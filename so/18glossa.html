@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sistemas Operacionais - 18&nbsp; Glossário - Sistemas Operacionais: Fundamentos e Evolução</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./19exerc.html" rel="next">
+<link href="./3heterox.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles/styles.css">
+<meta property="og:title" content="Sistemas Operacionais - 18&nbsp; Glossário - Sistemas Operacionais: Fundamentos e Evolução">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Sistemas Operacionais">
+<meta name="twitter:title" content="Sistemas Operacionais - 18&nbsp; Glossário - Sistemas Operacionais: Fundamentos e Evolução">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./18glossa.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sistemas Operacionais</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linefollower" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistemas Operacionais: Equilibrando Recursos e Simplicidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exercícios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gerenciamento de Processos: Introdução</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12germem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14geres.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18glossa.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a" id="toc-a" class="nav-link active" data-scroll-target="#a"><span class="header-section-number">18.0.1</span> A</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">18.0.2</span> B</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c"><span class="header-section-number">18.0.3</span> C</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d"><span class="header-section-number">18.0.4</span> D</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e"><span class="header-section-number">18.0.5</span> E</a></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f"><span class="header-section-number">18.0.6</span> F</a></li>
+  <li><a href="#g" id="toc-g" class="nav-link" data-scroll-target="#g"><span class="header-section-number">18.0.7</span> G</a></li>
+  <li><a href="#h" id="toc-h" class="nav-link" data-scroll-target="#h"><span class="header-section-number">18.0.8</span> H</a></li>
+  <li><a href="#i" id="toc-i" class="nav-link" data-scroll-target="#i"><span class="header-section-number">18.0.9</span> I</a></li>
+  <li><a href="#j" id="toc-j" class="nav-link" data-scroll-target="#j"><span class="header-section-number">18.0.10</span> J</a></li>
+  <li><a href="#k" id="toc-k" class="nav-link" data-scroll-target="#k"><span class="header-section-number">18.0.11</span> K</a></li>
+  <li><a href="#l" id="toc-l" class="nav-link" data-scroll-target="#l"><span class="header-section-number">18.0.12</span> L</a></li>
+  <li><a href="#m" id="toc-m" class="nav-link" data-scroll-target="#m"><span class="header-section-number">18.0.13</span> M</a></li>
+  <li><a href="#n" id="toc-n" class="nav-link" data-scroll-target="#n"><span class="header-section-number">18.0.14</span> N</a></li>
+  <li><a href="#o" id="toc-o" class="nav-link" data-scroll-target="#o"><span class="header-section-number">18.0.15</span> O</a></li>
+  <li><a href="#p" id="toc-p" class="nav-link" data-scroll-target="#p"><span class="header-section-number">18.0.16</span> P</a></li>
+  <li><a href="#q" id="toc-q" class="nav-link" data-scroll-target="#q"><span class="header-section-number">18.0.17</span> Q</a></li>
+  <li><a href="#r" id="toc-r" class="nav-link" data-scroll-target="#r"><span class="header-section-number">18.0.18</span> R</a></li>
+  <li><a href="#s" id="toc-s" class="nav-link" data-scroll-target="#s"><span class="header-section-number">18.0.19</span> S</a></li>
+  <li><a href="#t" id="toc-t" class="nav-link" data-scroll-target="#t"><span class="header-section-number">18.0.20</span> T</a></li>
+  <li><a href="#u" id="toc-u" class="nav-link" data-scroll-target="#u"><span class="header-section-number">18.0.21</span> U</a></li>
+  <li><a href="#v" id="toc-v" class="nav-link" data-scroll-target="#v"><span class="header-section-number">18.0.22</span> V</a></li>
+  <li><a href="#w" id="toc-w" class="nav-link" data-scroll-target="#w"><span class="header-section-number">18.0.23</span> W</a></li>
+  <li><a href="#x" id="toc-x" class="nav-link" data-scroll-target="#x"><span class="header-section-number">18.0.24</span> X</a></li>
+  <li><a href="#z" id="toc-z" class="nav-link" data-scroll-target="#z"><span class="header-section-number">18.0.25</span> Z</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/18glossa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="a" class="level3" data-number="18.0.1">
+<h3 data-number="18.0.1" class="anchored" data-anchor-id="a"><span class="header-section-number">18.0.1</span> A</h3>
+<p><strong>Abstração</strong> Processo de esconder detalhes complexos de implementação, fornecendo uma interface mais simples e amigável para os usuários e programadores.</p>
+<p><strong>ACLs (Access Control Lists)</strong> Listas que especificam quais usuários ou processos têm permissão para acessar determinados recursos do sistema e que tipo de operações podem realizar.</p>
+<p><strong>Adaptive Battery</strong> Recurso de Inteligência Artifical (Inteligência Artificial) em <strong>Sistemas Operacionais</strong> M, como o Android, que aprende os padrões de uso do usuário para otimizar o consumo de energia.</p>
+<p><strong>AKKA</strong> Toolkit e runtime para construir aplicações concorrentes, distribuídas e resilientes na JVM, baseado no modelo de atores.</p>
+<p><strong>Alocação de Memória</strong> Processo de atribuir blocos de memória principal aos processos que necessitam de espaço para execução.</p>
+<p><strong>Android</strong> Sistema Operacional móvel desenvolvido pelo Google, baseado no <code>Kernel</code> <strong>Linux</strong> e de código aberto.</p>
+<p><strong>Android Runtime (ART)</strong> Ambiente de execução usado pelo <strong>Android</strong> para executar aplicativos, substituindo a antiga máquina virtual Dalvik.</p>
+<p><strong>API (Application Programming Interface)</strong> Conjunto de rotinas, protocolos e ferramentas que especificam como componentes de software devem interagir.</p>
+</section>
+<section id="b" class="level3" data-number="18.0.2">
+<h3 data-number="18.0.2" class="anchored" data-anchor-id="b"><span class="header-section-number">18.0.2</span> B</h3>
+<p><strong>Batch Processing (Processamento em Lote)</strong> Método de processamento no qual os programas são executados sequencialmente sem interação direta do usuário, maximizando a utilização da <code>CPU</code>.</p>
+<p><strong>Buffering</strong> Técnica que utiliza áreas de memória temporária para compensar diferenças de velocidade entre dispositivos, melhorando o desempenho do sistema.</p>
+</section>
+<section id="c" class="level3" data-number="18.0.3">
+<h3 data-number="18.0.3" class="anchored" data-anchor-id="c"><span class="header-section-number">18.0.3</span> C</h3>
+<p><strong>Cache</strong> Memória de alta velocidade que armazena dados frequentemente acessados para reduzir o tempo de acesso médio.</p>
+<p><strong>Chamadas de Sistema (System Calls)</strong> Interface programática por meio da qual processos solicitam serviços do <strong>Sistema Operacional</strong>.</p>
+<p><strong>CFS (Completely Fair Scheduler)</strong> Algoritmo de escalonamento do <code>Kernel</code> <strong>Linux</strong> que visa garantir uma distribuição justa do tempo de <code>CPU</code> entre os processos.</p>
+<p><strong>Colossus</strong> Um dos primeiros computadores eletrônicos, utilizado pelo Reino Unido durante a Segunda Guerra Mundial para decifrar códigos.</p>
+<p><strong>Computação em Nuvem</strong> Modelo de fornecimento de serviços de computação (servidores, armazenamento, bancos de dados, etc.) pela internet (<code>a nuvem</code>).</p>
+<p><strong>Computação Quântica</strong> Paradigma de computação que utiliza princípios da mecânica quântica, como superposição e emaranhamento, para processar informações.</p>
+<p><strong>Concorrência</strong> Capacidade de múltiplos processos ou threads executarem simultaneamente, compartilhando recursos do sistema.</p>
+<p><strong>Context Switch (Troca de Contexto)</strong> Processo de salvar o estado de um processo em execução e carregar o estado de outro processo para execução.</p>
+<p><strong>CP/M (Control Program for Microcomputers)</strong> Um dos primeiros <strong>Sistemas Operacionais</strong> dominantes para microcomputadores de 8 bits, que influenciou o MS-DOS.</p>
+<p><strong><code>CPU</code> Scheduling</strong> Processo de determinar qual processo deve utilizar a <code>CPU</code> em um determinado momento.</p>
+<p><strong>CTSS (Compatible <em>time-sharing</em> System)</strong> Sistema pioneiro de tempo compartilhado desenvolvido no MIT que estabeleceu conceitos fundamentais de sistemas interativos.</p>
+</section>
+<section id="d" class="level3" data-number="18.0.4">
+<h3 data-number="18.0.4" class="anchored" data-anchor-id="d"><span class="header-section-number">18.0.4</span> D</h3>
+<p><strong>Dalvik</strong> Máquina virtual utilizada em versões mais antigas do <strong>Android</strong> para executar aplicativos, posteriormente substituída pela ART.</p>
+<p><strong>Deadlock</strong> Situação na qual dois ou mais processos ficam permanentemente bloqueados, cada um esperando que o outro libere um recurso.</p>
+<p><strong>Device Driver</strong> Software específico que permite ao <strong>Sistema Operacional</strong> comunicar-se com dispositivos de hardware particulares.</p>
+<p><strong>DMA (Direct Memory Access)</strong> Técnica que permite a dispositivos de<code>E/S</code>acessar a memória principal diretamente, sem intervenção da <code>CPU</code>.</p>
+<p><strong>Docker</strong> Plataforma de software que permite a criação, teste e implantação de aplicações em containers.</p>
+<p><strong>Dual-Mode Operation</strong> Mecanismo de proteção de hardware que distingue entre o modo de usuário (user mode), com privilégios limitados, e o modo de <code>Kernel</code> (<code>Kernel</code> mode), com acesso irrestrito.</p>
+</section>
+<section id="e" class="level3" data-number="18.0.5">
+<h3 data-number="18.0.5" class="anchored" data-anchor-id="e"><span class="header-section-number">18.0.5</span> E</h3>
+<p><strong>Earliest Deadline First (EDF)</strong> Algoritmo de escalonamento de tempo real que prioriza dinamicamente as tarefas com o prazo final (deadline) mais próximo.</p>
+<p><strong>EDA (Event-Driven Architecture)</strong> Arquitetura de software na qual os componentes do sistema reagem a eventos, promovendo baixo acoplamento e escalabilidade.</p>
+<p><strong>EDVAC</strong> Um dos primeiros computadores eletrônicos a utilizar o conceito de programa armazenado na memória.</p>
+<p><strong>Emaranhamento (Entanglement)</strong> Fenômeno quântico no qual múltiplos qubits se tornam interligados, de forma que o estado de um afeta instantaneamente o estado dos outros.</p>
+<p><strong>ENIAC</strong> Um dos primeiros computadores digitais eletrônicos de grande escala, desenvolvido nos EUA durante a Segunda Guerra Mundial.</p>
+<p><strong>Escalonamento (Scheduling)</strong> Processo de decidir qual processo, thread ou tarefa deve ser executado em um determinado momento.</p>
+<p><strong>Espaço de Endereçamento</strong> Conjunto de endereços de memória que um processo pode utilizar para armazenar dados e código.</p>
+</section>
+<section id="f" class="level3" data-number="18.0.6">
+<h3 data-number="18.0.6" class="anchored" data-anchor-id="f"><span class="header-section-number">18.0.6</span> F</h3>
+<p><strong>FCFS (First-Come, First-Served)</strong> Algoritmo de escalonamento no qual os processos são executados na ordem de chegada.</p>
+<p><strong>File System (Sistema de Arquivos)</strong> Método de organizar e armazenar arquivos em dispositivos de armazenamento secundário.</p>
+<p><strong>FMS (</strong>FORTRAN** Monitor System)<strong> Um dos primeiros sistemas de monitoramento para programas </strong>FORTRAN**.</p>
+</section>
+<section id="g" class="level3" data-number="18.0.7">
+<h3 data-number="18.0.7" class="anchored" data-anchor-id="g"><span class="header-section-number">18.0.7</span> G</h3>
+<p><strong>GPU (Graphics Processing Unit)</strong> Processador especializado projetado para renderizar gráficos, mas também utilizado para acelerar tarefas de computação paralela.</p>
+<p><strong>GUI (Graphical User Interface)</strong> Interface que utiliza elementos gráficos como janelas, ícones e menus para interação com o usuário.</p>
+</section>
+<section id="h" class="level3" data-number="18.0.8">
+<h3 data-number="18.0.8" class="anchored" data-anchor-id="h"><span class="header-section-number">18.0.8</span> H</h3>
+<p><strong>HAL (Hardware Abstraction Layer)</strong> Camada de software que esconde diferenças específicas de hardware, proporcionando uma interface uniforme.</p>
+<p><strong>Hypervisor</strong> Software ou hardware que cria e executa máquinas virtuais (VMs), também conhecido como Monitor de Máquina Virtual (VMM).</p>
+</section>
+<section id="i" class="level3" data-number="18.0.9">
+<h3 data-number="18.0.9" class="anchored" data-anchor-id="i"><span class="header-section-number">18.0.9</span> I</h3>
+<p><strong>IaaS (Infrastructure as a Service)</strong> Modelo de computação em nuvem que oferece recursos de computação virtualizados pela internet.</p>
+<p><strong>IBSYS</strong> Sistema batch para o IBM 7094 que estabeleceu muitos conceitos fundamentais de <strong>Sistemas Operacionais</strong>.</p>
+<p><strong>Inodes</strong> Estrutura de dados em sistemas de arquivos do tipo <strong>UNIX</strong> que armazena metadados sobre um arquivo ou diretório.</p>
+<p><strong>Interrupção</strong> Sinal que informa à <code>CPU</code> sobre a ocorrência de um evento que requer atenção imediata.</p>
+<p><strong>IOKit</strong> Framework orientado a objetos no macOS para a criação de drivers de dispositivo.</p>
+<p><strong>Sistemas Operacionais Móveis</strong> Sistema Operacional móvel proprietário da Apple, utilizado em iPhones e iPads.</p>
+<p><strong>IPC (Inter-Process Communication)</strong> Mecanismos que permitem a processos trocar dados e sincronizar suas atividades.</p>
+</section>
+<section id="j" class="level3" data-number="18.0.10">
+<h3 data-number="18.0.10" class="anchored" data-anchor-id="j"><span class="header-section-number">18.0.10</span> J</h3>
+<p><strong>JCL (Job Control Language)</strong> Linguagem específica utilizada para instruir sistemas batch sobre como processar trabalhos.</p>
+<p><strong>Job</strong> Termo usado principalmente em sistemas batch para se referir a uma tarefa ou trabalho a ser executado. O equivalente moderno é o processo.</p>
+</section>
+<section id="k" class="level3" data-number="18.0.11">
+<h3 data-number="18.0.11" class="anchored" data-anchor-id="k"><span class="header-section-number">18.0.11</span> K</h3>
+<p><strong><code>Kernel</code></strong> Parte central do <strong>Sistema Operacional</strong> que gerencia recursos do sistema e fornece serviços fundamentais.</p>
+<p><strong>Kubernetes</strong> Plataforma de orquestração de containers de código aberto para automatizar a implantação, o escalonamento e a gestão de aplicações em containers.</p>
+</section>
+<section id="l" class="level3" data-number="18.0.12">
+<h3 data-number="18.0.12" class="anchored" data-anchor-id="l"><span class="header-section-number">18.0.12</span> L</h3>
+<p><strong>L4</strong> Família de micro<code>Kernel</code>s de segunda geração, conhecida por seu alto desempenho e design minimalista.</p>
+<p><strong>Linguagem C</strong> Linguagem de programação de propósito geral desenvolvida por Dennis Ritchie, intimamente ligada ao desenvolvimento do <strong>Sistema Operacional</strong> <strong>UNIX</strong>.</p>
+<p><strong>Linux</strong> <code>Kernel</code> de <strong>Sistema Operacional</strong> de código aberto, monolítico e semelhante ao <strong>UNIX</strong>, criado por Linus Torvalds. É a base para muitas distribuições de SO.</p>
+<p><strong>Lisp</strong> Família de linguagens de programação com uma longa história e uma sintaxe distintiva baseada em S-expressions.</p>
+<p><strong>LLM (Large Language Model)</strong> Modelo de Inteligência Artificial treinado com grandes volumes de texto para compreender e gerar linguagem humana.</p>
+<p><strong>LLMOS (Large Language Model Operating System)</strong> Conceito de <strong>Sistema Operacional</strong> que integra LLMs em seu núcleo para revolucionar a interação do usuário por meio de linguagem natural.</p>
+<p><strong>LPU (Language Processing Unit)</strong> Tipo de processador especializado, como o da <a href="https://groq.com/about-us/">Groq</a>, projetado para acelerar a inferência de modelos de linguagem.</p>
+<p><strong>LSI (Large Scale Integration)</strong> Tecnologia de circuitos integrados que permitiu a criação de microprocessadores e computadores pessoais.</p>
+<p><strong>LXC (Linux Containers)</strong> Tecnologia de virtualização no nível do <strong>Sistema Operacional</strong> para rodar múltiplos ambientes <strong>Linux</strong> isolados (containers) em um único host.</p>
+</section>
+<section id="m" class="level3" data-number="18.0.13">
+<h3 data-number="18.0.13" class="anchored" data-anchor-id="m"><span class="header-section-number">18.0.13</span> M</h3>
+<p><strong>Máquina Virtual</strong> Abstração de software que simula um computador completo, permitindo execução de múltiplos <strong>Sistemas Operacionais</strong>.</p>
+<p><strong>Macintosh OS (Classic Mac OS)</strong> Sistema Operacional da Apple que popularizou a interface gráfica do usuário (GUI) com sua metáfora de área de trabalho.</p>
+<p><strong>Memory Management</strong> Função do <strong>Sistema Operacional</strong> responsável por controlar e coordenar o uso da memória principal.</p>
+<p><strong>Microserviços</strong> Estilo arquitetural que estrutura uma aplicação como uma coleção de serviços pequenos, independentes e fracamente acoplados.</p>
+<p><strong>MINIX</strong> Sistema Operacional semelhante ao <strong>UNIX</strong>, baseado em uma arquitetura de micro<code>Kernel</code>, criado por Andrew S. Tanenbaum para fins educacionais.</p>
+<p><strong>MMU (Memory Management Unit)</strong> Componente de hardware responsável por traduzir endereços virtuais em endereços físicos.</p>
+<p><strong>MS-DOS (Microsoft Disk Operating System)</strong> Sistema Operacional de linha de comando que dominou computadores pessoais compatíveis com IBM na década de 1980.</p>
+<p><strong>MULTICS (Multiplexed Information and Computing Service)</strong> Sistema de tempo compartilhado avançado que introduziu conceitos como memória virtual e sistema de arquivos hierárquico, e que influenciou o <strong>UNIX</strong>.</p>
+<p><strong>multiprocessamento</strong> Técnica que permite que múltiplos programas residam na memória simultaneamente, melhorando a utilização da <code>CPU</code>.</p>
+<p><strong>Multitasking</strong> Capacidade de um sistema executar múltiplas tarefas aparentemente em paralelo por meio de compartilhamento de tempo.</p>
+</section>
+<section id="n" class="level3" data-number="18.0.14">
+<h3 data-number="18.0.14" class="anchored" data-anchor-id="n"><span class="header-section-number">18.0.14</span> N</h3>
+<p><strong>NFS (Network File System)</strong> Sistema que permite acesso a arquivos por meio de uma rede como se fossem locais.</p>
+<p><strong>NISQ (Noisy Intermediate-Scale Quantum)</strong> Era atual da computação quântica, caracterizada por processadores com um número intermediário de qubits que são suscetíveis a ruído.</p>
+</section>
+<section id="o" class="level3" data-number="18.0.15">
+<h3 data-number="18.0.15" class="anchored" data-anchor-id="o"><span class="header-section-number">18.0.15</span> O</h3>
+<p><strong>OS/360</strong> Família de <strong>Sistemas Operacionais</strong> da IBM para seus mainframes System/360, que estabeleceu muitos conceitos fundamentais de multiprocessamento.</p>
+</section>
+<section id="p" class="level3" data-number="18.0.16">
+<h3 data-number="18.0.16" class="anchored" data-anchor-id="p"><span class="header-section-number">18.0.16</span> P</h3>
+<p><strong>PaaS (Platform as a Service)</strong> Modelo de computação em nuvem que fornece uma plataforma permitindo aos clientes desenvolver, executar e gerenciar aplicações sem a complexidade de construir e manter a infraestrutura.</p>
+<p><strong>Paginação</strong> Técnica de gerenciamento de memória que divide a memória em páginas de tamanho fixo.</p>
+<p><strong>Paxos</strong> Família de protocolos para resolver o consenso em uma rede de processos não confiáveis.</p>
+<p><strong>PBFT (Practical Byzantine Fault Tolerance)</strong> Algoritmo de consenso projetado para tolerar falhas bizantinas (comportamento malicioso ou arbitrário) em sistemas distribuídos.</p>
+<p><strong>PCB (Process Control Block)</strong> Estrutura de dados que contém informações sobre um processo específico.</p>
+<p><strong>PIO (Programmed <code>E/S</code>)</strong> Método de transferência de dados entre a <code>CPU</code> e um periférico no qual a <code>CPU</code> executa um programa que controla a transferência.</p>
+<p><strong>POSIX</strong> Conjunto de padrões especificados pelo IEEE para manter a compatibilidade entre <strong>Sistemas Operacionais</strong>, especialmente variantes do <strong>UNIX</strong>.</p>
+<p><strong>Preemptive Scheduling</strong> Tipo de escalonamento no qual o <strong>Sistema Operacional</strong> pode interromper um processo em execução para dar lugar a outro.</p>
+<p><strong>Processo</strong> Programa em execução, incluindo código, dados, pilha e contexto de execução.</p>
+<p><strong>PRISM</strong> Projeto de <strong>Sistema Operacional</strong> cancelado da DEC, do qual Dave Cutler, arquiteto do Windows NT, fazia parte.</p>
+</section>
+<section id="q" class="level3" data-number="18.0.17">
+<h3 data-number="18.0.17" class="anchored" data-anchor-id="q"><span class="header-section-number">18.0.17</span> Q</h3>
+<p><strong>QCOS (Quantum Computer Operating System)</strong> Sistema Operacional projetado para gerenciar os recursos de um computador quântico.</p>
+<p><strong>Qernel</strong> Componente central de um QCOS, análogo ao <code>Kernel</code> clássico, que gerencia os recursos quânticos como qubits.</p>
+<p><strong>QNX</strong> Sistema Operacional comercial de tempo real baseado em uma arquitetura de micro<code>Kernel</code>, usado em sistemas embarcados críticos.</p>
+<p><strong>Quantum</strong> Fatia de tempo atribuída a um processo em algoritmos de escalonamento round-robin. Também chamado de Time Slice.</p>
+<p><strong>Qubit</strong> Unidade básica de informação quântica, análoga ao bit clássico, mas que pode existir em uma superposição de estados.</p>
+</section>
+<section id="r" class="level3" data-number="18.0.18">
+<h3 data-number="18.0.18" class="anchored" data-anchor-id="r"><span class="header-section-number">18.0.18</span> R</h3>
+<p><strong>Raft</strong> Algoritmo de consenso projetado para ser mais fácil de entender que o Paxos.</p>
+<p><strong>Rate Monotonic (RM)</strong> Algoritmo de escalonamento de tempo real de prioridade fixa, usado para tarefas periódicas.</p>
+<p><strong>Round Robin</strong> Algoritmo de escalonamento no qual cada processo recebe uma fatia de tempo fixa antes de ser preemptado.</p>
+<p><strong>RPC (Remote Procedure Call)</strong> Mecanismo que permite a um programa executar um procedimento ou função em outro computador na rede como se fosse uma chamada local.</p>
+<p><strong>RTOS (Real-Time Operating System)</strong> Sistema Operacional destinado a aplicações de tempo real que processam dados à medida que chegam, geralmente sem atrasos de buffer.</p>
+</section>
+<section id="s" class="level3" data-number="18.0.19">
+<h3 data-number="18.0.19" class="anchored" data-anchor-id="s"><span class="header-section-number">18.0.19</span> S</h3>
+<p><strong>SaaS (Software as a Service)</strong> Modelo de licenciamento e entrega de software no qual o software é licenciado por assinatura e hospedado centralmente.</p>
+<p><strong>Sandboxing</strong> Mecanismo de segurança para separar programas em execução, restringindo o ambiente em que o código pode operar.</p>
+<p><strong>Scala</strong> Linguagem de programação que combina programação orientada a objetos e funcional, projetada para ser concisa e escalável.</p>
+<p><strong>Segmentação</strong> Técnica de gerenciamento de memória que divide o espaço de endereçamento em segmentos lógicos.</p>
+<p><strong>SJF (Shortest Job First)</strong> Algoritmo de escalonamento que prioriza processos com menor tempo de execução estimado.</p>
+<p><strong>SMB/CIFS</strong> Protocolo de rede para compartilhamento de arquivos, impressoras e outros recursos, predominantemente usado em ambientes Windows.</p>
+<p><strong><code>spooling</code> (Simultaneous Peripheral Operation On-Line)</strong> Técnica que utiliza disco como buffer para operações de<code>E/S</code>, como a impressão.</p>
+<p><strong>SQLite</strong> Biblioteca de software que implementa um banco de dados SQL autônomo, sem servidor e sem configuração.</p>
+<p><strong>Swapping</strong> Técnica de mover processos inteiros entre memória principal e armazenamento secundário.</p>
+<p><strong>System Call</strong> Interface por meio da qual programas de usuário solicitam serviços do <code>Kernel</code>.</p>
+</section>
+<section id="t" class="level3" data-number="18.0.20">
+<h3 data-number="18.0.20" class="anchored" data-anchor-id="t"><span class="header-section-number">18.0.20</span> T</h3>
+<p><strong>TCP/IP</strong> Conjunto de protocolos de comunicação que formam a base da Internet, organizados em camadas (Aplicação, Transporte, Internet, Acesso à Rede).</p>
+<p><strong>Teorema CAP</strong> Princípio fundamental dos sistemas distribuídos que afirma ser impossível garantir simultaneamente Consistência, Disponibilidade e Tolerância a Partições.</p>
+<p><strong>THE (Technische Hogeschool Eindhoven)</strong> Sistema Operacional influente desenvolvido por Edsger Dijkstra, pioneiro na utilização de uma arquitetura estritamente em camadas.</p>
+<p><strong>Thread</strong> Unidade básica de utilização da <code>CPU</code> dentro de um processo, permitindo execução concorrente.</p>
+<p><strong>Throughput</strong> Medida da quantidade de trabalho realizado por unidade de tempo, como o número de tarefas concluídas por hora.</p>
+<p><strong><em>time-sharing</em> (Tempo Compartilhado)</strong> Sistema no qual múltiplos usuários compartilham recursos computacionais simultaneamente, com o SO alternando rapidamente entre eles.</p>
+<p><strong>Time Slice</strong> Período de tempo durante o qual um processo pode utilizar a <code>CPU</code> antes de ser preemptado. Também chamado de Quantum.</p>
+<p><strong>TLB (Translation Lookaside Buffer)</strong> Cache de memória usado pela unidade de gerenciamento de memória (MMU) para acelerar a tradução de endereços virtuais para físicos.</p>
+<p><strong>TPU (Tensor Processing Unit)</strong> Acelerador de Inteligência Artifical especializado, desenvolvido pelo Google, para processamento de redes neurais.</p>
+</section>
+<section id="u" class="level3" data-number="18.0.21">
+<h3 data-number="18.0.21" class="anchored" data-anchor-id="u"><span class="header-section-number">18.0.21</span> U</h3>
+<p><strong>UNIX</strong> Sistema Operacional multiusuário e multitarefa, portável e influente, desenvolvido nos Bell Labs. Sua filosofia de design impactou muitos outros sistemas.</p>
+</section>
+<section id="v" class="level3" data-number="18.0.22">
+<h3 data-number="18.0.22" class="anchored" data-anchor-id="v"><span class="header-section-number">18.0.22</span> V</h3>
+<p><strong>Válvulas Termiônicas (Tubos de Vácuo)</strong> Componentes eletrônicos usados nos primeiros computadores, como o <strong>ENIAC</strong>, que controlavam o fluxo de elétrons no vácuo.</p>
+<p><strong>Virtual Memory (Memória Virtual)</strong> Técnica que permite a execução de programas maiores que a memória física disponível, utilizando o armazenamento secundário como uma extensão da <code>RAM</code>.</p>
+<p><strong>VLSI (Very Large Scale Integration)</strong> Tecnologia avançada de circuitos integrados que permitiu maior densidade de componentes.</p>
+<p><strong>VMS (Virtual Memory System)</strong> Sistema Operacional da DEC, conhecido por sua robustez, que influenciou o design do Windows NT.</p>
+</section>
+<section id="w" class="level3" data-number="18.0.23">
+<h3 data-number="18.0.23" class="anchored" data-anchor-id="w"><span class="header-section-number">18.0.23</span> W</h3>
+<p><strong>Wake Locks</strong> Mecanismo no <strong>Android</strong> que permite que aplicações mantenham a <code>CPU</code> ou a tela ativas para realizar tarefas em segundo plano.</p>
+<p><strong>Windows</strong> Família de <strong>Sistemas Operacionais</strong> desenvolvidos pela Microsoft, que evoluiu de um ambiente gráfico sobre o MS-DOS para <strong>Sistemas Operacionais</strong> completos.</p>
+<p><strong>Windows </strong>NT** (New Technology)<strong> Linha de </strong>Sistemas Operacionais** da Microsoft construída com uma arquitetura híbrida, formando a base para todas as versões modernas do Windows.</p>
+</section>
+<section id="x" class="level3" data-number="18.0.24">
+<h3 data-number="18.0.24" class="anchored" data-anchor-id="x"><span class="header-section-number">18.0.24</span> X</h3>
+<p><strong>XNU</strong> <code>Kernel</code> do macOS e <strong>Sistemas Operacionais</strong> M, que combina o micro<code>Kernel</code> Mach com componentes do BSD <strong>UNIX</strong>, formando uma arquitetura híbrida.</p>
+</section>
+<section id="z" class="level3" data-number="18.0.25">
+<h3 data-number="18.0.25" class="anchored" data-anchor-id="z"><span class="header-section-number">18.0.25</span> Z</h3>
+<p><strong>Z3</strong> O primeiro computador programável e totalmente automático do mundo, criado por Konrad Zuse na Alemanha em 1941.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./3heterox.html" class="pagination-link" aria-label="Tendências Avançadas em Sistemas Operacionais">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./19exerc.html" class="pagination-link" aria-label="Exercícios Resolvidos">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/18glossa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

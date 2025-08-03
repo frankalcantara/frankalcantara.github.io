@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sistemas Operacionais: Equilibrando Recursos e Simplicidade</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+    <script src="./common_js.js" defer></script>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#gerente-recursos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Capitão de Navio</a></li>
+                <li class="mb-2"><a href="#maquina-estendida" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Máquina Estendida</a></li>
+                <li class="mb-2"><a href="#objetivos-orientadores" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Objetivos Orientadores</a></li>
+                <li class="mb-2"><a href="#conveniencia-usuario" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Conveniência</a></li>
+                <li class="mb-2"><a href="#eficiencia-recursos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Eficiência</a></li>
+                <li class="mb-2"><a href="#evolucao-adaptacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Evolução</a></li>
+                <li class="mb-2"><a href="#confiabilidade" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Confiabilidade</a></li>
+                <li class="mb-2"><a href="#escolhas-compromissos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Compromissos</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Perspectivas Duais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-ship me-2 text-primary"></i><small class="text-primary fw-medium">Gerente de Recursos</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-layer-group me-2 text-success"></i><small class="text-success fw-medium">Máquina Estendida</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Objetivos Fundamentais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Conveniência</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Eficiência</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Evolução</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Confiabilidade</small>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                        <div class="position-absolute w-100 h-100 opacity-25" ">
+                        </div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Equilibrando</em>
+                                    <span class="d-block">Recursos e Simplicidade</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Perspectivas e Objetivos dos Sistemas Operacionais
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">2</div>
+                            <div class="fs-6 text-muted">Perspectivas Fundamentais</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">4</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Objetivos Orientadores</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-ship fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Capitão</h3>
+                                <p class="fs-7 text-muted">Gerente de recursos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-layer-group fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Abstração</h3>
+                                <p class="fs-7 text-muted">Máquina estendida</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-balance-scale fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Equilíbrio</h3>
+                                <p class="fs-7 text-muted">Arte do compromisso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-shield-alt fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Confiabilidade</h3>
+                                <p class="fs-7 text-muted">Tolerância a falhas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Duas Perspectivas Complementares</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Para compreender plenamente a natureza e o papel de um Sistema Operacional, consideremos duas perspectivas distintas, porém complementares: como um <strong>gerente de recursos</strong> e como uma <strong>máquina estendida</strong>.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Assim como um capitão governa seu navio, o Sistema Operacional coordena todos os recursos, criando uma máquina mais poderosa que a soma de suas partes"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Conceito Fundamental">Perspectiva Dual dos Sistemas Operacionais</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-ship fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Gerente de Recursos</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    O Sistema Operacional atua como um <strong>capitão experiente</strong>, gerenciando e alocando todos os recursos do sistema de forma controlada, eficiente e segura.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Responsabilidade</div>
+                                    <div class="fs-6 text-muted">Distribuir recursos escassos entre demandas concorrentes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-layer-group fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Máquina Estendida</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Fornece uma interface mais simples, limpa e poderosa do que a oferecida diretamente pelo hardware bruto, <strong>transformando complexidade em elegância</strong>.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Abstração</div>
+                                    <div class="fs-6 text-muted">Simplicidade conceitual sobre complexidade técnica</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <img src="../images/perspectivas_duais_so.webp" alt="Perspectivas Duais do Sistema Operacional" class="img-fluid rounded shadow mb-3" style="max-height: 730px;">
+                        <div class="figure-caption">
+                            As duas perspectivas fundamentais dos Sistemas Operacionais - Gerente de Recursos e Máquina Estendida
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gerente de Recursos -->
+        <section id="gerente-recursos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. O Sistema Operacional como Capitão de Navio</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Em um mundo de recursos finitos - CPU, memória, dispositivos de E/S e armazenamento - <strong>alguém deve decidir quem obtém o quê, quando e por quanto tempo</strong>.
+                    </p>
+
+                    <!-- Recursos Fundamentais -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">
+                                    <i class="fas fa-microchip me-2"></i>
+                                    Tempo de CPU
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    O recurso mais valioso. Gerenciado por algoritmos de escalonamento desde o simples <strong>FCFS</strong> até técnicas avançadas como <strong>CFS</strong> e <strong>EEVDF</strong>.
+                                </p>
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">FCFS</span>
+                                        <span class="text-muted">Simples</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">CFS</span>
+                                        <span class="text-muted">Linux 2.6.23+</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">EEVDF</span>
+                                        <span class="text-muted">Linux 6.6+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">
+                                    <i class="fas fa-memory me-2"></i>
+                                    Memória Principal
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    RAM volátil, limitada e lenta. Requer alocação dinâmica, combate à fragmentação, implementação de <strong>memória virtual</strong> e proteção entre processos.
+                                </p>
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Alocação</span>
+                                        <span class="text-muted">Dinâmica</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Virtual</span>
+                                        <span class="text-muted">Paginação</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">Proteção</span>
+                                        <span class="text-muted">Isolamento</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-5 fw-semibold mb-3 text-warning">
+                                    <i class="fas fa-hdd me-2"></i>
+                                    Armazenamento
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Maior que a memória, porém muito mais lento. Sistema de arquivos hierárquico, gerenciamento de blocos, <strong>cache de disco</strong> e journaling.
+                                </p>
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Hierárquico</span>
+                                        <span class="text-muted">Árvore</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Cache</span>
+                                        <span class="text-muted">Acelera acesso</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">Journaling</span>
+                                        <span class="text-muted">Consistência</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-info">
+                                <h3 class="fs-5 fw-semibold mb-3 text-info">
+                                    <i class="fas fa-exchange-alt me-2"></i>
+                                    Dispositivos E/S
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Interface com o mundo exterior. Drivers especializados, filas de requisições, <strong>buffering e spooling</strong>, gerenciamento de interrupções.
+                                </p>
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Drivers</span>
+                                        <span class="text-muted">Específicos</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">Buffering</span>
+                                        <span class="text-muted">Otimização</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">Interrupções</span>
+                                        <span class="text-muted">Eventos</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Escalonamento Diagram -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Escalonamento de Processos</h3>
+                        <div class="text-center mb-4">
+                            <img src="../images/multiprocessing-diagram.webp" alt="Fluxo de Escalonamento" class="img-fluid rounded shadow" style="max-height: 400px;">
+                            <div class="figure-caption">
+                                Fluxo de escalonamento de processos: da fila de prontos ao escalonador e CPU
+                            </div>
+                        </div>
+                        <p class="fs-6 text-muted">
+                            O escalonador atua como intermediário, selecionando processos da fila baseado na política implementada, coordenando múltiplas estratégias: <strong>prioridade dinâmica</strong>, algoritmos de justiça e otimizações de eficiência.
+                        </p>
+                    </div>
+
+                    <!-- Métricas de Avaliação -->
+                    <div class="table-responsive-custom">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Métrica</th>
+                                    <th>Definição</th>
+                                    <th>Fórmula</th>
+                                    <th>Objetivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Throughput</strong></td>
+                                    <td>Jobs completados por unidade de tempo</td>
+                                    <td><code>N/t</code></td>
+                                    <td>Maximizar</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Turnaround Time</strong></td>
+                                    <td>Tempo total desde submissão até conclusão</td>
+                                    <td><code>T_término - T_chegada</code></td>
+                                    <td>Minimizar</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Response Time</strong></td>
+                                    <td>Tempo até primeira resposta</td>
+                                    <td><code>T_primeira_resposta - T_chegada</code></td>
+                                    <td>Minimizar</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CPU Utilization</strong></td>
+                                    <td>Percentual de tempo que CPU está ocupada</td>
+                                    <td><code>(T_ativa/T_total) × 100%</code></td>
+                                    <td>Maximizar</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Waiting Time</strong></td>
+                                    <td>Tempo em filas de espera</td>
+                                    <td><code>T_turnaround - T_execução</code></td>
+                                    <td>Minimizar</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Máquina Estendida -->
+        <section id="maquina-estendida" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. A Arte da Abstração Computacional</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O Sistema Operacional <strong>transforma a complexidade técnica em elegância operacional</strong>, criando uma hierarquia de abstrações que tornam o hardware hostil em uma interface amigável.
+                    </p>
+
+                    <!-- Hierarquia de Abstrações -->
+                    <div class="text-center mb-5">
+                        <img src="../images/os_abstraction_layers.webp" alt="Camadas de Abstração" class="img-fluid rounded shadow" style="max-height: 650px;">
+                        <div class="figure-caption">
+                            Arquitetura hierárquica: das aplicações amigáveis ao hardware complexo
+                        </div>
+                    </div>
+
+                    <!-- Abstrações Fundamentais -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-4 fw-semibold mb-3 text-primary">
+                                    <i class="fas fa-file me-2"></i>
+                                    Arquivos e Diretórios: A Metáfora da Organização
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Em vez de setores, trilhas e cilindros, o Sistema Operacional apresenta <strong>documentos organizados em pastas hierárquicas</strong>. Uma operação simples como <code>read("documento.txt", buffer, 1024)</code> oculta complexidade extraordinária.
+                                </p>
+                                <div class="code-block">
+<span class="code-keyword">int</span> fd = <span class="code-keyword">open</span>(<span class="code-string">"relatorio.pdf"</span>, O_RDONLY);
+<span class="code-keyword">ssize_t</span> bytes = <span class="code-keyword">read</span>(fd, buffer, <span class="code-number">4096</span>);
+<span class="code-keyword">close</span>(fd);
+<span class="code-comment">// Três linhas que ocultam centenas de operações</span>
+                                </div>
+                                <div class="mt-3 p-3 bg-primary-subtle rounded">
+                                    <strong class="text-primary">Operações Ocultas:</strong>
+                                    <ul class="list-unstyled mt-2 mb-0">
+                                        <li><i class="fas fa-arrow-right me-2 text-primary"></i>Resolução de caminho hierárquico</li>
+                                        <li><i class="fas fa-arrow-right me-2 text-primary"></i>Tradução lógica para física</li>
+                                        <li><i class="fas fa-arrow-right me-2 text-primary"></i>Gerenciamento de cache</li>
+                                        <li><i class="fas fa-arrow-right me-2 text-primary"></i>Coordenação de acesso concorrente</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-4 fw-semibold mb-3 text-success">
+                                    <i class="fas fa-cogs me-2"></i>
+                                    Processos: A Ilusão da Máquina Dedicada
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Cada programa acredita ter uma <strong>máquina computacional exclusiva</strong>. O Sistema Operacional oculta o controle direto de registradores, modos de operação e mecanismos de interrupção.
+                                </p>
+                                <div class="definition-box">
+                                    <div class="definition-title">Custo da Troca de Contexto</div>
+                                    <div class="text-center my-3">
+                                        <div class="fs-5 fw-bold" style="font-family: 'Times New Roman', serif;">
+                                            T<sub>context switch</sub> = T<sub>save</sub> + T<sub>load</sub> + T<sub>cache miss</sub>
+                                        </div>
+                                    </div>
+                                    <p class="fs-6 mb-0">O Sistema Operacional deve otimizar cada componente para minimizar custos computacionais.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">
+                                    <i class="fas fa-memory me-2"></i>
+                                    Memória Virtual: A Expansão do Possível
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Cria a <strong>ilusão de abundância em um mundo de escassez</strong>. A MMU implementa tradução hierárquica de endereços virtuais para físicos.
+                                </p>
+                                <div class="text-center mb-3">
+                                    <img src="../images/mmu_address_translation.webp" alt="Tradução de Endereços MMU" class="img-fluid rounded shadow" style="max-height: 600px;">
+                                    <div class="figure-caption">
+                                        Decomposição hierárquica de endereços virtuais de 32 bits pela MMU
+                                    </div>
+                                </div>
+                                <div class="definition-box">
+                                    <div class="definition-title">Taxa de Acertos na TLB</div>
+                                    <div class="text-center my-3">
+                                        <div class="fs-5 fw-bold" style="font-family: 'Times New Roman', serif;">
+                                            Hit Rate = TLB Hits / (TLB Hits + TLB Misses)
+                                        </div>
+                                    </div>
+                                    <p class="fs-6 mb-0">Valores típicos excedem 99%, demonstrando a eficiência desta abstração.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-info">
+                                <h3 class="fs-4 fw-semibold mb-3 text-info">
+                                    <i class="fas fa-network-wired me-2"></i>
+                                    Sockets: A Transparência da Comunicação
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Transforma a complexidade dos protocolos de rede em <strong>operações familiares de leitura e escrita</strong>. Uma simples operação <code>write(socket, data, length)</code> cascata por múltiplas camadas.
+                                </p>
+                                <div class="callout-tip">
+                                    <h4 class="fs-6 fw-semibold mb-2">Analogia: Prédio de Apartamentos</h4>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><strong>Endereço IP:</strong> endereço do prédio (192.168.1.100)</li>
+                                        <li><strong>Portas:</strong> números dos apartamentos (80, 443, 22)</li>
+                                        <li><strong>Socket:</strong> combinação exata (prédio + apartamento)</li>
+                                    </ul>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <img src="../images/tcp_stack_diagram.webp" alt="Pilha TCP/IP" class="img-fluid rounded shadow" style="max-height: 800px;">
+                                    <div class="figure-caption">
+                                        Processamento hierárquico através das camadas TCP/IP
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Princípio da Transparência -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Princípio da Transparência Progressiva</h3>
+                        <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                            Cada camada de abstração deve ser suficientemente rica para ocultar a complexidade subjacente, mas eficiente para não introduzir custos proibitivos.
+                        </p>
+                        <div class="text-center">
+                            <div class="fs-5 fw-bold" style="font-family: 'Times New Roman', serif; color: var(--sage-800);">
+                                E = (F<sub>funcionalidade</sub> / C<sub>overhead</sub>) × T<sub>transparência</sub>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objetivos Orientadores -->
+        <section id="objetivos-orientadores" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Objetivos Orientadores: Os Princípios Fundamentais</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O projeto de um Sistema Operacional é a <strong>arte de equilibrar objetivos frequentemente conflitantes</strong>. Estas escolhas determinam as soluções arquiteturais e a filosofia do sistema.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Conveniência para o Usuário</h3>
+                                <p class="fs-6 text-muted">Transformar complexidade em experiências fluidas e intuitivas</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-solution mx-auto mb-3">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Eficiência de Recursos</h3>
+                                <p class="fs-6 text-muted">Maximizar utilização de recursos finitos e custosos</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-methodology mx-auto mb-3">
+                                    <i class="fas fa-code-branch"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Capacidade de Evolução</h3>
+                                <p class="fs-6 text-muted">Adaptar-se a novas tecnologias e requisitos</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-evaluation mx-auto mb-3">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Confiabilidade</h3>
+                                <p class="fs-6 text-muted">Operar corretamente mesmo diante de falhas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <img src="../images/mapa_funcoes_essenciais_so.webp" alt="Mapa de Funções Essenciais" class="img-fluid rounded shadow mb-3" style="max-height: 850px;">
+                        <div class="figure-caption">
+                            Mapa intuitivo das funções essenciais de um Sistema Operacional
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conveniência para o Usuário -->
+        <section id="conveniencia-usuario" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Conveniência para o Usuário: A Arte da Simplicidade</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O Sistema Operacional deve atuar como um <strong>tradutor universal</strong>, convertendo intenções humanas em ações computacionais e resultados em informações compreensíveis.
+                    </p>
+
+                    <!-- Impactos da IA -->
+                    <div class="callout-success">
+                        <h3 class="fs-4 fw-semibold mb-3 text-success">
+                            <i class="fas fa-brain me-2"></i>
+                            Impactos Recentes da Inteligência Artificial
+                        </h3>
+                        <p class="fs-6 mb-3 text-success">
+                            A integração de IA nas interfaces representa a transição de uma interface reativa para uma <strong>interface proativa conversacional</strong>, baseada em três pilares fundamentais.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-lg-3 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2 text-primary">Microsoft Windows</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Copilot+ PCs:</strong> integração nativa</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Recall:</strong> memória semântica</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Paint Cocreator:</strong> criação por IA</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2 text-success">Apple Intelligence</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Ferramentas contextuais:</strong> escrita</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Siri renovada:</strong> contexto pessoal</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Privacidade:</strong> processamento local</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2 text-success">Android Gemini</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Camada conversacional:</strong> contexto</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Busca multimodal:</strong> gestos</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i><strong>Integração profunda:</strong> SO</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Componentes da Conveniência -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Interfaces Amigáveis</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Sejam gráficas com metáforas familiares, shells de comando ou interfaces de IA conversacional - devem minimizar a curva de aprendizado.
+                                </p>
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">GUI</span>
+                                        <span class="text-muted">Metáforas visuais</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-medium">CLI</span>
+                                        <span class="text-muted">Linguagens específicas</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="fw-medium">IA</span>
+                                        <span class="text-muted">Conversacional</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Abstração de Complexidade</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Operações de alto nível, automatização de tarefas repetitivas e configuração simplificada reduzem barreiras para novos usuários.
+                                </p>
+                                <div class="text-center">
+                                    <img src="../images/conveniencia-usuario-abstraction.webp" alt="Camadas de Abstração" class="img-fluid rounded shadow" style="max-height: 350px;">
+                                    <div class="figure-caption mt-2">
+                                        Pilha de abstração: da complexidade à simplicidade
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eficiência de Recursos -->
+        <section id="eficiencia-recursos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Eficiência: Maximizando o Potencial do Sistema</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A eficiência na utilização de recursos reflete a realidade econômica de que recursos computacionais, embora abundantes pelos padrões históricos, <strong>permanecem finitos e custosos</strong>.
+                    </p>
+
+                    <!-- Métricas de Otimização -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Throughput Máximo</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Maximizar a quantidade de trabalho completado por unidade de tempo. Particularmente importante em ambientes de processamento em lote ou servidores de alto volume.
+                                </p>
+                                <div class="definition-box">
+                                    <div class="text-center">
+                                        <div class="fs-5 fw-bold" style="font-family: 'Times New Roman', serif;">
+                                            Throughput = N<sub>jobs</sub> / t<sub>total</sub>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Tempo de Resposta Mínimo</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Prioriza responsividade para sistemas interativos, garantindo que usuários não experimentem latências perceptíveis.
+                                </p>
+                                <div class="definition-box">
+                                    <div class="text-center">
+                                        <div class="fs-5 fw-bold" style="font-family: 'Times New Roman', serif;">
+                                            Utilização = (T<sub>útil</sub> / T<sub>total</sub>) × 100%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métricas Completas -->
+                    <div class="table-responsive-custom mb-5">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Métrica</th>
+                                    <th>Equação</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Throughput</strong></td>
+                                    <td><code>T = N/t</code></td>
+                                    <td>Número de processos (N) completados por unidade de tempo (t)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Response Time</strong></td>
+                                    <td><code>R = t_início - t_chegada</code></td>
+                                    <td>Tempo desde chegada até início da execução</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Turnaround Time</strong></td>
+                                    <td><code>TAT = t_completion - t_arrival</code></td>
+                                    <td>Tempo total desde submissão até conclusão</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CPU Utilization</strong></td>
+                                    <td><code>U = (t_busy/t_total) × 100%</code></td>
+                                    <td>Percentual do tempo em que CPU executa processos</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Context Switch Overhead</strong></td>
+                                    <td><code>O = (Σt_cs/t_total) × 100%</code></td>
+                                    <td>Percentual do tempo gasto em mudanças de contexto</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="callout-warning">
+                        <h3 class="fs-5 fw-semibold mb-3">A Complexidade Emergente</h3>
+                        <p class="fs-6 mb-3">
+                            Em sistemas modernos com múltiplos núcleos, arquiteturas NUMA e cargas dinâmicas, a gestão transcende algoritmos simples, empregando:
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check me-2 text-warning"></i><strong>Aprendizado de máquina:</strong> predição de padrões</li>
+                                    <li><i class="fas fa-check me-2 text-warning"></i><strong>Feedback loops:</strong> ajuste dinâmico</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check me-2 text-warning"></i><strong>Hierarquias de escalonamento:</strong> múltiplos níveis</li>
+                                    <li><i class="fas fa-check me-2 text-warning"></i><strong>Quality of Service:</strong> garantias de performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evolução e Adaptação -->
+        <section id="evolucao-adaptacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Capacidade de Evolução: Construindo para o Futuro</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Sistemas Operacionais devem ser projetados <strong>não apenas para necessidades atuais, mas para evoluir conforme novas tecnologias emergem</strong> e requisitos mudam.
+                    </p>
+
+                    <!-- Design Modular -->
+                    <div class="text-center mb-5">
+                        <img src="../images/modular-evolution-diagram.webp" alt="Evolução Modular" class="img-fluid rounded shadow" style="max-height: 750px;">
+                        <div class="figure-caption">
+                            Kernel evolutivo com APIs padronizadas e módulos carregáveis dinamicamente
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Design Modular</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    A espinha dorsal da capacidade de evolução. <strong>Interfaces bem definidas</strong> entre componentes permitem substituição ou atualização sem afetar o sistema.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-puzzle-piece me-2 text-primary"></i>
+                                        <small><strong>Separação política/mecanismo:</strong> lógica vs implementação</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-plug me-2 text-primary"></i>
+                                        <small><strong>Drivers carregáveis:</strong> suporte dinâmico para hardware</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-code me-2 text-primary"></i>
+                                        <small><strong>APIs estáveis:</strong> contratos de comunicação</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Escalabilidade</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Capacidade de crescer em resposta ao aumento da demanda: processamento, memória, armazenamento ou usuários.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-microchip me-2 text-success"></i>
+                                        <small><strong>Multiprocessamento:</strong> SMP e NUMA</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-memory me-2 text-success"></i>
+                                        <small><strong>64 bits+:</strong> grandes volumes de memória</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-cloud me-2 text-success"></i>
+                                        <small><strong>Distribuição:</strong> além de máquinas físicas</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drivers de Dispositivo -->
+                    <div class="callout-tip">
+                        <h3 class="fs-5 fw-semibold mb-3 text-info">Drivers de Dispositivo: A Interface Universal</h3>
+                        <p class="fs-6 mb-3 text-info">
+                            Os drivers atuam como tradutores entre o Sistema Operacional e hardware específico, implementando duas interfaces críticas:
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2">Interface Superior</h5>
+                                    <p class="fs-6 mb-0">Padronizada com o kernel usando chamadas como <code>read()</code>, <code>write()</code>, <code>ioctl()</code></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2">Interface Inferior</h5>
+                                    <p class="fs-6 mb-0">Específica do dispositivo, controlando registradores, portas de E/S e interrupções</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-3 bg-white rounded">
+                            <strong>Exemplo Prático:</strong> <code>write() → VFS → ext4 → block layer → NVMe driver</code>
+                            <br><small class="text-muted">O driver NVMe traduz operações em comandos específicos do protocolo</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Confiabilidade -->
+        <section id="confiabilidade" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Confiabilidade: Garantindo a Estabilidade</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Sistemas Operacionais devem operar confiavelmente <strong>mesmo diante de falhas de hardware, software ou condições ambientais adversas</strong>.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">A Arte de Falhar Graciosamente</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    A confiabilidade manifesta-se <strong>não na ausência de falhas, mas na capacidade de lidar com erros de forma graciosa</strong> e transparente.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-search me-3 mt-1 text-primary"></i>
+                                        <div>
+                                            <div class="fw-medium">Detecção de Falhas</div>
+                                            <div class="fs-6 text-muted">Monitoramento contínuo e checksums</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-undo me-3 mt-1 text-primary"></i>
+                                        <div>
+                                            <div class="fw-medium">Recuperação de Erros</div>
+                                            <div class="fs-6 text-muted">Rollback, restart e failover</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-shield-alt me-3 mt-1 text-primary"></i>
+                                        <div>
+                                            <div class="fw-medium">Isolamento</div>
+                                            <div class="fs-6 text-muted">Contenção de falhas localizadas</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Integridade de Dados</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    O fundamento sobre o qual toda confiabilidade é construída, garantindo que informações permaneçam <strong>consistentes e duráveis</strong>.
+                                </p>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-database me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Transações Atômicas</div>
+                                            <div class="fs-6 text-muted">Completa inteiramente ou não produz efeito</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-copy me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Backups Automáticos</div>
+                                            <div class="fs-6 text-muted">Cópias de segurança regulares</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-check-double me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">ECC Memory</div>
+                                            <div class="fs-6 text-muted">Correção automática de erros</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checksums -->
+                    <div class="callout-tip">
+                        <h3 class="fs-5 fw-semibold mb-3 text-info">Checksums: Guardiões da Integridade</h3>
+                        <p class="fs-6 mb-3 text-info">
+                            Valores matemáticos que funcionam como <strong>impressões digitais dos dados</strong>, permitindo detectar alterações, corrupções ou erros.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded text-center">
+                                    <div class="fw-medium text-primary">Checksum Simples</div>
+                                    <small class="text-muted">Soma aritmética dos bytes</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded text-center">
+                                    <div class="fw-medium text-success">CRC</div>
+                                    <small class="text-muted">Aritmética polinomial</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded text-center">
+                                    <div class="fw-medium text-warning">MD5/SHA</div>
+                                    <small class="text-muted">Funções criptográficas</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-3 bg-white rounded">
+                            <strong>Aplicação TCP:</strong> Cada segmento inclui checksum calculado sobre cabeçalho e payload. O receptor recalcula e compara - diferenças indicam corrupção e acionam retransmissão.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Escolhas e Compromissos -->
+        <section id="escolhas-compromissos" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. Escolhas Inevitáveis: A Arte do Compromisso</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Objetivos louváveis frequentemente entram em conflito direto, exigindo <strong>compromissos cuidadosamente calibrados</strong> que reflitam as prioridades específicas do sistema.
+                    </p>
+
+                    <!-- Trade-offs Principais -->
+                    <div class="table-responsive-custom mb-5">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Trade-off</th>
+                                    <th>Benefício A</th>
+                                    <th>Benefício B</th>
+                                    <th>Implicação do Compromisso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Segurança vs. Desempenho</strong></td>
+                                    <td>Proteção robusta</td>
+                                    <td>Execução rápida</td>
+                                    <td>Verificações introduzem latência</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Simplicidade vs. Funcionalidade</strong></td>
+                                    <td>Facilidade de uso</td>
+                                    <td>Recursos avançados</td>
+                                    <td>Complexidade crescente da interface</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Portabilidade vs. Otimização</strong></td>
+                                    <td>Compatibilidade ampla</td>
+                                    <td>Desempenho máximo</td>
+                                    <td>Abstrações reduzem eficiência</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Detalhamento dos Compromissos -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h3 class="fs-4 fw-semibold mb-3 text-danger">Segurança versus Desempenho</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Verificações de segurança introduzem <strong>custos computacionais mensuráveis</strong>. Cada operação deve ser validada, criptografia consome recursos significativos e isolamento rigoroso pode limitar compartilhamento eficiente.
+                                </p>
+                                <div class="table-responsive-custom">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Mecanismo</th>
+                                                <th>Benefício</th>
+                                                <th>Custo</th>
+                                                <th>Impacto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Verificação de Permissões</td>
+                                                <td>Controle granular</td>
+                                                <td>Validação contínua</td>
+                                                <td>2-5% overhead</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Criptografia AES-256</td>
+                                                <td>Proteção robusta</td>
+                                                <td>Processamento intensivo</td>
+                                                <td>10-30% CPU</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sandboxing</td>
+                                                <td>Contenção de ameaças</td>
+                                                <td>Virtualização</td>
+                                                <td>5-15% performance</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">Simplicidade versus Funcionalidade</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    A adição de recursos aumenta inevitavelmente a complexidade. <strong>Cada nova capacidade</strong> adiciona código, expande superfície de ataque e eleva a curva de aprendizado.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-layer-group me-3 mt-1 text-warning"></i>
+                                        <div>
+                                            <div class="fw-medium">Interfaces Simples vs. Avançadas</div>
+                                            <div class="fs-6 text-muted">APIs básicas são intuitivas mas limitam funcionalidades especializadas</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-cog me-3 mt-1 text-warning"></i>
+                                        <div>
+                                            <div class="fw-medium">Configuração Automática vs. Manual</div>
+                                            <div class="fs-6 text-muted">Detecção automática simplifica uso mas limita controle especializado</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-terminal me-3 mt-1 text-warning"></i>
+                                        <div>
+                                            <div class="fw-medium">CLI vs. GUI</div>
+                                            <div class="fs-6 text-muted">Linha de comando oferece poder, interfaces gráficas acessibilidade</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-info">
+                                <h3 class="fs-4 fw-semibold mb-3 text-info">Portabilidade versus Otimização</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Código específico para hardware</strong> oferece desempenho superior mas limita portabilidade entre arquiteturas diferentes.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-microchip me-3 mt-1 text-info"></i>
+                                        <div>
+                                            <div class="fw-medium">Otimizações Específicas</div>
+                                            <div class="fs-6 text-muted">Instruções AES-NI podem ser 10x mais rápidas que implementações genéricas</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-code me-3 mt-1 text-info"></i>
+                                        <div>
+                                            <div class="fw-medium">Abstrações Genéricas</div>
+                                            <div class="fs-6 text-muted">Facilitam portabilidade mas introduzem 2-5% de overhead</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-puzzle-piece me-3 mt-1 text-info"></i>
+                                        <div>
+                                            <div class="fw-medium">APIs Padronizadas</div>
+                                            <div class="fs-6 text-muted">POSIX promove compatibilidade mas impede recursos únicos</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sabedoria do Equilíbrio -->
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">A Sabedoria do Equilíbrio</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                O design eficaz de Sistemas Operacionais requer <strong>não a eliminação destas escolhas</strong>, mas sua gestão inteligente através de arquiteturas que permitem diferentes configurações para diferentes contextos.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                A maestria reside na compreensão profunda destes objetivos e na habilidade de equilibrá-los apropriadamente.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

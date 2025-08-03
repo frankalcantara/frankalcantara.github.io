@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sistemas Operacionais - 4&nbsp; Introdução: Referências</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./gerproc.html" rel="next">
+<link href="./intro2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles/styles.css">
+<meta property="og:title" content="Sistemas Operacionais - 4&nbsp; Introdução: Referências">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Sistemas Operacionais">
+<meta name="twitter:title" content="Sistemas Operacionais - 4&nbsp; Introdução: Referências">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</a></li><li class="breadcrumb-item"><a href="./intro3.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sistemas Operacionais</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linefollower" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistemas Operacionais: Equilibrando Recursos e Simplicidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exercícios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gerenciamento de Processos: Introdução</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12germem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14geres.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18glossa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</a></li><li class="breadcrumb-item"><a href="./intro3.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>ACM. <strong>The development of the C programming language</strong>. Disponível em: <a href="https://dl.acm.org/doi/10.1145/234286.1057834" class="uri">https://dl.acm.org/doi/10.1145/234286.1057834</a>. Acesso em: 7 jun. 2025.</p>
+<p>AMD. <strong>Computação quântica</strong>. Disponível em: <a href="https://www.amd.com/pt/solutions/quantum-computing.html" class="uri">https://www.amd.com/pt/solutions/quantum-computing.html</a>. Acesso em: 15 out. 2024.</p>
+<p>AMNIC. <strong>Cloud Computing Elasticity: A Game Changer for Modern Businesses</strong>. [S.l.]: Amnic, [s.d.]. Disponível em: <a href="https://amnic.com/blogs/cloud-computing-elasticity" class="uri">https://amnic.com/blogs/cloud-computing-elasticity</a>. Acesso em: 15 out. 2024.</p>
+<p>ANDRADE, W. L.; SANTOS, G. L.; MACEDO, R. J. A. de. <strong>Análise e avaliação funcional de sistemas operacionais móveis: vantagens e desvantagens</strong>. <strong>Revista de Sistemas de Informação da UNIFACS – RSI</strong>, Salvador, n.&nbsp;3, p.&nbsp;3-13, jan./jun. 2013. Disponível em: <a href="https://revistas.unifacs.br/index.php/rsc/article/download/2581/1950" class="uri">https://revistas.unifacs.br/index.php/rsc/article/download/2581/1950</a>. Acesso em: 15 out. 2024.</p>
+<p>APPLEINSIDER. <strong>Apple turns to AI for battery management in iOS 19</strong>. AppleInsider, 12 maio 2025. Disponível em: <a href="https://appleinsider.com/articles/25/05/12/apple-turns-to-ai-for-battery-management-in-ios-19" class="uri">https://appleinsider.com/articles/25/05/12/apple-turns-to-ai-for-battery-management-in-ios-19</a>. Acesso em: 15 out. 2024.</p>
+<p>ARUTE, F. et al.&nbsp;<strong>Quantum supremacy using a programmable superconducting processor</strong>. <strong>Nature</strong>, v. 574, n.&nbsp;7779, p.&nbsp;505-510, out. 2019.</p>
+<p>AZURE. <strong>Introdução à computação quântica híbrida - Azure Quantum</strong>. Microsoft Learn, 07 ago. 2024. Disponível em: <a href="https://learn.microsoft.com/pt-br/azure/quantum/hybrid-computing-overview" class="uri">https://learn.microsoft.com/pt-br/azure/quantum/hybrid-computing-overview</a>. Acesso em: 15 out. 2024.</p>
+<p>BELL, J. <strong>Operating Systems: Introduction</strong>. Chicago: University of Illinois at Chicago, Computer Science Department, [s.d.]. Disponível em: <a href="https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/1_Introduction.html" class="uri">https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/1_Introduction.html</a>. Acesso em: 6 jun. 2025.</p>
+<p>BERTRAND, E. D. <strong>Introduction to Operating Systems</strong>. West Lafayette: Purdue University, School of Electrical and Computer Engineering, [s.d.]. Disponível em: <a href="https://engineering.purdue.edu/~ebertd/469/notes/EE469-ch1.pdf" class="uri">https://engineering.purdue.edu/~ebertd/469/notes/EE469-ch1.pdf</a>. Acesso em: 6 jun. 2025.</p>
+<p>BRITANNICA. <strong>Dennis M. Ritchie | Biography &amp; Facts</strong>. [S.l.]: Encyclopædia Britannica, [s.d.]. Disponível em: <a href="https://www.britannica.com/biography/Dennis-M-Ritchie" class="uri">https://www.britannica.com/biography/Dennis-M-Ritchie</a>. Acesso em: 7 jun. 2025.</p>
+<p>CARVALHO, C. A. G. F. <strong>Características de Sistemas Distribuídos</strong>. Recife: Universidade Federal de Pernambuco, Centro de Informática, [s.d.]. Disponível em: <a href="https://www.cin.ufpe.br/~cagf/sdgrad/aulas/Caracteristicas.pdf" class="uri">https://www.cin.ufpe.br/~cagf/sdgrad/aulas/Caracteristicas.pdf</a>. Acesso em: 15 out. 2024.</p>
+<p>CLOUDFLARE. <strong>O que é multilocação? | Arquitetura multi-inquilinos</strong>. [S.l.]: Cloudflare, [s.d.]. Disponível em: <a href="https://www.cloudflare.com/pt-br/learning/cloud/what-is-multitenancy/" class="uri">https://www.cloudflare.com/pt-br/learning/cloud/what-is-multitenancy/</a>. Acesso em: 15 out. 2024.</p>
+<p>CLOUDZERO. <strong>What Is Cloud Elasticity? (+How Does It Affect Cloud Spend?)</strong>. [S.l.]: CloudZero, [s.d.]. Disponível em: <a href="https://www.cloudzero.com/blog/cloud-elasticity/" class="uri">https://www.cloudzero.com/blog/cloud-elasticity/</a>. Acesso em: 15 out. 2024.</p>
+<p>COMPUTER HISTORY MUSEUM. <strong>Dennis Ritchie - CHM</strong>. [S.l.]: Computer History Museum, [s.d.]. Disponível em: <a href="https://computerhistory.org/profile/dennis-ritchie/" class="uri">https://computerhistory.org/profile/dennis-ritchie/</a>. Acesso em: 7 jun. 2025.</p>
+<p>CORE. <strong>Operating systems for computer networks</strong>. [S.l.]: Academic Repository, [s.d.]. Disponível em: <a href="https://core.ac.uk/download/pdf/228680543.pdf" class="uri">https://core.ac.uk/download/pdf/228680543.pdf</a>. Acesso em: 6 jun. 2025.</p>
+<p>DEITEL, H. M.; DEITEL, P. J.; CHOFFNES, D. R. <strong>Operating Systems</strong>. 3. ed.&nbsp;Boston: Pearson, 2004.</p>
+<p>FERRIOLS, F. <strong>iPhone 17 AI Battery Improvements in iOS 19: More Than Just a Nice-to-Have</strong>. [S.l.]: Thinborne, 23 maio 2025. Disponível em: <a href="https://thinborne.com/blogs/news/iphone-17-ai-battery-improvements-in-ios-19-more-than-just-a-nice-to-have" class="uri">https://thinborne.com/blogs/news/iphone-17-ai-battery-improvements-in-ios-19-more-than-just-a-nice-to-have</a>. Acesso em: 15 out. 2024.</p>
+<p>FOSSCOMICS. <strong>The Origins of UNIX and the C Language</strong>. [S.l.]: Fosscomics, [s.d.]. Disponível em: <a href="https://fosscomics.com/8.%20The%20Origins%20of%20Unix%20and%20the%20C%20Language/" class="uri">https://fosscomics.com/8.%20The%20Origins%20of%20Unix%20and%20the%20C%20Language/</a>. Acesso em: 7 jun. 2025.</p>
+<p>FREERTOS. <strong>FreeRTOS - Market leading RTOS for embedded systems</strong>. [S.l.]: FreeRTOS, [s.d.]. Disponível em: <a href="https://www.freertos.org/" class="uri">https://www.freertos.org/</a>. Acesso em: 22 jun. 2025.</p>
+<p>GIORTAMIS, E. et al.&nbsp;<strong>QOS: A Quantum Operating System</strong>. arXiv:2406.19120v2, 28 jun. 2024. Disponível em: <a href="https://arxiv.org/html/2406.19120v2" class="uri">https://arxiv.org/html/2406.19120v2</a>. Acesso em: 15 out. 2024.</p>
+<p>HONEYWELL. <strong>How Quantum Will Transform the Future of 5 Industries</strong>. [S.l.]: Honeywell, jul. 2020. Disponível em: <a href="https://www.honeywell.com/br/pt/news/2020/07/how-quantum-will-transform-the-future-of-5-industries" class="uri">https://www.honeywell.com/br/pt/news/2020/07/how-quantum-will-transform-the-future-of-5-industries</a>. Acesso em: 15 out. 2024.</p>
+<p>IBM QUANTUM. <strong>Qiskit Runtime Overview</strong>. [S.l.]: IBM Quantum, [s.d.]. Disponível em: <a href="https://quantum-computing.ibm.com/services/runtime" class="uri">https://quantum-computing.ibm.com/services/runtime</a>. Acesso em: 22 jun. 2025.</p>
+<p>IT BRIEFCASE. <strong>New Trends Increase the Effectiveness of Distributed Computing</strong>. [S.l.]: IT Briefcase, 17 dez. 2024. Disponível em: <a href="https://itbriefcase.net/new-trends-increase-the-effectiveness-of-distributed-computing/" class="uri">https://itbriefcase.net/new-trends-increase-the-effectiveness-of-distributed-computing/</a>. Acesso em: 15 out. 2024.</p>
+<p>JONES, P. J. <strong>Operating Systems</strong>. Manchester: University of Manchester, Department of Computer Science, [s.d.]. Disponível em: <a href="https://www.cs.man.ac.uk/~pjj/cs1011/filestore/node2.html" class="uri">https://www.cs.man.ac.uk/~pjj/cs1011/filestore/node2.html</a>. Acesso em: 6 jun. 2025.</p>
+<p>KERNIGHAN, Brian. <strong>Computer Hope</strong>. [S.l.]: Computer Hope, [s.d.]. Disponível em: <a href="https://www.computerhope.com/people/brian_kernighan.htm" class="uri">https://www.computerhope.com/people/brian_kernighan.htm</a>. Acesso em: 7 jun. 2025.</p>
+<p>KLABUNDE, R. et al.&nbsp;<strong>Hybrid Quantum-Classical Computing Systems: Architectures, Interfaces, and Applications</strong>. arXiv:2503.18868v1, 27 mar. 2025. Disponível em: <a href="https://arxiv.org/html/2503.18868v1" class="uri">https://arxiv.org/html/2503.18868v1</a>. Acesso em: 15 out. 2024.</p>
+<p>KLEIMAN, Kathy. <strong>Proving ground: the untold story of the six women who programmed the world’s first modern computer</strong>. New York: Grand Central Publishing, 2022.</p>
+<p>KNOTT, W. J. <strong>UNIX and Operating Systems Fundamentals</strong>. London: Imperial College London, Department of Computing, [s.d.]. Disponível em: <a href="http://www.doc.ic.ac.uk/~wjk/UNIX/Lecture1.html" class="uri">http://www.doc.ic.ac.uk/~wjk/UNIX/Lecture1.html</a>. Acesso em: 6 jun. 2025.</p>
+<p>LIBERTY UNIVERSITY. <strong>Operating Systems – CSIS 443</strong>. [S.l.]: Liberty University Online, [s.d.]. Disponível em: <a href="https://www.liberty.edu/online/courses/csis443/" class="uri">https://www.liberty.edu/online/courses/csis443/</a>. Acesso em: 6 jun. 2025.</p>
+<p>LIVINGINTERNET. <strong>History of C Programming Language</strong>. [S.l.]: LivingInternet, [s.d.]. Disponível em: <a href="https://www.livinginternet.com/i/iw_unix_c.htm" class="uri">https://www.livinginternet.com/i/iw_unix_c.htm</a>. Acesso em: 7 jun. 2025.</p>
+<p>MELL, P.; GRANCE, T. <strong>The NIST Definition of Cloud Computing</strong>. [S.l.]: National Institute of Standards and Technology, Special Publication 800-145, set. 2011. Disponível em: <a href="https://peasoup.cloud/nist-definition-of-cloud-computing/" class="uri">https://peasoup.cloud/nist-definition-of-cloud-computing/</a> e <a href="https://cic.gsa.gov/basics/cloud-basics" class="uri">https://cic.gsa.gov/basics/cloud-basics</a>. Acesso em: 15 out. 2024.</p>
+<p>MICROSOFT AZURE. <strong>O que é computação elástica?</strong>. [S.l.]: Microsoft Azure, [s.d.]. Disponível em: <a href="https://azure.microsoft.com/pt-br/resources/cloud-computing-dictionary/what-is-elastic-computing" class="uri">https://azure.microsoft.com/pt-br/resources/cloud-computing-dictionary/what-is-elastic-computing</a>. Acesso em: 15 out. 2024.</p>
+<p>MIT OPENCOURSEWARE. <strong>6.828 Operating System Engineering</strong>. Cambridge: Massachusetts Institute of Technology, Electrical Engineering and Computer Science Department, [s.d.]. Disponível em: <a href="https://ocw.mit.edu/courses/6-828-operating-system-engineering-fall-2012/" class="uri">https://ocw.mit.edu/courses/6-828-operating-system-engineering-fall-2012/</a>. Acesso em: 6 jun. 2025.</p>
+<p>MOBILE OPERATING SYSTEM. <strong>The Flying Theatre Company</strong>. [S.l.]: The Flying Theatre Company, [s.d.]. Disponível em: <a href="https://theflyingtheatre.com/UserFiles/images/files/punel.pdf" class="uri">https://theflyingtheatre.com/UserFiles/images/files/punel.pdf</a>. Acesso em: 15 out. 2024.</p>
+<p>NORTHWESTERN UNIVERSITY. <strong>COMP_SCI 343: Operating Systems</strong>. Evanston: Northwestern University, Computer Science Department, McCormick School of Engineering, [s.d.]. Disponível em: <a href="https://www.mccormick.northwestern.edu/computer-science/academics/courses/descriptions/343.html" class="uri">https://www.mccormick.northwestern.edu/computer-science/academics/courses/descriptions/343.html</a>. Acesso em: 6 jun. 2025.</p>
+<p>NUTT, G. <strong>Operating Systems: A Modern Perspective</strong>. 3. ed.&nbsp;Boston: Addison-Wesley, 2004.</p>
+<p>ORACLE. <strong>O que é computação em nuvem?</strong>. [S.l.]: Oracle Brasil, [s.d.]. Disponível em: <a href="https://www.oracle.com/br/cloud/what-is-cloud-computing/" class="uri">https://www.oracle.com/br/cloud/what-is-cloud-computing/</a>. Acesso em: 15 out. 2024.</p>
+<p>ORGANICK, E. I. <strong>The Multics System: An Examination of its Structure</strong>. Cambridge: MIT Press, 1972.</p>
+<p>RITCHIE, D. M.; THOMPSON, K. <strong>The UNIX Time-Sharing System</strong>. <strong>Communications of the ACM</strong>, v. 17, n.&nbsp;7, p.&nbsp;365-375, 1974.</p>
+<p>RYCKMAN, George F. <strong>The computer operation language</strong>. In: ACM NATIONAL CONFERENCE, 1962, Syracuse. Anais […]. New York: ACM, 1962. p.&nbsp;102. Disponível em: https://doi.org/10.1145/800256.809187. Acesso em: 4 jul. 2025.</p>
+<p>SALTZER, J. H.; SCHROEDER, M. D. <strong>The protection of information in computer systems</strong>. <strong>Proceedings of the IEEE</strong>, v. 63, n.&nbsp;9, p.&nbsp;1278-1308, 1975.</p>
+<p>SHARMA, A. <strong>One UI 7 could bring even smarter power-saving options to Galaxy phones</strong>. [S.l.]: <strong>Android</strong> Authority, 15 maio 2025. Disponível em: <a href="https://www.androidauthority.com/one-ui-7-power-saving-options-3558362/" class="uri">https://www.androidauthority.com/one-ui-7-power-saving-options-3558362/</a>. Acesso em: 15 out. 2024.</p>
+<p>SIEGFRIED, S. <strong>CSC 553 Operating Systems - Lecture 2</strong>. Garden City: Adelphi University, Computer Science Department, [s.d.]. Disponível em: <a href="https://home.adelphi.edu/~siegfried/cs553/553l2.pdf" class="uri">https://home.adelphi.edu/~siegfried/cs553/553l2.pdf</a>. Acesso em: 6 jun. 2025.</p>
+<p>SILBERSCHATZ, A.; GALVIN, P. B.; GAGNE, G. <strong>Operating System Concepts</strong>. 10. ed.&nbsp;Hoboken: John Wiley &amp; Sons, 2018.</p>
+<p>SPINQ. <strong>Quantum Computer Operating System: The Key to Quantum Power</strong>. [S.l.]: SpinQ Technology, 16 jan. 2025. Disponível em: <a href="https://www.spinquanta.com/news-detail/quantum-computer-operating-system-the-key-to-quantum-power20250116104617" class="uri">https://www.spinquanta.com/news-detail/quantum-computer-operating-system-the-key-to-quantum-power20250116104617</a>. Acesso em: 15 out. 2024.</p>
+<p>STALLINGS, W. <strong>Operating Systems: Internals and Design Principles</strong>. 9. ed.&nbsp;Boston: Pearson, 2018.</p>
+<p>SWEISS, W. <strong>Chapter 1: Introduction to Operating Systems</strong>. New York: Hunter College, CUNY, Computer Science Department, [s.d.]. Disponível em: <a href="https://www.cs.hunter.cuny.edu/~sweiss/course_materials/csci340/slides/chapter01.pdf" class="uri">https://www.cs.hunter.cuny.edu/~sweiss/course_materials/csci340/slides/chapter01.pdf</a>. Acesso em: 6 jun. 2025.</p>
+<p>TANENBAUM, A. S.; BOS, H. <strong>Modern Operating Systems</strong>. 4. ed.&nbsp;Boston: Pearson, 2015.</p>
+<p>THE MOONLIGHT. <strong>QOS: A Quantum Operating System</strong>. [S.l.]: The Moonlight Review, [s.d.]. Disponível em: <a href="https://www.themoonlight.io/en/review/qos-a-quantum-operating-system" class="uri">https://www.themoonlight.io/en/review/qos-a-quantum-operating-system</a>. Acesso em: 15 out. 2024.</p>
+<p>TOPTAL. <strong>Why the C Programming Language Still Runs the World</strong>. [S.l.]: Toptal, [s.d.]. Disponível em: <a href="https://www.toptal.com/c/after-all-these-years-the-world-is-still-powered-by-c-programming" class="uri">https://www.toptal.com/c/after-all-these-years-the-world-is-still-powered-by-c-programming</a>. Acesso em: 7 jun. 2025.</p>
+<p>UNIVERSITY OF COLORADO. <strong>CSCI 3753 Operating Systems Syllabus</strong>. Boulder: University of Colorado, Computer Science Department, [s.d.]. Disponível em: <a href="https://home.cs.colorado.edu" class="uri">https://home.cs.colorado.edu</a>. Acesso em: 6 jun. 2025.</p>
+<p>VON KYPKE, L.; WACK, A. <strong>How an Operating System for Quantum Computers Should Be Architected</strong>. arXiv:2410.13482v1, 21 out. 2024. Disponível em: <a href="https://arxiv.org/html/2410.13482v1" class="uri">https://arxiv.org/html/2410.13482v1</a>. Acesso em: 15 out. 2024.</p>
+<p>ZDNET. <strong>I changed 12 settings on my </strong>Android** phone to give it an instant battery boost**. [S.l.]: ZDNet, [s.d.]. Disponível em: <a href="https://www.zdnet.com/article/i-changed-12-settings-on-my-android-phone-to-give-it-an-instant-battery-boost/" class="uri">https://www.zdnet.com/article/i-changed-12-settings-on-my-android-phone-to-give-it-an-instant-battery-boost/</a>. Acesso em: 15 out. 2024.</p>
+<p>ZEPHYR PROJECT. <strong>Zephyr RTOS Documentation</strong>. [S.l.]: Zephyr Project, [s.d.]. Disponível em: <a href="https://docs.zephyrproject.org/" class="uri">https://docs.zephyrproject.org/</a>. Acesso em: 22 jun. 2025.</p>
+<p><strong>Dennis Ritchie and Ken Thompson on the history of UNIX</strong>. [S.l.]: [s.n.], [s.d.]. Disponível em: <a href="https://my3.my.umbc.edu/groups/csee/media/1799" class="uri">https://my3.my.umbc.edu/groups/csee/media/1799</a>. Acesso em: 7 jun. 2025.</p>
+<p><strong>Early UNIX history and evolution</strong>. [S.l.]: Nokia Bell Labs, [s.d.]. Disponível em: <a href="https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.html" class="uri">https://www.nokia.com/bell-labs/about/dennis-m-ritchie/hist.html</a>. Acesso em: 7 jun. 2025.</p>
+<p><strong>Lessons Learned from 30 Years of MINIX</strong>. <strong>Communications of the ACM</strong>, [s.d.]. Disponível em: <a href="https://cacm.acm.org/research/lessons-learned-from-30-years-of-minix/" class="uri">https://cacm.acm.org/research/lessons-learned-from-30-years-of-minix/</a>. Acesso em: 7 jun. 2025.</p>
+<p><strong>Power Management Techniques in Smartphones Operating Systems</strong>. <strong>IJCSI International Journal of Computer Science Issues</strong>, v. 9, i. 3, n.&nbsp;3, maio 2012. Disponível em: <a href="https://www.researchgate.net/publication/268409514_Power_Management_Techniques_in_Smartphones_Operating_Systems" class="uri">https://www.researchgate.net/publication/268409514_Power_Management_Techniques_in_Smartphones_Operating_Systems</a>. Acesso em: 15 out. 2024.</p>
+<p><strong>Quantum Computing: An Emerging Ecosystem and Industry Use Cases</strong>. [S.l.]: McKinsey &amp; Company, dez. 2021. Disponível em: <a href="https://www.westconference.org/WEST25/Custom/Handout/Speaker0_Session11706_1.pdf" class="uri">https://www.westconference.org/WEST25/Custom/Handout/Speaker0_Session11706_1.pdf</a>. Acesso em: 15 out. 2024.</p>
+<p><strong>UNIX - Wikipedia</strong>. [S.l.]: Wikipedia, [s.d.]. Disponível em: <a href="https://en.wikipedia.org/wiki/UNIX" class="uri">https://en.wikipedia.org/wiki/UNIX</a>. Acesso em: 7 jun. 2025.</p>
+<p><strong>UNIX and Multics</strong>. [S.l.]: [s.n.], [s.d.]. Disponível em: <a href="https://multicians.org/UNIX.html" class="uri">https://multicians.org/UNIX.html</a>. Acesso em: 7 jun. 2025.</p>
+<p><strong>UNIX | Definition, Meaning, History, &amp; Facts</strong>. [S.l.]: Encyclopædia Britannica, [s.d.]. Disponível em: <a href="https://www.britannica.com/technology/UNIX" class="uri">https://www.britannica.com/technology/UNIX</a>. Acesso em: 7 jun. 2025.</p>
+<p><strong>Os desafios da computação em nuvem</strong>. Marabá: Universidade Federal do Sul e Sudeste do Pará, [s.d.]. Disponível em: <a href="https://repositorio.unifesspa.edu.br/bitstream/123456789/228/1/TCC_%20Os%20desafios%20da%20computa%C3%A7%C3%A3o%20em%20nuvem.pdf" class="uri">https://repositorio.unifesspa.edu.br/bitstream/123456789/228/1/TCC_%20Os%20desafios%20da%20computa%C3%A7%C3%A3o%20em%20nuvem.pdf</a>. Acesso em: 15 out. 2024.</p>
+<p>WANG, Chao et al.&nbsp;<strong>Quantum Annealing Public Key Cryptographic Attack Algorithm Based on D-Wave Advantage</strong>. 计算机学报 (Chinese Journal of Computers), v. 47, n.&nbsp;5, p.&nbsp;1030-1044, maio 2024.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./intro2.html" class="pagination-link" aria-label="Exercícios">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exercícios</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./gerproc.html" class="pagination-link" aria-label="Gerenciamento de Processos: Introdução">
+        <span class="nav-page-text">Gerenciamento de Processos: Introdução</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/intro3.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

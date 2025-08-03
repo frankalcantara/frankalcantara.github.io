@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sistemas Operacionais - 9&nbsp; Simuladores e Projetos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./gerproc6.html" rel="next">
+<link href="./gerproc4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/styles.css">
+<meta property="og:title" content="Sistemas Operacionais - 9&nbsp; Simuladores e Projetos">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Sistemas Operacionais">
+<meta name="twitter:title" content="Sistemas Operacionais - 9&nbsp; Simuladores e Projetos">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gerenciamento de Processos: Introdução</a></li><li class="breadcrumb-item"><a href="./gerproc5.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sistemas Operacionais</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linefollower" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistemas Operacionais: Equilibrando Recursos e Simplicidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exercícios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Gerenciamento de Processos: Introdução</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12germem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14geres.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18glossa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#projeto-3-shell-interativo-minimalista-cross-platform" id="toc-projeto-3-shell-interativo-minimalista-cross-platform" class="nav-link active" data-scroll-target="#projeto-3-shell-interativo-minimalista-cross-platform"><span class="header-section-number">9.1</span> Projeto 3: Shell Interativo Minimalista Cross-Platform</a>
+  <ul class="collapse">
+  <li><a href="#aspectos-técnicos" id="toc-aspectos-técnicos" class="nav-link" data-scroll-target="#aspectos-técnicos"><span class="header-section-number">9.1.1</span> Aspectos Técnicos</a></li>
+  <li><a href="#objetivos" id="toc-objetivos" class="nav-link" data-scroll-target="#objetivos"><span class="header-section-number">9.1.2</span> Objetivos</a></li>
+  <li><a href="#fases-do-projeto" id="toc-fases-do-projeto" class="nav-link" data-scroll-target="#fases-do-projeto"><span class="header-section-number">9.1.3</span> Fases do Projeto</a></li>
+  <li><a href="#exemplo-de-saída" id="toc-exemplo-de-saída" class="nav-link" data-scroll-target="#exemplo-de-saída"><span class="header-section-number">9.1.4</span> Exemplo de Saída</a></li>
+  </ul></li>
+  <li><a href="#projeto-4-threads-threads-monitor-e-gerenciador-de-processos-empresarial" id="toc-projeto-4-threads-threads-monitor-e-gerenciador-de-processos-empresarial" class="nav-link" data-scroll-target="#projeto-4-threads-threads-monitor-e-gerenciador-de-processos-empresarial"><span class="header-section-number">9.2</span> Projeto 4: THREADS THREADS Monitor e Gerenciador de Processos Empresarial</a>
+  <ul class="collapse">
+  <li><a href="#aspectos-técnicos-1" id="toc-aspectos-técnicos-1" class="nav-link" data-scroll-target="#aspectos-técnicos-1"><span class="header-section-number">9.2.1</span> Aspectos Técnicos</a></li>
+  <li><a href="#objetivos-1" id="toc-objetivos-1" class="nav-link" data-scroll-target="#objetivos-1"><span class="header-section-number">9.2.2</span> Objetivos</a></li>
+  <li><a href="#fases-do-projeto-1" id="toc-fases-do-projeto-1" class="nav-link" data-scroll-target="#fases-do-projeto-1"><span class="header-section-number">9.2.3</span> Fases do Projeto</a></li>
+  <li><a href="#exemplo-de-saída-1" id="toc-exemplo-de-saída-1" class="nav-link" data-scroll-target="#exemplo-de-saída-1"><span class="header-section-number">9.2.4</span> Exemplo de Saída</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/gerproc5.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gerenciamento de Processos: Introdução</a></li><li class="breadcrumb-item"><a href="./gerproc5.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="projeto-3-shell-interativo-minimalista-cross-platform" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="projeto-3-shell-interativo-minimalista-cross-platform"><span class="header-section-number">9.1</span> Projeto 3: Shell Interativo Minimalista Cross-Platform</h2>
+<p>Este projeto tem como objetivo implementar um shell de comando funcional que demonstre os conceitos fundamentais de criação de processos, job control e comunicação inter-processo. Implementado em C++23, o sistema consolida o paradigma <code>fork()/exec()</code> do <strong>Linux</strong> e <code>CreateProcess</code> do <strong>Windows</strong>, permitindo que a esforçada leitora experimente diretamente os mecanismos de controle de processos abordados teoricamente.</p>
+<section id="aspectos-técnicos" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="aspectos-técnicos"><span class="header-section-number">9.1.1</span> Aspectos Técnicos</h3>
+<p>Um sistema em <strong>C++23</strong> que utilize <code>std::variant</code> para abstrair diferenças entre plataformas, <code>std::unique_ptr</code> para gerenciamento seguro de recursos de processo e <code>std::ranges</code> para parsing eficiente de comandos. O sistema deve integrar <strong>API</strong>s específicas para <strong>Linux</strong>, como <code>fork()</code>, <code>execvp()</code>, <code>pipe()</code>, <code>setpgid()</code> e <code>tcsetpgrp()</code> para implementar um sistema <em>job control</em> completo, e para <strong>Windows</strong>, utilizando <code>CreateProcess</code>, <code>CreatePipe</code> e <code>Job Objects</code> para funcionalidades equivalentes. Implemente tratamento robusto de sinais no <strong>Linux</strong> (<code>SIGINT</code>, <code>SIGTSTP</code>, <code>SIGCHLD</code>) e eventos no <strong>Windows</strong> para controle adequado de sessão. Além disso, adote um design extensível que permita adicionar comandos internos e funcionalidades de scripting no futuro. Pense grande!</p>
+</section>
+<section id="objetivos" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="objetivos"><span class="header-section-number">9.1.2</span> Objetivos</h3>
+<p>Consolidar os conceitos de criação de processos através de implementação prática de um <code>shell</code> funcional. Demonstrar diferenças entre paradigmas <code>fork()/exec()</code> e <code>CreateProcess</code> em contexto real. Implementar <em>job control</em> completo incluindo execução em <em>background</em>, suspensão e resumo de processos. Fornecer <em>parsing</em> robusto de linha de comando com suporte a <em>pipes</em>, redirecionamento e expansão de variáveis. Em uma ferramenta que seja educativa e demonstre conceitos avançados como <em>process groups</em> e <em>sessions</em>.</p>
+<p>A esperança é que a amável leitora consiga: experiência prática com <strong>API</strong>s de sistema para criação e controle de processos; compreensão profunda dos mecanismos de <em>job control</em> utilizados por <code>shells</code> modernos; e habilidade para implementar <em>pipelines</em> complexos e redirecionamento de <code>E/S</code> programaticamente.</p>
+<p>O programa deverá ser capaz de executar comandos externos, gerenciar <em>jobs</em> em <em>foreground</em> e <em>background</em>, e implementar comandos internos essenciais. As principais funcionalidades incluem:</p>
+<p><strong>Linux</strong>:</p>
+<ul>
+<li><strong>Process Groups</strong>: controle completo com <code>setpgid()</code> e <code>tcsetpgrp()</code>;</li>
+<li><strong>Signal Handling</strong>: tratamento adequado de <code>SIGINT</code>, <code>SIGTSTP</code>, <code>SIGCHLD</code>;</li>
+<li><strong>Pipeline Support</strong>: implementação nativa usando <code>pipe()</code> e <code>dup2()</code>;</li>
+<li><strong>Job Control</strong>: suspensão (<code>Ctrl+Z</code>) e resumo (<code>fg</code>, <code>bg</code>) de processos.</li>
+</ul>
+<p><strong>Windows</strong>:</p>
+<ul>
+<li><strong>Job Objects</strong>: agrupamento de processos para controle unitário;</li>
+<li><strong>Pipe Redirection</strong>: redirecionamento usando <code>CreatePipe</code> e <code>SetStdHandle</code>;</li>
+<li><strong>Process Termination</strong>: controle graceful via <code>TerminateProcess</code> e <code>WaitForSingleObject</code>;</li>
+<li><strong>Console Control</strong>: manipulação de console para simulação de job control.</li>
+</ul>
+<p>Além disso, o programa deve demonstrar:</p>
+<ul>
+<li><strong>Parsing avançado</strong> de linha de comando com suporte a quotes e escape;</li>
+<li><strong>Expansão de variáveis</strong> de ambiente e substituição de comandos;</li>
+<li><strong>Histórico de comandos</strong> com navegação e busca;</li>
+<li><strong>Auto-completion</strong> básico para comandos e arquivos;</li>
+<li><strong>Comandos internos</strong> (<code>cd</code>, <code>exit</code>, <code>jobs</code>, <code>fg</code>, <code>bg</code>, <code>export</code>);</li>
+<li><strong>Redirecionamento</strong> completo (<code>&gt;</code>, <code>&lt;</code>, <code>&gt;&gt;</code>, <code>2&gt;</code>, <code>|</code>);</li>
+<li><strong>Execução condicional</strong> com operadores <code>&amp;&amp;</code> e <code>||</code>;</li>
+<li><strong>Controle de sessão</strong> e terminal ownership.</li>
+</ul>
+</section>
+<section id="fases-do-projeto" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="fases-do-projeto"><span class="header-section-number">9.1.3</span> Fases do Projeto</h3>
+<p>O Projeto está dividido em <span class="math inline">\(4\)</span> fases:</p>
+<section id="fase-1-parser-de-comandos-e-arquitetura-base" class="level4" data-number="9.1.3.1">
+<h4 data-number="9.1.3.1" class="anchored" data-anchor-id="fase-1-parser-de-comandos-e-arquitetura-base"><span class="header-section-number">9.1.3.1</span> Fase 1: Parser de Comandos e Arquitetura Base</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Estabelecer uma base sólida para parsing de linha de comando que suporte expansões futuras.</li>
+<li>Criar abstração cross-platform que encapsule diferenças entre <strong>Linux</strong> e <strong>Windows</strong>.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Desenvolver a classe <code>CommandParser</code> para análise lexical e sintática de comandos.</li>
+<li>Criar interface <code>ShellPlatform</code> para abstrair operações específicas de cada sistema.</li>
+<li>Implementar <code>CommandExecutor</code> como núcleo de execução de comandos.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SimpleShell <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> Platform <span class="op">{</span> <span class="op">**</span>Linux<span class="op">**,</span> <span class="op">**</span>Windows<span class="op">**</span> <span class="op">};</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> CommandType <span class="op">{</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        External<span class="op">,</span> Builtin<span class="op">,</span> Pipeline<span class="op">,</span> Redirection<span class="op">,</span> Background </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    Platform <span class="va">current_platform_</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>CommandParser<span class="op">&gt;</span> <span class="va">parser_</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>JobManager<span class="op">&gt;</span> <span class="va">job_manager_</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>EnvironmentManager<span class="op">&gt;</span> <span class="va">env_manager_</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>ShellPlatform<span class="op">&gt;</span> <span class="va">platform_</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> run<span class="op">();</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> execute_command<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> handle_signal<span class="op">(</span><span class="dt">int</span> signal<span class="op">);</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CommandParser <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Token <span class="op">{</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="kw">enum</span> Type <span class="op">{</span> Word<span class="op">,</span> Pipe<span class="op">,</span> Redirect<span class="op">,</span> Background<span class="op">,</span> And<span class="op">,</span> Or <span class="op">};</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        Type type<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string value<span class="op">;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">size_t</span> position<span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> ParsedCommand <span class="op">{</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> args<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>optional<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> input_file<span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>optional<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> output_file<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> append_output <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> run_background <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> redirect_stderr <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>ParsedCommand<span class="op">&gt;</span> parse<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> input<span class="op">);</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>Token<span class="op">&gt;</span> tokenize<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> input<span class="op">);</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: A classe <code>SimpleShell</code> serve como ponto de entrada principal, coordenando parser, <em>job manager</em> e platform-specific operations. <code>CommandParser</code> realiza análise lexical completa, produzindo tokens que são então organizados em <code>ParsedCommand</code> structures contendo argumentos, redirecionamentos e modificadores. O design modular permite extensão fácil para novos tipos de comando e operadores.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Parser robusto é fundamental para suportar sintaxe complexa de shell.</li>
+<li>Abstração de plataforma permite implementação consistente em <strong>Linux</strong> e Windows.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Parser completo de linha de comando.</li>
+<li>Estruturas de dados para representar comandos parsed.</li>
+<li>Framework básico para execução de comandos.</li>
+</ul>
+</section>
+<section id="fase-2-execução-de-comandos-e-redirecionamento" class="level4" data-number="9.1.3.2">
+<h4 data-number="9.1.3.2" class="anchored" data-anchor-id="fase-2-execução-de-comandos-e-redirecionamento"><span class="header-section-number">9.1.3.2</span> Fase 2: Execução de Comandos e Redirecionamento</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Implementar funcionalidade core do shell: execução de programas externos.</li>
+<li>Demonstrar redirecionamento de <code>E/S</code> usando <code>APIs</code>nativas de cada plataforma.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Implementar <code>LinuxExecutor</code> usando fork/exec pattern com setup de redirecionamento.</li>
+<li>Implementar <code>WindowsExecutor</code> usando CreateProcess com STARTUPINFO configurado.</li>
+<li>Criar sistema de redirecionamento que funcione consistentemente em ambas plataformas.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ShellPlatform <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="op">~</span>ShellPlatform<span class="op">()</span> <span class="op">=</span> <span class="cf">default</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> ProcessResult execute_command<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> PipeResult create_pipeline<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>ParsedCommand<span class="op">&gt;&amp;</span> commands<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">bool</span> redirect_io<span class="op">(</span><span class="at">const</span> IORedirection<span class="op">&amp;</span> redirection<span class="op">)</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">virtual</span> <span class="dt">void</span> setup_signal_handlers<span class="op">()</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinuxExecutor <span class="op">:</span> <span class="kw">public</span> ShellPlatform <span class="op">{</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ProcessResult execute_command<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">pid_t</span> <span class="op">**</span>PID<span class="op">**</span> <span class="op">=</span> fork<span class="op">();</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>pid <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Setup redirecionamento antes de exec</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            setup_redirections<span class="op">(</span>cmd<span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            setup_process_group<span class="op">(</span>cmd<span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">char</span><span class="op">*&gt;</span> argv <span class="op">=</span> prepare_argv<span class="op">(</span>cmd<span class="op">.</span>args<span class="op">);</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            execvp<span class="op">(</span>argv<span class="op">[</span><span class="dv">0</span><span class="op">],</span> argv<span class="op">.</span>data<span class="op">());</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            perror<span class="op">(</span><span class="st">"execvp failed"</span><span class="op">);</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            _exit<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ProcessResult<span class="op">{</span>pid<span class="op">,</span> cmd<span class="op">.</span>run_background<span class="op">};</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> setup_redirections<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">);</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> setup_process_group<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">);</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WindowsExecutor <span class="op">:</span> <span class="kw">public</span> ShellPlatform <span class="op">{</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    ProcessResult execute_command<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">)</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        STARTUPINFOW si <span class="op">=</span> <span class="op">{};</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        PROCESS_INFORMATION pi <span class="op">=</span> <span class="op">{};</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        setup_startupinfo<span class="op">(</span>si<span class="op">,</span> cmd<span class="op">);</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>wstring cmdline <span class="op">=</span> build_command_line<span class="op">(</span>cmd<span class="op">.</span>args<span class="op">);</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        CreateProcessW<span class="op">(</span><span class="kw">nullptr</span><span class="op">,</span> <span class="op">&amp;</span>cmdline<span class="op">[</span><span class="dv">0</span><span class="op">],</span> <span class="kw">nullptr</span><span class="op">,</span> <span class="kw">nullptr</span><span class="op">,</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>                      TRUE<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="kw">nullptr</span><span class="op">,</span> <span class="kw">nullptr</span><span class="op">,</span> <span class="op">&amp;</span>si<span class="op">,</span> <span class="op">&amp;</span>pi<span class="op">);</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ProcessResult<span class="op">{</span>pi<span class="op">.</span>dwProcessId<span class="op">,</span> cmd<span class="op">.</span>run_background<span class="op">};</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> setup_startupinfo<span class="op">(</span>STARTUPINFOW<span class="op">&amp;</span> si<span class="op">,</span> <span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">);</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>ShellPlatform</code> define interface comum para execução de comandos, criação de pipelines e redirecionamento de <code>E/S</code>. <code>LinuxExecutor</code> implementa padrão fork/exec tradicional, configurando redirecionamentos através de <code>dup2()</code> antes do exec. <code>WindowsExecutor</code> usa <code>CreateProcess</code> com <code>STARTUPINFO</code> pré-configurado para redirecionamentos. Ambas implementações garantem isolamento adequado de processos.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Redirecionamento de <code>E/S</code> é funcionalidade essencial de qualquer shell.</li>
+<li>Implementação cross-platform demonstra diferenças fundamentais entre sistemas.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Execução de comandos externos em ambas plataformas.</li>
+<li>Sistema completo de redirecionamento (&gt;, &lt;, &gt;&gt;, 2&gt;).</li>
+<li>Tratamento robusto de erros de execução.</li>
+</ul>
+</section>
+<section id="fase-3-pipeline-implementation-e-job-control" class="level4" data-number="9.1.3.3">
+<h4 data-number="9.1.3.3" class="anchored" data-anchor-id="fase-3-pipeline-implementation-e-job-control"><span class="header-section-number">9.1.3.3</span> Fase 3: Pipeline Implementation e Job Control</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Pipelines são uma das funcionalidades mais poderosas e complexas de shells <strong>UNIX</strong>.</li>
+<li><em>Job control</em> demonstra conceitos avançados de <em>process groups</em> e <em>sinal handling</em>.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Implementar <code>PipelineManager</code> para criar e conectar múltiplos processos via pipes.</li>
+<li>Desenvolver <code>JobManager</code> para controle completo de jobs (background, suspend, resume).</li>
+<li>Adicionar <em>sinal handling</em> robusto para controle de sessão.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PipelineManager <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> PipelineResult <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">pid_t</span><span class="op">&gt;</span> process_ids<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> pipeline_id<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_background<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string command_line<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    PipelineResult execute_pipeline<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>ParsedCommand<span class="op">&gt;&amp;</span> commands<span class="op">);</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> wait_for_pipeline<span class="op">(</span><span class="dt">int</span> pipeline_id<span class="op">);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> PipeDescriptor <span class="op">{</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> read_fd<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> write_fd<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> created<span class="op">;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>PipeDescriptor<span class="op">&gt;</span> create_pipes<span class="op">(</span><span class="dt">size_t</span> count<span class="op">);</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> setup_pipeline_process<span class="op">(</span><span class="dt">size_t</span> index<span class="op">,</span> <span class="dt">size_t</span> total<span class="op">,</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                               <span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>PipeDescriptor<span class="op">&gt;&amp;</span> pipes<span class="op">,</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                               <span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">);</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> JobManager <span class="op">{</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Job <span class="op">{</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> job_id<span class="op">;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">pid_t</span> pgid<span class="op">;</span>  <span class="co">// Process group ID</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string command<span class="op">;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        JobStatus status<span class="op">;</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">pid_t</span><span class="op">&gt;</span> processes<span class="op">;</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_background<span class="op">;</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> JobStatus <span class="op">{</span> Running<span class="op">,</span> Stopped<span class="op">,</span> Completed <span class="op">};</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> add_job<span class="op">(</span><span class="at">const</span> PipelineResult<span class="op">&amp;</span> pipeline<span class="op">);</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> update_job_status<span class="op">(</span><span class="dt">pid_t</span> pid<span class="op">,</span> <span class="dt">int</span> status<span class="op">);</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> bring_to_foreground<span class="op">(</span><span class="dt">int</span> job_id<span class="op">);</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> send_to_background<span class="op">(</span><span class="dt">int</span> job_id<span class="op">);</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> list_jobs<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> cleanup_completed_jobs<span class="op">();</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>Job<span class="op">&gt;</span> <span class="va">active_jobs_</span><span class="op">;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="va">next_job_id_</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    <span class="dt">pid_t</span> <span class="va">shell_pgid_</span><span class="op">;</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> termios <span class="va">shell_tmodes_</span><span class="op">;</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>PipelineManager</code> coordena criação de múltiplos pipes e processos, configurando cada processo na pipeline com entrada/saída conectada adequadamente. <code>JobManager</code> mantém registro de todos os jobs ativos, implementando controle completo incluindo <em>process groups</em> para job control adequado. No <strong>Linux</strong>, usa <code>setpgid()</code> e <code>tcsetpgrp()</code> para controle de terminal; no Windows, simula comportamento similar com Job Objects.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Pipelines demonstram composição de processos, conceito fundamental em <strong>UNIX</strong>.</li>
+<li><em>job control</em> é funcionalidade avançada que distingue shells interativos.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Sistema completo de pipelines com n processos conectados.</li>
+<li><em>job control</em> funcional (fg, bg, jobs, Ctrl+Z).</li>
+<li>Signal handling robusto para controle de sessão.</li>
+</ul>
+</section>
+<section id="fase-4-comandos-internos-e-funcionalidades-avançadas" class="level4" data-number="9.1.3.4">
+<h4 data-number="9.1.3.4" class="anchored" data-anchor-id="fase-4-comandos-internos-e-funcionalidades-avançadas"><span class="header-section-number">9.1.3.4</span> Fase 4: Comandos Internos e Funcionalidades Avançadas</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Comandos internos demonstram integração entre shell e <strong>Sistema Operacional</strong>.</li>
+<li>Funcionalidades avançadas tornam o shell verdadeiramente utilizável.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Implementar <code>BuiltinCommands</code> para comandos que devem rodar no processo do shell.</li>
+<li>Adicionar <code>HistoryManager</code> para navegação e busca no histórico.</li>
+<li>Desenvolver <code>CompletionEngine</code> para auto-completion de comandos e arquivos.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BuiltinCommands <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> BuiltinType <span class="op">{</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        CD<span class="op">,</span> EXIT<span class="op">,</span> JOBS<span class="op">,</span> FG<span class="op">,</span> BG<span class="op">,</span> EXPORT<span class="op">,</span> UNSET<span class="op">,</span> PWD<span class="op">,</span> ECHO<span class="op">,</span> HISTORY </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> is_builtin<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> command<span class="op">);</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> execute_builtin<span class="op">(</span><span class="at">const</span> ParsedCommand<span class="op">&amp;</span> cmd<span class="op">,</span> ShellState<span class="op">&amp;</span> state<span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> cmd_cd<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&amp;</span> args<span class="op">);</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> cmd_jobs<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&amp;</span> args<span class="op">,</span> <span class="at">const</span> JobManager<span class="op">&amp;</span> jobs<span class="op">);</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> cmd_fg<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&amp;</span> args<span class="op">,</span> JobManager<span class="op">&amp;</span> jobs<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> cmd_export<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&amp;</span> args<span class="op">,</span> EnvironmentManager<span class="op">&amp;</span> env<span class="op">);</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> cmd_history<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&amp;</span> args<span class="op">,</span> <span class="at">const</span> HistoryManager<span class="op">&amp;</span> hist<span class="op">);</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HistoryManager <span class="op">{</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> add_command<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> command<span class="op">);</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>optional<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> get_command<span class="op">(</span><span class="dt">int</span> index<span class="op">);</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> search_history<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> pattern<span class="op">);</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> save_to_file<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> filename<span class="op">);</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> load_from_file<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> filename<span class="op">);</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Navegação estilo readline</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string previous_command<span class="op">();</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string next_command<span class="op">();</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> reset_navigation<span class="op">();</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> <span class="va">history_</span><span class="op">;</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> <span class="va">current_position_</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="kw">constexpr</span> <span class="dt">size_t</span> MAX_HISTORY <span class="op">=</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CompletionEngine <span class="op">{</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> CompletionResult <span class="op">{</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> completions<span class="op">;</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string common_prefix<span class="op">;</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_unique<span class="op">;</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    CompletionResult complete_command<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> partial<span class="op">);</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    CompletionResult complete_filename<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> partial<span class="op">);</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    CompletionResult complete_variable<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> partial<span class="op">);</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> get_executable_commands<span class="op">();</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> get_files_in_directory<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> dir<span class="op">);</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>BuiltinCommands</code> implementa comandos que devem executar no contexto do shell (cd, export, jobs), diferente de comandos externos. <code>HistoryManager</code> mantém histórico persistente com funcionalidades de navegação e busca. <code>CompletionEngine</code> oferece auto-completion inteligente baseado em contexto (comandos, arquivos, variáveis). Todas as funcionalidades são implementadas de forma cross-platform.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Comandos internos são essenciais para funcionalidade completa do shell.</li>
+<li>Funcionalidades modernas (histórico, completion) melhoram experiência do usuário.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Conjunto completo de comandos internos.</li>
+<li>Sistema de histórico com persistência.</li>
+<li>Auto-completion funcional para comandos e arquivos.</li>
+</ul>
+</section>
+</section>
+<section id="exemplo-de-saída" class="level3" data-number="9.1.4">
+<h3 data-number="9.1.4" class="anchored" data-anchor-id="exemplo-de-saída"><span class="header-section-number">9.1.4</span> Exemplo de Saída</h3>
+<section id="execução-de-pipeline" class="level4" data-number="9.1.4.1">
+<h4 data-number="9.1.4.1" class="anchored" data-anchor-id="execução-de-pipeline"><span class="header-section-number">9.1.4.1</span> Execução de Pipeline</h4>
+<pre class="shell"><code>MyShell&gt; ls -la | grep "\.cpp" | sort | head -5
+-rw-r--r--  1 user  staff   2847 Jan 15 10:30 main.cpp
+-rw-r--r--  1 user  staff   1653 Jan 14 16:45 parser.cpp
+-rw-r--r--  1 user  staff   3421 Jan 15 09:15 shell.cpp
+[Pipeline executado com PIDs: 1234, 1235, 1236, 1237]
+MyShell&gt; </code></pre>
+</section>
+<section id="job-control" class="level4" data-number="9.1.4.2">
+<h4 data-number="9.1.4.2" class="anchored" data-anchor-id="job-control"><span class="header-section-number">9.1.4.2</span> Job Control</h4>
+<pre class="shell"><code>MyShell&gt; sleep 100 &amp;
+[1] 1245 sleep 100
+MyShell&gt; jobs
+[1]+  Running    sleep 100 &amp;
+MyShell&gt; fg 1
+sleep 100
+^Z
+[1]+  Stopped    sleep 100
+MyShell&gt; bg 1
+[1]+ sleep 100 &amp;
+MyShell&gt; </code></pre>
+</section>
+</section>
+</section>
+<section id="projeto-4-threads-threads-monitor-e-gerenciador-de-processos-empresarial" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="projeto-4-threads-threads-monitor-e-gerenciador-de-processos-empresarial"><span class="header-section-number">9.2</span> Projeto 4: THREADS THREADS Monitor e Gerenciador de Processos Empresarial</h2>
+<p>Este projeto tem como objetivo implementar um sistema robusto de monitoramento e gerenciamento de processos adequado para ambientes de produção. Implementado em C++23, o sistema demonstra técnicas avançadas de supervisão de processos, coleta de métricas em tempo real e políticas de restart automático, permitindo que a esforçada leitora compreenda como sistemas de produção gerenciam serviços críticos.</p>
+<section id="aspectos-técnicos-1" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="aspectos-técnicos-1"><span class="header-section-number">9.2.1</span> Aspectos Técnicos</h3>
+<p>Um sistema em <strong>C++23</strong> que utilize <code>std::thread</code> e <code>std::jthread</code> para monitoramento assíncrono, <code>std::chrono</code> para medições precisas de performance e <code>std::atomic</code> para operações thread-safe. O sistema deve integrar <strong>API</strong>s específicas para <strong>Linux</strong>, como <code>/proc/[pid]/stat</code>, <code>/proc/[pid]/status</code>, <code>cgroups</code> e <code>systemd</code> para monitoramento detalhado, e para Windows, utilizando <code>Performance Counters</code>, <code>WMI</code>, <code>Job Objects</code> e <code>Windows Services API</code> para coleta equivalente de métricas. Implemente sistema de alertas baseado em thresholds configuráveis e logging estruturado para auditoria. Além disso, adote arquitetura orientada a eventos que permita integração com sistemas de monitoring externos como Prometheus e Grafana.</p>
+</section>
+<section id="objetivos-1" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="objetivos-1"><span class="header-section-number">9.2.2</span> Objetivos</h3>
+<p>Consolidar conceitos avançados de gerenciamento de processos através de implementação de um supervisor profissional. Demonstrar coleta e análise de métricas de sistema em tempo real incluindo CPU, memória, <code>E/S</code> e network. Implementar políticas sofisticadas de restart com circuit breaker e exponential backoff. Fornecer interface de controle remoto via REST API e WebSocket para monitoramento em tempo real. Em uma ferramenta que seja escalável para ambientes de produção e demonstre best practices de observability.</p>
+<p>A esperança é que a amável leitora consiga: experiência com técnicas profissionais de monitoring e alerting; compreensão de políticas de restart e fault tolerance; e habilidade para implementar sistemas robustos de supervisão de serviços.</p>
+<p>O programa deverá ser capaz de supervisionar múltiplos serviços simultaneamente, coletar métricas detalhadas e reagir automaticamente a falhas. As principais funcionalidades incluem:</p>
+<p><strong>Linux</strong>:</p>
+<ul>
+<li><strong>Process Monitoring</strong>: Coleta via <code>/proc</code> filesystem e <code>procfs</code></li>
+<li><strong>Cgroup Integration</strong>: Monitoring de resource usage via cgroups v2</li>
+<li><strong>Systemd Integration</strong>: Interface com systemd para service management</li>
+<li><strong>Signal Monitoring</strong>: Captura de sinais para detecção de crashes</li>
+</ul>
+<p><strong>Windows</strong>:</p>
+<ul>
+<li><strong>Performance Counters</strong>: Coleta nativa de métricas via PDH API</li>
+<li><strong>WMI Integration</strong>: Monitoring avançado via Windows Management Instrumentation</li>
+<li><strong>Service Control</strong>: Integration com Windows Service Control Manager</li>
+<li><strong>Event Log</strong>: Monitoring de Windows Event Log para alertas</li>
+</ul>
+<p>Além disso, o programa deve demonstrar:</p>
+<ul>
+<li><strong>Métricas em tempo real</strong> (CPU, Memory, Disk I/O, Network I/O)</li>
+<li><strong>Health checks</strong> customizáveis por serviço</li>
+<li><strong>Políticas de restart</strong> configuráveis com rate limiting</li>
+<li><strong>Alerting system</strong> com múltiplos channels (email, webhook, Slack)</li>
+<li><strong>REST API</strong> para controle e consulta</li>
+<li><strong>Dashboard web</strong> para visualização em tempo real</li>
+<li><strong>Configuration management</strong> via YAML/JSON</li>
+<li><strong>Logging estruturado</strong> com log rotation</li>
+</ul>
+</section>
+<section id="fases-do-projeto-1" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="fases-do-projeto-1"><span class="header-section-number">9.2.3</span> Fases do Projeto</h3>
+<p>O Projeto está dividido em <span class="math inline">\(4\)</span> fases:</p>
+<section id="fase-1-arquitetura-core-e-monitoring-básico" class="level4" data-number="9.2.3.1">
+<h4 data-number="9.2.3.1" class="anchored" data-anchor-id="fase-1-arquitetura-core-e-monitoring-básico"><span class="header-section-number">9.2.3.1</span> Fase 1: Arquitetura Core e Monitoring Básico</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Estabelecer arquitetura robusta que suporte monitoramento de múltiplos processos.</li>
+<li>Implementar coleta básica de métricas usando <code>APIs</code>nativas de cada plataforma.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Desenvolver classe <code>ProcessManager</code> como núcleo do sistema de supervisão.</li>
+<li>Criar <code>MetricsCollector</code> para coleta padronizada de métricas cross-platform.</li>
+<li>Implementar <code>ServiceRegistry</code> para registro e tracking de serviços.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ProcessManager <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> ServiceStatus <span class="op">{</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        Starting<span class="op">,</span> Running<span class="op">,</span> Stopping<span class="op">,</span> Stopped<span class="op">,</span> Failed<span class="op">,</span> Unknown </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> ServiceConfig <span class="op">{</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string name<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string executable<span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> arguments<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;</span> environment<span class="op">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>filesystem::path working_directory<span class="op">;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Monitoring configuration</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds health_check_interval<span class="op">{</span><span class="dv">30</span><span class="op">};</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string health_check_command<span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Restart policy</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> auto_restart <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> max_restart_attempts <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds restart_delay<span class="op">{</span><span class="dv">10</span><span class="op">};</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds restart_backoff_max<span class="op">{</span><span class="dv">300</span><span class="op">};</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>PlatformMonitor<span class="op">&gt;</span> <span class="va">platform_monitor_</span><span class="op">;</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>MetricsCollector<span class="op">&gt;</span> <span class="va">metrics_collector_</span><span class="op">;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>AlertManager<span class="op">&gt;</span> <span class="va">alert_manager_</span><span class="op">;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unordered_map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> ManagedService<span class="op">&gt;</span> <span class="va">services_</span><span class="op">;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>jthread <span class="va">monitoring_thread_</span><span class="op">;</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>atomic<span class="op">&lt;</span><span class="dt">bool</span><span class="op">&gt;</span> <span class="va">running_</span><span class="op">{</span><span class="kw">false</span><span class="op">};</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> start_service<span class="op">(</span><span class="at">const</span> ServiceConfig<span class="op">&amp;</span> config<span class="op">);</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> stop_service<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">);</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> restart_service<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">);</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    ServiceMetrics get_service_metrics<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">);</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>ServiceInfo<span class="op">&gt;</span> list_services<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MetricsCollector <span class="op">{</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> ProcessMetrics <span class="op">{</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>        <span class="co">// `CPU` metrics</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>        <span class="dt">double</span> cpu_usage_percent<span class="op">;</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::nanoseconds cpu_time_user<span class="op">;</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::nanoseconds cpu_time_system<span class="op">;</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Memory metrics</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>        <span class="dt">size_t</span> memory_virtual_bytes<span class="op">;</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        <span class="dt">size_t</span> memory_resident_bytes<span class="op">;</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>        <span class="dt">size_t</span> memory_shared_bytes<span class="op">;</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>        <span class="co">// `E/S` metrics</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint64_t</span> io_read_bytes<span class="op">;</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint64_t</span> io_write_bytes<span class="op">;</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint64_t</span> io_read_ops<span class="op">;</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint64_t</span> io_write_ops<span class="op">;</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Network metrics (if available)</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint64_t</span> network_rx_bytes<span class="op">;</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>        <span class="dt">uint64_t</span> network_tx_bytes<span class="op">;</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::system_clock::time_point timestamp<span class="op">;</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>    ProcessMetrics collect_metrics<span class="op">(</span><span class="dt">pid_t</span> pid<span class="op">);</span></span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>    SystemMetrics collect_system_metrics<span class="op">();</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> start_continuous_collection<span class="op">(</span><span class="bu">std::</span>chrono::seconds interval<span class="op">);</span></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>ProcessManager</code> serve como núcleo central, coordenando monitoring de múltiplos serviços através de configuration-driven approach. <code>ServiceConfig</code> encapsula toda configuração necessária incluindo políticas de restart e health checks. <code>MetricsCollector</code> abstrai coleta de métricas entre plataformas, fornecendo interface consistente para CPU, memória, <code>E/S</code> e network metrics.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Arquitetura robusta é essencial para sistemas de produção.</li>
+<li>Coleta padronizada de métricas permite comparação cross-platform.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Sistema básico de supervisão de processos.</li>
+<li>Coleta de métricas em tempo real.</li>
+<li>Framework para service configuration.</li>
+</ul>
+</section>
+<section id="fase-2-health-checks-e-restart-policies" class="level4" data-number="9.2.3.2">
+<h4 data-number="9.2.3.2" class="anchored" data-anchor-id="fase-2-health-checks-e-restart-policies"><span class="header-section-number">9.2.3.2</span> Fase 2: Health Checks e Restart Policies</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Health checks são cruciais para detecção proativa de problemas.</li>
+<li>Políticas inteligentes de restart previnem restart loops e cascading failures.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Implementar <code>HealthCheckManager</code> para execução de checks customizáveis.</li>
+<li>Desenvolver <code>RestartPolicyEngine</code> com algoritmos sofisticados de backoff.</li>
+<li>Criar sistema de states para tracking detalhado de service lifecycle.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HealthCheckManager <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> CheckType <span class="op">{</span> Process<span class="op">,</span> Command<span class="op">,</span> HTTP<span class="op">,</span> TCP<span class="op">,</span> Custom <span class="op">};</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> HealthCheck <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        CheckType type<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds interval<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds timeout<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> failure_threshold <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> success_threshold <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Type-specific configuration</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>variant<span class="op">&lt;</span>ProcessCheck<span class="op">,</span> CommandCheck<span class="op">,</span> HTTPCheck<span class="op">,</span> TCPCheck<span class="op">&gt;</span> config<span class="op">;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> CheckResult <span class="op">{</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_healthy<span class="op">;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string message<span class="op">;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::milliseconds response_time<span class="op">;</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::system_clock::time_point timestamp<span class="op">;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> register_health_check<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">,</span> </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                              <span class="at">const</span> HealthCheck<span class="op">&amp;</span> check<span class="op">);</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    CheckResult execute_check<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">);</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> start_continuous_checking<span class="op">();</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unordered_map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> HealthCheck<span class="op">&gt;</span> <span class="va">health_checks_</span><span class="op">;</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unordered_map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>deque<span class="op">&lt;</span>CheckResult<span class="op">&gt;&gt;</span> <span class="va">check_history_</span><span class="op">;</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>jthread <span class="va">checking_thread_</span><span class="op">;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RestartPolicyEngine <span class="op">{</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> RestartPolicy <span class="op">{</span> Never<span class="op">,</span> Always<span class="op">,</span> OnFailure<span class="op">,</span> UnlessStopped <span class="op">};</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> RestartDecision <span class="op">{</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> should_restart<span class="op">;</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds delay<span class="op">;</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string reason<span class="op">;</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    RestartDecision evaluate_restart<span class="op">(</span><span class="at">const</span> ServiceInfo<span class="op">&amp;</span> service<span class="op">,</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">const</span> ServiceMetrics<span class="op">&amp;</span> metrics<span class="op">,</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">const</span> HealthCheckHistory<span class="op">&amp;</span> health_history<span class="op">);</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Circuit breaker pattern implementation</span></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> CircuitBreaker <span class="op">{</span></span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>        <span class="kw">enum</span> State <span class="op">{</span> Closed<span class="op">,</span> Open<span class="op">,</span> HalfOpen <span class="op">};</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>        State current_state <span class="op">=</span> Closed<span class="op">;</span></span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> failure_count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::system_clock::time_point last_failure<span class="op">;</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds timeout<span class="op">{</span><span class="dv">60</span><span class="op">};</span></span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>chrono::seconds calculate_backoff_delay<span class="op">(</span><span class="dt">int</span> attempt_count<span class="op">);</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> is_circuit_breaker_open<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">);</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> update_circuit_breaker<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service_name<span class="op">,</span> <span class="dt">bool</span> success<span class="op">);</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>HealthCheckManager</code> suporta múltiplos tipos de health checks (process existence, command execution, HTTP endpoints, TCP connections) com configuração flexível de thresholds. <code>RestartPolicyEngine</code> implementa circuit breaker pattern e exponential backoff para prevenir restart loops, considerando histórico de falhas e métricas atuais do serviço.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Health checks proativos previnem downtime prolongado.</li>
+<li>Políticas inteligentes de restart são essenciais para sistemas resilientes.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Sistema completo de health checking.</li>
+<li>Engine de restart policies com circuit breaker.</li>
+<li>Tracking detalhado de service states.</li>
+</ul>
+</section>
+<section id="fase-3-alerting-system-e-external-integration" class="level4" data-number="9.2.3.3">
+<h4 data-number="9.2.3.3" class="anchored" data-anchor-id="fase-3-alerting-system-e-external-integration"><span class="header-section-number">9.2.3.3</span> Fase 3: Alerting System e External Integration</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Alerting automatizado é fundamental para resposta rápida a incidentes.</li>
+<li>Integração com sistemas externos permite observability completa.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Implementar <code>AlertManager</code> com múltiplos channels de notificação.</li>
+<li>Desenvolver <code>MetricsExporter</code> para integração com Prometheus/Grafana.</li>
+<li>Criar <code>APIServer</code> para controle remoto via REST API.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AlertManager <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> AlertSeverity <span class="op">{</span> Info<span class="op">,</span> Warning<span class="op">,</span> Error<span class="op">,</span> Critical <span class="op">};</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> AlertChannel <span class="op">{</span> Email<span class="op">,</span> Webhook<span class="op">,</span> Slack<span class="op">,</span> SMS<span class="op">,</span> PagerDuty <span class="op">};</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Alert <span class="op">{</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string service_name<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        AlertSeverity severity<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string title<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string description<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;</span> labels<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::system_clock::time_point timestamp<span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_resolved <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> AlertRule <span class="op">{</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string name<span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string metric_query<span class="op">;</span>  <span class="co">// e.g., "cpu_usage &gt; 80"</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        AlertSeverity severity<span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds evaluation_interval<span class="op">{</span><span class="dv">60</span><span class="op">};</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds for_duration<span class="op">{</span><span class="dv">300</span><span class="op">};</span>  <span class="co">// Alert fires after 5min</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span>AlertChannel<span class="op">&gt;</span> channels<span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> register_alert_rule<span class="op">(</span><span class="at">const</span> AlertRule<span class="op">&amp;</span> rule<span class="op">);</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> send_alert<span class="op">(</span><span class="at">const</span> Alert<span class="op">&amp;</span> alert<span class="op">);</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> resolve_alert<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> alert_id<span class="op">);</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>Alert<span class="op">&gt;</span> get_active_alerts<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>AlertRule<span class="op">&gt;</span> <span class="va">alert_rules_</span><span class="op">;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unordered_map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> Alert<span class="op">&gt;</span> <span class="va">active_alerts_</span><span class="op">;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>NotificationSender<span class="op">&gt;</span> <span class="va">notification_sender_</span><span class="op">;</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>jthread <span class="va">evaluation_thread_</span><span class="op">;</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MetricsExporter <span class="op">{</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Prometheus-compatible metrics export</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string export_prometheus_format<span class="op">()</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> start_metrics_server<span class="op">(</span><span class="dt">uint16_t</span> port<span class="op">);</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Push metrics to external systems</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> push_to_graphite<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> endpoint<span class="op">);</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> push_to_influxdb<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> endpoint<span class="op">);</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> MetricFamily <span class="op">{</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string name<span class="op">;</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string help<span class="op">;</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string type<span class="op">;</span>  <span class="co">// counter, gauge, histogram</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span>Metric<span class="op">&gt;</span> metrics<span class="op">;</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>MetricFamily<span class="op">&gt;</span> <span class="va">metric_families_</span><span class="op">;</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>HttpServer<span class="op">&gt;</span> <span class="va">metrics_server_</span><span class="op">;</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> APIServer <span class="op">{</span></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> start_server<span class="op">(</span><span class="dt">uint16_t</span> port<span class="op">);</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> stop_server<span class="op">();</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">// REST API endpoints</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> setup_routes<span class="op">();</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>HttpServer<span class="op">&gt;</span> <span class="va">server_</span><span class="op">;</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Route handlers</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>    Response handle_list_services<span class="op">(</span><span class="at">const</span> Request<span class="op">&amp;</span> req<span class="op">);</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>    Response handle_start_service<span class="op">(</span><span class="at">const</span> Request<span class="op">&amp;</span> req<span class="op">);</span></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>    Response handle_stop_service<span class="op">(</span><span class="at">const</span> Request<span class="op">&amp;</span> req<span class="op">);</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>    Response handle_get_metrics<span class="op">(</span><span class="at">const</span> Request<span class="op">&amp;</span> req<span class="op">);</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a>    Response handle_get_logs<span class="op">(</span><span class="at">const</span> Request<span class="op">&amp;</span> req<span class="op">);</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>AlertManager</code> implementa sistema completo de alerting com regras configuráveis, múltiplos channels de notificação e deduplication de alerts. <code>MetricsExporter</code> fornece integração com ecosistema de monitoring (Prometheus, Grafana, InfluxDB) através de formatos padronizados. <code>APIServer</code> expõe REST API para controle remoto e integração com outros sistemas.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Alerting automatizado reduz tempo de resposta a incidentes.</li>
+<li>Integração externa permite observability em escala empresarial.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Sistema completo de alerting multi-channel.</li>
+<li>Exporters para sistemas de monitoring populares.</li>
+<li>REST API para controle remoto.</li>
+</ul>
+</section>
+<section id="fase-4-dashboard-web-e-advanced-features" class="level4" data-number="9.2.3.4">
+<h4 data-number="9.2.3.4" class="anchored" data-anchor-id="fase-4-dashboard-web-e-advanced-features"><span class="header-section-number">9.2.3.4</span> Fase 4: Dashboard Web e Advanced Features</h4>
+<p><strong>Por que?</strong></p>
+<ul>
+<li>Interface visual facilita monitoring e troubleshooting.</li>
+<li>Funcionalidades avançadas tornam o sistema adequado para produção.</li>
+</ul>
+<p><strong>Como?</strong></p>
+<ul>
+<li>Implementar <code>WebDashboard</code> com real-time updates via WebSocket.</li>
+<li>Desenvolver <code>LogManager</code> para logging estruturado e rotation.</li>
+<li>Adicionar <code>ConfigurationManager</code> para hot-reload de configurações.</li>
+</ul>
+<p><strong>Definição da Classe</strong>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> WebDashboard <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> start_dashboard<span class="op">(</span><span class="dt">uint16_t</span> port<span class="op">);</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> stop_dashboard<span class="op">();</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> DashboardData <span class="op">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span>ServiceInfo<span class="op">&gt;</span> services<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        SystemMetrics system_metrics<span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span>Alert<span class="op">&gt;</span> active_alerts<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>MetricPoint<span class="op">&gt;&gt;</span> metric_series<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> broadcast_update<span class="op">(</span><span class="at">const</span> DashboardData<span class="op">&amp;</span> data<span class="op">);</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>WebServer<span class="op">&gt;</span> <span class="va">web_server_</span><span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span>WebSocketConnection<span class="op">&gt;</span> <span class="va">clients_</span><span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>jthread <span class="va">update_thread_</span><span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> handle_websocket_connection<span class="op">(</span>WebSocketConnection conn<span class="op">);</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> send_periodic_updates<span class="op">();</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LogManager <span class="op">{</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">enum</span> <span class="kw">class</span> LogLevel <span class="op">{</span> Debug<span class="op">,</span> Info<span class="op">,</span> Warning<span class="op">,</span> Error<span class="op">,</span> Critical <span class="op">};</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> LogEntry <span class="op">{</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::system_clock::time_point timestamp<span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        LogLevel level<span class="op">;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string service_name<span class="op">;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string message<span class="op">;</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;</span> fields<span class="op">;</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> log<span class="op">(</span>LogLevel level<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> service<span class="op">,</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> message<span class="op">,</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>             <span class="at">const</span> <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;&amp;</span> fields <span class="op">=</span> <span class="op">{});</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> configure_rotation<span class="op">(</span><span class="dt">size_t</span> max_file_size<span class="op">,</span> <span class="dt">int</span> max_files<span class="op">);</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> set_output_format<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> format<span class="op">);</span>  <span class="co">// JSON, plain, structured</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>LogWriter<span class="op">&gt;</span> <span class="va">writer_</span><span class="op">;</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    LogLevel <span class="va">minimum_level_</span> <span class="op">=</span> LogLevel<span class="op">::</span>Info<span class="op">;</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>mutex <span class="va">log_mutex_</span><span class="op">;</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ConfigurationManager <span class="op">{</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> load_configuration<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>filesystem::path<span class="op">&amp;</span> config_file<span class="op">);</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> watch_configuration_changes<span class="op">();</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> reload_configuration<span class="op">();</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    T get_value<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> key<span class="op">)</span> <span class="at">const</span><span class="op">;</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> set_value<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> key<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>any<span class="op">&amp;</span> value<span class="op">);</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>any<span class="op">&gt;</span> <span class="va">configuration_</span><span class="op">;</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>filesystem::path <span class="va">config_file_path_</span><span class="op">;</span></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unique_ptr<span class="op">&lt;</span>FileWatcher<span class="op">&gt;</span> <span class="va">file_watcher_</span><span class="op">;</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>function<span class="op">&lt;</span><span class="dt">void</span><span class="op">()&gt;</span> <span class="va">reload_callback_</span><span class="op">;</span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Explicação</strong>: <code>WebDashboard</code> fornece interface web moderna com real-time updates via WebSocket, permitindo monitoring visual e controle através de browser. <code>LogManager</code> implementa logging estruturado com rotation automática e múltiplos formatos de output. <code>ConfigurationManager</code> permite hot-reload de configurações sem restart, essencial para ambientes de produção.</p>
+<p><strong>Motivação</strong>:</p>
+<ul>
+<li>Interface visual melhora significativamente experience de monitoring.</li>
+<li>Funcionalidades enterprise são necessárias para adoção em produção.</li>
+</ul>
+<p><strong>Entregáveis</strong>:</p>
+<ul>
+<li>Dashboard web com real-time monitoring.</li>
+<li>Sistema robusto de logging estruturado.</li>
+<li>Configuration management com hot-reload.</li>
+</ul>
+</section>
+</section>
+<section id="exemplo-de-saída-1" class="level3" data-number="9.2.4">
+<h3 data-number="9.2.4" class="anchored" data-anchor-id="exemplo-de-saída-1"><span class="header-section-number">9.2.4</span> Exemplo de Saída</h3>
+<section id="dashboard-de-monitoramento" class="level4" data-number="9.2.4.1">
+<h4 data-number="9.2.4.1" class="anchored" data-anchor-id="dashboard-de-monitoramento"><span class="header-section-number">9.2.4.1</span> Dashboard de Monitoramento</h4>
+<pre class="shell"><code>=== Process Manager Dashboard ===
+Status: Running | Uptime: 2d 14h 32m | Services: 12
+
+Active Services:
+┌─────────────────┬─────────┬──────────┬─────────┬──────────┬─────────┐
+│ Service         │ Status  │ `CPU` %    │ Memory  │ Restarts │ Health  │
+├─────────────────┼─────────┼──────────┼─────────┼──────────┼─────────┤
+│ web-server      │ Running │    15.2% │  256 MB │        0 │ Healthy │
+│ database        │ Running │     8.1% │ 1024 MB │        0 │ Healthy │
+│ message-queue   │ Running │     3.7% │  128 MB │        1 │ Healthy │
+│ worker-1        │ Failed  │     0.0% │    0 MB │        3 │ Failed  │
+│ worker-2        │ Running │    22.4% │  512 MB │        0 │ Healthy │
+└─────────────────┴─────────┴──────────┴─────────┴──────────┴─────────┘
+
+Recent Alerts:
+[CRITICAL] worker-1: Process crashed (exit code: 1) - 2 minutes ago
+[WARNING] web-server: High `CPU` usage (&gt;80%) - 15 minutes ago
+
+System Metrics:
+├── `CPU` Usage: 45.2% (8 cores)
+├── Memory: 12.4 GB / 32 GB (38.7%)
+├── Disk I/O: R:45MB/s W:12MB/s
+└── Network: RX:156MB/s TX:89MB/s
+
+Recent Actions:
+[14:32:15] Restarting service: worker-1 (attempt 3/5)
+[14:31:45] Health check failed: worker-1 (timeout)
+[14:30:12] Alert fired: web-server high `CPU` usage</code></pre>
+</section>
+<section id="log-output-estruturado" class="level4" data-number="9.2.4.2">
+<h4 data-number="9.2.4.2" class="anchored" data-anchor-id="log-output-estruturado"><span class="header-section-number">9.2.4.2</span> Log Output Estruturado</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"timestamp"</span><span class="fu">:</span> <span class="st">"2025-01-15T14:32:15.123Z"</span><span class="fu">,</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"level"</span><span class="fu">:</span> <span class="st">"ERROR"</span><span class="fu">,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"service"</span><span class="fu">:</span> <span class="st">"worker-1"</span><span class="fu">,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"message"</span><span class="fu">:</span> <span class="st">"Process crashed during task execution"</span><span class="fu">,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"fields"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"pid"</span><span class="fu">:</span> <span class="dv">12345</span><span class="fu">,</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"exit_code"</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"signal"</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"restart_attempt"</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"last_health_check"</span><span class="fu">:</span> <span class="st">"2025-01-15T14:31:45.456Z"</span><span class="fu">,</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"task_id"</span><span class="fu">:</span> <span class="st">"task-789"</span><span class="fu">,</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"duration_ms"</span><span class="fu">:</span> <span class="dv">15420</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./gerproc4.html" class="pagination-link" aria-label="Untitled">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Untitled</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./gerproc6.html" class="pagination-link" aria-label="Referências">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Referências</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/gerproc5.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
