@@ -1,0 +1,19 @@
+/* Reduzir tamanho das fontes MathJax */
+.MathJax {
+    font-size: 0.85em !important;
+}
+
+/* Ajustar fontes inline */
+.MathJax_Display {
+    font-size: 0.9em !important;
+}
+
+/* Reduzir tamanho para fórmulas inline */
+span.MathJax {
+    font-size: 0.85em !important;
+}
+
+/* Ajustar display math */
+div.MathJax_Display {
+    font-size: 0.9em !important;
+}

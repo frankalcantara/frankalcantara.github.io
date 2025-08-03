@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lógica de Primeira Ordem: Lógica Predicativa e Quantificadores</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                width: 280px;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .logic-component {
+            border-left: 4px solid;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-syntax { border-left-color: #3b82f6; }
+        .component-semantics { border-left-color: #10b981; }
+        .component-inference { border-left-color: #0284c7; }
+        .component-equivalence { border-left-color: #8b5cf6; }
+        .component-quantifier { border-left-color: #ef4444; }
+
+        .formula-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .inference-rule {
+            background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+            border-left: 4px solid #0284c7;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .rule-name {
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .inference-notation {
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .step-number {
+            background: var(--sage-600);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+
+        .predicate-example {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--sage-600);
+        }
+
+        .quantifier-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .conversion-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .conversion-pair {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .natural-language {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .logical-formula {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            font-family: 'Times New Roman', serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#predicados" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Predicados</a></li>
+                <li class="mb-2"><a href="#universo-discurso" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Universo do Discurso</a></li>
+                <li class="mb-2"><a href="#quantificadores" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Quantificadores</a></li>
+                <li class="mb-2"><a href="#quantificador-universal" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Quantificador Universal</a></li>
+                <li class="mb-2"><a href="#quantificador-existencial" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Quantificador Existencial</a></li>
+                <li class="mb-2"><a href="#equivalencias" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Equivalências</a></li>
+                <li class="mb-2"><a href="#linguagem-natural" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Linguagem Natural</a></li>
+                <li class="mb-2"><a href="#conversoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Conversões</a></li>
+                <li class="mb-2"><a href="#ordem-quantificadores" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Ordem dos Quantificadores</a></li>
+                <li class="mb-2"><a href="#negacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">11. Negação</a></li>
+                <li class="mb-2"><a href="#inferencia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">12. Regras de Inferência</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Quantificadores</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-infinity me-2 text-primary"></i><small class="text-primary fw-medium">∀ (Universal)</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-search me-2 text-success"></i><small class="text-success fw-medium">∃ (Existencial)</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"logic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><circle cx=\"45\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"15\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"45\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M15,15 L45,15 M15,15 L15,45 M45,15 L45,45 M15,45 L45,45\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23logic)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Lógica de Primeira Ordem:</em>
+                                    <span class="d-block">Lógica Predicativa</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    O coração da Lógica de Primeira Ordem: Predicados e Quantificadores
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">∀∃</div>
+                            <div class="fs-6 text-muted">Quantificadores</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">P(x)</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Predicados</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-search fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Predicados</h3>
+                                <p class="fs-7 text-muted">Propriedades</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-globe fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Universo</h3>
+                                <p class="fs-7 text-muted">Domínio</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-infinity fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">∀ Universal</h3>
+                                <p class="fs-7 text-muted">Para todo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-search-plus fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">∃ Existencial</h3>
+                                <p class="fs-7 text-muted">Existe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução à Lógica Predicativa</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "A lógica é a técnica que usamos para adicionar convicção à verdade."
+                            </p>
+                            <footer class="blockquote-footer">Jean de la Bruyère</footer>
+                        </blockquote>
+                    </div>
+
+                    <p class="fs-5 text-muted mb-5">
+                        A Lógica Predicativa, coração e espírito da <strong>Lógica de Primeira Ordem</strong>, nos leva um passo além da <strong>Lógica Proposicional</strong>. Em vez de se concentrar apenas em proposições completas que são verdadeiras ou falsas, a lógica predicativa nos permite expressar proposições sobre objetos e as relações entre eles.
+                    </p>
+
+                    <!-- Comparison between Propositional and Predicate Logic -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-atom fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Lógica Proposicional</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Cada proposição é um <strong>átomo indivisível</strong>. Por exemplo, "A chuva cai" ou "O sol brilha". Cada uma dessas proposições é verdadeira ou falsa como uma unidade.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Característica</div>
+                                    <div class="fs-6 text-muted">Aritmética do verdadeiro e do falso</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-search fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Lógica Predicativa</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Podemos olhar <strong>dentro das proposições</strong>. Podemos falar sobre o sujeito - a chuva, o sol - e o predicado - cai, brilha. Podemos quantificar sobre eles.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Característica</div>
+                                    <div class="fs-6 text-muted">Álgebra do raciocínio</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Poder Expressivo</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Enquanto a Lógica Proposicional pode ser vista como a aritmética do verdadeiro e do falso, a lógica predicativa é a álgebra do raciocínio. Ela nos permite manipular proposições de forma muito mais rica e expressiva.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Objetivo:</strong>
+                            <span class="text-info">Com ela, podemos começar a codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predicates Section -->
+        <section id="predicados" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Introdução aos Predicados</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Um predicado é como uma luneta que nos permite observar as propriedades de uma entidade. Um conjunto de lentes através do qual podemos ver se uma entidade particular possui ou não uma característica específica.
+                    </p>
+
+                    <!-- Predicate Definition -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">O que é um Predicado?</h3>
+                        
+                        <div class="example-box mb-4">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplos Cotidianos</h4>
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                <div class="col">
+                                    <div class="predicate-example">
+                                        <div class="fw-bold">O _______ está saboroso</div>
+                                        <small class="text-muted">Predicado sobre sabor</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="predicate-example">
+                                        <div class="fw-bold">O _______ é vermelho</div>
+                                        <small class="text-muted">Predicado sobre cor</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="predicate-example">
+                                        <div class="fw-bold">_______ é alto</div>
+                                        <small class="text-muted">Predicado sobre altura</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="formula-box">
+                            <strong>Definição Formal:</strong><br>
+                            Um predicado é uma função $P: u \rightarrow \{\text{TRUE, FALSE}\}$<br>
+                            onde $u$ é o universo do discurso
+                        </div>
+
+                        <p class="fs-6 text-muted mb-0">
+                            Preencha as lacunas e perceba que, em cada caso, ao preencher estamos atribuindo uma qualidade a um objeto. Esses são exemplos de predicados do nosso cotidiano que sintetizam o conceito que queremos abordar.
+                        </p>
+                    </div>
+
+                    <!-- Predicate Examples -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplos Matemáticos</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-primary">Exemplo 1: Predicado Unário</h4>
+                                    <div class="mb-3">
+                                        <strong>Universo:</strong> $u = \{1, 2, 3, 4, 5\}$<br>
+                                        <strong>Predicado:</strong> $P(x)$ = "x é par"
+                                    </div>
+                                    <div class="formula-box bg-light">
+                                        $P(1) = \text{FALSE}$<br>
+                                        $P(2) = \text{TRUE}$<br>
+                                        $P(3) = \text{FALSE}$<br>
+                                        $P(4) = \text{TRUE}$<br>
+                                        $P(5) = \text{FALSE}$
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-success">Exemplo 2: Predicado Binário</h4>
+                                    <div class="mb-3">
+                                        <strong>Universo:</strong> $u = \mathbb{N}$<br>
+                                        <strong>Predicado:</strong> $Q(x, y)$ = "x é maior que y"
+                                    </div>
+                                    <div class="formula-box bg-light">
+                                        $Q(5, 3) = \text{TRUE}$<br>
+                                        $Q(2, 7) = \text{FALSE}$<br>
+                                        $Q(4, 4) = \text{FALSE}$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Universe of Discourse Section -->
+        <section id="universo-discurso" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Universo do Discurso</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            O universo do discurso, $u$, também chamado de <strong>universo</strong> ou domínio, é o conjunto de objetos de interesse em um determinado cenário lógico para uma análise específica.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Importância:</strong>
+                            <span class="text-info">O universo do discurso é importante porque as proposições na Lógica de Predicados serão declarações sobre objetos de um universo.</span>
+                        </div>
+                    </div>
+
+                    <!-- Examples of Universes -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-2">Conjuntos Infinitos</h4>
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="predicate-example">
+                                            <div class="fw-bold">$\mathbb{R}$ - Números Reais</div>
+                                            <small class="text-muted">Conjunto infinito contínuo</small>
+                                        </div>
+                                        <div class="predicate-example">
+                                            <div class="fw-bold">$\mathbb{N}$ - Números Naturais</div>
+                                            <small class="text-muted">$\{0, 1, 2, 3, ...\}$</small>
+                                        </div>
+                                        <div class="predicate-example">
+                                            <div class="fw-bold">$\mathbb{Z}$ - Números Inteiros</div>
+                                            <small class="text-muted">$\{..., -2, -1, 0, 1, 2, ...\}$</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">Conjuntos Finitos</h4>
+                                    <div class="d-flex flex-column gap-3">
+                                        <div class="predicate-example">
+                                            <div class="fw-bold">Alunos de uma sala</div>
+                                            <small class="text-muted">$\{\text{Paulo}, \text{Ana}, \text{João}\}$</small>
+                                        </div>
+                                        <div class="predicate-example">
+                                            <div class="fw-bold">Cores primárias</div>
+                                            <small class="text-muted">$\{\text{vermelho}, \text{azul}, \text{amarelo}\}$</small>
+                                        </div>
+                                        <div class="predicate-example">
+                                            <div class="fw-bold">Dígitos</div>
+                                            <small class="text-muted">$\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Examples -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplos Detalhados</h3>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Matemáticos</h4>
+                                    <div class="formula-box bg-white">
+                                        <strong>Universo:</strong> $u = \text{conjunto de todas as pessoas}$<br>
+                                        <strong>Predicado:</strong> $P(x) = \{x : x \text{ é um matemático}\}$<br>
+                                        <strong>Verdadeiro para:</strong> Carl Gauss, Leonhard Euler, John Von Neumann
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Números Pares Maiores que 5</h4>
+                                    <div class="formula-box bg-white">
+                                        <strong>Universo:</strong> $u = \{x \in \mathbb{Z} : x \text{ é par}\}$<br>
+                                        <strong>Predicado:</strong> $Q(x) = (x > 5)$<br>
+                                        <strong>Verdadeiro para:</strong> $6, 8, 10, 12, ...$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quantifiers Section -->
+        <section id="quantificadores" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Quantificadores</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Para termos uma linguagem lógica suficientemente flexível para representar problemas do mundo real, precisamos ser capazes de dizer quando um predicado é verdadeiro para diferentes valores. Para tanto, vincularemos as variáveis aos predicados usando operadores para indicar quantidade.
+                    </p>
+
+                    <!-- Quantifier Introduction -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Tipos de Quantificadores</h3>
+                        
+                        <div class="row row-cols-1 row-cols-lg-2 g-4">
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-infinity fs-3 me-3 text-warning"></i>
+                                        <h4 class="fs-4 fw-semibold mb-0 text-warning">Quantificação Universal</h4>
+                                    </div>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Indica se a sentença se aplica a <strong>todos os valores possíveis</strong> do argumento.
+                                    </p>
+                                    <div class="quantifier-visual">
+                                        $\forall$ - "para todo"
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-search-plus fs-3 me-3 text-info"></i>
+                                        <h4 class="fs-4 fw-semibold mb-0 text-info">Quantificação Existencial</h4>
+                                    </div>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Indica se a sentença se aplica a <strong>pelo menos um elemento</strong> específico.
+                                    </p>
+                                    <div class="quantifier-visual">
+                                        $\exists$ - "existe algum"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Party Metaphor -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora da Festa</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-warning">Verificação Universal ($\forall$)</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Imagine verificar se <strong>todos os convidados</strong> têm algo para beber. Você precisa verificar cada pessoa. Se encontrar pelo menos uma sem bebida, pode dizer "nem todos têm bebidas".
+                                    </p>
+                                    <div class="p-2 bg-warning-subtle rounded">
+                                        <small class="text-warning fw-medium">Só é verdade se for verdade para TODOS</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-info">Verificação Existencial ($\exists$)</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Para saber se <strong>alguém está bebendo champanhe</strong>, assim que encontrar uma pessoa com champanhe, pode responder "sim, alguém está bebendo champanhe".
+                                    </p>
+                                    <div class="p-2 bg-info-subtle rounded">
+                                        <small class="text-info fw-medium">Verdade se for verdade para PELO MENOS UM</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Universal Quantifier Section -->
+        <section id="quantificador-universal" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Quantificador Universal ($\forall$)</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição e Uso</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            O quantificador universal $\forall$, lê-se "para todo", indica que uma afirmação deve ser verdadeira para todos os valores de uma variável dentro de um universo de discurso definido.
+                        </p>
+                        
+                        <div class="formula-box">
+                            <strong>Exemplo Clássico:</strong><br>
+                            $\forall x (Humano(x) \rightarrow Mortal(x))$<br>
+                            <em>"Todos os humanos são mortais"</em>
+                        </div>
+                        
+                        <div class="formula-box">
+                            <strong>Exemplo Matemático:</strong><br>
+                            $\forall x (x > 0 \rightarrow x + 1 > 0)$<br>
+                            <em>"Se x é positivo então x + 1 é positivo"</em>
+                        </div>
+                    </div>
+
+                    <!-- Expansion as Conjunction -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Representação como Conjunção</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            O quantificador universal pode ser representado usando a operação $\land$ (AND) aplicada a todos os elementos do universo do discurso:
+                        </p>
+                        
+                        <div class="formula-box">
+                            $\forall x (x \in \mathbb{N} \rightarrow P(x))$ é equivalente a:<br>
+                            $P(0) \land P(1) \land P(2) \land P(3) \land \ldots$
+                        </div>
+                        
+                        <div class="p-3 bg-warning-subtle rounded">
+                            <strong class="text-warning">Limitação:</strong>
+                            <span class="text-warning">Esta expansão não é uma Fórmula Bem Formada se o universo for infinito, pois não podemos escrever expressões com número infinito de termos em Lógica Proposicional.</span>
+                        </div>
+                    </div>
+
+                    <!-- Examples of Universal Quantification -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplos de Quantificação Universal</h4>
+                                
+                                <div class="row row-cols-1 row-cols-md-2 g-3">
+                                    <div class="col">
+                                        <div class="p-3 bg-white rounded">
+                                            <h5 class="fs-6 fw-semibold mb-2">Exemplo 1: Propriedade Falsa</h5>
+                                            <div class="formula-box bg-light">
+                                                $\forall x (x \in \mathbb{R} \rightarrow x > 0)$<br>
+                                                <em>"Todos os números reais são maiores que 0"</em><br>
+                                                <strong class="text-danger">FALSO</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="p-3 bg-white rounded">
+                                            <h5 class="fs-6 fw-semibold mb-2">Exemplo 2: Geometria Euclidiana</h5>
+                                            <div class="formula-box bg-light">
+                                                $\forall x (Triângulo(x) \rightarrow \Sigma_{i=1}^3 ÂnguloInterno_i(x) = 180°)$<br>
+                                                <em>"Todos os triângulos têm soma dos ângulos igual a 180°"</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Why Use Implication -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Por que Usar Implicação com $\forall$?</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Usamos preferencialmente a implicação ($\rightarrow$) com o quantificador universal para indicar que uma propriedade vale para todos os elementos de um domínio, porque permite afirmar condicionalmente.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">✓ Vantagens da Implicação</h4>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Flexibilidade para exceções</li>
+                                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Verdadeira quando antecedente é falso</li>
+                                        <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Captura relações condicionais</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-warning mb-2">⚠ Problemas de Outros Conectivos</h4>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2"><i class="fas fa-times me-2 text-warning"></i><strong>Conjunção:</strong> Muito restritiva</li>
+                                        <li class="mb-2"><i class="fas fa-times me-2 text-warning"></i><strong>Disjunção:</strong> Muito fraca</li>
+                                        <li class="mb-2"><i class="fas fa-times me-2 text-warning"></i><strong>Equivalência:</strong> Muito forte</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Existential Quantifier Section -->
+        <section id="quantificador-existencial" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Quantificador Existencial ($\exists$)</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição e Uso</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            O quantificador existencial $\exists$ nos permite fazer afirmações sobre a existência de objetos com certas propriedades, sem precisarmos especificar exatamente quais objetos são esses.
+                        </p>
+                        
+                        <div class="formula-box">
+                            <strong>Exemplo Básico:</strong><br>
+                            $\exists x (Humano(x) \land Mortal(x))$<br>
+                            <em>"Existem humanos mortais"</em>
+                        </div>
+                    </div>
+
+                    <!-- Why Use Conjunction -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Por que Usar Conjunção com $\exists$?</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">✓ Correto: Com Conjunção</h4>
+                                    <div class="formula-box bg-white">
+                                        $\exists x (Humano(x) \land Mortal(x))$<br>
+                                        <em>"Existe um x que é humano E mortal"</em>
+                                    </div>
+                                    <small class="text-success">Garante que as propriedades se aplicam ao objeto existente</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-danger mb-2">✗ Problemático: Com Implicação</h4>
+                                    <div class="formula-box bg-white">
+                                        $\exists x (Humano(x) \rightarrow Mortal(x))$<br>
+                                        <em>"Existe um x tal que SE x é humano ENTÃO x é mortal"</em>
+                                    </div>
+                                    <small class="text-danger">Verdadeiro mesmo com unicórnios imortais!</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples of Existential Quantification -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplos de Quantificação Existencial</h4>
+                                
+                                <div class="row row-cols-1 row-cols-md-2 g-3">
+                                    <div class="col">
+                                        <div class="p-3 bg-white rounded">
+                                            <h5 class="fs-6 fw-semibold mb-2">Exemplo 1: Animais Vertebrados</h5>
+                                            <div class="formula-box bg-light">
+                                                $\exists x (Vertebrado(x) \land \neg Mamífero(x))$<br>
+                                                <em>"Existe um animal que é vertebrado e não é mamífero"</em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="p-3 bg-white rounded">
+                                            <h5 class="fs-6 fw-semibold mb-2">Exemplo 2: Números Primos Pares</h5>
+                                            <div class="formula-box bg-light">
+                                                $\exists x (Primo(x) \land Par(x))$<br>
+                                                <em>"Existe um número primo que é par"</em><br>
+                                                <strong class="text-success">VERDADEIRO (x = 2)</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expansion as Disjunction -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Representação como Disjunção</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Podemos representar uma declaração $\exists x P(x)$ como uma expressão OR (disjunção):
+                        </p>
+                        
+                        <div class="formula-box">
+                            $\exists x (x \in \mathbb{N} \land P(x))$ equivale a:<br>
+                            $P(0) \lor P(1) \lor P(2) \lor P(3) \lor \ldots$
+                        </div>
+                        
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Significado:</strong>
+                            <span class="text-info">A proposição $P(x)$ é verdadeira se pelo menos um valor de $x$ dentro do universo do discurso atender ao predicado $P$. Não precisamos saber exatamente qual é esse $x$.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equivalences Section -->
+        <section id="equivalencias" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Equivalências Interessantes</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Estudando os quantificadores encontramos equivalências importantes que são versões quantificadas das Leis de De Morgan.
+                    </p>
+
+                    <!-- De Morgan's Laws for Quantifiers -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Leis de De Morgan para Quantificadores</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-4 bg-primary-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-primary mb-3">Primeira Lei</h4>
+                                    <div class="formula-box bg-white">
+                                        $\lnot \forall x P(x) \leftrightarrow \exists x \lnot P(x)$
+                                    </div>
+                                    <p class="fs-6 text-muted mb-0">
+                                        <em>"Nem todos os humanos são mortais"</em> é equivalente a <em>"Existe algum humano que não é mortal"</em>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-4 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-3">Segunda Lei</h4>
+                                    <div class="formula-box bg-white">
+                                        $\lnot \exists x P(x) \leftrightarrow \forall x \lnot P(x)$
+                                    </div>
+                                    <p class="fs-6 text-muted mb-0">
+                                        <em>"Nenhum humano é mortal"</em> é equivalente a <em>"Todos os humanos não são mortais"</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Universal and Existential Expansions -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Conjunção e Disjunção Universais</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-warning">Conjunção Universal</h4>
+                                    <div class="formula-box bg-light">
+                                        $\forall x (P(x) \land Q(x))$
+                                    </div>
+                                    <p class="fs-6 text-muted mb-0">
+                                        Para todo $x$ no domínio, as propriedades $P$, $Q$ são todas verdadeiras. Todas as condições são verdadeiras para cada elemento.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-info">Disjunção Existencial</h4>
+                                    <div class="formula-box bg-light">
+                                        $\exists x (P(x) \lor Q(x))$
+                                    </div>
+                                    <p class="fs-6 text-muted mb-0">
+                                        Existe pelo menos um $x$ no domínio que satisfaz a propriedade $P$, ou $Q$, ou ambas. Pelo menos uma das condições é verdadeira.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Natural Language Section -->
+        <section id="linguagem-natural" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Dos Predicados à Linguagem Natural</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Ao ler uma Fórmula Bem Formada contendo quantificadores, a ordem da leitura é geralmente da esquerda para a direita. A interpretação precisa depende da ordem e do tipo dos quantificadores.
+                    </p>
+
+                    <!-- Reading Guidelines -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Como Ler Quantificadores</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-warning mb-2">$\forall x$ - Universal</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        <em>"Para todo objeto x no universo do discurso, o seguinte se mantém"</em>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-info mb-2">$\exists x$ - Existencial</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        <em>"Existe um objeto x no universo que satisfaz o seguinte"</em>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flight Speed Example -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo: Velocidade de Aviões</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Considere $U$ como o universo do discurso (conjunto de todos os aviões) e $F(x,y)$ como "$x$ voa mais rápido que $y$".
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-5 fw-semibold mb-3" style="color: #92400e;">1. $\forall x \forall y F(x,y)$</h4>
+                                    <div class="natural-language">
+                                        <strong>Leitura:</strong> Para todo avião x, e para todo avião y, x voa mais rápido que y.
+                                    </div>
+                                    <div class="logical-formula">
+                                        <strong>Significado:</strong> Cada avião é mais rápido que todos os aviões (incluindo ele mesmo). Provavelmente FALSO.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-5 fw-semibold mb-3" style="color: #92400e;">2. $\exists x \forall y F(x,y)$</h4>
+                                    <div class="natural-language">
+                                        <strong>Leitura:</strong> Existe um avião x tal que, para todo avião y, x voa mais rápido que y.
+                                    </div>
+                                    <div class="logical-formula">
+                                        <strong>Significado:</strong> Existe um "avião mais rápido absoluto". Mais plausível.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-5 fw-semibold mb-3" style="color: #92400e;">3. $\forall x \exists y F(x,y)$</h4>
+                                    <div class="natural-language">
+                                        <strong>Leitura:</strong> Para todo avião x, existe um avião y tal que x voa mais rápido que y.
+                                    </div>
+                                    <div class="logical-formula">
+                                        <strong>Significado:</strong> Para cada avião, há outro que ele supera em velocidade. Não existe "avião mais lento absoluto".
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-5 fw-semibold mb-3" style="color: #92400e;">4. $\exists x \exists y F(x,y)$</h4>
+                                    <div class="natural-language">
+                                        <strong>Leitura:</strong> Existe um avião x e existe um avião y tal que x voa mais rápido que y.
+                                    </div>
+                                    <div class="logical-formula">
+                                        <strong>Significado:</strong> A relação "voa mais rápido que" não é vazia. Afirmação mais fraca.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-danger-subtle rounded">
+                            <strong class="text-danger">Importante:</strong>
+                            <span class="text-danger">Estas quatro sentenças têm significados lógicos distintos. A ordem dos quantificadores, especialmente quando misturamos $\forall$ e $\exists$, altera drasticamente o significado.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conversions Section -->
+        <section id="conversoes" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. Exercícios de Conversão</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A prática de converter entre linguagem natural e expressões lógicas é fundamental para dominar a Lógica Predicativa.
+                    </p>
+
+                    <!-- Natural to Logic Examples -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">De Linguagem Natural para Expressões Lógicas</h3>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Matemáticos Professores</h4>
+                                    <div class="conversion-pair">
+                                        <div class="natural-language">
+                                            <strong>Linguagem Natural:</strong><br>
+                                            <em>"Todo matemático que é professor tem alunos que são brilhantes e interessados."</em>
+                                        </div>
+                                        <div class="logical-formula">
+                                            <strong>Expressão Lógica:</strong><br>
+                                            $\forall x ((\text{Matemático}(x) \wedge \text{Professor}(x)) \rightarrow \exists y (\text{Aluno}(y) \wedge \text{Brilhante}(y) \wedge \text{Interessado}(y) \wedge \text{Ensina}(x, y)))$
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Engenheiros</h4>
+                                    <div class="conversion-pair">
+                                        <div class="natural-language">
+                                            <strong>Linguagem Natural:</strong><br>
+                                            <em>"Alguns engenheiros não são nem ricos nem felizes."</em>
+                                        </div>
+                                        <div class="logical-formula">
+                                            <strong>Expressão Lógica:</strong><br>
+                                            $\exists x (\text{Engenheiro}(x) \wedge \neg\text{Rico}(x) \wedge \neg\text{Feliz}(x))$
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logic to Natural Examples -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">De Expressões Lógicas para Linguagem Natural</h3>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Humanos</h4>
+                                    <div class="conversion-pair">
+                                        <div class="logical-formula">
+                                            <strong>Expressão Lógica:</strong><br>
+                                            $\forall x (\text{Humano}(x) \rightarrow (\text{Mortal}(x) \wedge \text{Racional}(x)))$
+                                        </div>
+                                        <div class="natural-language">
+                                            <strong>Linguagem Natural:</strong><br>
+                                            <em>"Todo humano é mortal e racional."</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="example-box">
+                                    <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Livros</h4>
+                                    <div class="conversion-pair">
+                                        <div class="logical-formula">
+                                            <strong>Expressão Lógica:</strong><br>
+                                            $\exists y (\text{Livro}(y) \wedge (\text{Interessante}(y) \vee \text{Complicado}(y)))$
+                                        </div>
+                                        <div class="natural-language">
+                                            <strong>Linguagem Natural:</strong><br>
+                                            <em>"Existe pelo menos um livro que é interessante ou complicado."</em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order of Quantifiers Section -->
+        <section id="ordem-quantificadores" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Ordem de Aplicação dos Quantificadores</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Regras de Aplicação</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            Quando mais de uma variável é quantificada em uma Fórmula Bem Formada, os quantificadores são aplicados da esquerda para a direita.
+                        </p>
+                        
+                        <div class="formula-box">
+                            <strong>Exemplo:</strong> $\forall y\forall x P(x,y)$<br>
+                            <em>Lê-se: "para todo y, para todo x, P(x,y) se mantém"</em>
+                        </div>
+                    </div>
+
+                    <!-- Commutativity Rules -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">✓ Comutatividade Permitida</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Quantificadores do <strong>mesmo tipo</strong> podem ter suas posições trocadas sem afetar o valor lógico.
+                                    </p>
+                                    <div class="formula-box bg-success-subtle">
+                                        $\forall x\forall y\forall z P(x,y,z)$ ≡<br>
+                                        $\forall y\forall x\forall z P(x,y,z)$ ≡<br>
+                                        $\forall z\forall y\forall x P(x,y,z)$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-quantifier">
+                                    <h4 class="fs-4 fw-semibold text-danger mb-2">✗ Comutatividade Proibida</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Quantificadores de <strong>tipos diferentes</strong> NÃO podem ter suas posições trocadas.
+                                    </p>
+                                    <div class="formula-box bg-danger-subtle">
+                                        $\forall x\exists y P(x,y)$ ≢<br>
+                                        $\exists y\forall x P(x,y)$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Practical Example -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo Prático: Números Maiores</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Seja $P(x,y)$ representando "$x < y$" para o conjunto dos números como universo.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">$\forall x\exists y P(x,y)$</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        <em>"Para todo número x, existe um número y que é maior que x"</em>
+                                    </p>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong class="text-success">VERDADEIRO</strong> - sempre podemos encontrar um número maior
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-danger mb-2">$\exists y\forall x P(x,y)$</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        <em>"Existe um número que é maior que todo (qualquer) número"</em>
+                                    </p>
+                                    <div class="p-2 bg-white rounded">
+                                        <strong class="text-danger">FALSO</strong> - não existe número máximo
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Negation Section -->
+        <section id="negacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">11. Negação dos Quantificadores</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Existe uma equivalência entre as negações dos quantificadores, similar às Leis de De Morgan para conectivos lógicos.
+                    </p>
+
+                    <!-- Negation Rules -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Regras de Negação</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-4 bg-primary-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-primary mb-3">Negação do Universal</h4>
+                                    <div class="formula-box bg-white">
+                                        $\neg \forall x \, P(x) \equiv \exists x \, \neg P(x)$
+                                    </div>
+                                    <p class="fs-6 text-muted mb-0">
+                                        Negar que "para todos os x, P(x) é verdadeiro" é equivalente a afirmar que "existe algum x tal que P(x) não é verdadeiro".
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-4 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-3">Negação do Existencial</h4>
+                                    <div class="formula-box bg-white">
+                                        $\neg \exists x \, P(x) \equiv \forall x \, \neg P(x)$
+                                    </div>
+                                    <p class="fs-6 text-muted mb-0">
+                                        Negar que "existe algum x tal que P(x) é verdadeiro" é equivalente a afirmar que "para todos os x, P(x) não é verdadeiro".
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intuitive Understanding -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Entendimento Intuitivo</h3>
+                        
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo: Felicidade</h4>
+                            <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                                Considere P(x) como "x é feliz" e vamos analisar as negações:
+                            </p>
+                            
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-6 fw-semibold mb-2">$\neg (\forall x P(x))$</h5>
+                                        <p class="fs-6 mb-2 text-muted"><em>"Não é verdade que todos estão felizes"</em></p>
+                                        <div class="p-2 bg-info-subtle rounded">
+                                            <small class="text-info">Implica que deve haver alguém que não está feliz</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-6 fw-semibold mb-2">$\exists x (\neg P(x))$</h5>
+                                        <p class="fs-6 mb-2 text-muted"><em>"Existe alguém que não está feliz"</em></p>
+                                        <div class="p-2 bg-success-subtle rounded">
+                                            <small class="text-success">Forma equivalente mais direta</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Table -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Tabela de Equivalências</h3>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Expressão</th>
+                                        <th>Equivalência</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\forall x P(x)$</td>
+                                        <td>$\neg \exists x \neg P(x)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\exists x \, P(x)$</td>
+                                        <td>$\neg \forall x \, \neg P(x)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\neg \forall x \, P(x)$</td>
+                                        <td>$\exists x \, \neg P(x)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\neg \exists x \, P(x)$</td>
+                                        <td>$\forall x \, \neg P(x)$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-warning-subtle rounded">
+                            <strong class="text-warning">Observação:</strong>
+                            <span class="text-warning">Estas equivalências refletem uma relação profunda e intuitiva em nosso entendimento de declarações sobre entidades em nosso mundo.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inference Rules Section -->
+        <section id="inferencia" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">12. Regras de Inferência usando Quantificadores</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As regras de inferência com quantificadores lidam especificamente com proposições que envolvem quantificadores, permitindo generalizações e especificações.
+                    </p>
+
+                    <!-- Basic Rules -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Repetição</div>
+                                <div class="inference-notation">
+                                    F<br>
+                                    ─────<br>
+                                    F
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    A regra de Repetição permite repetir uma afirmação. Útil para propagar premissas em uma prova formal.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo:</strong><br>
+                                    $\forall x(H(x) \rightarrow M(x))$ - "Todos os homens são mortais"<br>
+                                    Logo: $\forall x(H(x) \rightarrow M(x))$
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Instanciação Universal</div>
+                                <div class="inference-notation">
+                                    $\forall x P(x)$<br>
+                                    ─────<br>
+                                    $P(a)$
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Permite substituir a variável em uma afirmação universalmente quantificada por um termo concreto.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo:</strong><br>
+                                    "Todos os humanos são mortais" + "Sócrates é humano"<br>
+                                    Logo: "Sócrates é mortal"
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Generalização Existencial</div>
+                                <div class="inference-notation">
+                                    $P(a)$<br>
+                                    ─────<br>
+                                    $\exists x P(x)$
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Permite inferir que algo existe a partir de uma afirmação concreta. Generaliza de exemplos específicos.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo:</strong><br>
+                                    "Rex é um cachorro"<br>
+                                    Logo: "Existe pelo menos um cachorro"
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Instanciação Existencial</div>
+                                <div class="inference-notation">

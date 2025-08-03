@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introdução à Programação Lógica - 11&nbsp; Problemas Interessantes Resolvidos com Lógica Proposicional e Predicativa</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./apendice-a-glossario.html" rel="next">
+<link href="./08-verificacao-formal-de-programas.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./09-desafios-logicos-enigmas-e-misterios.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à Programação Lógica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/logica" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Fundamentos da Lógica</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução ao Paradigma da Programação Lógica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-introducao-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução Prática ao Prolog com Swish</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Aplicações Avançadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Solucao-Exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" id="toc-o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="nav-link active" data-scroll-target="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">11.0.1</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/09-desafios-logicos-enigmas-e-misterios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./09-desafios-logicos-enigmas-e-misterios.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando <strong>Lógica de Primeira Ordem</strong></p>
+<ol type="1">
+<li><p><strong>Quebra-cabeça: O Mentiroso e o Verdadeiro</strong> Você encontra dois habitantes: <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a <span class="math inline">\(A\)</span>, <em>Você é o verdadeiro?</em> A responde, mas você não consegue ouvir a resposta dele. <span class="math inline">\(B\)</span> então te diz, <em>A disse que ele é o mentiroso</em>.</p>
+<p><strong>Solução</strong>: <span class="math inline">\(A\)</span> deve ser o verdadeiro e <span class="math inline">\(B\)</span> deve ser o mentiroso. Se <span class="math inline">\(B\)</span> fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, <span class="math inline">\(B\)</span> deve ser o mentiroso e <span class="math inline">\(A\)</span> deve ser o verdadeiro, independentemente do que <span class="math inline">\(B\)</span> disse.</p>
+<p>Usando apenas <strong>Lógica Proposicional</strong> teremos:</p>
+<p><strong>Definições</strong>: VA: A é o verdadeiro MA: A é o mentiroso VB: B é o verdadeiro MB: B é o mentiroso RA: A respondeu “Sim” à pergunta “Você é o verdadeiro?”</p>
+<p><strong>Axiomas</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(VA \lor MA\)</span> (A é verdadeiro ou mentiroso);</li>
+<li><span class="math inline">\(\neg(VA \land MA)\)</span> (A não é ambos verdadeiro e mentiroso);</li>
+<li><span class="math inline">\(VB \lor MB\)</span> (B é verdadeiro ou mentiroso);</li>
+<li><span class="math inline">\(\neg(VB \land MB)\)</span> (B não é ambos verdadeiro e mentiroso);</li>
+<li><span class="math inline">\(VA \to \neg VB\)</span> (Se A é verdadeiro, B não é verdadeiro);</li>
+<li><span class="math inline">\(VA \to RA\)</span> (Se A é verdadeiro, ele respondeu “Sim”);</li>
+<li><span class="math inline">\(MA \to \neg RA\)</span> (Se A é mentiroso, ele respondeu “Não”);</li>
+<li><span class="math inline">\(VB \to (B \text{ diz } \neg RA)\)</span> (Se B é verdadeiro, ele diz a verdade sobre a resposta de A);</li>
+<li><span class="math inline">\(MB \to (B \text{ diz } RA)\)</span> (Se B é mentiroso, ele mente sobre a resposta de A).</li>
+</ol>
+<p><strong>Fato observado</strong>:</p>
+<p><span class="math display">\[B \text{ diz } \neg RA\]</span></p>
+<p><strong>Prova</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(B \text{ diz } \neg RA\)</span> (Fato observado)</li>
+<li><span class="math inline">\((VB \land \neg RA) \lor (MB \land RA)\)</span> (Por 8, 9 e 1)</li>
+<li>Suponha <span class="math inline">\(MA\)</span>: 3.1. <span class="math inline">\(\neg RA\)</span> (Por 7) 3.2. <span class="math inline">\(VB\)</span> (Por 3, 4 e 5) 3.3. Mas isto contradiz 2, pois teríamos <span class="math inline">\((VB \land RA)\)</span></li>
+<li>Portanto, <span class="math inline">\(\neg MA\)</span> (Por reductio ad absurdum)</li>
+<li><span class="math inline">\(VA\)</span> (Por 1 e 4)</li>
+</ol>
+<p>Conclusão:</p>
+<p><span class="math display">\[VA \land \neg MA\]</span></p>
+<p><span class="math inline">\(A\)</span> é o verdadeiro e não é o mentiroso.</p>
+<p>Usando lógica de primeiro grau teremos:</p>
+<p><strong>Definições</strong>:</p>
+<ol type="1">
+<li><p><span class="math inline">\(V(x)\)</span>: <span class="math inline">\(x\)</span> é o verdadeiro;</p></li>
+<li><p><span class="math inline">\(M(x)\)</span>: <span class="math inline">\(x\)</span> é o mentiroso;</p></li>
+<li><p><span class="math inline">\(R(x)\)</span>: <span class="math inline">\(x\)</span> respondeu “Sim” à pergunta “Você é o verdadeiro?”;</p></li>
+<li><p><span class="math inline">\(D(x, p)\)</span>: <span class="math inline">\(x\)</span> diz que p é verdadeiro.</p></li>
+</ol>
+<p><strong>Axiomas</strong>:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\forall x (V(x) \lor M(x))\)</span> (Todo x é verdadeiro ou mentiroso);</p></li>
+<li><p><span class="math inline">\(\forall x (V(x) \to \neg M(x))\)</span> (Ninguém é ambos verdadeiro e mentiroso);</p></li>
+<li><p><span class="math inline">\(\forall x (V(x) \to R(x))\)</span> (Se x é verdadeiro, x responde “Sim”);</p></li>
+<li><p><span class="math inline">\(\forall x (M(x) \to \neg R(x))\)</span> (Se x é mentiroso, x responde “Não”);</p></li>
+<li><p><span class="math inline">\(\forall x \forall y \forall p (V(x) \to (D(x, p) \leftrightarrow p))\)</span> (Se x é verdadeiro, x diz p se e somente se p é verdadeiro);</p></li>
+<li><p><span class="math inline">\(\forall x \forall y \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))\)</span> (Se x é mentiroso, x diz p se e somente se p é falso).</p></li>
+</ol>
+<p><strong>Fatos observados</strong>:</p>
+<p><span class="math display">\[D(B, \neg R(A))\]</span></p>
+<p><strong>Prova</strong>:</p>
+<ol type="1">
+<li><p><span class="math inline">\(D(B, \neg R(A))\)</span> (Fato observado);</p></li>
+<li><p><span class="math inline">\(V(A) \lor M(A)\)</span> (Por 1);</p></li>
+<li><p>Suponha <span class="math inline">\(M(A)\)</span>: 3.1. <span class="math inline">\(\neg R(A)\)</span> (Por 4); 3.2. <span class="math inline">\(V(B)\)</span> (Pois apenas um é mentiroso, por 1 e 2); 3.3. <span class="math inline">\(D(B, \neg R(A)) \leftrightarrow \neg R(A)\)</span> (Por 5); 3.4. <span class="math inline">\(\neg R(A)\)</span> (Por 1 e 3.3); 3.5. Mas isto contradiz 3.1 e 3.4.</p></li>
+<li><p>Portanto, <span class="math inline">\(\neg M(A)\)</span> (Por reductio ad absurdum)</p></li>
+<li><p><span class="math inline">\(V(A)\)</span> (Por 2 e 4)</p></li>
+</ol>
+<p><strong>Conclusão</strong>: <span class="math display">\[V(A) \land \neg M(A)\]</span></p>
+<p><span class="math inline">\(A\)</span> é o verdadeiro e não é o mentiroso.</p></li>
+<li><p><strong>Quebra-cabeça: As Três Lâmpadas</strong> Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?</p>
+<p><strong>Solução</strong>: ligue um interruptor e espere um pouco. Então desligue esse interruptor e ligue um segundo interruptor. Entre na sala. A lâmpada que está acesa corresponde ao segundo interruptor. A lâmpada que está desligada e quente corresponde ao primeiro interruptor. A lâmpada que está desligada e fria corresponde ao terceiro interruptor.</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar os interruptores como <span class="math inline">\(s1, s2, s3\)</span> e as lâmpadas como <span class="math inline">\(b1, b2, b3\)</span>. Podemos definir predicados <span class="math inline">\(On(b, s)\)</span> e <span class="math inline">\(Hot(b)\)</span>.</p>
+<p><span class="math display">\[On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))\]</span></p></li>
+<li><p><strong>Quebra-cabeça: O Agricultor, a Raposa, o Ganso e o Grão</strong> Um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?</p>
+<p><strong>Solução</strong>: o agricultor leva o ganso através do rio primeiro, deixando a raposa e o grão no lado original. Ele deixa o ganso no outro lado e volta para pegar a raposa. Ele deixa a raposa no outro lado, mas leva o ganso de volta ao lado original para pegar o grão. Ele deixa o grão com a raposa no outro lado. Finalmente, ele retorna ao lado original mais uma vez para pegar o ganso.</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Podemos definir predicados <span class="math inline">\(mesmoLado(x, y)\)</span> e <span class="math inline">\(come (x, y)\)</span>. A solução envolve a sequência de ações que mantêm as seguintes condições:</p>
+<p><span class="math display">\[\neg (mesmoLado(Raposa, Ganso) \land \neg mesmoLado(Raposa, Fazendeiro))\]</span></p>
+<p><span class="math display">\[\neg (mesmoLado(Ganso, Grãos) \land \neg mesmoLado(Ganso, Fazendeiro))\]</span></p></li>
+<li><p><strong>Quebra-cabeça: O Problema da Ponte e da Tocha</strong> Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa <span class="math inline">\(A\)</span> pode atravessar a ponte em um minuto, <span class="math inline">\(B\)</span> em dois minutos, <span class="math inline">\(C\)</span> em cinco minutos e <span class="math inline">\(D\)</span> em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?</p>
+<p><strong>Solução</strong>: primeiro, <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam a ponte, o que leva 2 minutos. <span class="math inline">\(A\)</span> então pega a tocha e volta para o lado original, levando 1 minuto. <span class="math inline">\(A\)</span> fica no lado original enquanto <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span> atravessam a ponte, levando 8 minutos. <span class="math inline">\(B\)</span> então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam a ponte novamente, levando 2 minutos. No total, teremos <span class="math inline">\(2+1+8+2+2=15\)</span> minutos.</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como <span class="math inline">\(t_A, t_B, t_C, t_D\)</span> e o tempo total como <span class="math inline">\(T\)</span>. O problema pode ser representado da seguinte forma:</p>
+<p><span class="math display">\[(t_A + t_B + t_A + t_C + t_D + t_B + t_A) \leq T\]</span></p>
+<p>Substituindo os valores dos tempos resulta em <span class="math inline">\(15 \leq T\)</span>.</p></li>
+<li><p><strong>Quebra-cabeça: O Problema de Monty Hall</strong> Em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra, representando nenhum prêmio. O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?</p>
+<p><strong>Solução</strong>: o concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é <span class="math inline">\(1/3\)</span> e a chance de estar atrás de uma das outras portas é <span class="math inline">\(2/3\)</span>. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é <span class="math inline">\(2/3\)</span>.</p>
+<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar as portas como <span class="math inline">\(d1, d2, d3\)</span> e o prêmio como <span class="math inline">\(P\)</span>. Podemos definir um predicado <span class="math inline">\(contémPrêmio(d)\)</span>. A solução pode ser representada pela seguinte condição:</p>
+<p><span class="math display">\[(contémPrêmio(d1) \land \neg contémPrêmio(d2) \land \neg contémPrêmio(d3)) \\ \lor (contémPrêmio(d2)  \land \neg contémPrêmio(d1) \land \neg contémPrêmio(d3)) \\ \lor (contémPrêmio(d3) \land \neg contémPrêmio(d1) \land \neg contémPrêmio(d2))\]</span></p>
+<p>Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.</p></li>
+</ol>
+<section id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="level3" data-number="11.0.1">
+<h3 data-number="11.0.1" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">11.0.1</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</h3>
+<p><img src=".\images/mansaohollow.webp" class="img-fluid"></p>
+<p><strong>Objetivo</strong>: Aplicar os princípios da <strong>Lógica Proposicional</strong> e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.</p>
+<p><strong>Descrição</strong>: A esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:</p>
+<ol type="1">
+<li><p>Analisar cuidadosamente todo o material fornecido (descrições de personagens, mapa da mansão, horários, depoimentos, bilhetes).</p></li>
+<li><p>Formalizar as informações relevantes utilizando sentenças da <strong>Lógica Proposicional</strong> e, quando aplicável, da lógica de predicados.</p></li>
+<li><p>Construir tabelas-verdade e/ou aplicar regras de inferência para verificar a consistência das informações e deduzir novos fatos.</p></li>
+<li><p>Identificar o(s) responsável(is) pelo desaparecimento do Sr.&nbsp;Blackwood (ou determinar o que de fato aconteceu), justificando cada passo da sua conclusão com base nas deduções lógicas realizadas.</p></li>
+</ol>
+<p>A seguir a descrição do caso, o mapa da mansão e os depoimentos dos envolvidos.</p>
+<section id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" class="level4" data-number="11.0.1.1">
+<h4 data-number="11.0.1.1" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood"><span class="header-section-number">11.0.1.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></h4>
+<p><strong>Data do Incidente</strong>: Segunda-feira, 12 de Maio de 2025 <strong>Local</strong>: Mansão Hollow, uma propriedade rural isolada. <strong>Vítima (Desaparecido)</strong>: Sir Arthur Blackwood, renomado inventor, 58 anos.</p>
+<p><strong>1. Descrições dos Personagens</strong>:</p>
+<ul>
+<li><p><strong>Sir Arthur Blackwood</strong>: O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado “Quimera”.</p></li>
+<li><p><strong>Sra. Eleanor Blackwood (50 anos)</strong>: Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.</p></li>
+<li><p><strong>Dr.&nbsp;Alistair Finch (45 anos)</strong>: Um cientista brilhante, antigo protegido de Arthur, mas que se tornou seu principal rival acadêmico e comercial. Chegou à mansão no dia do desaparecimento, alegando buscar uma reconciliação e possível colaboração.</p></li>
+<li><p><strong>Miss Clara Evans (28 anos)</strong>: A jovem e inteligente assistente pessoal de Arthur. Dedicada e leal, trabalhava em estreita colaboração com ele no projeto “Quimera” e conhecia muitos de seus segredos.</p></li>
+<li><p><strong>Sr.&nbsp;Reginald “Reggie” Croft (65 anos)</strong>: O mordomo, trabalha para a família Blackwood há mais de trinta anos. É um homem discreto, observador e extremamente leal à memória do falecido pai de Arthur, mas demonstra certa reserva em relação ao próprio Arthur.</p></li>
+<li><p><strong>Sra. Beatrice Croft (62 anos)</strong>: Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.</p></li>
+</ul>
+<p>Nossos personagens podem ser vistos na imagem abaixo:</p>
+<p><img src=".\images/personagens.webp" class="img-fluid">{:class=“lazyload”}</p>
+<p><strong>2. Mapa da Mansão Hollow (Descrição Textual)</strong>: A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto terreno.</p>
+<ul>
+<li><p><strong>Térreo</strong>:</p>
+<ul>
+<li><p><strong>Hall de Entrada</strong>: Amplo, com piso de mármore, uma imponente escadaria de carvalho que leva ao andar superior. Portas levam à biblioteca (esquerda), sala de estar (direita) e, ao fundo, um corredor para a sala de jantar e a ala de serviço/cozinha.</p></li>
+<li><p><strong>Biblioteca</strong>: Paredes forradas de estantes com livros antigos e científicos. Uma grande escrivaninha de mogno, poltronas de couro e uma lareira. Duas janelas altas com vista para o jardim da frente.</p></li>
+<li><p><strong>Sala de Estar</strong>: Mobiliário luxuoso, mas um pouco antiquado. Um piano de cauda, lareira e janelas com vista para o jardim lateral e o gazebo.</p></li>
+<li><p><strong>Sala de Jantar</strong>: Uma longa mesa de jantar polida, prataria reluzente. Acesso direto à cozinha.</p></li>
+<li><p><strong>Cozinha</strong>: Grande e funcional, com uma mesa rústica ao centro. Portas para a despensa, os aposentos dos Croft e uma saída para o jardim dos fundos/horta.</p></li>
+<li><p><strong>Laboratório do Sr.&nbsp;Blackwood</strong>: Localizado no final de um corredor isolado, partindo do hall, perto da escada de serviço. A porta possui uma fechadura especial de alta segurança projetada pelo próprio Arthur. O interior é um caos organizado de equipamentos eletrônicos, protótipos mecânicos, quadros com equações e ferramentas. Possui uma única janela reforçada que dá para o jardim dos fundos. Este é o local principal da investigação inicial.</p></li>
+<li><p><strong>Escritório do Sr.&nbsp;Blackwood</strong>: Uma sala menor, anexa ao laboratório, acessível apenas por uma porta dentro do laboratório. Mais organizada, com arquivos, patentes, um cofre e um computador.</p></li>
+</ul></li>
+<li><p><strong>Andar Superior</strong>:</p>
+<ul>
+<li><p><strong>Quarto Principal (Sr.&nbsp;e Sra. Blackwood)</strong>: Espaçoso, com uma grande cama de dossel, penteadeira, armários embutidos e um banheiro privativo. Uma varanda com vista para o jardim da frente.</p></li>
+<li><p><strong>Quarto de Hóspedes</strong>: Onde Dr.&nbsp;Finch deixou seus pertences (embora não tenha passado a noite). Confortável, com uma cama de solteiro, escrivaninha e janela para o jardim lateral.</p></li>
+<li><p><strong>Quarto de Clara Evans</strong>: Menor e mais simples, localizado perto da escada de serviço, com vista para os fundos.</p></li>
+<li><p><strong>Aposentos do Mordomo e da Cozinheira (Sr.&nbsp;e Sra. Croft)</strong>: Localizados na ala de serviço, acima da cozinha.</p></li>
+</ul></li>
+<li><p><strong>Exterior</strong>:</p>
+<ul>
+<li><p><strong>Jardim da Frente</strong>: Um gramado bem cuidado com um caminho circular de cascalho que leva à porta principal. Ladeado por sebes altas.</p></li>
+<li><p><strong>Jardim Lateral</strong>: Menos formal, com um gazebo antigo coberto de hera e canteiros de rosas.</p></li>
+<li><p><strong>Jardim dos Fundos</strong>: Uma área mais extensa e um pouco mais selvagem, com árvores antigas, uma pequena horta cultivada pela Sra. Croft e, nos limites da propriedade, uma velha estufa de vidro abandonada e parcialmente coberta por vegetação.</p></li>
+</ul></li>
+</ul>
+<p>Alguns ambientes da Mansão Hollow podem ser vistos na imagem abaixo:</p>
+<p><img src=".\images/ambientes.webp" class="img-fluid"></p>
+<p><strong>3. Linha do Tempo (Segunda-feira, 18 de Maio de 1915)</strong>:</p>
+<ul>
+<li><p><strong>08:00</strong>: Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr.&nbsp;Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.</p></li>
+<li><p><strong>09:00</strong>: Clara Evans leva uma bandeja com café e torradas para o laboratório do Sr.&nbsp;Blackwood.</p></li>
+<li><p><strong>10:00</strong>: Dr.&nbsp;Alistair Finch chega pontualmente à Mansão Hollow. É recebido pelo mordomo, Sr.&nbsp;Croft, e anunciado à Sra. Blackwood.</p></li>
+<li><p><strong>10:15 - 11:00 (aprox.)</strong>: Dr.&nbsp;Finch e Sra. Blackwood conversam na sala de estar.</p></li>
+<li><p><strong>11:00</strong>: Sra. Blackwood acompanha Dr.&nbsp;Finch até a porta do laboratório do Sr.&nbsp;Blackwood. Ela bate. Uma voz abafada, identificada por ela como sendo de Arthur, diz: “Estou no meio de algo crítico! Não me perturbem agora!”. Dr.&nbsp;Finch parece contrariado.</p></li>
+<li><p><strong>11:05 - 13:00</strong>: Período decisivo com movimentações diversas e álibis a serem verificados.</p></li>
+<li><p><strong>13:00</strong>: O almoço é servido. Sr.&nbsp;Blackwood novamente não aparece.</p></li>
+<li><p><strong>14:00</strong>: Sra. Blackwood, demonstrando crescente preocupação, pede a Sr.&nbsp;Croft que vá verificar pessoalmente o Sr.&nbsp;Blackwood em seu laboratório.</p></li>
+<li><p><strong>14:05</strong>: Sr.&nbsp;Croft dirige-se ao laboratório. Encontra a porta especial entreaberta. A fechadura de alta segurança parece ter sido arranhada (marcas de tentativa de arrombamento), mas está destrancada (possivelmente aberta corretamente após a tentativa de arrombamento). O interior do laboratório está em grande desordem: papéis e diagramas espalhados pelo chão, algumas ferramentas fora do lugar, uma cadeira virada. Sr.&nbsp;Blackwood não está em lugar nenhum. A janela dos fundos do laboratório está destrancada e aberta. Não há sinais óbvios de luta violenta (ex: sangue).</p></li>
+<li><p><strong>14:15</strong>: Sra. Blackwood, após ser informada por Sr.&nbsp;Croft, instrui-o a chamar a polícia local.</p></li>
+<li><p><strong>17:00</strong>: A notícia do desaparecimento e a natureza peculiar do caso chegam aos ouvidos de Hercule Poirot, que está concluindo um caso em uma cidade vizinha. Ele informa que só poderá dedicar-se ao mistério da Mansão Hollow na manhã seguinte. (Vocês têm até lá para resolver!)</p></li>
+</ul>
+<p><strong>4. Depoimentos Iniciais (Coletados apressadamente pelo Sargento Davis, da polícia local)</strong>:</p>
+<ul>
+<li><p><strong>Sra. Eleanor Clithering</strong>:</p>
+<ul>
+<li><p>“Arthur estava impossível nas últimas semanas, totalmente absorvido pelo tal projeto ‘Quimera’. Falava coisas sem sentido sobre revolucionar o mundo, mas também sobre pessoas que queriam roubá-lo. Ele sempre foi um pouco… dramático.”</p></li>
+<li><p>“Quando bati à porta do laboratório às 11:00, ouvi claramente Arthur dizer para não ser perturbado. Sim, a voz parecia um pouco abafada, mas era ele. Dr.&nbsp;Finch estava ao meu lado.”</p></li>
+<li><p>“Depois disso, subi para meus aposentos para descansar e escrever algumas cartas. Não vi mais o Dr.&nbsp;Finch até a hora do almoço.”</p></li>
+<li><p>“A fechadura do laboratório é uma invenção do próprio Arthur. Apenas ele possuía a chave mestra. Ouvi dizer que Clara talvez soubesse algum truque para abri-la, mas forçá-la… faria um barulho terrível, não acha?”</p></li>
+<li><p>“Desaparecer assim… não é do feitio de Arthur, a menos que seja parte de algum plano mirabolante dele. Ou então algo terrível aconteceu.”</p></li>
+</ul></li>
+<li><p><strong>Dr.&nbsp;Alistair Finch</strong>:</p>
+<ul>
+<li><p>“Eu vim em uma missão de paz, acreditem. Nossas divergências passadas foram puramente intelectuais. Eu esperava que pudéssemos colaborar. A ideia de roubar o trabalho de Arthur é um insulto.”</p></li>
+<li><p>“Sim, a Sra. Blackwood me acompanhou até a porta do laboratório. Ouvi uma voz masculina dizer para não sermos inoportunos. Não posso jurar que era Arthur, a voz estava abafada, como disse a Sra. Blackwood.”</p></li>
+<li><p>“Após a recusa, senti-me um pouco desconfortável. Decidi caminhar pelos jardins para espairecer, entre aproximadamente 11:05 e 12:45. Andei pela frente da casa e também pelo jardim lateral, perto do gazebo. O tempo estava agradável.”</p></li>
+<li><p>“Não vi ninguém suspeito. Vi o mordomo, Sr.&nbsp;Croft, por um instante, perto da entrada lateral da casa, por volta das 11:20. Ele parecia estar carregando uma caixa ou algo similar em direção à parte de trás da casa ou à adega.”</p></li>
+<li><p>“Eu nunca tocaria na fechadura do laboratório de Arthur sem permissão. Seria uma violação imperdoável da ética científica.”</p></li>
+</ul></li>
+<li><p><strong>Miss Clara Evans</strong>:</p>
+<ul>
+<li><p>“Sr.&nbsp;Blackwood estava muito pressionado, mas também excitado com o ‘Quimera’. Ele dizia que mudaria tudo. Ele confiava em mim implicitamente.”</p></li>
+<li><p>“Sim, ele temia que o Dr.&nbsp;Finch, ou outros, pudessem tentar se apropriar de suas descobertas. Ele tomava muitas precauções.”</p></li>
+<li><p>“Quando levei seu café às 09:00, ele estava um pouco agitado, mas lúcido. Disse-me: ‘Clara, hoje é um dia de grandes decisões. Lembre-se dos nossos protocolos.’”</p></li>
+<li><p>“Entre 11:00 e 13:00, estive principalmente no escritório anexo ao laboratório, compilando dados. A porta entre o escritório e o laboratório estava fechada na maior parte do tempo para que ele tivesse silêncio. Saí brevemente, por volta das 11:30, para ir à biblioteca buscar o ‘Compêndio de Ligas Metálicas Raras’. Fiquei lá uns 15, talvez 20 minutos. Não cruzei com ninguém no corredor ou na biblioteca.”</p></li>
+<li><p>“O laboratório tem um bom isolamento acústico, especialmente com a porta do escritório fechada. Não ouvi nenhum barulho de arrombamento. A fechadura especial é complexa; apenas Sr.&nbsp;Blackwood tinha a chave. Eu conheço o procedimento de abertura manual de emergência, mas é uma sequência demorada e específica.”</p></li>
+</ul></li>
+<li><p><strong>Sr.&nbsp;Reginald “Reggie” Croft (Mordomo)</strong>:</p>
+<ul>
+<li><p>“Dr.&nbsp;Finch chegou às 10:00. Parecia um pouco nervoso, na minha opinião. Ele e a patroa conversaram na sala de estar por um bom tempo.”</p></li>
+<li><p>“Por volta das 11:00, eu estava no hall polindo a prata, e ouvi as vozes da Sra. Blackwood e do Dr.&nbsp;Finch perto do corredor do laboratório. Não prestei muita atenção ao que foi dito. Logo depois, vi a Sra. Blackwood subir a escadaria principal.”</p></li>
+<li><p>“De fato, por volta das 11:15, eu estava transportando uma caixa de garrafas de vinho da entrada de serviço lateral para a adega no porão. Nesse momento, vi o Dr.&nbsp;Finch caminhando pelo jardim da frente, perto do portão principal. Ele olhava muito para o relógio.”</p></li>
+<li><p>“Quando fui chamado pela Sra. Blackwood às 14:00, encontrei a porta do laboratório como descrito: entreaberta, com arranhões na fechadura, mas destrancada. O Sr.&nbsp;Blackwood era metódico. Se ele não queria ser perturbado, ele trancava a porta de uma forma que ninguém entraria.”</p></li>
+</ul></li>
+<li><p><strong>Sra. Beatrice Croft (Cozinheira)</strong>:</p>
+<ul>
+<li><p>“Da cozinha, não se ouve muito do resto da casa, a menos que seja uma gritaria. Estive ocupada com o almoço toda a manhã.”</p></li>
+<li><p>“Sr.&nbsp;Blackwood não aparecer para as refeições não era novidade quando estava às voltas com suas invenções malucas.”</p></li>
+<li><p>“Uma coisa estranha: Miss Evans passou rapidamente pela cozinha por volta das 12:50. Parecia muito pálida e apressada. Perguntei se estava tudo bem, e ela murmurou algo sobre ir verificar se o Sr.&nbsp;Blackwood queria que o almoço fosse servido no laboratório. Ela voltou alguns minutos depois, ainda mais pálida, e disse que ele não tinha respondido aos chamados dela na porta do laboratório e que era melhor não insistir. Achei estranho ela não ter comentado isso com a Sra. Blackwood imediatamente, antes do alarme oficial.”</p></li>
+<li><p>“A janela do laboratório? Sim, dá para uma parte mais isolada d-o jardim dos fundos, perto da minha horta. Se alguém pulou por ali, e se esgueirou pelas árvores, poderia sumir sem ser visto da casa principal.”</p></li>
+</ul></li>
+</ul>
+<p><strong>5. Pistas e Bilhetes Enigmáticos</strong>:</p>
+<ul>
+<li><p><strong>Pista 1: Papel Amassado na Lixeira do Laboratório</strong>: Um pequeno pedaço de papel de anotações, claramente arrancado de um bloco maior, contém a seguinte mensagem escrita à mão por Sr.&nbsp;Blackwood (caligrafia confirmada):</p>
+<blockquote class="blockquote">
+<p>“Se A implica B, e o Corvo visita o Ninho, então a Hipótese se confirma. A negação do consequente é o único caminho seguro. Sigma Ativado.”</p>
+</blockquote></li>
+<li><p><strong>Pista 2: Objeto Encontrado no Chão do Laboratório, Perto da Mesa Principal</strong>: Um pequeno e incomum botão de metal fosco, com um desenho de uma engrenagem estilizada. Não parece pertencer a nenhuma roupa do Sr.&nbsp;Blackwood, nem faz parte do vestuário usual dos funcionários.</p></li>
+<li><p><strong>Pista 3: Anotação na Margem de um Livro na Biblioteca</strong>: No livro “Compêndio de Ligas Metálicas Raras” (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:</p>
+<blockquote class="blockquote">
+<p>“Onde o passado encontra o futuro, a reflexão é a chave. <span class="math inline">\((\neg P \lor Q)\)</span> é equivalente a ?” A caligrafia parece ser de Sr.&nbsp;Blackwood.</p>
+</blockquote></li>
+<li><p><strong>Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório</strong>: Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.</p></li>
+<li><p><strong>Pista 5: Na Estufa Abandonada (Jardim dos Fundos)</strong>: Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.</p></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./apendice-a-glossario.html" class="pagination-link" aria-label="Glossário">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Glossário</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/09-desafios-logicos-enigmas-e-misterios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

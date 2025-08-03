@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fundamentos da Lógica Proposicional: Base Matemática da Computação</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                width: 280px;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .logic-component {
+            border-left: 4px solid;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-syntax { border-left-color: #3b82f6; }
+        .component-semantics { border-left-color: #10b981; }
+        .component-inference { border-left-color: #0284c7; }
+        .component-equivalence { border-left-color: #8b5cf6; }
+        .component-tautology { border-left-color: #ef4444; }
+
+        .formula-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .truth-table {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+        }
+
+        .truth-table th,
+        .truth-table td {
+            text-align: center;
+            padding: 0.5rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .truth-table th {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+            font-weight: bold;
+        }
+
+        .inference-rule {
+            background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+            border-left: 4px solid #0284c7;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .inference-rule .rule-name {
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .inference-notation {
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .simplification-steps {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .step-number {
+            background: var(--sage-600);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .equivalence-table {
+            font-size: 0.9rem;
+            margin: 1.5rem 0;
+        }
+
+        .equivalence-table th,
+        .equivalence-table td {
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+        }
+
+        .equivalence-table th {
+            background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+            color: white;
+            font-weight: bold;
+        }
+
+        .equivalence-table tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        .equivalence-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .law-reference {
+            font-size: 0.8rem;
+            color: var(--sage-600);
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#logica-primeira-ordem" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Lógica de Primeira Ordem</a></li>
+                <li class="mb-2"><a href="#alfabeto-sintaxe" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Alfabeto e Sintaxe</a></li>
+                <li class="mb-2"><a href="#precedencia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Precedência de Operadores</a></li>
+                <li class="mb-2"><a href="#fundamentos-proposicional" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Fundamentos da Lógica Proposicional</a></li>
+                <li class="mb-2"><a href="#conectivos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Análise dos Conectivos</a></li>
+                <li class="mb-2"><a href="#equivalencias" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Equivalências Lógicas</a></li>
+                <li class="mb-2"><a href="#exemplos-simplificacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Exemplos de Simplificação</a></li>
+                <li class="mb-2"><a href="#sistema-dedutivo" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Sistema Dedutivo</a></li>
+                <li class="mb-2"><a href="#regras-inferencia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Regras de Inferência</a></li>
+                <li class="mb-2"><a href="#analise-semantica" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Análise Semântica</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conectivos Lógicos</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-times me-2 text-primary"></i><small class="text-primary fw-medium">¬ (Negação)</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-plus me-2 text-success"></i><small class="text-success fw-medium">∧ (Conjunção)</small></div>
+                <div class="p-2" style="background-color: #fef3c7;"><i class="fas fa-expand-alt me-2" style="color: #f59e0b;"></i><small style="color: #f59e0b;" class="fw-medium">∨ (Disjunção)</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-arrow-right me-2 text-info"></i><small class="text-info fw-medium">→ (Implicação)</small></div>
+                <div class="p-2 bg-secondary-subtle rounded"><i class="fas fa-arrows-alt-h me-2 text-secondary"></i><small class="text-secondary fw-medium">↔ (Equivalência)</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Regras de Inferência</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Modus Ponens</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Modus Tollens</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Adjunção</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Simplificação</small>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"logic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><circle cx=\"45\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"15\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"45\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M15,15 L45,15 M15,15 L15,45 M45,15 L45,45 M15,45 L45,45\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23logic)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Fundamentos da</em>
+                                    <span class="d-block">Lógica Proposicional</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Base Matemática da Ciência da Computação
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">21</div>
+                            <div class="fs-6 text-muted">Equivalências Principais</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">Boole</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Álgebra Booleana</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-times fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">¬ Negação</h3>
+                                <p class="fs-7 text-muted">NOT</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-plus fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">∧ Conjunção</h3>
+                                <p class="fs-7 text-muted">AND</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-expand-alt fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">∨ Disjunção</h3>
+                                <p class="fs-7 text-muted">OR</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-arrow-right fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">→ Implicação</h3>
+                                <p class="fs-7 text-muted">IF-THEN</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-arrows-alt-h fs-2 text-secondary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-secondary">↔ Equivalência</h3>
+                                <p class="fs-7 text-muted">IFF</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- First Order Logic Section -->
+        <section id="logica-primeira-ordem" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Lógica de Primeira Ordem</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        A <strong>Lógica de Primeira Ordem</strong> é uma estrutura básica da ciência da computação e da programação. Ela nos permite discursar e raciocinar com precisão sobre os elementos.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-balance-scale fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Equilíbrio Fundamental</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Esta restrição não é um defeito, mas sim um <strong>equilíbrio cuidadoso</strong> entre poder expressivo e simplicidade computacional.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Capacidade</div>
+                                    <div class="fs-6 text-muted">Formular grande variedade de problemas</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-gem fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Pedra Fundamental</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Uma forma poderosa e útil de olhar para o universo, não tão complicada que seja hermética, mas <strong>suficientemente complexa</strong> para descobrir mistérios matemáticos.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Objetivo</div>
+                                    <div class="fs-6 text-muted">Resolver problemas práticos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Capacidades e Limitações</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">✓ Podemos fazer</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Afirmações sobre todo um grupo</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Afirmações sobre elemento particular</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Raciocínio com precisão</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-warning">⚠ Limitações clássicas</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-times me-2 text-warning"></i>Afirmações diretas sobre predicados</li>
+                                    <li class="mb-2"><i class="fas fa-times me-2 text-warning"></i>Afirmações diretas sobre funções</li>
+                                    <li class="mb-2"><i class="fas fa-info me-2 text-info"></i>Extensões: Lógica de Segunda Ordem</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alphabet and Syntax Section -->
+        <section id="alfabeto-sintaxe" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Alfabeto e Sintaxe da Lógica de Primeira Ordem</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A <strong>Lógica de Primeira Ordem</strong> é uma linguagem criada a partir de um alfabeto Σ, de um conjunto de axiomas e de um conjunto de regras de inferência.
+                    </p>
+
+                    <!-- Alphabet Components -->
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-2">1. Variáveis e Constantes</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Símbolos do alfabeto latino e pontuação
+                                    </p>
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong class="text-primary">Variáveis:</strong> u, v, w, x, y, z<br>
+                                        <strong class="text-primary">Constantes:</strong> a, b, c, d, e<br>
+                                        <strong class="text-primary">Pontuação:</strong> ( )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">2. Funções e Predicados</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Símbolos para operações e relações
+                                    </p>
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong class="text-success">Funções:</strong> f, g, h, i<br>
+                                        <strong class="text-success">Predicados:</strong> P, Q, R, S<br>
+                                        <strong class="text-success">Ou strings:</strong> MaiorQue, IgualA
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-warning mb-2">3. Operadores</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Conectivos lógicos tradicionais
+                                    </p>
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <strong class="text-warning">Negação:</strong> ¬<br>
+                                        <strong class="text-warning">Conjunção:</strong> ∧<br>
+                                        <strong class="text-warning">Disjunção:</strong> ∨<br>
+                                        <strong class="text-warning">Implicação:</strong> →<br>
+                                        <strong class="text-warning">Equivalência:</strong> ↔
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-info mb-2">4. Quantificadores</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Tradição matemática para quantificação
+                                    </p>
+                                    <div class="p-3 bg-info-subtle rounded">
+                                        <strong class="text-info">Existencial:</strong> ∃<br>
+                                        <strong class="text-info">Universal:</strong> ∀<br>
+                                        <strong class="text-info">Significado:</strong> "existe" e "para todo"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-secondary mb-2">5. Fórmulas Bem Formadas</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Expressões válidas da linguagem
+                                    </p>
+                                    <div class="p-3 bg-secondary-subtle rounded">
+                                        <strong class="text-secondary">Representação:</strong> P, Q, R, S<br>
+                                        <strong class="text-secondary">Valores:</strong> TRUE, FALSE<br>
+                                        <strong class="text-secondary">Propriedade:</strong> Só podem ser verdadeiras ou falsas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-danger mb-2">6. Termos e Átomos</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Elementos básicos das fórmulas
+                                    </p>
+                                    <div class="p-3 bg-danger-subtle rounded">
+                                        <strong class="text-danger">Termos:</strong> variáveis, constantes, funções<br>
+                                        <strong class="text-danger">Átomos:</strong> predicados aplicados a termos<br>
+                                        <strong class="text-danger">Exemplo:</strong> P(x), MaiorQue(a,b)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Well-Formed Formulas Definition -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Fórmulas Bem Formadas (FBF)</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "Em <strong>Lógica de Primeira Ordem</strong>, uma <strong>Fórmula Bem Formada</strong> é uma expressão que <strong>só pode ser</strong> verdadeira ou falsa."
+                            </p>
+                        </blockquote>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            As FBF são compostas de símbolos que representam quantificadores, variáveis, constantes, predicados, e conectivos lógicos, seguindo regras sintáticas, gramaticais e semânticas da linguagem lógica.
+                        </p>
+                        <div class="border-start border-4 border-primary ps-3">
+                            <div class="fw-bold text-primary">Aprendizado</div>
+                            <div class="fs-6 text-muted">Aprender lógica é aprender esta linguagem</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operator Precedence Section -->
+        <section id="precedencia" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Precedência de Operadores e Uso de Parênteses</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A regra sintática mais importante é a <strong>precedência das operações</strong>, uma espécie de receita indexada que deve ser seguida à letra.
+                    </p>
+
+                    <!-- Precedence Order -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Ordem de Precedência</h3>
+                        <div class="formula-box">
+                            ¬, ∀, ∃, ∧, ∨, →, ↔
+                        </div>
+                        <p class="text-center text-muted">
+                            <strong>Maior precedência:</strong> ¬ (negação) &nbsp;&nbsp;|&nbsp;&nbsp; <strong>Menor precedência:</strong> ↔ (equivalência)
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">✓ Com Parênteses (Explícito)</h4>
+                                    <div class="formula-box bg-white">
+                                        (∀x(∃y (P(x,y)→Q(x))))
+                                    </div>
+                                    <small class="text-success">Sem ambiguidade, fácil de interpretar</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-warning mb-2">⚠ Sem Parênteses (Ambíguo)</h4>
+                                    <div class="formula-box bg-white">
+                                        ∀x ∃y (P(x,y)→Q(x))
+                                    </div>
+                                    <small class="text-warning">Pode permitir outras interpretações</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Atoms Rules -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Regras para Termos</h3>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-primary me-3">1.</span>
+                                        <div>
+                                            <div class="fw-medium">Variável</div>
+                                            <div class="fs-6 text-muted">Uma variável x é um termo em si</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-primary me-3">2.</span>
+                                        <div>
+                                            <div class="fw-medium">Constante</div>
+                                            <div class="fs-6 text-muted">Uma constante a é um termo em si</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-primary me-3">3.</span>
+                                        <div>
+                                            <div class="fw-medium">Função</div>
+                                            <div class="fs-6 text-muted">Se f é função de termos (t₁, ... tₙ) então f(t₁, ... tₙ) é um termo</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-primary me-3">4.</span>
+                                        <div>
+                                            <div class="fw-medium">Valores Lógicos</div>
+                                            <div class="fs-6 text-muted">T/TRUE para verdadeiro, F/FALSE para falso</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--copper-800);">Regras para Átomos e FBF</h3>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-success me-3">1.</span>
+                                        <div>
+                                            <div class="fw-medium">Átomo Predicativo</div>
+                                            <div class="fs-6 text-muted">P(t₁, ... tₙ) é uma FBF básica</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-success me-3">2.</span>
+                                        <div>
+                                            <div class="fw-medium">Conectivos</div>
+                                            <div class="fs-6 text-muted">Se P, Q são FBF então ¬P, P∧Q, P∨Q, P→Q, P↔Q são FBF</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <span class="fw-bold text-success me-3">3.</span>
+                                        <div>
+                                            <div class="fw-medium">Quantificadores</div>
+                                            <div class="fs-6 text-muted">Se P é FBF e x variável então ∃x P(x) e ∀x P(x) são FBF</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Language Definition -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Definição da Linguagem</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "Podemos definir a linguagem da <strong>Lógica de Primeira Ordem</strong> como o conjunto de todas as <strong>Fórmulas Bem Formadas</strong> criadas a partir dos campos de estudo da <strong>Lógica Proposicional</strong> e da Lógica de Predicados."
+                            </p>
+                        </blockquote>
+                        <p class="fs-6 mb-0" style="color: var(--sage-700);">
+                            Termos e átomos interligados em uma teia, em que cada termo ou átomo é como uma <strong>ilha de verdade</strong>. As operações lógicas são as <strong>pontes</strong> que conectam essas ilhas, permitindo-nos construir as estruturas mais complexas da razão.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Propositional Logic Fundamentals Section -->
+        <section id="fundamentos-proposicional" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Fundamentos da Lógica Proposicional</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Esse sistema, também chamado de <strong>álgebra booleana</strong>, fundamental para o desenvolvimento da computação, é uma verdadeira tapeçaria de possibilidades.
+                    </p>
+
+                    <!-- Core Concept -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Na <strong>Lógica Proposicional</strong>, declarações atômicas, que só podem ter valores <strong>verdadeiro (TRUE)</strong> ou <strong>falso (FALSE)</strong>, são entrelaçadas em declarações compostas cuja veracidade depende dos valores de verdade das declarações atômicas que as compõem quando sujeitas aos conectivos."
+                            </p>
+                        </blockquote>
+                    </div>
+
+                    <!-- Atomic Propositions and Literals -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-atom fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Proposições Atômicas</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Representamos por letras como P, Q, R, S, ou usando índices como X₁, X₂, etc. Cada proposição é um <strong>fato fundamental e indivisível</strong>.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Exemplos</div>
+                                    <div class="fs-6 text-muted">"A chuva cai", "O sol brilha"</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-building-blocks fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Literais</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Um <strong>literal</strong> é uma variável proposicional (P ou Q) ou sua negação (¬P ou ¬Q). São as <strong>unidades básicas</strong> da Lógica Proposicional.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Combinação</div>
+                                    <div class="fs-6 text-muted">Conectivos lógicos formam fórmulas complexas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Well-Formed Formulas Structure -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Estrutura das Fórmulas</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">Fórmulas Atômicas</h4>
+                                <p class="fs-6 mb-0 text-muted">
+                                    Proposições básicas que não podem ser decompostas em partes mais simples usando conectivos lógicos.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Fórmulas Compostas</h4>
+                                <p class="fs-6 mb-0 text-muted">
+                                    Um operador principal (conectivo) liga duas fórmulas atômicas ou duas fórmulas compostas.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-white rounded">
+                            <strong class="text-info">Construção:</strong>
+            <span class="text-info">As declarações atômicas e compostas são <strong>costuradas por conectivos</strong> para produzir declarações compostas, cujo valor de verdade depende dos valores de verdade das declarações componentes.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Truth Table and Connectives Section -->
+        <section id="conectivos" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Análise dos Conectivos Lógicos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Os conectivos lógicos são os elementos fundamentais que nos permitem combinar proposições atômicas para formar expressões mais complexas.
+                    </p>
+
+                    <!-- Truth Table -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Tabela Verdade - Operadores Básicos</h3>
+                        <div class="table-responsive">
+                            <table class="truth-table table">
+                                <thead>
+                                    <tr>
+                                        <th>P</th>
+                                        <th>Q</th>
+                                        <th>P∨Q</th>
+                                        <th>P∧Q</th>
+                                        <th>¬P</th>
+                                        <th>P→Q</th>
+                                        <th>P↔Q</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FALSE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-center text-muted mt-3">
+                            <em>Tabela 1 - Tabela Verdade dos operadores básicos da Lógica Proposicional</em>
+                        </p>
+                    </div>
+
+                    <!-- Connectives Analysis -->
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-2">∨ (Disjunção)</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Também chamado de <strong>ou inclusivo</strong>, é verdadeiro quando pelo menos um dos termos é verdadeiro.
+                                    </p>
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong class="text-primary">Diferença:</strong><br>
+                                        <div class="fs-6 text-primary">∨ difere de ⊕ (ou exclusivo)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">∧ (Conjunção)</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Verdadeiro apenas quando ambos os termos são verdadeiros. Corresponde ao <strong>"e" lógico</strong>.
+                                    </p>
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong class="text-success">Exemplo:</strong><br>
+                                        <div class="fs-6 text-success">"o céu está azul e a grama é verde"</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-warning mb-2">¬ (Negação)</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Operador unário que inverte o valor-verdade de uma proposição.
+                                    </p>
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <strong class="text-warning">Propriedade:</strong><br>
+                                        <div class="fs-6 text-warning">TRUE quando proposição é FALSE e vice-versa</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-info mb-2">→ (Implicação)</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Falso apenas quando o antecedente é verdadeiro e o consequente é falso. <strong>Não implica causalidade</strong>.
+                                    </p>
+                                    <div class="p-3 bg-info-subtle rounded">
+                                        <strong class="text-info">Importante:</strong><br>
+                                        <div class="fs-6 text-info">Lógico, não causal</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-secondary mb-2">↔ (Bicondicional)</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Equivale a ambos os componentes terem o mesmo valor-verdade. Corresponde a <strong>"se e somente se"</strong>.
+                                    </p>
+                                    <div class="p-3 bg-secondary-subtle rounded">
+                                        <strong class="text-secondary">Condição:</strong><br>
+                                        <div class="fs-6 text-secondary">Verdadeiras ou falsas simultaneamente</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arity Table -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Aridade dos Operadores</h3>
+                        <div class="table-responsive">
+                            <table class="equivalence-table table">
+                                <thead>
+                                    <tr>
+                                        <th>No Argumentos</th>
+                                        <th>Aridade</th>
+                                        <th>Exemplos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Unário</td>
+                                        <td>P(x), ¬P</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Binário</td>
+                                        <td>P ∨ Q, P ∧ Q</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 p-3 bg-white rounded">
+                            <strong class="text-info">Observação importante:</strong>
+            <span class="text-info">Se tivermos quatro termos diferentes, em vez de dois, teremos 2⁴ = 16 linhas. Se todos os resultados forem TRUE, temos uma <strong>tautologia</strong>; se todos forem FALSE, uma <strong>contradição</strong>.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logical Equivalences Section -->
+        <section id="equivalencias" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Equivalências Lógicas</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As equivalências lógicas permitem validar <strong>Fórmulas Bem Formadas</strong> sem recorrer a tabelas-verdade, simplificando expressões e facilitando provas lógicas.
+                    </p>
+
+                    <!-- Tautology and Contradiction Definition -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-tautology">
+                                    <h4 class="fs-4 fw-semibold text-danger mb-2">Tautologia</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Uma fórmula que é sempre verdadeira, não importa os valores dados às variáveis. <strong>Verdades universais</strong> no domínio do problema.
+                                    </p>
+                                    <div class="p-3 bg-danger-subtle rounded">
+                                        <strong class="text-danger">Aplicação:</strong><br>
+                                        <div class="fs-6 text-danger">Simplificar expressões e fazer inferências válidas automaticamente</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-tautology">
+                                    <h4 class="fs-4 fw-semibold text-secondary mb-2">Contradição</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        Uma fórmula que é sempre falsa, independentemente dos valores das variáveis. Mostra <strong>inconsistências</strong> ou impossibilidades lógicas.
+                                    </p>
+                                    <div class="p-3 bg-secondary-subtle rounded">
+                                        <strong class="text-secondary">Benefício:</strong><br>
+                                        <div class="fs-6 text-secondary">Evita custo de tentar provar algo logicamente impossível</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Equivalences Table -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Principais Equivalências da Lógica Proposicional</h3>
+                        <div class="table-responsive">
+                            <table class="equivalence-table table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 60%;">Expressão Lógica Equivalente</th>
+                                        <th style="width: 30%;">Nome da Lei/Propriedade</th>
+                                        <th style="width: 10%;">Ref.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>P ∧ Q ≡ Q ∧ P</td>
+                                        <td>Comutatividade da Conjunção</td>
+                                        <td class="law-reference">(1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∨ Q ≡ Q ∨ P</td>
+                                        <td>Comutatividade da Disjunção</td>
+                                        <td class="law-reference">(2)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∧ (Q ∨ R) ≡ (P ∧ Q) ∨ (P ∧ R)</td>
+                                        <td>Distributividade da Conjunção sobre a Disjunção</td>
+                                        <td class="law-reference">(3)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∨ (Q ∧ R) ≡ (P ∨ Q) ∧ (P ∨ R)</td>
+                                        <td>Distributividade da Disjunção sobre a Conjunção</td>
+                                        <td class="law-reference">(4)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>¬(P ∧ Q) ≡ ¬P ∨ ¬Q</td>
+                                        <td>Lei de De Morgan</td>
+                                        <td class="law-reference">(5)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>¬(P ∨ Q) ≡ ¬P ∧ ¬Q</td>
+                                        <td>Lei de De Morgan</td>
+                                        <td class="law-reference">(6)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P → Q ≡ ¬P ∨ Q</td>
+                                        <td>Definição de Implicação</td>
+                                        <td class="law-reference">(7)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ↔ Q ≡ (P → Q) ∧ (Q → P)</td>
+                                        <td>Definição de Equivalência</td>
+                                        <td class="law-reference">(8)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P → Q ≡ ¬Q → ¬P</td>
+                                        <td>Lei da Contrapositiva</td>
+                                        <td class="law-reference">(9)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∧ ¬P ≡ FALSE</td>
+                                        <td>Lei da Contradição</td>
+                                        <td class="law-reference">(10)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∨ ¬P ≡ TRUE</td>
+                                        <td>Lei do Terceiro Excluído</td>
+                                        <td class="law-reference">(11)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>¬(¬P) ≡ P</td>
+                                        <td>Lei da Dupla Negação</td>
+                                        <td class="law-reference">(12)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ≡ P</td>
+                                        <td>Lei da Identidade</td>
+                                        <td class="law-reference">(13)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∧ TRUE ≡ P</td>
+                                        <td>Lei da Identidade para a Conjunção</td>
+                                        <td class="law-reference">(14)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∧ FALSE ≡ FALSE</td>
+                                        <td>Lei do Domínio para a Conjunção</td>
+                                        <td class="law-reference">(15)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∨ TRUE ≡ TRUE</td>
+                                        <td>Lei do Domínio para a Disjunção</td>
+                                        <td class="law-reference">(16)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∨ FALSE ≡ P</td>
+                                        <td>Lei da Identidade para a Disjunção</td>
+                                        <td class="law-reference">(17)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>(P ∧ Q) ∧ R ≡ P ∧ (Q ∧ R)</td>
+                                        <td>Associatividade da Conjunção</td>
+                                        <td class="law-reference">(18)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>(P ∨ Q) ∨ R ≡ P ∨ (Q ∨ R)</td>
+                                        <td>Associatividade da Disjunção</td>
+                                        <td class="law-reference">(19)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∧ P ≡ P</td>
+                                        <td>Idempotência da Conjunção</td>
+                                        <td class="law-reference">(20)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P ∨ P ≡ P</td>
+                                        <td>Idempotência da Disjunção</td>
+                                        <td class="law-reference">(21)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-center text-muted mt-3">
+                            <em>Tabela 3 - Equivalências em Lógica Proposicional</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simplification Examples Section -->
+        <section id="exemplos-simplificacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Exemplos de Simplificação</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As equivalências surgem naturalmente enquanto trabalhamos. Vejamos exemplos práticos de simplificação usando apenas as equivalências da Tabela 3.
+                    </p>
+
+                    <!-- Basic Level Examples -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Nível Básico</h3>
+                        
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: P ∧ (Q ∨ (P ∧ R))</h4>
+                            <div class="simplification-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <div class="fw-medium">P ∧ (Q ∨ (P ∧ R))</div>
+                                        <div class="text-muted">Fórmula original</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (P ∧ Q) ∨ (P ∧ (P ∧ R))</div>
+                                        <div class="text-muted">Distributividade da Conjunção sobre a Disjunção</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (P ∧ Q) ∨ ((P ∧ P) ∧ R)</div>
+                                        <div class="text-muted">Associatividade da Conjunção</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (P ∧ Q) ∨ (P ∧ R)</div>
+                                        <div class="text-muted">Idempotência da Conjunção</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="fs-6 text-muted mb-0">
+                                <strong>Resultado:</strong> A fórmula é <strong>satisfatível</strong> e <strong>falsificável</strong>, mas não é uma tautologia.
+                            </p>
+                        </div>
+
+                        <div class="example-box mt-4">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: P → (Q ∧ (R ∨ P))</h4>
+                            <div class="simplification-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <div class="fw-medium">P → (Q ∧ (R ∨ P))</div>
+                                        <div class="text-muted">Fórmula original</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <div class="fw-medium">≡ ¬P ∨ (Q ∧ (R ∨ P))</div>
+                                        <div class="text-muted">Definição de Implicação (7)</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (¬P ∨ Q) ∧ (¬P ∨ (R ∨ P))</div>
+                                        <div class="text-muted">Distributividade (4)</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (¬P ∨ Q) ∧ TRUE</div>
+                                        <div class="text-muted">Lei do Terceiro Excluído (11)</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>
+                                        <div class="fw-medium">≡ ¬P ∨ Q</div>
+                                        <div class="text-muted">Lei da Identidade (14)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Level Examples -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Nível Avançado</h3>
+                        
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo: (P → Q) ∨ (R → S) ∨ (E → P)</h4>
+                            <div class="simplification-steps">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <div class="fw-medium">(P → Q) ∨ (R → S) ∨ (E → P)</div>
+                                        <div class="text-muted">Fórmula original</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (¬P ∨ Q) ∨ (¬R ∨ S) ∨ (¬E ∨ P)</div>
+                                        <div class="text-muted">Definição de Implicação</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <div class="fw-medium">≡ ¬P ∨ Q ∨ ¬R ∨ S ∨ ¬E ∨ P</div>
+                                        <div class="text-muted">Associatividade da Disjunção</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <div class="fw-medium">≡ (¬P ∨ P) ∨ Q ∨ ¬R ∨ S ∨ ¬E</div>
+                                        <div class="text-muted">Comutatividade da Disjunção</div>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>
+                                        <div class="fw-medium">≡ TRUE</div>
+                                        <div class="text-muted">Lei do Terceiro Excluído + Lei da Dominação</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="fs-6 text-success mb-0">
+                                <strong>Conclusão:</strong> A fórmula é uma <strong>tautologia</strong>, sempre verdadeira.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deductive System Section -->
+        <section id="sistema-dedutivo" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Sistema Dedutivo da Lógica Proposicional</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O sistema dedutivo é um conjunto de regras e princípios que nos permite derivar conclusões a partir de premissas, fundamental para a construção de argumentos lógicos válidos.
+                    </p>
+
+                    <!-- Historical Context -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Importância Histórica</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "A <strong>Lógica Proposicional</strong> é essencial para entendermos o mundo. É a base de argumentos sólidos e da avaliação de proposições."
+                            </p>
+                        </blockquote>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-primary">Claude Shannon</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        Em sua dissertação, usou a álgebra booleana para simplificar circuitos de controle, criando a base dos sistemas digitais modernos.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-success">George Boole</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        Sua álgebra sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-white rounded">
+                            <strong class="text-info">Operações Fundamentais:</strong>
+            <span class="text-info">As operações básicas <strong>AND</strong>, <strong>OR</strong>, <strong>NOT</strong> tornaram-se os blocos fundamentais dos sistemas digitais, formando o núcleo de toda nossa civilização digital.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inference Rules Section -->
+        <section id="regras-inferencia" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. Regras de Inferência</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Regras de inferência são esquemas que proporcionam a estrutura para derivações lógicas, formando a base dos sistemas de tomada de decisão computacional.
+                    </p>
+
+                    <!-- Rule Notation -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Notação das Regras</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Uma regra de inferência será representada por:
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="formula-box">
+                                    P₁, P₂, ..., Pₙ<br>
+                                    ──────────<br>
+                                    C
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="formula-box">
+                                    P₁, P₂, ..., Pₙ ⊢ C
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Significado:</strong>
+            <span class="text-info">O conjunto {P₁, P₂, ..., Pₙ} é o <strong>contexto</strong> (antecedente), e C é a <strong>conclusão</strong> (consequente). Se as premissas do contexto são verdadeiras, então a conclusão também será verdadeira.</span>
+                        </div>
+                    </div>
+
+                    <!-- Major Inference Rules -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Modus Ponens</div>
+                                <div class="inference-notation">
+                                    P → Q<br>
+                                    P<br>
+                                    ─────<br>
+                                    Q
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Se temos uma implicação P→Q e sabemos que P é verdadeiro, então podemos concluir que Q também é verdadeiro.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo Natural:</strong><br>
+                                    • Se chover, a rua ficará molhada<br>
+                                    • Está chovendo<br>
+                                    • Logo, a rua ficará molhada
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Modus Tollens</div>
+                                <div class="inference-notation">
+                                    P → Q<br>
+                                    ¬Q<br>
+                                    ─────<br>
+                                    ¬P
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Se temos uma implicação P→Q e sabemos que Q é falso, então podemos concluir que P também é falso.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo Natural:</strong><br>
+                                    • Se uma pessoa tem 18 anos ou mais, então pode votar<br>
+                                    • Maria não pode votar<br>
+                                    • Logo, Maria não tem 18 anos ou mais
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Adjunção</div>
+                                <div class="inference-notation">
+                                    P<br>
+                                    Q<br>
+                                    ─────<br>
+                                    P ∧ Q
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Se P e Q são verdadeiros, então P ∧ Q é verdadeiro. Permite combinar duas afirmações em uma conjunção.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo Natural:</strong><br>
+                                    • O céu está azul<br>
+                                    • Os pássaros estão cantando<br>
+                                    • Logo, o céu está azul e os pássaros estão cantando
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Simplificação</div>
+                                <div class="inference-notation">
+                                    P ∧ Q<br>
+                                    ─────<br>
+                                    P
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Se P ∧ Q é verdadeiro, então P (ou Q) é verdadeiro. Permite extrair componentes individuais de uma conjunção.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo Natural:</strong><br>
+                                    • O céu está azul e os pássaros estão cantando<br>
+                                    • Logo, o céu está azul
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Modus Tollendo Ponens</div>
+                                <div class="inference-notation">
+                                    P ∨ Q<br>
+                                    ¬P<br>
+                                    ─────<br>
+                                    Q
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    Dada uma disjunção P∨Q, se ¬P então Q. Permite inferir uma disjunção a partir da negação da outra.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo Natural:</strong><br>
+                                    • Ou o céu está azul ou a grama é roxa<br>
+                                    • A grama não é roxa<br>
+                                    • Logo, o céu está azul
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="inference-rule">
+                                <div class="rule-name">Dupla Negação</div>
+                                <div class="inference-notation">
+                                    ¬¬P<br>
+                                    ─────<br>
+                                    P
+                                </div>
+                                <p class="fs-6 mb-3">
+                                    A negação de uma negação é equivalente à afirmação original. Importante para simplificar expressões lógicas.
+                                </p>
+                                <div class="example-box">
+                                    <strong>Exemplo Natural:</strong><br>
+                                    • Não é verdade que Maria não está feliz<br>
+                                    • Logo, Maria está feliz
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Table -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Resumo das Regras de Inferência</h3>
+                        <div class="table-responsive">
+                            <table class="equivalence-table table">
+                                <thead>
+                                    <tr>
+                                        <th>Regra</th>
+                                        <th>Descrição</th>
+                                        <th>Fórmula</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Modus Ponens</td>
+                                        <td>Se P → Q e P são verdadeiros, então Q também é verdadeiro</td>
+                                        <td>P, P → Q / Q</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Modus Tollens</td>
+                                        <td>Se P → Q e ¬Q são verdadeiros, então ¬P também é verdadeiro</td>
+                                        <td>¬Q, P → Q / ¬P</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dupla Negação</td>
+                                        <td>A negação de uma negação é equivalente à afirmação original</td>
+                                        <td>¬¬P / P</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adição</td>
+                                        <td>Se P é verdadeiro, então P ∨ Q também é verdadeiro</td>
+                                        <td>P / P ∨ Q</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adjunção</td>
+                                        <td>Se P e Q são verdadeiros, então P ∧ Q é verdadeiro</td>
+                                        <td>P, Q / P ∧ Q</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Simplificação</td>
+                                        <td>Se P ∧ Q é verdadeiro, então P (ou Q) é verdadeiro</td>
+                                        <td>P ∧ Q / P</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bicondicionalidade</td>
+                                        <td>Se P ↔ Q, então P → Q e Q → P são verdadeiros</td>
+                                        <td>P ↔ Q / P → Q, Q → P</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 p-3 bg-white rounded">
+                            <strong class="text-info">Fundamento das Provas:</strong>
+            <span class="text-info">As regras de inferência são o <strong>alicerce da lógica dedutiva</strong> e das provas matemáticas. Elas permitem que raciocínios complexos sejam divididos em passos simples, com cada passo sendo justificado pela aplicação de uma regra de inferência.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Semantic Analysis Section -->
+        <section id="analise-semantica" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Análise Semântica de Fórmulas</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A análise semântica estuda o significado e as propriedades de verdade das expressões lógicas, examinando quando e por que essas fórmulas são verdadeiras ou falsas.
+                    </p>
+
+                    <!-- Syntax vs Semantics -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Sintaxe vs Semântica</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded h-100">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-primary">Sintaxe</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        Preocupa-se com a <strong>estrutura formal</strong> das fórmulas, as regras de formação e a organização dos símbolos.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded h-100">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-success">Semântica</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        Examina <strong>quando e por que</strong> essas fórmulas são verdadeiras ou falsas, focando no significado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formula Classification -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">Satisfatível</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        R é <strong>satisfatível</strong> se sua Tabela Verdade contém pelo menos uma linha verdadeira.
+                                    </p>
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong class="text-success">Exemplo:</strong> P ∧ Q<br>
+                                        <div class="fs-6 text-success">Verdadeiro quando P=TRUE e Q=TRUE</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-danger mb-2">Insatisfatível</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        R é <strong>insatisfatível</strong> se sua Tabela Verdade contém apenas linhas falsas.
+                                    </p>
+                                    <div class="p-3 bg-danger-subtle rounded">
+                                        <strong class="text-danger">Exemplo:</strong> P ∧ ¬P<br>
+                                        <div class="fs-6 text-danger">Sempre falso (contradição)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-warning mb-2">Falsificável</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        R é <strong>falsificável</strong> se sua Tabela Verdade contém pelo menos uma linha falsa.
+                                    </p>
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <strong class="text-warning">Exemplo:</strong> P ∧ Q<br>
+                                        <div class="fs-6 text-warning">Falso quando P=FALSE ou Q=FALSE</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-info mb-2">Válida (Tautologia)</h4>
+                                    <p class="fs-6 text-muted mb-3">
+                                        R é <strong>válida</strong> se sua Tabela Verdade contém apenas linhas verdadeiras.
+                                    </p>
+                                    <div class="p-3 bg-info-subtle rounded">
+                                        <strong class="text-info">Exemplo:</strong> P ∨ ¬P<br>
+                                        <div class="fs-6 text-info">Sempre verdadeiro (tautologia)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Truth Table Example -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo: Análise de P ∧ Q</h3>
+                        <div class="table-responsive">
+                            <table class="truth-table table">
+                                <thead>
+                                    <tr>
+                                        <th>P</th>
+                                        <th>Q</th>
+                                        <th>P ∧ Q</th>
+                                        <th>Classificação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td class="text-muted">Linha falsa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FALSE</td>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                        <td class="text-muted">Linha falsa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRUE</td>
+                                        <td>FALSE</td>
+                                        <td>FALSE</td>
+                                        <td class="text-muted">Linha falsa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td>TRUE</td>
+                                        <td class="text-success">Linha verdadeira</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3 p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Conclusão:</strong>
+            <span class="text-info">P ∧ Q é <strong>satisfatível</strong> (tem pelo menos uma linha verdadeira) e <strong>falsificável</strong> (tem pelo menos uma linha falsa), mas não é uma tautologia.</span>
+                        </div>
+                    </div>
+
+                    <!-- Important Properties -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Propriedades Importantes</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-success">✓ Relações Válidas</h4>
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-success"></i>Se A é válida, então A é satisfatível</li>
+                                        <li class="mb-2"><i class="fas fa-arrow-right me-2 text-success"></i>Se A é insatisfatível, então A é falsificável</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-info">📋 Explicação</h4>
+                                    <p class="fs-6 mb-0 text-muted">
+                                        Uma fórmula válida (tautologia) é satisfatível porque tem pelo menos uma linha verdadeira. Uma fórmula insatisfatível (contradição) é falsificável porque tem pelo menos uma linha falsa.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Practical Applications -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Aplicações Práticas da Classificação</h3>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">1. Análise de Argumentos</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Se uma argumentação pode ser representada por uma fórmula insatisfatível, então o argumento é <strong>inválido ou inconsistente</strong>. Usado em lógica e filosofia para analisar validade.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">2. Prova de Teoremas</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Podemos mostrar que a <strong>negação da fórmula é insatisfatível</strong>, demonstrando que a fórmula original é uma tautologia.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-warning">3. Simplificação de Fórmulas</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Se parte de uma fórmula é <strong>tautologia</strong>, podemos simplificar removendo essa parte. Se é <strong>contradição</strong>, a fórmula inteira é insatisfatível.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-3 text-info">4. Construção de Argumentos</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Garantir que argumentos são válidos verificando se são representados por fórmulas <strong>satisfatíveis</strong> (mas não tautologias).
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-warning-subtle rounded">
+                            <strong class="text-warning">Uso em Programação Lógica:</strong><br>
+            <span class="text-warning">• <strong>Unificação</strong> e resolução fazem deduções usando tautologias<br>
+            • <strong>Satisfatibilidade</strong>: se obtivermos contradição, as premissas são insatisfatíveis<br>
+            • Reconhecer contradições evita custo de tentar provar algo logicamente impossível</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Historical Context Section -->
+        <section id="contexto-historico" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">Contexto Histórico e Legado</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A Lógica Proposicional nasceu da necessidade humana de buscar a verdade e resolver conflitos com a lógica, mas sua beleza vai além da filosofia e matemática.
+                    </p>
+
+                    <!-- Historical Impact -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-book fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Fundação Filosófica</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    A Lógica Proposicional é <strong>essencial para entendermos o mundo</strong>. É a base de argumentos sólidos, avaliação de proposições e pensamento racional.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Aplicações</div>
+                                    <div class="fs-6 text-muted">Tomada de decisões, prova de teoremas</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-microchip fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Revolução Digital</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    É a fundação da álgebra de <strong>George Boole</strong>, que sustenta o design de circuitos eletrônicos e a construção dos computadores modernos.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Legado</div>
+                                    <div class="fs-6 text-muted">Base de toda nossa civilização digital</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shannon's Contribution -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">A Dissertação de Claude Shannon</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "Em sua dissertação de final de curso, <strong>Claude Shannon</strong> usou a álgebra booleana para simplificar circuitos de controle. Desde então, as operações básicas dessa álgebra — <strong>AND</strong>, <strong>OR</strong>, <strong>NOT</strong> — tornaram-se os blocos fundamentais dos sistemas digitais."
+                            </p>
+                        </blockquote>
+                        <div class="row row-cols-1 row-cols-sm-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-plus fs-3 mb-2 text-success"></i>
+                                    <div class="fw-medium text-success">AND</div>
+                                    <small class="text-muted">Conjunção lógica</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-expand-alt fs-3 mb-2 text-warning"></i>
+                                    <div class="fw-medium text-warning">OR</div>
+                                    <small class="text-muted">Disjunção lógica</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-times fs-3 mb-2 text-primary"></i>
+                                    <div class="fw-medium text-primary">NOT</div>
+                                    <small class="text-muted">Negação lógica</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-white rounded">
+                            <strong class="text-info">Impacto:</strong>
+            <span class="text-info">Elas formam o núcleo dos computadores, dos celulares e, na verdade, de toda a nossa <strong>civilização digital</strong>.</span>
+                        </div>
+                    </div>
+
+                    <!-- Metaphorical Conclusion -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">A Lógica como Base Universal</h3>
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "A <strong>Lógica Proposicional</strong> é a base de todo o raciocínio lógico. Como a tabela periódica para químicos ou as leis de Newton para físicos. Ela é simples, elegante e poderosa."
+                            </p>
+                        </blockquote>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-atom fs-3 mb-2 text-primary"></i>
+                                    <div class="fw-medium text-primary">Para Químicos</div>
+                                    <small class="text-muted">Tabela Periódica</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-apple-alt fs-3 mb-2 text-success"></i>
+                                    <div class="fw-medium text-success">Para Físicos</div>
+                                    <small class="text-muted">Leis de Newton</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <i class="fas fa-brain fs-3 mb-2 text-warning"></i>
+                                    <div class="fw-medium text-warning">Para Lógicos</div>
+                                    <small class="text-muted">Lógica Proposicional</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-success-subtle rounded">
+                            <strong class="text-success">Características Fundamentais:</strong>
+            <span class="text-success">Tão importante quanto o impacto na tecnologia digital é seu papel no pensamento racional, na tomada de decisões e na prova de teoremas. Neste caminho, nosso guia são as <strong>regras de inferência</strong>.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Summary Section -->
+        <section id="conclusao" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Fundamentos Estabelecidos</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                Estabelecemos os <strong>fundamentos matemáticos</strong> da Lógica Proposicional: desde o alfabeto e sintaxe até as regras de inferência e análise semântica.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                Base sólida para a jornada rumo à Programação Lógica e ao Prolog
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-5">
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-language fs-2 text-primary mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-primary">Sintaxe Formal</h3>
+                                    <p class="fs-7 text-muted">Alfabeto, precedência, FBF</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-table fs-2 text-success mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-success">Tabelas Verdade</h3>
+                                    <p class="fs-7 text-muted">Conectivos, operadores</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-equals fs-2 text-warning mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-warning">Equivalências</h3>
+                                    <p class="fs-7 text-muted">21 leis principais</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-sitemap fs-2 text-info mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-info">Inferência</h3>
+                                    <p class="fs-7 text-muted">Regras dedutivas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.getElementById('toc');
+            const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+            if (window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                    toc.classList.remove('open');
+                }
+            }
+        });
+
+        // Smooth scrolling and active link highlighting
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Add click handlers for smooth scrolling with offset
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('open');
+                    }
+                });
+            });
+            
+            // Highlight active section in TOC
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        links.forEach(link => {
+                            link.classList.remove('bg-light', 'text-dark');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('bg-light', 'text-dark');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-80px 0px -70% 0px'
+            });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                fadeObserver.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const toc = document.getElementById('toc');
+            if (window.innerWidth > 1024) {
+                toc.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
