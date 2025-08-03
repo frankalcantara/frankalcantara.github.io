@@ -1,0 +1,79 @@
+p {
+    text-align: justify !important;
+}
+
+/* Reduzir tamanho das equações MathJax - versão mais robusta */
+.MathJax, .MathJax_Display, .MathJax_CHTML {
+    font-size: 1.4em !important;
+    transform: scale(0.9) !important;
+    transform-origin: left center !important;
+}
+
+mjx-container, mjx-container[display="true"], mjx-container[display="false"] {
+    margin-top: 10px !important;
+    font-size: 2em !important;
+    transform: scale(0.8) !important;
+    transform-origin: left center !important;
+}
+
+
+/* Para equações inline - menor ainda */
+mjx-container[display="false"] {
+    font-size: 0.75em !important;
+    transform: scale(0.85) !important;
+}
+
+/* Força o tamanho em todos os elementos matemáticos */
+math, .math {
+    font-size: 0.7em !important;
+    transform: scale(0.8) !important;
+    transform-origin: left center !important;
+}
+
+/* Ajustar espaçamento se necessário */
+mjx-container[display="true"] {
+    margin: 0.5em 0 !important;
+}
+
+/* Estilos para tabelas */
+table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    margin: 1em 0 !important;
+    border: 2px solid #ddd !important;
+}
+
+/* Cabeçalho da tabela - fonte em negrito */
+table th {
+    font-weight: bold !important;
+    background-color: #8ec4fb !important;
+    border: 1px solid #ddd !important;
+    padding: 12px 8px !important;
+    text-align: center !important;
+}
+
+/* Células da tabela */
+table td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    text-align: left !important;
+}
+
+/* Efeito zebra - azul bem leve alternando com branco */
+table tbody tr:nth-child(even) {
+    background-color: #f0f8ff !important; /* azul bem leve */
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: white !important;
+}
+
+/* Hover effect para melhor interatividade */
+table tbody tr:hover {
+    background-color: #e6f3ff !important;
+}
+
+li {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+}

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 2&nbsp; Parsers LL(1): O Mundo da Análise Sintática</title>
+<title>Linguagens Formais e Autômatos - 5&nbsp; Parsers LL(1): O Mundo da Análise Sintática</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./first-follow.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./02-lexico.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./parsers.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./parsers.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,7 +148,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Autômatos e Gramáticas</span></a>
+ <span class="menu-text">Analisadores Léxicos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -156,20 +156,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parsers.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
   </div>
 </li>
       </ul>
@@ -177,7 +177,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Projeto da Disciplina</span></a>
+ <span class="menu-text">Analisadores Sintáticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -185,12 +185,47 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  <a href="./parsers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./referencias.html" class="sidebar-item-text sidebar-link">
@@ -203,30 +238,30 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#definição-e-características-dos-parsers-ll1" id="toc-definição-e-características-dos-parsers-ll1" class="nav-link active" data-scroll-target="#definição-e-características-dos-parsers-ll1"><span class="header-section-number">2.1</span> Definição e Características dos Parsers LL(1)</a></li>
-  <li><a href="#eliminação-da-recursão-à-esquerda" id="toc-eliminação-da-recursão-à-esquerda" class="nav-link" data-scroll-target="#eliminação-da-recursão-à-esquerda"><span class="header-section-number">2.2</span> Eliminação da Recursão à Esquerda</a></li>
-  <li><a href="#elementos-fundamentais-do-parser-ll1" id="toc-elementos-fundamentais-do-parser-ll1" class="nav-link" data-scroll-target="#elementos-fundamentais-do-parser-ll1"><span class="header-section-number">2.3</span> Elementos Fundamentais do Parser LL(1)</a></li>
-  <li><a href="#conjuntos-first-follow-e-símbolos-nullable" id="toc-conjuntos-first-follow-e-símbolos-nullable" class="nav-link" data-scroll-target="#conjuntos-first-follow-e-símbolos-nullable"><span class="header-section-number">2.4</span> Conjuntos FIRST, FOLLOW e Símbolos Nullable</a></li>
-  <li><a href="#exemplo-com-símbolos-nullable" id="toc-exemplo-com-símbolos-nullable" class="nav-link" data-scroll-target="#exemplo-com-símbolos-nullable"><span class="header-section-number">2.5</span> Exemplo com Símbolos Nullable</a></li>
-  <li><a href="#tabela-de-derivação-ll1-para-a-gramática-modificada" id="toc-tabela-de-derivação-ll1-para-a-gramática-modificada" class="nav-link" data-scroll-target="#tabela-de-derivação-ll1-para-a-gramática-modificada"><span class="header-section-number">2.6</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span> para a Gramática Modificada</a></li>
-  <li><a href="#o-exemplo-mais-comum-de-todos" id="toc-o-exemplo-mais-comum-de-todos" class="nav-link" data-scroll-target="#o-exemplo-mais-comum-de-todos"><span class="header-section-number">2.7</span> O Exemplo Mais Comum de Todos</a>
+  <li><a href="#definição-e-características-dos-parsers-ll1" id="toc-definição-e-características-dos-parsers-ll1" class="nav-link active" data-scroll-target="#definição-e-características-dos-parsers-ll1"><span class="header-section-number">5.1</span> Definição e Características dos Parsers LL(1)</a></li>
+  <li><a href="#eliminação-da-recursão-à-esquerda" id="toc-eliminação-da-recursão-à-esquerda" class="nav-link" data-scroll-target="#eliminação-da-recursão-à-esquerda"><span class="header-section-number">5.2</span> Eliminação da Recursão à Esquerda</a></li>
+  <li><a href="#elementos-fundamentais-do-parser-ll1" id="toc-elementos-fundamentais-do-parser-ll1" class="nav-link" data-scroll-target="#elementos-fundamentais-do-parser-ll1"><span class="header-section-number">5.3</span> Elementos Fundamentais do Parser LL(1)</a></li>
+  <li><a href="#conjuntos-first-follow-e-símbolos-nullable" id="toc-conjuntos-first-follow-e-símbolos-nullable" class="nav-link" data-scroll-target="#conjuntos-first-follow-e-símbolos-nullable"><span class="header-section-number">5.4</span> Conjuntos FIRST, FOLLOW e Símbolos Nullable</a></li>
+  <li><a href="#exemplo-com-símbolos-nullable" id="toc-exemplo-com-símbolos-nullable" class="nav-link" data-scroll-target="#exemplo-com-símbolos-nullable"><span class="header-section-number">5.5</span> Exemplo com Símbolos Nullable</a></li>
+  <li><a href="#tabela-de-derivação-ll1-para-a-gramática-modificada" id="toc-tabela-de-derivação-ll1-para-a-gramática-modificada" class="nav-link" data-scroll-target="#tabela-de-derivação-ll1-para-a-gramática-modificada"><span class="header-section-number">5.6</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span> para a Gramática Modificada</a></li>
+  <li><a href="#o-exemplo-mais-comum-de-todos" id="toc-o-exemplo-mais-comum-de-todos" class="nav-link" data-scroll-target="#o-exemplo-mais-comum-de-todos"><span class="header-section-number">5.7</span> O Exemplo Mais Comum de Todos</a>
   <ul class="collapse">
-  <li><a href="#gramática" id="toc-gramática" class="nav-link" data-scroll-target="#gramática"><span class="header-section-number">2.7.1</span> Gramática</a></li>
-  <li><a href="#first" id="toc-first" class="nav-link" data-scroll-target="#first"><span class="header-section-number">2.7.2</span> <span class="math inline">\(FIRST\)</span></a></li>
-  <li><a href="#follow" id="toc-follow" class="nav-link" data-scroll-target="#follow"><span class="header-section-number">2.7.3</span> <span class="math inline">\(FOLLOW\)</span></a></li>
-  <li><a href="#nullable" id="toc-nullable" class="nav-link" data-scroll-target="#nullable"><span class="header-section-number">2.7.4</span> <span class="math inline">\(NULLABLE\)</span></a></li>
-  <li><a href="#tabela-de-derivação-ll1" id="toc-tabela-de-derivação-ll1" class="nav-link" data-scroll-target="#tabela-de-derivação-ll1"><span class="header-section-number">2.7.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></a></li>
-  <li><a href="#processo-de-parser-testando-com-id-id-id" id="toc-processo-de-parser-testando-com-id-id-id" class="nav-link" data-scroll-target="#processo-de-parser-testando-com-id-id-id"><span class="header-section-number">2.7.6</span> Processo de Parser Testando com <span class="math inline">\(id + id * id\)</span></a></li>
-  <li><a href="#testando-com-a-string-id---id-id" id="toc-testando-com-a-string-id---id-id" class="nav-link" data-scroll-target="#testando-com-a-string-id---id-id"><span class="header-section-number">2.7.7</span> Testando com a <em>string</em> <em>id - id </em> id*</a></li>
+  <li><a href="#gramática" id="toc-gramática" class="nav-link" data-scroll-target="#gramática"><span class="header-section-number">5.7.1</span> Gramática</a></li>
+  <li><a href="#first" id="toc-first" class="nav-link" data-scroll-target="#first"><span class="header-section-number">5.7.2</span> <span class="math inline">\(FIRST\)</span></a></li>
+  <li><a href="#follow" id="toc-follow" class="nav-link" data-scroll-target="#follow"><span class="header-section-number">5.7.3</span> <span class="math inline">\(FOLLOW\)</span></a></li>
+  <li><a href="#nullable" id="toc-nullable" class="nav-link" data-scroll-target="#nullable"><span class="header-section-number">5.7.4</span> <span class="math inline">\(NULLABLE\)</span></a></li>
+  <li><a href="#tabela-de-derivação-ll1" id="toc-tabela-de-derivação-ll1" class="nav-link" data-scroll-target="#tabela-de-derivação-ll1"><span class="header-section-number">5.7.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></a></li>
+  <li><a href="#processo-de-parser-testando-com-id-id-id" id="toc-processo-de-parser-testando-com-id-id-id" class="nav-link" data-scroll-target="#processo-de-parser-testando-com-id-id-id"><span class="header-section-number">5.7.6</span> Processo de Parser Testando com <span class="math inline">\(id + id * id\)</span></a></li>
+  <li><a href="#testando-com-a-string-id---id-id" id="toc-testando-com-a-string-id---id-id" class="nav-link" data-scroll-target="#testando-com-a-string-id---id-id"><span class="header-section-number">5.7.7</span> Testando com a <em>string</em> <em>id - id </em> id*</a></li>
   </ul></li>
-  <li><a href="#um-exemplo-nem-tão-comum" id="toc-um-exemplo-nem-tão-comum" class="nav-link" data-scroll-target="#um-exemplo-nem-tão-comum"><span class="header-section-number">2.8</span> Um Exemplo Nem Tão Comum</a>
+  <li><a href="#um-exemplo-nem-tão-comum" id="toc-um-exemplo-nem-tão-comum" class="nav-link" data-scroll-target="#um-exemplo-nem-tão-comum"><span class="header-section-number">5.8</span> Um Exemplo Nem Tão Comum</a>
   <ul class="collapse">
-  <li><a href="#gramática-1" id="toc-gramática-1" class="nav-link" data-scroll-target="#gramática-1"><span class="header-section-number">2.8.1</span> Gramática</a></li>
-  <li><a href="#first-1" id="toc-first-1" class="nav-link" data-scroll-target="#first-1"><span class="header-section-number">2.8.2</span> <span class="math inline">\(FIRST\)</span></a></li>
-  <li><a href="#follow-1" id="toc-follow-1" class="nav-link" data-scroll-target="#follow-1"><span class="header-section-number">2.8.3</span> <span class="math inline">\(FOLLOW\)</span></a></li>
-  <li><a href="#nullable-1" id="toc-nullable-1" class="nav-link" data-scroll-target="#nullable-1"><span class="header-section-number">2.8.4</span> <span class="math inline">\(NULLABLE\)</span></a></li>
-  <li><a href="#tabela-de-derivação-ll1-1" id="toc-tabela-de-derivação-ll1-1" class="nav-link" data-scroll-target="#tabela-de-derivação-ll1-1"><span class="header-section-number">2.8.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></a></li>
-  <li><a href="#testando-com-id-or-not-id-and-id-or-id" id="toc-testando-com-id-or-not-id-and-id-or-id" class="nav-link" data-scroll-target="#testando-com-id-or-not-id-and-id-or-id"><span class="header-section-number">2.8.6</span> Testando com <em>id OR NOT id AND (id OR id)</em></a></li>
+  <li><a href="#gramática-1" id="toc-gramática-1" class="nav-link" data-scroll-target="#gramática-1"><span class="header-section-number">5.8.1</span> Gramática</a></li>
+  <li><a href="#first-1" id="toc-first-1" class="nav-link" data-scroll-target="#first-1"><span class="header-section-number">5.8.2</span> <span class="math inline">\(FIRST\)</span></a></li>
+  <li><a href="#follow-1" id="toc-follow-1" class="nav-link" data-scroll-target="#follow-1"><span class="header-section-number">5.8.3</span> <span class="math inline">\(FOLLOW\)</span></a></li>
+  <li><a href="#nullable-1" id="toc-nullable-1" class="nav-link" data-scroll-target="#nullable-1"><span class="header-section-number">5.8.4</span> <span class="math inline">\(NULLABLE\)</span></a></li>
+  <li><a href="#tabela-de-derivação-ll1-1" id="toc-tabela-de-derivação-ll1-1" class="nav-link" data-scroll-target="#tabela-de-derivação-ll1-1"><span class="header-section-number">5.8.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></a></li>
+  <li><a href="#testando-com-id-or-not-id-and-id-or-id" id="toc-testando-com-id-or-not-id-and-id-or-id" class="nav-link" data-scroll-target="#testando-com-id-or-not-id-and-id-or-id"><span class="header-section-number">5.8.6</span> Testando com <em>id OR NOT id AND (id OR id)</em></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/parsers.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -238,9 +273,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./parsers.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./parsers.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></h1>
 </div>
 
 
@@ -263,8 +298,8 @@ window.Quarto = {
 <p>A análise preditiva é um tipo de análise descendente que usa uma pilha para armazenar os símbolos esperados e os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> para prever qual regra de produção aplicar em cada etapa do processo de análise. Essa previsão permite que o analisador tome decisões sem precisar retroceder, tornando a análise mais eficiente computacionalmente. Esta análise preditiva será a ação que um parser <span class="math inline">\(LL(1)\)</span> irá utilizar para validar os <em>strings</em> de uma determinada linguagem, símbolo por símbolo.</p>
 <p>Para atingir meu objetivo, com este texto, as linguagens que usaremos como exemplo serão representadas apenas pelo conjunto de regras de produção da sua gramática. Vou manter a álgebra o mais longe possível e se o conjunto de regras de produção estiver perfeitamente construído todos os elementos da gramática poderão ser identificados. isso permitirá que aqueles com arrepios algébricos possam se dedicar a uma análise formal da linguagem.</p>
 <p>Outro ponto importante, neste texto, símbolos não-terminais serão representados em caracteres latinos maiúsculos e símbolos terminais em caracteres latinos minúsculos. A única exceção será <span class="math inline">\(\varepsilon\)</span> para representar uma produção vazia.</p>
-<section id="definição-e-características-dos-parsers-ll1" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="definição-e-características-dos-parsers-ll1"><span class="header-section-number">2.1</span> Definição e Características dos Parsers LL(1)</h2>
+<section id="definição-e-características-dos-parsers-ll1" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="definição-e-características-dos-parsers-ll1"><span class="header-section-number">5.1</span> Definição e Características dos Parsers LL(1)</h2>
 <p>Os <em>parsers</em> preditivos são analisadores sintáticos descendentes (<em>top-down</em>) que utilizam um único símbolo de <em>lookahead</em> (antecipação) para determinar a regra de produção correta a ser aplicada em cada etapa da análise. Eles <em>predizem</em> qual regra usar com base no próximo símbolo da entrada e no não-terminal atualmente sendo analisado. O termo <span class="math inline">\(LL(1)\)</span> significa:</p>
 <ul>
 <li><strong>L:</strong> Left-to-right scan (varredura da esquerda para a direita) da entrada.</li>
@@ -278,8 +313,8 @@ window.Quarto = {
 </ul>
 <p>Além do perigo do laço de repetição infinito que faz o pobre Turing se revolver no túmulo, a recursão à esquerda impede o desenvolvimento de uma Tabela de Derivação. Graças a criação de regras em conflito. Duas ou mais regras, para a mesma combinação de símbolo terminal e símbolo não-terminal em um determinado momento do processo de <em>parser</em>.</p>
 </section>
-<section id="eliminação-da-recursão-à-esquerda" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="eliminação-da-recursão-à-esquerda"><span class="header-section-number">2.2</span> Eliminação da Recursão à Esquerda</h2>
+<section id="eliminação-da-recursão-à-esquerda" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="eliminação-da-recursão-à-esquerda"><span class="header-section-number">5.2</span> Eliminação da Recursão à Esquerda</h2>
 <p>Felizmente, existem técnicas para eliminar a recursão à esquerda em gramáticas livres de contexto. Uma técnica comum e eficaz envolve a introdução de novos símbolos não terminais e a substituição de regras recursivas por regras equivalentes que não apresentem recursão. Em alguns casos, a substituição direta dos símbolos não terminais recursivos por suas respectivas regras pode ser suficiente para eliminar a recursão à esquerda direta. Outra técnica, a fatoração à esquerda, pode ser utilizada para eliminar ambiguidades na gramática, mas não resolve diretamente o problema da recursão.</p>
 <p><strong>Exemplo 1</strong>: eliminando a Recursão à Esquerda Direta, considere a regra <span class="math inline">\(A → Aa \mid b\)</span>. Esta regra pode ser reescrita como:</p>
 <ol type="1">
@@ -320,8 +355,8 @@ window.Quarto = {
 </ul>
 <p>Portanto, a transformação feita elimina a recursão à esquerda direta sem introduzir recursão à esquerda indireta. A recursão â esquerda indireta é mais complexa e requer um texto específico para o assunto. Mas, em linhas gerais você terá que refazer a gramática em face dos objetivos originais para eliminar este tipo de recursão. Vou deixar por sua conta resolver a recursão à esquerda indireta e a ambiguidade que surjam nas gramáticas que você criar.</p>
 </section>
-<section id="elementos-fundamentais-do-parser-ll1" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="elementos-fundamentais-do-parser-ll1"><span class="header-section-number">2.3</span> Elementos Fundamentais do Parser LL(1)</h2>
+<section id="elementos-fundamentais-do-parser-ll1" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="elementos-fundamentais-do-parser-ll1"><span class="header-section-number">5.3</span> Elementos Fundamentais do Parser LL(1)</h2>
 <p>Como a classe de gramáticas para um <em>parser</em> <span class="math inline">\(LL(1)\)</span> é limitada (nem todas as gramáticas livres de contexto são <span class="math inline">\(LL(1)\)</span>, é muito comum que seja necessário modificar a sua ideia original de gramática para eliminar ambiguidades e recursões à esquerda. Um <em>parser</em> <span class="math inline">\(LL(1)\)</span>, para funcionar, precisa dos seguintes elementos:</p>
 <ol type="1">
 <li><p><strong>Tabela de Derivação:</strong> O <em>parser</em> <span class="math inline">\(LL(1)\)</span> utiliza uma Tabela de Derivação, ou Tabela de Derivação, que mapeia cada combinação de não-terminal e terminal (ou símbolo de fim de entrada) para a regra de produção que deve ser aplicada. Essa tabela é construída a partir da gramática e dos conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> e será o mapa que guiará todo o processo de análise sintática.</p></li>
@@ -336,8 +371,8 @@ window.Quarto = {
 <li><p><strong>Sucesso ou Erro:</strong> A análise termina com sucesso quando a pilha e a entrada estão vazias. Caso contrário, ocorre um erro sintático. Erros poderão ocorrer durante o processo sempre que a combinação de símbolos na pilha e no <em>buffer</em> apontarem para uma célula vazia da Tabela de Derivação.</p></li>
 </ol>
 </section>
-<section id="conjuntos-first-follow-e-símbolos-nullable" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="conjuntos-first-follow-e-símbolos-nullable"><span class="header-section-number">2.4</span> Conjuntos FIRST, FOLLOW e Símbolos Nullable</h2>
+<section id="conjuntos-first-follow-e-símbolos-nullable" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="conjuntos-first-follow-e-símbolos-nullable"><span class="header-section-number">5.4</span> Conjuntos FIRST, FOLLOW e Símbolos Nullable</h2>
 <p>Criar um parser <span class="math inline">\(LL(1)\)</span> geralmente exige mais do que apenas os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>. Este é um processo que envolve garantir a adequação da gramática e seguir etapas específicas para construir a Tabela de Derivação. Vou explorar esse processo de forma mais clara e detalhada, ainda neste texto.</p>
 <p>A gramática criada para o <em>parser</em> <span class="math inline">\(LL(1)\)</span> não pode ter qualquer ambiguidade. Ou seja, cada <em>string</em> da linguagem deve ser derivada em uma e apenas uma árvore sintática. Acrescente-se a isso que a gramática não deve ter regras do tipo <span class="math inline">\(A \rightarrow A\alpha\)</span> (recursão direta) nem <span class="math inline">\(A \rightarrow B\alpha\)</span> e <span class="math inline">\(B \rightarrow AB\)</span> (recursão indireta). Ou seja, uma gramática sem recursão à esquerda.</p>
 <p>Uma vez que tenha uma gramática adequada, será possível construir uma Tabela de Derivação <span class="math inline">\(LL(1)\)</span>. Para isso vamos precisar:</p>
@@ -367,8 +402,8 @@ window.Quarto = {
 <li><p><span class="math inline">\(FOLLOW\)</span>: Se um símbolo é <em>nullable</em>, ao calcular o <span class="math inline">\(FOLLOW\)</span> de um símbolo que o precede, também é imprescindível considerar o <span class="math inline">\(FOLLOW\)</span> do símbolo anterior.</p></li>
 </ul>
 </section>
-<section id="exemplo-com-símbolos-nullable" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="exemplo-com-símbolos-nullable"><span class="header-section-number">2.5</span> Exemplo com Símbolos Nullable</h2>
+<section id="exemplo-com-símbolos-nullable" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="exemplo-com-símbolos-nullable"><span class="header-section-number">5.5</span> Exemplo com Símbolos Nullable</h2>
 <p><strong>Exemplo 2:</strong> Considere a gramática representada pelo conjunto de regras de produção a seguir:</p>
 <ol type="1">
 <li><span class="math inline">\(S → AB\)</span></li>
@@ -436,8 +471,8 @@ window.Quarto = {
 <li><span class="math inline">\(S \rightarrow \epsilon\)</span>: essa produção gerará a <em>string</em> vazia.</li>
 </ul>
 </section>
-<section id="tabela-de-derivação-ll1-para-a-gramática-modificada" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="tabela-de-derivação-ll1-para-a-gramática-modificada"><span class="header-section-number">2.6</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span> para a Gramática Modificada</h2>
+<section id="tabela-de-derivação-ll1-para-a-gramática-modificada" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="tabela-de-derivação-ll1-para-a-gramática-modificada"><span class="header-section-number">5.6</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span> para a Gramática Modificada</h2>
 <table class="table">
 <thead>
 <tr class="header">
@@ -461,11 +496,11 @@ window.Quarto = {
 </ul>
 <p>E pronto! Neste ponto do texto vimos tudo que precisamos ver e podemos parar. A pobre leitora, nesta altura do campeonato, deve estar pensando mal de mim. Eu sei, parece confuso. Talvez dois exemplos mais detalhados ajudem.</p>
 </section>
-<section id="o-exemplo-mais-comum-de-todos" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="o-exemplo-mais-comum-de-todos"><span class="header-section-number">2.7</span> O Exemplo Mais Comum de Todos</h2>
+<section id="o-exemplo-mais-comum-de-todos" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="o-exemplo-mais-comum-de-todos"><span class="header-section-number">5.7</span> O Exemplo Mais Comum de Todos</h2>
 <p>O exemplo a seguir está em todos os sites, livros e aulas que eu já vi disponíveis na internet. É tão comum que não me dei ao trabalho de procurar sua origem. Meu instinto me diz que deve ser do <a href="https://amzn.to/4celnGt">livro do Aho</a>, mas não fui conferir. É um exemplo tão bom que deve ser do Aho. Enfim, vamos ao trabalho:</p>
-<section id="gramática" class="level3" data-number="2.7.1">
-<h3 data-number="2.7.1" class="anchored" data-anchor-id="gramática"><span class="header-section-number">2.7.1</span> Gramática</h3>
+<section id="gramática" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="gramática"><span class="header-section-number">5.7.1</span> Gramática</h3>
 <p>Considere a gramática representada pelo conjunto de regras de produção a seguir:</p>
 <p><span class="math inline">\(1. S \rightarrow E\)</span></p>
 <p><span class="math inline">\(2. E \rightarrow E + T \mid T\)</span></p>
@@ -473,8 +508,8 @@ window.Quarto = {
 <p><span class="math inline">\(4. F \rightarrow (E) \mid id\)</span></p>
 <p>Que permite criar os seguintes conjuntos:</p>
 </section>
-<section id="first" class="level3" data-number="2.7.2">
-<h3 data-number="2.7.2" class="anchored" data-anchor-id="first"><span class="header-section-number">2.7.2</span> <span class="math inline">\(FIRST\)</span></h3>
+<section id="first" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="first"><span class="header-section-number">5.7.2</span> <span class="math inline">\(FIRST\)</span></h3>
 <ul>
 <li><span class="math inline">\(FIRST(S) = FIRST(E)\)</span></li>
 <li><span class="math inline">\(FIRST(E) = \{ id, ( \}\)</span></li>
@@ -482,8 +517,8 @@ window.Quarto = {
 <li><span class="math inline">\(FIRST(F) = \{ id, ( \}\)</span></li>
 </ul>
 </section>
-<section id="follow" class="level3" data-number="2.7.3">
-<h3 data-number="2.7.3" class="anchored" data-anchor-id="follow"><span class="header-section-number">2.7.3</span> <span class="math inline">\(FOLLOW\)</span></h3>
+<section id="follow" class="level3" data-number="5.7.3">
+<h3 data-number="5.7.3" class="anchored" data-anchor-id="follow"><span class="header-section-number">5.7.3</span> <span class="math inline">\(FOLLOW\)</span></h3>
 <ul>
 <li><span class="math inline">\(FOLLOW(S) = \{ \$ \}\)</span></li>
 <li><span class="math inline">\(FOLLOW(E) = \{ +, ), \$ \}\)</span></li>
@@ -491,13 +526,13 @@ window.Quarto = {
 <li><span class="math inline">\(FOLLOW(F) = \{ +, *, ), \$ \}\)</span></li>
 </ul>
 </section>
-<section id="nullable" class="level3" data-number="2.7.4">
-<h3 data-number="2.7.4" class="anchored" data-anchor-id="nullable"><span class="header-section-number">2.7.4</span> <span class="math inline">\(NULLABLE\)</span></h3>
+<section id="nullable" class="level3" data-number="5.7.4">
+<h3 data-number="5.7.4" class="anchored" data-anchor-id="nullable"><span class="header-section-number">5.7.4</span> <span class="math inline">\(NULLABLE\)</span></h3>
 <p>Nenhuma das produções é nullable.</p>
 <p>Os quais, por sua vez, irão permitir a criação da seguinte Tabela de Derivação</p>
 </section>
-<section id="tabela-de-derivação-ll1" class="level3" data-number="2.7.5">
-<h3 data-number="2.7.5" class="anchored" data-anchor-id="tabela-de-derivação-ll1"><span class="header-section-number">2.7.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></h3>
+<section id="tabela-de-derivação-ll1" class="level3" data-number="5.7.5">
+<h3 data-number="5.7.5" class="anchored" data-anchor-id="tabela-de-derivação-ll1"><span class="header-section-number">5.7.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -560,8 +595,8 @@ window.Quarto = {
 </table>
 <p>Com a Tabela de Derivação em mãos, podemos partir para a criação do <em>parser</em>. Não vou criar nenhum algoritmo agora, na verdade, vou apenas reproduzir o processo passo a passo, na esperança que a corajosa leitora entenda o algoritmo muito antes de vê-lo formalizado ou implementado.</p>
 </section>
-<section id="processo-de-parser-testando-com-id-id-id" class="level3" data-number="2.7.6">
-<h3 data-number="2.7.6" class="anchored" data-anchor-id="processo-de-parser-testando-com-id-id-id"><span class="header-section-number">2.7.6</span> Processo de Parser Testando com <span class="math inline">\(id + id * id\)</span></h3>
+<section id="processo-de-parser-testando-com-id-id-id" class="level3" data-number="5.7.6">
+<h3 data-number="5.7.6" class="anchored" data-anchor-id="processo-de-parser-testando-com-id-id-id"><span class="header-section-number">5.7.6</span> Processo de Parser Testando com <span class="math inline">\(id + id * id\)</span></h3>
 <p>Para verificar se a string <em>id + id </em> id* faz parte da linguagem representada na gramática dada pode ser identificada por um <em>parser</em> <span class="math inline">\(LL(1)\)</span> usando a Tabela de Derivação acima. Seguiremos um processo de análise preditiva descendente, começando pelo símbolo inicial. Usaremos uma pilha e a própria <em>string</em> de entrada como <em>buffer</em></p>
 <p>Vou começar com a pilha contendo o símbolo inicial da gramática, <span class="math inline">\(S\)</span>, e a <em>string</em> de entrada <em>id + id </em> id$<em>, onde o <span class="math inline">\(\$\)</span> indica o final da entrada. Se você estiver fazendo o </em>parser* na mão deverá seguir os seguintes passos:</p>
 <ol type="1">
@@ -595,8 +630,8 @@ window.Quarto = {
 </ol>
 <p>Como foi possível consumir toda <em>string</em> da entrada, <em>id + id </em> id$<em>, e esvaziar a pilha sem encontrar nenhum erro, a </em>string* <em>id + id </em> id* é de fato parte da linguagem identificada pelo <em>parser</em> <span class="math inline">\(LL(1)\)</span> que poderá ser criado pela Tabela de Derivação que definimos. Mas estamos em universo onde o céu é sempre azul e as rosas estão sempre desbrochadas.</p>
 </section>
-<section id="testando-com-a-string-id---id-id" class="level3" data-number="2.7.7">
-<h3 data-number="2.7.7" class="anchored" data-anchor-id="testando-com-a-string-id---id-id"><span class="header-section-number">2.7.7</span> Testando com a <em>string</em> <em>id - id </em> id*</h3>
+<section id="testando-com-a-string-id---id-id" class="level3" data-number="5.7.7">
+<h3 data-number="5.7.7" class="anchored" data-anchor-id="testando-com-a-string-id---id-id"><span class="header-section-number">5.7.7</span> Testando com a <em>string</em> <em>id - id </em> id*</h3>
 <p>Vamos analisar a string <em>id - id </em> id* utilizando a Tabela de Derivação <span class="math inline">\(LL(1)\)</span> que foi estabelecida anteriormente, seguindo os passos do <em>parser</em> <span class="math inline">\(LL(1)\)</span>. Começamos com a pilha inicial contendo o símbolo inicial <span class="math inline">\(S\)</span> e a entrada “id - id * id$”.</p>
 <ol type="1">
 <li>Verificar o topo da pilha (<span class="math inline">\(S\)</span>) e o próximo símbolo de entrada (‘id’).</li>
@@ -616,11 +651,11 @@ window.Quarto = {
 <p>Vimos, com a mesma gramática, as duas situações possíveis: ou a <em>string</em> faz parte da linguagem definida pela gramática, ou não. Simples assim.</p>
 </section>
 </section>
-<section id="um-exemplo-nem-tão-comum" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="um-exemplo-nem-tão-comum"><span class="header-section-number">2.8</span> Um Exemplo Nem Tão Comum</h2>
+<section id="um-exemplo-nem-tão-comum" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="um-exemplo-nem-tão-comum"><span class="header-section-number">5.8</span> Um Exemplo Nem Tão Comum</h2>
 <p>Este exemplo saiu das vozes da minha cabeça. Pode ser que exista em algum outro lugar, mas não me dei ao trabalho de verificar. É um exemplo que uso há muitos anos, em aula e já nem me preocupo com ele. Se souber a origem, fico grato.</p>
-<section id="gramática-1" class="level3" data-number="2.8.1">
-<h3 data-number="2.8.1" class="anchored" data-anchor-id="gramática-1"><span class="header-section-number">2.8.1</span> Gramática</h3>
+<section id="gramática-1" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="gramática-1"><span class="header-section-number">5.8.1</span> Gramática</h3>
 <p>Considere a seguinte gramática para expressões booleanas (<span class="math inline">\(OR, AND, NOT\)</span>), definida pelo conjunto de regras de produção a seguir:</p>
 <p><span class="math inline">\(1. S \rightarrow B\)</span></p>
 <p><span class="math inline">\(2. B \rightarrow B \,\, OR \,\, M \mid M\)</span></p>
@@ -628,8 +663,8 @@ window.Quarto = {
 <p><span class="math inline">\(4. N \rightarrow NOT \,\, N \mid (B) \,\mid id\)</span></p>
 <p>Novamente, graças ao conjunto de regras de produção podemos criar os seguintes conjuntos:</p>
 </section>
-<section id="first-1" class="level3" data-number="2.8.2">
-<h3 data-number="2.8.2" class="anchored" data-anchor-id="first-1"><span class="header-section-number">2.8.2</span> <span class="math inline">\(FIRST\)</span></h3>
+<section id="first-1" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="first-1"><span class="header-section-number">5.8.2</span> <span class="math inline">\(FIRST\)</span></h3>
 <ul>
 <li><span class="math inline">\(FIRST(S) = FIRST(B)\)</span></li>
 <li><span class="math inline">\(FIRST(B) = FIRST(M) = FIRST(N)\)</span></li>
@@ -637,8 +672,8 @@ window.Quarto = {
 <li><span class="math inline">\(FIRST(N) = \{ NOT, (, id \}\)</span></li>
 </ul>
 </section>
-<section id="follow-1" class="level3" data-number="2.8.3">
-<h3 data-number="2.8.3" class="anchored" data-anchor-id="follow-1"><span class="header-section-number">2.8.3</span> <span class="math inline">\(FOLLOW\)</span></h3>
+<section id="follow-1" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="follow-1"><span class="header-section-number">5.8.3</span> <span class="math inline">\(FOLLOW\)</span></h3>
 <ul>
 <li><span class="math inline">\(FOLLOW(S) = \{ \$ \}\)</span></li>
 <li><span class="math inline">\(FOLLOW(B) = \{ OR, ), \$ \}\)</span></li>
@@ -646,13 +681,13 @@ window.Quarto = {
 <li><span class="math inline">\(FOLLOW(N) = \{ OR, AND, ), \$ \}\)</span></li>
 </ul>
 </section>
-<section id="nullable-1" class="level3" data-number="2.8.4">
-<h3 data-number="2.8.4" class="anchored" data-anchor-id="nullable-1"><span class="header-section-number">2.8.4</span> <span class="math inline">\(NULLABLE\)</span></h3>
+<section id="nullable-1" class="level3" data-number="5.8.4">
+<h3 data-number="5.8.4" class="anchored" data-anchor-id="nullable-1"><span class="header-section-number">5.8.4</span> <span class="math inline">\(NULLABLE\)</span></h3>
 <p>Nenhuma das produções é nullable.</p>
 <p>Com os conjuntos já criados podemos criar uma Tabela de Derivação:</p>
 </section>
-<section id="tabela-de-derivação-ll1-1" class="level3" data-number="2.8.5">
-<h3 data-number="2.8.5" class="anchored" data-anchor-id="tabela-de-derivação-ll1-1"><span class="header-section-number">2.8.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></h3>
+<section id="tabela-de-derivação-ll1-1" class="level3" data-number="5.8.5">
+<h3 data-number="5.8.5" class="anchored" data-anchor-id="tabela-de-derivação-ll1-1"><span class="header-section-number">5.8.5</span> Tabela de Derivação <span class="math inline">\(LL(1)\)</span></h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -721,8 +756,8 @@ window.Quarto = {
 </table>
 <p>Com a Tabela de Derivação, podemos partir para o passo a passo do <em>parser</em> <span class="math inline">\(LL(1)\)</span>.</p>
 </section>
-<section id="testando-com-id-or-not-id-and-id-or-id" class="level3" data-number="2.8.6">
-<h3 data-number="2.8.6" class="anchored" data-anchor-id="testando-com-id-or-not-id-and-id-or-id"><span class="header-section-number">2.8.6</span> Testando com <em>id OR NOT id AND (id OR id)</em></h3>
+<section id="testando-com-id-or-not-id-and-id-or-id" class="level3" data-number="5.8.6">
+<h3 data-number="5.8.6" class="anchored" data-anchor-id="testando-com-id-or-not-id-and-id-or-id"><span class="header-section-number">5.8.6</span> Testando com <em>id OR NOT id AND (id OR id)</em></h3>
 <p>Para verificar se a string <em>id OR NOT id AND (id OR id)</em> faz parte da linguagem definida pela gramática dada e se pode ser analisada por um <em>parser</em> <span class="math inline">\(LL(1)\)</span> usando a Tabela de Derivação encontrada, seguiremos o processo de análise preditiva descendente, começando pelo símbolo inicial, <span class="math inline">\(S\)</span>, utilizando a Tabela de Derivação para guiar a derivação.</p>
 <p>Novamente o processo iniciará com a pilha contendo o símbolo inicial da gramática, <span class="math inline">\(S\)</span>, e a <em>string</em> de entrada <em>id OR NOT id AND (id OR id)$</em> será usada como <em>buffer</em>, onde o “$” indica o final da entrada. Siga os seguintes passos:</p>
 <ol type="1">
@@ -1192,13 +1227,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Disciplina de Linguagens Formais">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span>
+      <a href="./02-lexico.html" class="pagination-link" aria-label="Autômatos Finitos Determinísticos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./first-follow.html" class="pagination-link" aria-label="Conjuntos FIRST e FOLLOW">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

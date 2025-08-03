@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 2&nbsp; Analisadores Léxicos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 1em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./01a-lexico.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-lexico.html">Analisadores Léxicos</a></li><li class="breadcrumb-item"><a href="./01-lexico.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#máquinas-de-estado-finito-história-e-conceito" id="toc-máquinas-de-estado-finito-história-e-conceito" class="nav-link active" data-scroll-target="#máquinas-de-estado-finito-história-e-conceito"><span class="header-section-number">2.1</span> Máquinas de Estado Finito: História e Conceito</a>
+  <ul class="collapse">
+  <li><a href="#o-ponto-de-partida-o-modelo-de-mcculloch-e-pitts" id="toc-o-ponto-de-partida-o-modelo-de-mcculloch-e-pitts" class="nav-link" data-scroll-target="#o-ponto-de-partida-o-modelo-de-mcculloch-e-pitts"><span class="header-section-number">2.1.1</span> O Ponto de Partida: O Modelo de McCulloch e Pitts</a></li>
+  <li><a href="#sec-kleene" id="toc-sec-kleene" class="nav-link" data-scroll-target="#sec-kleene"><span class="header-section-number">2.1.2</span> A Era da Formalização — Kleene, Moore e Mealy</a></li>
+  <li><a href="#o-poder-do-não-determinismo" id="toc-o-poder-do-não-determinismo" class="nav-link" data-scroll-target="#o-poder-do-não-determinismo"><span class="header-section-number">2.1.3</span> O Poder do Não-Determinismo</a></li>
+  </ul></li>
+  <li><a href="#sec-analisador-lexico" id="toc-sec-analisador-lexico" class="nav-link" data-scroll-target="#sec-analisador-lexico"><span class="header-section-number">2.2</span> Autômatos Finitos: O Analisador Léxico</a></li>
+  <li><a href="#extensões-modernas-e-conclusão" id="toc-extensões-modernas-e-conclusão" class="nav-link" data-scroll-target="#extensões-modernas-e-conclusão"><span class="header-section-number">2.3</span> Extensões Modernas e Conclusão</a>
+  <ul class="collapse">
+  <li><a href="#um-olhar-no-horizonte-não-determinismo-e-a-fronteira-quântica" id="toc-um-olhar-no-horizonte-não-determinismo-e-a-fronteira-quântica" class="nav-link" data-scroll-target="#um-olhar-no-horizonte-não-determinismo-e-a-fronteira-quântica"><span class="header-section-number">2.3.1</span> Um Olhar no Horizonte: Não-Determinismo e a Fronteira Quântica</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/01-lexico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-lexico.html">Analisadores Léxicos</a></li><li class="breadcrumb-item"><a href="./01-lexico.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-analisadores-lexicos" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Os Analisadores Léxicos formam o primeiro bloco de processamento da maioria dos processos de tradução que ocorrem entre linguagens de programação e linguagens de máquina, incluindo compiladores, interpretadores e sistemas mistos. Os Analisadores Léxicos são responsáveis por ler o código fonte por meio de um fluxo contínuo de caracteres e agrupar esses caracteres em blocos sintáticos significativos para uma dada linguagem, chamados <strong><em>tokens</em></strong>. Este fluxo contínuo de símbolos de entrada, geralmente caracteres, será chamado de <em>string</em>, ou cadeia, de forma intercambiável durante todo este texto. Contudo, é necessário que a atenta leitora já crie uma imagem mental de que estes termos, <em>string</em> e cadeia, se referem a sequências de caracteres, ou símbolos, sem limitação de tamanho. Ou seja, dependendo do parágrafo, ou capítulo, que estiver lendo a palavra <em>string</em> pode se referir a um conjunto vazio, alguns símbolos, um arquivo de código fonte, ou até mesmo um projeto completo.</p>
+<p>Não é possível entender analisadores léxicos sem antes compreender o conceito de <strong>Máquina de Estado Finito</strong>. Este é um modelo matemático fundamental que serve como base para a análise léxica. Neste caso, começamos dizendo que uma <strong>Máquina de Estado Finito</strong> é uma abstração matemática que captura o comportamento de sistemas que podem ser descritos por um conjunto finito de estados. Contudo, antes de nos aprofundarmos na teoria, é importante entender a história e o contexto que levaram ao desenvolvimento deste conceito.</p>
+<p>Neste capítulo, vamos estudar as <strong>Máquinas de Estados Finitos</strong>, começando por sua origem como um modelo matemático inspirado na neurobiologia, passando pela formalização matemática inicial, até sua aplicação prática na análise léxica, principalmente nos compiladores modernos. Nesta jornada, a amável leitora viajará nas ondas da teoria, explorando como as <strong>Máquinas de Estados Finitos</strong> se tornaram uma ferramenta essencial na engenharia de software.</p>
+<section id="máquinas-de-estado-finito-história-e-conceito" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="máquinas-de-estado-finito-história-e-conceito"><span class="header-section-number">2.1</span> Máquinas de Estado Finito: História e Conceito</h2>
+<p>Os estudos da Ciência da Computação são frequentemente organizados em uma hierarquia de capacidade computacional. Uma hierarquia em que a <strong>Máquina de Estados Finitos</strong> ocupa a posição de modelo mais fundamental e, em certos aspectos, o mais simples. Uma <strong>Máquina de Estado Finito</strong> é um modelo para sistemas que possuem uma quantidade finita e limitada de memória.</p>
+<p>O modelo que chamamos de <strong>Máquina de Estado Finito</strong> é composto por um conjunto finito de <strong>estados</strong>, um estado inicial, um conjunto de <strong>transições</strong> que definem como a máquina muda de estado com base em entradas discretas, e um conjunto de <strong>estados de aceitação</strong> que determinam se uma cadeia de símbolos de entrada é aceita ou rejeitada.</p>
+<p>A origem da máquina de estado finito está no produto de um esforço colaborativo que envolveu biólogos, psicólogos, matemáticos, engenheiros e alguns dos primeiros cientistas da computação, todos unidos por um interesse comum: modelar o processo do pensamento humano, seja no cérebro ou em uma máquina. Isso, curiosamente, liga as máquinas de estados finitos às ferramentas de Inteligência Artificial e Aprendizagem de Máquina. A história das Máquinas de Estados Finitos começa com a tentativa de entender o funcionamento do cérebro humano e como este processa informações.</p>
+<section id="o-ponto-de-partida-o-modelo-de-mcculloch-e-pitts" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="o-ponto-de-partida-o-modelo-de-mcculloch-e-pitts"><span class="header-section-number">2.1.1</span> O Ponto de Partida: O Modelo de McCulloch e Pitts</h3>
+<p>O trabalho pioneiro que deu origem à teoria dos autômatos foi o artigo de 1943 dos neurofisiologistas <a href="https://en.wikipedia.org/wiki/Warren_Sturgis_McCulloch">Warren McCulloch</a> e <a href="https://en.wikipedia.org/wiki/Walter_Pitts">Walter Pitts</a>, intitulado <em><a href="https://www.cs.cmu.edu/~epxing/Class/10715/reading/McCulloch.and.Pitts.pdf">A Logical Calculus Immanent in Nervous Activity</a></em><span class="citation" data-cites="mcculloch1943logical">(<a href="referencias.html#ref-mcculloch1943logical" role="doc-biblioref">1</a>)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>McCulloch e Pitts propuseram um modelo matemático para o neurônio biológico, caracterizando-o como uma unidade de processamento binária. No modelo de McCulloch e Pitts, um neurônio <em>dispararia</em>, produzindo um sinal de saída, se, e somente se, um número fixo de sinapses de entrada fosse excitado dentro de um período de tempo discreto, excedendo assim um limiar predefinido <span class="citation" data-cites="mcculloch1943logical">(<a href="referencias.html#ref-mcculloch1943logical" role="doc-biblioref">1</a>)</span>]. Este é um modelo discreto e binário, no qual cada neurônio pode estar em um conjunto finito de estados, por exemplo, <em>disparando</em> ou <em>quieto</em>, e cuja transição de estado é governada por entradas também discretas. O modelo de McCulloch e Pitts representa a primeira formalização conhecida de um Autômato Finito. O artigo demonstrou que uma rede destes neurônios formava um sistema capaz de computações lógicas complexas, como as operações da lógica proposicional, indicando que comportamentos complexos poderiam emergir de componentes simples e finitos.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Um Autômato Finito é uma Máquina de Estados Finitos do tipo <em>reconhecedor</em> cuja função é reconhecer padrões em cadeias de símbolos, ou seja, determinar se um <em>string</em> de entrada pertence a uma determinada linguagem. Este modelo é fundamental para a teoria da computação e serve como base para muitos conceitos mais avançados, como autômatos de pilha e máquinas de Turing. Todo Autômato Finito é uma Máquina de Estados Finitos. Mas, nem toda Máquina de Estados Finitos é um Autômato Finito. A diferença está no propósito: enquanto os Autômatos Finitos são projetados para reconhecer linguagens, as Máquinas de Estados Finitos podem ser usadas para modelar qualquer sistema que possa ser descrito por estados discretos e as transições entre eles.</p>
+</div>
+</div>
+<p>A partir da inspiração biológica do modelo de McCulloch e Pitts, o conceito foi rapidamente abstraído para um modelo matemático puro, que ficou conhecido como <strong>Máquina de Estados Finitos</strong>. No domínio da linguagem computacional, uma Máquina de Estado Finito, em sua forma mais interessante para nosso propósito, funcionando como um artefato capaz de identificar uma linguagem, será formalmente definida como uma 5-tupla:</p>
+<p><span class="math display">\[M=(Q, \Sigma, \delta, q_0, F)\]</span></p>
+<p>na qual:</p>
+<ul>
+<li><span class="math inline">\(Q\)</span> é o conjunto de estados;</li>
+<li><span class="math inline">\(\Sigma\)</span> é o alfabeto;</li>
+<li><span class="math inline">\(\delta\)</span> é a função de transição;</li>
+<li><span class="math inline">\(q_0\)</span> é o estado inicial;</li>
+<li><span class="math inline">\(F\)</span> é o conjunto de estados de aceitação.</li>
+</ul>
+<p>O conceito de <strong>estado</strong> é o coração da Máquina de Estado Finito.</p>
+<p>Um estado é uma abstração que resume todo o histórico de entradas que a máquina processou até um determinado momento, contendo apenas a informação necessária para decidir sobre as futuras transições e saídas. Uma Máquina de Estados Finitos transita de um estado para outro com base na entrada atual. Este comportamento é frequentemente visualizado por meio de um <strong>diagrama de transição de estados</strong>. Este diagrama é um grafo em que os nós representam os estados e as arestas direcionadas e rotuladas representam as transições. Como pode ser visto na <a href="#fig-maq1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
+<p>Uma cadeia de entrada será <em>aceita</em> pela Máquina de Estado Finito se, começando no estado inicial <span class="math inline">\(q_0\)</span>, a sequência de transições correspondente à cadeia de entrada termina em um dos estados de aceitação que estejam no conjunto <span class="math inline">\(F\)</span>, no caso da <a href="#fig-maq1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>, o estado de aceitação é <span class="math inline">\(q_2\)</span>.</p>
+<div id="fig-maq1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="\images\maq1.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Diagrama de transição de uma máquina de estados finitos.
+</figcaption>
+</figure>
+</div>
+<p>A origem da <strong>Máquina de Estado Finito</strong> ilustra um dos ciclos virtuosos de inovação da Ciência da Computação. O processo começou com a observação de um sistema complexo do mundo real, o cérebro, e continua até os dias de hoje. McCulloch e Pitts não estavam tentando inventar um modelo de computação, tentavam entender a lógica da atividade nervosa. O passo de gênio subsequente, liderado por figuras como <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Stephen Kleene</a>, foi reconhecer que o <em>princípio computacional</em> subjacente, um sistema com memória finita que muda de estado com base em entradas discretas, pode ser divorciado de sua inspiração biológica.</p>
+<p>Este divórcio foi o passo que permitiu a generalização do conceito e sua aplicação a domínios completamente diferentes. Domínios que abrangem desde o design de circuitos digitais até a análise de textos em um compilador.</p>
+</section>
+<section id="sec-kleene" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="sec-kleene"><span class="header-section-number">2.1.2</span> A Era da Formalização — Kleene, Moore e Mealy</h3>
+<p>A década de 1950 marcou um período de intensa formalização e expansão da teoria dos Autômatos Finitos. Três figuras destacam-se nesta época: Stephen Kleene, que estabeleceu a ligação fundamental entre autômatos e uma nova notação de padrões, e <a href="https://en.wikipedia.org/wiki/Edward_F._Moore">Edward F. Moore</a> e <a href="https://en.wikipedia.org/wiki/George_H._Mealy">George H. Mealy</a>, que estenderam o modelo para além do simples reconhecimento, dotando-o da capacidade de produzir saídas.</p>
+<p>Seguindo as ideias pioneiras de McCulloch e Pitts, o matemático americano <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Stephen Cole Kleene</a> publicou em 1956 seu artigo <em>Representation of Events in Nerve Nets and Finite Automata</em><span class="citation" data-cites="kleene1956representation">(<a href="referencias.html#ref-kleene1956representation" role="doc-biblioref">2</a>)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Seu trabalho estava inserido em um contexto mais amplo de investigação sobre os limites da computação, que funções podem ser computadas e que problemas são decidíveis.</p>
+<p>A contribuição mais notável de Kleene neste artigo foi a criação das <strong>expressões regulares</strong> (<strong>REGEX</strong>). Kleene introduziu esta notação algébrica como uma forma concisa e poderosa para descrever conjuntos de sequências de entrada, ou eventos, que hoje conhecemos como <strong>Linguagens Regulares</strong>. Na sua obra, Kleene definiu formalmente as três operações fundamentais que formam a base de todas as expressões regulares:</p>
+<ol type="1">
+<li><strong>União (Alternância)</strong>: representada por <span class="math inline">\(+\)</span>, <span class="math inline">\(|\)</span> ou <span class="math inline">\(\cup\)</span>, dependendo da área da matemática onde a união é usada, denota uma escolha entre dois padrões.</li>
+<li><strong>Concatenação</strong>: representada pela justaposição de dois padrões, denota a sequência de um padrão seguido por outro. A concatenação é representada simplesmente pela junção dos símbolos, como em <span class="math inline">\(ab\)</span>, que denota a sequência do símbolo <span class="math inline">\(a\)</span> seguido pelo símbolo <span class="math inline">\(b\)</span>. Ou pelo uso da notação do produto escalar <span class="math inline">\(\cdot\)</span>, como em <span class="math inline">\(a \cdot b\)</span>.<br>
+</li>
+<li><strong>Fechamento de Kleene (Kleene Star)</strong>: representado pelo asterisco <span class="math inline">\(*\)</span>, denota <em>zero ou mais ocorrências</em> do padrão precedente. Considerando o padrão <span class="math inline">\(p\)</span>, o fechamento de Kleene é denotado por <span class="math inline">\(p^*\)</span> e representa a linguagem que contém todas as cadeias que podem ser formadas concatenando zero ou mais cópias de <span class="math inline">\(p\)</span>. Por exemplo, o fechamento de Kleene do símbolo <span class="math inline">\(a\)</span> é a linguagem <span class="math inline">\(\{\epsilon, a, aa, aaa, \ldots\}\)</span>, no qual <span class="math inline">\(\epsilon\)</span> representa a cadeia vazia.</li>
+</ol>
+<p>Estas operações, aplicadas a símbolos de um alfabeto, formam a <strong>Álgebra de Kleene</strong>, um sistema formal que se tornou onipresente na ciência da computação, com aplicações que vão desde a verificação de programas até a análise de algoritmos.</p>
+<section id="o-teorema-de-kleene-a-grande-unificação" class="level4" data-number="2.1.2.1">
+<h4 data-number="2.1.2.1" class="anchored" data-anchor-id="o-teorema-de-kleene-a-grande-unificação"><span class="header-section-number">2.1.2.1</span> O <strong>Teorema de Kleene</strong>: A Grande Unificação</h4>
+<p>A genialidade do trabalho de Kleene não reside apenas na invenção das expressões regulares, mas na prova de sua profunda ligação com os Autômatos Finitos. O <strong>Teorema de Kleene</strong> estabelece uma equivalência fundamental: <strong>a classe de linguagens que podem ser <em>descritas</em> por expressões regulares é precisamente a mesma classe de linguagens que podem ser <em>reconhecidas</em> por Autômatos Finitos</strong>. A prova deste teorema é construtiva e, por isso, de enorme importância prática.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A curiosa leitora deve notar que uma prova construtiva é um tipo de prova matemática que não apenas demonstra a existência de um objeto matemático, mas também fornece um método explícito para construí-lo ou encontrá-lo. Neste caso, em vez de provar que algo <em>deve</em> existir por meio de uma contradição, a prova construtiva <strong>mostra</strong> o objeto.</p>
+<p><strong>Exemplo</strong>: Provar que entre quaisquer dois números racionais distintos, <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, existe um outro número racional, <span class="math inline">\(z\)</span>.</p>
+<p><strong>Prova por Construção</strong>:</p>
+<p>Assumindo <span class="math inline">\(x, y \in \mathbb{Q}\)</span> e <span class="math inline">\(x &lt; y\)</span>.</p>
+<ol type="1">
+<li><p><strong>Construção</strong>: Vamos construir <span class="math inline">\(z\)</span> pegando a média de <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>: <span class="math display">\[z = \frac{x+y}{2}\]</span></p></li>
+<li><p><strong>Verificação</strong>:</p>
+<ul>
+<li>Como a soma e a divisão de números racionais resulta em um número racional, <span class="math inline">\(z\)</span> é garantidamente um número racional (<span class="math inline">\(z \in \mathbb{Q}\)</span>).</li>
+<li>Como <span class="math inline">\(x &lt; y\)</span>, pode-se provar que <span class="math inline">\(x &lt; z &lt; y\)</span>.</li>
+</ul></li>
+</ol>
+<p>A prova funciona porque nós <strong>construímos</strong> um valor específico para <span class="math inline">\(z\)</span> e demonstramos que ele satisfaz as condições exigidas.</p>
+</div>
+</div>
+<p>No caso do <strong>Teorema de Kleene</strong>, a prova construtiva é dividida em duas partes fundamentais, cada uma correspondendo a uma direção da equivalência.</p>
+<ol type="1">
+<li><p><strong>De Expressão Regular para Autômato Finito</strong>: esta parte da prova demonstra que, para qualquer expressão regular, é possível construir um Autômato Finito, especificamente, um Autômato Finito Não-Determinístico (<strong>AFN</strong>) com transições épsilon, ou <strong>AFN</strong>*-<span class="math inline">\(\epsilon\)</span>, que aceita a mesma linguagem. A construção deste Autômato é indutiva sobre a estrutura da expressão regular. Começa-se com autômatos simples para os casos base, a linguagem vazia <span class="math inline">\(\emptyset\)</span>, a linguagem contendo a cadeia vazia <span class="math inline">\(\{\epsilon\}\)</span>, e a linguagem contendo um único símbolo <span class="math inline">\(\{a\}\)</span>) e depois mostram-se métodos para combinar autômatos existentes para corresponder às operações de união, concatenação e fechamento de Kleene.</p></li>
+<li><p><strong>De Autômato Finito para Expressão Regular</strong>: a segunda parte demonstra que, para qualquer Autômato Finito, é possível derivar uma expressão regular que descreve a linguagem que ele aceita. Este processo é mais complexo e envolve a eliminação progressiva de estados do autômato, enquanto as etiquetas das transições são substituídas por expressões regulares cada vez mais complexas que representam os caminhos que foram eliminados.</p></li>
+</ol>
+<p>O <strong>Teorema de Kleene</strong> é a pedra angular teórica que sustenta os programas geradores de Analisadores Léxicos modernos como o Lex <span class="citation" data-cites="lesk1975lex">(<a href="referencias.html#ref-lesk1975lex" role="doc-biblioref">3</a>)</span> e o Flex <span class="citation" data-cites="paxson1995flex">(<a href="referencias.html#ref-paxson1995flex" role="doc-biblioref">4</a>)</span>. O <strong>Teorema de Kleene</strong> garante que os programadores podem usar a notação declarativa e legível das expressões regulares para <em>especificar</em> os padrões dos <em>tokens</em>, com a confiança de que estas especificações podem ser automaticamente compiladas por um sistema eficiente de reconhecimento, o Autômato Finito.</p>
+<p>Sim, a leitora entendeu corretamente. Existem programas capazes de gerar Analisadores Léxicos a partir de especificações da linguagem. O Lex e o Flex são exemplos clássicos desses programas. Porém, o que queremos neste livro é entender linguagens formais e compiladores, e não apenas usar ferramentas prontas.</p>
+</section>
+<section id="a-introdução-de-saídas-máquinas-transdutoras" class="level4" data-number="2.1.2.2">
+<h4 data-number="2.1.2.2" class="anchored" data-anchor-id="a-introdução-de-saídas-máquinas-transdutoras"><span class="header-section-number">2.1.2.2</span> A Introdução de Saídas: Máquinas Transdutoras</h4>
+<p>Os autômatos de Kleene, tal como os de McCulloch e Pitts, eram artefatos para o reconhecimento, ou aceitação de padrões. Sua única função era emitir um veredito binário: o <em>string</em> de entrada pertence ou não à linguagem. Todavia, muitas aplicações, desde circuitos de controle a sistemas de Inteligência Artificial, necessitam <em>gerar uma sequência de saídas</em> em resposta às entradas.</p>
+<p>As Máquinas de Estados Finitos que produzem saídas são chamadas de <strong>transdutores de estados finitos</strong>. Um Transdutor de Estados Finitos estende a definição da Máquina de Estado Finito para uma 6-tupla,</p>
+<p><span class="math display">\[(Q, \Sigma, \Gamma, \delta, \lambda, q_0)\]</span></p>
+<p>na qual <span class="math inline">\(\Gamma\)</span> é um alfabeto finito de símbolos de saída e <span class="math inline">\(\lambda\)</span> é uma função de saída.</p>
+<p>Em meados da década de 1950, <a href="https://en.wikipedia.org/wiki/George_H._Mealy">G.H. Mealy</a> e <a href="https://en.wikipedia.org/wiki/Edward_F._Moore">E.F. Moore</a>, trabalhando de forma independente, propuseram dois modelos distintos para os Transdutores de Estados Finitos, generalizando a teoria para englobar máquinas muito mais poderosas.</p>
+<p>No seu artigo “Gedanken-experiments on Sequential Machines”<span class="citation" data-cites="Moore1956">(<a href="referencias.html#ref-Moore1956" role="doc-biblioref">5</a>)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, Edward F. Moore introduziu um modelo de transdutor no qual <em>a saída é determinada exclusivamente pelo estado atual</em> da máquina. A função de saída é, portanto, definida como:</p>
+<p><span class="math display">\[\lambda: Q \to \Gamma\]</span></p>
+<p>Esta definição implica que a saída é estável enquanto a máquina permanece em um determinado estado. Isso quer dizer que uma mudança na saída só ocorre quando há uma transição para um novo estado. Em implementações de hardware, isto significa que as saídas são síncronas com as transições de estado, que por sua vez são frequentemente sincronizadas por um sinal de relógio, um <em>clock</em>. Nos diagramas de estado, a saída de uma máquina de Moore é tipicamente associada ao próprio estado, sendo escrita dentro do círculo que o representa. Uma máquina de Moore tende a necessitar de mais estados do que uma máquina de Mealy para realizar a mesma tarefa, pois um estado pode ser necessário apenas para gerar uma saída específica.</p>
+<p>Um ano antes, George H. Mealy, em seu artigo “A Method for Synthesizing Sequential Circuits”<span class="citation" data-cites="Mealy1955">(<a href="referencias.html#ref-Mealy1955" role="doc-biblioref">6</a>)</span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> publicado no <em>Bell System Technical Journal</em>, propôs um modelo alternativo. Em uma máquina de Mealy, a saída depende tanto do <strong>estado atual como da entrada atual</strong>. A função de saída é definida como</p>
+<p><span class="math display">\[\lambda: Q \times \Sigma \to \Gamma\]</span></p>
+<p>Como a saída pode mudar instantaneamente com uma mudança na entrada, mesmo sem uma transição de estado, as saídas de uma máquina de Mealy são consideradas assíncronas. Isto pode permitir uma resposta mais rápida do sistema, mas também introduz a possibilidade de problemas de temporização em circuitos sequenciais. Nos diagramas de estado, a saída é associada à transição, sendo escrita no arco da transição, tipicamente separada da entrada por uma barra (ex.: <code>a/b</code> indica que a máquina transita de um estado a outro com a entrada <code>a</code> e produz a saída <code>b</code>). Esta característica permite que as máquinas de Mealy sejam mais compactas, frequentemente necessitando de menos estados do que a máquina de Moore equivalente.</p>
+<p>A tabela <a href="#tbl-compara2" class="quarto-xref">Table&nbsp;<span>2.1</span></a> resume as diferenças entre os dois modelos.</p>
+<div id="tbl-compara2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Comparação Detalhada entre Máquinas de Moore e Mealy
+</figcaption>
+<div aria-describedby="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;">Máquina de Moore</th>
+<th style="text-align: left;">Máquina de Mealy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Função de Saída (<span class="math inline">\(\lambda\)</span>)</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\lambda: Q \to \Gamma\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\lambda: Q \times \Sigma \to \Gamma\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Dependência da Saída</strong></td>
+<td style="text-align: left;">Apenas do estado atual</td>
+<td style="text-align: left;">Do estado atual e da entrada atual</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Timing da Saída</strong></td>
+<td style="text-align: left;">Síncrona com o estado</td>
+<td style="text-align: left;">Assíncrona com a entrada</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Representação em Diagrama</strong></td>
+<td style="text-align: left;">Associada ao nó do estado</td>
+<td style="text-align: left;">Associada ao arco da transição</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Número de Estados</strong></td>
+<td style="text-align: left;">Geralmente necessita de mais estados</td>
+<td style="text-align: left;">Geralmente necessita de menos estados</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Aplicação Típica</strong></td>
+<td style="text-align: left;">Ativação de um conjunto de ações estáveis num estado</td>
+<td style="text-align: left;">Desencadear eventos ou sinais em resposta a transições</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A esforçada leitora deve ter em mente que o <strong>Teorema de Kleene</strong> não é apenas um resultado matemático elegante; ele estabelece uma dicotomia que serve como alicerce para grande parte da engenharia de software moderna. Essa dicotomia se manifesta de forma clara:</p>
+<ul>
+<li>As <strong>expressões regulares</strong> são uma linguagem <em>declarativa</em>: descrevem <strong>o que</strong> é o padrão;</li>
+<li>Os <strong>Autômatos Finitos</strong> são um modelo <em>operacional</em>: descrevem <strong>como</strong> reconhecer o padrão.</li>
+</ul>
+<p>A genialidade do <strong>Teorema de Kleene</strong>, amável leitora, reside na garantia de que podemos traduzir informações, sem perdas, do mundo declarativo, que é mais fácil para os humanos, para o mundo operacional, que é eficiente para as máquinas. Ou vice-versa.</p>
+<p>Este padrão, traduzir uma especificação de alto nível em uma implementação de baixo nível, é a descrição sintética do que um compilador faz. Além disso, o trabalho de Kleene pode ser visto como o arquétipo da poderosa ideia de <strong>separação de preocupações</strong>, um princípio de design tecnológico que permite criar abstrações elegantes sem sacrificar a performance.</p>
+</section>
+</section>
+<section id="o-poder-do-não-determinismo" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="o-poder-do-não-determinismo"><span class="header-section-number">2.1.3</span> O Poder do Não-Determinismo</h3>
+<p>Enquanto Kleene, Moore e Mealy solidificavam e expandiam a teoria dos autômatos determinísticos, uma nova ideia despontava no horizonte. Esta ideia, o não-determinismo, parecia à primeira vista conceder um poder quase mágico às máquinas, mas acabaria por se revelar uma das ferramentas conceituais mais úteis para simplificar o design e a teoria dos autômatos.</p>
+<p>Em 1959, <a href="https://en.wikipedia.org/wiki/Michael_O._Rabin">Michael O. Rabin</a> e <a href="https://en.wikipedia.org/wiki/Dana_Scott">Dana Scott</a> publicaram seu artigo clássico e profundamente influente, <em>Finite Automata and Their Decision Problems</em><span class="citation" data-cites="rabin1959">(<a href="referencias.html#ref-rabin1959" role="doc-biblioref">7</a>)</span>. Por este trabalho, que introduziu formalmente o conceito de <strong>Autômato Finito Não-Determinístico</strong>, foram agraciados com o Prêmio Turing, a mais alta honra da ciência da computação.</p>
+<p>Um Autômato Finito Não-Determinístico relaxa as restrições de um Autômato Finito Determinístico de três formas cruciais:</p>
+<ol type="1">
+<li><p><strong>Múltiplas Transições</strong>: para um dado estado e um símbolo de entrada, um Autômato Finito Não-Determinístico pode ter zero, uma ou múltiplas transições possíveis. A função de transição mapeia para um <em>conjunto</em> de estados, não para um único estado. Formalmente, <span class="math inline">\(\delta: Q \times \Sigma \to \mathcal{P}(Q)\)</span>, em que <span class="math inline">\(\mathcal{P}(Q)\)</span> é o conjunto das partes de <span class="math inline">\(Q\)</span>.</p></li>
+<li><p><strong>Transições-Épsilon (<span class="math inline">\(\epsilon\)</span>-transitions)</strong>: um Autômato Finito Não-Determinístico pode mudar de estado sem consumir qualquer símbolo da entrada. Estas transições, rotuladas com <span class="math inline">\(\epsilon\)</span>, permitem que a máquina <em>salte</em> espontaneamente entre estados. A função de transição é então <span class="math inline">\(\delta: Q \times (\Sigma \cup \{\epsilon\}) \to \mathcal{P}(Q)\)</span>.</p></li>
+<li><p><strong>Transições Ausentes</strong>: para um determinado par, estado e símbolo de entrada, o conjunto de próximos estados pode ser o conjunto vazio, significando que a computação nesse <em>ramo</em> termina.</p></li>
+</ol>
+<p>O modelo de computação de um Autômato Finito Não-Determinístico permite a existência de múltiplas transições possíveis a partir de um mesmo estado para um mesmo símbolo de entrada. Essa característica resulta em um modelo de computação inerentemente paralelo, no qual o Autômato Finito Não-Determinístico explora todos os caminhos de transição possíveis simultaneamente ao processar uma cadeia de entrada. A cadeia é considerada <em>aceita</em> se <em>pelo menos um</em> destes caminhos terminar em um estado de aceitação após a leitura de toda a cadeia.</p>
+<section id="a-construção-do-conjunto-das-partes-powerset-construction" class="level4" data-number="2.1.3.1">
+<h4 data-number="2.1.3.1" class="anchored" data-anchor-id="a-construção-do-conjunto-das-partes-powerset-construction"><span class="header-section-number">2.1.3.1</span> A Construção do Conjunto das Partes (Powerset Construction)</h4>
+<p>A conclusão mais surpreendente e poderosa do artigo de Rabin e Scott é que, apesar de sua aparente flexibilidade e poder acrescido, os Autômatos Finitos Não-Determinísticos não são mais expressivos do que os Autômatos Finitos Determinísticos. Isto é uma forma elegante de dizer que para qualquer Autômato Finito Não-Determinístico, existe um Autômato Finito Determinístico equivalente que reconhece exatamente a mesma linguagem.</p>
+<p>A prova da equivalência entre Autômatos Finitos Não-Determinísticos e Determinísticos, mais uma vez, construtiva, através de um algoritmo conhecido como a <strong>construção do conjunto das partes</strong> (<em>powerset construction</em>). A ideia central desse algoritmo é simular o comportamento paralelo do Autômato Finito Não-Determinístico de forma determinística. Para tanto, cada estado no Autômato Finito Determinístico construído corresponde a um <em>conjunto</em> de estados nos quais o Autômato Finito Não-Determinístico poderia estar em um mesmo momento. O algoritmo da <strong>construção do conjunto das partes</strong> funciona da seguinte forma:</p>
+<ol type="1">
+<li><p><strong>Estado Inicial do Autômato Finito Determinístico</strong>: o estado inicial do Autômato Finito Determinístico (AFD) é o conjunto de todos os estados do Autômato Finito Não-Determinístico que são alcançáveis a partir do estado inicial do Autômato Finito Não-Determinístico usando apenas transições-<span class="math inline">\(\epsilon\)</span>. Este conjunto é conhecido como o <strong>fechamento-<span class="math inline">\(\epsilon\)</span></strong> (<em>epsilon-closure</em>) do estado inicial do Autômato Finito Não-Determinístico.</p></li>
+<li><p><strong>Transições do Autômato Finito Determinístico</strong>: para cada estado do Autômato Finito Determinístico, que corresponde a um conjunto de estados do Autômato Finito Não-Determinístico, e para cada símbolo do alfabeto, a transição do Autômato Finito Determinístico é calculada em duas etapas: primeiro, determina-se o conjunto de todos os estados do Autômato Finito Não-Determinístico que podem ser alcançados a partir do conjunto atual ao ler esse símbolo; segundo, calcula-se o fechamento-<span class="math inline">\(\epsilon\)</span> desse novo conjunto. O resultado é o novo estado do Autômato Finito Determinístico.</p></li>
+<li><p><strong>Estados de Aceitação do Autômato Finito Determinístico</strong>: um estado no Autômato Finito Determinístico é um estado de aceitação se seu conjunto correspondente de estados do Autômato Finito Não-Determinístico contiver pelo menos um dos estados de aceitação originais do Autômato Finito Não-Determinístico.</p></li>
+</ol>
+<p>Este processo é repetido até que não sejam gerados novos estados no Autômato Finito Determinístico. Como o número de subconjuntos de um conjunto finito de estados é finito, embora potencialmente grande, o processo garante a terminação.</p>
+<p>A existência da construção do conjunto das partes estabelece uma relação de compromisso (<em>trade-off</em>) entre Autômatos Finitos Não-Determinísticos e Determinísticos, que é de extrema importância na prática da engenharia de compiladores.</p>
+<ul>
+<li><p><strong>Construção e Tamanho</strong>: os Autômatos Finitos Não-Determinísticos são geralmente muito mais fáceis e intuitivos de construir diretamente a partir de uma especificação de uma linguagem, como uma expressão regular. Um Autômato Finito Não-Determinístico para uma dada linguagem é tipicamente muito menor, em termos de número de estados e transições, do que o Autômato Finito Determinístico equivalente. A conversão de um Autômato Finito Não-Determinístico com <span class="math inline">\(n\)</span> estados para um Autômato Finito Determinístico pode, no pior dos casos, resultar em um Autômato Finito Determinístico com até <span class="math inline">\(2^n\)</span> estados, um fenômeno conhecido como <em>explosão de estados</em>.</p></li>
+<li><p><strong>Simulação e Eficiência</strong>: por outro lado, os Autômatos Finitos Determinísticos são muito mais fáceis de simular. Para uma cadeia de entrada de comprimento <span class="math inline">\(k\)</span>, um Autômato Finito Determinístico executa exatamente <span class="math inline">\(k\)</span> transições, resultando em uma execução em tempo linear. A simulação direta de um Autômato Finito Não-Determinístico é mais complexa, pois pode exigir o rastreamento de múltiplos caminhos de computação em paralelo, tornando-a mais lenta.</p></li>
+</ul>
+<p>A tabela <a href="#tbl-compara1" class="quarto-xref">Table&nbsp;<span>2.2</span></a> resume esses compromissos práticos.</p>
+<div id="tbl-compara1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-compara1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.2: Autômato Finito Não-Determinístico vs.&nbsp;Autômato Finito Determinístico.
+</figcaption>
+<div aria-describedby="tbl-compara1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Critério</th>
+<th style="text-align: left;">Autômato Finito Não-Determinístico</th>
+<th style="text-align: left;">Autômato Finito Determinístico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Função de Transição</strong></td>
+<td style="text-align: left;"><span class="math inline">\(\delta: Q \times (\Sigma \cup \{\epsilon\}) \to \mathcal{P}(Q)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\delta: Q \times \Sigma \to Q\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Transições-<span class="math inline">\(\epsilon\)</span></strong></td>
+<td style="text-align: left;">Permitidas</td>
+<td style="text-align: left;">Não permitidas</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Número de Estados</strong></td>
+<td style="text-align: left;">Geralmente pequeno (<span class="math inline">\(n\)</span>)</td>
+<td style="text-align: left;">Potencialmente grande (até <span class="math inline">\(2^n\)</span>)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Facilidade de Construção</strong></td>
+<td style="text-align: left;">Alta (fácil de construir a partir de RE)</td>
+<td style="text-align: left;">Baixa (difícil de construir diretamente)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Velocidade de Execução</strong></td>
+<td style="text-align: left;">Lenta (simulação direta)</td>
+<td style="text-align: left;">Rápida (execução em tempo linear)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Utilização na Prática</strong></td>
+<td style="text-align: left;">Passo intermédio na compilação de RE</td>
+<td style="text-align: left;">Produto final para analisadores léxicos eficientes</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>O não-determinismo, tal como introduzido por Rabin e Scott, não é um recurso computacional físico. Nenhuma máquina real <em>adivinha</em> o caminho correto, ou verifica todos os caminhos no mesmo instante. Em vez disso, o não-determinismo é uma poderosa <strong>ferramenta de abstração conceitual</strong>. O não-determinismo permite que os projetistas humanos pensem em termos de possibilidades: _existe algum caminho que leve à aceitação? Em vez de se prenderem aos detalhes físicos de uma única computação determinística. Além disso, a prova de que Autômatos Finitos Não-Determinísticos são equivalentes a Autômatos Finitos Determinísticos é mais do que um resultado teórico; é uma licença para usar a abstração mais conveniente, geralmente o Autômato Finito Não-Determinístico, para o design e a especificação, com a garantia de que ela pode ser convertida em uma forma eficiente e fisicamente executável, geralmente o Autômato Finito Determinístico.</p>
+</section>
+</section>
+</section>
+<section id="sec-analisador-lexico" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-analisador-lexico"><span class="header-section-number">2.2</span> Autômatos Finitos: O Analisador Léxico</h2>
+<p>A teoria dos Autômatos Finitos, com suas provas de equivalência e algoritmos de conversão, poderia ter permanecido um tópico de interesse puramente acadêmico. No entanto, encontrou uma aplicação prática tão perfeita na construção de compiladores que se tornou um exemplo de como a teoria fundamental pode transformar a engenharia de software. Esta aplicação é a análise léxica.</p>
+<p>Como eu disse antes, a primeira fase de um compilador é o <strong>analisador léxico</strong>, também conhecido como <em>scanner</em> ou <em>lexer</em>. Sua tarefa é ler um fluxo de caracteres criados a partir do código fonte, e identificar conjuntos significativos de símbolos para uma dada linguagem, os <strong>lexemas</strong>. Para cada lexema, o analisador léxico produzirá um <strong><em>token</em></strong>, que é tipicamente uma estrutura de dados consistindo em uma classe de <em>token</em> (ex.: IDENTIFICADOR, NÚMERO, PALAVRA-CHAVE), o valor do lexema, a cadeia de símbolos real, e a posição do lexema no código fonte. Por exemplo, a linha de código <code>if (i == j)</code> seria transformada em uma sequência de <em>tokens</em> como (IF, “if”, 0, 0), (LPAREN, “(”, 0, 3), (ID, “i”, 0, 4), (EQ, “==”, 0, 6), (ID, “j”, 0, 9), (RPAREN, “)”, 0, 10). O fragmento de código <a href="#lst-lex1" class="quarto-xref">Listing&nbsp;<span>2.1</span></a> ilustra uma estrutura de armazenamento para tokens.</p>
+<div id="lst-lex1" class="listing quarto-float">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-lex1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2.1
+</figcaption>
+<div aria-describedby="lst-lex1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode" id="lst-lex1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="lst-lex1-1"><a href="#lst-lex1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="lst-lex1-2"><a href="#lst-lex1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string_view&gt;</span></span>
+<span id="lst-lex1-3"><a href="#lst-lex1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;array&gt;</span></span>
+<span id="lst-lex1-4"><a href="#lst-lex1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-lex1-5"><a href="#lst-lex1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Enumeração para os tipos de token</span></span>
+<span id="lst-lex1-6"><a href="#lst-lex1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> <span class="kw">class</span> TokenType <span class="op">{</span></span>
+<span id="lst-lex1-7"><a href="#lst-lex1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Palavras-chave</span></span>
+<span id="lst-lex1-8"><a href="#lst-lex1-8" aria-hidden="true" tabindex="-1"></a>    IF<span class="op">,</span></span>
+<span id="lst-lex1-9"><a href="#lst-lex1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// outras palavras-chave como ELSE, WHILE, FOR, etc.</span></span>
+<span id="lst-lex1-10"><a href="#lst-lex1-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="lst-lex1-11"><a href="#lst-lex1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Identificadores e literais</span></span>
+<span id="lst-lex1-12"><a href="#lst-lex1-12" aria-hidden="true" tabindex="-1"></a>    IDENTIFICADOR<span class="op">,</span></span>
+<span id="lst-lex1-13"><a href="#lst-lex1-13" aria-hidden="true" tabindex="-1"></a>    NUMERO<span class="op">,</span></span>
+<span id="lst-lex1-14"><a href="#lst-lex1-14" aria-hidden="true" tabindex="-1"></a>    STRING_LITERAL<span class="op">,</span></span>
+<span id="lst-lex1-15"><a href="#lst-lex1-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="lst-lex1-16"><a href="#lst-lex1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Operadores</span></span>
+<span id="lst-lex1-17"><a href="#lst-lex1-17" aria-hidden="true" tabindex="-1"></a>    EQ<span class="op">,</span>          <span class="co">// ==</span></span>
+<span id="lst-lex1-18"><a href="#lst-lex1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// outros operadores como NEQ, LT, GT, LE, GE, ADD, SUB, MUL, DIV</span></span>
+<span id="lst-lex1-19"><a href="#lst-lex1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-lex1-20"><a href="#lst-lex1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Delimitadores</span></span>
+<span id="lst-lex1-21"><a href="#lst-lex1-21" aria-hidden="true" tabindex="-1"></a>    LPAREN<span class="op">,</span>      <span class="co">// (</span></span>
+<span id="lst-lex1-22"><a href="#lst-lex1-22" aria-hidden="true" tabindex="-1"></a>    RPAREN<span class="op">,</span>      <span class="co">// )</span></span>
+<span id="lst-lex1-23"><a href="#lst-lex1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// outros delimitadores como LBRACE, RBRACE, SEMICOLON, COMMA    </span></span>
+<span id="lst-lex1-24"><a href="#lst-lex1-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Especiais</span></span>
+<span id="lst-lex1-25"><a href="#lst-lex1-25" aria-hidden="true" tabindex="-1"></a>    END_OF_FILE<span class="op">,</span></span>
+<span id="lst-lex1-26"><a href="#lst-lex1-26" aria-hidden="true" tabindex="-1"></a>    INVALID</span>
+<span id="lst-lex1-27"><a href="#lst-lex1-27" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="lst-lex1-28"><a href="#lst-lex1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-lex1-29"><a href="#lst-lex1-29" aria-hidden="true" tabindex="-1"></a><span class="co">// Estrutura para representar um token</span></span>
+<span id="lst-lex1-30"><a href="#lst-lex1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Token <span class="op">{</span></span>
+<span id="lst-lex1-31"><a href="#lst-lex1-31" aria-hidden="true" tabindex="-1"></a>    TokenType tipo<span class="op">;</span>           <span class="co">// Classe do token</span></span>
+<span id="lst-lex1-32"><a href="#lst-lex1-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>string lexema<span class="op">;</span>       <span class="co">// Valor do lexema (cadeia de caracteres real)</span></span>
+<span id="lst-lex1-33"><a href="#lst-lex1-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> linha<span class="op">;</span>               <span class="co">// Número da linha</span></span>
+<span id="lst-lex1-34"><a href="#lst-lex1-34" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> posicao<span class="op">;</span>             <span class="co">// Posição na linha</span></span>
+<span id="lst-lex1-35"><a href="#lst-lex1-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="lst-lex1-36"><a href="#lst-lex1-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Construtor</span></span>
+<span id="lst-lex1-37"><a href="#lst-lex1-37" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType t<span class="op">,</span> <span class="bu">std::</span>string_view lex<span class="op">,</span> <span class="dt">int</span> lin<span class="op">,</span> <span class="dt">int</span> pos<span class="op">)</span></span>
+<span id="lst-lex1-38"><a href="#lst-lex1-38" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span> tipo<span class="op">(</span>t<span class="op">),</span> lexema<span class="op">(</span>lex<span class="op">),</span> linha<span class="op">(</span>lin<span class="op">),</span> posicao<span class="op">(</span>pos<span class="op">)</span> <span class="op">{}</span></span>
+<span id="lst-lex1-39"><a href="#lst-lex1-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="lst-lex1-40"><a href="#lst-lex1-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Construtor padrão</span></span>
+<span id="lst-lex1-41"><a href="#lst-lex1-41" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">()</span> <span class="op">:</span> tipo<span class="op">(</span>TokenType<span class="op">::</span>INVALID<span class="op">),</span> linha<span class="op">(</span><span class="dv">0</span><span class="op">),</span> posicao<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">{}</span></span>
+<span id="lst-lex1-42"><a href="#lst-lex1-42" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="lst-lex1-43"><a href="#lst-lex1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-lex1-44"><a href="#lst-lex1-44" aria-hidden="true" tabindex="-1"></a><span class="co">// Exemplo de array de tokens para o fragmento "if (i == j)"</span></span>
+<span id="lst-lex1-45"><a href="#lst-lex1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span>Token<span class="op">,</span> <span class="dv">6</span><span class="op">&gt;</span> exemplo_tokens <span class="op">=</span> <span class="op">{{</span></span>
+<span id="lst-lex1-46"><a href="#lst-lex1-46" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>IF<span class="op">,</span> <span class="st">"if"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">),</span></span>
+<span id="lst-lex1-47"><a href="#lst-lex1-47" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>LPAREN<span class="op">,</span> <span class="st">"("</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">),</span></span>
+<span id="lst-lex1-48"><a href="#lst-lex1-48" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>IDENTIFICADOR<span class="op">,</span> <span class="st">"i"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">4</span><span class="op">),</span></span>
+<span id="lst-lex1-49"><a href="#lst-lex1-49" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>EQ<span class="op">,</span> <span class="st">"=="</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">6</span><span class="op">),</span></span>
+<span id="lst-lex1-50"><a href="#lst-lex1-50" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>IDENTIFICADOR<span class="op">,</span> <span class="st">"j"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">9</span><span class="op">),</span></span>
+<span id="lst-lex1-51"><a href="#lst-lex1-51" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>RPAREN<span class="op">,</span> <span class="st">")"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">10</span><span class="op">)</span></span>
+<span id="lst-lex1-52"><a href="#lst-lex1-52" aria-hidden="true" tabindex="-1"></a><span class="op">}};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<p>A questão fundamental que deve estar incomodando a curiosa leitora é: como reconhecer estes padrões?</p>
+<p>Os padrões que definem os <em>tokens</em> na maioria das linguagens de programação, como identificadores, números inteiros, e palavras-chave, são quase invariavelmente descritos por <strong>Linguagens Regulares</strong>. Como estabelecido pelo <strong>Teorema de Kleene</strong>, as Linguagens Regulares são precisamente aquelas que podem ser reconhecidas por Autômatos Finitos. Portanto, as <strong>Máquinas de Estados Finitos</strong> são o modelo computacional adequado e suficiente para a tarefa da análise léxica. Parece simples, contudo, na prática, a análise léxica enfrenta ambiguidades que devem ser resolvidas por regras claras:</p>
+<ul>
+<li><p><strong>Regra da Correspondência Mais Longa (<em>Maximal Munch</em>)</strong>: se uma porção do texto de entrada pode corresponder a múltiplos padrões de comprimentos diferentes, o analisador léxico escolhe sempre a correspondência mais longa possível. Por exemplo, no <em>string</em> <code>&gt;=</code>, o lexer não irá parar no <em>token</em> <code>&gt;</code>; ele continuará a ler para reconhecer o identificador <code>&gt;=</code>. Isto requer que o algoritmo tenha capacidade de <em>lookahead</em>, do inglês para olhar para a frente, lendo caracteres para além do final de um potencial lexema para garantir que não há uma correspondência mais longa.</p></li>
+<li><p><strong>Prioridade das Regras</strong>: se dois padrões correspondem a um lexema do mesmo comprimento, por exemplo <code>if</code> poderia ser uma palavra-chave ou um identificador, a ambiguidade é resolvida dando prioridade à regra que aparece primeiro no arquivo de especificação das regras do analisador léxico. Por esta razão, as regras para palavras-chave são sempre listadas antes, e têm precedência, sobre a regra geral para identificadores.</p></li>
+<li><p><strong>Tratamento de Erros</strong>: se uma sequência de caracteres não corresponder a nenhum padrão conhecido, o analisador léxico deve sinalizar um erro. Normalmente, isso é feito emitindo um <em>token</em> especial, como <code>INVALID</code>, e registrando a posição do erro.</p></li>
+</ul>
+</section>
+<section id="extensões-modernas-e-conclusão" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="extensões-modernas-e-conclusão"><span class="header-section-number">2.3</span> Extensões Modernas e Conclusão</h2>
+<p>Embora o modelo clássico da máquina de estado finito seja perfeitamente adequado para a análise léxica, sua simplicidade pode tornar-se uma limitação ao modelar sistemas mais complexos. A história das Máquinas de Estados Finitos não termina com sua aplicação em compiladores; ela continua com extensões que procuram gerir a complexidade em domínios como sistemas reativos e de controle.</p>
+<p>Uma das principais dificuldades ao aplicar Máquinas de Estados Finitos a sistemas complexos é o problema da <strong>explosão de estados</strong>. Se um sistema é composto por múltiplas variáveis ou componentes, o número total de estados na Máquina de Estado Finito que o descreve pode crescer exponencialmente, tornando o modelo intratável e incompreensível. Por exemplo, um sistema com <span class="math inline">\(n\)</span> variáveis, cada uma podendo assumir <span class="math inline">\(Z\)</span> valores, pode ter até <span class="math inline">\(Z^n\)</span> estados possíveis. Uma Máquina de Estado Finito <em>plana</em>, na qual todos os estados existem ao mesmo nível, não escala bem para esses cenários.</p>
+<p>O termo <em>máquina de estados finitos plana</em> não é uma definição padrão na teoria formal da computação, mas pode ter algumas interpretações dependendo do contexto. Exemplo de representação plana:</p>
+<p><strong>Estados</strong>: <span class="math inline">\(Q = \{q_0, q_1, q_2, q_3\}\)</span> <strong>Transições</strong>: <span class="math inline">\(q_0 \xrightarrow{a} q_1, q_1 \xrightarrow{b} q_2, q_2 \xrightarrow{c} q_3\)</span></p>
+<p>Para resolver esta limitação, David Harel introduziu em 1987 os <strong><em>StateCharts</em></strong>, uma poderosa extensão visual e formal das Máquinas de Estados Finitos. Os <em>StateCharts</em> enriquecem o formalismo clássico com duas noções fundamentais:</p>
+<ol type="1">
+<li><p><strong>Hierarquia (Aninhamento de Estados ou Decomposição-OU)</strong>: os estados podem conter subestados. Isto permite refinar o comportamento de um superestado em vários subestados mais detalhados, organizando a complexidade de forma hierárquica.</p></li>
+<li><p><strong>Concorrência (Estados Ortogonais ou Decomposição-E)</strong>: os <em>StateCharts</em> permitem que o sistema esteja em múltiplos estados de subsistemas diferentes no mesmo instante. Isto é ideal para modelar sistemas compostos por componentes paralelos e independentes, reduzindo drasticamente o número de estados explícitos necessários em comparação com uma máquina de estados finitos plana.</p></li>
+</ol>
+<p>Exemplo hierárquico:</p>
+<p><span class="math display">\[\text{Estado\_Principal} \begin{cases}
+\text{Subestado\_A} \{q_0, q_1\} \\
+\text{Subestado\_B} \{q_2, q_3\}
+\end{cases}\]</span></p>
+<p>Para facilitar a compreensão da abstração dos <em>StateCharts</em>, considere um sistema de um <em>player</em> como mostrado na <a href="#fig-statechart1" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>.</p>
+<div id="fig-statechart1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-statechart1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="\images\state1.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-statechart1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2
+</figcaption>
+</figure>
+</div>
+<p>Embora as <strong>Máquinas de Estados Finitos</strong> clássicas sejam suficientes para a análise léxica, os <em>StateCharts</em> demonstram como o modelo fundamental pode ser estendido para lidar com a complexidade inerente a sistemas de controle de software, protocolos de comunicação e interfaces de usuário, mostrando a versatilidade e a relevância contínua do paradigma de estados.</p>
+<section id="um-olhar-no-horizonte-não-determinismo-e-a-fronteira-quântica" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="um-olhar-no-horizonte-não-determinismo-e-a-fronteira-quântica"><span class="header-section-number">2.3.1</span> Um Olhar no Horizonte: Não-Determinismo e a Fronteira Quântica</h3>
+<p>A amável leitora, ao se deparar com o não-determinismo de um Autômato Finito Não-Determinístico, pode se perguntar sobre outros modelos de computação que exploram múltiplos caminhos. Onde a computação quântica se encaixa nisso?</p>
+<p>A conexão teórica existe nos <strong>Autômatos Finitos Quânticos</strong><span class="citation" data-cites="Tian2019Experimental">(<a href="referencias.html#ref-Tian2019Experimental" role="doc-biblioref">8</a>)</span>. Contudo, é fundamental distinguir os conceitos:</p>
+<ul>
+<li><p><strong>Não-Determinismo Clássico:</strong> a máquina explora múltiplos caminhos computacionais em paralelo. Imagine seguir todas as saídas de um labirinto ao mesmo tempo. A cadeia de entrada é aceita se <em>pelo menos um</em> caminho leva a um estado de aceitação.</p></li>
+<li><p><strong>Paralelismo Quântico:</strong> a máquina evolui em um único estado de <strong>superposição quântica</strong>. Os estados não são caminhos separados, mas sim componentes de um vetor de estado em um espaço de Hilbert complexo. O resultado depende das probabilidades das amplitudes quânticas no momento da medição.</p></li>
+</ul>
+<p>Essa distinção leva a uma consequência surpreendente: os modelos mais básicos de Autômatos Finitos Quânticos são, na verdade, <em>menos poderosos</em> que os Autômatos Finitos Não-Determinísticos clássicos. Os modelos quânticos não conseguem reconhecer todas as Linguagens Regulares. A razão está nas restrições da mecânica quântica, como a reversibilidade das operações.</p>
+<p>Onde está a vantagem, então? Na eficiência de estados. Para certas linguagens específicas, um Autômato Finito Quântico pode ser exponencialmente mais compacto que qualquer autômato clássico. O exemplo canônico é a linguagem <span class="math inline">\(L_p = \{a^k \mid k \text{ é múltiplo de } p\}\)</span>, para um <span class="math inline">\(p\)</span> primo. Um <strong>Autômato Finito Determinístico (AFD)</strong> precisa de <span class="math inline">\(p\)</span> estados, enquanto um AFQ pode reconhecer a mesma linguagem com apenas <span class="math inline">\(O(\log p)\)</span> estados.</p>
+<p>Embora a aplicação prática de Autômatos Finitos Quânticos em analisadores léxicos seja um campo puramente especulativo, eles demonstram como os modelos fundamentais que estudamos neste capítulo continuam a inspirar as fronteiras mais avançadas da teoria da computação.</p>
+
+
+<div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list" style="display: none">
+<div id="ref-mcculloch1943logical" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">MCCULLOCH, W. S.; PITTS, W. <a href="https://www.cs.cmu.edu/~epxing/Class/10715/reading/McCulloch.and.Pitts.pdf">A logical calculus of the ideas immanent in nervous activity</a>. <strong>The bulletin of mathematical biophysics</strong>, v. 5, n. 4, p. 115–133, 1943. </div>
+</div>
+<div id="ref-kleene1956representation" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">KLEENE, S. C. <a href="https://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf">Representation of events in nerve nets and finite automata</a>. In: SHANNON, C. E.; MCCARTHY, J. (Eds.). <strong>Automata studies</strong>. Annals of mathematics studies. [s.l.] Princeton University Press, 1956. v. 34p. 3–41. </div>
+</div>
+<div id="ref-lesk1975lex" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">LESK, M. E. <strong><span>Lex – A Lexical Analyzer Generator</span></strong>. Murray Hill, NJ: Bell Laboratories, 1975. </div>
+</div>
+<div id="ref-paxson1995flex" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">PAXSON, V. <strong><a href="https://www.gnu.org/software/flex/manual/"><span class="nocase">Flex, a fast lexical analyzer generator</span></a></strong>. [s.l: s.n.]. </div>
+</div>
+<div id="ref-Moore1956" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">MOORE, E. F. <a href="https://doi.org/doi:10.1515/9781400882618-006">Gedanken-experiments on sequential machines</a>. In: SHANNON, C. E.; MCCARTHY, J. (Eds.). <strong>Automata studies</strong>. Princeton: Princeton University Press, 1956. p. 129–154. </div>
+</div>
+<div id="ref-Mealy1955" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">MEALY, G. H. <a href="https://doi.org/10.1002/j.1538-7305.1955.tb03788.x">A method for synthesizing sequential circuits</a>. <strong>The Bell System Technical Journal</strong>, v. 34, n. 5, p. 1045–1064, Sep. 1955. </div>
+</div>
+<div id="ref-rabin1959" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">RABIN, M. O.; SCOTT, D. <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6771467"><span class="nocase">Finite Automata and Their Decision Problems</span></a>. <strong>IBM Journal of Research and Development</strong>, v. 3, n. 2, p. 114–125, 1959. </div>
+</div>
+<div id="ref-Tian2019Experimental" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">TIAN, Y. et al. <a href="https://doi.org/10.1038/s41534-019-0163-x">Experimental demonstration of quantum finite automaton</a>. <strong>npj Quantum Information</strong>, v. 5, 2019. </div>
+</div>
+</div>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>em tradução livre, “Um Cálculo Lógico Immanente na Atividade Nervosa”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>em tradução livre, “Representação de Eventos em Redes Nervosas e Autômatos Finitos”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>em tradução livre, “Experimentos Mentais sobre Máquinas Sequenciais”.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>em tradução livre, “Um Método para Sintetizar Circuitos Sequenciais”.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Disciplina de Linguagens Formais">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./01a-lexico.html" class="pagination-link" aria-label="Alfabetos, Linguagens e Strings: Fundamentos Matemáticos">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/01-lexico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

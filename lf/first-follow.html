@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 3&nbsp; Conjuntos FIRST e FOLLOW</title>
+<title>Linguagens Formais e Autômatos - 6&nbsp; Conjuntos FIRST e FOLLOW</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./first-follow.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./first-follow.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -182,7 +182,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Autômatos e Gramáticas</span></a>
+ <span class="menu-text">Analisadores Léxicos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -190,20 +190,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first-follow.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
   </div>
 </li>
       </ul>
@@ -211,7 +211,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Projeto da Disciplina</span></a>
+ <span class="menu-text">Analisadores Sintáticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -219,12 +219,47 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first-follow.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./referencias.html" class="sidebar-item-text sidebar-link">
@@ -237,14 +272,14 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#o-conjunto-first" id="toc-o-conjunto-first" class="nav-link active" data-scroll-target="#o-conjunto-first"><span class="header-section-number">3.1</span> O Conjunto FIRST</a>
+  <li><a href="#o-conjunto-first" id="toc-o-conjunto-first" class="nav-link active" data-scroll-target="#o-conjunto-first"><span class="header-section-number">6.1</span> O Conjunto FIRST</a>
   <ul class="collapse">
-  <li><a href="#regras-de-criação-do-conjunto-first" id="toc-regras-de-criação-do-conjunto-first" class="nav-link" data-scroll-target="#regras-de-criação-do-conjunto-first"><span class="header-section-number">3.1.1</span> Regras de Criação do Conjunto FIRST</a></li>
-  <li><a href="#exemplo-1-criação-de-conjuntos-first" id="toc-exemplo-1-criação-de-conjuntos-first" class="nav-link" data-scroll-target="#exemplo-1-criação-de-conjuntos-first"><span class="header-section-number">3.1.2</span> Exemplo 1: Criação de Conjuntos FIRST</a></li>
-  <li><a href="#algoritmo-para-calcular-o-conjunto-first" id="toc-algoritmo-para-calcular-o-conjunto-first" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">3.1.3</span> Algoritmo para calcular o conjunto FIRST</a></li>
+  <li><a href="#regras-de-criação-do-conjunto-first" id="toc-regras-de-criação-do-conjunto-first" class="nav-link" data-scroll-target="#regras-de-criação-do-conjunto-first"><span class="header-section-number">6.1.1</span> Regras de Criação do Conjunto FIRST</a></li>
+  <li><a href="#exemplo-1-criação-de-conjuntos-first" id="toc-exemplo-1-criação-de-conjuntos-first" class="nav-link" data-scroll-target="#exemplo-1-criação-de-conjuntos-first"><span class="header-section-number">6.1.2</span> Exemplo 1: Criação de Conjuntos FIRST</a></li>
+  <li><a href="#algoritmo-para-calcular-o-conjunto-first" id="toc-algoritmo-para-calcular-o-conjunto-first" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">6.1.3</span> Algoritmo para calcular o conjunto FIRST</a></li>
   </ul></li>
-  <li><a href="#o-conjunto-follow" id="toc-o-conjunto-follow" class="nav-link" data-scroll-target="#o-conjunto-follow"><span class="header-section-number">3.2</span> O Conjunto FOLLOW</a></li>
-  <li><a href="#algoritmo-para-calcular-o-conjunto-follow" id="toc-algoritmo-para-calcular-o-conjunto-follow" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">3.3</span> Algoritmo para calcular o conjunto FOLLOW</a></li>
+  <li><a href="#o-conjunto-follow" id="toc-o-conjunto-follow" class="nav-link" data-scroll-target="#o-conjunto-follow"><span class="header-section-number">6.2</span> O Conjunto FOLLOW</a></li>
+  <li><a href="#algoritmo-para-calcular-o-conjunto-follow" id="toc-algoritmo-para-calcular-o-conjunto-follow" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">6.3</span> Algoritmo para calcular o conjunto FOLLOW</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/first-follow.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -255,9 +290,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./first-follow.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./first-follow.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></h1>
 </div>
 
 
@@ -281,11 +316,11 @@ window.Quarto = {
 <p>Diferentemente do <span class="math inline">\(FIRST\)</span>, que se concentra no início de uma derivação, o <span class="math inline">\(FOLLOW\)</span> analisa a situação em que um não-terminal aparece, considerando as produções diretas do não-terminal e também as produções de outros não terminais que, por ventura, contenham o não-terminal em análise. Por exemplo, considere uma gramática que define declarações de variáveis. O não-terminal <em>DECLARACAO_VAR</em> pode ser seguido por diferentes símbolos, dependendo do contexto. Em uma linguagem como o <span class="math inline">\(C\)</span>, uma declaração de variável pode terminar com um ponto e vírgula, ser seguida por um operador de atribuição e uma expressão, ou até mesmo ser parte de uma estrutura maior. Neste cenário, o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal <em>DECLARACAO_VAR</em> incluiria, portanto, o ponto e vírgula ‘;’, o sinal de igual ‘=’, e todos os outros símbolos que podem iniciar uma expressão ou um comando que a linguagem permita ocorrer na mesma linha da declaração da variável.</p>
 <p>Os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> serão utilizados para construir a Tabela de Derivação <span class="math inline">\(LL(1)\)</span>. A forma tecnicamente mais correta seria dizer que estes conjuntos formam a Tabela De Análise <span class="math inline">\(LL(1)\)</span>. Entretanto, pobre de mim, prefiro chamar de Tabela de Derivação.</p>
 <p>As Tabelas de Derivação são tabelas que guiam o processo de análise sintática descendente preditiva no <em>parser</em> <span class="math inline">\(LL(1)\)</span> deterministicamente. Cada célula dessas tabelas corresponde a relação que existe em um par não-terminal, terminal. De forma que o valor da célula apontada por este par indica qual regra de produção deve ser aplicada quando o analisador encontrar este par específico durante a análise preditiva <span class="math inline">\(LL(1)\)</span>.</p>
-<section id="o-conjunto-first" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="o-conjunto-first"><span class="header-section-number">3.1</span> O Conjunto FIRST</h2>
+<section id="o-conjunto-first" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="o-conjunto-first"><span class="header-section-number">6.1</span> O Conjunto FIRST</h2>
 <p>O conjunto <span class="math inline">\(FIRST\)</span> de um símbolo não-terminal é o conjunto de todos os terminais que podem aparecer no início de qualquer <em>string</em> derivada desse símbolo, incluindo o símbolo vazio (<span class="math inline">\(\varepsilon\)</span>) se o não-terminal puder derivar a <em>string</em> vazia. Para os símbolos terminais, o elemento do conjunto <span class="math inline">\(FIRST\)</span> será o próprio símbolo terminal.</p>
-<section id="regras-de-criação-do-conjunto-first" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="regras-de-criação-do-conjunto-first"><span class="header-section-number">3.1.1</span> Regras de Criação do Conjunto FIRST</h3>
+<section id="regras-de-criação-do-conjunto-first" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="regras-de-criação-do-conjunto-first"><span class="header-section-number">6.1.1</span> Regras de Criação do Conjunto FIRST</h3>
 <p>Para definir o conjunto <span class="math inline">\(FIRST(X)\)</span> para todos os símbolos não-terminais <span class="math inline">\(X\)</span> de uma gramática que esteja definida por um conjunto de regras de produção, podemos seguir os seguintes passos:</p>
 <ol type="1">
 <li><p><strong>Para símbolos terminais</strong>: o conjunto <span class="math inline">\(FIRST\)</span> é o próprio símbolo terminal. Ou seja, se <span class="math inline">\(a\)</span> é um terminal, então <span class="math inline">\(FIRST(a) = {a}\)</span>.</p></li>
@@ -299,8 +334,8 @@ window.Quarto = {
 <p><strong>O símbolo vazio <span class="math inline">\(\varepsilon\)</span> pertence ao conjunto FIRST(X) se, e somente se, <span class="math inline">\(X\)</span> pode derivar a string vazia (diretamente ou indiretamente).</strong></p>
 <p>Repita esses passos até que os conjuntos <span class="math inline">\(FIRST\)</span> de todos os símbolos não-terminais não possam ser alterado.</p>
 </section>
-<section id="exemplo-1-criação-de-conjuntos-first" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="exemplo-1-criação-de-conjuntos-first"><span class="header-section-number">3.1.2</span> Exemplo 1: Criação de Conjuntos FIRST</h3>
+<section id="exemplo-1-criação-de-conjuntos-first" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="exemplo-1-criação-de-conjuntos-first"><span class="header-section-number">6.1.2</span> Exemplo 1: Criação de Conjuntos FIRST</h3>
 <p>Considere a gramática definida pelo seguinte conjunto de regras de produção:</p>
 <p><span class="math display">\[
 \begin{array}{cc}
@@ -339,8 +374,8 @@ window.Quarto = {
 <p>Logo: <span class="math inline">\(FIRST =\{(S,\{a, b\}),(A,\{c, d\}),(B,\{e, f\})\}\)</span>, um conjunto de tuplas.</p>
 <p>Agora que entendemos o algoritmo, podemos tentar criar um pseudocódigo para encontrar os elementos do conjunto <span class="math inline">\(First\)</span>.</p>
 </section>
-<section id="algoritmo-para-calcular-o-conjunto-first" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">3.1.3</span> Algoritmo para calcular o conjunto FIRST</h3>
+<section id="algoritmo-para-calcular-o-conjunto-first" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">6.1.3</span> Algoritmo para calcular o conjunto FIRST</h3>
 <pre class="pseudo"><code>## Algoritmo para calcular o conjunto FIRST para símbolos não-terminais
 
 # Entrada: Um conjunto de regras de produção P
@@ -456,8 +491,8 @@ função calcular_FIRST(gramática):
 <span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"FIRST(</span><span class="sc">{</span>nao_terminal<span class="sc">}</span><span class="ss">) = </span><span class="sc">{</span>FIRST[nao_terminal]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="o-conjunto-follow" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="o-conjunto-follow"><span class="header-section-number">3.2</span> O Conjunto FOLLOW</h2>
+<section id="o-conjunto-follow" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="o-conjunto-follow"><span class="header-section-number">6.2</span> O Conjunto FOLLOW</h2>
 <p>O conjunto <span class="math inline">\(FOLLOW\)</span> de um símbolo não-terminal é o conjunto de terminais que podem aparecer imediatamente à direita (após, <em>follow</em>) desse não-terminal em alguma forma sentencial derivada, <strong>ou o símbolo de fim de entrada ($) se o não-terminal puder aparecer no final de uma forma sentencial</strong>.</p>
 <p>Para definir o conjunto <span class="math inline">\(FOLLOW(A)\)</span> para cada não-terminal <span class="math inline">\(A\)</span>, siga estes passos:</p>
 <ol type="1">
@@ -531,8 +566,8 @@ função calcular_FIRST(gramática):
 </tbody>
 </table>
 </section>
-<section id="algoritmo-para-calcular-o-conjunto-follow" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">3.3</span> Algoritmo para calcular o conjunto FOLLOW</h2>
+<section id="algoritmo-para-calcular-o-conjunto-follow" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">6.3</span> Algoritmo para calcular o conjunto FOLLOW</h2>
 <p>Assim como fizemos com o <span class="math inline">\(FIRST\)</span> podemos criar um algoritmo para criar o conjunto <span class="math inline">\(FOLLOW\)</span>:</p>
 <pre class="pseudo"><code># Entrada: Um conjunto de regras de produção P e o símbolo inicial S
 # Saída: Um dicionário FOLLOW, onde FOLLOW[X] é o conjunto FOLLOW do símbolo não-terminal X
@@ -1099,12 +1134,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./parsers.html" class="pagination-link" aria-label="Parsers LL(1): O Mundo da Análise Sintática">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./tabela-derivacao.html" class="pagination-link" aria-label="Tabelas de Derivação (Análise) LL(1)">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 4&nbsp; Tabelas de Derivação (Análise) LL(1)</title>
+<title>Linguagens Formais e Autômatos - 7&nbsp; Tabelas de Derivação (Análise) LL(1)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./tabela-derivacao.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./tabela-derivacao.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -182,7 +182,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Autômatos e Gramáticas</span></a>
+ <span class="menu-text">Analisadores Léxicos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -190,20 +190,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
   </div>
 </li>
       </ul>
@@ -211,7 +211,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Projeto da Disciplina</span></a>
+ <span class="menu-text">Analisadores Sintáticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -219,12 +219,47 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./referencias.html" class="sidebar-item-text sidebar-link">
@@ -237,22 +272,22 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#conflitos-na-tabela-de-derivação" id="toc-conflitos-na-tabela-de-derivação" class="nav-link active" data-scroll-target="#conflitos-na-tabela-de-derivação"><span class="header-section-number">4.1</span> Conflitos na Tabela de Derivação</a>
+  <li><a href="#conflitos-na-tabela-de-derivação" id="toc-conflitos-na-tabela-de-derivação" class="nav-link active" data-scroll-target="#conflitos-na-tabela-de-derivação"><span class="header-section-number">7.1</span> Conflitos na Tabela de Derivação</a>
   <ul class="collapse">
-  <li><a href="#conjunto-first" id="toc-conjunto-first" class="nav-link" data-scroll-target="#conjunto-first"><span class="header-section-number">4.1.1</span> Conjunto FIRST</a></li>
-  <li><a href="#conjunto-follow" id="toc-conjunto-follow" class="nav-link" data-scroll-target="#conjunto-follow"><span class="header-section-number">4.1.2</span> Conjunto FOLLOW</a></li>
-  <li><a href="#nullable" id="toc-nullable" class="nav-link" data-scroll-target="#nullable"><span class="header-section-number">4.1.3</span> Nullable</a></li>
-  <li><a href="#resumo-dos-conjuntos" id="toc-resumo-dos-conjuntos" class="nav-link" data-scroll-target="#resumo-dos-conjuntos"><span class="header-section-number">4.1.4</span> Resumo dos Conjuntos</a></li>
+  <li><a href="#conjunto-first" id="toc-conjunto-first" class="nav-link" data-scroll-target="#conjunto-first"><span class="header-section-number">7.1.1</span> Conjunto FIRST</a></li>
+  <li><a href="#conjunto-follow" id="toc-conjunto-follow" class="nav-link" data-scroll-target="#conjunto-follow"><span class="header-section-number">7.1.2</span> Conjunto FOLLOW</a></li>
+  <li><a href="#nullable" id="toc-nullable" class="nav-link" data-scroll-target="#nullable"><span class="header-section-number">7.1.3</span> Nullable</a></li>
+  <li><a href="#resumo-dos-conjuntos" id="toc-resumo-dos-conjuntos" class="nav-link" data-scroll-target="#resumo-dos-conjuntos"><span class="header-section-number">7.1.4</span> Resumo dos Conjuntos</a></li>
   </ul></li>
-  <li><a href="#tipos-de-conflitos" id="toc-tipos-de-conflitos" class="nav-link" data-scroll-target="#tipos-de-conflitos"><span class="header-section-number">4.2</span> Tipos de Conflitos</a>
+  <li><a href="#tipos-de-conflitos" id="toc-tipos-de-conflitos" class="nav-link" data-scroll-target="#tipos-de-conflitos"><span class="header-section-number">7.2</span> Tipos de Conflitos</a>
   <ul class="collapse">
-  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">4.2.1</span> Resolução de Conflitos</a></li>
-  <li><a href="#conjunto-first-1" id="toc-conjunto-first-1" class="nav-link" data-scroll-target="#conjunto-first-1"><span class="header-section-number">4.2.2</span> Conjunto FIRST</a></li>
-  <li><a href="#conjunto-follow-1" id="toc-conjunto-follow-1" class="nav-link" data-scroll-target="#conjunto-follow-1"><span class="header-section-number">4.2.3</span> Conjunto FOLLOW</a></li>
-  <li><a href="#nullable-1" id="toc-nullable-1" class="nav-link" data-scroll-target="#nullable-1"><span class="header-section-number">4.2.4</span> Nullable</a></li>
-  <li><a href="#resumo-dos-conjuntos-1" id="toc-resumo-dos-conjuntos-1" class="nav-link" data-scroll-target="#resumo-dos-conjuntos-1"><span class="header-section-number">4.2.5</span> Resumo dos Conjuntos</a></li>
+  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">7.2.1</span> Resolução de Conflitos</a></li>
+  <li><a href="#conjunto-first-1" id="toc-conjunto-first-1" class="nav-link" data-scroll-target="#conjunto-first-1"><span class="header-section-number">7.2.2</span> Conjunto FIRST</a></li>
+  <li><a href="#conjunto-follow-1" id="toc-conjunto-follow-1" class="nav-link" data-scroll-target="#conjunto-follow-1"><span class="header-section-number">7.2.3</span> Conjunto FOLLOW</a></li>
+  <li><a href="#nullable-1" id="toc-nullable-1" class="nav-link" data-scroll-target="#nullable-1"><span class="header-section-number">7.2.4</span> Nullable</a></li>
+  <li><a href="#resumo-dos-conjuntos-1" id="toc-resumo-dos-conjuntos-1" class="nav-link" data-scroll-target="#resumo-dos-conjuntos-1"><span class="header-section-number">7.2.5</span> Resumo dos Conjuntos</a></li>
   </ul></li>
-  <li><a href="#pseudocódigo-para-a-criação-da-tabela-de-derivação" id="toc-pseudocódigo-para-a-criação-da-tabela-de-derivação" class="nav-link" data-scroll-target="#pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">4.3</span> Pseudocódigo para a criação da Tabela de Derivação</a></li>
+  <li><a href="#pseudocódigo-para-a-criação-da-tabela-de-derivação" id="toc-pseudocódigo-para-a-criação-da-tabela-de-derivação" class="nav-link" data-scroll-target="#pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">7.3</span> Pseudocódigo para a criação da Tabela de Derivação</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/tabela-derivacao.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -263,9 +298,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Autômatos e Gramáticas</a></li><li class="breadcrumb-item"><a href="./tabela-derivacao.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parsers.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./tabela-derivacao.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></h1>
 </div>
 
 
@@ -381,8 +416,8 @@ FOLLOW(B) &amp; = &amp; \{\$\} \\
 </tbody>
 </table>
 <p>Este exemplo é perfeito, para cada par terminal / não-terminal existe apenas uma regra de produção. Infelizmente, quando estamos construindo linguagens livres de contexto, este não é o cenário mais comum.</p>
-<section id="conflitos-na-tabela-de-derivação" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="conflitos-na-tabela-de-derivação"><span class="header-section-number">4.1</span> Conflitos na Tabela de Derivação</h2>
+<section id="conflitos-na-tabela-de-derivação" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="conflitos-na-tabela-de-derivação"><span class="header-section-number">7.1</span> Conflitos na Tabela de Derivação</h2>
 <p>Conflitos na Tabela de Derivação <span class="math inline">\(LL(1)\)</span> ocorrem quando há mais de uma regra de produção associada a um mesmo par indicador (terminal, não-terminal). Esta ambiguidade significa que, ao encontrar esse par, o <em>parser</em> <span class="math inline">\(LL(1)\)</span> não conseguirá determinar, de forma única e inequívoca, qual regra deverá aplicar a um determinado símbolo de entrada, tornando a gramática ambígua e inadequada para uso com <em>parsers</em> <span class="math inline">\(LL(1)\)</span>.</p>
 <p><strong>Exemplo 2</strong>: o conflito. Observe que gramática a seguir foi criada para criar um conflito na Tabela de Derivação. Antes de nos preocuparmos com os tipos de conflito, e como solucioná-los, vamos rever todo o processo de criação de uma Tabela de Derivação para entender o problema.</p>
 <p><span class="math display">\[
@@ -391,8 +426,8 @@ FOLLOW(B) &amp; = &amp; \{\$\} \\
 2. &amp;\ T \rightarrow int \ \vert  \ (E)
 \end{aligned}
 \]</span></p>
-<section id="conjunto-first" class="level3" data-number="4.1.1">
-<h3 data-number="4.1.1" class="anchored" data-anchor-id="conjunto-first"><span class="header-section-number">4.1.1</span> Conjunto FIRST</h3>
+<section id="conjunto-first" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="conjunto-first"><span class="header-section-number">7.1.1</span> Conjunto FIRST</h3>
 <ol type="1">
 <li><p><strong>Para o não-terminal E:</strong></p>
 <ul>
@@ -413,8 +448,8 @@ FIRST(E) &amp;= FIRST(T) = \{ int, ( \}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="conjunto-follow" class="level3" data-number="4.1.2">
-<h3 data-number="4.1.2" class="anchored" data-anchor-id="conjunto-follow"><span class="header-section-number">4.1.2</span> Conjunto FOLLOW</h3>
+<section id="conjunto-follow" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="conjunto-follow"><span class="header-section-number">7.1.2</span> Conjunto FOLLOW</h3>
 <ol type="1">
 <li><strong>Para o símbolo inicial E:</strong>
 <ul>
@@ -443,8 +478,8 @@ FOLLOW(T) &amp;= \{ +, \$, ) \}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="nullable" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="nullable"><span class="header-section-number">4.1.3</span> Nullable</h3>
+<section id="nullable" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="nullable"><span class="header-section-number">7.1.3</span> Nullable</h3>
 <p>Para determinar se algum não-terminal é <em>nullable</em>, verificamos se ele pode derivar a string vazia <span class="math inline">\(\epsilon\)</span>.</p>
 <ol type="1">
 <li><strong>Para E:</strong>
@@ -466,8 +501,8 @@ Nullable(T) &amp;= false
 \end{aligned}
 \]</span></p>
 </section>
-<section id="resumo-dos-conjuntos" class="level3" data-number="4.1.4">
-<h3 data-number="4.1.4" class="anchored" data-anchor-id="resumo-dos-conjuntos"><span class="header-section-number">4.1.4</span> Resumo dos Conjuntos</h3>
+<section id="resumo-dos-conjuntos" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="resumo-dos-conjuntos"><span class="header-section-number">7.1.4</span> Resumo dos Conjuntos</h3>
 <p><span class="math display">\[
 \begin{aligned}
 FIRST(E) &amp;= \{ int, ( \} \\
@@ -521,15 +556,15 @@ Nullable(T) &amp;= false
 <p>Sempre que na criação de Tabelas de Derivação existir um conflito estaremos gerando ambiguidades na derivação. A gramática é ambígua, sempre que uma sentença puder ser derivada de duas ou mais formas diferentes, gerando árvores sintáticas diferentes. Por exemplo, na gramática do <strong>Exemplo 2</strong>, a sentença <span class="math inline">\(int + int\)</span> pode ser derivada tanto como <span class="math inline">\(E → T → int\)</span> seguido de <span class="math inline">\(E → T + E → int + int\)</span> quanto como <span class="math inline">\(E → T + E → T + T → int + int\)</span>.</p>
 </section>
 </section>
-<section id="tipos-de-conflitos" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="tipos-de-conflitos"><span class="header-section-number">4.2</span> Tipos de Conflitos</h2>
+<section id="tipos-de-conflitos" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="tipos-de-conflitos"><span class="header-section-number">7.2</span> Tipos de Conflitos</h2>
 <p>Conflitos na tabela <span class="math inline">\(LL(1)\)</span> podem ser classificados em dois tipos principais:</p>
 <ol type="1">
 <li><p><strong>Conflito <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FIRST\)</span></strong>: ocorre quando o conjunto <span class="math inline">\(FIRST\)</span> de duas ou mais produções de um mesmo não-terminal possui um terminal em comum. Na gramática do <strong>Exemplo 2</strong>, as produções <span class="math inline">\(E \to T + E\)</span> e <span class="math inline">\(E \to T\)</span> possuem os terminais <span class="math inline">\(int\)</span> e <span class="math inline">\((\)</span> em seus conjuntos <span class="math inline">\(FIRST\)</span>. Ao encontrar <span class="math inline">\(int\)</span> ou <span class="math inline">\((\)</span> na entrada, o <em>parser</em> não sabe se deve aplicar a regra que deriva uma expressão com um operador <span class="math inline">\(+\)</span> ou a regra que deriva um termo. Neste momento do processo de <em>parsing</em> determinismo saiu pela janela e o <em>parser</em> <span class="math inline">\(LL(1)\)</span> é inútil.</p></li>
 <li><p><strong>Conflito <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FOLLOW\)</span></strong>: ocorre quando uma produção tem <span class="math inline">\(\varepsilon\)</span> (a <em>string</em> vazia) em seu conjunto <span class="math inline">\(FIRST\)</span> e o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal da produção possui um terminal em comum com o <span class="math inline">\(FIRST\)</span> de outra produção do mesmo não-terminal. Por exemplo, na gramática do <strong>Exemplo 2</strong>, se <span class="math inline">\(E \rightarrow \varepsilon\)</span> fosse uma produção e o conjunto <span class="math inline">\(FOLLOW(E)\)</span> contivesse <span class="math inline">\(+\)</span>, que também está no <span class="math inline">\(FIRST\)</span> da produção <span class="math inline">\(E \rightarrow T + E\)</span>, ao encontrar o fim de uma expressão (representado por um símbolo em <span class="math inline">\(FOLLOW(E)\)</span>), o <em>parser</em> não saberia se deve aplicar a regra que deriva apenas um termo ou a regra que deriva uma expressão com um operador <span class="math inline">\(+\)</span>.</p></li>
 </ol>
-<section id="resolução-de-conflitos" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">4.2.1</span> Resolução de Conflitos</h3>
+<section id="resolução-de-conflitos" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">7.2.1</span> Resolução de Conflitos</h3>
 <p>Conflitos na tabela <span class="math inline">\(LL(1)\)</span> podem ser resolvidos das seguintes formas:</p>
 <ol type="1">
 <li><strong>Refatoração da gramática</strong>: A gramática pode ser reescrita para eliminar ambiguidades e recursões à esquerda, evitando assim os conflitos.</li>
@@ -547,8 +582,8 @@ Nullable(T) &amp;= false
 \]</span></p>
 <p>Se calcularmos os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> novamente, teremos:</p>
 </section>
-<section id="conjunto-first-1" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="conjunto-first-1"><span class="header-section-number">4.2.2</span> Conjunto FIRST</h3>
+<section id="conjunto-first-1" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="conjunto-first-1"><span class="header-section-number">7.2.2</span> Conjunto FIRST</h3>
 <ol type="1">
 <li><strong>Para o não-terminal E:</strong>
 <ul>
@@ -574,8 +609,8 @@ FIRST(E) &amp;= FIRST(T) = \{ int, ( \}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="conjunto-follow-1" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="conjunto-follow-1"><span class="header-section-number">4.2.3</span> Conjunto FOLLOW</h3>
+<section id="conjunto-follow-1" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="conjunto-follow-1"><span class="header-section-number">7.2.3</span> Conjunto FOLLOW</h3>
 <ol type="1">
 <li><strong>Para o símbolo inicial E:</strong>
 <ul>
@@ -613,8 +648,8 @@ FOLLOW(T) &amp;= \{ +, \$, ) \}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="nullable-1" class="level3" data-number="4.2.4">
-<h3 data-number="4.2.4" class="anchored" data-anchor-id="nullable-1"><span class="header-section-number">4.2.4</span> Nullable</h3>
+<section id="nullable-1" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="nullable-1"><span class="header-section-number">7.2.4</span> Nullable</h3>
 <p>Para determinar se algum não-terminal é <em>nullable</em>, verificamos se ele pode derivar a string vazia <span class="math inline">\(\epsilon\)</span>.</p>
 <ol type="1">
 <li><strong>Para E:</strong>
@@ -641,8 +676,8 @@ Nullable(T) &amp;= false
 \end{aligned}
 \]</span></p>
 </section>
-<section id="resumo-dos-conjuntos-1" class="level3" data-number="4.2.5">
-<h3 data-number="4.2.5" class="anchored" data-anchor-id="resumo-dos-conjuntos-1"><span class="header-section-number">4.2.5</span> Resumo dos Conjuntos</h3>
+<section id="resumo-dos-conjuntos-1" class="level3" data-number="7.2.5">
+<h3 data-number="7.2.5" class="anchored" data-anchor-id="resumo-dos-conjuntos-1"><span class="header-section-number">7.2.5</span> Resumo dos Conjuntos</h3>
 <p><span class="math display">\[
 \begin{aligned}
 FIRST(E) &amp;= \{ int, ( \} \\
@@ -707,8 +742,8 @@ Nullable(T) &amp;= false
 <p>Assim como fiz nos artigos anteriores, vou sugerir um pseudocódigo, um tanto inocente, para a criação de tabelas de derivação. Acredito que, com um pouco de cuidado, depois que a amável leitora dominar esta técnica possa criar um pseudocódigo mais eficiente. A fé move montanhas.</p>
 </section>
 </section>
-<section id="pseudocódigo-para-a-criação-da-tabela-de-derivação" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">4.3</span> Pseudocódigo para a criação da Tabela de Derivação</h2>
+<section id="pseudocódigo-para-a-criação-da-tabela-de-derivação" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">7.3</span> Pseudocódigo para a criação da Tabela de Derivação</h2>
 <pre class="shell"><code>**Entrada:**
 - Conjuntos de produções da gramática: `Productions`
 - Conjuntos FIRST: `First`
@@ -1308,12 +1343,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./first-follow.html" class="pagination-link" aria-label="Conjuntos FIRST e FOLLOW">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

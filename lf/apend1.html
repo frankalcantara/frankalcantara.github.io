@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 9&nbsp; Apêndice 1: A Relação de Myhill-Nerode</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./referencias.html" rel="next">
+<link href="./fase1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./apend1.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#definição-formal-da-relação" id="toc-definição-formal-da-relação" class="nav-link active" data-scroll-target="#definição-formal-da-relação"><span class="header-section-number">9.1</span> Definição Formal da Relação</a>
+  <ul class="collapse">
+  <li><a href="#intuição-por-trás-da-definição" id="toc-intuição-por-trás-da-definição" class="nav-link" data-scroll-target="#intuição-por-trás-da-definição"><span class="header-section-number">9.1.1</span> Intuição por Trás da Definição</a></li>
+  </ul></li>
+  <li><a href="#classes-de-equivalência" id="toc-classes-de-equivalência" class="nav-link" data-scroll-target="#classes-de-equivalência"><span class="header-section-number">9.2</span> Classes de Equivalência</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-fundamental" id="toc-exemplo-fundamental" class="nav-link" data-scroll-target="#exemplo-fundamental"><span class="header-section-number">9.2.1</span> Exemplo Fundamental</a></li>
+  </ul></li>
+  <li><a href="#o-teorema-de-myhill-nerode" id="toc-o-teorema-de-myhill-nerode" class="nav-link" data-scroll-target="#o-teorema-de-myhill-nerode"><span class="header-section-number">9.3</span> O Teorema de Myhill-Nerode</a>
+  <ul class="collapse">
+  <li><a href="#demonstração-esboço" id="toc-demonstração-esboço" class="nav-link" data-scroll-target="#demonstração-esboço"><span class="header-section-number">9.3.1</span> Demonstração (Esboço)</a></li>
+  </ul></li>
+  <li><a href="#aplicações-práticas" id="toc-aplicações-práticas" class="nav-link" data-scroll-target="#aplicações-práticas"><span class="header-section-number">9.4</span> Aplicações Práticas</a>
+  <ul class="collapse">
+  <li><a href="#determinação-de-regularidade" id="toc-determinação-de-regularidade" class="nav-link" data-scroll-target="#determinação-de-regularidade"><span class="header-section-number">9.4.1</span> 1. Determinação de Regularidade</a></li>
+  <li><a href="#minimização-de-autômatos" id="toc-minimização-de-autômatos" class="nav-link" data-scroll-target="#minimização-de-autômatos"><span class="header-section-number">9.4.2</span> 2. Minimização de Autômatos</a></li>
+  <li><a href="#algoritmo-de-construção-do-autômato-mínimo" id="toc-algoritmo-de-construção-do-autômato-mínimo" class="nav-link" data-scroll-target="#algoritmo-de-construção-do-autômato-mínimo"><span class="header-section-number">9.4.3</span> 3. Algoritmo de Construção do Autômato Mínimo</a></li>
+  </ul></li>
+  <li><a href="#exemplo-detalhado-construção-passo-a-passo" id="toc-exemplo-detalhado-construção-passo-a-passo" class="nav-link" data-scroll-target="#exemplo-detalhado-construção-passo-a-passo"><span class="header-section-number">9.5</span> Exemplo Detalhado: Construção Passo a Passo</a></li>
+  <li><a href="#propriedades-importantes" id="toc-propriedades-importantes" class="nav-link" data-scroll-target="#propriedades-importantes"><span class="header-section-number">9.6</span> Propriedades Importantes</a>
+  <ul class="collapse">
+  <li><a href="#refinamento-de-relações" id="toc-refinamento-de-relações" class="nav-link" data-scroll-target="#refinamento-de-relações"><span class="header-section-number">9.6.1</span> 1. Refinamento de Relações</a></li>
+  <li><a href="#invariância-por-operações" id="toc-invariância-por-operações" class="nav-link" data-scroll-target="#invariância-por-operações"><span class="header-section-number">9.6.2</span> 2. Invariância por Operações</a></li>
+  <li><a href="#conexão-com-congruências" id="toc-conexão-com-congruências" class="nav-link" data-scroll-target="#conexão-com-congruências"><span class="header-section-number">9.6.3</span> 3. Conexão com Congruências</a></li>
+  </ul></li>
+  <li><a href="#limitações-e-extensões" id="toc-limitações-e-extensões" class="nav-link" data-scroll-target="#limitações-e-extensões"><span class="header-section-number">9.7</span> Limitações e Extensões</a>
+  <ul class="collapse">
+  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">9.7.1</span> Limitações</a></li>
+  <li><a href="#extensões-modernas" id="toc-extensões-modernas" class="nav-link" data-scroll-target="#extensões-modernas"><span class="header-section-number">9.7.2</span> Extensões Modernas</a></li>
+  </ul></li>
+  <li><a href="#conclusão-a-elegância-da-teoria" id="toc-conclusão-a-elegância-da-teoria" class="nav-link" data-scroll-target="#conclusão-a-elegância-da-teoria"><span class="header-section-number">9.8</span> Conclusão: A Elegância da Teoria</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/apend1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-myhill-nerode" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A <strong>relação de Myhill-Nerode</strong>, nomeada em homenagem aos matemáticos <a href="https://en.wikipedia.org/wiki/John_Myhill">John Myhill</a> e <a href="https://en.wikipedia.org/wiki/Anil_Nerode">Anil Nerode</a>, representa um dos conceitos mais elegantes e fundamentais da teoria de linguagens formais. Esta relação estabelece uma conexão profunda entre propriedades estruturais de linguagens e a existência de autômatos finitos para reconhecê-las.</p>
+<p>A beleza desta teoria reside em sua capacidade de transformar questões sobre linguagens infinitas em problemas finitos e tratáveis. Por meio de uma relação de equivalência aparentemente simples, podemos determinar não apenas se uma linguagem é regular, mas também qual é o menor autômato capaz de reconhecê-la.</p>
+<section id="definição-formal-da-relação" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="definição-formal-da-relação"><span class="header-section-number">9.1</span> Definição Formal da Relação</h2>
+<p>Seja <span class="math inline">\(L\)</span> uma linguagem sobre um alfabeto <span class="math inline">\(\Sigma\)</span>. A <strong>relação de Myhill-Nerode</strong> para <span class="math inline">\(L\)</span> é uma relação de equivalência <span class="math inline">\(\sim_L\)</span> definida sobre <span class="math inline">\(\Sigma^*\)</span> (o conjunto de todas as strings possíveis sobre <span class="math inline">\(\Sigma\)</span>).</p>
+<p><strong>Definição:</strong> Para duas strings <span class="math inline">\(x, y \in \Sigma^*\)</span>, dizemos que <span class="math inline">\(x \sim_L y\)</span> (lê-se “<span class="math inline">\(x\)</span> é equivalente a <span class="math inline">\(y\)</span> módulo <span class="math inline">\(L\)</span>”) se, e somente se:</p>
+<p><span class="math display">\[\forall z \in \Sigma^*: (xz \in L \iff yz \in L)\]</span></p>
+<p>Em outras palavras, duas strings são equivalentes segundo Myhill-Nerode se, ao concatenarmos qualquer string <span class="math inline">\(z\)</span> a cada uma delas, ambas as strings resultantes têm o mesmo comportamento em relação à linguagem <span class="math inline">\(L\)</span>: ou ambas pertencem a <span class="math inline">\(L\)</span>, ou ambas não pertencem.</p>
+<section id="intuição-por-trás-da-definição" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="intuição-por-trás-da-definição"><span class="header-section-number">9.1.1</span> Intuição por Trás da Definição</h3>
+<p>A intuição fundamental é que strings equivalentes são <strong>indistinguíveis</strong> do ponto de vista de <span class="math inline">\(L\)</span>. Se um autômato finito está processando uma entrada e chega a um estado após ler <span class="math inline">\(x\)</span>, ele deveria estar no mesmo estado após ler <span class="math inline">\(y\)</span> (se <span class="math inline">\(x \sim_L y\)</span>), pois qualquer continuação da entrada (<span class="math inline">\(z\)</span>) levará ao mesmo resultado final.</p>
+</section>
+</section>
+<section id="classes-de-equivalência" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="classes-de-equivalência"><span class="header-section-number">9.2</span> Classes de Equivalência</h2>
+<p>A relação <span class="math inline">\(\sim_L\)</span> particiona <span class="math inline">\(\Sigma^*\)</span> em <strong>classes de equivalência</strong>. Cada classe agrupa todas as strings que são mutuamente equivalentes segundo a relação.</p>
+<p><strong>Notação:</strong> A classe de equivalência de uma string <span class="math inline">\(x\)</span> é denotada por <span class="math inline">\([x]_L\)</span> ou simplesmente <span class="math inline">\([x]\)</span> quando <span class="math inline">\(L\)</span> está claro no contexto:</p>
+<p><span class="math display">\[[x]_L = \{y \in \Sigma^* \mid x \sim_L y\}\]</span></p>
+<section id="exemplo-fundamental" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="exemplo-fundamental"><span class="header-section-number">9.2.1</span> Exemplo Fundamental</h3>
+<p>Considere a linguagem <span class="math inline">\(L = \{w \in \{0,1\}^* \mid w \text{ termina em } 01\}\)</span>.</p>
+<p><strong>Análise das classes:</strong></p>
+<ol type="1">
+<li><strong>Strings que terminam em <span class="math inline">\(0\)</span>:</strong> <span class="math inline">\([0] = \{0, 10, 00, 110, 010, \ldots\}\)</span>
+<ul>
+<li>Para qualquer <span class="math inline">\(z\)</span>, temos <span class="math inline">\(xz \in L\)</span> se e somente se <span class="math inline">\(z\)</span> começar com <span class="math inline">\(1\)</span></li>
+</ul></li>
+<li><strong>Strings que terminam em <span class="math inline">\(1\)</span> (exceto <span class="math inline">\(01\)</span>):</strong> <span class="math inline">\([1] = \{1, 11, 001, 101, \ldots\}\)</span>
+<ul>
+<li>Para qualquer <span class="math inline">\(z\)</span>, temos <span class="math inline">\(xz \in L\)</span> se e somente se <span class="math inline">\(z = \epsilon\)</span> ou <span class="math inline">\(z\)</span> começar com <span class="math inline">\(0\)</span> seguido de algo que termine em <span class="math inline">\(1\)</span></li>
+</ul></li>
+<li><strong>Strings que terminam em <span class="math inline">\(01\)</span>:</strong> <span class="math inline">\([01] = \{01, 101, 001, 1001, \ldots\}\)</span>
+<ul>
+<li>Temos <span class="math inline">\(x\epsilon = x \in L\)</span>, então <span class="math inline">\(z = \epsilon\)</span> sempre leva à aceitação</li>
+</ul></li>
+<li><strong>String vazia e outras:</strong> <span class="math inline">\([\epsilon] = \{\epsilon, 11, 0011, \ldots\}\)</span></li>
+</ol>
+<p>Após análise cuidadosa, esta linguagem possui exatamente <strong>3 classes de equivalência</strong>.</p>
+</section>
+</section>
+<section id="o-teorema-de-myhill-nerode" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="o-teorema-de-myhill-nerode"><span class="header-section-number">9.3</span> O Teorema de Myhill-Nerode</h2>
+<p>O teorema principal estabelece a conexão fundamental entre regularidade e finitude das classes de equivalência.</p>
+<p><strong>Teorema (Myhill-Nerode):</strong> Uma linguagem <span class="math inline">\(L\)</span> é regular se, e somente se, a relação <span class="math inline">\(\sim_L\)</span> possui um número finito de classes de equivalência.</p>
+<section id="demonstração-esboço" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="demonstração-esboço"><span class="header-section-number">9.3.1</span> Demonstração (Esboço)</h3>
+<p><strong>(<span class="math inline">\(\Rightarrow\)</span>) Se <span class="math inline">\(L\)</span> é regular, então <span class="math inline">\(\sim_L\)</span> tem finitas classes:</strong></p>
+<p>Se <span class="math inline">\(L\)</span> é regular, existe um autômato finito determinístico (AFD) <span class="math inline">\(M\)</span> com <span class="math inline">\(n\)</span> estados que reconhece <span class="math inline">\(L\)</span>. Definimos uma função <span class="math inline">\(f: \Sigma^* \to Q\)</span> (onde <span class="math inline">\(Q\)</span> é o conjunto de estados) que mapeia cada string para o estado em que <span class="math inline">\(M\)</span> para após processá-la.</p>
+<p>Se <span class="math inline">\(f(x) = f(y)\)</span>, então para qualquer <span class="math inline">\(z\)</span>, o autômato, partindo do mesmo estado, chegará ao mesmo estado final ao processar <span class="math inline">\(z\)</span>. Logo, <span class="math inline">\(xz \in L \iff yz \in L\)</span>, provando que <span class="math inline">\(x \sim_L y\)</span>.</p>
+<p>Como há no máximo <span class="math inline">\(n\)</span> estados distintos, há no máximo <span class="math inline">\(n\)</span> classes de equivalência.</p>
+<p><strong>(<span class="math inline">\(\Leftarrow\)</span>) Se <span class="math inline">\(\sim_L\)</span> tem finitas classes, então <span class="math inline">\(L\)</span> é regular:</strong></p>
+<p>Suponha que existam <span class="math inline">\(k\)</span> classes de equivalência: <span class="math inline">\(C_1, C_2, \ldots, C_k\)</span>. Construímos um AFD onde:</p>
+<ul>
+<li><strong>Estados:</strong> <span class="math inline">\(Q = \{C_1, C_2, \ldots, C_k\}\)</span></li>
+<li><strong>Estado inicial:</strong> <span class="math inline">\(C_i\)</span> tal que <span class="math inline">\(\epsilon \in C_i\)</span><br>
+</li>
+<li><strong>Estados finais:</strong> <span class="math inline">\(F = \{C_i \mid \exists x \in C_i: x \in L\}\)</span></li>
+<li><strong>Função de transição:</strong> <span class="math inline">\(\delta(C_i, a) = C_j\)</span> onde <span class="math inline">\(j\)</span> é tal que se <span class="math inline">\(x \in C_i\)</span>, então <span class="math inline">\(xa \in C_j\)</span></li>
+</ul>
+<p>Este autômato reconhece exatamente <span class="math inline">\(L\)</span>.</p>
+</section>
+</section>
+<section id="aplicações-práticas" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="aplicações-práticas"><span class="header-section-number">9.4</span> Aplicações Práticas</h2>
+<section id="determinação-de-regularidade" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="determinação-de-regularidade"><span class="header-section-number">9.4.1</span> 1. Determinação de Regularidade</h3>
+<p>A relação de Myhill-Nerode fornece um método sistemático para provar que uma linguagem não é regular:</p>
+<p><strong>Exemplo:</strong> <span class="math inline">\(L = \{a^nb^n \mid n \geq 0\}\)</span></p>
+<p>Para cada <span class="math inline">\(i \neq j\)</span>, as strings <span class="math inline">\(a^i\)</span> e <span class="math inline">\(a^j\)</span> estão em classes diferentes, pois: - <span class="math inline">\(a^i b^i \in L\)</span> mas <span class="math inline">\(a^j b^i \notin L\)</span> (quando <span class="math inline">\(i \neq j\)</span>)</p>
+<p>Como há infinitas strings <span class="math inline">\(a^i\)</span> duas-a-duas não equivalentes, <span class="math inline">\(L\)</span> não é regular.</p>
+</section>
+<section id="minimização-de-autômatos" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="minimização-de-autômatos"><span class="header-section-number">9.4.2</span> 2. Minimização de Autômatos</h3>
+<p>O teorema de Myhill-Nerode também caracteriza o <strong>autômato mínimo</strong> para uma linguagem regular:</p>
+<p><strong>Teorema:</strong> Se <span class="math inline">\(L\)</span> é uma linguagem regular com <span class="math inline">\(k\)</span> classes de equivalência segundo Myhill-Nerode, então: 1. Todo AFD que reconhece <span class="math inline">\(L\)</span> tem pelo menos <span class="math inline">\(k\)</span> estados 2. Existe um único AFD (a menos de isomorfismo) com exatamente <span class="math inline">\(k\)</span> estados que reconhece <span class="math inline">\(L\)</span></p>
+<p>Este AFD é chamado de <strong>autômato canônico</strong> ou <strong>autômato mínimo</strong> para <span class="math inline">\(L\)</span>.</p>
+</section>
+<section id="algoritmo-de-construção-do-autômato-mínimo" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="algoritmo-de-construção-do-autômato-mínimo"><span class="header-section-number">9.4.3</span> 3. Algoritmo de Construção do Autômato Mínimo</h3>
+<p><strong>Entrada:</strong> Uma linguagem regular <span class="math inline">\(L\)</span><br>
+<strong>Saída:</strong> O autômato mínimo para <span class="math inline">\(L\)</span></p>
+<p><strong>Passos:</strong> 1. <strong>Identificar representantes:</strong> Encontre strings representativas de cada classe de equivalência 2. <strong>Construir estados:</strong> Cada classe torna-se um estado 3. <strong>Definir transições:</strong> Para cada classe <span class="math inline">\([x]\)</span> e símbolo <span class="math inline">\(a\)</span>, determine <span class="math inline">\([xa]\)</span> 4. <strong>Marcar estados finais:</strong> Classes contendo strings de <span class="math inline">\(L\)</span></p>
+</section>
+</section>
+<section id="exemplo-detalhado-construção-passo-a-passo" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="exemplo-detalhado-construção-passo-a-passo"><span class="header-section-number">9.5</span> Exemplo Detalhado: Construção Passo a Passo</h2>
+<p><strong>Linguagem:</strong> <span class="math inline">\(L = \{w \in \{a,b\}^* \mid |w|_a \text{ é par}\}\)</span> (número par de <span class="math inline">\(a\)</span>’s)</p>
+<p><strong>Passo 1 - Identificação das classes:</strong></p>
+<p>Precisamos rastrear apenas a paridade do número de <span class="math inline">\(a\)</span>’s lidos:</p>
+<ul>
+<li><strong>Classe <span class="math inline">\(C_0\)</span> (par de <span class="math inline">\(a\)</span>’s):</strong> <span class="math inline">\([\epsilon] = \{b^*ab^*ab^*...\}\)</span> onde há um número par de <span class="math inline">\(a\)</span>’s</li>
+<li><strong>Classe <span class="math inline">\(C_1\)</span> (ímpar de <span class="math inline">\(a\)</span>’s):</strong> <span class="math inline">\([a] = \{b^*ab^*...\}\)</span> onde há um número ímpar de <span class="math inline">\(a\)</span>’s</li>
+</ul>
+<p><strong>Passo 2 - Verificação da equivalência:</strong></p>
+<p>Para <span class="math inline">\(x, y \in C_0\)</span>: qualquer <span class="math inline">\(z\)</span> mudará ambos da mesma forma (mantendo ou alternando paridade)<br>
+Para <span class="math inline">\(x \in C_0, y \in C_1\)</span>: existe <span class="math inline">\(z = \epsilon\)</span> tal que <span class="math inline">\(x \in L\)</span> mas <span class="math inline">\(y \notin L\)</span></p>
+<p><strong>Passo 3 - Construção do autômato:</strong></p>
+<pre><code>Estados: {C_0, C_1}
+Estado inicial: C_0
+Estados finais: {C_0}
+
+Transições:
+C_0 --a--&gt; C_1
+C_0 --b--&gt; C_0  
+C_1 --a--&gt; C_0
+C_1 --b--&gt; C_1</code></pre>
+<p><strong>Resultado:</strong> Autômato mínimo com 2 estados.</p>
+</section>
+<section id="propriedades-importantes" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="propriedades-importantes"><span class="header-section-number">9.6</span> Propriedades Importantes</h2>
+<section id="refinamento-de-relações" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="refinamento-de-relações"><span class="header-section-number">9.6.1</span> 1. Refinamento de Relações</h3>
+<p>Se <span class="math inline">\(\approx\)</span> é qualquer relação de equivalência sobre <span class="math inline">\(\Sigma^*\)</span> que <strong>respeita</strong> <span class="math inline">\(L\)</span> (isto é, se <span class="math inline">\(x \approx y\)</span> então <span class="math inline">\(\forall z: xz \in L \iff yz \in L\)</span>), então <span class="math inline">\(\sim_L\)</span> é um <strong>refinamento</strong> de <span class="math inline">\(\approx\)</span>. Em outras palavras, Myhill-Nerode é a relação mais fina possível que mantém as propriedades da linguagem.</p>
+</section>
+<section id="invariância-por-operações" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="invariância-por-operações"><span class="header-section-number">9.6.2</span> 2. Invariância por Operações</h3>
+<p>A relação de Myhill-Nerode se comporta bem com operações regulares:</p>
+<ul>
+<li><strong>União:</strong> <span class="math inline">\(\sim_{L_1 \cup L_2}\)</span> tem no máximo <span class="math inline">\(|\sim_{L_1}| \times |\sim_{L_2}|\)</span> classes</li>
+<li><strong>Concatenação:</strong> Comportamento mais complexo, mas ainda finito para linguagens regulares</li>
+<li><strong>Fechamento de Kleene:</strong> Preserve a finitude das classes</li>
+</ul>
+</section>
+<section id="conexão-com-congruências" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="conexão-com-congruências"><span class="header-section-number">9.6.3</span> 3. Conexão com Congruências</h3>
+<p>A relação <span class="math inline">\(\sim_L\)</span> é não apenas uma equivalência, mas também uma <strong>congruência</strong> à direita: se <span class="math inline">\(x \sim_L y\)</span>, então <span class="math inline">\(xz \sim_L yz\)</span> para qualquer <span class="math inline">\(z \in \Sigma^*\)</span>.</p>
+</section>
+</section>
+<section id="limitações-e-extensões" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="limitações-e-extensões"><span class="header-section-number">9.7</span> Limitações e Extensões</h2>
+<section id="limitações" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="limitações"><span class="header-section-number">9.7.1</span> Limitações</h3>
+<ol type="1">
+<li><strong>Computabilidade:</strong> Para linguagens arbitrárias, determinar as classes pode ser indecidível</li>
+<li><strong>Complexidade:</strong> Mesmo para linguagens regulares, o número de classes pode ser exponencial no tamanho da descrição</li>
+<li><strong>Aplicabilidade:</strong> Limitado a linguagens regulares por definição</li>
+</ol>
+</section>
+<section id="extensões-modernas" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="extensões-modernas"><span class="header-section-number">9.7.2</span> Extensões Modernas</h3>
+<ol type="1">
+<li><strong>Relações de Nerode Generalizadas:</strong> Para linguagens livres de contexto</li>
+<li><strong>Myhill-Nerode Probabilístico:</strong> Para autômatos probabilísticos<br>
+</li>
+<li><strong>Versões Categóricas:</strong> Em teoria das categorias e sistemas de tipos</li>
+</ol>
+</section>
+</section>
+<section id="conclusão-a-elegância-da-teoria" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="conclusão-a-elegância-da-teoria"><span class="header-section-number">9.8</span> Conclusão: A Elegância da Teoria</h2>
+<p>A relação de Myhill-Nerode exemplifica a beleza da matemática teórica aplicada à ciência da computação. Com uma definição simples e elegante, ela resolve problemas fundamentais:</p>
+<ul>
+<li><strong>Caracteriza completamente</strong> as linguagens regulares</li>
+<li><strong>Fornece algoritmos</strong> para minimização de autômatos</li>
+<li><strong>Estabelece limites teóricos</strong> para a representação de linguagens</li>
+<li><strong>Conecta</strong> aspectos algébricos e combinatórios da teoria</li>
+</ul>
+<p>Para a engenhosa leitora, esta teoria representa não apenas uma ferramenta técnica, mas um exemplo paradigmático de como abstração matemática pode revelar estruturas profundas em sistemas computacionais. A relação de Myhill-Nerode continua sendo uma das joias conceituais da ciência da computação teórica, influenciando desenvolvimentos em áreas que vão desde compiladores até aprendizado de máquina.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./referencias.html" class="pagination-link" aria-label="Referências">
+        <span class="nav-page-text">Referências</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/apend1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
