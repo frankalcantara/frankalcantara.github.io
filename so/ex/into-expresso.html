@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+    <script src="./common_js.js" defer></script>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#maquinas-nuas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Máquinas Nuas (1940s-1950s)</a></li>
+                <li class="mb-2"><a href="#revolucao-batch" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Revolução Batch (1950s-1960s)</a></li>
+                <li class="mb-2"><a href="#multiprogramacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Multiprogramação (1960s-1970s)</a></li>
+                <li class="mb-2"><a href="#time-sharing" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Time-Sharing (1960s-1980s)</a></li>
+                <li class="mb-2"><a href="#era-pcs" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Era dos PCs (1970s-presente)</a></li>
+                <li class="mb-2"><a href="#fronteiras-modernas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Fronteiras Modernas</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Eras Tecnológicas</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-microchip me-2 text-primary"></i><small class="text-primary fw-medium">Válvulas</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-bolt me-2 text-success"></i><small class="text-success fw-medium">Transistores</small></div>
+                <div class="p-2" style="background-color: #dbeafe;"><i class="fas fa-memory me-2" style="color: #0284c7;"></i><small style="color: #0284c7;" class="fw-medium">Circuitos Integrados</small></div>
+                <div class="p-2 bg-secondary-subtle rounded"><i class="fas fa-network-wired me-2 text-secondary"></i><small class="text-secondary fw-medium">Multicore</small></div>
+            </div>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Sistemas Influentes</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">ENIAC/Z3</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">UNIX</small>
+                </div>
+                <div class="p-2 bg-light rounded">
+                    <small class="fw-medium text-dark">Linux</small>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"circuits\" x=\"0\" y=\"0\" width=\"80\" height=\"80\" patternUnits=\"userSpaceOnUse\"><circle cx=\"20\" cy=\"20\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.4\"/><circle cx=\"60\" cy=\"20\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"20\" cy=\"60\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"60\" cy=\"60\" r=\"4\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M20,20 L60,20 M20,20 L20,60 M60,20 L60,60 M20,60 L60,60 M40,0 L40,80 M0,40 L80,40\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23circuits)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Desvendando o</em>
+                                    <span class="d-block">Invisível</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Uma Introdução aos Sistemas Operacionais
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">1940s</div>
+                            <div class="fs-6 text-muted">Primórdios da Computação</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">UNIX</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Revolução dos SO</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-microchip fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Hardware</h3>
+                                <p class="fs-7 text-muted">Base física</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-layer-group fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Abstração</h3>
+                                <p class="fs-7 text-muted">Ponte invisível</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-users fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Multiusuário</h3>
+                                <p class="fs-7 text-muted">Compartilhamento</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-cloud fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Distribuição</h3>
+                                <p class="fs-7 text-muted">Era moderna</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. O Capitão Invisível</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Em cada computador, smartphone ou dispositivo inteligente que utilizamos hoje existe um software fundamental que orquestra silenciosamente todas as operações: o <strong>Sistema Operacional</strong>.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Assim como o capitão pilota um navio, o Sistema Operacional coordena cada pequeno subsistema da máquina criando harmonia perfeita"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Texto Original">Do conceito à realidade</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-eye-slash fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Invisibilidade Funcional</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    A natureza ubíqua dos Sistemas Operacionais torna-os quase <strong>invisíveis</strong> para a maioria dos usuários. Quando salvamos um arquivo ou executamos um programa, não nos damos conta dos mecanismos complexos que tornam essas ações possíveis.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Transparência</div>
+                                    <div class="fs-6 text-muted">O usuário não precisa se preocupar</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-cogs fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Complexidade Gerenciada</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Por trás da aparente simplicidade, reside uma das criações mais sofisticadas da engenharia de software: um sistema capaz de <strong>gerenciar recursos limitados, coordenar atividades concorrentes e garantir segurança</strong>.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Orquestração</div>
+                                    <div class="fs-6 text-muted">Hardware e software em harmonia</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Por Que Estudar Sistemas Operacionais?</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Compreender os Sistemas Operacionais não é apenas curiosidade acadêmica, mas <strong>necessidade fundamental</strong> para qualquer profissional que deseje trabalhar com tecnologia de forma competente. Esta necessidade é maximizada em tempos de crescente complexidade tecnológica.
+                        </p>
+                        <div class="row row-cols-1 row-cols-sm-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="stat-highlight text-primary">IA</div>
+                                    <div class="fs-6 text-primary">Inteligência</div>
+                                    <small class="text-muted">Artificial</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="stat-highlight text-success">Quantum</div>
+                                    <div class="fs-6 text-success">Computação</div>
+                                    <small class="text-muted">Quântica</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="stat-highlight text-warning">IoT</div>
+                                    <div class="fs-6 text-warning">Internet</div>
+                                    <small class="text-muted">das Coisas</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Era das Máquinas Nuas -->
+        <section id="maquinas-nuas" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. O Estágio Nascente: Máquinas Nuas (1940s-1950s)</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Os primórdios da computação, <em>a era do bit lascado</em>, foram caracterizados por máquinas colossais que utilizavam <strong>válvulas termiônicas e painéis de conexão</strong>, operando sem qualquer forma de sistema supervisor.
+                    </p>
+
+                    <!-- ENIAC vs Z3 -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center text-danger">
+                                    <i class="fas fa-desktop me-3"></i>
+                                    ENIAC (1945)
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Electronic Numerical Integrator And Computer</strong> - um dos primeiros computadores digitais eletrônicos de grande escala, desenvolvido durante a Segunda Guerra Mundial.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">17.468 válvulas</div>
+                                            <div class="fs-6 text-muted">167 m² e 30 toneladas</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Painéis de conexão</div>
+                                            <div class="fs-6 text-muted">Programação física manual</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-danger"></i>
+                                        <div>
+                                            <div class="fw-medium">Programadoras</div>
+                                            <div class="fs-6 text-muted">Primeiras programadoras do mundo</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-3 fw-semibold mb-3 d-flex align-items-center text-success">
+                                    <i class="fas fa-microchip me-3"></i>
+                                    Z3 (1941)
+                                </h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Criado por <strong>Konrad Zuse</strong> em Berlim, reconhecido como o primeiro computador programável e totalmente automático do mundo. Redescoberto nos anos 1990.
+                                </p>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">2.600 relés</div>
+                                            <div class="fs-6 text-muted">Tecnologia eletromecânica</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Fitas perfuradas</div>
+                                            <div class="fs-6 text-muted">Programação automática</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-start">
+                                        <i class="fas fa-arrow-right me-3 mt-1 text-success"></i>
+                                        <div>
+                                            <div class="fw-medium">Turing-completo</div>
+                                            <div class="fs-6 text-muted">Provado em 1998</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Características da Era -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Características da Era</h3>
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-wrench fs-3 mb-2" style="color: var(--sage-600);"></i>
+                                    <div class="fw-medium" style="color: var(--sage-600);">Configuração Manual</div>
+                                    <small class="text-muted">Circuitos montados fisicamente para cada tarefa</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-clock fs-3 mb-2" style="color: var(--copper-600);"></i>
+                                    <div class="fw-medium" style="color: var(--copper-600);">Tempo de Setup</div>
+                                    <small class="text-muted">Dias ou semanas para programar</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center p-3 bg-white rounded">
+                                    <i class="fas fa-users fs-3 mb-2" style="color: var(--sage-700);"></i>
+                                    <div class="fw-medium" style="color: var(--sage-700);">Especialistas</div>
+                                    <small class="text-muted">Matemáticos e eletrônicos</small>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="fs-6 mt-3 mb-0 fst-italic" style="color: var(--sage-700);">
+                            <strong>Mesmo sem qualquer sistema de gerência de hardware ou software, os computadores já eram capazes de realizar tarefas complexas.</strong> No entanto, a falta de abstração tornava o processo trabalhoso e propenso a erros.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Revolução Batch -->
+        <section id="revolucao-batch" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. A Revolução Batch: Automatizando o Throughput (1950s-1960s)</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A era dos <strong>transistores</strong> trouxe máquinas menores, mais confiáveis e práticas. Os mainframes caros e centralizados enfrentavam um problema: a <strong>subutilização da CPU</strong> durante operações de E/S.
+                    </p>
+
+                    <!-- Throughput Concept -->
+                    <div class="callout-tip">
+                        <h3 class="fs-4 fw-semibold mb-3 text-info">
+                            <i class="fas fa-tachometer-alt me-2"></i>
+                            Conceito de Throughput
+                        </h3>
+                        <p class="fs-6 mb-3 text-info">
+                            <strong>Throughput</strong> refere-se à quantidade de trabalho que um sistema pode realizar em um determinado período. É diferente de velocidade individual - uma fábrica pode produzir muitos carros por dia (alto throughput) mesmo que cada carro leve semanas para ficar pronto (alta latência).
+                        </p>
+                        <div class="p-3 bg-white rounded">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="text-center me-4">
+                                    <div class="stat-highlight text-primary">1x</div>
+                                    <small class="text-muted">Máquinas nuas</small>
+                                </div>
+                                <i class="fas fa-arrow-right fs-3 text-success mx-3"></i>
+                                <div class="text-center ms-4">
+                                    <div class="stat-highlight text-success">4x</div>
+                                    <small class="text-muted">Sistemas Batch</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Batch Systems Features -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-layer-group fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Monitor Residente</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Um componente <strong>precursor dos Sistemas Operacionais modernos</strong> que automatizava o sequenciamento dos trabalhos, eliminando a intervenção manual entre tarefas.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Inovação</div>
+                                    <div class="fs-6 text-muted">Automação do processo de execução</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-code fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">JCL - Job Control Language</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Linguagem específica que permitia instruir o sistema para processar trabalhos, definindo <strong>parâmetros e sequências de execução</strong>. A primeira linguagem de domínio específico para controle de sistemas.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Programação</div>
+                                    <div class="fs-6 text-muted">Controle automatizado de trabalhos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Systems -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Sistemas Influentes da Era Batch</h3>
+                        
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-2 text-primary">FMS (Fortran Monitor System)</h4>
+                                <p class="fs-6 text-muted mb-3">
+                                    Um dos primeiros sistemas desenvolvido para programas <strong>FORTRAN</strong>, permitia execução sequencial sem intervenção manual e introduziu conceitos básicos de gerenciamento de tarefas.
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h4 class="fs-5 fw-semibold mb-2 text-success">IBSYS (IBM 7094)</h4>
+                                <p class="fs-6 text-muted mb-3">
+                                    Estabeleceu conceitos fundamentais como <strong>gerenciamento de memória, escalonamento de tarefas e proteção de memória</strong>, garantindo que programas não interferissem uns com os outros.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-light rounded">
+                            <strong class="text-primary">Marco Histórico:</strong>
+                            <span class="text-primary">Os sistemas Batch marcaram o primeiro passo na automação dos processos de operação das máquinas e impulsionaram os conceitos de abstração que usamos hoje.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Multiprogramação -->
+        <section id="multiprogramacao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Malabarismo de Recursos: Multiprogramação (1960s-1970s)</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A introdução dos <strong>circuitos integrados</strong> trouxe computadores mais poderosos, mas o problema persistia: a CPU permanecia ociosa durante operações de E/S. Surgiu então a <strong>multiprogramação</strong>.
+                    </p>
+
+                    <!-- Multiprogramming Concept -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">A Técnica Revolucionária</h3>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    <strong>Manter múltiplos processos na memória simultaneamente</strong>. Quando um programa precisar fazer E/S, o sistema rapidamente comuta a CPU para outro programa pronto para execução.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Eficiência</div>
+                                    <div class="fs-6 text-muted">Utilização da CPU próxima a 100%</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <i class="fas fa-sync-alt fs-1" style="color: var(--copper-600);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mathematical Model -->
+                    <div class="definition-box">
+                        <div class="definition-title">Modelo Matemático da Multiprogramação</div>
+                        <p class="fs-6 mb-3">
+                            Se um processo gasta uma fração <strong>p</strong> do tempo em E/S, a utilização da CPU com <strong>n</strong> processos é:
+                        </p>
+                        <div class="text-center my-3">
+                            <div class="fs-4 fw-bold" style="font-family: 'Times New Roman', serif;">
+                                Utilização da CPU = 1 - p<sup>n</sup>
+                            </div>
+                        </div>
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Processos (n)</th>
+                                        <th>p = 0.5</th>
+                                        <th>Utilização CPU</th>
+                                        <th>Melhoria</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>0.5</td>
+                                        <td>50%</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>0.25</td>
+                                        <td>75%</td>
+                                        <td>+50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>0.0625</td>
+                                        <td>93.75%</td>
+                                        <td>+87.5%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>0.0039</td>
+                                        <td>99.61%</td>
+                                        <td>+99.2%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-exchange-alt fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Context Switching</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    O chaveamento de contexto permite alternar rapidamente entre processos, mantendo a CPU ocupada enquanto outros processos esperam por E/S.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Não-preemptivo</div>
+                                    <div class="fs-6 text-muted">Processo cede controle voluntariamente</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-database fs-3 me-3 text-warning"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Spooling</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    <strong>Simultaneous Peripheral Operation On-Line</strong> - utiliza o disco como buffer para operações de E/S, permitindo operação concorrente da CPU e dispositivos.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3">
+                                    <div class="fw-bold text-warning">Buffer</div>
+                                    <div class="fs-6 text-muted">Armazenamento temporário inteligente</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Time-Sharing -->
+        <section id="time-sharing" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Era da Interatividade: Time-Sharing (1960s-1980s)</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Os sistemas de tempo compartilhado representaram o nascimento da <strong>multitarefa interativa moderna</strong>, focando na experiência do usuário através do <em>time slicing</em> - divisão do tempo da CPU em pequenas fatias.
+                    </p>
+
+                    <!-- Time-Sharing vs Multiprogramming -->
+                    <div class="table-responsive-custom mb-5">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Aspecto</th>
+                                    <th>Multiprogramação</th>
+                                    <th>Time-Sharing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Objetivo Principal</strong></td>
+                                    <td>Maximizar utilização de CPU</td>
+                                    <td>Garantir responsividade interativa</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Troca de Contexto</strong></td>
+                                    <td>Apenas quando processo bloqueia</td>
+                                    <td>Por quantum de tempo <strong>ou</strong> quando bloqueia</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Preempção</strong></td>
+                                    <td>Não</td>
+                                    <td>Sim (por tempo)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tipo de Usuário</strong></td>
+                                    <td>Batch jobs, processamento em lote</td>
+                                    <td>Usuários interativos</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Aplicação Ideal</strong></td>
+                                    <td>Sistemas com alta taxa de E/S</td>
+                                    <td>Sistemas multiusuário interativos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Key Concepts -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-3 fw-semibold mb-3 text-primary">Preempção por Tempo</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Cada processo recebe um <strong>quantum de tempo fixo</strong>. Quando expira, o sistema interrompe forçosamente o processo e concede a CPU ao próximo na fila.
+                                </p>
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <div class="text-center">
+                                        <div class="fs-5 fw-bold text-primary">Round-Robin</div>
+                                        <small class="text-primary">Algoritmo de escalonamento</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-3 fw-semibold mb-3 text-success">Interatividade Prioritária</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    O objetivo mudou de maximizar throughput para fornecer <strong>responsividade interativa</strong>. Cada usuário tem a impressão de uso exclusivo do computador.
+                                </p>
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <div class="text-center">
+                                        <div class="fs-5 fw-bold text-success">Experiência</div>
+                                        <small class="text-success">Computador dedicado</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Historical Systems -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Sistemas Influentes em Time-Sharing</h3>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2 text-primary">CTSS (MIT)</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                <strong>Compatible Time-Sharing System</strong> pioneiro no uso de compartilhamento de tempo com interrupções, estabeleceu conceitos fundamentais dos sistemas interativos modernos.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2 text-success">MULTICS</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                <strong>Multiplexed Information and Computing Service</strong> introduziu memória de nível único, ligação dinâmica e sistema de arquivos hierárquico, com forte foco em segurança.
+                            </p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-2 text-warning">UNIX (Bell Labs)</h4>
+                            <p class="fs-6 text-muted mb-0">
+                                Desenvolvido por <strong>Ken Thompson e Dennis Ritchie</strong>, escrito em linguagem C, ofereceu portabilidade notável e estabeleceu padrões que influenciam sistemas modernos até hoje.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Era dos PCs -->
+        <section id="era-pcs" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. A Democratização: Era dos PCs (1970s-presente)</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A invenção dos <strong>microprocessadores</strong> e avanços em LSI/VLSI levaram ao surgimento de computadores pessoais acessíveis, transformando a computação de privilégio institucional para ferramenta pessoal ubíqua.
+                    </p>
+
+                    <!-- Hardware Evolution -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Evolução do Hardware e o Dilema dos 3GHz</h3>
+                        <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                            Máquinas menores e mais rápidas implicavam em altas velocidades de clock, mas o <strong>aumento da frequência gera calor</strong> - inimigo mortal da eletrônica. Na virada do milênio, o limite estava próximo dos 3GHz.
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2 text-danger">O Problema</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-thermometer-full me-2 text-danger"></i>Aumento de temperatura</li>
+                                        <li><i class="fas fa-snowflake me-2 text-info"></i>Sistemas de resfriamento complexos</li>
+                                        <li><i class="fas fa-dollar-sign me-2 text-warning"></i>Aumento de custo e complexidade</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2 text-success">A Solução</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-microchip me-2 text-success"></i>Chips multicore</li>
+                                        <li><i class="fas fa-tachometer-alt me-2 text-primary"></i>Velocidades mais baixas</li>
+                                        <li><i class="fas fa-fire me-2 text-danger"></i>Menos calor, mais throughput</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multicore Evolution -->
+                    <div class="callout-success">
+                        <h3 class="fs-4 fw-semibold mb-3 text-success">
+                            <i class="fas fa-history me-2"></i>
+                            A Era Multicore
+                        </h3>
+                        <div class="timeline-item">
+                            <h4 class="fs-6 fw-semibold mb-1">2001 - IBM POWER4</h4>
+                            <p class="fs-6 text-muted mb-0">Primeiro microprocessador dual-core comercial para servidores</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-6 fw-semibold mb-1">2005 - Intel Pentium D</h4>
+                            <p class="fs-6 text-muted mb-0">Primeiro dual-core para consumidor (dois Pentium 4 unidos)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fs-6 fw-semibold mb-1">2006 - Intel Core Duo</h4>
+                            <p class="fs-6 text-muted mb-0">Primeiro dual-core verdadeiro com cache L2 compartilhado</p>
+                        </div>
+                    </div>
+
+                    <!-- Influential Systems -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">CP/M e MS-DOS</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    O <strong>CP/M</strong> de Gary Kildall estabeleceu convenções duradouras e introduziu o conceito de BIOS. O <strong>MS-DOS</strong> dominou a era IBM PC com compatibilidade e simplicidade.
+                                </p>
+                                <div class="p-2 bg-primary-subtle rounded">
+                                    <small class="text-primary fw-medium">Legado: A:, B:, C: drives</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Mac OS e Windows</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    O <strong>Mac OS</strong> (1984) revolucionou interfaces gráficas com WYSIWYG. O <strong>Windows NT</strong> trouxe arquitetura de 32 bits e recursos avançados de segurança.
+                                </p>
+                                <div class="p-2 bg-success-subtle rounded">
+                                    <small class="text-success fw-medium">Inovação: Interface gráfica intuitiva</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fronteiras Modernas -->
+        <section id="fronteiras-modernas" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Fronteiras Modernas: O Futuro em Construção</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As últimas décadas foram marcadas pela criação de novos paradigmas computacionais que transformaram nossa relação com a tecnologia, estabelecendo alicerces para a <strong>revolução da Inteligência Artificial</strong>.
+                    </p>
+
+                    <!-- Modern Frontiers Grid -->
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-microchip fs-3 me-3 text-primary"></i>
+                                    <h4 class="fs-5 fw-semibold mb-0">Sistemas Embarcados</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Internet das Coisas (IoT)</strong> - sistemas com recursos limitados operando em tempo real, desde marca-passos até controle industrial.
+                                </p>
+                                <div class="p-2 bg-primary-subtle rounded">
+                                    <small class="text-primary fw-medium">Desafio: Eficiência energética</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-mobile-alt fs-3 me-3 text-success"></i>
+                                    <h4 class="fs-5 fw-semibold mb-0">Sistemas Móveis</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Android e iOS</strong> redefinindo computação pessoal com interfaces de toque, sensores integrados e IA embarcada para gerenciamento adaptativo.
+                                </p>
+                                <div class="p-2 bg-success-subtle rounded">
+                                    <small class="text-success fw-medium">Inovação: IA para bateria</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-info">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-network-wired fs-3 me-3 text-info"></i>
+                                    <h4 class="fs-5 fw-semibold mb-0">Sistemas Distribuídos</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>Microsserviços e containers</strong> - arquiteturas que decompõem aplicações monolíticas em serviços independentes e escaláveis.
+                                </p>
+                                <div class="p-2 bg-info-subtle rounded">
+                                    <small class="text-info fw-medium">Tecnologia: Docker, Kubernetes</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-cloud fs-3 me-3 text-warning"></i>
+                                    <h4 class="fs-5 fw-semibold mb-0">Computação em Nuvem</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>SaaS, PaaS, IaaS</strong> - transformação fundamental na arquitetura de sistemas com elasticidade, autoatendimento e modelos de serviço mensurados.
+                                </p>
+                                <div class="p-2 bg-warning-subtle rounded">
+                                    <small class="text-warning fw-medium">Característica: Elasticidade</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-brain fs-3 me-3 text-danger"></i>
+                                    <h4 class="fs-5 fw-semibold mb-0">Inteligência Artificial</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>LLMs e hardware especializado</strong> - GPUs, TPUs e LPUs exigindo novos paradigmas de gerenciamento de recursos e energia.
+                                </p>
+                                <div class="p-2 bg-danger-subtle rounded">
+                                    <small class="text-danger fw-medium">Impacto: Integração nativa</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-secondary">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-atom fs-3 me-3 text-secondary"></i>
+                                    <h4 class="fs-5 fw-semibold mb-0">Computação Quântica</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    <strong>QCOS e qubits</strong> - sistemas operacionais quânticos gerenciando superposição, emaranhamento e correção de erros quânticos.
+                                </p>
+                                <div class="p-2 bg-secondary-subtle rounded">
+                                    <small class="text-secondary fw-medium">Desafio: Decoerência</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Message -->
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">A Jornada Continua</h4>
+                            <p class="fs-5 mb-3 text-white">
+                                Nossa jornada pelos <strong>Sistemas Operacionais</strong> nos mostrou como a tecnologia evolui em laços de realimentação positiva: hardware avança, software se adapta, novas demandas surgem.
+                            </p>
+                            <div class="fs-6 text-white opacity-75">
+                                Do ENIAC aos sistemas quânticos - a evolução continua acelerando.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
