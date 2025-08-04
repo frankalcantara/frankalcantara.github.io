@@ -388,7 +388,7 @@ window.Quarto = {
 <p><strong>Linux</strong>:</p>
 <ul>
 <li><strong>Process Groups</strong>: controle completo com <code>setpgid()</code> e <code>tcsetpgrp()</code>;</li>
-<li><strong>Signal Handling</strong>: tratamento adequado de <code>SIGINT</code>, <code>SIGTSTP</code>, <code>SIGCHLD</code>;</li>
+<li><strong>Signal Handling</strong>:tratamento adequado de <code>SIGINT</code>, <code>SIGTSTP</code>, <code>SIGCHLD</code>;</li>
 <li><strong>Pipeline Support</strong>: implementação nativa usando <code>pipe()</code> e <code>dup2()</code>;</li>
 <li><strong>Job Control</strong>: suspensão (<code>Ctrl+Z</code>) e resumo (<code>fg</code>, <code>bg</code>) de processos.</li>
 </ul>
@@ -554,8 +554,7 @@ window.Quarto = {
 <p><strong>Entregáveis</strong>:</p>
 <ul>
 <li>Execução de comandos externos em ambas plataformas.</li>
-<li>Sistema completo de redirecionamento (&gt;, &lt;, &gt;&gt;, 2&gt;).</li>
-<li>Tratamento robusto de erros de execução.</li>
+<li>Sistema completo de redirecionamento (&gt;, &lt;, &gt;&gt;, 2&gt;). -tratamento robusto de erros de execução.</li>
 </ul>
 </section>
 <section id="fase-3-pipeline-implementation-e-job-control" class="level4" data-number="9.1.3.3">
@@ -902,7 +901,7 @@ MyShell&gt; </code></pre>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> HealthCheck <span class="op">{</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        CheckType type<span class="op">;</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds interval<span class="op">;</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds timeout<span class="op">;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds time t<span class="op">;</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> failure_threshold <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> success_threshold <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        </span>
@@ -949,7 +948,7 @@ MyShell&gt; </code></pre>
 <span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>        State current_state <span class="op">=</span> Closed<span class="op">;</span></span>
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> failure_count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::system_clock::time_point last_failure<span class="op">;</span></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds timeout<span class="op">{</span><span class="dv">60</span><span class="op">};</span></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>chrono::seconds time t<span class="op">{</span><span class="dv">60</span><span class="op">};</span></span>
 <span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
 <span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>chrono::seconds calculate_backoff_delay<span class="op">(</span><span class="dt">int</span> attempt_count<span class="op">);</span></span>
@@ -1195,7 +1194,7 @@ System Metrics:
 
 Recent Actions:
 [14:32:15] Restarting service: worker-1 (attempt 3/5)
-[14:31:45] Health check failed: worker-1 (timeout)
+[14:31:45] Health check failed: worker-1 (time t)
 [14:30:12] Alert fired: web-server high `CPU` usage</code></pre>
 </section>
 <section id="log-output-estruturado" class="level4" data-number="9.2.4.2">
