@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        /* Estilos Base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* Layout Principal */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Layout Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        /* Seções */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        /* Elementos de Destaque */
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Concept Cards */
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Icon Badges */
+        .icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-primary { background: #3b82f6; }
+        .badge-success { background: #10b981; }
+        .badge-warning { background: #f59e0b; }
+        .badge-info { background: #0ea5e9; }
+
+        /* Tabelas */
+        .table-responsive-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table-custom th,
+        .table-custom td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            vertical-align: top;
+        }
+
+        .table-custom thead th {
+            background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table-custom tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #dbeafe;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--copper-100);
+            transition: background-color 0.2s ease;
+        }
+
+        /* Figure captions */
+        .figure-caption {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--sage-200);
+            font-style: italic;
+            color: var(--sage-700);
+            text-align: center;
+        }
+
+        /* Code styling */
+        .code-highlight {
+            background: var(--sage-800);
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* Exercise styling */
+        .exercise-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--sage-600);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+
+        /* Definition boxes */
+        .definition-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .definition-title {
+            font-weight: 600;
+            color: var(--sage-800);
+            margin-bottom: 0.5rem;
+        }
+
+        /* MathJax styling */
+        .MathJax {
+            font-size: 1em !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#alfabetos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Alfabetos</a></li>
+                <li class="mb-2"><a href="#strings" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Strings</a></li>
+                <li class="mb-2"><a href="#linguagens" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Linguagens</a></li>
+                <li class="mb-2"><a href="#expressoes-regulares" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Expressões Regulares</a></li>
+                <li class="mb-2"><a href="#limitacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Limitações</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-font me-2 text-primary"></i><small class="text-primary fw-medium">Alfabetos</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-link me-2 text-success"></i><small class="text-success fw-medium">Strings</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-layer-group me-2 text-warning"></i><small class="text-warning fw-medium">Linguagens</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-code me-2 text-info"></i><small class="text-info fw-medium">Regex</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Alfabetos, Linguagens</em>
+                                    <span class="d-block">e Strings</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Fundamentos matemáticos da teoria da computação
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">3</div>
+                            <div class="fs-6 text-muted">Operações Fundamentais</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">∞</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Strings Possíveis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-font fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Alfabetos</h3>
+                                <p class="fs-7 text-muted">Conjuntos finitos de símbolos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-link fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Strings</h3>
+                                <p class="fs-7 text-muted">Sequências de símbolos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-layer-group fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Linguagens</h3>
+                                <p class="fs-7 text-muted">Conjuntos de strings</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-code fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Expressões</h3>
+                                <p class="fs-7 text-muted">Notação concisa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Fundamentos Teóricos</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        A teoria da computação repousa sobre fundamentos matemáticos que fornecem uma base precisa para a compreensão de como as máquinas processam informações. Entre estes fundamentos, os conceitos de <strong>alfabeto</strong>, <strong>linguagem</strong> e <strong>string</strong> ocupam uma posição central.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "A formalização matemática de conceitos elementares permite modelar desde a estrutura de uma palavra até a complexidade de uma linguagem de programação completa"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Teoria da Computação">Fundamentos Matemáticos</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-font"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Alfabetos</h3>
+                                <p class="fs-6 text-muted">Conjuntos finitos não-vazios de símbolos que formam os blocos fundamentais</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Strings</h3>
+                                <p class="fs-6 text-muted">Sequências finitas de símbolos escolhidos de um alfabeto</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Linguagens</h3>
+                                <p class="fs-6 text-muted">Conjuntos de strings formadas a partir de símbolos de um alfabeto</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alfabetos -->
+        <section id="alfabetos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Alfabetos: Os Blocos Fundamentais</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Formal</div>
+                        <p class="mb-0">
+                            Um <strong>alfabeto</strong> é um conjunto finito não-vazio de símbolos, denotado convencionalmente pela letra grega $\Sigma$:
+                        </p>
+                        <div class="text-center my-3">
+                            $$\Sigma = \{a_1, a_2, \ldots, a_n\} \text{ tal que } |\Sigma| = n < \infty \text{ e } n \geq 1$$
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-binary fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Alfabeto Binário</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    $\Sigma_{\text{bin}} = \{0, 1\}$ com cardinalidade $|\Sigma_{\text{bin}}| = 2$
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Aplicações</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-circle me-2" style="font-size: 0.5rem;"></i>Representações binárias</li>
+                                        <li><i class="fas fa-circle me-2" style="font-size: 0.5rem;"></i>Lógica booleana</li>
+                                        <li><i class="fas fa-circle me-2" style="font-size: 0.5rem;"></i>Circuitos digitais</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-calculator fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--copper-800);">Alfabeto Decimal</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    $\Sigma_{\text{dec}} = \{+, -, ., 0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}$ com $|\Sigma_{\text{dec}}| = 13$
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Componentes</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-circle me-2" style="font-size: 0.5rem;"></i>Dígitos (0-9)</li>
+                                        <li><i class="fas fa-circle me-2" style="font-size: 0.5rem;"></i>Sinais (+, -)</li>
+                                        <li><i class="fas fa-circle me-2" style="font-size: 0.5rem;"></i>Separador decimal (.)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exercícios: Alfabetos
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> Determine a cardinalidade de $\Sigma_1 = \{a, b, c, +, -, *, /, (, )\}$
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> Construa um alfabeto para expressões lógicas booleanas
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> Identifique qual conjunto não é um alfabeto válido: $A = \emptyset$ ou $B = \{\epsilon\}$
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4.</strong> Determine o menor alfabeto para as strings $\{\text{if}, \text{then}, \text{else}\}$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strings -->
+        <section id="strings" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Strings: Sequências Sobre Alfabetos</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Formal</div>
+                        <p class="mb-0">
+                            Uma <strong>string</strong> sobre um alfabeto $\Sigma$ é uma sequência finita de símbolos escolhidos de $\Sigma$:
+                        </p>
+                        <div class="text-center my-3">
+                            $$w = a_1a_2\ldots a_n \text{ tal que } a_i \in \Sigma \text{ para } i = 1, 2, \ldots, n$$
+                        </div>
+                        <p class="mb-0">
+                            A <strong>string vazia</strong> $\epsilon$ possui comprimento zero: $|\epsilon| = 0$
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Concatenação</h3>
+                                <p class="fs-6 text-muted">$xy = a_1a_2\ldots a_mb_1b_2\ldots b_n$</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-primary-subtle text-primary">Associativa</span>
+                                    <span class="badge bg-warning-subtle text-warning">Não-comutativa</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-superscript"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Potências</h3>
+                                <p class="fs-6 text-muted">$w^0 = \epsilon$, $w^{n+1} = w^n \cdot w$</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-success-subtle text-success">Recursiva</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-undo"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Reverso</h3>
+                                <p class="fs-6 text-muted">$\epsilon^R = \epsilon$, $(wa)^R = aw^R$</p>
+                                <div class="mt-3">
+                                    <span class="badge bg-warning-subtle text-warning">Involutiva</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-custom mb-5">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Conceito</th>
+                                    <th>Definição</th>
+                                    <th>Exemplo com $w = compilador$</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Substring</strong></td>
+                                    <td>$v$ é substring de $w$ se $w = xvy$</td>
+                                    <td>$pila$, $com$, $dor$</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prefixo</strong></td>
+                                    <td>$v$ é prefixo de $w$ se $w = vy$</td>
+                                    <td>$c$, $com$, $compi$</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sufixo</strong></td>
+                                    <td>$v$ é sufixo de $w$ se $w = xv$</td>
+                                    <td>$r$, $dor$, $lador$</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Prefixo Próprio</strong></td>
+                                    <td>Prefixo $v$ tal que $v \neq w$</td>
+                                    <td>$compi$ (mas não $compilador$)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Linguagens -->
+        <section id="linguagens" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Linguagens: Conjuntos de Strings</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Formal</div>
+                        <p class="mb-0">
+                            Uma <strong>linguagem</strong> sobre um alfabeto $\Sigma$ é um conjunto de strings formadas a partir de símbolos de $\Sigma$:
+                        </p>
+                        <div class="text-center my-3">
+                            $$L \subseteq \Sigma^*$$
+                        </div>
+                        <p class="mb-0">
+                            onde $\Sigma^* = \Sigma^0 \cup \Sigma^1 \cup \Sigma^2 \cup \Sigma^3 \cup \ldots$ é o fechamento de Kleene
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Operações Básicas</h3>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="p-3 bg-primary-subtle rounded">
+                                            <strong>União:</strong> $L_1 \cup L_2 = \{w \mid w \in L_1 \text{ ou } w \in L_2\}$
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="p-3 bg-success-subtle rounded">
+                                            <strong>Concatenação:</strong> $L_1 \cdot L_2 = \{xy \mid x \in L_1 \text{ e } y \in L_2\}$
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="p-3 bg-warning-subtle rounded">
+                                            <strong>Kleene:</strong> $L^* = L^0 \cup L^1 \cup L^2 \cup \ldots$
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Propriedades Algébricas</h3>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Leis Fundamentais</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-check me-2 text-success"></i>Comutatividade da união</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i>Associatividade de união e concatenação</li>
+                                        <li><i class="fas fa-check me-2 text-success"></i>Distributividade</li>
+                                        <li><i class="fas fa-times me-2 text-danger"></i>Concatenação não-comutativa</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exemplos de Linguagens
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-light rounded border">
+                                    <strong>Linguagem Vazia:</strong> $L_{\emptyset} = \emptyset$
+                                    <br><small class="text-muted">Não contém nenhuma string</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-light rounded border">
+                                    <strong>String Vazia:</strong> $L_{\epsilon} = \{\epsilon\}$
+                                    <br><small class="text-muted">Contém apenas a string vazia</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-light rounded border">
+                                    <strong>Comprimento Par:</strong> $L = \{w \in \{0,1\}^* \mid |w| \text{ é par}\}$
+                                    <br><small class="text-muted">Strings binárias de comprimento par</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-light rounded border">
+                                    <strong>Identificadores:</strong> $L = \{w \mid w \text{ inicia com letra}\}$
+                                    <br><small class="text-muted">Modelagem de identificadores válidos</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expressões Regulares -->
+        <section id="expressoes-regulares" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Expressões Regulares: Notação Concisa</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As expressões regulares fornecem uma notação algébrica concisa para descrever linguagens, permitindo especificar conjuntos potencialmente infinitos de strings através de padrões finitos.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Definição Indutiva</h3>
+                                
+                                <div class="mb-3">
+                                    <div class="fw-bold text-primary">Casos Base:</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-dot-circle me-2" style="font-size: 0.5rem;"></i>$\emptyset$ denota a linguagem vazia</li>
+                                        <li><i class="fas fa-dot-circle me-2" style="font-size: 0.5rem;"></i>$\epsilon$ denota $\{\epsilon\}$</li>
+                                        <li><i class="fas fa-dot-circle me-2" style="font-size: 0.5rem;"></i>$a$ para $a \in \Sigma$ denota $\{a\}$</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <div class="fw-bold text-primary">Casos Indutivos:</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-dot-circle me-2" style="font-size: 0.5rem;"></i>$(r \cup s)$ - União</li>
+                                        <li><i class="fas fa-dot-circle me-2" style="font-size: 0.5rem;"></i>$(r \cdot s)$ - Concatenação</li>
+                                        <li><i class="fas fa-dot-circle me-2" style="font-size: 0.5rem;"></i>$(r^*)$ - Fechamento de Kleene</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Precedência dos Operadores</h3>
+                                
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge bg-danger me-3">1</div>
+                                        <div>
+                                            <div class="fw-medium">Fechamento de Kleene ($*$)</div>
+                                            <div class="fs-6 text-muted">Maior precedência</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge bg-warning me-3">2</div>
+                                        <div>
+                                            <div class="fw-medium">Concatenação ($\cdot$)</div>
+                                            <div class="fs-6 text-muted">Precedência média</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge bg-success me-3">3</div>
+                                        <div>
+                                            <div class="fw-medium">União ($\cup$)</div>
+                                            <div class="fs-6 text-muted">Menor precedência</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive-custom mb-5">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Expressão Regular</th>
+                                    <th>Linguagem Denotada</th>
+                                    <th>Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>(0 ∪ 1)*01</code></td>
+                                    <td>$\{01, 001, 101, 0001, \ldots\}$</td>
+                                    <td>Strings binárias terminando em 01</td>
+                                </tr>
+                                <tr>
+                                    <td><code>b*(ab*ab*)*</code></td>
+                                    <td>Strings com número par de a's</td>
+                                    <td>Padrão elegante para paridade</td>
+                                </tr>
+                                <tr>
+                                    <td><code>(a ∪ ... ∪ z)(a ∪ ... ∪ z ∪ 0 ∪ ... ∪ 9)*</code></td>
+                                    <td>Identificadores válidos</td>
+                                    <td>Começa com letra, continua alfanumérico</td>
+                                </tr>
+                                <tr>
+                                    <td><code>(ε ∪ + ∪ -)(1 ∪ ... ∪ 9)(0 ∪ ... ∪ 9)*</code></td>
+                                    <td>Números inteiros com sinal opcional</td>
+                                    <td>Evita zeros à esquerda</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-primary">Notações Adicionais</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><strong>$r^+$:</strong> Uma ou mais ocorrências (fechamento positivo)</li>
+                                    <li class="mb-2"><strong>$r?$:</strong> Zero ou uma ocorrência (opcional)</li>
+                                    <li class="mb-2"><strong>$[abc]$:</strong> Classe de caracteres</li>
+                                    <li class="mb-2"><strong>$[a-z]$:</strong> Intervalo de caracteres</li>
+                                    <li class="mb-2"><strong>$r\{n,m\}$:</strong> Repetição entre n e m vezes</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Aplicações Práticas</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-search me-2 text-success"></i>Busca e substituição de texto</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Validação de dados de entrada</li>
+                                    <li class="mb-2"><i class="fas fa-code me-2 text-success"></i>Análise léxica em compiladores</li>
+                                    <li class="mb-2"><i class="fas fa-filter me-2 text-success"></i>Filtragem e processamento de logs</li>
+                                    <li class="mb-2"><i class="fas fa-database me-2 text-success"></i>Extração de informações</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limitações -->
+        <section id="limitacoes" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Poder e Limitações das Linguagens Regulares</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As Linguagens Regulares ocupam um lugar específico na Hierarquia de Chomsky, oferecendo simplicidade e previsibilidade, mas com limitações fundamentais relacionadas à memória finita.
+                    </p>
+
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-4 fw-semibold mb-3 text-success">Propriedades Fundamentais</h3>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-success-subtle rounded">
+                                            <strong class="text-success">Fechamento sob Operações</strong>
+                                            <p class="mb-0 mt-2 fs-6">União, concatenação, fechamento de Kleene, interseção e complemento sempre produzem Linguagens Regulares</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-info-subtle rounded">
+                                            <strong class="text-info">Decidibilidade</strong>
+                                            <p class="mb-0 mt-2 fs-6">Questões como pertencimento, vazio e equivalência são sempre decidíveis</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">Limitações Fundamentais</h3>
+                                
+                                <div class="mb-4">
+                                    <h5 class="fs-5 fw-semibold text-warning">Exemplos de Linguagens Não-Regulares:</h5>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="p-3 bg-warning-subtle rounded text-center">
+                                            <div class="fw-bold">$L = \{a^n b^n \mid n \geq 0\}$</div>
+                                            <small class="text-muted">Balanceamento simples</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 bg-warning-subtle rounded text-center">
+                                            <div class="fw-bold">Palíndromos</div>
+                                            <small class="text-muted">$w = w^R$</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 bg-warning-subtle rounded text-center">
+                                            <div class="fw-bold">Parênteses Balanceados</div>
+                                            <small class="text-muted">Estrutura de pilha</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h3 class="fs-4 fw-semibold mb-3 text-danger">Lema do Bombeamento</h3>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Ferramenta fundamental para provar que uma linguagem não é regular, baseada na propriedade de que strings longas em Linguagens Regulares devem conter partes "bombeáveis".
+                                </p>
+                                
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong class="text-danger">Intuição:</strong> Se uma linguagem é regular, strings suficientemente longas devem conter ciclos que podem ser repetidos arbitrariamente. Se encontrarmos uma string onde essa repetição "quebra" a linguagem, então ela não é regular.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumo Final -->
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Síntese</h4>
+                            <p class="fs-5 mb-0 text-white">
+                                As Linguagens Regulares formam a base da <strong>teoria da computação</strong>, oferecendo ferramentas poderosas para modelagem de padrões, mas com limitações claras que definem suas fronteiras matemáticas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript para TOC e Navegação -->
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            if (toc) {
+                toc.classList.toggle('open');
+            }
+        }
+
+        // Inicialização quando DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTOC();
+            initializeFadeAnimations();
+            initializeClickOutside();
+            initializeResize();
+        });
+
+        // Inicializar funcionalidades do TOC
+        function initializeTOC() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Smooth scrolling para links âncora
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Fechar TOC móvel após clique
+                    if (window.innerWidth <= 1024) {
+                        const toc = document.getElementById('toc');
+                        if (toc) {
+                            toc.classList.remove('open');
+                        }
+                    }
+                });
+            });
+            
+            // Highlight ativo no TOC baseado na seção visível
+            if (sections.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                            links.forEach(link => {
+                                link.classList.remove('bg-light', 'text-dark');
+                                if (link.getAttribute('href') === `#${id}`) {
+                                    link.classList.add('bg-light', 'text-dark');
+                                }
+                            });
+                        }
+                    });
+                }, {
+                    rootMargin: '-80px 0px -70% 0px'
+                });
+                
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            }
+        }
+
+        // Inicializar animações de fade-in
+        function initializeFadeAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            if (fadeElements.length > 0) {
+                const fadeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+                
+                fadeElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    fadeObserver.observe(el);
+                });
+            }
+        }
+
+        // Inicializar fechamento do TOC ao clicar fora (mobile)
+        function initializeClickOutside() {
+            document.addEventListener('click', function(event) {
+                const toc = document.getElementById('toc');
+                const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+                
+                if (toc && hamburger && window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                    if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                        toc.classList.remove('open');
+                    }
+                }
+            });
+        }
+
+        // Inicializar tratamento de redimensionamento
+        function initializeResize() {
+            window.addEventListener('resize', function() {
+                const toc = document.getElementById('toc');
+                if (toc && window.innerWidth > 1024) {
+                    toc.classList.remove('open');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
