@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Autômatos Finitos Determinísticos: Fundamentos e Aplicações</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        /* Estilos Base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* Layout Principal */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Layout Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        /* Seções */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        /* Elementos de Destaque */
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Concept Cards */
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Icon Badges */
+        .icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-primary { background: #3b82f6; }
+        .badge-success { background: #10b981; }
+        .badge-warning { background: #f59e0b; }
+        .badge-info { background: #0ea5e9; }
+
+        /* Tabelas */
+        .table-responsive-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table-custom th,
+        .table-custom td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            vertical-align: top;
+        }
+
+        .table-custom thead th {
+            background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table-custom tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #dbeafe;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--copper-100);
+            transition: background-color 0.2s ease;
+        }
+
+        /* Figure captions */
+        .figure-caption {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--sage-200);
+            font-style: italic;
+            color: var(--sage-700);
+            text-align: center;
+        }
+
+        /* Code styling */
+        .code-highlight {
+            background: var(--sage-800);
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* Exercise styling */
+        .exercise-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--sage-600);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+
+        /* Definition boxes */
+        .definition-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .definition-title {
+            font-weight: 600;
+            color: var(--sage-800);
+            margin-bottom: 0.5rem;
+        }
+
+        /* MathJax styling */
+        .MathJax {
+            font-size: 1em !important;
+        }
+
+        /* Diagram placeholder */
+        .diagram-placeholder {
+            background: linear-gradient(135deg, var(--sage-100), var(--copper-100));
+            border: 2px dashed var(--sage-300);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            color: var(--sage-700);
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#definicao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Definição Formal</a></li>
+                <li class="mb-2"><a href="#funcao-transicao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Função de Transição</a></li>
+                <li class="mb-2"><a href="#representacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Representações</a></li>
+                <li class="mb-2"><a href="#computacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Computação</a></li>
+                <li class="mb-2"><a href="#exemplos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Exemplos Práticos</a></li>
+                <li class="mb-2"><a href="#propriedades" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Propriedades</a></li>
+                <li class="mb-2"><a href="#limitacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Limitações</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-cogs me-2 text-primary"></i><small class="text-primary fw-medium">Determinismo</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-project-diagram me-2 text-success"></i><small class="text-success fw-medium">Estados Finitos</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-arrows-alt me-2 text-warning"></i><small class="text-warning fw-medium">Transições</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-check-circle me-2 text-info"></i><small class="text-info fw-medium">Aceitação</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Autômatos Finitos</em>
+                                    <span class="d-block">Determinísticos</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Fundamentos matemáticos para análise léxica
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">5</div>
+                            <div class="fs-6 text-muted">Componentes da Tupla</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">O(n)</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Complexidade Linear</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-cogs fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Determinístico</h3>
+                                <p class="fs-7 text-muted">Uma transição por entrada</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-project-diagram fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Estados</h3>
+                                <p class="fs-7 text-muted">Conjunto finito de estados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-arrows-alt fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Transições</h3>
+                                <p class="fs-7 text-muted">Função de mudança de estado</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-check-circle fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Aceitação</h3>
+                                <p class="fs-7 text-muted">Estados finais definem linguagem</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Fundamentos dos Autômatos Finitos Determinísticos</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Os Autômatos Finitos Determinísticos representam a forma mais eficiente e prática de implementar o reconhecimento de padrões léxicos. A palavra <strong>determinístico</strong> é fundamental: para cada combinação de estado atual e símbolo de entrada, existe <strong>exatamente uma</strong> transição possível.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Esta propriedade elimina qualquer ambiguidade no processo de reconhecimento, tornando os AFDs ideais para implementações práticas como os analisadores léxicos"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Teoria da Computação">Análise Léxica</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Determinismo</h3>
+                                <p class="fs-6 text-muted">Para cada par (estado, símbolo) existe exatamente uma transição</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-memory"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Memória Finita</h3>
+                                <p class="fs-6 text-muted">Informação limitada ao conjunto finito de estados</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Eficiência</h3>
+                                <p class="fs-6 text-muted">Processamento linear de strings de entrada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Definição Formal -->
+        <section id="definicao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Definição Formal e Componentes</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Matemática</div>
+                        <p class="mb-2">
+                            Um Autômato Finito Determinístico é formalmente definido como uma 5-tupla:
+                        </p>
+                        <div class="text-center my-3">
+                            $$M = (Q, \Sigma, \delta, q_0, F)$$
+                        </div>
+                        <p class="mb-0">
+                            onde cada componente possui um papel específico e bem definido no comportamento da máquina.
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-layer-group fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Componentes</h3>
+                                </div>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <ul class="list-unstyled mt-2">
+                                        <li class="mb-2"><strong>Q:</strong> conjunto finito de estados</li>
+                                        <li class="mb-2"><strong>Σ:</strong> alfabeto de entrada</li>
+                                        <li class="mb-2"><strong>δ:</strong> função de transição</li>
+                                        <li class="mb-2"><strong>q₀:</strong> estado inicial único</li>
+                                        <li class="mb-2"><strong>F:</strong> estados de aceitação</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-check-circle fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--copper-800);">Restrições</h3>
+                                </div>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Consistência Matemática</div>
+                                    <div class="text-center my-3">
+                                        $$q_0 \in Q \quad \text{e} \quad F \subseteq Q$$
+                                    </div>
+                                    <p class="mb-0 mt-2 fs-6">Estado inicial deve pertencer ao conjunto de estados, e todos os estados finais devem ser estados válidos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exercícios: Componentes
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> Dado $M = (\{s_0,s_1,s_2,s_3\}, \{a,b\}, \delta, s_0, \{s_0,s_3\})$, identifique cada componente da 5-tupla
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> Se $|Q| = 3$ e $|\Sigma| = 4$, quantas transições a função $\delta$ deve definir?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> É possível que $F = Q$? Se sim, o que isso significa sobre a linguagem?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4.</strong> Pode $q_0 \in F$? O que isso implica sobre a aceitação de $\epsilon$?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Função de Transição -->
+        <section id="funcao-transicao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. A Função de Transição Determinística</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Propriedade Fundamental</div>
+                        <p class="mb-2">
+                            A função de transição $\delta$ é definida matematicamente como:
+                        </p>
+                        <div class="text-center my-3">
+                            $$\delta : Q \times \Sigma \rightarrow Q$$
+                        </div>
+                        <p class="mb-0">
+                            Para cada par $(q, a)$ onde $q \in Q$ e $a \in \Sigma$, existe <strong>exatamente um</strong> estado de destino.
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Completude</h3>
+                                <p class="mb-3">Um AFD deve ser uma função <strong>total</strong>, com transições definidas para todos os pares possíveis.</p>
+                                
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Estado de Erro:</strong> Para manter completude, introduz-se um estado especial $q_{erro}$ que captura transições inválidas:
+                                    <div class="text-center my-2">
+                                        $$\forall a \in \Sigma: \delta(q_{erro}, a) = q_{erro}$$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Eficiência</h3>
+                                <p class="mb-3">O determinismo permite implementações extremamente eficientes:</p>
+                                
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Acesso em tempo constante O(1)</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Complexidade total O(n) para strings</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Implementação com arrays 2D</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Sem backtracking necessário</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exercícios: Função de Transição
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> Por que a propriedade determinística é crucial para eficiência de analisadores léxicos?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> Um estado de erro pode ser um estado de aceitação? Justifique
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> É possível $\delta(q_i, a) = q_i$? Dê um exemplo prático
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4.</strong> Como completar um AFD que tem transições "não mostradas"?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Representações -->
+        <section id="representacoes" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Representações de AFDs</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Os AFDs podem ser representados de três formas principais: <strong>algébrica</strong> (precisa para definições formais), <strong>tabular</strong> (eficiente para implementação) e <strong>gráfica</strong> (intuitiva para visualização).
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Representação Tabular</h3>
+                                <p class="mb-3">Organiza a função $\delta$ em matriz bidimensional:</p>
+                                
+                                <div class="table-responsive-custom mb-3">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr>
+                                                <th>Estado</th>
+                                                <th>0</th>
+                                                <th>1</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>→ q₀</td>
+                                                <td>q₂</td>
+                                                <td>q₀</td>
+                                            </tr>
+                                            <tr>
+                                                <td>* q₁</td>
+                                                <td>q₁</td>
+                                                <td>q₁</td>
+                                            </tr>
+                                            <tr>
+                                                <td>q₂</td>
+                                                <td>q₂</td>
+                                                <td>q₁</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Convenções</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-arrow-right me-2"></i>Estado inicial</li>
+                                        <li><i class="fas fa-star me-2"></i>Estados de aceitação</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Representação Gráfica</h3>
+                                <p class="mb-3">Diagrama de transições como grafo direcionado:</p>
+                                
+                                <!-- trecho para inserir na div desejada -->
+                                <div class="diagram-placeholder mb-3">
+                                     <img src="../images/dia1.webp" alt="AFD que aceita strings contendo pelo menos um '0' seguido por pelo menos um '1'"
+                                        class="img-fluid mb-2" />
+                                    <p class="mb-0">AFD que aceita strings contendo pelo menos um '0' seguido por pelo menos um '1'</p>
+                                </div>
+                                
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Elementos</div>
+                                    <ul class="list-unstyled mt-2">
+                                        <li><i class="fas fa-circle me-2"></i>Círculos = estados</li>
+                                        <li><i class="fas fa-arrow-right me-2"></i>Setas = transições</li>
+                                        <li><i class="fas fa-bullseye me-2"></i>Círculo duplo = final</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Computação -->
+        <section id="computacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Computação e Aceitação de Strings</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">1. Inicialização</h3>
+                                <p class="fs-6 text-muted">Máquina posiciona-se no estado inicial $q_0$</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-forward"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">2. Processamento</h3>
+                                <p class="fs-6 text-muted">Para cada símbolo, transita usando $\delta(q, a_i)$</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">3. Decisão</h3>
+                                <p class="fs-6 text-muted">Aceita se estado final está em $F$</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Formal de Aceitação</div>
+                        <p class="mb-2">
+                            Uma string $w = a_1a_2...a_k$ é aceita pelo AFD $M$ se existe uma sequência de estados $r_0, r_1, ..., r_k$ tal que:
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><strong>•</strong> $r_0 = q_0$ (inicia no estado inicial)</li>
+                            <li class="mb-2"><strong>•</strong> $\delta(r_i, a_{i+1}) = r_{i+1}$ para $i = 0, 1, ..., k-1$ (transições válidas)</li>
+                            <li class="mb-2"><strong>•</strong> $r_k \in F$ (termina em estado de aceitação)</li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exercícios: Computação
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> Trace a computação de "01101" no AFD da tabela anterior
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> Uma string é aceita se passa por estado final no meio?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> Descreva uma string de comprimento 5 aceita e uma rejeitada
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4.</strong> O que acontece com strings vazias quando $q_0 \in F$?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exemplos Práticos -->
+        <section id="exemplos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Exemplos Práticos de AFDs</h2>
+                    
+                    <div class="mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo 1: Reconhecimento de Operadores Relacionais</h3>
+                        
+                        <div class="concept-card mb-4">
+                            <p class="mb-3"><strong>Problema:</strong> Construir um AFD que reconheça os operadores relacionais: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, e <code>!=</code>.</p>
+                            
+                            <div class="row row-cols-1 row-cols-lg-2 g-4">
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold mb-3">Especificação Formal</h5>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Estados:</strong> $Q = \{q_0, q_>, q_<, q_=, q_!, q_{\geq}, q_{\leq}, q_{==}, q_{\neq}, q_{erro}\}$</li>
+                                        <li><strong>Alfabeto:</strong> $\Sigma = \{>, <, =, !, outros\}$</li>
+                                        <li><strong>Estado inicial:</strong> $q_0$</li>
+                                        <li><strong>Estados finais:</strong> $F = \{q_>, q_<, q_{\geq}, q_{\leq}, q_{==}, q_{\neq}\}$</li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <div class="diagram-placeholder">
+                                        <i class="fas fa-code-branch fs-1 mb-3" style="color: var(--sage-400);"></i>
+                                        <img src="../images/dia4.webp" alt="AFD que aceita strings contendo pelo menos um '0' seguido por pelo menos um '1'"
+                                            class="img-fluid mb-2" />
+                                        <p class="mb-0">Diagrama de transições para operadores relacionais</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive-custom mb-4">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Estado</th>
+                                        <th>&gt;</th>
+                                        <th>&lt;</th>
+                                        <th>=</th>
+                                        <th>!</th>
+                                        <th>outros</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>→ q₀</td>
+                                        <td>*q₍</td>
+                                        <td>*q₍</td>
+                                        <td>q₌</td>
+                                        <td>q₍</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                    </tr>
+                                    <tr>
+                                        <td>*q₍</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>*q₍≥₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                    </tr>
+                                    <tr>
+                                        <td>*q₍</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>*q₍≤₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                    </tr>
+                                    <tr>
+                                        <td>q₌</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>*q₍₌₌₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                    </tr>
+                                    <tr>
+                                        <td>q₍</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>*q₍≠₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                        <td>q₍ₑᵣᵣₒ₎</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong>Observação:</strong> Os estados q₍ e q₍ são marcados como de aceitação, implementando a regra da correspondência mais longa. Se a entrada continuar com '=', o autômato transita para q₍≥₎ ou q₍≤₎.
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo 2: Números Binários com Paridade Par</h3>
+                        
+                        <div class="concept-card mb-4">
+                            <p class="mb-3"><strong>Problema:</strong> Construir um AFD que aceite strings binárias com número par de símbolos '1'.</p>
+                            
+                            <div class="row row-cols-1 row-cols-lg-2 g-4">
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold mb-3">Análise</h5>
+                                    <p class="mb-3">O autômato deve <em>contar</em> o número de bits '1', distinguindo entre quantidades pares e ímpares. Como só precisamos da paridade, dois estados são suficientes.</p>
+                                    
+                                    <div class="table-responsive-custom">
+                                        <table class="table table-custom">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>0</th>
+                                                    <th>1</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>→ *q₍ₚₐᵣ₎</td>
+                                                    <td>q₍ₚₐᵣ₎</td>
+                                                    <td>q₍íₘₚₐᵣ₎</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>q₍íₘₚₐᵣ₎</td>
+                                                    <td>q₍íₘₚₐᵣ₎</td>
+                                                    <td>q₍ₚₐᵣ₎</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="diagram-placeholder">
+                                        <img src="../images/dia2.webp" alt="AFD que aceita strings contendo pelo menos um '0' seguido por pelo menos um '1'"
+                                            class="img-fluid mb-2" />
+                                        <p class="mb-0">AFD que funciona como contador módulo 2</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exercícios: Exemplos Práticos
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> Projete um AFD sobre Σ={a,b} que aceite strings contendo a substring "aba"
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> Construa um AFD para números binários múltiplos de 3
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> AFD que reconhece comentários "//..." até fim de linha
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4.</strong> AFD que aceita apenas as strings "cat" e "car"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Propriedades -->
+        <section id="propriedades" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Propriedades Matemáticas dos AFDs</h2>
+                    
+                    <div class="mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Fechamento sob Operações</h3>
+                        
+                        <p class="fs-5 text-muted mb-4">
+                            Uma característica notável da classe dos AFDs é que ela é <strong>fechada</strong> sob as operações fundamentais da teoria dos conjuntos. Isto significa que ao combinarmos AFDs usando estas operações, o resultado é sempre outro AFD.
+                        </p>
+
+                        <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                            <div class="col">
+                                <div class="concept-card text-center">
+                                    <div class="icon-badge badge-primary mx-auto mb-3">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">União</h3>
+                                    <p class="fs-6 text-muted">$L_1 \cup L_2$ combina duas linguagens</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card text-center">
+                                    <div class="icon-badge badge-success mx-auto mb-3">
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                    <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Interseção</h3>
+                                    <p class="fs-6 text-muted">$L_1 \cap L_2$ elementos comuns</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card text-center">
+                                    <div class="icon-badge badge-warning mx-auto mb-3">
+                                        <i class="fas fa-minus"></i>
+                                    </div>
+                                    <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Complemento</h3>
+                                    <p class="fs-6 text-muted">$\overline{L} = \Sigma^* - L$</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo Detalhado: Construção da União</h3>
+                        
+                        <div class="definition-box mb-4">
+                            <div class="definition-title">Teorema (Fechamento sob União)</div>
+                            <p class="mb-2">
+                                Sejam $M_1$ e $M_2$ dois AFDs que reconhecem as linguagens $L_1$ e $L_2$, respectivamente. Então existe um AFD $M$ que reconhece $L_1 \cup L_2$.
+                            </p>
+                            <p class="mb-0">
+                                <strong>Construção:</strong> Executamos ambos os autômatos <strong>simultaneamente</strong> usando produto cartesiano dos estados.
+                            </p>
+                        </div>
+
+                        <div class="concept-card mb-4">
+                            <h4 class="fs-5 fw-semibold mb-3">Exemplo Prático: União de AFDs</h4>
+                            
+                            <div class="row row-cols-1 row-cols-lg-2 g-4 mb-4">
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold mb-3">AFD M₁: Strings que começam com 'a'</h5>
+                                    <div class="table-responsive-custom">
+                                        <table class="table table-custom">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>a</th>
+                                                    <th>b</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>→ s₀</td>
+                                                    <td>*s₁</td>
+                                                    <td>s₂</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>*s₁</td>
+                                                    <td>*s₁</td>
+                                                    <td>*s₁</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>s₂</td>
+                                                    <td>s₂</td>
+                                                    <td>s₂</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold mb-3">AFD M₂: Número ímpar de 'b's</h5>
+                                    <div class="table-responsive-custom">
+                                        <table class="table table-custom">
+                                            <thead>
+                                                <tr>
+                                                    <th>Estado</th>
+                                                    <th>a</th>
+                                                    <th>b</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>→ t₀</td>
+                                                    <td>t₀</td>
+                                                    <td>*t₁</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>*t₁</td>
+                                                    <td>*t₁</td>
+                                                    <td>t₀</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5 class="fs-6 fw-semibold mb-3">AFD da União M₁ ∪ M₂</h5>
+                            <div class="table-responsive-custom mb-4">
+                                <table class="table table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>a</th>
+                                            <th>b</th>
+                                            <th>Aceita?</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>→ (s₀,t₀)</td>
+                                            <td>(s₁,t₀)</td>
+                                            <td>(s₂,t₁)</td>
+                                            <td>NÃO</td>
+                                        </tr>
+                                        <tr>
+                                            <td>*(s₀,t₁)</td>
+                                            <td>(s₁,t₁)</td>
+                                            <td>(s₂,t₀)</td>
+                                            <td>SIM (t₁ ∈ F₂)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>*(s₁,t₀)</td>
+                                            <td>(s₁,t₀)</td>
+                                            <td>(s₁,t₁)</td>
+                                            <td>SIM (s₁ ∈ F₁)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>*(s₁,t₁)</td>
+                                            <td>(s₁,t₁)</td>
+                                            <td>(s₁,t₀)</td>
+                                            <td>SIM (ambos aceitam)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>(s₂,t₀)</td>
+                                            <td>(s₂,t₀)</td>
+                                            <td>(s₂,t₁)</td>
+                                            <td>NÃO</td>
+                                        </tr>
+                                        <tr>
+                                            <td>*(s₂,t₁)</td>
+                                            <td>(s₂,t₁)</td>
+                                            <td>(s₂,t₀)</td>
+                                            <td>SIM (t₁ ∈ F₂)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="p-3 bg-success-subtle rounded">
+                                <strong>Verificação:</strong> String "ab" é aceita porque M₁ aceita (começa com 'a') E M₂ aceita (um 'b' = ímpar). String "bb" é rejeitada porque M₁ rejeita (começa com 'b') E M₂ rejeita (dois 'b's = par).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tasks me-2"></i>Exercícios: Propriedades
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> Se M₁ tem 3 estados e M₂ tem 2 estados, quantos estados terá M₁ ∪ M₂?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> Na união, quando um estado (p,q) é de aceitação?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> Como construir o complemento de um AFD?
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4.</strong> Por que a completude é essencial para complemento?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limitações -->
+        <section id="limitacoes" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Limitações dos Autômatos Finitos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Apesar de sua aplicabilidade na análise léxica, os AFDs possuem uma limitação fundamental: sua <strong>memória finita</strong>. Eles só conseguem "lembrar" informações através do estado atual, e como o conjunto de estados é finito, a capacidade de memorização é limitada.
+                    </p>
+
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">Linguagem Não-Regular Clássica</h3>
+                                
+                                <div class="text-center my-4">
+                                    $$L = \{0^n1^n \mid n \geq 0\}$$
+                                </div>
+                                
+                                <p class="mb-3">Esta linguagem consiste em qualquer número $n$ de símbolos '0', seguido pela <strong>mesma quantidade</strong> $n$ de símbolos '1'. Exemplos: $\epsilon$, $01$, $0011$, $000111$...</p>
+                                
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Por que AFDs não conseguem reconhecer:</strong> Para reconhecer esta linguagem, seria necessário contar todos os '0's e verificar se a quantidade de '1's é exatamente a mesma. Como $n$ pode ser arbitrariamente grande, seria necessário um número infinito de estados para memorizar cada contagem possível.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-info">
+                                <h3 class="fs-4 fw-semibold mb-3 text-info">Consequências Práticas</h3>
+                                
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-danger-subtle rounded">
+                                            <strong class="text-danger">Não Podem Reconhecer</strong>
+                                            <ul class="list-unstyled mt-2">
+                                                <li><i class="fas fa-times me-2"></i>Parênteses balanceados</li>
+                                                <li><i class="fas fa-times me-2"></i>Estruturas aninhadas</li>
+                                                <li><i class="fas fa-times me-2"></i>Contagens ilimitadas</li>
+                                                <li><i class="fas fa-times me-2"></i>Palíndromos arbitrários</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3 bg-success-subtle rounded">
+                                            <strong class="text-success">Ideais Para</strong>
+                                            <ul class="list-unstyled mt-2">
+                                                <li><i class="fas fa-check me-2"></i>Análise léxica</li>
+                                                <li><i class="fas fa-check me-2"></i>Reconhecimento de tokens</li>
+                                                <li><i class="fas fa-check me-2"></i>Padrões regulares</li>
+                                                <li><i class="fas fa-check me-2"></i>Validação de formato</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumo Final -->
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Síntese</h4>
+                            <p class="fs-5 mb-0 text-white">
+                                Os AFDs são <strong>fundamentais</strong> para análise léxica, oferecendo eficiência e determinismo, mas <strong>modelos mais poderosos</strong> como Autômatos de Pilha são necessários para fases posteriores da compilação.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript para TOC e Navegação -->
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            if (toc) {
+                toc.classList.toggle('open');
+            }
+        }
+
+        // Inicialização quando DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTOC();
+            initializeFadeAnimations();
+            initializeClickOutside();
+            initializeResize();
+        });
+
+        // Inicializar funcionalidades do TOC
+        function initializeTOC() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Smooth scrolling para links âncora
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Fechar TOC móvel após clique
+                    if (window.innerWidth <= 1024) {
+                        const toc = document.getElementById('toc');
+                        if (toc) {
+                            toc.classList.remove('open');
+                        }
+                    }
+                });
+            });
+            
+            // Highlight ativo no TOC baseado na seção visível
+            if (sections.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                            links.forEach(link => {
+                                link.classList.remove('bg-light', 'text-dark');
+                                if (link.getAttribute('href') === `#${id}`) {
+                                    link.classList.add('bg-light', 'text-dark');
+                                }
+                            });
+                        }
+                    });
+                }, {
+                    rootMargin: '-80px 0px -70% 0px'
+                });
+                
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            }
+        }
+
+        // Inicializar animações de fade-in
+        function initializeFadeAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            if (fadeElements.length > 0) {
+                const fadeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+                
+                fadeElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    fadeObserver.observe(el);
+                });
+            }
+        }
+
+        // Inicializar fechamento do TOC ao clicar fora (mobile)
+        function initializeClickOutside() {
+            document.addEventListener('click', function(event) {
+                const toc = document.getElementById('toc');
+                const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+                
+                if (toc && hamburger && window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                    if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                        toc.classList.remove('open');
+                    }
+                }
+            });
+        }
+
+        // Inicializar tratamento de redimensionamento
+        function initializeResize() {
+            window.addEventListener('resize', function() {
+                const toc = document.getElementById('toc');
+                if (toc && window.innerWidth > 1024) {
+                    toc.classList.remove('open');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
