@@ -285,12 +285,14 @@ window.Quarto = {
   <li><a href="#propriedades-matemáticas-dos-autômatos-finitos-determinísticos" id="toc-propriedades-matemáticas-dos-autômatos-finitos-determinísticos" class="nav-link" data-scroll-target="#propriedades-matemáticas-dos-autômatos-finitos-determinísticos"><span class="header-section-number">4.6</span> Propriedades Matemáticas dos Autômatos Finitos Determinísticos</a>
   <ul class="collapse">
   <li><a href="#propriedades-de-fechamento" id="toc-propriedades-de-fechamento" class="nav-link" data-scroll-target="#propriedades-de-fechamento"><span class="header-section-number">4.6.1</span> Propriedades de Fechamento</a></li>
-  <li><a href="#minimização-de-estados" id="toc-minimização-de-estados" class="nav-link" data-scroll-target="#minimização-de-estados"><span class="header-section-number">4.6.2</span> Minimização de Estados</a></li>
-  <li><a href="#sec-myhill-nerode" id="toc-sec-myhill-nerode" class="nav-link" data-scroll-target="#sec-myhill-nerode"><span class="header-section-number">4.6.3</span> A Relação de Myhill-Nerode</a></li>
-  <li><a href="#equivalência-entre-modelos" id="toc-equivalência-entre-modelos" class="nav-link" data-scroll-target="#equivalência-entre-modelos"><span class="header-section-number">4.6.4</span> Equivalência entre Modelos</a></li>
-  <li><a href="#teste-de-equivalência-entre-autômatos-finitos-determinísticos" id="toc-teste-de-equivalência-entre-autômatos-finitos-determinísticos" class="nav-link" data-scroll-target="#teste-de-equivalência-entre-autômatos-finitos-determinísticos"><span class="header-section-number">4.6.5</span> Teste de Equivalência entre Autômatos Finitos Determinísticos</a></li>
-  <li><a href="#implicações-práticas-das-propriedades" id="toc-implicações-práticas-das-propriedades" class="nav-link" data-scroll-target="#implicações-práticas-das-propriedades"><span class="header-section-number">4.6.6</span> Implicações Práticas das Propriedades</a></li>
-  <li><a href="#limitações-dos-autômatos-finitos" id="toc-limitações-dos-autômatos-finitos" class="nav-link" data-scroll-target="#limitações-dos-autômatos-finitos"><span class="header-section-number">4.6.7</span> Limitações dos Autômatos Finitos</a></li>
+  <li><a href="#implicações-práticas-das-propriedades-de-fechamento" id="toc-implicações-práticas-das-propriedades-de-fechamento" class="nav-link" data-scroll-target="#implicações-práticas-das-propriedades-de-fechamento"><span class="header-section-number">4.6.2</span> Implicações Práticas das Propriedades de Fechamento</a></li>
+  <li><a href="#Exercicios-9" id="toc-Exercicios-9" class="nav-link" data-scroll-target="#Exercicios-9"><span class="header-section-number">4.6.3</span> Exercícios 9</a></li>
+  <li><a href="#sec-myhill-nerode" id="toc-sec-myhill-nerode" class="nav-link" data-scroll-target="#sec-myhill-nerode"><span class="header-section-number">4.6.4</span> A Relação de Myhill-Nerode</a></li>
+  <li><a href="#equivalência-entre-modelos" id="toc-equivalência-entre-modelos" class="nav-link" data-scroll-target="#equivalência-entre-modelos"><span class="header-section-number">4.6.5</span> Equivalência entre Modelos</a></li>
+  <li><a href="#teste-de-equivalência-entre-autômatos-finitos-determinísticos" id="toc-teste-de-equivalência-entre-autômatos-finitos-determinísticos" class="nav-link" data-scroll-target="#teste-de-equivalência-entre-autômatos-finitos-determinísticos"><span class="header-section-number">4.6.6</span> Teste de Equivalência entre Autômatos Finitos Determinísticos</a></li>
+  <li><a href="#implicações-práticas-das-propriedades" id="toc-implicações-práticas-das-propriedades" class="nav-link" data-scroll-target="#implicações-práticas-das-propriedades"><span class="header-section-number">4.6.7</span> Implicações Práticas das Propriedades</a></li>
+  <li><a href="#Exercicios-10" id="toc-Exercicios-10" class="nav-link" data-scroll-target="#Exercicios-10"><span class="header-section-number">4.6.8</span> Exercícios 10</a></li>
+  <li><a href="#limitações-dos-autômatos-finitos" id="toc-limitações-dos-autômatos-finitos" class="nav-link" data-scroll-target="#limitações-dos-autômatos-finitos"><span class="header-section-number">4.6.9</span> Limitações dos Autômatos Finitos</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/02-lexico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -341,11 +343,11 @@ window.Quarto = {
 <p>Estas restrições garantem a consistência do modelo: o estado inicial deve necessariamente pertencer ao conjunto de estados, e todos os estados de aceitação devem ser estados válidos da máquina. Mais formalmente, um Autômato Finito Determinístico representa um sistema que, em qualquer momento, encontra-se em exatamente um estado do conjunto <span class="math inline">\(Q\)</span>, e que, ao receber um símbolo de entrada do alfabeto <span class="math inline">\(\Sigma\)</span>, transita deterministicamente para um novo estado, que pode, inclusive, ser o mesmo estado atual.</p>
 <section id="exercícios-1" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="exercícios-1"><span class="header-section-number">4.1.1</span> Exercícios 1</h3>
-<p><strong>1.</strong> Dado o AFD M=(s_0,s_1,s_2,s_3,a,b,delta,s_0,s_0,s_3), identifique cada um dos cinco componentes da tupla com sua respectiva descrição.</p>
-<p><strong>2.</strong> Um modelo foi definido como M=(Q,Sigma,delta,q_0,F) onde Q=q_0,q_1, Sigma=0,1, q_0=q_0, e F=q_2. Este modelo representa um AFD válido? Justifique sua resposta com base nas restrições formais.</p>
-<p><strong>3.</strong> Se um Autômato Finito Determinístico possui ∣Q∣=3 estados e um alfabeto com ∣Sigma∣=4 símbolos, qual é o número exato de pares no domínio da função de transição delta?</p>
-<p><strong>4.</strong> É possível que o conjunto de estados de aceitação F seja igual ao conjunto de todos os estados Q? Se sim, o que isso significaria sobre a linguagem reconhecida pelo autômato?</p>
-<p><strong>5.</strong> É possível que o estado inicial q_0 também seja um estado de aceitação, ou seja, q_0inF? Se sim, o que isso implica sobre a aceitação da <em>string</em> vazia, epsilon?</p>
+<p><strong>1.</strong> Dado o Autômato Finito Determinístico <span class="math inline">\(M =(\{s_0,s_1,s_2,s_3\},\{a,b\},\delta,s_0,\{s_0,s_3\})\)</span>, identifique cada um dos cinco componentes da tupla com sua respectiva descrição.</p>
+<p><strong>2.</strong> Um modelo foi definido como <span class="math inline">\(M =(Q,\Sigma,\delta,q_0,F)\)</span> onde <span class="math inline">\(Q=\{q_0,q_1\}\)</span>, <span class="math inline">\(\Sigma=\{0,1\}\)</span>, <span class="math inline">\(q_0=q_0\)</span>, e <span class="math inline">\(F=\{q_2\}\)</span>. Este modelo representa um Autômato Finito Determinístico válido? Justifique sua resposta com base nas restrições formais.</p>
+<p><strong>3.</strong> Se um Autômato Finito Determinístico possui <span class="math inline">\(\mid Q \mid=3\)</span> estados e um alfabeto com <span class="math inline">\(\mid \Sigma \mid=4\)</span> símbolos, qual é o número exato de pares no domínio da função de transição <span class="math inline">\(\delta\)</span>?</p>
+<p><strong>4.</strong> É possível que o conjunto de estados de aceitação <span class="math inline">\(F\)</span> seja igual ao conjunto de todos os estados <span class="math inline">\(Q\)</span>? Se sim, o que isso significaria sobre a linguagem reconhecida pelo autômato?</p>
+<p><strong>5.</strong> É possível que o estado inicial <span class="math inline">\(q_0\)</span> também seja um estado de aceitação, ou seja, q_0inF? Se sim, o que isso implica sobre a aceitação da <em>string</em> vazia, epsilon?</p>
 </section>
 <section id="sec-funcao-transicao-deterministica" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="sec-funcao-transicao-deterministica"><span class="header-section-number">4.1.2</span> A Função de Transição Determinística</h3>
@@ -356,18 +358,18 @@ window.Quarto = {
 <p>Na prática, muitos autômatos possuem combinações de estado e símbolo que quebram a lógica do padrão que está sendo reconhecido. Por exemplo, em um autômato que reconhece a palavra “treco”, o que acontece se ele estiver no estado inicial e ler a letra ‘z’?</p>
 <p>Para tratar esses casos e manter a função de transição total, introduz-se um <strong>estado de erro</strong>, também conhecido como <em>estado poço</em> ou <em>sumidouro</em>. Este é um estado especial não-final do qual não há escapatória: toda transição a partir do estado de erro aponta para ele mesmo.</p>
 <p><span class="math display">\[
-\forall a \in \Sigma, \quad \delta(q_{erro}, a) = q_{erro}
+\forall a \in \Sigma, \quad \delta(q_{\text{erro}}, a) = q_{\text{erro}}
 \]</span></p>
 <p>Dessa forma, qualquer sequência de entrada que desvie do padrão desejado é permanentemente capturada pelo estado de erro, garantindo que a <em>string</em> seja rejeitada. Por uma questão de clareza visual, muitos diagramas de transição omitem o estado de erro e as setas que levam a ele, mas é importante saber que, para um autômato ser formalmente completo, essas transições implícitas devem existir.</p>
 <p>A característica determinística da função de transição tem implicações profundas para a implementação prática. Em um Autômato Finito Determinístico, não há <em>escolhas</em> a serem feitas durante a execução: dado o estado atual e o símbolo de entrada, o próximo estado é inequivocamente determinado. Esta propriedade permite implementações extremamente eficientes, nas quais cada símbolo de entrada requer apenas uma consulta à tabela de transições, tipicamente implementada como um array bidimensional, ou uma operação equivalente.</p>
-<p>O domínio da função <span class="math inline">\(\delta\)</span> é o produto cartesiano <span class="math inline">\(Q \times \Sigma\)</span>, que representa o conjunto de todas as combinações possíveis de estado atual e símbolo de entrada. Para uma máquina com cardinalidade <span class="math inline">\(|Q| = n\)</span> estados e um alfabeto com cardinalidade <span class="math inline">\(|\Sigma| = k\)</span> símbolos, existem exatamente <span class="math inline">\(n \times k\)</span> transições possíveis, e cada uma deve estar definida para que o autômato seja completo e funcional.</p>
+<p>O domínio da função <span class="math inline">\(\delta\)</span> é o produto cartesiano <span class="math inline">\(Q \times \Sigma\)</span>, que representa o conjunto de todas as combinações possíveis de estado atual e símbolo de entrada. Para uma máquina com cardinalidade <span class="math inline">\(\mid Q \mid = n\)</span> estados e um alfabeto com cardinalidade <span class="math inline">\(\mid \Sigma \mid = k\)</span> símbolos, existem exatamente <span class="math inline">\(n \times k\)</span> transições possíveis, e cada uma deve estar definida para que o autômato seja completo e funcional.</p>
 <section id="exercicios-2" class="level4" data-number="4.1.2.1">
 <h4 data-number="4.1.2.1" class="anchored" data-anchor-id="exercicios-2"><span class="header-section-number">4.1.2.1</span> Exercícios 2</h4>
-<p><strong>1.</strong> Considere um AFD que reconhece identificadores que começam com ‘l’ (letra) e são seguidos por ‘d’ (dígito). O alfabeto é Sigma=l,d.&nbsp;As transições definidas são delta(q_0,l)=q_1 e delta(q_1,d)=q_1. O estado de aceitação é F=q_1. Este autômato é <strong>completo</strong>? Se não, adicione um estado de erro q_e e liste todas as transições que faltam para completá-lo.</p>
-<p><strong>2.</strong> Explique com suas próprias palavras por que a propriedade determinística (para cada par (q,a), existe <strong>exatamente um</strong> estado de destino) é importante para a eficiência da implementação de um analisador léxico.</p>
+<p><strong>1.</strong> Considere um Autômato Finito Determinístico que reconhece identificadores que começam com ‘l’ (letra) e são seguidos por ‘d’ (dígito). O alfabeto é <span class="math inline">\(\Sigma=l,d\)</span>. As transições definidas são <span class="math inline">\(\delta(q_0,l)=q_1\)</span> e <span class="math inline">\(\delta(q_1,d)=q_1\)</span>. O estado de aceitação é <span class="math inline">\(F=q_1\)</span>. Este autômato é <strong>completo</strong>? Se não, adicione um estado de erro <span class="math inline">\(q_e\)</span> e liste todas as transições que faltam para completá-lo.</p>
+<p><strong>2.</strong> Explique com suas próprias palavras por que a propriedade determinística (para cada par <span class="math inline">\((q,a)\)</span>, existe <strong>exatamente um</strong> estado de destino) é importante para a eficiência da implementação de um analisador léxico.</p>
 <p><strong>3.</strong> Um estado de erro (ou poço) pode ser um estado de aceitação? Justifique sua resposta com base na função de um estado de erro.</p>
-<p><strong>4.</strong> Se um AFD completo não possui um estado de erro explicitamente desenhado em seu diagrama, o que se assume sobre as transições não mostradas?</p>
-<p><strong>5.</strong> Dada a definição delta:QtimesSigmarightarrowQ, se a máquina está no estado q_i e lê um símbolo ainSigma, é possível que ela permaneça no mesmo estado, ou seja, delta(q_i,a)=q_i? Dê um exemplo prático.</p>
+<p><strong>4.</strong> Se um Autômato Finito Determinístico completo não possui um estado de erro explicitamente desenhado em seu diagrama, o que se assume sobre as transições não mostradas?</p>
+<p><strong>5.</strong> Dada a definição <span class="math inline">\(\delta:Q \times \Sigma \rightarrow Q\)</span>, se a máquina está no estado <span class="math inline">\(q_i\)</span> e lê um símbolo <span class="math inline">\(a \in \Sigma\)</span>, é possível que ela permaneça no mesmo estado, ou seja, <span class="math inline">\(\delta(q_i,a)=q_i\)</span>? Dê um exemplo prático.</p>
 </section>
 </section>
 </section>
@@ -469,7 +471,7 @@ Figure&nbsp;4.1: Diagrama de transições de um Autômato Finito Determinístico
 </section>
 <section id="exercicios-3" class="level3" data-number="4.2.4">
 <h3 data-number="4.2.4" class="anchored" data-anchor-id="exercicios-3"><span class="header-section-number">4.2.4</span> Exercícios 3</h3>
-<p><strong>1.</strong> Desenhe o diagrama de transições para o AFD descrito pela seguinte tabela. Use as convenções gráficas para o estado inicial e os estados de aceitação.</p>
+<p><strong>1.</strong> Desenhe o diagrama de transições para o Autômato Finito Determinístico descrito pela seguinte tabela. Use as convenções gráficas para o estado inicial e os estados de aceitação.</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -480,7 +482,7 @@ Figure&nbsp;4.1: Diagrama de transições de um Autômato Finito Determinístico
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">rightarrowq_A</td>
+<td style="text-align: left;">q_A</td>
 <td style="text-align: left;">q_B</td>
 <td style="text-align: left;">q_A</td>
 </tr>
@@ -490,14 +492,14 @@ Figure&nbsp;4.1: Diagrama de transições de um Autômato Finito Determinístico
 <td style="text-align: left;">q_C</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">\*q_C</td>
+<td style="text-align: left;">*q_C</td>
 <td style="text-align: left;">q_B</td>
 <td style="text-align: left;">q_A</td>
 </tr>
 </tbody>
 </table>
 <p><strong>2.</strong> Para o diagrama de transições abaixo, que reconhece <em>strings</em> em a,b com um número par de ’a’s e um número par de ’b’s, forneça a especificação formal completa (a 5-tupla).</p>
-<p><strong>3.</strong> Converta a especificação formal do Exemplo 2 da seção “Exemplos Práticos” (reconhecimento da senha <em>abre</em>) em uma tabela de transições completa, incluindo o estado de erro e todas as transições para ele. Considere o alfabeto Sigma=a,b,r,e,x, onde ‘x’ representa qualquer outro caractere.</p>
+<p><strong>3.</strong> Converta a especificação formal do Exemplo 2 da seção “Exemplos Práticos” (reconhecimento da senha <em>abre</em>) em uma tabela de transições completa, incluindo o estado de erro e todas as transições para ele. Considere o alfabeto =a,b,r,e,x, onde ‘x’ representa qualquer outro caractere.</p>
 <p><strong>4.</strong> Qual representação (tabular, gráfica ou formal) você considera mais útil para depurar o comportamento de um autômato? E para implementá-lo em um programa? Justifique.</p>
 <p><strong>5.</strong> Considere a tabela de transições da questão 3.1. Modifique-a para que o autômato passe a aceitar <em>strings</em> que terminam com “010” em vez de “01”.</p>
 </section>
@@ -851,11 +853,11 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 </section>
 <section id="exercicios-5" class="level3" data-number="4.4.4">
 <h3 data-number="4.4.4" class="anchored" data-anchor-id="exercicios-5"><span class="header-section-number">4.4.4</span> Exercícios 5</h3>
-<p><strong>1.</strong> Projete o diagrama de transições de um AFD sobre Sigma=a,b que aceite todas e somente as <em>strings</em> que contêm a substring “aba”.</p>
-<p><strong>2.</strong> Projete o diagrama de transições de um AFD sobre Sigma=0,1 que aceite <em>strings</em> que representam números binários cujo valor é múltiplo de 3. (Dica: Mantenha o resto da divisão por 3 como estado. v(w0)=2cdotv(w) e v(w1)=2cdotv(w)+1).</p>
-<p><strong>3.</strong> Projete a tabela de transições de um AFD que reconhece comentários de uma linha em uma linguagem de programação hipotética. Um comentário começa com // e vai até o final da linha (não nos preocuparemos com o final da linha). O alfabeto é Sigma=/,c, onde ‘c’ representa qualquer outro caractere.</p>
-<p><strong>4.</strong> Desenhe o diagrama de um AFD que aceite <em>strings</em> em a,b que tenham comprimento ímpar e terminem com ‘a’.</p>
-<p><strong>5.</strong> Projete um AFD que aceite apenas as <em>strings</em> cat e car sobre o alfabeto Sigma=c,a,t,r.</p>
+<p><strong>1.</strong> Projete o diagrama de transições de um Autômato Finito Determinístico sobre <span class="math inline">\(\Sigma=\{a,b\}\)</span> que aceite todas e somente as <em>strings</em> que contêm a substring <code>aba</code>.</p>
+<p><strong>2.</strong> Projete o diagrama de transições de um Autômato Finito Determinístico sobre <span class="math inline">\(\Sigma=\{0,1\}\)</span> que aceite <em>strings</em> que representam números binários cujo valor é múltiplo de <span class="math inline">\(3\)</span>. (Dica: Mantenha o resto da divisão por <span class="math inline">\(3\)</span> como estado. <span class="math inline">\(v(w0)=2 \cdot v(w)\)</span> e <span class="math inline">\(v(w1)=2 \cdot v(w)+1\)</span>).</p>
+<p><strong>3.</strong> Projete a tabela de transições de um Autômato Finito Determinístico que reconhece comentários de uma linha em uma linguagem de programação hipotética. Um comentário começa com <code>//</code> e vai até o final da linha (não nos preocuparemos com o final da linha). O alfabeto é <span class="math inline">\(\Sigma=\{/,c\}\)</span>, onde ‘c’ representa qualquer outro caractere.</p>
+<p><strong>4.</strong> Desenhe o diagrama de um Autômato Finito Determinístico que aceite <em>strings</em> em <span class="math inline">\(\Sigma=\{a,b\}\)</span> que tenham comprimento ímpar e terminem com ‘a’.</p>
+<p><strong>5.</strong> Projete um Autômato Finito Determinístico que aceite apenas as <em>strings</em> <code>cat</code> e <code>car</code> sobre o alfabeto <span class="math inline">\(\Sigma=\{c,a,t,r\}\)</span>.</p>
 </section>
 </section>
 <section id="considerações-sobre-implementação-prática" class="level2" data-number="4.5">
@@ -866,7 +868,7 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 <li><p><strong>Reconhecimento de Sequências</strong>: O exemplo da senha ilustra o reconhecimento determinístico de <em>strings</em> específicas, fundamental para palavras-chave.</p></li>
 <li><p><strong>Tratamento de Ambiguidades</strong>: O exemplo dos operadores demonstra como resolver conflitos de prefixos através da regra da correspondência mais longa.</p></li>
 </ol>
-<p>A persistente leitora observará que estes padrões são ubíquos na construção de analisadores léxicos em aplicações práticas, formando os blocos que definem o reconhecimento de identificadores, números, palavras-chave e operadores em linguagens de programação reais.</p>
+<p>A atenta leitora observará que estes padrões são ubíquos na construção de analisadores léxicos em aplicações práticas, formando os blocos que definem o reconhecimento de identificadores, números, palavras-chave e operadores em linguagens de programação reais.</p>
 </section>
 <section id="propriedades-matemáticas-dos-autômatos-finitos-determinísticos" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="propriedades-matemáticas-dos-autômatos-finitos-determinísticos"><span class="header-section-number">4.6</span> Propriedades Matemáticas dos Autômatos Finitos Determinísticos</h2>
@@ -874,66 +876,76 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 <section id="propriedades-de-fechamento" class="level3" data-number="4.6.1">
 <h3 data-number="4.6.1" class="anchored" data-anchor-id="propriedades-de-fechamento"><span class="header-section-number">4.6.1</span> Propriedades de Fechamento</h3>
 <p>Uma das características notáveis da classe dos Autômatos Finitos Determinísticos é que ela é <strong>fechada</strong> sob as operações fundamentais da teoria dos conjuntos. Isto significa que, ao combinarmos Autômatos Finitos Determinísticos usando estas operações, o resultado é sempre outro Autômato Finito Determinístico. Esta propriedade tem implicações profundas tanto teóricas quanto práticas, especialmente na construção de analisadores léxicos que precisam reconhecer múltiplos padrões simultaneamente.</p>
+<p>Considere o seguinte cenário prático: um analisador léxico precisa reconhecer tanto identificadores válidos quanto palavras-chave reservadas. Em vez de construir um único autômato complexo que trate ambos os casos, seria elegante construir dois autômatos simples e depois combiná-los. As propriedades de fechamento garantem que tal composição sempre resulta em outro Autômato Finito Determinístico válido, permitindo uma abordagem modular e sistemática para problemas complexos de reconhecimento.</p>
 <section id="fechamento-sob-união" class="level4" data-number="4.6.1.1">
 <h4 data-number="4.6.1.1" class="anchored" data-anchor-id="fechamento-sob-união"><span class="header-section-number">4.6.1.1</span> Fechamento sob União</h4>
 <p><strong>Teorema (Fechamento sob União)</strong>: Sejam <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> dois Autômatos Finitos Determinísticos que reconhecem as linguagens <span class="math inline">\(L_1\)</span> e <span class="math inline">\(L_2\)</span>, respectivamente. Então existe um Autômato Finito Determinístico <span class="math inline">\(M\)</span> que reconhece <span class="math inline">\(L_1 \cup L_2\)</span>.</p>
-<p><strong>Construção Paralela</strong>: a ideia central é construir um autômato que execute <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> <strong>em paralelo</strong>. Para entender o que significa “executar em paralelo”, imagine que você tem duas máquinas rodando simultaneamente, processando a mesma entrada. A cada símbolo lido, ambas as máquinas avançam um passo. O novo autômato mantém, em cada momento, a informação sobre o estado atual de ambas as máquinas originais através de pares ordenados.</p>
-<p>Formalmente, dados:</p>
+<p>A intuição por trás da construção da união é elegante: executamos ambos os autômatos <strong>simultaneamente</strong> sobre a mesma entrada, mantendo o estado atual de cada um em um par ordenado. A atenta leitora pode visualizar isto como duas máquinas trabalhando em paralelo, processando o mesmo fluxo de símbolos. Se ao menos uma delas aceitar a entrada, o autômato combinado também aceita.</p>
+<p><strong>Construção Formal do Produto</strong>: Dados:</p>
 <ul>
-<li><span class="math inline">\(M_1 = (Q_1, \Sigma, \delta_1, q_{01}, F_1)\)</span></li>
-<li><span class="math inline">\(M_2 = (Q_2, \Sigma, \delta_2, q_{02}, F_2)\)</span></li>
+<li><span class="math inline">\(M_1 = (Q_1, \Sigma, \delta_1, q_{01}, F_1)\)</span>;</li>
+<li><span class="math inline">\(M_2 = (Q_2, \Sigma, \delta_2, q_{02}, F_2)\)</span>.</li>
 </ul>
-<p>Construímos <span class="math inline">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> onde:</p>
+<p>Construímos <span class="math inline">\(M = (Q, \Sigma, \delta, q_0, F)\)</span> no qual:</p>
 <ul>
-<li><span class="math inline">\(Q = Q_1 \times Q_2\)</span> (produto cartesiano dos conjuntos de estados)</li>
-<li><span class="math inline">\(q_0 = (q_{01}, q_{02})\)</span> (par dos estados iniciais)</li>
-<li><span class="math inline">\(F = (F_1 \times Q_2) \cup (Q_1 \times F_2)\)</span> (aceita se pelo menos um dos autômatos aceita)</li>
-<li><span class="math inline">\(\delta((q_1, q_2), a) = (\delta_1(q_1, a), \delta_2(q_2, a))\)</span> para todo <span class="math inline">\((q_1, q_2) \in Q\)</span> e <span class="math inline">\(a \in \Sigma\)</span></li>
+<li><span class="math inline">\(Q = Q_1 \times Q_2\)</span> (produto cartesiano dos conjuntos de estados);</li>
+<li><span class="math inline">\(q_0 = (q_{01}, q_{02})\)</span> (par dos estados iniciais);</li>
+<li><span class="math inline">\(F = (F_1 \times Q_2) \cup (Q_1 \times F_2)\)</span> (aceita se pelo menos um dos autômatos aceita);</li>
+<li><span class="math inline">\(\delta((q_1, q_2), a) = (\delta_1(q_1, a), \delta_2(q_2, a))\)</span> para todo <span class="math inline">\((q_1, q_2) \in Q\)</span> e <span class="math inline">\(a \in \Sigma\)</span>.</li>
 </ul>
-<p>Alguns autores utilizam o termo <strong>Construção do Produto</strong> para esta construção, devido à natureza do produto cartesiano dos estados. A atenta leitora notará que esta construção é uma aplicação direta da definição de produto cartesiano, refletindo a ideia de manter o estado de ambas as máquinas simultaneamente. Esta mesma construção base (produto cartesiano dos estados) é usada tanto para união quanto para interseção, a única diferença está na definição dos estados finais:</p>
-<p><strong>União</strong>: <span class="math inline">\(F = (F_1 \times Q_2) \cup (Q_1 \times F_2)\)</span>. o Autômato Finito Determinístico irá aceitar se pelo menos um aceitar.</p>
-<p><strong>Interseção</strong>: <span class="math inline">\(F = F_1 \times F_2\)</span>, neste caso o Autômato Finito Determinístico aceita se ambos aceitarem.</p>
-<p><strong>Exemplo Completo e Detalhado</strong>:</p>
-<p>Considere dois Autômatos Finitos Determinísticos sobre o alfabeto <span class="math inline">\(\Sigma = \{a, b\}\)</span>:</p>
-<p><strong>Autômato <span class="math inline">\(M_1\)</span></strong> - Aceita <em>strings</em> que terminam com ‘a’:</p>
-<ul>
-<li><span class="math inline">\(Q_1 = \{p_0, p_1\}\)</span></li>
-<li><span class="math inline">\(q_{01} = p_0\)</span></li>
-<li><span class="math inline">\(F_1 = \{p_1\}\)</span></li>
-<li>Transições de <span class="math inline">\(M_1\)</span>:
-<ul>
-<li><span class="math inline">\(\delta_1(p_0, a) = p_1\)</span></li>
-<li><span class="math inline">\(\delta_1(p_0, b) = p_0\)</span></li>
-<li><span class="math inline">\(\delta_1(p_1, a) = p_1\)</span></li>
-<li><span class="math inline">\(\delta_1(p_1, b) = p_0\)</span></li>
-</ul></li>
-</ul>
-<p><strong>Autômato <span class="math inline">\(M_2\)</span></strong> - Aceita <em>strings</em> de comprimento par (incluindo <span class="math inline">\(\epsilon\)</span>):</p>
-<ul>
-<li><span class="math inline">\(Q_2 = \{r_0, r_1\}\)</span></li>
-<li><span class="math inline">\(q_{02} = r_0\)</span></li>
-<li><span class="math inline">\(F_2 = \{r_0\}\)</span></li>
-<li>Transições de <span class="math inline">\(M_2\)</span>:
-<ul>
-<li><span class="math inline">\(\delta_2(r_0, a) = r_1\)</span></li>
-<li><span class="math inline">\(\delta_2(r_0, b) = r_1\)</span></li>
-<li><span class="math inline">\(\delta_2(r_1, a) = r_0\)</span></li>
-<li><span class="math inline">\(\delta_2(r_1, b) = r_0\)</span></li>
-</ul></li>
-</ul>
-<p><strong>Construção do Autômato União <span class="math inline">\(M\)</span></strong>:</p>
+<p>Para entender esse processo, considere dois Autômatos Finitos Determinísticos sobre o alfabeto <span class="math inline">\(\Sigma = \{a, b\}\)</span>:</p>
 <ol type="1">
-<li><p><strong>Estados</strong>: <span class="math inline">\(Q = Q_1 \times Q_2 = \{(p_0, r_0), (p_0, r_1), (p_1, r_0), (p_1, r_1)\}\)</span></p></li>
-<li><p><strong>Estado Inicial</strong>: <span class="math inline">\(q_0 = (p_0, r_0)\)</span></p></li>
-<li><p><strong>Estados de Aceitação</strong>:</p>
-<ul>
-<li><span class="math inline">\(F_1 \times Q_2 = \{p_1\} \times \{r_0, r_1\} = \{(p_1, r_0), (p_1, r_1)\}\)</span></li>
-<li><span class="math inline">\(Q_1 \times F_2 = \{p_0, p_1\} \times \{r_0\} = \{(p_0, r_0), (p_1, r_0)\}\)</span></li>
-<li><span class="math inline">\(F = \{(p_1, r_0), (p_1, r_1), (p_0, r_0)\}\)</span></li>
-</ul></li>
-<li><p><strong>Função de Transição <span class="math inline">\(\delta\)</span></strong>:</p></li>
+<li><strong>Autômato <span class="math inline">\(M_1\)</span></strong>: Aceita <em>strings</em> que começam com ‘a’</li>
 </ol>
+<ul>
+<li>Estados: <span class="math inline">\(Q_1 = \{s_0, s_{\text{aceita}}, s_{\text{rejeita}}\}\)</span></li>
+<li>Estado inicial: <span class="math inline">\(s_0\)</span></li>
+<li>Estados finais: <span class="math inline">\(F_1 = \{s_{\text{aceita}}\}\)</span></li>
+<li>Transições:
+<ul>
+<li><span class="math inline">\(\delta_1(s_0, a) = s_{\text{aceita}}\)</span></li>
+<li><span class="math inline">\(\delta_1(s_0, b) = s_{\text{rejeita}}\)</span></li>
+<li><span class="math inline">\(\delta_1(s_{\text{aceita}}, x) = s_{\text{aceita}}\)</span> para <span class="math inline">\(x \in \{a,b\}\)</span></li>
+<li><span class="math inline">\(\delta_1(s_{\text{rejeita}}, x) = s_{\text{rejeita}}\)</span> para <span class="math inline">\(x \in \{a,b\}\)</span></li>
+</ul></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Autômato <span class="math inline">\(M_2\)</span></strong>: Aceita <em>strings</em> com número par de ’b’s</li>
+</ol>
+<ul>
+<li>Estados: <span class="math inline">\(Q_2 = \{t_{\text{par}}, t_{\text{ímpar}}\}\)</span></li>
+<li>Estado inicial: <span class="math inline">\(t_{\text{par}}\)</span></li>
+<li>Estados finais: <span class="math inline">\(F_2 = \{t_{\text{par}}\}\)</span></li>
+<li>Transições:
+<ul>
+<li><span class="math inline">\(\delta_2(t_{\text{par}}, a) = t_{\text{par}}\)</span>, <span class="math inline">\(\delta_2(t_{\text{par}}, b) = t_{\text{ímpar}}\)</span></li>
+<li><span class="math inline">\(\delta_2(t_{\text{ímpar}}, a) = t_{\text{ímpar}}\)</span>, <span class="math inline">\(\delta_2(t_{\text{ímpar}}, b) = t_{\text{par}}\)</span></li>
+</ul></li>
+</ul>
+<p>A construção do autômato união <span class="math inline">\(M = M_1 \cup M_2\)</span> resulta em:</p>
+<p><strong>Estados</strong>: <span class="math inline">\(Q = Q_1 \times Q_2\)</span> possui <span class="math inline">\(\mid Q_1 \mid \times \mid Q_2 \mid = 3 \times 2 = 6\)</span> estados</p>
+<p><strong>Estados de Aceitação</strong>: um estado <span class="math inline">\((s_i, t_j)\)</span> é final se <span class="math inline">\(s_i \in F_1\)</span> <strong>ou</strong> <span class="math inline">\(t_j \in F_2\)</span>. Analisando cada par, teremos:</p>
+<ul>
+<li><span class="math inline">\((s_0, t_{\text{par}})\)</span>: aceita (pois <span class="math inline">\(t_{\text{par}} \in F_2\)</span>);</li>
+<li><span class="math inline">\((s_0, t_{\text{ímpar}})\)</span>: rejeita;</li>
+<li><span class="math inline">\((s_{\text{aceita}}, t_{\text{par}})\)</span>: aceita (ambos aceitam);</li>
+<li><span class="math inline">\((s_{\text{aceita}}, t_{\text{ímpar}})\)</span>: aceita (pois <span class="math inline">\(s_{\text{aceita}} \in F_1\)</span>);</li>
+<li><span class="math inline">\((s_{\text{rejeita}}, t_{\text{par}})\)</span>: aceita (pois <span class="math inline">\(t_{\text{par}} \in F_2\)</span>);</li>
+<li><span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span>: rejeita.</li>
+</ul>
+<p>A <a href="#tbl-uniao-exemplo" class="quarto-xref">Table&nbsp;<span>4.5</span></a> apresenta a tabela de transições completa:</p>
+<div id="tbl-uniao-exemplo" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-uniao-exemplo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.5: Tabela de transições para o autômato união <span class="math inline">\(M_1 \cup M_2\)</span>
+</figcaption>
+<div aria-describedby="tbl-uniao-exemplo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
+<colgroup>
+<col style="width: 57%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Estado</th>
@@ -943,92 +955,117 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(\rightarrow *(p_0, r_0)\)</span></td>
-<td><span class="math inline">\((p_1, r_1)\)</span></td>
-<td><span class="math inline">\((p_0, r_1)\)</span></td>
+<td><span class="math inline">\(\rightarrow *(s_0, t_{\text{par}})\)</span></td>
+<td><span class="math inline">\((s_{\text{aceita}}, t_{\text{par}})\)</span></td>
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\((p_0, r_1)\)</span></td>
-<td><span class="math inline">\((p_1, r_0)\)</span></td>
-<td><span class="math inline">\((p_0, r_0)\)</span></td>
+<td><span class="math inline">\((s_0, t_{\text{ímpar}})\)</span></td>
+<td><span class="math inline">\((s_{\text{aceita}}, t_{\text{ímpar}})\)</span></td>
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{par}})\)</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(*(p_1, r_0)\)</span></td>
-<td><span class="math inline">\((p_1, r_1)\)</span></td>
-<td><span class="math inline">\((p_0, r_1)\)</span></td>
+<td><span class="math inline">\(*(s_{\text{aceita}}, t_{\text{par}})\)</span></td>
+<td><span class="math inline">\((s_{\text{aceita}}, t_{\text{par}})\)</span></td>
+<td><span class="math inline">\((s_{\text{aceita}}, t_{\text{ímpar}})\)</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(*(p_1, r_1)\)</span></td>
-<td><span class="math inline">\((p_1, r_0)\)</span></td>
-<td><span class="math inline">\((p_0, r_0)\)</span></td>
+<td><span class="math inline">\(*(s_{\text{aceita}}, t_{\text{ímpar}})\)</span></td>
+<td><span class="math inline">\((s_{\text{aceita}}, t_{\text{ímpar}})\)</span></td>
+<td><span class="math inline">\((s_{\text{aceita}}, t_{\text{par}})\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(*(s_{\text{rejeita}}, t_{\text{par}})\)</span></td>
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{par}})\)</span></td>
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span></td>
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span></td>
+<td><span class="math inline">\((s_{\text{rejeita}}, t_{\text{par}})\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>A <a href="#fig-uniao1" class="quarto-xref">Figure&nbsp;<span>4.5</span></a> apresenta os diagramas de transição dos autômatos <span class="math inline">\(M_1\)</span>, <span class="math inline">\(M_2\)</span> e o autômato resultante <span class="math inline">\(M= M_1 \cup M_2\)</span>:</p>
-<div id="fig-uniao1" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-uniao1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src=".\images/uniao1.webp" class="img-fluid figure-img">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-uniao1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.5: Diagramas de transição dos Autômatos Finitos Determinísticos <span class="math inline">\(M_1\)</span>, <span class="math inline">\(M_2\)</span> e o autômato resultante <span class="math inline">\(M = M_1 \cup M_2\)</span>. O resultado desta união é um autômato que aceita <em>strings</em> que terminam com ‘a’ ou que possuem comprimento par.
-</figcaption>
 </figure>
 </div>
-<p>A matemática é ótima, contudo, a construção da união pode requerer um pouco de prática para ser compreendida completamente. Para treinar, vamos construir a união de dois autômatos simples, ainda sobre o alfabeto <span class="math inline">\(\Sigma = \{a, b\}\)</span>, para solidificar o processo algébrico.</p>
-<p><strong>Autômato M₁: Aceita strings que começam com ‘a’</strong>. Que pode ser visto como um autômato que reconhece a linguagem <span class="math inline">\(L_1 = \{a, aa, ab, aaa, aab, aba, aaaa, ...\}\)</span>. Algebricamente, temos:</p>
+<p><strong>Verificação</strong>: Testemos a <em>string</em> “ba”:</p>
 <ul>
-<li>Estados: <span class="math inline">\(Q_1 = \{s_0, s_1, s_2\}\)</span> onde:
+<li><span class="math inline">\((s_0, t_{\text{par}}) \xrightarrow{b} (s_{\text{rejeita}}, t_{\text{ímpar}}) \xrightarrow{a} (s_{\text{rejeita}}, t_{\text{ímpar}})\)</span>;</li>
+<li>Estado final: <span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span> não é de aceitação;</li>
+<li><span class="math inline">\(M_1\)</span> rejeita (não começa com ‘a’), <span class="math inline">\(M_2\)</span> rejeita (número ímpar de ’b’s);</li>
+<li>União rejeita corretamente.</li>
+</ul>
+<p>A matemática é ótima, contudo, a construção da união pode requerer um pouco de prática para ser compreendida completamente. Para treinar, vamos construir a união de dois autômatos simples, ainda sobre o alfabeto <span class="math inline">\(\Sigma = \{a, b\}\)</span>, com uma pequena alteração do exemplo anterior, para solidificar o processo algébrico. Considere os autômatos a seguir:</p>
+<p><strong>Autômato <span class="math inline">\(M_1\)</span>: Aceita strings que começam com ‘a’</strong>: um autômato que reconhece a linguagem <span class="math inline">\(L_1 = \{a, aa, ab, aaa, aab, aba, aaaa, ...\}\)</span>. Algebricamente, teremos:</p>
 <ul>
-<li><span class="math inline">\(s_0\)</span>: estado inicial (ainda não leu nada)</li>
-<li><span class="math inline">\(s_1\)</span>: leu ‘a’ como primeiro símbolo (aceita)</li>
-<li><span class="math inline">\(s_2\)</span>: leu ‘b’ como primeiro símbolo (rejeita)</li>
+<li>Estados: <span class="math inline">\(Q_1 = \{s_0, s_1, s_2\}\)</span> nos quais:
+<ul>
+<li><span class="math inline">\(s_0\)</span>: estado inicial (ainda não leu nada);</li>
+<li><span class="math inline">\(s_1\)</span>: leu ‘a’ como primeiro símbolo (aceita);</li>
+<li><span class="math inline">\(s_2\)</span>: leu ‘b’ como primeiro símbolo (rejeita).</li>
 </ul></li>
-<li>Estado inicial: <span class="math inline">\(s_0\)</span></li>
-<li>Estados finais: <span class="math inline">\(F_1 = \{s_1\}\)</span></li>
+<li>Estado inicial: <span class="math inline">\(s_0\)</span>.</li>
+<li>Estados finais: <span class="math inline">\(F_1 = \{s_1\}\)</span>.</li>
 <li>Transições:
 <ul>
-<li><span class="math inline">\(\delta_1(s_0, a) = s_1\)</span> (primeiro símbolo é ‘a’ → aceita)</li>
-<li><span class="math inline">\(\delta_1(s_0, b) = s_2\)</span> (primeiro símbolo é ‘b’ → rejeita)</li>
-<li><span class="math inline">\(\delta_1(s_1, a) = s_1\)</span> (já aceitou, continua aceitando)</li>
-<li><span class="math inline">\(\delta_1(s_1, b) = s_1\)</span> (já aceitou, continua aceitando)</li>
-<li><span class="math inline">\(\delta_1(s_2, a) = s_2\)</span> (já rejeitou, continua rejeitando)</li>
-<li><span class="math inline">\(\delta_1(s_2, b) = s_2\)</span> (já rejeitou, continua rejeitando)</li>
+<li><span class="math inline">\(\delta_1(s_0, a) = s_1\)</span> (primeiro símbolo é ‘a’ → aceita);</li>
+<li><span class="math inline">\(\delta_1(s_0, b) = s_2\)</span> (primeiro símbolo é ‘b’ → rejeita);</li>
+<li><span class="math inline">\(\delta_1(s_1, a) = s_1\)</span> (já aceitou, continua aceitando);</li>
+<li><span class="math inline">\(\delta_1(s_1, b) = s_1\)</span> (já aceitou, continua aceitando);</li>
+<li><span class="math inline">\(\delta_1(s_2, a) = s_2\)</span> (já rejeitou, continua rejeitando);</li>
+<li><span class="math inline">\(\delta_1(s_2, b) = s_2\)</span> (já rejeitou, continua rejeitando);</li>
 </ul></li>
 </ul>
-<p><strong>Autômato M₂: Aceita strings com número ímpar de ’b’s</strong>. Que pode ser visto como um autômato que reconhece a linguagem <span class="math inline">\(L_2 = \{b, ab, aab, aba, aaab, aababb, ...\}\)</span>. Que pode ser especificado como:</p>
+<p><strong>Autômato <span class="math inline">\(M_2\)</span>: Aceita strings com número ímpar de ’b’s</strong>: um autômato que reconhece a linguagem <span class="math inline">\(L_2 = \{b, ab, aab, aba, aaab, aababb, ...\}\)</span>. Que pode ser especificado como:</p>
 <ul>
 <li>Estados: <span class="math inline">\(Q_2 = \{t_0, t_1\}\)</span> onde:
 <ul>
-<li><span class="math inline">\(t_0\)</span>: número par de ’b’s (incluindo zero)</li>
-<li><span class="math inline">\(t_1\)</span>: número ímpar de ’b’s</li>
+<li><span class="math inline">\(t_0\)</span>: número par de ’b’s (incluindo zero);</li>
+<li><span class="math inline">\(t_1\)</span>: número ímpar de ’b’s.</li>
 </ul></li>
-<li>Estado inicial: <span class="math inline">\(t_0\)</span></li>
-<li>Estados finais: <span class="math inline">\(F_2 = \{t_1\}\)</span></li>
+<li>Estado inicial: <span class="math inline">\(t_0\)</span>.</li>
+<li>Estados finais: <span class="math inline">\(F_2 = \{t_1\}\)</span>.</li>
 <li>Transições:
 <ul>
-<li><span class="math inline">\(\delta_2(t_0, a) = t_0\)</span> (‘a’ não afeta a contagem de ’b’s)</li>
-<li><span class="math inline">\(\delta_2(t_0, b) = t_1\)</span> (de par para ímpar)</li>
-<li><span class="math inline">\(\delta_2(t_1, a) = t_1\)</span> (‘a’ não afeta a contagem)</li>
-<li><span class="math inline">\(\delta_2(t_1, b) = t_0\)</span> (de ímpar para par)</li>
+<li><span class="math inline">\(\delta_2(t_0, a) = t_0\)</span> (‘a’ não afeta a contagem de ’b’s);</li>
+<li><span class="math inline">\(\delta_2(t_0, b) = t_1\)</span> (de par para ímpar);</li>
+<li><span class="math inline">\(\delta_2(t_1, a) = t_1\)</span> (‘a’ não afeta a contagem);</li>
+<li><span class="math inline">\(\delta_2(t_1, b) = t_0\)</span> (de ímpar para par).</li>
 </ul></li>
 </ul>
-<p>Para construir o autômato união <span class="math inline">\(M = M_1 \cup M_2\)</span>, seguimos os seguintes passos:</p>
-<p><strong>Passo 1: Criar o conjunto de estados</strong>: o conjunto de estados do autômato união será dado pelo o produto cartesiano <span class="math inline">\(Q = Q_1 \times Q_2\)</span>. Enumerando todos os pares possíveis teremos:</p>
+<p>Os autômatos <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> podem ser vistos, representados como diagramas de transição na <a href="#fig-uniao1" class="quarto-xref">Figure&nbsp;<span>4.5</span></a>.</p>
+<div id="fig-uniao1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-uniao1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/uniao.webp" class="img-fluid figure-img"></p>
+<figcaption>Diagrama de transição do autômato <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-uniao1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.5
+</figcaption>
+</figure>
+</div>
+<p>Para construir o autômato união <span class="math inline">\(M = M_1 \cup M_2\)</span>, a esforçada leitora deve seguir os seguintes passos:</p>
+<p><strong>1. Passo 1: Criar o conjunto de estados</strong>: o conjunto de estados do autômato união será dado pelo o produto cartesiano <span class="math inline">\(Q = Q_1 \times Q_2\)</span>. Enumerando todos os pares possíveis teremos:</p>
 <ul>
-<li><span class="math inline">\((s_0, t_0)\)</span>: <span class="math inline">\(M_1\)</span> no estado inicial e <span class="math inline">\(M_2\)</span> com número par de ’b’s</li>
-<li><span class="math inline">\((s_0, t_1)\)</span>: <span class="math inline">\(M_1\)</span> no estado inicial e <span class="math inline">\(M_2\)</span> com número ímpar de ’b’s</li>
-<li><span class="math inline">\((s_1, t_0)\)</span>: <span class="math inline">\(M_1\)</span> aceitando (começou com ‘a’) e <span class="math inline">\(M_2\)</span> com número par de ’b’s</li>
-<li><span class="math inline">\((s_1, t_1)\)</span>: <span class="math inline">\(M_1\)</span> aceitando e <span class="math inline">\(M_2\)</span> com número ímpar de ’b’s</li>
-<li><span class="math inline">\((s_2, t_0)\)</span>: <span class="math inline">\(M_1\)</span> rejeitando (começou com ‘b’) e <span class="math inline">\(M_2\)</span> com número par de ’b’s</li>
-<li><span class="math inline">\((s_2, t_1)\)</span>: <span class="math inline">\(M_1\)</span> rejeitando e <span class="math inline">\(M_2\)</span> com número ímpar de ’b’s</li>
+<li><span class="math inline">\((s_0, t_0)\)</span>: <span class="math inline">\(M_1\)</span> no estado inicial e <span class="math inline">\(M_2\)</span> com número par de ’b’s;</li>
+<li><span class="math inline">\((s_0, t_1)\)</span>: <span class="math inline">\(M_1\)</span> no estado inicial e <span class="math inline">\(M_2\)</span> com número ímpar de ’b’s;</li>
+<li><span class="math inline">\((s_1, t_0)\)</span>: <span class="math inline">\(M_1\)</span> aceitando (começou com ‘a’) e <span class="math inline">\(M_2\)</span> com número par de ’b’s;</li>
+<li><span class="math inline">\((s_1, t_1)\)</span>: <span class="math inline">\(M_1\)</span> aceitando e <span class="math inline">\(M_2\)</span> com número ímpar de ’b’s;</li>
+<li><span class="math inline">\((s_2, t_0)\)</span>: <span class="math inline">\(M_1\)</span> rejeitando (começou com ‘b’) e <span class="math inline">\(M_2\)</span> com número par de ’b’s;</li>
+<li><span class="math inline">\((s_2, t_1)\)</span>: <span class="math inline">\(M_1\)</span> rejeitando e <span class="math inline">\(M_2\)</span> com número ímpar de ’b’s.</li>
 </ul>
-<p>Total: <span class="math inline">\(6\)</span> estados <span class="math inline">\((3 \times 2 = 6)\)</span>.</p>
-<p><strong>Passo 2: Determinar o estado inicial</strong>: o estado inicial é simplesmente o par dos estados iniciais:</p>
+<p><strong>Total</strong>: <span class="math inline">\(6\)</span> estados <span class="math inline">\((3 \times 2 = 6)\)</span>.</p>
+<p><strong>2. Passo 2: Determinar o estado inicial</strong>: o estado inicial é simplesmente o par dos estados iniciais:</p>
 <ul>
 <li><span class="math inline">\(q_0 = (s_0, t_0)\)</span></li>
 </ul>
-<p><strong>Passo 3: Determinar os estados finais</strong>: para a união, um estado é final se <strong>pelo menos um</strong> dos autômatos originais estaria em estado final. Para determinar os estados finais, verificamos quais pares <span class="math inline">\((s_i, t_j)\)</span> satisfazem a condição de aceitação. Para cada estado perguntamos:“<span class="math inline">\(M_1\)</span> aceita OU <span class="math inline">\(M_2\)</span> aceita?”</p>
+<p><strong>3. Passo 3: Determinar os estados finais</strong>: para a união, um estado é final se <strong>pelo menos um</strong> dos autômatos originais estaria em estado final. Para determinar os estados finais, verificamos quais pares <span class="math inline">\((s_i, t_j)\)</span> satisfazem a condição de aceitação. Para cada estado perguntamos:“<span class="math inline">\(M_1\)</span> aceita OU <span class="math inline">\(M_2\)</span> aceita?”</p>
 <ul>
 <li><span class="math inline">\((s_0, t_0)\)</span>: <span class="math inline">\(s_0 \notin F_1\)</span> e <span class="math inline">\(t_0 \notin F_2\)</span> → NÃO é final;</li>
 <li><span class="math inline">\((s_0, t_1)\)</span>: <span class="math inline">\(s_0 \notin F_1\)</span> mas <span class="math inline">\(t_1 \in F_2\)</span> → É FINAL;</li>
@@ -1038,26 +1075,26 @@ Figure&nbsp;4.5: Diagramas de transição dos Autômatos Finitos Determinístico
 <li><span class="math inline">\((s_2, t_1)\)</span>: <span class="math inline">\(s_2 \notin F_1\)</span> mas <span class="math inline">\(t_1 \in F_2\)</span> → É FINAL.</li>
 </ul>
 <p>Assim, os Estados finais são: <span class="math inline">\(F = \{(s_0, t_1), (s_1, t_0), (s_1, t_1), (s_2, t_1)\}\)</span></p>
-<p><strong>Passo 4: Construir a função de transição</strong>: para cada estado <span class="math inline">\((s_i, t_j)\)</span> e cada símbolo <span class="math inline">\(x \in \{a, b\}\)</span>, calculamos: <span class="math display">\[\delta((s_i, t_j), x) = (\delta_1(s_i, x), \delta_2(t_j, x))\]</span></p>
+<p><strong>4. Passo 4: Construir a função de transição</strong>: para cada estado <span class="math inline">\((s_i, t_j)\)</span> e cada símbolo <span class="math inline">\(x \in \{a, b\}\)</span>, calculamos: <span class="math display">\[\delta((s_i, t_j), x) = (\delta_1(s_i, x), \delta_2(t_j, x))\]</span></p>
 <p><strong>Transições com ‘a’:</strong></p>
 <ul>
-<li><span class="math inline">\(\delta((s_0, t_0), a) = (\delta_1(s_0, a), \delta_2(t_0, a)) = (s_1, t_0)\)</span></li>
-<li><span class="math inline">\(\delta((s_0, t_1), a) = (\delta_1(s_0, a), \delta_2(t_1, a)) = (s_1, t_1)\)</span></li>
-<li><span class="math inline">\(\delta((s_1, t_0), a) = (\delta_1(s_1, a), \delta_2(t_0, a)) = (s_1, t_0)\)</span></li>
-<li><span class="math inline">\(\delta((s_1, t_1), a) = (\delta_1(s_1, a), \delta_2(t_1, a)) = (s_1, t_1)\)</span></li>
-<li><span class="math inline">\(\delta((s_2, t_0), a) = (\delta_1(s_2, a), \delta_2(t_0, a)) = (s_2, t_0)\)</span></li>
-<li><span class="math inline">\(\delta((s_2, t_1), a) = (\delta_1(s_2, a), \delta_2(t_1, a)) = (s_2, t_1)\)</span></li>
+<li><span class="math inline">\(\delta((s_0, t_0), a) = (\delta_1(s_0, a), \delta_2(t_0, a)) = (s_1, t_0)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_0, t_1), a) = (\delta_1(s_0, a), \delta_2(t_1, a)) = (s_1, t_1)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_1, t_0), a) = (\delta_1(s_1, a), \delta_2(t_0, a)) = (s_1, t_0)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_1, t_1), a) = (\delta_1(s_1, a), \delta_2(t_1, a)) = (s_1, t_1)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_2, t_0), a) = (\delta_1(s_2, a), \delta_2(t_0, a)) = (s_2, t_0)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_2, t_1), a) = (\delta_1(s_2, a), \delta_2(t_1, a)) = (s_2, t_1)\)</span>.</li>
 </ul>
 <p><strong>Transições com ‘b’:</strong></p>
 <ul>
-<li><span class="math inline">\(\delta((s_0, t_0), b) = (\delta_1(s_0, b), \delta_2(t_0, b)) = (s_2, t_1)\)</span></li>
-<li><span class="math inline">\(\delta((s_0, t_1), b) = (\delta_1(s_0, b), \delta_2(t_1, b)) = (s_2, t_0)\)</span></li>
-<li><span class="math inline">\(\delta((s_1, t_0), b) = (\delta_1(s_1, b), \delta_2(t_0, b)) = (s_1, t_1)\)</span></li>
-<li><span class="math inline">\(\delta((s_1, t_1), b) = (\delta_1(s_1, b), \delta_2(t_1, b)) = (s_1, t_0)\)</span></li>
-<li><span class="math inline">\(\delta((s_2, t_0), b) = (\delta_1(s_2, b), \delta_2(t_0, b)) = (s_2, t_1)\)</span></li>
-<li><span class="math inline">\(\delta((s_2, t_1), b) = (\delta_1(s_2, b), \delta_2(t_1, b)) = (s_2, t_0)\)</span></li>
+<li><span class="math inline">\(\delta((s_0, t_0), b) = (\delta_1(s_0, b), \delta_2(t_0, b)) = (s_2, t_1)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_0, t_1), b) = (\delta_1(s_0, b), \delta_2(t_1, b)) = (s_2, t_0)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_1, t_0), b) = (\delta_1(s_1, b), \delta_2(t_0, b)) = (s_1, t_1)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_1, t_1), b) = (\delta_1(s_1, b), \delta_2(t_1, b)) = (s_1, t_0)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_2, t_0), b) = (\delta_1(s_2, b), \delta_2(t_0, b)) = (s_2, t_1)\)</span>;</li>
+<li><span class="math inline">\(\delta((s_2, t_1), b) = (\delta_1(s_2, b), \delta_2(t_1, b)) = (s_2, t_0)\)</span>.</li>
 </ul>
-<p><strong>Passo 5: Construir a Tabela de Transições da União</strong>:</p>
+<p><strong>5. Passo 5: Construir a Tabela de Transições da União</strong>:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1099,248 +1136,284 @@ Figure&nbsp;4.5: Diagramas de transição dos Autômatos Finitos Determinístico
 </tr>
 </tbody>
 </table>
-<p><strong>Passo 6: Depuração</strong>: vamos testar algumas strings para verificar que o autômato funciona corretamente:</p>
-<p><strong>String “ab”</strong> (começa com ‘a’ e tem um ‘b’, número ímpar de ’b’s):</p>
-<ul>
-<li><span class="math inline">\((s_0,t_0) \xrightarrow{a} (s_1,t_0) \xrightarrow{b} (s_1,t_1)\)</span> ACEITA</li>
-<li>M₁ aceita (começa com ‘a’)</li>
-<li>M₂ aceita (um ‘b’ = ímpar)</li>
-<li>União aceita</li>
-</ul>
-<p><strong>String “b”</strong> (não começa com ‘a’ mas tem número ímpar de ’b’s):</p>
-<ul>
-<li><span class="math inline">\((s_0,t_0) \xrightarrow{b} (s_2,t_1)\)</span> ACEITA</li>
-<li>M₁ rejeita (começa com ‘b’) ✗</li>
-<li>M₂ aceita (um ‘b’ = ímpar)</li>
-<li>União aceita (pelo menos um aceita)</li>
-</ul>
-<p><strong>String “bb”</strong> (não começa com ‘a’ e tem número par de ’b’s):</p>
-<ul>
-<li><span class="math inline">\((s_0,t_0) \xrightarrow{b} (s_2,t_1) \xrightarrow{b} (s_2,t_0)\)</span> ✗ REJEITA</li>
-<li>M₁ rejeita (começa com ‘b’) ✗</li>
-<li>M₂ rejeita (dois ’b’s = par) ✗</li>
-<li>União rejeita (nenhum aceita) ✗</li>
-</ul>
-<p><strong>String “aaa”</strong> (começa com ‘a’ mas zero ’b’s):</p>
-<ul>
-<li><span class="math inline">\((s_0,t_0) \xrightarrow{a} (s_1,t_0) \xrightarrow{a} (s_1,t_0) \xrightarrow{a} (s_1,t_0)\)</span> ACEITA</li>
-<li>M₁ aceita (começa com ‘a’)</li>
-<li>M₂ rejeita (zero ’b’s = par) ✗</li>
-<li>União aceita (pelo menos um aceita)</li>
-</ul>
-<p>A atenta leitora deve notar que a construção por produto cartesiano funciona como se estivéssemos executando ambos os autômatos simultaneamente em duas “trilhas” paralelas. A cada símbolo lido:</p>
-<ol type="1">
-<li><p><strong>Atualizamos ambas as trilhas</strong>: cada componente do par de estados evolui independentemente segundo sua própria função de transição.</p></li>
-<li><p><strong>Mantemos a história completa</strong>: o estado <span class="math inline">\((s_i, t_j)\)</span> nos diz exatamente onde cada autômato original estaria após processar a entrada até aquele ponto.</p></li>
-<li><p><strong>Decidimos aceitação com lógica OR</strong>: Para a união, basta que uma das trilhas aceite para o autômato combinado aceitar.</p></li>
+<p><strong>6. Passo 6: Depuração</strong>: vamos testar algumas strings para verificar que o autômato funciona corretamente:</p>
+<ol type="a">
+<li><strong>String <code>ab</code></strong> (começa com ‘a’ e tem um ‘b’, número ímpar de ’b’s):</li>
 </ol>
-<p>Este algoritmo de construção em seis passos, com um passo apenas para depuração, sempre funciona, servindo como evidência de que a classe das linguagens regulares é fechada sob união.</p>
-<p>Com base na seção “Fechamento sob União” do texto fornecido, que utiliza o método de construção paralela (ou construtor do produto), seguem dois novos exemplos detalhados da união de autômatos finitos determinísticos, incluindo a definição formal da linguagem para cada autômato.</p>
-<section id="exemplo-1-união-de-contém-aa-com-número-par-de-as" class="level5" data-number="4.6.1.1.1">
-<h5 data-number="4.6.1.1.1" class="anchored" data-anchor-id="exemplo-1-união-de-contém-aa-com-número-par-de-as"><span class="header-section-number">4.6.1.1.1</span> Exemplo 1: União de “Contém ‘aa’” com “Número Par de ’a’s”</h5>
-<p>Neste exemplo, vamos criar um autômato que aceita a linguagem <span class="math inline">\(L = L_1 \cup L_2\)</span>, onde <span class="math inline">\(L_1\)</span> são as strings que <strong>contenham a substring “aa”</strong> e <span class="math inline">\(L_2\)</span> são as strings que <strong>tenham um número par de ’a’s</strong>. O alfabeto é <span class="math inline">\(\Sigma = \{a, b\}\)</span>.</p>
-<p><strong>Autômato <span class="math inline">\(M_1\)</span></strong>: aceita a linguagem <span class="math inline">\(L_1\)</span>, dada por:</p>
-<p><span class="math display">\[ L_1 = \{ w \in \{a, b\}^* \mid w = x \cdot \text{"aa"} \cdot y \text{ para } x, y \in \{a, b\}^* \} \]</span></p>
-<p>Em linguagem natural, <span class="math inline">\(L_1\)</span> é o conjunto de todas as strings sobre o alfabeto <span class="math inline">\(\{a, b\}\)</span> que contêm a substring “aa” em qualquer posição. O autômato <span class="math inline">\(M_1\)</span> pode ser especificado como:</p>
 <ul>
-<li><strong>Estados <span class="math inline">\(Q_1\)</span></strong>: <span class="math inline">\(\{s_0, s_1, s_2\}\)</span>
-<ul>
-<li><span class="math inline">\(s_0\)</span>: Estado inicial, nenhum ‘a’ consecutivo detectado.</li>
-<li><span class="math inline">\(s_1\)</span>: Leu um ‘a’ que pode ser o início de “aa”.</li>
-<li><span class="math inline">\(s_2\)</span>: Já leu “aa”, estado de aceitação final e sem saída.</li>
-</ul></li>
-<li><strong>Estado inicial <span class="math inline">\(q_{01}\)</span></strong>: <span class="math inline">\(s_0\)</span></li>
-<li><strong>Estados finais <span class="math inline">\(F_1\)</span></strong>: <span class="math inline">\(\{s_2\}\)</span></li>
-<li><strong>Transições <span class="math inline">\(\delta_1\)</span></strong>:
-<ul>
-<li><span class="math inline">\(\delta_1(s_0, a) = s_1\)</span></li>
-<li><span class="math inline">\(\delta_1(s_0, b) = s_0\)</span></li>
-<li><span class="math inline">\(\delta_1(s_1, a) = s_2\)</span></li>
-<li><span class="math inline">\(\delta_1(s_1, b) = s_0\)</span></li>
-<li><span class="math inline">\(\delta_1(s_2, a) = s_2\)</span></li>
-<li><span class="math inline">\(\delta_1(s_2, b) = s_2\)</span></li>
-</ul></li>
+<li><span class="math inline">\((s_0,t_0) \xrightarrow{a} (s_1,t_0) \xrightarrow{b} (s_1,t_1)\)</span> ACEITA;</li>
+<li><span class="math inline">\(M_1\)</span> aceita (começa com ‘a’);</li>
+<li><span class="math inline">\(M_2\)</span> aceita (um ‘b’ = ímpar);</li>
+<li>União aceita.</li>
 </ul>
-<p><strong>Autômato <span class="math inline">\(M_2\)</span></strong>: aceita a linguagem <span class="math inline">\(L_2\)</span>, definida como:</p>
-<p><span class="math display">\[ L_2 = \{ w \in \{a, b\}^* \mid \#_a(w) \equiv 0 \pmod{2} \} \]</span></p>
-<p>Em linguagem natural, <span class="math inline">\(L_2\)</span> é o conjunto de todas as strings sobre o alfabeto <span class="math inline">\(\{a, b\}\)</span> que possuem uma contagem par do símbolo ‘a’, onde <span class="math inline">\(\#_a(w)\)</span> denota o número de ’a’s na <em>string</em> <span class="math inline">\(w\)</span>.</p>
-<ul>
-<li><strong>Estados <span class="math inline">\(Q_2\)</span></strong>: <span class="math inline">\(\{t_{par}, t_{impar}\}\)</span>
-<ul>
-<li><span class="math inline">\(t_{par}\)</span>: Número par de ’a’s lidos (estado inicial).</li>
-<li><span class="math inline">\(t_{impar}\)</span>: Número ímpar de ’a’s lidos.</li>
-</ul></li>
-<li><strong>Estado inicial <span class="math inline">\(q_{02}\)</span></strong>: <span class="math inline">\(t_{par}\)</span></li>
-<li><strong>Estados finais <span class="math inline">\(F_2\)</span></strong>: <span class="math inline">\(\{t_{par}\}\)</span></li>
-<li><strong>Transições <span class="math inline">\(\delta_2\)</span></strong>:
-<ul>
-<li><span class="math inline">\(\delta_2(t_{par}, a) = t_{impar}\)</span></li>
-<li><span class="math inline">\(\delta_2(t_{par}, b) = t_{par}\)</span></li>
-<li><span class="math inline">\(\delta_2(t_{impar}, a) = t_{par}\)</span></li>
-<li><span class="math inline">\(\delta_2(t_{impar}, b) = t_{impar}\)</span></li>
-</ul></li>
-</ul>
-<p><strong>Construção do Autômato União <span class="math inline">\(M = M_1 \cup M_2\)</span></strong></p>
-<ol type="1">
-<li><p><strong>Conjunto de Estados <span class="math inline">\(Q\)</span></strong>: <span class="math inline">\(Q_1 \times Q_2 = \{(s_0, t_{par}), (s_0, t_{impar}), (s_1, t_{par}), (s_1, t_{impar}), (s_2, t_{par}), (s_2, t_{impar})\}\)</span></p></li>
-<li><p><strong>Estado Inicial <span class="math inline">\(q_0\)</span></strong>: <span class="math inline">\((s_0, t_{par})\)</span></p></li>
-<li><p><strong>Estados de Aceitação <span class="math inline">\(F\)</span></strong>: Um estado <span class="math inline">\((s_i, t_j)\)</span> é de aceitação se <span class="math inline">\(s_i \in F_1\)</span> OU <span class="math inline">\(t_j \in F_2\)</span>.</p>
-<ul>
-<li><span class="math inline">\(s_i \in \{s_2\}\)</span> OU <span class="math inline">\(t_j \in \{t_{par}\}\)</span></li>
-<li><span class="math inline">\(F = \{(s_0, t_{par}), (s_1, t_{par}), (s_2, t_{par}), (s_2, t_{impar})\}\)</span></li>
-</ul></li>
-<li><p><strong>Tabela de Transições da União</strong>:</p></li>
+<ol start="2" type="a">
+<li><strong>String <code>b</code></strong> (não começa com ‘a’ mas tem número ímpar de ’b’s):</li>
 </ol>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Estado</th>
-<th style="text-align: left;">a</th>
-<th style="text-align: left;">b</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>→*</strong>(<span class="math inline">\(s_0, t_{par}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_1, t_{impar}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_0, t_{par}\)</span>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">(<span class="math inline">\(s_0, t_{impar}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_1, t_{par}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_0, t_{impar}\)</span>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>*</strong>(<span class="math inline">\(s_1, t_{par}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_2, t_{impar}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_0, t_{par}\)</span>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">(<span class="math inline">\(s_1, t_{impar}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_2, t_{par}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_0, t_{impar}\)</span>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>*</strong>(<span class="math inline">\(s_2, t_{par}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_2, t_{impar}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_2, t_{par}\)</span>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>*</strong>(<span class="math inline">\(s_2, t_{impar}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_2, t_{par}\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(s_2, t_{impar}\)</span>)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="exemplo-2-união-de-termina-com-b-com-termina-com-a" class="level5" data-number="4.6.1.1.2">
-<h5 data-number="4.6.1.1.2" class="anchored" data-anchor-id="exemplo-2-união-de-termina-com-b-com-termina-com-a"><span class="header-section-number">4.6.1.1.2</span> Exemplo 2: União de “Termina com ‘b’” com “Termina com ‘a’”</h5>
-<p>Este exemplo criará um autômato para a linguagem <span class="math inline">\(L = L_1 \cup L_2\)</span>, onde <span class="math inline">\(L_1\)</span> são as strings que <strong>terminam com ‘b’</strong> e <span class="math inline">\(L_2\)</span> são as que <strong>terminam com ‘a’</strong>. O alfabeto é <span class="math inline">\(\Sigma = \{a, b\}\)</span>.</p>
-<p><strong>Autômato <span class="math inline">\(M_1\)</span></strong>: aceita a linguagem <span class="math inline">\(L_1\)</span>, definida como:</p>
-<p><span class="math display">\[ L_1 = \{ w \in \{a, b\}^* \mid w = x \cdot b \text{ para algum } x \in \{a, b\}^* \} \]</span></p>
-<p>Em linguagem natural, <span class="math inline">\(L_1\)</span> é o conjunto de todas as strings sobre o alfabeto <span class="math inline">\(\{a, b\}\)</span> que terminam com o símbolo ‘b’.</p>
 <ul>
-<li><strong>Estados <span class="math inline">\(Q_1\)</span></strong>: <span class="math inline">\(\{p_0, p_1\}\)</span>
-<ul>
-<li><span class="math inline">\(p_0\)</span>: Estado inicial, a <em>string</em> lida até agora não termina com ‘b’.</li>
-<li><span class="math inline">\(p_1\)</span>: O último símbolo lido foi ‘b’.</li>
-</ul></li>
-<li><strong>Estado inicial <span class="math inline">\(q_{01}\)</span></strong>: <span class="math inline">\(p_0\)</span></li>
-<li><strong>Estados finais <span class="math inline">\(F_1\)</span></strong>: <span class="math inline">\(\{p_1\}\)</span></li>
-<li><strong>Transições <span class="math inline">\(\delta_1\)</span></strong>:
-<ul>
-<li><span class="math inline">\(\delta_1(p_0, a) = p_0\)</span></li>
-<li><span class="math inline">\(\delta_1(p_0, b) = p_1\)</span></li>
-<li><span class="math inline">\(\delta_1(p_1, a) = p_0\)</span></li>
-<li><span class="math inline">\(\delta_1(p_1, b) = p_1\)</span></li>
-</ul></li>
+<li><span class="math inline">\((s_0,t_0) \xrightarrow{b} (s_2,t_1)\)</span> ACEITA;</li>
+<li><span class="math inline">\(M_1\)</span> rejeita (começa com ‘b’);</li>
+<li><span class="math inline">\(M_2\)</span> aceita (um ‘b’ = ímpar);</li>
+<li>União aceita (pelo menos um aceita).</li>
 </ul>
-<p><strong>Autômato <span class="math inline">\(M_2\)</span></strong>: aceita a linguagem <span class="math inline">\(L_2\)</span>, que pode ser dada por: <span class="math display">\[ L_2 = \{ w \in \{a, b\}^* \mid w = x \cdot a \text{ para algum } x \in \{a, b\}^* \} \]</span></p>
-<p>Em linguagem natural, <span class="math inline">\(L_2\)</span> é o conjunto de todas as strings sobre o alfabeto <span class="math inline">\(\{a, b\}\)</span> que terminam com o símbolo ‘a’.</p>
-<p>Especificação de <span class="math inline">\(M_2\)</span><strong>: * </strong>Estados <span class="math inline">\(Q_2\)</span><strong>: <span class="math inline">\(\{r_0, r_1\}\)</span> * <span class="math inline">\(r_0\)</span>: Estado inicial, a <em>string</em> lida até agora não termina com ‘a’. * <span class="math inline">\(r_1\)</span>: O último símbolo lido foi ‘a’. * </strong>Estado inicial <span class="math inline">\(q_{02}\)</span><strong>: <span class="math inline">\(r_0\)</span> * </strong>Estados finais <span class="math inline">\(F_2\)</span><strong>: <span class="math inline">\(\{r_1\}\)</span> * </strong>Transições <span class="math inline">\(\delta_2\)</span>**: * <span class="math inline">\(\delta_2(r_0, a) = r_1\)</span> * <span class="math inline">\(\delta_2(r_0, b) = r_0\)</span> * <span class="math inline">\(\delta_2(r_1, a) = r_1\)</span> * <span class="math inline">\(\delta_2(r_1, b) = r_0\)</span></p>
-<p><strong>Construção do Autômato União <span class="math inline">\(M = M_1 \cup M_2\)</span></strong></p>
-<ol type="1">
-<li><p><strong>Conjunto de Estados <span class="math inline">\(Q\)</span></strong>: <span class="math inline">\(Q_1 \times Q_2 = \{(p_0, r_0), (p_0, r_1), (p_1, r_0), (p_1, r_1)\}\)</span></p></li>
-<li><p><strong>Estado Inicial <span class="math inline">\(q_0\)</span></strong>: <span class="math inline">\((p_0, r_0)\)</span>. Este estado representa a <em>string</em> vazia, que não é aceita por nenhum dos autômatos.</p></li>
-<li><p><strong>Estados de Aceitação <span class="math inline">\(F\)</span></strong>: Um estado <span class="math inline">\((p_i, r_j)\)</span> é de aceitação se <span class="math inline">\(p_i \in F_1\)</span> OU <span class="math inline">\(r_j \in F_2\)</span>.</p>
-<ul>
-<li><span class="math inline">\(p_i \in \{p_1\}\)</span> OU <span class="math inline">\(r_j \in \{r_1\}\)</span></li>
-<li><span class="math inline">\(F = \{(p_0, r_1), (p_1, r_0), (p_1, r_1)\}\)</span></li>
-</ul></li>
-<li><p><strong>Tabela de Transições da União</strong>:</p></li>
+<ol start="3" type="a">
+<li><strong>String <code>bb</code></strong> (não começa com ‘a’ e tem número par de ’b’s):</li>
 </ol>
-<table class="table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Estado</th>
-<th style="text-align: left;">a</th>
-<th style="text-align: left;">b</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><strong>→</strong>(<span class="math inline">\(p_0, r_0\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_0, r_1\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_1, r_0\)</span>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>*</strong>(<span class="math inline">\(p_0, r_1\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_0, r_1\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_1, r_0\)</span>)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>*</strong>(<span class="math inline">\(p_1, r_0\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_0, r_1\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_1, r_0\)</span>)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>*</strong>(<span class="math inline">\(p_1, r_1\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_0, r_1\)</span>)</td>
-<td style="text-align: left;">(<span class="math inline">\(p_1, r_0\)</span>)</td>
-</tr>
-</tbody>
-</table>
-<p>Neste último exemplo, podemos observar que o estado <span class="math inline">\((p_1, r_1)\)</span> é inalcançável, pois uma <em>string</em> não pode terminar com ‘a’ e ‘b’ simultaneamente. O autômato poderia ser minimizado, mas a construção do produto gera-o desta forma.</p>
-</section>
-<section id="exercicio-6" class="level5" data-number="4.6.1.1.3">
-<h5 data-number="4.6.1.1.3" class="anchored" data-anchor-id="exercicio-6"><span class="header-section-number">4.6.1.1.3</span> Exercícios 6</h5>
-<p><strong>1.</strong> Considere dois AFDs sobre Sigma=a,b: M_1 aceita <em>strings</em> com número par de ‘a’s. M_2 aceita <em>strings</em> que terminam com ’b’. Usando a construção do produto, construa a tabela de transições do autômato M=M_1cupM_2.</p>
-<p><strong>2.</strong> No autômato produto M do exercício anterior, quais são o estado inicial e o conjunto de estados de aceitação?</p>
-<p><strong>3.</strong> Se ∣Q_1∣=3 e ∣Q_2∣=4, quantos estados o autômato produto M=M_1cupM_2 terá?</p>
-<p><strong>4.</strong> Usando a construção do produto, o que aconteceria se tentássemos unir um autômato consigo mesmo (M_1cupM_1)? O autômato resultante seria diferente do original?</p>
-<p><strong>5.</strong> A construção do produto para a união sempre resulta em um AFD completo se os autômatos originais M_1 e M_2 forem completos? Justifique</p>
+<ul>
+<li><span class="math inline">\((s_0,t_0) \xrightarrow{b} (s_2,t_1) \xrightarrow{b} (s_2,t_0)\)</span> REJEITA;</li>
+<li><span class="math inline">\(M_1\)</span> rejeita (começa com ‘b’);</li>
+<li><span class="math inline">\(M_2\)</span> rejeita (dois ’b’s = par);</li>
+<li>União rejeita (nenhum aceita).</li>
+</ul>
+<ol start="4" type="a">
+<li><strong>String <code>aaa</code></strong> (começa com ‘a’ mas zero ’b’s):</li>
+</ol>
+<ul>
+<li><span class="math inline">\((s_0,t_0) \xrightarrow{a} (s_1,t_0) \xrightarrow{a} (s_1,t_0) \xrightarrow{a} (s_1,t_0)\)</span> ACEITA;</li>
+<li><span class="math inline">\(M_1\)</span> aceita (começa com ‘a’);</li>
+<li><span class="math inline">\(M_2\)</span> rejeita (zero ’b’s = par);</li>
+<li>União aceita (pelo menos um aceita).</li>
+</ul>
+<p>O autômato resultante da união entre <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> terá estados que representam todas as combinações possíveis de estados de <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> e pode ser visto na <a href="#fig-uniaoresultado1" class="quarto-xref">Figure&nbsp;<span>4.6</span></a>.</p>
+<div id="fig-uniaoresultado1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-uniaoresultado1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/uniaoresultado1.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-uniaoresultado1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.6
+</figcaption>
+</figure>
+</div>
+<p>A atenta leitora deve notar que a construção por produto cartesiano funciona como se estivéssemos executando ambos os autômatos simultaneamente em duas <em>trilhas</em> paralelas. A cada símbolo lido:</p>
+<ol type="1">
+<li><strong>Atualizamos ambas as trilhas</strong>: cada componente do par de estados evolui independentemente segundo sua própria função de transição;</li>
+<li><strong>Mantemos a história completa</strong>: o estado <span class="math inline">\((s_i, t_j)\)</span> nos diz exatamente onde cada autômato original estaria após processar a entrada até aquele ponto;</li>
+<li><strong>Decidimos aceitação com lógica OR</strong>: Para a união, basta que uma das trilhas aceite para o autômato combinado aceitar.</li>
+</ol>
+<p>Este algoritmo de construção em seis passos, com um passo específico para depuração, sempre funciona, servindo como evidência de que a classe das linguagens regulares é fechada sob união.</p>
+<section id="exercicios-6" class="level5" data-number="4.6.1.1.1">
+<h5 data-number="4.6.1.1.1" class="anchored" data-anchor-id="exercicios-6"><span class="header-section-number">4.6.1.1.1</span> Exercícios 6</h5>
+<p><strong>1.</strong> Considere dois Autômatos Finitos Determinísticos sobre <span class="math inline">\(\Sigma=\{a,b\}\)</span>: <span class="math inline">\(M_1\)</span> aceita <em>strings</em> que contêm <code>aa</code> e <span class="math inline">\(M_2\)</span> aceita <em>strings</em> de comprimento ímpar. Quantos estados terá o autômato produto <span class="math inline">\(M = M_1 \cup M_2\)</span> se <span class="math inline">\(\mid Q_1 \mid = 3\)</span> e <span class="math inline">\(\mid Q_2 \mid = 2\)</span>?</p>
+<p><strong>2.</strong> No autômato união, um estado <span class="math inline">\((p, q)\)</span> é de aceitação quando <span class="math inline">\(p \in F_1\)</span> ou <span class="math inline">\(q \in F_2\)</span>. Se modificássemos a condição para <span class="math inline">\(p \in F_1\)</span> <strong>e</strong> <span class="math inline">\(q \in F_2\)</span>, que operação estaríamos realizando?</p>
+<p><strong>3.</strong> Construa a tabela de transições completa para a união de: <span class="math inline">\(M_1\)</span> que aceita apenas <code>a</code> e <span class="math inline">\(M_2\)</span> que aceita apenas <code>b</code>, sobre <span class="math inline">\(\Sigma = \{a, b\}\)</span>.</p>
+<p><strong>4.</strong> Considere dois autômatos sobre <span class="math inline">\(\Sigma = \{0, 1\}\)</span>: <span class="math inline">\(M_1\)</span> aceita strings que terminam em ‘01’ e <span class="math inline">\(M_2\)</span> aceita strings com número par de ’1’s. Construa a tabela de transições para o autômato união <span class="math inline">\(M_1 \cup M_2\)</span>.</p>
+<p><strong>5.</strong> Dados dois autômatos binários <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> onde <span class="math inline">\(M_1\)</span> aceita strings que começam com ‘1’ (2 estados) e <span class="math inline">\(M_2\)</span> aceita strings de comprimento par (2 estados). Construa o passo a passo completo para determinar o autômato união <span class="math inline">\(M_1 \cup M_2\)</span> sobre <span class="math inline">\(\Sigma = \{0, 1\}\)</span>.</p>
 </section>
 </section>
 <section id="fechamento-sob-interseção" class="level4" data-number="4.6.1.2">
 <h4 data-number="4.6.1.2" class="anchored" data-anchor-id="fechamento-sob-interseção"><span class="header-section-number">4.6.1.2</span> Fechamento sob Interseção</h4>
-<p><strong>Teorema (Fechamento sob Interseção)</strong>: Sejam <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> dois Autômatos Finitos Determinísticos que reconhecem <span class="math inline">\(L_1\)</span> e <span class="math inline">\(L_2\)</span>. Então existe um Autômato Finito Determinístico <span class="math inline">\(M\)</span> que reconhece <span class="math inline">\(L_1 \cap L_2\)</span>.</p>
-<p>A construção é similar à união, mas com uma modificação crucial no conjunto de estados finais:</p>
+<p><strong>Teorema (Fechamento sob Interseção)</strong>: Sejam <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> dois Autômatos Finitos Determinísticos que reconhecem as linguagens <span class="math inline">\(L_1\)</span> e <span class="math inline">\(L_2\)</span>, respectivamente. Então existe um Autômato Finito Determinístico <span class="math inline">\(M\)</span> que reconhece <span class="math inline">\(L_1 \cap L_2\)</span>.</p>
+<p>A elegante leitora notará que a construção da interseção é notavelmente similar à da união. A diferença crucial reside apenas na definição dos estados finais: enquanto a união implementa uma lógica <strong>OU</strong>, a interseção implementa uma lógica <strong>E</strong>.</p>
+<p><strong>Construção Formal</strong>: Utilizamos a mesma estrutura de produto cartesiano, mas com:</p>
+<p><span class="math display">\[F = F_1 \times F_2\]</span></p>
+<p>Ou seja, um estado <span class="math inline">\((q_1, q_2)\)</span> é final se, e somente se, <strong>ambos</strong> <span class="math inline">\(q_1 \in F_1\)</span> <strong>e</strong> <span class="math inline">\(q_2 \in F_2\)</span>.</p>
+<p>Vamos construir um exemplo mais elaborado para solidificar o entendimento da construção de interseção. Considere os autômatos <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> descritos a seguir:</p>
+<p><strong>Autômato <span class="math inline">\(M_1\)</span></strong>: aceita <em>strings</em> que começam com ‘a’. A linguagem formal é:</p>
+<p><span class="math display">\[ L_1 = \{ w \in \{a, b\}^* \mid w = a \cdot x \text{ para algum } x \in \{a, b\}^* \} \]</span></p>
 <ul>
-<li><span class="math inline">\(F = F_1 \times F_2\)</span> (aceita apenas se <strong>ambos</strong> os autômatos aceitam)</li>
+<li><strong>Estados</strong>: <span class="math inline">\(Q_1 = \{s_0, s_1, s_2\}\)</span> onde:
+<ul>
+<li><span class="math inline">\(s_0\)</span>: estado inicial (ainda não leu nada)</li>
+<li><span class="math inline">\(s_1\)</span>: leu ‘a’ como primeiro símbolo (aceita)</li>
+<li><span class="math inline">\(s_2\)</span>: leu ‘b’ como primeiro símbolo (rejeita)</li>
+</ul></li>
+<li><strong>Estado inicial</strong>: <span class="math inline">\(s_0\)</span></li>
+<li><strong>Estados finais</strong>: <span class="math inline">\(F_1 = \{s_1\}\)</span></li>
+<li><strong>Transições</strong>:
+<ul>
+<li><span class="math inline">\(\delta_1(s_0, a) = s_1\)</span>, <span class="math inline">\(\delta_1(s_0, b) = s_2\)</span></li>
+<li><span class="math inline">\(\delta_1(s_1, a) = s_1\)</span>, <span class="math inline">\(\delta_1(s_1, b) = s_1\)</span></li>
+<li><span class="math inline">\(\delta_1(s_2, a) = s_2\)</span>, <span class="math inline">\(\delta_1(s_2, b) = s_2\)</span></li>
+</ul></li>
 </ul>
-<p>Esta diferença sutil tem um impacto profundo: enquanto a união implementa uma lógica “OU”, a interseção implementa uma lógica “E”. A atenta leitora notará que esta construção permite expressar condições complexas através da composição de autômatos simples.</p>
+<p><strong>Autômato <span class="math inline">\(M_2\)</span></strong>: aceita <em>strings</em> com número par de ’b’s. A linguagem formal é:</p>
+<p><span class="math display">\[ L_2 = \{ w \in \{a, b\}^* \mid \#_b(w) \equiv 0 \pmod{2} \} \]</span></p>
+<p>no qual <span class="math inline">\(\#_b(w)\)</span> denota o número de ’b’s na <em>string</em> <span class="math inline">\(w\)</span>.</p>
+<ul>
+<li><strong>Estados</strong>: <span class="math inline">\(Q_2 = \{t_{par}, t_{ímpar}\}\)</span> onde:
+<ul>
+<li><span class="math inline">\(t_{par}\)</span>: número par de ’b’s (incluindo zero)</li>
+<li><span class="math inline">\(t_{ímpar}\)</span>: número ímpar de ’b’s</li>
+</ul></li>
+<li><strong>Estado inicial</strong>: <span class="math inline">\(t_{par}\)</span></li>
+<li><strong>Estados finais</strong>: <span class="math inline">\(F_2 = \{t_{par}\}\)</span></li>
+<li><strong>Transições</strong>:
+<ul>
+<li><span class="math inline">\(\delta_2(t_{par}, a) = t_{par}\)</span>, <span class="math inline">\(\delta_2(t_{par}, b) = t_{ímpar}\)</span></li>
+<li><span class="math inline">\(\delta_2(t_{ímpar}, a) = t_{ímpar}\)</span>, <span class="math inline">\(\delta_2(t_{ímpar}, b) = t_{par}\)</span></li>
+</ul></li>
+</ul>
+<p><strong>Passo a Passo para a Construção do Autômato Interseção</strong>:</p>
+<p><strong>Passo 1: Estados</strong>: <span class="math inline">\(Q = Q_1 \times Q_2 = \{(s_0, t_{par}), (s_0, t_{ímpar}), (s_1, t_{par}), (s_1, t_{ímpar}), (s_2, t_{par}), (s_2, t_{ímpar})\}\)</span></p>
+<p><strong>Passo 2: Estado inicial</strong>: <span class="math inline">\(q_0 = (s_0, t_{par})\)</span></p>
+<p><strong>Passo 3: Estados finais</strong>: Para a interseção, um estado é final apenas se <strong>ambos</strong> os componentes estão em estados finais: - <span class="math inline">\(F = F_1 \times F_2 = \{s_1\} \times \{t_{par}\} = \{(s_1, t_{par})\}\)</span></p>
+<p><strong>Passo 4: Tabela de Transições</strong>:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Estado</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\rightarrow (s_0, t_{par})\)</span></td>
+<td><span class="math inline">\((s_1, t_{par})\)</span></td>
+<td><span class="math inline">\((s_2, t_{ímpar})\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((s_0, t_{ímpar})\)</span></td>
+<td><span class="math inline">\((s_1, t_{ímpar})\)</span></td>
+<td><span class="math inline">\((s_2, t_{par})\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(*(s_1, t_{par})\)</span></td>
+<td><span class="math inline">\((s_1, t_{par})\)</span></td>
+<td><span class="math inline">\((s_1, t_{ímpar})\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((s_1, t_{ímpar})\)</span></td>
+<td><span class="math inline">\((s_1, t_{ímpar})\)</span></td>
+<td><span class="math inline">\((s_1, t_{par})\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\((s_2, t_{par})\)</span></td>
+<td><span class="math inline">\((s_2, t_{par})\)</span></td>
+<td><span class="math inline">\((s_2, t_{ímpar})\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\((s_2, t_{ímpar})\)</span></td>
+<td><span class="math inline">\((s_2, t_{ímpar})\)</span></td>
+<td><span class="math inline">\((s_2, t_{par})\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Passo 5: Verificação</strong>: Vamos testar algumas <em>strings</em>:</p>
+<p><strong>String “aa”</strong> (começa com ‘a’ e tem zero ‘b’s - par): - <span class="math inline">\((s_0, t_{par}) \xrightarrow{a} (s_1, t_{par}) \xrightarrow{a} (s_1, t_{par})\)</span> <strong>ACEITA</strong>; - <span class="math inline">\(M_1\)</span> aceita (começa com ’a’); - <span class="math inline">\(M_2\)</span> aceita (zero ’b’s = par); - Interseção aceita (ambos aceitam).</p>
+<p><strong>String “ab”</strong> (começa com ‘a’ mas tem um ‘b’ - ímpar): - <span class="math inline">\((s_0, t_{par}) \xrightarrow{a} (s_1, t_{par}) \xrightarrow{b} (s_1, t_{ímpar})\)</span> <strong>REJEITA</strong>; - <span class="math inline">\(M_1\)</span> aceita (começa com ‘a’); - <span class="math inline">\(M_2\)</span> rejeita (um ‘b’ = ímpar); - Interseção rejeita (nem todos aceitam).</p>
+<p><strong>String “abb”</strong> (começa com ‘a’ e tem dois ’b’s - par): - <span class="math inline">\((s_0, t_{par}) \xrightarrow{a} (s_1, t_{par}) \xrightarrow{b} (s_1, t_{ímpar}) \xrightarrow{b} (s_1, t_{par})\)</span> <strong>ACEITA</strong></p>
+<p>O autômato da interseção aceita apenas <em>strings</em> que <strong>começam com ‘a’ E têm número par de ’b’s</strong>.</p>
+<section id="exercicios-7" class="level5" data-number="4.6.1.2.1">
+<h5 data-number="4.6.1.2.1" class="anchored" data-anchor-id="exercicios-7"><span class="header-section-number">4.6.1.2.1</span> Exercícios 7</h5>
+<p><strong>1.</strong> Considere dois autômatos sobre <span class="math inline">\(\Sigma = \{0, 1\}\)</span>: - <span class="math inline">\(M_1\)</span> aceita strings que terminam em ‘10’ - <span class="math inline">\(M_2\)</span> aceita strings com número ímpar de ’0’s</p>
+<p>Construa o conjunto de estados finais para <span class="math inline">\(M_1 \cap M_2\)</span> e determine a linguagem aceita pela interseção.</p>
+<p><strong>2.</strong> É possível que <span class="math inline">\(L(M_1 \cup M_2) = L(M_1 \cap M_2)\)</span>? Em que condição isso ocorreria?</p>
+<p><strong>3.</strong> Se <span class="math inline">\(F_1 = Q_1\)</span> (todos os estados de <span class="math inline">\(M_1\)</span> são finais), o que podemos afirmar sobre <span class="math inline">\(L(M_1 \cap M_2)\)</span> em relação a <span class="math inline">\(L(M_2)\)</span>?</p>
+<p><strong>4.</strong> Considere <span class="math inline">\(M_1\)</span> que aceita strings terminadas em ‘ab’ e <span class="math inline">\(M_2\)</span> que aceita strings com número par de ’a’s. Construa o autômato interseção <span class="math inline">\(M_1 \cap M_2\)</span> e determine sua linguagem.</p>
+<p><strong>5.</strong> Dados três autômatos <span class="math inline">\(M_1\)</span>, <span class="math inline">\(M_2\)</span> e <span class="math inline">\(M_3\)</span>, tal que:</p>
+<ul>
+<li><span class="math inline">\(M_1\)</span> aceita strings que começam com ‘a’ (3 estados)</li>
+<li><span class="math inline">\(M_2\)</span> aceita strings de comprimento múltiplo de 3 (3 estados)<br>
+</li>
+<li><span class="math inline">\(M_3\)</span> aceita strings que contêm ‘bb’ (3 estados)</li>
+</ul>
+<p>Determine quantos estados teria <span class="math inline">\((M_1 \cup M_2) \cap M_3\)</span> e construa o passo a passo completo desta operação composta.</p>
+</section>
 </section>
 <section id="fechamento-sob-complemento" class="level4" data-number="4.6.1.3">
 <h4 data-number="4.6.1.3" class="anchored" data-anchor-id="fechamento-sob-complemento"><span class="header-section-number">4.6.1.3</span> Fechamento sob Complemento</h4>
 <p><strong>Teorema (Fechamento sob Complemento)</strong>: Seja <span class="math inline">\(M\)</span> um Autômato Finito Determinístico que reconhece a linguagem <span class="math inline">\(L\)</span>. Então existe um Autômato Finito Determinístico <span class="math inline">\(M'\)</span> que reconhece <span class="math inline">\(\overline{L} = \Sigma^* - L\)</span>.</p>
-<p>A construção do complemento é surpreendentemente elegante:</p>
-<p>Dado <span class="math inline">\(M = (Q, \Sigma, \delta, q_0, F)\)</span>, construímos <span class="math inline">\(M' = (Q, \Sigma, \delta, q_0, F')\)</span> onde: - <span class="math inline">\(F' = Q - F\)</span> (os estados de aceitação tornam-se estados de rejeição e vice-versa)</p>
-<p><strong>Observação Crítica</strong>: Esta construção só funciona para Autômatos Finitos Determinísticos <strong>completos</strong>, onde toda transição está definida. Para Autômatos Finitos Determinísticos incompletos, primeiro devemos adicionar um estado de erro e completar as transições faltantes.</p>
-<p><strong>Exemplo Ilustrativo</strong>: Se <span class="math inline">\(M\)</span> aceita <em>strings</em> com número par de ’1’s, então <span class="math inline">\(M'\)</span> (com estados finais invertidos) aceita <em>strings</em> com número ímpar de ’1’s.</p>
+<p>A construção do complemento é surpreendentemente elegante em sua simplicidade. Para a atenta leitora que acompanhou as construções anteriores, esta parecerá quase trivial: simplesmente invertemos quais estados são finais.</p>
+<p><strong>Construção Formal</strong>: Dado <span class="math inline">\(M = (Q, \Sigma, \delta, q_0, F)\)</span>, construímos:</p>
+<p><span class="math display">\[M' = (Q, \Sigma, \delta, q_0, Q - F)\]</span></p>
+<p><strong>Condição Crítica</strong>: Esta construção requer que o autômato seja <strong>completo</strong>. Se não for, devemos primeiro adicionar um estado de erro <span class="math inline">\(q_{\text{erro}}\)</span> com:</p>
+<p><span class="math display">\[\forall a \in \Sigma: \delta(q_{\text{erro}}, a) = q_{\text{erro}}\]</span></p>
+<p><strong>Exemplo Ilustrativo</strong>: Complemento de “strings com número par de ’a’s”</p>
+<p>Autômato original <span class="math inline">\(M\)</span>:</p>
+<div id="tbl-complemento-original" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-complemento-original-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.6: Autômato que aceita número par de ’a’s
+</figcaption>
+<div aria-describedby="tbl-complemento-original-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 57%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Estado</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\rightarrow *q_{\text{par}}\)</span></td>
+<td><span class="math inline">\(q_{\text{ímpar}}\)</span></td>
+<td><span class="math inline">\(q_{\text{par}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(q_{\text{ímpar}}\)</span></td>
+<td><span class="math inline">\(q_{\text{par}}\)</span></td>
+<td><span class="math inline">\(q_{\text{ímpar}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Autômato complemento <span class="math inline">\(\overline{M}\)</span>:</p>
+<div id="tbl-complemento-resultado" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-complemento-resultado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4.7: Autômato que aceita número ímpar de ’a’s
+</figcaption>
+<div aria-describedby="tbl-complemento-resultado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Estado</th>
+<th>a</th>
+<th>b</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\rightarrow q_{\text{par}}\)</span></td>
+<td><span class="math inline">\(q_{\text{ímpar}}\)</span></td>
+<td><span class="math inline">\(q_{\text{par}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(*q_{\text{ímpar}}\)</span></td>
+<td><span class="math inline">\(q_{\text{par}}\)</span></td>
+<td><span class="math inline">\(q_{\text{ímpar}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A perspicaz leitora observará que apenas trocamos os estados finais: <span class="math inline">\(F' = \{q_{\text{ímpar}}\}\)</span>.</p>
+<p><strong>Propriedades Algébricas</strong>: O fechamento sob complemento, combinado com união e interseção, estabelece que as linguagens regulares formam uma <strong>álgebra booleana</strong>:</p>
+<ol type="1">
+<li><strong>Leis de De Morgan</strong>: <span class="math inline">\(\overline{L_1 \cup L_2} = \overline{L_1} \cap \overline{L_2}\)</span></li>
+<li><strong>Dupla Negação</strong>: <span class="math inline">\(\overline{\overline{L}} = L\)</span></li>
+<li><strong>Diferença</strong>: <span class="math inline">\(L_1 - L_2 = L_1 \cap \overline{L_2}\)</span></li>
+</ol>
+<section id="Exercicios-8" class="level5" data-number="4.6.1.3.1">
+<h5 data-number="4.6.1.3.1" class="anchored" data-anchor-id="Exercicios-8"><span class="header-section-number">4.6.1.3.1</span> Exercícios 8</h5>
+<p><strong>1.</strong> Considere o Autômato Finito Determinístico <span class="math inline">\(M\)</span> com <span class="math inline">\(Q = \{q_0, q_1\}\)</span>, <span class="math inline">\(F = \{q_0\}\)</span>, <span class="math inline">\(\delta(q_0, a) = q_1\)</span>, <span class="math inline">\(\delta(q_0, b) = q_0\)</span>, <span class="math inline">\(\delta(q_1, a) = q_0\)</span>, <span class="math inline">\(\delta(q_1, b) = q_1\)</span>. Construa a tabela de transições de <span class="math inline">\(\overline{M}\)</span>.</p>
+<p><strong>2.</strong> Por que a completude é essencial para a construção do complemento? Dê um exemplo no qual a construção falharia sem completude.</p>
+<p><strong>3.</strong> Prove usando as propriedades de fechamento que se <span class="math inline">\(L_1\)</span> e <span class="math inline">\(L_2\)</span> são regulares, então <span class="math inline">\(L_1 - L_2\)</span> também é regular.</p>
+<p><strong>4.</strong> Se <span class="math inline">\(L\)</span> é regular e <span class="math inline">\(\overline{L} = \emptyset\)</span>, o que podemos concluir sobre <span class="math inline">\(L\)</span>?</p>
+<p><strong>5.</strong> Usando as leis de De Morgan, expresse <span class="math inline">\(\overline{L_1 \cap L_2 \cap L_3}\)</span> em termos de uniões e complementos individuais.</p>
 </section>
-<section id="exercicio-7" class="level4" data-number="4.6.1.4">
-<h4 data-number="4.6.1.4" class="anchored" data-anchor-id="exercicio-7"><span class="header-section-number">4.6.1.4</span> Exercícios 7</h4>
-<p><strong>1.</strong> Usando os mesmos autômatos M_1 (par de ‘a’s) e M_2 (termina com ’b’) do exercício 6.1, construa a tabela de transições para o autômato que reconhece L(M_1)capL(M_2).</p>
-<p><strong>2.</strong> Qual é o conjunto de estados de aceitação para o autômato de interseção do exercício 7.1?</p>
-<p><strong>3.</strong> Considere o AFD M que aceita strings sobre Sigma=a,b que contêm pelo menos um ‘a’.<br>
-M=(q_0,q_1,a,b,delta,q_0,q_1) com delta(q_0,a)=q_1, delta(q_0,b)=q_0, delta(q_1,a)=q_1, delta(q_1,b)=q_1.<br>
-Construa o autômato M′ que reconhece a linguagem complemento overlineL(M). Qual linguagem M′ reconhece?</p>
-<p><strong>4.</strong> Para construir o complemento de um AFD, o texto afirma que ele deve ser <strong>completo</strong>. Por que essa condição é necessária? O que poderia dar errado se aplicássemos a troca de estados finais em um autômato incompleto?</p>
-<p><strong>5.</strong> Se L é uma linguagem regular, o teorema do fechamento sob complemento garante que overlineL também é regular. A linguagem Sigma\*−(overlineL) também é regular? Justifique.</p>
 </section>
 </section>
-<section id="minimização-de-estados" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="minimização-de-estados"><span class="header-section-number">4.6.2</span> Minimização de Estados</h3>
+<section id="implicações-práticas-das-propriedades-de-fechamento" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="implicações-práticas-das-propriedades-de-fechamento"><span class="header-section-number">4.6.2</span> Implicações Práticas das Propriedades de Fechamento</h3>
+<p>As propriedades de fechamento que a dedicada leitora acaba de estudar não são meras curiosidades matemáticas. Elas fundamentam técnicas essenciais na construção de compiladores e processadores de texto:</p>
+<ol type="1">
+<li><p><strong>Composição Modular</strong>: Permite construir reconhecedores complexos a partir de componentes simples e bem testados.</p></li>
+<li><p><strong>Otimização de Consultas</strong>: Em sistemas de busca, a interseção permite refinar resultados, enquanto a união expande o escopo.</p></li>
+<li><p><strong>Análise Léxica Incremental</strong>: Novos padrões podem ser adicionados a um analisador existente através de união, sem reconstruir todo o autômato.</p></li>
+<li><p><strong>Verificação de Propriedades</strong>: Para verificar se dois autômatos são equivalentes, basta testar se <span class="math inline">\((L_1 - L_2) \cup (L_2 - L_1) = \emptyset\)</span>.</p></li>
+</ol>
+<p>A compreensão profunda destas propriedades capacita a engenheira a fazer escolhas arquiteturais informadas, sabendo que a modularidade não compromete a eficiência ou a correção do sistema final.### Minimização de Estados</p>
 <p>Um dos resultados mais importantes e práticos da teoria dos Autômatos Finitos Determinísticos é que toda linguagem regular possui um <strong>único Autômato Finito Determinístico mínimo</strong> (a menos de renomeação de estados). Este resultado não apenas tem valor teórico, mas permite otimizações significativas em implementações práticas.</p>
 <section id="o-conceito-de-estados-equivalentes" class="level4" data-number="4.6.2.1">
 <h4 data-number="4.6.2.1" class="anchored" data-anchor-id="o-conceito-de-estados-equivalentes"><span class="header-section-number">4.6.2.1</span> O Conceito de Estados Equivalentes</h4>
@@ -1364,21 +1437,62 @@ Construa o autômato M′ que reconhece a linguagem complemento overlineL(M). Qu
 3. Construção: Cada classe de equivalência torna-se
    um estado do Autômato Finito Determinístico mínimo</code></pre>
 <p><strong>Exemplo de Minimização</strong>: Considere um Autômato Finito Determinístico com estados redundantes que reconhece <span class="math inline">\((a|b)*abb\)</span>:</p>
-<p>Estados originais: <span class="math inline">\(\{q_0, q_1, q_2, q_3, q_4, q_5\}\)</span> onde alguns estados são equivalentes.</p>
+<p>Estados originais: <span class="math inline">\(\{q_0, q_1, q_2, q_3, q_4, q_5\}\)</span> nos quais alguns estados são equivalentes.</p>
 <p>Após aplicar o algoritmo: 1. Partição inicial: <span class="math inline">\(\{\{q_3\}, \{q_0, q_1, q_2, q_4, q_5\}\}\)</span> 2. Após refinamentos: <span class="math inline">\(\{\{q_3\}, \{q_2\}, \{q_1, q_4\}, \{q_0, q_5\}\}\)</span> 3. Autômato Finito Determinístico mínimo tem apenas 4 estados ao invés de 6</p>
 </section>
 </section>
-<section id="sec-myhill-nerode" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="sec-myhill-nerode"><span class="header-section-number">4.6.3</span> A Relação de Myhill-Nerode</h3>
+<section id="Exercicios-9" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="Exercicios-9"><span class="header-section-number">4.6.3</span> Exercícios 9</h3>
+<p><strong>1.</strong> Considere o alfabeto <span class="math inline">\(\Sigma = \{0, 1, +, -, *, /, (, )\}\)</span> representando tokens simplificados de expressões aritméticas binárias. Sejam os autômatos:</p>
+<ul>
+<li><span class="math inline">\(M_1\)</span>: aceita strings que começam com ‘(’ e terminam com ‘)’;</li>
+<li><span class="math inline">\(M_2\)</span>: aceita strings que contêm pelo menos um operador aritmético (+, -, * ou /);</li>
+<li><span class="math inline">\(M_3\)</span>: aceita strings de comprimento par.</li>
+</ul>
+<p>Construa o autômato que reconhece <span class="math inline">\((M_1 \cap M_2) \cup \overline{M_3}\)</span> e determine três strings aceitas e três rejeitadas.</p>
+<p><strong>2.</strong> Sobre o alfabeto <span class="math inline">\(\Sigma = \{a, b, \_, 0, 1\}\)</span> representando caracteres válidos em identificadores, considere:</p>
+<ul>
+<li><span class="math inline">\(M_{id}\)</span>: aceita strings que começam com letra (a ou b) ou underscore, seguidos de qualquer combinação de letras, underscore ou dígitos;</li>
+<li><span class="math inline">\(M_{kw}\)</span>: aceita exatamente as strings {“a”, “ab”, “b0”, “b1”} (palavras-chave).</li>
+</ul>
+<p>Construa o autômato <span class="math inline">\(M_{id} - M_{kw} = M_{id} \cap \overline{M_{kw}}\)</span> que aceita identificadores válidos que não são palavras-chave. Quantos estados tem o autômato mínimo resultante?</p>
+<p><strong>3.</strong> Considere <span class="math inline">\(\Sigma = \{/, *, ", \text{outro}\}\)</span> onde ‘outro’ representa qualquer caractere diferente dos anteriores. Sejam:</p>
+<ul>
+<li><span class="math inline">\(M_{comment}\)</span>: aceita strings da forma /* … */ (comentários de bloco);</li>
+<li><span class="math inline">\(M_{string}\)</span>: aceita strings da forma ” … ” (strings literais);</li>
+<li><span class="math inline">\(M_{nested}\)</span>: aceita strings que contêm pelo menos um ’/*’ dentro de aspas.</li>
+</ul>
+<p>Prove que <span class="math inline">\(L(M_{comment}) \cap L(M_{string}) = \emptyset\)</span> e construa <span class="math inline">\(M = (M_{comment} \cup M_{string}) \cap \overline{M_{nested}}\)</span>.</p>
+<p><strong>4.</strong> Sobre <span class="math inline">\(\Sigma = \{0, 1, \&amp;, |, !, (, )\}\)</span> representando expressões booleanas:</p>
+<ul>
+<li><span class="math inline">\(M_{balanced}\)</span>: aceita strings com parênteses balanceados (mesmo número de ‘(’ e ‘)’);</li>
+<li><span class="math inline">\(M_{op}\)</span>: aceita strings onde todo operador binário (&amp;, |) é precedido e seguido por 0, 1, ou );</li>
+<li><span class="math inline">\(M_{not}\)</span>: aceita strings onde todo ‘!’ é seguido por <code>0</code>, <code>1</code>, ou <code>(</code>.</li>
+</ul>
+<p>Construa passo a passo o autômato <span class="math inline">\((M_{balanced} \cap M_{op} \cap M_{not}) \cup \overline{(M_{op} \cup M_{not})}\)</span>. Esta construção resulta em um autômato que aceita que tipo de strings?</p>
+<p><strong>5.</strong> Dados três autômatos sobre <span class="math inline">\(\Sigma = \{&lt;, &gt;, =, !, 0, 1\}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(M_1\)</span> com 4 estados, reconhece operadores relacionais válidos (<code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>);</li>
+<li><span class="math inline">\(M_2\)</span> com 3 estados, reconhece strings que começam com operador;</li>
+<li><span class="math inline">\(M_3\)</span> com 2 estados, reconhece strings de comprimento ímpar.</li>
+</ul>
+<ol type="a">
+<li><p>Determine o número máximo de estados do autômato <span class="math inline">\((M_1 \cup M_2) \cap \overline{M_3}\)</span> antes da minimização.</p></li>
+<li><p>Se <span class="math inline">\(L(M_1) \subseteq L(M_2)\)</span>, simplifique a expressão <span class="math inline">\((M_1 \cap M_2) \cup (\overline{M_1} \cap M_3)\)</span> e justifique algebricamente.</p></li>
+<li><p>Prove que <span class="math inline">\(\overline{M_1 \cup M_2 \cup M_3} = \overline{M_1} \cap \overline{M_2} \cap \overline{M_3}\)</span> usando as leis de De Morgan e construa o autômato resultante.</p></li>
+</ol>
+</section>
+<section id="sec-myhill-nerode" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="sec-myhill-nerode"><span class="header-section-number">4.6.4</span> A Relação de Myhill-Nerode</h3>
 <p>A relação de Myhill-Nerode fornece uma caracterização fundamental das linguagens regulares e estabelece uma conexão profunda entre a estrutura algébrica de uma linguagem e o autômato mínimo que a reconhece.</p>
-<section id="definição-da-relação" class="level4" data-number="4.6.3.1">
-<h4 data-number="4.6.3.1" class="anchored" data-anchor-id="definição-da-relação"><span class="header-section-number">4.6.3.1</span> Definição da Relação</h4>
+<section id="definição-da-relação" class="level4" data-number="4.6.4.1">
+<h4 data-number="4.6.4.1" class="anchored" data-anchor-id="definição-da-relação"><span class="header-section-number">4.6.4.1</span> Definição da Relação</h4>
 <p>Dada uma linguagem <span class="math inline">\(L \subseteq \Sigma^*\)</span>, definimos a relação de equivalência de Myhill-Nerode sobre <span class="math inline">\(\Sigma^*\)</span>:</p>
 <p><span class="math display">\[x \equiv_L y \iff \forall z \in \Sigma^* : xz \in L \leftrightarrow yz \in L\]</span></p>
 <p>Duas <em>strings</em> <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> são equivalentes se elas são <strong>indistinguíveis</strong> com respeito a <span class="math inline">\(L\)</span>: qualquer sufixo <span class="math inline">\(z\)</span> que, concatenado com <span class="math inline">\(x\)</span>, produza uma <em>string</em> em <span class="math inline">\(L\)</span>, também produzirá uma <em>string</em> em <span class="math inline">\(L\)</span> quando concatenado com <span class="math inline">\(y\)</span>, e vice-versa.</p>
 </section>
-<section id="o-teorema-de-myhill-nerode" class="level4" data-number="4.6.3.2">
-<h4 data-number="4.6.3.2" class="anchored" data-anchor-id="o-teorema-de-myhill-nerode"><span class="header-section-number">4.6.3.2</span> O Teorema de Myhill-Nerode</h4>
+<section id="o-teorema-de-myhill-nerode" class="level4" data-number="4.6.4.2">
+<h4 data-number="4.6.4.2" class="anchored" data-anchor-id="o-teorema-de-myhill-nerode"><span class="header-section-number">4.6.4.2</span> O Teorema de Myhill-Nerode</h4>
 <p><strong>Teorema (Myhill-Nerode)</strong>: Uma linguagem <span class="math inline">\(L\)</span> é regular se, e somente se, a relação <span class="math inline">\(\equiv_L\)</span> tem um número finito de classes de equivalência. Além disso, o número de estados do Autômato Finito Determinístico mínimo para <span class="math inline">\(L\)</span> é exatamente igual ao número de classes de equivalência de <span class="math inline">\(\equiv_L\)</span>.</p>
 <p>Este teorema tem implicações profundas:</p>
 <ol type="1">
@@ -1391,23 +1505,23 @@ Construa o autômato M′ que reconhece a linguagem complemento overlineL(M). Qu
 <p>Como existem infinitas classes de equivalência, <span class="math inline">\(L\)</span> não é regular. Esta é uma prova alternativa ao Lema do Bombeamento!</p>
 </section>
 </section>
-<section id="equivalência-entre-modelos" class="level3" data-number="4.6.4">
-<h3 data-number="4.6.4" class="anchored" data-anchor-id="equivalência-entre-modelos"><span class="header-section-number">4.6.4</span> Equivalência entre Modelos</h3>
+<section id="equivalência-entre-modelos" class="level3" data-number="4.6.5">
+<h3 data-number="4.6.5" class="anchored" data-anchor-id="equivalência-entre-modelos"><span class="header-section-number">4.6.5</span> Equivalência entre Modelos</h3>
 <p>Um dos resultados fundamentais da teoria das linguagens formais é o <strong>Teorema de Kleene</strong>, que estabelece a equivalência entre três formalismos aparentemente distintos.</p>
-<section id="o-teorema-de-kleene" class="level4" data-number="4.6.4.1">
-<h4 data-number="4.6.4.1" class="anchored" data-anchor-id="o-teorema-de-kleene"><span class="header-section-number">4.6.4.1</span> O Teorema de Kleene</h4>
+<section id="o-teorema-de-kleene" class="level4" data-number="4.6.5.1">
+<h4 data-number="4.6.5.1" class="anchored" data-anchor-id="o-teorema-de-kleene"><span class="header-section-number">4.6.5.1</span> O Teorema de Kleene</h4>
 <p><strong>Teorema (Kleene)</strong>: As seguintes classes de linguagens são idênticas: 1. Linguagens reconhecidas por Autômatos Finitos Determinísticos 2. Linguagens reconhecidas por Autômatos Finitos Não-Determinísticos 3. Linguagens denotadas por Expressões Regulares</p>
 <p>A demonstração deste teorema envolve três construções algorítmicas:</p>
-<p><strong>1. Expressão Regular → AFN (Construção de Thompson)</strong>: Para cada operador da expressão regular, existe uma construção sistemática: - Base: <span class="math inline">\(a \in \Sigma\)</span> produz um AFN de dois estados - União: <span class="math inline">\(r|s\)</span> combina AFNs com transições-<span class="math inline">\(\epsilon\)</span> - Concatenação: <span class="math inline">\(rs\)</span> conecta AFNs em sequência - Fechamento: <span class="math inline">\(r^*\)</span> adiciona ciclo com transições-<span class="math inline">\(\epsilon\)</span></p>
-<p><strong>2. AFN → Autômato Finito Determinístico (Construção de Subconjuntos)</strong>: O algoritmo de subconjuntos constrói um Autômato Finito Determinístico onde cada estado representa um conjunto de estados do AFN original. Embora potencialmente exponencial, garante determinismo.</p>
+<p><strong>1. Expressão Regular → Autômato Finito Determinístico (Construção de Thompson)</strong>: Para cada operador da expressão regular, existe uma construção sistemática: - Base: <span class="math inline">\(a \in \Sigma\)</span> produz um Autômato Finito Determinístico de dois estados; - União: <span class="math inline">\(r|s\)</span> combina Autômatos Finitos Determinísticos com transições-<span class="math inline">\(\epsilon\)</span>; - Concatenação: <span class="math inline">\(rs\)</span> conecta Autômatos Finitos Determinísticos em sequência; - Fechamento: <span class="math inline">\(r^*\)</span> adiciona ciclo com transições-<span class="math inline">\(\epsilon\)</span>.</p>
+<p><strong>2. Autômato Finito Determinístico (Construção de Subconjuntos)</strong>: O algoritmo de subconjuntos constrói um Autômato Finito Determinístico no qual cada estado representa um conjunto de estados do Autômato Finito Determinístico original. Embora potencialmente exponencial, garante determinismo.</p>
 <p><strong>3. Autômato Finito Determinístico → Expressão Regular (Eliminação de Estados)</strong>: Remove sistematicamente estados do Autômato Finito Determinístico, substituindo-os por expressões regulares nas transições, até restar apenas uma expressão entre o estado inicial e os finais.</p>
 </section>
 </section>
-<section id="teste-de-equivalência-entre-autômatos-finitos-determinísticos" class="level3" data-number="4.6.5">
-<h3 data-number="4.6.5" class="anchored" data-anchor-id="teste-de-equivalência-entre-autômatos-finitos-determinísticos"><span class="header-section-number">4.6.5</span> Teste de Equivalência entre Autômatos Finitos Determinísticos</h3>
+<section id="teste-de-equivalência-entre-autômatos-finitos-determinísticos" class="level3" data-number="4.6.6">
+<h3 data-number="4.6.6" class="anchored" data-anchor-id="teste-de-equivalência-entre-autômatos-finitos-determinísticos"><span class="header-section-number">4.6.6</span> Teste de Equivalência entre Autômatos Finitos Determinísticos</h3>
 <p>Determinar se dois Autômatos Finitos Determinísticos reconhecem a mesma linguagem é um problema fundamental com aplicações práticas importantes, especialmente na otimização de compiladores.</p>
-<section id="algoritmo-de-teste-de-equivalência" class="level4" data-number="4.6.5.1">
-<h4 data-number="4.6.5.1" class="anchored" data-anchor-id="algoritmo-de-teste-de-equivalência"><span class="header-section-number">4.6.5.1</span> Algoritmo de Teste de Equivalência</h4>
+<section id="algoritmo-de-teste-de-equivalência" class="level4" data-number="4.6.6.1">
+<h4 data-number="4.6.6.1" class="anchored" data-anchor-id="algoritmo-de-teste-de-equivalência"><span class="header-section-number">4.6.6.1</span> Algoritmo de Teste de Equivalência</h4>
 <p><strong>Método 1: Via Minimização</strong>: 1. Minimize ambos os Autômatos Finitos Determinísticos 2. Verifique isomorfismo entre os Autômatos Finitos Determinísticos mínimos</p>
 <p><strong>Método 2: Via Construção do Produto</strong>: 1. Construa Autômato Finito Determinístico para <span class="math inline">\((L_1 - L_2) \cup (L_2 - L_1)\)</span> 2. Verifique se a linguagem resultante é vazia</p>
 <p><strong>Complexidade</strong>: a complexidade do teste de equivalência entre dois Autômatos Finitos Determinísticos (<span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span>) depende do método utilizado.</p>
@@ -1417,8 +1531,8 @@ Construa o autômato M′ que reconhece a linguagem complemento overlineL(M). Qu
 </ol>
 </section>
 </section>
-<section id="implicações-práticas-das-propriedades" class="level3" data-number="4.6.6">
-<h3 data-number="4.6.6" class="anchored" data-anchor-id="implicações-práticas-das-propriedades"><span class="header-section-number">4.6.6</span> Implicações Práticas das Propriedades</h3>
+<section id="implicações-práticas-das-propriedades" class="level3" data-number="4.6.7">
+<h3 data-number="4.6.7" class="anchored" data-anchor-id="implicações-práticas-das-propriedades"><span class="header-section-number">4.6.7</span> Implicações Práticas das Propriedades</h3>
 <p>A diligente leitora observará que estas propriedades matemáticas têm consequências diretas na engenharia de compiladores:</p>
 <ol type="1">
 <li><p><strong>Composição Modular</strong>: As propriedades de fechamento permitem construir analisadores léxicos complexos a partir de componentes simples, sabendo que o resultado permanecerá tratável.</p></li>
@@ -1428,8 +1542,51 @@ Construa o autômato M′ que reconhece a linguagem complemento overlineL(M). Qu
 </ol>
 <p>Estas propriedades fundamentais estabelecem os Autômatos Finitos Determinísticos não apenas como um modelo teórico elegante, mas como uma ferramenta prática poderosa para o processamento eficiente de linguagens. A compreensão profunda destas propriedades capacita a engenheira de software a fazer escolhas informadas sobre representações, otimizações e implementações em sistemas reais de análise léxica.</p>
 </section>
-<section id="limitações-dos-autômatos-finitos" class="level3" data-number="4.6.7">
-<h3 data-number="4.6.7" class="anchored" data-anchor-id="limitações-dos-autômatos-finitos"><span class="header-section-number">4.6.7</span> Limitações dos Autômatos Finitos</h3>
+<section id="Exercicios-10" class="level3" data-number="4.6.8">
+<h3 data-number="4.6.8" class="anchored" data-anchor-id="Exercicios-10"><span class="header-section-number">4.6.8</span> Exercícios 10</h3>
+<p><strong>1.</strong>: Considere a linguagem <span class="math inline">\(L = \{w \in \{0,1\}^* \mid w \text{ contém } 00 \text{ como substring}\}\)</span>.</p>
+<ol type="a">
+<li><p>Determine todas as classes de equivalência da relação <span class="math inline">\(\equiv_L\)</span>.</p></li>
+<li><p>Para cada classe, forneça um representante e explique por que strings dessa classe são equivalentes.</p></li>
+<li><p>Construa o Autômato Finito Determinístico mínimo para <span class="math inline">\(L\)</span> usando as classes de equivalência encontradas.</p></li>
+<li><p>Verifique que o número de estados do Autômato Finito Determinístico mínimo corresponde ao número de classes.</p></li>
+</ol>
+<p><strong>2.</strong>: Use a relação de Myhill-Nerode para provar que a linguagem <span class="math inline">\(L = \{0^i1^j \mid i &gt; j \geq 0\}\)</span> não é regular.</p>
+<p>Dica: Considere as strings <span class="math inline">\(0^n\)</span> para diferentes valores de <span class="math inline">\(n\)</span> e mostre que estão em classes distintas.</p>
+<p><strong>3.</strong>:Considere o Autômato Finito Determinístico <span class="math inline">\(M = (\{q_0, q_1, q_2\}, \{a, b\}, \delta, q_0, \{q_2\})\)</span> com transições:</p>
+<ul>
+<li><span class="math inline">\(\delta(q_0, a) = q_1\)</span>, <span class="math inline">\(\delta(q_0, b) = q_0\)</span>;</li>
+<li><span class="math inline">\(\delta(q_1, a) = q_1\)</span>, <span class="math inline">\(\delta(q_1, b) = q_2\)</span>;</li>
+<li><span class="math inline">\(\delta(q_2, a) = q_2\)</span>, <span class="math inline">\(\delta(q_2, b) = q_2\)</span>.</li>
+</ul>
+<p>Use o método de eliminação de estados para encontrar a expressão regular equivalente. Mostre cada passo da eliminação.</p>
+<p><strong>4.</strong>: Dados dois Autômatos Finitos Determinísticos sobre <span class="math inline">\(\Sigma = \{a, b\}\)</span>:</p>
+<p><strong>Autômato Finito Determinístico <span class="math inline">\(M_1\)</span>:</strong> Aceita strings com número par de <span class="math inline">\(a\)</span>’s - Estados: <span class="math inline">\(\{p_0, p_1\}\)</span> - Estado inicial: <span class="math inline">\(p_0\)</span> - Estados finais: <span class="math inline">\(\{p_0\}\)</span> - <span class="math inline">\(\delta_1(p_0, a) = p_1\)</span>, <span class="math inline">\(\delta_1(p_0, b) = p_0\)</span> - <span class="math inline">\(\delta_1(p_1, a) = p_0\)</span>, <span class="math inline">\(\delta_1(p_1, b) = p_1\)</span></p>
+<p><strong>Autômato Finito Determinístico <span class="math inline">\(M_2\)</span>:</strong> Aceita strings onde a posição de cada <span class="math inline">\(a\)</span> é ímpar (primeira posição = 1) - Estados: <span class="math inline">\(\{q_{par}, q_{impar}, q_{aceita}, q_{rejeita}\}\)</span> - Estado inicial: <span class="math inline">\(q_{par}\)</span> - Estados finais: <span class="math inline">\(\{q_{par}, q_{aceita}\}\)</span></p>
+<ol type="a">
+<li><p>Determine se <span class="math inline">\(L(M_1) = L(M_2)\)</span> usando o método do produto.</p></li>
+<li><p>Verifique sua resposta testando as strings: <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(aa\)</span>, <span class="math inline">\(ab\)</span>, <span class="math inline">\(ba\)</span>, <span class="math inline">\(aba\)</span>.</p></li>
+</ol>
+<p><strong>5.</strong> Considere um Autômato Finito Determinístico <span class="math inline">\(M\)</span> com 8 estados que reconhece strings sobre <span class="math inline">\(\{0, 1\}\)</span> terminadas em <span class="math inline">\(01\)</span>.</p>
+<ol type="a">
+<li><p>Aplique o algoritmo de minimização de Hopcroft para encontrar o Autômato Finito Determinístico mínimo.</p></li>
+<li><p>Calcule a complexidade temporal da minimização considerando <span class="math inline">\(|\Sigma| = 2\)</span> e <span class="math inline">\(n = 8\)</span>.</p></li>
+<li><p>Se tivéssemos dois Autômatos Finitos Determinísticos com 8 e 10 estados respectivamente, compare a complexidade de testar equivalência via minimização versus via construção do produto.</p></li>
+</ol>
+<p><strong>6.</strong> Você está projetando um analisador léxico que deve reconhecer três tipos de tokens:</p>
+<ul>
+<li><strong>Inteiros</strong>: sequências de dígitos (0-9);</li>
+<li><strong>Identificadores</strong>: começam com letra, seguidos de letras ou dígitos;</li>
+<li><strong>Operadores</strong>: <code>++</code>, <code>--</code>, <code>+=</code>, <code>-=</code>.</li>
+</ul>
+<ol type="a">
+<li><p>Construa Autômatos Finitos Determinísticos individuais para cada tipo.</p></li>
+<li><p>Use as propriedades de fechamento para criar um único Autômato Finito Determinístico que reconheça qualquer um dos três tipos.</p></li>
+<li><p>Discuta como você implementaria a distinção entre os tipos de tokens no Autômato Finito Determinístico combinado.</p></li>
+</ol>
+</section>
+<section id="limitações-dos-autômatos-finitos" class="level3" data-number="4.6.9">
+<h3 data-number="4.6.9" class="anchored" data-anchor-id="limitações-dos-autômatos-finitos"><span class="header-section-number">4.6.9</span> Limitações dos Autômatos Finitos</h3>
 <p>Apesar de sua grande aplicabilidade na análise léxica e no reconhecimento de padrões, os Autômatos Finitos Determinísticos possuem uma limitação fundamental que reside na própria natureza de sua memória: ela é <strong>finita</strong>. Um Autômato Finito Determinístico só consegue se <em>lembrar</em> de informações através do estado em que se encontra. Como o conjunto de estados <span class="math inline">\(Q\)</span> é finito, a capacidade de memorização da máquina é limitada.</p>
 <p>Esta limitação impede que os Autômatos Finitos Determinísticos reconheçam linguagens que exigem uma memória ilimitada ou a capacidade de contar sem um teto predefinido. O exemplo mais clássico de uma linguagem que um Autômato Finito Determinístico não pode reconhecer é a linguagem de parênteses balanceados ou, de forma análoga, a linguagem <span class="math inline">\(L\)</span>:</p>
 <p><span class="math display">\[
