@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Provas: A Arte da Demonstração e Análise de Argumentos</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        /* Estilos Base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* Layout Principal */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Layout Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Animações */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        /* Seções */
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        /* Elementos de Destaque */
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        /* Concept Cards */
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* Icon Badges */
+        .icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .badge-primary { background: #3b82f6; }
+        .badge-success { background: #10b981; }
+        .badge-warning { background: #f59e0b; }
+        .badge-info { background: #0ea5e9; }
+        .badge-danger { background: #ef4444; }
+
+        /* Tabelas */
+        .table-responsive-custom {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table-custom th,
+        .table-custom td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .table-custom thead th {
+            background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table-custom tbody tr:nth-child(odd) {
+            background-color: white;
+        }
+
+        .table-custom tbody tr:nth-child(even) {
+            background-color: #dbeafe;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: var(--copper-100);
+            transition: background-color 0.2s ease;
+        }
+
+        /* Figure captions */
+        .figure-caption {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--sage-200);
+            font-style: italic;
+            color: var(--sage-700);
+            text-align: center;
+        }
+
+        /* Code styling */
+        .code-highlight {
+            background: var(--sage-800);
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        /* Exercise styling */
+        .exercise-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--sage-600);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+
+        /* Definition boxes */
+        .definition-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .definition-title {
+            font-weight: 600;
+            color: var(--sage-800);
+            margin-bottom: 0.5rem;
+        }
+
+        /* MathJax styling */
+        .MathJax {
+            font-size: 1em !important;
+        }
+
+        /* Proof styling */
+        .proof-step {
+            background: white;
+            border-left: 4px solid var(--sage-600);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .proof-step .step-number {
+            font-weight: bold;
+            color: var(--sage-700);
+            margin-right: 1rem;
+        }
+
+        .proof-step .justification {
+            font-style: italic;
+            color: var(--sage-600);
+            margin-top: 0.5rem;
+        }
+
+        /* Argument analysis */
+        .argument-box {
+            background: linear-gradient(135deg, var(--copper-50), var(--sage-50));
+            border: 2px solid var(--copper-300);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .premise-list {
+            background: var(--sage-50);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .conclusion-box {
+            background: var(--copper-100);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--copper-600);
+        }
+
+        /* Truth table styling */
+        .truth-table {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .truth-table th {
+            background: var(--sage-700) !important;
+            color: white;
+        }
+
+        /* Axiom boxes */
+        .axiom-box {
+            background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+            border: 1px solid #0277bd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .axiom-title {
+            font-weight: 600;
+            color: #01579b;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#equivalencia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Equivalência Lógica</a></li>
+                <li class="mb-2"><a href="#contrapositiva" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Contrapositiva</a></li>
+                <li class="mb-2"><a href="#reciproca" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Recíproca</a></li>
+                <li class="mb-2"><a href="#argumentos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Análise de Argumentos</a></li>
+                <li class="mb-2"><a href="#sistema-prova" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Sistema de Prova</a></li>
+                <li class="mb-2"><a href="#aplicacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Aplicações Práticas</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-balance-scale me-2 text-primary"></i><small class="text-primary fw-medium">Equivalência</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-exchange-alt me-2 text-success"></i><small class="text-success fw-medium">Contrapositiva</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-comments me-2 text-warning"></i><small class="text-warning fw-medium">Argumentos</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-cogs me-2 text-info"></i><small class="text-info fw-medium">Sistema L</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Provas</em>
+                                    <span class="d-block">A Arte da Demonstração</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Lógica proposicional e análise de argumentos
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">⊢</div>
+                            <div class="fs-6 text-muted">Símbolo de Demonstrabilidade</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">3</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Axiomas do Sistema L</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-balance-scale fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Equivalência</h3>
+                                <p class="fs-7 text-muted">Fórmulas logicamente idênticas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-exchange-alt fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Contrapositiva</h3>
+                                <p class="fs-7 text-muted">Inversão e negação de implicações</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-comments fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Argumentos</h3>
+                                <p class="fs-7 text-muted">Premissas levam a conclusões</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-cogs fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Sistema L</h3>
+                                <p class="fs-7 text-muted">Axiomas e regras de inferência</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. A Essência da Prova Matemática</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        A matemática respira prova. Nenhuma sentença matemática tem qualquer valor se não for provada. As verdades da aritmética devem ser estabelecidas com rigor lógico; as conjecturas da geometria, confirmadas por construtos infalíveis.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "A beleza da Lógica Proposicional é revelar, nas entranhas da matemática, um método para destilar a verdade. Seus símbolos e regras exaltam nosso raciocínio e nos elevam da desordem da intuição"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Lógica Proposicional">Fundamentos do Raciocínio Formal</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Rigor Lógico</h3>
+                                <p class="fs-6 text-muted">Cada novo teorema se ergue sobre os ombros de gigantes - um edifício de razão cuidadosamente erigido</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-gem"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Estética Hermética</h3>
+                                <p class="fs-6 text-muted">Dentro deste sistema austero reside a beleza que faz brilhar a luz da razão e do entendimento</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Elementos Simples</h3>
+                                <p class="fs-6 text-muted">Com variáveis, conectivos e axiomas, capturamos verdades absolutas no pensamento simbólico</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Equivalência Lógica -->
+        <section id="equivalencia" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Logicamente Equivalente</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Formal</div>
+                        <p class="mb-2">
+                            As proposições $A$ e $B$ serão ditas <strong>logicamente equivalentes</strong> se, e somente se, a proposição $A \Leftrightarrow B$ for uma tautologia.
+                        </p>
+                        <p class="mb-0">
+                            Duas fórmulas $P$ e $Q$ são equivalentes se quando $P$ for verdadeiro, $Q$ também será e vice-versa.
+                        </p>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo 1: P → Q ≡ ¬Q → ¬P</h3>
+                        
+                        <p class="mb-3">Vamos mostrar que $P \rightarrow Q$ é logicamente equivalente a $\neg Q \rightarrow \neg P$ através da tabela verdade:</p>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom truth-table">
+                                <thead>
+                                    <tr>
+                                        <th>P</th>
+                                        <th>Q</th>
+                                        <th>P → Q</th>
+                                        <th>¬Q</th>
+                                        <th>¬P</th>
+                                        <th>¬Q → ¬P</th>
+                                        <th>(P → Q) ↔ (¬Q → ¬P)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>F</td>
+                                        <td>F</td>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td class="fw-bold text-success">T</td>
+                                    </tr>
+                                    <tr>
+                                        <td>F</td>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td>F</td>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td class="fw-bold text-success">T</td>
+                                    </tr>
+                                    <tr>
+                                        <td>T</td>
+                                        <td>F</td>
+                                        <td>F</td>
+                                        <td>T</td>
+                                        <td>F</td>
+                                        <td>F</td>
+                                        <td class="fw-bold text-success">T</td>
+                                    </tr>
+                                    <tr>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td>T</td>
+                                        <td>F</td>
+                                        <td>F</td>
+                                        <td>T</td>
+                                        <td class="fw-bold text-success">T</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded mt-3">
+                            <strong>Conclusão:</strong> Como a coluna da operação principal contém apenas valores verdadeiros (T), a proposição bicondicional é uma tautologia. Consequentemente, as fórmulas são logicamente equivalentes.
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h4 class="fs-5 fw-semibold mb-3 text-success">Exemplo 2: P → Q ≡ ¬P ∨ Q</h4>
+                                
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom truth-table">
+                                        <thead>
+                                            <tr>
+                                                <th>P</th>
+                                                <th>Q</th>
+                                                <th>¬P</th>
+                                                <th>¬P ∨ Q</th>
+                                                <th>P → Q</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>F</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                            </tr>
+                                            <tr>
+                                                <td>T</td>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>F</td>
+                                            </tr>
+                                            <tr>
+                                                <td>F</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                            </tr>
+                                            <tr>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h4 class="fs-5 fw-semibold mb-3 text-danger">Contraexemplo: P ∧ Q ≢ P ∨ Q</h4>
+                                
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom truth-table">
+                                        <thead>
+                                            <tr>
+                                                <th>P</th>
+                                                <th>Q</th>
+                                                <th>P ∧ Q</th>
+                                                <th>P ∨ Q</th>
+                                                <th>≡?</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                                <td>T</td>
+                                            </tr>
+                                            <tr>
+                                                <td>T</td>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>T</td>
+                                                <td class="fw-bold text-danger">F</td>
+                                            </tr>
+                                            <tr>
+                                                <td>F</td>
+                                                <td>T</td>
+                                                <td>F</td>
+                                                <td>T</td>
+                                                <td class="fw-bold text-danger">F</td>
+                                            </tr>
+                                            <tr>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>F</td>
+                                                <td>T</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contrapositiva -->
+        <section id="contrapositiva" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Contrapositiva</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição e Importância</div>
+                        <p class="mb-2">
+                            A contrapositiva de uma implicação $P \rightarrow Q$ é obtida invertendo-se o antecedente e o consequente e negando-os:
+                        </p>
+                        <div class="text-center my-3">
+                            $$\neg Q \rightarrow \neg P$$
+                        </div>
+                        <p class="mb-0">
+                            A contrapositiva é importante porque é <strong>logicamente equivalente</strong> à implicação original, mas frequentemente é mais fácil de provar.
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Exemplo Linguístico</h3>
+                                
+                                <div class="premise-list">
+                                    <strong>Implicação Original:</strong><br>
+                                    "Se chove, então a rua fica molhada"
+                                </div>
+                                
+                                <div class="conclusion-box">
+                                    <strong>Contrapositiva:</strong><br>
+                                    "Se a rua não está molhada, então não choveu"
+                                </div>
+                                
+                                <div class="p-3 bg-info-subtle rounded mt-3">
+                                    <strong>Observação:</strong> A contrapositiva preserva a validade das implicações proposicionais e troca o antecedente pela negação do consequente e vice-versa.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Exemplo Matemático</h3>
+                                
+                                <div class="premise-list">
+                                    <strong>Função Injetora:</strong><br>
+                                    $x \neq y$ implica $f(x) \neq f(y)$
+                                </div>
+                                
+                                <div class="conclusion-box">
+                                    <strong>Contrapositiva:</strong><br>
+                                    se $f(x) = f(y)$ então $x = y$
+                                </div>
+                                
+                                <div class="p-3 bg-success-subtle rounded mt-3">
+                                    <strong>Vantagem Prática:</strong> Normalmente é mais fácil assumir $f(x) = f(y)$ e deduzir $x = y$ do que assumir $x \neq y$ e deduzir $f(x) \neq f(y)$, pois $x \neq y$ geralmente não é uma informação útil.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-exchange-alt me-2"></i>Exemplos de Contrapositivas
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Exemplo 1:</strong><br>
+                                    A contrapositiva de $P \rightarrow (Q \vee R)$ é $\neg(Q \vee R) \rightarrow \neg P$
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Lembrete:</strong><br>
+                                    Toda implicação é sempre equivalente à sua contrapositiva
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recíproca -->
+        <section id="reciproca" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Recíproca</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição e Diferença Crucial</div>
+                        <p class="mb-2">
+                            A recíproca de $P \rightarrow Q$ é obtida apenas invertendo antecedente e consequente: $Q \rightarrow P$
+                        </p>
+                        <div class="p-3 bg-warning-subtle rounded">
+                            <strong>Atenção:</strong> Diferentemente da contrapositiva, a recíproca <strong>não é necessariamente equivalente</strong> à implicação original. A contrapositiva preserva a equivalência lógica, a recíproca não.
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo: Cães e Mamíferos</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="premise-list">
+                                    <strong>Implicação Original (VERDADEIRA):</strong><br>
+                                    "Se um animal é um cão, então ele é um mamífero"
+                                </div>
+                                
+                                <div class="conclusion-box">
+                                    <strong>Recíproca (FALSA):</strong><br>
+                                    "Se um animal é um mamífero, então ele é um cão"
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Contraexemplo:</strong> Existem muitos mamíferos que não são cães (gatos, cavalos, baleias, etc.), o que torna a recíproca claramente falsa.
+                                </div>
+                                
+                                <div class="p-3 bg-success-subtle rounded mt-3">
+                                    <strong>Bicondicional:</strong> Apenas nos casos em que ambas (implicação e recíproca) são verdadeiras, a relação bicondicional se sustenta.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Funções: Bem Definida vs Injetora</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Função Bem Definida</h5>
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    $x = y \rightarrow f(x) = f(y)$<br>
+                                    <small>Cada entrada tem uma saída única</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Função Injetora</h5>
+                                <div class="p-3 bg-success-subtle rounded">
+                                    $f(x) = f(y) \rightarrow x = y$<br>
+                                    <small>Saídas iguais implicam entradas iguais</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 bg-warning-subtle rounded mt-3">
+                            <strong>Observação:</strong> "Função bem definida" é a recíproca de "função injetora". Para provar uma bicondicional como $P \leftrightarrow Q$, devemos provar tanto $P \rightarrow Q$ quanto $Q \rightarrow P$ separadamente.
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-undo me-2"></i>Resumo: Contrapositiva vs Recíproca
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Contrapositiva:</strong><br>
+                                    $P \rightarrow Q \equiv \neg Q \rightarrow \neg P$<br>
+                                    <small>Sempre equivalente à original</small>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Recíproca:</strong><br>
+                                    $P \rightarrow Q$ vs $Q \rightarrow P$<br>
+                                    <small>Pode não ser equivalente à original</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Análise de Argumentos -->
+        <section id="argumentos" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Análise de Argumentos</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição de Argumento</div>
+                        <p class="mb-2">
+                            Um argumento é formado por um conjunto de premissas $P_1, P_2, ..., P_n$ e uma proposição $C$ (conclusão):
+                        </p>
+                        <div class="text-center my-3">
+                            $$\frac{P_1, P_2, ..., P_n}{C}$$
+                        </div>
+                        <p class="mb-0">
+                            O argumento é <strong>válido</strong> se, e somente se, a implicação $(P_1 \wedge P_2 \wedge ... \wedge P_n) \rightarrow C$ for uma tautologia.
+                        </p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Modus Ponens</h3>
+                                
+                                <div class="argument-box">
+                                    <div class="premise-list">
+                                        <strong>Premissas:</strong><br>
+                                        1. $P \rightarrow Q$ (Se P, então Q)<br>
+                                        2. $P$ (P é verdadeiro)
+                                    </div>
+                                    
+                                    <div class="conclusion-box">
+                                        <strong>Conclusão:</strong><br>
+                                        $Q$ (Portanto, Q é verdadeiro)
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Exemplo:</strong> Se eu estudar para o exame, então passarei. Eu estudei. Logo, passarei.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Modus Tollens</h3>
+                                
+                                <div class="argument-box">
+                                    <div class="premise-list">
+                                        <strong>Premissas:</strong><br>
+                                        1. $P \rightarrow Q$ (Se P, então Q)<br>
+                                        2. $\neg Q$ (Q é falso)
+                                    </div>
+                                    
+                                    <div class="conclusion-box">
+                                        <strong>Conclusão:</strong><br>
+                                        $\neg P$ (Portanto, P é falso)
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Exemplo:</strong> Se uma pessoa é um pássaro, então pode voar. Essa pessoa não pode voar. Logo, não é um pássaro.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-5 fw-semibold mb-3 text-warning">Silogismo Hipotético</h3>
+                                
+                                <div class="argument-box">
+                                    <div class="premise-list">
+                                        <strong>Premissas:</strong><br>
+                                        1. $P \rightarrow Q$ (Se P, então Q)<br>
+                                        2. $Q \rightarrow R$ (Se Q, então R)
+                                    </div>
+                                    
+                                    <div class="conclusion-box">
+                                        <strong>Conclusão:</strong><br>
+                                        $P \rightarrow R$ (Se P, então R)
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Exemplo:</strong> Se acordo cedo, então vou correr. Se corro, então tomo café saudável. Logo, se acordo cedo, então tomo café saudável.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-info">
+                                <h3 class="fs-5 fw-semibold mb-3 text-info">Silogismo Disjuntivo</h3>
+                                
+                                <div class="argument-box">
+                                    <div class="premise-list">
+                                        <strong>Premissas:</strong><br>
+                                        1. $P \vee Q$ (P ou Q)<br>
+                                        2. $\neg P$ (não P)
+                                    </div>
+                                    
+                                    <div class="conclusion-box">
+                                        <strong>Conclusão:</strong><br>
+                                        $Q$ (Portanto, Q)
+                                    </div>
+                                </div>
+                                
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Exemplo:</strong> Ou vou ao cinema ou ao teatro. Não vou ao cinema. Logo, vou ao teatro.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Lembrete Fundamental</div>
+                        <p class="mb-0">
+                            Um argumento só é válido se, e somente se, a proposição condicional que o expresse seja uma tautologia. A validade lógica garante que <strong>se todas as premissas forem verdadeiras, a conclusão será verdadeira</strong> - mas não garante que a conclusão seja verdadeira em termos absolutos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sistema de Prova -->
+        <section id="sistema-prova" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. O Sistema de Prova L</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Vamos definir um sistema de prova simples e direto chamado L, desenvolvido por John Lemmon. Em cada linha da nossa prova teremos um axioma, o resultado da aplicação do Modus Ponens, uma hipótese ou um lema.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="axiom-box">
+                                <div class="axiom-title">Axioma 1</div>
+                                <div class="text-center my-3">
+                                    $$A \rightarrow (B \rightarrow A)$$
+                                </div>
+                                <p class="mb-0">Se $A$ é verdadeiro, então a implicação $B \rightarrow A$ também é verdadeira, independentemente de $B$.</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="axiom-box">
+                                <div class="axiom-title">Axioma 2</div>
+                                <div class="text-center my-3">
+                                    $$(A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))$$
+                                </div>
+                                <p class="mb-0">Propriedade distributiva da implicação - permite encadear deduções que dependem de uma mesma premissa inicial.</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="axiom-box">
+                                <div class="axiom-title">Axioma 3</div>
+                                <div class="text-center my-3">
+                                    $$(\neg B \rightarrow \neg A) \rightarrow ((\neg B \rightarrow A) \rightarrow B)$$
+                                </div>
+                                <p class="mb-0">Se de $\neg B$ podemos inferir tanto $\neg A$ quanto $A$, então $B$ deve ser verdadeiro.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">O Símbolo de Demonstrabilidade (⊢)</div>
+                        <p class="mb-2">
+                            O símbolo $\vdash$ (turnstile) indica que uma fórmula pode ser demonstrada dentro de um sistema formal:
+                        </p>
+                        <ul class="list-unstyled">
+                            <li><strong>• $\vdash A$:</strong> "A fórmula $A$ é um teorema"</li>
+                            <li><strong>• $B_1, B_2, ..., B_n \vdash A$:</strong> "A partir das hipóteses, podemos demonstrar $A$"</li>
+                            <li><strong>• $\vdash_L A$:</strong> "A fórmula $A$ é demonstrável no sistema L"</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Prova 1: ⊢ A → A</h3>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">1.</span>
+                            $A \rightarrow ((A \rightarrow A) \rightarrow A)$
+                            <div class="justification">Axioma 1 com $A := A$ e $B := (A \rightarrow A)$</div>
+                        </div>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">2.</span>
+                            $(A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$
+                            <div class="justification">Axioma 2 com $A := A$, $B := (A \rightarrow A)$ e $C := A$</div>
+                        </div>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">3.</span>
+                            $((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))$
+                            <div class="justification">Modus Ponens aplicado às linhas 1 e 2</div>
+                        </div>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">4.</span>
+                            $(A \rightarrow (A \rightarrow A))$
+                            <div class="justification">Axioma 1 com $A := A$ e $B := A$</div>
+                        </div>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">5.</span>
+                            $(A \rightarrow A)$
+                            <div class="justification">Modus Ponens aplicado às linhas 3 e 4</div>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded mt-3">
+                            <strong>Conclusão:</strong> Provamos que $\vdash_L (A \rightarrow A)$ - toda proposição implica a si mesma.
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Prova 2: ⊢ (¬B → B) → B</h3>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">1.</span>
+                            $\neg B \rightarrow \neg B$
+                            <div class="justification">Lema: Teorema 1 com $A := \neg B$</div>
+                        </div>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">2.</span>
+                            $(\neg B \rightarrow \neg B) \rightarrow ((\neg B \rightarrow B) \rightarrow B)$
+                            <div class="justification">Instância do Axioma 3 com $X := B$ e $Y := B$</div>
+                        </div>
+                        
+                        <div class="proof-step">
+                            <span class="step-number">3.</span>
+                            $((\neg B \rightarrow B) \rightarrow B)$
+                            <div class="justification">Modus Ponens aplicado às linhas 1 e 2</div>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded mt-3">
+                            <strong>Conclusão:</strong> Provamos $\vdash ((\neg B \rightarrow B) \rightarrow B)$ usando o Teorema 1 como lema.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aplicações Práticas -->
+        <section id="aplicacoes" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Análise de Argumentos em Textos Cotidianos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A lógica não é apenas uma disciplina acadêmica, mas uma ferramenta poderosa para analisar e compreender argumentos em textos do cotidiano. A lógica nos ajuda a identificar premissas e conclusões, avaliar a validade de argumentos e entender como as ideias estão interconectadas.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo: Avanço Científico na Medicina (2022)</h3>
+                        
+                        <div class="argument-box mb-4">
+                            <div class="p-3 bg-light rounded">
+                                <em>"Em 2022, pesquisadores descobriram que a vacina contra a malária aprovada pela Organização Mundial da Saúde pode ajudar a salvar centenas de milhares de vidas por ano. É também a primeira vacina do mundo para uma infecção parasitária. A malária mata mais de 600.000 pessoas anualmente, a maioria crianças menores de cinco anos."</em>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="premise-list">
+                                    <strong>Premissas:</strong><br>
+                                    1. A malária mata mais de 600.000 pessoas anualmente<br>
+                                    2. A vacina foi aprovada pela OMS<br>
+                                    3. É a primeira vacina para infecção parasitária
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="conclusion-box">
+                                    <strong>Conclusão:</strong><br>
+                                    A vacina pode ajudar a salvar centenas de milhares de vidas por ano
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h5 class="fs-6 fw-semibold mb-3">Formalização em Lógica Proposicional:</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong>Variáveis:</strong><br>
+                                        • P: A malária mata 600.000+ pessoas<br>
+                                        • Q: A vacina foi aprovada pela OMS<br>
+                                        • R: É a primeira vacina parasitária<br>
+                                        • S: A vacina pode salvar vidas
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong>Estrutura:</strong><br>
+                                        $(P \wedge Q \wedge R) \rightarrow S$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exercício Prático: Sistema de Autenticação</h3>
+                        
+                        <div class="argument-box mb-4">
+                            <div class="p-3 bg-light rounded">
+                                <em>"O sistema de autenticação biométrica deve permitir o acesso a usuários autorizados por meio de reconhecimento facial ou impressão digital. Se um usuário não conseguir autenticar por nenhum dos métodos biométricos, o sistema deve oferecer como alternativa a autenticação por senha. Caso ocorram três tentativas falhas consecutivas por qualquer método, o acesso do usuário deve ser temporariamente bloqueado por 30 minutos."</em>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Formalização Proposicional:</h5>
+                                <div class="p-3 bg-info-subtle rounded">
+                                    • A: Usuário autorizado<br>
+                                    • F: Autentica com reconhecimento facial<br>
+                                    • D: Autentica com impressão digital<br>
+                                    • S: Autentica com senha<br>
+                                    • T: Três tentativas falhas consecutivas<br>
+                                    • B: Acesso bloqueado temporariamente
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Estrutura Lógica:</h5>
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    1. $A \rightarrow (F \vee D \vee S)$<br>
+                                    2. $\neg(F \vee D) \rightarrow S$<br>
+                                    3. $T \rightarrow B$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded mt-3">
+                            <strong>Análise da Validade:</strong> O argumento é válido em termos de lógica proposicional. A estrutura segue formas lógicas válidas, estabelecendo uma disjunção inclusiva de métodos de autenticação e implementando medidas de segurança consistentes.
+                        </div>
+                    </div>
+
+                    <!-- Resumo Final -->
+                    <div class="text-center">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Síntese</h4>
+                            <p class="fs-5 mb-0 text-white">
+                                A <strong>lógica proposicional</strong> fornece ferramentas poderosas para analisar argumentos, desde demonstrações matemáticas formais até textos do cotidiano, criando as <strong>estruturas cognitivas</strong> necessárias para soluções computacionais complexas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript para TOC e Navegação -->
+    <script>
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            if (toc) {
+                toc.classList.toggle('open');
+            }
+        }
+
+        // Inicialização quando DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTOC();
+            initializeFadeAnimations();
+            initializeClickOutside();
+            initializeResize();
+        });
+
+        // Inicializar funcionalidades do TOC
+        function initializeTOC() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            const sections = document.querySelectorAll('section[id]');
+            
+            // Smooth scrolling para links âncora
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        const offset = 80;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({
+                            top: elementPosition - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Fechar TOC móvel após clique
+                    if (window.innerWidth <= 1024) {
+                        const toc = document.getElementById('toc');
+                        if (toc) {
+                            toc.classList.remove('open');
+                        }
+                    }
+                });
+            });
+            
+            // Highlight ativo no TOC baseado na seção visível
+            if (sections.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.getAttribute('id');
+                            links.forEach(link => {
+                                link.classList.remove('bg-light', 'text-dark');
+                                if (link.getAttribute('href') === `#${id}`) {
+                                    link.classList.add('bg-light', 'text-dark');
+                                }
+                            });
+                        }
+                    });
+                }, {
+                    rootMargin: '-80px 0px -70% 0px'
+                });
+                
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+            }
+        }
+
+        // Inicializar animações de fade-in
+        function initializeFadeAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            if (fadeElements.length > 0) {
+                const fadeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+                
+                fadeElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                    fadeObserver.observe(el);
+                });
+            }
+        }
+
+        // Inicializar fechamento do TOC ao clicar fora (mobile)
+        function initializeClickOutside() {
+            document.addEventListener('click', function(event) {
+                const toc = document.getElementById('toc');
+                const hamburger = document.querySelector('button[onclick="toggleTOC()"]');
+                
+                if (toc && hamburger && window.innerWidth <= 1024 && toc.classList.contains('open')) {
+                    if (!toc.contains(event.target) && event.target !== hamburger && !hamburger.contains(event.target)) {
+                        toc.classList.remove('open');
+                    }
+                }
+            });
+        }
+
+        // Inicializar tratamento de redimensionamento
+        function initializeResize() {
+            window.addEventListener('resize', function() {
+                const toc = document.getElementById('toc');
+                if (toc && window.innerWidth > 1024) {
+                    toc.classList.remove('open');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

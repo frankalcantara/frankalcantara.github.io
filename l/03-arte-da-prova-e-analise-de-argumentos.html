@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à Programação Lógica - 5&nbsp; Provas</title>
+<title>Introdução à Programação Lógica - 5&nbsp; A Arte da Prova e Análise de Argumentos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./03-arte-da-prova-e-analise-de-argumentos.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./03-arte-da-prova-e-analise-de-argumentos.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -175,7 +175,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -251,20 +251,40 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#contrapositivas-e-recíprocas" id="toc-contrapositivas-e-recíprocas" class="nav-link active" data-scroll-target="#contrapositivas-e-recíprocas"><span class="header-section-number">5.0.1</span> Contrapositivas e Recíprocas</a></li>
-  <li><a href="#logicamente-equivalente" id="toc-logicamente-equivalente" class="nav-link" data-scroll-target="#logicamente-equivalente"><span class="header-section-number">5.0.2</span> Logicamente Equivalente</a></li>
-  <li><a href="#contrapositiva" id="toc-contrapositiva" class="nav-link" data-scroll-target="#contrapositiva"><span class="header-section-number">5.0.3</span> Contrapositiva</a></li>
-  <li><a href="#recíproca" id="toc-recíproca" class="nav-link" data-scroll-target="#recíproca"><span class="header-section-number">5.0.4</span> Recíproca</a></li>
-  <li><a href="#análise-de-argumentos" id="toc-análise-de-argumentos" class="nav-link" data-scroll-target="#análise-de-argumentos"><span class="header-section-number">5.0.5</span> Análise de Argumentos</a></li>
-  <li><a href="#finalmente-um-sistema-de-prova" id="toc-finalmente-um-sistema-de-prova" class="nav-link" data-scroll-target="#finalmente-um-sistema-de-prova"><span class="header-section-number">5.0.6</span> Finalmente, um Sistema de Prova</a></li>
-  <li><a href="#análise-de-argumentos-lógicos-em-textos-do-cotidiano" id="toc-análise-de-argumentos-lógicos-em-textos-do-cotidiano" class="nav-link" data-scroll-target="#análise-de-argumentos-lógicos-em-textos-do-cotidiano"><span class="header-section-number">5.1</span> Análise de Argumentos Lógicos em Textos do Cotidiano</a>
+  <li><a href="#contrapositivas-e-recíprocas" id="toc-contrapositivas-e-recíprocas" class="nav-link active" data-scroll-target="#contrapositivas-e-recíprocas"><span class="header-section-number">5.1</span> Contrapositivas e Recíprocas</a></li>
+  <li><a href="#logicamente-equivalente" id="toc-logicamente-equivalente" class="nav-link" data-scroll-target="#logicamente-equivalente"><span class="header-section-number">5.2</span> Logicamente Equivalente</a></li>
+  <li><a href="#contrapositiva" id="toc-contrapositiva" class="nav-link" data-scroll-target="#contrapositiva"><span class="header-section-number">5.3</span> Contrapositiva</a></li>
+  <li><a href="#recíproca" id="toc-recíproca" class="nav-link" data-scroll-target="#recíproca"><span class="header-section-number">5.4</span> Recíproca</a></li>
+  <li><a href="#análise-de-argumentos" id="toc-análise-de-argumentos" class="nav-link" data-scroll-target="#análise-de-argumentos"><span class="header-section-number">5.5</span> Análise de Argumentos</a></li>
+  <li><a href="#finalmente-um-sistema-de-prova" id="toc-finalmente-um-sistema-de-prova" class="nav-link" data-scroll-target="#finalmente-um-sistema-de-prova"><span class="header-section-number">5.6</span> Finalmente, um Sistema de Prova</a></li>
+  <li><a href="#o-símbolo-de-demonstrabilidade-turnstile" id="toc-o-símbolo-de-demonstrabilidade-turnstile" class="nav-link" data-scroll-target="#o-símbolo-de-demonstrabilidade-turnstile"><span class="header-section-number">5.7</span> O Símbolo de Demonstrabilidade (Turnstile)</a>
   <ul class="collapse">
-  <li><a href="#exemplo-1-avanço-científico-na-medicina-2022" id="toc-exemplo-1-avanço-científico-na-medicina-2022" class="nav-link" data-scroll-target="#exemplo-1-avanço-científico-na-medicina-2022"><span class="header-section-number">5.1.1</span> Exemplo 1: Avanço Científico na Medicina (2022)</a></li>
-  <li><a href="#exemplo-2-inovação-tecnológica-nuclear-2023" id="toc-exemplo-2-inovação-tecnológica-nuclear-2023" class="nav-link" data-scroll-target="#exemplo-2-inovação-tecnológica-nuclear-2023"><span class="header-section-number">5.1.2</span> Exemplo 2: Inovação Tecnológica Nuclear (2023)</a></li>
-  <li><a href="#exemplo-3-economia-global-2023" id="toc-exemplo-3-economia-global-2023" class="nav-link" data-scroll-target="#exemplo-3-economia-global-2023"><span class="header-section-number">5.1.3</span> Exemplo 3: Economia Global (2023)</a></li>
-  <li><a href="#exercício-de-análise-de-argumentos-lógicos" id="toc-exercício-de-análise-de-argumentos-lógicos" class="nav-link" data-scroll-target="#exercício-de-análise-de-argumentos-lógicos"><span class="header-section-number">5.1.4</span> Exercício de Análise de Argumentos Lógicos</a></li>
-  <li><a href="#sistema-de-recomendação-de-conteúdo" id="toc-sistema-de-recomendação-de-conteúdo" class="nav-link" data-scroll-target="#sistema-de-recomendação-de-conteúdo"><span class="header-section-number">5.1.5</span> Sistema de Recomendação de Conteúdo</a></li>
-  <li><a href="#formalização-lógica-3" id="toc-formalização-lógica-3" class="nav-link" data-scroll-target="#formalização-lógica-3"><span class="header-section-number">5.1.6</span> Formalização Lógica</a></li>
+  <li><a href="#notação-para-substituição-em-provas" id="toc-notação-para-substituição-em-provas" class="nav-link" data-scroll-target="#notação-para-substituição-em-provas"><span class="header-section-number">5.7.1</span> Notação para Substituição em Provas</a></li>
+  </ul></li>
+  <li><a href="#explorando-as-limitações-do-sistema-mathfrakl" id="toc-explorando-as-limitações-do-sistema-mathfrakl" class="nav-link" data-scroll-target="#explorando-as-limitações-do-sistema-mathfrakl"><span class="header-section-number">5.8</span> Explorando as Limitações do Sistema <span class="math inline">\(\mathfrak{L}\)</span></a>
+  <ul class="collapse">
+  <li><a href="#tentativa-inválida-de-demonstração" id="toc-tentativa-inválida-de-demonstração" class="nav-link" data-scroll-target="#tentativa-inválida-de-demonstração"><span class="header-section-number">5.8.1</span> Tentativa (INVÁLIDA) de Demonstração</a></li>
+  <li><a href="#por-que-esta-prova-falha" id="toc-por-que-esta-prova-falha" class="nav-link" data-scroll-target="#por-que-esta-prova-falha"><span class="header-section-number">5.8.2</span> Por Que Esta Prova Falha?</a></li>
+  <li><a href="#verificação-pela-tabela-verdade" id="toc-verificação-pela-tabela-verdade" class="nav-link" data-scroll-target="#verificação-pela-tabela-verdade"><span class="header-section-number">5.8.3</span> Verificação pela Tabela Verdade</a></li>
+  <li><a href="#como-sistemas-mais-ricos-resolvem-isso" id="toc-como-sistemas-mais-ricos-resolvem-isso" class="nav-link" data-scroll-target="#como-sistemas-mais-ricos-resolvem-isso"><span class="header-section-number">5.8.4</span> Como Sistemas Mais Ricos Resolvem Isso</a></li>
+  <li><a href="#incompletude-vs.-incorreção" id="toc-incompletude-vs.-incorreção" class="nav-link" data-scroll-target="#incompletude-vs.-incorreção"><span class="header-section-number">5.8.5</span> Incompletude vs.&nbsp;Incorreção</a></li>
+  <li><a href="#lição-importante" id="toc-lição-importante" class="nav-link" data-scroll-target="#lição-importante"><span class="header-section-number">5.8.6</span> Lição Importante</a></li>
+  <li><a href="#lema" id="toc-lema" class="nav-link" data-scroll-target="#lema"><span class="header-section-number">5.8.7</span> Lema</a></li>
+  <li><a href="#hipóteses" id="toc-hipóteses" class="nav-link" data-scroll-target="#hipóteses"><span class="header-section-number">5.8.8</span> Hipóteses</a></li>
+  </ul></li>
+  <li><a href="#análise-de-argumentos-lógicos-em-textos-do-cotidiano" id="toc-análise-de-argumentos-lógicos-em-textos-do-cotidiano" class="nav-link" data-scroll-target="#análise-de-argumentos-lógicos-em-textos-do-cotidiano"><span class="header-section-number">5.9</span> Análise de Argumentos Lógicos em Textos do Cotidiano</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-1-avanço-científico-na-medicina-2022" id="toc-exemplo-1-avanço-científico-na-medicina-2022" class="nav-link" data-scroll-target="#exemplo-1-avanço-científico-na-medicina-2022"><span class="header-section-number">5.9.1</span> Exemplo 1: Avanço Científico na Medicina (2022)</a></li>
+  <li><a href="#exemplo-2-inovação-tecnológica-nuclear-2023" id="toc-exemplo-2-inovação-tecnológica-nuclear-2023" class="nav-link" data-scroll-target="#exemplo-2-inovação-tecnológica-nuclear-2023"><span class="header-section-number">5.9.2</span> Exemplo 2: Inovação Tecnológica Nuclear (2023)</a></li>
+  <li><a href="#exemplo-3-economia-global-2023" id="toc-exemplo-3-economia-global-2023" class="nav-link" data-scroll-target="#exemplo-3-economia-global-2023"><span class="header-section-number">5.9.3</span> Exemplo 3: Economia Global (2023)</a></li>
+  </ul></li>
+  <li><a href="#exercícios-de-análise-de-argumentos-lógicos" id="toc-exercícios-de-análise-de-argumentos-lógicos" class="nav-link" data-scroll-target="#exercícios-de-análise-de-argumentos-lógicos"><span class="header-section-number">5.10</span> Exercícios de Análise de Argumentos Lógicos</a>
+  <ul class="collapse">
+  <li><a href="#exercício-1-sistema-de-autenticação-biométrica" id="toc-exercício-1-sistema-de-autenticação-biométrica" class="nav-link" data-scroll-target="#exercício-1-sistema-de-autenticação-biométrica"><span class="header-section-number">5.10.1</span> Exercício 1: Sistema de Autenticação Biométrica</a></li>
+  <li><a href="#exercício-2-processamento-de-pagamentos-online" id="toc-exercício-2-processamento-de-pagamentos-online" class="nav-link" data-scroll-target="#exercício-2-processamento-de-pagamentos-online"><span class="header-section-number">5.10.2</span> Exercício 2: Processamento de Pagamentos Online</a></li>
+  <li><a href="#exercício-3-sistema-de-gerenciamento-de-estoque" id="toc-exercício-3-sistema-de-gerenciamento-de-estoque" class="nav-link" data-scroll-target="#exercício-3-sistema-de-gerenciamento-de-estoque"><span class="header-section-number">5.10.3</span> Exercício 3: Sistema de Gerenciamento de Estoque</a></li>
+  <li><a href="#exercício-4-sistema-de-recomendação-de-conteúdo" id="toc-exercício-4-sistema-de-recomendação-de-conteúdo" class="nav-link" data-scroll-target="#exercício-4-sistema-de-recomendação-de-conteúdo"><span class="header-section-number">5.10.4</span> Exercício 4: Sistema de Recomendação de Conteúdo</a></li>
+  <li><a href="#exercício-5-sistema-de-detecção-de-fraudes" id="toc-exercício-5-sistema-de-detecção-de-fraudes" class="nav-link" data-scroll-target="#exercício-5-sistema-de-detecção-de-fraudes"><span class="header-section-number">5.10.5</span> Exercício 5: Sistema de Detecção de Fraudes</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/03-arte-da-prova-e-analise-de-argumentos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -276,9 +296,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./03-arte-da-prova-e-analise-de-argumentos.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-jornada-programacao-logica.html">Fundamentos da Lógica</a></li><li class="breadcrumb-item"><a href="./03-arte-da-prova-e-analise-de-argumentos.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Provas</span></h1>
+<h1 class="title"><span id="sec-provas" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></span></h1>
 </div>
 
 
@@ -295,22 +315,35 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Está sem tempo? Leia o <a href=".\ex\03-expresso.html">Expresso</a>.</p>
+</div>
+</div>
 <p>A matemática respira prova. Nenhuma sentença matemática tem qualquer valor se não for provada. As verdades da aritmética devem ser estabelecidas com rigor lógico; as conjecturas da geometria, confirmadas por construtos infalíveis. Cada novo teorema se ergue sobre os ombros de gigantes – um edifício de razão cuidadosamente erigido.</p>
 <p>A beleza da <strong>Lógica Proposicional</strong> é revelar, nas entranhas da matemática, um método para destilar a verdade. Seus símbolos e regras exaltam nosso raciocínio e nos elevam da desordem da intuição. Com poucos elementos simples – variáveis, conectivos, axiomas – podemos capturar verdades absolutas no âmbito do pensamento simbólico.</p>
 <p>Considere um sistema proposicional, com suas Fórmulas Bem Formadas, suas transformações válidas. Ainda que simples, vemos nesse sistema o que há de profundo na natureza da prova. Seus teoremas irradiam correção; suas demonstrações, poder dedutivo. Dentro deste sistema austero reside a beleza em uma estética hermética, mas que desvelada faz brilhar a luz da razão e do entendimento.</p>
-<section id="contrapositivas-e-recíprocas" class="level3" data-number="5.0.1">
-<h3 data-number="5.0.1" class="anchored" data-anchor-id="contrapositivas-e-recíprocas"><span class="header-section-number">5.0.1</span> Contrapositivas e Recíprocas</h3>
+<section id="contrapositivas-e-recíprocas" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="contrapositivas-e-recíprocas"><span class="header-section-number">5.1</span> Contrapositivas e Recíprocas</h2>
 <p>As implicações são um problema, do ponto de vista da matemática. Sentenças do tipo <em>se…então</em> induzem uma conclusão. Provar estas sentenças é uma preocupação constante da matemática. Dada uma implicação, existem duas fórmulas relacionadas que ocorrem com tanta frequência que possuem nomes especiais: contrapositivas e recíprocas. Antes de mergulharmos em contrapositivas, precisamos visitar alguns portos.</p>
 </section>
-<section id="logicamente-equivalente" class="level3" data-number="5.0.2">
-<h3 data-number="5.0.2" class="anchored" data-anchor-id="logicamente-equivalente"><span class="header-section-number">5.0.2</span> Logicamente Equivalente</h3>
+<section id="logicamente-equivalente" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="logicamente-equivalente"><span class="header-section-number">5.2</span> Logicamente Equivalente</h2>
 <p>Vamos imaginar um mundo de fórmulas que consistem apenas em duas proposições:<span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span>. Usando os operadores da <strong>Lógica Proposicional</strong> podemos escrever um número muito grande de fórmulas diferentes combinando estas duas proposições.</p>
 <p>A coisa interessante sobre as fórmulas que conseguimos criar com apenas duas proposições é que cada uma dessas fórmulas tem uma Tabela Verdade com exatamente quatro linhas, <span class="math inline">\(2^2=4\)</span>. Mesmo que isso pareça surpreendente, só existem dezesseis configurações possíveis para a última coluna de todas as Tabelas-Verdade de todas as tabelas que podemos criar, <span class="math inline">\(2^4=16\)</span>. Como resultado, muitas fórmulas compartilham a mesma configuração final em suas Tabelas Verdade. Todas as fórmulas que possuem a mesma configuração na última coluna são equivalentes.Terei ouvido um viva?</p>
 <p>Para que a esforçada leitora possa ver um pouco mais de formalidade considere as proposições <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição <span class="math inline">\(A \Leftrightarrow B\)</span> for uma tautologia.</p>
-<p><strong>Exemplo: 1</strong> Vamos mostrar que <span class="math inline">\(P\rightarrow Q\)</span> é logicamente equivalente a <span class="math inline">\(\neg Q \rightarrow \neg P\)</span>.</p>
-<p><strong>Solução</strong>: para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional <span class="math inline">\((P\rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> contém apenas valores verdadeiros:</p>
+<p><strong>Exemplo 1</strong>: Vamos mostrar que <span class="math inline">\(P \rightarrow Q\)</span> é logicamente equivalente a <span class="math inline">\(\neg Q \rightarrow \neg P\)</span>.</p>
+<p><strong>Solução</strong>: Para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional <span class="math inline">\((P \rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> contém apenas valores verdadeiros:</p>
 <p><span class="math display">\[
-\begin{array}{|c|c|c|c|c|c|}
+\begin{array}{|c|c|c|c|c|c|c|}
 \hline
 P &amp; Q &amp; P \rightarrow Q &amp; \neg Q &amp; \neg P &amp; \neg Q \rightarrow \neg P &amp; (P \rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P) \\
 \hline
@@ -324,14 +357,14 @@ T &amp; T &amp; T &amp; F &amp; F &amp; T &amp; T \\
 \hline
 \end{array}
 \]</span></p>
-<p>Como a coluna da operação principal <span class="math inline">\((P\rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> contém apenas valores verdadeiros (<span class="math inline">\(T\)</span>), a proposição bicondicional é uma tautologia. Consequentemente, as fórmulas <span class="math inline">\(P\rightarrow Q\)</span> e <span class="math inline">\(\neg Q \rightarrow \neg P\)</span> são logicamente equivalentes.</p>
-<p><strong>Exemplo 2</strong>: Vamos mostrar que <span class="math inline">\(P \land Q\)</span> não é logicamente equivalente a <span class="math inline">\(P \lor Q\)</span>.</p>
-<p><strong>Solução</strong> Para mostrar que <span class="math inline">\(P \land Q\)</span> não é logicamente equivalente a <span class="math inline">\(P \lor Q\)</span>, precisamos verificar se a proposição bicondicional <span class="math inline">\((P \land Q) \leftrightarrow (P \lor Q)\)</span> é uma tautologia. Se não for uma tautologia, então as duas fórmulas não são logicamente equivalentes.</p>
+<p>Como a coluna da operação principal <span class="math inline">\((P \rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> contém apenas valores verdadeiros (<span class="math inline">\(T\)</span>), a proposição bicondicional é uma tautologia. Consequentemente, as fórmulas <span class="math inline">\(P \rightarrow Q\)</span> e <span class="math inline">\(\neg Q \rightarrow \neg P\)</span> são logicamente equivalentes.</p>
+<p><strong>Exemplo 2</strong>: Vamos mostrar que <span class="math inline">\(P \wedge Q\)</span> não é logicamente equivalente a <span class="math inline">\(P \vee Q\)</span>.</p>
+<p><strong>Solução</strong> Para mostrar que <span class="math inline">\(P \wedge Q\)</span> não é logicamente equivalente a <span class="math inline">\(P \vee Q\)</span>, precisamos verificar se a proposição bicondicional <span class="math inline">\((P \wedge Q) \leftrightarrow (P \vee Q)\)</span> é uma tautologia. Se não for uma tautologia, então as duas fórmulas não são logicamente equivalentes.</p>
 <p>Construindo a Tabela Verdade (usando T para Verdadeiro e F para Falso):</p>
 <p><span class="math display">\[
 \begin{array}{|c|c|c|c|c|}
 \hline
-P &amp; Q &amp; P \land Q &amp; P \lor Q &amp; (P \land Q) \leftrightarrow (P \lor Q) \\
+P &amp; Q &amp; P \wedge Q &amp; P \vee Q &amp; (P \wedge Q) \leftrightarrow (P \vee Q) \\
 \hline
 T &amp; T &amp; T &amp; T &amp; T \\
 T &amp; F &amp; F &amp; T &amp; F \\
@@ -340,13 +373,13 @@ F &amp; F &amp; F &amp; F &amp; T \\
 \hline
 \end{array}
 \]</span></p>
-<p>Como a última coluna da Tabela Verdade para <span class="math inline">\((P \land Q) \leftrightarrow (P \lor Q)\)</span> não contém apenas valores <span class="math inline">\(T\)</span> (há ocorrências de <span class="math inline">\(F\)</span>), a proposição bicondicional não é uma tautologia. Portanto, <span class="math inline">\(P \land Q\)</span> e <span class="math inline">\(P \lor Q\)</span> não são logicamente equivalentes.</p>
-<p><strong>Exemplo 3</strong>: Vamos mostrar que <span class="math inline">\(P\rightarrow Q\)</span> é logicamente equivalente a <span class="math inline">\(\neg P \lor Q\)</span>.</p>
+<p>Como a última coluna da Tabela Verdade para <span class="math inline">\((P \wedge Q) \leftrightarrow (P \vee Q)\)</span> não contém apenas valores <span class="math inline">\(T\)</span> (há ocorrências de <span class="math inline">\(F\)</span>), a proposição bicondicional não é uma tautologia. Portanto, <span class="math inline">\(P \wedge Q\)</span> e <span class="math inline">\(P \vee Q\)</span> não são logicamente equivalentes.</p>
+<p><strong>Exemplo 3</strong>: Vamos mostrar que <span class="math inline">\(P\rightarrow Q\)</span> é logicamente equivalente a <span class="math inline">\(\neg P \vee Q\)</span>.</p>
 <p><strong>Solução</strong> Verificando a Tabela Verdade:</p>
 <p><span class="math display">\[
 \begin{array}{|c|c|c|c|c|c|}
 \hline
-P &amp; Q &amp; \neg P &amp; \neg P \lor Q &amp; P \rightarrow Q \leftrightarrow \neg P \lor Q\\
+P &amp; Q &amp; \neg P &amp; \neg P \vee Q &amp; P \rightarrow Q \leftrightarrow \neg P \vee Q\\
 \hline
 T &amp; T &amp; F &amp; T &amp; T\\
 \hline
@@ -357,11 +390,11 @@ F &amp; T &amp; T &amp; T &amp; T\\
 F &amp; F &amp; T &amp; T &amp; T\\ \hline
 \end{array}
 \]</span></p>
-<p>Neste caso <span class="math inline">\(P\rightarrow Q\)</span> e <span class="math inline">\(\neg P \lor Q\)</span> são logicamente equivalentes.</p>
+<p>Neste caso <span class="math inline">\(P\rightarrow Q\)</span> e <span class="math inline">\(\neg P \vee Q\)</span> são logicamente equivalentes.</p>
 <p>Em resumo, duas fórmulas <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span>, atômicas, ou não, são equivalentes se quando <span class="math inline">\(P\)</span> for verdadeiro, <span class="math inline">\(Q\)</span> também será e vice-versa. Agora que já sabemos o que significa <em>logicamente equivalentes</em> podemos entender o que é uma proposição contrapositiva.</p>
 </section>
-<section id="contrapositiva" class="level3" data-number="5.0.3">
-<h3 data-number="5.0.3" class="anchored" data-anchor-id="contrapositiva"><span class="header-section-number">5.0.3</span> Contrapositiva</h3>
+<section id="contrapositiva" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="contrapositiva"><span class="header-section-number">5.3</span> Contrapositiva</h2>
 <p>A contrapositiva de uma implicação é obtida invertendo-se o antecedente e o consequente da implicação original e negando-os. Por exemplo, considere a seguinte implicação: <em>se chove, então a rua fica molhada</em> sua contrapositiva poderia ser: <em>se a rua não está molhada, então não choveu</em>. Sejam <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> fórmulas proposicionais derivadas de uma sentença do tipo <em>se … então</em>. A implicação <span class="math inline">\(P\rightarrow Q\)</span> representa a sentença Se <span class="math inline">\(P\)</span>, então <span class="math inline">\(Q\)</span>. Neste caso, A contrapositiva de <span class="math inline">\(P\rightarrow Q\)</span> será dada por:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -370,17 +403,17 @@ F &amp; F &amp; T &amp; T &amp; T\\ \hline
 \]</span></p>
 <p>A contrapositiva pode ser lida como <em>se não <span class="math inline">\(Q\)</span>, então não <span class="math inline">\(P\)</span></em>. Em outras palavras estamos dizendo: <em>Se <span class="math inline">\(Q\)</span> é falso, então <span class="math inline">\(P\)</span> é falso</em>. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua fórmula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositiva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.</p>
 <p><strong>Exemplo 1</strong>:</p>
-<p>A contrapositiva de <span class="math inline">\(P\rightarrow (Q \lor R)\)</span> é <span class="math inline">\(\lnot(Q \lor R) \rightarrow \neg P\)</span>.</p>
+<p>A contrapositiva de <span class="math inline">\(P\rightarrow (Q \vee R)\)</span> é <span class="math inline">\(\lnot(Q \vee R) \rightarrow \neg P\)</span>.</p>
 <p><strong>Exemplo 2</strong>: Dizemos que uma função é injetora se $x y $implica <span class="math inline">\(f(x) \neq f(y)\)</span>. A contrapositiva desta implicação é: se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
 <p>O Exemplo 2 é uma prova de conceito. Normalmente é mais fácil assumir <span class="math inline">\(f(x) = f(y)\)</span> e deduzir <span class="math inline">\(x = y\)</span> do que assumir <span class="math inline">\(x \neq y\)</span> e deduzir <span class="math inline">\(f(x) \neq f(y)\)</span>. Isto pouco tem a ver com funções e muito com o fato de que <span class="math inline">\(x \neq y\)</span> geralmente não é uma informação útil.</p>
 <p>O que torna a contrapositiva importante é que toda implicação é logicamente equivalente à sua contrapositiva. Consequentemente, se queremos provar que uma função é injetora, é suficiente provar que se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
 <p>A contrapositiva funciona para qualquer declaração condicional, e matemáticos gastam muito tempo provando declarações condicionais.</p>
 <p>O que não podemos esquecer de jeito nenhum é que toda fórmula condicional terá a forma <span class="math inline">\(P\rightarrow Q\)</span>. Mostramos que isso é logicamente equivalente a <span class="math inline">\(\lnot Q \rightarrow \lnot P\)</span> verificando a Tabela Verdade para a declaração bicondicional construída a partir dessas fórmulas. E que para obter a contrapositiva basta inverter antecedente e consequente e negar ambos. mantendo a relação lógica entre os termos da implicação.</p>
 </section>
-<section id="recíproca" class="level3" data-number="5.0.4">
-<h3 data-number="5.0.4" class="anchored" data-anchor-id="recíproca"><span class="header-section-number">5.0.4</span> Recíproca</h3>
+<section id="recíproca" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="recíproca"><span class="header-section-number">5.4</span> Recíproca</h2>
 <p>A recíproca, também conhecida como <em>conversa</em> por alguns acadêmicos brasileiros, é obtida apenas invertendo antecedente e consequente. Então, considerando a recíproca da condicional <span class="math inline">\(P\rightarrow Q\)</span> será <span class="math inline">\(Q \rightarrow P\)</span>. Diferentemente da contrapositiva a recíproca não é necessariamente equivalente à implicação original. Além disso, a contrapositiva preserva a equivalência lógica, a recíproca não.</p>
-<p><strong>Exemplo 1</strong>: A recíproca de <span class="math inline">\(P\rightarrow (Q \lor R)\)</span> será <span class="math inline">\((Q \lor R) \rightarrow P\)</span>.</p>
+<p><strong>Exemplo 1</strong>: A recíproca de <span class="math inline">\(P\rightarrow (Q \vee R)\)</span> será <span class="math inline">\((Q \vee R) \rightarrow P\)</span>.</p>
 <p><strong>Exemplo 2</strong>: Dizemos que uma função é bem definida se cada entrada tem uma saída única. Assim, uma função é bem definida se <span class="math inline">\(x = y\)</span> implica <span class="math inline">\(f(x) = f(y)\)</span>. Observe estas fórmulas:</p>
 <ol type="1">
 <li><p><span class="math inline">\(f(x)\)</span> é bem definida significa que <span class="math inline">\(x = y \rightarrow f(x) = f(y)\)</span>.</p></li>
@@ -391,8 +424,8 @@ F &amp; F &amp; T &amp; T &amp; T\\ \hline
 <p>Por exemplo, considere a implicação verdadeira: <em>“Se um animal é um cão, então ele é um mamífero”</em>. Sua recíproca, <em>“Se um animal é um mamífero, então ele é um cão”</em>, é claramente falsa, pois existem muitos mamíferos que não são cães. Este exemplo mostra que uma implicação pode ser verdadeira enquanto sua recíproca é falsa. Apenas nos casos em que ambas são verdadeiras, como em <em>“um número inteiro é par se, e somente se, é divisível por 2”</em>, é que a relação bicondicional se sustenta.</p>
 <p>Para resumir, uma implicação é sempre equivalente à sua contrapositiva, mas pode não ser equivalente à sua recíproca.</p>
 </section>
-<section id="análise-de-argumentos" class="level3" data-number="5.0.5">
-<h3 data-number="5.0.5" class="anchored" data-anchor-id="análise-de-argumentos"><span class="header-section-number">5.0.5</span> Análise de Argumentos</h3>
+<section id="análise-de-argumentos" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="análise-de-argumentos"><span class="header-section-number">5.5</span> Análise de Argumentos</h2>
 <p>Quando vimos regras de inferência, sem muitos floreios, definimos argumentos. mas, sem usar a palavra argumento em nenhum lugar. Vamos voltar um pouco. Definiremos um argumento proposicionalmente como sendo uma regra de inferência, então um argumento será definido por um conjunto de proposições. Quando estamos analisando argumentos chamamos as proposições de premissas, de modo que:</p>
 <p><span class="math display">\[\frac{P_1, P_2, ..., P_n}{C}\]</span></p>
 <p>Um argumento é formado por um conjunto de premissas <span class="math inline">\(P_1, P_2, ..., P_n\)</span>, chamado de antecedente, e uma proposição <span class="math inline">\(C\)</span>, chamada de conclusão. Dizemos que o argumento será válido, só e somente se, a implicação definida por <span class="math inline">\((P_1 \wedge P_2 \wedge ... \wedge P_n) \rightarrow C\)</span> for uma tautologia. Neste caso, é muito importante percebermos que a conclusão de um argumento logicamente válido não é necessariamente verdadeira. A única coisa que a validade lógica garante é que se todas as premissas forem verdadeiras, a conclusão será verdadeira.</p>
@@ -477,7 +510,7 @@ F &amp; F &amp; F &amp; T &amp; T &amp; T \\
 <p>Sejam <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> Proposições. A forma do Silogismo Disjuntivo é a seguinte:</p>
 <p><span class="math display">\[
 \begin{align*}
-&amp; \quad P \lor Q \quad \text{(P ou Q)} \\
+&amp; \quad P \vee Q \quad \text{(P ou Q)} \\
 &amp; \quad \neg P \quad \text{(não P)} \\
 \hline
 &amp;\quad Q \quad \text{(Portanto, Q)}
@@ -487,7 +520,7 @@ F &amp; F &amp; F &amp; T &amp; T &amp; T \\
 <p><span class="math display">\[
 \begin{array}{|c|c|c|c|}
 \hline
-P &amp; Q &amp; \neg P &amp; P \lor Q \\
+P &amp; Q &amp; \neg P &amp; P \vee Q \\
 \hline
 T &amp; T &amp; F &amp; T \\
 T &amp; F &amp; F &amp; T \\
@@ -499,8 +532,8 @@ F &amp; F &amp; T &amp; F \\
 <p>Se olharmos para a terceira linha, se <span class="math inline">\(P\)</span> é falso e <span class="math inline">\(P\vee Q\)</span> é verdadeiro, então <span class="math inline">\(Q\)</span> é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Disjuntivo.</p>
 <p>Não podemos esquecer: um argumento só é válido se, e somente se, a proposição condicional que o expresse seja uma tautologia. Agora podemos definir um sistema de prova.</p>
 </section>
-<section id="finalmente-um-sistema-de-prova" class="level3" data-number="5.0.6">
-<h3 data-number="5.0.6" class="anchored" data-anchor-id="finalmente-um-sistema-de-prova"><span class="header-section-number">5.0.6</span> Finalmente, um Sistema de Prova</h3>
+<section id="finalmente-um-sistema-de-prova" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="finalmente-um-sistema-de-prova"><span class="header-section-number">5.6</span> Finalmente, um Sistema de Prova</h2>
 <p>Ainda estamos no domínio da <strong>Lógica Proposicional</strong> e vamos definir um sistema de prova simples e direto chamado de <span class="math inline">\(\mathfrak{L}\)</span> desenvolvido por <a href="https://en.wikipedia.org/wiki/John_Lemmon">John Lemmon</a> na segunda metade do século XX. Vamos construir a prova e, sintaticamente, em cada linha da nossa prova teremos:</p>
 <ul>
 <li><strong>um axioma</strong> de <span class="math inline">\(\mathfrak{L}\)</span>. Um axioma é uma fórmula ou proposição que é aceita como verdadeira primitivamente, sem necessidade de demonstração. Por exemplo: <span class="math inline">\((p \rightarrow q) \rightarrow ((q \rightarrow r) \rightarrow (p \rightarrow r))\)</span>;</li>
@@ -514,6 +547,38 @@ F &amp; F &amp; T &amp; F \\
 <p><strong>Axioma 2</strong>: <span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span>. Este axioma funciona como uma propriedade distributiva da implicação. Ele estabelece que, se uma hipótese <span class="math inline">\(A\)</span> implica uma segunda implicação <span class="math inline">\((B \rightarrow C)\)</span>, e se a mesma hipótese <span class="math inline">\(A\)</span> também implica <span class="math inline">\(B\)</span>, então podemos concluir que a hipótese <span class="math inline">\(A\)</span> necessariamente implica <span class="math inline">\(C\)</span>. Essencialmente, ele permite encadear deduções que dependem de uma mesma premissa inicial <span class="math inline">\(A\)</span>.</p>
 <p><strong>Axioma 3</strong>: <span class="math inline">\((\lnot B \rightarrow \lnot A) \rightarrow ((\lnot B \rightarrow A) \rightarrow B)\)</span>, este axioma garante que se de <span class="math inline">\(\lnot B\)</span> podemos inferir tanto <span class="math inline">\(\lnot A\)</span> quanto <span class="math inline">\(A\)</span>, então <span class="math inline">\(B\)</span> deve ser verdadeiro. Isso porque <span class="math inline">\(B\)</span> e <span class="math inline">\(\lnot B\)</span> não podem ser verdadeiros simultaneamente.</p>
 <p>Além dos axiomas, usaremos apenas uma regra de inferência, o <em>Modus Ponens</em>. O <em>Modus Ponens</em> está intimamente relacionado à proposição <span class="math inline">\((P \wedge (P \rightarrow Q)) \rightarrow Q\)</span>. Tanto a proposição quando a regra de inferência, de certa forma, dizem: “se <span class="math inline">\(P\)</span> e <span class="math inline">\(P\rightarrow Q\)</span> são verdadeiros, então <span class="math inline">\(Q\)</span> é verdadeiro”. Esta proposição é um exemplo de uma tautologia, porque é verdadeira para cada configuração de <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span>. A diferença é que esta tautologia é uma única proposição, enquanto o <em>Modus Ponens</em> é uma regra de inferência que nos permite deduzir novas proposições a partir proposições já provadas.</p>
+</section>
+<section id="o-símbolo-de-demonstrabilidade-turnstile" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="o-símbolo-de-demonstrabilidade-turnstile"><span class="header-section-number">5.7</span> O Símbolo de Demonstrabilidade (Turnstile)</h2>
+<p>Antes de apresentarmos nossas primeiras provas formais, precisamos introduzir um símbolo fundamental na teoria da demonstração: o <strong>turnstile</strong> ou <strong>catraca</strong> em português ou ainda, formalmente, <strong>símbolo de demonstrabilidade</strong>, representado por <span class="math inline">\(\vdash\)</span>.</p>
+<p><strong>O que significa <span class="math inline">\(\vdash\)</span>?</strong></p>
+<p>O símbolo <span class="math inline">\(\vdash\)</span> (lê-se “demonstra” ou “deriva”) indica que uma fórmula pode ser demonstrada ou derivada dentro de um sistema formal específico. É um símbolo metalinguístico - ele fala sobre o que podemos fazer no sistema, não é parte das fórmulas em si.</p>
+<p><strong>Diferentes usos do símbolo:</strong></p>
+<ol type="1">
+<li><p><strong>Teorema sem hipóteses</strong>: <span class="math inline">\(\vdash A\)</span><br>
+Significa: “A fórmula <span class="math inline">\(A\)</span> é um teorema” (pode ser demonstrada usando apenas axiomas e regras de inferência)</p></li>
+<li><p><strong>Derivação com hipóteses</strong>: <span class="math inline">\(B_1, B_2, ..., B_n \vdash A\)</span><br>
+Significa: “A partir das hipóteses <span class="math inline">\(B_1, B_2, ..., B_n\)</span>, podemos demonstrar <span class="math inline">\(A\)</span>”</p></li>
+<li><p><strong>Com sistema específico</strong>: <span class="math inline">\(\vdash_{\mathfrak{L}} A\)</span><br>
+Significa: “A fórmula <span class="math inline">\(A\)</span> é demonstrável no sistema <span class="math inline">\(\mathfrak{L}\)</span>”</p></li>
+</ol>
+<p><strong>Exemplos ilustrativos:</strong></p>
+<ul>
+<li><p><span class="math inline">\(P, P \rightarrow Q \vdash Q\)</span><br>
+“Das hipóteses <span class="math inline">\(P\)</span> e <span class="math inline">\(P \rightarrow Q\)</span>, podemos demonstrar <span class="math inline">\(Q\)</span>” (isso é o Modus Ponens)</p></li>
+<li><p><span class="math inline">\(\vdash (A \rightarrow A)\)</span><br>
+“A fórmula <span class="math inline">\(A \rightarrow A\)</span> é um teorema” (pode ser provada sem hipóteses adicionais)</p></li>
+<li><p><span class="math inline">\(A \rightarrow B, B \rightarrow C \vdash A \rightarrow C\)</span><br>
+“Das hipóteses <span class="math inline">\(A \rightarrow B\)</span> e <span class="math inline">\(B \rightarrow C\)</span>, podemos demonstrar <span class="math inline">\(A \rightarrow C\)</span>”</p></li>
+</ul>
+<p><strong>Diferença importante</strong>:</p>
+<ul>
+<li><span class="math inline">\(P \rightarrow Q\)</span> é uma <strong>fórmula</strong> da lógica proposicional (objeto da linguagem)</li>
+<li><span class="math inline">\(P \vdash Q\)</span> é uma <strong>afirmação sobre demonstrabilidade</strong> (metalinguagem)</li>
+</ul>
+<p>A primeira é uma implicação que pode ser verdadeira ou falsa em uma interpretação. A segunda afirma que existe uma sequência de passos dedutivos que vai de <span class="math inline">\(P\)</span> até <span class="math inline">\(Q\)</span>.</p>
+<p><strong>Convenção</strong>: Quando o sistema é claro pelo contexto, omitimos o subscrito. Assim, <span class="math inline">\(\vdash A\)</span> geralmente significa <span class="math inline">\(\vdash_{\mathfrak{L}} A\)</span> quando estamos trabalhando no sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p>
+<p>Com esta notação estabelecida, podemos agora formalizar o conceito de teorema: uma fórmula <span class="math inline">\(A\)</span> é um <strong>teorema</strong> do sistema <span class="math inline">\(\mathfrak{L}\)</span> se, e somente se, <span class="math inline">\(\vdash_{\mathfrak{L}} A\)</span>.</p>
 <p>Nos resta apenas destacar a última linha de uma prova. No sistema <span class="math inline">\(\mathfrak{L}\)</span>, a última fórmula será chamada de teorema. Representaremos como <span class="math inline">\(\vdash A\)</span> se <span class="math inline">\(A\)</span> for um teorema. Escrevemos <span class="math inline">\(B_1, B_2, ..., B_n \vdash_L A\)</span> se, e somente se, <span class="math inline">\(A\)</span> puder ser provado em <span class="math inline">\(\mathfrak{L}\)</span> a partir das fórmulas dadas <span class="math inline">\(B_1, B_2, ..., B_n\)</span>. Nesse caso:</p>
 <ul>
 <li><p><span class="math inline">\(A\)</span>: Fórmula que é um teorema;</p></li>
@@ -521,7 +586,16 @@ F &amp; F &amp; T &amp; F \\
 <li><p><span class="math inline">\(\vdash_L\)</span>: Símbolo para indicar <em>demonstrável em <span class="math inline">\(\mathfrak{L}\)</span></em>;</p></li>
 <li><p>escrevemos <span class="math inline">\(\mathfrak{L} A\)</span> para indicar que <span class="math inline">\(A\)</span> é demonstrável no sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p></li>
 </ul>
-<p>Talvez tudo isso fique mais claro se fizermos algumas provas.</p>
+<section id="notação-para-substituição-em-provas" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="notação-para-substituição-em-provas"><span class="header-section-number">5.7.1</span> Notação para Substituição em Provas</h3>
+<p>Antes de iniciarmos nossas provas no sistema <span class="math inline">\(\mathfrak{L}\)</span>, é importante esclarecer uma notação que usaremos por conveniência. Ao trabalhar com axiomas e teoremas, frequentemente precisamos indicar que estamos substituindo variáveis proposicionais por fórmulas específicas.</p>
+<p><strong>Notação de Substituição</strong>: Usaremos o símbolo <span class="math inline">\(:=\)</span> para indicar substituição. Este símbolo <strong>não faz parte do alfabeto da lógica proposicional</strong> - é apenas uma ferramenta metalinguística (uma notação sobre a linguagem, não dentro dela) que nos ajuda a explicar como estamos aplicando axiomas.</p>
+<p>Quando escrevemos <span class="math inline">\(A := P\)</span>, estamos dizendo: “onde aparece a variável <span class="math inline">\(A\)</span> no axioma, substitua por <span class="math inline">\(P\)</span>”.</p>
+<p><strong>Exemplo de uso</strong>: Considere o Axioma 1: <span class="math inline">\(A \rightarrow (B \rightarrow A)\)</span></p>
+<p>Se quisermos usar este axioma com proposições específicas, podemos escrever: - Com <span class="math inline">\(A := P\)</span> e <span class="math inline">\(B := Q\)</span>, obtemos: <span class="math inline">\(P \rightarrow (Q \rightarrow P)\)</span> - Com <span class="math inline">\(A := (P \land Q)\)</span> e <span class="math inline">\(B := R\)</span>, obtemos: <span class="math inline">\((P \land Q) \rightarrow (R \rightarrow (P \land Q))\)</span></p>
+<p><strong>Importante</strong>: Esta é uma convenção notacional para facilitar a leitura. Formalmente, estamos criando uma <strong>instância</strong> do axioma - aplicando o esquema axiomático a fórmulas específicas. O símbolo <span class="math inline">\(:=\)</span> é nossa forma concisa de indicar essa instanciação.</p>
+<p>Alternativamente, poderíamos dizer “substituindo <span class="math inline">\(A\)</span> por…” ou “com <span class="math inline">\(A\)</span> sendo…”, mas <span class="math inline">\(:=\)</span> torna as provas mais claras e concisas. É uma licença pedagógica que tomamos para melhorar a legibilidade, similar a quando dizemos “seja <span class="math inline">\(x\)</span> um número” em vez de usar quantificadores formais em textos introdutórios.</p>
+<p>Agora que temos uma notação adequada, podemos prosseguir com nossas provas, usando esta notação quando necessário.</p>
 <p><strong>Prova 1</strong>: nosso teorema é <span class="math inline">\(A \rightarrow A\)</span></p>
 <ol type="1">
 <li><p><span class="math inline">\(A \rightarrow ((A \rightarrow A) \rightarrow A)\)</span> (Axioma 1 com <span class="math inline">\(A := A\)</span> e <span class="math inline">\(B := (A \rightarrow A)\)</span>)</p>
@@ -536,27 +610,61 @@ F &amp; F &amp; T &amp; F \\
 <p>Finalmente, aplicamos o <em>Modus Ponens</em> às linhas 3 e 4 para obter a fórmula na última linha, que é o teorema que tentamos provar.</p>
 <p>Então, o primeiro teorema está correto e podemos escrever <span class="math inline">\(\vdash \mathfrak{L} A\)</span>.</p></li>
 </ol>
-<p><strong>Prova 2</strong>: vamos tentar provar <span class="math inline">\(\vdash (\lnot B \rightarrow B) \rightarrow B\)</span></p>
-<p>Para esta prova, utilizaremos o Teorema 1 (<span class="math inline">\(\vdash A \rightarrow A\)</span>) como um lema e o Axioma 3. O Axioma 3 é: <span class="math inline">\((\lnot X \rightarrow \lnot Y) \rightarrow ((\lnot X \rightarrow Y) \rightarrow X)\)</span>.</p>
+<p><strong>Prova 2</strong>: Vamos provar <span class="math inline">\(\vdash (\lnot B \rightarrow B) \rightarrow B\)</span></p>
+<p>Para esta prova, utilizaremos o Teorema 1 (<span class="math inline">\(\vdash A \rightarrow A\)</span>) como um lema e o Axioma 3.</p>
+<p>Recordando o Axioma 3: <span class="math inline">\((\lnot X \rightarrow \lnot Y) \rightarrow ((\lnot X \rightarrow Y) \rightarrow X)\)</span></p>
+<p><strong>Demonstração:</strong></p>
 <ol type="1">
-<li><p><span class="math inline">\(\lnot B \rightarrow \lnot B\)</span> (Lema, Teorema 1 com <span class="math inline">\(A\)</span> substituído por <span class="math inline">\(\lnot B\)</span>)</p></li>
-<li><p><span class="math inline">\((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)\)</span> (Instância do Axioma 3, em que <span class="math inline">\(X\)</span> do axioma é <span class="math inline">\(B\)</span> da nossa meta, e <span class="math inline">\(Y\)</span> do axioma é <span class="math inline">\(B\)</span> da nossa meta. Substituindo <span class="math inline">\(X\)</span> por <span class="math inline">\(B\)</span> e <span class="math inline">\(Y\)</span> por <span class="math inline">\(B\)</span> no Axioma 3: <span class="math inline">\((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)\)</span>)</p></li>
-<li><p><span class="math inline">\(((\lnot B \rightarrow B) \rightarrow B)\)</span> (Modus Ponens aplicado às linhas 1 e 2. A linha 1 é o antecedente da implicação na linha 2.)</p></li>
+<li><p><span class="math inline">\(\lnot B \rightarrow \lnot B\)</span><br>
+(Lema: Teorema 1 com <span class="math inline">\(A := \lnot B\)</span>)<br>
+Justificativa: Como já provamos que <span class="math inline">\(A \rightarrow A\)</span> é um teorema, podemos usá-lo substituindo <span class="math inline">\(A\)</span> por <span class="math inline">\(\lnot B\)</span>.</p></li>
+<li><p><span class="math inline">\((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)\)</span><br>
+(Instância do Axioma 3 com <span class="math inline">\(X := B\)</span> e <span class="math inline">\(Y := B\)</span>)<br>
+Justificativa: Substituindo no Axioma 3:</p>
+<ul>
+<li>Onde temos <span class="math inline">\(\lnot X\)</span>, colocamos <span class="math inline">\(\lnot B\)</span></li>
+<li>Onde temos <span class="math inline">\(\lnot Y\)</span>, colocamos <span class="math inline">\(\lnot B\)</span><br>
+</li>
+<li>Onde temos <span class="math inline">\(Y\)</span>, colocamos <span class="math inline">\(B\)</span></li>
+<li>Onde temos <span class="math inline">\(X\)</span>, colocamos <span class="math inline">\(B\)</span></li>
+</ul>
+<p>Assim: <span class="math inline">\((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)\)</span></p></li>
+<li><p><span class="math inline">\(((\lnot B \rightarrow B) \rightarrow B)\)</span><br>
+(Modus Ponens aplicado às linhas 1 e 2)<br>
+Justificativa: A linha 1 nos dá <span class="math inline">\(\lnot B \rightarrow \lnot B\)</span>, que é exatamente o antecedente da implicação na linha 2. Aplicando Modus Ponens, obtemos o consequente.</p></li>
 </ol>
-<p><strong>Prova 3</strong>: vamos tentar novamente, desta vez com <span class="math inline">\(\vdash ((A \land B) \rightarrow C)\)</span></p>
+<p>Portanto, provamos <span class="math inline">\(\vdash (\lnot B \rightarrow B) \rightarrow B\)</span>.</p>
+</section>
+</section>
+<section id="explorando-as-limitações-do-sistema-mathfrakl" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="explorando-as-limitações-do-sistema-mathfrakl"><span class="header-section-number">5.8</span> Explorando as Limitações do Sistema <span class="math inline">\(\mathfrak{L}\)</span></h2>
+<p>Vamos tentar uma terceira prova, um pouco mais complexa e com mais nuances.</p>
+<p><strong>Objetivo</strong>: Examinar por que NÃO podemos provar <span class="math inline">\(\vdash ((A \land B) \rightarrow C)\)</span> no sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p>
+<p>Esta seção é fundamental para entender as limitações de sistemas formais. Vamos analisar uma tentativa de prova que <strong>falha</strong>, e explicar por que isso ocorre.</p>
+<section id="tentativa-inválida-de-demonstração" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="tentativa-inválida-de-demonstração"><span class="header-section-number">5.8.1</span> Tentativa (INVÁLIDA) de Demonstração</h3>
+<p>Alguém poderia tentar provar <span class="math inline">\(((A \land B) \rightarrow C)\)</span> assim:</p>
 <ol type="1">
-<li><p><span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \land B) \rightarrow C)\)</span> (Suposto axioma com <span class="math inline">\(A := A\)</span>, <span class="math inline">\(B := B\)</span> e $ c := C$)</p>
-<p>Aqui estamos assumindo que a fórmula <span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \land B) \rightarrow C)\)</span> é um axioma. No entanto, esta fórmula <strong>não</strong> é um axioma do sistema <span class="math inline">\(\mathfrak{L}\)</span>. Portanto, esta tentativa de provar o teorema é inválida desde o início.</p></li>
-<li><p><span class="math inline">\(A \rightarrow (B \rightarrow C)\)</span> (Hipótese)</p>
-<p>Aqui estamos introduzindo uma hipótese, que é permissível. No entanto, uma hipótese deve ser descartada antes do final da prova e, nesta tentativa de prova, não é.</p></li>
-<li><p><span class="math inline">\((A \land B) \rightarrow C\)</span> (<em>Modus Ponens</em> aplicado às linhas 1 e 2)</p>
-<p>Finalmente, tentamos aplicar a regra de inferência <em>Modus Ponens</em> às linhas 1 e 2 para obter <span class="math inline">\((A \land B) \rightarrow C\)</span>. No entanto, como a linha 1 é inválida, esta aplicação de <em>Modus Ponens</em> também é inválida.</p></li>
+<li><p><span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \land B) \rightarrow C)\)</span> ❌ <strong>[ERRO: Isto NÃO é um axioma de <span class="math inline">\(\mathfrak{L}\)</span>]</strong></p></li>
+<li><p><span class="math inline">\(A \rightarrow (B \rightarrow C)\)</span> (Hipótese)</p></li>
+<li><p><span class="math inline">\((A \land B) \rightarrow C\)</span> (Tentativa de aplicar Modus Ponens às linhas 1 e 2) ❌ <strong>[INVÁLIDO]</strong></p></li>
 </ol>
-<p>Portanto, esta tentativa de provar o teorema <span class="math inline">\((A \land B) \rightarrow C\)</span> <strong>falha</strong> porque faz suposições inválidas e usa regras de inferência de forma inválida.</p>
-<p>Esta última tentativa de prova é interessante. Para o teorema <span class="math inline">\((A \land B) \rightarrow C\)</span>, não é possível provar diretamente no sistema <span class="math inline">\(\mathfrak{L}\)</span> sem a presença de axiomas adicionais ou a introdução de hipóteses adicionais. Que não fazem parte do sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p>
-<p>O sistema <span class="math inline">\(\mathfrak{L}\)</span> é baseado em axiomas específicos (que utilizam os conectivos <span class="math inline">\(\rightarrow\)</span> e <span class="math inline">\(\lnot\)</span>) e em uma única regra de inferência (<em>Modus Ponens</em>), como vimos. O teorema <span class="math inline">\(((A \land B) \rightarrow C)\)</span> não pode ser derivado diretamente apenas a partir dos axiomas do sistema <span class="math inline">\(\mathfrak{L}\)</span> porque o conectivo de conjunção (<span class="math inline">\(\land\)</span>) não é primitivo no sistema <span class="math inline">\(\mathfrak{L}\)</span> e não pode ser definido ou introduzido usando apenas os axiomas fornecidos e o Modus Ponens sem regras adicionais ou definições para <span class="math inline">\(\land\)</span>. Os axiomas de <span class="math inline">\(\mathfrak{L}\)</span> focam na implicação e na negação.</p>
-<p>Se tivéssemos acesso a axiomas ou regras de inferência adicionais que lidam com a conjunção, ou se você tem permissão para introduzir hipóteses adicionais (por exemplo, você pode introduzir <span class="math inline">\(A \land B \rightarrow C\)</span> como uma hipótese), então a prova pode ser possível. Em alguns sistemas de lógica, a conjunção pode ser definida em termos de negação e disjunção, e neste caso, o teorema pode ser provável.</p>
-<p>Com as ferramentas que vimos até agora, podemos tentar provar o teorema <span class="math inline">\(((A \land B) \rightarrow C)\)</span> usando uma Tabela Verdade:</p>
+</section>
+<section id="por-que-esta-prova-falha" class="level3" data-number="5.8.2">
+<h3 data-number="5.8.2" class="anchored" data-anchor-id="por-que-esta-prova-falha"><span class="header-section-number">5.8.2</span> Por Que Esta Prova Falha?</h3>
+<p><strong>1. Limitação Fundamental</strong>: O sistema <span class="math inline">\(\mathfrak{L}\)</span> trabalha apenas com os conectivos <span class="math inline">\(\rightarrow\)</span> (implicação) e <span class="math inline">\(\lnot\)</span> (negação). O conectivo <span class="math inline">\(\land\)</span> (conjunção) <strong>não é primitivo</strong> neste sistema.</p>
+<p><strong>2. Ausência de Axiomas para Conjunção</strong>: Os três axiomas de <span class="math inline">\(\mathfrak{L}\)</span> não fornecem nenhuma regra para manipular o conectivo <span class="math inline">\(\land\)</span>. Observe:</p>
+<ul>
+<li>Axioma 1: Lida apenas com implicações;</li>
+<li>Axioma 2: Distribui implicações sobre implicações;</li>
+<li>Axioma 3: Relaciona negação e implicação.</li>
+</ul>
+<p>Nenhum deles menciona ou permite derivar propriedades da conjunção.</p>
+<p><strong>3. Problema da Linha 2</strong>: Mesmo que a linha 1 fosse válida (não é), a linha 2 introduz uma hipótese que não pode ser descartada adequadamente no sistema <span class="math inline">\(\mathfrak{L}\)</span> básico. Para trabalhar com hipóteses temporárias, precisaríamos do Teorema da Dedução, que não está disponível na versão básica do sistema.</p>
+</section>
+<section id="verificação-pela-tabela-verdade" class="level3" data-number="5.8.3">
+<h3 data-number="5.8.3" class="anchored" data-anchor-id="verificação-pela-tabela-verdade"><span class="header-section-number">5.8.3</span> Verificação pela Tabela Verdade</h3>
+<p>Vamos verificar se <span class="math inline">\((A \land B) \rightarrow C\)</span> é sequer uma tautologia:</p>
 <p><span class="math display">\[
 \begin{array}{|c|c|c|c|c|}
 \hline
@@ -573,10 +681,64 @@ F &amp; F &amp; F &amp; F &amp; T \\
 \hline
 \end{array}
 \]</span></p>
-<p>Como podemos ver, a coluna final, que representa o teorema <span class="math inline">\((A \land B) \rightarrow C\)</span>, não é sempre verdadeira. Isso significa que a proposição <span class="math inline">\((A \land B) \rightarrow C\)</span> não é uma tautologia, existe uma situação, quando <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> são verdadeiros, mas <span class="math inline">\(C\)</span> é falso, em que a proposição inteira é falsa. Basta isso para que a proposição não seja uma tautologia e, portanto, não possa ser provada como um teorema.</p>
+<p>Como vemos, <span class="math inline">\((A \land B) \rightarrow C\)</span> <strong>não é uma tautologia</strong> - é falsa quando <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> são verdadeiros mas <span class="math inline">\(C\)</span> é falso. Portanto, não deveria ser demonstrável em nenhum sistema correto.</p>
+</section>
+<section id="como-sistemas-mais-ricos-resolvem-isso" class="level3" data-number="5.8.4">
+<h3 data-number="5.8.4" class="anchored" data-anchor-id="como-sistemas-mais-ricos-resolvem-isso"><span class="header-section-number">5.8.4</span> Como Sistemas Mais Ricos Resolvem Isso</h3>
+<p><strong>1. Adicionando Axiomas para Conjunção</strong>: Sistemas como o cálculo proposicional clássico incluem axiomas específicos para <span class="math inline">\(\land\)</span>:</p>
+<ul>
+<li><span class="math inline">\((A \land B) \rightarrow A\)</span> (eliminação da conjunção, esquerda);</li>
+<li><span class="math inline">\((A \land B) \rightarrow B\)</span> (eliminação da conjunção, direita);</li>
+<li><span class="math inline">\(A \rightarrow (B \rightarrow (A \land B))\)</span> (introdução da conjunção).</li>
+</ul>
+<p><strong>2. Definindo Conjunção via Outros Conectivos</strong>: Em alguns sistemas, podemos definir:</p>
+<ul>
+<li><span class="math inline">\(A \land B \equiv \lnot(\lnot A \lor \lnot B)\)</span> (Lei de De Morgan);</li>
+<li>Mas isso requer também axiomas para disjunção (<span class="math inline">\(\lor\)</span>).</li>
+</ul>
+<p><strong>3. Sistemas de Dedução Natural</strong>: Incluem regras específicas de introdução e eliminação para cada conectivo, tornando as provas mais intuitivas.</p>
+</section>
+<section id="incompletude-vs.-incorreção" class="level3" data-number="5.8.5">
+<h3 data-number="5.8.5" class="anchored" data-anchor-id="incompletude-vs.-incorreção"><span class="header-section-number">5.8.5</span> Incompletude vs.&nbsp;Incorreção</h3>
+<p>É importante que a curiosa leitora entenda a diferença:</p>
+<p><strong>Incompletude</strong>: O sistema <span class="math inline">\(\mathfrak{L}\)</span> é <strong>incompleto</strong> para a lógica proposicional com todos os conectivos. Existem tautologias (como <span class="math inline">\((P \lor \lnot P)\)</span>) que não podem ser provadas nele porque o sistema não tem ferramentas para lidar com disjunção.</p>
+<p><strong>Incorreção</strong>: Se o sistema permitisse provar fórmulas que não são tautologias (como <span class="math inline">\((A \land B) \rightarrow C\)</span>), ele seria <strong>incorreto</strong>. Felizmente, <span class="math inline">\(\mathfrak{L}\)</span> é correto - tudo que pode ser provado nele é de fato uma tautologia.</p>
+<p><strong>Completude Relativa</strong>: O sistema <span class="math inline">\(\mathfrak{L}\)</span> é completo para o fragmento implicacional da lógica proposicional - toda tautologia que usa apenas <span class="math inline">\(\rightarrow\)</span> e <span class="math inline">\(\lnot\)</span> pode ser provada nele.</p>
+</section>
+<section id="lição-importante" class="level3" data-number="5.8.6">
+<h3 data-number="5.8.6" class="anchored" data-anchor-id="lição-importante"><span class="header-section-number">5.8.6</span> Lição Importante</h3>
+<p>Esta tentativa falha de prova ilustra que:</p>
+<ol type="1">
+<li>Nem toda fórmula bem formada pode ser provada em um sistema formal;</li>
+<li>A escolha de axiomas e conectivos primitivos determina o poder expressivo do sistema;</li>
+<li>Um sistema pode ser correto mas incompleto;</li>
+<li>Para trabalhar com todos os conectivos lógicos, precisamos de sistemas mais ricos.</li>
+</ol>
+<p>O sistema <span class="math inline">\(\mathfrak{L}\)</span>, apesar de suas limitações, é valioso pedagogicamente porque demonstra conceitos fundamentais de sistemas formais de forma simples e elegante. Esta última tentativa de prova é interessante. Para o teorema <span class="math inline">\((A \wedge B) \rightarrow C\)</span>, não é possível provar diretamente no sistema <span class="math inline">\(\mathfrak{L}\)</span> sem a presença de axiomas adicionais ou a introdução de hipóteses adicionais. Que não fazem parte do sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p>
+<p>O sistema <span class="math inline">\(\mathfrak{L}\)</span> é baseado em axiomas específicos (que utilizam os conectivos <span class="math inline">\(\rightarrow\)</span> e <span class="math inline">\(\lnot\)</span>) e em uma única regra de inferência (<em>Modus Ponens</em>), como vimos. O teorema <span class="math inline">\(((A \wedge B) \rightarrow C)\)</span> não pode ser derivado diretamente apenas a partir dos axiomas do sistema <span class="math inline">\(\mathfrak{L}\)</span> porque o conectivo de conjunção (<span class="math inline">\(\wedge\)</span>) não é primitivo no sistema <span class="math inline">\(\mathfrak{L}\)</span> e não pode ser definido ou introduzido usando apenas os axiomas fornecidos e o Modus Ponens sem regras adicionais ou definições para <span class="math inline">\(\wedge\)</span>. Os axiomas de <span class="math inline">\(\mathfrak{L}\)</span> focam na implicação e na negação.</p>
+<p>Se tivéssemos acesso a axiomas ou regras de inferência adicionais que lidam com a conjunção, ou se você tem permissão para introduzir hipóteses adicionais (por exemplo, você pode introduzir <span class="math inline">\(A \wedge B \rightarrow C\)</span> como uma hipótese), então a prova pode ser possível. Em alguns sistemas de lógica, a conjunção pode ser definida em termos de negação e disjunção, e neste caso, o teorema pode ser provável.</p>
+<p>Com as ferramentas que vimos até agora, podemos tentar provar o teorema <span class="math inline">\(((A \wedge B) \rightarrow C)\)</span> usando uma Tabela Verdade:</p>
+<p><span class="math display">\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+A &amp; B &amp; C &amp; A \wedge B &amp; (A \wedge B) \rightarrow C \\
+\hline
+T &amp; T &amp; T &amp; T &amp; T \\
+T &amp; T &amp; F &amp; T &amp; F \\
+T &amp; F &amp; T &amp; F &amp; T \\
+T &amp; F &amp; F &amp; F &amp; T \\
+F &amp; T &amp; T &amp; F &amp; T \\
+F &amp; T &amp; F &amp; F &amp; T \\
+F &amp; F &amp; T &amp; F &amp; T \\
+F &amp; F &amp; F &amp; F &amp; T \\
+\hline
+\end{array}
+\]</span></p>
+<p>Como podemos ver, a coluna final, que representa o teorema <span class="math inline">\((A \wedge B) \rightarrow C\)</span>, não é sempre verdadeira. Isso significa que a proposição <span class="math inline">\((A \wedge B) \rightarrow C\)</span> não é uma tautologia, existe uma situação, quando <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> são verdadeiros, mas <span class="math inline">\(C\)</span> é falso, em que a proposição inteira é falsa. Basta isso para que a proposição não seja uma tautologia e, portanto, não possa ser provada como um teorema.</p>
 <p>A nossa terceira prova mostra os limites do sistema <span class="math inline">\(\mathfrak{L}\)</span>, o que pode dar uma falsa impressão sobre o a capacidade deste sistema de prova. Vamos tentar melhorar isso.</p>
-<section id="lema" class="level4" data-number="5.0.6.1">
-<h4 data-number="5.0.6.1" class="anchored" data-anchor-id="lema"><span class="header-section-number">5.0.6.1</span> Lema</h4>
+</section>
+<section id="lema" class="level3" data-number="5.8.7">
+<h3 data-number="5.8.7" class="anchored" data-anchor-id="lema"><span class="header-section-number">5.8.7</span> Lema</h3>
 <p>Vamos lembrar a primeira prova, provamos <span class="math inline">\(A \rightarrow A\)</span> e, a partir deste momento, <span class="math inline">\(A \rightarrow A\)</span> se tornou um Lema. Um lema é uma afirmação que é provada não como um fim em si mesma, mas como um passo útil para a prova de outros teoremas.</p>
 <p>Em outras palavras, um lema é um resultado menor que serve de base para um resultado maior. Uma vez que um lema é provado, ele pode ser usado em provas subsequentes de teoremas mais complexos. Em geral, um lema é menos geral e menos notável do que um teorema.</p>
 <p>Considere o seguinte Teorema: <span class="math inline">\(\vdash_L (\lnot B \rightarrow B) \rightarrow B\)</span>, podemos prová-lo da seguinte forma:</p>
@@ -587,8 +749,8 @@ F &amp; F &amp; F &amp; F &amp; T \\
 </ol>
 <p>A adoção de lemas é, na verdade, um mecanismo útil para economizar tempo e esforço. Ao invés de replicar o Teorema 1 na primeira linha dessa prova, nós poderíamos, alternativamente, copiar as 5 linhas da prova original do Teorema 1, substituindo todos os casos de <span class="math inline">\(A\)</span> Por <span class="math inline">\(\lnot B\)</span>. As justificativas seriam mantidas iguais às da prova original do Teorema 1. A prova resultante, então, consistiria exclusivamente de axiomas e aplicações do <em>Modus Ponens</em>. No entanto, uma vez que a prova do Teorema 1 já foi formalmente documentada, parece redundante replicá-la aqui. E eis o motivo da existência e uso dos lemas.</p>
 </section>
-<section id="hipóteses" class="level4" data-number="5.0.6.2">
-<h4 data-number="5.0.6.2" class="anchored" data-anchor-id="hipóteses"><span class="header-section-number">5.0.6.2</span> Hipóteses</h4>
+<section id="hipóteses" class="level3" data-number="5.8.8">
+<h3 data-number="5.8.8" class="anchored" data-anchor-id="hipóteses"><span class="header-section-number">5.8.8</span> Hipóteses</h3>
 <p>Hipóteses são suposições ou proposições feitas como base para o raciocínio, sem a suposição de sua veracidade. Elas são usadas como pontos de partida para investigações ou pesquisas científicas. Essencialmente uma hipótese é uma teoria ou ideia que você pode testar de alguma forma. Isso significa que, através de experimentação e observação, uma hipótese pode ser provada verdadeira ou falsa.</p>
 <p>Por exemplo, se você observar que uma planta está morrendo, pode formar a hipótese de que ela não está recebendo água suficiente. Para testar essa hipótese, você pode dar mais água à planta e observar se ela melhora. Se melhorar, isso suporta sua hipótese. Se não houver mudança, isso sugere que sua hipótese pode estar errada, e você pode então formular uma nova hipótese para testar.</p>
 <p>Na <strong>Lógica Proposicional</strong>, uma hipótese é uma proposição (ou afirmação) que é assumida como verdadeira para o propósito de argumentação ou investigação. Obviamente, pode ser uma fórmula atômica, ou complexa, desde que seja uma <strong>Fórmula Bem Formada</strong>.</p>
@@ -617,16 +779,16 @@ A \rightarrow C
 <p>Neste ponto, podemos voltar um pouco e destacar um constructor importante na programação imperativa: <em>se…então</em> representando por <span class="math inline">\(P\rightarrow Q\)</span>, uma implicação. Que pode ser lido como hipótese <span class="math inline">\(P\)</span> e conclusão <span class="math inline">\(Q\)</span>.</p>
 </section>
 </section>
-<section id="análise-de-argumentos-lógicos-em-textos-do-cotidiano" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="análise-de-argumentos-lógicos-em-textos-do-cotidiano"><span class="header-section-number">5.1</span> Análise de Argumentos Lógicos em Textos do Cotidiano</h2>
+<section id="análise-de-argumentos-lógicos-em-textos-do-cotidiano" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="análise-de-argumentos-lógicos-em-textos-do-cotidiano"><span class="header-section-number">5.9</span> Análise de Argumentos Lógicos em Textos do Cotidiano</h2>
 <p>Uma das coisas mais importantes que a amável leitora irá aprender neste documento é que a lógica não é apenas uma disciplina acadêmica, mas uma ferramenta poderosa para analisar e compreender argumentos em textos do cotidiano. A lógica nos ajuda a identificar premissas e conclusões, avaliar a validade de argumentos e entender como as ideias estão interconectadas. A lógica é útil e pode ser a diferença entre um argumento persuasivo e um argumento falacioso. Além disso, o uso da lógica para entender textos do cotidiano criará as estruturas cognitivas necessários para a construção de soluções computacionais para os problemas mais complexos da atualidade.</p>
 <p>A análise de argumentos lógicos em textos do cotidiano envolve a identificação de premissas e conclusões, bem como a formalização dessas relações em <strong>Lógica Proposicional</strong> ou lógica de predicados.</p>
 <p>Deste ponto tem diante, caberá a esforçada leitora, aplicar os conceitos aprendidos neste documento para analisar textos de livros, notícias, especificações de sistemas e outros documentos. Comece vendo os textos de exemplo a seguir.</p>
-<section id="exemplo-1-avanço-científico-na-medicina-2022" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="exemplo-1-avanço-científico-na-medicina-2022"><span class="header-section-number">5.1.1</span> Exemplo 1: Avanço Científico na Medicina (2022)</h3>
+<section id="exemplo-1-avanço-científico-na-medicina-2022" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="exemplo-1-avanço-científico-na-medicina-2022"><span class="header-section-number">5.9.1</span> Exemplo 1: Avanço Científico na Medicina (2022)</h3>
 <p>“Em 2022, pesquisadores descobriram que a vacina contra a malária aprovada pela Organização Mundial da Saúde pode ajudar a salvar centenas de milhares de vidas por ano. É também a primeira vacina do mundo para uma infecção parasitária. A malária mata mais de 600.000 pessoas anualmente, a maioria crianças menores de cinco anos.”</p>
-<section id="premissas-e-conclusão" class="level4" data-number="5.1.1.1">
-<h4 data-number="5.1.1.1" class="anchored" data-anchor-id="premissas-e-conclusão"><span class="header-section-number">5.1.1.1</span> Premissas e Conclusão</h4>
+<section id="premissas-e-conclusão" class="level4" data-number="5.9.1.1">
+<h4 data-number="5.9.1.1" class="anchored" data-anchor-id="premissas-e-conclusão"><span class="header-section-number">5.9.1.1</span> Premissas e Conclusão</h4>
 <p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li>A malária mata mais de 600.000 pessoas anualmente, majoritariamente crianças menores de cinco anos;</li>
@@ -638,8 +800,8 @@ A \rightarrow C
 <li>A vacina contra a malária pode ajudar a salvar centenas de milhares de vidas por ano.</li>
 </ul>
 </section>
-<section id="formalização-lógica" class="level4" data-number="5.1.1.2">
-<h4 data-number="5.1.1.2" class="anchored" data-anchor-id="formalização-lógica"><span class="header-section-number">5.1.1.2</span> Formalização Lógica</h4>
+<section id="formalização-lógica" class="level4" data-number="5.9.1.2">
+<h4 data-number="5.9.1.2" class="anchored" data-anchor-id="formalização-lógica"><span class="header-section-number">5.9.1.2</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(P\)</span>: A malária mata mais de 600.000 pessoas anualmente, majoritariamente crianças menores de cinco anos;</li>
@@ -647,7 +809,7 @@ A \rightarrow C
 <li><span class="math inline">\(R\)</span>: A vacina contra a malária é a primeira vacina do mundo para uma infecção parasitária;</li>
 <li><span class="math inline">\(S\)</span>: A vacina contra a malária pode ajudar a salvar centenas de milhares de vidas por ano.</li>
 </ul>
-<p>Estrutura do argumento: <span class="math inline">\((P \land Q \land R) \rightarrow S\)</span></p>
+<p>Estrutura do argumento: <span class="math inline">\((P \wedge Q \wedge R) \rightarrow S\)</span></p>
 <p><strong>Lógica de Predicados</strong>:</p>
 <ul>
 <li><span class="math inline">\(m\)</span>: malária;</li>
@@ -660,16 +822,16 @@ A \rightarrow C
 </ul>
 <p><strong>Formalização</strong>:</p>
 <ol type="1">
-<li><span class="math inline">\(Mata(m, 600000) \land MajoriaCriancas(m)\)</span>;</li>
+<li><span class="math inline">\(Mata(m, 600000) \wedge MajoriaCriancas(m)\)</span>;</li>
 <li><span class="math inline">\(Aprovada(v)\)</span>;</li>
 <li><span class="math inline">\(Primeira(v)\)</span>;</li>
-<li><span class="math inline">\([Mata(m, 600000) \land MajoriaCriancas(m) \land Aprovada(v) \land Primeira(v)] \rightarrow PodeSalvar(v, \text{"centenas de milhares"})\)</span>.</li>
+<li><span class="math inline">\([Mata(m, 600000) \wedge MajoriaCriancas(m) \wedge Aprovada(v) \wedge Primeira(v)] \rightarrow PodeSalvar(v, \text{"centenas de milhares"})\)</span>.</li>
 </ol>
 </section>
-<section id="análise-da-validade" class="level4" data-number="5.1.1.3">
-<h4 data-number="5.1.1.3" class="anchored" data-anchor-id="análise-da-validade"><span class="header-section-number">5.1.1.3</span> Análise da Validade</h4>
+<section id="análise-da-validade" class="level4" data-number="5.9.1.3">
+<h4 data-number="5.9.1.3" class="anchored" data-anchor-id="análise-da-validade"><span class="header-section-number">5.9.1.3</span> Análise da Validade</h4>
 <p>Este argumento não segue uma forma lógica estritamente válida. A relação entre as premissas e a conclusão depende de conhecimentos médicos implícitos.</p>
-<p>Estrutura implícita:</p>
+<p><strong>Estrutura implícita</strong>:</p>
 <ul>
 <li>Se uma doença mata muitas pessoas e existe uma vacina aprovada contra essa doença, então essa vacina pode salvar muitas vidas;</li>
 <li>A malária mata muitas pessoas;</li>
@@ -678,8 +840,8 @@ A \rightarrow C
 </ul>
 <p>Esta estrutura se aproxima de um modus ponens, mas depende de uma premissa implícita.</p>
 </section>
-<section id="análise-da-solidez" class="level4" data-number="5.1.1.4">
-<h4 data-number="5.1.1.4" class="anchored" data-anchor-id="análise-da-solidez"><span class="header-section-number">5.1.1.4</span> Análise da Solidez</h4>
+<section id="análise-da-solidez" class="level4" data-number="5.9.1.4">
+<h4 data-number="5.9.1.4" class="anchored" data-anchor-id="análise-da-solidez"><span class="header-section-number">5.9.1.4</span> Análise da Solidez</h4>
 <p>As premissas são verificáveis e consideradas verdadeiras:</p>
 <ul>
 <li>A mortalidade por malária é confirmada por dados epidemiológicos da OMS;</li>
@@ -689,11 +851,11 @@ A \rightarrow C
 <p>A conclusão é razoável no contexto médico, mas sua solidez completa dependeria de dados específicos sobre a eficácia da vacina.</p>
 </section>
 </section>
-<section id="exemplo-2-inovação-tecnológica-nuclear-2023" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="exemplo-2-inovação-tecnológica-nuclear-2023"><span class="header-section-number">5.1.2</span> Exemplo 2: Inovação Tecnológica Nuclear (2023)</h3>
+<section id="exemplo-2-inovação-tecnológica-nuclear-2023" class="level3" data-number="5.9.2">
+<h3 data-number="5.9.2" class="anchored" data-anchor-id="exemplo-2-inovação-tecnológica-nuclear-2023"><span class="header-section-number">5.9.2</span> Exemplo 2: Inovação Tecnológica Nuclear (2023)</h3>
 <p>“O campo da fusão nuclear teve um grande avanço em 2023. A fusão nuclear é uma reação nuclear que produz uma grande quantidade de calor que pode ser usada para gerar energia. É o mesmo processo que alimenta o sol. A reação nuclear é produzida por dois núcleos atômicos leves que se combinam e formam um único núcleo atômico leve mais pesado. Isso produz uma grande quantidade de energia.”</p>
-<section id="premissas-e-conclusão-1" class="level4" data-number="5.1.2.1">
-<h4 data-number="5.1.2.1" class="anchored" data-anchor-id="premissas-e-conclusão-1"><span class="header-section-number">5.1.2.1</span> Premissas e Conclusão</h4>
+<section id="premissas-e-conclusão-1" class="level4" data-number="5.9.2.1">
+<h4 data-number="5.9.2.1" class="anchored" data-anchor-id="premissas-e-conclusão-1"><span class="header-section-number">5.9.2.1</span> Premissas e Conclusão</h4>
 <p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li>A fusão nuclear é uma reação que ocorre quando dois núcleos atômicos leves se combinam formando um único núcleo mais pesado.</li>
@@ -706,8 +868,8 @@ A \rightarrow C
 <li>O campo da fusão nuclear teve um grande avanço em 2023.</li>
 </ul>
 </section>
-<section id="formalização-lógica-1" class="level4" data-number="5.1.2.2">
-<h4 data-number="5.1.2.2" class="anchored" data-anchor-id="formalização-lógica-1"><span class="header-section-number">5.1.2.2</span> Formalização Lógica</h4>
+<section id="formalização-lógica-1" class="level4" data-number="5.9.2.2">
+<h4 data-number="5.9.2.2" class="anchored" data-anchor-id="formalização-lógica-1"><span class="header-section-number">5.9.2.2</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(P\)</span>: A fusão nuclear é uma reação em que núcleos leves se combinam formando um núcleo mais pesado.</li>
@@ -716,7 +878,7 @@ A \rightarrow C
 <li><span class="math inline">\(S\)</span>: A fusão nuclear é o mesmo processo que alimenta o sol.</li>
 <li><span class="math inline">\(T\)</span>: O campo da fusão nuclear teve um grande avanço em 2023.</li>
 </ul>
-<p>Estrutura do argumento: <span class="math inline">\((P \land Q \land R \land S) \rightarrow T\)</span></p>
+<p>Estrutura do argumento: <span class="math inline">\((P \wedge Q \wedge R \wedge S) \rightarrow T\)</span></p>
 <p><strong>Lógica de Predicados</strong>:</p>
 <ul>
 <li><span class="math inline">\(FusaoNuclear(x)\)</span>: <span class="math inline">\(x\)</span> é um processo de fusão nuclear.</li>
@@ -735,13 +897,13 @@ A \rightarrow C
 <li><span class="math inline">\(TeveAvanco(\text{"campo da fusão nuclear"}, \text{"grande"}, 2023)\)</span>.</li>
 </ol>
 </section>
-<section id="análise-da-validade-1" class="level4" data-number="5.1.2.3">
-<h4 data-number="5.1.2.3" class="anchored" data-anchor-id="análise-da-validade-1"><span class="header-section-number">5.1.2.3</span> Análise da Validade</h4>
+<section id="análise-da-validade-1" class="level4" data-number="5.9.2.3">
+<h4 data-number="5.9.2.3" class="anchored" data-anchor-id="análise-da-validade-1"><span class="header-section-number">5.9.2.3</span> Análise da Validade</h4>
 <p>Este argumento apresenta uma estrutura incomum, pois a conclusão não é derivada logicamente das premissas apresentadas. As premissas descrevem o que é a fusão nuclear e suas características, mas não estabelecem uma relação lógica com o avanço mencionado.</p>
 <p>Sob análise de dedução natural, o argumento não é válido, pois a conclusão não é uma consequência lógica das premissas fornecidas.</p>
 </section>
-<section id="análise-da-solidez-1" class="level4" data-number="5.1.2.4">
-<h4 data-number="5.1.2.4" class="anchored" data-anchor-id="análise-da-solidez-1"><span class="header-section-number">5.1.2.4</span> Análise da Solidez</h4>
+<section id="análise-da-solidez-1" class="level4" data-number="5.9.2.4">
+<h4 data-number="5.9.2.4" class="anchored" data-anchor-id="análise-da-solidez-1"><span class="header-section-number">5.9.2.4</span> Análise da Solidez</h4>
 <p>Como o argumento não é formalmente válido, não pode ser considerado sólido. Entretanto, suas premissas descritivas são majoritariamente verdadeiras:</p>
 <ul>
 <li>A definição de fusão nuclear como combinação de núcleos leves é cientificamente precisa.</li>
@@ -750,11 +912,11 @@ A \rightarrow C
 </ul>
 </section>
 </section>
-<section id="exemplo-3-economia-global-2023" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="exemplo-3-economia-global-2023"><span class="header-section-number">5.1.3</span> Exemplo 3: Economia Global (2023)</h3>
+<section id="exemplo-3-economia-global-2023" class="level3" data-number="5.9.3">
+<h3 data-number="5.9.3" class="anchored" data-anchor-id="exemplo-3-economia-global-2023"><span class="header-section-number">5.9.3</span> Exemplo 3: Economia Global (2023)</h3>
 <p>“As economias avançadas devem desacelerar de 2,6% em 2022 para 1,5% em 2023 e 1,4% em 2024, à medida que o aperto da política começa a surtir efeito. A inflação global deverá diminuir constantemente, de 8,7% em 2022 para 6,9% em 2023 e 5,8% em 2024, devido a uma política monetária mais rígida auxiliada por preços mais baixos das commodities internacionais.”</p>
-<section id="premissas-e-conclusão-2" class="level4" data-number="5.1.3.1">
-<h4 data-number="5.1.3.1" class="anchored" data-anchor-id="premissas-e-conclusão-2"><span class="header-section-number">5.1.3.1</span> Premissas e Conclusão</h4>
+<section id="premissas-e-conclusão-2" class="level4" data-number="5.9.3.1">
+<h4 data-number="5.9.3.1" class="anchored" data-anchor-id="premissas-e-conclusão-2"><span class="header-section-number">5.9.3.1</span> Premissas e Conclusão</h4>
 <p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li>O aperto da política (monetária) está começando a surtir efeito;</li>
@@ -767,8 +929,8 @@ A \rightarrow C
 <li>A inflação global deverá diminuir constantemente, de <span class="math inline">\(8,7\%\)</span> em 2022 para <span class="math inline">\(6,9\%\)</span> em 2023 e <span class="math inline">\(5,8\%\)</span> em 2024.</li>
 </ol>
 </section>
-<section id="formalização-lógica-2" class="level4" data-number="5.1.3.2">
-<h4 data-number="5.1.3.2" class="anchored" data-anchor-id="formalização-lógica-2"><span class="header-section-number">5.1.3.2</span> Formalização Lógica</h4>
+<section id="formalização-lógica-2" class="level4" data-number="5.9.3.2">
+<h4 data-number="5.9.3.2" class="anchored" data-anchor-id="formalização-lógica-2"><span class="header-section-number">5.9.3.2</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(P\)</span>: O aperto da política monetária está surtindo efeito;</li>
@@ -777,7 +939,7 @@ A \rightarrow C
 <li><span class="math inline">\(S\)</span>: As economias avançadas desacelerarão para <span class="math inline">\(1,5\%\)</span> em 2023 e <span class="math inline">\(1,4\%\)</span> em 2024;</li>
 <li><span class="math inline">\(T\)</span>: A inflação global diminuirá para <span class="math inline">\(6,9\%\)</span> em 2023 e <span class="math inline">\(5,8\%\)</span> em 2024.</li>
 </ul>
-<p>Estrutura do argumento: <span class="math inline">\((P \land Q \land R) \rightarrow (S \land T)\)</span></p>
+<p>Estrutura do argumento: <span class="math inline">\((P \wedge Q \wedge R) \rightarrow (S \wedge T)\)</span></p>
 <p><strong>Lógica de Predicados</strong>:</p>
 <ul>
 <li><span class="math inline">\(ApertoSurteEfeito(x)\)</span>: o aperto da política monetária <span class="math inline">\(x\)</span> está surtindo efeito;</li>
@@ -791,12 +953,12 @@ A \rightarrow C
 <li><span class="math inline">\(ApertoSurteEfeito(\text{"política monetária"})\)</span>;</li>
 <li><span class="math inline">\(PoliticaRigida(\text{"política monetária atual"})\)</span>;</li>
 <li><span class="math inline">\(PrecosBaixos(\text{"commodities internacionais"})\)</span>;</li>
-<li><span class="math inline">\([ApertoSurteEfeito(\text{"política monetária"}) \land PoliticaRigida(\text{"política monetária atual"})] \rightarrow Desacelerar(\text{"economias avançadas"}, 1.5\%, 2023) \land Desacelerar(\text{"economias avançadas"}, 1.4\%, 2024)\)</span>;</li>
-<li><span class="math inline">\([PoliticaRigida(\text{"política monetária atual"}) \land PrecosBaixos(\text{"commodities internacionais"})] \rightarrow DiminuirInflacao(\text{"global"}, 6.9\%, 2023) \land DiminuirInflacao(\text{"global"}, 5.8\%, 2024)\)</span>.</li>
+<li><span class="math inline">\([ApertoSurteEfeito(\text{"política monetária"}) \wedge PoliticaRigida(\text{"política monetária atual"})] \rightarrow Desacelerar(\text{"economias avançadas"}, 1.5\%, 2023) \wedge Desacelerar(\text{"economias avançadas"}, 1.4\%, 2024)\)</span>;</li>
+<li><span class="math inline">\([PoliticaRigida(\text{"política monetária atual"}) \wedge PrecosBaixos(\text{"commodities internacionais"})] \rightarrow DiminuirInflacao(\text{"global"}, 6.9\%, 2023) \wedge DiminuirInflacao(\text{"global"}, 5.8\%, 2024)\)</span>.</li>
 </ol>
 </section>
-<section id="análise-da-validade-2" class="level4" data-number="5.1.3.3">
-<h4 data-number="5.1.3.3" class="anchored" data-anchor-id="análise-da-validade-2"><span class="header-section-number">5.1.3.3</span> Análise da Validade</h4>
+<section id="análise-da-validade-2" class="level4" data-number="5.9.3.3">
+<h4 data-number="5.9.3.3" class="anchored" data-anchor-id="análise-da-validade-2"><span class="header-section-number">5.9.3.3</span> Análise da Validade</h4>
 <p>Este argumento segue uma estrutura causal que pode ser analisada pela forma lógica:</p>
 <ul>
 <li>Se <span class="math inline">\(X\)</span> causa <span class="math inline">\(Y\)</span>, e <span class="math inline">\(X\)</span> está ocorrendo, então <span class="math inline">\(Y\)</span> ocorrerá;</li>
@@ -805,8 +967,8 @@ A \rightarrow C
 </ul>
 <p>Esta estrutura segue o padrão de modus ponens, que é uma forma de argumento válida.</p>
 </section>
-<section id="análise-da-solidez-2" class="level4" data-number="5.1.3.4">
-<h4 data-number="5.1.3.4" class="anchored" data-anchor-id="análise-da-solidez-2"><span class="header-section-number">5.1.3.4</span> Análise da Solidez</h4>
+<section id="análise-da-solidez-2" class="level4" data-number="5.9.3.4">
+<h4 data-number="5.9.3.4" class="anchored" data-anchor-id="análise-da-solidez-2"><span class="header-section-number">5.9.3.4</span> Análise da Solidez</h4>
 <p>A validade lógica do argumento foi estabelecida, mas sua solidez depende da veracidade das premissas:</p>
 <ol type="1">
 <li>A eficácia do aperto monetário é uma afirmação empírica que requer verificação com dados econômicos;</li>
@@ -817,12 +979,13 @@ A \rightarrow C
 <p>Em economia, relações causais são geralmente probabilísticas, tornando a solidez do argumento contingente a condições específicas.</p>
 </section>
 </section>
-<section id="exercício-de-análise-de-argumentos-lógicos" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="exercício-de-análise-de-argumentos-lógicos"><span class="header-section-number">5.1.4</span> Exercício de Análise de Argumentos Lógicos</h3>
+</section>
+<section id="exercícios-de-análise-de-argumentos-lógicos" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="exercícios-de-análise-de-argumentos-lógicos"><span class="header-section-number">5.10</span> Exercícios de Análise de Argumentos Lógicos</h2>
 <p><strong>Objetivo</strong>: aplicar técnicas de <strong>Lógica Proposicional</strong> e de predicados para analisar descrições e especificações de sistemas computacionais, traduzindo-as para a linguagem formal e avaliando sua consistência lógica como base para decisões de implementação.</p>
 <p><strong>Descrição</strong>: na engenharia de software, especificações e requisitos de sistemas são frequentemente descritos em linguagem natural, o que pode levar a ambiguidades, inconsistências e interpretações equivocadas. A análise lógica formal dessas descrições pode ajudar a identificar tais problemas e proporcionar uma base sólida para o desenvolvimento de soluções computacionais. Nesta tarefa, você atuará como “Arquiteto Lógico de Sistemas” para traduzir especificações em linguagem natural para modelos lógicos formais.</p>
-<section id="exercício-1-sistema-de-autenticação-biométrica" class="level4" data-number="5.1.4.1">
-<h4 data-number="5.1.4.1" class="anchored" data-anchor-id="exercício-1-sistema-de-autenticação-biométrica"><span class="header-section-number">5.1.4.1</span> Exercício 1: Sistema de Autenticação Biométrica</h4>
+<section id="exercício-1-sistema-de-autenticação-biométrica" class="level3" data-number="5.10.1">
+<h3 data-number="5.10.1" class="anchored" data-anchor-id="exercício-1-sistema-de-autenticação-biométrica"><span class="header-section-number">5.10.1</span> Exercício 1: Sistema de Autenticação Biométrica</h3>
 <p><strong>Fragmento de Texto Original</strong>: O sistema de autenticação biométrica deve permitir o acesso a usuários autorizados por meio de reconhecimento facial ou impressão digital. Se um usuário não conseguir autenticar por nenhum dos métodos biométricos, o sistema deve oferecer como alternativa a autenticação por senha. Caso ocorram três tentativas falhas consecutivas por qualquer método, o acesso do usuário deve ser temporariamente bloqueado por 30 minutos por motivos de segurança.</p>
 <p><strong>Solução</strong>: A tarefa é analisar o fragmento de texto e formalizá-lo em <strong>Lógica Proposicional</strong> e lógica de predicados, identificando premissas, conclusões e avaliando a validade e solidez do argumento.</p>
 <p><strong>Premissas</strong>:</p>
@@ -838,7 +1001,8 @@ A \rightarrow C
 <li>O sistema deve bloquear o acesso após três tentativas falhas consecutivas;</li>
 <li>O sistema deve permitir múltiplos métodos de autenticação.</li>
 </ul>
-<p><strong>Formalização</strong></p>
+<section id="formalização-lógica-3" class="level4" data-number="5.10.1.1">
+<h4 data-number="5.10.1.1" class="anchored" data-anchor-id="formalização-lógica-3"><span class="header-section-number">5.10.1.1</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(A\)</span>: O usuário está autorizado;</li>
@@ -850,8 +1014,8 @@ A \rightarrow C
 </ul>
 <p><strong>Estrutura do argumento</strong>:</p>
 <ol type="1">
-<li><span class="math inline">\(A \rightarrow (F \lor D \lor S)\)</span>;</li>
-<li><span class="math inline">\(\neg(F \lor D) \rightarrow S\)</span>;</li>
+<li><span class="math inline">\(A \rightarrow (F \vee D \vee S)\)</span>;</li>
+<li><span class="math inline">\(\neg(F \vee D) \rightarrow S\)</span>;</li>
 <li><span class="math inline">\(T \rightarrow B\)</span>.</li>
 </ol>
 <p><strong>Lógica de Predicados</strong>:</p>
@@ -866,14 +1030,14 @@ A \rightarrow C
 </ul>
 <p><strong>Formalização</strong>:</p>
 <ol type="1">
-<li><span class="math inline">\(\forall x [Autorizado(x) \rightarrow (AutenticaFacial(x) \lor AutenticaDigital(x) \lor AutenticaSenha(x))]\)</span>;</li>
-<li><span class="math inline">\(\forall x [(Usuario(x) \land \neg(AutenticaFacial(x) \lor AutenticaDigital(x))) \rightarrow AutenticaSenha(x)]\)</span>;</li>
+<li><span class="math inline">\(\forall x [Autorizado(x) \rightarrow (AutenticaFacial(x) \vee AutenticaDigital(x) \vee AutenticaSenha(x))]\)</span>;</li>
+<li><span class="math inline">\(\forall x [(Usuario(x) \wedge \neg(AutenticaFacial(x) \vee AutenticaDigital(x))) \rightarrow AutenticaSenha(x)]\)</span>;</li>
 <li><span class="math inline">\(\forall x [TentativasFalhas(x, 3) \rightarrow Bloqueado(x, 30)]\)</span>.</li>
 </ol>
 <p><strong>Análise da Validade</strong>: o argumento é válido em termos de <strong>Lógica Proposicional</strong> e de predicados. A estrutura segue formas lógicas válidas:</p>
 <ol type="1">
 <li><p>A primeira relação estabelece uma disjunção inclusiva (OR) de métodos de autenticação disponíveis para usuários autorizados;</p></li>
-<li><p>A segunda relação segue a forma <span class="math inline">\((P \land \neg Q) \rightarrow R\)</span>, que é válida: se um usuário não consegue autenticar pelos métodos biométricos, então deve poder usar senha;</p></li>
+<li><p>A segunda relação segue a forma <span class="math inline">\((P \wedge \neg Q) \rightarrow R\)</span>, que é válida: se um usuário não consegue autenticar pelos métodos biométricos, então deve poder usar senha;</p></li>
 <li><p>A terceira relação segue a forma <span class="math inline">\(P \rightarrow Q\)</span>, um modus ponens: se ocorrerem três tentativas falhas, então o bloqueio é implementado.</p></li>
 </ol>
 <p><strong>Análise da Solidez</strong>:</p>
@@ -885,8 +1049,9 @@ A \rightarrow C
 </ol>
 <p>As conclusões derivadas são sólidas no contexto de sistemas de autenticação e seguem práticas recomendadas de segurança digital.</p>
 </section>
-<section id="exercício-2-processamento-de-pagamentos-online" class="level4" data-number="5.1.4.2">
-<h4 data-number="5.1.4.2" class="anchored" data-anchor-id="exercício-2-processamento-de-pagamentos-online"><span class="header-section-number">5.1.4.2</span> Exercício 2: Processamento de Pagamentos Online</h4>
+</section>
+<section id="exercício-2-processamento-de-pagamentos-online" class="level3" data-number="5.10.2">
+<h3 data-number="5.10.2" class="anchored" data-anchor-id="exercício-2-processamento-de-pagamentos-online"><span class="header-section-number">5.10.2</span> Exercício 2: Processamento de Pagamentos Online</h3>
 <p><strong>Fragmento de Texto Original</strong>: O sistema de pagamentos online deve processar transações com cartões de crédito, cartões de débito e carteiras digitais. Quando uma transação é iniciada, o sistema verifica primeiro se há fundos suficientes. Se houver fundos suficientes, o sistema realiza a verificação de segurança. Uma transação só é aprovada se ambas as verificações forem bem-sucedidas. Caso contrário, a transação é rejeitada e o cliente recebe uma notificação com o motivo da falha.</p>
 <p><strong>Solução</strong>: A tarefa é analisar o fragmento de texto e formalizá-lo em <strong>Lógica Proposicional</strong> e lógica de predicados, identificando premissas, conclusões e avaliando a validade e solidez do argumento.</p>
 <p><strong>Premissas</strong>:</p>
@@ -901,7 +1066,8 @@ A \rightarrow C
 <ul>
 <li>Se uma verificação de fundos ou segurança falhar, a transação será rejeitada.</li>
 </ul>
-<p><strong>Formalização</strong></p>
+<section id="formalização-lógica-4" class="level4" data-number="5.10.2.1">
+<h4 data-number="5.10.2.1" class="anchored" data-anchor-id="formalização-lógica-4"><span class="header-section-number">5.10.2.1</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(C\)</span>: A transação é com cartão de crédito;</li>
@@ -915,10 +1081,10 @@ A \rightarrow C
 </ul>
 <p>Estrutura do argumento:</p>
 <ol type="1">
-<li><span class="math inline">\((C \lor D \lor W)\)</span> (A transação é feita por um dos métodos aceitos);</li>
+<li><span class="math inline">\((C \vee D \vee W)\)</span> (A transação é feita por um dos métodos aceitos);</li>
 <li><span class="math inline">\(F \rightarrow S\)</span> (Se há fundos, realiza-se verificação de segurança);</li>
-<li><span class="math inline">\((F \land S) \rightarrow A\)</span> (Se há fundos e a verificação de segurança é bem-sucedida, a transação é aprovada);</li>
-<li><span class="math inline">\(\neg(F \land S) \rightarrow (R \land N)\)</span> (Se não há fundos ou a verificação falha, a transação é rejeitada e há notificação).</li>
+<li><span class="math inline">\((F \wedge S) \rightarrow A\)</span> (Se há fundos e a verificação de segurança é bem-sucedida, a transação é aprovada);</li>
+<li><span class="math inline">\(\neg(F \wedge S) \rightarrow (R \wedge N)\)</span> (Se não há fundos ou a verificação falha, a transação é rejeitada e há notificação).</li>
 </ol>
 <p><strong>Lógica de Predicados</strong>:</p>
 <ul>
@@ -932,18 +1098,18 @@ A \rightarrow C
 </ul>
 <p><strong>Formalização</strong>:</p>
 <ol type="1">
-<li><span class="math inline">\(\forall x [Transacao(x) \rightarrow (Metodo(x, \text{"crédito"}) \lor Metodo(x, \text{"débito"}) \lor Metodo(x, \text{"carteira digital"}))]\)</span>;</li>
+<li><span class="math inline">\(\forall x [Transacao(x) \rightarrow (Metodo(x, \text{"crédito"}) \vee Metodo(x, \text{"débito"}) \vee Metodo(x, \text{"carteira digital"}))]\)</span>;</li>
 <li><span class="math inline">\(\forall x [Transacao(x) \rightarrow (TemFundos(x) \rightarrow VerificacaoSeguranca(x))]\)</span>;</li>
-<li><span class="math inline">\(\forall x [Transacao(x) \rightarrow ((TemFundos(x) \land VerificacaoSeguranca(x)) \rightarrow Aprovada(x))]\)</span>;</li>
-<li><span class="math inline">\(\forall x [Transacao(x) \rightarrow (\neg(TemFundos(x) \land VerificacaoSeguranca(x)) \rightarrow (Rejeitada(x) \land \exists y Notifica(x, y)))]\)</span>.</li>
+<li><span class="math inline">\(\forall x [Transacao(x) \rightarrow ((TemFundos(x) \wedge VerificacaoSeguranca(x)) \rightarrow Aprovada(x))]\)</span>;</li>
+<li><span class="math inline">\(\forall x [Transacao(x) \rightarrow (\neg(TemFundos(x) \wedge VerificacaoSeguranca(x)) \rightarrow (Rejeitada(x) \wedge \exists y Notifica(x, y)))]\)</span>.</li>
 </ol>
 <p><strong>Análise da Validade</strong>:</p>
 <p>O argumento é válido logicamente. As relações causais seguem formas lógicas consistentes:</p>
 <ol type="1">
 <li>A primeira premissa estabelece os métodos de pagamento aceitos, formando uma disjunção inclusiva;</li>
 <li>A relação entre verificação de fundos e verificação de segurança segue um fluxo condicional válido;</li>
-<li>A aprovação da transação requer a conjunção (AND) de condições, seguindo o padrão <span class="math inline">\((P \land Q) \rightarrow R\)</span>;</li>
-<li>A rejeição da transação ocorre pela negação da conjunção, usando a lei de De Morgan: <span class="math inline">\(\neg(P \land Q) \equiv \neg P \lor \neg Q\)</span>;</li>
+<li>A aprovação da transação requer a conjunção (AND) de condições, seguindo o padrão <span class="math inline">\((P \wedge Q) \rightarrow R\)</span>;</li>
+<li>A rejeição da transação ocorre pela negação da conjunção, usando a lei de De Morgan: <span class="math inline">\(\neg(P \wedge Q) \equiv \neg P \vee \neg Q\)</span>;</li>
 </ol>
 <p><strong>Análise da Solidez</strong>:</p>
 <p>As premissas são sólidas no contexto de sistemas de processamento de pagamentos:</p>
@@ -955,8 +1121,9 @@ A \rightarrow C
 </ol>
 <p>A conclusão derivada é sólida e consistente com o funcionamento esperado de um sistema de pagamentos seguro e funcional.</p>
 </section>
-<section id="exercício-3-sistema-de-gerenciamento-de-estoque" class="level4" data-number="5.1.4.3">
-<h4 data-number="5.1.4.3" class="anchored" data-anchor-id="exercício-3-sistema-de-gerenciamento-de-estoque"><span class="header-section-number">5.1.4.3</span> Exercício 3: Sistema de Gerenciamento de Estoque</h4>
+</section>
+<section id="exercício-3-sistema-de-gerenciamento-de-estoque" class="level3" data-number="5.10.3">
+<h3 data-number="5.10.3" class="anchored" data-anchor-id="exercício-3-sistema-de-gerenciamento-de-estoque"><span class="header-section-number">5.10.3</span> Exercício 3: Sistema de Gerenciamento de Estoque</h3>
 <p><strong>Fragmento de Texto Original</strong>: “O sistema de gerenciamento de estoque deve monitorar continuamente os níveis de produtos. Quando o estoque de um produto cai abaixo do limite mínimo configurado, o sistema deve gerar automaticamente uma ordem de reabastecimento. Se o produto estiver marcado como ‘crítico’, a ordem deve ser enviada com prioridade alta. Caso contrário, a ordem segue o fluxo padrão. Qualquer produto que não tenha movimento de venda por mais de 90 dias deve ser marcado para revisão de demanda.”</p>
 <p><strong>Solução</strong>: A tarefa é analisar o fragmento de texto e formalizá-lo em <strong>Lógica Proposicional</strong> e lógica de predicados, identificando premissas, conclusões e avaliando a validade e solidez do argumento.</p>
 <p><strong>Premissas</strong>:</p>
@@ -974,7 +1141,8 @@ A \rightarrow C
 <li>Se o estoque de um produto cai abaixo do limite e o produto não é crítico, uma ordem de reabastecimento padrão é gerada;</li>
 <li>Se um produto não tem vendas por mais de 90 dias, ele deve ser revisado.</li>
 </ul>
-<p><strong>Formalização</strong></p>
+<section id="formalização-lógica-5" class="level4" data-number="5.10.3.1">
+<h4 data-number="5.10.3.1" class="anchored" data-anchor-id="formalização-lógica-5"><span class="header-section-number">5.10.3.1</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(M\)</span>: O sistema monitora os níveis de estoque;</li>
@@ -990,8 +1158,8 @@ A \rightarrow C
 <ol type="1">
 <li><span class="math inline">\(M\)</span>;</li>
 <li><span class="math inline">\(B \rightarrow O\)</span>;</li>
-<li><span class="math inline">\((B \land C) \rightarrow (O \land P)\)</span>;</li>
-<li><span class="math inline">\((B \land \neg C) \rightarrow (O \land F)\)</span>;</li>
+<li><span class="math inline">\((B \wedge C) \rightarrow (O \wedge P)\)</span>;</li>
+<li><span class="math inline">\((B \wedge \neg C) \rightarrow (O \wedge F)\)</span>;</li>
 <li><span class="math inline">\(N \rightarrow R\)</span>.</li>
 </ol>
 <p><strong>Lógica de Predicados</strong>:</p>
@@ -1007,10 +1175,10 @@ A \rightarrow C
 <p><strong>Formalização</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(\forall x [Produto(x) \rightarrow Monitora(x)]\)</span>;</li>
-<li><span class="math inline">\(\forall x [Produto(x) \land AbaixoLimite(x) \rightarrow \exists y \, GeraOrdem(x, y)]\)</span>;</li>
-<li><span class="math inline">\(\forall x [Produto(x) \land AbaixoLimite(x) \land Critico(x) \rightarrow GeraOrdem(x, \text{"alta"})]\)</span>;</li>
-<li><span class="math inline">\(\forall x [Produto(x) \land AbaixoLimite(x) \land \neg Critico(x) \rightarrow GeraOrdem(x, \text{"normal"})]\)</span>;</li>
-<li><span class="math inline">\(\forall x [Produto(x) \land SemVendas(x, 90) \rightarrow MarcarRevisao(x)]\)</span>.</li>
+<li><span class="math inline">\(\forall x [Produto(x) \wedge AbaixoLimite(x) \rightarrow \exists y \, GeraOrdem(x, y)]\)</span>;</li>
+<li><span class="math inline">\(\forall x [Produto(x) \wedge AbaixoLimite(x) \wedge Critico(x) \rightarrow GeraOrdem(x, \text{"alta"})]\)</span>;</li>
+<li><span class="math inline">\(\forall x [Produto(x) \wedge AbaixoLimite(x) \wedge \neg Critico(x) \rightarrow GeraOrdem(x, \text{"normal"})]\)</span>;</li>
+<li><span class="math inline">\(\forall x [Produto(x) \wedge SemVendas(x, 90) \rightarrow MarcarRevisao(x)]\)</span>.</li>
 </ol>
 <p><strong>Análise da Validade</strong>:</p>
 <p>O argumento é logicamente válido. A estrutura segue padrões lógicos consistentes:</p>
@@ -1031,24 +1199,49 @@ A \rightarrow C
 <p>As conclusões derivadas são sólidas e refletem procedimentos operacionais padrão em gerenciamento de estoque e logística.</p>
 </section>
 </section>
-<section id="sistema-de-recomendação-de-conteúdo" class="level3" data-number="5.1.5">
-<h3 data-number="5.1.5" class="anchored" data-anchor-id="sistema-de-recomendação-de-conteúdo"><span class="header-section-number">5.1.5</span> Sistema de Recomendação de Conteúdo</h3>
+<section id="exercício-4-sistema-de-recomendação-de-conteúdo" class="level3" data-number="5.10.4">
+<h3 data-number="5.10.4" class="anchored" data-anchor-id="exercício-4-sistema-de-recomendação-de-conteúdo"><span class="header-section-number">5.10.4</span> Exercício 4: Sistema de Recomendação de Conteúdo</h3>
 <p>“O sistema de recomendação deve analisar o histórico de visualizações, preferências explícitas e comportamento de navegação de cada usuário. Com base nesses dados, o sistema calcula um score de relevância para cada item de conteúdo disponível. Itens com score acima de 0,7 são recomendados ao usuário. No entanto, se o usuário já visualizou um item nos últimos 30 dias, este não deve ser recomendado novamente, independentemente do score. Adicionalmente, se o usuário deu um feedback negativo a um conteúdo similar, o score desse tipo de conteúdo deve ser reduzido em 0,3 pontos.”</p>
 <p><strong>Solução</strong>: A tarefa é analisar o fragmento de texto e formalizá-lo em <strong>Lógica Proposicional</strong> e lógica de predicados, identificando premissas, conclusões e avaliando a validade e solidez do argumento.</p>
 <p><strong>Premissas</strong>: 1. O sistema analisa o histórico de visualizações, preferências explícitas e comportamento de navegação. 2. Um score de relevância é calculado para cada item de conteúdo. 3. Itens com score acima de 0,7 são recomendados. 4. Itens visualizados nos últimos 30 dias não são recomendados, independentemente do score. 5. Feedback negativo a conteúdo similar reduz o score em 0,3 pontos.</p>
 <p><strong>Conclusões</strong>: - Um item será recomendado se seu score for maior que 0,7 E não tiver sido visualizado nos últimos 30 dias. - O feedback negativo do usuário influencia o cálculo do score para itens similares.</p>
-</section>
-<section id="formalização-lógica-3" class="level3" data-number="5.1.6">
-<h3 data-number="5.1.6" class="anchored" data-anchor-id="formalização-lógica-3"><span class="header-section-number">5.1.6</span> Formalização Lógica</h3>
-<p><strong>Lógica Proposicional</strong>: - <span class="math inline">\(A\)</span>: O sistema analisa dados do usuário. - <span class="math inline">\(C\)</span>: O sistema calcula scores de relevância. - <span class="math inline">\(S\)</span>: O item tem score acima de 0,7. - <span class="math inline">\(V\)</span>: O item foi visualizado nos últimos 30 dias. - <span class="math inline">\(R\)</span>: O item é recomendado ao usuário. - <span class="math inline">\(F\)</span>: O usuário deu feedback negativo a conteúdo similar. - <span class="math inline">\(D\)</span>: O score é reduzido em 0,3 pontos.</p>
-<p>Estrutura do argumento: 1. <span class="math inline">\(A \rightarrow C\)</span> 2. <span class="math inline">\((S \land \neg V) \rightarrow R\)</span> 3. <span class="math inline">\(V \rightarrow \neg R\)</span> 4. <span class="math inline">\(F \rightarrow D\)</span></p>
-<p><strong>Lógica de Predicados</strong>: - <span class="math inline">\(Usuario(u)\)</span>: u é um usuário - <span class="math inline">\(Item(i)\)</span>: i é um item de conteúdo - <span class="math inline">\(AnalisaDados(u)\)</span>: o sistema analisa dados do usuário u - <span class="math inline">\(Score(i, s)\)</span>: o item i tem score s - <span class="math inline">\(Visualizado(u, i, d)\)</span>: o usuário u visualizou o item i nos últimos d dias - <span class="math inline">\(Recomendado(u, i)\)</span>: o item i é recomendado ao usuário u - <span class="math inline">\(FeedbackNegativo(u, t)\)</span>: o usuário u deu feedback negativo ao tipo de conteúdo t - <span class="math inline">\(Similar(i, t)\)</span>: o item i é similar ao tipo de conteúdo t - <span class="math inline">\(ReducaoScore(i, v)\)</span>: o score do item i é reduzido em v pontos</p>
+<section id="formalização-lógica-6" class="level4" data-number="5.10.4.1">
+<h4 data-number="5.10.4.1" class="anchored" data-anchor-id="formalização-lógica-6"><span class="header-section-number">5.10.4.1</span> Formalização Lógica</h4>
+<p><strong>Lógica Proposicional</strong>:</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: O sistema analisa dados do usuário.</li>
+<li><span class="math inline">\(C\)</span>: O sistema calcula scores de relevância.</li>
+<li><span class="math inline">\(S\)</span>: O item tem score acima de 0,7.</li>
+<li><span class="math inline">\(V\)</span>: O item foi visualizado nos últimos 30 dias.</li>
+<li><span class="math inline">\(R\)</span>: O item é recomendado ao usuário.</li>
+<li><span class="math inline">\(F\)</span>: O usuário deu feedback negativo a conteúdo similar.</li>
+<li><span class="math inline">\(D\)</span>: O score é reduzido em 0,3 pontos.</li>
+</ul>
+<p>Estrutura do argumento:</p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow C\)</span></li>
+<li><span class="math inline">\((S \wedge \neg V) \rightarrow R\)</span></li>
+<li><span class="math inline">\(V \rightarrow \neg R\)</span></li>
+<li><span class="math inline">\(F \rightarrow D\)</span></li>
+</ol>
+<p><strong>Lógica de Predicados</strong>:</p>
+<ul>
+<li><span class="math inline">\(Usuario(u)\)</span>: u é um usuário;</li>
+<li><span class="math inline">\(Item(i)\)</span>: i é um item de conteúdo;</li>
+<li><span class="math inline">\(AnalisaDados(u)\)</span>: o sistema analisa dados do usuário u;</li>
+<li><span class="math inline">\(Score(i, s)\)</span>: o item i tem score s;</li>
+<li><span class="math inline">\(Visualizado(u, i, d)\)</span>: o usuário u visualizou o item i nos últimos d dias;</li>
+<li><span class="math inline">\(Recomendado(u, i)\)</span>: o item i é recomendado ao usuário u;</li>
+<li><span class="math inline">\(FeedbackNegativo(u, t)\)</span>: o usuário u deu feedback negativo ao tipo de conteúdo t;</li>
+<li><span class="math inline">\(Similar(i, t)\)</span>: o item i é similar ao tipo de conteúdo t;</li>
+<li><span class="math inline">\(ReducaoScore(i, v)\)</span>: o score do item i é reduzido em v pontos.</li>
+</ul>
 <p><strong>Formalização</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(\forall u [Usuario(u) \rightarrow AnalisaDados(u)]\)</span>;</li>
-<li><span class="math inline">\(\forall u \forall i [Usuario(u) \land Item(i) \land Score(i, s) \land s &gt; 0.7 \land \neg Visualizado(u, i, 30) \rightarrow Recomendado(u, i)]\)</span>;</li>
-<li><span class="math inline">\(\forall u \forall i [Usuario(u) \land Item(i) \land Visualizado(u, i, 30) \rightarrow \neg Recomendado(u, i)]\)</span>;</li>
-<li><span class="math inline">\(\forall u \forall i \forall t [Usuario(u) \land Item(i) \land Similar(i, t) \land FeedbackNegativo(u, t) \rightarrow ReducaoScore(i, 0.3)]\)</span>.</li>
+<li><span class="math inline">\(\forall u \forall i [Usuario(u) \wedge Item(i) \wedge Score(i, s) \wedge s &gt; 0.7 \wedge \neg Visualizado(u, i, 30) \rightarrow Recomendado(u, i)]\)</span>;</li>
+<li><span class="math inline">\(\forall u \forall i [Usuario(u) \wedge Item(i) \wedge Visualizado(u, i, 30) \rightarrow \neg Recomendado(u, i)]\)</span>;</li>
+<li><span class="math inline">\(\forall u \forall i \forall t [Usuario(u) \wedge Item(i) \wedge Similar(i, t) \wedge FeedbackNegativo(u, t) \rightarrow ReducaoScore(i, 0.3)]\)</span>.</li>
 </ol>
 <p><strong>Análise da Validade</strong>:</p>
 <p>O argumento é logicamente válido. As regras de recomendação seguem formas lógicas bem definidas:</p>
@@ -1068,8 +1261,10 @@ A \rightarrow C
 <li>A consideração de feedback negativo reflete sistemas adaptativos reais.</li>
 </ol>
 <p>As conclusões derivadas são sólidas e representam um sistema de recomendação funcional que equilibra relevância, novidade e preferências do usuário.</p>
-<section id="exercício-5-sistema-de-detecção-de-fraudes" class="level4" data-number="5.1.6.1">
-<h4 data-number="5.1.6.1" class="anchored" data-anchor-id="exercício-5-sistema-de-detecção-de-fraudes"><span class="header-section-number">5.1.6.1</span> Exercício 5: Sistema de Detecção de Fraudes</h4>
+</section>
+</section>
+<section id="exercício-5-sistema-de-detecção-de-fraudes" class="level3" data-number="5.10.5">
+<h3 data-number="5.10.5" class="anchored" data-anchor-id="exercício-5-sistema-de-detecção-de-fraudes"><span class="header-section-number">5.10.5</span> Exercício 5: Sistema de Detecção de Fraudes</h3>
 <p><strong>Fragmento Texto Original</strong>: <em>“O sistema de detecção de fraudes deve analisar cada transação em tempo real. Uma transação é marcada como suspeita se atender a pelo menos um dos seguintes critérios: valor acima do padrão histórico do cliente, localização geográfica incomum, ou múltiplas tentativas em curto período de tempo. Se dois ou mais critérios forem atendidos simultaneamente, a transação é automaticamente bloqueada e enviada para revisão manual. Caso contrário, se apenas um critério for atendido, o cliente recebe uma notificação de confirmação. Se o cliente não confirmar em 5 minutos, a transação é bloqueada preventivamente”</em>.</p>
 <p><strong>Solução</strong>: A tarefa é analisar o fragmento de texto e formalizá-lo em <strong>Lógica Proposicional</strong> e lógica de predicados, identificando premissas, conclusões e avaliando a validade e solidez do argumento.</p>
 <p><strong>Premissas</strong>:</p>
@@ -1087,7 +1282,8 @@ A \rightarrow C
 <li>Se um único critério é atendido, a transação depende de confirmação do cliente;</li>
 <li>Toda transação suspeita é ou bloqueada automaticamente ou requer confirmação.</li>
 </ul>
-<p><strong>Formalização</strong></p>
+<section id="formalização-lógica-7" class="level4" data-number="5.10.5.1">
+<h4 data-number="5.10.5.1" class="anchored" data-anchor-id="formalização-lógica-7"><span class="header-section-number">5.10.5.1</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
 <li><span class="math inline">\(R\)</span>: O sistema analisa transações em tempo real;</li>
@@ -1102,10 +1298,10 @@ A \rightarrow C
 </ul>
 <p><strong>Estrutura do argumento</strong>:</p>
 <ol type="1">
-<li><span class="math inline">\((V \lor L \lor M) \rightarrow S\)</span>;</li>
-<li><span class="math inline">\([(V \land L) \lor (V \land M) \lor (L \land M)] \rightarrow B\)</span>;</li>
-<li><span class="math inline">\([S \land \neg((V \land L) \lor (V \land M) \lor (L \land M))] \rightarrow N\)</span>;</li>
-<li><span class="math inline">\((N \land \neg C) \rightarrow P\)</span>.</li>
+<li><span class="math inline">\((V \vee L \vee M) \rightarrow S\)</span>;</li>
+<li><span class="math inline">\([(V \wedge L) \vee (V \wedge M) \vee (L \wedge M)] \rightarrow B\)</span>;</li>
+<li><span class="math inline">\([S \wedge \neg((V \wedge L) \vee (V \wedge M) \vee (L \wedge M))] \rightarrow N\)</span>;</li>
+<li><span class="math inline">\((N \wedge \neg C) \rightarrow P\)</span>.</li>
 </ol>
 <p><strong>Lógica de Predicados</strong>:</p>
 <ul>
@@ -1123,10 +1319,10 @@ A \rightarrow C
 <p><strong>Formalização</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(\forall t [Transacao(t) \rightarrow AnalisaTempoReal(t)]\)</span>;</li>
-<li><span class="math inline">\(\forall t [Transacao(t) \land (ValorAlto(t) \lor LocalizacaoIncomum(t) \lor MultiplasTentativas(t)) \rightarrow Suspeita(t)]\)</span>;</li>
-<li><span class="math inline">\(\forall t [Transacao(t) \land ((ValorAlto(t) \land LocalizacaoIncomum(t)) \lor (ValorAlto(t) \land MultiplasTentativas(t)) \lor (LocalizacaoIncomum(t) \land MultiplasTentativas(t))) \rightarrow Bloqueada(t)]\)</span>;</li>
-<li><span class="math inline">\(\forall t [Transacao(t) \land Suspeita(t) \land \neg((ValorAlto(t) \land LocalizacaoIncomum(t)) \lor (ValorAlto(t) \land MultiplasTentativas(t)) \lor (LocalizacaoIncomum(t) \land MultiplasTentativas(t))) \rightarrow EnviaNotificacao(t)]\)</span>;</li>
-<li><span class="math inline">\(\forall t [Transacao(t) \land EnviaNotificacao(t) \land \neg Confirma(t, 5) \rightarrow BloqueioPreventivo(t)]\)</span>.</li>
+<li><span class="math inline">\(\forall t [Transacao(t) \wedge (ValorAlto(t) \vee LocalizacaoIncomum(t) \vee MultiplasTentativas(t)) \rightarrow Suspeita(t)]\)</span>;</li>
+<li><span class="math inline">\(\forall t [Transacao(t) \wedge ((ValorAlto(t) \wedge LocalizacaoIncomum(t)) \vee (ValorAlto(t) \wedge MultiplasTentativas(t)) \vee (LocalizacaoIncomum(t) \wedge MultiplasTentativas(t))) \rightarrow Bloqueada(t)]\)</span>;</li>
+<li><span class="math inline">\(\forall t [Transacao(t) \wedge Suspeita(t) \wedge \neg((ValorAlto(t) \wedge LocalizacaoIncomum(t)) \vee (ValorAlto(t) \wedge MultiplasTentativas(t)) \vee (LocalizacaoIncomum(t) \wedge MultiplasTentativas(t))) \rightarrow EnviaNotificacao(t)]\)</span>;</li>
+<li><span class="math inline">\(\forall t [Transacao(t) \wedge EnviaNotificacao(t) \wedge \neg Confirma(t, 5) \rightarrow BloqueioPreventivo(t)]\)</span>.</li>
 </ol>
 <p><strong>Análise da Validade</strong>:</p>
 <p>O argumento é logicamente válido. A estrutura representa corretamente o processo de decisão do sistema:</p>
