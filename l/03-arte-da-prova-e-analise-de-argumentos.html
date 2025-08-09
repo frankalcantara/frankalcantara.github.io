@@ -305,10 +305,10 @@ window.Quarto = {
 <section id="logicamente-equivalente" class="level3" data-number="5.0.2">
 <h3 data-number="5.0.2" class="anchored" data-anchor-id="logicamente-equivalente"><span class="header-section-number">5.0.2</span> Logicamente Equivalente</h3>
 <p>Vamos imaginar um mundo de fórmulas que consistem apenas em duas proposições:<span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span>. Usando os operadores da <strong>Lógica Proposicional</strong> podemos escrever um número muito grande de fórmulas diferentes combinando estas duas proposições.</p>
-<p>A coisa interessante sobre as fórmulas que conseguimos criar com apenas duas proposições é que cada uma dessas fórmulas tem uma Tabela Verdade com exatamente quatro linhas, <span class="math inline">\(2^2=4\)</span>. Mesmo que isso pareça surpreendente, só existem dezesseis configurações possíveis para a última coluna de todas as Tabelas Verdades de todas as tabelas que podemos criar, <span class="math inline">\(2^4=16\)</span>. Como resultado, muitas fórmulas compartilham a mesma configuração final em suas Tabelas Verdade. Todas as fórmulas que possuem a mesma configuração na última coluna são equivalentes.Terei ouvido um viva?</p>
-<p>Com um pouco mais de formalidade podemos dizer que: considere as proposições <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição <span class="math inline">\(A \Leftrightarrow B\)</span> for uma tautologia.</p>
+<p>A coisa interessante sobre as fórmulas que conseguimos criar com apenas duas proposições é que cada uma dessas fórmulas tem uma Tabela Verdade com exatamente quatro linhas, <span class="math inline">\(2^2=4\)</span>. Mesmo que isso pareça surpreendente, só existem dezesseis configurações possíveis para a última coluna de todas as Tabelas-Verdade de todas as tabelas que podemos criar, <span class="math inline">\(2^4=16\)</span>. Como resultado, muitas fórmulas compartilham a mesma configuração final em suas Tabelas Verdade. Todas as fórmulas que possuem a mesma configuração na última coluna são equivalentes.Terei ouvido um viva?</p>
+<p>Para que a esforçada leitora possa ver um pouco mais de formalidade considere as proposições <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Estas proposições serão ditas logicamente equivalentes se, e somente se, a proposição <span class="math inline">\(A \Leftrightarrow B\)</span> for uma tautologia.</p>
 <p><strong>Exemplo: 1</strong> Vamos mostrar que <span class="math inline">\(P\rightarrow Q\)</span> é logicamente equivalente a <span class="math inline">\(\neg Q \rightarrow \neg P\)</span>.</p>
-<p><strong>Solução</strong>: Para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional <span class="math inline">\((P\rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> contém apenas valores verdadeiros:</p>
+<p><strong>Solução</strong>: para isso, verificaremos se a coluna do conectivo principal na Tabela Verdade para a proposição bicondicional <span class="math inline">\((P\rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> contém apenas valores verdadeiros:</p>
 <p><span class="math display">\[
 \begin{array}{|c|c|c|c|c|c|}
 \hline
@@ -348,13 +348,13 @@ F &amp; F &amp; F &amp; F &amp; T \\
 \hline
 P &amp; Q &amp; \neg P &amp; \neg P \lor Q &amp; P \rightarrow Q \leftrightarrow \neg P \lor Q\\
 \hline
-V &amp; V &amp; F &amp; V &amp; V\\
+T &amp; T &amp; F &amp; T &amp; T\\
 \hline
-V &amp; F &amp; F &amp; F &amp; V\\
+T &amp; F &amp; F &amp; F &amp; T\\
 \hline
-F &amp; V &amp; V &amp; V &amp; V\\
+F &amp; T &amp; T &amp; T &amp; T\\
 \hline
-F &amp; F &amp; V &amp; V &amp; V\\ \hline
+F &amp; F &amp; T &amp; T &amp; T\\ \hline
 \end{array}
 \]</span></p>
 <p>Neste caso <span class="math inline">\(P\rightarrow Q\)</span> e <span class="math inline">\(\neg P \lor Q\)</span> são logicamente equivalentes.</p>
@@ -368,32 +368,34 @@ F &amp; F &amp; V &amp; V &amp; V\\ \hline
 \lnot Q \rightarrow \lnot P
 \end{aligned}
 \]</span></p>
-<p>A contrapositiva pode ser lida como <em>se não <span class="math inline">\(Q\)</span>, então não <span class="math inline">\(P\)</span></em>. Em outras palavras estamos dizendo: <em>Se <span class="math inline">\(Q\)</span> é falso, então <span class="math inline">\(P\)</span> é falso</em>. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua formula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositiva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.</p>
+<p>A contrapositiva pode ser lida como <em>se não <span class="math inline">\(Q\)</span>, então não <span class="math inline">\(P\)</span></em>. Em outras palavras estamos dizendo: <em>Se <span class="math inline">\(Q\)</span> é falso, então <span class="math inline">\(P\)</span> é falso</em>. A contrapositiva de uma fórmula é importante porque, frequentemente, é mais fácil provar a contrapositiva de uma fórmula que a própria fórmula. E, como a contrapositiva é logicamente equivalente a sua fórmula, provar a contrapositiva é provar a fórmula. Como a contrapositiva de uma implicação e a própria implicação são logicamente equivalentes, se provamos uma, a outra está provada. Além disso, a contrapositiva preserva a validade das implicações proposicionais. Finalmente, observe que a contrapositiva troca o antecedente pelo negação do consequente e vice-versa.</p>
 <p><strong>Exemplo 1</strong>:</p>
 <p>A contrapositiva de <span class="math inline">\(P\rightarrow (Q \lor R)\)</span> é <span class="math inline">\(\lnot(Q \lor R) \rightarrow \neg P\)</span>.</p>
 <p><strong>Exemplo 2</strong>: Dizemos que uma função é injetora se $x y $implica <span class="math inline">\(f(x) \neq f(y)\)</span>. A contrapositiva desta implicação é: se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
 <p>O Exemplo 2 é uma prova de conceito. Normalmente é mais fácil assumir <span class="math inline">\(f(x) = f(y)\)</span> e deduzir <span class="math inline">\(x = y\)</span> do que assumir <span class="math inline">\(x \neq y\)</span> e deduzir <span class="math inline">\(f(x) \neq f(y)\)</span>. Isto pouco tem a ver com funções e muito com o fato de que <span class="math inline">\(x \neq y\)</span> geralmente não é uma informação útil.</p>
-<p>O que torna a contrapositiva importante é que toda <strong>Fórmula Bem Formada</strong> é logicamente equivalente à sua contrapositiva. Consequentemente, se queremos provar que uma função é injetora, é suficiente provar que se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
+<p>O que torna a contrapositiva importante é que toda implicação é logicamente equivalente à sua contrapositiva. Consequentemente, se queremos provar que uma função é injetora, é suficiente provar que se <span class="math inline">\(f(x) = f(y)\)</span> então <span class="math inline">\(x = y\)</span>.</p>
 <p>A contrapositiva funciona para qualquer declaração condicional, e matemáticos gastam muito tempo provando declarações condicionais.</p>
 <p>O que não podemos esquecer de jeito nenhum é que toda fórmula condicional terá a forma <span class="math inline">\(P\rightarrow Q\)</span>. Mostramos que isso é logicamente equivalente a <span class="math inline">\(\lnot Q \rightarrow \lnot P\)</span> verificando a Tabela Verdade para a declaração bicondicional construída a partir dessas fórmulas. E que para obter a contrapositiva basta inverter antecedente e consequente e negar ambos. mantendo a relação lógica entre os termos da implicação.</p>
 </section>
 <section id="recíproca" class="level3" data-number="5.0.4">
 <h3 data-number="5.0.4" class="anchored" data-anchor-id="recíproca"><span class="header-section-number">5.0.4</span> Recíproca</h3>
-<p>A recíproca, também conhecida como <em>conversa</em> por alguns acadêmicos brasileiros, é obtida apenas invertendo antecedente e consequente. Então, considerando a recíproca da condicional<span class="math inline">\(P\rightarrow Q\)</span> será $ q P$. Destoando da contrapositiva a recíproca não é necessariamente equivalente à implicação original. Além disso, a contrapositiva preserva a equivalência lógica, a recíproca não.</p>
-<p><strong>Exemplo 1</strong>: A conversa de <span class="math inline">\(P\rightarrow (Q \lor R)\)</span> será <span class="math inline">\((Q \lor R) \rightarrow P\)</span>.</p>
+<p>A recíproca, também conhecida como <em>conversa</em> por alguns acadêmicos brasileiros, é obtida apenas invertendo antecedente e consequente. Então, considerando a recíproca da condicional <span class="math inline">\(P\rightarrow Q\)</span> será <span class="math inline">\(Q \rightarrow P\)</span>. Diferentemente da contrapositiva a recíproca não é necessariamente equivalente à implicação original. Além disso, a contrapositiva preserva a equivalência lógica, a recíproca não.</p>
+<p><strong>Exemplo 1</strong>: A recíproca de <span class="math inline">\(P\rightarrow (Q \lor R)\)</span> será <span class="math inline">\((Q \lor R) \rightarrow P\)</span>.</p>
 <p><strong>Exemplo 2</strong>: Dizemos que uma função é bem definida se cada entrada tem uma saída única. Assim, uma função é bem definida se <span class="math inline">\(x = y\)</span> implica <span class="math inline">\(f(x) = f(y)\)</span>. Observe estas fórmulas:</p>
 <ol type="1">
 <li><p><span class="math inline">\(f(x)\)</span> é bem definida significa que <span class="math inline">\(x = y \rightarrow f(x) = f(y)\)</span>.</p></li>
 <li><p><span class="math inline">\(f(x)\)</span> é injetora significa que <span class="math inline">\(f(x) = f(y) \rightarrow x = y\)</span>.</p></li>
 </ol>
 <p>Podemos ver que <em><span class="math inline">\(f(x)\)</span> é bem definida</em> é a recíproca de <em><span class="math inline">\(f(x)\)</span> é injetora</em>.</p>
-<p>Para provar uma bicondicional como <em>o número é primo se e somente se o número é ímpar</em>, um matemático frequentemente prova <em>se o número é primo, então o número é ímpar</em> e depois prova a recíproca, <em>se o número é ímpar, então o número é primo</em>. Nenhuma dessas etapas pode ser pulada, pois uma implicação e sua recíproca podem não ser logicamente equivalentes. Por exemplo, pode-se facilmente mostrar que <em>se o número é par, então o número é divisível por 2</em> não é logicamente equivalente à sua recíproca <em>se o número é divisível por 2, então o número é par</em>. Algumas fórmulas como <em>se 5 é ímpar, então 5 é ímpar</em> são equivalentes às suas recíprocas por coincidência. Para resumir, uma implicação é sempre equivalente à sua contrapositiva, mas pode não ser equivalente à sua recíproca.</p>
+<p>Para provar uma bicondicional, como <span class="math inline">\(P \leftrightarrow Q\)</span>, um matemático frequentemente divide a prova em duas etapas. Primeiro, prova-se a implicação <span class="math inline">\(P \rightarrow Q\)</span> e, depois, prova-se a sua <strong>recíproca</strong>, <span class="math inline">\(Q \rightarrow P\)</span>. Nenhuma dessas etapas pode ser pulada, pois uma implicação e sua recíproca não são, em geral, logicamente equivalentes; a verdade de uma não garante a verdade da outra.</p>
+<p>Por exemplo, considere a implicação verdadeira: <em>“Se um animal é um cão, então ele é um mamífero”</em>. Sua recíproca, <em>“Se um animal é um mamífero, então ele é um cão”</em>, é claramente falsa, pois existem muitos mamíferos que não são cães. Este exemplo mostra que uma implicação pode ser verdadeira enquanto sua recíproca é falsa. Apenas nos casos em que ambas são verdadeiras, como em <em>“um número inteiro é par se, e somente se, é divisível por 2”</em>, é que a relação bicondicional se sustenta.</p>
+<p>Para resumir, uma implicação é sempre equivalente à sua contrapositiva, mas pode não ser equivalente à sua recíproca.</p>
 </section>
 <section id="análise-de-argumentos" class="level3" data-number="5.0.5">
 <h3 data-number="5.0.5" class="anchored" data-anchor-id="análise-de-argumentos"><span class="header-section-number">5.0.5</span> Análise de Argumentos</h3>
-<p>Quando vimos regras de inferência, sem muitos floreios, definimos argumentos. mas, sem usar a palavra argumento em nenhum lugar. Vamos voltar um pouco. Definiremos um argumento proposicionalmente como sendo uma regra de inferência, então um argumento será definido por um conjunto de proposições. Quando estamos analisando argumentos chamamos as proposições de premissas logo:</p>
+<p>Quando vimos regras de inferência, sem muitos floreios, definimos argumentos. mas, sem usar a palavra argumento em nenhum lugar. Vamos voltar um pouco. Definiremos um argumento proposicionalmente como sendo uma regra de inferência, então um argumento será definido por um conjunto de proposições. Quando estamos analisando argumentos chamamos as proposições de premissas, de modo que:</p>
 <p><span class="math display">\[\frac{P_1, P_2, ..., P_n}{C}\]</span></p>
-<p>O conjunto formado <span class="math inline">\(P_1, P_2, ..., P_n\)</span>, chamado de antecedente, e $ c$, chamado de conclusão. Dizemos que o argumento será válido, só e somente se, a implicação definida por <span class="math inline">\(P_1, P_2, ..., P_n \rightarrow C\)</span> for uma tautologia. Neste caso, é muito importante percebermos que a conclusão de um argumento logicamente válido não é necessariamente verdadeira. A única coisa que a validade lógica garante é que se todas as premissas forem verdadeiras, a conclusão será verdadeira.</p>
+<p>Um argumento é formado por um conjunto de premissas <span class="math inline">\(P_1, P_2, ..., P_n\)</span>, chamado de antecedente, e uma proposição <span class="math inline">\(C\)</span>, chamada de conclusão. Dizemos que o argumento será válido, só e somente se, a implicação definida por <span class="math inline">\((P_1 \wedge P_2 \wedge ... \wedge P_n) \rightarrow C\)</span> for uma tautologia. Neste caso, é muito importante percebermos que a conclusão de um argumento logicamente válido não é necessariamente verdadeira. A única coisa que a validade lógica garante é que se todas as premissas forem verdadeiras, a conclusão será verdadeira.</p>
 <p>Podemos recuperar as regras de inferência e observá-las pelo ponto de vista da análise de argumentos. Se fizermos isso, vamos encontrar alguns formatos comuns:</p>
 <p><strong>Modus Ponens</strong>: se é verdade que se eu estudar para o exame <span class="math inline">\(P\)</span>, então eu passarei no exame, <span class="math inline">\(Q\)</span>, e também é verdade que eu estudei para o exame <span class="math inline">\(P\)</span>, então podemos concluir que eu passarei no exame <span class="math inline">\(Q\)</span>.</p>
 <p>matematicamente, sejam <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> Proposições. A forma do <em>Modus Ponens</em> é a seguinte:</p>
@@ -418,7 +420,7 @@ F &amp; F &amp; T \\
 \hline
 \end{array}
 \]</span></p>
-<p>SSe olharmos para a primeira linha, se <span class="math inline">\(P\)</span> é verdadeiro e <span class="math inline">\(P→ Q\)</span> é verdadeiro, então <span class="math inline">\(Q\)</span> é necessariamente verdadeiro, o que é exatamente a forma de Modus Ponens.</p>
+<p>Se olharmos para a primeira linha, se <span class="math inline">\(P\)</span> é verdadeiro e <span class="math inline">\(P→ Q\)</span> é verdadeiro, então <span class="math inline">\(Q\)</span> é necessariamente verdadeiro, o que é exatamente a forma de Modus Ponens.</p>
 <p><strong>Modus Tollens</strong> : se é verdade que se uma pessoa é um pássaro <span class="math inline">\(P\)</span>, então essa pessoa pode voar <span class="math inline">\(Q\)</span>, e também é verdade que essa pessoa não pode voar <span class="math inline">\(\neg Q\)</span>, então podemos concluir que essa pessoa não é um pássaro <span class="math inline">\(\neg P\)</span>. Ou:</p>
 <p>Sejam <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> Proposições. A forma do Modus Tollens é a seguinte:</p>
 <p><span class="math display">\[
@@ -470,7 +472,7 @@ F &amp; F &amp; F &amp; T &amp; T &amp; T \\
 \hline
 \end{array}
 \]</span></p>
-<p>Se olharmos para a primeira linha, se <span class="math inline">\(P\)</span> é verdadeiro, <span class="math inline">\(P\rightarrow Q\)</span> é verdadeiro e $ q r $ é verdadeiro, então $Pr $ é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Hipotético.</p>
+<p>Se olharmos para a primeira linha, se <span class="math inline">\(P\)</span> é verdadeiro, <span class="math inline">\(P\rightarrow Q\)</span> é verdadeiro e <span class="math inline">\(Q \rightarrow R\)</span> é verdadeiro, então <span class="math inline">\(P\rightarrow R\)</span> é necessariamente verdadeiro, o que é exatamente a forma de Silogismo Hipotético.</p>
 <p><strong>Silogismo Disjuntivo</strong>: <em>se é verdade que ou eu vou ao cinema <span class="math inline">\(P\)</span> ou eu vou ao teatro <span class="math inline">\(Q\)</span>, e também é verdade que eu não vou ao cinema <span class="math inline">\(\neg P\)</span>, então podemos concluir que eu vou ao teatro <span class="math inline">\(Q\)</span></em>. Ou, com um pouco mais de formalidade:</p>
 <p>Sejam <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> Proposições. A forma do Silogismo Disjuntivo é a seguinte:</p>
 <p><span class="math display">\[
@@ -499,35 +501,33 @@ F &amp; F &amp; T &amp; F \\
 </section>
 <section id="finalmente-um-sistema-de-prova" class="level3" data-number="5.0.6">
 <h3 data-number="5.0.6" class="anchored" data-anchor-id="finalmente-um-sistema-de-prova"><span class="header-section-number">5.0.6</span> Finalmente, um Sistema de Prova</h3>
-<p>Ainda estamos no domínio da <strong>Lógica Proposicional</strong> e vamos definir um sistema de prova simples e direto chamado de <span class="math inline">\(\mathfrak{L}\)</span> desenvolvido por <a href="https://en.wikipedia.org/wiki/John_Lemmon">John Lemmon</a> na primeira parte do século XX. Vamos construir a prova e, sintaticamente, em cada linha da nossa prova teremos:</p>
+<p>Ainda estamos no domínio da <strong>Lógica Proposicional</strong> e vamos definir um sistema de prova simples e direto chamado de <span class="math inline">\(\mathfrak{L}\)</span> desenvolvido por <a href="https://en.wikipedia.org/wiki/John_Lemmon">John Lemmon</a> na segunda metade do século XX. Vamos construir a prova e, sintaticamente, em cada linha da nossa prova teremos:</p>
 <ul>
 <li><strong>um axioma</strong> de <span class="math inline">\(\mathfrak{L}\)</span>. Um axioma é uma fórmula ou proposição que é aceita como verdadeira primitivamente, sem necessidade de demonstração. Por exemplo: <span class="math inline">\((p \rightarrow q) \rightarrow ((q \rightarrow r) \rightarrow (p \rightarrow r))\)</span>;</li>
 <li><strong>o resultado da aplicação do <em>Modus Ponens</em></strong>;</li>
 <li><strong>uma hipótese</strong>, na forma de fórmula;</li>
 <li><strong>ou um lema</strong>, uma proposição auxiliar demonstrável utilizada como passo intermediário na prova. Por exemplo: a derivação de fórmulas menores.</li>
 </ul>
-<p><strong>Axiomas</strong> são preposições consideradas como verdades, são absolutos. <strong>Lemas</strong> são passos intermediários no processo de prova, pequenos teoremas já provados e, finalmente temos o <strong>teorema</strong>: representado por <span class="math inline">\(\varphi\)</span>. Um teorema é uma fórmula demonstrável a partir de axiomas, lemas e das regras de inferência do sistema. Vamos começar dos axiomas.</p>
+<p><strong>Axiomas</strong> são proposições consideradas como verdades, são absolutos. <strong>Lemas</strong> são passos intermediários no processo de prova, pequenos teoremas já provados e, finalmente temos o <strong>teorema</strong>: representado por <span class="math inline">\(\varphi\)</span>. Um teorema é uma fórmula demonstrável a partir de axiomas, lemas e das regras de inferência do sistema. Vamos começar dos axiomas.</p>
 <p>Existem três axiomas no sistema <span class="math inline">\(\mathfrak{L}\)</span>. Estes axiomas formam a base do sistema dedutivo <span class="math inline">\(\mathfrak{L}\)</span> em <strong>Lógica Proposicional</strong>. Eles capturam propriedades fundamentais das implicações que permitem derivar teoremas válidos.</p>
 <p><strong>Axioma 1</strong>: <span class="math inline">\(A \rightarrow (B \rightarrow A)\)</span>, este axioma estabelece que se <span class="math inline">\(A\)</span> é verdadeiro, então a implicação <span class="math inline">\(B \rightarrow A\)</span> também é verdadeira, independentemente de <span class="math inline">\(B\)</span>. Isso porque a implicação <span class="math inline">\(B \rightarrow A\)</span> só será falsa se <span class="math inline">\(B\)</span> for verdadeiro e <span class="math inline">\(A\)</span> falso, o que não pode ocorrer se <span class="math inline">\(A\)</span> é inicialmente verdadeiro.</p>
-<p><strong>Axioma 2</strong>: <span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span>, este axioma captura a transitividade das implicações, estabelecendo que se a implicação <span class="math inline">\(A \rightarrow B\)</span> e <span class="math inline">\(B \rightarrow C\)</span> são verdadeiras, então <span class="math inline">\(A \rightarrow C\)</span> também é verdadeira.</p>
-<p><strong>Axioma 3</strong>: <span class="math inline">\((\lnot B \rightarrow \lnot A) \rightarrow ((\lnot B \rightarrow A) \rightarrow B)\)</span>, este axioma garante que se de <span class="math inline">\(\lnot B\)</span> Podemos inferir tanto <span class="math inline">\(\lnot A\)</span> quanto <span class="math inline">\(A\)</span>, então <span class="math inline">\(B\)</span> deve ser verdadeiro. Isso porque <span class="math inline">\(B\)</span> e <span class="math inline">\(\lnot B\)</span> não podem ser verdadeiros simultaneamente.</p>
+<p><strong>Axioma 2</strong>: <span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span>. Este axioma funciona como uma propriedade distributiva da implicação. Ele estabelece que, se uma hipótese <span class="math inline">\(A\)</span> implica uma segunda implicação <span class="math inline">\((B \rightarrow C)\)</span>, e se a mesma hipótese <span class="math inline">\(A\)</span> também implica <span class="math inline">\(B\)</span>, então podemos concluir que a hipótese <span class="math inline">\(A\)</span> necessariamente implica <span class="math inline">\(C\)</span>. Essencialmente, ele permite encadear deduções que dependem de uma mesma premissa inicial <span class="math inline">\(A\)</span>.</p>
+<p><strong>Axioma 3</strong>: <span class="math inline">\((\lnot B \rightarrow \lnot A) \rightarrow ((\lnot B \rightarrow A) \rightarrow B)\)</span>, este axioma garante que se de <span class="math inline">\(\lnot B\)</span> podemos inferir tanto <span class="math inline">\(\lnot A\)</span> quanto <span class="math inline">\(A\)</span>, então <span class="math inline">\(B\)</span> deve ser verdadeiro. Isso porque <span class="math inline">\(B\)</span> e <span class="math inline">\(\lnot B\)</span> não podem ser verdadeiros simultaneamente.</p>
 <p>Além dos axiomas, usaremos apenas uma regra de inferência, o <em>Modus Ponens</em>. O <em>Modus Ponens</em> está intimamente relacionado à proposição <span class="math inline">\((P \wedge (P \rightarrow Q)) \rightarrow Q\)</span>. Tanto a proposição quando a regra de inferência, de certa forma, dizem: “se <span class="math inline">\(P\)</span> e <span class="math inline">\(P\rightarrow Q\)</span> são verdadeiros, então <span class="math inline">\(Q\)</span> é verdadeiro”. Esta proposição é um exemplo de uma tautologia, porque é verdadeira para cada configuração de <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span>. A diferença é que esta tautologia é uma única proposição, enquanto o <em>Modus Ponens</em> é uma regra de inferência que nos permite deduzir novas proposições a partir proposições já provadas.</p>
-<p>Nos resta apenas destacar a última linha de uma prova. No sistema <span class="math inline">\(\mathfrak{L}\)</span>A última fórmula será chamada de teorema. Representaremos como <span class="math inline">\(\vdash A\)</span> se <span class="math inline">\(A\)</span> for um teorema. Escrevemos <span class="math inline">\(B_1, B_2, ..., B_n \vdash_L A\)</span> só, e somente só, <span class="math inline">\(A\)</span>Puder ser provado em <span class="math inline">\(\mathfrak{L}\)</span>A partir das fórmulas dadas <span class="math inline">\(B_1, B_2, ..., B_n\)</span>. Nesse caso:</p>
+<p>Nos resta apenas destacar a última linha de uma prova. No sistema <span class="math inline">\(\mathfrak{L}\)</span>, a última fórmula será chamada de teorema. Representaremos como <span class="math inline">\(\vdash A\)</span> se <span class="math inline">\(A\)</span> for um teorema. Escrevemos <span class="math inline">\(B_1, B_2, ..., B_n \vdash_L A\)</span> se, e somente se, <span class="math inline">\(A\)</span> puder ser provado em <span class="math inline">\(\mathfrak{L}\)</span> a partir das fórmulas dadas <span class="math inline">\(B_1, B_2, ..., B_n\)</span>. Nesse caso:</p>
 <ul>
 <li><p><span class="math inline">\(A\)</span>: Fórmula que é um teorema;</p></li>
-<li><p>$ g_1, …, G_n$: Fórmulas que servem como premissas;</p></li>
+<li><p><span class="math inline">\(g_1, ..., g_n\)</span>: Fórmulas que servem como premissas;</p></li>
 <li><p><span class="math inline">\(\vdash_L\)</span>: Símbolo para indicar <em>demonstrável em <span class="math inline">\(\mathfrak{L}\)</span></em>;</p></li>
-<li><p>escrevemos <span class="math inline">\(\mathfrak{L} A\)</span> Para indicar que <span class="math inline">\(A\)</span> é demonstrável no sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p></li>
+<li><p>escrevemos <span class="math inline">\(\mathfrak{L} A\)</span> para indicar que <span class="math inline">\(A\)</span> é demonstrável no sistema <span class="math inline">\(\mathfrak{L}\)</span>.</p></li>
 </ul>
 <p>Talvez tudo isso fique mais claro se fizermos algumas provas.</p>
 <p><strong>Prova 1</strong>: nosso teorema é <span class="math inline">\(A \rightarrow A\)</span></p>
 <ol type="1">
-<li><span class="math inline">\(A \rightarrow ((A \rightarrow A) \rightarrow A)\)</span> (Axioma 1 com <span class="math inline">\(A := A\)</span> e <span class="math inline">\(B := (A \rightarrow A)\)</span>)</li>
-</ol>
-<p>Aqui usamos o primeiro axioma de <span class="math inline">\(\mathfrak{L}\)</span>, que tem a forma <span class="math inline">\((A \rightarrow (B \rightarrow A))\)</span>. Para tanto usamos <span class="math inline">\(A := A\)</span> e <span class="math inline">\(B := (A \rightarrow A)\)</span> para fazer a correspondência com o axioma, obtendo a fórmula na linha. Observe que usamos o símbolo <span class="math inline">\(:=\)</span>, um símbolo que não faz parte do nosso alfabeto e aqui está sendo usado com o sentido <em>substituído por</em>. Até na matemática usamos licenças poéticas.</p>
-<ol type="1">
+<li><p><span class="math inline">\(A \rightarrow ((A \rightarrow A) \rightarrow A)\)</span> (Axioma 1 com <span class="math inline">\(A := A\)</span> e <span class="math inline">\(B := (A \rightarrow A)\)</span>)</p>
+<p>Aqui usamos o primeiro axioma de <span class="math inline">\(\mathfrak{L}\)</span>, que tem a forma <span class="math inline">\((A \rightarrow (B \rightarrow A))\)</span>. Para tanto usamos <span class="math inline">\(A := A\)</span> e <span class="math inline">\(B := (A \rightarrow A)\)</span> para fazer a correspondência com o axioma, obtendo a fórmula na linha. Observe que usamos o símbolo <span class="math inline">\(:=\)</span>, um símbolo que não faz parte do nosso alfabeto e aqui está sendo usado com o sentido <em>substituído por</em>. Até na matemática usamos licenças poéticas.</p></li>
 <li><p><span class="math inline">\((A \rightarrow ((A \rightarrow A) \rightarrow A)) \rightarrow ((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))\)</span> (Axioma 2 com <span class="math inline">\(A := A\)</span>, <span class="math inline">\(B := (A \rightarrow A)\)</span> e $ c := A$)</p>
-<p>A segunda linha usa o segundo axioma de <span class="math inline">\(\mathfrak{L}\)</span>, que é <span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span>. O autor substituiu <span class="math inline">\(A := A\)</span>, <span class="math inline">\(B := (A \rightarrow A)\)</span> e $ c := A$ Para obter a fórmula na linha.</p></li>
+<p>A segunda linha usa o segundo axioma de <span class="math inline">\(\mathfrak{L}\)</span>, que é <span class="math inline">\((A \rightarrow (B \rightarrow C)) \rightarrow ((A \rightarrow B) \rightarrow (A \rightarrow C))\)</span>. O autor substituiu <span class="math inline">\(A := A\)</span>, <span class="math inline">\(B := (A \rightarrow A)\)</span> e $ c := A$ para obter a fórmula na linha.</p></li>
 <li><p><span class="math inline">\(((A \rightarrow (A \rightarrow A)) \rightarrow (A \rightarrow A))\)</span> (<em>Modus Ponens</em> aplicado às linhas 1 e 2)</p>
 <p>Finalmente aplicamos a regra de <em>Modus Ponens</em>, que diz que se temos <span class="math inline">\(A\)</span> e também temos <span class="math inline">\(A \rightarrow B\)</span>, então podemos deduzir <span class="math inline">\(B\)</span>. As linhas 1 e 2 correspondem a <span class="math inline">\(A\)</span> e <span class="math inline">\(A \rightarrow B\)</span>, respectivamente, e ao aplicar <em>Modus Ponens</em>, obtemos <span class="math inline">\(B\)</span>, que é a fórmula na linha 3.</p></li>
 <li><p><span class="math inline">\((A \rightarrow (A \rightarrow A))\)</span> (Axioma 1 com <span class="math inline">\(A := A\)</span> e <span class="math inline">\(B := A\)</span>)</p>
@@ -536,14 +536,12 @@ F &amp; F &amp; T &amp; F \\
 <p>Finalmente, aplicamos o <em>Modus Ponens</em> às linhas 3 e 4 para obter a fórmula na última linha, que é o teorema que tentamos provar.</p>
 <p>Então, o primeiro teorema está correto e podemos escrever <span class="math inline">\(\vdash \mathfrak{L} A\)</span>.</p></li>
 </ol>
-<p><strong>Prova 2</strong>: vamos tentar provar <span class="math inline">\(\vdash (\lnot B \rightarrow B) \rightarrow B\)</span> <strong>Prova 2</strong>: vamos provar <span class="math inline">\(\vdash (\lnot B \rightarrow B) \rightarrow B\)</span></p>
+<p><strong>Prova 2</strong>: vamos tentar provar <span class="math inline">\(\vdash (\lnot B \rightarrow B) \rightarrow B\)</span></p>
 <p>Para esta prova, utilizaremos o Teorema 1 (<span class="math inline">\(\vdash A \rightarrow A\)</span>) como um lema e o Axioma 3. O Axioma 3 é: <span class="math inline">\((\lnot X \rightarrow \lnot Y) \rightarrow ((\lnot X \rightarrow Y) \rightarrow X)\)</span>.</p>
 <ol type="1">
 <li><p><span class="math inline">\(\lnot B \rightarrow \lnot B\)</span> (Lema, Teorema 1 com <span class="math inline">\(A\)</span> substituído por <span class="math inline">\(\lnot B\)</span>)</p></li>
 <li><p><span class="math inline">\((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)\)</span> (Instância do Axioma 3, em que <span class="math inline">\(X\)</span> do axioma é <span class="math inline">\(B\)</span> da nossa meta, e <span class="math inline">\(Y\)</span> do axioma é <span class="math inline">\(B\)</span> da nossa meta. Substituindo <span class="math inline">\(X\)</span> por <span class="math inline">\(B\)</span> e <span class="math inline">\(Y\)</span> por <span class="math inline">\(B\)</span> no Axioma 3: <span class="math inline">\((\lnot B \rightarrow \lnot B) \rightarrow ((\lnot B \rightarrow B) \rightarrow B)\)</span>)</p></li>
 <li><p><span class="math inline">\(((\lnot B \rightarrow B) \rightarrow B)\)</span> (Modus Ponens aplicado às linhas 1 e 2. A linha 1 é o antecedente da implicação na linha 2.)</p></li>
-<li><p><span class="math inline">\((\lnot B \rightarrow B) \rightarrow B\)</span> (Aplicação do Axioma 1 com <span class="math inline">\(A := \lnot B\)</span> e <span class="math inline">\(B := B\)</span>)</p>
-<p>Finalmente, aplicamos o primeiro axioma, que é <span class="math inline">\(A \rightarrow (B \rightarrow A)\)</span>, substituindo <span class="math inline">\(A\)</span> Por <span class="math inline">\(\lnot B\)</span> e <span class="math inline">\(B\)</span> Por <span class="math inline">\(B\)</span> Para obter o teorema que estamos tentando provar.</p></li>
 </ol>
 <p><strong>Prova 3</strong>: vamos tentar novamente, desta vez com <span class="math inline">\(\vdash ((A \land B) \rightarrow C)\)</span></p>
 <ol type="1">
@@ -575,7 +573,7 @@ F &amp; F &amp; F &amp; F &amp; T \\
 \hline
 \end{array}
 \]</span></p>
-<p>Como podemos ver, a coluna final, que representa o teorema <span class="math inline">\((A \land B) \rightarrow C\)</span>, não é sempre verdadeira. Isso significa que a proposição <span class="math inline">\((A \land B) \rightarrow C\)</span> não é uma tautologia, existe uma situação, quando <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> são verdadeiros, mas $ c$ é falso, em que a proposição inteira é falsa. Basta isso para que o teorema seja falso.</p>
+<p>Como podemos ver, a coluna final, que representa o teorema <span class="math inline">\((A \land B) \rightarrow C\)</span>, não é sempre verdadeira. Isso significa que a proposição <span class="math inline">\((A \land B) \rightarrow C\)</span> não é uma tautologia, existe uma situação, quando <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> são verdadeiros, mas <span class="math inline">\(C\)</span> é falso, em que a proposição inteira é falsa. Basta isso para que a proposição não seja uma tautologia e, portanto, não possa ser provada como um teorema.</p>
 <p>A nossa terceira prova mostra os limites do sistema <span class="math inline">\(\mathfrak{L}\)</span>, o que pode dar uma falsa impressão sobre o a capacidade deste sistema de prova. Vamos tentar melhorar isso.</p>
 <section id="lema" class="level4" data-number="5.0.6.1">
 <h4 data-number="5.0.6.1" class="anchored" data-anchor-id="lema"><span class="header-section-number">5.0.6.1</span> Lema</h4>
@@ -693,14 +691,14 @@ A \rightarrow C
 </section>
 <section id="exemplo-2-inovação-tecnológica-nuclear-2023" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="exemplo-2-inovação-tecnológica-nuclear-2023"><span class="header-section-number">5.1.2</span> Exemplo 2: Inovação Tecnológica Nuclear (2023)</h3>
-<p>“O campo da fusão nuclear teve um grande avanço em 2023. A fusão nuclear é uma reação química que produz uma grande quantidade de calor que pode ser usada para gerar energia. É o mesmo processo que alimenta o sol. A reação química é produzida por dois núcleos atômicos leves que se combinam e formam um único núcleo atômico leve mais pesado. Isso produz uma grande quantidade de energia.”</p>
+<p>“O campo da fusão nuclear teve um grande avanço em 2023. A fusão nuclear é uma reação nuclear que produz uma grande quantidade de calor que pode ser usada para gerar energia. É o mesmo processo que alimenta o sol. A reação nuclear é produzida por dois núcleos atômicos leves que se combinam e formam um único núcleo atômico leve mais pesado. Isso produz uma grande quantidade de energia.”</p>
 <section id="premissas-e-conclusão-1" class="level4" data-number="5.1.2.1">
 <h4 data-number="5.1.2.1" class="anchored" data-anchor-id="premissas-e-conclusão-1"><span class="header-section-number">5.1.2.1</span> Premissas e Conclusão</h4>
 <p><strong>Premissas</strong>:</p>
 <ol type="1">
-<li>A fusão nuclear é uma reação que ocorre quando dois núcleos atômicos leves se combinam formando um único núcleo mais pesado;</li>
-<li>Esta reação produz grande quantidade de calor;</li>
-<li>O calor pode ser usado para gerar energia;</li>
+<li>A fusão nuclear é uma reação que ocorre quando dois núcleos atômicos leves se combinam formando um único núcleo mais pesado.</li>
+<li>Esta reação produz grande quantidade de calor.</li>
+<li>O calor pode ser usado para gerar energia.</li>
 <li>A fusão nuclear é o mesmo processo que alimenta o sol.</li>
 </ol>
 <p><strong>Conclusão</strong>:</p>
@@ -712,20 +710,20 @@ A \rightarrow C
 <h4 data-number="5.1.2.2" class="anchored" data-anchor-id="formalização-lógica-1"><span class="header-section-number">5.1.2.2</span> Formalização Lógica</h4>
 <p><strong>Lógica Proposicional</strong>:</p>
 <ul>
-<li><span class="math inline">\(P\)</span>: A fusão nuclear é uma reação em que núcleos leves se combinam formando um núcleo mais pesado;</li>
-<li><span class="math inline">\(Q\)</span>: A fusão nuclear produz grande quantidade de calor;</li>
-<li><span class="math inline">\(R\)</span>: O calor pode ser usado para gerar energia;</li>
-<li><span class="math inline">\(S\)</span>: A fusão nuclear é o mesmo processo que alimenta o sol;</li>
+<li><span class="math inline">\(P\)</span>: A fusão nuclear é uma reação em que núcleos leves se combinam formando um núcleo mais pesado.</li>
+<li><span class="math inline">\(Q\)</span>: A fusão nuclear produz grande quantidade de calor.</li>
+<li><span class="math inline">\(R\)</span>: O calor pode ser usado para gerar energia.</li>
+<li><span class="math inline">\(S\)</span>: A fusão nuclear é o mesmo processo que alimenta o sol.</li>
 <li><span class="math inline">\(T\)</span>: O campo da fusão nuclear teve um grande avanço em 2023.</li>
 </ul>
 <p>Estrutura do argumento: <span class="math inline">\((P \land Q \land R \land S) \rightarrow T\)</span></p>
 <p><strong>Lógica de Predicados</strong>:</p>
 <ul>
-<li><span class="math inline">\(FusaoNuclear(x)\)</span>: <span class="math inline">\(x\)</span> é um processo de fusão nuclear;</li>
-<li><span class="math inline">\(Reacao(x, y, z)\)</span>: <span class="math inline">\(x\)</span> é uma reação em que <span class="math inline">\(y\)</span> se combina formando <span class="math inline">\(z\)</span>;</li>
-<li><span class="math inline">\(Produz(x, y)\)</span>: <span class="math inline">\(x\)</span> produz <span class="math inline">\(y\)</span>;</li>
-<li><span class="math inline">\(PodeGerarEnergia(x)\)</span>: <span class="math inline">\(x\)</span> pode ser usado para gerar energia;</li>
-<li><span class="math inline">\(AlimentaSol(x)\)</span>: <span class="math inline">\(x\)</span> é o processo que alimenta o sol;</li>
+<li><span class="math inline">\(FusaoNuclear(x)\)</span>: <span class="math inline">\(x\)</span> é um processo de fusão nuclear.</li>
+<li><span class="math inline">\(Reacao(x, y, z)\)</span>: <span class="math inline">\(x\)</span> é uma reação em que <span class="math inline">\(y\)</span> se combina formando <span class="math inline">\(z\)</span>.</li>
+<li><span class="math inline">\(Produz(x, y)\)</span>: <span class="math inline">\(x\)</span> produz <span class="math inline">\(y\)</span>.</li>
+<li><span class="math inline">\(PodeGerarEnergia(x)\)</span>: <span class="math inline">\(x\)</span> pode ser usado para gerar energia.</li>
+<li><span class="math inline">\(AlimentaSol(x)\)</span>: <span class="math inline">\(x\)</span> é o processo que alimenta o sol.</li>
 <li><span class="math inline">\(TeveAvanco(x, y, z)\)</span>: o campo <span class="math inline">\(x\)</span> teve um avanço de grau <span class="math inline">\(y\)</span> no ano <span class="math inline">\(z\)</span>.</li>
 </ul>
 <p><strong>Formalização</strong>:</p>
@@ -744,13 +742,12 @@ A \rightarrow C
 </section>
 <section id="análise-da-solidez-1" class="level4" data-number="5.1.2.4">
 <h4 data-number="5.1.2.4" class="anchored" data-anchor-id="análise-da-solidez-1"><span class="header-section-number">5.1.2.4</span> Análise da Solidez</h4>
-<p>Como o argumento não é formalmente válido, não pode ser considerado sólido. Entretanto, suas premissas são majoritariamente verdadeiras:</p>
+<p>Como o argumento não é formalmente válido, não pode ser considerado sólido. Entretanto, suas premissas descritivas são majoritariamente verdadeiras:</p>
 <ul>
-<li>A definição de fusão nuclear como combinação de núcleos leves é cientificamente precisa;</li>
-<li>A produção de calor e seu potencial energético são verdadeiros;</li>
+<li>A definição de fusão nuclear como combinação de núcleos leves é cientificamente precisa.</li>
+<li>A produção de calor e seu potencial energético são verdadeiros.</li>
 <li>A fusão nuclear realmente alimenta o sol.</li>
 </ul>
-<p>Há um erro conceitual no texto: a fusão nuclear é descrita como “reação química”, quando na verdade é uma reação nuclear, comprometendo a precisão científica do texto.</p>
 </section>
 </section>
 <section id="exemplo-3-economia-global-2023" class="level3" data-number="5.1.3">
@@ -785,7 +782,7 @@ A \rightarrow C
 <ul>
 <li><span class="math inline">\(ApertoSurteEfeito(x)\)</span>: o aperto da política monetária <span class="math inline">\(x\)</span> está surtindo efeito;</li>
 <li><span class="math inline">\(PoliticaRigida(x)\)</span>: <span class="math inline">\(x\)</span> é uma política monetária rígida;</li>
-<li><span class="math inline">\(PrecosBaixos(x)\)</span>: os preços de $<span class="math inline">\(x\)</span> estão baixos;</li>
+<li><span class="math inline">\(PrecosBaixos(x)\)</span>: os preços de <span class="math inline">\(x\)</span> estão baixos;</li>
 <li><span class="math inline">\(Desacelerar(x, y, z)\)</span>: a economia <span class="math inline">\(x\)</span> desacelerará para taxa <span class="math inline">\(y\)</span> no ano <span class="math inline">\(z\)</span>;</li>
 <li><span class="math inline">\(DiminuirInflacao(x, y, z)\)</span>: a inflação <span class="math inline">\(x\)</span> diminuirá para taxa <span class="math inline">\(y\)</span> no ano <span class="math inline">\(z\)</span>.</li>
 </ul>
@@ -1073,7 +1070,7 @@ A \rightarrow C
 <p>As conclusões derivadas são sólidas e representam um sistema de recomendação funcional que equilibra relevância, novidade e preferências do usuário.</p>
 <section id="exercício-5-sistema-de-detecção-de-fraudes" class="level4" data-number="5.1.6.1">
 <h4 data-number="5.1.6.1" class="anchored" data-anchor-id="exercício-5-sistema-de-detecção-de-fraudes"><span class="header-section-number">5.1.6.1</span> Exercício 5: Sistema de Detecção de Fraudes</h4>
-<p><strong>Fragmento Texto Original</strong>: “O sistema de detecção de fraudes deve analisar cada transação em tempo real. Uma transação é marcada como suspeita se atender a pelo menos um dos seguintes critérios: valor acima do padrão histórico do cliente, localização geográfica incomum, ou múltiplas tentativas em curto período de tempo. Se dois ou mais critérios forem atendidos simultaneamente, a transação é automaticamente bloqueada e enviada para revisão manual. Caso contrário, se apenas um critério for atendido, o cliente recebe uma notificação de confirmação. Se o cliente não confirmar em 5 minutos, a transação é bloqueada preventivamente.”</p>
+<p><strong>Fragmento Texto Original</strong>: <em>“O sistema de detecção de fraudes deve analisar cada transação em tempo real. Uma transação é marcada como suspeita se atender a pelo menos um dos seguintes critérios: valor acima do padrão histórico do cliente, localização geográfica incomum, ou múltiplas tentativas em curto período de tempo. Se dois ou mais critérios forem atendidos simultaneamente, a transação é automaticamente bloqueada e enviada para revisão manual. Caso contrário, se apenas um critério for atendido, o cliente recebe uma notificação de confirmação. Se o cliente não confirmar em 5 minutos, a transação é bloqueada preventivamente”</em>.</p>
 <p><strong>Solução</strong>: A tarefa é analisar o fragmento de texto e formalizá-lo em <strong>Lógica Proposicional</strong> e lógica de predicados, identificando premissas, conclusões e avaliando a validade e solidez do argumento.</p>
 <p><strong>Premissas</strong>:</p>
 <ol type="1">
