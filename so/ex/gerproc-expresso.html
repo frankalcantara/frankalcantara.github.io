@@ -10,6 +10,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
     <style>
         /* Variáveis CSS Comuns */
         :root {
@@ -230,7 +232,20 @@
         }
 
         /* Code styling */
-        .code-highlight {
+        /* Highlight.js customização - IMPORTANTE: Não sobrescrever cores! */
+        pre code.hljs {
+            border-radius: 8px !important;
+            padding: 1rem !important;
+            font-family: 'Courier New', monospace !important;
+            line-height: 1.5 !important;
+            font-size: 0.9rem !important;
+            overflow-x: auto !important;
+            /* NÃO definir background ou color aqui - deixar para o tema do highlight.js */
+        }
+
+        /* Para blocos sem highlight.js (fallback) */
+        .code-highlight,
+        pre code:not(.hljs) {
             background: var(--sage-800);
             color: #f8fafc;
             border-radius: 8px;
@@ -240,6 +255,7 @@
             line-height: 1.5;
             overflow-x: auto;
             margin: 1rem 0;
+            display: block;
         }
 
         /* Mobile responsive */
@@ -562,13 +578,11 @@
                                 <p class="fs-6 mb-3 text-muted">
                                     Utiliza chamadas diretas de API para gerenciamento de processos através de handles e estruturas binárias.
                                 </p>
-                                <div class="code-highlight mb-3">
-HANDLE hProcess = OpenProcess(
+                                <pre class="mb-3"><code class="language-cpp">HANDLE hProcess = OpenProcess(
     PROCESS_QUERY_INFORMATION | PROCESS_VM_READ,
     FALSE, processId
 );
-GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc));
-                                </div>
+GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc));</code></pre>
                                 <div class="p-3 bg-primary-subtle rounded">
                                     <strong class="text-primary">APIs Principais:</strong>
                                     <ul class="list-unstyled mt-2 mb-0">
@@ -587,11 +601,9 @@ GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc));
                                 <p class="fs-6 mb-3 text-muted">
                                     Segue a filosofia "tudo é arquivo", expondo informações de processos através do sistema de arquivos virtual /proc.
                                 </p>
-                                <div class="code-highlight mb-3">
-std::ifstream statusFile("/proc/1234/status");
+                                <pre class="mb-3"><code class="language-cpp">std::ifstream statusFile("/proc/1234/status");
 std::ifstream commFile("/proc/1234/comm");
-std::ifstream cmdlineFile("/proc/1234/cmdline");
-                                </div>
+std::ifstream cmdlineFile("/proc/1234/cmdline");</code></pre>
                                 <div class="p-3 bg-success-subtle rounded">
                                     <strong class="text-success">Arquivos Principais:</strong>
                                     <ul class="list-unstyled mt-2 mb-0">
@@ -705,6 +717,10 @@ std::ifstream cmdlineFile("/proc/1234/cmdline");
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- Highlight.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    
     <!-- JavaScript para TOC e Navegação -->
     <script>
         // Mobile TOC Toggle
@@ -721,6 +737,7 @@ std::ifstream cmdlineFile("/proc/1234/cmdline");
             initializeFadeAnimations();
             initializeClickOutside();
             initializeResize();
+            initializeHighlightJS();
         });
 
         // Inicializar funcionalidades do TOC
@@ -824,6 +841,53 @@ std::ifstream cmdlineFile("/proc/1234/cmdline");
                 }
             });
         }
+
+        // Inicializar Highlight.js para syntax highlighting
+        function initializeHighlightJS() {
+            // Aguardar que o hljs seja carregado
+            if (typeof hljs === 'undefined') {
+                console.warn('Highlight.js não está disponível ainda, tentando novamente em 100ms...');
+                setTimeout(initializeHighlightJS, 100);
+                return;
+            }
+            
+            try {
+                // Configurar Highlight.js
+                hljs.configure({
+                    ignoreUnescapedHTML: true,
+                    throwUnescapedHTML: false
+                });
+                
+                // Aplicar highlighting a todos os blocos de código
+                hljs.highlightAll();
+                
+                // Log para debug
+                const codeBlocks = document.querySelectorAll('pre code');
+                console.log(`Highlight.js inicializado com sucesso. Encontrados ${codeBlocks.length} blocos de código.`);
+                
+            } catch (error) {
+                console.error('Erro ao inicializar Highlight.js:', error);
+            }
+        }
+    </script>
+    
+    <!-- Inicialização manual adicional para debug -->
+    <script>
+        // Verificação adicional para debug
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (typeof hljs !== 'undefined') {
+                    console.log('Highlight.js disponível após load:', hljs);
+                    const blocks = document.querySelectorAll('pre code:not(.hljs)');
+                    if (blocks.length > 0) {
+                        console.log(`Aplicando highlight a ${blocks.length} blocos não processados...`);
+                        blocks.forEach(block => hljs.highlightElement(block));
+                    }
+                } else {
+                    console.error('Highlight.js ainda não está disponível após window.load');
+                }
+            }, 500);
+        });
     </script>
 </body>
 </html>

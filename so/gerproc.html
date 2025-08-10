@@ -341,7 +341,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#processos-a-nível-de-usuário-nascimento-vida-e-morte-de-tarefas" id="toc-processos-a-nível-de-usuário-nascimento-vida-e-morte-de-tarefas" class="nav-link" data-scroll-target="#processos-a-nível-de-usuário-nascimento-vida-e-morte-de-tarefas">Processos a Nível de Usuário: Nascimento, Vida e Morte de Tarefas</a>
   <ul class="collapse">
-  <li><a href="#seu-primeiro-processo-windows-11" id="toc-seu-primeiro-processo-windows-11" class="nav-link" data-scroll-target="#seu-primeiro-processo-windows-11">Seu primeiro Processo <strong>Windows</strong> 11</a></li>
+  <li><a href="#meu-primeiro-processo-windows-11" id="toc-meu-primeiro-processo-windows-11" class="nav-link" data-scroll-target="#meu-primeiro-processo-windows-11">Meu primeiro Processo Windows 11</a></li>
   <li><a href="#meu-primeiro-processo-linux" id="toc-meu-primeiro-processo-linux" class="nav-link" data-scroll-target="#meu-primeiro-processo-linux">Meu Primeiro Processo Linux</a></li>
   <li><a href="#clico-de-vida-de-um-processo" id="toc-clico-de-vida-de-um-processo" class="nav-link" data-scroll-target="#clico-de-vida-de-um-processo">Clico de vida de um Processo</a></li>
   <li><a href="#modelos-teóricos-do-ciclo-de-vida-do-processo" id="toc-modelos-teóricos-do-ciclo-de-vida-do-processo" class="nav-link" data-scroll-target="#modelos-teóricos-do-ciclo-de-vida-do-processo">Modelos Teóricos do Ciclo de Vida do Processo</a></li>
@@ -354,7 +354,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Gerenciamento de Processos: Introdução</h1>
+<h1 class="title"><span id="sec-gerproc" class="quarto-section-identifier">Gerenciamento de Processos: Introdução</span></h1>
 </div>
 
 
@@ -621,8 +621,8 @@ Table&nbsp;2: Benchmarks comparativos de criação de processos e threads.
 <p>Um processo é a unidade fundamental de execução de sistemas computacionais gerenciados por um <strong>Sistema Operacional</strong>, representando uma instância de um programa em andamento.</p>
 <p>Como vamos começar estudando processos de usuário. Para criar um processo a esforçada leitora pode, simplesmente, dar dois cliques rápidos com o m se em um ícone de aplicativo na tela da sua máquina. Ou, se for um pouco mais audaciosa, pode abrir um terminal e digitar um comando como <code>./meu_programa</code> e teclar <code>Enter</code>. Nestes dois casos existem duas possibilidades, o <strong>Sistema Operacional</strong> entende o clique duplo e o comando e cria um processo, ele indica um erro. Nos dois casos restam algumas dúvidas. A mais importante delas é: como o <strong>Sistema Operacional</strong> transforma esse comando em uma tarefa em execução? Vamos explorar os fundamentos do gerenciamento de processos, desde a criação até a finalização, passando por conceitos essenciais como espaço de endereçamento virtual, tabelas de páginas e o ciclo de vida de um processo.</p>
 <p>Se a corajosa leitora desejar pode tentar criar o seu próprio processo do zero. Para isso precisará ter configurado o seu próprio ambiente de desenvolvimento. Eu recomendo que, no <strong>Linux</strong>, você use o <a href="https://code.visualstudio.com/">Visual Studio Code</a> como editor de código, o <a href="https://cmake.org/">CMake</a> como sistema de construção e o <a href="https://llvm.org/">LLVM</a> como compilador. No Windows, você pode montar um ambiente parecido com esse ou, simplesmente usar o Visual Studio com o <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Visual Studio Build Tools</a> e o <a href="https://cmake.org/">CMake</a>. No macOS, você pode usar o Visual Studio Code com o <a href="https://developer.apple.com/xcode/features/">Xcode Command Line Tools</a> e o <a href="https://cmake.org/">CMake</a>.</p>
-<section id="seu-primeiro-processo-windows-11" class="level3">
-<h3 class="anchored" data-anchor-id="seu-primeiro-processo-windows-11">Seu primeiro Processo <strong>Windows</strong> 11</h3>
+<section id="meu-primeiro-processo-windows-11" class="level3">
+<h3 class="anchored" data-anchor-id="meu-primeiro-processo-windows-11">Meu primeiro Processo Windows 11</h3>
 <p>Os programas <strong>Windows</strong> são executados como processos, e o <strong>Sistema Operacional</strong> <strong>Windows</strong> 11 fornece uma API rica para criar e gerenciar esses processos. Fazer um <em>Hello World</em> seria denegrir a capacidade da esforçada leitora. Sendo assim, a seguir está um exemplo de como listar os processos que estão em execução em uma máquina rodando <strong>Windows</strong> 11, usando a API do <strong>Windows</strong> em C++23:</p>
 <div id="lst-cppwindows1" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
@@ -961,7 +961,7 @@ Note
 <p>Quando chamamos <code>OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId)</code>, o <strong>Sistema Operacional</strong> verifica as permissões e, se aprovadas, retorna um valor do tipo <code>HANDLE</code> que referencia internamente as estruturas de dados do <code>kernel</code> relacionadas àquele processo. Este <code>handle</code> não é um ponteiro direto, é um índice para uma tabela interna do <strong>Sistema Operacional</strong> que mapeia o objeto real.</p>
 <p>É fundamental fechar todo <code>handle</code> obtido usando <code>CloseHandle()</code> ao final de sua utilização, pois handles são recursos limitados do sistema. Falhar em liberá-los pode causar vazamentos de recursos, <em>resource leaks</em> que, em casos extremos, podem esgotar a capacidade do sistema de criar novos <code>handles</code>. O padrão <strong>R</strong>esource <strong>A</strong>cquisition <strong>I</strong>s <strong>I</strong>nitialization, <strong>RAII</strong> do C++ pode ser usado com classes <em>wrapper</em> para garantir liberação automática de <code>handles</code>.</p>
 <p>A exibição dos dados coletados será feita pelo método <code>displayProcesses()</code>, que demonstra o uso de recursos modernos do C++ como <code>std::format</code> para formatação elegante de <em>strings</em> e <code>std::ranges::sort</code> para ordenação funcional dos processos por <strong>PID</strong>. O programa também oferece o método <code>getStatistics()</code> que calcula estatísticas gerais do sistema usando <em>structured bindings</em>, e o método <code>filterByName()</code> que implementa filtragem de processos usando <code>std::ranges::copy_if</code>. A função <code>main()</code> orquestra todo o fluxo do programa, configurando adequadamente a saída Unicode com <code>std::wcout.imbue(std::locale(""))</code>, não me preocupei com saídas corretamente acentuadas em português, e demonstrando o uso prático de todas as funcionalidades implementadas.</p>
-<p>O código utiliza características avançadas do C++23 e 20. A implementação garante que <code>handles</code> de processos sejam adequadamente fechados com <code>CloseHandle()</code>, evitando vazamentos de recursos, e usa técnicas modernas como <code>emplace_back()</code> para construção eficiente de objetos diretamente no contêiner. Este programa serve como uma demonstração de como interfaces de sistema de baixo nível podem ser encapsuladas em código C++ moderno, mantendo tanto a eficiência quanto a legibilidade e manutenibilidade. Ao executar este código a leitora verá, no terminal uma lista de processos algo como:</p>
+<p>O código utiliza características avançadas do C++ disponíveis a partir do C++20. A implementação garante que <code>handles</code> de processos sejam adequadamente fechados com <code>CloseHandle()</code>, evitando vazamentos de recursos, e usa técnicas modernas como <code>emplace_back()</code> para construção eficiente de objetos diretamente no contêiner. Este programa serve como uma demonstração de como interfaces de sistema de baixo nível podem ser encapsuladas em código C++ moderno, mantendo tanto a eficiência quanto a legibilidade e manutenibilidade. Ao executar este código a leitora verá, no terminal uma lista de processos algo como:</p>
 <div id="lst-shell1" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-shell1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -992,6 +992,19 @@ Estatísticas:
 </figure>
 </div>
 <p>A listagem <a href="#lst-shell1" class="quarto-xref">Listing&nbsp;<span>2</span></a> foi manualmente editada, eu encurtei os caminhos, paths em inglês, para que coubessem na página e também limitei a listagem aos últimos processos que estão rodando na minha máquina <strong>Windows</strong> 11, neste momento em que escrevo, rodo códigos de teste faço buscas na web e em sistemas de inteligência artificial. Como a atenta leitora percebeu, neste momento minha máquina está rodando <span class="math inline">\(322\)</span> processos usando um quarto da capacidade de memória da minha máquina. Observe também que alguns dos processos estão com o <code>acesso negado</code>, isso acontece porque o programa não tem permissão para acessar os detalhes desses processos. Outros processos, como o <code>msedge.exe</code>, são executáveis comuns que a leitora pode reconhecer como parte do navegador Microsoft Edge.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Você pode ver um resumo do <a href="#lst-cppwindows1" class="quarto-xref">Listing&nbsp;<span>1</span></a> no <a href=".\ex\gerproc1-expresso.html">Expresso</a>.</p>
+</div>
+</div>
 </section>
 <section id="meu-primeiro-processo-linux" class="level3">
 <h3 class="anchored" data-anchor-id="meu-primeiro-processo-linux">Meu Primeiro Processo Linux</h3>

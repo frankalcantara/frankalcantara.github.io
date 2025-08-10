@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFadeAnimations();
     initializeClickOutside();
     initializeResize();
+    initializeHighlightJS();
 });
 
 // Inicializar funcionalidades do TOC
@@ -197,4 +198,41 @@ if (typeof MutationObserver !== 'undefined') {
             });
         }
     });
+}
+
+// Inicializar Highlight.js para syntax highlighting
+function initializeHighlightJS() {
+    // Aguardar que o hljs seja carregado
+    if (typeof hljs === 'undefined') {
+        console.warn('Highlight.js não está disponível ainda, tentando novamente em 100ms...');
+        setTimeout(initializeHighlightJS, 100);
+        return;
+    }
+    
+    try {
+        // Configurar Highlight.js
+        hljs.configure({
+            ignoreUnescapedHTML: true,
+            throwUnescapedHTML: false
+        });
+        
+        // Aplicar highlighting a todos os blocos de código
+        hljs.highlightAll();
+        
+        // Log para debug
+        const codeBlocks = document.querySelectorAll('pre code');
+        console.log(`Highlight.js inicializado com sucesso. Encontrados ${codeBlocks.length} blocos de código.`);
+        
+        // Verificar se as classes foram aplicadas
+        codeBlocks.forEach((block, index) => {
+            console.log(`Bloco ${index + 1}:`, {
+                hasHljsClass: block.classList.contains('hljs'),
+                languageClass: Array.from(block.classList).find(c => c.startsWith('language-')),
+                innerHTML: block.innerHTML.substring(0, 50) + '...'
+            });
+        });
+        
+    } catch (error) {
+        console.error('Erro ao inicializar Highlight.js:', error);
+    }
 }

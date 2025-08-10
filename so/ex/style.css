@@ -565,3 +565,161 @@ pre[style*="font-size"] code.hljs {
     margin-right: 1rem;
     font-weight: bold;
 }
+
+/* Estilos específicos do gerproc1-expresso.html */
+
+/* Code highlighting */
+.code-highlight {
+    background: var(--sage-800);
+    color: #f8fafc;
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+/* Highlight.js customização - IMPORTANTE: Não sobrescrever cores! */
+pre code.hljs {
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+    margin: 1.5rem 0 !important;
+    font-family: 'Courier New', monospace !important;
+    line-height: 1.6 !important;
+    font-size: 0.9rem !important;
+    overflow-x: auto !important;
+    /* NÃO definir background ou color aqui - deixar para o tema do highlight.js */
+}
+
+/* Para blocos sem highlight.js (fallback) */
+pre code:not(.hljs) {
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    background: var(--sage-800);
+    color: #f8fafc;
+    display: block;
+    margin: 1.5rem 0;
+}
+
+/* Preserve existing custom styles for code that don't use highlight.js */
+.api-call pre code.hljs,
+.definition-box pre code.hljs {
+    margin: 0 !important;
+}
+
+.api-call pre code:not(.hljs),
+.definition-box pre code:not(.hljs) {
+    margin: 0;
+}
+
+/* Exercise styling */
+.exercise-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--sage-600);
+}
+
+/* Icon Badges */
+.badge-primary { background: #3b82f6; }
+.badge-success { background: #10b981; }
+.badge-warning { background: #f59e0b; }
+.badge-info { background: #0ea5e9; }
+.badge-danger { background: #ef4444; }
+
+/* API Call styling */
+.api-call {
+    background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+    border: 1px solid #0277bd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.api-title {
+    font-weight: 600;
+    color: #01579b;
+    margin-bottom: 0.5rem;
+}
+
+/* Memory layout styling */
+.memory-block {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border: 2px solid #ff9800;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.5rem;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+}
+
+/* Process flow */
+.flow-step {
+    background: white;
+    border-left: 4px solid var(--sage-600);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0 8px 8px 0;
+    position: relative;
+}
+
+.flow-step::before {
+    content: attr(data-step);
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--sage-600);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+/* Security badges */
+.security-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.25rem;
+}
+
+.privilege-high { background: #ffebee; color: #c62828; }
+.privilege-medium { background: #fff3e0; color: #ef6c00; }
+.privilege-low { background: #e8f5e8; color: #2e7d32; }
+
+/* Architecture diagram */
+.arch-layer {
+    background: white;
+    border: 2px solid var(--sage-300);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.kernel-space {
+    background: linear-gradient(135deg, #ffcdd2, #f8bbd9);
+    border-color: #e91e63;
+}
+
+.user-space {
+    background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+    border-color: #03a9f4;
+}

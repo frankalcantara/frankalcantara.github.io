@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Process Lister: Interação Avançada com o Sistema Operacional Windows</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- CSS Externo -->
+    <link href="style.css" rel="stylesheet"/>
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#visao-geral" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Visão Geral</a></li>
+                <li class="mb-2"><a href="#estruturas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Estruturas de Dados</a></li>
+                <li class="mb-2"><a href="#interacao-so" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Interação com SO</a></li>
+                <li class="mb-2"><a href="#funcoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Funções e Métodos</a></li>
+                <li class="mb-2"><a href="#codigo-exemplo" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Código Exemplo</a></li>
+                <li class="mb-2"><a href="#conceitos-avancados" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Conceitos Avançados</a></li>
+                <li class="mb-2"><a href="#aplicacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Aplicações</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-windows me-2 text-primary"></i><small class="text-primary fw-medium">API Windows</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-memory me-2 text-success"></i><small class="text-success fw-medium">Gerenciamento</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-cogs me-2 text-warning"></i><small class="text-warning fw-medium">Processos</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-shield-alt me-2 text-info"></i><small class="text-info fw-medium">Segurança</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Process Lister</em>
+                                    <span class="d-block">Programação de Sistemas</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Interação avançada com API do Windows
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">C++23</div>
+                            <div class="fs-6 text-muted">Padrão Moderno</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">API</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Windows Nativa</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-windows fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">API Windows</h3>
+                                <p class="fs-7 text-muted">psapi.dll e kernel32.dll</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-memory fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Working Set</h3>
+                                <p class="fs-7 text-muted">Gerenciamento de memória</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-cogs fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Processos</h3>
+                                <p class="fs-7 text-muted">Enumeração e consulta</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-shield-alt fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Segurança</h3>
+                                <p class="fs-7 text-muted">HANDLEs e privilégios</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução à Programação de Sistemas Windows</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        O <strong>process_lister.cpp</strong> representa um exemplo completo de programação de sistemas em Windows, demonstrando a interação direta com o kernel através da API nativa. Este programa ilustra conceitos fundamentais de sistemas operacionais em ação real.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Este código é uma ponte entre o mundo das abstrações de alto nível e a realidade crua do sistema operacional, onde cada byte de memória e cada handle têm significado preciso"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Programação de Sistemas">Windows System Programming</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">C++23 Moderno</h3>
+                                <p class="fs-6 text-muted">Utiliza std::format, std::ranges e recursos avançados da linguagem</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Arquitetura Híbrida</h3>
+                                <p class="fs-6 text-muted">Combina abstrações C++ com APIs de baixo nível do Windows</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-microscope"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Inspeção Profunda</h3>
+                                <p class="fs-6 text-muted">Acesso direto às estruturas internas do kernel Windows</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visão Geral -->
+        <section id="visao-geral" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Visão Geral do Sistema</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Funcionalidade Principal</div>
+                        <p class="mb-2">
+                            O programa é uma ferramenta de linha de comando que lista os processos atualmente em execução no sistema Windows, exibindo para cada processo:
+                        </p>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fas fa-id-card me-2 text-primary"></i><strong>ID do Processo (PID)</strong> - Identificador único do kernel</li>
+                            <li class="mb-2"><i class="fas fa-file-code me-2 text-success"></i><strong>Nome do Executável</strong> - Nome do módulo principal</li>
+                            <li class="mb-2"><i class="fas fa-memory me-2 text-warning"></i><strong>Uso de Memória</strong> - Working Set em bytes</li>
+                            <li class="mb-2"><i class="fas fa-folder-open me-2 text-info"></i><strong>Caminho Completo</strong> - Path absoluto do executável</li>
+                        </ul>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Tecnologias Utilizadas</h3>
+                                
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr>
+                                                <th>Componente</th>
+                                                <th>Tecnologia</th>
+                                                <th>Propósito</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Linguagem</strong></td>
+                                                <td>C++23</td>
+                                                <td>Performance e controle</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>API</strong></td>
+                                                <td>Windows API</td>
+                                                <td>Acesso ao sistema</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DLL</strong></td>
+                                                <td>psapi.dll</td>
+                                                <td>Informações de processo</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>DLL</strong></td>
+                                                <td>kernel32.dll</td>
+                                                <td>Funções básicas do kernel</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Arquitetura do Sistema</h3>
+                                
+                                <div class="arch-layer user-space">
+                                    <h5 class="fs-6 fw-semibold mb-2">User-Space</h5>
+                                    <div class="memory-block">process_lister.exe</div>
+                                    <div class="memory-block">std::vector&lt;ProcessInfo&gt;</div>
+                                    <div class="memory-block">C++ Standard Library</div>
+                                </div>
+                                
+                                <div class="text-center my-2">
+                                    <i class="fas fa-arrow-up-down fs-4 text-muted"></i><br>
+                                    <small class="text-muted">System Calls</small>
+                                </div>
+                                
+                                <div class="arch-layer kernel-space">
+                                    <h5 class="fs-6 fw-semibold mb-2">Kernel-Space</h5>
+                                    <div class="memory-block">EPROCESS Blocks</div>
+                                    <div class="memory-block">Process Manager</div>
+                                    <div class="memory-block">Memory Manager</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-info-circle me-2"></i>Informações Coletadas
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>PID (Process ID):</strong> Identificador único de 32 bits atribuído pelo kernel no momento da criação do processo
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Working Set:</strong> Conjunto de páginas da memória virtual que estão atualmente carregadas na RAM física
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Module Name:</strong> Nome do módulo executável principal extraído dos metadados do processo
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Full Path:</strong> Caminho absoluto do arquivo executável no sistema de arquivos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Estruturas de Dados -->
+        <section id="estruturas" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Estruturas de Dados e Relação com o SO</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        O código utiliza uma combinação estratégica de estruturas C++ modernas e tipos primitivos da API Windows, criando uma ponte eficiente entre as abstrações de alto nível e os dados do kernel.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">struct ProcessInfo - Agregação Local</h3>
+                        
+                        <pre><code class="language-cpp">struct ProcessInfo {
+    DWORD processId;           // PID do kernel Windows
+    std::wstring processName;  // Nome do módulo (UTF-16)
+    std::wstring fullPath;     // Caminho completo (UTF-16)
+    SIZE_T workingSetSize;     // Working Set em bytes
+};</code></pre>
+                        
+                        <div class="row g-4 mt-3">
+                            <div class="col-md-6">
+                                <div class="definition-box">
+                                    <div class="definition-title">Propósito no Código</div>
+                                    <p class="mb-0">Serve como um contêiner de dados local, facilitando o gerenciamento (armazenamento, ordenação, filtragem) das informações após serem obtidas do SO. É uma abstração C++ que encapsula dados do kernel.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="definition-box">
+                                    <div class="definition-title">Correspondência no Kernel</div>
+                                    <p class="mb-0">Cada campo corresponde a um dado mantido pelo Kernel do Windows em sua estrutura interna <code>EPROCESS</code> block. É uma representação em user-space de dados do kernel-space.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Tipos de Dados Específicos</h3>
+                                
+                                <div class="api-call mb-3">
+                                    <div class="api-title">DWORD processId</div>
+                                    <p class="mb-2"><strong>Tipo:</strong> typedef para uint32_t da API Windows</p>
+                                    <p class="mb-0"><strong>Kernel:</strong> Identificador único que o Kernel atribui no <code>EPROCESS.UniqueProcessId</code>. É a "chave primária" na tabela de processos do SO.</p>
+                                </div>
+                                
+                                <div class="api-call mb-3">
+                                    <div class="api-title">std::wstring (Nome e Caminho)</div>
+                                    <p class="mb-2"><strong>Tipo:</strong> String Unicode UTF-16</p>
+                                    <p class="mb-0"><strong>Razão:</strong> API Windows opera nativamente com wchar_t para suportar caracteres internacionais. Extraído dos metadados do módulo executável na memória.</p>
+                                </div>
+                                
+                                <div class="api-call">
+                                    <div class="api-title">SIZE_T workingSetSize</div>
+                                    <p class="mb-2"><strong>Tipo:</strong> Tamanho em bytes (64-bit em x64)</p>
+                                    <p class="mb-0"><strong>Kernel:</strong> Métrica específica do Memory Manager - páginas da memória virtual carregadas na RAM física.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Estruturas Agregadoras</h3>
+                                
+                                <div class="definition-box mb-3">
+                                    <div class="definition-title">std::vector&lt;ProcessInfo&gt;</div>
+                                    <p class="mb-2"><strong>Propósito:</strong> Contêiner dinâmico para múltiplos objetos ProcessInfo</p>
+                                    <p class="mb-0"><strong>Memória:</strong> Alocada no heap via HeapAlloc → VirtualAlloc do kernel</p>
+                                </div>
+                                
+                                <div class="definition-box mb-3">
+                                    <div class="definition-title">std::vector&lt;DWORD&gt; processIds</div>
+                                    <p class="mb-2"><strong>Propósito:</strong> Buffer temporário para EnumProcesses</p>
+                                    <p class="mb-0"><strong>Função:</strong> Recebe PIDs diretamente da chamada da API - exemplo de buffer user-space preenchido pelo kernel</p>
+                                </div>
+                                
+                                <div class="flow-step" data-step="1">
+                                    <strong>Kernel cria EPROCESS</strong><br>
+                                    <small>Estrutura interna no kernel-space</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="2">
+                                    <strong>API copia dados</strong><br>
+                                    <small>Transição kernel → user space</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="3">
+                                    <strong>ProcessInfo armazena</strong><br>
+                                    <small>Estrutura C++ no heap do processo</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Working Set: Conceito Fundamental</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <p class="mb-3">O <strong>Working Set</strong> não é apenas um número - é uma métrica específica do Memory Manager do Windows que representa o conjunto de páginas de memória virtual de um processo que estão atualmente carregadas na memória física (RAM).</p>
+                                
+                                <div class="p-3 bg-info-subtle rounded mb-3">
+                                    <strong>Comportamento Dinâmico:</strong> O Memory Manager do Windows ajusta dinamicamente este conjunto para otimizar o uso da RAM em todo o sistema, movendo páginas entre RAM e arquivo de paginação conforme necessário.
+                                </div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Diferença Conceitual:</strong> Working Set ≠ Memória Total Alocada. Um processo pode ter gigabytes alocados virtualmente, mas apenas uma fração no Working Set (RAM).
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="memory-block mb-2" style="background: #e3f2fd;">Virtual Memory<br>2 GB</div>
+                                <div class="text-center mb-2">
+                                    <i class="fas fa-arrow-down"></i><br>
+                                    <small>Memory Manager</small>
+                                </div>
+                                <div class="memory-block" style="background: #c8e6c9;">Working Set<br>64 MB</div>
+                                <div class="text-center mt-2">
+                                    <small class="text-muted">RAM Física</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interação com SO -->
+        <section id="interacao-so" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Interação Detalhada com o Sistema Operacional</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Cada função do programa representa uma transição específica entre o modo de usuário e o modo de kernel, envolvendo múltiplos subsistemas do Windows em uma orquestração complexa.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Processo de Inicialização do Programa</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <div class="flow-step" data-step="1">
+                                    <strong>Loader do Windows cria EPROCESS</strong><br>
+                                    <small>Kernel aloca estrutura de processo no pool não-paginado</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="2">
+                                    <strong>Criação do Address Space</strong><br>
+                                    <small>Memory Manager aloca tabelas de páginas e VAD tree</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="3">
+                                    <strong>Mapeamento de Módulos</strong><br>
+                                    <small>Loader mapeia .exe, kernel32.dll, psapi.dll no espaço virtual</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="4">
+                                    <strong>Thread Principal</strong><br>
+                                    <small>Kernel cria ETHREAD e aponta RIP para main()</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="5">
+                                    <strong>Configuração de Locale</strong><br>
+                                    <small>std::wcout.imbue() interage com APIs de localização</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="definition-box">
+                                    <div class="definition-title">Subsistemas Envolvidos</div>
+                                    <ul class="list-unstyled">
+                                        <li><span class="security-badge privilege-high">Process Manager</span></li>
+                                        <li><span class="security-badge privilege-high">Memory Manager</span></li>
+                                        <li><span class="security-badge privilege-medium">Loader</span></li>
+                                        <li><span class="security-badge privilege-medium">Object Manager</span></li>
+                                        <li><span class="security-badge privilege-low">Console Subsystem</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">EnumProcesses() - Transição Crítica</h3>
+                                
+                                <div class="api-call mb-3">
+                                    <div class="api-title">Chamada da API</div>
+                                    <pre><code class="language-cpp">BOOL EnumProcesses(
+    DWORD* lpidProcess,    // Buffer user-space
+    DWORD cb,              // Tamanho do buffer
+    LPDWORD lpcbNeeded     // Bytes necessários
+);</code></pre>
+                                </div>
+                                
+                                <div class="flow-step" data-step="1">
+                                    <strong>Transição User → Kernel</strong><br>
+                                    <small>System call via SYSENTER/SYSCALL</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="2">
+                                    <strong>Validação de Parâmetros</strong><br>
+                                    <small>Kernel verifica se buffer é acessível</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="3">
+                                    <strong>Iteração na Process List</strong><br>
+                                    <small>Percorre lista encadeada de EPROCESS</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="4">
+                                    <strong>Cópia Segura</strong><br>
+                                    <small>ProbeForWrite + memcpy para user-space</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">OpenProcess() - Sistema de Segurança</h3>
+                                
+                                <div class="api-call mb-3">
+                                    <div class="api-title">Solicitação de Acesso</div>
+                                    <pre><code class="language-cpp">HANDLE OpenProcess(
+    DWORD dwDesiredAccess,     // Privilégios
+    BOOL bInheritHandle,       // Herança
+    DWORD dwProcessId          // PID alvo
+);</code></pre>
+                                </div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded mb-3">
+                                    <strong>Privilégios Solicitados:</strong><br>
+                                    <code>PROCESS_QUERY_INFORMATION | PROCESS_VM_READ</code>
+                                </div>
+                                
+                                <div class="flow-step" data-step="1">
+                                    <strong>Localização do EPROCESS</strong><br>
+                                    <small>PsLookupProcessByProcessId()</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="2">
+                                    <strong>Verificação de Segurança</strong><br>
+                                    <small>SeAccessCheck() consulta DACL</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="3">
+                                    <strong>Criação do HANDLE</strong><br>
+                                    <small>ObCreateHandle() no Object Manager</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Cenários de Falha de Segurança</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Processo Alvo</th>
+                                        <th>Nosso Privilégio</th>
+                                        <th>Resultado</th>
+                                        <th>Exibição</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>notepad.exe</td>
+                                        <td>Usuário Normal</td>
+                                        <td class="text-success">Sucesso</td>
+                                        <td>Informações completas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>csrss.exe</td>
+                                        <td>Usuário Normal</td>
+                                        <td class="text-danger">Falha</td>
+                                        <td>&lt;acesso negado&gt;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>winlogon.exe</td>
+                                        <td>Administrador</td>
+                                        <td class="text-warning">Parcial</td>
+                                        <td>Apenas PID</td>
+                                    </tr>
+                                    <tr>
+                                        <td>System (PID 4)</td>
+                                        <td>SYSTEM</td>
+                                        <td class="text-danger">Falha</td>
+                                        <td>&lt;processo do kernel&gt;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="p-3 bg-danger-subtle rounded mt-3">
+                            <strong>Nota de Segurança:</strong> O Monitor de Referência de Segurança do Windows implementa um modelo de segurança robusto onde processos críticos do sistema são protegidos mesmo contra administradores, demonstrando o princípio de menor privilégio em ação.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funções e Métodos -->
+        <section id="funcoes" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Análise Detalhada das Funções</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Cada método do <code>ProcessEnumerator</code> representa uma técnica específica de extração de dados do kernel, utilizando diferentes APIs e estratégias de acesso à memória do processo alvo.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">ProcessEnumerator::enumerateProcesses()</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <pre><code class="language-cpp">bool ProcessEnumerator::enumerateProcesses() {
+    std::vector&lt;DWORD&gt; processIds(1024);
+    DWORD bytesNeeded = 0;
+    
+    // Primeira tentativa - buffer inicial
+    if (!EnumProcesses(processIds.data(), 
+                      processIds.size() * sizeof(DWORD), 
+                      &bytesNeeded)) {
+        return false;
+    }
+    
+    // Redimensiona se necessário
+    if (bytesNeeded == processIds.size() * sizeof(DWORD)) {
+        processIds.resize(bytesNeeded / sizeof(DWORD) + 256);
+        if (!EnumProcesses(processIds.data(), 
+                          processIds.size() * sizeof(DWORD), 
+                          &bytesNeeded)) {
+            return false;
+        }
+    }
+    
+    // Processa cada PID...
+}</code></pre>
+                                
+                                <div class="definition-box">
+                                    <div class="definition-title">Estratégia de Buffer Adaptativo</div>
+                                    <p class="mb-0">O código implementa uma estratégia defensiva contra buffer overflow, redimensionando dinamicamente o vetor quando detecta que o buffer inicial pode ser insuficiente. Esta é uma prática essencial ao trabalhar com APIs que podem retornar quantidades variáveis de dados.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="flow-step" data-step="1">
+                                    <strong>Buffer Inicial</strong><br>
+                                    <small>1024 DWORDs (4KB)</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="2">
+                                    <strong>Chamada EnumProcesses</strong><br>
+                                    <small>Kernel → User copy</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="3">
+                                    <strong>Verificação de Tamanho</strong><br>
+                                    <small>bytesNeeded vs buffer</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="4">
+                                    <strong>Redimensionamento</strong><br>
+                                    <small>+256 DWORDs margem</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="5">
+                                    <strong>Iteração sobre PIDs</strong><br>
+                                    <small>Loop de processamento</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">getProcessName() - Técnica de Módulos</h3>
+                                
+                                <div class="api-call mb-3">
+                                    <div class="api-title">Sequência de Chamadas</div>
+                                    <pre><code class="language-cpp">// 1. Enumera módulos do processo
+HMODULE hModule;
+DWORD cbNeeded;
+if (EnumProcessModules(hProcess, &hModule, 
+                      sizeof(hModule), &cbNeeded)) {
+    
+    // 2. Obtém nome do primeiro módulo (exe)
+    wchar_t moduleName[MAX_PATH];
+    if (GetModuleBaseNameW(hProcess, hModule, 
+                          moduleName, MAX_PATH)) {
+        return std::wstring(moduleName);
+    }
+}</code></pre>
+                                </div>
+                                
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Conceito:</strong> O primeiro módulo na lista é sempre o executável principal. <code>EnumProcessModules</code> lê a PEB (Process Environment Block) do processo alvo para obter informações de módulos carregados.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">getProcessPath() - Acesso Direto</h3>
+                                
+                                <div class="api-call mb-3">
+                                    <div class="api-title">Chamada Otimizada</div>
+                                    <pre><code class="language-cpp">wchar_t fullPath[MAX_PATH];
+DWORD pathLength = MAX_PATH;
+
+if (QueryFullProcessImageNameW(hProcess, 0, 
+                              fullPath, &pathLength)) {
+    return std::wstring(fullPath);
+}</code></pre>
+                                </div>
+                                
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Vantagem:</strong> Mais eficiente que EnumProcessModules + GetModuleFileName. Acessa diretamente o campo <code>ImageFileName</code> na estrutura EPROCESS do kernel.
+                                </div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded mt-2">
+                                    <strong>Limitação:</strong> Requer Windows Vista+ (função introduzida na API mais recente).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">getProcessMemoryInfo() - Estatísticas do Memory Manager</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <pre><code class="language-cpp">PROCESS_MEMORY_COUNTERS memoryCounters;
+memoryCounters.cb = sizeof(memoryCounters);
+
+if (GetProcessMemoryInfo(hProcess, 
+                        &memoryCounters, 
+                        sizeof(memoryCounters))) {
+    return memoryCounters.WorkingSetSize;
+}</code></pre>
+                                
+                                <div class="definition-box">
+                                    <div class="definition-title">Estrutura PROCESS_MEMORY_COUNTERS</div>
+                                    <ul class="list-unstyled">
+                                        <li><strong>WorkingSetSize:</strong> Páginas na RAM</li>
+                                        <li><strong>PagefileUsage:</strong> Páginas no arquivo de troca</li>
+                                        <li><strong>PeakWorkingSetSize:</strong> Máximo histórico</li>
+                                        <li><strong>PageFaultCount:</strong> Total de page faults</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="arch-layer">
+                                    <h5 class="fs-6 fw-semibold mb-2">Memory Manager Counters</h5>
+                                    <div class="memory-block" style="background: #e8f5e8;">Working Set: 64 MB</div>
+                                    <div class="memory-block" style="background: #fff3e0;">Page File: 128 MB</div>
+                                    <div class="memory-block" style="background: #ffebee;">Peak WS: 256 MB</div>
+                                    <div class="memory-block" style="background: #f3e5f5;">Page Faults: 15,847</div>
+                                </div>
+                                
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Fonte dos Dados:</strong> Estes contadores são mantidos pelo Memory Manager no campo <code>Vm</code> da estrutura EPROCESS e atualizados em tempo real conforme o processo acessa memória.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Funções de Processamento - Operações User-Mode</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="definition-box">
+                                    <div class="definition-title">displayProcesses() - C++20 Ranges</div>
+                                    <pre><code class="language-cpp">// Ordenação usando std::ranges
+std::ranges::sort(processes, 
+    [](const auto& a, const auto& b) {
+        return a.workingSetSize > b.workingSetSize;
+    });
+
+// Formatação com std::format (C++20)
+for (const auto& process : processes) {
+    std::wcout << std::format(
+        L"PID: {:>8} | Mem: {:>10} KB | {}\n",
+        process.processId,
+        process.workingSetSize / 1024,
+        process.processName
+    );
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="definition-box">
+                                    <div class="definition-title">filterByName() - Filtragem Funcional</div>
+                                    <pre><code class="language-cpp">auto filtered = processes 
+    | std::views::filter([&pattern](const auto& p) {
+        return p.processName.find(pattern) 
+               != std::wstring::npos;
+    });
+
+std::ranges::copy(filtered, 
+    std::back_inserter(result));</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded">
+                            <strong>Característica Importante:</strong> Estas operações são puramente computacionais, executando inteiramente em user-mode. Não há novas system calls - apenas manipulação de dados já coletados na memória do processo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Código Exemplo -->
+        <section id="codigo-exemplo" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Análise do Código de Exemplo</h2>
+                    
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Função main() - Orquestração do Sistema</h3>
+                        
+                        <pre><code class="language-cpp">int main() {
+    // Configura a saída para suportar caracteres Unicode
+    std::wcout.imbue(std::locale(""));
+
+    std::wcout << L"=== Listador de Processos Windows - C++23 ===" << std::endl;
+    std::wcout << L"Coletando informações dos processos..." << std::endl << std::endl;
+
+    // Cria o enumerador de processos
+    ProcessEnumerator enumerator;
+
+    // Enumera os processos. Esta chamada desencadeia múltiplas interações
+    // com o kernel do Windows para obter a lista e os detalhes dos processos.
+    if (!enumerator.enumerateProcesses()) {
+        std::wcerr << L"Falha ao enumerar processos!" << std::endl;
+        return 1;
+    }
+
+    // Exibe os processos. Esta operação ocorre em user-mode, formatando
+    // os dados já coletados.
+    enumerator.displayProcesses();
+
+    // Estatísticas e interação com usuário...
+    return 0;
+}</code></pre>
+                        
+                        <div class="row g-4 mt-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Análise Linha por Linha</h5>
+                                
+                                <div class="flow-step" data-step="1">
+                                    <strong>std::wcout.imbue(std::locale(""))</strong><br>
+                                    <small>Configura locale para renderização Unicode correta no console</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="2">
+                                    <strong>ProcessEnumerator enumerator</strong><br>
+                                    <small>Construtor C++ aloca objetos no stack frame</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="3">
+                                    <strong>enumerateProcesses()</strong><br>
+                                    <small>Múltiplas system calls para coleta de dados</small>
+                                </div>
+                                
+                                <div class="flow-step" data-step="4">
+                                    <strong>displayProcesses()</strong><br>
+                                    <small>Processamento local sem interaction com kernel</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Subsistemas Envolvidos</h5>
+                                
+                                <div class="api-call mb-2">
+                                    <div class="api-title">Console Subsystem</div>
+                                    <p class="mb-0">std::wcout interage com conhost.exe para renderização de texto Unicode</p>
+                                </div>
+                                
+                                <div class="api-call mb-2">
+                                    <div class="api-title">Process Manager</div>
+                                    <p class="mb-0">EnumProcesses acessa lista interna de EPROCESS structures</p>
+                                </div>
+                                
+                                <div class="api-call mb-2">
+                                    <div class="api-title">Memory Manager</div>
+                                    <p class="mb-0">GetProcessMemoryInfo lê contadores de VM usage</p>
+                                </div>
+                                
+                                <div class="api-call">
+                                    <div class="api-title">Object Manager</div>
+                                    <p class="mb-0">OpenProcess/CloseHandle gerenciam lifetime de handles</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Fluxo de Execução Detalhado</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Fase</th>
+                                        <th>Operação</th>
+                                        <th>Modo CPU</th>
+                                        <th>Subsistema</th>
+                                        <th>Complexidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Inicialização</td>
+                                        <td>Locale configuration</td>
+                                        <td>User-mode</td>
+                                        <td>CRT + NLS</td>
+                                        <td>O(1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Enumeração</td>
+                                        <td>EnumProcesses()</td>
+                                        <td>Kernel-mode</td>
+                                        <td>Process Manager</td>
+                                        <td>O(n) processos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Detalhamento</td>
+                                        <td>Loop de ProcessInfo</td>
+                                        <td>User→Kernel</td>
+                                        <td>Múltiplos</td>
+                                        <td>O(n × m) chamadas</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Processamento</td>
+                                        <td>Sort + Format</td>
+                                        <td>User-mode</td>
+                                        <td>STL</td>
+                                        <td>O(n log n)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Exibição</td>
+                                        <td>Console output</td>
+                                        <td>User-mode</td>
+                                        <td>Console</td>
+                                        <td>O(n)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-cogs me-2"></i>Análise de Performance
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Otimizações Implementadas:</strong><br>
+                                    • Buffer adaptativo para EnumProcesses<br>
+                                    • RAII com CloseHandle automático<br>
+                                    • std::ranges para operações funcionais<br>
+                                    • std::format para output eficiente
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Gargalos Potenciais:</strong><br>
+                                    • Múltiplas system calls por processo<br>
+                                    • Verificações de segurança no OpenProcess<br>
+                                    • Alocações dinâmicas do std::vector<br>
+                                    • Console output com Unicode conversion
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conceitos Avançados -->
+        <section id="conceitos-avancados" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Conceitos Avançados de Sistema</h2>
+                    
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Handle Management e RAII</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <pre><code class="language-cpp">class ProcessHandle {
+private:
+    HANDLE hProcess;
+    
+public:
+    ProcessHandle(DWORD pid, DWORD access) 
+        : hProcess(OpenProcess(access, FALSE, pid)) {}
+    
+    ~ProcessHandle() {
+        if (hProcess && hProcess != INVALID_HANDLE_VALUE) {
+            CloseHandle(hProcess);  // Automático via RAII
+        }
+    }
+    
+    operator HANDLE() const { return hProcess; }
+    bool valid() const { 
+        return hProcess && hProcess != INVALID_HANDLE_VALUE; 
+    }
+};</code></pre>
+                                
+                                <div class="definition-box">
+                                    <div class="definition-title">Vantagens do RAII</div>
+                                    <p class="mb-0">Resource Acquisition Is Initialization garante que recursos do kernel sejam automaticamente liberados quando o objeto sai de escopo, evitando handle leaks que podem esgotar a tabela de handles do processo.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="arch-layer kernel-space">
+                                    <h5 class="fs-6 fw-semibold mb-2">Kernel Object</h5>
+                                    <div class="memory-block">EPROCESS</div>
+                                    <div class="text-center my-2">↕<br><small>Reference Count</small></div>
+                                    <div class="memory-block">RefCount: 3</div>
+                                </div>
+                                
+                                <div class="arch-layer user-space">
+                                    <h5 class="fs-6 fw-semibold mb-2">Handle Table</h5>
+                                    <div class="memory-block">Handle: 0x1234</div>
+                                    <div class="memory-block">Access: 0x1000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-5 fw-semibold mb-3 text-primary">Virtual Address Descriptors (VAD)</h3>
+                                
+                                <div class="definition-box mb-3">
+                                    <div class="definition-title">Estrutura VAD Tree</div>
+                                    <p class="mb-0">O Memory Manager mantém uma árvore AVL de VADs para cada processo, descrevendo todas as regiões de memória virtual alocadas. Cada nó contém:</p>
+                                </div>
+                                
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><span class="security-badge privilege-medium">StartingVPN</span> Virtual Page Number inicial</li>
+                                    <li class="mb-2"><span class="security-badge privilege-medium">EndingVPN</span> Virtual Page Number final</li>
+                                    <li class="mb-2"><span class="security-badge privilege-low">Protection</span> PAGE_READWRITE, etc.</li>
+                                    <li class="mb-2"><span class="security-badge privilege-low">CommitCharge</span> Páginas commitadas</li>
+                                </ul>
+                                
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Working Set:</strong> Subconjunto das páginas descritas pelos VADs que estão atualmente na RAM física.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-5 fw-semibold mb-3 text-success">Process Environment Block (PEB)</h3>
+                                
+                                <div class="definition-box mb-3">
+                                    <div class="definition-title">Localização e Acesso</div>
+                                    <p class="mb-0">A PEB reside em user-space mas contém metadados críticos. APIs como EnumProcessModules leem a PEB do processo alvo:</p>
+                                </div>
+                                
+                                <div class="memory-block mb-2">PEB_LDR_DATA</div>
+                                <div class="memory-block mb-2">LIST_ENTRY Modules</div>
+                                <div class="memory-block mb-2">LDR_DATA_TABLE_ENTRY</div>
+                                <div class="memory-block">FullDllName, BaseDllName</div>
+                                
+                                <div class="p-3 bg-success-subtle rounded mt-3">
+                                    <strong>Segurança:</strong> Requer PROCESS_VM_READ para acessar PEB de outro processo via ReadProcessMemory.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Sistema de Privilégios e Token de Acesso</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="api-call">
+                                    <div class="api-title">Token Structure</div>
+                                    <pre><code class="language-cpp">typedef struct _TOKEN {
+    TOKEN_SOURCE TokenSource;
+    LUID TokenId;
+    LUID AuthenticationId;
+    PSID UserAndGroups[];
+    PPRIVILEGE_SET Privileges;
+    PACL DefaultDacl;
+    // ... outros campos
+} TOKEN, *PTOKEN;</code></pre>
+                                </div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>SeAccessCheck():</strong> Função do Security Reference Monitor que compara o token do processo requisitante com a DACL do objeto alvo.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="definition-box">
+                                    <div class="definition-title">Privilégios Relevantes</div>
+                                    <ul class="list-unstyled">
+                                        <li><span class="security-badge privilege-high">SeDebugPrivilege</span></li>
+                                        <li><small>Permite acesso total a qualquer processo</small></li>
+                                        <li><span class="security-badge privilege-medium">SeIncreaseQuotaPrivilege</span></li>
+                                        <li><small>Modificar cotas de memória de processos</small></li>
+                                        <li><span class="security-badge privilege-low">SeChangeNotifyPrivilege</span></li>
+                                        <li><small>Bypass traverse checking (padrão)</small></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong>SeDebugPrivilege:</strong> Essencialmente dá acesso de "god mode" ao sistema, permitindo ler/escrever memória de qualquer processo, incluindo csrss.exe e winlogon.exe.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Memory Manager Internals</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Estrutura</th>
+                                        <th>Localização</th>
+                                        <th>Função</th>
+                                        <th>Nosso Acesso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>EPROCESS.Vm</strong></td>
+                                        <td>Kernel Pool</td>
+                                        <td>Estatísticas de VM por processo</td>
+                                        <td>Via GetProcessMemoryInfo</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>VAD Tree</strong></td>
+                                        <td>Kernel Pool</td>
+                                        <td>Mapeamento de endereços virtuais</td>
+                                        <td>Indireto via APIs</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Working Set List</strong></td>
+                                        <td>Process Memory</td>
+                                        <td>Páginas na RAM física</td>
+                                        <td>WorkingSetSize counter</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Page Frame Database</strong></td>
+                                        <td>Kernel Global</td>
+                                        <td>Estado de cada página física</td>
+                                        <td>Não acessível</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="p-3 bg-info-subtle rounded mt-3">
+                            <strong>Insight:</strong> O nosso programa opera como um "observador privilegiado" que pode inspecionar estruturas internas do kernel através de APIs bem definidas, mas nunca acessar diretamente as estruturas raw do kernel por questões de segurança e estabilidade.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aplicações -->
+        <section id="aplicacoes" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Aplicações e Extensões</h2>
+                    
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Possíveis Extensões do Sistema</h3>
+                        
+                        <div class="row row-cols-1 row-cols-lg-2 g-4">
+                            <div class="col">
+                                <div class="concept-card border-start border-4 border-primary">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-primary">Monitoramento em Tempo Real</h4>
+                                    <pre><code class="language-cpp">// Notificação de criação de processos
+HANDLE hNotification = CreateJobObject(NULL, NULL);
+
+// Callback para novos processos  
+SetInformationJobObject(hNotification, 
+    JobObjectAssociateCompletionPortInformation,
+    &port, sizeof(port));
+
+// Loop de monitoramento
+while (true) {
+    DWORD completionCode;
+    GetQueuedCompletionStatus(hCompletionPort, 
+        &completionCode, ...);
+}</code></pre>
+                                    <p class="mb-0">Implementação de um sistema de monitoramento que detecta criação/terminação de processos em tempo real usando Job Objects ou WMI.</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card border-start border-4 border-success">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-success">Análise de Performance</h4>
+                                    <pre><code class="language-cpp">struct ProcessMetrics {
+    double cpuUsage;
+    SIZE_T privateBytes;
+    SIZE_T virtualSize;
+    DWORD handleCount;
+    DWORD threadCount;
+    FILETIME creationTime;
+};</code></pre>
+                                    <p class="mb-0">Expansão para coletar métricas avançadas como CPU usage, handle count, thread count e tempo de criação usando Performance Counters.</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card border-start border-4 border-warning">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-warning">Análise de Dependências</h4>
+                                    <pre><code class="language-cpp">// Enumera todos os módulos
+HMODULE hModules[1024];
+DWORD cbNeeded;
+EnumProcessModules(hProcess, hModules, 
+    sizeof(hModules), &cbNeeded);
+
+// Para cada módulo, obter dependências
+for (auto hModule : modules) {
+    // Análise PE header...
+}</code></pre>
+                                    <p class="mb-0">Implementação de um analisador que mapeia todas as DLLs carregadas por cada processo e suas dependências transitivas.</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card border-start border-4 border-info">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-info">Security Auditing</h4>
+                                    <pre><code class="language-cpp">// Obter token do processo
+HANDLE hToken;
+OpenProcessToken(hProcess, 
+    TOKEN_QUERY, &hToken);
+
+// Analisar privilégios
+TOKEN_PRIVILEGES privileges;
+GetTokenInformation(hToken, 
+    TokenPrivileges, ...);</code></pre>
+                                    <p class="mb-0">Sistema de auditoria que analisa tokens de segurança, privilégios, grupos e políticas de acesso de cada processo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Ferramentas Similares no Ecossistema</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Ferramenta</th>
+                                        <th>Técnica Principal</th>
+                                        <th>Vantagens</th>
+                                        <th>Limitações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Process Monitor</strong></td>
+                                        <td>Kernel Driver ETW</td>
+                                        <td>Real-time, baixo overhead</td>
+                                        <td>Requer driver assinado</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Task Manager</strong></td>
+                                        <td>NtQuerySystemInformation</td>
+                                        <td>APIs não documentadas</td>
+                                        <td>Interface limitada</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Process Explorer</strong></td>
+                                        <td>Múltiplas APIs + Driver</td>
+                                        <td>Informações detalhadas</td>
+                                        <td>Complexidade alta</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Nosso Tool</strong></td>
+                                        <td>APIs públicas PSAPI</td>
+                                        <td>Simplicidade, portabilidade</td>
+                                        <td>Info limitada, snapshot only</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-graduation-cap me-2"></i>Exercícios Avançados
+                        </h4>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1. Implementar RAII:</strong> Criar uma classe ProcessHandle com destructor automático para gerenciar handles do sistema
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2. Filtro de Segurança:</strong> Adicionar análise de tokens e privilégios para cada processo listado
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3. Monitoramento:</strong> Implementar notificações de criação/terminação usando WMI events
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>4. Performance:</strong> Medir e otimizar o tempo de execução para sistemas com 1000+ processos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumo Final -->
+                    <div class="text-center mt-5">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Síntese</h4>
+                            <p class="fs-5 mb-0 text-white">
+                                O <strong>process_lister.cpp</strong> demonstra a interseção perfeita entre programação de alto nível e sistemas operacionais, onde cada linha de código representa uma <strong>interação precisa</strong> com os subsistemas fundamentais do Windows, desde o Memory Manager até o Security Reference Monitor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Highlight.js JavaScript - Carregado ANTES do nosso script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    
+    <!-- JavaScript Externo - Carregado DEPOIS do Highlight.js -->
+    <script src="common_js.js"></script>
+    
+    <!-- Inicialização manual adicional para debug -->
+    <script>
+        // Verificação adicional para debug
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (typeof hljs !== 'undefined') {
+                    console.log('Highlight.js disponível após load:', hljs);
+                    const blocks = document.querySelectorAll('pre code:not(.hljs)');
+                    if (blocks.length > 0) {
+                        console.log(`Aplicando highlight a ${blocks.length} blocos não processados...`);
+                        blocks.forEach(block => hljs.highlightElement(block));
+                    }
+                } else {
+                    console.error('Highlight.js ainda não está disponível após window.load');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
