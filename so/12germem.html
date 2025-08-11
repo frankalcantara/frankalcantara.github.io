@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sistemas Operacionais - 11&nbsp; Gestão de Memória</title>
+<title>Sistemas Operacionais - 13&nbsp; Gestão de Memória</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,10 +102,10 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles/styles.css">
-<meta property="og:title" content="Sistemas Operacionais - 11&nbsp; Gestão de Memória">
+<meta property="og:title" content="Sistemas Operacionais - 13&nbsp; Gestão de Memória">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Sistemas Operacionais">
-<meta name="twitter:title" content="Sistemas Operacionais - 11&nbsp; Gestão de Memória">
+<meta name="twitter:title" content="Sistemas Operacionais - 13&nbsp; Gestão de Memória">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -119,7 +119,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -156,8 +156,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introdução</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -165,28 +165,34 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./intro1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Sistemas Operacionais: Equilibrando Recursos e Simplicidade</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sistemas Operacionais: Equilibrando Recursos e Simplicidade</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exercícios</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Gerenciamento de Processos: Introdução</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Gestão de Projetos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,38 +200,44 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
       </ul>
@@ -233,55 +245,55 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12germem.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14geres.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18glossa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -300,9 +312,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-germen1" id="toc-sec-germen1" class="nav-link active" data-scroll-target="#sec-germen1"><span class="header-section-number">11.1</span> Gerenciamento de Memória: Otimizando o Uso de <code>RAM</code></a>
+  <li><a href="#sec-germen1" id="toc-sec-germen1" class="nav-link active" data-scroll-target="#sec-germen1"><span class="header-section-number">13.1</span> Gerenciamento de Memória: Otimizando o Uso de <code>RAM</code></a>
   <ul class="collapse">
-  <li><a href="#memória-virtual" id="toc-memória-virtual" class="nav-link" data-scroll-target="#memória-virtual"><span class="header-section-number">11.1.1</span> Memória Virtual</a></li>
+  <li><a href="#memória-virtual" id="toc-memória-virtual" class="nav-link" data-scroll-target="#memória-virtual"><span class="header-section-number">13.1.1</span> Memória Virtual</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/12germem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -312,7 +324,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></h1>
 </div>
 
 
@@ -329,8 +341,8 @@ window.Quarto = {
 </header>
 
 
-<section id="sec-germen1" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="sec-germen1"><span class="header-section-number">11.1</span> Gerenciamento de Memória: Otimizando o Uso de <code>RAM</code></h2>
+<section id="sec-germen1" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="sec-germen1"><span class="header-section-number">13.1</span> Gerenciamento de Memória: Otimizando o Uso de <code>RAM</code></h2>
 <p>A memória principal, também conhecida como <code>RAM</code> (Random Access Memory), representa um dos recursos mais importantes e voláteis que devem ser gerenciados cuidadosamente em qualquer <strong>Sistema Operacional</strong> moderno. Diferentemente do armazenamento permanente, a <code>RAM</code> perde todo seu conteúdo quando a energia é removida, tornando seu gerenciamento uma tarefa que exige precisão e eficiência constantes.</p>
 <p><em>O controle de alocação de processos em memória envolve manter um registro detalhado e atualizado de quais partes da memória estão em uso por processos ativos e quais permanecem disponíveis</em>. A alocação dinâmica aumenta a complexidade desta tarefa ao exigir que o sistema constantemente atribua e libere espaço conforme processos são criados e terminados, criando um ambiente dinâmico de constante mudança. Além disso, o sistema deve lidar com a fragmentação da memória, que ocorre quando blocos de memória livre são divididos em pedaços pequenos e não contíguos, dificultando a alocação eficiente de novos processos.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -353,8 +365,8 @@ Note
 <p><span class="math display">\[\text{Endereço Físico} = \text{Número da Página} \times \text{Tamanho da Página} + \text{Offset}\]</span></p>
 <p>A segmentação oferece uma alternativa ao dividir a memória em segmentos de tamanho variável que correspondem mais naturalmente à estrutura lógica dos programas, com diferentes segmentos contendo código, dados, pilha ou heap.</p>
 <p><img src=".\assets/images/memory_management_figure1.webp" class="img-fluid" alt="Diagrama mostrando particionamento fixo e dinâmico e memória virtual e o particionamento todos os diagramas em blocos"> <em>Figura 9: Diagrama ilustrativo de paginação e segmentação na memória, mostrando como processos são divididos em páginas e segmentos, com endereços físicos correspondentes.</em>{: class=<code>legend</code>}</p>
-<section id="memória-virtual" class="level3" data-number="11.1.1">
-<h3 data-number="11.1.1" class="anchored" data-anchor-id="memória-virtual"><span class="header-section-number">11.1.1</span> Memória Virtual</h3>
+<section id="memória-virtual" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="memória-virtual"><span class="header-section-number">13.1.1</span> Memória Virtual</h3>
 <p>O conceito de memória virtual representa uma das inovações mais impactantes no gerenciamento de memória. Esta técnica permite, como vimos antes, que programas maiores que a memória física sejam executados, criando transparentemente a ilusão de abundância de memória por meio de duas estratégias principais. O primeiro é o <strong>swapping</strong>, que envolve mover processos inteiros entre a memória física e o disco rígido quando necessário. Embora eficaz, o <strong>swapping</strong> pode introduzir latências significativas durante as transferências, especialmente se os processos forem grandes ou se houver muitos processos ativos simultaneamente.</p>
 <p>O segundo é a <strong>paginação sob demanda</strong>, que refina o conceito de <strong>swapping</strong> ao carregar apenas as páginas necessárias de um processo na memória física quando elas são realmente requisitadas. Isso minimiza tanto o uso da memória física quanto o tempo de carregamento inicial dos programas, permitindo que sistemas modernos executem dezenas de processos simultaneamente mesmo com quantidades modestas de <code>RAM</code> física.</p>
 <p><img src=".\assets/images/memory_management_figure2.webp" class="img-fluid"> <em>Figura 10: Diagrama ilustrativo de paginação e segmentação na memória, mostrando como processos são divididos em páginas e segmentos, com endereços físicos correspondentes.</em>{: class=<code>legend</code>}</p>
@@ -920,12 +932,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./gerproc6.html" class="pagination-link" aria-label="Referências">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Referências</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./13gerfiles.html" class="pagination-link" aria-label="Gestão de Arquivos">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
