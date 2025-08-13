@@ -1097,50 +1097,42 @@ window.Quarto = {
 <p><strong>Lado direito</strong>: <span class="math inline">\((a \cup b)^*\)</span> - Qualquer sequência de <span class="math inline">\(a\)</span>’s e <span class="math inline">\(b\)</span>’s em qualquer ordem</p>
 <p><strong>Contraexemplo</strong>: A string <span class="math inline">\(aba\)</span> - <span class="math inline">\(aba \in L((a|b)^*)\)</span> - <span class="math inline">\(aba \notin L(a^*b^*)\)</span> (pois tem <span class="math inline">\(a\)</span> após <span class="math inline">\(b\)</span>) - <span class="math inline">\(aba \notin L(b^*a^*)\)</span> (pois tem <span class="math inline">\(b\)</span> entre <span class="math inline">\(a\)</span>’s) - Portanto: <span class="math inline">\(aba \notin L((a^*b^*|b^*a^*))\)</span></p>
 <p><strong>Conclusão</strong>: As expressões <strong>NÃO</strong> são equivalentes.</p>
-<p><strong>Análise de performance</strong>:</p>
-<table class="table">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 33%">
-<col style="width: 36%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Expressão</th>
-<th>Eficiência</th>
-<th>Observações</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(ab(c\|d\|e)\)</span></td>
-<td>⭐⭐⭐⭐⭐</td>
-<td>Evita backtracking desnecessário</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\([0-9]\{4\}\)</span></td>
-<td>⭐⭐⭐⭐⭐</td>
-<td>Otimização interna comum</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\((a\|b)^*\)</span> vs <span class="math inline">\((a^*b^*\|b^*a^*)\)</span></td>
-<td>⭐⭐⭐ vs ⭐⭐</td>
-<td>Primeira é mais eficiente, mas não equivalente</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Recomendações gerais para performance</strong>:</p>
-<ol type="1">
-<li><strong>Fatore prefixos comuns</strong> para reduzir backtracking</li>
-<li><strong>Use quantificadores</strong> em vez de repetição manual</li>
-<li><strong>Evite alternativas desnecessárias</strong> quando uma expressão mais simples serve</li>
-<li><strong>Coloque alternativas mais prováveis primeiro</strong> em uniões</li>
-<li><strong>Use classes de caracteres</strong> em vez de uniões longas de caracteres individuais</li>
+<ol start="6" type="1">
+<li><strong>Solução</strong>:</li>
 </ol>
-<p><strong>Exemplo de otimização completa</strong>:</p>
-<p><strong>Antes</strong>: <span class="math inline">\((http|https)://[a-z][a-z][a-z]*\.(com|org|net|edu)\)</span></p>
-<p><strong>Depois</strong>: <span class="math inline">\(https?://[a-z]^+\.(com|org|net|edu)\)</span></p>
-<p>Benefícios: prefixo comum fatorado, quantificador usado, expressão mais concisa.</p>
+<p><strong>Definição do Alfabeto</strong> <span class="math display">\[\sigma = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, /, (, ), }\]</span></p>
+<p><strong>Subconjuntos Úteis</strong> - Dígitos: <span class="math inline">\(D = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}\)</span>; - Dígitos não-zero: <span class="math inline">\(D_{nz} = {1, 2, 3, 4, 5, 6, 7, 8, 9}\)</span>; - Operadores: <span class="math inline">\(Op = {+, -, *, /}\)</span>; - Delimitadores: <span class="math inline">\(Del = {(, )}\)</span> - Espaço: <span class="math inline">\(Esp = { }\)</span>.</p>
+<p><strong>Expressões Regulares por Componente</strong></p>
+<p><strong>Números Inteiros (<span class="math inline">\(r_num\)</span>)</strong></p>
+<p><span class="math display">\[r_num = (+|-|ε)(0|(D_nz D^*))\]</span></p>
+<p><strong>Operadores (<span class="math inline">\(r_op\)</span>)</strong></p>
+<p><span class="math display">\[r_op = +|-|*|/\]</span></p>
+<p><strong>Espaços Opcionais (<span class="math inline">\(r_esp\)</span>)</strong></p>
+<p><span class="math display">\[r_esp = ( )^*\]</span></p>
+<p><strong>Sem Parênteses (r_expr_simples)</strong></p>
+<p><span class="math display">\[r_expr_simples = r_esp r_num r_esp (r_op r_esp r_num r_esp)^*\]</span></p>
+<p><strong>Com Um Nível de Parênteses (r_expr_paren)</strong></p>
+<p><span class="math display">\[r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
+               (r_op r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp)^*\]</span></p>
+<p><strong>Expressão Regular Completa, Versão Compacta</strong></p>
+<p><span class="math display">\[r_expr = r_esp^* Termo (Op r_esp^* Termo)^* r_esp^*\]</span></p>
+<p>na qual:</p>
+<p><span class="math display">\[Termo = Numero | (Esp^* Numero Esp^* Op Esp^* Numero Esp^*)\]</span></p>
+<p><span class="math display">\[Numero = (+|-)?( 0 | D_nz D^* )\]</span></p>
+<p><span class="math display">\[Op = +|-|*|/\]</span></p>
+<p><span class="math display">\[Esp = ( )^*\]</span></p>
+<section id="versão-expandida" class="level4" data-number="11.0.4.1">
+<h4 data-number="11.0.4.1" class="anchored" data-anchor-id="versão-expandida"><span class="header-section-number">11.0.4.1</span> Versão Expandida</h4>
+<p><span class="math display">\[r_expr = ( )^* ((+|-)?( 0 | [1-9][0-9]^* ) |
+         \(( )^* (+|-)?( 0 | [1-9][0-9]^* ) ( )^*
+         (+|-|*|/) ( )^* (+|-)?( 0 | [1-9][0-9]^* ) ( )^* \))
+         (( )* (+|-|*|/) ( )^*
+         ((+|-)?( 0 | [1-9][0-9]^* ) |
+         \(( )^* (+|-)?( 0 | [1-9][0-9]^* ) ( )^*
+         (+|-|*|/) ( )^* (+|-)?( 0 | [1-9][0-9]^* ) ( )^* \)))^* ( )^*\]</span></p>
+<p><strong>Expressões Válidas</strong> - <span class="math inline">\(42\)</span> - <span class="math inline">\(3 + 5\)</span> - <span class="math inline">\(-10 * 2\)</span> - <span class="math inline">\((5 + 3) / 2\)</span> - <span class="math inline">\(15 - 7 + 2\)</span> - <span class="math inline">\((8 * 3) - (4 / 2)\)</span></p>
+<p><strong>Expressões Inválidas</strong> - <span class="math inline">\(3 +\)</span> // operador sem segundo operando - <span class="math inline">\(+ 5\)</span> // operador sem primeiro operando - <span class="math inline">\((3 + 5\)</span> // parênteses não balanceados - <span class="math inline">\(3 ++ 5\)</span> // operador duplo - <span class="math inline">\(07 + 3\)</span> // número com zero à esquerda - <span class="math inline">\(3.5 + 2\)</span> // número decimal</p>
+</section>
 </section>
 <section id="capítulo-sec-aut-finitos-deterministicos" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="capítulo-sec-aut-finitos-deterministicos"><span class="header-section-number">11.1</span> Capítulo sec-aut-finitos-deterministicos</h2>

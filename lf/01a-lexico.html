@@ -309,6 +309,7 @@ window.Quarto = {
   <li><a href="#notações-convencionais-adicionais" id="toc-notações-convencionais-adicionais" class="nav-link" data-scroll-target="#notações-convencionais-adicionais"><span class="header-section-number">3.4.6</span> Notações Convencionais Adicionais</a></li>
   <li><a href="#aplicações-práticas" id="toc-aplicações-práticas" class="nav-link" data-scroll-target="#aplicações-práticas"><span class="header-section-number">3.4.7</span> Aplicações Práticas</a></li>
   <li><a href="#sec-ex-regex5" id="toc-sec-ex-regex5" class="nav-link" data-scroll-target="#sec-ex-regex5"><span class="header-section-number">3.4.8</span> Exercícios 8</a></li>
+  <li><a href="#limitações-das-expressões-regulares" id="toc-limitações-das-expressões-regulares" class="nav-link" data-scroll-target="#limitações-das-expressões-regulares"><span class="header-section-number">3.4.9</span> Limitações das Expressões Regulares</a></li>
   </ul></li>
   <li><a href="#o-lugar-das-linguagens-regulares-poder-e-limitações" id="toc-o-lugar-das-linguagens-regulares-poder-e-limitações" class="nav-link" data-scroll-target="#o-lugar-das-linguagens-regulares-poder-e-limitações"><span class="header-section-number">3.5</span> O Lugar das Linguagens Regulares: Poder e Limitações</a>
   <ul class="collapse">
@@ -1291,6 +1292,26 @@ Tip
 <h3 data-number="3.4.7" class="anchored" data-anchor-id="aplicações-práticas"><span class="header-section-number">3.4.7</span> Aplicações Práticas</h3>
 <p>Após a jornada pelos fundamentos matemáticos, a curiosa leitora pode estar se perguntando: onde essa teoria se manifesta no dia a dia da computação? A resposta curta é: em praticamente todos os lugares. As expressões regulares representam um dos casos mais bem-sucedidos de uma teoria matemática que transcendeu a academia e se tornou uma ferramenta indispensável, utilizada diariamente por desenvolvedores de software, administradores de sistemas e cientistas de dados.</p>
 <p>Para a resposta longa precisamos abandonar o formalismo puro para ilustrar como as expressões regulares, com suas notações concisas, resolvem problemas concretos.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Do Formalismo à Prática: Expressões Regulares no Mundo Real
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A leitora atenta deve notar que as expressões regulares definidas formalmente neste capítulo, baseadas apenas em união, concatenação e Fechamento de Kleene, são o alicerce matemático da teoria. No entanto, as ferramentas que usamos no dia a dia, conhecidas como <strong>regex engines</strong>, são equipadas com funções que vão além dessa definição.</p>
+<p>Esses <em>engines</em>, como o <strong>PCRE</strong> (<strong>P</strong>erl <strong>C</strong>ompatible <strong>R</strong>egular <strong>E</strong>xpressions), que influencia as implementações em linguagens como Python, PHP e JavaScript, estendem a notação formal com recursos para maior conveniência e poder expressivo. Os mais notáveis são:</p>
+<ol type="a">
+<li><p><strong><code>Lookarounds</code> (<code>lookaheads</code> e <code>lookbehinds</code>):</strong> Permitem verificar a existência de um padrão antes (<code>lookbehind</code>) ou depois (<code>lookahead</code>) da posição atual, <strong>sem consumir</strong> os caracteres verificados (ou seja, sem incluí-los no resultado da captura). Um exemplo clássico é a expressão <code>q(?=u)</code>, que encontra a letra <code>q</code> apenas se ela for imediatamente seguida pela letra <code>u</code>, mas sem incluir o <code>u</code> no resultado.</p></li>
+<li><p><strong><code>Backreferences</code> (Retrovisores):</strong> Permitem referenciar um grupo que foi previamente capturado dentro da mesma expressão. Por exemplo, a expressão <code>(\w)\1</code> encontra qualquer caractere alfanumérico (<code>\w</code>) que é seguido imediatamente por ele mesmo. É com esta capacidade que um motor de regex pode reconhecer a linguagem não-regular <span class="math inline">\(L = \{ww \mid w \in \{a,b\}^*\}\)</span>.</p></li>
+</ol>
+<p>A consequência mais importante é que esses sistemas de regex modernos podem reconhecer linguagens que <strong>não são regulares</strong> no sentido estrito da teoria. Enquanto uma expressão regular formal jamais poderia reconhecer a linguagem <span class="math inline">\(L = \{a^n b^n \mid n \geq 1\}\)</span>, as extensões práticas oferecem um poder que transcende os limites dos Autômatos Finitos.</p>
+<p>Portanto, é valioso distinguir entre a <strong>classe teórica das Linguagens Regulares</strong> e o conjunto de padrões que as <strong>ferramentas de software</strong> podem processar. O formalismo discutido neste livro é a base para entender o poder, as limitações e a complexidade computacional por trás dessas operações, enquanto as extensões práticas oferecem conveniência e expressividade para resolver problemas do mundo real.</p>
+</div>
+</div>
 <section id="análise-léxica-em-compiladores" class="level4" data-number="3.4.7.1">
 <h4 data-number="3.4.7.1" class="anchored" data-anchor-id="análise-léxica-em-compiladores"><span class="header-section-number">3.4.7.1</span> Análise Léxica em Compiladores</h4>
 <p>A análise léxica é a primeira fase da compilação de um programa. O analisador, chamado de <em>scanner</em> ou <em>lexer</em>, lê o código-fonte como uma sequência de caracteres e a converte em uma sequência de <em>tokens</em>, unidades lexicais como identificadores, palavras-chave, números e operadores. Cada tipo de <em>token</em> é definido precisamente por um padrão, que é, em sua essência, uma expressão regular.</p>
@@ -1372,7 +1393,16 @@ Tip
 <li><span class="math inline">\((a^*b^*|b^*a^*)\)</span> → <span class="math inline">\((a|b)^*\)</span> (verifique se são realmente equivalentes);</li>
 <li>Analise qual versão seria mais eficiente em uma implementação real.</li>
 </ol></li>
+<li>Defina o alfabeto, e as expressões regulares que sejam capazes de validar expressões aritméticas entre números inteiros considerando apenas as operações de soma, subtração, divisão e multiplicação.</li>
 </ol>
+</section>
+<section id="limitações-das-expressões-regulares" class="level3" data-number="3.4.9">
+<h3 data-number="3.4.9" class="anchored" data-anchor-id="limitações-das-expressões-regulares"><span class="header-section-number">3.4.9</span> Limitações das Expressões Regulares</h3>
+<ul>
+<li>Parênteses aninhados arbitrariamente não são reconhecíveis</li>
+<li>Requer gramáticas livres de contexto para estruturas recursivas</li>
+<li>Exemplo problemático: ((3 + 5) * (7 - 2))</li>
+</ul>
 </section>
 </section>
 <section id="o-lugar-das-linguagens-regulares-poder-e-limitações" class="level2" data-number="3.5">
