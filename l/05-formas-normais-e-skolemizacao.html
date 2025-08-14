@@ -303,9 +303,9 @@ window.Quarto = {
 <h2 data-number="7.1" class="anchored" data-anchor-id="formas-normais-básicas"><span class="header-section-number">7.1</span> Formas Normais Básicas</h2>
 <p>Existem várias formas normais na <strong>Lógica Proposicional</strong>, cada uma com suas próprias regras e aplicações. A seguir a esforçada leitora encontrará uma descrição resumida das formas normais, destacando algumas das principais:</p>
 <ol type="1">
-<li><p><strong>Forma Normal Negativa (PNN)</strong>: Uma proposição está na Forma Normal Negativa se as operações de negação $$Aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.</p>
+<li><p><strong>Forma Normal Negativa (PNN)</strong>: Uma proposição está na Forma Normal Negativa se as operações de negação <span class="math inline">\(\neg\)</span> aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.</p>
 <p><span class="math display">\[\neg (A \wedge B) \equiv (\neg A \vee \neg B)\]</span></p></li>
-<li><p><strong>Forma Normal Conjuntiva (PNC)</strong>: uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação <em>E</em>, $$, de uma ou mais cláusulas, nas quais, cada cláusula é uma disjunção, operação <em>OU</em>, $$, de literais. Em outras palavras, é uma série de cláusulas conectadas por <em>Es</em>, nas quais, cada cláusula é composta de variáveis conectadas por <em>OUs</em>. <strong>Uma forma normal conjuntiva é uma conjunção de disjunções</strong>.</p>
+<li><p><strong>Forma Normal Conjuntiva (PNC)</strong>: uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação <em>E</em>, <span class="math inline">\(\wedge\)</span>, de uma ou mais cláusulas, nas quais, cada cláusula é uma disjunção, operação <em>OU</em>, <span class="math inline">\(\vee\)</span>, de literais. Em outras palavras, é uma série de cláusulas conectadas por <em>Es</em>, nas quais, cada cláusula é composta de variáveis conectadas por <em>OUs</em>. <strong>Uma forma normal conjuntiva é uma conjunção de disjunções</strong>.</p>
 <p><span class="math display">\[(A \vee B) \wedge (C \vee D) \wedge (B \vee D) \wedge (A \vee C)\]</span></p></li>
 <li><p><strong>Forma Normal Disjuntiva (PND)</strong>: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, na qual cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por <strong>ORs</strong>, nas quais cada cláusula é composta de variáveis conectadas por <strong>ANDs</strong>. <strong>A forma normal disjuntiva é uma disjunção de conjunções</strong>.</p>
 <p><span class="math display">\[(A \wedge B) \vee (C \wedge D) \vee (A \wedge C) \vee (B \wedge D)\]</span></p></li>
@@ -328,8 +328,8 @@ window.Quarto = {
 <p>É como o processo de desenrolar as linhas de pesca emaranhadas: pegamos cada fio de negação e o seguimos até sua extremidade natural, eliminando as voltas e os nós desnecessários que encontramos no caminho.</p>
 <p>Uma fórmula está na Forma Normal Negativa se:</p>
 <ol type="a">
-<li><p>todos os operadores de negação $$ são aplicados diretamente aos átomos, variáveis ou constantes.</p></li>
-<li><p>usaremos apenas a negação $$, a conjunção $$, e a disjunção $$.</p></li>
+<li><p>todos os operadores de negação <span class="math inline">\(\neg\)</span> são aplicados diretamente aos átomos, variáveis ou constantes.</p></li>
+<li><p>usaremos apenas a negação <span class="math inline">\(\neg\)</span>, a conjunção <span class="math inline">\(\wedge\)</span>, e a disjunção <span class="math inline">\(\vee\)</span>.</p></li>
 </ol>
 <p>Converter uma fórmula para a FNN envolve os seguintes passos:</p>
 <ol type="1">
@@ -359,12 +359,12 @@ window.Quarto = {
 </section>
 <section id="exemplo-2-converta-a-fórmula-a-rightarrow-b-wedge-neg-c-vee-d-para-fnn" class="level4" data-number="7.1.1.2">
 <h4 data-number="7.1.1.2" class="anchored" data-anchor-id="exemplo-2-converta-a-fórmula-a-rightarrow-b-wedge-neg-c-vee-d-para-fnn"><span class="header-section-number">7.1.1.2</span> Exemplo 2: Converta a fórmula <span class="math inline">\((A \rightarrow B) \wedge  \neg (C \vee D)\)</span> Para FNN</h4>
-<p>Neste exemplo, ambos os lados da conjunção principal (<span class="math inline">\(\land\)</span>) são tratados para se adequarem à FNN.</p>
+<p>Neste exemplo, ambos os lados da conjunção principal (<span class="math inline">\(\wedge\)</span>) são tratados para se adequarem à FNN.</p>
 <ol type="1">
 <li><p><strong>Eliminar Implicações</strong>: O primeiro passo é converter a implicação <span class="math inline">\(A \rightarrow B\)</span> em sua equivalência, <span class="math inline">\(\neg A \vee B\)</span>. A segunda parte da fórmula não possui implicações.</p>
 <p><span class="math display">\[(\neg A \vee B) \wedge  \neg (C \vee D)\]</span></p></li>
 <li><p><strong>Aplicar Lei de De Morgan</strong>: A seguir, aplicamos a lei de De Morgan na expressão <span class="math inline">\(\neg (C \vee D)\)</span> para mover a negação para o interior dos parênteses.</p>
-<p><span class="math display">\[(\neg A \vee B) \wedge  (\neg C \wedge  \neg D)\]</span></p></li>
+<p><span class="math display">\[(\neg A \vee B) \wedge (\neg C \wedge \neg D)\]</span></p></li>
 </ol>
 <p>A fórmula final já se encontra na Forma Normal Negativa (FNN), pois todos os operadores de negação estão aplicados diretamente aos átomos (<span class="math inline">\(A\)</span>, <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span>). Não há duplas negações que precisem ser eliminadas neste caso.</p>
 </section>
@@ -373,7 +373,7 @@ window.Quarto = {
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="forma-normal-disjuntiva-fnd"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva (FND)</h3>
 <p>A Forma Normal Disjuntiva é uma representação canônica de fórmulas lógicas em que a fórmula é escrita como uma disjunção de conjunções. Trata-se uma forma canônica útil para a análise e manipulação de fórmulas lógicas e é comumente usada em algoritmos de raciocínio lógico.</p>
 <p>Uma fórmula está na Forma Normal Disjuntiva se puder ser escrita como:</p>
-<p><span class="math display">\[(C_1 \wedge  C_2 \wedge  \ldots) \vee (D_1 \wedge  D_2 \wedge  \ldots) \lor\]</span></p>
+<p><span class="math display">\[(C_1 \wedge  C_2 \wedge  \ldots) \vee (D_1 \wedge  D_2 \wedge  \ldots) \vee\]</span></p>
 <p>Na qual, cada <span class="math inline">\(C_i\)</span> e <span class="math inline">\(D_i\)</span> é um literal. Ou seja, é uma variável ou sua negação. Com um pouco mais de formalidade matemática podemos afirmar que uma <strong>Fórmula Bem Formada</strong> está na Forma Normal Disjuntiva quando está na forma:</p>
 <p><span class="math display">\[\bigvee_{i=1}^{m} \left( \bigwedge_{j=1}^{n} L_{ij} \right)\]</span></p>
 <p>Converter uma fórmula para FND é como identificar todas as combinações de ventos e correntes que levam o navio ao porto desejado. A fórmula original é a rota complexa, a disjunção de todas as opções de rotas. Cada termo da FND final é como um cenário único e completo, uma conjunção de condições marítimas, que, por si só, garante que o navio chegue ao destino.</p>
@@ -423,7 +423,7 @@ window.Quarto = {
 <li>Terceiro termo: <span class="math inline">\((\neg A \wedge  \neg E) \vee (B \wedge  \neg E)\)</span>.</li>
 </ul></li>
 <li><p><strong>Forma Normal Disjuntiva Final</strong></p>
-<p>Unindo todos os termos expandidos com o operador <span class="math inline">\(\lor\)</span>, chegamos à FND final.</p>
+<p>Unindo todos os termos expandidos com o operador <span class="math inline">\(\vee\)</span>, chegamos à FND final.</p>
 <p><span class="math display">\[
 (\neg A \wedge  C) \vee (B \wedge  C) \vee (\neg A \wedge  \neg D) \vee (B \wedge  \neg D) \vee (\neg A \wedge  \neg E) \vee (B \wedge  \neg E)
 \]</span></p>
@@ -477,7 +477,7 @@ window.Quarto = {
 \neg((\neg p \vee q) \wedge  (\neg q \vee p))
 \]</span></p></li>
 <li><p><strong>Aplicar a Lei de De Morgan</strong></p>
-<p>Aplicamos a lei de De Morgan na negação que cobre toda a expressão, transformando a conjunção (<span class="math inline">\(\land\)</span>) em disjunção (<span class="math inline">\(\lor\)</span>) e movendo a negação para os termos internos.</p>
+<p>Aplicamos a lei de De Morgan na negação que cobre toda a expressão, transformando a conjunção (<span class="math inline">\(\wedge\)</span>) em disjunção (<span class="math inline">\(\vee\)</span>) e movendo a negação para os termos internos.</p>
 <p><span class="math display">\[
 \neg(\neg p \vee q) \vee \neg(\neg q \vee p)
 \]</span></p></li>
@@ -533,7 +533,7 @@ window.Quarto = {
 <p><span class="math display">\[
 (p \wedge  q) \vee ((\neg r \wedge  \neg s) \vee (s \wedge  r))
 \]</span></p>
-<p>Como o operador <span class="math inline">\(\lor\)</span> é associativo, podemos remover os parênteses extras, chegando à FND final:</p>
+<p>Como o operador <span class="math inline">\(\vee\)</span> é associativo, podemos remover os parênteses extras, chegando à FND final:</p>
 <p><span class="math display">\[
 (p \wedge  q) \vee (\neg r \wedge  \neg s) \vee (s \wedge  r)
 \]</span></p>
@@ -568,7 +568,7 @@ A \rightarrow B \equiv \neg A \vee B
 <li><span class="math inline">\(\neg\neg A \equiv A\)</span></li>
 </ul>
 <p>Ao final deste passo, a fórmula estará em Forma Normal Negativa (FNN).</p></li>
-<li><p><strong>Aplicar a Lei Distributiva</strong>: Para finalizar, aplique a lei distributiva para garantir que nenhuma conjunção (<span class="math inline">\(\land\)</span>) esteja aninhada dentro de uma disjunção (<span class="math inline">\(\lor\)</span>). A regra chave é distribuir o <span class="math inline">\(\lor\)</span> sobre o <span class="math inline">\(\land\)</span>.</p>
+<li><p><strong>Aplicar a Lei Distributiva</strong>: Para finalizar, aplique a lei distributiva para garantir que nenhuma conjunção (<span class="math inline">\(\wedge\)</span>) esteja aninhada dentro de uma disjunção (<span class="math inline">\(\vee\)</span>). A regra chave é distribuir o <span class="math inline">\(\vee\)</span> sobre o <span class="math inline">\(\wedge\)</span>.</p>
 <p><span class="math display">\[
 A \vee (B \wedge  C) \equiv (A \vee B) \wedge  (A \vee C)
 \]</span></p>
@@ -781,7 +781,7 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 <li><p><strong>Segundo Termo Correspondente a Linha 7: <span class="math inline">\((\neg A \wedge  \neg B \wedge  C)\)</span></strong> Este termo é verdadeiro quando <span class="math inline">\(A\)</span> é falso, <span class="math inline">\(B\)</span> é falso e <span class="math inline">\(C\)</span> é verdadeiro, o que corresponde à linha 7 da tabela.</p></li>
 <li><p><strong>Terceiro Correspondente a Linha 8: <span class="math inline">\((\neg A \wedge  \neg B \wedge  \neg C)\)</span></strong> Este termo é verdadeiro quando <span class="math inline">\(A\)</span> é falso, <span class="math inline">\(B\)</span> é falso e <span class="math inline">\(C\)</span> é falso, o que corresponde à linha 8 da tabela.</p></li>
 </ol>
-<p>Finalmente, unimos estes termos com operações OR (<span class="math inline">\(\lor\)</span>) para criar a expressão FND completa:</p>
+<p>Finalmente, unimos estes termos com operações OR (<span class="math inline">\(\vee\)</span>) para criar a expressão FND completa:</p>
 <p><span class="math display">\[
 (A \vee B) \rightarrow (C \wedge  \neg A) = (\neg A \wedge  B \wedge  C) \vee (\neg A \wedge  \neg B \wedge  C) \vee (\neg A \wedge  \neg B \wedge  \neg C)
 \]</span></p>
@@ -807,10 +807,10 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 <li><p><strong>Formar a FNC</strong>: A conjunção de todas essas cláusulas nos dá a FNC:</p>
 <p><span class="math display">\[\begin{align*}
 (A \vee B) \rightarrow (C \wedge  \neg A) &amp;\equiv (\neg A \vee \neg B \vee \neg C) \\
-&amp;\land (\neg A \vee \neg B \vee C) \\
-&amp;\land (\neg A \vee B \vee \neg C) \\
-&amp;\land (\neg A \vee B \vee C) \\
-&amp;\land (A \vee \neg B \vee C)
+&amp;\wedge (\neg A \vee \neg B \vee C) \\
+&amp;\wedge (\neg A \vee B \vee \neg C) \\
+&amp;\wedge (\neg A \vee B \vee C) \\
+&amp;\wedge (A \vee \neg B \vee C)
 \end{align*}\]</span></p></li>
 </ol>
 <p><strong>Verificação</strong>: Cada cláusula é falsa apenas na linha correspondente da tabela-verdade. A conjunção de todas as cláusulas será verdadeira exceto quando pelo menos uma cláusula for falsa, o que acontece exatamente nas linhas na quais a fórmula original é falsa.</p>
