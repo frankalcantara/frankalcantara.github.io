@@ -325,7 +325,7 @@ Tip
 </ol>
 <p><span class="math display">\[\forall x \exists y (P(x,y))\]</span></p>
 <p>Sua forma após a Skolemização, que preserva a satisfatibilidade, será:</p>
-<p><span class="math display">\[\forall x (P(x, f(x)))\]</span></p>
+<p><span class="math display">\[\forall x (P(x, \mathbf{\mathbf{f}}(x)))\]</span></p>
 <p>Nosso objetivo, neste livro, é rever a matemática que suporta a Programação Lógica, entre as principais formas normais, para este objetivo, precisamos destacar duas formas:</p>
 <ol type="a">
 <li><p><strong>Forma Normal Conjuntiva</strong>: a Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na Forma Normal Conjuntiva. Além disso, os programas em Prolog, a linguagem de Programação Lógica que escolhemos, são formados por Cláusulas de Horn, que são um tipo específico de cláusula na Forma Normal Conjuntiva, cláusulas que possuem, no máximo, um literal positivo.</p></li>
@@ -458,49 +458,49 @@ Tip
 <section id="exemplo-3" class="level4" data-number="7.1.2.3">
 <h4 data-number="7.1.2.3" class="anchored" data-anchor-id="exemplo-3"><span class="header-section-number">7.1.2.3</span> Exemplo 3</h4>
 <p>Considere a fórmula:</p>
-<p><span class="math display">\[(p \rightarrow q) \rightarrow (r \vee s)\]</span></p>
+<p><span class="math display">\[(P \rightarrow Q) \rightarrow (R \vee S)\]</span></p>
 <ol type="1">
 <li><p>Remover as implicações (<span class="math inline">\(\rightarrow\)</span>):</p>
-<p><span class="math display">\[p \rightarrow q \equiv \neg p \vee q\]</span></p></li>
+<p><span class="math display">\[P \rightarrow Q \equiv \neg P \vee Q\]</span></p></li>
 <li><p>Substituir a expressão original com a equivalência encontrada no passo 1:</p>
-<p><span class="math display">\[(\neg p \vee q) \rightarrow (r \vee s)\]</span></p></li>
+<p><span class="math display">\[(\neg P \vee Q) \rightarrow (R \vee S)\]</span></p></li>
 <li><p>Aplicar novamente a equivalência para remover a implicação:</p>
-<p><span class="math display">\[\neg (\neg p \vee q) \vee (r \vee s)\]</span></p></li>
+<p><span class="math display">\[\neg (\neg P \vee Q) \vee (R \vee S)\]</span></p></li>
 <li><p>Aplicar a lei de De Morgan para expandir a negação:</p>
-<p><span class="math display">\[(p \wedge \neg q) \vee (r \vee s)\]</span></p></li>
+<p><span class="math display">\[(P \wedge \neg Q) \vee (R \vee S)\]</span></p></li>
 </ol>
 </section>
 <section id="exemplo-4" class="level4" data-number="7.1.2.4">
 <h4 data-number="7.1.2.4" class="anchored" data-anchor-id="exemplo-4"><span class="header-section-number">7.1.2.4</span> Exemplo 4</h4>
 <p>Considere a fórmula que representa a negação de uma bicondicional, que é logicamente equivalente a uma operação de “ou exclusivo” (XOR):</p>
 <p><span class="math display">\[
-\neg(p \leftrightarrow q)
+\neg(P \leftrightarrow Q)
 \]</span></p>
 <p>Vamos convertê-la para a Forma Normal Disjuntiva.</p>
 <ol type="1">
 <li><p><strong>Eliminar a Bicondicional</strong></p>
 <p>O primeiro passo é substituir o operador de bicondicional (<span class="math inline">\(A \leftrightarrow B\)</span>) por sua definição equivalente: <span class="math inline">\((A \rightarrow B) \wedge  (B \rightarrow A)\)</span>.</p>
 <p><span class="math display">\[
-\neg((p \rightarrow q) \wedge  (q \rightarrow p))
+\neg((P \rightarrow Q) \wedge  (Q \rightarrow P))
 \]</span></p></li>
 <li><p><strong>Eliminar as Implicações</strong></p>
 <p>Agora, convertemos as duas implicações internas em suas formas disjuntivas, usando a regra <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>.</p>
 <p><span class="math display">\[
-\neg((\neg p \vee q) \wedge  (\neg q \vee p))
+\neg((\neg P \vee Q) \wedge  (\neg Q \vee P))
 \]</span></p></li>
 <li><p><strong>Aplicar a Lei de De Morgan</strong></p>
 <p>Aplicamos a lei de De Morgan na negação que cobre toda a expressão, transformando a conjunção (<span class="math inline">\(\wedge\)</span>) em disjunção (<span class="math inline">\(\vee\)</span>) e movendo a negação para os termos internos.</p>
 <p><span class="math display">\[
-\neg(\neg p \vee q) \vee \neg(\neg q \vee p)
+\neg(\neg P \vee Q) \vee \neg(\neg Q \vee P)
 \]</span></p></li>
 <li><p><strong>Aplicar a Lei de De Morgan Novamente e Simplificar</strong></p>
 <p>Para finalizar, aplicamos a lei de De Morgan em cada um dos termos e removemos as duplas negações (<span class="math inline">\(\neg\neg A \equiv A\)</span>) que surgem no processo.</p>
 <p><span class="math display">\[
-(\neg\neg p \wedge  \neg q) \vee (\neg\neg q \wedge  \neg p)
+(\neg\neg P \wedge  \neg Q) \vee (\neg\neg Q \wedge  \neg P)
 \]</span></p>
 <p>Simplificando, obtemos a Forma Normal Disjuntiva final:</p>
 <p><span class="math display">\[
-(p \wedge  \neg q) \vee (\neg p \wedge  q)
+(P \wedge  \neg Q) \vee (\neg P \wedge  Q)
 \]</span></p>
 <p>A expressão resultante é uma disjunção de duas conjunções, o que corresponde perfeitamente à definição da Forma Normal Disjuntiva.</p></li>
 </ol>
@@ -508,46 +508,46 @@ Tip
 <section id="exemplo-5" class="level4" data-number="7.1.2.5">
 <h4 data-number="7.1.2.5" class="anchored" data-anchor-id="exemplo-5"><span class="header-section-number">7.1.2.5</span> Exemplo 5</h4>
 <p>Considere a seguinte fórmula com uma implicação principal e uma bicondicional aninhada: <span class="math display">\[
-\neg(p \wedge  q) \rightarrow (r \leftrightarrow s)
+\neg(P \wedge  Q) \rightarrow (R \leftrightarrow S)
 \]</span> Nosso objetivo é convertê-la para a Forma Normal Disjuntiva.</p>
 <ol type="1">
 <li><p><strong>Eliminar a Implicação Principal</strong></p>
 <p>Utilizando a equivalência <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>, removemos o operador de implicação principal da fórmula.</p>
 <p><span class="math display">\[
-\neg(\neg(p \wedge  q)) \vee (r \leftrightarrow s)
+\neg(\neg(P \wedge  Q)) \vee (R \leftrightarrow S)
 \]</span></p></li>
 <li><p><strong>Eliminar a Dupla Negação</strong></p>
-<p>A expressão <span class="math inline">\(\neg(\neg(p \wedge  q))\)</span> simplifica-se diretamente para <span class="math inline">\((p \wedge  q)\)</span>, resultando em:</p>
+<p>A expressão <span class="math inline">\(\neg(\neg(P \wedge  Q))\)</span> simplifica-se diretamente para <span class="math inline">\((P \wedge  Q)\)</span>, resultando em:</p>
 <p><span class="math display">\[
-(p \wedge  q) \vee (r \leftrightarrow s)
+(P \wedge  Q) \vee (R \leftrightarrow S)
 \]</span></p></li>
 <li><p><strong>Eliminar a Bicondicional</strong></p>
-<p>Substituímos a bicondicional <span class="math inline">\(r \leftrightarrow s\)</span> por sua definição equivalente: <span class="math inline">\((r \rightarrow s) \wedge  (s \rightarrow r)\)</span>.</p>
+<p>Substituímos a bicondicional <span class="math inline">\(R \leftrightarrow S\)</span> por sua definição equivalente: <span class="math inline">\((R \rightarrow S) \wedge  (S \rightarrow R)\)</span>.</p>
 <p><span class="math display">\[
-(p \wedge  q) \vee ((r \rightarrow s) \wedge  (s \rightarrow r))
+(P \wedge  Q) \vee ((R \rightarrow S) \wedge  (S \rightarrow R))
 \]</span></p>
 <p>Em seguida, eliminamos as implicações restantes:</p>
 <p><span class="math display">\[
-(p \wedge  q) \vee ((\neg r \vee s) \wedge  (\neg s \vee r))
+(P \wedge  Q) \vee ((\neg R \vee S) \wedge  (\neg S \vee R))
 \]</span></p>
 <p>Note que a expressão ainda não está em Forma Normal Disjuntiva, pois a parte direita é uma conjunção.</p></li>
 <li><p><strong>Aplicar a Lei Distributiva</strong></p>
-<p>Para que toda a expressão se torne uma disjunção de conjunções, precisamos converter a parte <span class="math inline">\((\neg r \vee s) \wedge  (\neg s \vee r)\)</span> para Forma Normal Disjuntiva. Fazemos isso aplicando a distributividade:</p>
+<p>Para que toda a expressão se torne uma disjunção de conjunções, precisamos converter a parte <span class="math inline">\((\neg R \vee S) \wedge  (\neg S \vee R)\)</span> para Forma Normal Disjuntiva. Fazemos isso aplicando a distributividade:</p>
 <p><span class="math display">\[
-(\neg r \vee s) \wedge  (\neg s \vee r) \equiv (\neg r \wedge  \neg s) \vee (\neg r \wedge  r) \vee (s \wedge  \neg s) \vee (s \wedge  r)
+(\neg R \vee S) \wedge  (\neg S \vee R) \equiv (\neg R \wedge  \neg S) \vee (\neg R \wedge  R) \vee (S \wedge  \neg S) \vee (S \wedge  R)
 \]</span></p>
-<p>As cláusulas <span class="math inline">\((\neg r \wedge  r)\)</span> e <span class="math inline">\((s \wedge  \neg s)\)</span> são contradições (sempre falsas), então podem ser removidas, simplificando a expressão para:</p>
+<p>As cláusulas <span class="math inline">\((\neg R \wedge  R)\)</span> e <span class="math inline">\((S \wedge  \neg S)\)</span> são contradições (sempre falsas), então podem ser removidas, simplificando a expressão para:</p>
 <p><span class="math display">\[
-(\neg r \wedge  \neg s) \vee (s \wedge  r)
+(\neg R \wedge  \neg S) \vee (S \wedge  R)
 \]</span></p></li>
 <li><p><strong>Forma Normal Disjuntiva Final</strong></p>
 <p>Agora, substituímos a Forma Normal Disjuntiva que acabamos de derivar de volta na fórmula principal:</p>
 <p><span class="math display">\[
-(p \wedge  q) \vee ((\neg r \wedge  \neg s) \vee (s \wedge  r))
+(P \wedge  Q) \vee ((\neg R \wedge  \neg S) \vee (S \wedge  R))
 \]</span></p>
 <p>Como o operador <span class="math inline">\(\vee\)</span> é associativo, podemos remover os parênteses extras, chegando à Forma Normal Disjuntiva final:</p>
 <p><span class="math display">\[
-(p \wedge  q) \vee (\neg r \wedge  \neg s) \vee (s \wedge  r)
+(P \wedge  Q) \vee (\neg R \wedge  \neg S) \vee (S \wedge  R)
 \]</span></p>
 <p>A fórmula final está corretamente expressa como uma disjunção de três conjunções de literais.</p></li>
 </ol>
@@ -650,19 +650,19 @@ A \vee (B \wedge  C) \equiv (A \vee B) \wedge  (A \vee C)
 <h4 data-number="7.1.3.3" class="anchored" data-anchor-id="exemplo-3-1"><span class="header-section-number">7.1.3.3</span> Exemplo 3</h4>
 <p>Considere a fórmula:</p>
 <p><span class="math display">\[
-(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)
+(P \wedge (Q \vee R)) \vee (\neg P \wedge \neg Q)
 \]</span></p>
 <p><strong>Conversão para Forma Normal Conjuntiva :</strong></p>
 <ol type="1">
-<li><p><strong>Aplicar a lei distributiva no primeiro termo</strong>: expandir <span class="math inline">\((p \wedge (q \vee r))\)</span> usando <span class="math inline">\(A \wedge (B \vee C) \equiv (A \wedge B) \vee (A \wedge C)\)</span></p>
+<li><p><strong>Aplicar a lei distributiva no primeiro termo</strong>: expandir <span class="math inline">\((P \wedge (Q \vee R))\)</span> usando <span class="math inline">\(A \wedge (B \vee C) \equiv (A \wedge B) \vee (A \wedge C)\)</span></p>
 <p><span class="math display">\[
-(p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)
+(P \wedge Q) \vee (P \wedge R) \vee (\neg P \wedge \neg Q)
 \]</span></p>
 <p>Neste ponto, temos uma <strong>Forma Normal Disjuntiva </strong>.</p></li>
 <li><p><strong>Construir a tabela-verdade para determinar a Forma Normal Conjuntiva</strong>:</p>
 <p><span class="math display">\[
 \begin{array}{ccc|c|c|c}
-p &amp; q &amp; r &amp; p \wedge q &amp; p \wedge r &amp; \neg p \wedge \neg q &amp; \text{Resultado} \\
+P &amp; Q &amp; R &amp; P \wedge Q &amp; P \wedge R &amp; \neg P \wedge \neg Q &amp; \text{Resultado} \\
 \hline
 T &amp; T &amp; T &amp; T &amp; T &amp; F &amp; T \\
 T &amp; T &amp; F &amp; T &amp; F &amp; F &amp; T \\
@@ -677,20 +677,20 @@ F &amp; F &amp; F &amp; F &amp; F &amp; T &amp; T \\
 <li><p><strong>Identificar as linhas falsas</strong>: as linhas 4, 5 e 6 têm resultado falso.</p></li>
 <li><p><strong>Construir cláusulas excludentes</strong>: para cada linha falsa, criamos uma cláusula que a “proíbe”:</p>
 <ul>
-<li><strong>Linha 4</strong> (p=T, q=F, r=F): Para excluir esta combinação, criamos <span class="math inline">\((\neg p \vee q \vee r)\)</span></li>
-<li><strong>Linha 5</strong> (p=F, q=T, r=T): Para excluir esta combinação, criamos <span class="math inline">\((p \vee \neg q \vee \neg r)\)</span><br>
+<li><strong>Linha 4</strong> (P=T, Q=F, R=F): Para excluir esta combinação, criamos <span class="math inline">\((\neg P \vee Q \vee R)\)</span></li>
+<li><strong>Linha 5</strong> (P=F, Q=T, R=T): Para excluir esta combinação, criamos <span class="math inline">\((P \vee \neg Q \vee \neg R)\)</span><br>
 </li>
-<li><strong>Linha 6</strong> (p=F, q=T, r=F): Para excluir esta combinação, criamos <span class="math inline">\((p \vee \neg q \vee r)\)</span></li>
+<li><strong>Linha 6</strong> (P=F, Q=T, R=F): Para excluir esta combinação, criamos <span class="math inline">\((P \vee \neg Q \vee R)\)</span></li>
 </ul></li>
 <li><p><strong>Formar a Forma Normal Conjuntiva</strong>: a conjunção de todas essas cláusulas nos dá a Forma Normal Conjuntiva:</p>
 <p><span class="math display">\[
-(\neg p \vee q \vee r) \wedge (p \vee \neg q \vee \neg r) \wedge (p \vee \neg q \vee r)
+(\neg P \vee Q \vee R) \wedge (P \vee \neg Q \vee \neg R) \wedge (P \vee \neg Q \vee R)
 \]</span></p></li>
 <li><p><strong>Simplificação</strong>: podemos aplicar a lei da resolução nas duas últimas cláusulas:</p>
-<p>De <span class="math inline">\((p \vee \neg q \vee \neg r) \wedge (p \vee \neg q \vee r)\)</span>, obtemos <span class="math inline">\((p \vee \neg q)\)</span> (eliminando <span class="math inline">\(r\)</span> e <span class="math inline">\(\neg r\)</span>).</p>
+<p>De <span class="math inline">\((P \vee \neg Q \vee \neg R) \wedge (P \vee \neg Q \vee R)\)</span>, obtemos <span class="math inline">\((P \vee \neg Q)\)</span> (eliminando <span class="math inline">\(R\)</span> e <span class="math inline">\(\neg R\)</span>).</p>
 <p><strong>Forma Normal Conjuntiva final simplificada</strong>:</p>
 <p><span class="math display">\[
-(\neg p \vee q \vee r) \wedge (p \vee \neg q)
+(\neg P \vee Q \vee R) \wedge (P \vee \neg Q)
 \]</span></p></li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -705,17 +705,17 @@ Important
 <div class="callout-body-container callout-body">
 <p><strong>Observação importante - Por que a conversão direta não funciona</strong>:</p>
 <p>A conversão direta de Forma Normal Disjuntiva para Forma Normal Conjuntiva através de distributividade simples frequentemente resulta em uma explosão exponencial de termos. Vamos ver por que:</p>
-<p>Para converter <span class="math inline">\((p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)\)</span> diretamente para Forma Normal Conjuntiva, precisaríamos aplicar a distributividade do <span class="math inline">\(\wedge\)</span> sobre <span class="math inline">\(\vee\)</span>, usando a regra <span class="math inline">\((A \vee B) \wedge (C \vee D) \equiv (A \wedge C) \vee (A \wedge D) \vee (B \wedge C) \vee (B \wedge D)\)</span>.</p>
+<p>Para converter <span class="math inline">\((P \wedge Q) \vee (P \wedge R) \vee (\neg P \wedge \neg Q)\)</span> diretamente para Forma Normal Conjuntiva, precisaríamos aplicar a distributividade do <span class="math inline">\(\wedge\)</span> sobre <span class="math inline">\(\vee\)</span>, usando a regra <span class="math inline">\((A \vee B) \wedge (C \vee D) \equiv (A \wedge C) \vee (A \wedge D) \vee (B \wedge C) \vee (B \wedge D)\)</span>.</p>
 <p>Se tentássemos aplicar isso sistematicamente:</p>
 <ol type="1">
-<li>Primeiro, agruparíamos: <span class="math inline">\(((p \wedge q) \vee (p \wedge r)) \vee (\neg p \wedge \neg q)\)</span>;</li>
+<li>Primeiro, agruparíamos: <span class="math inline">\(((P \wedge Q) \vee (P \wedge R)) \vee (\neg P \wedge \neg Q)\)</span>;</li>
 <li>Cada aplicação de distributividade duplicaria o número de termos;</li>
 <li>Com 3 termos conjuntivos originais, cada um com 2 literais, a expansão completa geraria <span class="math inline">\(2^3 = 8\)</span> combinações possíveis;</li>
 <li>Muitas dessas combinações seriam tautológicas ou contraditórias, requerendo simplificação adicional.</li>
 </ol>
 <p><strong>Exemplo da complexidade</strong>: Aplicando distributividade apenas ao primeiro passo:</p>
 <ul>
-<li><span class="math inline">\((p \wedge q) \vee (p \wedge r)\)</span> precisa ser convertido para Forma Normal Conjuntiva</li>
+<li><span class="math inline">\((P \wedge Q) \vee (P \wedge R)\)</span> precisa ser convertido para Forma Normal Conjuntiva</li>
 <li>Isso exigiria criar “pseudo-literais” para cada conjunção</li>
 <li>A expressão resultante seria muito mais complexa que a Forma Normal Conjuntiva obtida pela tabela-verdade</li>
 </ul>
@@ -732,18 +732,18 @@ Important
 <section id="exemplo-4-1" class="level4" data-number="7.1.3.4">
 <h4 data-number="7.1.3.4" class="anchored" data-anchor-id="exemplo-4-1"><span class="header-section-number">7.1.3.4</span> Exemplo 4</h4>
 <p>Considere a fórmula:</p>
-<p><span class="math display">\[ \neg ((p \wedge q) \vee \neg (r \wedge s))\]</span></p>
+<p><span class="math display">\[ \neg ((P \wedge Q) \vee \neg (R \wedge S))\]</span></p>
 <ol type="1">
 <li><p>Aplicando a Lei de De Morgan na expressão inteira:</p>
 <p><span class="math display">\[
 \begin{align*}
-\neg ((p \wedge q) \vee \neg (r \wedge s)) &amp;\equiv \neg (p \wedge q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
+\neg ((P \wedge Q) \vee \neg (R \wedge S)) &amp;\equiv \neg (P \wedge Q) \wedge (R \wedge S) \quad \text{(Lei de De Morgan)}
 \end{align*}
 \]</span></p></li>
 <li><p>aplicando a Lei de De Morgan nos termos internos:</p>
 <p><span class="math display">\[
 \begin{align*}
-\neg (p \wedge q) \wedge (r \wedge s) &amp;\equiv (\neg p \vee \neg q) \wedge (r \wedge s) \quad \text{(Lei de De Morgan)}
+\neg (P \wedge Q) \wedge (R \wedge S) &amp;\equiv (\neg P \vee \neg Q) \wedge (R \wedge S) \quad \text{(Lei de De Morgan)}
 \end{align*}
 \]</span></p></li>
 </ol>
@@ -752,61 +752,61 @@ Important
 <h4 data-number="7.1.3.5" class="anchored" data-anchor-id="exemplo-5-1"><span class="header-section-number">7.1.3.5</span> Exemplo 5</h4>
 <p>Considere a seguinte fórmula, que é a negação da Lei de Peirce (uma conhecida tautologia na lógica clássica):</p>
 <p><span class="math display">\[
-\neg (((p \rightarrow q) \rightarrow p) \rightarrow p)
+\neg (((P \rightarrow Q) \rightarrow P) \rightarrow P)
 \]</span></p>
 <p>Nosso objetivo é converter esta fórmula para a Forma Normal Conjuntiva para determinar sua natureza.</p>
 <ol type="1">
 <li><p><strong>Eliminar a Implicação Mais Externa</strong></p>
 <p>Aplicamos a regra <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span> na implicação principal.</p>
 <p><span class="math display">\[
-\neg (\neg((p \rightarrow q) \rightarrow p) \vee p)
+\neg (\neg((P \rightarrow Q) \rightarrow P) \vee P)
 \]</span></p></li>
 <li><p><strong>Aplicar a Lei de De Morgan</strong></p>
 <p>Agora, aplicamos a lei <span class="math inline">\(\neg(A \vee B) \equiv \neg A \wedge  \neg B\)</span> na fórmula.</p>
 <p><span class="math display">\[
-\neg\neg((p \rightarrow q) \rightarrow p) \wedge  \neg p
+\neg\neg((P \rightarrow Q) \rightarrow P) \wedge  \neg P
 \]</span></p></li>
 <li><p><strong>Eliminar a Dupla Negação</strong></p>
 <p>A dupla negação é removida, simplificando a expressão.</p>
 <p><span class="math display">\[
-((p \rightarrow q) \rightarrow p) \wedge  \neg p
+((P \rightarrow Q) \rightarrow P) \wedge  \neg P
 \]</span></p></li>
 <li><p><strong>Eliminar as Implicações Restantes</strong></p>
 <p>Continuamos eliminando as implicações de dentro para fora.</p>
 <p><span class="math display">\[
-(\neg(p \rightarrow q) \vee p) \wedge  \neg p
+(\neg(P \rightarrow Q) \vee P) \wedge  \neg P
 \]</span></p>
 <p><span class="math display">\[
-(\neg(\neg p \vee q) \vee p) \wedge  \neg p
+(\neg(\neg P \vee Q) \vee P) \wedge  \neg P
 \]</span></p></li>
 <li><p><strong>Mover a Negação para o Interior</strong></p>
 <p>Aplicamos a Lei de De Morgan no primeiro termo aninhado.</p>
 <p><span class="math display">\[
-((p \wedge  \neg q) \vee p) \wedge  \neg p
+((P \wedge  \neg Q) \vee P) \wedge  \neg P
 \]</span></p>
-<p>Neste ponto, a expressão <span class="math inline">\(((p \wedge  \neg q) \vee p) \wedge  \neg p\)</span> está em Forma Normal Disjuntiva. Para prosseguir com a conversão para Forma Normal Conjuntiva, precisamos aplicar a lei distributiva nela.</p></li>
+<p>Neste ponto, a expressão <span class="math inline">\(((P \wedge  \neg Q) \vee P) \wedge  \neg P\)</span> está em Forma Normal Disjuntiva. Para prosseguir com a conversão para Forma Normal Conjuntiva, precisamos aplicar a lei distributiva nela.</p></li>
 <li><p><strong>Aplicar a Lei Distributiva</strong></p>
-<p>Distribuímos <span class="math inline">\(\vee p\)</span> sobre <span class="math inline">\((p \wedge  \neg q)\)</span> usando a regra <span class="math inline">\((A \wedge  B) \vee C \equiv (A \vee C) \wedge  (B \vee C)\)</span>.</p>
+<p>Distribuímos <span class="math inline">\(\vee P\)</span> sobre <span class="math inline">\((P \wedge  \neg Q)\)</span> usando a regra <span class="math inline">\((A \wedge  B) \vee C \equiv (A \vee C) \wedge  (B \vee C)\)</span>.</p>
 <p><span class="math display">\[
-((p \vee p) \wedge  (\neg q \vee p)) \wedge  \neg p
+((P \vee P) \wedge  (\neg Q \vee P)) \wedge  \neg P
 \]</span></p></li>
 <li><p><strong>Simplificar e Reassociar</strong></p>
-<p>Simplificamos <span class="math inline">\((p \vee p)\)</span> para <span class="math inline">\(p\)</span> (Idempotência) e reassociamos os termos para agrupar <span class="math inline">\(p\)</span> e <span class="math inline">\(\neg p\)</span>.</p>
+<p>Simplificamos <span class="math inline">\((P \vee P)\)</span> para <span class="math inline">\(P\)</span> (Idempotência) e reassociamos os termos para agrupar <span class="math inline">\(P\)</span> e <span class="math inline">\(\neg P\)</span>.</p>
 <p><span class="math display">\[
-(p \wedge  (\neg q \vee p)) \wedge  \neg p
+(P \wedge  (\neg Q \vee P)) \wedge  \neg P
 \]</span></p>
 <p><span class="math display">\[
-(p \wedge  \neg p) \wedge  (\neg q \vee p)
+(P \wedge  \neg P) \wedge  (\neg Q \vee P)
 \]</span></p></li>
 <li><p><strong>Resultado Final</strong></p>
-<p>A expressão <span class="math inline">\((p \wedge  \neg p)\)</span> é uma contradição, equivalente a <span class="math inline">\(Falso\)</span> (<span class="math inline">\(F\)</span>). Qualquer conjunção com <span class="math inline">\(F\)</span> resulta em <span class="math inline">\(F\)</span>.</p>
+<p>A expressão <span class="math inline">\((P \wedge  \neg P)\)</span> é uma contradição, equivalente a <span class="math inline">\(Falso\)</span> (<span class="math inline">\(F\)</span>). Qualquer conjunção com <span class="math inline">\(F\)</span> resulta em <span class="math inline">\(F\)</span>.</p>
 <p><span class="math display">\[
-F \wedge  (\neg q \vee p)
+F \wedge  (\neg Q \vee P)
 \]</span></p>
 <p><span class="math display">\[
 F
 \]</span></p>
-<p>A fórmula original é uma contradição. A Forma Normal Conjuntiva de uma contradição pode ser representada simplesmente como <span class="math inline">\(F\)</span>, ou por qualquer conjunção contraditória, como <span class="math inline">\((p \wedge  \neg p)\)</span>.</p>
+<p>A fórmula original é uma contradição. A Forma Normal Conjuntiva de uma contradição pode ser representada simplesmente como <span class="math inline">\(F\)</span>, ou por qualquer conjunção contraditória, como <span class="math inline">\((P \wedge  \neg P)\)</span>.</p>
 <div class="{calout-note}">
 <p><strong>Negação da Lei de Peirce</strong></p>
 <p>A <em>Lei de Peirce</em> é uma tautologia fundamental da lógica clássica, formulada como:</p>
@@ -847,39 +847,39 @@ F
 <section id="exemplo-6" class="level4" data-number="7.1.3.6">
 <h4 data-number="7.1.3.6" class="anchored" data-anchor-id="exemplo-6"><span class="header-section-number">7.1.3.6</span> Exemplo 6</h4>
 <p>Considere a fórmula:</p>
-<p><span class="math display">\[(p \rightarrow q) \leftrightarrow (p \rightarrow r)\]</span></p>
+<p><span class="math display">\[(P \rightarrow Q) \leftrightarrow (P \rightarrow R)\]</span></p>
 <ol type="1">
 <li><p>Começamos pela definição de equivalência e implicação:</p>
-<p><span class="math display">\[(p \rightarrow q) \leftrightarrow (p \rightarrow r)\]</span></p></li>
+<p><span class="math display">\[(P \rightarrow Q) \leftrightarrow (P \rightarrow R)\]</span></p></li>
 <li><p>Aplicamos as definições de implicação:</p>
-<p><span class="math display">\[(\neg p \vee q) \leftrightarrow (\neg p \vee r)\]</span></p></li>
+<p><span class="math display">\[(\neg P \vee Q) \leftrightarrow (\neg P \vee R)\]</span></p></li>
 <li><p>Agora, aplicamos a definição de equivalência, transformando-a em uma conjunção de duas implicações:</p>
-<p><span class="math display">\[((\neg p \vee q) \rightarrow (\neg p \vee r)) \wedge  ((\neg p \vee r) \rightarrow (\neg p \vee q))\]</span></p></li>
+<p><span class="math display">\[((\neg P \vee Q) \rightarrow (\neg P \vee R)) \wedge  ((\neg P \vee R) \rightarrow (\neg P \vee Q))\]</span></p></li>
 <li><p>Em seguida, aplicamos a definição de implicação novamente para cada uma das implicações internas:</p>
-<p><span class="math display">\[(\neg (\neg p \vee q) \vee (\neg p \vee r)) \wedge  (\neg (\neg p \vee r) \vee (\neg p \vee q))\]</span></p></li>
+<p><span class="math display">\[(\neg (\neg P \vee Q) \vee (\neg P \vee R)) \wedge  (\neg (\neg P \vee R) \vee (\neg P \vee Q))\]</span></p></li>
 <li><p>Vamos aplicar a lei de De Morgan e a lei da dupla negação para simplificar a expressão:</p>
-<p><span class="math display">\[((p \wedge  \neg q) \vee (\neg p \vee r)) \wedge  ((p \wedge  \neg r) \vee (\neg p \vee q))\]</span></p></li>
+<p><span class="math display">\[((P \wedge  \neg Q) \vee (\neg P \vee R)) \wedge  ((P \wedge  \neg R) \vee (\neg P \vee Q))\]</span></p></li>
 <li><p>Aplicando a lei distributiva para desenvolver cada conjunção interna em disjunções:</p>
-<p><span class="math display">\[((p \vee (\neg p \vee r)) \wedge  (\neg q \vee (\neg p \vee r))) \wedge  ((p \vee (\neg p \vee q)) \wedge  (\neg r \vee (\neg p \vee q)))\]</span></p></li>
+<p><span class="math display">\[((P \vee (\neg P \vee R)) \wedge  (\neg Q \vee (\neg P \vee R))) \wedge  ((P \vee (\neg P \vee Q)) \wedge  (\neg R \vee (\neg P \vee Q)))\]</span></p></li>
 </ol>
 <p>A aplicação das equivalências não é, nem de longe, a única forma de percorrer a rota da conversão de uma <strong>Fórmula Bem Formada</strong> em Forma Normal Conjuntiva.</p>
 </section>
 <section id="sec-exercicios-conversao-fnc" class="level4" data-number="7.1.3.7">
 <h4 data-number="7.1.3.7" class="anchored" data-anchor-id="sec-exercicios-conversao-fnc"><span class="header-section-number">7.1.3.7</span> Exercícios de Conversão para Forma Normal Conjuntiva</h4>
 <p><strong>1.</strong> Converta a seguinte fórmula para Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[(p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))\]</span></p>
-<p><span class="math display">\[(p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))\]</span></p>
-<p><strong>2.</strong> Transforme em Forma Normal Conjuntiva a fórmula: <span class="math display">\[\neg((p \rightarrow q) \vee (q \rightarrow p)) \wedge (p \vee q)\]</span></p>
+<p><span class="math display">\[(P \leftrightarrow Q) \rightarrow ((P \wedge R) \vee (Q \wedge \neg R))\]</span></p>
+<p><span class="math display">\[(P \leftrightarrow Q) \rightarrow ((P \wedge R) \vee (Q \wedge \neg R))\]</span></p>
+<p><strong>2.</strong> Transforme em Forma Normal Conjuntiva a fórmula: <span class="math display">\[\neg((P \rightarrow Q) \vee (Q \rightarrow P)) \wedge (P \vee Q)\]</span></p>
 <p><strong>3.</strong> Converta para Forma Normal Conjuntiva a negação de uma tautologia distributiva:</p>
-<p><span class="math display">\[\neg((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))\]</span></p>
+<p><span class="math display">\[\neg((P \wedge (Q \vee R)) \leftrightarrow ((P \wedge Q) \vee (P \wedge R)))\]</span></p>
 <p><strong>4.</strong> Obtenha a Forma Normal Conjuntiva para:</p>
-<p><span class="math display">\[((p \vee q) \rightarrow r) \leftrightarrow (p \rightarrow r) \wedge (q \rightarrow r)\]</span></p>
+<p><span class="math display">\[((P \vee Q) \rightarrow R) \leftrightarrow (P \rightarrow R) \wedge (Q \rightarrow R)\]</span></p>
 <p><strong>5.</strong> Converta a seguinte fórmula complexa para Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[(p \rightarrow (q \rightarrow r)) \wedge \neg((p \wedge q) \rightarrow r)\]</span></p>
+<p><span class="math display">\[(P \rightarrow (Q \rightarrow R)) \wedge \neg((P \wedge Q) \rightarrow R)\]</span></p>
 <p><strong>6.</strong> Transforme em Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[((p \leftrightarrow q) \vee (q \leftrightarrow r)) \wedge \neg(p \leftrightarrow r)\]</span></p>
+<p><span class="math display">\[((P \leftrightarrow Q) \vee (Q \leftrightarrow R)) \wedge \neg(P \leftrightarrow R)\]</span></p>
 <p><strong>7.</strong> Converta para Forma Normal Conjuntiva a fórmula:</p>
-<p><span class="math display">\[\neg(p \rightarrow (q \vee r)) \vee ((p \wedge \neg q) \rightarrow r)\]</span></p>
+<p><span class="math display">\[\neg(P \rightarrow (Q \vee R)) \vee ((P \wedge \neg Q) \rightarrow R)\]</span></p>
 </section>
 </section>
 <section id="usando-a-tabela-verdade-para-gerar-formas-normais" class="level3" data-number="7.1.4">
@@ -1083,7 +1083,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p><strong>5. Eliminar os Quantificadores Existenciais (Skolemização)</strong>: substitua cada quantificador existencial <span class="math inline">\(\exists x\)</span> por um novo termo constante ou Função Skolem, dependendo das variáveis quantificadas universalmente à esquerda no prefixo Prenex:</p>
 <ol type="1">
 <li><p><strong>Se o quantificador existencial não tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> por <span class="math inline">\(P(c)\)</span>, sendo que <span class="math inline">\(c\)</span> é uma nova constante.</p></li>
-<li><p><strong>Se o quantificador existencial tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> por <span class="math inline">\(P(f(y_1, y_2, \ldots, y_n))\)</span>, sendo que <span class="math inline">\(f\)</span> é uma nova função Skolem, e <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> são as variáveis universais à esquerda do quantificador existencial.</p></li>
+<li><p><strong>Se o quantificador existencial tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> por <span class="math inline">\(P(\mathbf{\mathbf{f}}(y_1, y_2, \ldots, y_n))\)</span>, sendo que <span class="math inline">\(\mathbf{\mathbf{f}}\)</span> é uma nova função Skolem, e <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> são as variáveis universais à esquerda do quantificador existencial.</p></li>
 </ol>
 <p><strong>6. Eliminar os Quantificadores Universais</strong>: remova os quantificadores universais, deixando apenas a matriz da fórmula. As variáveis que eram ligadas pelo quantificador universal agora são tratadas como variáveis livres na matriz da fórmula.</p>
 <p><strong>7. Conversão para Forma Normal Conjuntiva ou Forma Normal Disjuntiva</strong>:</p>
@@ -1139,24 +1139,24 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 \]</span></p>
 <p>Siga os passos para conversão para Forma Normal Conjuntiva:</p>
 <ol type="1">
-<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem um quantificador universal <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por uma função Skolem <span class="math inline">\(f(x)\)</span>:</li>
+<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem um quantificador universal <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por uma função Skolem <span class="math inline">\(\mathbf{\mathbf{f}}(x)\)</span>:</li>
 </ol>
 <p><span class="math display">\[
-\forall x (P(x) \wedge Q(f(x)))
+\forall x (P(x) \wedge Q(\mathbf{\mathbf{f}}(x)))
 \]</span></p>
 <ol start="2" type="1">
 <li><strong>Eliminar os Quantificadores Universais</strong>: Remova <span class="math inline">\(\forall x\)</span>, tratando <span class="math inline">\(x\)</span> como variável livre:</li>
 </ol>
 <p><span class="math display">\[
-P(x) \wedge Q(f(x))
+P(x) \wedge Q(\mathbf{\mathbf{f}}(x))
 \]</span></p>
 <ol start="3" type="1">
 <li><strong>Conversão para Forma Normal Conjuntiva</strong>: A matriz já é uma conjunção de literais, resultando em cláusulas:</li>
 </ol>
 <p><span class="math display">\[
-P(x) \wedge Q(f(x))
+P(x) \wedge Q(\mathbf{\mathbf{f}}(x))
 \]</span></p>
-<p>Isso equivale a duas cláusulas: <span class="math inline">\(\{P(x)\}\)</span> e <span class="math inline">\(\{Q(f(x))\}\)</span>.</p>
+<p>Isso equivale a duas cláusulas: <span class="math inline">\(\{P(x)\}\)</span> e <span class="math inline">\(\{Q(\mathbf{f}(x))\}\)</span>.</p>
 </section>
 <section id="exemplo-4---conversão-para-forma-normal-conjuntiva" class="level4" data-number="7.2.1.6">
 <h4 data-number="7.2.1.6" class="anchored" data-anchor-id="exemplo-4---conversão-para-forma-normal-conjuntiva"><span class="header-section-number">7.2.1.6</span> Exemplo 4 - Conversão para Forma Normal Conjuntiva</h4>
@@ -1170,24 +1170,24 @@ P(x) \wedge Q(f(x))
 \]</span></p>
 <p>Siga os passos para conversão para Forma Normal Conjuntiva:</p>
 <ol type="1">
-<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por <span class="math inline">\(f(x)\)</span>:</li>
+<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por <span class="math inline">\(\mathbf{f}(x)\)</span>:</li>
 </ol>
 <p><span class="math display">\[
-\forall x (\neg P(x) \vee Q(x, f(x)))
+\forall x (\neg P(x) \vee Q(x, \mathbf{f}(x)))
 \]</span></p>
 <ol start="2" type="1">
 <li><strong>Eliminar os Quantificadores Universais</strong>: Remova <span class="math inline">\(\forall x\)</span>:</li>
 </ol>
 <p><span class="math display">\[
-\neg P(x) \vee Q(x, f(x))
+\neg P(x) \vee Q(x, \mathbf{f}(x))
 \]</span></p>
 <ol start="3" type="1">
 <li><strong>Conversão para Forma Normal Conjuntiva</strong>: A matriz já é uma disjunção (cláusula única):</li>
 </ol>
 <p><span class="math display">\[
-\neg P(x) \vee Q(x, f(x))
+\neg P(x) \vee Q(x, \mathbf{f}(x))
 \]</span></p>
-<p>Isso resulta na cláusula: <span class="math inline">\(\{\neg P(x), Q(x, f(x))\}\)</span>.</p>
+<p>Isso resulta na cláusula: <span class="math inline">\(\{\neg P(x), Q(x, \mathbf{f}(x))\}\)</span>.</p>
 </section>
 <section id="exemplo-5---conversão-para-forma-normal-conjuntiva" class="level4" data-number="7.2.1.7">
 <h4 data-number="7.2.1.7" class="anchored" data-anchor-id="exemplo-5---conversão-para-forma-normal-conjuntiva"><span class="header-section-number">7.2.1.7</span> Exemplo 5 - Conversão para Forma Normal Conjuntiva</h4>
@@ -1247,13 +1247,13 @@ Warning
 <p>A criativa leitora pode se imaginar como um mestre de porto organizando o registro de embarcações: em vez de deixar referências vagas como ‘existe um navio cargueiro’, o mestre de porto cria um sistema de registro que permite localizar exatamente qual embarcação estamos procurando, baseados nas necessidades que definem nossos critérios de busca.</p>
 <p>Considere a fórmula a seguir com um quantificador universal e um existencial:</p>
 <p><span class="math display">\[\forall x \exists y P(x,y)\]</span></p>
-<p>Ao aplicar a Skolemização, a variável existencial <span class="math inline">\(y\)</span> é substituída por uma Função de Skolem <span class="math inline">\(f(x)\)</span>:</p>
-<p><span class="math display">\[P(x,f(x))\]</span></p>
+<p>Ao aplicar a Skolemização, a variável existencial <span class="math inline">\(y\)</span> é substituída por uma Função de Skolem <span class="math inline">\(\mathbf{f}(x)\)</span>:</p>
+<p><span class="math display">\[P(x,\mathbf{f}(x))\]</span></p>
 <p>Para uma fórmula com dois quantificadores universais e dois existenciais:</p>
 <p><span class="math display">\[\forall x \forall z \exists y \exists w R(x,y,z,w)\]</span></p>
 <p>A Skolemização resultará em:</p>
-<p><span class="math display">\[\forall x \forall z R(x,f(x),z,g(x,z))\]</span></p>
-<p><span class="math inline">\(f(x)\)</span> e $ g(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais <span class="math inline">\(y\)</span> e $w $ respectivamente. A escolha entre Constante e Função Skolem é como decidir entre definir valores definitivos ou sua ação e aplicação:</p>
+<p><span class="math display">\[\forall x \forall z R(x,\mathbf{f}(x),z,\mathbf{g}(x,z))\]</span></p>
+<p><span class="math inline">\(\mathbf{f}(x)\)</span> e $ (x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais <span class="math inline">\(y\)</span> e $w $ respectivamente. A escolha entre Constante e Função Skolem é como decidir entre definir valores definitivos ou sua ação e aplicação:</p>
 <ul>
 <li><p>A <strong>Constante Skolem</strong> é como batizar um navio com nome fixo, “Santa Maria sempre será Santa Maria”, independente da rota ou tripulação.</p></li>
 <li><p>A <strong>Função Skolem</strong> é como designar um papel dinâmico, “o navio de apoio da embarcação principal”, no qual a identidade específica muda dependendo de qual é a embarcação principal, mas a relação permanece consistente.</p></li>
@@ -1266,18 +1266,18 @@ Warning
 <ol type="1">
 <li><p><strong>Identificação do quantificador existencial</strong>: identificamos o quantificador existencial <span class="math inline">\(\exists y\)</span> que introduz a variável <span class="math inline">\(y\)</span>.</p></li>
 <li><p><strong>Análise de dependência</strong>: a variável existencial <span class="math inline">\(y\)</span> <strong>depende</strong> da variável universal <span class="math inline">\(x\)</span>, pois o quantificador <span class="math inline">\(\forall x\)</span> aparece <strong>antes</strong> de <span class="math inline">\(\exists y\)</span> na fórmula. Isso significa que para cada valor específico de <span class="math inline">\(x\)</span>, existe um valor correspondente de <span class="math inline">\(y\)</span> que pode variar com <span class="math inline">\(x\)</span>.</p></li>
-<li><p><strong>Escolha da substituição</strong>: como <span class="math inline">\(y\)</span> depende de <span class="math inline">\(x\)</span>, usamos uma <strong>Função de Skolem</strong> <span class="math inline">\(f(x)\)</span> (não uma constante). A função <span class="math inline">\(f\)</span> “escolhe” o valor apropriado de <span class="math inline">\(y\)</span> para cada <span class="math inline">\(x\)</span>.</p></li>
-<li><p><strong>Substituição</strong>: substituímos <span class="math inline">\(y\)</span> por <span class="math inline">\(f(x)\)</span> na fórmula: <span class="math display">\[\forall x \ P(x,f(x))\]</span></p></li>
-<li><p><strong>Remoção dos quantificadores universais</strong>: removemos o quantificador universal restante, obtendo a forma final: <span class="math display">\[P(x,f(x))\]</span></p></li>
+<li><p><strong>Escolha da substituição</strong>: como <span class="math inline">\(y\)</span> depende de <span class="math inline">\(x\)</span>, usamos uma <strong>Função de Skolem</strong> <span class="math inline">\(\mathbf{f}(x)\)</span> (não uma constante). A função <span class="math inline">\(\mathbf{f}\)</span> “escolhe” o valor apropriado de <span class="math inline">\(y\)</span> para cada <span class="math inline">\(x\)</span>.</p></li>
+<li><p><strong>Substituição</strong>: substituímos <span class="math inline">\(y\)</span> por <span class="math inline">\(\mathbf{f}(x)\)</span> na fórmula: <span class="math display">\[\forall x \ P(x,\mathbf{f}(x))\]</span></p></li>
+<li><p><strong>Remoção dos quantificadores universais</strong>: removemos o quantificador universal restante, obtendo a forma final: <span class="math display">\[P(x,\mathbf{f}(x))\]</span></p></li>
 </ol>
-<p><strong>Intuição</strong>: A função Skolem <span class="math inline">\(f(x)\)</span> representa uma “regra de escolha” que, dado qualquer valor de <span class="math inline">\(x\)</span>, seleciona o valor apropriado de <span class="math inline">\(y\)</span> que satisfaz <span class="math inline">\(P(x,y)\)</span>. Por exemplo, se <span class="math inline">\(P(x,y)\)</span> significa “<span class="math inline">\(y\)</span> é o dobro de <span class="math inline">\(x\)</span>”, então <span class="math inline">\(f(x) = 2x\)</span>.</p>
+<p><strong>Intuição</strong>: A função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span> representa uma “regra de escolha” que, dado qualquer valor de <span class="math inline">\(x\)</span>, seleciona o valor apropriado de <span class="math inline">\(y\)</span> que satisfaz <span class="math inline">\(P(x,y)\)</span>. Por exemplo, se <span class="math inline">\(P(x,y)\)</span> significa “<span class="math inline">\(y\)</span> é o dobro de <span class="math inline">\(x\)</span>”, então <span class="math inline">\(\mathbf{f}(x) = 2x\)</span>.</p>
 <p><strong>Exemplo 2</strong>: considere a fórmula original: <span class="math inline">\(\forall x \forall z \exists y \ Q(x,y,z)\)</span></p>
 <ol type="1">
 <li><p>Identificamos o quantificador existencial que introduz a variável <span class="math inline">\(y\)</span>.</p></li>
-<li><p>A variável <span class="math inline">\(y\)</span> depende de duas variáveis universais, <span class="math inline">\(x\)</span> e <span class="math inline">\(z\)</span>. Portanto, usamos uma Função de Skolem, digamos <span class="math inline">\(f(x,z)\)</span>. A fórmula se torna:</p>
-<p><span class="math display">\[\forall x \forall z \ Q(x,f(x,z),z)\]</span></p></li>
+<li><p>A variável <span class="math inline">\(y\)</span> depende de duas variáveis universais, <span class="math inline">\(x\)</span> e <span class="math inline">\(z\)</span>. Portanto, usamos uma Função de Skolem, digamos <span class="math inline">\(\mathbf{f}(x,z)\)</span>. A fórmula se torna:</p>
+<p><span class="math display">\[\forall x \forall z \ Q(x,\mathbf{f}(x,z),z)\]</span></p></li>
 </ol>
-<p>Substituímos <span class="math inline">\(y\)</span> por <span class="math inline">\(f(x,z)\)</span>, que é uma função que depende das variáveis universais <span class="math inline">\(x\)</span> e <span class="math inline">\(z\)</span>.</p>
+<p>Substituímos <span class="math inline">\(y\)</span> por <span class="math inline">\(\mathbf{f}(x,z)\)</span>, que é uma função que depende das variáveis universais <span class="math inline">\(x\)</span> e <span class="math inline">\(z\)</span>.</p>
 <p>Em resumo, a Skolemização simplifica fórmulas quantificadas, eliminando quantificadores existenciais e substituindo variáveis por Constantes ou Funções de Skolem, dependendo de sua relação com quantificadores universais. Isso auxilia na conversão de fórmulas quantificadas para a Forma Normal Conjuntiva e na simplificação da lógica.</p>
 <section id="exemplos-de-conversão-em-formas-normais-conjuntiva-e-disjuntiva" class="level4" data-number="7.2.2.1">
 <h4 data-number="7.2.2.1" class="anchored" data-anchor-id="exemplos-de-conversão-em-formas-normais-conjuntiva-e-disjuntiva"><span class="header-section-number">7.2.2.1</span> Exemplos de conversão em formas normais, conjuntiva e disjuntiva</h4>
@@ -1299,17 +1299,17 @@ Warning
 <p><span class="math display">\[
 \forall x \exists y ((\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(y) \wedge \text{EnsinaMatemática}(y)))
 \]</span></p></li>
-<li><p><strong>Skolemização</strong>: eliminar o quantificador existencial <span class="math inline">\(\exists y\)</span>. Como <span class="math inline">\(y\)</span> está no escopo de <span class="math inline">\(\forall x\)</span>, ele é substituído por uma função Skolem <span class="math inline">\(f(x)\)</span>.</p>
+<li><p><strong>Skolemização</strong>: eliminar o quantificador existencial <span class="math inline">\(\exists y\)</span>. Como <span class="math inline">\(y\)</span> está no escopo de <span class="math inline">\(\forall x\)</span>, ele é substituído por uma função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span>.</p>
 <p><span class="math display">\[
-\forall x ((\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(f(x)) \wedge \text{EnsinaMatemática}(f(x))))
+\forall x ((\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(\mathbf{f}(x)) \wedge \text{EnsinaMatemática}(\mathbf{f}(x))))
 \]</span></p></li>
 <li><p><strong>Aplicar distributividade</strong>: distribuir <span class="math inline">\(\vee\)</span> sobre <span class="math inline">\(\wedge\)</span> usando a regra <span class="math inline">\((P \vee (Q \wedge R)) \equiv ((P \vee Q) \wedge (P \vee R))\)</span>.</p>
 <p><span class="math display">\[
-\forall x ((\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(f(x))) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(f(x))))
+\forall x ((\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(\mathbf{f}(x))) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(\mathbf{f}(x))))
 \]</span></p></li>
 <li><p><strong>Remover quantificadores universais</strong>: na forma clausal, os quantificadores universais são implícitos.</p>
 <p><span class="math display">\[
-(\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(f(x))) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(f(x)))
+(\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(\mathbf{f}(x))) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(\mathbf{f}(x)))
 \]</span></p></li>
 </ol>
 <p><strong>Resultado final em Forma Normal Conjuntiva</strong>: A fórmula está na Forma Normal Conjuntiva, representada como uma conjunção de duas cláusulas.</p>
@@ -1440,7 +1440,7 @@ Warning
 <li><p>Use um Mapa de Karnaugh ou álgebra booleana para encontrar a Forma Normal Disjuntiva mínima.</p></li>
 </ol>
 <p><strong>Questão 7: Validando uma Inferência (Tautologia)</strong>: considere que “Todos os leões são mamíferos” e “Simba é um leão”, podemos concluir “Simba é um mamífero”. Prove que a estrutura lógica desta inferência é uma tautologia:</p>
-<p><span class="math display">\[((\forall x(L(x) \to M(x))) \wedge L(s)) \to M(s)\]</span></p>
+<p><span class="math display">\[((\forall x(L(x) \to M(x))) \wedge L(S)) \to M(S)\]</span></p>
 <p><strong>Questão 8: Problema de Satisfatibilidade (SAT)</strong>: três programadores (Ana, Beto, Carla) precisam ser alocados para um projeto. As restrições são:</p>
 <ol type="1">
 <li>Pelo menos um dos três deve ser alocado;<br>
