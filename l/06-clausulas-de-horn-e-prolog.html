@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à Programação Lógica - 9&nbsp; Cláusulas de Horn</title>
+<title>Introdução à Programação Lógica - 8&nbsp; Cláusulas de Horn</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08-verificacao-formal-de-programas.html" rel="next">
-<link href="./06-construcao-de-mundos-logicos.html" rel="prev">
+<link href="./07-construcao-de-mundos-logicos.html" rel="next">
+<link href="./05-formas-normais-e-skolemizacao.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07-clausulas-de-horn-e-prolog.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./06-clausulas-de-horn-e-prolog.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -237,14 +237,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span></a>
+  <a href="./06-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+  <a href="./07-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Raciocínio Algorítmico: Criando Mundos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,7 +256,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Problemas Interessantes Resolvidos com <strong>Lógica Proposicional</strong> e Predicativa</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -285,15 +285,15 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#definição-da-cláusula-de-horn" id="toc-definição-da-cláusula-de-horn" class="nav-link active" data-scroll-target="#definição-da-cláusula-de-horn"><span class="header-section-number">9.0.1</span> Definição da Cláusula de Horn</a></li>
-  <li><a href="#exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" id="toc-exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem"><span class="header-section-number">9.1</span> Exemplo 3 - Mundo Núcleo Familiar (<strong>Lógica de Primeira Ordem</strong>)</a>
+  <li><a href="#definição-da-cláusula-de-horn" id="toc-definição-da-cláusula-de-horn" class="nav-link active" data-scroll-target="#definição-da-cláusula-de-horn"><span class="header-section-number">8.0.1</span> Definição da Cláusula de Horn</a></li>
+  <li><a href="#exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" id="toc-exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem"><span class="header-section-number">8.1</span> Exemplo 3 - Mundo Núcleo Familiar (<strong>Lógica de Primeira Ordem</strong>)</a>
   <ul class="collapse">
-  <li><a href="#quantificadores-em-cláusulas-de-horn" id="toc-quantificadores-em-cláusulas-de-horn" class="nav-link" data-scroll-target="#quantificadores-em-cláusulas-de-horn"><span class="header-section-number">9.1.1</span> Quantificadores em Cláusulas de Horn</a></li>
-  <li><a href="#conversão-de-fórmulas" id="toc-conversão-de-fórmulas" class="nav-link" data-scroll-target="#conversão-de-fórmulas"><span class="header-section-number">9.1.2</span> Conversão de Fórmulas</a></li>
+  <li><a href="#quantificadores-em-cláusulas-de-horn" id="toc-quantificadores-em-cláusulas-de-horn" class="nav-link" data-scroll-target="#quantificadores-em-cláusulas-de-horn"><span class="header-section-number">8.1.1</span> Quantificadores em Cláusulas de Horn</a></li>
+  <li><a href="#conversão-de-fórmulas" id="toc-conversão-de-fórmulas" class="nav-link" data-scroll-target="#conversão-de-fórmulas"><span class="header-section-number">8.1.2</span> Conversão de Fórmulas</a></li>
   </ul></li>
-  <li><a href="#o-prolog-entra-em-cena" id="toc-o-prolog-entra-em-cena" class="nav-link" data-scroll-target="#o-prolog-entra-em-cena"><span class="header-section-number">9.2</span> O Prolog Entra em Cena</a></li>
+  <li><a href="#o-prolog-entra-em-cena" id="toc-o-prolog-entra-em-cena" class="nav-link" data-scroll-target="#o-prolog-entra-em-cena"><span class="header-section-number">8.2</span> O Prolog Entra em Cena</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/07-clausulas-de-horn-e-prolog.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/06-clausulas-de-horn-e-prolog.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -302,9 +302,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07-clausulas-de-horn-e-prolog.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./06-clausulas-de-horn-e-prolog.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></h1>
 </div>
 
 
@@ -325,8 +325,8 @@ window.Quarto = {
 <p>Não demorou muito para os matemáticos perceberem que a <strong>Lógica de Primeira Ordem</strong> é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da <strong>Lógica de Primeira Ordem</strong>, onde a decidibilidade poderia ser alcançada de forma mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.</p>
 <p>Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como <strong>Cláusula de Horn</strong>. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.</p>
 <p>Se prepare vamos ver porque $P Q R $ é uma Cláusula de Horn e <span class="math inline">\(P \lor Q \lor \neg R\)</span> não é.</p>
-<section id="definição-da-cláusula-de-horn" class="level3" data-number="9.0.1">
-<h3 data-number="9.0.1" class="anchored" data-anchor-id="definição-da-cláusula-de-horn"><span class="header-section-number">9.0.1</span> Definição da Cláusula de Horn</h3>
+<section id="definição-da-cláusula-de-horn" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="definição-da-cláusula-de-horn"><span class="header-section-number">8.0.1</span> Definição da Cláusula de Horn</h3>
 <p>A <strong>Cláusula de Horn</strong> é uma disjunção de literais que contém, no máximo, um literal positivo. Existem algumas formas equivalentes de representar Cláusulas de Horn:</p>
 <ol type="1">
 <li><p><strong>Forma Disjuntiva</strong>: <span class="math inline">\(\neg A_1 \lor \neg A_2 \lor \ldots \lor \neg A_k \lor B\)</span> Aqui, <span class="math inline">\(A_1, \ldots, A_k, B\)</span> são proposições atômicas (átomos). Os literais <span class="math inline">\(\neg A_i\)</span> são negativos, e <span class="math inline">\(B\)</span> é o único literal positivo (se presente). Se não houver literal positivo, a cláusula é uma meta ou consulta. Se não houver literais negativos, é um fato.</p></li>
@@ -374,8 +374,8 @@ window.Quarto = {
 <li><span class="math inline">\(\neg X \land \neg Y \land \neg Z\)</span>: <em><span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> e $Z $ são falsos?</em></li>
 </ul>
 <p>Podemos tentar avaliar alguns exemplos de uso de Fatos, Regras e Consultas:</p>
-<section id="exemplo-1---sistema-de-recomendação-de-roupas" class="level4" data-number="9.0.1.1">
-<h4 data-number="9.0.1.1" class="anchored" data-anchor-id="exemplo-1---sistema-de-recomendação-de-roupas"><span class="header-section-number">9.0.1.1</span> Exemplo 1 - Sistema de Recomendação de Roupas</h4>
+<section id="exemplo-1---sistema-de-recomendação-de-roupas" class="level4" data-number="8.0.1.1">
+<h4 data-number="8.0.1.1" class="anchored" data-anchor-id="exemplo-1---sistema-de-recomendação-de-roupas"><span class="header-section-number">8.0.1.1</span> Exemplo 1 - Sistema de Recomendação de Roupas</h4>
 <p>Imagine que estamos construindo um sistema lógico para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.</p>
 <p><strong>1. Fatos</strong>: primeiro, estabelecemos os fatos, as verdades básicas do cenário que descreve nosso problema. Neste exemplo, os fatos poderiam ser informações sobre o clima atual.</p>
 <ul>
@@ -404,8 +404,8 @@ window.Quarto = {
 </ol>
 <p>Neste exemplo, as Cláusulas de Horn nos permitiram representar o conhecimento sobre o clima e as regras para escolher roupas. Os fatos forneceram a base de conhecimento, as regras permitiram inferências lógicas, e a consulta nos permitiu explorar o sistema para obter recomendações práticas.</p>
 </section>
-<section id="exemplo-2---sistema-de-diagnóstico-médico" class="level4" data-number="9.0.1.2">
-<h4 data-number="9.0.1.2" class="anchored" data-anchor-id="exemplo-2---sistema-de-diagnóstico-médico"><span class="header-section-number">9.0.1.2</span> Exemplo 2 - Sistema de Diagnóstico Médico</h4>
+<section id="exemplo-2---sistema-de-diagnóstico-médico" class="level4" data-number="8.0.1.2">
+<h4 data-number="8.0.1.2" class="anchored" data-anchor-id="exemplo-2---sistema-de-diagnóstico-médico"><span class="header-section-number">8.0.1.2</span> Exemplo 2 - Sistema de Diagnóstico Médico</h4>
 <p>Imagine que estamos construindo um sistema lógico para diagnosticar doenças com base em sintomas, histórico médico e outros fatores relevantes. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.</p>
 <p><strong>1. Fatos</strong>: começamos estabelecendo os fatos, que são as informações conhecidas sobre o paciente.</p>
 <ul>
@@ -433,8 +433,8 @@ window.Quarto = {
 <p><strong>5. Conclusão</strong>: este exemplo ilustra como as Cláusulas de Horn podem ser usadas em um contexto mais complexo, como um sistema de diagnóstico médico. A mesma abordagem pode ser aplicada a outros domínios, como diagnósticos de falhas em máquinas, sistemas legais, planejamento financeiro e muito mais.</p>
 </section>
 </section>
-<section id="exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem"><span class="header-section-number">9.1</span> Exemplo 3 - Mundo Núcleo Familiar (<strong>Lógica de Primeira Ordem</strong>)</h2>
+<section id="exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="exemplo-3---mundo-núcleo-familiar-lógica-de-primeira-ordem"><span class="header-section-number">8.1</span> Exemplo 3 - Mundo Núcleo Familiar (<strong>Lógica de Primeira Ordem</strong>)</h2>
 <p>O exemplo a seguir apresenta um mundo que representa uma família e suas relações, apresentado usando a sintaxe da <strong>Lógica de Primeira Ordem</strong> (FOL).</p>
 <p><strong>Fatos</strong>: os fatos são representados como predicados aplicados a constantes em FOL.</p>
 <ul>
@@ -566,8 +566,8 @@ window.Quarto = {
 <li><p>Verificar se um disco está no topo de um poste:</p>
 <p><span class="math display">\[\neg DiscoNoTopo(x, y)\]</span></p></li>
 </ol>
-<section id="quantificadores-em-cláusulas-de-horn" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="quantificadores-em-cláusulas-de-horn"><span class="header-section-number">9.1.1</span> Quantificadores em Cláusulas de Horn</h3>
+<section id="quantificadores-em-cláusulas-de-horn" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="quantificadores-em-cláusulas-de-horn"><span class="header-section-number">8.1.1</span> Quantificadores em Cláusulas de Horn</h3>
 <p>Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.</p>
 <p>Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma <strong>Lógica de Primeira Ordem</strong> mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.</p>
 <p>O quantificador universal (representado por $$) afirma que uma propriedade é verdadeira para todos os membros de um domínio. Em Cláusulas de Horn, isso é geralmente representado implicitamente através de regras gerais que se aplicam a todos os membros de um conjunto. Por exemplo, considere a regra: <em>Todos os pássaros podem voar</em>. Em uma Cláusula de Horn, isso pode ser representado como:</p>
@@ -583,8 +583,8 @@ window.Quarto = {
 <li>Se a existência é conhecida mas o indivíduo não é nomeado, em processos de prova teórica (como resolução), a Skolemização substituiria <span class="math inline">\(x\)</span> por uma nova constante (constante de Skolem), resultando em: <span class="math inline">\(\text{Pássaro}(c) \land \neg \text{Voa}(c)\)</span>. Estes seriam então fatos no sistema: <span class="math inline">\(\text{Pássaro}(c).\)</span> e <span class="math inline">\(\neg \text{Voa}(c).\)</span> (ou um predicado para a negação).</li>
 </ul>
 </section>
-<section id="conversão-de-fórmulas" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" class="anchored" data-anchor-id="conversão-de-fórmulas"><span class="header-section-number">9.1.2</span> Conversão de Fórmulas</h3>
+<section id="conversão-de-fórmulas" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="conversão-de-fórmulas"><span class="header-section-number">8.1.2</span> Conversão de Fórmulas</h3>
 <p>Seja uma <strong>Fórmula Bem Formada</strong> arbitrária da <strong>Lógica Proposicional</strong>. Alguns passos podem ser aplicados para obter uma cláusula de Horn equivalente:</p>
 <ol type="1">
 <li><p>Converter a fórmula para Forma Normal Conjuntiva (FNC), obtendo uma conjunção de disjunções</p></li>
@@ -596,8 +596,8 @@ window.Quarto = {
 </ul></li>
 <li><p>Simplificar a fórmula final obtida.</p></li>
 </ol>
-<section id="exemplo-1-dada-a-fórmula" class="level4" data-number="9.1.2.1">
-<h4 data-number="9.1.2.1" class="anchored" data-anchor-id="exemplo-1-dada-a-fórmula"><span class="header-section-number">9.1.2.1</span> Exemplo 1: dada a fórmula</h4>
+<section id="exemplo-1-dada-a-fórmula" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="exemplo-1-dada-a-fórmula"><span class="header-section-number">8.1.2.1</span> Exemplo 1: dada a fórmula</h4>
 <p><span class="math display">\[(P \land Q) \lor (P \land R)\]</span></p>
 <p>Passos:</p>
 <ol type="1">
@@ -608,8 +608,8 @@ window.Quarto = {
 </ol>
 <p>A sequência destes passos permite encontrar uma conjunção de cláusulas de Horn equivalente à fórmula original.</p>
 </section>
-<section id="transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn" class="level4" data-number="9.1.2.2">
-<h4 data-number="9.1.2.2" class="anchored" data-anchor-id="transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn"><span class="header-section-number">9.1.2.2</span> Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn</h4>
+<section id="transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn" class="level4" data-number="8.1.2.2">
+<h4 data-number="8.1.2.2" class="anchored" data-anchor-id="transformação-de-forma-normal-conjuntiva-fnc-para-cláusulas-de-horn"><span class="header-section-number">8.1.2.2</span> Transformação de Forma Normal Conjuntiva (FNC) para Cláusulas de Horn</h4>
 <p>A Forma Normal Conjuntiva é uma conjunção de disjunções de literais. Uma Cláusula de Horn é um tipo especial de cláusula que contém no máximo um literal positivo. Considere que o objetivo das Cláusulas de Horn é criar um conjunto de Fórmulas Bem Formadas, divididas em Fatos, Regras e Consultas para permitir a resolução de problemas então, a transformação de uma FNC para Cláusulas de Horn pode incorrer em alguns problemas:</p>
 <ul>
 <li><strong>Perda de Informação</strong>: Nem todas as cláusulas em FNC podem ser transformadas em Cláusulas de Horn. Para minimizar este risco atente para as regras de equivalência que vimos anteriormente.</li>
@@ -621,8 +621,8 @@ window.Quarto = {
 <li><strong>Identificar Cláusulas de Horn</strong>: Verifique cada cláusula na Forma Normal Conjuntiva. Se uma cláusula contém no máximo um literal positivo, ela já é uma Cláusula de Horn;</li>
 <li><strong>Transformar Cláusulas Não-Horn</strong>: Se uma cláusula contém mais de um literal positivo, ela não pode ser diretamente transformada em uma Cláusula de Horn sem perder informações.</li>
 </ol>
-<section id="exemplo-1-vamos-considerar-a-seguinte-fórmula-bem-formada" class="level5" data-number="9.1.2.2.1">
-<h5 data-number="9.1.2.2.1" class="anchored" data-anchor-id="exemplo-1-vamos-considerar-a-seguinte-fórmula-bem-formada"><span class="header-section-number">9.1.2.2.1</span> Exemplo 1: vamos considerar a seguinte <strong>Fórmula Bem Formada</strong></h5>
+<section id="exemplo-1-vamos-considerar-a-seguinte-fórmula-bem-formada" class="level5" data-number="8.1.2.2.1">
+<h5 data-number="8.1.2.2.1" class="anchored" data-anchor-id="exemplo-1-vamos-considerar-a-seguinte-fórmula-bem-formada"><span class="header-section-number">8.1.2.2.1</span> Exemplo 1: vamos considerar a seguinte <strong>Fórmula Bem Formada</strong></h5>
 <p><span class="math display">\[(A \rightarrow B) \land (B \lor C)\]</span></p>
 <ol type="1">
 <li><p><strong>Converter para FNC</strong>:</p>
@@ -641,8 +641,8 @@ window.Quarto = {
 </ol>
 </section>
 </section>
-<section id="problemas-interessantes-resolvidos-com-a-cláusula-de-horn" class="level4" data-number="9.1.2.3">
-<h4 data-number="9.1.2.3" class="anchored" data-anchor-id="problemas-interessantes-resolvidos-com-a-cláusula-de-horn"><span class="header-section-number">9.1.2.3</span> Problemas interessantes resolvidos com a Cláusula de Horn</h4>
+<section id="problemas-interessantes-resolvidos-com-a-cláusula-de-horn" class="level4" data-number="8.1.2.3">
+<h4 data-number="8.1.2.3" class="anchored" data-anchor-id="problemas-interessantes-resolvidos-com-a-cláusula-de-horn"><span class="header-section-number">8.1.2.3</span> Problemas interessantes resolvidos com a Cláusula de Horn</h4>
 <p><strong>Problema 1 - O Mentiroso e o Verdadeiro</strong>:: Você encontra dois habitantes: <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você consulta a <span class="math inline">\(A\)</span>, <em>Você é o verdadeiro?</em> A responde, mas você não consegue ouvir a resposta dele. <span class="math inline">\(B\)</span> então te diz, <em>A disse que ele é o mentiroso</em>.</p>
 <p><strong>Fatos</strong>:</p>
 <p><span class="math inline">\(mentiroso(A)\)</span> <span class="math inline">\(verdadeiro(B)\)</span></p>
@@ -737,8 +737,8 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="o-prolog-entra-em-cena" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="o-prolog-entra-em-cena"><span class="header-section-number">9.2</span> O Prolog Entra em Cena</h2>
+<section id="o-prolog-entra-em-cena" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="o-prolog-entra-em-cena"><span class="header-section-number">8.2</span> O Prolog Entra em Cena</h2>
 <p>O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e a semântica do Prolog são diretamente mapeadas para Cláusulas de Horn:</p>
 <ul>
 <li><strong>Fatos</strong>: Em Prolog, fatos são representados como cláusulas sem antecedentes. Por exemplo, o fato <em>John é humano</em> pode ser representado como <em>humano(john)</em>.</li>
@@ -746,8 +746,8 @@ window.Quarto = {
 <li><strong>Consultas</strong>: As consultas em Prolog são feitas ao sistema para inferir informações com base nos fatos e regras definidos. Por exemplo, a consulta “Quem é mortal?” pode ser representada como <em>?- mortal(X)</em>.</li>
 </ul>
 <p>O Prolog utiliza um mecanismo de resolução baseado em Cláusulas de Horn para responder a consultas. Ele aplica uma técnica de busca em profundidade para encontrar uma substituição de variáveis que satisfaça a consulta.</p>
-<section id="exemplo-1-o-mais-simples-possível" class="level4" data-number="9.2.0.1">
-<h4 data-number="9.2.0.1" class="anchored" data-anchor-id="exemplo-1-o-mais-simples-possível"><span class="header-section-number">9.2.0.1</span> Exemplo 1: O mais simples possível</h4>
+<section id="exemplo-1-o-mais-simples-possível" class="level4" data-number="8.2.0.1">
+<h4 data-number="8.2.0.1" class="anchored" data-anchor-id="exemplo-1-o-mais-simples-possível"><span class="header-section-number">8.2.0.1</span> Exemplo 1: O mais simples possível</h4>
 <p><strong>Fatos</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>homem(jo<span class="er">ã</span>o)<span class="kw">.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mulher(maria)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -759,8 +759,8 @@ window.Quarto = {
 <div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mortal(jo<span class="er">ã</span>o)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A consulta verifica se “João é mortal”, aplicando a regra definida anteriormente. O Prolog responderá <strong>True</strong> (verdadeiro ou <span class="math inline">\(\top\)</span>) pois a regra se aplica dado o fato de que João é homem.</p>
 </section>
-<section id="exemplo-2-sistema-de-recomendação-de-roupas-em-prolog" class="level4" data-number="9.2.0.2">
-<h4 data-number="9.2.0.2" class="anchored" data-anchor-id="exemplo-2-sistema-de-recomendação-de-roupas-em-prolog"><span class="header-section-number">9.2.0.2</span> Exemplo 2: Sistema de Recomendação de Roupas em Prolog</h4>
+<section id="exemplo-2-sistema-de-recomendação-de-roupas-em-prolog" class="level4" data-number="8.2.0.2">
+<h4 data-number="8.2.0.2" class="anchored" data-anchor-id="exemplo-2-sistema-de-recomendação-de-roupas-em-prolog"><span class="header-section-number">8.2.0.2</span> Exemplo 2: Sistema de Recomendação de Roupas em Prolog</h4>
 <p>Imagine que estamos construindo um sistema lógico simples em Prolog para recomendar o tipo de roupa que uma pessoa deve vestir com base no clima. Vamos usar Cláusulas de Horn para representar o conhecimento e a lógica do sistema.</p>
 <p><strong>Fatos</strong>: primeiro, estabelecemos os fatos, que são as verdades básicas sobre o mundo. Neste caso, os fatos podem ser informações sobre o clima atual.</p>
 <ul>
@@ -790,8 +790,8 @@ window.Quarto = {
 </ul>
 <div class="sourceCode" id="cb9"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">?-</span> <span class="er">ó</span>culos_de_sol<span class="kw">,</span> chap<span class="er">é</span>u<span class="kw">,</span> camiseta<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="exemplo-3-torre-de-hanói" class="level4" data-number="9.2.0.3">
-<h4 data-number="9.2.0.3" class="anchored" data-anchor-id="exemplo-3-torre-de-hanói"><span class="header-section-number">9.2.0.3</span> Exemplo 3: Torre de Hanói</h4>
+<section id="exemplo-3-torre-de-hanói" class="level4" data-number="8.2.0.3">
+<h4 data-number="8.2.0.3" class="anchored" data-anchor-id="exemplo-3-torre-de-hanói"><span class="header-section-number">8.2.0.3</span> Exemplo 3: Torre de Hanói</h4>
 <div class="sourceCode" id="cb10"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>disco(d1)<span class="kw">.</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>disco(d2)<span class="kw">.</span></span>
@@ -852,8 +852,8 @@ window.Quarto = {
 <span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- disco_valido(D1, D2).</span></span>
 <span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- movimento_unico(D).</span></span>
 <span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- estado_inicial.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="exemplo-4-o-narrador-é-seu-próprio-avô" class="level5" data-number="9.2.0.3.1">
-<h5 data-number="9.2.0.3.1" class="anchored" data-anchor-id="exemplo-4-o-narrador-é-seu-próprio-avô"><span class="header-section-number">9.2.0.3.1</span> Exemplo 4: O Narrador é seu próprio avô</h5>
+<section id="exemplo-4-o-narrador-é-seu-próprio-avô" class="level5" data-number="8.2.0.3.1">
+<h5 data-number="8.2.0.3.1" class="anchored" data-anchor-id="exemplo-4-o-narrador-é-seu-próprio-avô"><span class="header-section-number">8.2.0.3.1</span> Exemplo 4: O Narrador é seu próprio avô</h5>
 <p>O problema do narrador que é seu próprio avô é um exemplo clássico de raciocínio lógico e relações familiares. O problema envolve a construção de uma base de conhecimento que representa as relações familiares e a aplicação de regras lógicas para determinar se o narrador realmente é seu próprio avô. Este exemplo foi publicado por <a href="https://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a> em seu livro <em>Algorithms + Data Structures = Programs</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> fazendo referência a um problema que havia sido publicado em um jornal de Zürich em 1922, que cito em tradução livre a seguir:</p>
 <p>Casei com uma viúva (vamos chamá-la de W) que tem uma filha adulta (chame-a de D). Meu pai (F), que nos visitava com bastante frequência, apaixonou-se pela minha enteada e casou-se com ela. Por isso, meu pai se tornou meu genro e minha enteada se tornou minha madrasta. Alguns meses depois, minha esposa deu à luz um filho (S1), que se tornou cunhado do meu pai, e meu tio. A esposa do meu pai, ou seja, minha enteada, também teve um filho (S2). Em outras palavras, para todos os efeitos, eu sou meu próprio avo.</p>
 <p>Usando este relato como base podemos criar uma base de conhecimento em Prolog, incluir algumas regras, e finalmente verificar se é verdade que o <strong>narrador</strong> é o seu próprio avô.</p>
@@ -1303,13 +1303,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./06-construcao-de-mundos-logicos.html" class="pagination-link" aria-label="Mundos na **Lógica de Primeira Ordem**">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Mundos na <strong>Lógica de Primeira Ordem</strong></span></span>
+      <a href="./05-formas-normais-e-skolemizacao.html" class="pagination-link" aria-label="Formas Normais Organizando o Pensamento Lógico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-construcao-de-mundos-logicos.html" class="pagination-link" aria-label="Raciocínio Algorítmico: Criando Mundos">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Raciocínio Algorítmico: Criando Mundos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1321,7 +1321,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright © 2025 Frank de Alcantara</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/07-clausulas-de-horn-e-prolog.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/06-clausulas-de-horn-e-prolog.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
