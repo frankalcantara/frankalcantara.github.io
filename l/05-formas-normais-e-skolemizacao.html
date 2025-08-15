@@ -253,20 +253,18 @@ window.Quarto = {
   <ul>
   <li><a href="#formas-normais-básicas" id="toc-formas-normais-básicas" class="nav-link active" data-scroll-target="#formas-normais-básicas"><span class="header-section-number">7.1</span> Formas Normais Básicas</a>
   <ul class="collapse">
-  <li><a href="#forma-normal-negativa-fnn" id="toc-forma-normal-negativa-fnn" class="nav-link" data-scroll-target="#forma-normal-negativa-fnn"><span class="header-section-number">7.1.1</span> Forma Normal Negativa (FNN)</a></li>
-  <li><a href="#forma-normal-disjuntiva-fnd" id="toc-forma-normal-disjuntiva-fnd" class="nav-link" data-scroll-target="#forma-normal-disjuntiva-fnd"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva (FND)</a></li>
-  <li><a href="#forma-normal-conjuntiva-fnc" id="toc-forma-normal-conjuntiva-fnc" class="nav-link" data-scroll-target="#forma-normal-conjuntiva-fnc"><span class="header-section-number">7.1.3</span> Forma Normal Conjuntiva (FNC)</a></li>
-  <li><a href="#usando-a-tabela-verdade-para-gerar-formas-normais" id="toc-usando-a-tabela-verdade-para-gerar-formas-normais" class="nav-link" data-scroll-target="#usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.4</span> Usando a Tabela-Verdade para Gerar Formas Normais</a></li>
+  <li><a href="#forma-normal-negativa" id="toc-forma-normal-negativa" class="nav-link" data-scroll-target="#forma-normal-negativa"><span class="header-section-number">7.1.1</span> Forma Normal Negativa</a></li>
+  <li><a href="#forma-normal-disjuntiva" id="toc-forma-normal-disjuntiva" class="nav-link" data-scroll-target="#forma-normal-disjuntiva"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva</a></li>
+  <li><a href="#forma-normal-conjuntiva" id="toc-forma-normal-conjuntiva" class="nav-link" data-scroll-target="#forma-normal-conjuntiva"><span class="header-section-number">7.1.3</span> Forma Normal Conjuntiva</a></li>
+  <li><a href="#sec-exercicios-conversao-fnc" id="toc-sec-exercicios-conversao-fnc" class="nav-link" data-scroll-target="#sec-exercicios-conversao-fnc"><span class="header-section-number">7.1.4</span> Exercícios de Conversão para Forma Normal Conjuntiva</a></li>
+  <li><a href="#usando-a-tabela-verdade-para-gerar-formas-normais" id="toc-usando-a-tabela-verdade-para-gerar-formas-normais" class="nav-link" data-scroll-target="#usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.5</span> Usando a Tabela-Verdade para Gerar Formas Normais</a></li>
   </ul></li>
   <li><a href="#formas-normais-avançadas" id="toc-formas-normais-avançadas" class="nav-link" data-scroll-target="#formas-normais-avançadas"><span class="header-section-number">7.2</span> Formas Normais Avançadas</a>
   <ul class="collapse">
   <li><a href="#forma-normal-prenex" id="toc-forma-normal-prenex" class="nav-link" data-scroll-target="#forma-normal-prenex"><span class="header-section-number">7.2.1</span> Forma Normal Prenex</a></li>
   <li><a href="#skolemização" id="toc-skolemização" class="nav-link" data-scroll-target="#skolemização"><span class="header-section-number">7.2.2</span> Skolemização</a></li>
   </ul></li>
-  <li><a href="#exercícios-de-conexão-com-prolog" id="toc-exercícios-de-conexão-com-prolog" class="nav-link" data-scroll-target="#exercícios-de-conexão-com-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</a>
-  <ul class="collapse">
-  <li><a href="#questão-7-validando-uma-inferência-tautologia" id="toc-questão-7-validando-uma-inferência-tautologia" class="nav-link" data-scroll-target="#questão-7-validando-uma-inferência-tautologia"><span class="header-section-number">7.3.1</span> Questão 7: Validando uma Inferência (Tautologia)</a></li>
-  </ul></li>
+  <li><a href="#sec-predicativa-conexao-prolog" id="toc-sec-predicativa-conexao-prolog" class="nav-link" data-scroll-target="#sec-predicativa-conexao-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/05-formas-normais-e-skolemizacao.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -301,37 +299,37 @@ window.Quarto = {
 <p>Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma forma padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel importante na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da <strong>Lógica Proposicional</strong>, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.</p>
 <section id="formas-normais-básicas" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="formas-normais-básicas"><span class="header-section-number">7.1</span> Formas Normais Básicas</h2>
-<p>Existem várias formas normais na <strong>Lógica Proposicional</strong>, cada uma com suas próprias regras e aplicações. A seguir a esforçada leitora encontrará uma descrição resumida das formas normais, destacando algumas das principais:</p>
+<p>Existem várias formas normais na <strong>Lógica Proposicional</strong>, cada uma com suas próprias regras e aplicações. A seguir, a esforçada leitora encontrará uma descrição resumida das formas normais, destacando algumas das principais:</p>
 <ol type="1">
-<li><p><strong>Forma Normal Negativa (PNN)</strong>: Uma proposição está na Forma Normal Negativa se as operações de negação <span class="math inline">\(\neg\)</span> aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.</p>
+<li><p><strong>Forma Normal Negativa</strong>: Uma proposição está na Forma Normal Negativa se as operações de negação <span class="math inline">\(\neg\)</span> aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.</p>
 <p><span class="math display">\[\neg (A \wedge B) \equiv (\neg A \vee \neg B)\]</span></p></li>
-<li><p><strong>Forma Normal Conjuntiva (PNC)</strong>: uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação <em>E</em>, <span class="math inline">\(\wedge\)</span>, de uma ou mais cláusulas, nas quais, cada cláusula é uma disjunção, operação <em>OU</em>, <span class="math inline">\(\vee\)</span>, de literais. Em outras palavras, é uma série de cláusulas conectadas por <em>Es</em>, nas quais, cada cláusula é composta de variáveis conectadas por <em>OUs</em>. <strong>Uma forma normal conjuntiva é uma conjunção de disjunções</strong>.</p>
+<li><p><strong>Forma Normal Conjuntiva</strong>: uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação <strong>E</strong>, <span class="math inline">\(\wedge\)</span>, de uma ou mais cláusulas, nas quais, cada cláusula é uma disjunção, operação <strong>OU</strong>, <span class="math inline">\(\vee\)</span>, de literais. Em outras palavras, é uma série de cláusulas conectadas por <strong>Es</strong>, nas quais, cada cláusula é composta de variáveis conectadas por <strong>OUs</strong>. <strong>Uma forma normal conjuntiva é uma conjunção de disjunções</strong>.</p>
 <p><span class="math display">\[(A \vee B) \wedge (C \vee D) \wedge (B \vee D) \wedge (A \vee C)\]</span></p></li>
-<li><p><strong>Forma Normal Disjuntiva (PND)</strong>: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, na qual cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por <strong>ORs</strong>, nas quais cada cláusula é composta de variáveis conectadas por <strong>ANDs</strong>. <strong>A forma normal disjuntiva é uma disjunção de conjunções</strong>.</p>
+<li><p><strong>Forma Normal Disjuntiva</strong>: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, na qual cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por <strong>OUs</strong>, nas quais cada cláusula é composta de variáveis conectadas por <strong>Es</strong>, conjunções. <strong>A forma normal disjuntiva é uma disjunção de conjunções</strong>.</p>
 <p><span class="math display">\[(A \wedge B) \vee (C \wedge D) \vee (A \wedge C) \vee (B \wedge D)\]</span></p></li>
-<li><p><strong>Forma Normal Prenex (PNP)</strong>: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a <strong>Lógica de Primeira Ordem</strong>, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na <strong>Lógica de Primeira Ordem</strong> e na teoria da prova.</p>
+<li><p><strong>Forma Normal Prenex</strong>: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a <strong>Lógica de Primeira Ordem</strong>, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na <strong>Lógica de Primeira Ordem</strong> e na teoria da prova.</p>
 <p><span class="math display">\[\forall x \exists y \forall z (P(x,y) \wedge \neg Q(z))\]</span></p></li>
-<li><p><strong>Forma Normal Skolem (PNS)</strong>: na <strong>Lógica de Primeira Ordem</strong>, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização. Por exemplo, dada a fórmula:</p></li>
+<li><p><strong>Forma Normal Skolem</strong>: na <strong>Lógica de Primeira Ordem</strong>, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização. Por exemplo, dada a fórmula:</p></li>
 </ol>
 <p><span class="math display">\[\forall x \exists y (P(x,y))\]</span></p>
 <p>Sua forma após a Skolemização, que preserva a satisfatibilidade, será:</p>
 <p><span class="math display">\[\forall x (P(x, f(x)))\]</span></p>
 <p>Nosso objetivo, neste livro, é rever a matemática que suporta a Programação Lógica, entre as principais formas normais, para este objetivo, precisamos destacar duas formas:</p>
 <ol type="a">
-<li><p><strong>Forma Normal Conjuntiva (FNC)</strong>: a Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na FNC. Além disso, os programas em Prolog, a linguagem de Programação Lógica que escolhemos, são formados por Cláusulas de Horn, que são um tipo específico de cláusula na FNC, cláusulas que possuem, no máximo, um literal positivo.</p></li>
-<li><p><strong>Forma Normal de Skolem (FNS)</strong>: a Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em <strong>Lógica de Primeira Ordem</strong> e teoria da prova, ambas fundamentais para a Programação Lógica.</p></li>
+<li><p><strong>Forma Normal Conjuntiva</strong>: a Forma Normal Conjuntiva é importante na Programação Lógica porque muitos sistemas de inferência, como a resolução, funcionam em fórmulas que estão na Forma Normal Conjuntiva. Além disso, os programas em Prolog, a linguagem de Programação Lógica que escolhemos, são formados por Cláusulas de Horn, que são um tipo específico de cláusula na Forma Normal Conjuntiva, cláusulas que possuem, no máximo, um literal positivo.</p></li>
+<li><p><strong>Forma Normal de Skolem</strong>: a Forma Normal de Skolem é útil na Programação Lógica porque a Skolemização, o processo de remover quantificadores existenciais transformando-os em funções de quantificadores universais, permite uma forma mais eficiente de representação e processamento de fórmulas lógicas. Essa forma normal é frequentemente usada em <strong>Lógica de Primeira Ordem</strong> e teoria da prova, ambas fundamentais para a Programação Lógica.</p></li>
 </ol>
-<p>Para entender como chegamos conseguimos resolver problemas complexos de lógica, teremos que explorar essas formas normais em detalhes. Começando com a mais simples de todas, a Forma Normal Negativa.</p>
-<section id="forma-normal-negativa-fnn" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="forma-normal-negativa-fnn"><span class="header-section-number">7.1.1</span> Forma Normal Negativa (FNN)</h3>
-<p>A Forma Normal Negativa é como um capitão experiente que ajusta as velas de seu navio. Assim como o capitão remove o excesso de pano e reorganiza as velas para que cada uma capture o vento diretamente, a FNN move cada negação para o mais próximo possível de seu alvo, os átomos da fórmula.”</p>
+<p>Para entender como conseguimos resolver problemas complexos de lógica, teremos que explorar essas formas normais em detalhes. Começando com a mais simples de todas, a Forma Normal Negativa.</p>
+<section id="forma-normal-negativa" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="forma-normal-negativa"><span class="header-section-number">7.1.1</span> Forma Normal Negativa</h3>
+<p>A Forma Normal Negativa é como um capitão experiente que ajusta as velas de seu navio. Assim como o capitão remove o excesso de pano e reorganiza as velas para que cada uma capture o vento diretamente, a Forma Normal Negativa move cada negação para o mais próximo possível de seu alvo, os átomos da fórmula.”</p>
 <p>É como o processo de desenrolar as linhas de pesca emaranhadas: pegamos cada fio de negação e o seguimos até sua extremidade natural, eliminando as voltas e os nós desnecessários que encontramos no caminho.</p>
 <p>Uma fórmula está na Forma Normal Negativa se:</p>
 <ol type="a">
 <li><p>todos os operadores de negação <span class="math inline">\(\neg\)</span> são aplicados diretamente aos átomos, variáveis ou constantes.</p></li>
 <li><p>usaremos apenas a negação <span class="math inline">\(\neg\)</span>, a conjunção <span class="math inline">\(\wedge\)</span>, e a disjunção <span class="math inline">\(\vee\)</span>.</p></li>
 </ol>
-<p>Converter uma fórmula para a FNN envolve os seguintes passos:</p>
+<p>Converter uma fórmula para a Forma Normal Negativa envolve os seguintes passos:</p>
 <ol type="1">
 <li><p><strong>Eliminar os Bicondicionais</strong>: substitua todas as ocorrências de <span class="math inline">\(A\leftrightarrow B\)</span> Por <span class="math inline">\(A\rightarrow B \wedge B\rightarrow A\)</span>.</p></li>
 <li><p><strong>Eliminar Implicações</strong>: substitua todas as ocorrências de implicação <span class="math inline">\(A \rightarrow B\)</span> Por <span class="math inline">\(\neg A \vee B\)</span>.</p></li>
@@ -342,8 +340,9 @@ window.Quarto = {
 </ul></li>
 <li><p><strong>Eliminar Dupla Negação</strong>: Substitua qualquer dupla negação <span class="math inline">\(\neg \neg A\)</span> Por <span class="math inline">\(A\)</span>.</p></li>
 </ol>
-<section id="exemplo-1-converta-a-fórmula-neg-a-wedge-b-rightarrow-c-para-fnn" class="level4" data-number="7.1.1.1">
-<h4 data-number="7.1.1.1" class="anchored" data-anchor-id="exemplo-1-converta-a-fórmula-neg-a-wedge-b-rightarrow-c-para-fnn"><span class="header-section-number">7.1.1.1</span> Exemplo 1: Converta a fórmula <span class="math inline">\(\neg (A \wedge  (B \rightarrow C))\)</span> Para FNN</h4>
+<section id="exemplo-1" class="level4" data-number="7.1.1.1">
+<h4 data-number="7.1.1.1" class="anchored" data-anchor-id="exemplo-1"><span class="header-section-number">7.1.1.1</span> Exemplo 1</h4>
+<p>Converta a fórmula <span class="math inline">\(\neg (A \wedge  (B \rightarrow C))\)</span> Para Forma Normal Negativa</p>
 <p>Para converter a fórmula, seguimos o processo passo a passo para mover as negações para o interior da expressão até que elas se apliquem apenas aos átomos.</p>
 <ol type="1">
 <li><p><strong>Eliminar Implicações</strong>: Primeiro, substituímos a implicação <span class="math inline">\(B \rightarrow C\)</span> por sua equivalência <span class="math inline">\(\neg B \vee C\)</span>.</p>
@@ -357,26 +356,27 @@ window.Quarto = {
 <p>A fórmula resultante está na Forma Normal Negativa, pois os operadores de negação (<span class="math inline">\(\neg\)</span>) aplicam-se diretamente aos átomos <span class="math inline">\(A\)</span> e <span class="math inline">\(C\)</span>.</p></li>
 </ol>
 </section>
-<section id="exemplo-2-converta-a-fórmula-a-rightarrow-b-wedge-neg-c-vee-d-para-fnn" class="level4" data-number="7.1.1.2">
-<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="exemplo-2-converta-a-fórmula-a-rightarrow-b-wedge-neg-c-vee-d-para-fnn"><span class="header-section-number">7.1.1.2</span> Exemplo 2: Converta a fórmula <span class="math inline">\((A \rightarrow B) \wedge  \neg (C \vee D)\)</span> Para FNN</h4>
-<p>Neste exemplo, ambos os lados da conjunção principal (<span class="math inline">\(\wedge\)</span>) são tratados para se adequarem à FNN.</p>
+<section id="exemplo-2" class="level4" data-number="7.1.1.2">
+<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="exemplo-2"><span class="header-section-number">7.1.1.2</span> Exemplo 2</h4>
+<p>Converta a fórmula <span class="math inline">\((A \rightarrow B) \wedge  \neg (C \vee D)\)</span> Para Forma Normal Negativa</p>
+<p>Neste exemplo, ambos os lados da conjunção principal (<span class="math inline">\(\wedge\)</span>) são tratados para se adequarem à Forma Normal Negativa.</p>
 <ol type="1">
 <li><p><strong>Eliminar Implicações</strong>: O primeiro passo é converter a implicação <span class="math inline">\(A \rightarrow B\)</span> em sua equivalência, <span class="math inline">\(\neg A \vee B\)</span>. A segunda parte da fórmula não possui implicações.</p>
 <p><span class="math display">\[(\neg A \vee B) \wedge  \neg (C \vee D)\]</span></p></li>
 <li><p><strong>Aplicar Lei de De Morgan</strong>: A seguir, aplicamos a lei de De Morgan na expressão <span class="math inline">\(\neg (C \vee D)\)</span> para mover a negação para o interior dos parênteses.</p>
 <p><span class="math display">\[(\neg A \vee B) \wedge (\neg C \wedge \neg D)\]</span></p></li>
 </ol>
-<p>A fórmula final já se encontra na Forma Normal Negativa (FNN), pois todos os operadores de negação estão aplicados diretamente aos átomos (<span class="math inline">\(A\)</span>, <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span>). Não há duplas negações que precisem ser eliminadas neste caso.</p>
+<p>A fórmula final já se encontra na Forma Normal Negativa , pois todos os operadores de negação estão aplicados diretamente aos átomos (<span class="math inline">\(A\)</span>, <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span>). Não há duplas negações que precisem ser eliminadas neste caso.</p>
 </section>
 </section>
-<section id="forma-normal-disjuntiva-fnd" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="forma-normal-disjuntiva-fnd"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva (FND)</h3>
-<p>A Forma Normal Disjuntiva é uma representação canônica de fórmulas lógicas em que a fórmula é escrita como uma disjunção de conjunções. Trata-se uma forma canônica útil para a análise e manipulação de fórmulas lógicas e é comumente usada em algoritmos de raciocínio lógico.</p>
+<section id="forma-normal-disjuntiva" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="forma-normal-disjuntiva"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva</h3>
+<p>A Forma Normal Disjuntiva é uma representação canônica de fórmulas lógicas em que a fórmula é escrita como uma disjunção de conjunções. Trata-se de uma forma canônica útil para a análise e manipulação de fórmulas lógicas e é comumente usada em algoritmos de raciocínio lógico.</p>
 <p>Uma fórmula está na Forma Normal Disjuntiva se puder ser escrita como:</p>
 <p><span class="math display">\[(C_1 \wedge  C_2 \wedge  \ldots) \vee (D_1 \wedge  D_2 \wedge  \ldots) \vee\]</span></p>
 <p>Na qual, cada <span class="math inline">\(C_i\)</span> e <span class="math inline">\(D_i\)</span> é um literal. Ou seja, é uma variável ou sua negação. Com um pouco mais de formalidade matemática podemos afirmar que uma <strong>Fórmula Bem Formada</strong> está na Forma Normal Disjuntiva quando está na forma:</p>
 <p><span class="math display">\[\bigvee_{i=1}^{m} \left( \bigwedge_{j=1}^{n} L_{ij} \right)\]</span></p>
-<p>Converter uma fórmula para FND é como identificar todas as combinações de ventos e correntes que levam o navio ao porto desejado. A fórmula original é a rota complexa, a disjunção de todas as opções de rotas. Cada termo da FND final é como um cenário único e completo, uma conjunção de condições marítimas, que, por si só, garante que o navio chegue ao destino.</p>
+<p>Converter uma fórmula para Forma Normal Disjuntiva é como identificar todas as combinações de ventos e correntes que levam o navio ao porto desejado. A fórmula original é a rota complexa, a disjunção de todas as opções de rotas. Cada termo da Forma Normal Disjuntiva final é como um cenário único e completo, uma conjunção de condições marítimas, que, por si só, garante que o navio chegue ao destino.</p>
 <p>Para esta conversão, a intrépida leitora deve seguir os seguintes passos:</p>
 <ol type="1">
 <li><p><strong>Eliminar os Bicondicionais</strong>: substitua todas as ocorrências de <span class="math inline">\(A\leftrightarrow B\)</span> Por <span class="math inline">\(A\rightarrow B \wedge B\rightarrow A\)</span>.</p></li>
@@ -389,15 +389,15 @@ window.Quarto = {
 <li><p><strong>Eliminar Dupla Negação</strong>: Substitua qualquer dupla negação <span class="math inline">\(\neg \neg A\)</span> Por <span class="math inline">\(A\)</span>.</p></li>
 <li><p><strong>Aplicar a Lei Distributiva</strong>: Use a lei distributiva para expandir a fórmula, transformando-a em uma disjunção de conjunções.</p></li>
 </ol>
-<section id="exemplo-1" class="level4" data-number="7.1.2.1">
-<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="exemplo-1"><span class="header-section-number">7.1.2.1</span> Exemplo 1</h4>
+<section id="exemplo-1-1" class="level4" data-number="7.1.2.1">
+<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="exemplo-1-1"><span class="header-section-number">7.1.2.1</span> Exemplo 1</h4>
 <p>Considere a fórmula:</p>
 <p><span class="math display">\[
 (A \rightarrow B) \wedge  (C \vee \neg (D \wedge  E))
 \]</span></p>
-<p>O objetivo é convertê-la para uma disjunção de conjunções (FND).</p>
+<p>O objetivo é convertê-la para uma disjunção de conjunções.</p>
 <ol type="1">
-<li><p><strong>Converter para a Forma Normal Negativa (FNN)</strong></p>
+<li><p><strong>Converter para a Forma Normal Negativa </strong></p>
 <p>Primeiro, realizamos os passos iniciais para eliminar implicações e mover as negações para o interior da fórmula, o que nos dará uma forma intermediária.</p>
 <ul>
 <li><p>Eliminar Implicações (<span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>):</p>
@@ -405,7 +405,7 @@ window.Quarto = {
 <li><p>Aplicar a Lei de De Morgan (<span class="math inline">\(\neg (D \wedge  E) \equiv \neg D \vee \neg E\)</span>):</p>
 <p><span class="math display">\[(\neg A \vee B) \wedge  (C \vee \neg D \vee \neg E)\]</span></p></li>
 </ul>
-<p>Neste ponto, a fórmula encontra-se na <strong>Forma Normal Conjuntiva (FNC)</strong>. O passo seguinte é aplicar a distributividade para alcançar a FND.</p></li>
+<p>Neste ponto, a fórmula encontra-se na <strong>Forma Normal Conjuntiva </strong>. O passo seguinte é aplicar a distributividade para alcançar a Forma Normal Disjuntiva.</p></li>
 <li><p><strong>Aplicar a Lei Distributiva (Parte 1)</strong></p>
 <p>Usamos a lei distributiva <span class="math inline">\(P \wedge  (Q \vee R) \equiv (P \wedge  Q) \vee (P \wedge  R)\)</span>. Vamos tratar o termo <span class="math inline">\((\neg A \vee B)\)</span> como uma única unidade, <span class="math inline">\(X\)</span>, e distribuí-lo sobre <span class="math inline">\((C \vee \neg D \vee \neg E)\)</span>.</p>
 <p><span class="math display">\[
@@ -423,15 +423,15 @@ window.Quarto = {
 <li>Terceiro termo: <span class="math inline">\((\neg A \wedge  \neg E) \vee (B \wedge  \neg E)\)</span>.</li>
 </ul></li>
 <li><p><strong>Forma Normal Disjuntiva Final</strong></p>
-<p>Unindo todos os termos expandidos com o operador <span class="math inline">\(\vee\)</span>, chegamos à FND final.</p>
+<p>Unindo todos os termos expandidos com o operador <span class="math inline">\(\vee\)</span>, chegamos à Forma Normal Disjuntiva final.</p>
 <p><span class="math display">\[
 (\neg A \wedge  C) \vee (B \wedge  C) \vee (\neg A \wedge  \neg D) \vee (B \wedge  \neg D) \vee (\neg A \wedge  \neg E) \vee (B \wedge  \neg E)
 \]</span></p>
 <p>A expressão agora é uma disjunção de múltiplas conjunções, que é a definição da Forma Normal Disjuntiva.</p></li>
 </ol>
 </section>
-<section id="exemplo-2" class="level4" data-number="7.1.2.2">
-<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="exemplo-2"><span class="header-section-number">7.1.2.2</span> Exemplo 2</h4>
+<section id="exemplo-2-1" class="level4" data-number="7.1.2.2">
+<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="exemplo-2-1"><span class="header-section-number">7.1.2.2</span> Exemplo 2</h4>
 <p>Considere:</p>
 <p><span class="math display">\[(\neg A \wedge  (B \rightarrow C)) \vee (D \wedge  \neg (E \rightarrow F))\]</span></p>
 <ol type="1">
@@ -464,7 +464,7 @@ window.Quarto = {
 <p><span class="math display">\[
 \neg(p \leftrightarrow q)
 \]</span></p>
-<p>Vamos convertê-la para a Forma Normal Disjuntiva (FND).</p>
+<p>Vamos convertê-la para a Forma Normal Disjuntiva.</p>
 <ol type="1">
 <li><p><strong>Eliminar a Bicondicional</strong></p>
 <p>O primeiro passo é substituir o operador de bicondicional (<span class="math inline">\(A \leftrightarrow B\)</span>) por sua definição equivalente: <span class="math inline">\((A \rightarrow B) \wedge  (B \rightarrow A)\)</span>.</p>
@@ -486,7 +486,7 @@ window.Quarto = {
 <p><span class="math display">\[
 (\neg\neg p \wedge  \neg q) \vee (\neg\neg q \wedge  \neg p)
 \]</span></p>
-<p>Simplificando, obtemos a FND final:</p>
+<p>Simplificando, obtemos a Forma Normal Disjuntiva final:</p>
 <p><span class="math display">\[
 (p \wedge  \neg q) \vee (\neg p \wedge  q)
 \]</span></p>
@@ -497,7 +497,7 @@ window.Quarto = {
 <h4 data-number="7.1.2.5" class="anchored" data-anchor-id="exemplo-5"><span class="header-section-number">7.1.2.5</span> Exemplo 5</h4>
 <p>Considere a seguinte fórmula com uma implicação principal e uma bicondicional aninhada: <span class="math display">\[
 \neg(p \wedge  q) \rightarrow (r \leftrightarrow s)
-\]</span> Nosso objetivo é convertê-la para a Forma Normal Disjuntiva (FND).</p>
+\]</span> Nosso objetivo é convertê-la para a Forma Normal Disjuntiva.</p>
 <ol type="1">
 <li><p><strong>Eliminar a Implicação Principal</strong></p>
 <p>Utilizando a equivalência <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>, removemos o operador de implicação principal da fórmula.</p>
@@ -518,9 +518,9 @@ window.Quarto = {
 <p><span class="math display">\[
 (p \wedge  q) \vee ((\neg r \vee s) \wedge  (\neg s \vee r))
 \]</span></p>
-<p>Note que a expressão ainda não está em FND, pois a parte direita é uma conjunção.</p></li>
+<p>Note que a expressão ainda não está em Forma Normal Disjuntiva, pois a parte direita é uma conjunção.</p></li>
 <li><p><strong>Aplicar a Lei Distributiva</strong></p>
-<p>Para que toda a expressão se torne uma disjunção de conjunções, precisamos converter a parte <span class="math inline">\((\neg r \vee s) \wedge  (\neg s \vee r)\)</span> para FND. Fazemos isso aplicando a distributividade:</p>
+<p>Para que toda a expressão se torne uma disjunção de conjunções, precisamos converter a parte <span class="math inline">\((\neg r \vee s) \wedge  (\neg s \vee r)\)</span> para Forma Normal Disjuntiva. Fazemos isso aplicando a distributividade:</p>
 <p><span class="math display">\[
 (\neg r \vee s) \wedge  (\neg s \vee r) \equiv (\neg r \wedge  \neg s) \vee (\neg r \wedge  r) \vee (s \wedge  \neg s) \vee (s \wedge  r)
 \]</span></p>
@@ -529,11 +529,11 @@ window.Quarto = {
 (\neg r \wedge  \neg s) \vee (s \wedge  r)
 \]</span></p></li>
 <li><p><strong>Forma Normal Disjuntiva Final</strong></p>
-<p>Agora, substituímos a FND que acabamos de derivar de volta na fórmula principal:</p>
+<p>Agora, substituímos a Forma Normal Disjuntiva que acabamos de derivar de volta na fórmula principal:</p>
 <p><span class="math display">\[
 (p \wedge  q) \vee ((\neg r \wedge  \neg s) \vee (s \wedge  r))
 \]</span></p>
-<p>Como o operador <span class="math inline">\(\vee\)</span> é associativo, podemos remover os parênteses extras, chegando à FND final:</p>
+<p>Como o operador <span class="math inline">\(\vee\)</span> é associativo, podemos remover os parênteses extras, chegando à Forma Normal Disjuntiva final:</p>
 <p><span class="math display">\[
 (p \wedge  q) \vee (\neg r \wedge  \neg s) \vee (s \wedge  r)
 \]</span></p>
@@ -541,17 +541,48 @@ window.Quarto = {
 </ol>
 <p>A Forma Normal Disjuntiva é útil porque qualquer fórmula lógica pode ser representada desta forma. Além disso, essa representação é única, com exceção da ordem dos literais e das cláusulas.</p>
 </section>
+<section id="sec-exercicios-conversao-fnd" class="level4" data-number="7.1.2.6">
+<h4 data-number="7.1.2.6" class="anchored" data-anchor-id="sec-exercicios-conversao-fnd"><span class="header-section-number">7.1.2.6</span> Exercícios de Conversão para Forma Normal Disjuntiva</h4>
+<p><strong>1.</strong> Converta a seguinte fórmula para Forma Normal Disjuntiva:</p>
+<p><span class="math display">\[
+((P \leftrightarrow Q) \rightarrow R) \wedge \neg(R \rightarrow (P \vee Q))
+\]</span></p>
+<p><strong>2.</strong> Converta para Forma Normal Disjuntiva a fórmula que representa a negação de uma tautologia clássica:</p>
+<p><span class="math display">\[
+\neg((P \rightarrow (Q \rightarrow R)) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R)))
+\]</span></p>
+<p><strong>3.</strong> Dada a fórmula com múltiplas bicondicionais aninhadas, obtenha sua Forma Normal Disjuntiva:</p>
+<p><span class="math display">\[
+(P \leftrightarrow (Q \leftrightarrow R)) \vee \neg(P \wedge Q \wedge R)
+\]</span></p>
+<p><strong>4.</strong> Converta a seguinte fórmula complexa para Forma Normal Disjuntiva:</p>
+<p><span class="math display">\[
+\neg((P \vee Q) \rightarrow (R \wedge S)) \leftrightarrow (P \rightarrow \neg Q)
+\]</span></p>
+<p><strong>5.</strong> Transforme em Forma Normal Disjuntiva a fórmula:</p>
+<p><span class="math display">\[
+((P \wedge Q) \rightarrow (R \vee S)) \wedge ((R \rightarrow P) \vee (S \rightarrow Q))
+\]</span></p>
+<p><strong>6.</strong> Obtenha a Forma Normal Disjuntiva para:</p>
+<p><span class="math display">\[
+\neg(P \leftrightarrow \neg Q) \rightarrow ((P \wedge R) \vee (Q \wedge \neg R))
+\]</span></p>
+<p><strong>7.</strong> Converta para Forma Normal Disjuntiva a fórmula que combina negação de implicação com bicondicional:</p>
+<p><span class="math display">\[
+\neg((P \rightarrow Q) \wedge (Q \rightarrow R)) \leftrightarrow (P \wedge \neg R)
+\]</span></p>
 </section>
-<section id="forma-normal-conjuntiva-fnc" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="forma-normal-conjuntiva-fnc"><span class="header-section-number">7.1.3</span> Forma Normal Conjuntiva (FNC)</h3>
+</section>
+<section id="forma-normal-conjuntiva" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="forma-normal-conjuntiva"><span class="header-section-number">7.1.3</span> Forma Normal Conjuntiva</h3>
 <p>A Forma Normal Conjuntiva é uma representação canônica de fórmulas lógicas em que a fórmula é escrita como uma conjunção de disjunções. Em outras palavras, é uma expressão lógica na forma de uma <em>conjunção de disjunções</em>. É uma forma canônica útil para a análise e manipulação de fórmulas lógicas e é comumente usada em algoritmos de raciocínio lógico e simplificação de fórmulas.</p>
-<p>A diferença entre FNC e FND é como a diferença entre dois estilos de organização de uma biblioteca:</p>
-<p>A FNC (Forma Normal Conjuntiva) é como uma esquadra naval na qual cada embarcação, conjunção, deve ter pelo menos um tripulante qualificado, disjunção. Você só fica satisfeito se TODAS as embarcações tiverem alguém capacitado a bordo.</p>
+<p>A diferença entre Forma Normal Conjuntiva e Forma Normal Disjuntiva é como a diferença entre dois estilos de organização de uma biblioteca:</p>
+<p>A Forma Normal Conjuntiva é como uma esquadra naval na qual cada embarcação, conjunção, deve ter pelo menos um tripulante qualificado, disjunção. Você só fica satisfeito se TODAS as embarcações tiverem alguém capacitado a bordo.</p>
 <p>Dizemos que uma fórmula está na Forma Normal Conjuntiva se puder ser expressa na forma:</p>
 <p><span class="math display">\[(D_1 \vee D_2 \vee \ldots \vee D_n) \wedge  (E_1 \vee E_2 \vee \ldots \vee E_m) \wedge  \ldots\]</span></p>
-<p>Na qual, <span class="math inline">\(D_1, \ldots , D_n\)</span> e $ e_1, ,E_n $ representam átomos. Podemos dizer que a Forma Normal Conjuntiva acontece quando a <strong>Fórmula Bem Formada</strong> está na forma:</p>
+<p>Na qual, <span class="math inline">\(D_1, \ldots , D_n\)</span> e $ E_1, ,E_m $ representam literais. Podemos dizer que a Forma Normal Conjuntiva acontece quando a <strong>Fórmula Bem Formada</strong> está na forma:</p>
 <p><span class="math display">\[\bigwedge_{i=1}^{m} \left( \bigvee_{j=1}^{n} L_{ij} \right)\]</span></p>
-<p>Converter uma fórmula <strong>proposicional</strong> para a Forma Normal Conjuntiva (FNC) é um processo algorítmico que garante que a expressão final seja uma conjunção de disjunções. Os passos são os seguintes:</p>
+<p>Converter uma fórmula <strong>proposicional</strong> para a Forma Normal Conjuntiva é um processo algorítmico que garante que a expressão final seja uma conjunção de disjunções. Os passos são os seguintes:</p>
 <ol type="1">
 <li><p><strong>Eliminar Bicondicionais</strong>: Substitua todas as ocorrências da bicondicional pela sua definição baseada em implicações.</p>
 <p><span class="math display">\[
@@ -561,42 +592,47 @@ A \leftrightarrow B \equiv (A \rightarrow B) \wedge  (B \rightarrow A)
 <p><span class="math display">\[
 A \rightarrow B \equiv \neg A \vee B
 \]</span></p></li>
-<li><p><strong>Mover Negações para o Interior (Converter para FNN)</strong>: Use as Leis de De Morgan e a Lei da Dupla Negação para mover todos os operadores de negação (<span class="math inline">\(\neg\)</span>) para dentro da expressão, até que eles se apliquem apenas diretamente às variáveis atômicas. As regras principais são:</p>
+<li><p><strong>Mover Negações para o Interior (Converter para Forma Normal Negativa)</strong>: Use as Leis de De Morgan e a Lei da Dupla Negação para mover todos os operadores de negação (<span class="math inline">\(\neg\)</span>) para dentro da expressão, até que eles se apliquem apenas diretamente às variáveis atômicas. As regras principais são:</p>
 <ul>
 <li><span class="math inline">\(\neg(A \wedge  B) \equiv \neg A \vee \neg B\)</span></li>
 <li><span class="math inline">\(\neg(A \vee B) \equiv \neg A \wedge  \neg B\)</span></li>
 <li><span class="math inline">\(\neg\neg A \equiv A\)</span></li>
 </ul>
-<p>Ao final deste passo, a fórmula estará em Forma Normal Negativa (FNN).</p></li>
+<p>Ao final deste passo, a fórmula estará em Forma Normal Negativa .</p></li>
 <li><p><strong>Aplicar a Lei Distributiva</strong>: Para finalizar, aplique a lei distributiva para garantir que nenhuma conjunção (<span class="math inline">\(\wedge\)</span>) esteja aninhada dentro de uma disjunção (<span class="math inline">\(\vee\)</span>). A regra chave é distribuir o <span class="math inline">\(\vee\)</span> sobre o <span class="math inline">\(\wedge\)</span>.</p>
 <p><span class="math display">\[
 A \vee (B \wedge  C) \equiv (A \vee B) \wedge  (A \vee C)
 \]</span></p>
-<p>Este passo deve ser repetido até que a fórmula inteira seja uma conjunção de cláusulas, nas quais cada cláusula é uma disjunção de literais, satisfazendo a definição da FNC.</p></li>
+<p>Este passo deve ser repetido até que a fórmula inteira seja uma conjunção de cláusulas, nas quais cada cláusula é uma disjunção de literais, satisfazendo a definição da Forma Normal Conjuntiva.</p></li>
 </ol>
-<section id="exemplo-1-1" class="level4" data-number="7.1.3.1">
-<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="exemplo-1-1"><span class="header-section-number">7.1.3.1</span> Exemplo 1</h4>
+<section id="exemplo-1-2" class="level4" data-number="7.1.3.1">
+<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="exemplo-1-2"><span class="header-section-number">7.1.3.1</span> Exemplo 1</h4>
 <p>Considere a fórmula:</p>
 <p><span class="math display">\[(A \wedge  B) \rightarrow (C \vee D)\]</span></p>
 <ol type="1">
-<li><p>Eliminar Implicações*:</p>
-<p><span class="math display">\[\neg (A \wedge  B) \vee (C \vee D) \rightarrow (\neg A \vee \neg B) \vee (C \vee D)\]</span></p></li>
-<li><p>Distribuir a Disjunção:</p>
-<p><span class="math display">\[(\neg A \vee \neg B \vee C \vee D)\]</span></p></li>
+<li><p>Eliminar Implicações:</p>
+<p><span class="math display">\[\neg (A \wedge  B) \vee (C \vee D) \equiv (\neg A \vee \neg B) \vee (C \vee D)\]</span></p></li>
 </ol>
+<p>Neste ponto temos <span class="math inline">\((\neg A \vee \neg B) \vee (C \vee D)\)</span> e podemos remover os parênteses obtendo:</p>
+<p><span class="math display">\[\neg A \vee \neg B \vee C \vee D\]</span></p>
+<p>Aqui a atenta leitora deve observar que temos uma única cláusula, ou seja, uma Forma Normal Conjuntiva com apenas uma cláusula. Nenhuma outra simplificação é necessária.</p>
 </section>
-<section id="exemplo-2-1" class="level4" data-number="7.1.3.2">
-<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="exemplo-2-1"><span class="header-section-number">7.1.3.2</span> Exemplo 2</h4>
+<section id="exemplo-2-2" class="level4" data-number="7.1.3.2">
+<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="exemplo-2-2"><span class="header-section-number">7.1.3.2</span> Exemplo 2</h4>
 <p>Considere a fórmula:</p>
 <p><span class="math display">\[(A \wedge  \neg B) \vee (\neg C \wedge  D) \rightarrow (E \vee F)\]</span></p>
 <ol type="1">
-<li><p>Eliminar Implicações:</p>
-<p><span class="math display">\[\neg ((A \wedge  \neg B) \vee (\neg C \wedge  D)) \vee (E \vee F) \rightarrow \neg (A \wedge  \neg B) \wedge  \neg (\neg C \wedge  D) \vee (E \vee F)\]</span></p></li>
-<li><p>Aplicar De Morgan:</p>
-<p><span class="math display">\[(\neg A \vee B) \wedge  (C \vee \neg D) \vee (E \vee F)\]</span></p></li>
-<li><p>Distribuir a Disjunção:</p>
-<p><span class="math display">\[(\neg A \vee B \vee E \vee F) \wedge  (C \vee \neg D \vee E \vee F)\]</span></p></li>
+<li>Eliminar Implicações (usando a equivalência <span class="math inline">\(P \rightarrow Q \equiv \neg P \vee Q\)</span>):</li>
 </ol>
+<p><span class="math display">\[\neg ((A \wedge  \neg B) \vee (\neg C \wedge  D)) \vee (E \vee F)\]</span></p>
+<ol start="2" type="1">
+<li>Mover a Negação para Dentro (usando Leis de De Morgan):</li>
+</ol>
+<p><span class="math display">\[((\neg A \vee B) \wedge (C \vee \neg D)) \vee (E \vee F)\]</span></p>
+<ol start="3" type="1">
+<li>Distribuir a Disjunção sobre a Conjunção (usando a equivalência <span class="math inline">\((P \wedge Q) \vee R \equiv (P \vee R) \wedge (Q \vee R)\)</span>):</li>
+</ol>
+<p><span class="math display">\[(\neg A \vee B \vee E \vee F) \wedge (C \vee \neg D \vee E \vee F)\]</span></p>
 </section>
 <section id="exemplo-3-1" class="level4" data-number="7.1.3.3">
 <h4 data-number="7.1.3.3" class="anchored" data-anchor-id="exemplo-3-1"><span class="header-section-number">7.1.3.3</span> Exemplo 3</h4>
@@ -604,14 +640,14 @@ A \vee (B \wedge  C) \equiv (A \vee B) \wedge  (A \vee C)
 <p><span class="math display">\[
 (p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)
 \]</span></p>
-<p><strong>Conversão para Forma Normal Conjuntiva (FNC):</strong></p>
+<p><strong>Conversão para Forma Normal Conjuntiva :</strong></p>
 <ol type="1">
 <li><p><strong>Aplicar a lei distributiva no primeiro termo</strong>: expandir <span class="math inline">\((p \wedge (q \vee r))\)</span> usando <span class="math inline">\(A \wedge (B \vee C) \equiv (A \wedge B) \vee (A \wedge C)\)</span></p>
 <p><span class="math display">\[
 (p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)
 \]</span></p>
-<p>Neste ponto, temos uma <strong>Forma Normal Disjuntiva (FND)</strong>.</p></li>
-<li><p><strong>Construir a tabela-verdade para determinar a FNC</strong>:</p>
+<p>Neste ponto, temos uma <strong>Forma Normal Disjuntiva </strong>.</p></li>
+<li><p><strong>Construir a tabela-verdade para determinar a Forma Normal Conjuntiva</strong>:</p>
 <p><span class="math display">\[
 \begin{array}{ccc|c|c|c}
 p &amp; q &amp; r &amp; p \wedge q &amp; p \wedge r &amp; \neg p \wedge \neg q &amp; \text{Resultado} \\
@@ -634,18 +670,52 @@ F &amp; F &amp; F &amp; F &amp; F &amp; T &amp; T \\
 </li>
 <li><strong>Linha 6</strong> (p=F, q=T, r=F): Para excluir esta combinação, criamos <span class="math inline">\((p \vee \neg q \vee r)\)</span></li>
 </ul></li>
-<li><p><strong>Formar a FNC</strong>: a conjunção de todas essas cláusulas nos dá a FNC:</p>
+<li><p><strong>Formar a Forma Normal Conjuntiva</strong>: a conjunção de todas essas cláusulas nos dá a Forma Normal Conjuntiva:</p>
 <p><span class="math display">\[
 (\neg p \vee q \vee r) \wedge (p \vee \neg q \vee \neg r) \wedge (p \vee \neg q \vee r)
 \]</span></p></li>
 <li><p><strong>Simplificação</strong>: podemos aplicar a lei da resolução nas duas últimas cláusulas:</p>
 <p>De <span class="math inline">\((p \vee \neg q \vee \neg r) \wedge (p \vee \neg q \vee r)\)</span>, obtemos <span class="math inline">\((p \vee \neg q)\)</span> (eliminando <span class="math inline">\(r\)</span> e <span class="math inline">\(\neg r\)</span>).</p>
-<p><strong>FNC final simplificada</strong>:</p>
+<p><strong>Forma Normal Conjuntiva final simplificada</strong>:</p>
 <p><span class="math display">\[
 (\neg p \vee q \vee r) \wedge (p \vee \neg q)
 \]</span></p></li>
 </ol>
-<p><strong>Observação importante</strong>: A conversão direta de FND para FNC não pode ser feita através de uma simples aplicação de distributividade. É necessário usar métodos como tabela-verdade, equivalências lógicas complexas, ou algoritmos específicos de conversão. A abordagem pela tabela-verdade é mais sistemática e confiável para este tipo de conversão.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Observação importante - Por que a conversão direta não funciona</strong>:</p>
+<p>A conversão direta de Forma Normal Disjuntiva para Forma Normal Conjuntiva através de distributividade simples frequentemente resulta em uma explosão exponencial de termos. Vamos ver por que:</p>
+<p>Para converter <span class="math inline">\((p \wedge q) \vee (p \wedge r) \vee (\neg p \wedge \neg q)\)</span> diretamente para Forma Normal Conjuntiva, precisaríamos aplicar a distributividade do <span class="math inline">\(\wedge\)</span> sobre <span class="math inline">\(\vee\)</span>, usando a regra <span class="math inline">\((A \vee B) \wedge (C \vee D) \equiv (A \wedge C) \vee (A \wedge D) \vee (B \wedge C) \vee (B \wedge D)\)</span>.</p>
+<p>Se tentássemos aplicar isso sistematicamente:</p>
+<ol type="1">
+<li>Primeiro, agruparíamos: <span class="math inline">\(((p \wedge q) \vee (p \wedge r)) \vee (\neg p \wedge \neg q)\)</span>;</li>
+<li>Cada aplicação de distributividade duplicaria o número de termos;</li>
+<li>Com 3 termos conjuntivos originais, cada um com 2 literais, a expansão completa geraria <span class="math inline">\(2^3 = 8\)</span> combinações possíveis;</li>
+<li>Muitas dessas combinações seriam tautológicas ou contraditórias, requerendo simplificação adicional.</li>
+</ol>
+<p><strong>Exemplo da complexidade</strong>: Aplicando distributividade apenas ao primeiro passo:</p>
+<ul>
+<li><span class="math inline">\((p \wedge q) \vee (p \wedge r)\)</span> precisa ser convertido para Forma Normal Conjuntiva</li>
+<li>Isso exigiria criar “pseudo-literais” para cada conjunção</li>
+<li>A expressão resultante seria muito mais complexa que a Forma Normal Conjuntiva obtida pela tabela-verdade</li>
+</ul>
+<p><strong>Por isso, métodos alternativos são preferíveis</strong>:</p>
+<ul>
+<li><strong>Tabela-verdade</strong>: Identifica diretamente as condições falsas, gerando a Forma Normal Conjuntiva mínima</li>
+<li><strong>Algoritmo de Tseitin</strong>: Introduz variáveis auxiliares para evitar explosão exponencial</li>
+<li><strong>Resolução reversa</strong>: Constrói cláusulas incrementalmente</li>
+</ul>
+<p>A abordagem pela tabela-verdade, embora limitada a fórmulas proposicionais pequenas, é mais sistemática e garante uma Forma Normal Conjuntiva correta sem a complexidade da distributividade direta.</p>
+</div>
+</div>
 </section>
 <section id="exemplo-4-1" class="level4" data-number="7.1.3.4">
 <h4 data-number="7.1.3.4" class="anchored" data-anchor-id="exemplo-4-1"><span class="header-section-number">7.1.3.4</span> Exemplo 4</h4>
@@ -672,7 +742,7 @@ F &amp; F &amp; F &amp; F &amp; F &amp; T &amp; T \\
 <p><span class="math display">\[
 \neg (((p \rightarrow q) \rightarrow p) \rightarrow p)
 \]</span></p>
-<p>Nosso objetivo é converter esta fórmula para a FNC para determinar sua natureza.</p>
+<p>Nosso objetivo é converter esta fórmula para a Forma Normal Conjuntiva para determinar sua natureza.</p>
 <ol type="1">
 <li><p><strong>Eliminar a Implicação Mais Externa</strong></p>
 <p>Aplicamos a regra <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span> na implicação principal.</p>
@@ -702,9 +772,9 @@ F &amp; F &amp; F &amp; F &amp; F &amp; T &amp; T \\
 <p><span class="math display">\[
 ((p \wedge  \neg q) \vee p) \wedge  \neg p
 \]</span></p>
-<p>Neste ponto, a expressão <code>(p ∧ ¬q) ∨ p</code> está em FND. Para prosseguir com a conversão para FNC, precisamos aplicar a lei distributiva nela.</p></li>
+<p>Neste ponto, a expressão <span class="math inline">\(((p \wedge  \neg q) \vee p) \wedge  \neg p\)</span> está em Forma Normal Disjuntiva. Para prosseguir com a conversão para Forma Normal Conjuntiva, precisamos aplicar a lei distributiva nela.</p></li>
 <li><p><strong>Aplicar a Lei Distributiva</strong></p>
-<p>Distribuímos <code>∨ p</code> sobre <code>(p ∧ ¬q)</code> usando a regra <span class="math inline">\((A \wedge  B) \vee C \equiv (A \vee C) \wedge  (B \vee C)\)</span>.</p>
+<p>Distribuímos <span class="math inline">\(\vee p\)</span> sobre <span class="math inline">\((p \wedge  \neg q)\)</span> usando a regra <span class="math inline">\((A \wedge  B) \vee C \equiv (A \vee C) \wedge  (B \vee C)\)</span>.</p>
 <p><span class="math display">\[
 ((p \vee p) \wedge  (\neg q \vee p)) \wedge  \neg p
 \]</span></p></li>
@@ -717,14 +787,49 @@ F &amp; F &amp; F &amp; F &amp; F &amp; T &amp; T \\
 (p \wedge  \neg p) \wedge  (\neg q \vee p)
 \]</span></p></li>
 <li><p><strong>Resultado Final</strong></p>
-<p>A expressão <span class="math inline">\((p \wedge  \neg p)\)</span> é uma contradição, equivalente a <code>Falso</code> (<span class="math inline">\(F\)</span>). Qualquer conjunção com <span class="math inline">\(F\)</span> resulta em <span class="math inline">\(F\)</span>.</p>
+<p>A expressão <span class="math inline">\((p \wedge  \neg p)\)</span> é uma contradição, equivalente a <span class="math inline">\(Falso\)</span> (<span class="math inline">\(F\)</span>). Qualquer conjunção com <span class="math inline">\(F\)</span> resulta em <span class="math inline">\(F\)</span>.</p>
 <p><span class="math display">\[
 F \wedge  (\neg q \vee p)
 \]</span></p>
 <p><span class="math display">\[
 F
 \]</span></p>
-<p>A fórmula original é uma contradição. A Forma Normal Conjuntiva de uma contradição pode ser representada simplesmente como <span class="math inline">\(F\)</span>, ou por qualquer conjunção contraditória, como <span class="math inline">\((p \wedge  \neg p)\)</span>.</p></li>
+<p>A fórmula original é uma contradição. A Forma Normal Conjuntiva de uma contradição pode ser representada simplesmente como <span class="math inline">\(F\)</span>, ou por qualquer conjunção contraditória, como <span class="math inline">\((p \wedge  \neg p)\)</span>.</p>
+<div class="{calout-note}">
+<p><strong>Negação da Lei de Peirce</strong></p>
+<p>A <em>Lei de Peirce</em> é uma tautologia fundamental da lógica clássica, formulada como:</p>
+<p><span class="math display">\[((P \rightarrow Q) \rightarrow P) \rightarrow P\]</span></p>
+<p>A <em>negação da Lei de Peirce</em> é expressa por:</p>
+<p><span class="math display">\[\neg(((P \rightarrow Q) \rightarrow P) \rightarrow P)\]</span></p>
+<p>Esta negação representa uma fórmula que é:</p>
+<ul>
+<li>Sempre falsa na lógica clássica (sendo a negação de uma tautologia);</li>
+<li>Satisfazível em alguns sistemas de lógica intuicionista;</li>
+<li>Um exemplo importante de fórmula que distingue lógica clássica de lógica intuicionista.</li>
+</ul>
+<p>Para entender melhor, considere que a a <em>lógica clássica</em> é baseada em princípios fundamentais como:</p>
+<ul>
+<li><strong>Princípio do Terceiro Excluído</strong>: para qualquer proposição <span class="math inline">\(P\)</span>, ou <span class="math inline">\(P\)</span> é verdadeira ou <span class="math inline">\(\neg P\)</span> é verdadeira: <span class="math inline">\(P \vee \neg P\)</span>;</li>
+<li><strong>Princípio da Não-Contradição</strong>: uma proposição não pode ser simultaneamente verdadeira e falsa: <span class="math inline">\(\neg(P \wedge \neg P)\)</span>;</li>
+<li><strong>Reductio ad Absurdum</strong>: se assumir <span class="math inline">\(\neg P\)</span> leva a uma contradição, então <span class="math inline">\(P\)</span> deve ser verdadeira.</li>
+</ul>
+<p>Por outro lado, a <em>lógica intuicionista</em>, desenvolvida por <a href="https://en.wikipedia.org/wiki/L._E._J._Brouwer">Brouwer</a> e formalizada por <a href="https://en.wikipedia.org/wiki/Arend_Heyting">Heyting</a>, rejeita o princípio do terceiro excluído. Principais características:</p>
+<ul>
+<li>Uma proposição só é considerada verdadeira se existe uma <em>prova construtiva</em> de sua verdade;</li>
+<li>A negação de uma proposição <span class="math inline">\(\neg P\)</span> significa que assumir <span class="math inline">\(P\)</span> leva a uma contradição;</li>
+<li><span class="math inline">\(P \vee \neg P\)</span> não é universalmente válida - requer demonstração específica para cada <span class="math inline">\(P\)</span>.</li>
+</ul>
+<p><strong>Diferenças Fundamentais entre a Lógica Clássica e a Intuicionista</strong></p>
+<ul>
+<li><p><strong>Interpretação da Implicação</strong>: Na lógica clássica, <span class="math inline">\(P \rightarrow Q\)</span> é falsa apenas quando <span class="math inline">\(P\)</span> é verdadeira e <span class="math inline">\(Q\)</span> é falsa. Na lógica intuicionista, <span class="math inline">\(P \rightarrow Q\)</span> requer uma construção que transforme qualquer prova de <span class="math inline">\(P\)</span> em uma prova de <span class="math inline">\(Q\)</span></p></li>
+<li><p><strong>Existência</strong>: Na lógica clássica, provar <span class="math inline">\(\exists x \, P(x)\)</span> pode ser feito mostrando que <span class="math inline">\(\neg \forall x \, \neg P(x)\)</span>. Na lógica intuicionista, é necessário fornecer um exemplo específico</p></li>
+<li><p><strong>Dupla Negação</strong>: <span class="math inline">\(\neg \neg P \rightarrow P\)</span> é válida na lógica clássica, mas não na intuicionista</p></li>
+</ul>
+<p>Na lógica intuicionista, a negação da Lei de Peirce não é uma contradição, pois o princípio do terceiro excluído não é universalmente válido. Isso significa que existem modelos intuicionistas nos quais:</p>
+<p><span class="math display">\[\neg(((P \rightarrow Q) \rightarrow P) \rightarrow P)\]</span></p>
+<p>pode ser verdadeira, demonstrando uma diferença fundamental entre os sistemas lógicos clássico e intuicionista.</p>
+<p>A fórmula original <span class="math inline">\((((P \rightarrow Q) \rightarrow P) \rightarrow P)\)</span> é equivalente ao <em>reductio ad absurdum</em> e ao princípio do terceiro excluído na lógica clássica.</p>
+</div></li>
 </ol>
 </section>
 <section id="exemplo-6" class="level4" data-number="7.1.3.6">
@@ -748,12 +853,43 @@ F
 <p>A aplicação das equivalências não é, nem de longe, a única forma de percorrer a rota da conversão de uma <strong>Fórmula Bem Formada</strong> em Forma Normal Conjuntiva.</p>
 </section>
 </section>
-<section id="usando-a-tabela-verdade-para-gerar-formas-normais" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.4</span> Usando a Tabela-Verdade para Gerar Formas Normais</h3>
+<section id="sec-exercicios-conversao-fnc" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="sec-exercicios-conversao-fnc"><span class="header-section-number">7.1.4</span> Exercícios de Conversão para Forma Normal Conjuntiva</h3>
+<p><strong>1.</strong> Converta a seguinte fórmula para Forma Normal Conjuntiva:</p>
+<p><span class="math display">\[
+(p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))
+\]</span> (p q) ((p r) (q r)) $$</p>
+<p><strong>2.</strong> Transforme em Forma Normal Conjuntiva a fórmula:</p>
+<p><span class="math display">\[
+\neg((p \rightarrow q) \vee (q \rightarrow p)) \wedge (p \vee q)
+\]</span></p>
+<p><strong>3.</strong> Converta para Forma Normal Conjuntiva a negação de uma tautologia distributiva:</p>
+<p><span class="math display">\[
+\neg((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))
+\]</span></p>
+<p><strong>4.</strong> Obtenha a Forma Normal Conjuntiva para:</p>
+<p><span class="math display">\[
+((p \vee q) \rightarrow r) \leftrightarrow (p \rightarrow r) \wedge (q \rightarrow r)
+\]</span></p>
+<p><strong>5.</strong> Converta a seguinte fórmula complexa para Forma Normal Conjuntiva:</p>
+<p><span class="math display">\[
+(p \rightarrow (q \rightarrow r)) \wedge \neg((p \wedge q) \rightarrow r)
+\]</span></p>
+<p><strong>6.</strong> Transforme em Forma Normal Conjuntiva:</p>
+<p><span class="math display">\[
+((p \leftrightarrow q) \vee (q \leftrightarrow r)) \wedge \neg(p \leftrightarrow r)
+\]</span></p>
+<p><strong>7.</strong> Converta para Forma Normal Conjuntiva a fórmula:</p>
+<p><span class="math display">\[
+\neg(p \rightarrow (q \vee r)) \vee ((p \wedge \neg q) \rightarrow r)
+\]</span></p>
+</section>
+<section id="usando-a-tabela-verdade-para-gerar-formas-normais" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.5</span> Usando a Tabela-Verdade para Gerar Formas Normais</h3>
 <p>A tabela-verdade é nosso navegador experiente que mapeia todas as rotas possíveis em águas desconhecidas das possibilidades lógicas. Como um cartógrafo naval que registra cada banco de areia e recife em uma nova rota marítima, a tabela-verdade cataloga cada combinação possível de verdades e falsidades, criando uma carta náutica completa do oceano lógico que a leitora deverá percorrer em busca da verdade.</p>
-<p>Para entender este conceito com um pouco mais de formalidade, considere a <strong>Fórmula Bem Formada</strong> dada por: <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span>, se encontrarmos sua Tabela Verdade, poderemos encontrar, tanto a Forma Normal Conjuntiva quanto a Forma Normal Disjuntiva. Bastando fixar nosso olhar nas linhas da verdade, ou da falsidade.</p>
-<section id="gerando-a-forma-normal-disjuntiva" class="level4" data-number="7.1.4.1">
-<h4 data-number="7.1.4.1" class="anchored" data-anchor-id="gerando-a-forma-normal-disjuntiva"><span class="header-section-number">7.1.4.1</span> Gerando a Forma Normal Disjuntiva</h4>
+<p>Para entender este conceito com um pouco mais de formalidade, considere a <strong>Fórmula Bem Formada</strong> dada por: <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span>, se encontrarmos sua Tabela Verdade, poderemos encontrar, tanto a Forma Normal Conjuntiva quanto a Forma Normal Disjuntiva. Basta fixar nosso olhar nas linhas da verdade, ou da falsidade.</p>
+<section id="gerando-a-forma-normal-disjuntiva" class="level4" data-number="7.1.5.1">
+<h4 data-number="7.1.5.1" class="anchored" data-anchor-id="gerando-a-forma-normal-disjuntiva"><span class="header-section-number">7.1.5.1</span> Gerando a Forma Normal Disjuntiva</h4>
 <p>Para transformar <span class="math inline">\((A \vee B) \rightarrow (C \wedge \neg A)\)</span> na sua Forma Normal Conjuntiva, como um timoneiro disciplinado seguindo o roteiro de navegação, devemos seguir rigidamente, os seguintes passos:</p>
 <ol type="1">
 <li><p>Criar a Tabela-Verdade</p>
@@ -773,7 +909,7 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 \]</span></p></li>
 <li><p>Identificar as Linhas com Resultado Verdadeiro</p>
 <p>As linhas 5, 7 e 8 têm resultado verdadeiro.</p></li>
-<li><p>Construir a FND usando as linhas com resultados verdadeiros:</p></li>
+<li><p>Construir a Forma Normal Disjuntiva usando as linhas com resultados verdadeiros:</p></li>
 </ol>
 <p>Neste passo, nosso objetivo é construir uma expressão que seja verdadeira nas linhas 5, 7 e 8 (as linhas nas quais o resultado é verdadeiro), e falsa em todos os outros casos. Para fazer isso, criamos uma disjunção (uma expressão <em>OR</em>) para cada linha verdadeira que reflete as condições das variáveis nesta linha, e então unimos essas disjunções com uma conjunção (uma operação <strong>AND</strong>) para criar a Forma Normal Disjuntiva desejada:</p>
 <ol type="a">
@@ -781,14 +917,14 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 <li><p><strong>Segundo Termo Correspondente a Linha 7: <span class="math inline">\((\neg A \wedge  \neg B \wedge  C)\)</span></strong> Este termo é verdadeiro quando <span class="math inline">\(A\)</span> é falso, <span class="math inline">\(B\)</span> é falso e <span class="math inline">\(C\)</span> é verdadeiro, o que corresponde à linha 7 da tabela.</p></li>
 <li><p><strong>Terceiro Correspondente a Linha 8: <span class="math inline">\((\neg A \wedge  \neg B \wedge  \neg C)\)</span></strong> Este termo é verdadeiro quando <span class="math inline">\(A\)</span> é falso, <span class="math inline">\(B\)</span> é falso e <span class="math inline">\(C\)</span> é falso, o que corresponde à linha 8 da tabela.</p></li>
 </ol>
-<p>Finalmente, unimos estes termos com operações OR (<span class="math inline">\(\vee\)</span>) para criar a expressão FND completa:</p>
+<p>Finalmente, unimos estes termos com operações OR (<span class="math inline">\(\vee\)</span>) para criar a expressão Forma Normal Disjuntiva completa:</p>
 <p><span class="math display">\[
 (A \vee B) \rightarrow (C \wedge  \neg A) = (\neg A \wedge  B \wedge  C) \vee (\neg A \wedge  \neg B \wedge  C) \vee (\neg A \wedge  \neg B \wedge  \neg C)
 \]</span></p>
 <p>A expressão acima será verdadeira se qualquer um dos termos (ou seja, qualquer uma das linhas 5, 7 ou 8 da tabela) for verdadeiro, garantindo que a expressão capture exatamente as condições em que <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span> é verdadeira de acordo com a tabela-verdade.</p>
 </section>
-<section id="gerando-a-forma-normal-conjuntiva" class="level4" data-number="7.1.4.2">
-<h4 data-number="7.1.4.2" class="anchored" data-anchor-id="gerando-a-forma-normal-conjuntiva"><span class="header-section-number">7.1.4.2</span> Gerando a Forma Normal Conjuntiva</h4>
+<section id="gerando-a-forma-normal-conjuntiva" class="level4" data-number="7.1.5.2">
+<h4 data-number="7.1.5.2" class="anchored" data-anchor-id="gerando-a-forma-normal-conjuntiva"><span class="header-section-number">7.1.5.2</span> Gerando a Forma Normal Conjuntiva</h4>
 <p>Para transformar <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span> em sua Forma Normal Conjuntiva usando a tabela-verdade, devemos nos concentrar nas linhas nas quais a fórmula é <strong>falsa</strong> e criar cláusulas que “proíbam” essas combinações de valores.</p>
 <p><strong>Princípio fundamental</strong>: Para cada linha falsa, criamos uma cláusula que será verdadeira <strong>exceto</strong> naquela linha específica.</p>
 <ol type="1">
@@ -804,7 +940,7 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 <li><strong>Linha 4</strong> (A=V, B=F, C=F): Para excluir esta combinação, criamos <span class="math inline">\((\neg A \vee B \vee C)\)</span></li>
 <li><strong>Linha 6</strong> (A=F, B=V, C=F): Para excluir esta combinação, criamos <span class="math inline">\((A \vee \neg B \vee C)\)</span></li>
 </ul></li>
-<li><p><strong>Formar a FNC</strong>: A conjunção de todas essas cláusulas nos dá a FNC:</p>
+<li><p><strong>Formar a Forma Normal Conjuntiva</strong>: A conjunção de todas essas cláusulas nos dá a Forma Normal Conjuntiva:</p>
 <p><span class="math display">\[\begin{align*}
 (A \vee B) \rightarrow (C \wedge  \neg A) &amp;\equiv (\neg A \vee \neg B \vee \neg C) \\
 &amp;\wedge (\neg A \vee \neg B \vee C) \\
@@ -822,10 +958,13 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 <h2 data-number="7.2" class="anchored" data-anchor-id="formas-normais-avançadas"><span class="header-section-number">7.2</span> Formas Normais Avançadas</h2>
 <section id="forma-normal-prenex" class="level3" data-number="7.2.1">
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="forma-normal-prenex"><span class="header-section-number">7.2.1</span> Forma Normal Prenex</h3>
-<p>A Forma Normal Prenex é uma padronização para fórmulas da lógica de primeira ordem. Nela, todos os quantificadores são deslocados para a frente da fórmula, deixando a matriz da fórmula livre de quantificadores. A Forma Normal Prenex é vantajosa por três razões fundamentais:</p>
+<p>A Forma Normal Prenex é como um almirante experiente organizando a cadeia de comando antes de uma operação naval complexa.</p>
+<p>A criativa leitora pode imaginar uma esquadra na qual as ordens estão sendo transmitidas de forma caótica, alguns capitães recebem instruções diretas, outros recebem ordens através de subordinados, e as responsabilidades estão misturadas com as tarefas operacionais. A Forma Normal Prenex é como este almirante que, antes de qualquer manobra, convoca todos os comandantes para a ponte principal, estabelecendo claramente a hierarquia completa, quem comanda o quê e em que ordem, antes de transmitir as instruções operacionais.</p>
+<p>Assim como o almirante separa completamente a estrutura de comando (todos os quantificadores universais <span class="math inline">\(\forall\)</span> e existenciais <span class="math inline">\(\exists\)</span> movidos para frente) das ordens de execução (a matriz livre de quantificadores), a Forma Normal Prenex cria uma divisão clara entre “quem decide” e “o que fazer”.</p>
+<p>Com um pouco de formalidade a atenta leitora verá que a Forma Normal Prenex é uma padronização para fórmulas da lógica de primeira ordem. Nela, todos os quantificadores são deslocados para a frente da fórmula, deixando a matriz da fórmula livre de quantificadores. A Forma Normal Prenex apresenta três características principais:</p>
 <ol type="1">
 <li><p><strong>Facilitação da Manipulação Lógica</strong>: ao separar os quantificadores da matriz, a Forma Normal Prenex simplifica a análise e manipulação da estrutura lógica da fórmula;</p></li>
-<li><p><strong>Preparação para Outras Formas Normais</strong>: Serve como uma etapa intermediária valiosa na conversão para outras formas normais, como as Forma Normal Conjuntiva e Forma Normal Disjuntiva;</p></li>
+<li><p><strong>Preparação para Outras Formas Normais</strong>: serve como uma etapa intermediária na conversão para outras formas normais, como as Forma Normal Conjuntiva e Forma Normal Disjuntiva;</p></li>
 <li><p><strong>Uso em Provas Automáticas</strong>: é amplamente empregada em métodos de prova automática, tornando o raciocínio sobre quantificadores mais acessível.</p></li>
 </ol>
 <p><strong>Exemplo de conversão para Forma Normal Prenex:</strong></p>
@@ -835,24 +974,56 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 \]</span></p>
 <p>Para convertê-la para Forma Normal Prenex, seguimos os passos:</p>
 <ol type="1">
-<li><p><strong>Padronizar variáveis</strong>: renomear variáveis para evitar conflitos</p>
+<li><strong>Padronizar variáveis</strong>: renomear variáveis para evitar conflitos</li>
+</ol>
 <p><span class="math display">\[
 \forall x (P(x) \rightarrow \exists y Q(x,y)) \wedge \exists w R(w)
-\]</span></p></li>
-<li><p><strong>Eliminar implicações</strong>: substituir <span class="math inline">\(P(x) \rightarrow Q(x,y)\)</span> por <span class="math inline">\(\neg P(x) \vee Q(x,y)\)</span></p>
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Eliminar implicações</strong>: substituir <span class="math inline">\(P(x) \rightarrow Q(x,y)\)</span> por <span class="math inline">\(\neg P(x) \vee Q(x,y)\)</span></li>
+</ol>
 <p><span class="math display">\[
 \forall x (\neg P(x) \vee \exists y Q(x,y)) \wedge \exists w R(w)
-\]</span></p></li>
-<li><p><strong>Mover quantificadores para fora</strong>: extrair <span class="math inline">\(\exists y\)</span> e <span class="math inline">\(\exists w\)</span> para a frente, preservando a ordem relativa</p>
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Mover quantificadores para fora</strong>: extrair <span class="math inline">\(\exists y\)</span> e <span class="math inline">\(\exists w\)</span> para a frente, preservando a ordem relativa</li>
+</ol>
 <p><span class="math display">\[
 \exists w \forall x \exists y (R(w) \wedge (\neg P(x) \vee Q(x,y)))
-\]</span></p></li>
-</ol>
+\]</span></p>
 <p><strong>Exemplo de fórmula já em Forma Normal Prenex:</strong></p>
 <p>A fórmula a seguir <strong>já está</strong> em Forma Normal Prenex e não precisa de conversão:</p>
 <p><span class="math display">\[
 \exists x \forall y (P(x,y) \wedge Q(y))
 \]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Ordem Crítica dos Quantificadores</strong></p>
+<p>A ordem relativa entre quantificadores de tipos diferentes <strong>não pode ser alterada</strong> sem modificar o significado lógico:</p>
+<ul>
+<li><span class="math inline">\(\exists x \forall y \, P(x,y)\)</span>: “Existe um x específico que funciona para todos os y”;</li>
+<li><span class="math inline">\(\forall y \exists x \, P(x,y)\)</span>: “Para cada y, pode existir um x diferente”.</li>
+</ul>
+<p><strong>Exemplo prático</strong>:</p>
+<ul>
+<li><span class="math inline">\(\exists x \forall y \, \text{AmaX}(x,y)\)</span>: “Existe uma pessoa que ama todo mundo”;</li>
+<li><span class="math inline">\(\forall y \exists x \, \text{AmaX}(x,y)\)</span>: “Todo mundo é amado por alguém”.</li>
+</ul>
+<p>Apenas quantificadores do <strong>mesmo tipo</strong> podem ser reordenados sem alterar o significado:</p>
+<ul>
+<li><span class="math inline">\(\forall x \forall y \, P(x,y) \equiv \forall y \forall x \, P(x,y)\)</span>;</li>
+<li><span class="math inline">\(\exists x \exists y \, P(x,y) \equiv \exists y \exists x \, P(x,y)\)</span>.</li>
+</ul>
+</div>
+</div>
 <p><strong>IMPORTANTE</strong>: Quantificadores de tipos diferentes <strong>não podem ser trocados de ordem</strong> sem alterar o significado lógico. As fórmulas <span class="math inline">\(\exists x \forall y \phi(x,y)\)</span> e <span class="math inline">\(\forall y \exists x \phi(x,y)\)</span> <strong>não são equivalentes</strong>. A primeira é logicamente mais forte (existe um <span class="math inline">\(x\)</span> específico que funciona para todos os <span class="math inline">\(y\)</span>), enquanto a segunda é mais fraca (para cada <span class="math inline">\(y\)</span>, pode existir um <span class="math inline">\(x\)</span> diferente).</p>
 <p>Uma fórmula na Forma Normal Prenex segue uma estrutura específica definida por:</p>
 <p><span class="math display">\[
@@ -869,68 +1040,206 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <li><p><strong>Eliminar Implicações</strong>: substitua todas as ocorrências de implicação por disjunções e negações;</p></li>
 <li><p><strong>Mover Negações para Dentro</strong>: use as leis de De Morgan para mover as negações para dentro dos quantificadores e proposições;</p></li>
 <li><p><strong>Padronizar Variáveis</strong>: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas;</p></li>
-<li><p><strong>Mover Quantificadores para Fora</strong>: mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa quando necessário para preservar o significado;</p></li>
-<li><p><strong>Eliminar Quantificadores Existenciais</strong> (se necessário): substitua os quantificadores existenciais por constantes ou funções Skolem, dependendo do contexto.</p></li>
+<li><p><strong>Mover Quantificadores para Fora</strong>: mova todos os quantificadores para a esquerda da expressão, mantendo a ordem relativa quando necessário para preservar o significado.</p></li>
 </ol>
-<p>A Forma Normal Prenex é uma representação canônica de fórmulas da lógica de primeira ordem que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta valiosa na lógica e na teoria da prova, e sua compreensão é fundamental para trabalhar com lógica de primeira ordem, especialmente na <strong>Lógica de Primeira Ordem</strong> e teoria da prova, ambas fundamentais para a Programação Lógica.</p>
+<p>A Forma Normal Prenex é uma representação canônica de fórmulas da lógica de primeira ordem que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta amplamente utilizada na lógica e na teoria da prova, e sua compreensão é essencial para trabalhar com lógica de primeira ordem, especialmente na <strong>Lógica de Primeira Ordem</strong> e teoria da prova, ambas aplicadas na Programação Lógica.</p>
 <section id="regras-de-equivalência-prenex" class="level4" data-number="7.2.1.1">
 <h4 data-number="7.2.1.1" class="anchored" data-anchor-id="regras-de-equivalência-prenex"><span class="header-section-number">7.2.1.1</span> Regras de Equivalência Prenex</h4>
 <p>A Forma Prenex de uma fórmula lógica com quantificadores permite mover todos os quantificadores para o início da fórmula. Existem algumas regras de equivalência que preservam a Forma Prenex quando aplicadas a uma fórmula:</p>
 <p><strong>1. Comutatividade de quantificadores do mesmo tipo</strong>: a ordem dos quantificadores do mesmo tipo pode ser trocada em uma fórmula na Forma Prenex. Por exemplo:</p>
-<p><span class="math display">\[\forall x \forall y \ P(x,y) \Leftrightarrow \forall y \forall x \ P(x,y)\]</span></p>
+<p><span class="math display">\[
+\forall x \forall y \ P(x,y) \Leftrightarrow \forall y \forall x \ P(x,y)
+\]</span></p>
 <p>Isso ocorre porque a ordem dos quantificadores universais <span class="math inline">\(\forall x\)</span> e <span class="math inline">\(\forall y\)</span> não altera o significado lógico da fórmula. Essa propriedade é conhecida como comutatividade dos quantificadores.</p>
 <p><strong>2. Associatividade de quantificadores do mesmo tipo</strong>: quantificadores do mesmo tipo podem ser agrupados de forma associativa em uma Forma Prenex. Por exemplo:</p>
-<p><span class="math display">\[\forall x \forall y \forall z \ P(x,y,z) \Leftrightarrow \forall x (\forall y \forall z \ P(x,y,z))\]</span></p>
+<p><span class="math display">\[
+\forall x \forall y \forall z \ P(x,y,z) \Leftrightarrow \forall x (\forall y \forall z \ P(x,y,z))
+\]</span></p>
 <p>Novamente, o agrupamento dos quantificadores universais não muda o significado da fórmula. Essa é a propriedade associativa.</p>
-<p><strong>3. Distributividade de quantificadores sobre operadores lógicos</strong>: os quantificadores podem ser distribuídos sobre operadores lógicos como <span class="math inline">\(\wedge, \vee, \rightarrow\)</span>:</p>
-<p><span class="math display">\[\forall x (P(x) \vee Q(x)) \Leftrightarrow (\forall x \ P(x)) \vee (\forall x \ Q(x))\]</span></p>
-<p>Isso permite mover o quantificador para dentro do escopo do operador lógico. A equivalência se mantém pois a ordem de quantificação e operação não se altera.</p>
-</section>
-<section id="conversão-para-formas-normais-conjuntiva-fnc-e-disjuntiva-fnd" class="level4" data-number="7.2.1.2">
-<h4 data-number="7.2.1.2" class="anchored" data-anchor-id="conversão-para-formas-normais-conjuntiva-fnc-e-disjuntiva-fnd"><span class="header-section-number">7.2.1.2</span> Conversão para Formas Normais Conjuntiva (FNC) e Disjuntiva (FND)</h4>
-<p><strong>1. Eliminar Implicações</strong>: substitua todas as ocorrências de implicação da forma <span class="math inline">\(A \rightarrow B\)</span> Por <span class="math inline">\(\neg A \vee B\)</span>.</p>
-<p><strong>2. Mover a Negação para Dentro</strong>: use as leis de De Morgan para mover a negação para dentro dos quantificadores e das proposições. Aplique as seguintes transformações:</p>
+<p><strong>3. Distributividade de quantificadores sobre operadores lógicos</strong>: existem regras específicas para a distribuição de quantificadores:</p>
 <ul>
-<li><span class="math inline">\(\neg \forall x P(x) \rightarrow \exists x \neg P(x)\)</span></li>
-<li><span class="math inline">\(\neg \exists x P(x) \rightarrow \forall x \neg P(x)\)</span></li>
+<li>O quantificador universal distribui sobre conjunção:</li>
+</ul>
+<p><span class="math display">\[
+\forall x (P(x) \wedge Q(x)) \Leftrightarrow (\forall x \ P(x)) \wedge (\forall x \ Q(x))
+\]</span></p>
+<ul>
+<li>O quantificador existencial distribui sobre disjunção:</li>
+</ul>
+<p><span class="math display">\[
+\exists x (P(x) \vee Q(x)) \Leftrightarrow (\exists x \ P(x)) \vee (\exists x \ Q(x))
+\]</span></p>
+<p>Note que <span class="math inline">\(\forall\)</span> não distribui sobre <span class="math inline">\(\vee\)</span> e <span class="math inline">\(\exists\)</span> não distribui sobre <span class="math inline">\(\wedge\)</span>.</p>
+</section>
+<section id="conversão-para-formas-normais-conjuntiva-e-disjuntiva" class="level4" data-number="7.2.1.2">
+<h4 data-number="7.2.1.2" class="anchored" data-anchor-id="conversão-para-formas-normais-conjuntiva-e-disjuntiva"><span class="header-section-number">7.2.1.2</span> Conversão para Formas Normais Conjuntiva e Disjuntiva</h4>
+<p>A conversão para formas clausais (CNF/DNF) em lógica de primeira ordem segue estes passos:</p>
+<p><strong>1. Eliminar Implicações</strong>: substitua todas as ocorrências de implicação da forma <span class="math inline">\(A \rightarrow B\)</span> por <span class="math inline">\(\neg A \vee B\)</span>.</p>
+<p><strong>2. Mover a Negação para Dentro</strong>: use as leis de De Morgan para mover a negação para dentro dos quantificadores e das proposições:</p>
+<ul>
+<li><span class="math inline">\(\neg \forall x P(x) \Leftrightarrow \exists x \neg P(x)\)</span></li>
+<li><span class="math inline">\(\neg \exists x P(x) \Leftrightarrow \forall x \neg P(x)\)</span></li>
 </ul>
 <p><strong>3. Padronizar Variáveis</strong>: certifique-se de que as variáveis ligadas a diferentes quantificadores sejam distintas, renomeando-as se necessário.</p>
-<p><strong>4. Eliminar os Quantificadores Existenciais</strong>: substitua cada quantificador existencial <span class="math inline">\(\exists x\)</span> Por um novo termo constante ou Função Skolem, dependendo das variáveis livres em seu escopo. Para eliminar os quantificadores existenciais, é necessário introduzir novos termos: Constantes ou Funções Skolem.</p>
+<p><strong>4. Converter para Forma Normal Prenex</strong>: mova todos os quantificadores para o prefixo, preservando a ordem relativa.</p>
+<p><strong>5. Eliminar os Quantificadores Existenciais (Skolemização)</strong>: substitua cada quantificador existencial <span class="math inline">\(\exists x\)</span> por um novo termo constante ou Função Skolem, dependendo das variáveis quantificadas universalmente à esquerda no prefixo Prenex:</p>
 <ol type="1">
-<li><p><strong>Se o quantificador existencial não tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> Por <span class="math inline">\(P(c)\)</span>, sendo que <span class="math inline">\(c\)</span> é uma nova constante.</p></li>
-<li><p><strong>Se o quantificador existencial tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> Por <span class="math inline">\(P(f(y_1, y_2, \ldots, y_n))\)</span>, sendo que <span class="math inline">\(f\)</span> é uma nova função Skolem, e <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> são as variáveis universais à esquerda do quantificador existencial.</p></li>
+<li><p><strong>Se o quantificador existencial não tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> por <span class="math inline">\(P(c)\)</span>, sendo que <span class="math inline">\(c\)</span> é uma nova constante.</p></li>
+<li><p><strong>Se o quantificador existencial tem quantificadores universais à sua esquerda</strong>: Substitua <span class="math inline">\(\exists x P(x)\)</span> por <span class="math inline">\(P(f(y_1, y_2, \ldots, y_n))\)</span>, sendo que <span class="math inline">\(f\)</span> é uma nova função Skolem, e <span class="math inline">\(y_1, y_2, \ldots, y_n\)</span> são as variáveis universais à esquerda do quantificador existencial.</p></li>
 </ol>
-<p><strong>5. Mover os Quantificadores Universais para Fora</strong>: mova todos os quantificadores universais para fora, para a esquerda da expressão. Isso cria uma Forma Prenex da fórmula.</p>
-<p><strong>6. Eliminar os Quantificadores Universais</strong>: remova os quantificadores universais, deixando apenas a matriz da fórmula. Isso resulta em uma fórmula livre de quantificadores. Após a eliminação dos quantificadores existenciais e a movimentação de todos os quantificadores universais para fora (Forma Prenex), a eliminação dos quantificadores universais é simples:</p>
-<ol type="1">
-<li><p><strong>Remova os quantificadores universais da fórmula</strong>: Se você tem uma fórmula da forma <span class="math inline">\(\forall x P(x)\)</span>, simplesmente remova o quantificador <span class="math inline">\(\forall x\)</span>, deixando apenas a matriz da fórmula <span class="math inline">\(P(x)\)</span>.</p></li>
-<li><p><strong>Trate as variáveis como variáveis livres</strong>: As variáveis que eram ligadas pelo quantificador universal agora são tratadas como variáveis livres na matriz da fórmula.</p></li>
-</ol>
-<p><strong>7. Conversão para FNC</strong>:</p>
-<ol type="1">
-<li>Use as leis distributivas para mover as conjunções para dentro e as disjunções para fora.</li>
-<li>Certifique-se de que a fórmula esteja na forma de uma conjunção de disjunções (cláusulas).</li>
-</ol>
-<p><strong>8. Conversão para FND</strong>:</p>
-<ol type="1">
-<li>Use as leis distributivas para mover as disjunções para dentro e as conjunções para fora.</li>
-<li>Certifique-se de que a fórmula esteja na forma de uma disjunção de conjunções.</li>
-</ol>
+<p><strong>6. Eliminar os Quantificadores Universais</strong>: remova os quantificadores universais, deixando apenas a matriz da fórmula. As variáveis que eram ligadas pelo quantificador universal agora são tratadas como variáveis livres na matriz da fórmula.</p>
+<p><strong>7. Conversão para Forma Normal Conjuntiva ou Forma Normal Disjuntiva</strong>:</p>
+<ul>
+<li><strong>Para Forma Normal Conjuntiva</strong>: use as leis distributivas para converter a matriz em uma conjunção de disjunções (cláusulas)</li>
+<li><strong>Para Forma Normal Disjuntiva</strong>: use as leis distributivas para converter a matriz em uma disjunção de conjunções</li>
+</ul>
 </section>
 <section id="exemplo-1---duas-fórmulas-logicamente-equivalentes" class="level4" data-number="7.2.1.3">
 <h4 data-number="7.2.1.3" class="anchored" data-anchor-id="exemplo-1---duas-fórmulas-logicamente-equivalentes"><span class="header-section-number">7.2.1.3</span> Exemplo 1 - Duas fórmulas logicamente equivalentes</h4>
-<p>Vamos considerar duas fórmulas logicamente equivalentes, uma na Forma Prenex e outra não considere a fórmula original:</p>
-<p><span class="math display">\[\forall x \exists y (P(x) \rightarrow Q(y))\]</span></p>
+<p>Vamos considerar duas fórmulas logicamente equivalentes, uma na Forma Prenex e outra não. Considere a fórmula original:</p>
+<p><span class="math display">\[
+\forall x \exists y (P(x) \rightarrow Q(y))
+\]</span></p>
 <p>Se convertida para a Forma Prenex teremos:</p>
-<p><span class="math display">\[\exists y \forall x (P(x) \rightarrow Q(y))\]</span></p>
-<p>Cuja a equivalência pode ser provada por meio do seguinte raciocínio: seja <span class="math inline">\(I\)</span> uma interpretação booleana das variáveis <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span>. Suponha <span class="math inline">\(I\)</span> satisfaz <span class="math inline">\(\forall x \exists y (P(x) \rightarrow Q(y))\)</span>. Logo, para todo <span class="math inline">\(x\)</span> no domínio, existe um <span class="math inline">\(y\)</span> tal que: se <span class="math inline">\(P(x)\)</span> é verdadeiro, então <span class="math inline">\(Q(y)\)</span> também é verdadeiro. Isso é equivalente a dizer: existe um <span class="math inline">\(y\)</span>, tal que para todo <span class="math inline">\(x\)</span>, se <span class="math inline">\(P(x)\)</span> é verdadeiro, <span class="math inline">\(Q(y)\)</span> também é verdadeiro. Ou seja, <span class="math inline">\(I\)</span> também satisfaz: <span class="math inline">\(\exists y \forall x (P(x) \rightarrow Q(y))\)</span>. Por um raciocínio simétrico, o oposto também é verdadeiro. Portanto, as fórmulas são logicamente equivalentes.</p>
+<p><span class="math display">\[
+\exists y \forall x (P(x) \rightarrow Q(y))
+\]</span></p>
+<p>A equivalência pode ser demonstrada por meio do seguinte raciocínio: seja <span class="math inline">\(I\)</span> uma interpretação (estrutura) para os predicados <span class="math inline">\(P\)</span> e <span class="math inline">\(Q\)</span> em um domínio não vazio.</p>
+<p>Suponha <span class="math inline">\(I\)</span> satisfaz <span class="math inline">\(\forall x \exists y (P(x) \rightarrow Q(y))\)</span>. Existem dois casos a considerar:</p>
+<ul>
+<li>Se não existe nenhum <span class="math inline">\(x\)</span> tal que <span class="math inline">\(P(x)\)</span> seja verdadeiro, então a implicação é vacuamente verdadeira para todos os <span class="math inline">\(x\)</span>, e qualquer <span class="math inline">\(y\)</span> satisfará <span class="math inline">\(\exists y \forall x (P(x) \rightarrow Q(y))\)</span></li>
+<li>Se existe pelo menos um <span class="math inline">\(x\)</span> tal que <span class="math inline">\(P(x)\)</span> é verdadeiro, então deve existir um <span class="math inline">\(y\)</span> correspondente tal que <span class="math inline">\(Q(y)\)</span> é verdadeiro. Este mesmo <span class="math inline">\(y\)</span> funcionará para todos os <span class="math inline">\(x\)</span>, satisfazendo <span class="math inline">\(\exists y \forall x (P(x) \rightarrow Q(y))\)</span></li>
+</ul>
+<p>Assim, existe um <span class="math inline">\(y\)</span> fixo que satisfaz a condição para todo <span class="math inline">\(x\)</span>, preservando a equivalência. O raciocínio inverso também se aplica. Portanto, as fórmulas são logicamente equivalentes.</p>
 </section>
-<section id="exemplo-2---fórmula-sem-forma-prenex" class="level4" data-number="7.2.1.4">
-<h4 data-number="7.2.1.4" class="anchored" data-anchor-id="exemplo-2---fórmula-sem-forma-prenex"><span class="header-section-number">7.2.1.4</span> Exemplo 2 - Fórmula sem Forma Prenex</h4>
-<p><span class="math display">\[\forall x (P(x) \rightarrow \exists y Q(x,y))\]</span></p>
-<p>Não pode ser convertida à Forma Prenex pois o quantificador <span class="math inline">\(\exists y\)</span> está dentro do escopo de de uma implicação (<span class="math inline">\(\rightarrow\)</span>).</p>
+<section id="exemplo-2---conversão-para-forma-prenex" class="level4" data-number="7.2.1.4">
+<h4 data-number="7.2.1.4" class="anchored" data-anchor-id="exemplo-2---conversão-para-forma-prenex"><span class="header-section-number">7.2.1.4</span> Exemplo 2 - Conversão para Forma Prenex</h4>
+<p>A fórmula:</p>
+<p><span class="math display">\[
+\forall x (P(x) \rightarrow \exists y Q(x,y))
+\]</span></p>
+<p>Pode ser convertida para Forma Normal Prenex seguindo os passos:</p>
+<ol type="1">
+<li><strong>Eliminar implicação</strong>: substituir <span class="math inline">\(P(x) \rightarrow \exists y Q(x,y)\)</span> por <span class="math inline">\(\neg P(x) \vee \exists y Q(x,y)\)</span></li>
+</ol>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee \exists y Q(x,y))
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Mover quantificadores para fora</strong>: extrair <span class="math inline">\(\exists y\)</span> para a frente, preservando a ordem (∀ antes de ∃)</li>
+</ol>
+<p><span class="math display">\[
+\forall x \exists y (\neg P(x) \vee Q(x,y))
+\]</span></p>
+<p>A ordem dos quantificadores deve ser preservada para manter o significado original da fórmula.</p>
+</section>
+<section id="exemplo-3---conversão-para-forma-normal-conjuntiva" class="level4" data-number="7.2.1.5">
+<h4 data-number="7.2.1.5" class="anchored" data-anchor-id="exemplo-3---conversão-para-forma-normal-conjuntiva"><span class="header-section-number">7.2.1.5</span> Exemplo 3 - Conversão para Forma Normal Conjuntiva</h4>
+<p>Considere a fórmula original em Forma Normal Prenex:</p>
+<p><span class="math display">\[
+\forall x \exists y (P(x) \wedge Q(y))
+\]</span></p>
+<p>Siga os passos para conversão para Forma Normal Conjuntiva:</p>
+<ol type="1">
+<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem um quantificador universal <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por uma função Skolem <span class="math inline">\(f(x)\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\forall x (P(x) \wedge Q(f(x)))
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Eliminar os Quantificadores Universais</strong>: Remova <span class="math inline">\(\forall x\)</span>, tratando <span class="math inline">\(x\)</span> como variável livre:</li>
+</ol>
+<p><span class="math display">\[
+P(x) \wedge Q(f(x))
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Conversão para Forma Normal Conjuntiva</strong>: A matriz já é uma conjunção de literais, resultando em cláusulas:</li>
+</ol>
+<p><span class="math display">\[
+P(x) \wedge Q(f(x))
+\]</span></p>
+<p>Isso equivale a duas cláusulas: <span class="math inline">\(\{P(x)\}\)</span> e <span class="math inline">\(\{Q(f(x))\}\)</span>.</p>
+</section>
+<section id="exemplo-4---conversão-para-forma-normal-conjuntiva" class="level4" data-number="7.2.1.6">
+<h4 data-number="7.2.1.6" class="anchored" data-anchor-id="exemplo-4---conversão-para-forma-normal-conjuntiva"><span class="header-section-number">7.2.1.6</span> Exemplo 4 - Conversão para Forma Normal Conjuntiva</h4>
+<p>Considere a fórmula original:</p>
+<p><span class="math display">\[
+\forall x (P(x) \rightarrow \exists y Q(x,y))
+\]</span></p>
+<p>Primeiro, converta para Forma Normal Prenex (como no Exemplo 2):</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg P(x) \vee Q(x,y))
+\]</span></p>
+<p>Siga os passos para conversão para Forma Normal Conjuntiva:</p>
+<ol type="1">
+<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por <span class="math inline">\(f(x)\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee Q(x, f(x)))
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Eliminar os Quantificadores Universais</strong>: Remova <span class="math inline">\(\forall x\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\neg P(x) \vee Q(x, f(x))
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Conversão para Forma Normal Conjuntiva</strong>: A matriz já é uma disjunção (cláusula única):</li>
+</ol>
+<p><span class="math display">\[
+\neg P(x) \vee Q(x, f(x))
+\]</span></p>
+<p>Isso resulta na cláusula: <span class="math inline">\(\{\neg P(x), Q(x, f(x))\}\)</span>.</p>
+</section>
+<section id="exemplo-5---conversão-para-forma-normal-conjuntiva" class="level4" data-number="7.2.1.7">
+<h4 data-number="7.2.1.7" class="anchored" data-anchor-id="exemplo-5---conversão-para-forma-normal-conjuntiva"><span class="header-section-number">7.2.1.7</span> Exemplo 5 - Conversão para Forma Normal Conjuntiva</h4>
+<p>Considere a fórmula original em Forma Normal Prenex:</p>
+<p><span class="math display">\[
+\exists x \forall y (P(x) \vee Q(y))
+\]</span></p>
+<p>Siga os passos para conversão para Forma Normal Conjuntiva:</p>
+<ol type="1">
+<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists x\)</span> não tem quantificadores universais à sua esquerda, então substitua por uma constante Skolem <span class="math inline">\(c\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\forall y (P(c) \vee Q(y))
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Eliminar os Quantificadores Universais</strong>: Remova <span class="math inline">\(\forall y\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+P(c) \vee Q(y)
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Conversão para Forma Normal Conjuntiva</strong>: A matriz é uma disjunção, resultando em uma cláusula única:</li>
+</ol>
+<p><span class="math display">\[
+P(c) \vee Q(y)
+\]</span></p>
+<p>Isso equivale à cláusula: <span class="math inline">\(\{P(c), Q(y)\}\)</span>.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Preservação vs.&nbsp;Equivalência na Skolemização</strong></p>
+<p>A Skolemização é um processo que preserva a satisfatibilidade mas <strong>não preserva a equivalência lógica</strong>. Isso significa:</p>
+<ul>
+<li>Se a fórmula original é satisfatível, a fórmula skolemizada também será;</li>
+<li>Se a fórmula original é insatisfatível, a fórmula skolemizada também será;</li>
+<li><strong>Porém</strong>, a fórmula skolemizada pode ser verdadeira em modelos onde a original é falsa.</li>
+</ul>
+<p>Esta distinção é fundamental em: - <strong>Provas por refutação</strong>: onde buscamos inconsistência (adequado para Skolemização); - <strong>Verificação de modelos</strong>: onde precisamos preservar verdade (Skolemização inadequada); - <strong>Sistemas como Prolog</strong>: que utilizam formas clausais skolemizadas para inferência.</p>
+<p>Por isso a Skolemização é apropriada para métodos de prova automática como resolução, mas não para verificação direta de satisfação de fórmulas.</p>
+</div>
+</div>
 <blockquote class="blockquote">
-<p>A conversão para Forma Normal Conjuntiva é útil para métodos de prova. A conversão para Forma Normal Disjuntiva é menos comum, mas pode ser útil em alguns contextos de análise lógica. <strong>CUIDADO: a eliminação dos quantificadores pode alterar a interpretação da fórmula em alguns modelos, mas é útil porque preserva a satisfatibilidade</strong>.</p>
+<p>A conversão para Forma Normal Conjuntiva (forma clausal) é amplamente utilizada em métodos de prova automática como resolução. A conversão para Forma Normal Disjuntiva é menos comum, mas pode ser aplicada em alguns contextos de análise lógica. <strong>OBSERVAÇÃO: a Skolemização (eliminação dos quantificadores existenciais) pode alterar a interpretação da fórmula em alguns modelos, mas preserva a satisfatibilidade, sendo apropriada para provas automáticas</strong>.</p>
 </blockquote>
 </section>
 </section>
@@ -963,7 +1272,8 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <li><p><strong>Substituição</strong>: substituímos <span class="math inline">\(y\)</span> por <span class="math inline">\(f(x)\)</span> na fórmula: <span class="math display">\[\forall x \ P(x,f(x))\]</span></p></li>
 <li><p><strong>Remoção dos quantificadores universais</strong>: removemos o quantificador universal restante, obtendo a forma final: <span class="math display">\[P(x,f(x))\]</span></p></li>
 </ol>
-<p><strong>Intuição</strong>: A função Skolem <span class="math inline">\(f(x)\)</span> representa uma “regra de escolha” que, dado qualquer valor de <span class="math inline">\(x\)</span>, seleciona o valor apropriado de <span class="math inline">\(y\)</span> que satisfaz <span class="math inline">\(P(x,y)\)</span>. Por exemplo, se <span class="math inline">\(P(x,y)\)</span> significa “<span class="math inline">\(y\)</span> é o dobro de <span class="math inline">\(x\)</span>”, então <span class="math inline">\(f(x) = 2x\)</span>. <strong>Exemplo 2</strong>: considere a fórmula original: <span class="math inline">\(\forall x \forall z \exists y \ Q(x,y,z)\)</span></p>
+<p><strong>Intuição</strong>: A função Skolem <span class="math inline">\(f(x)\)</span> representa uma “regra de escolha” que, dado qualquer valor de <span class="math inline">\(x\)</span>, seleciona o valor apropriado de <span class="math inline">\(y\)</span> que satisfaz <span class="math inline">\(P(x,y)\)</span>. Por exemplo, se <span class="math inline">\(P(x,y)\)</span> significa “<span class="math inline">\(y\)</span> é o dobro de <span class="math inline">\(x\)</span>”, então <span class="math inline">\(f(x) = 2x\)</span>.</p>
+<p><strong>Exemplo 2</strong>: considere a fórmula original: <span class="math inline">\(\forall x \forall z \exists y \ Q(x,y,z)\)</span></p>
 <ol type="1">
 <li><p>Identificamos o quantificador existencial que introduz a variável <span class="math inline">\(y\)</span>.</p></li>
 <li><p>A variável <span class="math inline">\(y\)</span> depende de duas variáveis universais, <span class="math inline">\(x\)</span> e <span class="math inline">\(z\)</span>. Portanto, usamos uma Função de Skolem, digamos <span class="math inline">\(f(x,z)\)</span>. A fórmula se torna:</p>
@@ -980,119 +1290,74 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p><span class="math display">\[
 \forall x(\text{Aluno}(x) \rightarrow \text{Estuda}(x)) \vee \exists y(\text{Professor}(y) \wedge \text{EnsinaMatemática}(y))
 \]</span></p>
-<p><strong>Conversão para Forma Normal Disjuntiva (FND)</strong>:</p>
+<p><strong>Conversão para Forma Normal Conjuntiva </strong>:</p>
 <ol type="1">
-<li><p><strong>Eliminar implicações</strong>: converter <span class="math inline">\(A \rightarrow B\)</span> em <span class="math inline">\(\neg A \vee B\)</span></p>
+<li><p><strong>Eliminar implicações</strong>: converter <span class="math inline">\(A \rightarrow B\)</span> em <span class="math inline">\(\neg A \vee B\)</span>.</p>
 <p><span class="math display">\[
 \forall x(\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee \exists y(\text{Professor}(y) \wedge \text{EnsinaMatemática}(y))
 \]</span></p></li>
-<li><p><strong>Skolemização</strong>: eliminar quantificadores existenciais</p>
-<ul>
-<li><span class="math inline">\(\exists y\)</span> não depende de variáveis universais, então usamos constante Skolem <span class="math inline">\(c\)</span>:</li>
-</ul>
+<li><p><strong>Padronizar variáveis</strong>: as variáveis <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> já são distintas e não há conflito de escopo. Nenhuma alteração é necessária.</p></li>
+<li><p><strong>Converter para Forma Normal Prenex</strong>: mover todos os quantificadores para a frente da fórmula.</p>
 <p><span class="math display">\[
-\forall x(\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(c) \wedge \text{EnsinaMatemática}(c))
+\forall x \exists y ((\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(y) \wedge \text{EnsinaMatemática}(y)))
 \]</span></p></li>
-<li><p><strong>Aplicar distributividade</strong>: distribuir a disjunção sobre a conjunção usando <span class="math inline">\((A \vee (B \wedge C)) \equiv ((A \vee B) \wedge (A \vee C))\)</span></p>
+<li><p><strong>Skolemização</strong>: eliminar o quantificador existencial <span class="math inline">\(\exists y\)</span>. Como <span class="math inline">\(y\)</span> está no escopo de <span class="math inline">\(\forall x\)</span>, ele é substituído por uma função Skolem <span class="math inline">\(f(x)\)</span>.</p>
 <p><span class="math display">\[
-\forall x((\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(c)) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(c)))
+\forall x ((\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(f(x)) \wedge \text{EnsinaMatemática}(f(x))))
 \]</span></p></li>
-<li><p><strong>Remover quantificadores universais</strong>:</p>
+<li><p><strong>Aplicar distributividade</strong>: distribuir <span class="math inline">\(\vee\)</span> sobre <span class="math inline">\(\wedge\)</span> usando a regra <span class="math inline">\((P \vee (Q \wedge R)) \equiv ((P \vee Q) \wedge (P \vee R))\)</span>.</p>
 <p><span class="math display">\[
-(\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(c)) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(c))
+\forall x ((\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(f(x))) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(f(x))))
+\]</span></p></li>
+<li><p><strong>Remover quantificadores universais</strong>: na forma clausal, os quantificadores universais são implícitos.</p>
+<p><span class="math display">\[
+(\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(f(x))) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(f(x)))
 \]</span></p></li>
 </ol>
-<p><strong>Resultado final</strong>: A fórmula resultante está na <strong>Forma Normal Conjuntiva (FNC)</strong>, não na FND, pois é uma conjunção de disjunções.</p>
-<p><strong>Observação importante</strong>: Esta fórmula específica não pode ser expressa naturalmente em FND devido à estrutura mista de quantificadores e operadores. A distributividade força a conversão para FNC. Para obter uma verdadeira FND, seria necessário negar toda a fórmula original:</p>
-<p><strong>FND da negação</strong> (quando a proposição é falsa):</p>
+<p><strong>Resultado final em Forma Normal Conjuntiva</strong>: A fórmula está na Forma Normal Conjuntiva, representada como uma conjunção de duas cláusulas.</p>
+<p><strong>Conversão para Forma Normal Disjuntiva </strong>:</p>
+<p>A conversão para Forma Normal Disjuntiva segue um caminho diferente e <strong>não utiliza Skolemização</strong>, pois este processo não preserva a equivalência lógica. O ponto de partida correto é a Forma Normal Prenex (passo 3 da conversão anterior).</p>
+<ol type="1">
+<li><p><strong>Ponto de Partida (Forma Normal Prenex)</strong>:</p>
 <p><span class="math display">\[
-\exists x(\text{Aluno}(x) \wedge \neg \text{Estuda}(x)) \wedge \forall y(\neg \text{Professor}(y) \vee \neg \text{EnsinaMatemática}(y))
-\]</span></p>
-<p>Após Skolemização e remoção de quantificadores:</p>
+\forall x \exists y ((\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(y) \wedge \text{EnsinaMatemática}(y)))
+\]</span></p></li>
+<li><p><strong>Analisar a Matriz da Fórmula</strong>: A matriz é a parte da fórmula sem os quantificadores. Vamos analisá-la:</p>
 <p><span class="math display">\[
-(\text{Aluno}(d) \wedge \neg \text{Estuda}(d)) \wedge (\neg \text{Professor}(y) \vee \neg \text{EnsinaMatemática}(y))
+(\neg \text{Aluno}(x) \vee \text{Estuda}(x)) \vee (\text{Professor}(y) \wedge \text{EnsinaMatemática}(y))
 \]</span></p>
-<p>Esta representa: “Existe um aluno que não estuda E nenhum professor ensina matemática.”</p>
-<p><strong>Conversão para Forma Normal Conjuntiva (FNC)</strong>:</p>
-<p>O resultado obtido no passo 4 acima já está em FNC:</p>
+<p>Uma fórmula está em Forma Normal Disjuntiva se for uma disjunção de conjunções de literais. Simplificando a expressão acima (removendo parênteses por associatividade), obtemos:</p>
 <p><span class="math display">\[
-(\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{Professor}(c)) \wedge (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee \text{EnsinaMatemática}(c))
+\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee (\text{Professor}(y) \wedge \text{EnsinaMatemática}(y))
 \]</span></p>
-<p>Esta FNC representa que: “Para qualquer indivíduo <span class="math inline">\(x\)</span>, ou ele não é aluno, ou ele estuda, ou existe um professor específico <span class="math inline">\(c\)</span>” E “Para qualquer indivíduo <span class="math inline">\(x\)</span>, ou ele não é aluno, ou ele estuda, ou esse professor específico <span class="math inline">\(c\)</span> ensina matemática.”</p>
-<ol start="2" type="a">
-<li><p>Algum aluno estuda e todo professor ensina</p>
-<p><strong>Lógica de Primeiro Grau</strong>:</p>
-<p><span class="math display">\[\exists x(\text{Aluno}(x) \wedge  \text{Estuda}(x)) \wedge  \forall y(\text{Professor}(y) \rightarrow \text{Ensina}(y))\]</span></p>
-<p><strong>Forma Normal Conjuntiva (FNC)</strong>:</p>
-<ol type="1">
-<li><p>Convertendo a implicação:</p>
-<p><span class="math display">\[\neg \text{Professor}(y) \vee \text{Ensina}(y)\]</span></p></li>
-<li><p>Adicionando a conjunção existencial:</p>
-<p><span class="math display">\[(\text{Aluno}(x) \wedge  \text{Estuda}(x)) \wedge  (\neg \text{Professor}(y) \vee \text{Ensina}(y))\]</span></p></li>
+<p>Esta estrutura já corresponde a uma Forma Normal Disjuntiva. Ela é uma disjunção (termos ligados por <span class="math inline">\(\vee\)</span>) de três termos: <span class="math inline">\(\neg \text{Aluno}(x)\)</span>, <span class="math inline">\(\text{Estuda}(x)\)</span> e a conjunção <span class="math inline">\((\text{Professor}(y) \wedge \text{EnsinaMatemática}(y))\)</span>. Nenhum passo de distribuição é necessário.</p></li>
 </ol>
-<p><strong>Forma Normal Disjuntiva (FND)</strong>:</p>
-<ol type="1">
-<li><p>Negando a conjunção existencial:</p>
-<p><span class="math display">\[\neg \text{Aluno}(x) \vee \neg \text{Estuda}(x)\]</span></p></li>
-<li><p>Adicionando a conjunção negada do consequente do implicador:</p>
-<p><span class="math display">\[(\neg \text{Aluno}(x) \vee \neg \text{Estuda}(x)) \vee (\text{Professor}(y) \wedge  \neg \text{Ensina}(y))\]</span></p></li>
-</ol></li>
-<li><p>Todo estudante é inteligente ou algum professor é sábio</p>
-<p><strong>Lógica de Primeiro Grau</strong>:</p>
-<p><span class="math display">\[\forall x(\text{Estudante}(x) \rightarrow \text{Inteligente}(x)) \vee \exists y(\text{Professor}(y) \wedge  \text{Sábio}(y))\]</span></p>
-<p><strong>Forma Normal Conjuntiva (FNC)</strong>:</p>
-<ol type="1">
-<li><p>Convertendo a implicação:</p>
-<p><span class="math display">\[\neg \text{Estudante}(x) \vee \text{Inteligente}(x)\]</span></p></li>
-<li><p>Adicionando a disjunção existencial:</p>
-<p><span class="math display">\[(\neg \text{Estudante}(x) \vee \text{Inteligente}(x)) \wedge  (\text{Professor}(y) \wedge  \text{Sábio}(y))\]</span></p></li>
-</ol>
-<p><strong>Forma Normal Disjuntiva (FND)</strong>:</p>
-<ol type="1">
-<li><p>Negando o consequente do implicador:</p>
-<p><span class="math display">\[\text{Estudante}(x) \wedge  \neg \text{Inteligente}(x)\]</span></p></li>
-<li><p>Adicionando a conjunção existencial negada:</p>
-<p><span class="math display">\[(\text{Estudante}(x) \wedge  \neg \text{Inteligente}(x)) \vee (\neg \text{Professor}(y) \vee \neg \text{Sábio}(y))\]</span></p></li>
-</ol></li>
-<li><p>Todo animal corre ou algum pássaro voa</p>
-<p><strong>Lógica de Primeiro Grau</strong>:</p>
-<p><span class="math display">\[\forall x(\text{Animal}(x) \rightarrow \text{Corre}(x)) \vee \exists y(\text{Pássaro}(y) \wedge  \text{Voa}(y))\]</span></p>
-<p><strong>Forma Normal Conjuntiva (FNC)</strong>:</p>
-<ol type="1">
-<li><p>Convertendo a implicação:</p>
-<p><span class="math display">\[\neg \text{Animal}(x) \vee \text{Corre}(x)\]</span></p></li>
-<li><p>Adicionando a disjunção existencial:</p>
-<p><span class="math display">\[(\neg \text{Animal}(x) \vee \text{Corre}(x)) \wedge  (\text{Pássaro}(y) \wedge  \text{Voa}(y))\]</span></p></li>
-</ol>
-<p><strong>Forma Normal Disjuntiva (FND)</strong>:</p>
-<ol type="1">
-<li><p>Negando o consequente do implicador:</p>
-<p><span class="math display">\[\text{Animal}(x) \wedge  \neg \text{Corre}(x)\]</span></p></li>
-<li><p>Adicionando a conjunção existencial negada:</p>
-<p><span class="math display">\[(\text{Animal}(x) \wedge  \neg \text{Corre}(x)) \vee (\neg \text{Pássaro}(y) \vee \neg \text{Voa}(y))\]</span></p></li>
-</ol></li>
-</ol>
+<p><strong>Resultado final em Forma Normal Disjuntiva</strong>: A Forma Normal Disjuntiva da fórmula, mantendo os quantificadores, é:</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg \text{Aluno}(x) \vee \text{Estuda}(x) \vee (\text{Professor}(y) \wedge \text{EnsinaMatemática}(y)))
+\]</span></p>
+<p><strong>Observação</strong>: A estrutura da fórmula original, uma grande disjunção (<span class="math inline">\(P \vee Q\)</span>), faz com que ela seja naturalmente próxima da Forma Normal Disjuntiva, exigindo poucos ou nenhum passo de conversão. Em contraste, para chegar à Forma Normal Conjuntiva, foi necessário aplicar a lei da distributividade, resultando em uma expressão mais complexa.</p>
 </section>
 </section>
 </section>
-<section id="exercícios-de-conexão-com-prolog" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="exercícios-de-conexão-com-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</h2>
-<p>A conversão de fórmulas para uma <strong>Forma Normal</strong> (seja Conjuntiva - <strong>FNC</strong>, ou Disjuntiva - <strong>FND</strong>) é um processo algorítmico que permite a padronização e a manipulação de expressões lógicas por computadores. Este conjunto de questões foca nesta habilidade, que é a base para o funcionamento de provadores de teoremas e do mecanismo de resolução do Prolog.</p>
+<section id="sec-predicativa-conexao-prolog" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="sec-predicativa-conexao-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</h2>
+<p>A conversão de fórmulas para uma <strong>Forma Normal</strong> (seja Conjuntiva - <strong>Forma Normal Conjuntiva</strong>, ou Disjuntiva - <strong>Forma Normal Disjuntiva</strong>) é um processo algorítmico que permite a padronização e a manipulação de expressões lógicas por computadores. Este conjunto de questões foca nesta habilidade, que é a base para o funcionamento de provadores de teoremas e do mecanismo de resolução do Prolog.</p>
 <p><strong>Questão 1: Conversão Básica</strong>:</p>
 <p>Dada a seguinte fórmula lógica, que representa uma regra de negócio simples: “Se o pedido (<span class="math inline">\(P\)</span>) foi aprovado, então a nota fiscal (<span class="math inline">\(N\)</span>) deve ser emitida, mas não é verdade que a nota fiscal foi emitida sem que o produto esteja em estoque (<span class="math inline">\(E\)</span>).” Fórmula:</p>
 <p><span class="math display">\[(P \to N) \wedge \neg (N \wedge \neg E)\]</span></p>
 <p>Converta esta fórmula para:</p>
 <ol type="1">
-<li>A Forma Normal Conjuntiva (FNC).<br>
+<li>A Forma Normal Conjuntiva.<br>
 </li>
-<li>A Forma Normal Disjuntiva (FND).</li>
+<li>A Forma Normal Disjuntiva.</li>
 </ol>
 <p><strong>Questão 2: Cenários de Ativação de Sistema</strong>:</p>
 <p>Um sistema de irrigação automática (<span class="math inline">\(I\)</span>) é ativado se o sensor de umidade do solo indicar que está seco (<span class="math inline">\(S\)</span>) ou se não choveu nas últimas 24 horas (<span class="math inline">\(\neg C\)</span>) e a temperatura está alta (<span class="math inline">\(T\)</span>).</p>
 <ol type="1">
 <li>Modele a condição de ativação (<span class="math inline">\(I\)</span>) como uma fórmula lógica.<br>
 </li>
-<li>Converta a fórmula para a Forma Normal Disjuntiva (FND). O que cada termo da FND representa em termos de cenários práticos de ativação?</li>
+<li>Converta a fórmula para a Forma Normal Disjuntiva. O que cada termo da Forma Normal Disjuntiva representa em termos de cenários práticos de ativação?</li>
 </ol>
 <p><strong>Questão 3: Verificação de Consistência de Regras</strong>:</p>
 <p>As regras de configuração de um firewall são:</p>
@@ -1103,7 +1368,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 </li>
 <li>Uma conexão segura nunca vem da rede interna.</li>
 </ol>
-<p>Modele as três regras como uma única fórmula. Converta-a para a Forma Normal Conjuntiva (FNC). A FNC resultante indica se as regras são consistentes? O que aconteceria se uma conexão fosse segura e viesse da rede interna?</p>
+<p>Modele as três regras como uma única fórmula. Converta-a para a Forma Normal Conjuntiva. A Forma Normal Conjuntiva resultante indica se as regras são consistentes? O que aconteceria se uma conexão fosse segura e viesse da rede interna?</p>
 <p><strong>Questão 4: Equivalência de Políticas de Segurança</strong>:</p>
 <p>Dois administradores de sistemas escreveram políticas de acesso a um servidor de desenvolvimento.</p>
 <ul>
@@ -1115,7 +1380,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p>Uma regra de um e-commerce afirma: “Um cliente recebe frete grátis (<span class="math inline">\(F\)</span>) se, e somente se, ele for um membro Prime (<span class="math inline">\(P\)</span>) ou o valor do seu pedido for superior a R$100 (<span class="math inline">\(V\)</span>).”</p>
 <p>Fórmula:</p>
 <p><span class="math display">\[F \leftrightarrow (P \vee V)\]</span></p>
-<p>Converta esta fórmula para a Forma Normal Conjuntiva (FNC). Cada cláusula da FNC representa que tipo de restrição no sistema?</p>
+<p>Converta esta fórmula para a Forma Normal Conjuntiva. Cada cláusula da Forma Normal Conjuntiva representa que tipo de restrição no sistema?</p>
 <p><strong>Questão 6: Simplificação de Circuito Lógico</strong>:</p>
 <p>A saída de um circuito lógico com três entradas (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>) é descrita pela seguinte tabela verdade:</p>
 <table class="table">
@@ -1179,11 +1444,10 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 </tbody>
 </table>
 <ol type="1">
-<li><p>Escreva a Forma Normal Disjuntiva (FND) canônica a partir da tabela.</p></li>
-<li><p>Use um Mapa de Karnaugh ou álgebra booleana para encontrar a FND mínima.</p></li>
+<li><p>Escreva a Forma Normal Disjuntiva canônica a partir da tabela.</p></li>
+<li><p>Use um Mapa de Karnaugh ou álgebra booleana para encontrar a Forma Normal Disjuntiva mínima.</p></li>
 </ol>
-<section id="questão-7-validando-uma-inferência-tautologia" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="questão-7-validando-uma-inferência-tautologia"><span class="header-section-number">7.3.1</span> Questão 7: Validando uma Inferência (Tautologia)</h3>
+<p><strong>Questão 7: Validando uma Inferência (Tautologia)</strong></p>
 <p>Considere que “Todos os leões são mamíferos” e “Simba é um leão”, podemos concluir “Simba é um mamífero”. Prove que a estrutura lógica desta inferência é uma tautologia:</p>
 <p><span class="math display">\[((\forall x(L(x) \to M(x))) \wedge L(s)) \to M(s)\]</span></p>
 <p><strong>Solução</strong>:</p>
@@ -1257,10 +1521,10 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p>Reorganizando:</p>
 <p><span class="math display">\[L(s) \wedge M(s) \wedge \neg M(s)\]</span></p>
 <p>Esta fórmula contém a contradição <span class="math inline">\(M(s) \wedge \neg M(s)\)</span>, que é sempre falsa.</p>
-<p><strong>Passo 4 - Conversão para FNC</strong></p>
+<p><strong>Passo 4 - Conversão para Forma Normal Conjuntiva</strong></p>
 <p>A negação da fórmula original (que é uma contradição) já está em Forma Normal Conjuntiva:</p>
 <p><span class="math display">\[L(s) \wedge M(s) \wedge \neg M(s)\]</span></p>
-<p>Esta é uma conjunção de três cláusulas unitárias. Como esta FNC é sempre falsa (contradição), a fórmula original é sempre verdadeira (tautologia).</p>
+<p>Esta é uma conjunção de três cláusulas unitárias. Como esta Forma Normal Conjuntiva é sempre falsa (contradição), a fórmula original é sempre verdadeira (tautologia).</p>
 <p><strong>Conclusão</strong>: como demonstrado tanto pela tabela-verdade quanto pela prova por contradição, a fórmula <span class="math inline">\(((\forall x(L(x) \to M(x))) \wedge L(s)) \to M(s)\)</span> é uma tautologia. Isso confirma que a inferência “Todos os leões são mamíferos, Simba é um leão, portanto Simba é um mamífero” é logicamente válida em qualquer interpretação.</p>
 <p><strong>Questão 8: Problema de Satisfatibilidade (SAT)</strong>:</p>
 <p>Três programadores (Ana, Beto, Carla) precisam ser alocados para um projeto. As restrições são:</p>
@@ -1270,13 +1534,13 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <li>Ana e Beto não podem trabalhar juntos;</li>
 <li>Se Carla for alocada, então Ana também deve ser.</li>
 </ol>
-<p>Sejam <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> as proposições “Ana foi alocada”, “Beto foi alocado” e “Carla foi alocada”. Modele as três restrições e converta-as para um conjunto de cláusulas em FNC. O conjunto de restrições é satisfatível? Se sim, apresente uma alocação válida.</p>
+<p>Sejam <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> as proposições “Ana foi alocada”, “Beto foi alocado” e “Carla foi alocada”. Modele as três restrições e converta-as para um conjunto de cláusulas em Forma Normal Conjuntiva. O conjunto de restrições é satisfatível? Se sim, apresente uma alocação válida.</p>
 <p><strong>Questão 9: Forma Normal Prenex</strong>:</p>
 <p>A conversão para Forma Normal Clausal (que veremos no próximo bloco) muitas vezes começa com a conversão para a Forma Normal Prenex, na qual todos os quantificadores são movidos para o início da fórmula.<br>
 Converta a seguinte fórmula para a Forma Normal Prenex:</p>
 <p><span class="math display">\[\forall x (P(x) \to (\exists y (Q(y) \wedge R(x,y)))) \vee \exists z S(z)\]</span></p>
 <p><strong>Questão 10: O Princípio da Resolução</strong>:</p>
-<p>O Princípio da Resolução é um método de inferência que opera sobre cláusulas em FNC. Dadas duas cláusulas <span class="math inline">\((\neg P \vee Q)\)</span> e <span class="math inline">\((P \vee R)\)</span>, podemos inferir a cláusula resolvente <span class="math inline">\((Q \vee R)\)</span>.<br>
+<p>O Princípio da Resolução é um método de inferência que opera sobre cláusulas em Forma Normal Conjuntiva. Dadas duas cláusulas <span class="math inline">\((\neg P \vee Q)\)</span> e <span class="math inline">\((P \vee R)\)</span>, podemos inferir a cláusula resolvente <span class="math inline">\((Q \vee R)\)</span>.<br>
 Use o Princípio da Resolução para provar que o seguinte conjunto de cláusulas é inconsistente (leva à cláusula vazia, <span class="math inline">\(\square\)</span>):</p>
 <ol type="1">
 <li><span class="math inline">\(\neg P \vee \neg Q \vee R\)</span>;<br>
@@ -1289,7 +1553,6 @@ Use o Princípio da Resolução para provar que o seguinte conjunto de cláusula
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
