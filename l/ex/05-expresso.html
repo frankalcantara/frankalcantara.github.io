@@ -838,13 +838,13 @@
                         <div class="col">
                             <div class="example-box">
                                 <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Bicondicional XOR</h4>
-                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $\neg(p \leftrightarrow q)$ (ou exclusivo)</p>
+                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $\neg(P \leftrightarrow Q)$ (ou exclusivo)</p>
                                 
                                 <div class="step">
                                     <div class="step-number">1</div>
                                     <div>
                                         <strong>Eliminar bicondicional:</strong><br>
-                                        $\neg((p \rightarrow q) \wedge (q \rightarrow p))$
+                                        $\neg((P \rightarrow Q) \wedge (Q \rightarrow P))$
                                     </div>
                                 </div>
                                 
@@ -852,7 +852,7 @@
                                     <div class="step-number">2</div>
                                     <div>
                                         <strong>Eliminar implicações:</strong><br>
-                                        $\neg((\neg p \vee q) \wedge (\neg q \vee p))$
+                                        $\neg((\neg P \vee Q) \wedge (\neg Q \vee P))$
                                     </div>
                                 </div>
                                 
@@ -860,13 +860,13 @@
                                     <div class="step-number">3</div>
                                     <div>
                                         <strong>Aplicar De Morgan e simplificar:</strong><br>
-                                        $(p \wedge \neg q) \vee (\neg p \wedge q)$
+                                        $(P \wedge \neg Q) \vee (\neg P \wedge Q)$
                                     </div>
                                 </div>
                                 
                                 <div class="formula-box bg-success-subtle">
                                     <strong>FND Final:</strong><br>
-                                    $(p \wedge \neg q) \vee (\neg p \wedge q)$
+                                    $(P \wedge \neg Q) \vee (\neg P \wedge Q)$
                                 </div>
                             </div>
                         </div>
