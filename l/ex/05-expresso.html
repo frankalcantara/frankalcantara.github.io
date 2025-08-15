@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Formas Normais: Organizando o Pensamento Lógico</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        /* Variáveis CSS Comuns */
+        :root {
+            --copper-50: #fdf8f6;
+            --copper-100: #f2e8e5;
+            --copper-200: #eaddd7;
+            --copper-300: #e0cec7;
+            --copper-400: #d2bab0;
+            --copper-500: #bfa094;
+            --copper-600: #a18072;
+            --copper-700: #977669;
+            --copper-800: #846358;
+            --copper-900: #43302b;
+            --sage-50: #f6f7f6;
+            --sage-100: #e3e7e3;
+            --sage-200: #c7d0c7;
+            --sage-300: #a3b2a3;
+            --sage-400: #7a8f7a;
+            --sage-500: #5d7360;
+            --sage-600: #495a4c;
+            --sage-700: #3d4a3f;
+            --sage-800: #343d36;
+            --sage-900: #2d342f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Crimson Text', serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(93, 115, 96, 0.9) 0%, rgba(191, 160, 148, 0.8) 100%);
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                width: 280px;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+
+        .bento-main {
+            grid-row: 1 / -1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-side-top,
+        .bento-side-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .hover-bg-light:hover {
+            background-color: var(--sage-50);
+        }
+
+        section[id] {
+            scroll-margin-top: 80px;
+        }
+
+        .stat-highlight {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .concept-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .logic-component {
+            border-left: 4px solid;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-syntax { border-left-color: #3b82f6; }
+        .component-semantics { border-left-color: #10b981; }
+        .component-inference { border-left-color: #0284c7; }
+        .component-equivalence { border-left-color: #8b5cf6; }
+        .component-quantifier { border-left-color: #ef4444; }
+
+        .formula-box {
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border: 1px solid var(--sage-200);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            overflow-x: auto;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .inference-rule {
+            background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+            border-left: 4px solid #0284c7;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .rule-name {
+            font-weight: bold;
+            color: #0284c7;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .inference-notation {
+            text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 0.8rem 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .step-number {
+            background: var(--sage-600);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .bento-main {
+                grid-row: auto;
+            }
+            
+            .stat-highlight {
+                font-size: 2rem;
+            }
+        }
+
+        .normal-form-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--sage-600);
+        }
+
+        .conversion-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .algorithm-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .algorithm-step {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .truth-table {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .truth-table table {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .exercise-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .skolem-visualization {
+            background: linear-gradient(135deg, #f0f9ff, #dbeafe);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .prenex-structure {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+        }
+
+        .quantifier-section {
+            background: var(--sage-100);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--sage-300);
+        }
+
+        .matrix-section {
+            background: var(--copper-100);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--copper-300);
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#formas-basicas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Formas Normais Básicas</a></li>
+                <li class="mb-2"><a href="#forma-negativa" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Forma Normal Negativa</a></li>
+                <li class="mb-2"><a href="#forma-disjuntiva" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Forma Normal Disjuntiva</a></li>
+                <li class="mb-2"><a href="#forma-conjuntiva" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Forma Normal Conjuntiva</a></li>
+                <li class="mb-2"><a href="#tabela-verdade" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Tabela-Verdade</a></li>
+                <li class="mb-2"><a href="#formas-avancadas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Formas Avançadas</a></li>
+                <li class="mb-2"><a href="#forma-prenex" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Forma Prenex</a></li>
+                <li class="mb-2"><a href="#skolemizacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Skolemização</a></li>
+                <li class="mb-2"><a href="#exercicios" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Exercícios</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Formas Normais</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-minus me-2 text-primary"></i><small class="text-primary fw-medium">FNN (Negativa)</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-plus me-2 text-success"></i><small class="text-success fw-medium">FND (Disjuntiva)</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-times me-2 text-warning"></i><small class="text-warning fw-medium">FNC (Conjuntiva)</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-arrow-right me-2 text-info"></i><small class="text-info fw-medium">Prenex</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"logic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><circle cx=\"45\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"15\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"45\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M15,15 L45,15 M15,15 L15,45 M45,15 L45,45 M15,45 L45,45\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23logic)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Formas Normais:</em>
+                                    <span class="d-block">Organizando o Pensamento Lógico</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Como um capitão de porto organiza águas caóticas em rotas padronizadas
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">∧∨</div>
+                            <div class="fs-6 text-muted">Conectivos</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">¬</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Negação</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-minus fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">FNN</h3>
+                                <p class="fs-7 text-muted">Negativa</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-plus fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">FND</h3>
+                                <p class="fs-7 text-muted">Disjuntiva</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-times fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">FNC</h3>
+                                <p class="fs-7 text-muted">Conjuntiva</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-arrow-right fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Prenex</h3>
+                                <p class="fs-7 text-muted">Avançada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução às Formas Normais</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "As formas normais são como diferentes rotas de navegação padronizadas que organizam o tráfego marítimo em um porto movimentado."
+                            </p>
+                            <footer class="blockquote-footer">Metáfora do Capitão de Porto</footer>
+                        </blockquote>
+                    </div>
+
+                    <p class="fs-5 text-muted mb-5">
+                        A criativa leitora pode se imaginar tentando navegar em águas desconhecidas sem cartas náuticas, onde as correntes se cruzam caoticamente, sem padrão ou lógica. Seria como tentar compreender uma fórmula lógica sem forma normal - possível, mas desnecessariamente árduo.
+                    </p>
+
+                    <!-- Benefits of Normal Forms -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-map fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Organização</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    As formas normais fornecem um <strong>mapa claro e consistente</strong> para navegar pelas complexidades da lógica, permitindo ver o panorama completo de maneira organizada.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Benefício</div>
+                                    <div class="fs-6 text-muted">Navegação estruturada</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-balance-scale fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Comparação</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Ao utilizar formas normais, cada proposição é expressa de uma <strong>forma padrão</strong>, tornando a comparação direta e simples.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Benefício</div>
+                                    <div class="fs-6 text-muted">Equivalência direta</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Aplicações Fundamentais</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            As formas normais não são apenas uma ferramenta para lidar com a complexidade da Lógica Proposicional, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Objetivo:</strong>
+                            <span class="text-info">Codificar partes substanciais da matemática e da ciência, levando-nos mais perto de nossa busca para decifrar o cosmos, um símbolo de lógica de cada vez.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Basic Normal Forms Section -->
+        <section id="formas-basicas" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Formas Normais Básicas</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Existem várias formas normais na Lógica Proposicional, cada uma com suas próprias regras e aplicações. A seguir, encontramos uma descrição resumida das principais:
+                    </p>
+
+                    <!-- Normal Forms Overview -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="normal-form-card">
+                                <h4 class="fs-4 fw-semibold text-primary mb-2">1. Forma Normal Negativa (FNN)</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    As operações de negação $\neg$ aparecem apenas imediatamente antes das variáveis.
+                                </p>
+                                <div class="formula-box bg-primary-subtle">
+                                    $\neg (A \wedge B) \equiv (\neg A \vee \neg B)$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="normal-form-card">
+                                <h4 class="fs-4 fw-semibold text-success mb-2">2. Forma Normal Conjuntiva (FNC)</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Uma conjunção de disjunções. Série de cláusulas conectadas por **E**s.
+                                </p>
+                                <div class="formula-box bg-success-subtle">
+                                    $(A \vee B) \wedge (C \vee D) \wedge (B \vee D) \wedge (A \vee C)$
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="normal-form-card">
+                                <h4 class="fs-4 fw-semibold text-warning mb-2">3. Forma Normal Disjuntiva (FND)</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Uma disjunção de conjunções. Série de cláusulas conectadas por **OU**s.
+                                </p>
+                                <div class="formula-box bg-warning-subtle">
+                                    $(A \wedge B) \vee (C \wedge D) \vee (A \wedge C) \vee (B \wedge D)$
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="normal-form-card">
+                                <h4 class="fs-4 fw-semibold text-info mb-2">4. Forma Normal Prenex</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Todos os quantificadores estão à esquerda, precedendo uma matriz livre.
+                                </p>
+                                <div class="formula-box bg-info-subtle">
+                                    $\forall x \exists y \forall z (P(x,y) \wedge \neg Q(z))$
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="normal-form-card">
+                                <h4 class="fs-4 fw-semibold text-secondary mb-2">5. Forma Normal Skolem</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Forma Prenex com quantificadores existenciais eliminados via Skolemização.
+                                </p>
+                                <div class="formula-box bg-secondary-subtle">
+                                    $\forall x (P(x, f(x)))$ &nbsp; <small class="text-muted">(de $\forall x \exists y (P(x,y))$)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Focus on Key Forms -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Formas Fundamentais para Programação Lógica</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-success">Forma Normal Conjuntiva</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Fundamental para sistemas de inferência como resolução e programas Prolog (Cláusulas de Horn).
+                                    </p>
+                                    <div class="p-2 bg-success-subtle rounded">
+                                        <small class="text-success fw-medium">Base para inferência automática</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-5 fw-semibold mb-2 text-info">Forma Normal Skolem</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Permite representação e processamento eficiente de fórmulas de primeira ordem.
+                                    </p>
+                                    <div class="p-2 bg-info-subtle rounded">
+                                        <small class="text-info fw-medium">Essencial para teoria da prova</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Negative Normal Form Section -->
+        <section id="forma-negativa" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Forma Normal Negativa</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora do Capitão</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A Forma Normal Negativa é como um capitão experiente que ajusta as velas de seu navio. Assim como o capitão remove o excesso de pano e reorganiza as velas para que cada uma capture o vento diretamente, a FNN move cada negação para o mais próximo possível de seu alvo.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Analogia:</strong>
+                            <span class="text-info">É como desenrolar linhas de pesca emaranhadas: seguimos cada fio de negação até sua extremidade natural, eliminando voltas e nós desnecessários.</span>
+                        </div>
+                    </div>
+
+                    <!-- Definition -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição Formal</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Uma fórmula está na Forma Normal Negativa se:
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong class="text-primary">a.</strong> Todos os operadores de negação $\neg$ são aplicados diretamente aos átomos
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong class="text-success">b.</strong> Usamos apenas $\neg$, $\wedge$, e $\vee$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversion Algorithm -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Algoritmo de Conversão</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Eliminar Bicondicionais:</strong> $A\leftrightarrow B$ por $A\rightarrow B \wedge B\rightarrow A$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Eliminar Implicações:</strong> $A \rightarrow B$ por $\neg A \vee B$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Aplicar De Morgan:</strong> 
+                                        <div class="mt-2">
+                                            <div>$\neg (A \wedge B) \equiv \neg A \vee \neg B$</div>
+                                            <div>$\neg (A \vee B) \equiv \neg A \wedge \neg B$</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Eliminar Dupla Negação:</strong> $\neg \neg A$ por $A$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1</h4>
+                                <p class="fs-6 mb-3"><strong>Converter:</strong> $\neg (A \wedge (B \rightarrow C))$</p>
+                                
+                                <div class="conversion-visual">
+                                    <div class="text-center">
+                                        <div class="mb-2">$\neg (A \wedge (\neg B \vee C))$</div>
+                                        <div class="mb-2">↓</div>
+                                        <div class="mb-2">$\neg A \vee \neg(\neg B \vee C)$</div>
+                                        <div class="mb-2">↓</div>
+                                        <div class="mb-2">$\neg A \vee (B \wedge \neg C)$</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2</h4>
+                                <p class="fs-6 mb-3"><strong>Converter:</strong> $(A \rightarrow B) \wedge \neg (C \vee D)$</p>
+                                
+                                <div class="conversion-visual">
+                                    <div class="text-center">
+                                        <div class="mb-2">$(\neg A \vee B) \wedge \neg (C \vee D)$</div>
+                                        <div class="mb-2">↓</div>
+                                        <div class="mb-2">$(\neg A \vee B) \wedge (\neg C \wedge \neg D)$</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disjunctive Normal Form Section -->
+        <section id="forma-disjuntiva" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Forma Normal Disjuntiva</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição e Conceito</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A Forma Normal Disjuntiva é uma representação canônica onde a fórmula é escrita como uma <strong>disjunção de conjunções</strong>.
+                        </p>
+                        
+                        <div class="formula-box">
+                            <strong>Estrutura Geral:</strong><br>
+                            $(C_1 \wedge C_2 \wedge \ldots) \vee (D_1 \wedge D_2 \wedge \ldots) \vee \ldots$<br>
+                            <em>Onde cada $C_i$ e $D_i$ é um literal</em>
+                        </div>
+                        
+                        <div class="formula-box">
+                            <strong>Notação Formal:</strong><br>
+                            $\bigvee_{i=1}^{m} \left( \bigwedge_{j=1}^{n} L_{ij} \right)$
+                        </div>
+                    </div>
+
+                    <!-- Navigation Metaphor -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora da Navegação</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Converter para FND é como identificar todas as combinações de ventos e correntes que levam o navio ao porto desejado. Cada termo da FND final é como um cenário único e completo que, por si só, garante que o navio chegue ao destino.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-6 fw-semibold text-primary mb-2">Fórmula Original</h4>
+                                    <p class="fs-7 text-muted">Rota complexa com múltiplas condições</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h4 class="fs-6 fw-semibold text-success mb-2">FND Final</h4>
+                                    <p class="fs-7 text-muted">Disjunção de todas as rotas válidas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Regra de Negócio</h4>
+                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $(A \rightarrow B) \wedge (C \vee \neg (D \wedge E))$</p>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Converter para FNN:</strong><br>
+                                        $(\neg A \vee B) \wedge (C \vee \neg D \vee \neg E)$
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Aplicar distributividade:</strong><br>
+                                        Distribui $(\neg A \vee B)$ sobre $(C \vee \neg D \vee \neg E)$
+                                    </div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>FND Final:</strong><br>
+                                    $(\neg A \wedge C) \vee (B \wedge C) \vee (\neg A \wedge \neg D) \vee (B \wedge \neg D) \vee (\neg A \wedge \neg E) \vee (B \wedge \neg E)$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Bicondicional XOR</h4>
+                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $\neg(p \leftrightarrow q)$ (ou exclusivo)</p>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Eliminar bicondicional:</strong><br>
+                                        $\neg((p \rightarrow q) \wedge (q \rightarrow p))$
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Eliminar implicações:</strong><br>
+                                        $\neg((\neg p \vee q) \wedge (\neg q \vee p))$
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Aplicar De Morgan e simplificar:</strong><br>
+                                        $(p \wedge \neg q) \vee (\neg p \wedge q)$
+                                    </div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>FND Final:</strong><br>
+                                    $(p \wedge \neg q) \vee (\neg p \wedge q)$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exercises for DNF -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exercícios de Conversão para FND</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="exercise-card">
+                                    <h5 class="fs-5 fw-semibold mb-2">Exercício 1</h5>
+                                    <div class="formula-box bg-light">
+                                        $((P \leftrightarrow Q) \rightarrow R) \wedge \neg(R \rightarrow (P \vee Q))$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="exercise-card">
+                                    <h5 class="fs-5 fw-semibold mb-2">Exercício 2</h5>
+                                    <div class="formula-box bg-light">
+                                        $\neg((P \rightarrow (Q \rightarrow R)) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R)))$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="exercise-card">
+                                    <h5 class="fs-5 fw-semibold mb-2">Exercício 3</h5>
+                                    <div class="formula-box bg-light">
+                                        $(P \leftrightarrow (Q \leftrightarrow R)) \vee \neg(P \wedge Q \wedge R)$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="exercise-card">
+                                    <h5 class="fs-5 fw-semibold mb-2">Exercício 4</h5>
+                                    <div class="formula-box bg-light">
+                                        $\neg((P \vee Q) \rightarrow (R \wedge S)) \leftrightarrow (P \rightarrow \neg Q)$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conjunctive Normal Form Section -->
+        <section id="forma-conjuntiva" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Forma Normal Conjuntiva</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição e Metáfora</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A Forma Normal Conjuntiva é uma representação canônica onde a fórmula é escrita como uma <strong>conjunção de disjunções</strong>.
+                        </p>
+                        
+                        <div class="p-3 bg-info-subtle rounded mb-4">
+                            <strong class="text-info">Metáfora Naval:</strong>
+                            <span class="text-info">É como uma esquadra naval na qual cada embarcação (conjunção) deve ter pelo menos um tripulante qualificado (disjunção). Você só fica satisfeito se TODAS as embarcações tiverem alguém capacitado a bordo.</span>
+                        </div>
+                        
+                        <div class="formula-box">
+                            <strong>Estrutura Geral:</strong><br>
+                            $(D_1 \vee D_2 \vee \ldots \vee D_n) \wedge (E_1 \vee E_2 \vee \ldots \vee E_m) \wedge \ldots$
+                        </div>
+                        
+                        <div class="formula-box">
+                            <strong>Notação Formal:</strong><br>
+                            $\bigwedge_{i=1}^{m} \left( \bigvee_{j=1}^{n} L_{ij} \right)$
+                        </div>
+                    </div>
+
+                    <!-- Conversion Algorithm -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Algoritmo de Conversão para FNC</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Eliminar Bicondicionais:</strong> $A \leftrightarrow B \equiv (A \rightarrow B) \wedge (B \rightarrow A)$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Eliminar Implicações:</strong> $A \rightarrow B \equiv \neg A \vee B$
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Mover Negações (FNN):</strong> Aplicar De Morgan e dupla negação
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Aplicar Distributividade:</strong> $A \vee (B \wedge C) \equiv (A \vee B) \wedge (A \vee C)$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Implicação Simples</h4>
+                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $(A \wedge B) \rightarrow (C \vee D)$</p>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Eliminar implicação:</strong><br>
+                                        $\neg (A \wedge B) \vee (C \vee D)$
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Aplicar De Morgan:</strong><br>
+                                        $(\neg A \vee \neg B) \vee (C \vee D)$
+                                    </div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>FNC Final:</strong><br>
+                                    $\neg A \vee \neg B \vee C \vee D$ (cláusula única)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Usando Tabela-Verdade</h4>
+                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $(p \wedge (q \vee r)) \vee (\neg p \wedge \neg q)$</p>
+                                
+                                <div class="truth-table">
+                                    <table class="table table-sm table-bordered">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>p</th><th>q</th><th>r</th><th>Resultado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>T</td><td>T</td><td>T</td><td class="text-success">T</td></tr>
+                                            <tr><td>T</td><td>T</td><td>F</td><td class="text-success">T</td></tr>
+                                            <tr><td>T</td><td>F</td><td>T</td><td class="text-success">T</td></tr>
+                                            <tr class="table-danger"><td>T</td><td>F</td><td>F</td><td class="text-danger">F</td></tr>
+                                            <tr class="table-danger"><td>F</td><td>T</td><td>T</td><td class="text-danger">F</td></tr>
+                                            <tr class="table-danger"><td>F</td><td>T</td><td>F</td><td class="text-danger">F</td></tr>
+                                            <tr><td>F</td><td>F</td><td>T</td><td class="text-success">T</td></tr>
+                                            <tr><td>F</td><td>F</td><td>F</td><td class="text-success">T</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Identificar linhas falsas:</strong> linhas 4, 5, 6
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Criar cláusulas excludentes:</strong><br>
+                                        • Linha 4: $(\neg p \vee q \vee r)$<br>
+                                        • Linha 5: $(p \vee \neg q \vee \neg r)$<br>
+                                        • Linha 6: $(p \vee \neg q \vee r)$
+                                    </div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>FNC Final:</strong><br>
+                                    $(\neg p \vee q \vee r) \wedge (p \vee \neg q)$ (após simplificação)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Note -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <div class="p-3 bg-warning-subtle rounded">
+                            <h4 class="fs-5 fw-semibold text-warning mb-2">Por que a conversão direta não funciona</h4>
+                            <p class="fs-6 text-warning mb-3">
+                                A conversão direta de FND para FNC através de distributividade simples frequentemente resulta em uma <strong>explosão exponencial</strong> de termos.
+                            </p>
+                            <div class="text-warning">
+                                <strong>Métodos alternativos preferíveis:</strong>
+                                <ul class="mb-0">
+                                    <li><strong>Tabela-verdade:</strong> Identifica diretamente as condições falsas</li>
+                                    <li><strong>Algoritmo de Tseitin:</strong> Introduz variáveis auxiliares</li>
+                                    <li><strong>Resolução reversa:</strong> Constrói cláusulas incrementalmente</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Truth Table Section -->
+        <section id="tabela-verdade" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Usando Tabela-Verdade para Gerar Formas Normais</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora do Navegador</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A tabela-verdade é nosso <strong>navegador experiente</strong> que mapeia todas as rotas possíveis em águas desconhecidas das possibilidades lógicas. Como um cartógrafo naval que registra cada banco de areia e recife, a tabela-verdade cataloga cada combinação possível de verdades e falsidades.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Objetivo:</strong>
+                            <span class="text-info">Criar uma carta náutica completa do oceano lógico que a leitora deverá percorrer em busca da verdade.</span>
+                        </div>
+                    </div>
+
+                    <!-- Example Formula -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo: $(A \vee B) \rightarrow (C \wedge \neg A)$</h3>
+                        
+                        <div class="truth-table">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>A</th><th>B</th><th>C</th><th>¬A</th><th>A∨B</th><th>C∧¬A</th><th>Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-danger"><td>T</td><td>T</td><td>T</td><td>F</td><td>T</td><td>F</td><td class="text-danger">F</td></tr>
+                                    <tr class="table-danger"><td>T</td><td>T</td><td>F</td><td>F</td><td>T</td><td>F</td><td class="text-danger">F</td></tr>
+                                    <tr class="table-danger"><td>T</td><td>F</td><td>T</td><td>F</td><td>T</td><td>F</td><td class="text-danger">F</td></tr>
+                                    <tr class="table-danger"><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td class="text-danger">F</td></tr>
+                                    <tr class="table-success"><td>F</td><td>T</td><td>T</td><td>T</td><td>T</td><td>T</td><td class="text-success">T</td></tr>
+                                    <tr class="table-danger"><td>F</td><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td><td class="text-danger">F</td></tr>
+                                    <tr class="table-success"><td>F</td><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td class="text-success">T</td></tr>
+                                    <tr class="table-success"><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td>T</td><td class="text-success">T</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Generating DNF -->
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-plus fs-3 me-3 text-success"></i>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-success">Gerando FND</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Focar nas <strong>linhas verdadeiras</strong> (5, 7, 8)
+                                </p>
+                                
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>$(\neg A \wedge B \wedge C)$</div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">7</div>
+                                    <div>$(\neg A \wedge \neg B \wedge C)$</div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">8</div>
+                                    <div>$(\neg A \wedge \neg B \wedge \neg C)$</div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>FND:</strong><br>
+                                    $(\neg A \wedge B \wedge C) \vee (\neg A \wedge \neg B \wedge C) \vee (\neg A \wedge \neg B \wedge \neg C)$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-times fs-3 me-3 text-warning"></i>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-warning">Gerando FNC</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Focar nas <strong>linhas falsas</strong> (1, 2, 3, 4, 6)
+                                </p>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>$(\neg A \vee \neg B \vee \neg C)$</div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>$(\neg A \vee \neg B \vee C)$</div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">6</div>
+                                    <div>$(A \vee \neg B \vee C)$</div>
+                                </div>
+                                
+                                <div class="formula-box bg-warning-subtle">
+                                    <strong>FNC:</strong><br>
+                                    $(\neg A \vee \neg B \vee \neg C) \wedge (\neg A \vee \neg B \vee C) \wedge (\neg A \vee B \vee \neg C) \wedge (\neg A \vee B \vee C) \wedge (A \vee \neg B \vee C)$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Insight -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Princípio Fundamental</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">Para FND</h4>
+                                    <p class="fs-6 text-success mb-0">
+                                        Cada termo corresponde a uma linha <strong>verdadeira</strong>. Criamos conjunções que capturam exatamente as condições daquela linha.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-warning mb-2">Para FNC</h4>
+                                    <p class="fs-6 text-warning mb-0">
+                                        Cada cláusula "proíbe" uma linha <strong>falsa</strong>. Criamos disjunções que são verdadeiras exceto naquela linha específica.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Metáfora:</strong>
+                            <span class="text-info">Cada cláusula FNC funciona como uma boia de sinalização que impede navegação em águas perigosas (linhas falsas).</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Normal Forms Section -->
+        <section id="formas-avancadas" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Formas Normais Avançadas</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Transição para Lógica de Primeira Ordem</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            Até agora navegamos pelas águas da Lógica Proposicional. Agora adentramos os oceanos mais profundos da <strong>Lógica de Primeira Ordem</strong>, onde encontramos quantificadores e predicados.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Novo Desafio:</strong>
+                            <span class="text-info">Organizar não apenas conectivos lógicos, mas também quantificadores universais (∀) e existenciais (∃) em estruturas padronizadas.</span>
+                        </div>
+                    </div>
+
+                    <!-- Overview of Advanced Forms -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-arrow-right fs-3 me-3 text-info"></i>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-info">Forma Normal Prenex</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Todos os quantificadores movidos para o <strong>início</strong> da fórmula, criando uma separação clara entre "quem decide" e "o que fazer".
+                                </p>
+                                <div class="prenex-structure">
+                                    <div class="quantifier-section">∀x ∃y ∀z</div>
+                                    <div class="matrix-section">P(x,y) ∧ ¬Q(z)</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-exchange-alt fs-3 me-3 text-secondary"></i>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-secondary">Forma Normal Skolem</h4>
+                                </div>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Elimina quantificadores existenciais através de <strong>Skolemização</strong>, substituindo-os por constantes ou funções de Skolem.
+                                </p>
+                                <div class="skolem-visualization">
+                                    <div class="text-center">
+                                        <div>∀x ∃y P(x,y)</div>
+                                        <div class="my-2">↓ Skolemização</div>
+                                        <div>∀x P(x,f(x))</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prenex Normal Form Section -->
+        <section id="forma-prenex" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Forma Normal Prenex</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora do Almirante</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A Forma Normal Prenex é como um <strong>almirante experiente</strong> organizando a cadeia de comando antes de uma operação naval complexa. Separa completamente a estrutura de comando (quantificadores) das ordens de execução (matriz livre).
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <h4 class="fs-6 fw-semibold text-primary mb-2">Antes (Caótico)</h4>
+                                    <p class="fs-7 text-muted">Ordens misturadas com responsabilidades, comandos espalhados</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-6 fw-semibold text-success mb-2">Depois (Organizado)</h4>
+                                    <p class="fs-7 text-muted">Hierarquia clara no início, instruções operacionais separadas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Structure Definition -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Estrutura da Forma Prenex</h3>
+                        
+                        <div class="formula-box">
+                            <strong>Estrutura Geral:</strong><br>
+                            $Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)$
+                        </div>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2">$Q_i$</h5>
+                                    <p class="fs-7 text-muted">Quantificadores (∀ ou ∃)</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2">$x_i$</h5>
+                                    <p class="fs-7 text-muted">Variáveis vinculadas</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold mb-2">$M$</h5>
+                                    <p class="fs-7 text-muted">Matriz livre de quantificadores</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Critical Order Warning -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <div class="p-3 bg-warning-subtle rounded">
+                            <h4 class="fs-5 fw-semibold text-warning mb-2">Ordem Crítica dos Quantificadores</h4>
+                            <p class="fs-6 text-warning mb-3">
+                                A ordem relativa entre quantificadores de tipos diferentes <strong>NÃO pode ser alterada</strong> sem modificar o significado lógico.
+                            </p>
+                            
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <div class="col">
+                                    <div class="p-2 bg-danger-subtle rounded">
+                                        <strong class="text-danger">∃x ∀y Ama(x,y)</strong><br>
+                                        <small class="text-danger">"Existe uma pessoa que ama todo mundo"</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-2 bg-info-subtle rounded">
+                                        <strong class="text-info">∀y ∃x Ama(x,y)</strong><br>
+                                        <small class="text-info">"Todo mundo é amado por alguém"</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3 p-2 bg-success-subtle rounded">
+                                <strong class="text-success">✓ Permitido:</strong>
+                                <span class="text-success">∀x ∀y P(x,y) ≡ ∀y ∀x P(x,y) (mesmo tipo)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="row row-cols-1 g-4">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Conversão para Prenex</h4>
+                                <p class="fs-6 mb-3"><strong>Fórmula Original:</strong> $∀x (P(x) → ∃y Q(x,y))$</p>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Eliminar implicação:</strong><br>
+                                        $∀x (¬P(x) ∨ ∃y Q(x,y))$
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Mover quantificadores:</strong><br>
+                                        $∀x ∃y (¬P(x) ∨ Q(x,y))$
+                                    </div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>Forma Prenex:</strong><br>
+                                    $∀x ∃y (¬P(x) ∨ Q(x,y))$
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Equivalência Lógica</h4>
+                                <p class="fs-6 mb-3"><strong>Duas fórmulas equivalentes:</strong></p>
+                                
+                                <div class="row row-cols-1 row-cols-md-2 g-3">
+                                    <div class="col">
+                                        <div class="p-2 bg-primary-subtle rounded">
+                                            <strong>Original:</strong><br>
+                                            $∀x ∃y (P(x) → Q(y))$
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="p-2 bg-success-subtle rounded">
+                                            <strong>Prenex:</strong><br>
+                                            $∃y ∀x (P(x) → Q(y))$
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3 p-3 bg-info-subtle rounded">
+                                    <strong class="text-info">Justificativa:</strong>
+                                    <span class="text-info">Se existe algum y que torna Q(y) verdadeiro, então a implicação é satisfeita para todos os x, independente de P(x).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skolemization Section -->
+        <section id="skolemizacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. Skolemização</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora do Pescador Veterano</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A Skolemização é como um <strong>pescador veterano</strong> que transforma indicações vagas de cardumes em coordenadas precisas de pesca. Quando encontramos 'há peixes por aqui', a Skolemização nos permite dizer 'muito bem, vamos marcar este ponto específico no GPS'.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h4 class="fs-6 fw-semibold text-warning mb-2">Constante Skolem</h4>
+                                    <p class="fs-7 text-muted">Como batizar um navio: "Santa Maria sempre será Santa Maria"</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <h4 class="fs-6 fw-semibold text-info mb-2">Função Skolem</h4>
+                                    <p class="fs-7 text-muted">Como designar papel dinâmico: "o navio de apoio da embarcação principal"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skolemization Algorithm -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Algoritmo de Skolemização</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Identificar Quantificadores Existenciais:</strong> Localizar todos os ∃ na fórmula
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Analisar Dependências:</strong> Verificar quais variáveis universais "dominam" cada existencial
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="algorithm-step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Escolher Substituição:</strong>
+                                        <ul class="mb-0 mt-2">
+                                            <li><strong>Sem dominância:</strong> Constante Skolem</li>
+                                            <li><strong>Com dominância:</strong> Função Skolem das variáveis dominantes</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Examples -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="example-box">
+                                <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Função de Skolem</h4>
+                                <p class="fs-6 mb-3"><strong>Fórmula:</strong> $∀x ∃y P(x,y)$</p>
+                                
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Identificação:</strong> Quantificador existencial ∃y
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Análise:</strong> y <strong>depende</strong> de x (∀x aparece antes de ∃y)
+                                    </div>
+                                </div>
+                                
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Substituição:</strong> y por f(x) - função de Skolem
+                                    </div>
+                                </div>
+                                
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>Resultado:</strong><br>
+                                    $∀x P(x,f(x)) → P
