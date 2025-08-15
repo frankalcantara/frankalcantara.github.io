@@ -17,3 +17,34 @@ span.MathJax {
 div.MathJax_Display {
     font-size: 0.9em !important;
 }
+
+/* Estilos para tabelas */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+table th {
+    background-color: #4A90E2;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #4A90E2;
+    font-weight: bold;
+}
+
+table td {
+    padding: 12px;
+    border: 1px solid #4A90E2;
+    text-align: left;
+}
+
+/* Efeito zebra nas linhas */
+table tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}

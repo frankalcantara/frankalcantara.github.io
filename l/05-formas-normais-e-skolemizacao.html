@@ -256,8 +256,7 @@ window.Quarto = {
   <li><a href="#forma-normal-negativa" id="toc-forma-normal-negativa" class="nav-link" data-scroll-target="#forma-normal-negativa"><span class="header-section-number">7.1.1</span> Forma Normal Negativa</a></li>
   <li><a href="#forma-normal-disjuntiva" id="toc-forma-normal-disjuntiva" class="nav-link" data-scroll-target="#forma-normal-disjuntiva"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva</a></li>
   <li><a href="#forma-normal-conjuntiva" id="toc-forma-normal-conjuntiva" class="nav-link" data-scroll-target="#forma-normal-conjuntiva"><span class="header-section-number">7.1.3</span> Forma Normal Conjuntiva</a></li>
-  <li><a href="#sec-exercicios-conversao-fnc" id="toc-sec-exercicios-conversao-fnc" class="nav-link" data-scroll-target="#sec-exercicios-conversao-fnc"><span class="header-section-number">7.1.4</span> Exercícios de Conversão para Forma Normal Conjuntiva</a></li>
-  <li><a href="#usando-a-tabela-verdade-para-gerar-formas-normais" id="toc-usando-a-tabela-verdade-para-gerar-formas-normais" class="nav-link" data-scroll-target="#usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.5</span> Usando a Tabela-Verdade para Gerar Formas Normais</a></li>
+  <li><a href="#usando-a-tabela-verdade-para-gerar-formas-normais" id="toc-usando-a-tabela-verdade-para-gerar-formas-normais" class="nav-link" data-scroll-target="#usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.4</span> Usando a Tabela-Verdade para Gerar Formas Normais</a></li>
   </ul></li>
   <li><a href="#formas-normais-avançadas" id="toc-formas-normais-avançadas" class="nav-link" data-scroll-target="#formas-normais-avançadas"><span class="header-section-number">7.2</span> Formas Normais Avançadas</a>
   <ul class="collapse">
@@ -852,44 +851,30 @@ F
 </ol>
 <p>A aplicação das equivalências não é, nem de longe, a única forma de percorrer a rota da conversão de uma <strong>Fórmula Bem Formada</strong> em Forma Normal Conjuntiva.</p>
 </section>
-</section>
-<section id="sec-exercicios-conversao-fnc" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="sec-exercicios-conversao-fnc"><span class="header-section-number">7.1.4</span> Exercícios de Conversão para Forma Normal Conjuntiva</h3>
+<section id="sec-exercicios-conversao-fnc" class="level4" data-number="7.1.3.7">
+<h4 data-number="7.1.3.7" class="anchored" data-anchor-id="sec-exercicios-conversao-fnc"><span class="header-section-number">7.1.3.7</span> Exercícios de Conversão para Forma Normal Conjuntiva</h4>
 <p><strong>1.</strong> Converta a seguinte fórmula para Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[
-(p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))
-\]</span> (p q) ((p r) (q r)) $$</p>
-<p><strong>2.</strong> Transforme em Forma Normal Conjuntiva a fórmula:</p>
-<p><span class="math display">\[
-\neg((p \rightarrow q) \vee (q \rightarrow p)) \wedge (p \vee q)
-\]</span></p>
+<p><span class="math display">\[(p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))\]</span></p>
+<p><span class="math display">\[(p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))\]</span></p>
+<p><strong>2.</strong> Transforme em Forma Normal Conjuntiva a fórmula: <span class="math display">\[\neg((p \rightarrow q) \vee (q \rightarrow p)) \wedge (p \vee q)\]</span></p>
 <p><strong>3.</strong> Converta para Forma Normal Conjuntiva a negação de uma tautologia distributiva:</p>
-<p><span class="math display">\[
-\neg((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))
-\]</span></p>
+<p><span class="math display">\[\neg((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))\]</span></p>
 <p><strong>4.</strong> Obtenha a Forma Normal Conjuntiva para:</p>
-<p><span class="math display">\[
-((p \vee q) \rightarrow r) \leftrightarrow (p \rightarrow r) \wedge (q \rightarrow r)
-\]</span></p>
+<p><span class="math display">\[((p \vee q) \rightarrow r) \leftrightarrow (p \rightarrow r) \wedge (q \rightarrow r)\]</span></p>
 <p><strong>5.</strong> Converta a seguinte fórmula complexa para Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[
-(p \rightarrow (q \rightarrow r)) \wedge \neg((p \wedge q) \rightarrow r)
-\]</span></p>
+<p><span class="math display">\[(p \rightarrow (q \rightarrow r)) \wedge \neg((p \wedge q) \rightarrow r)\]</span></p>
 <p><strong>6.</strong> Transforme em Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[
-((p \leftrightarrow q) \vee (q \leftrightarrow r)) \wedge \neg(p \leftrightarrow r)
-\]</span></p>
+<p><span class="math display">\[((p \leftrightarrow q) \vee (q \leftrightarrow r)) \wedge \neg(p \leftrightarrow r)\]</span></p>
 <p><strong>7.</strong> Converta para Forma Normal Conjuntiva a fórmula:</p>
-<p><span class="math display">\[
-\neg(p \rightarrow (q \vee r)) \vee ((p \wedge \neg q) \rightarrow r)
-\]</span></p>
+<p><span class="math display">\[\neg(p \rightarrow (q \vee r)) \vee ((p \wedge \neg q) \rightarrow r)\]</span></p>
 </section>
-<section id="usando-a-tabela-verdade-para-gerar-formas-normais" class="level3" data-number="7.1.5">
-<h3 data-number="7.1.5" class="anchored" data-anchor-id="usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.5</span> Usando a Tabela-Verdade para Gerar Formas Normais</h3>
+</section>
+<section id="usando-a-tabela-verdade-para-gerar-formas-normais" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.4</span> Usando a Tabela-Verdade para Gerar Formas Normais</h3>
 <p>A tabela-verdade é nosso navegador experiente que mapeia todas as rotas possíveis em águas desconhecidas das possibilidades lógicas. Como um cartógrafo naval que registra cada banco de areia e recife em uma nova rota marítima, a tabela-verdade cataloga cada combinação possível de verdades e falsidades, criando uma carta náutica completa do oceano lógico que a leitora deverá percorrer em busca da verdade.</p>
 <p>Para entender este conceito com um pouco mais de formalidade, considere a <strong>Fórmula Bem Formada</strong> dada por: <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span>, se encontrarmos sua Tabela Verdade, poderemos encontrar, tanto a Forma Normal Conjuntiva quanto a Forma Normal Disjuntiva. Basta fixar nosso olhar nas linhas da verdade, ou da falsidade.</p>
-<section id="gerando-a-forma-normal-disjuntiva" class="level4" data-number="7.1.5.1">
-<h4 data-number="7.1.5.1" class="anchored" data-anchor-id="gerando-a-forma-normal-disjuntiva"><span class="header-section-number">7.1.5.1</span> Gerando a Forma Normal Disjuntiva</h4>
+<section id="gerando-a-forma-normal-disjuntiva" class="level4" data-number="7.1.4.1">
+<h4 data-number="7.1.4.1" class="anchored" data-anchor-id="gerando-a-forma-normal-disjuntiva"><span class="header-section-number">7.1.4.1</span> Gerando a Forma Normal Disjuntiva</h4>
 <p>Para transformar <span class="math inline">\((A \vee B) \rightarrow (C \wedge \neg A)\)</span> na sua Forma Normal Conjuntiva, como um timoneiro disciplinado seguindo o roteiro de navegação, devemos seguir rigidamente, os seguintes passos:</p>
 <ol type="1">
 <li><p>Criar a Tabela-Verdade</p>
@@ -923,8 +908,8 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 \]</span></p>
 <p>A expressão acima será verdadeira se qualquer um dos termos (ou seja, qualquer uma das linhas 5, 7 ou 8 da tabela) for verdadeiro, garantindo que a expressão capture exatamente as condições em que <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span> é verdadeira de acordo com a tabela-verdade.</p>
 </section>
-<section id="gerando-a-forma-normal-conjuntiva" class="level4" data-number="7.1.5.2">
-<h4 data-number="7.1.5.2" class="anchored" data-anchor-id="gerando-a-forma-normal-conjuntiva"><span class="header-section-number">7.1.5.2</span> Gerando a Forma Normal Conjuntiva</h4>
+<section id="gerando-a-forma-normal-conjuntiva" class="level4" data-number="7.1.4.2">
+<h4 data-number="7.1.4.2" class="anchored" data-anchor-id="gerando-a-forma-normal-conjuntiva"><span class="header-section-number">7.1.4.2</span> Gerando a Forma Normal Conjuntiva</h4>
 <p>Para transformar <span class="math inline">\((A \vee B) \rightarrow (C \wedge  \neg A)\)</span> em sua Forma Normal Conjuntiva usando a tabela-verdade, devemos nos concentrar nas linhas nas quais a fórmula é <strong>falsa</strong> e criar cláusulas que “proíbam” essas combinações de valores.</p>
 <p><strong>Princípio fundamental</strong>: Para cada linha falsa, criamos uma cláusula que será verdadeira <strong>exceto</strong> naquela linha específica.</p>
 <ol type="1">
@@ -1045,7 +1030,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p>A Forma Normal Prenex é uma representação canônica de fórmulas da lógica de primeira ordem que separa claramente os quantificadores da matriz da fórmula. Ela é uma ferramenta amplamente utilizada na lógica e na teoria da prova, e sua compreensão é essencial para trabalhar com lógica de primeira ordem, especialmente na <strong>Lógica de Primeira Ordem</strong> e teoria da prova, ambas aplicadas na Programação Lógica.</p>
 <section id="regras-de-equivalência-prenex" class="level4" data-number="7.2.1.1">
 <h4 data-number="7.2.1.1" class="anchored" data-anchor-id="regras-de-equivalência-prenex"><span class="header-section-number">7.2.1.1</span> Regras de Equivalência Prenex</h4>
-<p>A Forma Prenex de uma fórmula lógica com quantificadores permite mover todos os quantificadores para o início da fórmula. Existem algumas regras de equivalência que preservam a Forma Prenex quando aplicadas a uma fórmula:</p>
+<p>A Forma Prenex de uma fórmula lógica com quantificadores contém todos os quantificadores para o início da fórmula. Existem algumas regras de equivalência que preservam a Forma Prenex quando aplicadas a uma fórmula:</p>
 <p><strong>1. Comutatividade de quantificadores do mesmo tipo</strong>: a ordem dos quantificadores do mesmo tipo pode ser trocada em uma fórmula na Forma Prenex. Por exemplo:</p>
 <p><span class="math display">\[
 \forall x \forall y \ P(x,y) \Leftrightarrow \forall y \forall x \ P(x,y)
@@ -1343,8 +1328,7 @@ Warning
 <section id="sec-predicativa-conexao-prolog" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="sec-predicativa-conexao-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</h2>
 <p>A conversão de fórmulas para uma <strong>Forma Normal</strong> (seja Conjuntiva - <strong>Forma Normal Conjuntiva</strong>, ou Disjuntiva - <strong>Forma Normal Disjuntiva</strong>) é um processo algorítmico que permite a padronização e a manipulação de expressões lógicas por computadores. Este conjunto de questões foca nesta habilidade, que é a base para o funcionamento de provadores de teoremas e do mecanismo de resolução do Prolog.</p>
-<p><strong>Questão 1: Conversão Básica</strong>:</p>
-<p>Dada a seguinte fórmula lógica, que representa uma regra de negócio simples: “Se o pedido (<span class="math inline">\(P\)</span>) foi aprovado, então a nota fiscal (<span class="math inline">\(N\)</span>) deve ser emitida, mas não é verdade que a nota fiscal foi emitida sem que o produto esteja em estoque (<span class="math inline">\(E\)</span>).” Fórmula:</p>
+<p><strong>Questão 1: Conversão Básica</strong>: dada a seguinte fórmula lógica, que representa uma regra de negócio simples: “Se o pedido (<span class="math inline">\(P\)</span>) foi aprovado, então a nota fiscal (<span class="math inline">\(N\)</span>) deve ser emitida, mas não é verdade que a nota fiscal foi emitida sem que o produto esteja em estoque (<span class="math inline">\(E\)</span>).” Fórmula:</p>
 <p><span class="math display">\[(P \to N) \wedge \neg (N \wedge \neg E)\]</span></p>
 <p>Converta esta fórmula para:</p>
 <ol type="1">
@@ -1352,15 +1336,13 @@ Warning
 </li>
 <li>A Forma Normal Disjuntiva.</li>
 </ol>
-<p><strong>Questão 2: Cenários de Ativação de Sistema</strong>:</p>
-<p>Um sistema de irrigação automática (<span class="math inline">\(I\)</span>) é ativado se o sensor de umidade do solo indicar que está seco (<span class="math inline">\(S\)</span>) ou se não choveu nas últimas 24 horas (<span class="math inline">\(\neg C\)</span>) e a temperatura está alta (<span class="math inline">\(T\)</span>).</p>
+<p><strong>Questão 2: Cenários de Ativação de Sistema</strong>: um sistema de irrigação automática (<span class="math inline">\(I\)</span>) é ativado se o sensor de umidade do solo indicar que está seco (<span class="math inline">\(S\)</span>) ou se não choveu nas últimas 24 horas (<span class="math inline">\(\neg C\)</span>) e a temperatura está alta (<span class="math inline">\(T\)</span>).</p>
 <ol type="1">
 <li>Modele a condição de ativação (<span class="math inline">\(I\)</span>) como uma fórmula lógica.<br>
 </li>
 <li>Converta a fórmula para a Forma Normal Disjuntiva. O que cada termo da Forma Normal Disjuntiva representa em termos de cenários práticos de ativação?</li>
 </ol>
-<p><strong>Questão 3: Verificação de Consistência de Regras</strong>:</p>
-<p>As regras de configuração de um firewall são:</p>
+<p><strong>Questão 3: Verificação de Consistência de Regras</strong>: as regras de configuração de um firewall são:</p>
 <ol type="1">
 <li>Se uma conexão é da rede interna (<span class="math inline">\(I\)</span>), ela é permitida (<span class="math inline">\(P\)</span>).<br>
 </li>
@@ -1369,20 +1351,17 @@ Warning
 <li>Uma conexão segura nunca vem da rede interna.</li>
 </ol>
 <p>Modele as três regras como uma única fórmula. Converta-a para a Forma Normal Conjuntiva. A Forma Normal Conjuntiva resultante indica se as regras são consistentes? O que aconteceria se uma conexão fosse segura e viesse da rede interna?</p>
-<p><strong>Questão 4: Equivalência de Políticas de Segurança</strong>:</p>
-<p>Dois administradores de sistemas escreveram políticas de acesso a um servidor de desenvolvimento.</p>
+<p><strong>Questão 4: Equivalência de Políticas de Segurança</strong>: dois administradores de sistemas escreveram políticas de acesso a um servidor de desenvolvimento.</p>
 <ul>
 <li><p><strong>Política de Alice:</strong> “Um desenvolvedor (<span class="math inline">\(D\)</span>) pode acessar o servidor se tiver uma chave de acesso (<span class="math inline">\(C\)</span>), ou se não tiver uma chave de acesso mas estiver trabalhando em um projeto crítico (<span class="math inline">\(P\)</span>).”</p></li>
 <li><p><strong>Política de Beto:</strong> “Um desenvolvedor (<span class="math inline">\(D\)</span>) pode acessar o servidor se estiver trabalhando em um projeto crítico (<span class="math inline">\(P\)</span>), ou se tiver uma chave de acesso (<span class="math inline">\(C\)</span>).”</p></li>
 </ul>
 <p>Modele as duas políticas como fórmulas lógicas e converta ambas para a Forma Normal Disjuntiva Mínima. Elas são logicamente equivalentes?</p>
-<p><strong>Questão 5: Eliminando a Bicondicional</strong>:</p>
-<p>Uma regra de um e-commerce afirma: “Um cliente recebe frete grátis (<span class="math inline">\(F\)</span>) se, e somente se, ele for um membro Prime (<span class="math inline">\(P\)</span>) ou o valor do seu pedido for superior a R$100 (<span class="math inline">\(V\)</span>).”</p>
+<p><strong>Questão 5: Eliminando a Bicondicional</strong>: uma regra de um e-commerce afirma: “Um cliente recebe frete grátis (<span class="math inline">\(F\)</span>) se, e somente se, ele for um membro Prime (<span class="math inline">\(P\)</span>) ou o valor do seu pedido for superior a R$100 (<span class="math inline">\(V\)</span>).”</p>
 <p>Fórmula:</p>
 <p><span class="math display">\[F \leftrightarrow (P \vee V)\]</span></p>
 <p>Converta esta fórmula para a Forma Normal Conjuntiva. Cada cláusula da Forma Normal Conjuntiva representa que tipo de restrição no sistema?</p>
-<p><strong>Questão 6: Simplificação de Circuito Lógico</strong>:</p>
-<p>A saída de um circuito lógico com três entradas (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>) é descrita pela seguinte tabela verdade:</p>
+<p><strong>Questão 6: Simplificação de Circuito Lógico</strong>: a saída de um circuito lógico com três entradas (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>) é descrita pela seguinte tabela verdade:</p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -1447,87 +1426,9 @@ Warning
 <li><p>Escreva a Forma Normal Disjuntiva canônica a partir da tabela.</p></li>
 <li><p>Use um Mapa de Karnaugh ou álgebra booleana para encontrar a Forma Normal Disjuntiva mínima.</p></li>
 </ol>
-<p><strong>Questão 7: Validando uma Inferência (Tautologia)</strong></p>
-<p>Considere que “Todos os leões são mamíferos” e “Simba é um leão”, podemos concluir “Simba é um mamífero”. Prove que a estrutura lógica desta inferência é uma tautologia:</p>
+<p><strong>Questão 7: Validando uma Inferência (Tautologia)</strong>: considere que “Todos os leões são mamíferos” e “Simba é um leão”, podemos concluir “Simba é um mamífero”. Prove que a estrutura lógica desta inferência é uma tautologia:</p>
 <p><span class="math display">\[((\forall x(L(x) \to M(x))) \wedge L(s)) \to M(s)\]</span></p>
-<p><strong>Solução</strong>:</p>
-<p><strong>Passo 1 - Aplicação da Instanciação Universal</strong></p>
-<p>Como temos <span class="math inline">\(\forall x (L(x) \to M(x))\)</span> e queremos aplicar isso ao indivíduo específico <span class="math inline">\(s\)</span>, podemos usar a regra de instanciação universal para obter <span class="math inline">\(L(s) \to M(s)\)</span>. Assim, a fórmula se torna:</p>
-<p><span class="math display">\[((L(s) \to M(s)) \wedge L(s)) \to M(s)\]</span></p>
-<p><strong>Passo 2 - Prova por Tabela-Verdade</strong></p>
-<p>Para provar que esta fórmula é uma tautologia, vamos verificar que ela é verdadeira em todas as atribuições possíveis. Primeiro, vamos eliminar a implicação interna:</p>
-<p><span class="math display">\[((\neg L(s) \vee M(s)) \wedge L(s)) \to M(s)\]</span></p>
-<p>Construindo a tabela-verdade:</p>
-<table class="table">
-<colgroup>
-<col style="width: 7%">
-<col style="width: 7%">
-<col style="width: 26%">
-<col style="width: 42%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: center;"><span class="math inline">\(L(s)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(M(s)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(\neg L(s) \vee M(s)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\((\neg L(s) \vee M(s)) \wedge L(s)\)</span></th>
-<th style="text-align: center;">Fórmula Final</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">T</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">T</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">T</td>
-<td style="text-align: center;">F</td>
-<td style="text-align: center;">T</td>
-</tr>
-</tbody>
-</table>
-<p>A fórmula é verdadeira em todas as linhas, portanto é uma tautologia.</p>
-<p><strong>Passo 3 - Prova Alternativa por Contradição</strong></p>
-<p>Alternativamente, podemos provar que a fórmula é uma tautologia mostrando que sua negação é insatisfatível (sempre falsa). Negando a fórmula original:</p>
-<p><span class="math display">\[\neg [((L(s) \to M(s)) \wedge L(s)) \to M(s)]\]</span></p>
-<p>Aplicando <span class="math inline">\(\neg(A \to B) \equiv A \wedge \neg B\)</span>:</p>
-<p><span class="math display">\[((L(s) \to M(s)) \wedge L(s)) \wedge \neg M(s)\]</span></p>
-<p>Expandindo <span class="math inline">\(L(s) \to M(s) \equiv \neg L(s) \vee M(s)\)</span>:</p>
-<p><span class="math display">\[((\neg L(s) \vee M(s)) \wedge L(s)) \wedge \neg M(s)\]</span></p>
-<p>Distribuindo <span class="math inline">\(L(s)\)</span> sobre a disjunção:</p>
-<p><span class="math display">\[((\neg L(s) \wedge L(s)) \vee (M(s) \wedge L(s))) \wedge \neg M(s)\]</span></p>
-<p>Como <span class="math inline">\(\neg L(s) \wedge L(s)\)</span> é sempre falso:</p>
-<p><span class="math display">\[(M(s) \wedge L(s)) \wedge \neg M(s)\]</span></p>
-<p>Reorganizando:</p>
-<p><span class="math display">\[L(s) \wedge M(s) \wedge \neg M(s)\]</span></p>
-<p>Esta fórmula contém a contradição <span class="math inline">\(M(s) \wedge \neg M(s)\)</span>, que é sempre falsa.</p>
-<p><strong>Passo 4 - Conversão para Forma Normal Conjuntiva</strong></p>
-<p>A negação da fórmula original (que é uma contradição) já está em Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[L(s) \wedge M(s) \wedge \neg M(s)\]</span></p>
-<p>Esta é uma conjunção de três cláusulas unitárias. Como esta Forma Normal Conjuntiva é sempre falsa (contradição), a fórmula original é sempre verdadeira (tautologia).</p>
-<p><strong>Conclusão</strong>: como demonstrado tanto pela tabela-verdade quanto pela prova por contradição, a fórmula <span class="math inline">\(((\forall x(L(x) \to M(x))) \wedge L(s)) \to M(s)\)</span> é uma tautologia. Isso confirma que a inferência “Todos os leões são mamíferos, Simba é um leão, portanto Simba é um mamífero” é logicamente válida em qualquer interpretação.</p>
-<p><strong>Questão 8: Problema de Satisfatibilidade (SAT)</strong>:</p>
-<p>Três programadores (Ana, Beto, Carla) precisam ser alocados para um projeto. As restrições são:</p>
+<p><strong>Questão 8: Problema de Satisfatibilidade (SAT)</strong>: três programadores (Ana, Beto, Carla) precisam ser alocados para um projeto. As restrições são:</p>
 <ol type="1">
 <li>Pelo menos um dos três deve ser alocado;<br>
 </li>
@@ -1535,12 +1436,10 @@ Warning
 <li>Se Carla for alocada, então Ana também deve ser.</li>
 </ol>
 <p>Sejam <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span> as proposições “Ana foi alocada”, “Beto foi alocado” e “Carla foi alocada”. Modele as três restrições e converta-as para um conjunto de cláusulas em Forma Normal Conjuntiva. O conjunto de restrições é satisfatível? Se sim, apresente uma alocação válida.</p>
-<p><strong>Questão 9: Forma Normal Prenex</strong>:</p>
-<p>A conversão para Forma Normal Clausal (que veremos no próximo bloco) muitas vezes começa com a conversão para a Forma Normal Prenex, na qual todos os quantificadores são movidos para o início da fórmula.<br>
+<p><strong>Questão 9: Forma Normal Prenex</strong>: a conversão para Forma Normal Clausal, que veremos no próximo capítulo, muitas vezes começa com a conversão para a Forma Normal Prenex, na qual todos os quantificadores são movidos para o início da fórmula.<br>
 Converta a seguinte fórmula para a Forma Normal Prenex:</p>
 <p><span class="math display">\[\forall x (P(x) \to (\exists y (Q(y) \wedge R(x,y)))) \vee \exists z S(z)\]</span></p>
-<p><strong>Questão 10: O Princípio da Resolução</strong>:</p>
-<p>O Princípio da Resolução é um método de inferência que opera sobre cláusulas em Forma Normal Conjuntiva. Dadas duas cláusulas <span class="math inline">\((\neg P \vee Q)\)</span> e <span class="math inline">\((P \vee R)\)</span>, podemos inferir a cláusula resolvente <span class="math inline">\((Q \vee R)\)</span>.<br>
+<p><strong>Questão 10: O Princípio da Resolução</strong>: o Princípio da Resolução é um método de inferência que opera sobre cláusulas em Forma Normal Conjuntiva. Dadas duas cláusulas <span class="math inline">\((\neg P \vee Q)\)</span> e <span class="math inline">\((P \vee R)\)</span>, podemos inferir a cláusula resolvente <span class="math inline">\((Q \vee R)\)</span>.<br>
 Use o Princípio da Resolução para provar que o seguinte conjunto de cláusulas é inconsistente (leva à cláusula vazia, <span class="math inline">\(\square\)</span>):</p>
 <ol type="1">
 <li><span class="math inline">\(\neg P \vee \neg Q \vee R\)</span>;<br>
