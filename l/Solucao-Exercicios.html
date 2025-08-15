@@ -1868,7 +1868,7 @@ A fórmula <span class="math inline">\(P \leftrightarrow \neg P\)</span> é equi
 <li><p><strong>Conexão com Prolog</strong>: O Prolog evita este tipo de paradoxo através de sua semântica operacional e da negação por falha:</p></li>
 </ol>
 <div class="sourceCode" id="cb9"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Em Prolog, não podemos expressar diretamente:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">% p :- \+ p.  % Isso causaria um loop infinito</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">% P :- \+ P.  % Isso causaria um loop infinito</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">% O Prolog usa "negação por falha" que é diferente da negação lógica</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Se algo não pode ser provado, é assumido como falso</span></span>
@@ -3344,56 +3344,56 @@ P \rightarrow \neg Q \equiv \neg P \vee \neg Q
 <h3 data-number="14.3.2" class="anchored" data-anchor-id="exercícios-conversão-forma-normal-conjuntiva-sec-exercicios-conversao-fnc"><span class="header-section-number">14.3.2</span> Exercícios Conversão Forma Normal Conjuntiva <a href="05-formas-normais-e-skolemizacao.html#sec-exercicios-conversao-fnc" class="quarto-xref"><span>Section 7.1.3.7</span></a></h3>
 <section id="solução-do-exercício-1-1" class="level4" data-number="14.3.2.1">
 <h4 data-number="14.3.2.1" class="anchored" data-anchor-id="solução-do-exercício-1-1"><span class="header-section-number">14.3.2.1</span> Solução do Exercício 1</h4>
-<p>Converter <span class="math inline">\((p \leftrightarrow q) \rightarrow ((p \wedge r) \vee (q \wedge \neg r))\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\((P \leftrightarrow Q) \rightarrow ((P \wedge R) \vee (Q \wedge \neg R))\)</span> para Forma Normal Conjuntiva.</p>
 <p>Os passos 1 a 3 da solução original estão corretos. O erro ocorreu na conversão da forma intermediária para a FNC. Vamos retomar do final do passo 3.</p>
 <p><strong>Passo 3: Expressão intermediária</strong></p>
 <p>A fórmula é equivalente a:</p>
 <p><span class="math display">\[
-((\neg p \vee \neg q) \wedge (p \vee q)) \vee ((p \wedge r) \vee (q \wedge \neg r))
+((\neg P \vee \neg Q) \wedge (P \vee Q)) \vee ((P \wedge R) \vee (Q \wedge \neg R))
 \]</span></p>
 <p><strong>Passo 4: Aplicar a distributividade de <span class="math inline">\(\vee\)</span> sobre <span class="math inline">\(\wedge\)</span></strong></p>
 <p>Usando a regra <span class="math inline">\((A \wedge B) \vee C \equiv (A \vee C) \wedge (B \vee C)\)</span>, obtemos:</p>
 <p><span class="math display">\[
-((\neg p \vee \neg q) \vee ((p \wedge r) \vee (q \wedge \neg r))) \wedge ((p \vee q) \vee ((p \wedge r) \vee (q \wedge \neg r)))
+((\neg P \vee \neg Q) \vee ((P \wedge R) \vee (Q \wedge \neg R))) \wedge ((P \vee Q) \vee ((P \wedge R) \vee (Q \wedge \neg R)))
 \]</span></p>
 <p><strong>Passo 5: Simplificar a primeira grande cláusula</strong></p>
 <p><span class="math display">\[
-\neg p \vee \neg q \vee (p \wedge r) \vee (q \wedge \neg r)
+\neg P \vee \neg Q \vee (P \wedge R) \vee (Q \wedge \neg R)
 \]</span></p>
-<p>Aplicando distributividade e absorção: <span class="math inline">\((\neg p \vee (p \wedge r)) \equiv (\neg p \vee p) \wedge (\neg p \vee r) \equiv \top \wedge (\neg p \vee r) \equiv (\neg p \vee r)\)</span>. E <span class="math inline">\((\neg q \vee (q \wedge \neg r)) \equiv (\neg q \vee q) \wedge (\neg q \vee \neg r) \equiv \top \wedge (\neg q \vee \neg r) \equiv (\neg q \vee \neg r)\)</span>. A cláusula se torna <span class="math inline">\((\neg p \vee r) \vee (\neg q \vee \neg r) \equiv \neg p \vee \neg q \vee r \vee \neg r\)</span>, que é uma tautologia (<span class="math inline">\(\top\)</span>).</p>
+<p>Aplicando distributividade e absorção: <span class="math inline">\((\neg P \vee (P \wedge R)) \equiv (\neg P \vee P) \wedge (\neg P \vee R) \equiv \top \wedge (\neg P \vee R) \equiv (\neg P \vee R)\)</span>. E <span class="math inline">\((\neg Q \vee (Q \wedge \neg R)) \equiv (\neg Q \vee Q) \wedge (\neg Q \vee \neg R) \equiv \top \wedge (\neg Q \vee \neg R) \equiv (\neg Q \vee \neg R)\)</span>. A cláusula se torna <span class="math inline">\((\neg P \vee R) \vee (\neg Q \vee \neg R) \equiv \neg P \vee \neg Q \vee R \vee \neg R\)</span>, que é uma tautologia (<span class="math inline">\(\top\)</span>).</p>
 <p><strong>Passo 6: Simplificar a segunda grande cláusula</strong></p>
 <p><span class="math display">\[
-p \vee q \vee (p \wedge r) \vee (q \wedge \neg r)
+P \vee Q \vee (P \wedge R) \vee (Q \wedge \neg R)
 \]</span></p>
-<p>Pela lei de absorção, <span class="math inline">\((p \vee (p \wedge r)) \equiv p\)</span> e <span class="math inline">\((q \vee (q \wedge \neg r)) \equiv q\)</span>. A cláusula se torna <span class="math inline">\(p \vee q\)</span>.</p>
+<p>Pela lei de absorção, <span class="math inline">\((P \vee (P \wedge R)) \equiv P\)</span> e <span class="math inline">\((Q \vee (Q \wedge \neg R)) \equiv Q\)</span>. A cláusula se torna <span class="math inline">\(P \vee Q\)</span>.</p>
 <p><strong>Passo 7: Combinar os resultados</strong></p>
-<p>A fórmula completa é <span class="math inline">\(\top \wedge (p \vee q)\)</span>.</p>
+<p>A fórmula completa é <span class="math inline">\(\top \wedge (P \vee Q)\)</span>.</p>
 <p><strong>Resultado Final:</strong></p>
 <p><span class="math display">\[
-p \vee q
+P \vee Q
 \]</span></p>
 </section>
 <section id="solução-do-exercício-2-1" class="level4" data-number="14.3.2.2">
 <h4 data-number="14.3.2.2" class="anchored" data-anchor-id="solução-do-exercício-2-1"><span class="header-section-number">14.3.2.2</span> Solução do Exercício 2</h4>
-<p>Converter <span class="math inline">\(\neg((p \rightarrow q) \vee (q \rightarrow p)) \wedge (p \vee q)\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\(\neg((P \rightarrow Q) \vee (Q \rightarrow P)) \wedge (P \vee Q)\)</span> para Forma Normal Conjuntiva.</p>
 <p><strong>Passo 1: Aplicar De Morgan no primeiro termo</strong></p>
 <p><span class="math display">\[
-\neg(p \rightarrow q) \wedge \neg(q \rightarrow p) \wedge (p \vee q)
+\neg(P \rightarrow Q) \wedge \neg(Q \rightarrow P) \wedge (P \vee Q)
 \]</span></p>
 <p><strong>Passo 2: Eliminar implicações</strong></p>
 <p><span class="math display">\[
-\neg(\neg p \vee q) \wedge \neg(\neg q \vee p) \wedge (p \vee q)
+\neg(\neg P \vee Q) \wedge \neg(\neg Q \vee P) \wedge (P \vee Q)
 \]</span></p>
 <p><strong>Passo 3: Aplicar De Morgan</strong></p>
 <p><span class="math display">\[
-(p \wedge \neg q) \wedge (q \wedge \neg p) \wedge (p \vee q)
+(P \wedge \neg Q) \wedge (Q \wedge \neg P) \wedge (P \vee Q)
 \]</span></p>
 <p><strong>Passo 4: Expandir a conjunção</strong></p>
 <p><span class="math display">\[
-p \wedge \neg q \wedge q \wedge \neg p \wedge (p \vee q)
+P \wedge \neg Q \wedge Q \wedge \neg P \wedge (P \vee Q)
 \]</span></p>
 <p><strong>Passo 5: Identificar contradição</strong></p>
-<p>A expressão contém <span class="math inline">\(p \wedge \neg p\)</span> e <span class="math inline">\(q \wedge \neg q\)</span>, que são contradições.</p>
+<p>A expressão contém <span class="math inline">\(P \wedge \neg P\)</span> e <span class="math inline">\(Q \wedge \neg Q\)</span>, que são contradições.</p>
 <p><strong>Resultado Final:</strong></p>
 <p><span class="math display">\[
 \bot \text{ (fórmula insatisfatível)}
@@ -3401,15 +3401,15 @@ p \wedge \neg q \wedge q \wedge \neg p \wedge (p \vee q)
 </section>
 <section id="solução-do-exercício-3-1" class="level4" data-number="14.3.2.3">
 <h4 data-number="14.3.2.3" class="anchored" data-anchor-id="solução-do-exercício-3-1"><span class="header-section-number">14.3.2.3</span> Solução do Exercício 3</h4>
-<p>Converter <span class="math inline">\(\neg((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r)))\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\(\neg((P \wedge (Q \vee R)) \leftrightarrow ((P \wedge Q) \vee (P \wedge R)))\)</span> para Forma Normal Conjuntiva.</p>
 <p><strong>Passo 1: Observar que é a negação de uma tautologia</strong></p>
-<p>A bicondicional <span class="math inline">\((p \wedge (q \vee r)) \leftrightarrow ((p \wedge q) \vee (p \wedge r))\)</span> é a lei distributiva, que é uma tautologia. Sua negação é uma contradição.</p>
+<p>A bicondicional <span class="math inline">\((P \wedge (Q \vee R)) \leftrightarrow ((P \wedge Q) \vee (P \wedge R))\)</span> é a lei distributiva, que é uma tautologia. Sua negação é uma contradição.</p>
 <p><strong>Passo 2: Verificar por expansão</strong></p>
-<p>Lado esquerdo: <span class="math inline">\(p \wedge (q \vee r)\)</span></p>
-<p>Lado direito: <span class="math inline">\((p \wedge q) \vee (p \wedge r)\)</span></p>
+<p>Lado esquerdo: <span class="math inline">\(P \wedge (Q \vee R)\)</span></p>
+<p>Lado direito: <span class="math inline">\((P \wedge Q) \vee (P \wedge R)\)</span></p>
 <p>Aplicando distributividade no lado esquerdo:</p>
 <p><span class="math display">\[
-p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)
+P \wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R)
 \]</span></p>
 <p>Os dois lados são idênticos, confirmando que a bicondicional é uma tautologia.</p>
 <p><strong>Resultado Final:</strong></p>
@@ -3419,22 +3419,22 @@ p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)
 </section>
 <section id="solução-do-exercício-4-1" class="level4" data-number="14.3.2.4">
 <h4 data-number="14.3.2.4" class="anchored" data-anchor-id="solução-do-exercício-4-1"><span class="header-section-number">14.3.2.4</span> Solução do Exercício 4</h4>
-<p>Converter <span class="math inline">\(((p \vee q) \rightarrow r) \leftrightarrow (p \rightarrow r) \wedge (q \rightarrow r)\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\(((P \vee Q) \rightarrow R) \leftrightarrow (P \rightarrow R) \wedge (Q \rightarrow R)\)</span> para Forma Normal Conjuntiva.</p>
 <p><strong>Passo 1: Trabalhar o lado esquerdo</strong></p>
 <p><span class="math display">\[
-(p \vee q) \rightarrow r \equiv \neg(p \vee q) \vee r \equiv (\neg p \wedge \neg q) \vee r
+(P \vee Q) \rightarrow R \equiv \neg(P \vee Q) \vee R \equiv (\neg P \wedge \neg Q) \vee R
 \]</span></p>
 <p><strong>Passo 2: Trabalhar o lado direito</strong></p>
 <p><span class="math display">\[
-(p \rightarrow r) \wedge (q \rightarrow r) \equiv (\neg p \vee r) \wedge (\neg q \vee r)
+(P \rightarrow R) \wedge (Q \rightarrow R) \equiv (\neg P \vee R) \wedge (\neg Q \vee R)
 \]</span></p>
 <p>Aplicando distributividade:</p>
 <p><span class="math display">\[
-(\neg p \wedge \neg q) \vee (\neg p \wedge r) \vee (r \wedge \neg q) \vee (r \wedge r)
+(\neg P \wedge \neg Q) \vee (\neg P \wedge R) \vee (R \wedge \neg Q) \vee (R \wedge R)
 \]</span></p>
 <p>Simplificando:</p>
 <p><span class="math display">\[
-(\neg p \wedge \neg q) \vee r
+(\neg P \wedge \neg Q) \vee R
 \]</span></p>
 <p><strong>Passo 3: Observar que ambos os lados são equivalentes</strong></p>
 <p>Como ambos os lados da bicondicional são iguais, a fórmula é uma tautologia.</p>
@@ -3442,36 +3442,36 @@ p \wedge (q \vee r) \equiv (p \wedge q) \vee (p \wedge r)
 <p><span class="math display">\[
 \top \text{ (tautologia)}
 \]</span></p>
-<p>Como é uma tautologia, sua Forma Normal Conjuntiva é vazia ou pode ser representada por qualquer cláusula tautológica como <span class="math inline">\((p \vee \neg p)\)</span>.</p>
+<p>Como é uma tautologia, sua Forma Normal Conjuntiva é vazia ou pode ser representada por qualquer cláusula tautológica como <span class="math inline">\((P \vee \neg P)\)</span>.</p>
 </section>
 <section id="solução-do-exercício-5-1" class="level4" data-number="14.3.2.5">
 <h4 data-number="14.3.2.5" class="anchored" data-anchor-id="solução-do-exercício-5-1"><span class="header-section-number">14.3.2.5</span> Solução do Exercício 5</h4>
-<p>Converter <span class="math inline">\((p \rightarrow (q \rightarrow r)) \wedge \neg((p \wedge q) \rightarrow r)\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\((P \rightarrow (Q \rightarrow R)) \wedge \neg((P \wedge Q) \rightarrow R)\)</span> para Forma Normal Conjuntiva.</p>
 <p><strong>Passo 1: Eliminar implicações no primeiro termo</strong></p>
 <p><span class="math display">\[
-p \rightarrow (q \rightarrow r) \equiv \neg p \vee (\neg q \vee r) \equiv \neg p \vee \neg q \vee r
+P \rightarrow (Q \rightarrow R) \equiv \neg P \vee (\neg Q \vee R) \equiv \neg P \vee \neg Q \vee R
 \]</span></p>
 <p><strong>Passo 2: Trabalhar o segundo termo</strong></p>
 <p><span class="math display">\[
-\neg((p \wedge q) \rightarrow r) \equiv \neg(\neg(p \wedge q) \vee r) \equiv (p \wedge q) \wedge \neg r
+\neg((P \wedge Q) \rightarrow R) \equiv \neg(\neg(P \wedge Q) \vee R) \equiv (P \wedge Q) \wedge \neg R
 \]</span></p>
 <p><span class="math display">\[
-p \wedge q \wedge \neg r
+P \wedge Q \wedge \neg R
 \]</span></p>
 <p><strong>Passo 3: Formar a conjunção completa</strong></p>
 <p><span class="math display">\[
-(\neg p \vee \neg q \vee r) \wedge p \wedge q \wedge \neg r
+(\neg P \vee \neg Q \vee R) \wedge P \wedge Q \wedge \neg R
 \]</span></p>
 <p><strong>Passo 4: Reorganizar como cláusulas</strong></p>
 <p><span class="math display">\[
-(\neg p \vee \neg q \vee r) \wedge p \wedge q \wedge \neg r
+(\neg P \vee \neg Q \vee R) \wedge P \wedge Q \wedge \neg R
 \]</span></p>
 <p><strong>Passo 5: Aplicar a regra de unidade</strong></p>
-<p>Quando temos cláusulas unitárias (<span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span>, <span class="math inline">\(\neg r\)</span>), podemos simplificar a primeira cláusula:</p>
+<p>Quando temos cláusulas unitárias (<span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>, <span class="math inline">\(\neg R\)</span>), podemos simplificar a primeira cláusula:</p>
 <ul>
-<li>Como <span class="math inline">\(p\)</span> é verdadeiro, <span class="math inline">\(\neg p\)</span> é falso</li>
-<li>Como <span class="math inline">\(q\)</span> é verdadeiro, <span class="math inline">\(\neg q\)</span> é falso</li>
-<li>Como <span class="math inline">\(\neg r\)</span> é verdadeiro, <span class="math inline">\(r\)</span> é falso</li>
+<li>Como <span class="math inline">\(P\)</span> é verdadeiro, <span class="math inline">\(\neg P\)</span> é falso</li>
+<li>Como <span class="math inline">\(Q\)</span> é verdadeiro, <span class="math inline">\(\neg Q\)</span> é falso</li>
+<li>Como <span class="math inline">\(\neg R\)</span> é verdadeiro, <span class="math inline">\(R\)</span> é falso</li>
 </ul>
 <p>A primeira cláusula se torna: <span class="math inline">\((F \vee F \vee F) = F\)</span></p>
 <p><strong>Resultado Final:</strong></p>
@@ -3481,55 +3481,55 @@ p \wedge q \wedge \neg r
 </section>
 <section id="solução-do-exercício-6-1" class="level4" data-number="14.3.2.6">
 <h4 data-number="14.3.2.6" class="anchored" data-anchor-id="solução-do-exercício-6-1"><span class="header-section-number">14.3.2.6</span> Solução do Exercício 6</h4>
-<p>Converter <span class="math inline">\(((p \leftrightarrow q) \vee (q \leftrightarrow r)) \wedge \neg(p \leftrightarrow r)\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\(((P \leftrightarrow Q) \vee (Q \leftrightarrow R)) \wedge \neg(P \leftrightarrow R)\)</span> para Forma Normal Conjuntiva.</p>
 <p>A conversão para a Forma Normal Disjuntiva no Passo 5 estava correta, mas a conversão subsequente para FNC estava incorreta. Uma abordagem mais segura é converter cada parte para FNC separadamente.</p>
-<p><strong>Passo 1: Converter <span class="math inline">\(\neg(p \leftrightarrow r)\)</span> para FNC</strong></p>
+<p><strong>Passo 1: Converter <span class="math inline">\(\neg(P \leftrightarrow R)\)</span> para FNC</strong></p>
 <p><span class="math display">\[
-\neg(p \leftrightarrow r) \equiv (p \wedge \neg r) \vee (\neg p \wedge r)
+\neg(P \leftrightarrow R) \equiv (P \wedge \neg R) \vee (\neg P \wedge R)
 \]</span></p>
 <p>Aplicando a distributividade:</p>
 <p><span class="math display">\[
-(p \vee \neg p) \wedge (p \vee r) \wedge (\neg r \vee \neg p) \wedge (\neg r \vee r) \equiv (p \vee r) \wedge (\neg p \vee \neg r)
+(P \vee \neg P) \wedge (P \vee R) \wedge (\neg R \vee \neg P) \wedge (\neg R \vee R) \equiv (P \vee R) \wedge (\neg P \vee \neg R)
 \]</span></p>
-<p><strong>Passo 2: Converter <span class="math inline">\((p \leftrightarrow q) \vee (q \leftrightarrow r)\)</span> para FNC</strong></p>
-<p>Primeiro, as FNCs das bicondicionais: <span class="math inline">\(p \leftrightarrow q \equiv (\neg p \vee q) \wedge (p \vee \neg q)\)</span> <span class="math inline">\(q \leftrightarrow r \equiv (\neg q \vee r) \wedge (q \vee \neg r)\)</span> A expressão é <span class="math inline">\(((\neg p \vee q) \wedge (p \vee \neg q)) \vee ((\neg q \vee r) \wedge (q \vee \neg r))\)</span>. Aplicando a distributividade <span class="math inline">\((A \wedge B) \vee (C \wedge D) \equiv (A \vee C) \wedge (A \vee D) \wedge (B \vee C) \wedge (B \vee D)\)</span>:</p>
+<p><strong>Passo 2: Converter <span class="math inline">\((P \leftrightarrow Q) \vee (Q \leftrightarrow R)\)</span> para FNC</strong></p>
+<p>Primeiro, as FNCs das bicondicionais: <span class="math inline">\(P \leftrightarrow Q \equiv (\neg P \vee Q) \wedge (P \vee \neg Q)\)</span> <span class="math inline">\(Q \leftrightarrow R \equiv (\neg Q \vee R) \wedge (Q \vee \neg R)\)</span> A expressão é <span class="math inline">\(((\neg P \vee Q) \wedge (P \vee \neg Q)) \vee ((\neg Q \vee R) \wedge (Q \vee \neg R))\)</span>. Aplicando a distributividade <span class="math inline">\((A \wedge B) \vee (C \wedge D) \equiv (A \vee C) \wedge (A \vee D) \wedge (B \vee C) \wedge (B \vee D)\)</span>:</p>
 <ul>
-<li><span class="math inline">\((\neg p \vee q) \vee (\neg q \vee r) \equiv \neg p \vee \top \vee r \equiv \top\)</span></li>
-<li><span class="math inline">\((\neg p \vee q) \vee (q \vee \neg r) \equiv \neg p \vee q \vee \neg r\)</span></li>
-<li><span class="math inline">\((p \vee \neg q) \vee (\neg q \vee r) \equiv p \vee \neg q \vee r\)</span></li>
-<li><span class="math inline">\((p \vee \neg q) \vee (q \vee \neg r) \equiv p \vee \top \vee \neg r \equiv \top\)</span></li>
+<li><span class="math inline">\((\neg P \vee Q) \vee (\neg Q \vee R) \equiv \neg P \vee \top \vee R \equiv \top\)</span></li>
+<li><span class="math inline">\((\neg P \vee Q) \vee (Q \vee \neg R) \equiv \neg P \vee Q \vee \neg R\)</span></li>
+<li><span class="math inline">\((P \vee \neg Q) \vee (\neg Q \vee R) \equiv P \vee \neg Q \vee R\)</span></li>
+<li><span class="math inline">\((P \vee \neg Q) \vee (Q \vee \neg R) \equiv P \vee \top \vee \neg R \equiv \top\)</span></li>
 </ul>
-<p>Esta parte simplifica para <span class="math inline">\((\neg p \vee q \vee \neg r) \wedge (p \vee \neg q \vee r)\)</span>.</p>
+<p>Esta parte simplifica para <span class="math inline">\((\neg P \vee Q \vee \neg R) \wedge (P \vee \neg Q \vee R)\)</span>.</p>
 <p><strong>Passo 3: Formar a conjunção completa</strong></p>
 <p>Juntando as FNCs de ambas as partes:</p>
 <p><strong>Resultado Final:</strong></p>
 <p><span class="math display">\[
-(\neg p \vee q \vee \neg r) \wedge (p \vee \neg q \vee r) \wedge (p \vee r) \wedge (\neg p \vee \neg r)
+(\neg P \vee Q \vee \neg R) \wedge (P \vee \neg Q \vee R) \wedge (P \vee R) \wedge (\neg P \vee \neg R)
 \]</span></p>
 </section>
 <section id="solução-do-exercício-7-1" class="level4" data-number="14.3.2.7">
 <h4 data-number="14.3.2.7" class="anchored" data-anchor-id="solução-do-exercício-7-1"><span class="header-section-number">14.3.2.7</span> Solução do Exercício 7</h4>
-<p>Converter <span class="math inline">\(\neg(p \rightarrow (q \vee r)) \vee ((p \wedge \neg q) \rightarrow r)\)</span> para Forma Normal Conjuntiva.</p>
+<p>Converter <span class="math inline">\(\neg(P \rightarrow (Q \vee R)) \vee ((P \wedge \neg Q) \rightarrow R)\)</span> para Forma Normal Conjuntiva.</p>
 <p>Os passos 1 a 3 da solução original estão corretos, resultando em:</p>
 <p><span class="math display">\[
-(p \wedge \neg q \wedge \neg r) \vee (\neg p \vee q \vee r)
+(P \wedge \neg Q \wedge \neg R) \vee (\neg P \vee Q \vee R)
 \]</span></p>
 <p>O erro ocorreu na simplificação final após a distributividade.</p>
 <p><strong>Passo 4: Aplicar distributividade para obter FNC</strong></p>
-<p>Seja <span class="math inline">\(A = (\neg p \vee q \vee r)\)</span>. A expressão é <span class="math inline">\((p \wedge \neg q \wedge \neg r) \vee A\)</span>. Distribuindo, temos:</p>
+<p>Seja <span class="math inline">\(A = (\neg P \vee Q \vee R)\)</span>. A expressão é <span class="math inline">\((P \wedge \neg Q \wedge \neg R) \vee A\)</span>. Distribuindo, temos:</p>
 <p><span class="math display">\[
-(p \vee A) \wedge (\neg q \vee A) \wedge (\neg r \vee A)
+(P \vee A) \wedge (\neg Q \vee A) \wedge (\neg R \vee A)
 \]</span></p>
 <p>Substituindo <span class="math inline">\(A\)</span> de volta:</p>
 <p><span class="math display">\[
-(p \vee (\neg p \vee q \vee r)) \wedge (\neg q \vee (\neg p \vee q \vee r)) \wedge (\neg r \vee (\neg p \vee q \vee r))
+(P \vee (\neg P \vee Q \vee R)) \wedge (\neg Q \vee (\neg P \vee Q \vee R)) \wedge (\neg R \vee (\neg P \vee Q \vee R))
 \]</span></p>
 <p><strong>Passo 5: Simplificar</strong></p>
 <p>Analisamos cada cláusula:</p>
 <ol type="1">
-<li><span class="math inline">\(p \vee \neg p \vee q \vee r \equiv \top \vee q \vee r \equiv \top\)</span>;</li>
-<li><span class="math inline">\(\neg q \vee \neg p \vee q \vee r \equiv \neg p \vee (q \vee \neg q) \vee r \equiv \neg p \vee \top \vee r \equiv \top\)</span>;</li>
-<li><span class="math inline">\(\neg r \vee \neg p \vee q \vee r \equiv \neg p \vee q \vee (r \vee \neg r) \equiv \neg p \vee q \vee \top \equiv \top\)</span>.</li>
+<li><span class="math inline">\(P \vee \neg P \vee Q \vee R \equiv \top \vee Q \vee R \equiv \top\)</span>;</li>
+<li><span class="math inline">\(\neg Q \vee \neg P \vee Q \vee R \equiv \neg P \vee (Q \vee \neg Q) \vee R \equiv \neg P \vee \top \vee R \equiv \top\)</span>;</li>
+<li><span class="math inline">\(\neg R \vee \neg P \vee Q \vee R \equiv \neg P \vee Q \vee (R \vee \neg R) \equiv \neg P \vee Q \vee \top \equiv \top\)</span>.</li>
 </ol>
 <p>A expressão completa é <span class="math inline">\(\top \wedge \top \wedge \top\)</span>.</p>
 <p><strong>Resultado Final:</strong></p>
@@ -3796,11 +3796,11 @@ p \wedge q \wedge \neg r
 <h4 data-number="14.3.3.7" class="anchored" data-anchor-id="questão-7"><span class="header-section-number">14.3.3.7</span> Questão 7</h4>
 <p><strong>Solução</strong>:</p>
 <p><strong>Passo 1 - Aplicação da Instanciação Universal</strong></p>
-<p>Como temos <span class="math inline">\(\forall x (L(x) \to M(x))\)</span> e queremos aplicar isso ao indivíduo específico <span class="math inline">\(s\)</span>, podemos usar a regra de instanciação universal para obter <span class="math inline">\(L(s) \to M(s)\)</span>. Assim, a fórmula se torna:</p>
-<p><span class="math display">\[((L(s) \to M(s)) \wedge L(s)) \to M(s)\]</span></p>
+<p>Como temos <span class="math inline">\(\forall x (L(x) \to M(x))\)</span> e queremos aplicar isso ao indivíduo específico <span class="math inline">\(S\)</span>, podemos usar a regra de instanciação universal para obter <span class="math inline">\(L(S) \to M(S)\)</span>. Assim, a fórmula se torna:</p>
+<p><span class="math display">\[((L(S) \to M(S)) \wedge L(S)) \to M(S)\]</span></p>
 <p><strong>Passo 2 - Prova por Tabela-Verdade</strong></p>
 <p>Para provar que esta fórmula é uma tautologia, vamos verificar que ela é verdadeira em todas as atribuições possíveis. Primeiro, vamos eliminar a implicação interna:</p>
-<p><span class="math display">\[((\neg L(s) \vee M(s)) \wedge L(s)) \to M(s)\]</span></p>
+<p><span class="math display">\[((\neg L(S) \vee M(S)) \wedge L(S)) \to M(S)\]</span></p>
 <p>Construindo a tabela-verdade:</p>
 <table class="table">
 <colgroup>
@@ -3812,10 +3812,10 @@ p \wedge q \wedge \neg r
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">\(L(s)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(M(s)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(\neg L(s) \vee M(s)\)</span></th>
-<th style="text-align: center;"><span class="math inline">\((\neg L(s) \vee M(s)) \wedge L(s)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(L(S)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(M(S)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg L(S) \vee M(S)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((\neg L(S) \vee M(S)) \wedge L(S)\)</span></th>
 <th style="text-align: center;">Fórmula Final</th>
 </tr>
 </thead>
@@ -3853,25 +3853,25 @@ p \wedge q \wedge \neg r
 <p>A fórmula é verdadeira em todas as linhas, portanto é uma tautologia.</p>
 <p><strong>Passo 3 - Prova Alternativa por Contradição</strong></p>
 <p>Alternativamente, podemos provar que a fórmula é uma tautologia mostrando que sua negação é insatisfatível (sempre falsa). Negando a fórmula original:</p>
-<p><span class="math display">\[\neg [((L(s) \to M(s)) \wedge L(s)) \to M(s)]\]</span></p>
+<p><span class="math display">\[\neg [((L(S) \to M(S)) \wedge L(S)) \to M(S)]\]</span></p>
 <p>Aplicando <span class="math inline">\(\neg(A \to B) \equiv A \wedge \neg B\)</span>:</p>
-<p><span class="math display">\[((L(s) \to M(s)) \wedge L(s)) \wedge \neg M(s)\]</span></p>
-<p>Expandindo <span class="math inline">\(L(s) \to M(s) \equiv \neg L(s) \vee M(s)\)</span>:</p>
-<p><span class="math display">\[((\neg L(s) \vee M(s)) \wedge L(s)) \wedge \neg M(s)\]</span></p>
-<p>Distribuindo <span class="math inline">\(L(s)\)</span> sobre a disjunção:</p>
-<p><span class="math display">\[((\neg L(s) \wedge L(s)) \vee (M(s) \wedge L(s))) \wedge \neg M(s)\]</span></p>
-<p>Como <span class="math inline">\(\neg L(s) \wedge L(s)\)</span> é sempre falso:</p>
-<p><span class="math display">\[(M(s) \wedge L(s)) \wedge \neg M(s)\]</span></p>
+<p><span class="math display">\[((L(S) \to M(S)) \wedge L(S)) \wedge \neg M(S)\]</span></p>
+<p>Expandindo <span class="math inline">\(L(S) \to M(S) \equiv \neg L(S) \vee M(S)\)</span>:</p>
+<p><span class="math display">\[((\neg L(S) \vee M(S)) \wedge L(S)) \wedge \neg M(S)\]</span></p>
+<p>Distribuindo <span class="math inline">\(L(S)\)</span> sobre a disjunção:</p>
+<p><span class="math display">\[((\neg L(S) \wedge L(S)) \vee (M(S) \wedge L(S))) \wedge \neg M(S)\]</span></p>
+<p>Como <span class="math inline">\(\neg L(S) \wedge L(S)\)</span> é sempre falso:</p>
+<p><span class="math display">\[(M(S) \wedge L(S)) \wedge \neg M(S)\]</span></p>
 <p>Reorganizando:</p>
-<p><span class="math display">\[L(s) \wedge M(s) \wedge \neg M(s)\]</span></p>
-<p>Esta fórmula contém a contradição <span class="math inline">\(M(s) \wedge \neg M(s)\)</span>, que é sempre falsa.</p>
+<p><span class="math display">\[L(S) \wedge M(S) \wedge \neg M(S)\]</span></p>
+<p>Esta fórmula contém a contradição <span class="math inline">\(M(S) \wedge \neg M(S)\)</span>, que é sempre falsa.</p>
 <p><strong>Passo 4 - Conversão para Forma Normal Conjuntiva</strong></p>
 <p>A negação da fórmula original (que é uma contradição) já está em Forma Normal Conjuntiva:</p>
-<p><span class="math display">\[L(s) \wedge M(s) \wedge \neg M(s)\]</span></p>
+<p><span class="math display">\[L(S) \wedge M(S) \wedge \neg M(S)\]</span></p>
 <p>Esta é uma conjunção de três cláusulas unitárias. Como esta Forma Normal Conjuntiva é sempre falsa (contradição), a fórmula original é sempre verdadeira (tautologia).</p>
-<p><strong>Conclusão</strong>: como demonstrado tanto pela tabela-verdade quanto pela prova por contradição, a fórmula <span class="math inline">\(((\forall x(L(x) \to M(x))) \wedge L(s)) \to M(s)\)</span> é uma tautologia. Isso confirma que a inferência “Todos os leões são mamíferos, Simba é um leão, portanto Simba é um mamífero” é logicamente válida em qualquer interpretação. <strong>Em Prolog</strong>:</p>
+<p><strong>Conclusão</strong>: como demonstrado tanto pela tabela-verdade quanto pela prova por contradição, a fórmula <span class="math inline">\(((\forall x(L(x) \to M(x))) \wedge L(S)) \to M(S)\)</span> é uma tautologia. Isso confirma que a inferência “Todos os leões são mamíferos, Simba é um leão, portanto Simba é um mamífero” é logicamente válida em qualquer interpretação. <strong>Em Prolog</strong>:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Implementação da prova de tautologia em SWI-Prolog</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">% Fórmula: ((∀x(L(x) → M(x))) ∧ L(s)) → M(s)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">% Fórmula: ((∀x(L(x) → M(x))) ∧ L(S)) → M(S)</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">% ============================================================================</span></span>
 <span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">% PARTE 1: DEFINIÇÃO DOS FATOS E REGRAS BASE</span></span>
@@ -3910,8 +3910,8 @@ p \wedge q \wedge \neg r
 <span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a><span class="co">% Avaliação da fórmula para todos os valores possíveis</span></span>
 <span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>tabela_verdade <span class="kw">:-</span></span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Tabela</span><span class="st">-</span><span class="er">verdade para </span><span class="st">((</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">):'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">)→</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> </span><span class="st">(</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)→</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">))∧</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> F</span><span class="st">ó</span><span class="er">rmula</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Tabela</span><span class="st">-</span><span class="er">verdade para </span><span class="st">((</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">):'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">)→</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> </span><span class="st">(</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)→</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">))∧</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">|</span><span class="er"> F</span><span class="st">ó</span><span class="er">rmula</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-----|-----|---------|-------------|--------'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Testando todas as combinações</span></span>
@@ -3949,24 +3949,24 @@ p \wedge q \wedge \neg r
 <span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Prova por contradi</span><span class="st">çã</span><span class="er">o</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Assumindo que a f</span><span class="st">ó</span><span class="er">rmula </span><span class="st">é</span><span class="er"> falsa</span><span class="st">...'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Negação: ((L(s) → M(s)) ∧ L(s)) ∧ ¬M(s)</span></span>
-<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Isso significa</span><span class="st">:</span><span class="er"> </span><span class="st">((</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Negação: ((L(S) → M(S)) ∧ L(S)) ∧ ¬M(S)</span></span>
+<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Isso significa</span><span class="st">:</span><span class="er"> </span><span class="st">((</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Para que isso seja verdade, precisamos:</span></span>
-<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a>    <span class="co">% 1. L(s) → M(s) seja verdade</span></span>
-<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a>    <span class="co">% 2. L(s) seja verdade  </span></span>
-<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a>    <span class="co">% 3. M(s) seja falso</span></span>
+<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a>    <span class="co">% 1. L(S) → M(S) seja verdade</span></span>
+<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a>    <span class="co">% 2. L(S) seja verdade  </span></span>
+<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a>    <span class="co">% 3. M(S) seja falso</span></span>
 <span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Para isso ser verdade</span><span class="st">,</span><span class="er"> precisamos</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'1.</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'2.</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'3.</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> falso</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'1.</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'2.</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'3.</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> falso</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Mas se L(s) é verdade e L(s) → M(s) é verdade,</span></span>
-<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a>    <span class="co">% então M(s) deve ser verdade (modus ponens)</span></span>
-<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Mas se L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade e L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade</span><span class="st">,'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">ent</span><span class="st">ã</span><span class="er">o M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> deve ser verdade </span><span class="st">(</span><span class="er">modus ponens</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Contradi</span><span class="st">çã</span><span class="er">o</span><span class="st">:</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> n</span><span class="st">ã</span><span class="er">o pode ser verdade e falso simultaneamente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Mas se L(S) é verdade e L(S) → M(S) é verdade,</span></span>
+<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a>    <span class="co">% então M(S) deve ser verdade (modus ponens)</span></span>
+<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Mas se L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade e L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">=</span><span class="er"> verdade</span><span class="st">,'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">ent</span><span class="st">ã</span><span class="er">o M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> deve ser verdade </span><span class="st">(</span><span class="er">modus ponens</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Contradi</span><span class="st">çã</span><span class="er">o</span><span class="st">:</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> n</span><span class="st">ã</span><span class="er">o pode ser verdade e falso simultaneamente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Portanto</span><span class="st">,</span><span class="er"> a f</span><span class="st">ó</span><span class="er">rmula original </span><span class="st">é</span><span class="er"> uma TAUTOLOGIA</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">.</span></span>
 <span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a><span class="co">% ============================================================================</span></span>
@@ -3976,11 +3976,11 @@ p \wedge q \wedge \neg r
 <span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a><span class="co">% Simulação da conversão para FNC da negação</span></span>
 <span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a>fnc_negacao <span class="kw">:-</span></span>
 <span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Forma Normal Conjuntiva da nega</span><span class="st">çã</span><span class="er">o</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'¬[((</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)]'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'≡</span><span class="er"> </span><span class="st">((</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'≡</span><span class="er"> </span><span class="st">((¬</span><span class="er">L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">∨</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'≡</span><span class="er"> L</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">∧</span><span class="er"> M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Esta FNC cont</span><span class="st">é</span><span class="er">m a contradi</span><span class="st">çã</span><span class="er">o M</span><span class="st">(</span><span class="er">s</span><span class="st">)</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">s</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'¬[((</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)]'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'≡</span><span class="er"> </span><span class="st">((</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">→</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'≡</span><span class="er"> </span><span class="st">((¬</span><span class="er">L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">∨</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">))</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'≡</span><span class="er"> L</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">∧</span><span class="er"> M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Esta FNC cont</span><span class="st">é</span><span class="er">m a contradi</span><span class="st">çã</span><span class="er">o M</span><span class="st">(</span><span class="er">S</span><span class="st">)</span><span class="er"> </span><span class="st">∧</span><span class="er"> </span><span class="st">¬</span><span class="er">M</span><span class="st">(</span><span class="er">S</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Logo</span><span class="st">,</span><span class="er"> a f</span><span class="st">ó</span><span class="er">rmula original </span><span class="st">é</span><span class="er"> uma TAUTOLOGIA</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">.</span></span>
 <span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a><span class="co">% ============================================================================</span></span>
@@ -4080,16 +4080,16 @@ p \wedge q \wedge \neg r
 </ol>
 <p><strong>Em Prolog</strong>:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Definir predicados para um domínio finito</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>p(x1)<span class="kw">.</span> p(x2)<span class="kw">.</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>q(y1)<span class="kw">.</span> q(y2)<span class="kw">.</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>r(x1<span class="kw">,</span> y1)<span class="kw">.</span> r(x2<span class="kw">,</span> y2)<span class="kw">.</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>s(z1)<span class="kw">.</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="dt">P</span>(x1)<span class="kw">.</span> <span class="dt">P</span>(x2)<span class="kw">.</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="dt">Q</span>(y1)<span class="kw">.</span> <span class="dt">Q</span>(y2)<span class="kw">.</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="dt">R</span>(x1<span class="kw">,</span> y1)<span class="kw">.</span> <span class="dt">R</span>(x2<span class="kw">,</span> y2)<span class="kw">.</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="dt">S</span>(z1)<span class="kw">.</span></span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">% Fórmula: ∀x (¬P(x) ∨ ∃y (Q(y) ∧ R(x,y))) ∨ ∃z S(z)</span></span>
 <span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>formula <span class="kw">:-</span></span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    (forall(member(<span class="dt">X</span><span class="kw">,</span> [x1, x2])<span class="kw">,</span></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>            (<span class="kw">\+</span> p(<span class="dt">X</span>) <span class="kw">;</span> exists(member(<span class="dt">Y</span><span class="kw">,</span> [y1, y2])<span class="kw">,</span> (q(<span class="dt">Y</span>)<span class="kw">,</span> r(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)))))</span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span> exists(member(<span class="dt">Z</span><span class="kw">,</span> [z1])<span class="kw">,</span> s(<span class="dt">Z</span>)))<span class="kw">.</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>            (<span class="kw">\+</span> <span class="dt">P</span>(<span class="dt">X</span>) <span class="kw">;</span> exists(member(<span class="dt">Y</span><span class="kw">,</span> [y1, y2])<span class="kw">,</span> (<span class="dt">Q</span>(<span class="dt">Y</span>)<span class="kw">,</span> <span class="dt">R</span>(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)))))</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span> exists(member(<span class="dt">Z</span><span class="kw">,</span> [z1])<span class="kw">,</span> <span class="dt">S</span>(<span class="dt">Z</span>)))<span class="kw">.</span></span>
 <span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">% Testar a fórmula</span></span>
 <span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>test_formula <span class="kw">:-</span></span>
@@ -4128,14 +4128,14 @@ p \wedge q \wedge \neg r
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">% ============================================================================</span></span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">% Representamos cláusulas como listas de literais</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Literal positivo: p, Literal negativo: neg(p)</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Literal positivo: P, Literal negativo: neg(P)</span></span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Cláusula vazia: []</span></span>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Conjunto original de cláusulas</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">1</span><span class="kw">,</span> [neg(p), neg(q), r])<span class="kw">.</span>     <span class="co">% ¬P ∨ ¬Q ∨ R</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">2</span><span class="kw">,</span> [p, r])<span class="kw">.</span>                  <span class="co">% P ∨ R  </span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">3</span><span class="kw">,</span> [q])<span class="kw">.</span>                     <span class="co">% Q</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">4</span><span class="kw">,</span> [neg(r)])<span class="kw">.</span>                <span class="co">% ¬R</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">1</span><span class="kw">,</span> [neg(<span class="dt">P</span>), neg(<span class="dt">Q</span>), <span class="dt">R</span>])<span class="kw">.</span>     <span class="co">% ¬P ∨ ¬Q ∨ R</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">2</span><span class="kw">,</span> [<span class="dt">P</span>, <span class="dt">R</span>])<span class="kw">.</span>                  <span class="co">% P ∨ R  </span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">3</span><span class="kw">,</span> [<span class="dt">Q</span>])<span class="kw">.</span>                     <span class="co">% Q</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>clausula(<span class="dv">4</span><span class="kw">,</span> [neg(<span class="dt">R</span>)])<span class="kw">.</span>                <span class="co">% ¬R</span></span>
 <span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="co">% ============================================================================</span></span>
 <span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co">% PARTE 2: ALGORITMO DE RESOLUÇÃO</span></span>
@@ -4189,13 +4189,13 @@ p \wedge q \wedge \neg r
 <span id="cb36-67"><a href="#cb36-67" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb36-68"><a href="#cb36-68" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Passo 2: Resolver (5) e (3) sobre Q  </span></span>
 <span id="cb36-69"><a href="#cb36-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Passo </span><span class="st">2:</span><span class="er"> Resolvendo resultado anterior com </span><span class="st">(3)</span><span class="er"> sobre Q</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a>    resolucao(<span class="dt">C5</span><span class="kw">,</span> [q]<span class="kw">,</span> <span class="dt">C6</span>)<span class="kw">,</span></span>
+<span id="cb36-70"><a href="#cb36-70" aria-hidden="true" tabindex="-1"></a>    resolucao(<span class="dt">C5</span><span class="kw">,</span> [<span class="dt">Q</span>]<span class="kw">,</span> <span class="dt">C6</span>)<span class="kw">,</span></span>
 <span id="cb36-71"><a href="#cb36-71" aria-hidden="true" tabindex="-1"></a>    format(<span class="st">'</span><span class="er">Resultado</span><span class="st">:</span><span class="er"> </span><span class="st">~</span><span class="er">w</span><span class="st">~</span><span class="er">n</span><span class="st">'</span><span class="kw">,</span> [<span class="dt">C6</span>])<span class="kw">,</span></span>
 <span id="cb36-72"><a href="#cb36-72" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">6</span><span class="kw">,</span> <span class="dt">C6</span>))<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-73"><a href="#cb36-73" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb36-74"><a href="#cb36-74" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Passo 3: Resolver (6) e (4) sobre R</span></span>
 <span id="cb36-75"><a href="#cb36-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Passo </span><span class="st">3:</span><span class="er"> Resolvendo resultado anterior com </span><span class="st">(4)</span><span class="er"> sobre R</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>    resolucao(<span class="dt">C6</span><span class="kw">,</span> [neg(r)]<span class="kw">,</span> <span class="dt">Vazia</span>)<span class="kw">,</span></span>
+<span id="cb36-76"><a href="#cb36-76" aria-hidden="true" tabindex="-1"></a>    resolucao(<span class="dt">C6</span><span class="kw">,</span> [neg(<span class="dt">R</span>)]<span class="kw">,</span> <span class="dt">Vazia</span>)<span class="kw">,</span></span>
 <span id="cb36-77"><a href="#cb36-77" aria-hidden="true" tabindex="-1"></a>    format(<span class="st">'</span><span class="er">Resultado</span><span class="st">:</span><span class="er"> </span><span class="st">~</span><span class="er">w</span><span class="st">~</span><span class="er">n</span><span class="st">'</span><span class="kw">,</span> [<span class="dt">Vazia</span>])<span class="kw">,</span></span>
 <span id="cb36-78"><a href="#cb36-78" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb36-79"><a href="#cb36-79" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Verifica se obtivemos a cláusula vazia</span></span>
@@ -4218,13 +4218,13 @@ p \wedge q \wedge \neg r
 <span id="cb36-96"><a href="#cb36-96" aria-hidden="true" tabindex="-1"></a><span class="co">% Convertendo para cláusulas de Horn (apenas para demonstração)</span></span>
 <span id="cb36-97"><a href="#cb36-97" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-98"><a href="#cb36-98" aria-hidden="true" tabindex="-1"></a><span class="co">% Da cláusula (1): ¬P ∨ ¬Q ∨ R  ===&gt;  R :- P, Q</span></span>
-<span id="cb36-99"><a href="#cb36-99" aria-hidden="true" tabindex="-1"></a>regra_r <span class="kw">:-</span> p<span class="kw">,</span> q<span class="kw">.</span></span>
+<span id="cb36-99"><a href="#cb36-99" aria-hidden="true" tabindex="-1"></a>regra_r <span class="kw">:-</span> <span class="dt">P</span><span class="kw">,</span> <span class="dt">Q</span><span class="kw">.</span></span>
 <span id="cb36-100"><a href="#cb36-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-101"><a href="#cb36-101" aria-hidden="true" tabindex="-1"></a><span class="co">% Da cláusula (2): P ∨ R  ===&gt;  Se não podemos provar R, então P</span></span>
 <span id="cb36-102"><a href="#cb36-102" aria-hidden="true" tabindex="-1"></a><span class="co">% (Esta não é uma cláusula de Horn diretamente)</span></span>
 <span id="cb36-103"><a href="#cb36-103" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-104"><a href="#cb36-104" aria-hidden="true" tabindex="-1"></a><span class="co">% Da cláusula (3): Q é um fato</span></span>
-<span id="cb36-105"><a href="#cb36-105" aria-hidden="true" tabindex="-1"></a>q<span class="kw">.</span></span>
+<span id="cb36-105"><a href="#cb36-105" aria-hidden="true" tabindex="-1"></a><span class="dt">Q</span><span class="kw">.</span></span>
 <span id="cb36-106"><a href="#cb36-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-107"><a href="#cb36-107" aria-hidden="true" tabindex="-1"></a><span class="co">% Para demonstrar a inconsistência, vamos negar R e tentar prová-lo</span></span>
 <span id="cb36-108"><a href="#cb36-108" aria-hidden="true" tabindex="-1"></a>demonstrar_inconsistencia_prolog <span class="kw">:-</span></span>
@@ -4232,21 +4232,21 @@ p \wedge q \wedge \neg r
 <span id="cb36-110"><a href="#cb36-110" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'=========================================='</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-111"><a href="#cb36-111" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb36-112"><a href="#cb36-112" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Base de conhecimento</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb36-113"><a href="#cb36-113" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> q </span><span class="st">(</span><span class="er">fato</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb36-114"><a href="#cb36-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> r </span><span class="st">:-</span><span class="er"> p</span><span class="st">,</span><span class="er"> q </span><span class="st">(</span><span class="er">regra</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb36-113"><a href="#cb36-113" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> Q </span><span class="st">(</span><span class="er">fato</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb36-114"><a href="#cb36-114" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> R </span><span class="st">:-</span><span class="er"> P</span><span class="st">,</span><span class="er"> Q </span><span class="st">(</span><span class="er">regra</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-115"><a href="#cb36-115" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> Tentando provar </span><span class="st">¬</span><span class="er">r</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-116"><a href="#cb36-116" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb36-117"><a href="#cb36-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Para provar </span><span class="st">¬</span><span class="er">r</span><span class="st">,</span><span class="er"> o Prolog adiciona r </span><span class="st">à</span><span class="er"> base e busca contradi</span><span class="st">çã</span><span class="er">o</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb36-117"><a href="#cb36-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Para provar </span><span class="st">¬</span><span class="er">r</span><span class="st">,</span><span class="er"> o Prolog adiciona R </span><span class="st">à</span><span class="er"> base e busca contradi</span><span class="st">çã</span><span class="er">o</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-118"><a href="#cb36-118" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb36-119"><a href="#cb36-119" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Simula o processo de resolução do Prolog</span></span>
-<span id="cb36-120"><a href="#cb36-120" aria-hidden="true" tabindex="-1"></a>    (q <span class="kw">-&gt;</span></span>
-<span id="cb36-121"><a href="#cb36-121" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'✓</span><span class="er"> q </span><span class="st">é</span><span class="er"> verdadeiro</span><span class="st">'</span>) <span class="kw">;</span> </span>
-<span id="cb36-122"><a href="#cb36-122" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'✗</span><span class="er"> q </span><span class="st">é</span><span class="er"> falso</span><span class="st">'</span>)</span>
+<span id="cb36-120"><a href="#cb36-120" aria-hidden="true" tabindex="-1"></a>    (<span class="dt">Q</span> <span class="kw">-&gt;</span></span>
+<span id="cb36-121"><a href="#cb36-121" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'✓</span><span class="er"> Q </span><span class="st">é</span><span class="er"> verdadeiro</span><span class="st">'</span>) <span class="kw">;</span> </span>
+<span id="cb36-122"><a href="#cb36-122" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'✗</span><span class="er"> Q </span><span class="st">é</span><span class="er"> falso</span><span class="st">'</span>)</span>
 <span id="cb36-123"><a href="#cb36-123" aria-hidden="true" tabindex="-1"></a>    )<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-124"><a href="#cb36-124" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb36-125"><a href="#cb36-125" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Se assumirmos p verdadeiro</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb36-126"><a href="#cb36-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> De </span><span class="st">"</span><span class="er">r </span><span class="st">:-</span><span class="er"> p</span><span class="st">,</span><span class="er"> q</span><span class="st">"</span><span class="er"> e sabendo que p e q s</span><span class="st">ã</span><span class="er">o verdadeiros</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
-<span id="cb36-127"><a href="#cb36-127" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> Podemos inferir r</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb36-125"><a href="#cb36-125" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Se assumirmos P verdadeiro</span><span class="st">:'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb36-126"><a href="#cb36-126" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> De </span><span class="st">"</span><span class="er">R </span><span class="st">:-</span><span class="er"> P</span><span class="st">,</span><span class="er"> Q</span><span class="st">"</span><span class="er"> e sabendo que P e Q s</span><span class="st">ã</span><span class="er">o verdadeiros</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
+<span id="cb36-127"><a href="#cb36-127" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> Podemos inferir R</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-128"><a href="#cb36-128" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> Mas isso contradiz nossa tentativa de provar </span><span class="st">¬</span><span class="er">r</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-129"><a href="#cb36-129" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'-</span><span class="er"> Logo</span><span class="st">,</span><span class="er"> a suposi</span><span class="st">çã</span><span class="er">o inicial leva </span><span class="st">à</span><span class="er"> contradi</span><span class="st">çã</span><span class="er">o</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">.</span></span>
 <span id="cb36-130"><a href="#cb36-130" aria-hidden="true" tabindex="-1"></a></span>
@@ -4305,7 +4305,7 @@ p \wedge q \wedge \neg r
 <span id="cb36-183"><a href="#cb36-183" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'==============================='</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-184"><a href="#cb36-184" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb36-185"><a href="#cb36-185" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Um conjunto que não leva à contradição</span></span>
-<span id="cb36-186"><a href="#cb36-186" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ClausulasSat</span> <span class="kw">=</span> [[p], [neg(p), q], [neg(q), r]]<span class="kw">,</span></span>
+<span id="cb36-186"><a href="#cb36-186" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ClausulasSat</span> <span class="kw">=</span> [[<span class="dt">P</span>], [neg(<span class="dt">P</span>), <span class="dt">Q</span>], [neg(<span class="dt">Q</span>), <span class="dt">R</span>]]<span class="kw">,</span></span>
 <span id="cb36-187"><a href="#cb36-187" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write</span>(<span class="st">'</span><span class="er">Cl</span><span class="st">á</span><span class="er">usulas</span><span class="st">:</span><span class="er"> </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span></span>
 <span id="cb36-188"><a href="#cb36-188" aria-hidden="true" tabindex="-1"></a>    forall(member(<span class="dt">C</span><span class="kw">,</span> <span class="dt">ClausulasSat</span>)<span class="kw">,</span> </span>
 <span id="cb36-189"><a href="#cb36-189" aria-hidden="true" tabindex="-1"></a>           format(<span class="st">'</span><span class="er">  </span><span class="st">~</span><span class="er">w</span><span class="st">~</span><span class="er">n</span><span class="st">'</span><span class="kw">,</span> [<span class="dt">C</span>])</span>
@@ -4337,10 +4337,10 @@ p \wedge q \wedge \neg r
 <span id="cb36-215"><a href="#cb36-215" aria-hidden="true" tabindex="-1"></a>limpar_clausulas <span class="kw">:-</span></span>
 <span id="cb36-216"><a href="#cb36-216" aria-hidden="true" tabindex="-1"></a>    <span class="kw">retractall</span>(clausula(<span class="dt">N</span><span class="kw">,</span> <span class="dt">_</span>))<span class="kw">,</span></span>
 <span id="cb36-217"><a href="#cb36-217" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Reestabelece cláusulas originais</span></span>
-<span id="cb36-218"><a href="#cb36-218" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">1</span><span class="kw">,</span> [neg(p), neg(q), r]))<span class="kw">,</span></span>
-<span id="cb36-219"><a href="#cb36-219" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">2</span><span class="kw">,</span> [p, r]))<span class="kw">,</span></span>
-<span id="cb36-220"><a href="#cb36-220" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">3</span><span class="kw">,</span> [q]))<span class="kw">,</span></span>
-<span id="cb36-221"><a href="#cb36-221" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">4</span><span class="kw">,</span> [neg(r)]))<span class="kw">.</span></span>
+<span id="cb36-218"><a href="#cb36-218" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">1</span><span class="kw">,</span> [neg(<span class="dt">P</span>), neg(<span class="dt">Q</span>), <span class="dt">R</span>]))<span class="kw">,</span></span>
+<span id="cb36-219"><a href="#cb36-219" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">2</span><span class="kw">,</span> [<span class="dt">P</span>, <span class="dt">R</span>]))<span class="kw">,</span></span>
+<span id="cb36-220"><a href="#cb36-220" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">3</span><span class="kw">,</span> [<span class="dt">Q</span>]))<span class="kw">,</span></span>
+<span id="cb36-221"><a href="#cb36-221" aria-hidden="true" tabindex="-1"></a>    assert(clausula(<span class="dv">4</span><span class="kw">,</span> [neg(<span class="dt">R</span>)]))<span class="kw">.</span></span>
 <span id="cb36-222"><a href="#cb36-222" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-223"><a href="#cb36-223" aria-hidden="true" tabindex="-1"></a><span class="co">% ============================================================================</span></span>
 <span id="cb36-224"><a href="#cb36-224" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS DE EXEMPLO</span></span>
