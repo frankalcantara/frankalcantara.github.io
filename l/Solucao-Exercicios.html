@@ -301,7 +301,9 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#exercícios-conversão-forma-normal-disjuntiva-sec-exercicios-conversao-fnd" id="toc-exercícios-conversão-forma-normal-disjuntiva-sec-exercicios-conversao-fnd" class="nav-link" data-scroll-target="#exercícios-conversão-forma-normal-disjuntiva-sec-exercicios-conversao-fnd"><span class="header-section-number">14.3.1</span> Exercícios Conversão Forma Normal Disjuntiva <span>Section 7.1.2.6</span></a></li>
   <li><a href="#exercícios-conversão-forma-normal-conjuntiva-sec-exercicios-conversao-fnc" id="toc-exercícios-conversão-forma-normal-conjuntiva-sec-exercicios-conversao-fnc" class="nav-link" data-scroll-target="#exercícios-conversão-forma-normal-conjuntiva-sec-exercicios-conversao-fnc"><span class="header-section-number">14.3.2</span> Exercícios Conversão Forma Normal Conjuntiva <span>Section 7.1.3.7</span></a></li>
-  <li><a href="#conexão-com-o-prolog-sec-predicativa-conexao-prolog" id="toc-conexão-com-o-prolog-sec-predicativa-conexao-prolog" class="nav-link" data-scroll-target="#conexão-com-o-prolog-sec-predicativa-conexao-prolog"><span class="header-section-number">14.3.3</span> Conexão com o Prolog <span>Section 7.3</span></a></li>
+  <li><a href="#exercícios-conversão-para-forma-normal-prenex" id="toc-exercícios-conversão-para-forma-normal-prenex" class="nav-link" data-scroll-target="#exercícios-conversão-para-forma-normal-prenex"><span class="header-section-number">14.3.3</span> Exercícios Conversão para Forma Normal Prenex</a></li>
+  <li><a href="#exercícios-de-skolemização-sec-exercicios-skolemizacao" id="toc-exercícios-de-skolemização-sec-exercicios-skolemizacao" class="nav-link" data-scroll-target="#exercícios-de-skolemização-sec-exercicios-skolemizacao"><span class="header-section-number">14.3.4</span> Exercícios de Skolemização <span>Section 7.2.4</span></a></li>
+  <li><a href="#conexão-com-o-prolog-sec-predicativa-conexao-prolog" id="toc-conexão-com-o-prolog-sec-predicativa-conexao-prolog" class="nav-link" data-scroll-target="#conexão-com-o-prolog-sec-predicativa-conexao-prolog"><span class="header-section-number">14.3.5</span> Conexão com o Prolog <span>Section 7.3</span></a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/Solucao-Exercicios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -2231,7 +2233,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- nao_gerente(X).</span></span>
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: X = joao</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 11 - Sistema Bancário</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Cliente(x)\)</span>: x é um cliente</li>
 <li><span class="math inline">\(Conta(y)\)</span>: y é uma conta bancária</li>
@@ -2242,7 +2244,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(Transacao(z)\)</span>: z é uma transação</li>
 <li><span class="math inline">\(RealizouTransacao(x, z)\)</span>: cliente x realizou transação z</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong> - Todo cliente possui pelo menos uma conta:</p>
+<p><strong>2. Regras formalizadas</strong>: - Todo cliente possui pelo menos uma conta:</p>
 <p><span class="math display">\[∀x (Cliente(x) → ∃y (Conta(y) ∧ Possui(x, y)))\]</span></p>
 <ul>
 <li><p>Toda conta pertence a exatamente um cliente:</p>
@@ -2254,7 +2256,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><p>Nem todas as contas têm saldo positivo:</p>
 <p><span class="math display">\[¬∀y (Conta(y) → SaldoPositivo(y))\]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong> - Encontrar todos os clientes VIP:</p>
+<p><strong>3. Consultas úteis</strong>: - Encontrar todos os clientes VIP:</p>
 <p><span class="math display">\[∃x (Cliente(x) ∧ VIP(x))\]</span></p>
 <ul>
 <li><p>Verificar se existe alguma conta com saldo negativo:</p>
@@ -2350,7 +2352,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Y1</span> <span class="kw">\=</span> <span class="dt">Y2</span><span class="kw">.</span></span>
 <span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- cliente_multiplas_contas(X).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 12 - Sistema de Saúde</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Medico(x)\)</span>: x é um médico</li>
 <li><span class="math inline">\(Paciente(y)\)</span>: y é um paciente</li>
@@ -2363,7 +2365,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(Ambulatorial(y)\)</span>: paciente y é ambulatorial</li>
 <li><span class="math inline">\(Prescreveu(x, z)\)</span>: médico x prescreveu tratamento z</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong> - Todo paciente é atendido por pelo menos um médico:</p>
+<p><strong>2. Regras formalizadas</strong>: - Todo paciente é atendido por pelo menos um médico:</p>
 <p><span class="math display">\[∀y (Paciente(y) → ∃x (Medico(x) ∧ Atende(x, y)))\]</span></p>
 <ul>
 <li><p>Todo médico tem uma especialidade:</p></li>
@@ -2375,7 +2377,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><p>Todo tratamento é prescrito por algum médico:</p></li>
 <li><p><span class="math display">\[∀z (Tratamento(z) → ∃x (Medico(x) ∧ Prescreveu(x, z)))\]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong> - Encontrar médicos que atendem pacientes internados:</p>
+<p><strong>3. Consultas úteis</strong>: - Encontrar médicos que atendem pacientes internados:</p>
 <p><span class="math display">\[∃x ∃y (Medico(x) ∧ Paciente(y) ∧ Internado(y) ∧ Atende(x, y))\]</span></p>
 <ul>
 <li><p>Verificar se há tratamentos sem médico responsável:</p></li>
@@ -2480,7 +2482,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a>    <span class="dt">X1</span> <span class="kw">\=</span> <span class="dt">X2</span><span class="kw">.</span></span>
 <span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- paciente_multiplos_medicos(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 13 - Rede Social</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Usuario(x)\)</span>: x é um usuário</li>
 <li><span class="math inline">\(Postagem(y)\)</span>: y é uma postagem</li>
@@ -2491,7 +2493,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(Influenciador(x)\)</span>: usuário x é influenciador</li>
 <li><span class="math inline">\(Segue(x, y)\)</span>: usuário x segue usuário y</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong> - Amizade é uma relação simétrica:</p>
+<p><strong>2. Regras formalizadas</strong>: - Amizade é uma relação simétrica:</p>
 <p><span class="math display">\[∀x ∀y (Amigo(x, y) → Amigo(y, x))\]</span></p>
 <ul>
 <li><p>Todo usuário pode publicar postagens:</p>
@@ -2509,7 +2511,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 ¬∀y (Postagem(y) → ∃x (Usuario(x) ∧ Curtiu(x, y)))
 \]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong> - Encontrar postagens mais populares (com curtidas):</p>
+<p><strong>3. Consultas úteis</strong>: - Encontrar postagens mais populares (com curtidas):</p>
 <p><span class="math display">\[
   ∃y ∃x₁ ∃x₂ (Postagem(y) ∧ Usuario(x₁) ∧ Usuario(x₂) ∧ x₁ ≠ x₂ ∧ Curtiu(x₁, y) ∧ Curtiu(x₂, y))
   \]</span></p>
@@ -2619,7 +2621,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar influenciadores</span></span>
 <span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- influenciador(X).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 14 - Sistema de Biblioteca</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Livro(x)\)</span>: x é um livro</li>
 <li><span class="math inline">\(Usuario(y)\)</span>: y é um usuário</li>
@@ -2629,7 +2631,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(DataDevolucao(x, d)\)</span>: empréstimo do livro x tem data de devolução d</li>
 <li><span class="math inline">\(JaFoiEmprestado(x)\)</span>: livro x já foi emprestado alguma vez</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong> - Um usuário pode pegar vários livros:</p>
+<p><strong>2. Regras formalizadas</strong>: - Um usuário pode pegar vários livros:</p>
 <p><span class="math display">\[∃y ∃x₁ ∃x₂ (Usuario(y) ∧ Livro(x₁) ∧ Livro(x₂) ∧ x₁ ≠ x₂ ∧ Emprestado(x₁, y) ∧ Emprestado(x₂, y))\]</span></p>
 <ul>
 <li><p>Um livro só pode estar com um usuário por vez:</p>
@@ -2639,7 +2641,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><p>Existem livros que nunca foram emprestados: <span class="math display">\[∃x (Livro(x) ∧ ¬JaFoiEmprestado(x))\]</span></p></li>
 <li><p>Todo empréstimo tem data de devolução: <span class="math display">\[∀x ∀y (Emprestado(x, y) → ∃d DataDevolucao(x, d))\]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong> - Encontrar livros disponíveis: <span class="math display">\[∃x (Livro(x) ∧ Disponivel(x))\]</span></p>
+<p><strong>3. Consultas úteis</strong>: - Encontrar livros disponíveis: <span class="math display">\[∃x (Livro(x) ∧ Disponivel(x))\]</span></p>
 <ul>
 <li><p>Verificar usuários com empréstimos ativos: <span class="math display">\[∃y ∃x (Usuario(y) ∧ Livro(x) ∧ Emprestado(x, y))\]</span></p></li>
 <li><p>Listar livros nunca emprestados: <span class="math display">\[∃x (Livro(x) ∧ ¬JaFoiEmprestado(x))\]</span></p></li>
@@ -2722,7 +2724,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar livros nunca emprestados</span></span>
 <span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- livro_nunca_emprestado(X).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 15 - Sistema de E-commerce</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Produto(x)\)</span>: x é um produto</li>
 <li><span class="math inline">\(Cliente(y)\)</span>: y é um cliente</li>
@@ -2735,7 +2737,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(EmPromocao(x)\)</span>: produto x está em promoção</li>
 <li><span class="math inline">\(Avaliou(y, x, nota)\)</span>: cliente y avaliou produto x com nota</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong> - Todo produto pertence a pelo menos uma categoria:</p>
+<p><strong>2. Regras formalizadas</strong>: - Todo produto pertence a pelo menos uma categoria:</p>
 <p><span class="math display">\[∀x (Produto(x) → ∃c (Categoria(c) ∧ PertenceCategoria(x, c)))\]</span></p>
 <ul>
 <li><p>Todo pedido é feito por exatamente um cliente:</p>
@@ -2746,7 +2748,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <p><span class="math display">\[∃x (Produto(x) ∧ EmPromocao(x))\]</span></p></li>
 <li><p>Clientes podem fazer múltiplos pedidos: <span class="math display">\[∃y ∃z₁ ∃z₂ (Cliente(y) ∧ Pedido(z₁) ∧ Pedido(z₂) ∧ z₁ ≠ z₂ ∧ FezPedido(y, z₁) ∧ FezPedido(y, z₂))\]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong> - Encontrar produtos populares (com muitas avaliações):</p>
+<p><strong>3. Consultas úteis</strong>: - Encontrar produtos populares (com muitas avaliações):</p>
 <p><span class="math display">\[∃x ∃y₁ ∃y₂ (Produto(x) ∧ Cliente(y₁) ∧ Cliente(y₂) ∧ y₁ ≠ y₂ ∧ ∃n₁ ∃n₂ (Avaliou(y₁, x, n₁) ∧ Avaliou(y₂, x, n₂)))\]</span></p>
 <ul>
 <li><p>Listar produtos em promoção sem avaliações:</p>
@@ -2861,7 +2863,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb24-104"><a href="#cb24-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">N</span> <span class="dt">&gt;=</span> <span class="dv">2</span><span class="kw">.</span>  <span class="co">% Ajustado para o exemplo</span></span>
 <span id="cb24-105"><a href="#cb24-105" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- cliente_frequente(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 16 - Sistema de Transporte</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Motorista(x)\)</span>: x é um motorista</li>
 <li><span class="math inline">\(Passageiro(y)\)</span>: y é um passageiro</li>
@@ -2873,7 +2875,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(Premium(x)\)</span>: motorista x é premium</li>
 <li><span class="math inline">\(AvaliacaoAlta(x)\)</span>: motorista x tem avaliação alta</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong></p>
+<p><strong>2. Regras formalizadas</strong>:</p>
 <ul>
 <li><p>Todo motorista possui exatamente um veículo:</p>
 <p>$$∀x (Motorista(x) → ∃c (Veiculo(c) ∧ Possui(x, c) ∧ ∀d ((Veiculo(d) ∧ Possui(x, d)) → d = c)))`</p></li>
@@ -2886,7 +2888,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><p>Passageiros podem avaliar motoristas:</p>
 <p><span class="math display">\[∀y ∀x ∀v ((Passageiro(y) ∧ Motorista(x) ∧ Viagem(v) ∧ RealizouViagem(x, y, v)) → ∃nota RecebeuAvaliacao(v, nota))\]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong></p>
+<p><strong>3. Consultas úteis</strong>:</p>
 <ul>
 <li><p>Encontrar motoristas premium:</p>
 <p><span class="math display">\[∃x (Motorista(x) ∧ Premium(x))\]</span></p></li>
@@ -2987,7 +2989,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <span id="cb25-90"><a href="#cb25-90" aria-hidden="true" tabindex="-1"></a>    <span class="dt">V1</span> <span class="kw">\=</span> <span class="dt">V2</span><span class="kw">.</span></span>
 <span id="cb25-91"><a href="#cb25-91" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- passageiro_frequente(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Questão 17 - Sistema Universitário</strong></p>
-<p><strong>1. Predicados definidos:</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
 <ul>
 <li><span class="math inline">\(Estudante(x)\)</span>: x é um estudante</li>
 <li><span class="math inline">\(Professor(y)\)</span>: y é um professor</li>
@@ -3001,7 +3003,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><span class="math inline">\(AreaProfessor(y, a)\)</span>: professor y é da área a</li>
 <li><span class="math inline">\(AreaDisciplina(d, a)\)</span>: disciplina d é da área a</li>
 </ul>
-<p><strong>2. Regras formalizadas:</strong> - Todo estudante está matriculado em um curso:</p>
+<p><strong>2. Regras formalizadas</strong>: - Todo estudante está matriculado em um curso:</p>
 <p><span class="math display">\[∀x (Estudante(x) → ∃c (Curso(c) ∧ Matriculado(x, c)))\]</span></p>
 <ul>
 <li><p>Toda disciplina é ministrada por pelo menos um professor:</p>
@@ -3013,7 +3015,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 <li><p>Todo professor ensina disciplinas da sua área:</p>
 <p><span class="math display">\[∀y ∀d ∀a ((Professor(y) ∧ Disciplina(d) ∧ AreaProfessor(y, a) ∧ Ministra(y, d)) → AreaDisciplina(d, a))\]</span></p></li>
 </ul>
-<p><strong>3. Consultas úteis:</strong> - Encontrar estudantes com notas em todas as disciplinas obrigatórias:</p>
+<p><strong>3. Consultas úteis</strong>: - Encontrar estudantes com notas em todas as disciplinas obrigatórias:</p>
 <p><span class="math display">\[∃x (Estudante(x) ∧ ∀d ((Disciplina(d) ∧ Obrigatoria(d)) → ∃n TemNota(x, d, n)))\]</span></p>
 <ul>
 <li><p>Verificar disciplinas sem professor:</p>
@@ -3164,7 +3166,7 @@ Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
 \]</span></p>
 <p><strong>Passo 8: Simplificar</strong></p>
 <p>O primeiro termo contém <span class="math inline">\(P \wedge \neg P\)</span> (contradição), o segundo termo se reduz a <span class="math inline">\((Q \wedge \neg P \wedge R \wedge \neg Q)\)</span> que contém <span class="math inline">\(Q \wedge \neg Q\)</span> (contradição).</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 R \wedge \neg P \wedge \neg Q
 \]</span></p>
@@ -3200,7 +3202,7 @@ R \wedge \neg P \wedge \neg Q
 \]</span></p>
 <p><strong>Passo 6: Simplificar removendo contradições</strong></p>
 <p>Todos os termos contêm contradições (<span class="math inline">\(P \wedge \neg P\)</span>, <span class="math inline">\(Q \wedge \neg Q\)</span> ou <span class="math inline">\(R \wedge \neg R\)</span>).</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 \bot \text{ (fórmula insatisfatível)}
 \]</span></p>
@@ -3227,7 +3229,7 @@ R \wedge \neg P \wedge \neg Q
 <li><span class="math inline">\(\neg R\)</span> também absorve <span class="math inline">\((P \wedge \neg Q \wedge \neg R)\)</span>.</li>
 </ul>
 <p>Após a absorção, a expressão se torna muito mais simples.</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[(P \wedge Q \wedge R) \vee \neg P \vee \neg Q \vee \neg R\]</span></p>
 </section>
 <section id="solução-do-exercício-4" class="level4" data-number="14.3.1.4">
@@ -3264,7 +3266,7 @@ P \rightarrow \neg Q \equiv \neg P \vee \neg Q
 \]</span></p>
 <p><strong>Passo 8: Aplicar distributividade e simplificar</strong></p>
 <p>Após aplicar distributividade e eliminar contradições:</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 (P \wedge \neg Q \wedge \neg R) \vee (P \wedge \neg Q \wedge \neg S) \vee (\neg P \wedge Q \wedge \neg R) \vee (\neg P \wedge Q \wedge \neg S) \vee (P \wedge Q \wedge R \wedge S)
 \]</span></p>
@@ -3300,7 +3302,7 @@ P \rightarrow \neg Q \equiv \neg P \vee \neg Q
 \]</span></p>
 <p><strong>Passo 5: Eliminar contradições</strong></p>
 <p>Removendo termos com contradições (<span class="math inline">\(P \wedge \neg P\)</span>, <span class="math inline">\(Q \wedge \neg Q\)</span>, <span class="math inline">\(R \wedge \neg R\)</span>, <span class="math inline">\(S \wedge \neg S\)</span>):</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 (\neg P \wedge \neg R) \vee (\neg P \wedge \neg S) \vee (\neg P \wedge Q) \vee (\neg Q \wedge \neg R) \vee (\neg Q \wedge P) \vee (\neg Q \wedge \neg S) \vee (R \wedge P) \vee (R \wedge \neg S) \vee (R \wedge Q) \vee (S \wedge \neg R) \vee (S \wedge P) \vee (S \wedge Q)
 \]</span></p>
@@ -3331,7 +3333,7 @@ P \rightarrow \neg Q \equiv \neg P \vee \neg Q
 <p><span class="math display">\[
 ((\neg P \wedge Q) \vee (P \wedge \neg Q)) \vee ((P \wedge R) \vee (Q \wedge \neg R))
 \]</span></p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 (\neg P \wedge Q) \vee (P \wedge \neg Q) \vee (P \wedge R) \vee (Q \wedge \neg R)
 \]</span></p>
@@ -3368,7 +3370,7 @@ P \vee Q \vee (P \wedge R) \vee (Q \wedge \neg R)
 <p>Pela lei de absorção, <span class="math inline">\((P \vee (P \wedge R)) \equiv P\)</span> e <span class="math inline">\((Q \vee (Q \wedge \neg R)) \equiv Q\)</span>. A cláusula se torna <span class="math inline">\(P \vee Q\)</span>.</p>
 <p><strong>Passo 7: Combinar os resultados</strong></p>
 <p>A fórmula completa é <span class="math inline">\(\top \wedge (P \vee Q)\)</span>.</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 P \vee Q
 \]</span></p>
@@ -3394,7 +3396,7 @@ P \wedge \neg Q \wedge Q \wedge \neg P \wedge (P \vee Q)
 \]</span></p>
 <p><strong>Passo 5: Identificar contradição</strong></p>
 <p>A expressão contém <span class="math inline">\(P \wedge \neg P\)</span> e <span class="math inline">\(Q \wedge \neg Q\)</span>, que são contradições.</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 \bot \text{ (fórmula insatisfatível)}
 \]</span></p>
@@ -3412,7 +3414,7 @@ P \wedge \neg Q \wedge Q \wedge \neg P \wedge (P \vee Q)
 P \wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R)
 \]</span></p>
 <p>Os dois lados são idênticos, confirmando que a bicondicional é uma tautologia.</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 \bot \text{ (fórmula insatisfatível)}
 \]</span></p>
@@ -3438,7 +3440,7 @@ P \wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R)
 \]</span></p>
 <p><strong>Passo 3: Observar que ambos os lados são equivalentes</strong></p>
 <p>Como ambos os lados da bicondicional são iguais, a fórmula é uma tautologia.</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 \top \text{ (tautologia)}
 \]</span></p>
@@ -3474,7 +3476,7 @@ P \wedge Q \wedge \neg R
 <li>Como <span class="math inline">\(\neg R\)</span> é verdadeiro, <span class="math inline">\(R\)</span> é falso</li>
 </ul>
 <p>A primeira cláusula se torna: <span class="math inline">\((F \vee F \vee F) = F\)</span></p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 \bot \text{ (fórmula insatisfatível)}
 \]</span></p>
@@ -3502,7 +3504,7 @@ P \wedge Q \wedge \neg R
 <p>Esta parte simplifica para <span class="math inline">\((\neg P \vee Q \vee \neg R) \wedge (P \vee \neg Q \vee R)\)</span>.</p>
 <p><strong>Passo 3: Formar a conjunção completa</strong></p>
 <p>Juntando as FNCs de ambas as partes:</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 (\neg P \vee Q \vee \neg R) \wedge (P \vee \neg Q \vee R) \wedge (P \vee R) \wedge (\neg P \vee \neg R)
 \]</span></p>
@@ -3532,16 +3534,261 @@ P \wedge Q \wedge \neg R
 <li><span class="math inline">\(\neg R \vee \neg P \vee Q \vee R \equiv \neg P \vee Q \vee (R \vee \neg R) \equiv \neg P \vee Q \vee \top \equiv \top\)</span>.</li>
 </ol>
 <p>A expressão completa é <span class="math inline">\(\top \wedge \top \wedge \top\)</span>.</p>
-<p><strong>Resultado Final:</strong></p>
+<p><strong>Resultado </strong>:</p>
 <p><span class="math display">\[
 \top \text{ (a fórmula é uma tautologia)}
 \]</span></p>
 </section>
 </section>
-<section id="conexão-com-o-prolog-sec-predicativa-conexao-prolog" class="level3" data-number="14.3.3">
-<h3 data-number="14.3.3" class="anchored" data-anchor-id="conexão-com-o-prolog-sec-predicativa-conexao-prolog"><span class="header-section-number">14.3.3</span> Conexão com o Prolog <a href="05-formas-normais-e-skolemizacao.html#sec-predicativa-conexao-prolog" class="quarto-xref"><span>Section 7.3</span></a></h3>
+<section id="exercícios-conversão-para-forma-normal-prenex" class="level3" data-number="14.3.3">
+<h3 data-number="14.3.3" class="anchored" data-anchor-id="exercícios-conversão-para-forma-normal-prenex"><span class="header-section-number">14.3.3</span> Exercícios Conversão para Forma Normal Prenex</h3>
 <section id="questão-1" class="level4" data-number="14.3.3.1">
 <h4 data-number="14.3.3.1" class="anchored" data-anchor-id="questão-1"><span class="header-section-number">14.3.3.1</span> Questão 1</h4>
+<p><strong>Passo 1</strong>: Identificar quantificadores</p>
+<ul>
+<li>Temos <span class="math inline">\(\forall y\)</span> dentro da conjunção</li>
+</ul>
+<p><strong>Passo 2</strong>: Mover quantificadores para fora</p>
+<ul>
+<li><span class="math inline">\(\forall y\)</span> deve ser movido para o início</li>
+</ul>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\forall y (P(x) \wedge Q(y))
+\]</span></p>
+</section>
+<section id="questão-2" class="level4" data-number="14.3.3.2">
+<h4 data-number="14.3.3.2" class="anchored" data-anchor-id="questão-2"><span class="header-section-number">14.3.3.2</span> Questão 2</h4>
+<p><strong>Passo 1</strong>: Eliminar implicação</p>
+<ul>
+<li><span class="math inline">\(P(x) \rightarrow Q(x) \equiv \neg P(x) \vee Q(x)\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee Q(x)) \wedge \exists y R(y)
+\]</span></p>
+<p><strong>Passo 2</strong>: Mover quantificadores para fora</p>
+<ul>
+<li>Primeiro <span class="math inline">\(\forall x\)</span>, depois <span class="math inline">\(\exists y\)</span>.</li>
+</ul>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg P(x) \vee Q(x)) \wedge R(y))
+\]</span></p>
+</section>
+<section id="questão-3" class="level4" data-number="14.3.3.3">
+<h4 data-number="14.3.3.3" class="anchored" data-anchor-id="questão-3"><span class="header-section-number">14.3.3.3</span> Questão 3</h4>
+<p><strong>Passo 1</strong>: Aplicar Lei de De Morgan na negação do quantificador</p>
+<ul>
+<li><span class="math inline">\(\neg \forall x P(x) \equiv \exists x \neg P(x)\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+\exists x \neg P(x) \vee \exists y Q(y)
+\]</span></p>
+<p><strong>Passo 2</strong>: Padronizar variáveis (já estão distintas).</p>
+<p><strong>Passo 3</strong>: Mover quantificadores para fora.</p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\exists x \exists y (\neg P(x) \vee Q(y))
+\]</span></p>
+</section>
+<section id="questão-4" class="level4" data-number="14.3.3.4">
+<h4 data-number="14.3.3.4" class="anchored" data-anchor-id="questão-4"><span class="header-section-number">14.3.3.4</span> Questão 4</h4>
+<p><strong>Passo 1</strong>: Eliminar implicação</p>
+<ul>
+<li><span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span></li>
+</ul>
+<p><span class="math display">\[
+\neg(\forall x \exists y P(x,y)) \vee \exists z \forall w Q(z,w)
+\]</span></p>
+<p><strong>Passo 2</strong>: Aplicar De Morgan na negação</p>
+<ul>
+<li><span class="math inline">\(\neg \forall x \exists y P(x,y) \equiv \exists x \neg \exists y P(x,y) \equiv \exists x \forall y \neg P(x,y)\)</span></li>
+</ul>
+<p><span class="math display">\[
+\exists x \forall y \neg P(x,y) \vee \exists z \forall w Q(z,w)
+\]</span></p>
+<p><strong>Passo 3</strong>: Padronizar variáveis (renomear <span class="math inline">\(z\)</span> para <span class="math inline">\(u\)</span> e <span class="math inline">\(w\)</span> para <span class="math inline">\(v\)</span>)</p>
+<p><span class="math display">\[
+\exists x \forall y \neg P(x,y) \vee \exists u \forall v Q(u,v)
+\]</span></p>
+<p><strong>Passo 4</strong>: Mover quantificadores para fora</p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\exists x \forall y \exists u \forall v (\neg P(x,y) \vee Q(u,v))
+\]</span></p>
+</section>
+<section id="questão-5" class="level4" data-number="14.3.3.5">
+<h4 data-number="14.3.3.5" class="anchored" data-anchor-id="questão-5"><span class="header-section-number">14.3.3.5</span> Questão 5</h4>
+<p><strong>Passo 1</strong>: Eliminar bicondicional</p>
+<ul>
+<li><span class="math inline">\(A \leftrightarrow B \equiv (A \rightarrow B) \wedge (B \rightarrow A)\)</span></li>
+</ul>
+<p><span class="math display">\[
+\forall x ((P(x) \rightarrow \exists y Q(x,y)) \wedge (\exists y Q(x,y) \rightarrow P(x))) \vee \forall z R(z)
+\]</span></p>
+<p><strong>Passo 2</strong>: Eliminar implicações</p>
+<p><span class="math display">\[
+\forall x ((\neg P(x) \vee \exists y Q(x,y)) \wedge (\neg \exists y Q(x,y) \vee P(x))) \vee \forall z R(z)
+\]</span></p>
+<p><strong>Passo 3</strong>: Aplicar De Morgan em <span class="math inline">\(\neg \exists y Q(x,y)\)</span></p>
+<p><span class="math display">\[
+\forall x ((\neg P(x) \vee \exists y Q(x,y)) \wedge (\forall y \neg Q(x,y) \vee P(x))) \vee \forall z R(z)
+\]</span></p>
+<p><strong>Passo 4</strong>: Padronizar variáveis (renomear a segunda ocorrência de <span class="math inline">\(y\)</span> para <span class="math inline">\(w\)</span> e <span class="math inline">\(z\)</span> para <span class="math inline">\(u\)</span>)</p>
+<p><span class="math display">\[
+\forall x ((\neg P(x) \vee \exists y Q(x,y)) \wedge (\forall w \neg Q(x,w) \vee P(x))) \vee \forall u R(u)
+\]</span></p>
+<p><strong>Passo 5</strong>: Mover quantificadores para fora</p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall w \forall u (((\neg P(x) \vee Q(x,y)) \wedge (\neg Q(x,w) \vee P(x))) \vee R(u))
+\]</span></p>
+</section>
+<section id="questão-6" class="level4" data-number="14.3.3.6">
+<h4 data-number="14.3.3.6" class="anchored" data-anchor-id="questão-6"><span class="header-section-number">14.3.3.6</span> Questão 6</h4>
+<p><strong>Passo 1</strong>: Aplicar De Morgan na primeira negação</p>
+<ul>
+<li><span class="math inline">\(\neg(\forall x (P(x) \rightarrow \exists y Q(x,y))) \equiv \exists x \neg(P(x) \rightarrow \exists y Q(x,y))\)</span></li>
+</ul>
+<p><strong>Passo 2</strong>: Eliminar implicação interna</p>
+<ul>
+<li><span class="math inline">\(\neg(P(x) \rightarrow \exists y Q(x,y)) \equiv \neg(\neg P(x) \vee \exists y Q(x,y)) \equiv P(x) \wedge \neg \exists y Q(x,y)\)</span></li>
+</ul>
+<p><strong>Passo 3</strong>: Aplicar De Morgan em <span class="math inline">\(\neg \exists y Q(x,y)\)</span></p>
+<ul>
+<li><span class="math inline">\(\neg \exists y Q(x,y) \equiv \forall y \neg Q(x,y)\)</span></li>
+</ul>
+<p><span class="math display">\[
+\exists x \forall y (P(x) \wedge \neg Q(x,y)) \wedge \exists z (\forall w R(z,w) \vee S(z))
+\]</span></p>
+<p><strong>Passo 4</strong>: Padronizar variáveis (renomear <span class="math inline">\(z\)</span> para <span class="math inline">\(u\)</span> e <span class="math inline">\(w\)</span> para <span class="math inline">\(v\)</span>)</p>
+<p><span class="math display">\[
+\exists x \forall y (P(x) \wedge \neg Q(x,y)) \wedge \exists u (\forall v R(u,v) \vee S(u))
+\]</span></p>
+<p><strong>Passo 5</strong>: Mover quantificadores para fora</p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\exists x \forall y \exists u \forall v ((P(x) \wedge \neg Q(x,y)) \wedge (R(u,v) \vee S(u)))
+\]</span></p>
+</section>
+<section id="questão-7" class="level4" data-number="14.3.3.7">
+<h4 data-number="14.3.3.7" class="anchored" data-anchor-id="questão-7"><span class="header-section-number">14.3.3.7</span> Questão 7</h4>
+<p><strong>Passo 1</strong>: Eliminar implicação principal</p>
+<ul>
+<li><span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span></li>
+</ul>
+<p><span class="math display">\[
+\neg(\neg(\exists x \forall y P(x,y))) \vee (\forall z (Q(z) \rightarrow \exists w R(z,w)) \wedge \exists u S(u))
+\]</span></p>
+<p><strong>Passo 2</strong>: Simplificar dupla negação</p>
+<ul>
+<li><span class="math inline">\(\neg(\neg A) \equiv A\)</span></li>
+</ul>
+<p><span class="math display">\[
+\exists x \forall y P(x,y) \vee (\forall z (Q(z) \rightarrow \exists w R(z,w)) \wedge \exists u S(u))
+\]</span></p>
+<p><strong>Passo 3</strong>: Eliminar implicação interna</p>
+<ul>
+<li><span class="math inline">\(Q(z) \rightarrow \exists w R(z,w) \equiv \neg Q(z) \vee \exists w R(z,w)\)</span></li>
+</ul>
+<p><span class="math display">\[
+\exists x \forall y P(x,y) \vee (\forall z (\neg Q(z) \vee \exists w R(z,w)) \wedge \exists u S(u))
+\]</span></p>
+<p><strong>Passo 4</strong>: Padronizar variáveis (renomear conflitos)</p>
+<ul>
+<li>Renomear <span class="math inline">\(z\)</span> para <span class="math inline">\(a\)</span>, <span class="math inline">\(w\)</span> para <span class="math inline">\(b\)</span>, <span class="math inline">\(u\)</span> para <span class="math inline">\(c\)</span></li>
+</ul>
+<p><span class="math display">\[
+\exists x \forall y P(x,y) \vee (\forall a (\neg Q(a) \vee \exists b R(a,b)) \wedge \exists c S(c))
+\]</span></p>
+<p><strong>Passo 5</strong>: Mover quantificadores para fora</p>
+<ul>
+<li>Ordem: <span class="math inline">\(\exists x\)</span>, <span class="math inline">\(\forall y\)</span>, <span class="math inline">\(\forall a\)</span>, <span class="math inline">\(\exists b\)</span>, <span class="math inline">\(\exists c\)</span></li>
+</ul>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[
+\exists x \forall y \forall a \exists b \exists c (P(x,y) \vee ((\neg Q(a) \vee R(a,b)) \wedge S(c)))
+\]</span></p>
+</section>
+</section>
+<section id="exercícios-de-skolemização-sec-exercicios-skolemizacao" class="level3" data-number="14.3.4">
+<h3 data-number="14.3.4" class="anchored" data-anchor-id="exercícios-de-skolemização-sec-exercicios-skolemizacao"><span class="header-section-number">14.3.4</span> Exercícios de Skolemização <a href="05-formas-normais-e-skolemizacao.html#sec-exercicios-skolemizacao" class="quarto-xref"><span>Section 7.2.4</span></a></h3>
+<section id="questão-1-1" class="level4" data-number="14.3.4.1">
+<h4 data-number="14.3.4.1" class="anchored" data-anchor-id="questão-1-1"><span class="header-section-number">14.3.4.1</span> Questão 1</h4>
+<p>A fórmula <span class="math inline">\(\exists x \, P(x)\)</span> contém um quantificador existencial que não é precedido por nenhum quantificador universal.</p>
+<p><strong>Aplicação da Skolemização:</strong> - Substituímos <span class="math inline">\(x\)</span> por uma constante Skolem <span class="math inline">\(c\)</span></p>
+<p><strong>Resultado:</strong> <span class="math display">\[P(c)\]</span></p>
+</section>
+<section id="questão-1-2" class="level4" data-number="14.3.4.2">
+<h4 data-number="14.3.4.2" class="anchored" data-anchor-id="questão-1-2"><span class="header-section-number">14.3.4.2</span> Questão 1</h4>
+<p>A fórmula <span class="math inline">\(\forall x \exists y \, Q(x,y)\)</span> contém um quantificador existencial <span class="math inline">\(\exists y\)</span> precedido pelo quantificador universal <span class="math inline">\(\forall x\)</span>.</p>
+<p><strong>Aplicação da Skolemização:</strong> - Substituímos <span class="math inline">\(y\)</span> por uma função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span> que depende de <span class="math inline">\(x\)</span></p>
+<p><strong>Resultado:</strong> <span class="math display">\[\forall x \, Q(x, \mathbf{f}(x))\]</span></p>
+<p><strong>Forma com quantificadores universais implícitos:</strong> <span class="math display">\[Q(x, \mathbf{f}(x))\]</span></p>
+</section>
+<section id="questão-3-1" class="level4" data-number="14.3.4.3">
+<h4 data-number="14.3.4.3" class="anchored" data-anchor-id="questão-3-1"><span class="header-section-number">14.3.4.3</span> Questão 3</h4>
+<p>Para a fórmula <span class="math inline">\(\exists a \forall x \exists y \forall z \exists w \, R(a,x,y,z,w)\)</span>, identificamos as dependências de cada quantificador existencial:</p>
+<p><strong>Análise das dependências:</strong> - <span class="math inline">\(\exists a\)</span>: Não há quantificadores universais precedentes → Constante Skolem <span class="math inline">\(c_1\)</span> - <span class="math inline">\(\exists y\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> → Função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span> - <span class="math inline">\(\exists w\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> e <span class="math inline">\(\forall z\)</span> → Função Skolem <span class="math inline">\(\mathbf{g}(x,z)\)</span></p>
+<p><strong>Resultado:</strong> <span class="math display">\[\forall x \forall z \, R(c_1, x, \mathbf{f}(x), z, \mathbf{g}(x,z))\]</span></p>
+<p><strong>Forma com quantificadores universais implícitos:</strong> <span class="math display">\[R(c_1, x, \mathbf{f}(x), z, \mathbf{g}(x,z))\]</span></p>
+</section>
+<section id="questão-4-1" class="level4" data-number="14.3.4.4">
+<h4 data-number="14.3.4.4" class="anchored" data-anchor-id="questão-4-1"><span class="header-section-number">14.3.4.4</span> Questão 4</h4>
+<p><strong>Passo 1:</strong> Eliminar a implicação usando <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>:</p>
+<p><span class="math display">\[\forall x (\neg P(x) \vee \exists y \, Q(x,y)) \wedge \exists z \, R(z)\]</span></p>
+<p><strong>Passo 2:</strong> Padronizar variáveis (já são distintas).</p>
+<p><strong>Passo 3:</strong> Converter para Forma Normal Prenex movendo os quantificadores para fora:</p>
+<p><span class="math display">\[\forall x \exists y \exists z ((\neg P(x) \vee Q(x,y)) \wedge R(z))\]</span></p>
+<p><strong>Passo 4:</strong> Aplicar Skolemização: - <span class="math inline">\(\exists y\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> → Função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span> - <span class="math inline">\(\exists z\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> → Função Skolem <span class="math inline">\(\mathbf{g}(x)\)</span></p>
+<p><strong>Resultado:</strong> <span class="math display">\[\forall x ((\neg P(x) \vee Q(x, \mathbf{f}(x))) \wedge R(\mathbf{g}(x)))\]</span></p>
+<p><strong>Forma com quantificadores implícitos:</strong> <span class="math display">\[(\neg P(x) \vee Q(x, \mathbf{f}(x))) \wedge R(\mathbf{g}(x))\]</span></p>
+</section>
+<section id="questão-5-1" class="level4" data-number="14.3.4.5">
+<h4 data-number="14.3.4.5" class="anchored" data-anchor-id="questão-5-1"><span class="header-section-number">14.3.4.5</span> Questão 5</h4>
+<p><strong>Passo 1:</strong> Aplicar a negação ao quantificador existencial usando <span class="math inline">\(\neg \exists x \, \phi \equiv \forall x \neg \phi\)</span>:</p>
+<p><span class="math display">\[(\forall x \neg \forall y \, P(x,y)) \vee (\forall z \exists w \, S(z,w) \wedge \exists u \, T(u))\]</span></p>
+<p><strong>Passo 2:</strong> Aplicar a negação ao quantificador universal usando <span class="math inline">\(\neg \forall y \, \phi \equiv \exists y \neg \phi\)</span>:</p>
+<p><span class="math display">\[(\forall x \exists y \neg P(x,y)) \vee (\forall z \exists w \, S(z,w) \wedge \exists u \, T(u))\]</span></p>
+<p><strong>Passo 3:</strong> Padronizar variáveis (já são distintas).</p>
+<p><strong>Passo 4:</strong> Converter para Forma Normal Prenex:</p>
+<p><span class="math display">\[\forall x \exists y \forall z \exists w \exists u (\neg P(x,y) \vee (S(z,w) \wedge T(u)))\]</span></p>
+<p><strong>Passo 5:</strong> Aplicar Skolemização:</p>
+<ul>
+<li><span class="math inline">\(\exists y\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> → Função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span></li>
+<li><span class="math inline">\(\exists w\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> e <span class="math inline">\(\forall z\)</span> → Função Skolem <span class="math inline">\(\mathbf{g}(x,z)\)</span></li>
+<li><span class="math inline">\(\exists u\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> e <span class="math inline">\(\forall z\)</span> → Função Skolem <span class="math inline">\(\mathbf{h}(x,z)\)</span></li>
+</ul>
+<p><strong>Resultado:</strong> <span class="math display">\[\forall x \forall z (\neg P(x, \mathbf{f}(x)) \vee (S(z, \mathbf{g}(x,z)) \wedge T(\mathbf{h}(x,z))))\]</span></p>
+</section>
+<section id="questão-6-1" class="level4" data-number="14.3.4.6">
+<h4 data-number="14.3.4.6" class="anchored" data-anchor-id="questão-6-1"><span class="header-section-number">14.3.4.6</span> Questão 6</h4>
+<p><strong>Passo 1:</strong> A fórmula já está estruturada com quantificadores aninhados. Primeiro, eliminamos a implicação:</p>
+<p><span class="math display">\[\forall x (\neg \text{Estudante}(x) \vee \exists y (\text{Professor}(y) \wedge \exists z (\text{Disciplina}(z) \wedge \text{Ensina}(y,z) \wedge \text{Estuda}(x,z))))\]</span></p>
+<p><strong>Passo 2:</strong> Converter para Forma Normal Prenex movendo todos os quantificadores para fora:</p>
+<p><span class="math display">\[\forall x \exists y \exists z (\neg \text{Estudante}(x) \vee (\text{Professor}(y) \wedge \text{Disciplina}(z) \wedge \text{Ensina}(y,z) \wedge \text{Estuda}(x,z)))\]</span></p>
+<p><strong>Passo 3:</strong> Aplicar Skolemização: - <span class="math inline">\(\exists y\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> → Função Skolem <span class="math inline">\(\mathbf{professor}(x)\)</span> - <span class="math inline">\(\exists z\)</span>: Precedido por <span class="math inline">\(\forall x\)</span> → Função Skolem <span class="math inline">\(\mathbf{disciplina}(x)\)</span></p>
+<p><strong>Resultado:</strong> <span class="math display">\[\forall x (\neg \text{Estudante}(x) \vee (\text{Professor}(\mathbf{professor}(x)) \wedge \text{Disciplina}(\mathbf{disciplina}(x)) \wedge \text{Ensina}(\mathbf{professor}(x), \mathbf{disciplina}(x)) \wedge \text{Estuda}(x, \mathbf{disciplina}(x))))\]</span></p>
+</section>
+<section id="questão-7-1" class="level4" data-number="14.3.4.7">
+<h4 data-number="14.3.4.7" class="anchored" data-anchor-id="questão-7-1"><span class="header-section-number">14.3.4.7</span> Questão 7</h4>
+<p><strong>Passo 1:</strong> Eliminar a implicação principal <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>:</p>
+<p><span class="math display">\[\neg(\forall x \exists y \, P(x,y)) \vee (\exists u \forall v \exists w \, Q(u,v,w) \wedge \forall s \, R(s))\]</span></p>
+<p><strong>Passo 2:</strong> Aplicar a negação ao quantificador universal:</p>
+<p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists u \forall v \exists w \, Q(u,v,w) \wedge \forall s \, R(s))\]</span></p>
+<p><strong>Passo 3:</strong> Padronizar variáveis para evitar conflitos. Renomeamos <span class="math inline">\(s\)</span> para <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists u \forall v \exists w \, Q(u,v,w) \wedge \forall t \, R(t))\]</span></p>
+<p><strong>Passo 4:</strong> Converter para Forma Normal Prenex:</p>
+<p><span class="math display">\[\exists x \forall y \exists u \forall v \exists w \forall t (\neg P(x,y) \vee (Q(u,v,w) \wedge R(t)))\]</span></p>
+<p><strong>Passo 5:</strong> Aplicar Skolemização: - <span class="math inline">\(\exists x\)</span>: Não há universais precedentes → Constante Skolem <span class="math inline">\(c_1\)</span> - <span class="math inline">\(\exists u\)</span>: Precedido por <span class="math inline">\(\forall y\)</span> → Função Skolem <span class="math inline">\(\mathbf{f}(y)\)</span> - <span class="math inline">\(\exists w\)</span>: Precedido por <span class="math inline">\(\forall y\)</span> e <span class="math inline">\(\forall v\)</span> → Função Skolem <span class="math inline">\(\mathbf{g}(y,v)\)</span></p>
+<p><strong>Resultado:</strong> <span class="math display">\[\forall y \forall v \forall t (\neg P(c_1,y) \vee (Q(\mathbf{f}(y),v,\mathbf{g}(y,v)) \wedge R(t)))\]</span></p>
+<p><strong>Forma com quantificadores universais implícitos:</strong> <span class="math display">\[\neg P(c_1,y) \vee (Q(\mathbf{f}(y),v,\mathbf{g}(y,v)) \wedge R(t))\]</span></p>
+</section>
+</section>
+<section id="conexão-com-o-prolog-sec-predicativa-conexao-prolog" class="level3" data-number="14.3.5">
+<h3 data-number="14.3.5" class="anchored" data-anchor-id="conexão-com-o-prolog-sec-predicativa-conexao-prolog"><span class="header-section-number">14.3.5</span> Conexão com o Prolog <a href="05-formas-normais-e-skolemizacao.html#sec-predicativa-conexao-prolog" class="quarto-xref"><span>Section 7.3</span></a></h3>
+<section id="questão-1-3" class="level4" data-number="14.3.5.1">
+<h4 data-number="14.3.5.1" class="anchored" data-anchor-id="questão-1-3"><span class="header-section-number">14.3.5.1</span> Questão 1</h4>
 <p>Dada a seguinte fórmula lógica, que representa uma regra de negócio simples: “Se o pedido (<span class="math inline">\(P\)</span>) foi aprovado, então a nota fiscal (<span class="math inline">\(N\)</span>) deve ser emitida, mas não é verdade que a nota fiscal foi emitida sem que o produto esteja em estoque (<span class="math inline">\(E\)</span>).”</p>
 <p>Fórmula: <span class="math display">\[(P \to N) \wedge \neg (N \wedge \neg E)\]</span></p>
 <ol type="1">
@@ -3554,7 +3801,7 @@ P \wedge Q \wedge \neg R
 <p><span class="math display">\[((\neg P \vee N) \wedge \neg N) \vee ((\neg P \vee N) \wedge E)\]</span></p>
 <p><span class="math display">\[(\neg P \wedge \neg N) \vee (N \wedge \neg N) \vee (\neg P \wedge E) \vee (N \wedge E)\]</span></p>
 <p><span class="math display">\[(\neg P \wedge \neg N) \vee \text{Falso} \vee (\neg P \wedge E) \vee (N \wedge E)\]</span></p>
-<p><strong>FND Final</strong>:</p>
+<p><strong>FND </strong>:</p>
 <p><span class="math display">\[(\neg P \wedge \neg N) \vee (\neg P \wedge E) \vee (N \wedge E)\]</span></p>
 <p><strong>Em Prolog</strong>:</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Fórmula original: (P -&gt; N) ∧ ¬(N ∧ ¬E)</span></span>
@@ -3578,8 +3825,8 @@ P \wedge Q \wedge \neg R
 <span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>                <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">P</span>, <span class="dt">N</span>, <span class="dt">E</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">P</span>, <span class="dt">N</span>, <span class="dt">E</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> N</span><span class="st">ã</span><span class="er">o Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span> <span class="kw">fail</span>)))<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-2" class="level4" data-number="14.3.3.2">
-<h4 data-number="14.3.3.2" class="anchored" data-anchor-id="questão-2"><span class="header-section-number">14.3.3.2</span> Questão 2</h4>
+<section id="questão-2-1" class="level4" data-number="14.3.5.2">
+<h4 data-number="14.3.5.2" class="anchored" data-anchor-id="questão-2-1"><span class="header-section-number">14.3.5.2</span> Questão 2</h4>
 <ol type="1">
 <li><p><strong>Modelagem</strong>: <span class="math display">\[I \leftrightarrow (S \vee (\neg C \wedge T))\]</span></p></li>
 <li><p><strong>FND</strong>: A fórmula <span class="math display">\[S \vee (\neg C \wedge T)\]</span> já está em Forma Normal Disjuntiva.</p></li>
@@ -3603,8 +3850,8 @@ P \wedge Q \wedge \neg R
 <span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>                <span class="fu">write</span>(<span class="st">'</span><span class="er">Irriga</span><span class="st">çã</span><span class="er">o ativa para </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">S</span>, <span class="dt">C</span>, <span class="dt">T</span>, <span class="dt">I</span>])<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span>   <span class="kw">true</span>)))<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-3" class="level4" data-number="14.3.3.3">
-<h4 data-number="14.3.3.3" class="anchored" data-anchor-id="questão-3"><span class="header-section-number">14.3.3.3</span> Questão 3</h4>
+<section id="questão-3-2" class="level4" data-number="14.3.5.3">
+<h4 data-number="14.3.5.3" class="anchored" data-anchor-id="questão-3-2"><span class="header-section-number">14.3.5.3</span> Questão 3</h4>
 <ol type="1">
 <li><strong>Modelagem</strong>:</li>
 </ol>
@@ -3650,8 +3897,8 @@ P \wedge Q \wedge \neg R
 <span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'</span><span class="er">Consistente</span><span class="st">:</span><span class="er"> I</span><span class="st">=</span><span class="er">true</span><span class="st">,</span><span class="er"> P</span><span class="st">=</span><span class="er">true</span><span class="st">,</span><span class="er"> S</span><span class="st">=</span><span class="er">true</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Inconsistente para I</span><span class="st">=</span><span class="er">true</span><span class="st">,</span><span class="er"> P</span><span class="st">=</span><span class="er">true</span><span class="st">,</span><span class="er"> S</span><span class="st">=</span><span class="er">true </span><span class="st">(</span><span class="er">S </span><span class="st">∧</span><span class="er"> I </span><span class="st">é</span><span class="er"> proibido</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-4" class="level4" data-number="14.3.3.4">
-<h4 data-number="14.3.3.4" class="anchored" data-anchor-id="questão-4"><span class="header-section-number">14.3.3.4</span> Questão 4</h4>
+<section id="questão-4-2" class="level4" data-number="14.3.5.4">
+<h4 data-number="14.3.5.4" class="anchored" data-anchor-id="questão-4-2"><span class="header-section-number">14.3.5.4</span> Questão 4</h4>
 <ol type="1">
 <li><strong>Modelagem</strong>:</li>
 </ol>
@@ -3686,8 +3933,8 @@ P \wedge Q \wedge \neg R
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">D</span>, <span class="dt">C</span>, <span class="dt">P</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">D</span>, <span class="dt">C</span>, <span class="dt">P</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> N</span><span class="st">ã</span><span class="er">o Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span> <span class="kw">fail</span>)))<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-5" class="level4" data-number="14.3.3.5">
-<h4 data-number="14.3.3.5" class="anchored" data-anchor-id="questão-5"><span class="header-section-number">14.3.3.5</span> Questão 5</h4>
+<section id="questão-5-2" class="level4" data-number="14.3.5.5">
+<h4 data-number="14.3.5.5" class="anchored" data-anchor-id="questão-5-2"><span class="header-section-number">14.3.5.5</span> Questão 5</h4>
 <ol type="1">
 <li><p><strong>Fórmula</strong>: <span class="math display">\[F \leftrightarrow (P \vee T)\]</span></p></li>
 <li><p><strong>Conversão</strong>: A bicondicional <span class="math display">\[A \leftrightarrow B\]</span> é equivalente a <span class="math display">\[(A \to B) \wedge (B \to A)\]</span>.<br>
@@ -3705,7 +3952,7 @@ P \wedge Q \wedge \neg R
 <li>O segundo termo: <span class="math display">\[(\neg P \vee F) \wedge (\neg T \vee F)\]</span>.</li>
 </ul>
 <ol start="5" type="1">
-<li><strong>FNC Final</strong>: <span class="math display">\[(\neg F \vee P \vee T) \wedge (\neg P \vee F) \wedge (\neg T \vee F)\]</span>.</li>
+<li><strong>FNC </strong>: <span class="math display">\[(\neg F \vee P \vee T) \wedge (\neg P \vee F) \wedge (\neg T \vee F)\]</span>.</li>
 </ol>
 <ul>
 <li><p><strong>Significado das Cláusulas</strong>:</p></li>
@@ -3729,8 +3976,8 @@ P \wedge Q \wedge \neg R
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>                <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">F</span>, <span class="dt">P</span>, <span class="dt">T</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">F</span>, <span class="dt">P</span>, <span class="dt">T</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> N</span><span class="st">ã</span><span class="er">o Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span> <span class="kw">fail</span>)))<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-6" class="level4" data-number="14.3.3.6">
-<h4 data-number="14.3.3.6" class="anchored" data-anchor-id="questão-6"><span class="header-section-number">14.3.3.6</span> Questão 6</h4>
+<section id="questão-6-2" class="level4" data-number="14.3.5.6">
+<h4 data-number="14.3.5.6" class="anchored" data-anchor-id="questão-6-2"><span class="header-section-number">14.3.5.6</span> Questão 6</h4>
 <ol type="1">
 <li><strong>FND Canônica</strong>: Soma dos mintermos (casos onde a saída é 1):</li>
 </ol>
@@ -3792,8 +4039,8 @@ P \wedge Q \wedge \neg R
 <span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>                <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">A</span>, <span class="dt">B</span>, <span class="dt">C</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>            <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Caso </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>([<span class="dt">A</span>, <span class="dt">B</span>, <span class="dt">C</span>])<span class="kw">,</span> <span class="fu">write</span>(<span class="st">':</span><span class="er"> N</span><span class="st">ã</span><span class="er">o Equivalente</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span><span class="kw">,</span> <span class="kw">fail</span>)))<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-7" class="level4" data-number="14.3.3.7">
-<h4 data-number="14.3.3.7" class="anchored" data-anchor-id="questão-7"><span class="header-section-number">14.3.3.7</span> Questão 7</h4>
+<section id="questão-7-2" class="level4" data-number="14.3.5.7">
+<h4 data-number="14.3.5.7" class="anchored" data-anchor-id="questão-7-2"><span class="header-section-number">14.3.5.7</span> Questão 7</h4>
 <p><strong>Solução</strong>:</p>
 <p><strong>Passo 1 - Aplicação da Instanciação Universal</strong></p>
 <p>Como temos <span class="math inline">\(\forall x (L(x) \to M(x))\)</span> e queremos aplicar isso ao indivíduo específico <span class="math inline">\(S\)</span>, podemos usar a regra de instanciação universal para obter <span class="math inline">\(L(S) \to M(S)\)</span>. Assim, a fórmula se torna:</p>
@@ -3816,7 +4063,7 @@ P \wedge Q \wedge \neg R
 <th style="text-align: center;"><span class="math inline">\(M(S)\)</span></th>
 <th style="text-align: center;"><span class="math inline">\(\neg L(S) \vee M(S)\)</span></th>
 <th style="text-align: center;"><span class="math inline">\((\neg L(S) \vee M(S)) \wedge L(S)\)</span></th>
-<th style="text-align: center;">Fórmula Final</th>
+<th style="text-align: center;">Fórmula</th>
 </tr>
 </thead>
 <tbody>
@@ -4021,8 +4268,8 @@ P \wedge Q \wedge \neg R
 <span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- prova_contradicao.</span></span>
 <span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- verificar_regra_universal.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-8" class="level4" data-number="14.3.3.8">
-<h4 data-number="14.3.3.8" class="anchored" data-anchor-id="questão-8"><span class="header-section-number">14.3.3.8</span> Questão 8</h4>
+<section id="questão-8" class="level4" data-number="14.3.5.8">
+<h4 data-number="14.3.5.8" class="anchored" data-anchor-id="questão-8"><span class="header-section-number">14.3.5.8</span> Questão 8</h4>
 <ol type="1">
 <li><strong>Modelagem</strong>:</li>
 </ol>
@@ -4062,8 +4309,8 @@ P \wedge Q \wedge \neg R
 <span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'</span><span class="er">Satisfat</span><span class="st">í</span><span class="er">vel</span><span class="st">.</span><span class="er"> Solu</span><span class="st">çõ</span><span class="er">es</span><span class="st">:</span><span class="er"> </span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">write</span>(<span class="dt">Solutions</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Insatisfat</span><span class="st">í</span><span class="er">vel</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-9" class="level4" data-number="14.3.3.9">
-<h4 data-number="14.3.3.9" class="anchored" data-anchor-id="questão-9"><span class="header-section-number">14.3.3.9</span> Questão 9</h4>
+<section id="questão-9" class="level4" data-number="14.3.5.9">
+<h4 data-number="14.3.5.9" class="anchored" data-anchor-id="questão-9"><span class="header-section-number">14.3.5.9</span> Questão 9</h4>
 <ol type="1">
 <li><p><strong>Fórmula</strong>: <span class="math inline">\(\forall x (P(x) \to (\exists y (Q(y) \wedge R(x,y)))) \vee \exists z S(z)\)</span>;</p></li>
 <li><p><strong>Eliminar Implicação</strong>: <span class="math inline">\(\forall x (\neg P(x) \vee \exists y (Q(y) \wedge R(x,y))) \vee \exists z S(z)\)</span>;</p></li>
@@ -4076,7 +4323,7 @@ P \wedge Q \wedge \neg R
 <li><p><span class="math inline">\(\forall x \exists y \exists w (\neg P(x) \vee (Q(y) \wedge R(x,y)) \vee S(w))\)</span>;</p></li>
 </ul>
 <ol start="5" type="1">
-<li><strong>FNP Final</strong>: <span class="math inline">\(\forall x \exists y \exists w ((\neg P(x) \vee (Q(y) \wedge R(x,y))) \vee S(w))\)</span>.</li>
+<li><strong>FNP </strong>: <span class="math inline">\(\forall x \exists y \exists w ((\neg P(x) \vee (Q(y) \wedge R(x,y))) \vee S(w))\)</span>.</li>
 </ol>
 <p><strong>Em Prolog</strong>:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Definir predicados para um domínio finito</span></span>
@@ -4097,8 +4344,8 @@ P \wedge Q \wedge \neg R
 <span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'</span><span class="er">F</span><span class="st">ó</span><span class="er">rmula </span><span class="st">é</span><span class="er"> satisfat</span><span class="st">í</span><span class="er">vel no dom</span><span class="st">í</span><span class="er">nio dado</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
 <span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">F</span><span class="st">ó</span><span class="er">rmula n</span><span class="st">ã</span><span class="er">o </span><span class="st">é</span><span class="er"> satisfat</span><span class="st">í</span><span class="er">vel no dom</span><span class="st">í</span><span class="er">nio dado</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="questão-10" class="level4" data-number="14.3.3.10">
-<h4 data-number="14.3.3.10" class="anchored" data-anchor-id="questão-10"><span class="header-section-number">14.3.3.10</span> Questão 10</h4>
+<section id="questão-10" class="level4" data-number="14.3.5.10">
+<h4 data-number="14.3.5.10" class="anchored" data-anchor-id="questão-10"><span class="header-section-number">14.3.5.10</span> Questão 10</h4>
 <ol type="1">
 <li><p><strong>Cláusulas</strong>:</p></li>
 <li><p><span class="math inline">\(\neg P \vee \neg Q \vee R\)</span>;<br>
