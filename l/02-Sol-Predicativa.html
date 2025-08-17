@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introdução à Programação Lógica - 13&nbsp; Lógica Predicativa sec-logica-predicativa</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03-Sol-Normais.html" rel="next">
+<link href="./01-Sol-Proposicional.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Sol-Proposicional.html">Solução dos Exercícios</a></li><li class="breadcrumb-item"><a href="./02-Sol-Predicativa.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à Programação Lógica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/logica" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Fundamentos da Lógica</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução ao Paradigma da Programação Lógica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-introducao-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução Prática ao Prolog com Swish</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Aplicações Avançadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Raciocínio Algorítmico: Criando Mundos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Solução dos Exercícios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#exercícios-de-conexão-com-prolog-sec-predicativa-conexao-prolog" id="toc-exercícios-de-conexão-com-prolog-sec-predicativa-conexao-prolog" class="nav-link active" data-scroll-target="#exercícios-de-conexão-com-prolog-sec-predicativa-conexao-prolog"><span class="header-section-number">13.1</span> Exercícios de Conexão com Prolog <span>Section 7.4</span></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/02-Sol-Predicativa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Sol-Proposicional.html">Solução dos Exercícios</a></li><li class="breadcrumb-item"><a href="./02-Sol-Predicativa.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa <a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="exercícios-de-conexão-com-prolog-sec-predicativa-conexao-prolog" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="exercícios-de-conexão-com-prolog-sec-predicativa-conexao-prolog"><span class="header-section-number">13.1</span> Exercícios de Conexão com Prolog <a href="05-formas-normais-e-skolemizacao.html#sec-predicativa-conexao-prolog" class="quarto-xref"><span>Section 7.4</span></a></h2>
+<p><strong>Questão 1: Relações em um Sistema Acadêmico</strong></p>
+<p><strong>Resoluções</strong>:</p>
+<ol type="1">
+<li><strong>Existe pelo menos um aluno</strong>: <span class="math inline">\(\exists x A(x)\)</span>;</li>
+<li><strong>Nem todo aluno está matriculado em algum curso</strong>: <span class="math inline">\(\neg \forall x (A(x) \to \exists y (C(y) \wedge M(x,y)))\)</span>;</li>
+<li><strong>Todo aluno está matriculado em pelo menos um curso</strong>: <span class="math inline">\(\forall x (A(x) \to \exists y (C(y) \wedge M(x,y)))\)</span>;</li>
+<li><strong>Existe um curso no qual nenhum aluno está matriculado</strong>: <span class="math inline">\(\exists y (C(y) \wedge \neg \exists x (A(x) \wedge M(x,y)))\)</span>;</li>
+<li><strong>Existe um aluno que está matriculado em todos os cursos</strong>: <span class="math inline">\(\exists x (A(x) \wedge \forall y (C(y) \to M(x,y)))\)</span>.</li>
+</ol>
+<p><strong>Conexão com Prolog</strong>: Em Prolog, estes predicados se tornariam fatos e regras:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>aluno(joao)<span class="kw">.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>curso(matematica)<span class="kw">.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>matriculado(joao<span class="kw">,</span> matematica)<span class="kw">.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- aluno(X).</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: X = joao</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 2: O Escopo dos Quantificadores</strong></p>
+<p><strong>Análise das Fórmulas</strong>:</p>
+<ol type="1">
+<li><strong>Fórmula 1</strong>: <span class="math inline">\(\forall x \exists y (Pessoa(x) \to (Pessoa(y) \wedge Ama(x,y)))\)</span>
+<ul>
+<li><strong>Tradução</strong>: “Para toda pessoa x, existe uma pessoa y tal que x ama y”</li>
+<li><strong>Significado</strong>: Todo mundo ama alguém. A pessoa y que é amada pode ser diferente para cada x. Isso descreve o <strong>amor fraternal universal</strong>, onde o ato de amar é universal, mas o objeto do amor é individual.</li>
+</ul></li>
+<li><strong>Fórmula 2</strong>: <span class="math inline">\(\exists y \forall x (Pessoa(x) \to (Pessoa(y) \wedge Ama(x,y)))\)</span>
+<ul>
+<li><strong>Tradução</strong>: “Existe uma pessoa y tal que, para toda pessoa x, x ama y”</li>
+<li><strong>Significado</strong>: Existe um indivíduo específico (y) que é amado por todas as outras pessoas. Isso descreve a existência de uma <strong>figura universalmente amada</strong>.</li>
+</ul></li>
+</ol>
+<p><strong>Conexão com Prolog</strong>: A ordem dos quantificadores afeta diretamente como o Prolog resolve consultas e unifica variáveis.</p>
+<p><strong>Questão 3: O Paradoxo do Barbeiro</strong></p>
+<p><strong>Resolução</strong>: 1. <strong>Tradução da Regra</strong>: A regra diz que o barbeiro (b) barbeia uma pessoa <span class="math inline">\(x\)</span> se, e somente se, <span class="math inline">\(x\)</span> não se barbeia a si mesmo: <span class="math display">\[\forall x (Barbeia(b,x) \leftrightarrow \neg Barbeia(x,x))\]</span></p>
+<ol start="2" type="1">
+<li><p><strong>Dedução da Contradição</strong>: Vamos usar a Instanciação Universal, substituindo a variável universal <span class="math inline">\(x\)</span> pela constante <span class="math inline">\(b\)</span> (o próprio barbeiro): <span class="math display">\[Barbeia(b,b) \leftrightarrow \neg Barbeia(b,b)\]</span></p>
+<p>Seja <span class="math inline">\(P\)</span> a proposição <span class="math inline">\(Barbeia(b,b)\)</span>. A fórmula se torna <span class="math inline">\(P \leftrightarrow \neg P\)</span>. Como vimos na Lógica Proposicional, esta fórmula é uma contradição. Ela afirma que o barbeiro se barbeia se, e somente se, ele não se barbeia. Isso é impossível.</p></li>
+</ol>
+<p><strong>Conexão com Prolog</strong>: Este paradoxo ilustra por que o Prolog usa “negação por falha” em vez de negação clássica, evitando contradições deste tipo.</p>
+<p><strong>Questão 4: Especificação de um Sistema de Arquivos</strong></p>
+<p><strong>Resolução</strong>:</p>
+<ol type="1">
+<li><strong>Tradução da Política</strong>:</li>
+</ol>
+<ul>
+<li>“Qualquer administrador pode acessar todos os arquivos”:</li>
+</ul>
+<p><span class="math display">\[\forall x \forall y ((Admin(x) \wedge Arquivo(y)) \to PodeAcessar(x,y))\]</span></p>
+<ul>
+<li>“Ninguém que não seja administrador pode acessar algum arquivo”:</li>
+</ul>
+<p><span class="math display">\[\forall x \forall y ((\neg Admin(x) \wedge Arquivo(y)) \to \neg PodeAcessar(x,y))\]</span></p>
+<ol start="2" type="1">
+<li><strong>Conclusões</strong>:</li>
+</ol>
+<ul>
+<li>Para <span class="math inline">\(PodeAcessar(ana, relatorio.doc)\)</span>: Dado <span class="math inline">\(Admin(ana)\)</span>, a primeira regra se aplica. Por Instanciação Universal com <span class="math inline">\(x = ana\)</span> e <span class="math inline">\(y = relatorio.doc\)</span>, concluímos que <span class="math inline">\(PodeAcessar(ana, relatorio.doc)\)</span> <strong>é verdadeiro</strong>.</li>
+<li>Para <span class="math inline">\(PodeAcessar(beto, relatorio.doc)\)</span>: Dado <span class="math inline">\(\neg Admin(beto)\)</span>, a segunda regra se aplica. Por Instanciação Universal, concluímos que <span class="math inline">\(\neg PodeAcessar(beto, relatorio.doc)\)</span> <strong>é verdadeiro</strong>.</li>
+</ul>
+<p><strong>Conexão com Prolog</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>admin(ana)<span class="kw">.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>arquivo(relatorio_doc)<span class="kw">.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pode_acessar(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> admin(<span class="dt">X</span>)<span class="kw">,</span> arquivo(<span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- pode_acessar(ana, relatorio_doc).</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 5: Negando Afirmações Universais</strong></p>
+<p><strong>Resoluções</strong>:</p>
+<ol type="1">
+<li><p><strong>Sentença Original</strong>: <span class="math inline">\(\forall x (Programa(x) \to \exists y (Bug(y) \wedge Tem(x,y)))\)</span></p>
+<p><strong>Negação</strong>:</p></li>
+</ol>
+<p><span class="math display">\[\neg [\forall x (Programa(x) \to \exists y (Bug(y) \wedge Tem(x,y)))]\]</span></p>
+<p><span class="math display">\[\equiv \exists x \neg [Programa(x) \to \exists y (Bug(y) \wedge Tem(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \exists x [\Programa(x) \wedge \neg \exists y (Bug(y) \wedge Tem(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \exists x [Programa(x) \wedge \forall y \neg (Bug(y) \wedge Tem(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \exists x [Programa(x) \wedge \forall y (Bug(y) \to \neg Tem(x,y))]\]</span></p>
+<p><strong>Tradução</strong>: “Existe um programa de computador que não tem nenhum bug”</p>
+<ol start="2" type="1">
+<li><strong>Sentença Original</strong>: <span class="math inline">\(\exists x (Politico(x) \wedge \forall y (Eleitor(y,x) \to HonestoCom(x,y)))\)</span></li>
+</ol>
+<p><strong>Negação</strong>: <span class="math display">\[\neg [\exists x (Politico(x) \wedge \forall y (Eleitor(y,x) \to HonestoCom(x,y)))]\]</span></p>
+<p><span class="math display">\[\equiv \forall x \neg [Politico(x) \wedge \forall y (Eleitor(y,x) \to HonestoCom(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \forall x [Politico(x) \to \neg \forall y (Eleitor(y,x) \to HonestoCom(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \forall x [Politico(x) \to \exists y \neg (Eleitor(y,x) \to HonestoCom(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \forall x [Politico(x) \to \exists y (Eleitor(y,x) \wedge \neg HonestoCom(x,y))]\]</span></p>
+<p><strong>Tradução</strong>: “Todo político é desonesto com pelo menos um de seus eleitores”</p>
+<p><strong>Conexão com Prolog</strong>: A negação por falha em Prolog (<code>\+</code>) aproxima-se dessas transformações lógicas.</p>
+<p><strong>Questão 6: Mundo dos Blocos (Planejamento em IA) - Corrigida</strong></p>
+<ol type="1">
+<li><p><strong>Modelagem Formal dos Axiomas</strong>:</p>
+<ul>
+<li><p><strong>Axioma 1</strong>: Existe um bloco verde em cima de um bloco azul <span class="math display">\[\exists x \exists y (Bloco(x) \wedge Bloco(y) \wedge Verde(x) \wedge Azul(y) \wedge EmCima(x,y))\]</span></p></li>
+<li><p><strong>Axioma 2</strong>: Todo bloco que está diretamente sobre a mesa é azul <span class="math display">\[\forall x ((Bloco(x) \wedge NaMesa(x)) \rightarrow Azul(x))\]</span></p></li>
+<li><p><strong>Axioma 3</strong>: Nenhum bloco pode estar simultaneamente em cima de outro bloco e sobre a mesa <span class="math display">\[\forall x (Bloco(x) \rightarrow \neg(\exists y (Bloco(y) \wedge EmCima(x,y)) \wedge NaMesa(x)))\]</span></p></li>
+<li><p><strong>Axioma 4</strong>: Nenhum bloco pode ser verde e azul simultaneamente <span class="math display">\[\forall x (Bloco(x) \rightarrow \neg(Verde(x) \wedge Azul(x)))\]</span></p></li>
+</ul></li>
+<li><p><strong>Objetivo</strong>: Provar que “Existe um bloco que não é verde” <span class="math display">\[\exists x (Bloco(x) \wedge \neg Verde(x))\]</span></p></li>
+<li><p><strong>Prova Formal</strong>:</p>
+<ol type="a">
+<li><p><strong>Passo 1</strong>: Do Axioma 1, por <strong>Instanciação Existencial</strong>, obtemos constantes <span class="math inline">\(a\)</span> e <span class="math inline">\(b\)</span> tais que: <span class="math display">\[Bloco(a) \wedge Bloco(b) \wedge Verde(a) \wedge Azul(b) \wedge EmCima(a,b)\]</span></p></li>
+<li><p><strong>Passo 2</strong>: Por <strong>Simplificação</strong>, podemos separar as propriedades:</p></li>
+</ol>
+<ul>
+<li><span class="math inline">\(Bloco(a)\)</span> é verdadeiro</li>
+<li><span class="math inline">\(Bloco(b)\)</span> é verdadeiro<br>
+</li>
+<li><span class="math inline">\(Verde(a)\)</span> é verdadeiro</li>
+<li><span class="math inline">\(Azul(b)\)</span> é verdadeiro</li>
+<li><span class="math inline">\(EmCima(a,b)\)</span> é verdadeiro</li>
+</ul>
+<ol start="3" type="a">
+<li><p><strong>Passo 3</strong>: Do Axioma 4, por <strong>Instanciação Universal</strong> com <span class="math inline">\(x = b\)</span>: <span class="math display">\[Bloco(b) \rightarrow \neg(Verde(b) \wedge Azul(b))\]</span></p></li>
+<li><p><strong>Passo 4</strong>: Como sabemos que <span class="math inline">\(Bloco(b)\)</span> é verdadeiro (do Passo 2), por <strong>Modus Ponens</strong>: <span class="math display">\[\neg(Verde(b) \wedge Azul(b))\]</span></p></li>
+<li><p><strong>Passo 5</strong>: Aplicando <strong>De Morgan</strong>: <span class="math display">\[\neg Verde(b) \vee \neg Azul(b)\]</span></p></li>
+<li><p><strong>Passo 6</strong>: Como sabemos que <span class="math inline">\(Azul(b)\)</span> é verdadeiro (do Passo 2), e temos <span class="math inline">\(\neg Verde(b) \vee \neg Azul(b)\)</span>, por <strong>Silogismo Disjuntivo</strong>: <span class="math display">\[\neg Verde(b)\]</span></p></li>
+<li><p><strong>Passo 7</strong>: Combinando com <span class="math inline">\(Bloco(b)\)</span> (do Passo 2) usando <strong>Adjunção</strong>: <span class="math display">\[Bloco(b) \wedge \neg Verde(b)\]</span></p></li>
+<li><p><strong>Passo 8</strong>: Por <strong>Generalização Existencial</strong>: <span class="math display">\[\exists x (Bloco(x) \wedge \neg Verde(x))\]</span></p></li>
+</ol>
+<p><strong>C.Q.D.</strong> - Provamos que existe um bloco (especificamente o bloco <span class="math inline">\(b\)</span>) que não é verde.</p></li>
+<li><p><strong>Análise Adicional</strong>:</p>
+<p>Note que o bloco <span class="math inline">\(a\)</span> (verde) não pode estar na mesa devido ao Axioma 3, pois está em cima de <span class="math inline">\(b\)</span>. O bloco <span class="math inline">\(b\)</span> (azul) poderia estar na mesa (consistente com o Axioma 2), mas isso não é necessário para a prova. O importante é que <span class="math inline">\(b\)</span> é azul e, pelo Axioma 4, não pode ser simultaneamente verde.</p></li>
+</ol>
+<p><strong>Conexão com Prolog</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Definição dos fatos base do mundo dos blocos</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>bloco(bloco_a)<span class="kw">.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>bloco(bloco_b)<span class="kw">.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>bloco(bloco_c)<span class="kw">.</span>  <span class="co">% Podemos ter outros blocos no mundo</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Axioma 1: Existe um bloco verde em cima de um bloco azul</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>verde(bloco_a)<span class="kw">.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>azul(bloco_b)<span class="kw">.</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>em_cima(bloco_a<span class="kw">,</span> bloco_b)<span class="kw">.</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Axioma 2: Todo bloco que está sobre a mesa é azul</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Implementado como regra</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>azul(<span class="dt">X</span>) <span class="kw">:-</span> bloco(<span class="dt">X</span>)<span class="kw">,</span> na_mesa(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">% Axioma 3: Nenhum bloco pode estar em cima de outro E na mesa</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">% Implementado como restrição</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>valido(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    bloco(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (em_cima(<span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">,</span> na_mesa(<span class="dt">X</span>))<span class="kw">.</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">% Axioma 4: Nenhum bloco pode ser verde e azul simultaneamente</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">% Implementado como restrição</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>cor_valida(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    bloco(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (verde(<span class="dt">X</span>)<span class="kw">,</span> azul(<span class="dt">X</span>))<span class="kw">.</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra derivada: Um bloco não é verde se é azul</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>nao_verde(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    bloco(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    azul(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    cor_valida(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta principal: Existe um bloco que não é verde?</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>existe_bloco_nao_verde <span class="kw">:-</span> </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    bloco(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> verde(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">% Testes</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>test_mundo_blocos <span class="kw">:-</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Verificar que bloco_b não é verde</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    (nao_verde(bloco_b) <span class="kw">-&gt;</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'</span><span class="er">Bloco b n</span><span class="st">ã</span><span class="er">o </span><span class="st">é</span><span class="er"> verde </span><span class="st">(</span><span class="er">correto</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Erro</span><span class="st">:</span><span class="er"> Bloco b deveria n</span><span class="st">ã</span><span class="er">o ser verde</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span>)<span class="kw">,</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Verificar que existe pelo menos um bloco não verde</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    (existe_bloco_nao_verde <span class="kw">-&gt;</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'</span><span class="er">Existe um bloco que n</span><span class="st">ã</span><span class="er">o </span><span class="st">é</span><span class="er"> verde </span><span class="st">(</span><span class="er">teorema provado</span><span class="st">)'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Erro</span><span class="st">:</span><span class="er"> Deveria existir um bloco n</span><span class="st">ã</span><span class="er">o verde</span><span class="st">'</span>)<span class="kw">,</span> <span class="fu">nl</span>)<span class="kw">,</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">% Verificar consistência das cores</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    (cor_valida(bloco_a)<span class="kw">,</span> cor_valida(bloco_b) <span class="kw">-&gt;</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        <span class="fu">write</span>(<span class="st">'</span><span class="er">Cores s</span><span class="st">ã</span><span class="er">o consistentes com Axioma </span><span class="st">4'</span>)<span class="kw">,</span> <span class="fu">nl</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">;</span>   <span class="fu">write</span>(<span class="st">'</span><span class="er">Erro</span><span class="st">:</span><span class="er"> Viola</span><span class="st">çã</span><span class="er">o do Axioma </span><span class="st">4'</span>)<span class="kw">,</span> <span class="fu">nl</span>)<span class="kw">.</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- existe_bloco_nao_verde.</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co">% true.</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- nao_verde(X).</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co">% X = bloco_b.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 7: Propriedades dos Números Inteiros </strong></p>
+<p><strong>Resoluções</strong>: 1. <strong>Todo número par é maior que algum número ímpar</strong>: <span class="math display">\[\forall x (Par(x) \to \exists y (Impar(y) \wedge x &gt; y))\]</span></p>
+<ol start="2" type="1">
+<li><p><strong>Não existe um número inteiro que seja o maior de todos</strong>: <span class="math display">\[\neg \exists x \forall y (y \leq x)\]</span> ou, de forma equivalente: <span class="math display">\[\forall x \exists y (y &gt; x)\]</span></p></li>
+<li><p><strong>A soma de quaisquer dois números pares é par</strong>: <span class="math display">\[\forall x \forall y ((Par(x) \wedge Par(y)) \to Par(x + y))\]</span></p></li>
+</ol>
+<p><strong>Conexão com Prolog</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>par(<span class="dt">X</span>) <span class="kw">:-</span> <span class="dv">0</span> <span class="dt">is</span> <span class="dt">X</span> <span class="dv">mod</span> <span class="dv">2</span><span class="kw">.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>impar(<span class="dt">X</span>) <span class="kw">:-</span> <span class="dv">1</span> <span class="dt">is</span> <span class="dt">X</span> <span class="dv">mod</span> <span class="dv">2</span><span class="kw">.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>maior_que_impar(<span class="dt">X</span>) <span class="kw">:-</span> par(<span class="dt">X</span>)<span class="kw">,</span> impar(<span class="dt">Y</span>)<span class="kw">,</span> <span class="dt">X</span> <span class="dt">&gt;</span> <span class="dt">Y</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 8: Dedução Lógica com Instanciação</strong></p>
+<p><strong>Resolução</strong>: 1. <strong>Premissas</strong>: * <span class="math inline">\(P_1: \forall x (Leao(x) \to Mamifero(x))\)</span> * <span class="math inline">\(P_2: \exists x (Leao(x) \wedge ViveNaSavana(x))\)</span></p>
+<ol start="2" type="1">
+<li><strong>Prova Formal</strong>:
+<ul>
+<li>Da premissa <span class="math inline">\(P_2\)</span>, por <strong>Instanciação Existencial</strong>, podemos afirmar que existe uma constante <span class="math inline">\(c\)</span> (vamos chamá-lo de Simba) para a qual a afirmação é verdadeira: <span class="math inline">\(Leao(c) \wedge ViveNaSavana(c)\)</span>.</li>
+<li>Desta conjunção, podemos separar os dois fatos: <span class="math inline">\(Leao(c)\)</span> e <span class="math inline">\(ViveNaSavana(c)\)</span>.</li>
+<li>Da premissa <span class="math inline">\(P_1\)</span>, por <strong>Instanciação Universal</strong>, podemos aplicar a regra a qualquer objeto, incluindo nossa constante <span class="math inline">\(c\)</span>: <span class="math inline">\(Leao(c) \to Mamifero(c)\)</span>.</li>
+<li>Agora temos a implicação <span class="math inline">\(Leao(c) \to Mamifero(c)\)</span> e o fato <span class="math inline">\(Leao(c)\)</span>. Por <strong>Modus Ponens</strong>, podemos concluir <span class="math inline">\(Mamifero(c)\)</span>.</li>
+<li>Neste ponto, sabemos duas coisas sobre <span class="math inline">\(c\)</span>: <span class="math inline">\(Mamifero(c)\)</span> e <span class="math inline">\(ViveNaSavana(c)\)</span>. Podemos juntá-las em uma conjunção: <span class="math inline">\(Mamifero(c) \wedge ViveNaSavana(c)\)</span>.</li>
+<li>Finalmente, como encontramos um exemplo específico (<span class="math inline">\(c\)</span>) que satisfaz a condição, podemos usar a <strong>Generalização Existencial</strong> para concluir: <span class="math inline">\(\exists x (Mamifero(x) \wedge ViveNaSavana(x))\)</span>. <strong>Q.E.D.</strong></li>
+</ul></li>
+</ol>
+<p><strong>Conexão com Prolog</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>leao(simba)<span class="kw">.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>vive_na_savana(simba)<span class="kw">.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mamifero(<span class="dt">X</span>) <span class="kw">:-</span> leao(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- mamifero(X), vive_na_savana(X).</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: X = simba</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 9: Consulta a uma Base de Dados Relacional </strong></p>
+<p><strong>Resolução</strong>: A consulta pede os nomes (<span class="math inline">\(n\)</span>) dos funcionários que trabalham no departamento de ‘Vendas’. A fórmula correta deve especificar que estamos procurando por nomes:</p>
+<p><span class="math display">\[\{n \mid \exists x \exists d (Func(x,n,d) \wedge Depto(d,'Vendas'))\}\]</span></p>
+<p>Alternativamente, como uma fórmula lógica que define a condição: <span class="math display">\[\exists x \exists d (Func(x,n,d) \wedge Depto(d,'Vendas'))\]</span></p>
+<p>onde <span class="math inline">\(n\)</span> é uma variável livre que representa o nome que estamos buscando.</p>
+<p><strong>Conexão com Prolog</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>func(<span class="dv">1</span><span class="kw">,</span> joao<span class="kw">,</span> vendas)<span class="kw">.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>func(<span class="dv">2</span><span class="kw">,</span> maria<span class="kw">,</span> ti)<span class="kw">.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>depto(vendas<span class="kw">,</span> <span class="st">'</span><span class="er">Vendas</span><span class="st">'</span>)<span class="kw">.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>depto(ti<span class="kw">,</span> <span class="st">'</span><span class="er">TI</span><span class="st">'</span>)<span class="kw">.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>funcionario_vendas(<span class="dt">Nome</span>) <span class="kw">:-</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    func(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Nome</span><span class="kw">,</span> <span class="dt">Depto</span>)<span class="kw">,</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    depto(<span class="dt">Depto</span><span class="kw">,</span> <span class="st">'</span><span class="er">Vendas</span><span class="st">'</span>)<span class="kw">.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- funcionario_vendas(X).</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: X = joao</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Em SQL seria:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> F.Nome <span class="kw">FROM</span> Funcionario F </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> Departamento D <span class="kw">ON</span> F.DeptoID <span class="op">=</span> D.<span class="kw">ID</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> D.NomeDepto <span class="op">=</span> <span class="st">'Vendas'</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 10: Hierarquia Organizacional</strong></p>
+<p><strong>Resoluções</strong>:</p>
+<ol type="1">
+<li><p><strong>Todo funcionário tem exatamente um gerente</strong>: Isso se divide em duas partes: “pelo menos um” e “no máximo um”:</p>
+<ul>
+<li><span class="math inline">\(\forall x (Funcionario(x) \to \exists y Gerente(y,x))\)</span>;</li>
+<li><span class="math inline">\(\forall x \forall y \forall z ((Gerente(y,x) \wedge Gerente(z,x)) \to y = z)\)</span>.</li>
+</ul></li>
+<li><p><strong>Nenhum funcionário pode ser gerente de si mesmo</strong>:</p>
+<ul>
+<li><span class="math inline">\(\forall x \neg Gerente(x,x)\)</span></li>
+</ul></li>
+<li><p><strong>Todo gerente é também um funcionário</strong>: **</p>
+<ul>
+<li><span class="math inline">\(\forall x (\exists y Gerente(x,y) \to Funcionario(x))\)</span></li>
+</ul></li>
+<li><p><strong>Existe um funcionário que não é gerente de ninguém</strong>:</p>
+<ul>
+<li><span class="math inline">\(\exists x (Funcionario(x) \wedge \neg \exists y Gerente(x,y))\)</span></li>
+</ul></li>
+</ol>
+<p><strong>Conexão com Prolog</strong>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>funcionario(joao)<span class="kw">.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>funcionario(maria)<span class="kw">.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>funcionario(pedro)<span class="kw">.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>gerente(maria<span class="kw">,</span> joao)<span class="kw">.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>gerente(pedro<span class="kw">,</span> maria)<span class="kw">.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra: todo gerente é funcionário</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>funcionario(<span class="dt">X</span>) <span class="kw">:-</span> gerente(<span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: funcionário que não é gerente de ninguém</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>nao_gerente(<span class="dt">X</span>) <span class="kw">:-</span> funcionario(<span class="dt">X</span>)<span class="kw">,</span> <span class="kw">\+</span> gerente(<span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- nao_gerente(X).</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: X = joao</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 11 - Sistema Bancário</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Cliente(x)\)</span>: x é um cliente</li>
+<li><span class="math inline">\(Conta(y)\)</span>: y é uma conta bancária</li>
+<li><span class="math inline">\(Possui(x, y)\)</span>: cliente x possui conta y</li>
+<li><span class="math inline">\(SaldoPositivo(y)\)</span>: conta y tem saldo positivo</li>
+<li><span class="math inline">\(SaldoNegativo(y)\)</span>: conta y tem saldo negativo</li>
+<li><span class="math inline">\(VIP(x)\)</span>: cliente x é VIP</li>
+<li><span class="math inline">\(Transacao(z)\)</span>: z é uma transação</li>
+<li><span class="math inline">\(RealizouTransacao(x, z)\)</span>: cliente x realizou transação z</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>: - Todo cliente possui pelo menos uma conta:</p>
+<p><span class="math display">\[∀x (Cliente(x) → ∃y (Conta(y) ∧ Possui(x, y)))\]</span></p>
+<ul>
+<li><p>Toda conta pertence a exatamente um cliente:</p>
+<p><span class="math display">\[∀y (Conta(y) → ∃x (Cliente(x) ∧ Possui(x, y) ∧ ∀z ((Cliente(z) ∧ Possui(z, y)) → z = x)))\]</span></p></li>
+<li><p>Contas podem ter saldo positivo ou negativo:</p>
+<p><span class="math display">\[∀y (Conta(y) → (SaldoPositivo(y) ∨ SaldoNegativo(y)))\]</span></p></li>
+<li><p>Existem clientes VIP que têm mais de uma conta:</p>
+<p><span class="math display">\[∃x (Cliente(x) ∧ VIP(x) ∧ ∃y ∃z (Conta(y) ∧ Conta(z) ∧ y ≠ z ∧ Possui(x, y) ∧ Possui(x, z)))\]</span></p></li>
+<li><p>Nem todas as contas têm saldo positivo:</p>
+<p><span class="math display">\[¬∀y (Conta(y) → SaldoPositivo(y))\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>: - Encontrar todos os clientes VIP:</p>
+<p><span class="math display">\[∃x (Cliente(x) ∧ VIP(x))\]</span></p>
+<ul>
+<li><p>Verificar se existe alguma conta com saldo negativo:</p>
+<p><span class="math display">\[∃y (Conta(y) ∧ SaldoNegativo(y))\]</span></p></li>
+<li><p>Encontrar clientes com múltiplas contas: <span class="math display">\[∃x ∃y ∃z (Cliente(x) ∧ Conta(y) ∧ Conta(z) ∧ y ≠ z ∧ Possui(x, y) ∧ Possui(x, z))\]</span></p></li>
+</ul>
+<p><strong>Em Prolog</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 1 - SISTEMA BANCÁRIO</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base (dados de exemplo)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>cliente(joao)<span class="kw">.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>cliente(maria)<span class="kw">.</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cliente(pedro)<span class="kw">.</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>cliente(ana)<span class="kw">.</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>conta(conta1)<span class="kw">.</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>conta(conta2)<span class="kw">.</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>conta(conta3)<span class="kw">.</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>conta(conta4)<span class="kw">.</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>conta(conta5)<span class="kw">.</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">% Relação de posse de contas</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>possui(joao<span class="kw">,</span> conta1)<span class="kw">.</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>possui(maria<span class="kw">,</span> conta2)<span class="kw">.</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>possui(maria<span class="kw">,</span> conta3)<span class="kw">.</span>  <span class="co">% Maria tem duas contas (VIP)</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>possui(pedro<span class="kw">,</span> conta4)<span class="kw">.</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>possui(ana<span class="kw">,</span> conta5)<span class="kw">.</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">% Status de saldo das contas</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>saldo_positivo(conta1)<span class="kw">.</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>saldo_positivo(conta2)<span class="kw">.</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>saldo_positivo(conta4)<span class="kw">.</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>saldo_negativo(conta3)<span class="kw">.</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>saldo_negativo(conta5)<span class="kw">.</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">% Clientes VIP</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>vip(maria)<span class="kw">.</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">% Transações</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>transacao(trans1)<span class="kw">.</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>transacao(trans2)<span class="kw">.</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>realizou_transacao(joao<span class="kw">,</span> trans1)<span class="kw">.</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>realizou_transacao(maria<span class="kw">,</span> trans2)<span class="kw">.</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Todo cliente possui pelo menos uma conta</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>cliente_tem_conta(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    cliente(<span class="dt">X</span>)<span class="kw">,</span> </span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    conta(<span class="dt">Y</span>)<span class="kw">,</span> </span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    possui(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Toda conta pertence a exatamente um cliente</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>conta_tem_dono_unico(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    conta(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    possui(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (possui(<span class="dt">Z</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span> <span class="dt">X</span> <span class="kw">\=</span> <span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Contas podem ter saldo positivo ou negativo</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>conta_tem_saldo(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    conta(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    (saldo_positivo(<span class="dt">Y</span>) <span class="kw">;</span> saldo_negativo(<span class="dt">Y</span>))<span class="kw">.</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem clientes VIP que têm mais de uma conta</span></span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>cliente_vip_multiplas_contas(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    cliente(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    vip(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    possui(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y1</span>)<span class="kw">,</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    possui(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y2</span>)<span class="kw">,</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Y1</span> <span class="kw">\=</span> <span class="dt">Y2</span><span class="kw">.</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Nem todas as contas têm saldo positivo (verificação)</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>existe_conta_saldo_negativo <span class="kw">:-</span> </span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    conta(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>    saldo_negativo(<span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar todos os clientes VIP</span></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- vip(X).</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Verificar se existe alguma conta com saldo negativo</span></span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- existe_conta_saldo_negativo.</span></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Encontrar clientes com múltiplas contas</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a>cliente_multiplas_contas(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a>    cliente(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>    possui(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y1</span>)<span class="kw">,</span></span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>    possui(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y2</span>)<span class="kw">,</span></span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Y1</span> <span class="kw">\=</span> <span class="dt">Y2</span><span class="kw">.</span></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- cliente_multiplas_contas(X).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 12 - Sistema de Saúde</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Medico(x)\)</span>: x é um médico</li>
+<li><span class="math inline">\(Paciente(y)\)</span>: y é um paciente</li>
+<li><span class="math inline">\(Tratamento(z)\)</span>: z é um tratamento</li>
+<li><span class="math inline">\(Especialidade(w)\)</span>: w é uma especialidade</li>
+<li><span class="math inline">\(Atende(x, y)\)</span>: médico x atende paciente y</li>
+<li><span class="math inline">\(TemEspecialidade(x, w)\)</span>: médico x tem especialidade w</li>
+<li><span class="math inline">\(RequerEspecialista(z)\)</span>: tratamento z requer especialista</li>
+<li><span class="math inline">\(Internado(y)\)</span>: paciente y está internado</li>
+<li><span class="math inline">\(Ambulatorial(y)\)</span>: paciente y é ambulatorial</li>
+<li><span class="math inline">\(Prescreveu(x, z)\)</span>: médico x prescreveu tratamento z</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>: - Todo paciente é atendido por pelo menos um médico:</p>
+<p><span class="math display">\[∀y (Paciente(y) → ∃x (Medico(x) ∧ Atende(x, y)))\]</span></p>
+<ul>
+<li><p>Todo médico tem uma especialidade:</p></li>
+<li><p><span class="math display">\[∀x (Medico(x) → ∃w (Especialidade(w) ∧ TemEspecialidade(x, w)))\]</span></p></li>
+<li><p>Alguns tratamentos requerem médicos especialistas:</p></li>
+<li><p><span class="math display">\[∃z (Tratamento(z) ∧ RequerEspecialista(z))\]</span></p></li>
+<li><p>Existem pacientes internados e ambulatoriais:</p></li>
+<li><p><span class="math display">\[∃y (Paciente(y) ∧ Internado(y)) ∧ ∃y (Paciente(y) ∧ Ambulatorial(y))\]</span></p></li>
+<li><p>Todo tratamento é prescrito por algum médico:</p></li>
+<li><p><span class="math display">\[∀z (Tratamento(z) → ∃x (Medico(x) ∧ Prescreveu(x, z)))\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>: - Encontrar médicos que atendem pacientes internados:</p>
+<p><span class="math display">\[∃x ∃y (Medico(x) ∧ Paciente(y) ∧ Internado(y) ∧ Atende(x, y))\]</span></p>
+<ul>
+<li><p>Verificar se há tratamentos sem médico responsável:</p></li>
+<li><p><span class="math display">\[∃z (Tratamento(z) ∧ ¬∃x (Medico(x) ∧ Prescreveu(x, z)))\]</span></p></li>
+<li><p>Listar pacientes atendidos por múltiplos médicos:</p></li>
+<li><p><span class="math display">\[∃y ∃x₁ ∃x₂ (Paciente(y) ∧ Medico(x₁) ∧ Medico(x₂) ∧ x₁ ≠ x₂ ∧ Atende(x₁, y) ∧ Atende(x₂, y))\]</span></p></li>
+</ul>
+<p><strong>Em Prolog</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 2 - SISTEMA DE SAÚDE</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>medico(dr_silva)<span class="kw">.</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>medico(dra_santos)<span class="kw">.</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>medico(dr_costa)<span class="kw">.</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>paciente(carlos)<span class="kw">.</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>paciente(lucia)<span class="kw">.</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>paciente(roberto)<span class="kw">.</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>paciente(amanda)<span class="kw">.</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>tratamento(trat1)<span class="kw">.</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>tratamento(trat2)<span class="kw">.</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>tratamento(trat3)<span class="kw">.</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>especialidade(cardiologia)<span class="kw">.</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>especialidade(neurologia)<span class="kw">.</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>especialidade(pediatria)<span class="kw">.</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">% Relações</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>atende(dr_silva<span class="kw">,</span> carlos)<span class="kw">.</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>atende(dr_silva<span class="kw">,</span> lucia)<span class="kw">.</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>atende(dra_santos<span class="kw">,</span> roberto)<span class="kw">.</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>atende(dr_costa<span class="kw">,</span> amanda)<span class="kw">.</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>tem_especialidade(dr_silva<span class="kw">,</span> cardiologia)<span class="kw">.</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>tem_especialidade(dra_santos<span class="kw">,</span> neurologia)<span class="kw">.</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>tem_especialidade(dr_costa<span class="kw">,</span> pediatria)<span class="kw">.</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>requer_especialista(trat2)<span class="kw">.</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>internado(carlos)<span class="kw">.</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>ambulatorial(lucia)<span class="kw">.</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>ambulatorial(roberto)<span class="kw">.</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>internado(amanda)<span class="kw">.</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>prescreveu(dr_silva<span class="kw">,</span> trat1)<span class="kw">.</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>prescreveu(dra_santos<span class="kw">,</span> trat2)<span class="kw">.</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>prescreveu(dr_costa<span class="kw">,</span> trat3)<span class="kw">.</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Todo paciente é atendido por pelo menos um médico</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>paciente_tem_medico(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    paciente(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    medico(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    atende(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Todo médico tem uma especialidade</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>medico_tem_especialidade(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    medico(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    especialidade(<span class="dt">W</span>)<span class="kw">,</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    tem_especialidade(<span class="dt">X</span><span class="kw">,</span> <span class="dt">W</span>)<span class="kw">.</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Alguns tratamentos requerem médicos especialistas</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>tratamento_especialista(<span class="dt">Z</span>) <span class="kw">:-</span> </span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    tratamento(<span class="dt">Z</span>)<span class="kw">,</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>    requer_especialista(<span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem pacientes internados e ambulatoriais</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>existe_internado <span class="kw">:-</span> paciente(<span class="dt">Y</span>)<span class="kw">,</span> internado(<span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>existe_ambulatorial <span class="kw">:-</span> paciente(<span class="dt">Y</span>)<span class="kw">,</span> ambulatorial(<span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Todo tratamento é prescrito por algum médico</span></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>tratamento_tem_medico(<span class="dt">Z</span>) <span class="kw">:-</span> </span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>    tratamento(<span class="dt">Z</span>)<span class="kw">,</span></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>    medico(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>    prescreveu(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar médicos que atendem pacientes internados</span></span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>medico_atende_internado(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>    medico(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>    paciente(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>    internado(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>    atende(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- medico_atende_internado(X).</span></span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Verificar se há tratamentos sem médico responsável</span></span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>tratamento_sem_medico(<span class="dt">Z</span>) <span class="kw">:-</span> </span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>    tratamento(<span class="dt">Z</span>)<span class="kw">,</span></span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> prescreveu(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- tratamento_sem_medico(Z).</span></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar pacientes atendidos por múltiplos médicos</span></span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>paciente_multiplos_medicos(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>    paciente(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>    atende(<span class="dt">X1</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>    atende(<span class="dt">X2</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a>    <span class="dt">X1</span> <span class="kw">\=</span> <span class="dt">X2</span><span class="kw">.</span></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- paciente_multiplos_medicos(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 13 - Rede Social</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Usuario(x)\)</span>: x é um usuário</li>
+<li><span class="math inline">\(Postagem(y)\)</span>: y é uma postagem</li>
+<li><span class="math inline">\(Curtida(z)\)</span>: z é uma curtida</li>
+<li><span class="math inline">\(Amigo(x, y)\)</span>: usuário x é amigo de usuário y</li>
+<li><span class="math inline">\(Publicou(x, y)\)</span>: usuário x publicou postagem y</li>
+<li><span class="math inline">\(Curtiu(x, y)\)</span>: usuário x curtiu postagem y</li>
+<li><span class="math inline">\(Influenciador(x)\)</span>: usuário x é influenciador</li>
+<li><span class="math inline">\(Segue(x, y)\)</span>: usuário x segue usuário y</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>: - Amizade é uma relação simétrica:</p>
+<p><span class="math display">\[∀x ∀y (Amigo(x, y) → Amigo(y, x))\]</span></p>
+<ul>
+<li><p>Todo usuário pode publicar postagens:</p>
+<p><span class="math display">\[∀x (Usuario(x) → ∃y (Postagem(y) ∧ Publicou(x, y)))\]</span></p></li>
+<li><p>Usuários podem curtir postagens de amigos:</p>
+<p><span class="math display">\[
+∀x ∀y ∀z ((Usuario(x) ∧ Usuario(y) ∧ Postagem(z) ∧ Amigo(x, y) ∧ Publicou(y, z)) → Curtiu(x, z))
+\]</span></p></li>
+<li><p>Existem usuários influenciadores:</p>
+<p><span class="math display">\[
+∃x (Usuario(x) ∧ Influenciador(x) ∧ ∀y ((Usuario(y) ∧ y ≠ x) → Segue(y, x)))
+\]</span></p></li>
+<li><p>Nem toda postagem recebe curtidas:</p>
+<p><span class="math display">\[
+¬∀y (Postagem(y) → ∃x (Usuario(x) ∧ Curtiu(x, y)))
+\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>: - Encontrar postagens mais populares (com curtidas):</p>
+<p><span class="math display">\[
+  ∃y ∃x₁ ∃x₂ (Postagem(y) ∧ Usuario(x₁) ∧ Usuario(x₂) ∧ x₁ ≠ x₂ ∧ Curtiu(x₁, y) ∧ Curtiu(x₂, y))
+  \]</span></p>
+<ul>
+<li><p>Verificar usuários sem amigos:</p>
+<p><span class="math display">\[
+∃x (Usuario(x) ∧ ¬∃y (Usuario(y) ∧ Amigo(x, y)))
+\]</span></p></li>
+<li><p>Listar influenciadores:</p>
+<p><span class="math display">\[
+∃x (Usuario(x) ∧ Influenciador(x))
+\]</span></p></li>
+</ul>
+<p><strong>Em Prolog</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 3 - REDE SOCIAL</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>usuario(alice)<span class="kw">.</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>usuario(bob)<span class="kw">.</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>usuario(carol)<span class="kw">.</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>usuario(david)<span class="kw">.</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>usuario(eva)<span class="kw">.</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>postagem(post1)<span class="kw">.</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>postagem(post2)<span class="kw">.</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>postagem(post3)<span class="kw">.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>postagem(post4)<span class="kw">.</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">% Amizades (relação simétrica)</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>amigo(alice<span class="kw">,</span> bob)<span class="kw">.</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>amigo(bob<span class="kw">,</span> alice)<span class="kw">.</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>amigo(bob<span class="kw">,</span> carol)<span class="kw">.</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>amigo(carol<span class="kw">,</span> bob)<span class="kw">.</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>amigo(carol<span class="kw">,</span> david)<span class="kw">.</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>amigo(david<span class="kw">,</span> carol)<span class="kw">.</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>publicou(alice<span class="kw">,</span> post1)<span class="kw">.</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>publicou(bob<span class="kw">,</span> post2)<span class="kw">.</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>publicou(carol<span class="kw">,</span> post3)<span class="kw">.</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>publicou(eva<span class="kw">,</span> post4)<span class="kw">.</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>curtiu(bob<span class="kw">,</span> post1)<span class="kw">.</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>curtiu(alice<span class="kw">,</span> post2)<span class="kw">.</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>curtiu(carol<span class="kw">,</span> post2)<span class="kw">.</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>curtiu(david<span class="kw">,</span> post3)<span class="kw">.</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co">% post4 não tem curtidas</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>influenciador(eva)<span class="kw">.</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>segue(alice<span class="kw">,</span> eva)<span class="kw">.</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>segue(bob<span class="kw">,</span> eva)<span class="kw">.</span></span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>segue(carol<span class="kw">,</span> eva)<span class="kw">.</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>segue(david<span class="kw">,</span> eva)<span class="kw">.</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Amizade é uma relação simétrica (já implementada nos fatos)</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>amizade_simetrica(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    amigo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    amigo(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Todo usuário pode publicar postagens</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>usuario_pode_publicar(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    usuario(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    postagem(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>    publicou(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Usuários podem curtir postagens de amigos</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>pode_curtir_de_amigo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>) <span class="kw">:-</span> </span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>    usuario(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    usuario(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>    postagem(<span class="dt">Z</span>)<span class="kw">,</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    amigo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    publicou(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem usuários influenciadores</span></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>usuario_influenciador(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    usuario(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>    influenciador(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>    findall(<span class="dt">Y</span><span class="kw">,</span> (usuario(<span class="dt">Y</span>)<span class="kw">,</span> <span class="dt">Y</span> <span class="kw">\=</span> <span class="dt">X</span><span class="kw">,</span> segue(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>))<span class="kw">,</span> <span class="dt">Seguidores</span>)<span class="kw">,</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    length(<span class="dt">Seguidores</span><span class="kw">,</span> <span class="dt">N</span>)<span class="kw">,</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>    <span class="dt">N</span> <span class="dt">&gt;</span> <span class="dv">3</span><span class="kw">.</span>  <span class="co">% Tem mais de 3 seguidores</span></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Nem toda postagem recebe curtidas</span></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>postagem_sem_curtida(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>    postagem(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> curtiu(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar postagens populares (com múltiplas curtidas)</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>postagem_popular(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>    postagem(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>    curtiu(<span class="dt">X1</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>    curtiu(<span class="dt">X2</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>    <span class="dt">X1</span> <span class="kw">\=</span> <span class="dt">X2</span><span class="kw">.</span></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- postagem_popular(Y).</span></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Verificar usuários sem amigos</span></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>usuario_sem_amigos(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>    usuario(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> amigo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- usuario_sem_amigos(X).</span></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar influenciadores</span></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- influenciador(X).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 14 - Sistema de Biblioteca</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Livro(x)\)</span>: x é um livro</li>
+<li><span class="math inline">\(Usuario(y)\)</span>: y é um usuário</li>
+<li><span class="math inline">\(Emprestado(x, y)\)</span>: livro x está emprestado para usuário y</li>
+<li><span class="math inline">\(Disponivel(x)\)</span>: livro x está disponível</li>
+<li><span class="math inline">\(Reservado(x, y)\)</span>: livro x está reservado por usuário y</li>
+<li><span class="math inline">\(DataDevolucao(x, d)\)</span>: empréstimo do livro x tem data de devolução d</li>
+<li><span class="math inline">\(JaFoiEmprestado(x)\)</span>: livro x já foi emprestado alguma vez</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>: - Um usuário pode pegar vários livros:</p>
+<p><span class="math display">\[∃y ∃x₁ ∃x₂ (Usuario(y) ∧ Livro(x₁) ∧ Livro(x₂) ∧ x₁ ≠ x₂ ∧ Emprestado(x₁, y) ∧ Emprestado(x₂, y))\]</span></p>
+<ul>
+<li><p>Um livro só pode estar com um usuário por vez:</p>
+<p><span class="math display">\[∀x ∀y₁ ∀y₂ ((Livro(x) ∧ Emprestado(x, y₁) ∧ Emprestado(x, y₂)) → y₁ = y₂)\]</span></p></li>
+<li><p>Nem todos os livros estão emprestados:</p>
+<p><span class="math display">\[¬∀x (Livro(x) → ∃y Emprestado(x, y))\]</span></p></li>
+<li><p>Existem livros que nunca foram emprestados: <span class="math display">\[∃x (Livro(x) ∧ ¬JaFoiEmprestado(x))\]</span></p></li>
+<li><p>Todo empréstimo tem data de devolução: <span class="math display">\[∀x ∀y (Emprestado(x, y) → ∃d DataDevolucao(x, d))\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>: - Encontrar livros disponíveis: <span class="math display">\[∃x (Livro(x) ∧ Disponivel(x))\]</span></p>
+<ul>
+<li><p>Verificar usuários com empréstimos ativos: <span class="math display">\[∃y ∃x (Usuario(y) ∧ Livro(x) ∧ Emprestado(x, y))\]</span></p></li>
+<li><p>Listar livros nunca emprestados: <span class="math display">\[∃x (Livro(x) ∧ ¬JaFoiEmprestado(x))\]</span></p></li>
+</ul>
+<p><strong>Em Prolog</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 4 - SISTEMA DE BIBLIOTECA</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>livro(livro1)<span class="kw">.</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>livro(livro2)<span class="kw">.</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>livro(livro3)<span class="kw">.</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>livro(livro4)<span class="kw">.</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>livro(livro5)<span class="kw">.</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>usuario_bib(user1)<span class="kw">.</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>usuario_bib(user2)<span class="kw">.</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>usuario_bib(user3)<span class="kw">.</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>emprestado(livro1<span class="kw">,</span> user1)<span class="kw">.</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>emprestado(livro2<span class="kw">,</span> user1)<span class="kw">.</span>  <span class="co">% user1 tem 2 livros</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>emprestado(livro3<span class="kw">,</span> user2)<span class="kw">.</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>disponivel(livro4)<span class="kw">.</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>disponivel(livro5)<span class="kw">.</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>data_devolucao(livro1<span class="kw">,</span> <span class="st">'2025-02-15'</span>)<span class="kw">.</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>data_devolucao(livro2<span class="kw">,</span> <span class="st">'2025-02-20'</span>)<span class="kw">.</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>data_devolucao(livro3<span class="kw">,</span> <span class="st">'2025-02-18'</span>)<span class="kw">.</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>ja_foi_emprestado(livro1)<span class="kw">.</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>ja_foi_emprestado(livro2)<span class="kw">.</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>ja_foi_emprestado(livro3)<span class="kw">.</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co">% livro4 e livro5 nunca foram emprestados</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>reservado(livro4<span class="kw">,</span> user3)<span class="kw">.</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Um usuário pode pegar vários livros</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>usuario_multiplos_livros(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    usuario_bib(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    emprestado(<span class="dt">X1</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    emprestado(<span class="dt">X2</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">X1</span> <span class="kw">\=</span> <span class="dt">X2</span><span class="kw">.</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Um livro só pode estar com um usuário por vez</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>livro_usuario_unico(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>    livro(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>    emprestado(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (emprestado(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> <span class="dt">Y</span> <span class="kw">\=</span> <span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Nem todos os livros estão emprestados</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>existe_livro_disponivel <span class="kw">:-</span> </span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>    livro(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> emprestado(<span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem livros que nunca foram emprestados</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>livro_nunca_emprestado(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>    livro(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> ja_foi_emprestado(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Todo empréstimo tem data de devolução</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>emprestimo_tem_data(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    emprestado(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>    data_devolucao(<span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar livros disponíveis</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- disponivel(X).</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Verificar usuários com empréstimos ativos</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>usuario_com_emprestimo(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a>    usuario_bib(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>    emprestado(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- usuario_com_emprestimo(Y).</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar livros nunca emprestados</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- livro_nunca_emprestado(X).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 15 - Sistema de E-commerce</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Produto(x)\)</span>: x é um produto</li>
+<li><span class="math inline">\(Cliente(y)\)</span>: y é um cliente</li>
+<li><span class="math inline">\(Pedido(z)\)</span>: z é um pedido</li>
+<li><span class="math inline">\(Categoria(c)\)</span>: c é uma categoria</li>
+<li><span class="math inline">\(PertenceCategoria(x, c)\)</span>: produto x pertence à categoria c</li>
+<li><span class="math inline">\(FezPedido(y, z)\)</span>: cliente y fez pedido z</li>
+<li><span class="math inline">\(ContemProduto(z, x)\)</span>: pedido z contém produto x</li>
+<li><span class="math inline">\(TemAvaliacao(x)\)</span>: produto x tem avaliação</li>
+<li><span class="math inline">\(EmPromocao(x)\)</span>: produto x está em promoção</li>
+<li><span class="math inline">\(Avaliou(y, x, nota)\)</span>: cliente y avaliou produto x com nota</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>: - Todo produto pertence a pelo menos uma categoria:</p>
+<p><span class="math display">\[∀x (Produto(x) → ∃c (Categoria(c) ∧ PertenceCategoria(x, c)))\]</span></p>
+<ul>
+<li><p>Todo pedido é feito por exatamente um cliente:</p>
+<p><span class="math display">\[∀z (Pedido(z) → ∃y (Cliente(y) ∧ FezPedido(y, z) ∧ ∀w ((Cliente(w) ∧ FezPedido(w, z)) → w = y)))\]</span></p></li>
+<li><p>Nem todo produto tem avaliações:</p>
+<p><span class="math display">\[¬∀x (Produto(x) → TemAvaliacao(x))\]</span></p></li>
+<li><p>Existem produtos em promoção:</p>
+<p><span class="math display">\[∃x (Produto(x) ∧ EmPromocao(x))\]</span></p></li>
+<li><p>Clientes podem fazer múltiplos pedidos: <span class="math display">\[∃y ∃z₁ ∃z₂ (Cliente(y) ∧ Pedido(z₁) ∧ Pedido(z₂) ∧ z₁ ≠ z₂ ∧ FezPedido(y, z₁) ∧ FezPedido(y, z₂))\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>: - Encontrar produtos populares (com muitas avaliações):</p>
+<p><span class="math display">\[∃x ∃y₁ ∃y₂ (Produto(x) ∧ Cliente(y₁) ∧ Cliente(y₂) ∧ y₁ ≠ y₂ ∧ ∃n₁ ∃n₂ (Avaliou(y₁, x, n₁) ∧ Avaliou(y₂, x, n₂)))\]</span></p>
+<ul>
+<li><p>Listar produtos em promoção sem avaliações:</p>
+<p><code>∃x (Produto(x) ∧ EmPromocao(x) ∧ ¬TemAvaliacao(x))</code></p></li>
+<li><p>Verificar clientes frequentes:</p>
+<p><span class="math display">\[∃y ∃z₁ ∃z₂ ∃z₃ (Cliente(y) ∧ Pedido(z₁) ∧ Pedido(z₂) ∧ Pedido(z₃) ∧ z₁ ≠ z₂ ∧ z₂ ≠ z₃ ∧ z₁ ≠ z₃ ∧ FezPedido(y, z₁) ∧ FezPedido(y, z₂) ∧ FezPedido(y, z₃))\]</span></p></li>
+</ul>
+<p><strong>Em Prolog</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 5 - SISTEMA DE E-COMMERCE</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>produto(prod1)<span class="kw">.</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>produto(prod2)<span class="kw">.</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>produto(prod3)<span class="kw">.</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>produto(prod4)<span class="kw">.</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>cliente_ec(cliente1)<span class="kw">.</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>cliente_ec(cliente2)<span class="kw">.</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>cliente_ec(cliente3)<span class="kw">.</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>pedido(pedido1)<span class="kw">.</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>pedido(pedido2)<span class="kw">.</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>pedido(pedido3)<span class="kw">.</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>pedido(pedido4)<span class="kw">.</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>categoria(eletronicos)<span class="kw">.</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>categoria(livros)<span class="kw">.</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>categoria(roupas)<span class="kw">.</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>pertence_categoria(prod1<span class="kw">,</span> eletronicos)<span class="kw">.</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>pertence_categoria(prod2<span class="kw">,</span> livros)<span class="kw">.</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>pertence_categoria(prod3<span class="kw">,</span> roupas)<span class="kw">.</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>pertence_categoria(prod4<span class="kw">,</span> eletronicos)<span class="kw">.</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>pertence_categoria(prod4<span class="kw">,</span> roupas)<span class="kw">.</span>  <span class="co">% prod4 em duas categorias</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>fez_pedido(cliente1<span class="kw">,</span> pedido1)<span class="kw">.</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>fez_pedido(cliente1<span class="kw">,</span> pedido2)<span class="kw">.</span>  <span class="co">% cliente1 fez múltiplos pedidos</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>fez_pedido(cliente2<span class="kw">,</span> pedido3)<span class="kw">.</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>fez_pedido(cliente3<span class="kw">,</span> pedido4)<span class="kw">.</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>contem_produto(pedido1<span class="kw">,</span> prod1)<span class="kw">.</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>contem_produto(pedido2<span class="kw">,</span> prod2)<span class="kw">.</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>contem_produto(pedido3<span class="kw">,</span> prod3)<span class="kw">.</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>contem_produto(pedido4<span class="kw">,</span> prod4)<span class="kw">.</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>tem_avaliacao(prod1)<span class="kw">.</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>tem_avaliacao(prod2)<span class="kw">.</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co">% prod3 e prod4 não têm avaliação</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>em_promocao(prod3)<span class="kw">.</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>em_promocao(prod4)<span class="kw">.</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>avaliou(cliente1<span class="kw">,</span> prod1<span class="kw">,</span> <span class="dv">5</span>)<span class="kw">.</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>avaliou(cliente2<span class="kw">,</span> prod1<span class="kw">,</span> <span class="dv">4</span>)<span class="kw">.</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>avaliou(cliente1<span class="kw">,</span> prod2<span class="kw">,</span> <span class="dv">3</span>)<span class="kw">.</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Todo produto pertence a pelo menos uma categoria</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>produto_tem_categoria(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    produto(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    categoria(<span class="dt">C</span>)<span class="kw">,</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    pertence_categoria(<span class="dt">X</span><span class="kw">,</span> <span class="dt">C</span>)<span class="kw">.</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Todo pedido é feito por exatamente um cliente</span></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>pedido_cliente_unico(<span class="dt">Z</span>) <span class="kw">:-</span> </span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    pedido(<span class="dt">Z</span>)<span class="kw">,</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    fez_pedido(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (fez_pedido(<span class="dt">W</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> <span class="dt">Y</span> <span class="kw">\=</span> <span class="dt">W</span>)<span class="kw">.</span></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Nem todo produto tem avaliações</span></span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>produto_sem_avaliacao(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>    produto(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> tem_avaliacao(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem produtos em promoção</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>existe_promocao <span class="kw">:-</span> </span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>    produto(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>    em_promocao(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Clientes podem fazer múltiplos pedidos</span></span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>cliente_multiplos_pedidos(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>    cliente_ec(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>    fez_pedido(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z1</span>)<span class="kw">,</span></span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>    fez_pedido(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z2</span>)<span class="kw">,</span></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Z1</span> <span class="kw">\=</span> <span class="dt">Z2</span><span class="kw">.</span></span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar produtos populares (com múltiplas avaliações)</span></span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>produto_popular(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>    produto(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>    avaliou(<span class="dt">Y1</span><span class="kw">,</span> <span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">,</span></span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>    avaliou(<span class="dt">Y2</span><span class="kw">,</span> <span class="dt">X</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">,</span></span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Y1</span> <span class="kw">\=</span> <span class="dt">Y2</span><span class="kw">.</span></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- produto_popular(X).</span></span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Listar produtos em promoção sem avaliações</span></span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>promocao_sem_avaliacao(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>    produto(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>    em_promocao(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> tem_avaliacao(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- promocao_sem_avaliacao(X).</span></span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Verificar clientes frequentes (3+ pedidos)</span></span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>cliente_frequente(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>    cliente_ec(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>    findall(<span class="dt">Z</span><span class="kw">,</span> fez_pedido(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> <span class="dt">Pedidos</span>)<span class="kw">,</span></span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>    length(<span class="dt">Pedidos</span><span class="kw">,</span> <span class="dt">N</span>)<span class="kw">,</span></span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">N</span> <span class="dt">&gt;=</span> <span class="dv">2</span><span class="kw">.</span>  <span class="co">% Ajustado para o exemplo</span></span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- cliente_frequente(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 16 - Sistema de Transporte</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Motorista(x)\)</span>: x é um motorista</li>
+<li><span class="math inline">\(Passageiro(y)\)</span>: y é um passageiro</li>
+<li><span class="math inline">\(Viagem(v)\)</span>: v é uma viagem</li>
+<li><span class="math inline">\(Veiculo(c)\)</span>: c é um veículo</li>
+<li><span class="math inline">\(Possui(x, c)\)</span>: motorista x possui veículo c</li>
+<li><span class="math inline">\(RealizouViagem(x, y, v)\)</span>: motorista x realizou viagem v com passageiro y</li>
+<li><span class="math inline">\(RecebeuAvaliacao(v, nota)\)</span>: viagem v recebeu avaliação com nota</li>
+<li><span class="math inline">\(Premium(x)\)</span>: motorista x é premium</li>
+<li><span class="math inline">\(AvaliacaoAlta(x)\)</span>: motorista x tem avaliação alta</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>:</p>
+<ul>
+<li><p>Todo motorista possui exatamente um veículo:</p>
+<p>$$∀x (Motorista(x) → ∃c (Veiculo(c) ∧ Possui(x, c) ∧ ∀d ((Veiculo(d) ∧ Possui(x, d)) → d = c)))`</p></li>
+<li><p>Toda viagem conecta um passageiro a um motorista:</p>
+<p><span class="math display">\[∀v (Viagem(v) → ∃x ∃y (Motorista(x) ∧ Passageiro(y) ∧ RealizouViagem(x, y, v)))\]</span></p></li>
+<li><p>Nem toda viagem recebe avaliação:</p>
+<p><span class="math display">\[¬∀v (Viagem(v) → ∃nota RecebeuAvaliacao(v, nota))\]</span></p></li>
+<li><p>Existem motoristas premium (alta avaliação):</p>
+<p><span class="math display">\[∃x (Motorista(x) ∧ Premium(x) ∧ AvaliacaoAlta(x))\]</span></p></li>
+<li><p>Passageiros podem avaliar motoristas:</p>
+<p><span class="math display">\[∀y ∀x ∀v ((Passageiro(y) ∧ Motorista(x) ∧ Viagem(v) ∧ RealizouViagem(x, y, v)) → ∃nota RecebeuAvaliacao(v, nota))\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>:</p>
+<ul>
+<li><p>Encontrar motoristas premium:</p>
+<p><span class="math display">\[∃x (Motorista(x) ∧ Premium(x))\]</span></p></li>
+<li><p>Verificar viagens sem avaliação:</p>
+<p><span class="math display">\[∃v (Viagem(v) ∧ ¬∃nota RecebeuAvaliacao(v, nota))\]</span></p></li>
+<li><p>Listar passageiros frequentes:</p>
+<p><span class="math display">\[∃y ∃v₁ ∃v₂ (Passageiro(y) ∧ Viagem(v₁) ∧ Viagem(v₂) ∧ v₁ ≠ v₂ ∧ ∃x₁ ∃x₂ (RealizouViagem(x₁, y, v₁) ∧ RealizouViagem(x₂, y, v₂)))\]</span></p></li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 6 - SISTEMA DE TRANSPORTE</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>motorista(mot1)<span class="kw">.</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>motorista(mot2)<span class="kw">.</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>motorista(mot3)<span class="kw">.</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>passageiro(pass1)<span class="kw">.</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>passageiro(pass2)<span class="kw">.</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>passageiro(pass3)<span class="kw">.</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>viagem(viagem1)<span class="kw">.</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>viagem(viagem2)<span class="kw">.</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>viagem(viagem3)<span class="kw">.</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>viagem(viagem4)<span class="kw">.</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>veiculo(carro1)<span class="kw">.</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>veiculo(carro2)<span class="kw">.</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>veiculo(carro3)<span class="kw">.</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>possui_veiculo(mot1<span class="kw">,</span> carro1)<span class="kw">.</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>possui_veiculo(mot2<span class="kw">,</span> carro2)<span class="kw">.</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>possui_veiculo(mot3<span class="kw">,</span> carro3)<span class="kw">.</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>realizou_viagem(mot1<span class="kw">,</span> pass1<span class="kw">,</span> viagem1)<span class="kw">.</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>realizou_viagem(mot1<span class="kw">,</span> pass2<span class="kw">,</span> viagem2)<span class="kw">.</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>realizou_viagem(mot2<span class="kw">,</span> pass3<span class="kw">,</span> viagem3)<span class="kw">.</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>realizou_viagem(mot3<span class="kw">,</span> pass1<span class="kw">,</span> viagem4)<span class="kw">.</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>recebeu_avaliacao(viagem1<span class="kw">,</span> <span class="dv">5</span>)<span class="kw">.</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>recebeu_avaliacao(viagem2<span class="kw">,</span> <span class="dv">4</span>)<span class="kw">.</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>recebeu_avaliacao(viagem4<span class="kw">,</span> <span class="dv">5</span>)<span class="kw">.</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="co">% viagem3 não recebeu avaliação</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>premium(mot1)<span class="kw">.</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>premium(mot3)<span class="kw">.</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>avaliacao_alta(mot1)<span class="kw">.</span></span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>avaliacao_alta(mot3)<span class="kw">.</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Todo motorista possui exatamente um veículo</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>motorista_veiculo_unico(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    motorista(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    possui_veiculo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">C</span>)<span class="kw">,</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (possui_veiculo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">D</span>)<span class="kw">,</span> <span class="dt">C</span> <span class="kw">\=</span> <span class="dt">D</span>)<span class="kw">.</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Toda viagem conecta um passageiro a um motorista</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>viagem_conecta(<span class="dt">T</span>) <span class="kw">:-</span> </span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>    viagem(<span class="dt">T</span>)<span class="kw">,</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>    motorista(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>    passageiro(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>    realizou_viagem(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">T</span>)<span class="kw">.</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Nem toda viagem recebe avaliação</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>viagem_sem_avaliacao(<span class="dt">T</span>) <span class="kw">:-</span> </span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>    viagem(<span class="dt">T</span>)<span class="kw">,</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> recebeu_avaliacao(<span class="dt">T</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem motoristas premium (alta avaliação)</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>motorista_premium(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>    motorista(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>    premium(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>    avaliacao_alta(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Passageiros podem avaliar motoristas (através das viagens)</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>passageiro_pode_avaliar(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>    passageiro(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>    motorista(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>    viagem(<span class="dt">T</span>)<span class="kw">,</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>    realizou_viagem(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">T</span>)<span class="kw">,</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>    recebeu_avaliacao(<span class="dt">T</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar motoristas premium</span></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- premium(X).</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Verificar viagens sem avaliação</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- viagem_sem_avaliacao(T).</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar passageiros frequentes</span></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>passageiro_frequente(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>    passageiro(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>    realizou_viagem(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">V1</span>)<span class="kw">,</span></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>    realizou_viagem(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">V2</span>)<span class="kw">,</span></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>    <span class="dt">V1</span> <span class="kw">\=</span> <span class="dt">V2</span><span class="kw">.</span></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- passageiro_frequente(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 17 - Sistema Universitário</strong></p>
+<p><strong>1. Predicados definidos</strong>:</p>
+<ul>
+<li><span class="math inline">\(Estudante(x)\)</span>: x é um estudante</li>
+<li><span class="math inline">\(Professor(y)\)</span>: y é um professor</li>
+<li><span class="math inline">\(Disciplina(d)\)</span>: d é uma disciplina</li>
+<li><span class="math inline">\(Curso(c)\)</span>: c é um curso</li>
+<li><span class="math inline">\(Matriculado(x, c)\)</span>: estudante x está matriculado no curso c</li>
+<li><span class="math inline">\(Ministra(y, d)\)</span>: professor y ministra disciplina d</li>
+<li><span class="math inline">\(TemNota(x, d, n)\)</span>: estudante x tem nota n na disciplina d</li>
+<li><span class="math inline">\(Obrigatoria(d)\)</span>: disciplina d é obrigatória</li>
+<li><span class="math inline">\(Optativa(d)\)</span>: disciplina d é optativa</li>
+<li><span class="math inline">\(AreaProfessor(y, a)\)</span>: professor y é da área a</li>
+<li><span class="math inline">\(AreaDisciplina(d, a)\)</span>: disciplina d é da área a</li>
+</ul>
+<p><strong>2. Regras formalizadas</strong>: - Todo estudante está matriculado em um curso:</p>
+<p><span class="math display">\[∀x (Estudante(x) → ∃c (Curso(c) ∧ Matriculado(x, c)))\]</span></p>
+<ul>
+<li><p>Toda disciplina é ministrada por pelo menos um professor:</p>
+<p><span class="math display">\[∀d (Disciplina(d) → ∃y (Professor(y) ∧ Ministra(y, d)))\]</span></p></li>
+<li><p>Nem todo estudante tem nota em todas as disciplinas:</p>
+<p><span class="math display">\[¬∀x ∀d ((Estudante(x) ∧ Disciplina(d)) → ∃n TemNota(x, d, n))\]</span></p></li>
+<li><p>Existem disciplinas obrigatórias e optativas:</p>
+<p><span class="math display">\[∃d (Disciplina(d) ∧ Obrigatoria(d)) ∧ ∃d (Disciplina(d) ∧ Optativa(d))\]</span></p></li>
+<li><p>Todo professor ensina disciplinas da sua área:</p>
+<p><span class="math display">\[∀y ∀d ∀a ((Professor(y) ∧ Disciplina(d) ∧ AreaProfessor(y, a) ∧ Ministra(y, d)) → AreaDisciplina(d, a))\]</span></p></li>
+</ul>
+<p><strong>3. Consultas úteis</strong>: - Encontrar estudantes com notas em todas as disciplinas obrigatórias:</p>
+<p><span class="math display">\[∃x (Estudante(x) ∧ ∀d ((Disciplina(d) ∧ Obrigatoria(d)) → ∃n TemNota(x, d, n)))\]</span></p>
+<ul>
+<li><p>Verificar disciplinas sem professor:</p>
+<p><span class="math display">\[∃d (Disciplina(d) ∧ ¬∃y (Professor(y) ∧ Ministra(y, d)))\]</span></p></li>
+<li><p>Listar professores que ministram múltiplas disciplinas:</p>
+<p><span class="math display">\[∃y ∃d₁ ∃d₂ (Professor(y) ∧ Disciplina(d₁) ∧ Disciplina(d₂) ∧ d₁ ≠ d₂ ∧ Ministra(y, d₁) ∧ Ministra(y, d₂))\]</span></p></li>
+</ul>
+<p><strong>Em Prolog</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">% EXERCÍCIO 7 - SISTEMA UNIVERSITÁRIO</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">% ====================================================================</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos base</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>estudante(est1)<span class="kw">.</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>estudante(est2)<span class="kw">.</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>estudante(est3)<span class="kw">.</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>professor(prof1)<span class="kw">.</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>professor(prof2)<span class="kw">.</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>disciplina(disc1)<span class="kw">.</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>disciplina(disc2)<span class="kw">.</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>disciplina(disc3)<span class="kw">.</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>disciplina(disc4)<span class="kw">.</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>curso(computacao)<span class="kw">.</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>curso(matematica)<span class="kw">.</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>matriculado(est1<span class="kw">,</span> computacao)<span class="kw">.</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>matriculado(est2<span class="kw">,</span> computacao)<span class="kw">.</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>matriculado(est3<span class="kw">,</span> matematica)<span class="kw">.</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>ministra(prof1<span class="kw">,</span> disc1)<span class="kw">.</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>ministra(prof1<span class="kw">,</span> disc2)<span class="kw">.</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>ministra(prof2<span class="kw">,</span> disc3)<span class="kw">.</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>ministra(prof2<span class="kw">,</span> disc4)<span class="kw">.</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>tem_nota(est1<span class="kw">,</span> disc1<span class="kw">,</span> <span class="dv">8</span>)<span class="kw">.</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>tem_nota(est1<span class="kw">,</span> disc2<span class="kw">,</span> <span class="dv">9</span>)<span class="kw">.</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>tem_nota(est2<span class="kw">,</span> disc1<span class="kw">,</span> <span class="dv">7</span>)<span class="kw">.</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>tem_nota(est3<span class="kw">,</span> disc3<span class="kw">,</span> <span class="dv">10</span>)<span class="kw">.</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="co">% nem todos têm nota em todas as disciplinas</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>obrigatoria(disc1)<span class="kw">.</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>obrigatoria(disc2)<span class="kw">.</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>optativa(disc3)<span class="kw">.</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>optativa(disc4)<span class="kw">.</span></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>area_professor(prof1<span class="kw">,</span> exatas)<span class="kw">.</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>area_professor(prof2<span class="kw">,</span> exatas)<span class="kw">.</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>area_disciplina(disc1<span class="kw">,</span> exatas)<span class="kw">.</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>area_disciplina(disc2<span class="kw">,</span> exatas)<span class="kw">.</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>area_disciplina(disc3<span class="kw">,</span> exatas)<span class="kw">.</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>area_disciplina(disc4<span class="kw">,</span> exatas)<span class="kw">.</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="co">% REGRAS DE NEGÓCIO</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 1: Todo estudante está matriculado em um curso</span></span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>estudante_tem_curso(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>    estudante(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>    curso(<span class="dt">C</span>)<span class="kw">,</span></span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>    matriculado(<span class="dt">X</span><span class="kw">,</span> <span class="dt">C</span>)<span class="kw">.</span></span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 2: Toda disciplina é ministrada por pelo menos um professor</span></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>disciplina_tem_professor(<span class="dt">D</span>) <span class="kw">:-</span> </span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>    disciplina(<span class="dt">D</span>)<span class="kw">,</span></span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>    professor(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    ministra(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">D</span>)<span class="kw">.</span></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 3: Nem todo estudante tem nota em todas as disciplinas</span></span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>estudante_sem_nota_completa(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>    estudante(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>    disciplina(<span class="dt">D</span>)<span class="kw">,</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> tem_nota(<span class="dt">X</span><span class="kw">,</span> <span class="dt">D</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">.</span></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 4: Existem disciplinas obrigatórias e optativas</span></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>existe_obrigatoria <span class="kw">:-</span> disciplina(<span class="dt">D</span>)<span class="kw">,</span> obrigatoria(<span class="dt">D</span>)<span class="kw">.</span></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>existe_optativa <span class="kw">:-</span> disciplina(<span class="dt">D</span>)<span class="kw">,</span> optativa(<span class="dt">D</span>)<span class="kw">.</span></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra 5: Todo professor ensina disciplinas da sua área</span></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>professor_ensina_sua_area(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>    professor(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a>    area_professor(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">A</span>)<span class="kw">,</span></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    ministra(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">D</span>)<span class="kw">,</span></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>    area_disciplina(<span class="dt">D</span><span class="kw">,</span> <span class="dt">A</span>)<span class="kw">.</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a><span class="co">% CONSULTAS ÚTEIS</span></span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Encontrar estudantes com notas em todas as disciplinas obrigatórias</span></span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>estudante_completo_obrigatorias(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>    estudante(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> (disciplina(<span class="dt">D</span>)<span class="kw">,</span> obrigatoria(<span class="dt">D</span>)<span class="kw">,</span> <span class="kw">\+</span> tem_nota(<span class="dt">X</span><span class="kw">,</span> <span class="dt">D</span><span class="kw">,</span> <span class="dt">_</span>))<span class="kw">.</span></span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- estudante_completo_obrigatorias(X).</span></span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Verificar disciplinas sem professor</span></span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a>disciplina_sem_professor(<span class="dt">D</span>) <span class="kw">:-</span> </span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a>    disciplina(<span class="dt">D</span>)<span class="kw">,</span></span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> ministra(<span class="dt">_</span><span class="kw">,</span> <span class="dt">D</span>)<span class="kw">.</span></span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- disciplina_sem_professor(D).</span></span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Listar professores que ministram múltiplas disciplinas</span></span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a>professor_multiplas_disciplinas(<span class="dt">Y</span>) <span class="kw">:-</span> </span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a>    professor(<span class="dt">Y</span>)<span class="kw">,</span></span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a>    ministra(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">D1</span>)<span class="kw">,</span></span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a>    ministra(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">D2</span>)<span class="kw">,</span></span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a>    <span class="dt">D1</span> <span class="kw">\=</span> <span class="dt">D2</span><span class="kw">.</span></span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- professor_multiplas_disciplinas(Y).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-Sol-Proposicional.html" class="pagination-link" aria-label="Lógica Proposicional @sec-logica-proposicional">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+                
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03-Sol-Normais.html" class="pagination-link" aria-label="Formas Normais @sec-formas-normais">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a> <i class="bi bi-arrow-right-short"></i>
+      
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/02-Sol-Predicativa.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -227,22 +227,45 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Solução dos Exercícios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="#sec-formas-normais" class="quarto-xref"><span>Chapter 7</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Solucao-Exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -251,21 +274,29 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#formas-normais-básicas" id="toc-formas-normais-básicas" class="nav-link active" data-scroll-target="#formas-normais-básicas"><span class="header-section-number">7.1</span> Formas Normais Básicas</a>
+  <li><a href="#formas-normais-lógica-proposicional" id="toc-formas-normais-lógica-proposicional" class="nav-link active" data-scroll-target="#formas-normais-lógica-proposicional"><span class="header-section-number">7.1</span> Formas Normais, Lógica Proposicional</a>
   <ul class="collapse">
   <li><a href="#forma-normal-negativa" id="toc-forma-normal-negativa" class="nav-link" data-scroll-target="#forma-normal-negativa"><span class="header-section-number">7.1.1</span> Forma Normal Negativa</a></li>
   <li><a href="#forma-normal-disjuntiva" id="toc-forma-normal-disjuntiva" class="nav-link" data-scroll-target="#forma-normal-disjuntiva"><span class="header-section-number">7.1.2</span> Forma Normal Disjuntiva</a></li>
   <li><a href="#forma-normal-conjuntiva" id="toc-forma-normal-conjuntiva" class="nav-link" data-scroll-target="#forma-normal-conjuntiva"><span class="header-section-number">7.1.3</span> Forma Normal Conjuntiva</a></li>
   <li><a href="#usando-a-tabela-verdade-para-gerar-formas-normais" id="toc-usando-a-tabela-verdade-para-gerar-formas-normais" class="nav-link" data-scroll-target="#usando-a-tabela-verdade-para-gerar-formas-normais"><span class="header-section-number">7.1.4</span> Usando a Tabela-Verdade para Gerar Formas Normais</a></li>
   </ul></li>
-  <li><a href="#formas-normais-avançadas" id="toc-formas-normais-avançadas" class="nav-link" data-scroll-target="#formas-normais-avançadas"><span class="header-section-number">7.2</span> Formas Normais Avançadas</a>
+  <li><a href="#formas-normais-lógica-predicativa-e-quantificadores" id="toc-formas-normais-lógica-predicativa-e-quantificadores" class="nav-link" data-scroll-target="#formas-normais-lógica-predicativa-e-quantificadores"><span class="header-section-number">7.2</span> Formas Normais, Lógica Predicativa e Quantificadores</a>
   <ul class="collapse">
   <li><a href="#forma-normal-prenex" id="toc-forma-normal-prenex" class="nav-link" data-scroll-target="#forma-normal-prenex"><span class="header-section-number">7.2.1</span> Forma Normal Prenex</a></li>
   <li><a href="#skolemização" id="toc-skolemização" class="nav-link" data-scroll-target="#skolemização"><span class="header-section-number">7.2.2</span> Skolemização</a></li>
   <li><a href="#expansão-do-vocabulário-e-conexão-com-programação-lógica" id="toc-expansão-do-vocabulário-e-conexão-com-programação-lógica" class="nav-link" data-scroll-target="#expansão-do-vocabulário-e-conexão-com-programação-lógica"><span class="header-section-number">7.2.3</span> Expansão do Vocabulário e Conexão com Programação Lógica</a></li>
   <li><a href="#sec-exercicios-skolemizacao" id="toc-sec-exercicios-skolemizacao" class="nav-link" data-scroll-target="#sec-exercicios-skolemizacao"><span class="header-section-number">7.2.4</span> Exercícios de Skolemização</a></li>
   </ul></li>
-  <li><a href="#sec-predicativa-conexao-prolog" id="toc-sec-predicativa-conexao-prolog" class="nav-link" data-scroll-target="#sec-predicativa-conexao-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</a></li>
+  <li><a href="#formas-normais-prenex" id="toc-formas-normais-prenex" class="nav-link" data-scroll-target="#formas-normais-prenex"><span class="header-section-number">7.3</span> Formas Normais Prenex</a>
+  <ul class="collapse">
+  <li><a href="#algoritmo-para-conversão-na-forma-normal-prenex" id="toc-algoritmo-para-conversão-na-forma-normal-prenex" class="nav-link" data-scroll-target="#algoritmo-para-conversão-na-forma-normal-prenex"><span class="header-section-number">7.3.1</span> Algoritmo para Conversão na Forma Normal Prenex</a></li>
+  <li><a href="#forma-normal-negativa-prenex" id="toc-forma-normal-negativa-prenex" class="nav-link" data-scroll-target="#forma-normal-negativa-prenex"><span class="header-section-number">7.3.2</span> Forma Normal Negativa Prenex</a></li>
+  <li><a href="#algoritmo-para-forma-normal-disjuntiva-prenex-fnd-prenex" id="toc-algoritmo-para-forma-normal-disjuntiva-prenex-fnd-prenex" class="nav-link" data-scroll-target="#algoritmo-para-forma-normal-disjuntiva-prenex-fnd-prenex"><span class="header-section-number">7.3.3</span> Algoritmo para Forma Normal Disjuntiva Prenex (FND Prenex)</a></li>
+  <li><a href="#algoritmo-para-forma-normal-conjuntiva-prenex-fnc-prenex" id="toc-algoritmo-para-forma-normal-conjuntiva-prenex-fnc-prenex" class="nav-link" data-scroll-target="#algoritmo-para-forma-normal-conjuntiva-prenex-fnc-prenex"><span class="header-section-number">7.3.4</span> Algoritmo para Forma Normal Conjuntiva Prenex (FNC Prenex)</a></li>
+  <li><a href="#sec-exercicios-formas-normais-prenex" id="toc-sec-exercicios-formas-normais-prenex" class="nav-link" data-scroll-target="#sec-exercicios-formas-normais-prenex"><span class="header-section-number">7.3.5</span> Exercícios Formas Normais Prenex</a></li>
+  </ul></li>
+  <li><a href="#sec-predicativa-conexao-prolog" id="toc-sec-predicativa-conexao-prolog" class="nav-link" data-scroll-target="#sec-predicativa-conexao-prolog"><span class="header-section-number">7.4</span> Exercícios de Conexão com Prolog</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/05-formas-normais-e-skolemizacao.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -311,8 +342,8 @@ Tip
 <p>Neste porto da nossa jornada a aventureira leitora verá que as formas normais são como as diferentes rotas de navegação padronizadas que organizam o tráfego marítimo em um porto movimentado. Assim como um capitão de porto pode reorganizar águas caóticas em canais bem definidos com rotas padronizadas, as formas normais reorganizam fórmulas lógicas complexas em estruturas elegantes e uniformes.</p>
 <p>A criativa leitora pode se imaginar tentando navegar em águas desconhecidas sem cartas náuticas, onde as correntes se cruzam caoticamente, sem padrão ou lógica. Seria como tentar compreender uma fórmula lógica sem forma normal, possível, mas desnecessariamente árduo. As formas normais fornecem um mapa claro e consistente para navegar pelas complexidades da lógica, permitindo que a leitora veja o panorama completo de maneira organizada.</p>
 <p>Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma forma padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel importante na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da <strong>Lógica Proposicional</strong>, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.</p>
-<section id="formas-normais-básicas" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="formas-normais-básicas"><span class="header-section-number">7.1</span> Formas Normais Básicas</h2>
+<section id="formas-normais-lógica-proposicional" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="formas-normais-lógica-proposicional"><span class="header-section-number">7.1</span> Formas Normais, Lógica Proposicional</h2>
 <p>Existem várias formas normais na <strong>Lógica Proposicional</strong>, cada uma com suas próprias regras e aplicações. A seguir, a esforçada leitora encontrará uma descrição resumida das formas normais, destacando algumas das principais:</p>
 <ol type="1">
 <li><p><strong>Forma Normal Negativa</strong>: Uma proposição está na Forma Normal Negativa se as operações de negação <span class="math inline">\(\neg\)</span> aparecerem apenas imediatamente antes das variáveis. Isso é conseguido aplicando as leis de De Morgan e eliminando as duplas negações.</p>
@@ -1046,8 +1077,8 @@ F &amp; F &amp; F &amp; T &amp; F &amp; T &amp; T \\
 </section>
 </section>
 </section>
-<section id="formas-normais-avançadas" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="formas-normais-avançadas"><span class="header-section-number">7.2</span> Formas Normais Avançadas</h2>
+<section id="formas-normais-lógica-predicativa-e-quantificadores" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="formas-normais-lógica-predicativa-e-quantificadores"><span class="header-section-number">7.2</span> Formas Normais, Lógica Predicativa e Quantificadores</h2>
 <section id="forma-normal-prenex" class="level3" data-number="7.2.1">
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="forma-normal-prenex"><span class="header-section-number">7.2.1</span> Forma Normal Prenex</h3>
 <p>A Forma Normal Prenex é como um almirante experiente organizando a cadeia de comando antes de uma operação naval complexa.</p>
@@ -1634,8 +1665,818 @@ Q(c_1, x, \mathbf{f}(x), z, \mathbf{g}(x,z))
 <p>Realize a conversão completa: elimine implicações, converta para Forma Normal Prenex e aplique a Skolemização.</p>
 </section>
 </section>
-<section id="sec-predicativa-conexao-prolog" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="sec-predicativa-conexao-prolog"><span class="header-section-number">7.3</span> Exercícios de Conexão com Prolog</h2>
+<section id="formas-normais-prenex" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="formas-normais-prenex"><span class="header-section-number">7.3</span> Formas Normais Prenex</h2>
+<p>Agora que já conhecemos as Formas Normais Prenex e a Skolemização, podemos explorar as formas normais considerando a existência de quantificadores. Neste caso, podemos definir um algoritmo para converter fórmulas lógicas em suas respectivas Formas Normais Prenex. Começando com a própria Forma Normal Prenex.</p>
+<section id="algoritmo-para-conversão-na-forma-normal-prenex" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="algoritmo-para-conversão-na-forma-normal-prenex"><span class="header-section-number">7.3.1</span> Algoritmo para Conversão na Forma Normal Prenex</h3>
+<p>A Forma Normal Prenex (FNP) é uma representação de fórmulas lógicas onde todos os quantificadores estão no início da fórmula, seguidos por uma parte livre de quantificadores. Essa estrutura é útil para a aplicação de técnicas de resolução em lógica de primeira ordem.</p>
+<p><strong>Entrada</strong>: Fórmula <span class="math inline">\(A\)</span>. <strong>Saída</strong>: Fórmula <span class="math inline">\(B\)</span> em FNP tal que <span class="math inline">\(A \equiv B\)</span>.</p>
+<ol type="1">
+<li><strong>repita</strong>
+<ol type="1">
+<li>para todas as subfórmulas <span class="math inline">\(X, Y, Z \in A\)</span> faça
+<ol type="1">
+<li>se <span class="math inline">\((X \rightarrow Y)\)</span> redefina como <span class="math inline">\((\neg X \vee Y)\)</span></li>
+<li>se <span class="math inline">\((X \leftrightarrow Y)\)</span> redefina como <span class="math inline">\((X \wedge Y) \vee (\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \vee Y)\)</span> redefina como <span class="math inline">\((\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \wedge Y)\)</span> redefina como <span class="math inline">\((\neg X \vee \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg\neg X\)</span> redefina como <span class="math inline">\(X\)</span></li>
+<li>se <span class="math inline">\(\neg\forall x P(x)\)</span> redefina como <span class="math inline">\(\exists x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\(\neg\exists x P(x)\)</span> redefina como <span class="math inline">\(\forall x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (P(x) \vee Y)\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \vee Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (P(x) \vee Y)\)</span></li>
+<li>se <span class="math inline">\(Y \vee (\forall x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (Y \vee P(x))\)</span></li>
+<li>se <span class="math inline">\(Y \vee (\exists x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (Y \vee P(x))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \wedge Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (P(x) \wedge Y)\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (P(x) \wedge Y)\)</span></li>
+<li>se <span class="math inline">\(Y \wedge (\forall x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (Y \wedge P(x))\)</span></li>
+<li>se <span class="math inline">\(Y \wedge (\exists x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (Y \wedge P(x))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \wedge (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \forall y (P(x) \wedge Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \vee (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \exists y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \forall y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \exists y (P(x) \wedge Q(y))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \exists y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \forall y (P(x) \wedge Q(y))\)</span></li>
+</ol></li>
+<li>fim</li>
+</ol></li>
+<li><strong>até não ocorrerem substituições</strong></li>
+<li>Renomeie variáveis ligadas para evitar conflitos de escopo</li>
+<li>Mova todos os quantificadores restantes para o início da fórmula (prenexação final)</li>
+</ol>
+<section id="exemplo-1-3" class="level4" data-number="7.3.1.1">
+<h4 data-number="7.3.1.1" class="anchored" data-anchor-id="exemplo-1-3"><span class="header-section-number">7.3.1.1</span> Exemplo 1</h4>
+<p><strong>Fórmula inicial</strong>: $ x (P(x) y Q(x,y)) (z R(z)) $</p>
+<p><strong>Solução</strong>:</p>
+<p><strong>Passo 1</strong>: Eliminar Implicações</p>
+<p>Primeiro, removemos a implicação <span class="math inline">\(P(x) \rightarrow \exists y Q(x,y)\)</span>, aplicando a regra <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>:</p>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee \exists y Q(x,y)) \wedge \neg(\exists z R(z))
+\]</span></p>
+<p><strong>Passo 2</strong>: Mover Negações para Dentro (FNN)</p>
+<p>Em seguida, aplicamos a regra de negação do quantificador existencial, <span class="math inline">\(\neg\exists z \equiv \forall z \neg\)</span>, na segunda parte da fórmula:</p>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee \exists y Q(x,y)) \wedge \forall z \neg R(z)
+\]</span></p>
+<p><strong>Passo 3</strong>: Mover Quantificadores para o Início (Prenexação)</p>
+<p>Agora, movemos todos os quantificadores para o início da fórmula. É fundamental observar a ordem correta:</p>
+<ul>
+<li>O quantificador <span class="math inline">\(\exists y\)</span> está no escopo de <span class="math inline">\(\forall x\)</span>. Isso significa que a escolha de <span class="math inline">\(y\)</span> pode depender de <span class="math inline">\(x\)</span>. Para preservar essa dependência, <span class="math inline">\(\forall x\)</span> deve vir antes de <span class="math inline">\(\exists y\)</span> na forma prenex.</li>
+<li>O quantificador <span class="math inline">\(\forall z\)</span> vem de uma conjunção independente e pode ser movido para o início junto com os outros.</li>
+</ul>
+<p>Seguindo essa lógica, a ordem correta dos quantificadores é <span class="math inline">\(\forall x \exists y \forall z\)</span>.</p>
+<p><span class="math display">\[
+\forall x \exists y \forall z ((\neg P(x) \vee Q(x,y)) \wedge \neg R(z))
+\]</span></p>
+<p><strong>Resultado</strong>: A fórmula final em FNP, com a ordem dos quantificadores justificada para manter o sentido lógico original, é:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall z ((\neg P(x) \vee Q(x,y)) \wedge \neg R(z))
+\]</span></p>
+</section>
+<section id="exemplo-2-3" class="level4" data-number="7.3.1.2">
+<h4 data-number="7.3.1.2" class="anchored" data-anchor-id="exemplo-2-3"><span class="header-section-number">7.3.1.2</span> Exemplo 2</h4>
+<p><strong>Fórmula inicial</strong>: $ (x P(x) y Q(y)) $</p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><p><strong>Eliminar equivalências (passo 1.1.2):</strong> Primeiro, substituímos o operador de equivalência <span class="math inline">\(A \leftrightarrow B\)</span> por <span class="math inline">\((A \wedge B) \vee (\neg A \wedge \neg B)\)</span>. <span class="math display">\[ \neg((\forall x P(x) \wedge \exists y Q(y)) \vee (\neg \forall x P(x) \wedge \neg \exists y Q(y))) \]</span></p></li>
+<li><p><strong>Aplicar a lei de De Morgan para a negação de disjunção (passo 1.1.3):</strong> Movemos a negação principal para dentro, trocando <span class="math inline">\(\vee\)</span> por <span class="math inline">\(\wedge\)</span>. <span class="math display">\[ \neg(\forall x P(x) \wedge \exists y Q(y)) \wedge \neg(\neg \forall x P(x) \wedge \neg \exists y Q(y)) \]</span></p></li>
+<li><p><strong>Aplicar a lei de De Morgan para a negação de conjunção (passo 1.1.4):</strong> Continuamos a mover as negações para dentro das duas cláusulas. <span class="math display">\[ (\neg \forall x P(x) \vee \neg \exists y Q(y)) \wedge (\neg\neg \forall x P(x) \vee \neg\neg \exists y Q(y)) \]</span></p></li>
+<li><p><strong>Eliminar duplas negações (passo 1.1.5):</strong> Removemos as duplas negações na segunda parte da fórmula. <span class="math display">\[ (\neg \forall x P(x) \vee \neg \exists y Q(y)) \wedge (\forall x P(x) \vee \exists y Q(y)) \]</span></p></li>
+<li><p><strong>Aplicar regras de negação de quantificadores (passos 1.1.6 e 1.1.7):</strong> Esta é a conversão para a Forma Normal Negativa (FNN), o passo onde o erro original ocorreu. <span class="math display">\[ (\exists x \neg P(x) \vee \forall y \neg Q(y)) \wedge (\forall x P(x) \vee \exists y Q(y)) \]</span></p></li>
+<li><p><strong>Renomear variáveis ligadas (passo 3):</strong> Para evitar conflitos ao mover os quantificadores, renomeamos as variáveis <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> na segunda cláusula para <span class="math inline">\(z\)</span> e <span class="math inline">\(w\)</span>. <span class="math display">\[ (\exists x \neg P(x) \vee \forall y \neg Q(y)) \wedge (\forall z P(z) \vee \exists w Q(w)) \]</span></p></li>
+<li><p><strong>Mover quantificadores para a esquerda (prenexação, passo 4):</strong> Movemos todos os quantificadores para o início da fórmula para obter a Forma Normal Prenex. <span class="math display">\[ \exists x \forall y \forall z \exists w ((\neg P(x) \vee \neg Q(y)) \wedge (P(z) \vee Q(w))) \]</span></p></li>
+</ol>
+<p><strong>Resultado:</strong> $ x y z w ((P(x) Q(y)) (P(z) Q(w))) $</p>
+</section>
+<section id="exemplo-3-2" class="level4" data-number="7.3.1.3">
+<h4 data-number="7.3.1.3" class="anchored" data-anchor-id="exemplo-3-2"><span class="header-section-number">7.3.1.3</span> Exemplo 3</h4>
+<p><strong>Fórmula inicial</strong>: $ (x P(x) y Q(y)) z R(z) $</p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><p><strong>Eliminar implicações (passo 1.1.1)</strong>: <span class="math display">\[\neg(\exists x P(x) \vee \forall y Q(y)) \vee \forall z R(z)\]</span></p></li>
+<li><p><strong>Aplicar as leis de De Morgan para mover negações para dentro (passo 1.1.2, 1.1.7 e 1.1.8)</strong>: <span class="math display">\[(\forall x \neg P(x) \wedge \exists y \neg Q(y)) \vee \forall z R(z)\]</span></p></li>
+<li><p><strong>Renomear variáveis</strong>: (não necessário neste caso).</p></li>
+<li><p><strong>Mover quantificadores para a esquerda (prenexação, passo 4)</strong>: <span class="math display">\[\forall x \exists y \forall z ((\neg P(x) \wedge \neg Q(y)) \vee R(z))\]</span></p></li>
+</ol>
+<p><strong>Resultado:</strong></p>
+<p><span class="math display">\[\forall x \exists y \forall z ((\neg P(x) \wedge \neg Q(y)) \vee R(z))\]</span></p>
+</section>
+<section id="exemplo-4-2" class="level4" data-number="7.3.1.4">
+<h4 data-number="7.3.1.4" class="anchored" data-anchor-id="exemplo-4-2"><span class="header-section-number">7.3.1.4</span> Exemplo 4</h4>
+<p><strong>Fórmula inicial</strong>: $ (x y P(x,y)) (z w Q(z,w) u R(u)) $</p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><p><strong>Aplicar as leis de De Morgan para mover negações para dentro (passo 1.1.7 e 1.1.8)</strong>:</p></li>
+<li><p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\]</span></p></li>
+<li><p><strong>Renomear variáveis (passo 3)</strong>:</p></li>
+<li><p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall v R(v))\]</span></p></li>
+<li><p><strong>Mover quantificadores para a esquerda (prenexação, passo 4)</strong>: <span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y)) \vee (Q(z,w) \wedge R(v)))\]</span></p></li>
+</ol>
+<p><strong>Resultado:</strong></p>
+<p><span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y)) \vee (Q(z,w) \wedge R(v)))\]</span></p>
+</section>
+<section id="exemplo-5-2" class="level4" data-number="7.3.1.5">
+<h4 data-number="7.3.1.5" class="anchored" data-anchor-id="exemplo-5-2"><span class="header-section-number">7.3.1.5</span> Exemplo 5</h4>
+<p><strong>Fórmula inicial</strong>: $ x (y P(x,y) z Q(x,z)) (w R(w)) $</p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><p><strong>Eliminar implicações (passo 1.1.1)</strong>:</p>
+<p><span class="math display">\[\forall x (\neg \exists y P(x,y) \vee \forall z Q(x,z)) \wedge \neg(\exists w R(w))\]</span></p></li>
+<li><p><strong>Aplicar as leis de De Morgan para mover negações para dentro (passo 1.1.7 e 1.1.8)</strong>: <span class="math display">\[\forall x (\forall y \neg P(x,y) \vee \forall z Q(x,z)) \wedge \forall w \neg R(w)\]</span></p></li>
+<li><p><strong>Renomear variáveis (passo 3)</strong>:</p></li>
+<li><p><span class="math display">\[\forall x (\forall y \neg P(x,y) \vee \forall z Q(x,z)) \wedge \forall v \neg R(v)\]</span></p></li>
+<li><p><strong>Mover quantificadores para a esquerda (prenexação, passo 4)</strong>:</p>
+<p><span class="math display">\[\forall x \forall y \forall z \forall v ((\neg P(x,y) \vee Q(x,z)) \wedge \neg R(v))\]</span></p></li>
+</ol>
+<p><strong>Resultado:</strong></p>
+<p><span class="math display">\[\forall x \forall y \forall z \forall v ((\neg P(x,y) \vee Q(x,z)) \wedge \neg R(v))\]</span></p>
+</section>
+</section>
+<section id="forma-normal-negativa-prenex" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="forma-normal-negativa-prenex"><span class="header-section-number">7.3.2</span> Forma Normal Negativa Prenex</h3>
+<p>A Forma Normal Negativa Prenex (FNNP) é uma variação da Forma Normal Prenex que se concentra em manter as negações no nível mais externo possível, enquanto ainda obedece à estrutura prenex. Isso é útil em contextos onde a preservação da negação é crítica para a interpretação da fórmula.</p>
+<section id="algoritmo-para-forma-normal-negativa-fnn" class="level4" data-number="7.3.2.1">
+<h4 data-number="7.3.2.1" class="anchored" data-anchor-id="algoritmo-para-forma-normal-negativa-fnn"><span class="header-section-number">7.3.2.1</span> Algoritmo para Forma Normal Negativa (FNN)</h4>
+<p>Entrada: Fórmula <span class="math inline">\(A\)</span>. Saída: Fórmula <span class="math inline">\(B\)</span> em FNN tal que <span class="math inline">\(A \equiv B\)</span>.</p>
+<ol type="1">
+<li><strong>repita</strong></li>
+<li>para todas as subfórmulas <span class="math inline">\(X, Y \in A\)</span> faça
+<ol type="1">
+<li>se <span class="math inline">\((X \rightarrow Y)\)</span> redefina como <span class="math inline">\((\neg X \vee Y)\)</span></li>
+<li>se <span class="math inline">\((X \leftrightarrow Y)\)</span> redefina como <span class="math inline">\((X \wedge Y) \vee (\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \vee Y)\)</span> redefina como <span class="math inline">\((\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \wedge Y)\)</span> redefina como <span class="math inline">\((\neg X \vee \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg\neg X\)</span> redefina como <span class="math inline">\(X\)</span></li>
+<li>se <span class="math inline">\(\neg\forall x P(x)\)</span> redefina como <span class="math inline">\(\exists x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\(\neg\exists x P(x)\)</span> redefina como <span class="math inline">\(\forall x \neg P(x)\)</span></li>
+</ol></li>
+<li>fim</li>
+<li><strong>até não ocorrerem substituições</strong></li>
+</ol>
+</section>
+<section id="exemplo-1-4" class="level4" data-number="7.3.2.2">
+<h4 data-number="7.3.2.2" class="anchored" data-anchor-id="exemplo-1-4"><span class="header-section-number">7.3.2.2</span> Exemplo 1</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(P \rightarrow (Q \vee R))\)</span></p>
+<p><strong>Solução</strong>: 1. Eliminar implicações (passo 1.1.1): <span class="math inline">\(\neg(\neg P \vee (Q \vee R))\)</span>; 2. Aplicar lei de De Morgan para negação de disjunção (passo 1.1.3): <span class="math inline">\(P \wedge \neg(Q \vee R)\)</span>; 3. Aplicar novamente lei de De Morgan para negação de disjunção (passo 1.1.3): <span class="math inline">\(P \wedge (\neg Q \wedge \neg R)\)</span>.</p>
+<p><strong>Resultado final</strong>: <span class="math inline">\(P \wedge (\neg Q \wedge \neg R)\)</span></p>
+</section>
+<section id="exemplo-2-4" class="level4" data-number="7.3.2.3">
+<h4 data-number="7.3.2.3" class="anchored" data-anchor-id="exemplo-2-4"><span class="header-section-number">7.3.2.3</span> Exemplo 2</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(\forall x P(x) \leftrightarrow \exists y Q(y))\)</span></p>
+<p><strong>Solução</strong>: 1. Eliminar equivalências (passo 1.1.2):</p>
+<p><span class="math display">\[\neg((\forall x P(x) \wedge \exists y Q(y)) \vee (\neg \forall x P(x) \wedge \neg \exists y Q(y)))\]</span></p>
+<ol start="2" type="1">
+<li>Aplicar lei de De Morgan para negação de disjunção (passo 1.1.3):</li>
+</ol>
+<p><span class="math display">\[(\neg(\forall x P(x) \wedge \exists y Q(y))) \wedge (\neg(\neg \forall x P(x) \wedge \neg \exists y Q(y)))\]</span></p>
+<ol start="3" type="1">
+<li>Aplicar lei de De Morgan para negação de conjunção (passo 1.1.4):</li>
+</ol>
+<p><span class="math display">\[(\neg \forall x P(x) \vee \neg \exists y Q(y)) \wedge (\forall x P(x) \vee \exists y Q(y))\]</span></p>
+<ol start="4" type="1">
+<li>Aplicar lei de De Morgan para negação de quantificadores (passos 1.1.6 e 1.1.7):</li>
+</ol>
+<p><span class="math display">\[(\exists x \neg P(x) \vee \forall y \neg Q(y)) \wedge (\forall x P(x) \vee \exists y Q(y))\]</span></p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[(\exists x \neg P(x) \vee \forall y \neg Q(y)) \wedge (\forall x P(x) \vee \exists y Q(y))\]</span></p>
+</section>
+<section id="exemplo-2-5" class="level4" data-number="7.3.2.4">
+<h4 data-number="7.3.2.4" class="anchored" data-anchor-id="exemplo-2-5"><span class="header-section-number">7.3.2.4</span> Exemplo 2</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(\forall x (P(x) \rightarrow \exists y Q(x,y)))\)</span></p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li>Eliminar implicações (passo 1.1.1):</li>
+</ol>
+<p><span class="math display">\[\neg(\forall x (\neg P(x) \vee \exists y Q(x,y)))\]</span></p>
+<ol start="2" type="1">
+<li>Aplicar lei de De Morgan para negação de quantificador universal (passo 1.1.6):</li>
+</ol>
+<p><span class="math display">\[\exists x \neg(\neg P(x) \vee \exists y Q(x,y))\]</span></p>
+<ol start="3" type="1">
+<li>Aplicar lei de De Morgan para negação de disjunção (passo 1.1.3):</li>
+</ol>
+<p><span class="math display">\[\exists x (P(x) \wedge \neg(\exists y Q(x,y)))\]</span></p>
+<ol start="4" type="1">
+<li>Aplicar lei de De Morgan para negação de quantificador existencial (passo 1.1.7):</li>
+</ol>
+<p><span class="math display">\[\exists x (P(x) \wedge \forall y \neg Q(x,y))\]</span></p>
+<p>Resultado:</p>
+<p><span class="math display">\[\exists x (P(x) \wedge \forall y \neg Q(x,y))\]</span></p>
+</section>
+<section id="exemplo-4-3" class="level4" data-number="7.3.2.5">
+<h4 data-number="7.3.2.5" class="anchored" data-anchor-id="exemplo-4-3"><span class="header-section-number">7.3.2.5</span> Exemplo 4</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(\forall x (P(x) \vee Q(x)) \rightarrow \exists y R(y))\)</span></p>
+<p><strong>Solução</strong>: 1. Eliminar implicações (passo 1.1.1):</p>
+<p><span class="math display">\[\neg(\neg(\forall x (P(x) \vee Q(x))) \vee \exists y R(y))\]</span></p>
+<ol start="2" type="1">
+<li>Aplicar lei de De Morgan para negação de disjunção (passo 1.1.3):</li>
+</ol>
+<p><span class="math display">\[\neg\neg(\forall x (P(x) \vee Q(x))) \wedge \neg(\exists y R(y))\]</span></p>
+<ol start="3" type="1">
+<li>Eliminar dupla negação (passo 1.1.5):</li>
+</ol>
+<p><span class="math display">\[(\forall x (P(x) \vee Q(x))) \wedge \neg(\exists y R(y))\]</span></p>
+<ol start="4" type="1">
+<li>Aplicar lei de De Morgan para negação de quantificador existencial (passo 1.1.7):</li>
+</ol>
+<p><span class="math display">\[(\forall x (P(x) \vee Q(x))) \wedge (\forall y \neg R(y))\]</span></p>
+<p>Resultado:</p>
+<p><span class="math display">\[(\forall x (P(x) \vee Q(x))) \wedge (\forall y \neg R(y))\]</span></p>
+</section>
+</section>
+<section id="algoritmo-para-forma-normal-disjuntiva-prenex-fnd-prenex" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="algoritmo-para-forma-normal-disjuntiva-prenex-fnd-prenex"><span class="header-section-number">7.3.3</span> Algoritmo para Forma Normal Disjuntiva Prenex (FND Prenex)</h3>
+<p><strong>Entrada</strong>: Fórmula <span class="math inline">\(A\)</span>. <strong>Saída</strong>: Fórmula <span class="math inline">\(B\)</span> em FND Prenex tal que <span class="math inline">\(A \equiv B\)</span>.</p>
+<ol type="1">
+<li><strong>repita</strong>
+<ol type="1">
+<li>para todas as subfórmulas <span class="math inline">\(X, Y, Z \in A\)</span> faça
+<ol type="1">
+<li>se <span class="math inline">\((X \rightarrow Y)\)</span> redefina como <span class="math inline">\((\neg X \vee Y)\)</span></li>
+<li>se <span class="math inline">\((X \leftrightarrow Y)\)</span> redefina como <span class="math inline">\((X \wedge Y) \vee (\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \vee Y)\)</span> redefina como <span class="math inline">\((\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \wedge Y)\)</span> redefina como <span class="math inline">\((\neg X \vee \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg\neg X\)</span> redefina como <span class="math inline">\(X\)</span></li>
+<li>se <span class="math inline">\(X \wedge (Y \vee Z)\)</span> redefina como <span class="math inline">\((X \wedge Y) \vee (X \wedge Z)\)</span></li>
+<li>se <span class="math inline">\((X \vee Y) \wedge Z\)</span> redefina como <span class="math inline">\((X \wedge Z) \vee (Y \wedge Z)\)</span></li>
+<li>se <span class="math inline">\(\neg\forall x P(x)\)</span> redefina como <span class="math inline">\(\exists x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\(\neg\exists x P(x)\)</span> redefina como <span class="math inline">\(\forall x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\(\forall x P(x)\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(P\)</span>, redefina como <span class="math inline">\(P\)</span></li>
+<li>se <span class="math inline">\(\exists x P(x)\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(P\)</span>, redefina como <span class="math inline">\(P\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (P(x) \vee Y)\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \vee Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (P(x) \vee Y)\)</span></li>
+<li>se <span class="math inline">\(Y \vee (\forall x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (Y \vee P(x))\)</span></li>
+<li>se <span class="math inline">\(Y \vee (\exists x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (Y \vee P(x))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \wedge Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (P(x) \wedge Y)\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (P(x) \wedge Y)\)</span></li>
+<li>se <span class="math inline">\(Y \wedge (\forall x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (Y \wedge P(x))\)</span></li>
+<li>se <span class="math inline">\(Y \wedge (\exists x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (Y \wedge P(x))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \wedge (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \forall y (P(x) \wedge Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \vee (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \exists y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \forall y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \exists y (P(x) \wedge Q(y))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \exists y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \forall y (P(x) \wedge Q(y))\)</span></li>
+</ol></li>
+<li>fim</li>
+</ol></li>
+<li><strong>até não ocorrerem substituições</strong></li>
+<li>Renomeie variáveis ligadas para evitar conflitos</li>
+<li>Mova todos os quantificadores para o início da fórmula (prenexação)</li>
+</ol>
+<section id="exemplo-1-5" class="level4" data-number="7.3.3.1">
+<h4 data-number="7.3.3.1" class="anchored" data-anchor-id="exemplo-1-5"><span class="header-section-number">7.3.3.1</span> Exemplo 1</h4>
+<p><strong>Fórmula inicial</strong>: $ x y (P(x) Q(y)) (z R(z)) $</p>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação <span class="math inline">\(P(x) \rightarrow Q(y)\)</span>, aplicando a regra <span class="math inline">\(X \rightarrow Y \equiv \neg X \vee Y\)</span>:</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg P(x) \vee Q(y)) \wedge \neg(\forall z R(z))
+\]</span></p>
+<p><strong>Passo 2: Mover Negações para Dentro (FNN)</strong>: aplicamos a regra de negação do quantificador universal na segunda parte da fórmula:</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg P(x) \vee Q(y)) \wedge \exists z \neg R(z)
+\]</span></p>
+<p><strong>Passo 3: Mover Quantificadores para o Início (Prenexação)</strong>: renomeamos a variável <span class="math inline">\(z\)</span> para <span class="math inline">\(w\)</span> para evitar conflitos e movemos todos os quantificadores para o início:</p>
+<p><span class="math display">\[
+\forall x \exists y \exists w ((\neg P(x) \vee Q(y)) \wedge \neg R(w))
+\]</span></p>
+<p><strong>Passo 4: Distribuir <span class="math inline">\(\land\)</span> sobre <span class="math inline">\(\lor\)</span></strong>: a matriz <span class="math inline">\((\neg P(x) \vee Q(y)) \wedge \neg R(w)\)</span> ainda não está em FND. Para convertê-la, aplicamos a lei distributiva da conjunção sobre a disjunção. A expressão tem a forma <span class="math inline">\((X \vee Y) \land Z\)</span>, que é equivalente a <span class="math inline">\((X \land Z) \lor (Y \land Z)\)</span>:</p>
+<p><span class="math display">\[
+\forall x \exists y \exists w ((\neg P(x) \wedge \neg R(w)) \lor (Q(y) \wedge \neg R(w)))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final está em FND Prenex, pois sua matriz é uma disjunção de duas cláusulas conjuntivas:</p>
+<p><span class="math display">\[
+\forall x \exists y \exists w ((\neg P(x) \wedge \neg R(w)) \lor (Q(y) \wedge \neg R(w)))
+\]</span></p>
+</section>
+<section id="exemplo-2-6" class="level4" data-number="7.3.3.2">
+<h4 data-number="7.3.3.2" class="anchored" data-anchor-id="exemplo-2-6"><span class="header-section-number">7.3.3.2</span> Exemplo 2</h4>
+<p><strong>Fórmula inicial</strong>: $ (x P(x) y Q(y)) $</p>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação $ x P(x) y Q(y) $:</p>
+<p><span class="math display">\[
+\neg(\neg(\forall x P(x)) \vee \exists y Q(y))
+\]</span></p>
+<p><strong>Passo 2: Mover Negações para Dentro (FNN)</strong>: aplicamos a lei de De Morgan, eliminamos a dupla negação e aplicamos a regra de negação do quantificador existencial:</p>
+<p><span class="math display">\[
+\neg\neg(\forall x P(x)) \wedge \neg(\exists y Q(y))
+\]</span></p>
+<p><span class="math display">\[
+(\forall x P(x)) \wedge (\forall y \neg Q(y))
+\]</span></p>
+<p><strong>Passo 3: Mover Quantificadores para o Início (Prenexação)</strong>: renomeamos a variável <span class="math inline">\(y\)</span> para <span class="math inline">\(z\)</span> e movemos os quantificadores para o início da fórmula:</p>
+<p><span class="math display">\[
+\forall x \forall z (P(x) \wedge \neg Q(z))
+\]</span></p>
+<p><strong>Passo 4: Analisar a Matriz para FND</strong>: a matriz da fórmula é <span class="math inline">\(P(x) \wedge \neg Q(z)\)</span>. Uma fórmula em FND é uma disjunção de uma ou mais conjunções de literais. Uma única conjunção de literais, como neste caso, é considerada uma forma válida de FND. Portanto, a matriz já está na forma desejada e nenhuma distribuição é necessária.</p>
+<p><strong>Resultado</strong>: a fórmula final em FND é:</p>
+<p><span class="math display">\[
+\forall x \forall z (P(x) \wedge \neg Q(z))
+\]</span></p>
+</section>
+<section id="exemplo-3-3" class="level4" data-number="7.3.3.3">
+<h4 data-number="7.3.3.3" class="anchored" data-anchor-id="exemplo-3-3"><span class="header-section-number">7.3.3.3</span> Exemplo 3</h4>
+<p><strong>Fórmula inicial</strong>: $ (x P(x) y Q(y)) z R(z) $</p>
+<p><strong>Solução</strong>:</p>
+<p><strong>Passo 1: Eliminar Implicações</strong>: primeiro, removemos a implicação principal, aplicando a regra <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span>:</p>
+<p><span class="math display">\[
+\neg(\exists x P(x) \vee \forall y Q(y)) \vee \forall z R(z)
+\]</span></p>
+<p><strong>Passo 2: Aplicar a Lei de De Morgan na Disjunção</strong>: em seguida, aplicamos a lei de De Morgan à parte negada da fórmula, transformando <span class="math inline">\(\neg(A \vee B)\)</span> em <span class="math inline">\((\neg A \wedge \neg B)\)</span>:</p>
+<p><span class="math display">\[
+(\neg\exists x P(x) \wedge \neg\forall y Q(y)) \vee \forall z R(z)
+\]</span></p>
+<p><strong>Passo 3: Mover Negações para Dentro dos Quantificadores (FNN)</strong>: agora, movemos as negações para dentro dos quantificadores, aplicando as regras <span class="math inline">\(\neg\exists x \equiv \forall x \neg\)</span> e <span class="math inline">\(\neg\forall y \equiv \exists y \neg\)</span>:</p>
+<p><span class="math display">\[
+(\forall x \neg P(x) \wedge \exists y \neg Q(y)) \vee \forall z R(z)
+\]</span></p>
+<p><strong>Passo 4: Mover Quantificadores para o Início (Prenexação)</strong>: finalmente, movemos todos os quantificadores para o início da fórmula para obter a Forma Normal Prenex:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall z ((\neg P(x) \wedge \neg Q(y)) \vee R(z))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final em FNP, com todos os passos detalhados, é:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall z ((\neg P(x) \wedge \neg Q(y)) \vee R(z))
+\]</span></p>
+</section>
+<section id="exemplo-4-4" class="level4" data-number="7.3.3.4">
+<h4 data-number="7.3.3.4" class="anchored" data-anchor-id="exemplo-4-4"><span class="header-section-number">7.3.3.4</span> Exemplo 4</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(\forall x \exists y P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\)</span></p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><p><strong>Aplicar a lei de De Morgan para negação de quantificador universal (passo 1.1.8):</strong></p>
+<p><span class="math display">\[(\exists x \neg(\exists y P(x,y))) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\]</span></p></li>
+<li><p><strong>Aplicar a lei de De Morgan para negação de quantificador existencial (passo 1.1.9):</strong></p>
+<p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\]</span></p></li>
+<li><p><strong>Renomear variáveis ligadas (passo 3):</strong> para garantir que cada quantificador tenha uma variável única, renomeamos <span class="math inline">\(u\)</span> para <span class="math inline">\(v\)</span>.</p>
+<p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall v R(v))\]</span></p></li>
+<li><p><strong>Mover quantificadores para o início (prenexação, passo 4):</strong></p>
+<p><span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y)) \vee (Q(z,w) \wedge R(v)))\]</span></p></li>
+<li><p><strong>Analisar a matriz para FND:</strong> a matriz da fórmula é <span class="math inline">\((\neg P(x,y)) \vee (Q(z,w) \wedge R(v))\)</span>. Esta expressão já está na Forma Normal Disjuntiva, pois consiste em uma disjunção (<code>∨</code>) onde os operandos são um literal (<code>¬P(x,y)</code>) e uma conjunção de literais (<code>Q(z,w) \wedge R(v)</code>). Nenhuma aplicação da lei distributiva é necessária.</p></li>
+</ol>
+<p><strong>Resultado:</strong></p>
+<p><span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y)) \vee (Q(z,w) \wedge R(v)))\]</span></p>
+</section>
+<section id="exemplo-5-3" class="level4" data-number="7.3.3.5">
+<h4 data-number="7.3.3.5" class="anchored" data-anchor-id="exemplo-5-3"><span class="header-section-number">7.3.3.5</span> Exemplo 5</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\forall x (P(x) \rightarrow \exists y Q(x,y)) \wedge \neg(\exists z \forall w R(z,w))\)</span></p>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação $ P(x) y Q(x,y) $:</p>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee \exists y Q(x,y)) \wedge \neg(\exists z \forall w R(z,w))
+\]</span></p>
+<p><strong>Passo 2: Mover Negações para Dentro (FNN)</strong>: aplicamos as leis de De Morgan para quantificadores na segunda parte da fórmula para mover a negação para dentro:</p>
+<p><span class="math display">\[
+\forall x (\neg P(x) \vee \exists y Q(x,y)) \wedge (\forall z \exists w \neg R(z,w))
+\]</span></p>
+<p><strong>Passo 3: Mover Quantificadores para o Início (Prenexação)</strong>: renomeamos as variáveis <span class="math inline">\(z\)</span> e <span class="math inline">\(w\)</span> para <span class="math inline">\(u\)</span> e <span class="math inline">\(v\)</span> para evitar conflitos e movemos todos os quantificadores para o início:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall u \exists v ((\neg P(x) \vee Q(x,y)) \wedge \neg R(u,v))
+\]</span></p>
+<p><strong>Passo 4: Distribuir <span class="math inline">\(\land\)</span> sobre <span class="math inline">\(\lor\)</span></strong>: a matriz <span class="math inline">\((\neg P(x) \vee Q(x,y)) \wedge \neg R(u,v)\)</span> ainda não está em FND. Para convertê-la, aplicamos a lei distributiva da conjunção sobre a disjunção. A expressão tem a forma <span class="math inline">\((X \vee Y) \land Z\)</span>, que é equivalente a <span class="math inline">\((X \land Z) \lor (Y \land Z)\)</span>:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall u \exists v ((\neg P(x) \wedge \neg R(u,v)) \lor (Q(x,y) \wedge \neg R(u,v)))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final está em FND, pois sua matriz é uma disjunção de duas cláusulas conjuntivas:</p>
+<p><span class="math display">\[
+\forall x \exists y \forall u \exists v ((\neg P(x) \wedge \neg R(u,v)) \lor (Q(x,y) \wedge \neg R(u,v)))
+\]</span></p>
+</section>
+</section>
+<section id="algoritmo-para-forma-normal-conjuntiva-prenex-fnc-prenex" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="algoritmo-para-forma-normal-conjuntiva-prenex-fnc-prenex"><span class="header-section-number">7.3.4</span> Algoritmo para Forma Normal Conjuntiva Prenex (FNC Prenex)</h3>
+<p><strong>Entrada</strong>: Fórmula <span class="math inline">\(A\)</span>. <strong>Saída</strong>: Fórmula <span class="math inline">\(B\)</span> em FNC Prenex tal que <span class="math inline">\(A \equiv B\)</span>.</p>
+<ol type="1">
+<li><strong>repita</strong>
+<ol type="1">
+<li>para todas as subfórmulas <span class="math inline">\(X, Y, Z \in A\)</span> faça
+<ol type="1">
+<li>se <span class="math inline">\((X \rightarrow Y)\)</span> redefina como <span class="math inline">\((\neg X \vee Y)\)</span></li>
+<li>se <span class="math inline">\((X \leftrightarrow Y)\)</span> redefina como <span class="math inline">\((X \wedge Y) \vee (\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \vee Y)\)</span> redefina como <span class="math inline">\((\neg X \wedge \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg(X \wedge Y)\)</span> redefina como <span class="math inline">\((\neg X \vee \neg Y)\)</span></li>
+<li>se <span class="math inline">\(\neg\neg X\)</span> redefina como <span class="math inline">\(X\)</span></li>
+<li>se <span class="math inline">\((X \wedge Y) \vee Z\)</span> redefina como <span class="math inline">\((X \vee Z) \wedge (Y \vee Z)\)</span></li>
+<li>se <span class="math inline">\(X \vee (Y \wedge Z)\)</span> redefina como <span class="math inline">\((X \vee Y) \wedge (X \vee Z)\)</span></li>
+<li>se <span class="math inline">\(\neg\forall x P(x)\)</span> redefina como <span class="math inline">\(\exists x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\(\neg\exists x P(x)\)</span> redefina como <span class="math inline">\(\forall x \neg P(x)\)</span></li>
+<li>se <span class="math inline">\(\forall x P(x)\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(P\)</span>, redefina como <span class="math inline">\(P\)</span></li>
+<li>se <span class="math inline">\(\exists x P(x)\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(P\)</span>, redefina como <span class="math inline">\(P\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (P(x) \vee Y)\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \vee Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (P(x) \vee Y)\)</span></li>
+<li>se <span class="math inline">\(Y \vee (\forall x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (Y \vee P(x))\)</span></li>
+<li>se <span class="math inline">\(Y \vee (\exists x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (Y \vee P(x))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \wedge Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (P(x) \wedge Y)\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge Y\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (P(x) \wedge Y)\)</span></li>
+<li>se <span class="math inline">\(Y \wedge (\forall x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\forall x (Y \wedge P(x))\)</span></li>
+<li>se <span class="math inline">\(Y \wedge (\exists x P(x))\)</span> onde <span class="math inline">\(x\)</span> não ocorre livre em <span class="math inline">\(Y\)</span>, redefina como <span class="math inline">\(\exists x (Y \wedge P(x))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \wedge (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \forall y (P(x) \wedge Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \vee (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \exists y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \forall y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \exists y (P(x) \wedge Q(y))\)</span></li>
+<li>se <span class="math inline">\((\forall x P(x)) \vee (\exists y Q(y))\)</span> redefina como <span class="math inline">\(\forall x \exists y (P(x) \vee Q(y))\)</span></li>
+<li>se <span class="math inline">\((\exists x P(x)) \wedge (\forall y Q(y))\)</span> redefina como <span class="math inline">\(\exists x \forall y (P(x) \wedge Q(y))\)</span></li>
+</ol></li>
+<li>fim</li>
+</ol></li>
+<li><strong>até não ocorrerem substituições</strong></li>
+<li>Renomeie variáveis ligadas para evitar conflitos</li>
+<li>Mova todos os quantificadores para o início da fórmula (prenexação)</li>
+</ol>
+<section id="exemplo-1-6" class="level4" data-number="7.3.4.1">
+<h4 data-number="7.3.4.1" class="anchored" data-anchor-id="exemplo-1-6"><span class="header-section-number">7.3.4.1</span> Exemplo 1</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\forall x (P(x) \rightarrow Q(x)) \wedge \neg(\exists y R(y))\)</span></p>
+<p><strong>Solução</strong>: 1. <strong>Eliminar implicações (passo 1.1.1)</strong>:</p>
+<p><span class="math display">\[\forall x (\neg P(x) \vee Q(x)) \wedge \neg(\exists y R(y))\]</span></p>
+<ol start="2" type="1">
+<li><strong>Aplicar lei de De Morgan para negação de quantificador existencial (passo 1.1.8)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x (\neg P(x) \vee Q(x)) \wedge \forall y \neg R(y)\]</span></p>
+<ol start="4" type="1">
+<li><p><strong>Não há mais substituições a serem feitas</strong>.</p></li>
+<li><p><strong>Renomear variáveis ligadas (passo 3)</strong>:</p></li>
+</ol>
+<p><span class="math display">\[\forall x (\neg P(x) \vee Q(x)) \wedge \forall z \neg R(z)\]</span></p>
+<ol start="6" type="1">
+<li><strong>Mover quantificadores para o início (prenexação, passo 4)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x \forall z ((\neg P(x) \vee Q(x)) \wedge \neg R(z))\]</span></p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[\forall x \forall z ((\neg P(x) \vee Q(x)) \wedge \neg R(z))\]</span></p>
+</section>
+<section id="exemplo-2-7" class="level4" data-number="7.3.4.2">
+<h4 data-number="7.3.4.2" class="anchored" data-anchor-id="exemplo-2-7"><span class="header-section-number">7.3.4.2</span> Exemplo 2</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(\forall x P(x) \rightarrow \exists y Q(y))\)</span></p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><strong>Eliminar implicações (passo 1.1.1)</strong>:</li>
+</ol>
+<p><span class="math display">\[\neg(\neg(\forall x P(x)) \vee \exists y Q(y))\]</span></p>
+<ol start="2" type="1">
+<li><strong>Aplicar lei de De Morgan para negação de disjunção (passo 1.1.2)</strong>:</li>
+</ol>
+<p><span class="math display">\[\neg\neg(\forall x P(x)) \wedge \neg(\exists y Q(y))\]</span></p>
+<ol start="3" type="1">
+<li><strong>Eliminar dupla negação (passo 1.1.4)</strong>:</li>
+</ol>
+<p><span class="math display">\[(\forall x P(x)) \wedge \neg(\exists y Q(y))\]</span></p>
+<ol start="4" type="1">
+<li><strong>Aplicar lei de De Morgan para negação de quantificador existencial (passo 1.1.8)</strong>:</li>
+</ol>
+<p><span class="math display">\[(\forall x P(x)) \wedge (\forall y \neg Q(y))\]</span></p>
+<ol start="5" type="1">
+<li><strong>Não há mais substituições a serem feitas</strong>.</li>
+<li><strong>Renomear variáveis ligadas (passo 3)</strong>: não é necessário neste caso.</li>
+<li><strong>Mover quantificadores para o início (prenexação, passo 4)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x \forall y (P(x) \wedge \neg Q(y))\]</span></p>
+<p><strong>Resultado</strong>: <span class="math inline">\(\forall x \forall y (P(x) \wedge \neg Q(y))\)</span></p>
+</section>
+<section id="exemplo-3-4" class="level4" data-number="7.3.4.3">
+<h4 data-number="7.3.4.3" class="anchored" data-anchor-id="exemplo-3-4"><span class="header-section-number">7.3.4.3</span> Exemplo 3</h4>
+<p><strong>Fórmula inicial</strong>: $ (P Q) (R (S T)) $</p>
+<p><strong>Solução</strong>:</p>
+<p><strong>Passo 1: Eliminar Implicações</strong>: primeiro, removemos a implicação <span class="math inline">\(R \rightarrow (S \wedge T)\)</span>, aplicando a regra <span class="math inline">\(X \rightarrow Y \equiv \neg X \vee Y\)</span>:</p>
+<p><span class="math display">\[
+(P \vee Q) \wedge (\neg R \vee (S \wedge T))
+\]</span></p>
+<p><strong>Passo 2: Analisar a Matriz para FNC</strong>: a matriz da fórmula precisa ser uma conjunção de disjunções de literais. A primeira cláusula, <span class="math inline">\((P \vee Q)\)</span>, já está nesse formato. No entanto, a segunda cláusula, <span class="math inline">\((\neg R \vee (S \wedge T))\)</span>, contém uma conjunção dentro de uma disjunção, o que impede que a fórmula esteja em FNC. Portanto, precisamos aplicar a distributividade.</p>
+<p><strong>Passo 3: Distribuir <span class="math inline">\(\lor\)</span> sobre <span class="math inline">\(\land\)</span></strong>: aplicamos a lei distributiva da disjunção sobre a conjunção na cláusula <span class="math inline">\((\neg R \vee (S \wedge T))\)</span>. A regra é <span class="math inline">\(X \vee (Y \wedge Z) \equiv (X \vee Y) \wedge (X \vee Z)\)</span>:</p>
+<p><span class="math display">\[
+(P \vee Q) \wedge ((\neg R \vee S) \wedge (\neg R \vee T))
+\]</span></p>
+<p><strong>Passo 4: Simplificar a Fórmula</strong>: pela propriedade associativa da conjunção, podemos remover os parênteses extras para obter a forma final.</p>
+<p><span class="math display">\[
+(P \vee Q) \wedge (\neg R \vee S) \wedge (\neg R \vee T)
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final está em FNC, pois é uma conjunção de três cláusulas, onde cada uma é uma disjunção de literais:</p>
+<p><span class="math display">\[
+(P \vee Q) \wedge (\neg R \vee S) \wedge (\neg R \vee T)
+\]</span></p>
+</section>
+<section id="exemplo-4-5" class="level4" data-number="7.3.4.4">
+<h4 data-number="7.3.4.4" class="anchored" data-anchor-id="exemplo-4-5"><span class="header-section-number">7.3.4.4</span> Exemplo 4</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg(\forall x \exists y P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\)</span></p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><strong>Aplicar lei de De Morgan para negação de quantificador universal (passo 1.1.7)</strong>:</li>
+</ol>
+<p><span class="math display">\[(\exists x \neg(\exists y P(x,y))) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\]</span></p>
+<ol start="2" type="1">
+<li><strong>Aplicar lei de De Morgan para negação de quantificador existencial (passo 1.1.8)</strong>:</li>
+</ol>
+<p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall u R(u))\]</span></p>
+<ol start="3" type="1">
+<li><strong>Não há mais substituições a serem feitas</strong>.</li>
+<li><strong>Renomear variáveis ligadas (passo 3)</strong>:</li>
+</ol>
+<p><span class="math display">\[(\exists x \forall y \neg P(x,y)) \vee (\exists z \forall w Q(z,w) \wedge \forall v R(v))\]</span></p>
+<ol start="5" type="1">
+<li><strong>Mover quantificadores para o início (prenexação, passo 4)</strong>:</li>
+</ol>
+<p><span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y)) \vee (Q(z,w) \wedge R(v)))\]</span></p>
+<ol start="6" type="1">
+<li><strong>Distribuir <span class="math inline">\(\vee\)</span> sobre <span class="math inline">\(\wedge\)</span> (passo 1.1.6)</strong>:</li>
+</ol>
+<p><span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y) \vee Q(z,w)) \wedge (\neg P(x,y) \vee R(v)))\]</span></p>
+<p><strong>Resultado final</strong>:</p>
+<p><span class="math display">\[\exists x \forall y \exists z \forall w \forall v ((\neg P(x,y) \vee Q(z,w)) \wedge (\neg P(x,y) \vee R(v)))\]</span></p>
+</section>
+<section id="exemplo-5-4" class="level4" data-number="7.3.4.5">
+<h4 data-number="7.3.4.5" class="anchored" data-anchor-id="exemplo-5-4"><span class="header-section-number">7.3.4.5</span> Exemplo 5</h4>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\forall x (P(x) \vee (Q(x) \wedge R(x))) \wedge \neg(\exists y S(y))\)</span></p>
+<p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><strong>Aplicar distribuição (passo 1.1.6)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x ((P(x) \vee Q(x)) \wedge (P(x) \vee R(x))) \wedge \neg(\exists y S(y))\]</span></p>
+<ol start="2" type="1">
+<li><strong>Aplicar lei de De Morgan para negação de quantificador existencial (passo 1.1.8)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x ((P(x) \vee Q(x)) \wedge (P(x) \vee R(x))) \wedge \forall y \neg S(y)\]</span></p>
+<ol start="3" type="1">
+<li><strong>Não há mais substituições a serem feitas</strong>.</li>
+<li><strong>Renomear variáveis ligadas (passo 3)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x ((P(x) \vee Q(x)) \wedge (P(x) \vee R(x))) \wedge \forall z \neg S(z)\]</span></p>
+<ol start="5" type="1">
+<li><strong>Mover quantificadores para o início (prenexação, passo 4)</strong>:</li>
+</ol>
+<p><span class="math display">\[\forall x \forall z (((P(x) \vee Q(x)) \wedge (P(x) \vee R(x))) \wedge \neg S(z))\]</span></p>
+<p><strong>Resultado</strong>:</p>
+<p><span class="math display">\[\forall x \forall z (((P(x) \vee Q(x)) \wedge (P(x) \vee R(x))) \wedge \neg S(z))\]</span></p>
+</section>
+</section>
+<section id="sec-exercicios-formas-normais-prenex" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="sec-exercicios-formas-normais-prenex"><span class="header-section-number">7.3.5</span> Exercícios Formas Normais Prenex</h3>
+<p>Vou resolver cada um desses exercícios utilizando os algoritmos que definimos para FNC e FND. Começaremos com a fórmula em Lógica de Primeiro Grau e aplicaremos os algoritmos passo a passo.</p>
+<section id="exercício-1" class="level4" data-number="7.3.5.1">
+<h4 data-number="7.3.5.1" class="anchored" data-anchor-id="exercício-1"><span class="header-section-number">7.3.5.1</span> Exercício 1:</h4>
+<p>Transforme a sentença a seguir em Forma Normal Conjuntiva e Disjuntiva, prenex se possível: <em>Todos os alunos estudam ou alguns professores ensinam matemática</em>.</p>
+<p><strong>Solução</strong></p>
+<p>Expressando a sentença em Lógica de Primeiro Grau, teremos:</p>
+<p><span class="math display">\[(\forall x (A(x) \rightarrow E(x))) \lor (\exists y (P(y) \land M(y)))\]</span></p>
+<section id="solução-para-fnc" class="level5" data-number="7.3.5.1.1">
+<h5 data-number="7.3.5.1.1" class="anchored" data-anchor-id="solução-para-fnc"><span class="header-section-number">7.3.5.1.1</span> Solução para FNC:</h5>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação <span class="math inline">\(A(x) \rightarrow E(x)\)</span>, aplicando a regra <span class="math inline">\(X \rightarrow Y \equiv \neg X \vee Y\)</span>:</p>
+<p><span class="math display">\[
+(\forall x (\neg A(x) \vee E(x))) \lor (\exists y (P(y) \land M(y)))
+\]</span></p>
+<p><strong>Passo 2: Mover Quantificadores para o Início (Prenexação)</strong>: movemos os quantificadores para o início da fórmula para obter a Forma Normal Prenex. Como as variáveis <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span> são independentes, a ordem entre <span class="math inline">\(\forall x\)</span> e <span class="math inline">\(\exists y\)</span> pode ser escolhida livremente.</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee E(x)) \lor (P(y) \land M(y)))
+\]</span></p>
+<p><strong>Passo 3: Distribuir <span class="math inline">\(\lor\)</span> sobre <span class="math inline">\(\land\)</span></strong>: agora, para que a matriz da fórmula esteja em FNC, distribuímos a disjunção sobre a conjunção. A expressão tem a forma <span class="math inline">\(Z \lor (X \land Y)\)</span>, que é equivalente a <span class="math inline">\((Z \lor X) \land (Z \lor Y)\)</span>:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee E(x) \vee P(y)) \land (\neg A(x) \vee E(x) \vee M(y)))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final em FNC é:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee E(x) \vee P(y)) \land (\neg A(x) \vee E(x) \vee M(y)))
+\]</span></p>
+</section>
+<section id="solução-para-fnd" class="level5" data-number="7.3.5.1.2">
+<h5 data-number="7.3.5.1.2" class="anchored" data-anchor-id="solução-para-fnd"><span class="header-section-number">7.3.5.1.2</span> Solução para FND:</h5>
+<p><strong>Passo 1: Remover Implicações e Realizar a Prenexação</strong>: os passos iniciais são idênticos aos da conversão para FNC. Removemos as implicações e movemos os quantificadores para obter a forma prenex.</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee E(x)) \lor (P(y) \land M(y)))
+\]</span></p>
+<p><strong>Passo 2: Analisar a Matriz</strong>: o algoritmo para FND exige que a matriz da fórmula seja uma disjunção de conjunções de literais. Analisando a matriz <span class="math inline">\((\neg A(x) \vee E(x)) \lor (P(y) \land M(y))\)</span>, notamos que ela já satisfaz essa condição. Ela é uma disjunção entre os literais <span class="math inline">\(\neg A(x)\)</span>, <span class="math inline">\(E(x)\)</span> e a conjunção <span class="math inline">\((P(y) \land M(y))\)</span>. Assim, nenhuma etapa adicional de distribuição é necessária.</p>
+<p><strong>Resultado</strong>: a fórmula final em FND é:</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg A(x) \vee E(x) \vee (P(y) \land M(y)))
+\]</span></p>
+</section>
+</section>
+<section id="exercício-2" class="level4" data-number="7.3.5.2">
+<h4 data-number="7.3.5.2" class="anchored" data-anchor-id="exercício-2"><span class="header-section-number">7.3.5.2</span> Exercício 2</h4>
+<p>Transforme a sentença a seguir em Forma Normal Conjuntiva e Disjuntiva, prenex se possível: <em>Algum aluno estuda e todo professor ensina</em>.</p>
+<p><strong>Solução</strong>: Representando a sentença em Lógica de Primeiro Grau, teremos:</p>
+<p><span class="math display">\[(\exists x (A(x) \land E(x))) \land (\forall y (P(y) \rightarrow N(y)))\]</span></p>
+<section id="solução-para-fnd-1" class="level5" data-number="7.3.5.2.1">
+<h5 data-number="7.3.5.2.1" class="anchored" data-anchor-id="solução-para-fnd-1"><span class="header-section-number">7.3.5.2.1</span> Solução para FND:</h5>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação <span class="math inline">\(P(y) \rightarrow N(y)\)</span>, aplicando a regra <span class="math inline">\(X \rightarrow Y \equiv \neg X \vee Y\)</span>:</p>
+<p><span class="math display">\[
+(\exists x (A(x) \land E(x))) \land (\forall y (\neg P(y) \lor N(y)))
+\]</span></p>
+<p><strong>Passo 2: Mover Quantificadores para o Início (Prenexação)</strong>: movemos os quantificadores para o início da fórmula. A fórmula resultante está na Forma Normal Prenex.</p>
+<p><span class="math display">\[
+\exists x \forall y ((A(x) \land E(x)) \land (\neg P(y) \lor N(y)))
+\]</span></p>
+<p><strong>Passo 3: Distribuir <span class="math inline">\(\land\)</span> sobre <span class="math inline">\(\lor\)</span></strong>: a matriz da fórmula, <span class="math inline">\((A(x) \land E(x)) \land (\neg P(y) \lor N(y))\)</span>, ainda não está em FND. Para convertê-la, aplicamos a lei distributiva da conjunção sobre a disjunção. A expressão tem a forma <span class="math inline">\(Z \land (X \lor Y)\)</span>, que é equivalente a <span class="math inline">\((Z \land X) \lor (Z \land Y)\)</span>:</p>
+<p><span class="math display">\[
+\exists x \forall y (((A(x) \land E(x)) \land \neg P(y)) \lor ((A(x) \land E(x)) \land N(y)))
+\]</span></p>
+<p><strong>Passo 4: Simplificar a Matriz</strong>: podemos remover os parênteses internos nas cláusulas conjuntivas para obter a forma final.</p>
+<p><span class="math display">\[
+\exists x \forall y ((A(x) \land E(x) \land \neg P(y)) \lor (A(x) \land E(x) \land N(y)))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final está em FND, pois sua matriz é uma disjunção de duas cláusulas conjuntivas:</p>
+<p><span class="math display">\[
+\exists x \forall y ((A(x) \land E(x) \land \neg P(y)) \lor (A(x) \land E(x) \land N(y)))
+\]</span></p>
+</section>
+</section>
+<section id="exercício-3" class="level4" data-number="7.3.5.3">
+<h4 data-number="7.3.5.3" class="anchored" data-anchor-id="exercício-3"><span class="header-section-number">7.3.5.3</span> Exercício 3</h4>
+<p>Transforme a sentença a seguir em Forma Normal Conjuntiva e Disjuntiva, prenex se possível: <em>Todo estudante é inteligente ou algum professor é sábio</em>.</p>
+<p>Transformando a sentença em Lógica de Primeiro Grau, teremos:</p>
+<p><span class="math display">\[(\forall x (E(x) \rightarrow I(x))) \lor (\exists y (P(y) \land S(y)))\]</span></p>
+<section id="solução-para-fnc-1" class="level5" data-number="7.3.5.3.1">
+<h5 data-number="7.3.5.3.1" class="anchored" data-anchor-id="solução-para-fnc-1"><span class="header-section-number">7.3.5.3.1</span> Solução para FNC:</h5>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação <span class="math inline">\(E(x) \rightarrow I(x)\)</span>, aplicando a regra <span class="math inline">\(X \rightarrow Y \equiv \neg X \vee Y\)</span>:</p>
+<p><span class="math display">\[
+(\forall x (\neg E(x) \vee I(x))) \lor (\exists y (P(y) \land S(y)))
+\]</span></p>
+<p><strong>Passo 2: Mover Quantificadores para o Início (Prenexação)</strong>: movemos os quantificadores para o início da fórmula para obter a Forma Normal Prenex.</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg E(x) \vee I(x)) \lor (P(y) \land S(y)))
+\]</span></p>
+<p><strong>Passo 3: Distribuir <span class="math inline">\(\lor\)</span> sobre <span class="math inline">\(\land\)</span></strong>: para que a matriz da fórmula esteja em FNC, distribuímos a disjunção sobre a conjunção. A expressão tem a forma <span class="math inline">\(Z \lor (X \land Y)\)</span>, que é equivalente a <span class="math inline">\((Z \lor X) \land (Z \lor Y)\)</span>:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg E(x) \vee I(x) \vee P(y)) \land (\neg E(x) \vee I(x) \vee S(y)))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final em FNC é:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg E(x) \vee I(x) \vee P(y)) \land (\neg E(x) \vee I(x) \vee S(y)))
+\]</span></p>
+</section>
+<section id="solução-para-fnd-2" class="level5" data-number="7.3.5.3.2">
+<h5 data-number="7.3.5.3.2" class="anchored" data-anchor-id="solução-para-fnd-2"><span class="header-section-number">7.3.5.3.2</span> Solução para FND:</h5>
+<p><strong>Passo 1: Remover Implicações e Realizar a Prenexação</strong>: os passos iniciais são os mesmos da conversão para FNC, resultando na forma prenex:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg E(x) \vee I(x)) \lor (P(y) \land S(y)))
+\]</span></p>
+<p><strong>Passo 2: Analisar a Matriz</strong>: o algoritmo para FND exige que a matriz seja uma disjunção de conjunções. Analisando a matriz <span class="math inline">\((\neg E(x) \vee I(x)) \lor (P(y) \land S(y))\)</span>, notamos que ela já satisfaz essa condição. É uma disjunção de literais (<span class="math inline">\(\neg E(x)\)</span>, <span class="math inline">\(I(x)\)</span>) e uma conjunção (<span class="math inline">\((P(y) \land S(y))\)</span>). Nenhuma etapa de distribuição é necessária.</p>
+<p><strong>Resultado</strong>: a fórmula final em FND é:</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg E(x) \vee I(x) \vee (P(y) \land S(y)))
+\]</span></p>
+</section>
+</section>
+<section id="exercício-4" class="level4" data-number="7.3.5.4">
+<h4 data-number="7.3.5.4" class="anchored" data-anchor-id="exercício-4"><span class="header-section-number">7.3.5.4</span> Exercício 4</h4>
+<p>Transforme a sentença a seguir em Forma Normal Conjuntiva e Disjuntiva, prenex se possível: <em>Todo animal corre ou algum pássaro voa</em>.</p>
+<p>Em Lógica de Primeiro Grau, teremos:</p>
+<p><span class="math display">\[(\forall x (A(x) \rightarrow C(x))) \lor (\exists y (P(y) \land V(y)))\]</span></p>
+<section id="solução-para-fnc-2" class="level5" data-number="7.3.5.4.1">
+<h5 data-number="7.3.5.4.1" class="anchored" data-anchor-id="solução-para-fnc-2"><span class="header-section-number">7.3.5.4.1</span> Solução para FNC:</h5>
+<p><strong>Passo 1: Remover Implicações</strong>: primeiro, removemos a implicação <span class="math inline">\(A(x) \rightarrow C(x)\)</span>, aplicando a regra <span class="math inline">\(X \rightarrow Y \equiv \neg X \vee Y\)</span>:</p>
+<p><span class="math display">\[
+(\forall x (\neg A(x) \vee C(x))) \lor (\exists y (P(y) \land V(y)))
+\]</span></p>
+<p><strong>Passo 2: Mover Quantificadores para o Início (Prenexação)</strong>: movemos os quantificadores para o início da fórmula para obter a Forma Normal Prenex.</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee C(x)) \lor (P(y) \land V(y)))
+\]</span></p>
+<p><strong>Passo 3: Distribuir <span class="math inline">\(\lor\)</span> sobre <span class="math inline">\(\land\)</span></strong>: para que a matriz da fórmula esteja em FNC, distribuímos a disjunção sobre a conjunção. A expressão tem a forma <span class="math inline">\(Z \lor (X \land Y)\)</span>, que é equivalente a <span class="math inline">\((Z \lor X) \land (Z \lor Y)\)</span>:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee C(x) \vee P(y)) \land (\neg A(x) \vee C(x) \vee V(y)))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final em FNC é:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee C(x) \vee P(y)) \land (\neg A(x) \vee C(x) \vee V(y)))
+\]</span></p>
+</section>
+<section id="solução-para-fnd-3" class="level5" data-number="7.3.5.4.2">
+<h5 data-number="7.3.5.4.2" class="anchored" data-anchor-id="solução-para-fnd-3"><span class="header-section-number">7.3.5.4.2</span> Solução para FND:</h5>
+<p><strong>Passo 1: Remover Implicações e Realizar a Prenexação</strong>: os passos iniciais são os mesmos da conversão para FNC, resultando na forma prenex:</p>
+<p><span class="math display">\[
+\forall x \exists y ((\neg A(x) \vee C(x)) \lor (P(y) \land V(y)))
+\]</span></p>
+<p><strong>Passo 2: Analisar a Matriz</strong>: o algoritmo para FND exige que a matriz seja uma disjunção de conjunções. Analisando a matriz <span class="math inline">\((\neg A(x) \vee C(x)) \lor (P(y) \land V(y))\)</span>, notamos que ela já satisfaz essa condição. É uma disjunção de literais (<span class="math inline">\(\neg A(x)\)</span>, <span class="math inline">\(C(x)\)</span>) e uma conjunção (<span class="math inline">\((P(y) \land V(y))\)</span>). Nenhuma etapa de distribuição é necessária.</p>
+<p><strong>Resultado</strong>: a fórmula final em FND é:</p>
+<p><span class="math display">\[
+\forall x \exists y (\neg A(x) \vee C(x) \vee (P(y) \land V(y)))
+\]</span></p>
+</section>
+</section>
+<section id="exercício-5" class="level4" data-number="7.3.5.5">
+<h4 data-number="7.3.5.5" class="anchored" data-anchor-id="exercício-5"><span class="header-section-number">7.3.5.5</span> Exercício 5</h4>
+<p>Converta a seguinte fórmula para a Forma Normal Conjuntiva Prenex (FNCP).</p>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\(\neg (\forall x (P(x) \rightarrow \exists y Q(x,y)) \leftrightarrow \exists z R(z))\)</span></p>
+<p><strong>Solução</strong></p>
+<section id="solução-para-fnc-3" class="level5" data-number="7.3.5.5.1">
+<h5 data-number="7.3.5.5.1" class="anchored" data-anchor-id="solução-para-fnc-3"><span class="header-section-number">7.3.5.5.1</span> Solução para FNC:</h5>
+<p><strong>Passo 1: Eliminar a Equivalência (<span class="math inline">\(\leftrightarrow\)</span>)</strong>: A fórmula tem a estrutura <span class="math inline">\(\neg(A \leftrightarrow B)\)</span>. Primeiro, expandimos a bicondicional usando a regra <span class="math inline">\(A \leftrightarrow B \equiv (A \wedge B) \vee (\neg A \wedge \neg B)\)</span>, e aplicamos a negação externa.</p>
+<p><span class="math display">\[
+\neg ((\forall x (P(x) \rightarrow \exists y Q(x,y)) \wedge \exists z R(z)) \vee (\neg \forall x (P(x) \rightarrow \exists y Q(x,y)) \wedge \neg \exists z R(z)))
+\]</span></p>
+<p>Aplicando a lei de De Morgan na disjunção principal, obtemos:</p>
+<p><span class="math display">\[
+\neg (\forall x (P(x) \rightarrow \exists y Q(x,y)) \wedge \exists z R(z)) \wedge \neg (\neg \forall x (P(x) \rightarrow \exists y Q(x,y)) \wedge \neg \exists z R(z))
+\]</span></p>
+<p>Aplicando a lei de De Morgan novamente em ambas as conjunções:</p>
+<p><span class="math display">\[
+(\neg \forall x (P(x) \rightarrow \exists y Q(x,y)) \vee \neg \exists z R(z)) \wedge (\neg \neg \forall x (P(x) \rightarrow \exists y Q(x,y)) \vee \neg \neg \exists z R(z))
+\]</span></p>
+<p><strong>Passo 2: Eliminar Implicações e Duplas Negações</strong>: Agora, eliminamos as implicações e as duplas negações, e movemos as negações para dentro (conversão para FNN).</p>
+<p><span class="math display">\[
+(\exists x \neg (P(x) \rightarrow \exists y Q(x,y)) \vee \forall z \neg R(z)) \wedge (\forall x (P(x) \rightarrow \exists y Q(x,y)) \vee \exists z R(z))
+\]</span></p>
+<p><span class="math display">\[
+(\exists x \neg (\neg P(x) \vee \exists y Q(x,y)) \vee \forall z \neg R(z)) \wedge (\forall x (\neg P(x) \vee \exists y Q(x,y)) \vee \exists z R(z))
+\]</span></p>
+<p><span class="math display">\[
+(\exists x (P(x) \wedge \forall y \neg Q(x,y)) \vee \forall z \neg R(z)) \wedge (\forall x (\neg P(x) \vee \exists y Q(x,y)) \vee \exists z R(z))
+\]</span></p>
+<p><strong>Passo 3: Renomear Variáveis e Prenexação</strong>: Renomeamos as variáveis para evitar conflitos de escopo (<span class="math inline">\(x \rightarrow u, y \rightarrow v, z \rightarrow w\)</span>) e movemos todos os quantificadores para o início. A ordem dos quantificadores é <span class="math inline">\(\exists x \forall y \forall z\)</span> da primeira parte, e <span class="math inline">\(\forall u \exists v \exists w\)</span> da segunda.</p>
+<p><span class="math display">\[
+\exists x \forall y \forall z \forall u \exists v \exists w [ ( (P(x) \wedge \neg Q(x,y)) \vee \neg R(z) ) \wedge ( (\neg P(u) \vee Q(u,v)) \vee R(w) ) ]
+\]</span></p>
+<p><strong>Passo 4: Converter a Matriz para FNC</strong>: A matriz precisa ser uma conjunção de disjunções. A primeira parte, <span class="math inline">\((P(x) \wedge \neg Q(x,y)) \vee \neg R(z)\)</span>, precisa ser distribuída: <span class="math inline">\((P(x) \vee \neg R(z)) \wedge (\neg Q(x,y) \vee \neg R(z))\)</span>. A segunda parte, <span class="math inline">\((\neg P(u) \vee Q(u,v)) \vee R(w)\)</span>, já está na forma disjuntiva.</p>
+<p><span class="math display">\[
+\exists x \forall y \forall z \forall u \exists v \exists w [ (P(x) \vee \neg R(z)) \wedge (\neg Q(x,y) \vee \neg R(z)) \wedge (\neg P(u) \vee Q(u,v) \vee R(w)) ]
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final em FNCP é:</p>
+<p><span class="math display">\[
+\exists x \forall y \forall z \forall u \exists v \exists w [ (P(x) \vee \neg R(z)) \wedge (\neg Q(x,y) \vee \neg R(z)) \wedge (\neg P(u) \vee Q(u,v) \vee R(w)) ]
+\]</span></p>
+</section>
+</section>
+<section id="exercício-6" class="level4" data-number="7.3.5.6">
+<h4 data-number="7.3.5.6" class="anchored" data-anchor-id="exercício-6"><span class="header-section-number">7.3.5.6</span> Exercício 6</h4>
+<p>Converta a seguinte fórmula para a Forma Normal Disjuntiva Prenex (FNDP).</p>
+<p><strong>Fórmula inicial</strong>: <span class="math inline">\((\exists x P(x) \rightarrow \forall y Q(y)) \wedge (\exists z R(z) \rightarrow \forall w S(w))\)</span></p>
+<p><strong>Solução</strong></p>
+<section id="solução-para-fnd-4" class="level5" data-number="7.3.5.6.1">
+<h5 data-number="7.3.5.6.1" class="anchored" data-anchor-id="solução-para-fnd-4"><span class="header-section-number">7.3.5.6.1</span> Solução para FND:</h5>
+<p><strong>Passo 1: Eliminar Implicações</strong>: Removemos as implicações em ambas as cláusulas da conjunção.</p>
+<p><span class="math display">\[
+(\neg \exists x P(x) \vee \forall y Q(y)) \wedge (\neg \exists z R(z) \vee \forall w S(w))
+\]</span></p>
+<p><strong>Passo 2: Mover Negações para Dentro (FNN)</strong>: Aplicamos as regras de negação dos quantificadores.</p>
+<p><span class="math display">\[
+(\forall x \neg P(x) \vee \forall y Q(y)) \wedge (\forall z \neg R(z) \vee \forall w S(w))
+\]</span></p>
+<p><strong>Passo 3: Prenexação</strong>: Renomeamos as variáveis na segunda cláusula para evitar conflitos (<span class="math inline">\(z \rightarrow u, w \rightarrow v\)</span>) e movemos todos os quantificadores para o início da fórmula.</p>
+<p><span class="math display">\[
+\forall x \forall y \forall u \forall v [ (\neg P(x) \vee Q(y)) \wedge (\neg R(u) \vee S(v)) ]
+\]</span></p>
+<p><strong>Passo 4: Converter a Matriz para FND</strong>: A matriz atual, <span class="math inline">\((\neg P(x) \vee Q(y)) \wedge (\neg R(u) \vee S(v))\)</span>, tem a forma <span class="math inline">\((A \vee B) \wedge (C \vee D)\)</span>, que não está em FND. Precisamos aplicar a lei distributiva para convertê-la em uma disjunção de conjunções. Distribuindo <span class="math inline">\((A \vee B)\)</span> sobre <span class="math inline">\((C \vee D)\)</span>, obtemos: <span class="math inline">\(((A \vee B) \wedge C) \vee ((A \vee B) \wedge D)\)</span>. Isso expande para: <span class="math inline">\((A \wedge C) \vee (B \wedge C) \vee (A \wedge D) \vee (B \wedge D)\)</span>.</p>
+<p>Aplicando aos nossos literais:</p>
+<p><span class="math display">\[
+(\neg P(x) \wedge \neg R(u)) \vee (Q(y) \wedge \neg R(u)) \vee (\neg P(x) \wedge S(v)) \vee (Q(y) \wedge S(v))
+\]</span></p>
+<p><strong>Resultado</strong>: a fórmula final em FNDP, com a matriz distribuída, é:</p>
+<p><span class="math display">\[
+\forall x \forall y \forall u \forall v [ (\neg P(x) \wedge \neg R(u)) \vee (Q(y) \wedge \neg R(u)) \vee (\neg P(x) \wedge S(v)) \vee (Q(y) \wedge S(v)) ]
+\]</span></p>
+</section>
+</section>
+<section id="exercício-7" class="level4" data-number="7.3.5.7">
+<h4 data-number="7.3.5.7" class="anchored" data-anchor-id="exercício-7"><span class="header-section-number">7.3.5.7</span> Exercício 7</h4>
+<p>Transforme a sentença a seguir em Forma Normal Conjuntiva Prenex (FNCP) e Forma Normal Disjuntiva Prenex (FNDP): <em>Se para todo problema existe uma solução, então não é verdade que todos os problemas são difíceis</em>.</p>
+<p><strong>Solução</strong></p>
+<p>Primeiro, formalizamos a sentença: * <span class="math inline">\(P(x)\)</span>: <span class="math inline">\(x\)</span> é um problema. * <span class="math inline">\(S(x,y)\)</span>: <span class="math inline">\(y\)</span> é uma solução para <span class="math inline">\(x\)</span>. * <span class="math inline">\(D(x)\)</span>: <span class="math inline">\(x\)</span> é difícil.</p>
+<p>A fórmula em lógica de primeira ordem é:</p>
+<p><span class="math display">\[
+(\forall x (P(x) \rightarrow \exists y S(x,y))) \rightarrow (\neg \forall z (P(z) \rightarrow D(z)))
+\]</span></p>
+<p><strong>Passo 1: Eliminar Implicações e Mover Negações (FNN)</strong>: Começamos eliminando a implicação principal e, em seguida, as internas.</p>
+<p><span class="math display">\[
+\neg (\forall x (\neg P(x) \vee \exists y S(x,y))) \vee (\neg \forall z (\neg P(z) \vee D(z)))
+\]</span></p>
+<p>Agora, movemos as negações para dentro dos quantificadores.</p>
+<p><span class="math display">\[
+(\exists x \neg (\neg P(x) \vee \exists y S(x,y))) \vee (\exists z \neg (\neg P(z) \vee D(z)))
+\]</span></p>
+<p>Aplicamos a lei de De Morgan nas disjunções.</p>
+<p><span class="math display">\[
+(\exists x (P(x) \wedge \neg \exists y S(x,y))) \vee (\exists z (P(z) \wedge \neg D(z)))
+\]</span></p>
+<p>Finalizamos a conversão para FNN.</p>
+<p><span class="math display">\[
+(\exists x (P(x) \wedge \forall y \neg S(x,y))) \vee (\exists z (P(z) \wedge \neg D(z)))
+\]</span></p>
+<p><strong>Passo 2: Prenexação</strong>: Renomeamos a variável <span class="math inline">\(z\)</span> para <span class="math inline">\(w\)</span> para evitar conflito e movemos os quantificadores para o início.</p>
+<p><span class="math display">\[
+\exists x \forall y \exists w [ (P(x) \wedge \neg S(x,y)) \vee (P(w) \wedge \neg D(w)) ]
+\]</span></p>
+<p>Esta é a Forma Normal Prenex. Agora, vamos converter a matriz para FNC e FND. A matriz é <span class="math inline">\((P(x) \wedge \neg S(x,y)) \vee (P(w) \wedge \neg D(w))\)</span>.</p>
+<section id="solução-para-fnd-5" class="level5" data-number="7.3.5.7.1">
+<h5 data-number="7.3.5.7.1" class="anchored" data-anchor-id="solução-para-fnd-5"><span class="header-section-number">7.3.5.7.1</span> Solução para FND:</h5>
+<p>A matriz <span class="math inline">\((P(x) \wedge \neg S(x,y)) \vee (P(w) \wedge \neg D(w))\)</span> já está na Forma Normal Disjuntiva, pois é uma disjunção de duas conjunções de literais. Portanto, nenhum passo adicional de distribuição é necessário.</p>
+<p><strong>Resultado (FNDP)</strong>:</p>
+<p><span class="math display">\[
+\exists x \forall y \exists w [ (P(x) \wedge \neg S(x,y)) \vee (P(w) \wedge \neg D(w)) ]
+\]</span></p>
+</section>
+<section id="solução-para-fnc-4" class="level5" data-number="7.3.5.7.2">
+<h5 data-number="7.3.5.7.2" class="anchored" data-anchor-id="solução-para-fnc-4"><span class="header-section-number">7.3.5.7.2</span> Solução para FNC:</h5>
+<p>Para converter a matriz para FNC, precisamos distribuir a disjunção sobre a conjunção. A matriz tem a forma <span class="math inline">\((A \wedge B) \vee (C \wedge D)\)</span>. Aplicando a distributividade, obtemos <span class="math inline">\(( (A \wedge B) \vee C ) \wedge ( (A \wedge B) \vee D )\)</span>. Expandindo novamente, resulta em <span class="math inline">\((A \vee C) \wedge (B \vee C) \wedge (A \vee D) \wedge (B \vee D)\)</span>.</p>
+<p>Aplicando aos nossos literais, a matriz se torna:</p>
+<p><span class="math display">\[
+(P(x) \vee P(w)) \wedge (\neg S(x,y) \vee P(w)) \wedge (P(x) \vee \neg D(w)) \wedge (\neg S(x,y) \vee \neg D(w))
+\]</span></p>
+<p><strong>Resultado (FNCP)</strong>:</p>
+<p><span class="math display">\[
+\exists x \forall y \exists w [ (P(x) \vee P(w)) \wedge (\neg S(x,y) \vee P(w)) \wedge (P(x) \vee \neg D(w)) \wedge (\neg S(x,y) \vee \neg D(w)) ]
+\]</span></p>
+</section>
+</section>
+</section>
+</section>
+<section id="sec-predicativa-conexao-prolog" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-predicativa-conexao-prolog"><span class="header-section-number">7.4</span> Exercícios de Conexão com Prolog</h2>
 <p>A conversão de fórmulas para uma <strong>Forma Normal</strong> (seja Conjuntiva - <strong>Forma Normal Conjuntiva</strong>, ou Disjuntiva - <strong>Forma Normal Disjuntiva</strong>) é um processo algorítmico que permite a padronização e a manipulação de expressões lógicas por computadores. Este conjunto de questões foca nesta habilidade, que é a base para o funcionamento de provadores de teoremas e do mecanismo de resolução do Prolog.</p>
 <p><strong>Questão 1: Conversão Básica</strong>: dada a seguinte fórmula lógica, que representa uma regra de negócio simples: “Se o pedido (<span class="math inline">\(P\)</span>) foi aprovado, então a nota fiscal (<span class="math inline">\(N\)</span>) deve ser emitida, mas não é verdade que a nota fiscal foi emitida sem que o produto esteja em estoque (<span class="math inline">\(E\)</span>).” Fórmula:</p>
 <p><span class="math display">\[(P \to N) \wedge \neg (N \wedge \neg E)\]</span></p>

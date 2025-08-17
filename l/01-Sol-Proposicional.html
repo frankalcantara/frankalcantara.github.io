@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introdução à Programação Lógica - 12&nbsp; Lógica Proposicional sec-logica-proposicional</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-Sol-Predicativa.html" rel="next">
+<link href="./09-desafios-logicos-enigmas-e-misterios.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Sol-Proposicional.html">Solução dos Exercícios</a></li><li class="breadcrumb-item"><a href="./01-Sol-Proposicional.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à Programação Lógica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/logica" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Fundamentos da Lógica</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução ao Paradigma da Programação Lógica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-introducao-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução Prática ao Prolog com Swish</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Aplicações Avançadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Raciocínio Algorítmico: Criando Mundos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Solução dos Exercícios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#exercícios-sintaxe-e-fórmulas-bem-formadas" id="toc-exercícios-sintaxe-e-fórmulas-bem-formadas" class="nav-link active" data-scroll-target="#exercícios-sintaxe-e-fórmulas-bem-formadas"><span class="header-section-number">12.1</span> Exercícios: Sintaxe e Fórmulas Bem Formadas</a></li>
+  <li><a href="#exercícios-tabelas-verdade-e-conectivos-lógicos" id="toc-exercícios-tabelas-verdade-e-conectivos-lógicos" class="nav-link" data-scroll-target="#exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">12.2</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</a></li>
+  <li><a href="#exercícios-simplificação-com-equivalências-lógicas" id="toc-exercícios-simplificação-com-equivalências-lógicas" class="nav-link" data-scroll-target="#exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">12.3</span> Exercícios: Simplificação com Equivalências Lógicas</a></li>
+  <li><a href="#exercícios-provas-com-regras-de-inferência" id="toc-exercícios-provas-com-regras-de-inferência" class="nav-link" data-scroll-target="#exercícios-provas-com-regras-de-inferência"><span class="header-section-number">12.4</span> Exercícios: Provas com Regras de Inferência</a></li>
+  <li><a href="#exercícios-análise-semântica-de-fórmulas" id="toc-exercícios-análise-semântica-de-fórmulas" class="nav-link" data-scroll-target="#exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">12.5</span> Exercícios: Análise Semântica de Fórmulas</a></li>
+  <li><a href="#exercícios-conexão-com-o-prolog" id="toc-exercícios-conexão-com-o-prolog" class="nav-link" data-scroll-target="#exercícios-conexão-com-o-prolog"><span class="header-section-number">12.6</span> Exercícios: Conexão com o Prolog</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/01-Sol-Proposicional.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-Sol-Proposicional.html">Solução dos Exercícios</a></li><li class="breadcrumb-item"><a href="./01-Sol-Proposicional.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional <a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="exercícios-sintaxe-e-fórmulas-bem-formadas" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="exercícios-sintaxe-e-fórmulas-bem-formadas"><span class="header-section-number">12.1</span> Exercícios: Sintaxe e Fórmulas Bem Formadas</h2>
+<ol type="1">
+<li><ol type="a">
+<li><strong>Variáveis</strong>: <span class="math inline">\(x\)</span>;</li>
+<li><strong>Constantes</strong>: <span class="math inline">\(a\)</span>;</li>
+<li><strong>Predicados</strong>: <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span>;</li>
+<li><strong>Conectivos</strong>: <span class="math inline">\(\rightarrow\)</span>;</li>
+<li><strong>Quantificadores</strong>: <span class="math inline">\(\forall\)</span>.</li>
+</ol></li>
+<li><ol type="a">
+<li><strong>Variáveis</strong>: <span class="math inline">\(y\)</span>;</li>
+<li><strong>Constantes</strong>: <span class="math inline">\(c\)</span>;</li>
+<li><strong>Símbolos de função</strong>: <span class="math inline">\(f\)</span>;</li>
+<li><strong>Predicados</strong>: <span class="math inline">\(R\)</span>;</li>
+<li><strong>Quantificadores</strong>: <span class="math inline">\(\exists\)</span>.</li>
+</ol></li>
+<li><ol type="a">
+<li><strong>Variáveis</strong>: <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>;</li>
+<li><strong>Constantes</strong>: <span class="math inline">\(b\)</span>;</li>
+<li><strong>Símbolos de função</strong>: <span class="math inline">\(f\)</span>;</li>
+<li><strong>Predicados</strong>: <span class="math inline">\(P\)</span>, <span class="math inline">\(S\)</span>, <span class="math inline">\(R\)</span>;</li>
+<li><strong>Conectivos</strong>: <span class="math inline">\(\wedge\)</span>, <span class="math inline">\(\rightarrow\)</span>;</li>
+<li><strong>Quantificadores</strong>: <span class="math inline">\(\forall\)</span>, <span class="math inline">\(\exists\)</span>.</li>
+</ol></li>
+<li><strong>Sim, é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: <span class="math inline">\(a\)</span>, <span class="math inline">\(f(b)\)</span> e <span class="math inline">\(c\)</span> são termos. <span class="math inline">\(P\)</span> é um símbolo de predicado de aridade 3, aplicado a 3 termos, formando a fórmula atômica <span class="math inline">\(P(a, f(b), c)\)</span>. O operador de negação <span class="math inline">\(\neg\)</span> é aplicado a esta fórmula atômica, o que é uma regra de formação válida.</p>
+<ol start="5" type="1">
+<li><strong>Não, não é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: Falta um conectivo lógico (como <span class="math inline">\(\wedge\)</span>, <span class="math inline">\(\vee\)</span>, <span class="math inline">\(\rightarrow\)</span>) entre as fórmulas <span class="math inline">\(\forall x P(x)\)</span> e <span class="math inline">\(Q(a)\)</span>. Duas fórmulas devem ser unidas por um conectivo para formar uma nova fórmula.</p>
+<ol start="6" type="1">
+<li><strong>Não, não é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: <span class="math inline">\(f(x)\)</span> é um <strong>termo</strong>, não uma fórmula. Conectivos lógicos como <span class="math inline">\(\rightarrow\)</span> devem conectar fórmulas. Um termo não pode ser um dos lados de uma implicação.</p>
+<ol start="7" type="1">
+<li><strong>Sim, é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: <span class="math inline">\(P(x)\)</span> é uma fórmula atômica e <span class="math inline">\(\forall y Q(y)\)</span> também é uma fórmula. Elas estão corretamente unidas pelo conectivo <span class="math inline">\(\vee\)</span>.</p>
+<p><strong>Não, ela não é uma sentença.</strong> Uma sentença é uma FBF que não possui variáveis livres. Nesta fórmula, a variável <span class="math inline">\(x\)</span> no predicado <span class="math inline">\(P(x)\)</span> é uma <strong>variável livre</strong>, pois não está no escopo de nenhum quantificador (<span class="math inline">\(\forall x\)</span> ou <span class="math inline">\(\exists x\)</span>).</p>
+<ol start="8" type="1">
+<li><strong>Não, não é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: Os argumentos de um predicado devem ser <strong>termos</strong> (variáveis, constantes ou funções). Um quantificador como <span class="math inline">\(\forall x\)</span> não é um termo e não pode aparecer dentro dos parênteses de um predicado.</p>
+<ol start="10" type="1">
+<li><strong>Sim, é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: A estrutura segue todas as regras. <span class="math inline">\(\exists x P(f(z), x)\)</span> é uma FBF, sua negação também é. <span class="math inline">\(R(z)\)</span> é uma FBF. As duas estão corretamente conectadas pelo bicondicional <span class="math inline">\(\leftrightarrow\)</span>, e toda a expressão está corretamente no escopo do quantificador <span class="math inline">\(\forall z\)</span>.</p>
+<ol start="11" type="1">
+<li><strong>Não, não é uma Fórmula Bem Formada (FBF).</strong></li>
+</ol>
+<p><strong>Justificativa</strong>: A expressão dentro dos parênteses, <span class="math inline">\((P(x) \wedge )\)</span>, está sintaticamente incorreta. O conectivo de conjunção <span class="math inline">\(\wedge\)</span> é binário e requer uma fórmula em ambos os lados. Ele não pode ser seguido por um parêntese de fechamento.</p>
+</section>
+<section id="exercícios-tabelas-verdade-e-conectivos-lógicos" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">12.2</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</h2>
+<p><em>(Nota: Usaremos <code>T</code> para Verdadeiro e <code>F</code> para Falso nas tabelas.)</em></p>
+<ol type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\(P \rightarrow \neg Q\)</span></li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow \neg Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \vee Q) \wedge R\)</span></li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(R\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \vee Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \vee Q) \wedge R\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\(P \leftrightarrow (P \wedge Q)\)</span></li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \leftrightarrow (P \wedge Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<ol start="4" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \wedge (P \rightarrow Q)) \rightarrow Q\)</span>: (Esta é a forma lógica do <em>Modus Ponens</em>)</li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge (P \rightarrow Q)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \wedge (P \rightarrow Q)) \rightarrow Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: A fórmula é uma <strong>tautologia</strong>, pois a coluna final contém apenas <code>T</code>.</p>
+<ol start="5" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \rightarrow Q) \wedge (P \wedge \neg Q)\)</span></li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge \neg Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \rightarrow Q) \wedge (P \wedge \neg Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: A fórmula é uma <strong>contradição</strong>, pois a coluna final contém apenas <code>F</code>.</p>
+<ol start="6" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span> (Esta é a <em>Lei da Contrapositiva</em>)</li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg Q \rightarrow \neg P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \rightarrow Q) \leftrightarrow (\neg Q \rightarrow \neg P)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: A fórmula é uma <strong>tautologia</strong>, mostrando que uma implicação e sua contrapositiva são logicamente equivalentes.</p>
+<ol start="7" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((A \rightarrow B) \vee (B \rightarrow C)\)</span>:</li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(A\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(B\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(C\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(A \rightarrow B\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(B \rightarrow C\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((A \rightarrow B) \vee (B \rightarrow C)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: Esta fórmula é uma <strong>tautologia</strong>.</p>
+<ol start="8" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\(\neg(P \wedge Q) \leftrightarrow (\neg P \vee \neg Q)\)</span> (Esta é uma das <em>Leis de De Morgan</em>)</li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg(P \wedge Q)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg P \vee \neg Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg(P \wedge Q) \leftrightarrow (\neg P \vee \neg Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: A fórmula é uma <strong>tautologia</strong>, confirmando a validade da Lei de De Morgan.</p>
+<ol start="9" type="1">
+<li><p><strong>Solução para o argumento</strong>:</p>
+<ul>
+<li>Premissa 1: Se o programa é eficiente, o custo é baixo (<span class="math inline">\(P \rightarrow Q\)</span>).</li>
+<li>Premissa 2: O programa é eficiente (<span class="math inline">\(P\)</span>).</li>
+<li>Conclusão: O custo é baixo (<span class="math inline">\(Q\)</span>).</li>
+<li>Fórmula a ser testada: <span class="math inline">\(((P \rightarrow Q) \wedge P) \rightarrow Q\)</span>. Esta é a mesma fórmula do exercício 4.</li>
+</ul></li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \rightarrow Q) \wedge P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(((P \rightarrow Q) \wedge P) \rightarrow Q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: Como a fórmula que representa o argumento é uma</p>
+<p><strong>tautologia</strong>, o argumento é <strong>válido</strong>.</p>
+<ol start="10" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \vee Q) \rightarrow (P \wedge Q)\)</span></li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \vee Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \vee Q) \rightarrow (P \wedge Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusão</strong>: A fórmula é <strong>contingente</strong> (satisfatível e falsificável).</p>
+</section>
+<section id="exercícios-simplificação-com-equivalências-lógicas" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">12.3</span> Exercícios: Simplificação com Equivalências Lógicas</h2>
+<ol type="1">
+<li><strong>Solução para</strong>: $ (P Q) $**:</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+\neg(P \vee \neg Q) &amp;\equiv \neg P \wedge \neg(\neg Q) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv \neg P \wedge Q &amp;&amp; \text{Lei da Dupla Negação}
+\end{align*}
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\(P \vee (P \wedge Q)\)</span>: (Esta é a Lei da Absorção)</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+P \vee (P \wedge Q) &amp;\equiv (P \wedge TRUE) \vee (P \wedge Q) &amp;&amp; \text{Lei da Identidade} \\
+&amp;\equiv P \wedge (TRUE \vee Q) &amp;&amp; \text{Lei da Distributividade} \\
+&amp;\equiv P \wedge TRUE &amp;&amp; \text{Lei do Domínio} \\
+&amp;\equiv P &amp;&amp; \text{Lei da Identidade}
+\end{align*}
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\(\neg(P \rightarrow \neg Q)\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+\neg(P \rightarrow \neg Q) &amp;\equiv \neg(\neg P \vee \neg Q) &amp;&amp; \text{Definição de Implicação} \\
+&amp;\equiv \neg(\neg P) \wedge \neg(\neg Q) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv P \wedge Q &amp;&amp; \text{Lei da Dupla Negação}
+\end{align*}
+\]</span></p>
+<ol start="4" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \vee Q) \wedge (\neg P \vee Q)\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+(P \vee Q) \wedge (\neg P \vee Q) &amp;\equiv (Q \vee P) \wedge (Q \vee \neg P) &amp;&amp; \text{Lei da Comutatividade} \\
+&amp;\equiv Q \vee (P \wedge \neg P) &amp;&amp; \text{Lei da Distributividade} \\
+&amp;\equiv Q \vee FALSE &amp;&amp; \text{Lei da Contradição} \\
+&amp;\equiv Q &amp;&amp; \text{Lei da Identidade}
+\end{align*}
+\]</span></p>
+<ol start="5" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \rightarrow Q) \vee (Q \rightarrow P)\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+(P \rightarrow Q) \vee (Q \rightarrow P) &amp;\equiv (\neg P \vee Q) \vee (\neg Q \vee P) &amp;&amp; \text{Definição de Implicação} \\
+&amp;\equiv (\neg P \vee P) \vee (Q \vee \neg Q) &amp;&amp; \text{Leis da Associatividade e Comutatividade} \\
+&amp;\equiv TRUE \vee TRUE &amp;&amp; \text{Lei do Terceiro Excluído} \\
+&amp;\equiv TRUE &amp;&amp; \text{Idempotência da Disjunção}
+\end{align*}
+\]</span></p>
+<p>Como a fórmula simplifica para <span class="math inline">\(TRUE\)</span>, ela é uma <strong>tautologia</strong>.</p>
+<ol start="6" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\(\neg(P \leftrightarrow Q)\)</span> (Esta é a definição de “ou exclusivo”, XOR)</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+\neg(P \leftrightarrow Q) &amp;\equiv \neg((P \rightarrow Q) \wedge (Q \rightarrow P)) &amp;&amp; \text{Definição de Equivalência} \\
+&amp;\equiv \neg(P \rightarrow Q) \vee \neg(Q \rightarrow P) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv \neg(\neg P \vee Q) \vee \neg(\neg Q \vee P) &amp;&amp; \text{Definição de Implicação} \\
+&amp;\equiv (P \wedge \neg Q) \vee (Q \wedge \neg P) &amp;&amp; \text{Lei de De Morgan e Dupla Negação}
+\end{align*}
+\]</span></p>
+<ol start="7" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \wedge Q) \rightarrow (P \vee Q)\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+(P \wedge Q) \rightarrow (P \vee Q) &amp;\equiv \neg(P \wedge Q) \vee (P \vee Q) &amp;&amp; \text{Definição de Implicação} \\
+&amp;\equiv (\neg P \vee \neg Q) \vee (P \vee Q) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv (\neg P \vee P) \vee (\neg Q \vee Q) &amp;&amp; \text{Leis da Associatividade e Comutatividade} \\
+&amp;\equiv TRUE \vee TRUE &amp;&amp; \text{Lei do Terceiro Excluído} \\
+&amp;\equiv TRUE &amp;&amp; \text{Idempotência da Disjunção}
+\end{align*}
+\]</span></p>
+<p>Como a fórmula simplifica para <span class="math inline">\(TRUE\)</span>, ela é uma <strong>tautologia</strong>.</p>
+<ol start="8" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((P \vee Q) \wedge \neg(\neg P \wedge Q)\)</span></li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+(P \vee Q) \wedge \neg(\neg P \wedge Q) &amp;\equiv (P \vee Q) \wedge (\neg(\neg P) \vee \neg Q) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv (P \vee Q) \wedge (P \vee \neg Q) &amp;&amp; \text{Lei da Dupla Negação} \\
+&amp;\equiv P \vee (Q \wedge \neg Q) &amp;&amp; \text{Lei da Distributividade} \\
+&amp;\equiv P \vee FALSE &amp;&amp; \text{Lei da Contradição} \\
+&amp;\equiv P &amp;&amp; \text{Lei da Identidade}
+\end{align*}
+\]</span></p>
+<ol start="9" type="1">
+<li><strong>Solução para</strong>: <span class="math inline">\((A \wedge \neg B) \vee (A \vee \neg B)\)</span>:</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+(A \wedge \neg B) \vee (A \vee \neg B) &amp;\equiv (A \vee (A \vee \neg B)) \wedge (\neg B \vee (A \vee \neg B)) &amp;&amp; \text{Lei da Distributividade} \\
+&amp;\equiv (A \vee A \vee \neg B) \wedge (\neg B \vee \neg B \vee A) &amp;&amp; \text{Lei da Associatividade (e Comutatividade)} \\
+&amp;\equiv (A \vee \neg B) \wedge (\neg B \vee A) &amp;&amp; \text{Lei da Idempotência} \\
+&amp;\equiv (A \vee \neg B) \wedge (A \vee \neg B) &amp;&amp; \text{Lei da Comutatividade} \\
+&amp;\equiv A \vee \neg B &amp;&amp; \text{Lei da Idempotência}
+\end{align*}
+\]</span></p>
+<p><strong>Observação</strong>: apesar de a aplicação da distributividade ser válida, o passo inicial pode parecer confuso. Um método mais direto é reconhecer que $ (A B) (A B) $ é equivalente a $ A B $, pois $ A B $ já cobre todas as possibilidades onde $ A B $ é verdadeiro.</p>
+<p><strong>Resultado final</strong>: $ A B $</p>
+<ol start="10" type="1">
+<li><strong>Solução para</strong>: $ ((P Q) (Q R)) (P R) $:</li>
+</ol>
+<p><span class="math display">\[
+\begin{align*}
+&amp;((P \rightarrow Q) \wedge (Q \rightarrow R)) \rightarrow (P \rightarrow R) \\
+&amp;\equiv \neg ((\neg P \vee Q) \wedge (\neg Q \vee R)) \vee (\neg P \vee R) &amp;&amp; \text{Definição de Implicação (3x)} \\
+&amp;\equiv (\neg(\neg P \vee Q) \vee \neg(\neg Q \vee R)) \vee (\neg P \vee R) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv ((P \wedge \neg Q) \vee (Q \wedge \neg R)) \vee (\neg P \vee R) &amp;&amp; \text{De Morgan e Dupla Negação} \\
+&amp;\equiv (P \wedge \neg Q) \vee (Q \wedge \neg R) \vee \neg P \vee R &amp;&amp; \text{Lei da Associatividade} \\
+&amp;\equiv ((P \wedge \neg Q) \vee \neg P) \vee ((Q \wedge \neg R) \vee R) &amp;&amp; \text{Comutatividade e Associatividade} \\
+&amp;\equiv ((P \vee \neg P) \wedge (\neg Q \vee \neg P)) \vee ((Q \vee R) \wedge (\neg R \vee R)) &amp;&amp; \text{Lei da Distributividade (2x)} \\
+&amp;\equiv (TRUE \wedge (\neg Q \vee \neg P)) \vee ((Q \vee R) \wedge TRUE) &amp;&amp; \text{Lei do Terceiro Excluído (2x)} \\
+&amp;\equiv (\neg Q \vee \neg P) \vee (Q \vee R) &amp;&amp; \text{Lei da Identidade (2x)} \\
+&amp;\equiv (\neg Q \vee Q) \vee (\neg P \vee R) &amp;&amp; \text{Comutatividade e Associatividade} \\
+&amp;\equiv TRUE \vee (\neg P \vee R) &amp;&amp; \text{Lei do Terceiro Excluído} \\
+&amp;\equiv TRUE &amp;&amp; \text{Lei do Domínio}
+\end{align*}
+\]</span></p>
+<p>Como a fórmula simplifica para <span class="math inline">\(TRUE\)</span>, ela é uma <strong>tautologia</strong>.</p>
+</section>
+<section id="exercícios-provas-com-regras-de-inferência" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="exercícios-provas-com-regras-de-inferência"><span class="header-section-number">12.4</span> Exercícios: Provas com Regras de Inferência</h2>
+<ol type="1">
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(P \rightarrow Q\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(P\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(Q\)</span> (1, 2, Modus Ponens)</li>
+</ol></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(\neg B\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(\neg A\)</span> (1, 2, Modus Tollens)</li>
+</ol></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(P \wedge Q\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(P \rightarrow R\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(P\)</span> (1, Simplificação)</li>
+<li><span class="math inline">\(R\)</span> (2, 3, Modus Ponens)</li>
+</ol></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(S \rightarrow \neg T\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(T\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(S \vee U\)</span> (Premissa 3)</li>
+<li><span class="math inline">\(\neg\neg T\)</span> (2, Dupla Negação)</li>
+<li><span class="math inline">\(\neg S\)</span> (1, 4, Modus Tollens)</li>
+<li><span class="math inline">\(U\)</span> (3, 5, Silogismo Disjuntivo / Modus Tollendo Ponens)</li>
+</ol></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(A\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(B\)</span> (Premissa 2)</li>
+<li><span class="math inline">\((A \wedge B) \rightarrow C\)</span> (Premissa 3)</li>
+<li><span class="math inline">\(A \wedge B\)</span> (1, 2, Adjunção)</li>
+<li><span class="math inline">\(C\)</span> (3, 4, Modus Ponens)</li>
+</ol></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(P \rightarrow Q\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(Q \rightarrow R\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(P \rightarrow R\)</span> (1, 2, Silogismo Hipotético)</li>
+</ol>
+<p><em>(Nota: Esta é uma aplicação direta da regra de inferência Silogismo Hipotético.)</em></p></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(A \rightarrow B\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(C \rightarrow D\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(A \vee C\)</span> (Premissa 3)</li>
+<li><span class="math inline">\(B \vee D\)</span> (1, 2, 3, Dilema Construtivo)</li>
+</ol>
+<p><em>(Nota: Esta é uma aplicação direta da regra de inferência Dilema Construtivo.)</em></p></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(\neg A \vee B\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(C \rightarrow A\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(C\)</span> (Premissa 3)</li>
+<li><span class="math inline">\(A\)</span> (2, 3, Modus Ponens)</li>
+<li><span class="math inline">\(B\)</span> (1, 4, Silogismo Disjuntivo / Modus Tollendo Ponens)</li>
+</ol>
+<p><em>(Justificativa do passo 5: Como temos <span class="math inline">\(\neg A \vee B\)</span> e provamos <span class="math inline">\(A\)</span>, a primeira parte da disjunção, <span class="math inline">\(\neg A\)</span>, é falsa. Logo, a segunda parte, <span class="math inline">\(B\)</span>, deve ser verdadeira.)</em></p></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="a">
+<li><strong>Premissas</strong>:</li>
+</ol>
+<ol type="1">
+<li><span class="math inline">\(S \rightarrow D\)</span></li>
+<li><span class="math inline">\(D \rightarrow R\)</span></li>
+<li><span class="math inline">\(S\)</span></li>
+</ol>
+<ol start="2" type="a">
+<li><p><strong>Conclusão</strong>: <span class="math inline">\(R\)</span></p></li>
+<li><p><strong>Prova</strong>:</p></li>
+</ol>
+<ol type="1">
+<li><span class="math inline">\(S \rightarrow D\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(D \rightarrow R\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(S\)</span> (Premissa 3)</li>
+<li><span class="math inline">\(S \rightarrow R\)</span> (1, 2, Silogismo Hipotético)</li>
+<li><span class="math inline">\(R\)</span> (3, 4, Modus Ponens)</li>
+</ol></li>
+<li><p><strong>Solução</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\((P \wedge Q) \rightarrow R\)</span> (Premissa 1)</li>
+<li><span class="math inline">\(\neg R \vee S\)</span> (Premissa 2)</li>
+<li><span class="math inline">\(P\)</span> (Premissa 3)</li>
+<li><span class="math inline">\(Q \wedge T\)</span> (Premissa 4)</li>
+<li><span class="math inline">\(Q\)</span> (4, Simplificação)</li>
+<li><span class="math inline">\(P \wedge Q\)</span> (3, 5, Adjunção)</li>
+<li><span class="math inline">\(R\)</span> (1, 6, Modus Ponens)</li>
+<li><span class="math inline">\(R \rightarrow S\)</span> (2, Definição de Implicação)</li>
+<li><span class="math inline">\(S\)</span> (7, 8, Modus Ponens)</li>
+</ol></li>
+</ol>
+</section>
+<section id="exercícios-análise-semântica-de-fórmulas" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">12.5</span> Exercícios: Análise Semântica de Fórmulas</h2>
+<ol type="1">
+<li><p><strong>Solução para <span class="math inline">\(P \rightarrow (P \wedge Q)\)</span></strong>:</p>
+<p><strong>Classificação: Contingência.</strong></p>
+<p><strong>Justificativa (Tabela-Verdade)</strong>:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow (P \wedge Q)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>A coluna final possui tanto <code>T</code> quanto <code>F</code>.</p></li>
+<li><p><strong>Solução para <span class="math inline">\((P \vee Q) \vee (\neg P \wedge \neg Q)\)</span></strong>:</p>
+<p><strong>Classificação: Tautologia.</strong></p>
+<p><strong>Justificativa (Simplificação)</strong>:</p>
+<p><span class="math display">\[
+\begin{align*}
+(P \vee Q) \vee (\neg P \wedge \neg Q) &amp;\equiv (P \vee Q) \vee \neg(P \vee Q) &amp;&amp; \text{Lei de De Morgan} \\
+&amp;\equiv TRUE &amp;&amp; \text{Lei do Terceiro Excluído (na forma } X \vee \neg X)
+\end{align*}
+\]</span></p></li>
+<li><p><strong>Solução para <span class="math inline">\((P \leftrightarrow Q) \wedge (P \wedge \neg Q)\)</span></strong>:</p>
+<p><strong>Classificação: Contradição.</strong></p>
+<p><strong>Justificativa (Análise Lógica)</strong>: para a fórmula ser verdadeira, ambas as partes da conjunção precisam ser verdadeiras.</p>
+<ol type="1">
+<li>A segunda parte, <span class="math inline">\((P \wedge \neg Q)\)</span>, só é verdadeira se <span class="math inline">\(P=T\)</span> e <span class="math inline">\(Q=F\)</span>.</li>
+<li>Vamos testar essa valoração na primeira parte: <span class="math inline">\((P \leftrightarrow Q)\)</span> se torna <span class="math inline">\((T \leftrightarrow F)\)</span>, que é <span class="math inline">\(FALSO\)</span>.</li>
+<li>Portanto, a conjunção inteira se torna <span class="math inline">\((FALSO \wedge VERDADEIRO)\)</span>, que é <span class="math inline">\(FALSO\)</span>.</li>
+</ol>
+<p>Como não existe nenhuma valoração que torne a fórmula verdadeira, ela é uma contradição.</p></li>
+<li><p><strong>Solução (Valoração Verdadeira)</strong>:</p></li>
+</ol>
+<p>Uma implicação <span class="math inline">\(X \rightarrow Y\)</span> é verdadeira se o antecedente <span class="math inline">\(X\)</span> for falso, ou se o consequente <span class="math inline">\(Y\)</span> for verdadeiro.</p>
+<pre><code> - **Método 1 (Consequente Verdadeiro)**: Vamos tornar $(C \rightarrow A)$ verdadeiro. Isso acontece se $A=T$.
+
+ - **Valoração**: $A=T, B=T, C=T$.
+
+ - **Verificação**: $(\neg T \vee T) \rightarrow (T \rightarrow T) \equiv (F \vee T) \rightarrow T \equiv T \rightarrow T \equiv T$. A valoração funciona.</code></pre>
+<ol start="5" type="1">
+<li><p><strong>Solução (Valoração Falsa)</strong>:</p>
+<p>Uma implicação <span class="math inline">\(X \rightarrow Y\)</span> só é falsa se o antecedente <span class="math inline">\(X\)</span> for verdadeiro e o consequente <span class="math inline">\(Y\)</span> for falso.</p>
+<ol type="1">
+<li>Tornar o consequente <span class="math inline">\((C \rightarrow A)\)</span> falso: Para isso, precisamos de <span class="math inline">\(C=T\)</span> e <span class="math inline">\(A=F\)</span>.</li>
+<li>Verificar se o antecedente <span class="math inline">\((\neg A \vee B)\)</span> é verdadeiro com <span class="math inline">\(A=F\)</span>: <span class="math inline">\((\neg F \vee B) \equiv (T \vee B)\)</span>, que é sempre <span class="math inline">\(T\)</span>, não importa o valor de <span class="math inline">\(B\)</span>.</li>
+</ol>
+<ul>
+<li><p><strong>Valoração</strong>: <span class="math inline">\(A=F, B=F, C=T\)</span>.</p></li>
+<li><p><strong>Verificação</strong>: <span class="math inline">\((\neg F \vee F) \rightarrow (T \rightarrow F) \equiv (T \vee F) \rightarrow F \equiv T \rightarrow F \equiv F\)</span>. A valoração funciona.</p></li>
+</ul></li>
+<li><p><strong>Solução para</strong>: <span class="math inline">\((P \rightarrow (Q \rightarrow R)) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R))\)</span></p>
+<p><strong>Classificação: Tautologia.</strong></p>
+<p><strong>Justificativa</strong>: Esta é uma das fórmulas axiomáticas da Lógica Proposicional, conhecida como <strong>Axioma de Frege</strong>. Provar por simplificação é longo, e por tabela-verdade requer 8 linhas. Todas as valorações possíveis resultam em Verdadeiro. É um princípio fundamental que permite a distribuição da implicação.</p></li>
+<li><p><strong>Solução para <span class="math inline">\((P \rightarrow Q) \leftrightarrow (P \leftrightarrow (P \wedge Q))\)</span></strong>:</p>
+<p><strong>Classificação: Tautologia</strong>:</p>
+<p><strong>Justificativa (Tabela-Verdade)</strong>:</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(P\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \rightarrow Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \wedge Q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(P \leftrightarrow (P \wedge Q)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((P \rightarrow Q) \leftrightarrow (P \leftrightarrow (P \wedge Q))\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>Como a coluna final só contém <code>T</code>, a fórmula é uma tautologia.</p></li>
+<li><p><strong>Solução para <span class="math inline">\(\neg(((P \vee Q) \rightarrow P) \vee Q)\)</span></strong>:</p>
+<p><strong>Classificação: Contradição.</strong>:</p>
+<p><strong>Justificativa (Simplificação)</strong>:</p>
+<p><span class="math display">\[
+\begin{align*}
+\neg(((P \vee Q) \rightarrow P) \vee Q) &amp;\equiv \neg((\neg(P \vee Q) \vee P) \vee Q) &amp;&amp; \text{Def. Implicação} \\
+&amp;\equiv \neg(((\neg P \wedge \neg Q) \vee P) \vee Q) &amp;&amp; \text{De Morgan} \\
+&amp;\equiv \neg(((\neg P \vee P) \wedge (\neg Q \vee P)) \vee Q) &amp;&amp; \text{Distributividade} \\
+&amp;\equiv \neg((TRUE \wedge (\neg Q \vee P)) \vee Q) &amp;&amp; \text{Terceiro Excluído} \\
+&amp;\equiv \neg((\neg Q \vee P) \vee Q) &amp;&amp; \text{Identidade} \\
+&amp;\equiv \neg(\neg Q \vee Q \vee P) &amp;&amp; \text{Associatividade} \\
+&amp;\equiv \neg(TRUE \vee P) &amp;&amp; \text{Terceiro Excluído} \\
+&amp;\equiv \neg(TRUE) &amp;&amp; \text{Domínio} \\
+&amp;\equiv FALSE &amp;&amp; \text{Negação}
+\end{align*}
+\]</span></p></li>
+<li><p><strong>Solução para o argumento</strong>:</p>
+<p><strong>Não, não é logicamente consistente.</strong></p>
+<p><strong>Justificativa</strong>:</p>
+<ol type="1">
+<li>A regra é: <span class="math inline">\(D \leftrightarrow (C \wedge \neg E)\)</span>.</li>
+<li>A situação a ser testada é: <span class="math inline">\(D \wedge \neg C\)</span>. Para que isso seja verdade, <span class="math inline">\(D=T\)</span> e <span class="math inline">\(C=F\)</span>.</li>
+<li>Vamos substituir esses valores na regra: <span class="math inline">\(T \leftrightarrow (F \wedge \neg E)\)</span>.</li>
+<li>A expressão <span class="math inline">\((F \wedge \neg E)\)</span> será sempre <span class="math inline">\(FALSO\)</span>, não importa o valor de <span class="math inline">\(E\)</span>.</li>
+<li>Então, a regra se torna <span class="math inline">\(T \leftrightarrow FALSO\)</span>, o que é uma contradição (<span class="math inline">\(FALSO\)</span>).</li>
+<li>Como a situação (<span class="math inline">\(D \wedge \neg C\)</span>) leva a uma contradição da regra, ela não é consistente com a regra. É impossível satisfazer ambas as fórmulas ao mesmo tempo.</li>
+</ol></li>
+<li><p><strong>Solução para <span class="math inline">\((A \leftrightarrow B) \vee (B \leftrightarrow C)\)</span></strong>:</p>
+<p><strong>Classificação: Contingência.</strong></p>
+<p><strong>Justificativa (Análise de Casos)</strong>:</p>
+<ul>
+<li><p><strong>Pode ser Verdadeiro</strong>: Se <span class="math inline">\(A=T, B=T, C=T\)</span>, a fórmula se torna <span class="math inline">\((T \leftrightarrow T) \vee (T \leftrightarrow T) \equiv T \vee T \equiv T\)</span>.</p></li>
+<li><p><strong>Pode ser Falso</strong>: Se <span class="math inline">\(A=T, B=F, C=T\)</span>, a fórmula se torna <span class="math inline">\((T \leftrightarrow F) \vee (F \leftrightarrow T) \equiv F \vee F \equiv F\)</span>. Como a fórmula pode ser tanto verdadeira quanto falsa dependendo da valoração, ela é uma contingência.</p></li>
+</ul></li>
+</ol>
+</section>
+<section id="exercícios-conexão-com-o-prolog" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="exercícios-conexão-com-o-prolog"><span class="header-section-number">12.6</span> Exercícios: Conexão com o Prolog</h2>
+<p><strong>Questão 1: Diagnóstico de Sistema</strong></p>
+<ol type="1">
+<li><p><strong>Modelagem (Base de Conhecimento)</strong>:</p>
+<ul>
+<li>S: O servidor está sobrecarregado.<br>
+</li>
+<li>L: A latência da rede aumenta.<br>
+</li>
+<li>N: O sistema de alerta envia uma notificação.</li>
+</ul>
+<p><strong>Regras</strong>:</p>
+<ul>
+<li><span class="math inline">\(P_1: S \to L\)</span><br>
+</li>
+<li><span class="math inline">\(P_2: L \to N\)</span></li>
+</ul>
+<p><strong>Fato</strong>:</p>
+<ul>
+<li><span class="math inline">\(P_3: \neg N\)</span></li>
+</ul>
+<p><strong>Consulta</strong>: Prove <span class="math inline">\(\neg S\)</span>.</p></li>
+<li><p><strong>Dedução Lógica (usando Modus Tollens)</strong>:</p>
+<ul>
+<li>A partir de <span class="math inline">\(P_2 (L \to N)\)</span> e <span class="math inline">\(P_3 (\neg N)\)</span>, podemos inferir <span class="math inline">\(\neg L\)</span> pela regra de <em>Modus Tollens</em>.<br>
+</li>
+<li>Agora, usando <span class="math inline">\(P_1 (S \to L)\)</span> e nossa nova inferência <span class="math inline">\(\neg L\)</span>, aplicamos <em>Modus Tollens</em> novamente para concluir <span class="math inline">\(\neg S\)</span>.<br>
+</li>
+<li>Alternativamente, podemos primeiro combinar <span class="math inline">\(P_1\)</span> e <span class="math inline">\(P_2\)</span> usando o <em>Silogismo Hipotético</em>: de <span class="math inline">\((S \to L)\)</span> e <span class="math inline">\((L \to N)\)</span>, inferimos <span class="math inline">\((S \to N)\)</span>. Com <span class="math inline">\((S \to N)\)</span> e <span class="math inline">\(P_3 (\neg N)\)</span>, aplicamos <em>Modus Tollens</em> para obter <span class="math inline">\(\neg S\)</span>.</li>
+</ul></li>
+<li><p><strong>Conexão com Prolog</strong>: Este exemplo mostra como fatos e regras interagem para produzir novas conclusões. Em Prolog, teríamos:</p></li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>latencia_aumenta(<span class="dt">X</span>) <span class="kw">:-</span> servidor_sobrecarregado(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>alerta_enviado(<span class="dt">X</span>) <span class="kw">:-</span> latencia_aumenta(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Fato observado: não há alerta</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- servidor_sobrecarregado(servidor1).</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: false (devido à cadeia de inferências)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 2: Validação de Circuito Lógico (Half-Adder)</strong></p>
+<ol type="1">
+<li><strong>Tradução para Fórmulas</strong>:</li>
+</ol>
+<ul>
+<li>A condição para a saída S (“exatamente uma das entradas”) é um “ou exclusivo” (XOR):<br>
+<span class="math display">\[S \leftrightarrow (A \wedge \neg B) \vee (\neg A \wedge B)\]</span><br>
+Em muitos contextos, isso é escrito como <span class="math inline">\(A \oplus B\)</span>.<br>
+</li>
+<li>A condição para a saída C (“ambas as entradas”):<br>
+<span class="math display">\[C \leftrightarrow A \wedge B\]</span></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Tabela Verdade para Equivalência</strong>:</li>
+</ol>
+<p>Vamos comparar a fórmula de S com a fórmula proposta <span class="math inline">\(F \equiv (A \vee B) \wedge \neg(A \wedge B)\)</span>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>B</th>
+<th><span class="math inline">\(A \oplus B\)</span> (Saída S)</th>
+<th><span class="math inline">\(A \vee B\)</span></th>
+<th><span class="math inline">\(A \wedge B\)</span></th>
+<th><span class="math inline">\(\neg(A \wedge B)\)</span></th>
+<th><span class="math inline">\((A \vee B) \wedge \neg(A \wedge B)\)</span> (Fórmula F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr class="odd">
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="1">
+<li><p><strong>Conclusão</strong>: A coluna para a saída S e a coluna para a fórmula F são idênticas. Portanto, as duas fórmulas são logicamente equivalentes.</p></li>
+<li><p><strong>Conexão com Prolog</strong>: Em Prolog, poderíamos modelar o half-adder como:</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>half_adder_sum(<span class="dt">A</span><span class="kw">,</span> <span class="dt">B</span><span class="kw">,</span> <span class="dt">S</span>) <span class="kw">:-</span> (<span class="dt">A</span><span class="kw">,</span> <span class="kw">\+</span> <span class="dt">B</span>)<span class="kw">;</span> (<span class="kw">\+</span> <span class="dt">A</span><span class="kw">,</span> <span class="dt">B</span>)<span class="kw">.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>half_adder_carry(<span class="dt">A</span><span class="kw">,</span> <span class="dt">B</span><span class="kw">,</span> <span class="dt">C</span>) <span class="kw">:-</span> <span class="dt">A</span><span class="kw">,</span> <span class="dt">B</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 3: Análise de Contrato de Serviço </strong></p>
+<ol type="1">
+<li><strong>Modelagem</strong>:</li>
+</ol>
+<ul>
+<li>U: Uptime &lt; 99%<br>
+</li>
+<li>C: Cliente recebe crédito<br>
+</li>
+<li>T: Cliente abre ticket<br>
+</li>
+<li>D: Cliente recebe desconto</li>
+</ul>
+<p><strong>Regras</strong>:</p>
+<ul>
+<li><span class="math inline">\(P_1: U \to C\)</span><br>
+</li>
+<li><span class="math inline">\(P_2: C \to T\)</span><br>
+</li>
+<li><span class="math inline">\(P_3: \neg(C \wedge D)\)</span> (não pode ter ambos)</li>
+</ul>
+<p><strong>Fatos</strong>:</p>
+<ul>
+<li><span class="math inline">\(F_1: U\)</span> (uptime foi 98%)<br>
+</li>
+<li><span class="math inline">\(F_2: \neg T\)</span> (cliente não abriu ticket)</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Análise da Contradição</strong>:</li>
+</ol>
+<ul>
+<li>De <span class="math inline">\(P_1 (U \to C)\)</span> e <span class="math inline">\(F_1 (U)\)</span>, por <em>Modus Ponens</em>, concluímos <span class="math inline">\(C\)</span>.<br>
+</li>
+<li>De <span class="math inline">\(P_2 (C \to T)\)</span> e nossa conclusão <span class="math inline">\(C\)</span>, por <em>Modus Ponens</em>, deveríamos concluir <span class="math inline">\(T\)</span>.<br>
+</li>
+<li>Mas temos o fato <span class="math inline">\(F_2 (\neg T)\)</span>.<br>
+</li>
+<li>Isso cria uma contradição: <span class="math inline">\(T \wedge \neg T\)</span>.</li>
+</ul>
+<ol start="3" type="1">
+<li><p><strong>Conclusão</strong>: As regras do contrato são <strong>inconsistentes</strong>. Quando o uptime é baixo mas o cliente não abre um ticket, o sistema de regras gera uma contradição. O contrato precisa ser reformulado para ser logicamente consistente.</p></li>
+<li><p><strong>Reformulação Sugerida</strong>: Modificar a regra 1 para: “Se o uptime for menor que 99% E o cliente abrir um ticket, então receberá um crédito”: <span class="math inline">\((U \wedge T) \to C\)</span>.</p></li>
+<li><p><strong>Conexão com Prolog</strong>: Este tipo de inconsistência poderia ser detectada automaticamente em Prolog:</p></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras inconsistentes</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>credito(<span class="dt">Cliente</span>) <span class="kw">:-</span> uptime_baixo(<span class="dt">Cliente</span>)<span class="kw">.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>credito(<span class="dt">Cliente</span>) <span class="kw">:-</span> ticket_aberto(<span class="dt">Cliente</span>)<span class="kw">.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>uptime_baixo(cliente1)<span class="kw">.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span> ticket_aberto(cliente1)<span class="kw">.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta que revelaria a inconsistência</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> credito(cliente1)<span class="kw">,</span> <span class="kw">\+</span> ticket_aberto(cliente1)<span class="kw">.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">% A inconsistência seria revelada pela análise lógica</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 4: Dependências de Compilação</strong></p>
+<ol type="1">
+<li><strong>Modelagem Correta</strong>:<br>
+“Para compilar X, Y deve estar compilado” traduz-se em “Y deve estar compilado antes de X poder ser compilado”, ou seja: a capacidade de compilar X depende de Y estar compilado.</li>
+</ol>
+<p><strong>Regras de Dependência</strong>:<br>
+* <span class="math inline">\(R_1: C \to U\)</span> (para C ser compilado, U deve estar compilado)<br>
+* <span class="math inline">\(R_2: A \to C\)</span> (para A ser compilado, C deve estar compilado)<br>
+* <span class="math inline">\(R_3: G \to (A \wedge L)\)</span> (para G ser compilado, A e L devem estar compilados)</p>
+<p><strong>Fato</strong>:<br>
+* <span class="math inline">\(F_1: U\)</span> (utils já compilado)</p>
+<ol start="2" type="1">
+<li><strong>Análise de Viabilidade</strong>:<br>
+Para compilar G, precisamos de A e L. A cadeia de dependências é: <span class="math display">\[G \to (A \wedge L) \to (C \wedge L) \to (U \wedge C \wedge L)\]</span></li>
+</ol>
+<p>A condição completa para compilar G é: <span class="math inline">\(G \to (U \wedge C \wedge A \wedge L)\)</span>.</p>
+<ol start="3" type="1">
+<li><strong>Conclusão</strong>:<br>
+</li>
+</ol>
+<ul>
+<li>Temos U compilado<br>
+</li>
+<li>Podemos compilar C (pois U está disponível)<br>
+</li>
+<li>Podemos compilar A (pois C pode ser compilado)<br>
+</li>
+<li><strong>NÃO</strong> podemos compilar G pois não sabemos o estado de L</li>
+</ul>
+<p>É necessário que a biblioteca assets (L) também seja compilada.</p>
+<ol start="4" type="1">
+<li><strong>Conexão com Prolog</strong>:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pode_compilar(utils)<span class="kw">.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pode_compilar(core) <span class="kw">:-</span> pode_compilar(utils)<span class="kw">.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>pode_compilar(api) <span class="kw">:-</span> pode_compilar(core)<span class="kw">.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pode_compilar(gui) <span class="kw">:-</span> pode_compilar(api)<span class="kw">,</span> pode_compilar(assets)<span class="kw">.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- pode_compilar(gui).</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: false (pois assets não está definido)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 5: Regras de um Jogo</strong></p>
+<ol type="1">
+<li><strong>Simplificação da Condição de Vitória</strong>:</li>
+</ol>
+<p>Substituindo a suposição F = verdadeiro e o fato <span class="math inline">\(\neg E\)</span> = verdadeiro:</p>
+<ul>
+<li><span class="math inline">\(T \leftrightarrow (T \wedge A) \implies T \leftrightarrow A\)</span> (já que F é verdadeiro)<br>
+</li>
+<li><span class="math inline">\(A \leftrightarrow (D \vee F) \implies A \leftrightarrow D\)</span> (já que E é falso)</li>
+</ul>
+<p>Portanto: <span class="math inline">\(T \leftrightarrow D\)</span></p>
+<ol start="2" type="1">
+<li><strong>Análise da Condição para Derrotar o Dragão</strong>:</li>
+</ol>
+<ul>
+<li>A regra <span class="math inline">\(D \to S\)</span> estabelece que ter a espada é <strong>necessário</strong> para derrotar o dragão.<br>
+</li>
+<li>O fato S nos diz que essa condição necessária é satisfeita.<br>
+</li>
+<li>Contudo, <span class="math inline">\(D \to S\)</span> não nos permite concluir D a partir de S (isso seria a falácia de afirmar o consequente).</li>
+</ul>
+<ol start="3" type="1">
+<li><p><strong>Conclusão</strong>: Supondo que o jogador chegue à casa final, ele vencerá o jogo se, e somente se, <strong>derrotar o dragão (D)</strong>. A posse da espada é uma pré-condição satisfeita, mas a derrota do dragão ainda deve ocorrer no mundo do jogo.</p></li>
+<li><p><strong>Conexão com Prolog</strong>: Este cenário de jogo poderia ser modelado em Prolog como:</p></li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>possui(heroi<span class="kw">,</span> espada_prata)<span class="kw">.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>chegou_casa_final(heroi)<span class="kw">.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span> resolveu_enigma(heroi)<span class="kw">.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>vence(<span class="dt">X</span>) <span class="kw">:-</span> chegou_casa_final(<span class="dt">X</span>)<span class="kw">,</span> possui_amuleto(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>possui_amuleto(<span class="dt">X</span>) <span class="kw">:-</span> derrotou_dragao(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>possui_amuleto(<span class="dt">X</span>) <span class="kw">:-</span> resolveu_enigma(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>pode_enfrentar_dragao(<span class="dt">X</span>) <span class="kw">:-</span> possui(<span class="dt">X</span><span class="kw">,</span> espada_prata)<span class="kw">.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> vence(heroi)<span class="kw">.</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Dependeria de derrotou_dragao(heroi) ser provado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 6: Decisão de um Robô Autônomo</strong></p>
+<ol type="1">
+<li><strong>Dedução da Contradição</strong>:</li>
+</ol>
+<ul>
+<li>De O e <span class="math inline">\(P_1 (O \to (P \wedge G))\)</span>, por <em>Modus Ponens</em>: <span class="math inline">\((P \wedge G)\)</span>, logo P e G.<br>
+</li>
+<li>De B e <span class="math inline">\(P_2 (B \to (P \wedge R))\)</span>, por <em>Modus Ponens</em>: <span class="math inline">\((P \wedge R)\)</span>, logo P e R.<br>
+</li>
+<li>Das inferências: G é verdadeiro e R é verdadeiro, portanto <span class="math inline">\((G \wedge R)\)</span> é verdadeiro.<br>
+</li>
+<li>Mas <span class="math inline">\(P_3\)</span> afirma <span class="math inline">\(\neg(G \wedge R)\)</span>.<br>
+</li>
+<li><strong>Contradição</strong>: <span class="math inline">\((G \wedge R) \wedge \neg(G \wedge R)\)</span>.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Resolução do Conflito</strong>:</li>
+</ol>
+<p>Introduzir hierarquia de prioridades. <strong>Sugestão</strong>:</p>
+<p><strong>Regra 1 Modificada</strong>: <span class="math inline">\((O \wedge \neg B) \to (P \wedge G)\)</span></p>
+<p>Com esta modificação, quando O e B são ambos verdadeiros, apenas a Regra 2 é acionada, e o robô para e retorna à base, eliminando a contradição.</p>
+<ol start="3" type="1">
+<li><strong>Conexão com Prolog</strong>: Este exemplo ilustra a importância da <strong>ordem das regras</strong> em Prolog e como conflitos podem ser resolvidos através de condições mais específicas:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão com conflito</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>acao_robo(parar_girar) <span class="kw">:-</span> obstaculo_detectado<span class="kw">.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>acao_robo(parar_retornar) <span class="kw">:-</span> bateria_baixa<span class="kw">.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão corrigida com prioridades</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>acao_robo(parar_retornar) <span class="kw">:-</span> bateria_baixa<span class="kw">.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>acao_robo(parar_girar) <span class="kw">:-</span> obstaculo_detectado<span class="kw">,</span> <span class="kw">\+</span> bateria_baixa<span class="kw">.</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>obstaculo_detectado<span class="kw">.</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>bateria_baixa<span class="kw">.</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> acao_robo(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">% X = parar_retornar (prioridade para bateria baixa)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 7: Simplificação de Query de Banco de Dados </strong></p>
+<ol type="1">
+<li><strong>Tabela Verdade Completa</strong>:</li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>A</th>
+<th>S</th>
+<th>C</th>
+<th><span class="math inline">\(S \vee C\)</span></th>
+<th><span class="math inline">\(A \wedge (S \vee C)\)</span></th>
+<th><span class="math inline">\(S \wedge C\)</span></th>
+<th><span class="math inline">\(\neg A \wedge (S \wedge C)\)</span></th>
+<th>Fórmula Original</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td><strong>T</strong></td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td><strong>T</strong></td>
+</tr>
+<tr class="odd">
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td><strong>T</strong></td>
+</tr>
+<tr class="even">
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td><strong>F</strong></td>
+</tr>
+<tr class="odd">
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td><strong>T</strong></td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td><strong>F</strong></td>
+</tr>
+<tr class="odd">
+<td>F</td>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td><strong>F</strong></td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+<td><strong>F</strong></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><strong>Forma Normal Disjuntiva Mínima</strong>:</li>
+</ol>
+<p>A fórmula é verdadeira para os seguintes mintermos:</p>
+<ol type="1">
+<li><span class="math inline">\(A \wedge S \wedge C\)</span> (linha 1);<br>
+</li>
+<li><span class="math inline">\(A \wedge S \wedge \neg C\)</span> (linha 2);<br>
+</li>
+<li><span class="math inline">\(A \wedge \neg S \wedge C\)</span> (linha 3);<br>
+</li>
+<li><span class="math inline">\(\neg A \wedge S \wedge C\)</span> (linha 5).</li>
+</ol>
+<p><strong>Agrupamento dos mintermos</strong>:</p>
+<ul>
+<li>Agrupando (1) e (2): <span class="math inline">\((A \wedge S \wedge C) \vee (A \wedge S \wedge \neg C) \equiv A \wedge S\)</span>;<br>
+</li>
+<li>Agrupando (1) e (3): <span class="math inline">\((A \wedge S \wedge C) \vee (A \wedge \neg S \wedge C) \equiv A \wedge C\)</span>;<br>
+</li>
+<li>Agrupando (1) e (4): <span class="math inline">\((A \wedge S \wedge C) \vee (\neg A \wedge S \wedge C) \equiv S \wedge C\)</span>.</li>
+</ul>
+<p><strong>Forma Normal Disjuntiva Mínima</strong>:</p>
+<p><span class="math inline">\((A \wedge S) \vee (A \wedge C) \vee (S \wedge C)\)</span></p>
+<ol start="3" type="1">
+<li><p><strong>Verificação</strong>: Esta forma não pode ser simplificada ainda mais sem perder informação, pois cada termo cobre casos distintos que não podem ser agrupados.</p></li>
+<li><p><strong>Eficiência</strong>: A forma simplificada <span class="math inline">\((A \wedge S) \vee (A \wedge C) \vee (S \wedge C)\)</span> é mais eficiente que a original pois:</p></li>
+</ol>
+<ul>
+<li>Estrutura “plana” de ORs de ANDs (Forma Normal Disjuntiva);<br>
+</li>
+<li>Permite que o otimizador do banco use índices nas colunas A, S e C de forma mais eficaz;<br>
+</li>
+<li>Reduz operações lógicas aninhadas, diminuindo o custo computacional da consulta.</li>
+</ul>
+<ol type="1">
+<li><strong>Conexão com Prolog</strong>: A simplificação lógica é fundamental em Prolog para otimização de consultas:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta original (mais complexa)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>usuario_selecionado(<span class="dt">U</span>) <span class="kw">:-</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> (ativo(<span class="dt">U</span>)<span class="kw">,</span> (sao_paulo(<span class="dt">U</span>) <span class="kw">;</span> compras_altas(<span class="dt">U</span>))) <span class="kw">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> (<span class="kw">\+</span> ativo(<span class="dt">U</span>)<span class="kw">,</span> sao_paulo(<span class="dt">U</span>)<span class="kw">,</span> compras_altas(<span class="dt">U</span>))<span class="kw">.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão simplificada (mais eficiente)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>usuario_selecionado(<span class="dt">U</span>) <span class="kw">:-</span> ativo(<span class="dt">U</span>)<span class="kw">,</span> sao_paulo(<span class="dt">U</span>)<span class="kw">.</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>usuario_selecionado(<span class="dt">U</span>) <span class="kw">:-</span> ativo(<span class="dt">U</span>)<span class="kw">,</span> compras_altas(<span class="dt">U</span>)<span class="kw">.</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>usuario_selecionado(<span class="dt">U</span>) <span class="kw">:-</span> sao_paulo(<span class="dt">U</span>)<span class="kw">,</span> compras_altas(<span class="dt">U</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 8: O Paradoxo do Mentiroso (Versão Proposicional)</strong></p>
+<ol type="1">
+<li><strong>Tabela Verdade</strong>:<br>
+A fórmula <span class="math inline">\(P \leftrightarrow \neg P\)</span> é equivalente a <span class="math inline">\((P \to \neg P) \wedge (\neg P \to P)\)</span>.</li>
+</ol>
+<table class="table">
+<thead>
+<tr class="header">
+<th>P</th>
+<th><span class="math inline">\(\neg P\)</span></th>
+<th><span class="math inline">\(P \leftrightarrow \neg P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p><strong>Análise</strong>: A tabela verdade mostra que a fórmula é <strong>sempre falsa</strong>, sendo portanto uma <strong>contradição</strong>.</p></li>
+<li><p><strong>Explicação do Paradoxo</strong>: O paradoxo surge da autorreferência:</p></li>
+</ol>
+<ul>
+<li>Se a sentença é <strong>verdadeira</strong>, então deve ser o que afirma (falsa) → contradição<br>
+</li>
+<li>Se a sentença é <strong>falsa</strong>, então sua afirmação é incorreta, logo deve ser verdadeira → contradição</li>
+</ul>
+<ol start="4" type="1">
+<li><p><strong>Limitações da Lógica Clássica</strong>: A lógica proposicional clássica não foi projetada para autorreferência. Lógicas paraconsistentes ou de múltiplos valores foram desenvolvidas para lidar com tais paradoxos.</p></li>
+<li><p><strong>Conexão com Prolog</strong>: O Prolog evita este tipo de paradoxo através de sua semântica operacional e da negação por falha:</p></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Em Prolog, não podemos expressar diretamente:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">% P :- \+ P.  % Isso causaria um loop infinito</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">% O Prolog usa "negação por falha" que é diferente da negação lógica</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Se algo não pode ser provado, é assumido como falso</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>falso_se_nao_provavel(<span class="dt">X</span>) <span class="kw">:-</span> <span class="kw">\+</span> provavel(<span class="dt">X</span>)<span class="kw">.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">% Isso evita contradições autorreferentes</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 9: Política de Firewall</strong></p>
+<ol type="1">
+<li><strong>Dedução Lógica</strong>:</li>
+</ol>
+<ul>
+<li>Temos <span class="math inline">\(\neg P\)</span> (verdadeiro).<br>
+</li>
+<li>A premissa da Regra 2 é <span class="math inline">\((\neg I \vee \neg P)\)</span>.<br>
+</li>
+<li>Como <span class="math inline">\(\neg P\)</span> é verdadeiro, a disjunção <span class="math inline">\((\neg I \vee \neg P)\)</span> é verdadeira.<br>
+</li>
+<li>Por <em>Modus Ponens</em> na Regra 2: A é verdadeiro.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Análise de Redundância</strong>:<br>
+A condição total para A é: <span class="math inline">\(((I \wedge P) \vee (\neg I \vee \neg P))\)</span>.</li>
+</ol>
+<p>Por De Morgan: <span class="math inline">\((\neg I \vee \neg P) \equiv \neg(I \wedge P)\)</span>.</p>
+<p>Logo: <span class="math inline">\(A \leftrightarrow ((I \wedge P) \vee \neg(I \wedge P))\)</span>.</p>
+<p>Seja <span class="math inline">\(X = (I \wedge P)\)</span>. A condição torna-se <span class="math inline">\(X \vee \neg X\)</span>, que é uma <strong>tautologia</strong>.</p>
+<ol start="3" type="1">
+<li><p><strong>Conclusão</strong>: A política permite <strong>todas as requisições</strong>. É completamente ineficaz e altamente redundante, não bloqueando nada.</p></li>
+<li><p><strong>Conexão com Prolog</strong>: Este tipo de problema pode ser detectado analisando as regras em Prolog:</p></li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Política de firewall redundante</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>permitida(<span class="dt">Req</span>) <span class="kw">:-</span> rede_interna(<span class="dt">Req</span>)<span class="kw">,</span> porta_443(<span class="dt">Req</span>)<span class="kw">.</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>permitida(<span class="dt">Req</span>) <span class="kw">:-</span> <span class="kw">\+</span> rede_interna(<span class="dt">Req</span>)<span class="kw">.</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>permitida(<span class="dt">Req</span>) <span class="kw">:-</span> <span class="kw">\+</span> porta_443(<span class="dt">Req</span>)<span class="kw">.</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Teste que mostra que tudo é permitido</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> permitida(qualquer_requisicao)<span class="kw">.</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">% true (sempre, devido à redundância)</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão corrigida seria mais restritiva</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>permitida(<span class="dt">Req</span>) <span class="kw">:-</span> rede_interna(<span class="dt">Req</span>)<span class="kw">.</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>permitida(<span class="dt">Req</span>) <span class="kw">:-</span> <span class="kw">\+</span> rede_interna(<span class="dt">Req</span>)<span class="kw">,</span> conexao_segura(<span class="dt">Req</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Questão 10: Tautologia, Contradição ou Contingência?</strong></p>
+<ol type="1">
+<li><strong>Análise de Cenário Crítico</strong>:<br>
+Considere o caso onde T = verdadeiro e T = falso (fez treinamento, não bateu meta):</li>
+</ol>
+<ul>
+<li><p><strong>Primeira parte</strong>: <span class="math inline">\((T \vee T) \to B\)</span><br>
+Premissa: <span class="math inline">\((F \vee T) = T\)</span> → Conclusão: B deve ser verdadeiro</p></li>
+<li><p><strong>Segunda parte</strong>: <span class="math inline">\((T \wedge \neg T) \to \neg B\)</span><br>
+Premissa: <span class="math inline">\((T \wedge T) = T\)</span> → Conclusão: B deve ser falso</p></li>
+<li><p><strong>Resultado</strong>: B deve ser simultaneamente verdadeiro e falso → contradição.</p></li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Demonstração Formal</strong>:<br>
+Para o caso <span class="math inline">\((T \wedge \neg T)\)</span>:<br>
+<span class="math display">\[F \equiv (T \to B) \wedge (T \to \neg B) \equiv T \wedge B \wedge \neg B\]</span></li>
+</ol>
+<p>Como <span class="math inline">\(B \wedge \neg B\)</span> é sempre falso, a fórmula é falsa para este caso específico.</p>
+<ol start="3" type="1">
+<li><p><strong>Classificação</strong>: A fórmula é uma <strong>contingência</strong> (pode ser verdadeira ou falsa dependendo dos valores), mas é <strong>logicamente inconsistente</strong> para o caso <span class="math inline">\((T \wedge \neg T)\)</span>.</p></li>
+<li><p><strong>Implicação para a Empresa</strong>: A política de bônus é <strong>inaplicável</strong> - cria uma situação onde as regras simultaneamente concedem e negam o bônus para funcionários que fizeram treinamento mas não bateram a meta. A empresa precisa redefinir suas regras para serem consistentes.</p></li>
+<li><p><strong>Conexão com Prolog</strong>: Em Prolog, esta inconsistência seria revelada imediatamente:</p></li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Política inconsistente</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>bonus(<span class="dt">Func</span>) <span class="kw">:-</span> meta_atingida(<span class="dt">Func</span>)<span class="kw">.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>bonus(<span class="dt">Func</span>) <span class="kw">:-</span> treinamento(<span class="dt">Func</span>)<span class="kw">.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span> bonus(<span class="dt">Func</span>) <span class="kw">:-</span> treinamento(<span class="dt">Func</span>)<span class="kw">,</span> <span class="kw">\+</span> meta_atingida(<span class="dt">Func</span>)<span class="kw">.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>treinamento(joao)<span class="kw">.</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span> meta_atingida(joao)<span class="kw">.</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta reveladoria</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> bonus(joao)<span class="kw">.</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Resultado inconsistente: true e false simultaneamente</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Política corrigida</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>bonus(<span class="dt">Func</span>) <span class="kw">:-</span> meta_atingida(<span class="dt">Func</span>)<span class="kw">.</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>bonus(<span class="dt">Func</span>) <span class="kw">:-</span> treinamento(<span class="dt">Func</span>)<span class="kw">,</span> meta_atingida(<span class="dt">Func</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="pagination-link" aria-label="Desafios, Problemas e Mistérios">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-Sol-Predicativa.html" class="pagination-link" aria-label="Lógica Predicativa @sec-logica-predicativa">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a> <i class="bi bi-arrow-right-short"></i>
+      
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/01-Sol-Proposicional.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
