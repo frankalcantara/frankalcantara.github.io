@@ -176,7 +176,7 @@ section {
 }
 
 .table-custom thead th {
-    background: linear-gradient(135deg, var(--sage-600), var(--copper-600));
+    background: linear-gradient(170deg, #546af3, #1ebef3);
     color: white;
     font-weight: bold;
     border-bottom: 2px solid #dee2e6;
@@ -564,3 +564,418 @@ pre[style*="font-size"] code.hljs {
     margin-right: 1rem;
     font-weight: bold;
 }
+
+/* =============================================== */
+/* Classes específicas dos arquivos HTML em falta */
+/* =============================================== */
+
+/* Paradigm cards */
+.paradigm-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.paradigm-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Logic components */
+.logic-component {
+    border-left: 4px solid;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.component-proposicional { border-left-color: #3b82f6; }
+.component-predicativa { border-left-color: #10b981; }
+.component-horn { border-left-color: #8b5cf6; }
+.component-syntax { border-left-color: #3b82f6; }
+.component-semantics { border-left-color: #10b981; }
+.component-inference { border-left-color: #0284c7; }
+.component-form { border-left-color: #ef4444; }
+.component-tautology { border-left-color: #ef4444; }
+.component-quantifier { border-left-color: #ef4444; }
+.component-equivalence { border-left-color: #8b5cf6; }
+.component-sat { border-left-color: #ef4444; }
+
+/* Detective examples */
+.detective-example {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-left: 4px solid #f59e0b;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+/* Formula boxes */
+.formula-box {
+    background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+    border: 1px solid var(--sage-200);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2rem;
+    overflow-x: auto;
+}
+
+/* Example boxes */
+.example-box {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-left: 4px solid #f59e0b;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+/* Truth tables */
+.truth-table {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+}
+
+.truth-table th,
+.truth-table td {
+    text-align: center;
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.truth-table th {
+    background: linear-gradient(170deg, #546af3, #1ebef3);
+    color: white;
+    font-weight: bold;
+}
+
+.table-truth {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.table-truth table {
+    margin: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-truth th {
+    background: var(--sage-600);
+    color: white;
+    padding: 0.75rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table-truth td {
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.table-truth tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Predicate examples */
+.predicate-example {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-left: 3px solid var(--sage-600);
+}
+
+/* Inference rules */
+.inference-rule {
+    background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+    border-left: 4px solid #0284c7;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+.inference-rule .rule-name {
+    font-weight: bold;
+    color: #0284c7;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.inference-notation {
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.rule-name {
+    font-weight: bold;
+    color: #0284c7;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Proof steps */
+.proof-step {
+    background: white;
+    border-left: 4px solid var(--sage-600);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.proof-step .step-number {
+    font-weight: bold;
+    color: var(--sage-700);
+    margin-right: 1rem;
+}
+
+.proof-step .justification {
+    font-style: italic;
+    color: var(--sage-600);
+    margin-top: 0.5rem;
+}
+
+/* Argument analysis */
+.argument-box {
+    background: linear-gradient(170deg, #d2d2d5, #d3d3d3);
+    border: 2px solid var(--copper-300);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.premise-list {
+    background: var(--sage-50);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.conclusion-box {
+    background: var(--copper-100);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--copper-600);
+}
+
+/* Axiom boxes */
+.axiom-box {
+    background: linear-gradient(135deg, #e0f2fe, #b3e5fc);
+    border: 1px solid #0277bd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.axiom-title {
+    font-weight: 600;
+    color: #01579b;
+    margin-bottom: 0.5rem;
+}
+
+/* Conversion elements */
+.conversion-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .conversion-pair {
+        grid-template-columns: 1fr;
+    }
+}
+
+.conversion-steps {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-left: 3px solid var(--sage-600);
+}
+
+.natural-language {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.logical-formula {
+    background: #fff3cd;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Quantifier visuals */
+.quantifier-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2rem;
+    margin: 1rem 0;
+    background: linear-gradient(170deg, #546af3, #1ebef3);
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Form definitions */
+.form-definition {
+    background: linear-gradient(135deg, var(--copper-50), #fef3c7);
+    border: 1px solid var(--copper-200);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+/* Exercise sections */
+.exercise-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--sage-600);
+}
+
+/* Prenex form */
+.prenex-form {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    border-left: 4px solid #3b82f6;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+}
+
+/* Skolem function */
+.skolem-function {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    border: 1px solid #0ea5e9;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'Times New Roman', serif;
+}
+
+/* Steps */
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin: 0.8rem 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.step-number {
+    background: var(--sage-600);
+    color: white !important;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Simplification steps */
+.simplification-steps {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+}
+
+/* Equivalence tables */
+.equivalence-table {
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+}
+
+.equivalence-table th,
+.equivalence-table td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    vertical-align: top;
+}
+
+.equivalence-table th {
+    background: linear-gradient(170deg, #546af3, #1ebef3);
+    color: white;
+    font-weight: bold;
+}
+
+.equivalence-table tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+.equivalence-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.law-reference {
+    font-size: 0.8rem;
+    color: var(--sage-600);
+    font-weight: bold;
+}
+
+/* Definition boxes */
+.definition-box {
+    background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+    border: 1px solid var(--sage-200);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.definition-title {
+    font-weight: 600;
+    color: var(--sage-800);
+    margin-bottom: 0.5rem;
+}
+
+.text-warning{
+    color:#0277bd !important;
+}
+
+.text-info{
+    color:#0277bd !important;
+}
+
+.text-success{
+    text-align: center;
+}   
+
+.text-danger{
+    text-align: center;
+}   
+
+.text-primary{
+    text-align: center;
+}   
