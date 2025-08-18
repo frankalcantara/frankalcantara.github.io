@@ -205,13 +205,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -223,7 +223,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -314,7 +314,7 @@ window.Quarto = {
   <li><a href="#exercícios---capitulo-2" id="toc-exercícios---capitulo-2" class="nav-link" data-scroll-target="#exercícios---capitulo-2"><span class="header-section-number">4.2</span> Exercícios - Capitulo 2</a>
   <ul class="collapse">
   <li><a href="#utilização-de-cpu-com-fórmula-do-capítulo" id="toc-utilização-de-cpu-com-fórmula-do-capítulo" class="nav-link" data-scroll-target="#utilização-de-cpu-com-fórmula-do-capítulo"><span class="header-section-number">4.2.1</span> 1. Utilização de <code>CPU</code> com Fórmula do Capítulo</a></li>
-  <li><a href="#tempo-médio-de-espera-com-sjf" id="toc-tempo-médio-de-espera-com-sjf" class="nav-link" data-scroll-target="#tempo-médio-de-espera-com-sjf"><span class="header-section-number">4.2.2</span> 2. Tempo Médio de Espera com SJF</a></li>
+  <li><a href="#tempo-médio-de-espera-com-sjf" id="toc-tempo-médio-de-espera-com-sjf" class="nav-link" data-scroll-target="#tempo-médio-de-espera-com-sjf"><span class="header-section-number">4.2.2</span> 2. Tempo Médio de Espera com <strong>SJF</strong></a></li>
   <li><a href="#as-duas-perspectivas-fundamentais" id="toc-as-duas-perspectivas-fundamentais" class="nav-link" data-scroll-target="#as-duas-perspectivas-fundamentais"><span class="header-section-number">4.2.3</span> 3. As Duas Perspectivas Fundamentais</a></li>
   <li><a href="#recursos-computacionais-fundamentais" id="toc-recursos-computacionais-fundamentais" class="nav-link" data-scroll-target="#recursos-computacionais-fundamentais"><span class="header-section-number">4.2.4</span> 4. Recursos Computacionais Fundamentais</a></li>
   <li><a href="#tarefas-do-capitão-de-navio" id="toc-tarefas-do-capitão-de-navio" class="nav-link" data-scroll-target="#tarefas-do-capitão-de-navio"><span class="header-section-number">4.2.5</span> 5. Tarefas do Capitão de Navio</a></li>
@@ -481,8 +481,8 @@ window.Quarto = {
 <p><strong>Enunciado:</strong> Usando a fórmula apresentada no texto para calcular a utilização da CPU, <span class="math inline">\(U = \sum_{i=1}^{n} \frac{C_i}{T_i}\)</span>, calcule a utilização para um sistema com 3 processos, cada um com tempo de computação <span class="math inline">\(C_i = 2s\)</span> e período total <span class="math inline">\(T_i = 10s\)</span>. O que esse valor indica sobre o uso do sistema?</p>
 </section>
 <section id="tempo-médio-de-espera-com-sjf" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="tempo-médio-de-espera-com-sjf"><span class="header-section-number">4.2.2</span> 2. Tempo Médio de Espera com SJF</h3>
-<p><strong>Enunciado:</strong> Usando a fórmula do <em>Shortest Job First</em> (SJF) mencionada no texto, <span class="math inline">\(\text{Tempo Médio de Espera} = \frac{1}{n} \sum_{i=1}^{n} W_i\)</span>, calcule o tempo médio de espera para 4 processos com tempos de execução: 3s, 1s, 4s, 2s. Compare o resultado com o algoritmo <em>First-Come, First-Served</em> (FCFS) assumindo a ordem de chegada P1, P2, P3, P4.</p>
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="tempo-médio-de-espera-com-sjf"><span class="header-section-number">4.2.2</span> 2. Tempo Médio de Espera com <strong>SJF</strong></h3>
+<p><strong>Enunciado:</strong> Usando a fórmula do <em>Shortest Job First</em> (<strong>SJF</strong>) mencionada no texto, <span class="math inline">\(\text{Tempo Médio de Espera} = \frac{1}{n} \sum_{i=1}^{n} W_i\)</span>, calcule o tempo médio de espera para 4 processos com tempos de execução: 3s, 1s, 4s, 2s. Compare o resultado com o algoritmo <em>First-Come, First-Served</em> (<strong>FCFS</strong>) assumindo a ordem de chegada P1, P2, P3, P4.</p>
 </section>
 <section id="as-duas-perspectivas-fundamentais" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3" class="anchored" data-anchor-id="as-duas-perspectivas-fundamentais"><span class="header-section-number">4.2.3</span> 3. As Duas Perspectivas Fundamentais</h3>

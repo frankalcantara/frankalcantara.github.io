@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sistemas Operacionais - 7&nbsp; Criando Processos de Forma Programática: O Modelo Linux</title>
+<title>Sistemas Operacionais - 7&nbsp; Criando Processos de Forma Programática</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,10 +107,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles/styles.css">
-<meta property="og:title" content="Sistemas Operacionais - 7&nbsp; Criando Processos de Forma Programática: O Modelo Linux">
+<meta property="og:title" content="Sistemas Operacionais - 7&nbsp; Criando Processos de Forma Programática">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Sistemas Operacionais">
-<meta name="twitter:title" content="Sistemas Operacionais - 7&nbsp; Criando Processos de Forma Programática: O Modelo Linux">
+<meta name="twitter:title" content="Sistemas Operacionais - 7&nbsp; Criando Processos de Forma Programática">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -212,13 +212,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Untitled</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#filosofias-de-design-dois-paradigmas-duas-visões" id="toc-filosofias-de-design-dois-paradigmas-duas-visões" class="nav-link active" data-scroll-target="#filosofias-de-design-dois-paradigmas-duas-visões"><span class="header-section-number">7.0.1</span> Filosofias de Design: Dois Paradigmas, Duas Visões</a></li>
+  <li><a href="#filosofias-de-design-duas-visões" id="toc-filosofias-de-design-duas-visões" class="nav-link active" data-scroll-target="#filosofias-de-design-duas-visões"><span class="header-section-number">7.0.1</span> Filosofias de Design: Duas Visões</a></li>
   <li><a href="#o-modelo-linux-a-composição-de-fork-e-exec" id="toc-o-modelo-linux-a-composição-de-fork-e-exec" class="nav-link" data-scroll-target="#o-modelo-linux-a-composição-de-fork-e-exec"><span class="header-section-number">7.0.2</span> O Modelo Linux: A Composição de <code>fork()</code> e <code>exec()</code></a></li>
   <li><a href="#o-modelo-windows-a-configuração-com-createprocess" id="toc-o-modelo-windows-a-configuração-com-createprocess" class="nav-link" data-scroll-target="#o-modelo-windows-a-configuração-com-createprocess"><span class="header-section-number">7.0.3</span> O Modelo Windows: A Configuração com CreateProcess</a></li>
   </ul>
@@ -326,9 +326,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática: O Modelo Linux</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></h1>
 </div>
 
 
@@ -347,8 +347,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Até a esforçada leitora estudou a anatomia de um processo, seu ciclo de vida, e viu como podemos listar os processos existentes em um <strong>Sistema Operacional</strong>. Vimos que um clique duplo em um ícone ou a execução de um comando em um terminal são ações de alto nível que resultam na criação de um novo processo. Mas como o <strong>Sistema Operacional</strong> realmente executa essa mágica? Como ele pode criar processos? A resposta, como a perspicaz leitora já deve suspeitar, reside em um conjunto de chamadas de sistema, as interfaces programáticas que o <code>Kernel</code> oferece aos programas de usuário. Nesta seção, vamos explorar como criar processos de forma programática, tanto no <strong>Linux</strong> quanto no Windows, e entender as diferenças fundamentais entre esses dois mundos.</p>
 <p>Criar um processo de forma programática é uma das tarefas mais fundamentais em programação de sistemas. É o que permite que um servidor web inicie processos de trabalho para lidar com requisições, que um compilador chame o <code>linker</code>, que um <code>shell</code> execute os comandos que você digita. No entanto, os conceitos e as filosofias por trás dessa criação diferem drasticamente entre os mundos <strong>Linux</strong> e Windows, refletindo seus legados e suas prioridades de design.</p>
-<section id="filosofias-de-design-dois-paradigmas-duas-visões" class="level3" data-number="7.0.1">
-<h3 data-number="7.0.1" class="anchored" data-anchor-id="filosofias-de-design-dois-paradigmas-duas-visões"><span class="header-section-number">7.0.1</span> Filosofias de Design: Dois Paradigmas, Duas Visões</h3>
+<section id="filosofias-de-design-duas-visões" class="level3" data-number="7.0.1">
+<h3 data-number="7.0.1" class="anchored" data-anchor-id="filosofias-de-design-duas-visões"><span class="header-section-number">7.0.1</span> Filosofias de Design: Duas Visões</h3>
 <p>A diferença entre os modelos de criação de processos do <strong>Linux</strong> e <strong>Windows</strong> transcende aspectos meramente técnicos, refletindo filosofias fundamentalmente distintas de design de <strong>Sistemas Operacionais</strong>. Estas filosofias, forjadas por contextos históricos e objetivos diferentes, moldam não apenas como processos são criados, mas como desenvolvedores pensam sobre abstrações de sistema.</p>
 <section id="a-herança-unix-simplicidade-ortogonalidade-e-composição" class="level4" data-number="7.0.1.1">
 <h4 data-number="7.0.1.1" class="anchored" data-anchor-id="a-herança-unix-simplicidade-ortogonalidade-e-composição"><span class="header-section-number">7.0.1.1</span> A Herança UNIX: Simplicidade, Ortogonalidade e Composição</h4>
@@ -408,7 +408,7 @@ CreateProcess(..., &amp;si2, ...);</code></pre>
     }
     close(client);
 }</code></pre>
-<p>O <strong>Modelo Windows</strong> favorece arquiteturas baseadas em <code>threads</code> ou <code>E/s</code> assíncrono:</p>
+<p>O <strong>Modelo Windows</strong> favorece arquiteturas baseadas em <code>threads</code> ou <code>E/S</code> assíncrono:</p>
 <pre class="pseudocode"><code>// Criar novo processo por requisição
 // Preferência por thread pools ou completion ports
 HANDLE completionPort = CreateIoCompletionPort(...);
@@ -2171,8 +2171,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./gerproc2.html" class="pagination-link" aria-label="Processos de Sistema: **Linux** vs. Windows">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: <strong>Linux</strong> vs.&nbsp;Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./gerproc2.html" class="pagination-link" aria-label="Processos de Sistema: Linux vs. Windows">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
