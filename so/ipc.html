@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicações entre Processos - Andy Wang</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            overflow: hidden;
+        }
+        
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 60px;
+            position: relative;
+            background: white;
+            overflow-y: auto;
+        }
+        
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        h1, h2 {
+            color: #0066cc;
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-align: left;
+            border-bottom: 5px solid orange;
+        }
+        
+        h3 {
+            color: #0066cc;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        
+        p, li {
+            color: black;
+            font-size: 1.8em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            margin-left: 40px;
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        .item{font-size: 1.2em !important;
+        color:#0066cc}
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #0052a3;
+        }
+        
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        code {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            display: block;
+            margin: 20px 0;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        
+        svg {
+            max-width: 80%;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .title-slide {
+            text-align: center;
+        }
+        
+        .title-slide h1 {
+            font-size: 4em;
+            margin-bottom: 40px;
+        }
+        
+        .title-slide p {
+            font-size: 2.5em;
+        }
+        .author {
+           position: fixed;
+           bottom: 6px;
+           left: 50%;
+           transform: translateX(-50%);
+           display: flex;
+           gap: 20px;
+           z-index: 1000;
+           color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-number">
+        <span id="current-slide">1</span> / <span id="total-slides">76</span>
+    </div>
+    
+    <div class="navigation">
+        <button id="prev-btn" onclick="previousSlide()">Anterior</button>
+        <button id="restart-btn" onclick="restartPresentation()">Reiniciar</button>
+        <button id="next-btn" onclick="nextSlide()">Próximo</button>
+        
+    </div>
+    
+    <div class="author">Frank Coelho de Alcantara</div>
+    
+    <!-- Slide 1 -->
+    <div class="slide active title-slide">
+        <h1>Comunicações entre Processos</h1>
+        <p>Frank Coelho de Alcantara</p>
+        <p>2025 -2</p>
+        <p>Sistemas Computacionais</p>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+        <h2>Sumário</h2>
+        <ul>
+            <li>Fundamentos de IPC</li>
+            <li>Sockets</li>
+            <li>Chamada de procedimento remoto</li>
+            <li>Memória compartilhada e grandes espaços de memória</li>
+            <li>IPC no Windows NT</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+        <h2>Fundamentos de IPC</h2>
+        <h3>O que é IPC?</h3>
+        <p>Mecanismos para transferir dados entre processos. <b>I</b>nter<b>P</b>rocess <b>C</b>ommunication (<b>IPC</b>) refere-se a uma variedade de métodos que permitem que processos diferentes se comuniquem e sincronizem suas ações.</p>
+        <h3>Por que é necessário?</h3>
+        <p>Nem todos os procedimentos podem ser facilmente construídos em um único processo.</p>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+        <h2>Por que os processos se comunicam?</h2>
+        <ul>
+            <li>Para compartilhar recursos.</li>
+            <li>Paradigmas cliente/servidor.</li>
+            <li>Aplicações inerentemente distribuídas.</li>
+            <li>Componentes de software reutilizáveis.</li>
+            <li>Outras boas razões de engenharia de software.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide">
+        <h2>O Conceito Básico de IPC</h2>
+        <ul>
+            <li>Um processo precisa enviar dados para um processo receptor.</li>
+            <li>O emissor quer evitar detalhes da condição do receptor.</li>
+            <li>O receptor quer receber os dados de forma organizada.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide">
+        <h2>Comunicação entre Processos por meio  do Sistema Operacional</h2>
+        <svg viewBox="0 0 800 400">
+            <!-- Processo A -->
+            <rect x="50" y="100" width="200" height="200" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="150" y="80" text-anchor="middle" font-size="20" fill="#0066cc">Processo A</text>
+            <text x="150" y="200" text-anchor="middle" font-size="16">Espaço de endereçamento</text>
+            <text x="150" y="220" text-anchor="middle" font-size="16">privado</text>
+            
+            <!-- <b>SO</b> -->
+            <rect x="300" y="150" width="200" height="100" fill="#ffe6e6" stroke="#cc0000" stroke-width="2"/>
+            <text x="400" y="200" text-anchor="middle" font-size="18">Esp. de endereçamento</text>
+            <text x="400" y="220" text-anchor="middle" font-size="18">do SO</text>
+            
+            <!-- Processo B -->
+            <rect x="550" y="100" width="200" height="200" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="650" y="80" text-anchor="middle" font-size="20" fill="#0066cc">Processo B</text>
+            <text x="650" y="200" text-anchor="middle" font-size="16">Espaço de endereçamento</text>
+            <text x="650" y="220" text-anchor="middle" font-size="16">privado</text>
+            
+            <!-- Setas -->
+            <path d="M 250 200 L 300 200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <path d="M 500 200 L 550 200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide">
+        <h2>Problema Fundamental de IPC</h2>
+        <ul>
+            <li>Cada processo tem um espaço de endereço privado.</li>
+            <li>Normalmente, nenhum processo pode escrever no espaço de outro processo.</li>
+            <li>Como levar dados importantes do processo <b>A</b> para o processo <b>B</b>?</li>
+        </ul>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide">
+        <h2>Soluções do Sistema Operacional ( <b>SO</b> )</h2>
+        <p><strong>Fundamentalmente, duas opções:</strong></p>
+        <ul>
+            <li><strong>Suportar uma forma de espaço de endereço compartilhado.</strong>
+                <ul><li class="item">Memória compartilhada.</li></ul>
+            </li>
+            <li><strong>Usar mecanismos do <b>SO</b> para transportar dados de um espaço de endereço para outro</strong>
+                <ul><li class="item">Arquivos, mensagens, <i>pipes</i>, <b>R</b>emote <b>P</b>rocedure <b>C</b>all (<b>RPC</b>)</li></ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide">
+        <h2>Diferenças Fundamentais no Tratamento do <b>SO</b> para Soluções de IPC</h2>
+        <h3>Memória compartilhada:</h3>
+        <ul>
+            <li>O <b>SO</b> cria e configura o espaço necessário;</li>
+            <li>Eventualmente cabe ao <b>SO</b> gerenciar a sincronização;</li>
+            <li>Nunca é responsabilidade do <b>SO</b> transportar dados.</li>
+        </ul>
+        <h3>Nas outras formas:</h3>
+        <ul>
+            <li>O <b>SO</b> está envolvido em cada <b>IPC</b>;</li>
+            <li>O <b>SO</b> transporta os dados.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide">
+        <h2>Comunicação Entre Processos Ideal</h2>
+        <ul>
+            <li>Rápida;</li>
+            <li>Fácil de usar;</li>
+            <li>Modelo de sincronização bem definido;</li>
+            <li>Versátil;</li>
+            <li>Fácil de implementar;</li>
+            <li>Funciona remotamente.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 11 -->
+    <div class="slide">
+        <h2>Sincronização</h2>
+        <p>Com processos concorrentes, a sincronização é uma grande preocupação para o <b>IPC</b>.</p>
+        <ul>
+            <li>Permitir que o emissor indique quando os dados são transmitidos.</li>
+            <li>Permitir que o receptor saiba quando os dados estão prontos.</li>
+            <li>Permitir que ambos saibam quando mais <b>IPC</b> é possível.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 12 -->
+    <div class="slide">
+        <h2>IPC e Conexões</h2>
+        <p>Mecanismos de <b>IPC</b> podem ser sem conexão ou requerer conexão</p>
+        <ul>
+            <li>Mecanismos de <b>IPC</b> sem conexão não requerem configuração preliminar.</li>
+            <li>Mecanismos de <b>IPC</b> com conexão requerem negociação e configuração antes que os dados fluam.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 13 -->
+    <div class="slide">
+        <h2>Sem Conexão</h2>
+        <ul>
+            <li>Os dados simplesmente fluem.</li>
+            <li>Normalmente, nenhuma estrutura de dados permanente é compartilhada no <b>SO</b> pelo emissor e receptor.</li>
+            <li class="item" style="font-size:1.8em !important;"><strong>+</strong> Bom para comunicação rápida e curta.</li>
+            <li class="item" style="font-size:1.8em !important;"><strong>-</strong> Menos eficiente para comunicações grandes e frequentes.</li>
+            <li>Cada comunicação consome mais recursos do <b>SO</b> por byte.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 14 -->
+    <div class="slide">
+        <h2>Orientado à Conexão</h2>
+        <ul>
+            <li>Emissor e receptor negociam os detalhes da entrega da comunicação.</li>
+            <li>O <b>SO</b> normalmente salva informações relacionadas ao <b>IPC</b> para eles.</li>
+            <li>Prós/contras são praticamente os opostos do <b>IPC</b> sem conexão.</li>
+            <li class="item" style="font-size:1.8em !important;"><strong>-</strong> Menos eficiente para comunicação rápida e curta.</li>
+            <li class="item" style="font-size:1.8em !important;"><strong>+</strong> Bom para comunicações grandes e frequentes.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 15 -->
+    <div class="slide">
+        <h2>Mecanismos Básicos de <b>IPC</b></h2>
+        <ul>
+            <li>Sistema de arquivos.</li>
+            <li>Baseado em mensagens.</li>
+            <li>Chamada de procedimento.</li>
+            <li>Memória compartilhada.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 16 -->
+    <div class="slide">
+        <h2>IPC por meio  do Sistema de Arquivos</h2>
+        <ul>
+            <li>O emissor escreve em um arquivo.</li>
+            <li>O receptor lê dele.</li>
+            <li>Mas quando o receptor faz a leitura?</li>
+            <li>Muitas vezes sincronizado com bloqueio de arquivo ou arquivos de bloqueio.</li>
+            <li>Tipos especiais de arquivos podem facilitar o <b>IPC</b> baseado em arquivos.</li>
+            <ul>
+                <li class="item" style="font-size:1.8em !important;">Exemplo: FIFO (<i>First In, First Out</i>) ou pipes nomeados.</li>
+                <li class="item" style="font-size:1.8em !important;">Exemplo: Arquivos Mapeados em Memória (<i>Memory-Mapped Files</i>).</li>
+                <li class="item" style="font-size:1.8em !important;">Exemplo: Sockets.</li>
+            </ul>
+        </ul>
+    </div>
+
+    <!-- Slide 17 -->
+    <div class="slide">
+        <h2>Diagrama de <b>IPC</b> via Arquivo</h2>
+        <svg viewBox="0 0 800 400">
+            <!-- Processo A -->
+            <rect x="50" y="150" width="150" height="100" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="125" y="200" text-anchor="middle" font-size="20" fill="#0066cc">Processo A</text>
+            
+            <!-- Arquivo -->
+            <rect x="325" y="150" width="150" height="100" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+            <text x="400" y="200" text-anchor="middle" font-size="20">Dados</text>
+            
+            <!-- Processo B -->
+            <rect x="600" y="150" width="150" height="100" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="675" y="200" text-anchor="middle" font-size="20" fill="#0066cc">Processo B</text>
+            
+            <!-- Setas -->
+            <path d="M 200 200 L 325 200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead2)"/>
+            <text x="262" y="190" text-anchor="middle" font-size="14">escrever</text>
+            
+            <path d="M 475 200 L 600 200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead2)"/>
+            <text x="537" y="190" text-anchor="middle" font-size="14">ler</text>
+            
+            <defs>
+                <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Slide 18 -->
+    <div class="slide">
+        <h2>IPC Baseado em Mensagens</h2>
+        <ul>
+            <li>O emissor formata os dados em uma mensagem formal.</li>
+            <li>Com alguma forma de endereço para o receptor.</li>
+            <li>O <b>SO</b> entrega a mensagem na fila de entrada de mensagens do receptor (pode sinalizar também).</li>
+            <li>O receptor (quando pronto) lê uma mensagem da fila.</li>
+            <li>O emissor pode ou não bloquear.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 19 -->
+    <div class="slide">
+        <h2>Diagrama de <b>IPC</b> Baseado em Mensagens</h2>
+        <svg viewBox="0 0 800 500">
+            <!-- Processo A -->
+            <rect x="50" y="200" width="150" height="100" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="125" y="250" text-anchor="middle" font-size="20" fill="#0066cc">Processo A</text>
+            
+            <!-- <b>SO</b> -->
+            <rect x="325" y="200" width="150" height="100" fill="#ffe6e6" stroke="#cc0000" stroke-width="2"/>
+            <text x="400" y="250" text-anchor="middle" font-size="20">SO</text>
+            
+            <!-- Processo B -->
+            <rect x="600" y="200" width="150" height="100" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="675" y="250" text-anchor="middle" font-size="20" fill="#0066cc">Processo B</text>
+            
+            <!-- Fila de mensagens -->
+            <rect x="580" y="350" width="190" height="60" fill="#f0f0f0" stroke="#666" stroke-width="2"/>
+            <text x="675" y="385" text-anchor="middle" font-size="16">Fila de mensagens de B</text>
+            
+            <!-- Setas -->
+            <path d="M 200 250 L 325 250" stroke="#333" stroke-width="2" marker-end="url(#arrowhead3)"/>
+            <path d="M 475 250 L 600 250" stroke="#333" stroke-width="2" marker-end="url(#arrowhead3)"/>
+            <path d="M 675 300 L 675 350" stroke="#333" stroke-width="2" marker-end="url(#arrowhead3)"/>
+
+            <text x="400" y="180" text-anchor="middle" font-size="18">Dados enviados de Processo A para Processo B</text>
+
+            <defs>
+                <marker id="arrowhead3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Slide 20 -->
+    <div class="slide">
+        <h2>IPC por Chamada de Procedimento</h2>
+        <ul>
+            <li>Usa a mesma interface de chamada de procedimento que a intraprocesso.</li>
+            <li>Dados passados como parâmetros.</li>
+            <li>Informações retornadas via valores de retorno.</li>
+            <li>Complicado, pois o procedimento de destino está em um espaço de endereço diferente.</li>
+            <li>Geralmente, o procedimento chamador bloqueia até a chamada retornar.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 21 -->
+    <div class="slide">
+        <h2>Diagrama de <b>IPC</b> por Chamada de Procedimento</h2>
+        <svg viewBox="0 0 800 500">
+            <!-- Processo A -->
+            <rect x="50" y="150" width="200" height="250" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="150" y="130" text-anchor="middle" font-size="20" fill="#0066cc">Processo A</text>
+            <text x="150" y="200" text-anchor="middle" font-size="14" font-family="monospace">main () {</text>
+            <text x="150" y="220" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            <text x="150" y="260" text-anchor="middle" font-size="14" font-family="monospace">call();</text>
+            <text x="150" y="280" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            <text x="150" y="320" text-anchor="middle" font-size="14" font-family="monospace">}</text>
+            
+            <!-- Processo B -->
+            <rect x="550" y="150" width="200" height="250" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="650" y="130" text-anchor="middle" font-size="20" fill="#0066cc">Processo B</text>
+            <text x="650" y="220" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            <text x="650" y="260" text-anchor="middle" font-size="14" font-family="monospace">server();</text>
+            <text x="650" y="280" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            
+            <!-- Setas -->
+            <path d="M 250 260 L 550 260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead4)"/>
+            <text x="400" y="250" text-anchor="middle" font-size="14">Dados como parâmetros</text>
+            
+            <path d="M 550 320 L 250 320" stroke="#333" stroke-width="2" marker-end="url(#arrowhead4)"/>
+            <text x="400" y="340" text-anchor="middle" font-size="14">Dados como valores de retorno</text>
+            
+            <defs>
+                <marker id="arrowhead4" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Slide 22 -->
+    <div class="slide">
+        <h2>IPC por Memória Compartilhada</h2>
+        <ul>
+            <li>Processos diferentes compartilham uma área de memória.</li>
+            <li>Seja física ou virtualmente.</li>
+            <li>Comunicações via leituras/escritas normais.</li>
+            <li>Pode precisar de <i>sincronização</i> com semáforos ou bloqueios.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 23 -->
+    <div class="slide">
+        <h2>Diagrama de <b>IPC</b> por Memória Compartilhada</h2>
+        <svg viewBox="0 0 800 500">
+            <!-- Processo A -->
+            <rect x="50" y="150" width="200" height="250" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="150" y="130" text-anchor="middle" font-size="20" fill="#0066cc">Processo A</text>
+            <text x="150" y="200" text-anchor="middle" font-size="14" font-family="monospace">main () {</text>
+            <text x="150" y="220" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            <text x="150" y="260" text-anchor="middle" font-size="14" font-family="monospace">x = 10;</text>
+            <text x="150" y="280" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            <text x="150" y="320" text-anchor="middle" font-size="14" font-family="monospace">}</text>
+            
+            <!-- Memória Compartilhada -->
+            <rect x="325" y="225" width="150" height="100" fill="#ffffe0" stroke="#ffd700" stroke-width="2"/>
+            <text x="400" y="275" text-anchor="middle" font-size="20">x: 10</text>
+            
+            <!-- Processo B -->
+            <rect x="550" y="150" width="200" height="250" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="650" y="130" text-anchor="middle" font-size="20" fill="#0066cc">Processo B</text>
+            <text x="650" y="220" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            <text x="650" y="260" text-anchor="middle" font-size="14" font-family="monospace">print(x);</text>
+            <text x="650" y="280" text-anchor="middle" font-size="14" font-family="monospace">...</text>
+            
+            <!-- Setas -->
+            <path d="M 250 260 L 325 260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead5)"/>
+            <text x="287" y="250" text-anchor="middle" font-size="12">escrever</text>
+            
+            <path d="M 475 260 L 550 260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead5)"/>
+            <text x="512" y="250" text-anchor="middle" font-size="12">ler</text>
+            
+            <defs>
+                <marker id="arrowhead5" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Slide 24 -->
+    <div class="slide">
+        <h2>Sincronização em IPC</h2>
+        <p>Como os processos de envio e recebimento sincronizam suas comunicações?</p>
+        <ul>
+            <li>Muitas possibilidades.</li>
+            <li>Baseado em qual processo bloqueia e quando.</li>
+            <li>Exemplos a seguir em contexto de mensagem, mas aplicáveis de forma mais geral.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 25 -->
+    <div class="slide">
+        <h2>Envio Bloqueante, Recebimento Bloqueante</h2>
+        <ul>
+            <li>Tanto o emissor quanto o receptor bloqueiam.</li>
+            <li>O emissor bloqueia até que o receptor receba.</li>
+            <li>O receptor bloqueia até que o emissor envie.</li>
+            <li>Muitas vezes chamado de encontro de mensagens (rendezvous).</li>
+        </ul>
+    </div>
+
+    <!-- Slide 26 -->
+    <div class="slide">
+        <h2>Envio Não Bloqueante, Recebimento Bloqueante</h2>
+        <ul>
+            <li>O emissor emite o envio, pode prosseguir sem esperar para descobrir o destino da mensagem.</li>
+            <li>O receptor espera a chegada da mensagem antes de prosseguir.</li>
+            <li>Essencialmente, o receptor é orientado a mensagens.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 27 -->
+    <div class="slide">
+        <h2>Envio Não Bloqueante, Recebimento Não Bloqueante</h2>
+        <ul>
+            <li>Nenhuma das partes bloqueia.</li>
+            <li>O emissor prossegue após enviar a mensagem.</li>
+            <li>O receptor trabalha até a mensagem chegar.</li>
+            <li>Ou o receptor verifica periodicamente de forma não bloqueante.</li>
+            <li>Ou alguma forma de interrupção é entregue.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 28 -->
+    <div class="slide">
+        <h2>Endereçamento em IPC</h2>
+        <p>Como o emissor especifica para onde os dados vão?</p>
+        <ul>
+            <li>Em alguns casos, o mecanismo torna isso explícito (ex., memória compartilhada e <b>RPC</b>).</li>
+            <li>Em outros, existem opções.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 29 -->
+    <div class="slide">
+        <h2>Endereçamento Direto</h2>
+        <ul>
+            <li>O emissor especifica o nome do processo receptor.</li>
+            <li>Usando alguma forma de nome de processo único.</li>
+            <li>O receptor pode especificar o nome do emissor esperado.</li>
+            <li>Ou aceitar dados de qualquer um.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 30 -->
+    <div class="slide">
+        <h2>Endereçamento Indireto</h2>
+        <ul>
+            <li>Os dados são enviados para filas, caixas de correio ou alguma outra forma de estrutura de dados compartilhada.</li>
+            <li>O receptor realiza alguma forma de operações de leitura nessa estrutura.</li>
+            <li>Muito mais flexível que o endereçamento direto.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 31 -->
+    <div class="slide">
+        <h2>Dualidade nos Mecanismos de IPC</h2>
+        <ul>
+            <li>Muitos aspectos dos mecanismos de <b>IPC</b> são duais entre si.</li>
+            <li>Esses mecanismos têm o mesmo poder:
+                <ul><li class="item">Reconhecido pela primeira vez no contexto de mensagens vs. chamadas de procedimento</li></ul>
+            </li>
+            <li>Mecanismos de <b>IPC</b> podem ser simulados uns pelos outros.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 32 -->
+    <div class="slide">
+        <h2>Então, qual mecanismo de <b>IPC</b> construir/escolher/usar?</h2>
+        <ul>
+            <li>Depende do modelo de computação.</li>
+            <li>E da filosofia do usuário.</li>
+            <li>Em casos particulares, o hardware ou o software existente pode fazer um tipo ter um desempenho melhor.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 33 -->
+    <div class="slide">
+        <h2>Mecanismos Típicos de <b>IPC</b> no linux</h2>
+        <p>Diferentes versões do UNIX introduziram diferentes mecanismos de IPC</p>
+        <ul>
+            <li>Pipes</li>
+            <li>Filas de mensagens</li>
+            <li>Semáforos</li>
+            <li>Memória compartilhada</li>
+            <li>Sockets</li>
+            <li>RPC</li>
+        </ul>
+    </div>
+
+    <!-- Slide 34 -->
+    <div class="slide">
+        <h2>Pipes</h2>
+        <ul>
+            <li>Único mecanismo de <b>IPC</b> nos primeiros sistemas UNIX (além de arquivos)</li>
+            <li>Unidirecional</li>
+            <li>Não formatado</li>
+            <li>Fluxos de bytes entre processos</li>
+            <li>Acessado de maneira semelhante a arquivos</li>
+            <li><b>Origem</b>: Um dos mecanismos mais antigos e clássicos do UNIX.</li>
+            <li><b>Função</b>: Criam um canal de comunicação unidirecional. O que um processo escreve em uma ponta, o outro lê na outra.
+                São muito usados na linha de comando para encadear programas (ex: ls -l | grep .txt). Existem também os Pipes
+                Nominais (FIFOs), que têm um nome no sistema de arquivos e permitem a comunicação entre processos não relacionados.
+            </li>
+        </ul>
+    </div>
+
+    <!-- Slide 35 -->
+    <div class="slide">
+        <h2>Detalhes do Pipe</h2>
+        <ul>
+            <li>Um processo alimenta bytes no pipe</li>
+            <li>Um segundo processo lê os bytes dele</li>
+            <li>Mecanismo de comunicação potencialmente bloqueante</li>
+            <li>Requer cooperação estreita entre processos para configurar</li>
+            <li>Pipes nomeados permitem mais flexibilidade</li>
+        </ul>
+    </div>
+
+    <!-- Slide 36 -->
+    <div class="slide">
+        <h2>Pipes e Bloqueio</h2>
+        <ul>
+            <li>Escrever mais bytes do que a capacidade do pipe bloqueia o emissor
+                <ul><li class="item">Até que o receptor leia alguns deles</li></ul>
+            </li>
+            <li>Ler bytes quando não há nenhum disponível bloqueia o receptor
+                <ul><li class="item">Até que o emissor escreva alguns</li></ul>
+            </li>
+            <li>Um único pipe com capacidade limitada não pode causar deadlock</li>
+        </ul>
+    </div>
+
+    <!-- Slide 37 -->
+    <div class="slide">
+        <h2>Filas de Mensagens UNIX</h2>
+        <ul>
+            <li>Introduzido no UNIX System V Release 3</li>
+            <li>Como pipes, mas os dados são organizados em mensagens</li>
+            <li>Componentes da mensagem incluem:
+                <ul>
+                    <li class="item">Identificador de tipo</li>
+                    <li class="item">Comprimento</li>
+                    <li class="item">Dados</li>
+                </ul>
+            </li>
+            <li><b>Origem</b>: Parte do conjunto de ferramentas de IPC do UNIX System V (SysV IPC).</li>
+            <li><b>Função</b>: Permitem que processos troquem "pacotes" de dados (mensagens) de forma estruturada. Um processo envia uma
+                mensagem para uma fila, e outro processo pode lê-la posteriormente. Diferente dos pipes, não exigem que os processos
+                estejam rodando ao mesmo tempo.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 38 -->
+    <div class="slide">
+        <h2>Semáforos</h2>
+        <ul>
+            <li>Também introduzido no UNIX System V Release 3</li>
+            <li>Principalmente apenas para sincronização</li>
+            <li>Já que eles comunicam apenas um bit de informação</li>
+            <li>Frequentemente usado em conjunto com memória compartilhada</li>
+            <li><b>Origem</b>: Também do SysV IPC.</li>
+            <li><b>Função</b>: Não são usados para trocar dados, mas sim para sincronização. Eles funcionam como um "sinal de trânsito" ou
+                um contador que controla o acesso a um recurso compartilhado. Por exemplo, um semáforo pode garantir que apenas um
+                processo por vez escreva em uma área de memória compartilhada, evitando corrupção de dados.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 39 -->
+    <div class="slide">
+        <h2>Memória Compartilhada UNIX</h2>
+        <ul>
+            <li>Também introduzida no System V Release 3</li>
+            <li>Permite que dois ou mais processos compartilhem alguns segmentos de memória</li>
+            <li>Com algum controle sobre as permissões de leitura/escrita</li>
+            <li>Frequentemente usada para implementar pacotes de threads para UNIX</li>
+            <li><b>Origem</b>: Outro componente do SysV IPC.</li>
+            <li><b>Função</b>: É o método de IPC mais rápido de todos. O sistema operacional mapeia um mesmo segmento de memória física nos
+                espaços de endereço virtuais de múltiplos processos. Assim, quando um processo escreve nessa memória, a alteração é
+                instantaneamente visível para todos os outros. Exige o uso de semáforos ou outros mecanismos de sincronização para
+                ser usada com segurança.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 40 -->
+    <div class="slide">
+        <h2>Sockets</h2>
+        <ul>
+            <li>Introduzido no 4.3 BSD</li>
+            <li>Um socket é um canal de <b>IPC</b> com pontos de extremidade gerados</li>
+            <li>Destinado a ser um bloco de construção para comunicação</li>
+            <li>Pontos de extremidade estabelecidos pelos processos de <b>Origem</b> e destino</li>
+            <li><b>Origem</b>: Introduzidos no BSD (Berkeley Software Distribution) UNIX.</li>
+            <li><b>Função</b>: São a base para toda a comunicação em rede. Permitem a comunicação bidirecional entre processos, que podem
+                estar na mesma máquina (através dos Unix Domain Sockets, que são muito eficientes) ou em máquinas diferentes em uma
+                rede (usando protocolos como TCP/IP). São extremamente flexíveis.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 41 -->
+    <div class="slide">
+        <h2>Remote Procedure Calls (RPC)</h2>
+        <ul>
+            <li>Chamadas de procedimento de um espaço de endereço para outro</li>
+            <li>Na mesma máquina ou em máquinas diferentes. Requer cooperação de ambos os processos</li>
+            <li>No UNIX, geralmente construído sobre sockets. Frequentemente usado em computação cliente/servidor</li>
+            <li><b>Origem</b>: Desenvolvido por várias empresas, mas popularizado pelo Sun Microsystems (agora Oracle).</li>
+            <li><b>Função</b>: Como discutimos antes, este é um modelo de comunicação de alto nível, não um mecanismo primitivo do kernel.
+                Uma implementação de RPC utiliza outro mecanismo de IPC por baixo, quase sempre sockets, para realizar a
+                comunicação. Sua grande vantagem é a abstração: ele esconde a complexidade da rede e faz a comunicação entre
+                processos parecer uma simples chamada de função.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 42 -->
+    <div class="slide">
+        <h2>Chamada de Procedimento Remoto</h2>
+        <ul>
+            <li>Método de chamar procedimentos em outros espaços de endereço</li>
+            <li>Seja na mesma máquina</li>
+            <li>Ou em outras máquinas</li>
+            <li>Tenta fornecer uma interface exatamente como a chamada de procedimento local</li>
+            <li>Modelo de comunicação de requisição/resposta</li>
+        </ul>
+    </div>
+
+    <!-- Slide 43 -->
+    <div class="slide">
+        <h2>Semântica de RPC</h2>
+        <p>Semelhante à chamada de procedimento regular</p>
+        <ol>
+            <li>O procedimento chamador bloqueia</li>
+            <li>Parâmetros são transferidos para o procedimento chamado</li>
+            <li>O procedimento chamado computa até retornar</li>
+            <li>O valor de retorno é entregue ao procedimento chamador</li>
+            <li>O procedimento chamador continua</li>
+        </ol>
+    </div>
+
+    <!-- Slide 44 -->
+    <div class="slide">
+        <h2>Mecânica de Alto Nível de RPC</h2>
+        <ul>
+            <li>Esconder detalhes das aplicações</li>
+            <li>Clientes passam requisições para programas stub</li>
+            <li>O stub do lado do cliente envia a requisição para o stub do servidor</li>
+            <li>O stub do lado do servidor chama o servidor de nível de usuário</li>
+            <li>Os resultados viajam na direção inversa</li>
+            <li>O transporte de rede ou o <b>SO</b> realmente movem os dados</li>
+        </ul>
+    </div>
+
+    <!-- Slide 45 -->
+    <div class="slide">
+        <h2>Diagrama de RPC em Ação</h2>
+        <svg viewBox="0 0 800 600">
+            <!-- Cliente -->
+            <rect x="100" y="50" width="200" height="80" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="200" y="95" text-anchor="middle" font-size="18">Cliente (chamador)</text>
+            
+            <!-- Servidor -->
+            <rect x="500" y="50" width="200" height="80" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="600" y="95" text-anchor="middle" font-size="18">Servidor (chamado)</text>
+            
+            <!-- Stub Cliente -->
+            <rect x="100" y="200" width="200" height="80" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+            <text x="200" y="245" text-anchor="middle" font-size="18">Stub do cliente</text>
+            
+            <!-- Stub Servidor -->
+            <rect x="500" y="200" width="200" height="80" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+            <text x="600" y="245" text-anchor="middle" font-size="18">Stub do servidor</text>
+            
+            <!-- SO/Rede -->
+            <rect x="250" y="380" width="300" height="80" fill="#ffe6e6" stroke="#cc0000" stroke-width="2"/>
+            <text x="400" y="425" text-anchor="middle" font-size="18">SO ou Rede</text>
+            
+            <!-- Setas -->
+            <path d="M 200 130 L 200 200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead6)"/>
+            <text x="150" y="165" font-size="14">chamar</text>
+            
+            <path d="M 200 280 L 350 380" stroke="#333" stroke-width="2" marker-end="url(#arrowhead6)"/>
+            
+            <path d="M 450 380 L 600 280" stroke="#333" stroke-width="2" marker-end="url(#arrowhead6)"/>
+            
+            <path d="M 600 200 L 600 130" stroke="#333" stroke-width="2" marker-end="url(#arrowhead6)"/>
+            <text x="650" y="165" font-size="14">chamar</text>
+            
+            <!-- Retorno -->
+            <path d="M 600 130 L 600 200" stroke="#666" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead6)"/>
+            <text x="520" y="165" font-size="14">responder</text>
+            
+            <path d="M 600 280 L 450 380" stroke="#666" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead6)"/>
+            
+            <path d="M 350 380 L 200 280" stroke="#666" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead6)"/>
+            
+            <path d="M 200 200 L 200 130" stroke="#666" stroke-width="2" stroke-dasharray="5,5" marker-end="url(#arrowhead6)"/>
+            <text x="250" y="165" font-size="14">responder</text>
+            
+            <defs>
+                <marker id="arrowhead6" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Slide 46 -->
+    <div class="slide">
+        <h2>O que os stubs fazem?</h2>
+        <p>Stubs lidam com detalhes complexos como:</p>
+        <ul>
+            <li>Empacotamento de argumentos (<i>Marshaling</i>).</li>
+            <li>Construção de mensagens.</li>
+            <li>Tradução de formato de dados.</li>
+            <li>Encontrar o processo do servidor.</li>
+        </ul>
+    </div>
+
+    <!-- Slide 47 -->
+    <div class="slide">
+        <h2>Usando RPC</h2>
+        <ul>
+            <li>Uma vez vinculado, como o cliente usa o RPC?</li>
+            <li>Apenas chame as rotinas</li>
+            <li>Como se fossem locais</li>
+            <li>E os resultados voltam</li>
+        </ul>
+    </div>
+
+    <!-- Slide 48 -->
+    <div class="slide">
+        <h2>O que está acontecendo por baixo dos panos?</h2>
+        <ul>
+            <li>Quando um cliente chama uma rotina remota, ele realmente chama um programa stub local</li>
+            <li>O programa stub empacota a requisição para o servidor remoto</li>
+            <li>E a envia para o código de transporte local</li>
+            <li>Quando a resposta chega, o código de transporte local retorna os resultados para o stub</li>
+            <li>Que retorna para o programa cliente</li>
+        </ul>
+    </div>
+
+    <!-- Slide 49 -->
+    <div class="slide">
+        <h2>O que acontece no lado do servidor?</h2>
+        <ul>
+            <li>Uma requisição chega ao código de transporte do RPC</li>
+            <li>Ele a roteia para o stub do servidor apropriado</li>
+            <li>Que a converte em uma chamada de procedimento local</li>
+            <li>Que é feita dentro do contexto do servidor</li>
+        </ul>
+    </div>
+
+    <!-- Slide 50 -->
+    <div class="slide">
+        <h2>Diagrama Conceitual de RPC</h2>
+        <svg viewBox="0 0 800 700">
+            <!-- Fluxograma -->
+            <rect x="250" y="50" width="300" height="60" fill="#e6f2ff" stroke="#0066cc" stroke-width="2" rx="10"/>
+            <text x="400" y="85" text-anchor="middle" font-size="16" font-family="monospace">call_procedure();</text>
+            
+            <path d="M 400 110 L 400 150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead7)"/>
+            
+            <rect x="200" y="150" width="400" height="60" fill="#fff3cd" stroke="#ffc107" stroke-width="2" rx="10"/>
+            <text x="400" y="175" text-anchor="middle" font-size="14">Mensagem do stub do cliente</text>
+            <text x="400" y="195" text-anchor="middle" font-size="14">para o stub do servidor</text>
+            
+            <path d="M 400 210 L 400 250" stroke="#333" stroke-width="2" marker-end="url(#arrowhead7)"/>
+            
+            <rect x="250" y="250" width="300" height="60" fill="#ffe6e6" stroke="#cc0000" stroke-width="2" rx="10"/>
+            <text x="400" y="285" text-anchor="middle" font-size="16">Transporte de rede</text>
+            
+            <path d="M 400 310 L 400 350" stroke="#333" stroke-width="2" marker-end="url(#arrowhead7)"/>
+            
+            <rect x="200" y="350" width="400" height="60" fill="#fff3cd" stroke="#ffc107" stroke-width="2" rx="10"/>
+            <text x="400" y="375" text-anchor="middle" font-size="14">Mensagem recebida pelo</text>
+            <text x="400" y="395" text-anchor="middle" font-size="14">stub do servidor</text>
+            
+            <path d="M 400 410 L 400 450" stroke="#333" stroke-width="2" marker-end="url(#arrowhead7)"/>
+            
+            <rect x="250" y="450" width="300" height="60" fill="#e6f2ff" stroke="#0066cc" stroke-width="2" rx="10"/>
+            <text x="400" y="485" text-anchor="middle" font-size="16" font-family="monospace">call_procedure();</text>
+            
+            <!-- Retorno -->
+            <path d="m 552.45614,482.45614 126.14035,0 -2.45614,-304.97076 -70.46784,1.63743" stroke="#666666" fill="#ffffff"
+                stroke-width="2" stroke-dasharray="5, 5" marker-end="url(#arrowhead7)" id="path7" sodipodi:nodetypes="cccc"
+                style="fill:none" />
+            <text x="650" y="300" text-anchor="middle" font-size="14" transform="rotate(90 650 300)">Valor de retorno</text>
+            
+            <text x="100" y="85" text-anchor="middle" font-size="14">programa cliente continua</text>
+            
+            <defs>
+                <marker id="arrowhead7" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 50;
+        
+        function showSlide(n) {
+            const slides = document.getElementsByClassName('slide');
+            
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+        }
+        
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+        
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+        
+        function restartPresentation() {
+            currentSlide = 1;
+            showSlide(currentSlide);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') nextSlide();
+            if (event.key === 'ArrowLeft') previousSlide();
+            if (event.key === 'Home') restartPresentation();
+        });
+        
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
