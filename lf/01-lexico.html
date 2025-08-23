@@ -239,20 +239,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
   </div>
 </li>
       </ul>
@@ -269,7 +263,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
       </ul>
@@ -277,13 +271,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -459,11 +453,11 @@ Note
 <p>Em meados da década de 1950, <a href="https://en.wikipedia.org/wiki/George_H._Mealy">G.H. Mealy</a> e <a href="https://en.wikipedia.org/wiki/Edward_F._Moore">E.F. Moore</a>, trabalhando de forma independente, propuseram dois modelos distintos para os Transdutores de Estados Finitos, generalizando a teoria para englobar máquinas muito mais poderosas.</p>
 <p>No seu artigo “Gedanken-experiments on Sequential Machines”<span class="citation" data-cites="Moore1956">(<a href="referencias.html#ref-Moore1956" role="doc-biblioref">5</a>)</span><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, Edward F. Moore introduziu um modelo de transdutor no qual <em>a saída é determinada exclusivamente pelo estado atual</em> da máquina. A função de saída é, portanto, definida como:</p>
 <p><span class="math display">\[\lambda: Q \to \Gamma\]</span></p>
-<p>Esta definição implica que a saída é estável enquanto a máquina permanece em um determinado estado. Isso quer dizer que uma mudança na saída só ocorre quando há uma transição para um novo estado. Em implementações de hardware, isto significa que as saídas são síncronas com as transições de estado, que por sua vez são frequentemente sincronizadas por um sinal de relógio, um <em>clock</em>. Nos diagramas de estado, a saída de uma máquina de Moore é tipicamente associada ao próprio estado, sendo escrita dentro do círculo que o representa. Uma máquina de Moore tende a necessitar de mais estados do que uma máquina de Mealy para realizar a mesma tarefa, pois um estado pode ser necessário apenas para gerar uma saída específica.</p>
+<p>Esta definição implica que a saída é estável enquanto a máquina permanece em um determinado estado. Isso quer dizer que uma mudança na saída só ocorre quando há uma transição para um novo estado. Em implementações de hardware, isto significa que as saídas são síncronas com as transições de estado, que por sua vez são frequentemente sincronizadas por um sinal de relógio, um <em>clock</em>. Nos diagramas de estado, a saída de uma máquina de Moore é tipicamente associada ao próprio estado, sendo escrita dentro do círculo que o representa. Uma máquina de Moore tende a necessitar de mais estados do que uma máquina de Mealy para realizar a mesma tarefa. Neste caso, um estado pode ser necessário apenas para gerar uma saída específica.</p>
 <p>Um ano antes, George H. Mealy, em seu artigo “A Method for Synthesizing Sequential Circuits”<span class="citation" data-cites="Mealy1955">(<a href="referencias.html#ref-Mealy1955" role="doc-biblioref">6</a>)</span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> publicado no <em>Bell System Technical Journal</em>, propôs um modelo alternativo. Em uma máquina de Mealy, a saída depende tanto do <strong>estado atual como da entrada atual</strong>. A função de saída é definida como</p>
 <p><span class="math display">\[\lambda: Q \times \Sigma \to \Gamma\]</span></p>
 <p>Como a saída pode mudar instantaneamente com uma mudança na entrada, mesmo sem uma transição de estado, as saídas de uma máquina de Mealy são consideradas assíncronas. Isto pode permitir uma resposta mais rápida do sistema, mas também introduz a possibilidade de problemas de temporização em circuitos sequenciais. Nos diagramas de estado, a saída é associada à transição, sendo escrita no arco da transição, tipicamente separada da entrada por uma barra (ex.: <code>a/b</code> indica que a máquina transita de um estado a outro com a entrada <code>a</code> e produz a saída <code>b</code>). Esta característica permite que as máquinas de Mealy sejam mais compactas, frequentemente necessitando de menos estados do que a máquina de Moore equivalente.</p>
-<p>A tabela <a href="#tbl-compara2" class="quarto-xref">Table&nbsp;<span>2.1</span></a> resume as diferenças entre os dois modelos.</p>
+<p>A tabela <a href="04-Gramaticas.html#tbl-compara2" class="quarto-xref">Table&nbsp;<span>5.1</span></a> resume as diferenças entre os dois modelos.</p>
 <div id="tbl-compara2" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -542,7 +536,7 @@ Table&nbsp;2.1: Comparação Detalhada entre Máquinas de Moore e Mealy
 <section id="a-construção-do-conjunto-das-partes-powerset-construction" class="level4" data-number="2.1.3.1">
 <h4 data-number="2.1.3.1" class="anchored" data-anchor-id="a-construção-do-conjunto-das-partes-powerset-construction"><span class="header-section-number">2.1.3.1</span> A Construção do Conjunto das Partes (Powerset Construction)</h4>
 <p>A conclusão mais surpreendente e poderosa do artigo de Rabin e Scott é que, apesar de sua aparente flexibilidade e poder acrescido, os Autômatos Finitos Não-Determinísticos não são mais expressivos do que os Autômatos Finitos Determinísticos. Isto é uma forma elegante de dizer que para qualquer Autômato Finito Não-Determinístico, existe um Autômato Finito Determinístico equivalente que reconhece exatamente a mesma linguagem.</p>
-<p>A prova da equivalência entre Autômatos Finitos Não-Determinísticos e Determinísticos, mais uma vez, construtiva, através de um algoritmo conhecido como a <strong>construção do conjunto das partes</strong> (<em>powerset construction</em>). A ideia central desse algoritmo é simular o comportamento paralelo do Autômato Finito Não-Determinístico de forma determinística. Para tanto, cada estado no Autômato Finito Determinístico construído corresponde a um <em>conjunto</em> de estados nos quais o Autômato Finito Não-Determinístico poderia estar em um mesmo momento. O algoritmo da <strong>construção do conjunto das partes</strong> funciona da seguinte forma:</p>
+<p>A prova da equivalência entre Autômatos Finitos Não-Determinísticos e Determinísticos, mais uma vez, construtiva, por meio de um algoritmo conhecido como a <strong>construção do conjunto das partes</strong> (<em>powerset construction</em>). A ideia central desse algoritmo é simular o comportamento paralelo do Autômato Finito Não-Determinístico de forma determinística. Para tanto, cada estado no Autômato Finito Determinístico construído corresponde a um <em>conjunto</em> de estados nos quais o Autômato Finito Não-Determinístico poderia estar em um mesmo momento. O algoritmo da <strong>construção do conjunto das partes</strong> funciona da seguinte forma:</p>
 <ol type="1">
 <li><p><strong>Estado Inicial do Autômato Finito Determinístico</strong>: o estado inicial do Autômato Finito Determinístico (AFD) é o conjunto de todos os estados do Autômato Finito Não-Determinístico que são alcançáveis a partir do estado inicial do Autômato Finito Não-Determinístico usando apenas transições-<span class="math inline">\(\epsilon\)</span>. Este conjunto é conhecido como o <strong>fechamento-<span class="math inline">\(\epsilon\)</span></strong> (<em>epsilon-closure</em>) do estado inicial do Autômato Finito Não-Determinístico.</p></li>
 <li><p><strong>Transições do Autômato Finito Determinístico</strong>: para cada estado do Autômato Finito Determinístico, que corresponde a um conjunto de estados do Autômato Finito Não-Determinístico, e para cada símbolo do alfabeto, a transição do Autômato Finito Determinístico é calculada em duas etapas: primeiro, determina-se o conjunto de todos os estados do Autômato Finito Não-Determinístico que podem ser alcançados a partir do conjunto atual ao ler esse símbolo; segundo, calcula-se o fechamento-<span class="math inline">\(\epsilon\)</span> desse novo conjunto. O resultado é o novo estado do Autômato Finito Determinístico.</p></li>
@@ -552,7 +546,7 @@ Table&nbsp;2.1: Comparação Detalhada entre Máquinas de Moore e Mealy
 <p>A existência da construção do conjunto das partes estabelece uma relação de compromisso (<em>trade-off</em>) entre Autômatos Finitos Não-Determinísticos e Determinísticos, que é de extrema importância na prática da engenharia de compiladores.</p>
 <ul>
 <li><p><strong>Construção e Tamanho</strong>: os Autômatos Finitos Não-Determinísticos são geralmente muito mais fáceis e intuitivos de construir diretamente a partir de uma especificação de uma linguagem, como uma expressão regular. Um Autômato Finito Não-Determinístico para uma dada linguagem é tipicamente muito menor, em termos de número de estados e transições, do que o Autômato Finito Determinístico equivalente. A conversão de um Autômato Finito Não-Determinístico com <span class="math inline">\(n\)</span> estados para um Autômato Finito Determinístico pode, no pior dos casos, resultar em um Autômato Finito Determinístico com até <span class="math inline">\(2^n\)</span> estados, um fenômeno conhecido como <em>explosão de estados</em>.</p></li>
-<li><p><strong>Simulação e Eficiência</strong>: por outro lado, os Autômatos Finitos Determinísticos são muito mais fáceis de simular. Para uma cadeia de entrada de comprimento <span class="math inline">\(k\)</span>, um Autômato Finito Determinístico executa exatamente <span class="math inline">\(k\)</span> transições, resultando em uma execução em tempo linear. A simulação direta de um Autômato Finito Não-Determinístico é mais complexa, pois pode exigir o rastreamento de múltiplos caminhos de computação em paralelo, tornando-a mais lenta.</p></li>
+<li><p><strong>Simulação e Eficiência</strong>: por outro lado, os Autômatos Finitos Determinísticos são muito mais fáceis de simular. Para uma cadeia de entrada de comprimento <span class="math inline">\(k\)</span>, um Autômato Finito Determinístico executa exatamente <span class="math inline">\(k\)</span> transições, resultando em uma execução em tempo linear. A simulação direta de um Autômato Finito Não-Determinístico é mais complexa. Esta simulação pode exigir o rastreamento de múltiplos caminhos de computação em paralelo, tornando-a mais lenta.</p></li>
 </ul>
 <p>A tabela <a href="#tbl-compara1" class="quarto-xref">Table&nbsp;<span>2.2</span></a> resume esses compromissos práticos.</p>
 <div id="tbl-compara1" class="quarto-float anchored">
@@ -617,7 +611,7 @@ Table&nbsp;2.2: Autômato Finito Não-Determinístico vs.&nbsp;Autômato Finito 
 <section id="sec-analisador-lexico" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="sec-analisador-lexico"><span class="header-section-number">2.2</span> Autômatos Finitos: O Analisador Léxico</h2>
 <p>A teoria dos Autômatos Finitos, com suas provas de equivalência e algoritmos de conversão, poderia ter permanecido um tópico de interesse puramente acadêmico. No entanto, encontrou uma aplicação prática tão perfeita na construção de compiladores que se tornou um exemplo de como a teoria fundamental pode transformar a engenharia de software. Esta aplicação é a análise léxica.</p>
-<p>Como eu disse antes, a primeira fase de um compilador é o <strong>analisador léxico</strong>, também conhecido como <em>scanner</em> ou <em>lexer</em>. Sua tarefa é ler um fluxo de caracteres criados a partir do código fonte, e identificar conjuntos significativos de símbolos para uma dada linguagem, os <strong>lexemas</strong>. Para cada lexema, o analisador léxico produzirá um <strong><em>token</em></strong>, que é tipicamente uma estrutura de dados consistindo em uma classe de <em>token</em> (ex.: IDENTIFICADOR, NÚMERO, PALAVRA-CHAVE), o valor do lexema, a cadeia de símbolos real, e a posição do lexema no código fonte. Por exemplo, a linha de código <code>if (i == j)</code> seria transformada em uma sequência de <em>tokens</em> como (IF, “if”, 0, 0), (LPAREN, “(”, 0, 3), (ID, “i”, 0, 4), (EQ, “==”, 0, 6), (ID, “j”, 0, 9), (RPAREN, “)”, 0, 10). O fragmento de código <a href="#lst-lex1" class="quarto-xref">Listing&nbsp;<span>2.1</span></a> ilustra uma estrutura de armazenamento para tokens.</p>
+<p>Como eu disse antes, a primeira fase de um compilador é o <strong>analisador léxico</strong>, também conhecido como <em>scanner</em> ou <em>lexer</em>. Sua tarefa é ler um fluxo de caracteres criados a partir do código fonte, e identificar conjuntos significativos de símbolos para uma dada linguagem, os <strong>lexemas</strong>. Para cada lexema, o analisador léxico produzirá um <strong><em>token</em></strong>, que é tipicamente uma estrutura de dados consistindo em uma classe de <em>token</em> (ex.: IDENTIFICADOR, NÚMERO, PALAVRA-CHAVE), o valor do lexema, a cadeia de símbolos real, e a posição do lexema no código fonte. Por exemplo, a linha de código <code>if (i == j)</code> seria transformada em uma sequência de <em>tokens</em> como (IF, “if”, 0, 0), (LPAREN, “(”, 0, 3), (ID, “i”, 0, 4), (EQ, “==”, 0, 6), (ID, “j”, 0, 9), (RPAREN, “)”, 0, 10). O fragmento de código <a href="#lst-lex1" class="quarto-xref">Listing&nbsp;<span>2.1</span></a> ilustra uma estrutura de armazenamento para <em>tokens</em>.</p>
 <div id="lst-lex1" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-lex1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -667,8 +661,8 @@ Listing&nbsp;2.1
 <span id="lst-lex1-41"><a href="#lst-lex1-41" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">()</span> <span class="op">:</span> tipo<span class="op">(</span>TokenType<span class="op">::</span>INVALID<span class="op">),</span> linha<span class="op">(</span><span class="dv">0</span><span class="op">),</span> posicao<span class="op">(</span><span class="dv">0</span><span class="op">)</span> <span class="op">{}</span></span>
 <span id="lst-lex1-42"><a href="#lst-lex1-42" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="lst-lex1-43"><a href="#lst-lex1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-lex1-44"><a href="#lst-lex1-44" aria-hidden="true" tabindex="-1"></a><span class="co">// Exemplo de array de tokens para o fragmento "if (i == j)"</span></span>
-<span id="lst-lex1-45"><a href="#lst-lex1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span>Token<span class="op">,</span> <span class="dv">6</span><span class="op">&gt;</span> exemplo_tokens <span class="op">=</span> <span class="op">{{</span></span>
+<span id="lst-lex1-44"><a href="#lst-lex1-44" aria-hidden="true" tabindex="-1"></a><span class="co">// Exemplo de array de _tokens_ para o fragmento "if (i == j)"</span></span>
+<span id="lst-lex1-45"><a href="#lst-lex1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>array<span class="op">&lt;</span>Token<span class="op">,</span> <span class="dv">6</span><span class="op">&gt;</span> <span class="va">exemplo__tokens_</span> <span class="op">=</span> <span class="op">{{</span></span>
 <span id="lst-lex1-46"><a href="#lst-lex1-46" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>IF<span class="op">,</span> <span class="st">"if"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">),</span></span>
 <span id="lst-lex1-47"><a href="#lst-lex1-47" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>LPAREN<span class="op">,</span> <span class="st">"("</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">),</span></span>
 <span id="lst-lex1-48"><a href="#lst-lex1-48" aria-hidden="true" tabindex="-1"></a>    Token<span class="op">(</span>TokenType<span class="op">::</span>IDENTIFICADOR<span class="op">,</span> <span class="st">"i"</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">4</span><span class="op">),</span></span>
@@ -720,8 +714,8 @@ Figure&nbsp;2.2
 <p>A amável leitora, ao se deparar com o não-determinismo de um Autômato Finito Não-Determinístico, pode se perguntar sobre outros modelos de computação que exploram múltiplos caminhos. Onde a computação quântica se encaixa nisso?</p>
 <p>A conexão teórica existe nos <strong>Autômatos Finitos Quânticos</strong><span class="citation" data-cites="Tian2019Experimental">(<a href="referencias.html#ref-Tian2019Experimental" role="doc-biblioref">8</a>)</span>. Contudo, é fundamental distinguir os conceitos:</p>
 <ul>
-<li><p><strong>Não-Determinismo Clássico:</strong> a máquina explora múltiplos caminhos computacionais em paralelo. Imagine seguir todas as saídas de um labirinto ao mesmo tempo. A cadeia de entrada é aceita se <em>pelo menos um</em> caminho leva a um estado de aceitação.</p></li>
-<li><p><strong>Paralelismo Quântico:</strong> a máquina evolui em um único estado de <strong>superposição quântica</strong>. Os estados não são caminhos separados, mas sim componentes de um vetor de estado em um espaço de Hilbert complexo. O resultado depende das probabilidades das amplitudes quânticas no momento da medição.</p></li>
+<li><p><strong>Não-Determinismo Clássico</strong>: a máquina explora múltiplos caminhos computacionais em paralelo. Imagine seguir todas as saídas de um labirinto ao mesmo tempo. A cadeia de entrada é aceita se <em>pelo menos um</em> caminho leva a um estado de aceitação.</p></li>
+<li><p><strong>Paralelismo Quântico</strong>: a máquina evolui em um único estado de <strong>superposição quântica</strong>. Os estados não são caminhos separados, mas sim componentes de um vetor de estado em um espaço de Hilbert complexo. O resultado depende das probabilidades das amplitudes quânticas no momento da medição.</p></li>
 </ul>
 <p>Essa distinção leva a uma consequência surpreendente: os modelos mais básicos de Autômatos Finitos Quânticos são, na verdade, <em>menos poderosos</em> que os Autômatos Finitos Não-Determinísticos clássicos. Os modelos quânticos não conseguem reconhecer todas as Linguagens Regulares. A razão está nas restrições da mecânica quântica, como a reversibilidade das operações.</p>
 <p>Onde está a vantagem, então? Na eficiência de estados. Para certas linguagens específicas, um Autômato Finito Quântico pode ser exponencialmente mais compacto que qualquer autômato clássico. O exemplo canônico é a linguagem <span class="math inline">\(L_p = \{a^k \mid k \text{ é múltiplo de } p\}\)</span>, para um <span class="math inline">\(p\)</span> primo. Um <strong>Autômato Finito Determinístico (AFD)</strong> precisa de <span class="math inline">\(p\)</span> estados, enquanto um AFQ pode reconhecer a mesma linguagem com apenas <span class="math inline">\(O(\log p)\)</span> estados.</p>
@@ -730,10 +724,10 @@ Figure&nbsp;2.2
 
 <div id="refs" class="references csl-bib-body" data-entry-spacing="1" role="list" style="display: none">
 <div id="ref-mcculloch1943logical" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">MCCULLOCH, W. S.; PITTS, W. <a href="https://www.cs.cmu.edu/~epxing/Class/10715/reading/McCulloch.and.Pitts.pdf">A logical calculus of the ideas immanent in nervous activity</a>. <strong>The bulletin of mathematical biophysics</strong>, v. 5, n. 4, p. 115–133, 1943. </div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">MCCULLOCH, W. S.; PITTS, W. A logical calculus of the ideas immanent in nervous activity. <strong>The bulletin of mathematical biophysics</strong>, v. 5, n. 4, p. 115–133, 1943. </div>
 </div>
 <div id="ref-kleene1956representation" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">KLEENE, S. C. <a href="https://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf">Representation of events in nerve nets and finite automata</a>. In: SHANNON, C. E.; MCCARTHY, J. (Eds.). <strong>Automata studies</strong>. Annals of mathematics studies. [s.l.] Princeton University Press, 1956. v. 34p. 3–41. </div>
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">KLEENE, S. C. Representation of events in nerve nets and finite automata. <strong>Automata studies</strong>, v. 34, p. 3–41, 1956. </div>
 </div>
 <div id="ref-lesk1975lex" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[3] </div><div class="csl-right-inline">LESK, M. E. <strong><span>Lex – A Lexical Analyzer Generator</span></strong>. Murray Hill, NJ: Bell Laboratories, 1975. </div>

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Parsers LL(1): Começando a Análise Sintática</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <!-- Custom CSS and JS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="common_js.js"></script>
+   </head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#definicao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Definição e Características</a></li>
+                <li class="mb-2"><a href="#recursao-esquerda" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Eliminação da Recursão</a></li>
+                <li class="mb-2"><a href="#elementos-fundamentais" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Elementos Fundamentais</a></li>
+                <li class="mb-2"><a href="#conjuntos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Conjuntos NULLABLE, FIRST e FOLLOW</a></li>
+                <li class="mb-2"><a href="#exemplo-comum" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. O Exemplo Mais Comum</a></li>
+                <li class="mb-2"><a href="#exemplo-booleano" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Exemplo de Expressões Booleanas</a></li>
+                <li class="mb-2"><a href="#conflitos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Conflitos na Tabela de Derivação</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-project-diagram me-2 text-primary"></i><small class="text-primary fw-medium">Análise Preditiva</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-table me-2 text-success"></i><small class="text-success fw-medium">Tabela de Derivação</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-code me-2 text-warning"></i><small class="text-warning fw-medium">Recursão à Esquerda</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-layer-group me-2 text-info"></i><small class="text-info fw-medium">FIRST/FOLLOW</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Parsers LL(1)</em>
+                                    <span class="d-block">Começando a Análise Sintática</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    "Elementar meu caro Watson!" - Do determinismo à construção de compiladores
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">1965</div>
+                            <div class="fs-6 text-muted">Donald Knuth</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">LL(1)</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Left-to-right, Leftmost, 1-lookahead</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-search fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Análise Preditiva</h3>
+                                <p class="fs-7 text-muted">Decisões sem retrocesso</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-table fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Tabela de Derivação</h3>
+                                <p class="fs-7 text-muted">Guia determinístico</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-layer-group fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">FIRST/FOLLOW</h3>
+                                <p class="fs-7 text-muted">Conjuntos fundamentais</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-sitemap fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Top-Down</h3>
+                                <p class="fs-7 text-muted">Análise descendente</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução aos Parsers LL(1)</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Um parser LL(1) é um tipo de analisador sintático descendente que utiliza a análise preditiva para determinar qual regra de produção aplicar em cada etapa da análise. Como um detetive examinando uma cena do crime, ele verifica todos os detalhes de uma string e valida cada item em relação ao contexto definido por uma Tabela de Derivação.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "Elementar meu caro Watson! O trabalho do parser será verificar todos os detalhes de uma cena e validar cada um dos seus itens em relação a um contexto"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Compiladores">Análise Sintática</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Left-to-Right</h3>
+                                <p class="fs-6 text-muted">Varredura da entrada da esquerda para a direita</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-sitemap"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">Leftmost</h3>
+                                <p class="fs-6 text-muted">Derivação mais à esquerda da gramática</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">1-Lookahead</h3>
+                                <p class="fs-6 text-muted">Um símbolo de antecipação para decisões</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Definição e Características -->
+        <section id="definicao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Definição e Características dos Parsers LL(1)</h2>
+                    
+                    <div class="historical-figure mb-5">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-3 text-center">
+                                <div class="icon-badge badge-primary mx-auto" style="width: 80px; height: 80px; font-size: 2rem;">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h4 class="fs-5 fw-semibold mt-3" style="color: var(--copper-800);">1965</h4>
+                                <p class="text-muted">Donald Knuth</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h3 class="fs-4 fw-semibold mb-3" style="color: var(--copper-800);">"On the Translation of Languages from Left to Right"</h3>
+                                <p class="mb-3">Donald Knuth estabeleceu os fundamentos da análise LL(k), posteriormente aprimorada por Alfred Aho e Jeffrey Ullman nas décadas de 1970 e 1980. Esta técnica revolucionou a construção de compiladores eficientes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Significado de LL(1)</div>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>L:</strong> Left-to-right scan (varredura da esquerda para a direita)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>L:</strong> Leftmost derivation (derivação mais à esquerda)
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>1:</strong> Um símbolo de lookahead para decisões
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Características Essenciais</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="concept-card border-start border-4 border-success">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-success">✓ Gramática LL(1)</h4>
+                                    <ul class="list-unstyled">
+                                        <li>• Sem ambiguidades na escolha de regras</li>
+                                        <li>• Decisões determinísticas</li>
+                                        <li>• Um símbolo de lookahead é suficiente</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="concept-card border-start border-4 border-danger">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-danger">✗ Sem Recursão à Esquerda</h4>
+                                    <ul class="list-unstyled">
+                                        <li>• Nem recursão direta nem indireta</li>
+                                        <li>• Evita laços infinitos</li>
+                                        <li>• Impede conflitos na tabela</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eliminação da Recursão à Esquerda -->
+        <section id="recursao-esquerda" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Eliminação da Recursão à Esquerda</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h3 class="fs-4 fw-semibold mb-3 text-danger">Recursão à Esquerda Direta</h3>
+                                <p class="mb-3">Ocorre quando um símbolo não-terminal pode ser derivado em uma sequência que começa com ele mesmo.</p>
+                                
+                                <div class="code-highlight mb-3"><pre><code class="language-plaintext">
+A → Aa | b
+</code></pre></div>
+                                
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong>Problema:</strong> A pode ser substituído por Aa, onde A aparece novamente no início, criando um laço infinito.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">Recursão à Esquerda Indireta</h3>
+                                <p class="mb-3">Acontece através de uma cadeia de substituições que retorna ao símbolo original.</p>
+                                
+                                <div class="code-highlight mb-3"><pre><code class="language-plaintext">
+A → Ba
+B → Ab
+</code></pre></div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Problema:</strong> A deriva para Ba, B deriva para Ab, criando uma cadeia circular.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tools me-2"></i>Exemplo de Transformação
+                        </h4>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Regra Original (Problemática)</h5>
+                                <div class="code-highlight"><pre><code class="language-plaintext">
+A → Aa | b
+</code></pre></div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Regras Transformadas</h5>
+                                <div class="code-highlight"><pre><code class="language-plaintext">
+A → bA'
+A' → aA' | ε
+</code></pre></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-success-subtle rounded">
+                            <strong>Resultado:</strong> A nova gramática não contém mais recursão à esquerda direta. O não-terminal A' permite zero ou mais repetições do símbolo 'a' através do uso de ε (produção vazia).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elementos Fundamentais -->
+        <section id="elementos-fundamentais" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Elementos Fundamentais do Parser LL(1)</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-table fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Tabela de Derivação</h3>
+                                </div>
+                                <p class="mb-3">Mapeia cada combinação de não-terminal e terminal para a regra de produção que deve ser aplicada. Construída a partir dos conjuntos FIRST e FOLLOW.</p>
+                                
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Função:</strong> Guia determinístico para todo o processo de análise sintática
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-layer-group fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Pilha e Buffer</h3>
+                                </div>
+                                <p class="mb-3">A pilha mantém símbolos esperados, inicializando com o símbolo inicial e $. O buffer lê a entrada da esquerda para a direita.</p>
+                                
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Inicialização:</strong> Pilha=[S, $], Entrada=[string, $]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Processo de Análise</h3>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">1. Consulta à Tabela</h4>
+                            <p>O parser consulta a Tabela de Derivação usando como índices o não-terminal no topo da pilha e o próximo símbolo da entrada.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">2. Aplicação da Produção</h4>
+                            <p>A tabela indica qual produção aplicar. O não-terminal no topo da pilha é substituído pelos símbolos da produção (empilhados em ordem inversa).</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">3. Casamento de Terminais</h4>
+                            <p>Se o topo da pilha for um terminal que coincide com o próximo símbolo da entrada, ambos são removidos.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">4. Sucesso ou Erro</h4>
+                            <p>A análise termina com sucesso quando pilha e entrada estão vazias. Caso contrário, ocorre erro sintático.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conjuntos NULLABLE, FIRST e FOLLOW -->
+        <section id="conjuntos" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Conjuntos NULLABLE, FIRST e FOLLOW</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Como uma criança aprendendo a falar, precisamos entender quais palavras podem vir antes ou depois de outras. Os conjuntos NULLABLE, FIRST e FOLLOW desempenham esse papel na análise sintática, determinando determinísticamente as regras de produção.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-warning mx-auto mb-3">
+                                    <i class="fas fa-ghost"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">NULLABLE</h3>
+                                <p class="fs-6 text-muted">Símbolos que podem derivar a cadeia vazia (ε)</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-primary mx-auto mb-3">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">FIRST</h3>
+                                <p class="fs-6 text-muted">Terminais que podem aparecer no início de uma derivação</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card text-center">
+                                <div class="icon-badge badge-success mx-auto mb-3">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <h3 class="fs-5 fw-semibold mb-3" style="color: var(--sage-800);">FOLLOW</h3>
+                                <p class="fs-6 text-muted">Terminais que podem aparecer imediatamente após um não-terminal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Conjunto NULLABLE</div>
+                        <p class="mb-3">Um símbolo não-terminal é NULLABLE se pode derivar a cadeia vazia (ε) através de qualquer sequência de derivações possível.</p>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Nullable Direto:</strong> A → ε
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Nullable Indireto:</strong> A → B, B é NULLABLE
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Nullable Múltiplo:</strong> A → B₁B₂...Bₙ, todos são NULLABLE
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="algorithm-block mb-5">
+                        <h4 class="fs-5 fw-semibold mb-3">Algoritmo para NULLABLE</h4>
+                        
+                        <div class="code-highlight"><pre><code class="language-python">
+função calcular_NULLABLE(gramática):
+    NULLABLE = conjunto vazio
+    
+    // 1. Regra Base: Adiciona não-terminais que derivam ε diretamente
+    para cada não-terminal A em gramática:
+        para cada produção P nas alternativas de A:
+            se P é ['EPSILON']:
+                adicionar A em NULLABLE
+
+    // 2. Regra de Indução: Itera até nenhuma nova adição
+    mudou = verdadeiro
+    enquanto mudou:
+        mudou = falso
+        para cada não-terminal A em gramática:
+            para cada produção P = [Y1, Y2, ..., Yn]:
+                se todos os símbolos em P são NULLABLE:
+                    se A não está em NULLABLE:
+                        adicionar A em NULLABLE
+                        mudou = verdadeiro
+    
+    retornar NULLABLE
+</code></pre></div>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Conjunto FIRST</div>
+                        <p class="mb-3">O conjunto FIRST de um símbolo não-terminal é composto dos terminais que podem aparecer como primeiro símbolo de qualquer sequência derivada desse não-terminal.</p>
+                        
+                        <div class="p-3 bg-primary-subtle rounded">
+                            <strong>Exemplo:</strong> Para uma gramática de expressões aritméticas, se EXPR pode derivar "2 + 3", "(4 * 5)", "x - y", então FIRST(EXPR) = {número, '+', '-', '('}
+                        </div>
+                    </div>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Conjunto FOLLOW</div>
+                        <p class="mb-3">O conjunto FOLLOW determina quais terminais podem aparecer imediatamente após um não-terminal em alguma derivação da gramática.</p>
+                        
+                        <div class="p-3 bg-success-subtle rounded">
+                            <strong>Regras principais:</strong>
+                            <ul class="list-unstyled mt-2 mb-0">
+                                <li>1. Adicionar $ ao FOLLOW do símbolo inicial</li>
+                                <li>2. Para A → αBβ, adicionar FIRST(β) - {ε} ao FOLLOW(B)</li>
+                                <li>3. Se β é NULLABLE ou vazio, adicionar FOLLOW(A) ao FOLLOW(B)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- O Exemplo Mais Comum -->
+        <section id="exemplo-comum" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. O Exemplo Mais Comum de Todos</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Este exemplo está em todos os sites, livros e aulas disponíveis na internet. É tão comum que deve ser do livro do Aho. É um exemplo perfeito para demonstrar o processo completo.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Gramática Original (Problemática)</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="code-highlight"><pre><code class="language-plaintext">
+S → E
+E → E + T | T
+T → T * F | F
+F → (E) | id
+</code></pre></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong>Problema:</strong> Recursão à esquerda direta nas regras para E e T. Um parser LL(1) não consegue lidar com isso, pois entraria em laço infinito.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Gramática Corrigida (Adequada para LL(1))</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="code-highlight"><pre><code class="language-plaintext">
+S → E
+E → T E'
+E' → + T E' | ε
+T → F T'
+T' → * F T' | ε
+F → (E) | id
+</code></pre></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Solução:</strong> Eliminamos a recursão à esquerda introduzindo novos não-terminais (E' e T') e usando produções vazias (ε).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Conjuntos Calculados</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Não-Terminal</th>
+                                        <th>NULLABLE</th>
+                                        <th>FIRST</th>
+                                        <th>FOLLOW</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>S</strong></td>
+                                        <td>Não</td>
+                                        <td>{ '(', id }</td>
+                                        <td>{ $ }</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>E</strong></td>
+                                        <td>Não</td>
+                                        <td>{ '(', id }</td>
+                                        <td>{ $, ')' }</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>E'</strong></td>
+                                        <td>Sim</td>
+                                        <td>{ '+', ε }</td>
+                                        <td>{ $, ')' }</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>T</strong></td>
+                                        <td>Não</td>
+                                        <td>{ '(', id }</td>
+                                        <td>{ '+', $, ')' }</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>T'</strong></td>
+                                        <td>Sim</td>
+                                        <td>{ '*', ε }</td>
+                                        <td>{ '+', $, ')' }</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>F</strong></td>
+                                        <td>Não</td>
+                                        <td>{ '(', id }</td>
+                                        <td>{ '*', '+', $, ')' }</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Tabela de Derivação LL(1)</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Não-Terminal</th>
+                                        <th>id</th>
+                                        <th>+</th>
+                                        <th>*</th>
+                                        <th>(</th>
+                                        <th>)</th>
+                                        <th>$</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>S</strong></td>
+                                        <td>S → E</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>S → E</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>E</strong></td>
+                                        <td>E → T E'</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>E → T E'</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>E'</strong></td>
+                                        <td></td>
+                                        <td>E' → + T E'</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>E' → ε</td>
+                                        <td>E' → ε</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>T</strong></td>
+                                        <td>T → F T'</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>T → F T'</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>T'</strong></td>
+                                        <td></td>
+                                        <td>T' → ε</td>
+                                        <td>T' → * F T'</td>
+                                        <td></td>
+                                        <td>T' → ε</td>
+                                        <td>T' → ε</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>F</strong></td>
+                                        <td>F → id</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>F → (E)</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exemplo de Expressões Booleanas -->
+        <section id="exemplo-booleano" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Um Exemplo Nem Tão Comum</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Este exemplo surgiu das vozes da minha cabeça e demonstra parser LL(1) para expressões booleanas com operadores OR, AND e NOT.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Gramática Original (com Recursão à Esquerda)</h3>
+                        
+                        <div class="code-highlight"><pre><code class="language-plaintext">
+S → B
+B → B OR M | M
+M → M AND N | N
+N → NOT N | (B) | id
+</code></pre></div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Gramática Corrigida</h3>
+                        
+                        <div class="code-highlight"><pre><code class="language-plaintext">
+S → B
+B → M B'
+B' → OR M B' | ε
+M → N M'
+M' → AND N M' | ε
+N → NOT N | (B) | id
+</code></pre></div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-play me-2"></i>Teste com "id or not id and (id or id)"
+                        </h4>
+                        
+                        <p class="mb-3">Vamos rastrear a análise desta string usando nossa tabela de derivação:</p>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Pilha</th>
+                                        <th>Entrada</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>S $</td>
+                                        <td>id or not id and (id or id) $</td>
+                                        <td>T(S, 'id') → S → B</td>
+                                    </tr>
+                                    <tr>
+                                        <td>B $</td>
+                                        <td>id or not id and (id or id) $</td>
+                                        <td>T(B, 'id') → B → M B'</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M B' $</td>
+                                        <td>id or not id and (id or id) $</td>
+                                        <td>T(M, 'id') → M → N M'</td>
+                                    </tr>
+                                    <tr>
+                                        <td>N M' B' $</td>
+                                        <td>id or not id and (id or id) $</td>
+                                        <td>T(N, 'id') → N → id</td>
+                                    </tr>
+                                    <tr>
+                                        <td>id M' B' $</td>
+                                        <td>id or not id and (id or id) $</td>
+                                        <td>Consumir 'id'</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M' B' $</td>
+                                        <td>or not id and (id or id) $</td>
+                                        <td>T(M', 'or') → M' → ε</td>
+                                    </tr>
+                                    <tr>
+                                        <td>B' $</td>
+                                        <td>or not id and (id or id) $</td>
+                                        <td>T(B', 'or') → B' → OR M B'</td>
+                                    </tr>
+                                    <tr>
+                                        <td>...</td>
+                                        <td>...</td>
+                                        <td>... (continua até aceitar)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$</td>
+                                        <td>$</td>
+                                        <td><strong>Aceita</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-success-subtle rounded">
+                            <strong>Resultado:</strong> A string "id or not id and (id or id)" é aceita pela gramática e pode ser identificada por um parser LL(1).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conflitos na Tabela de Derivação -->
+        <section id="conflitos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Conflitos na Tabela de Derivação</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Conflitos ocorrem quando há mais de uma regra de produção associada ao mesmo par (terminal, não-terminal). Esta ambiguidade torna a gramática inadequada para parsers LL(1).
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h3 class="fs-4 fw-semibold mb-3 text-danger">Conflito FIRST/FIRST</h3>
+                                <p class="mb-3">Ocorre quando o conjunto FIRST de duas ou mais produções de um mesmo não-terminal possui um terminal em comum.</p>
+                                
+                                <div class="code-highlight mb-3"><pre><code class="language-plaintext">
+E → T + E | T
+</code></pre></div>
+                                
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong>Problema:</strong> Ambas produções têm os mesmos terminais em FIRST. Ao encontrar 'int' ou '(', o parser não sabe qual regra aplicar.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-warning">
+                                <h3 class="fs-4 fw-semibold mb-3 text-warning">Conflito FIRST/FOLLOW</h3>
+                                <p class="mb-3">Ocorre quando uma produção tem ε em seu conjunto FIRST e o conjunto FOLLOW do não-terminal possui terminal em comum com FIRST de outra produção.</p>
+                                
+                                <div class="code-highlight mb-3"><pre><code class="language-plaintext">
+E → T E'
+E' → + E | ε
+</code></pre></div>
+                                
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Situação:</strong> Se FOLLOW(E') contém '+', haveria conflito entre aplicar a regra E' → + E ou E' → ε.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo de Conflito e Resolução</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática Problemática</h5>
+                                <div class="code-highlight mb-3"><pre><code class="language-plaintext">
+E → T + E | T
+T → int | (E)
+</code></pre></div>
+                                
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr><th>Não-terminal</th><th>int</th><th>(</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>E</strong></td>
+                                                <td style="background-color: #fecaca;">E → T + E<br>E → T</td>
+                                                <td style="background-color: #fecaca;">E → T + E<br>E → T</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática Refatorada</h5>
+                                <div class="code-highlight mb-3"><pre><code class="language-plaintext">
+E → T E'
+E' → + E | ε
+T → int | (E)
+</code></pre></div>
+                                
+                                <div class="table-responsive-custom">
+                                    <table class="table table-custom">
+                                        <thead>
+                                            <tr><th>Não-terminal</th><th>int</th><th>(</th><th>+</th><th>$</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>E</strong></td>
+                                                <td>E → T E'</td>
+                                                <td>E → T E'</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>E'</strong></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>E' → + E</td>
+                                                <td>E' → ε</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tools me-2"></i>Estratégias de Resolução
+                        </h4>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-primary">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-primary">1. Refatoração da Gramática</h5>
+                                    <p class="fs-7">Reescrever para eliminar ambiguidades e recursões à esquerda</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-success">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-success">2. Fatoração à Esquerda</h5>
+                                    <p class="fs-7">Fatorar produções com prefixos comuns</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-warning">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-warning">3. Analisadores Mais Poderosos</h5>
+                                    <p class="fs-7">Usar LR(1) ou LALR(1) para gramáticas complexas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Síntese Final -->
+                    <div class="text-center mt-5">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Síntese</h4>
+                            <p class="fs-5 mb-0 text-white">
+                                Os <strong>parsers LL(1)</strong> representam um marco na construção de compiladores eficientes. Com análise preditiva determinística, eles transformam a complexidade da análise sintática em um processo <strong>linear e elegante</strong>, desde que a gramática seja adequadamente preparada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

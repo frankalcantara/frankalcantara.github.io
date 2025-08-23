@@ -448,6 +448,46 @@ section {
 
 /* File-specific styles from desenv1-expresso.html */
 
+/* Layout Principal - Estilos específicos dos HTMLs */
+.hero-gradient {
+    background: linear-gradient(135deg, rgba(103, 156, 236, 0.9) 0%, rgba(70, 65, 204, 0.8) 100%);
+}
+
+/* MathJax styling */
+.MathJax {
+    font-size: 1em !important;
+}
+
+/* Diagram placeholder */
+.diagram-placeholder {
+    background: linear-gradient(135deg, var(--sage-100), var(--copper-100));
+    border: 2px dashed var(--sage-300);
+    border-radius: 8px;
+    padding: 3rem;
+    text-align: center;
+    color: var(--sage-700);
+    margin: 1.5rem 0;
+}
+
+/* Historical figures styling */
+.historical-figure {
+    border-left: 4px solid var(--copper-600);
+    background: linear-gradient(135deg, var(--copper-50), var(--sage-50));
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Algorithm blocks - from parser HTML files */
+.algorithm-block {
+    background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+    border: 1px solid var(--sage-200);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--sage-600);
+}
+
 /* Highlight.js Custom Styles */
 pre code.hljs {
     border-radius: 8px;
@@ -460,6 +500,28 @@ pre code.hljs {
 
 pre[style*="font-size"] code.hljs {
     font-size: inherit;
+}
+
+/* Override highlight.js theme to match our design */
+.code-highlight .hljs {
+    background: var(--sage-800);
+    color: #f8fafc;
+}
+
+.code-highlight .hljs-keyword {
+    color: #60a5fa;
+}
+
+.code-highlight .hljs-string {
+    color: #10b981;
+}
+
+.code-highlight .hljs-number {
+    color: #0284c7;
+}
+
+.code-highlight .hljs-comment {
+    color: #94a3b8;
 }
 
 .methodology-comparison {

@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./parsers.html" rel="next">
+<link href="./04-Gramaticas.html" rel="next">
 <link href="./01a-lexico.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -205,20 +205,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
   </div>
 </li>
       </ul>
@@ -235,7 +229,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
       </ul>
@@ -243,13 +237,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -344,7 +338,7 @@ Tip
 </div>
 <p>Como vimos no capítulo anterior, as <strong>Máquinas de Estados Finitos</strong> formam a base teórica para os analisadores léxicos. Entre os diferentes tipos de máquinas de estados, os <strong>Autômatos Finitos Determinísticos</strong> ocupam uma posição de especial importância na engenharia de compiladores, representando a forma mais eficiente e prática de implementar o reconhecimento de padrões léxicos.</p>
 <p>Um Autômato Finito Determinístico é um modelo matemático preciso para representar sistemas que podem estar em um número finito de estados e que respondem a entradas de forma completamente previsível e unívoca. A palavra <em>determinístico</em> é fundamental aqui: para cada combinação de estado atual e símbolo de entrada, existe <strong>exatamente uma</strong> transição possível. Esta propriedade elimina qualquer ambiguidade no processo de reconhecimento, tornando os Autômatos Finitos Determinísticos ideais para implementações práticas como os analisadores léxicos.</p>
-<p>A importância dos Autômatos Finitos Determinísticos na análise léxica não pode ser subestimada. Eles representam o produto final do processo de construção de analisadores léxicos: uma máquina de estados que pode processar um fluxo de caracteres em tempo linear, identificando <em>tokens</em> de forma eficiente e sem ambiguidades. Como veremos ao longo deste capítulo, a elegante leitora descobrirá que esta simplicidade aparente esconde uma poderosa capacidade de reconhecimento que fundamenta toda a primeira fase da compilação.</p>
+<p>A importância dos Autômatos Finitos Determinísticos na análise léxica não pode ser subestimada. Eles representam o produto final do processo de construção de analisadores léxicos: uma máquina de estados que pode processar um fluxo de caracteres em tempo linear, identificando <em><em>tokens</em></em> de forma eficiente e sem ambiguidades. Como veremos ao longo deste capítulo, a elegante leitora descobrirá que esta simplicidade aparente esconde uma poderosa capacidade de reconhecimento que fundamenta toda a primeira fase da compilação.</p>
 <section id="sec-definicao-formal" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="sec-definicao-formal"><span class="header-section-number">4.1</span> Definição Formal e Componentes</h2>
 <p>Um Autômato Finito Determinístico é formalmente definido como uma 5-tupla matemática:</p>
@@ -734,7 +728,7 @@ Table&nbsp;4.3: Tabela de transições para reconhecimento da senha <em>abre</em
 </section>
 <section id="exemplo-3-reconhecimento-de-operadores-relacionais" class="level3" data-number="4.4.3">
 <h3 data-number="4.4.3" class="anchored" data-anchor-id="exemplo-3-reconhecimento-de-operadores-relacionais"><span class="header-section-number">4.4.3</span> Exemplo 3: Reconhecimento de Operadores Relacionais</h3>
-<p>O terceiro exemplo aborda um problema típico da análise léxica: o reconhecimento de operadores relacionais compostos. Este exemplo ilustra como tratar ambiguidades que surgem quando alguns <em>tokens</em> são prefixos de outros <span class="citation" data-cites="Aho2007Compilers">(<a href="referencias.html#ref-Aho2007Compilers" role="doc-biblioref">1</a>)</span>.</p>
+<p>O terceiro exemplo aborda um problema típico da análise léxica: o reconhecimento de operadores relacionais compostos. Este exemplo ilustra como tratar ambiguidades que surgem quando alguns <em><em>tokens</em></em> são prefixos de outros <span class="citation" data-cites="Aho2007Compilers">(<a href="referencias.html#ref-Aho2007Compilers" role="doc-biblioref">1</a>)</span>.</p>
 <p><strong>Definição do Problema</strong>: Construir um Autômato Finito Determinístico que reconheça os operadores relacionais: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, e <code>!=</code>.</p>
 <p><strong>Análise</strong>: Este problema apresenta desafios interessantes. Os operadores <code>&gt;</code> e <code>&lt;</code> são prefixos dos operadores <code>&gt;=</code> e <code>&lt;=</code>, respectivamente. Similarmente, <code>=</code> seria prefixo de <code>==</code>. O autômato deve implementar a regra da correspondência mais longa (<em>maximal munch</em>), continuando a ler enquanto uma correspondência mais longa for possível.</p>
 <p>Nós discutimos a regra da correspondência mais longa na seção <a href="01-lexico.html#sec-analisador-lexico" class="quarto-xref"><span>Section 2.2</span></a> do capítulo anterior. Esta regra é fundamental para resolver ambiguidades de prefixos. O autômato deve ser capaz de distinguir entre os operadores simples e compostos, aceitando os mais longos quando possível.</p>
@@ -885,7 +879,7 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 <ol type="1">
 <li><p><strong>Manutenção de Estado</strong>: O exemplo da paridade mostra como informações agregadas podem ser mantidas em estados finitos.</p></li>
 <li><p><strong>Reconhecimento de Sequências</strong>: O exemplo da senha ilustra o reconhecimento determinístico de <em>strings</em> específicas, fundamental para palavras-chave.</p></li>
-<li><p><strong>Tratamento de Ambiguidades</strong>: O exemplo dos operadores demonstra como resolver conflitos de prefixos através da regra da correspondência mais longa.</p></li>
+<li><p><strong>Tratamento de Ambiguidades</strong>: O exemplo dos operadores demonstra como resolver conflitos de prefixos por meio da regra da correspondência mais longa.</p></li>
 </ol>
 <p>A atenta leitora observará que estes padrões são ubíquos na construção de analisadores léxicos em aplicações práticas, formando os blocos que definem o reconhecimento de identificadores, números, palavras-chave e operadores em linguagens de programação reais.</p>
 </section>
@@ -945,11 +939,11 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 <p><strong>Estados</strong>: <span class="math inline">\(Q = Q_1 \times Q_2\)</span> possui <span class="math inline">\(\mid Q_1 \mid \times \mid Q_2 \mid = 3 \times 2 = 6\)</span> estados</p>
 <p><strong>Estados de Aceitação</strong>: um estado <span class="math inline">\((s_i, t_j)\)</span> é final se <span class="math inline">\(s_i \in F_1\)</span> <strong>ou</strong> <span class="math inline">\(t_j \in F_2\)</span>. Analisando cada par, teremos:</p>
 <ul>
-<li><span class="math inline">\((s_0, t_{\text{par}})\)</span>: aceita (pois <span class="math inline">\(t_{\text{par}} \in F_2\)</span>);</li>
+<li><span class="math inline">\((s_0, t_{\text{par}})\)</span>: aceita (porque <span class="math inline">\(t_{\text{par}} \in F_2\)</span>);</li>
 <li><span class="math inline">\((s_0, t_{\text{ímpar}})\)</span>: rejeita;</li>
 <li><span class="math inline">\((s_{\text{aceita}}, t_{\text{par}})\)</span>: aceita (ambos aceitam);</li>
-<li><span class="math inline">\((s_{\text{aceita}}, t_{\text{ímpar}})\)</span>: aceita (pois <span class="math inline">\(s_{\text{aceita}} \in F_1\)</span>);</li>
-<li><span class="math inline">\((s_{\text{rejeita}}, t_{\text{par}})\)</span>: aceita (pois <span class="math inline">\(t_{\text{par}} \in F_2\)</span>);</li>
+<li><span class="math inline">\((s_{\text{aceita}}, t_{\text{ímpar}})\)</span>: aceita (porque <span class="math inline">\(s_{\text{aceita}} \in F_1\)</span>);</li>
+<li><span class="math inline">\((s_{\text{rejeita}}, t_{\text{par}})\)</span>: aceita (porque <span class="math inline">\(t_{\text{par}} \in F_2\)</span>);</li>
 <li><span class="math inline">\((s_{\text{rejeita}}, t_{\text{ímpar}})\)</span>: rejeita.</li>
 </ul>
 <p>A <a href="#tbl-uniao-exemplo" class="quarto-xref">Table&nbsp;<span>4.5</span></a> apresenta a tabela de transições completa:</p>
@@ -1095,7 +1089,7 @@ Figure&nbsp;4.5
 </ul>
 <p>Assim, os Estados finais são: <span class="math inline">\(F = \{(s_0, t_1), (s_1, t_0), (s_1, t_1), (s_2, t_1)\}\)</span></p>
 <p><strong>4. Passo 4: Construir a função de transição</strong>: para cada estado <span class="math inline">\((s_i, t_j)\)</span> e cada símbolo <span class="math inline">\(x \in \{a, b\}\)</span>, calculamos: <span class="math display">\[\delta((s_i, t_j), x) = (\delta_1(s_i, x), \delta_2(t_j, x))\]</span></p>
-<p><strong>Transições com ‘a’:</strong></p>
+<p><strong>Transições com ‘a’</strong>:</p>
 <ul>
 <li><span class="math inline">\(\delta((s_0, t_0), a) = (\delta_1(s_0, a), \delta_2(t_0, a)) = (s_1, t_0)\)</span>;</li>
 <li><span class="math inline">\(\delta((s_0, t_1), a) = (\delta_1(s_0, a), \delta_2(t_1, a)) = (s_1, t_1)\)</span>;</li>
@@ -1104,7 +1098,7 @@ Figure&nbsp;4.5
 <li><span class="math inline">\(\delta((s_2, t_0), a) = (\delta_1(s_2, a), \delta_2(t_0, a)) = (s_2, t_0)\)</span>;</li>
 <li><span class="math inline">\(\delta((s_2, t_1), a) = (\delta_1(s_2, a), \delta_2(t_1, a)) = (s_2, t_1)\)</span>.</li>
 </ul>
-<p><strong>Transições com ‘b’:</strong></p>
+<p><strong>Transições com ‘b’</strong>:</p>
 <ul>
 <li><span class="math inline">\(\delta((s_0, t_0), b) = (\delta_1(s_0, b), \delta_2(t_0, b)) = (s_2, t_1)\)</span>;</li>
 <li><span class="math inline">\(\delta((s_0, t_1), b) = (\delta_1(s_0, b), \delta_2(t_1, b)) = (s_2, t_0)\)</span>;</li>
@@ -1429,7 +1423,7 @@ Table&nbsp;4.7: Autômato que aceita número ímpar de ’a’s
 <ol type="1">
 <li><p><strong>Composição Modular</strong>: Permite construir reconhecedores complexos a partir de componentes simples e bem testados.</p></li>
 <li><p><strong>Otimização de Consultas</strong>: Em sistemas de busca, a interseção permite refinar resultados, enquanto a união expande o escopo.</p></li>
-<li><p><strong>Análise Léxica Incremental</strong>: Novos padrões podem ser adicionados a um analisador existente através de união, sem reconstruir todo o autômato.</p></li>
+<li><p><strong>Análise Léxica Incremental</strong>: Novos padrões podem ser adicionados a um analisador existente por meio de união, sem reconstruir todo o autômato.</p></li>
 <li><p><strong>Verificação de Propriedades</strong>: Para verificar se dois autômatos são equivalentes, basta testar se <span class="math inline">\((L_1 - L_2) \cup (L_2 - L_1) = \emptyset\)</span>.</p></li>
 </ol>
 <p>A compreensão profunda destas propriedades capacita a engenheira a fazer escolhas arquiteturais informadas, sabendo que a modularidade não compromete a eficiência ou a correção do sistema final.### Minimização de Estados</p>
@@ -1462,7 +1456,7 @@ Table&nbsp;4.7: Autômato que aceita número ímpar de ’a’s
 </section>
 <section id="Exercicios-9" class="level3" data-number="4.6.3">
 <h3 data-number="4.6.3" class="anchored" data-anchor-id="Exercicios-9"><span class="header-section-number">4.6.3</span> Exercícios 9</h3>
-<p><strong>1.</strong> Considere o alfabeto <span class="math inline">\(\Sigma = \{0, 1, +, -, *, /, (, )\}\)</span> representando tokens simplificados de expressões aritméticas binárias. Sejam os autômatos:</p>
+<p><strong>1.</strong> Considere o alfabeto <span class="math inline">\(\Sigma = \{0, 1, +, -, *, /, (, )\}\)</span> representando <em>tokens</em> simplificados de expressões aritméticas binárias. Sejam os autômatos:</p>
 <ul>
 <li><span class="math inline">\(M_1\)</span>: aceita strings que começam com ‘(’ e terminam com ‘)’;</li>
 <li><span class="math inline">\(M_2\)</span>: aceita strings que contêm pelo menos um operador aritmético (+, -, * ou /);</li>
@@ -1580,8 +1574,8 @@ Table&nbsp;4.7: Autômato que aceita número ímpar de ’a’s
 </ul>
 <p>Use o método de eliminação de estados para encontrar a expressão regular equivalente. Mostre cada passo da eliminação.</p>
 <p><strong>4.</strong>: Dados dois Autômatos Finitos Determinísticos sobre <span class="math inline">\(\Sigma = \{a, b\}\)</span>:</p>
-<p><strong>Autômato Finito Determinístico <span class="math inline">\(M_1\)</span>:</strong> Aceita strings com número par de <span class="math inline">\(a\)</span>’s - Estados: <span class="math inline">\(\{p_0, p_1\}\)</span> - Estado inicial: <span class="math inline">\(p_0\)</span> - Estados finais: <span class="math inline">\(\{p_0\}\)</span> - <span class="math inline">\(\delta_1(p_0, a) = p_1\)</span>, <span class="math inline">\(\delta_1(p_0, b) = p_0\)</span> - <span class="math inline">\(\delta_1(p_1, a) = p_0\)</span>, <span class="math inline">\(\delta_1(p_1, b) = p_1\)</span></p>
-<p><strong>Autômato Finito Determinístico <span class="math inline">\(M_2\)</span>:</strong> Aceita strings onde a posição de cada <span class="math inline">\(a\)</span> é ímpar (primeira posição = 1) - Estados: <span class="math inline">\(\{q_{par}, q_{impar}, q_{aceita}, q_{rejeita}\}\)</span> - Estado inicial: <span class="math inline">\(q_{par}\)</span> - Estados finais: <span class="math inline">\(\{q_{par}, q_{aceita}\}\)</span></p>
+<p><strong>Autômato Finito Determinístico <span class="math inline">\(M_1\)</span></strong>: Aceita strings com número par de <span class="math inline">\(a\)</span>’s - Estados: <span class="math inline">\(\{p_0, p_1\}\)</span> - Estado inicial: <span class="math inline">\(p_0\)</span> - Estados finais: <span class="math inline">\(\{p_0\}\)</span> - <span class="math inline">\(\delta_1(p_0, a) = p_1\)</span>, <span class="math inline">\(\delta_1(p_0, b) = p_0\)</span> - <span class="math inline">\(\delta_1(p_1, a) = p_0\)</span>, <span class="math inline">\(\delta_1(p_1, b) = p_1\)</span></p>
+<p><strong>Autômato Finito Determinístico <span class="math inline">\(M_2\)</span></strong>: Aceita strings onde a posição de cada <span class="math inline">\(a\)</span> é ímpar (primeira posição = 1) - Estados: <span class="math inline">\(\{q_{par}, q_{impar}, q_{aceita}, q_{rejeita}\}\)</span> - Estado inicial: <span class="math inline">\(q_{par}\)</span> - Estados finais: <span class="math inline">\(\{q_{par}, q_{aceita}\}\)</span></p>
 <ol type="a">
 <li><p>Determine se <span class="math inline">\(L(M_1) = L(M_2)\)</span> usando o método do produto.</p></li>
 <li><p>Verifique sua resposta testando as strings: <span class="math inline">\(\epsilon\)</span>, <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, <span class="math inline">\(aa\)</span>, <span class="math inline">\(ab\)</span>, <span class="math inline">\(ba\)</span>, <span class="math inline">\(aba\)</span>.</p></li>
@@ -1592,7 +1586,7 @@ Table&nbsp;4.7: Autômato que aceita número ímpar de ’a’s
 <li><p>Calcule a complexidade temporal da minimização considerando <span class="math inline">\(|\Sigma| = 2\)</span> e <span class="math inline">\(n = 8\)</span>.</p></li>
 <li><p>Se tivéssemos dois Autômatos Finitos Determinísticos com 8 e 10 estados respectivamente, compare a complexidade de testar equivalência via minimização versus via construção do produto.</p></li>
 </ol>
-<p><strong>6.</strong> Você está projetando um analisador léxico que deve reconhecer três tipos de tokens:</p>
+<p><strong>6.</strong> Você está projetando um analisador léxico que deve reconhecer três tipos de <em>tokens</em>:</p>
 <ul>
 <li><strong>Inteiros</strong>: sequências de dígitos (0-9);</li>
 <li><strong>Identificadores</strong>: começam com letra, seguidos de letras ou dígitos;</li>
@@ -1601,12 +1595,12 @@ Table&nbsp;4.7: Autômato que aceita número ímpar de ’a’s
 <ol type="a">
 <li><p>Construa Autômatos Finitos Determinísticos individuais para cada tipo.</p></li>
 <li><p>Use as propriedades de fechamento para criar um único Autômato Finito Determinístico que reconheça qualquer um dos três tipos.</p></li>
-<li><p>Discuta como você implementaria a distinção entre os tipos de tokens no Autômato Finito Determinístico combinado.</p></li>
+<li><p>Discuta como você implementaria a distinção entre os tipos de <em>tokens</em> no Autômato Finito Determinístico combinado.</p></li>
 </ol>
 </section>
 <section id="limitações-dos-autômatos-finitos" class="level3" data-number="4.6.9">
 <h3 data-number="4.6.9" class="anchored" data-anchor-id="limitações-dos-autômatos-finitos"><span class="header-section-number">4.6.9</span> Limitações dos Autômatos Finitos</h3>
-<p>Apesar de sua grande aplicabilidade na análise léxica e no reconhecimento de padrões, os Autômatos Finitos Determinísticos possuem uma limitação fundamental que reside na própria natureza de sua memória: ela é <strong>finita</strong>. Um Autômato Finito Determinístico só consegue se <em>lembrar</em> de informações através do estado em que se encontra. Como o conjunto de estados <span class="math inline">\(Q\)</span> é finito, a capacidade de memorização da máquina é limitada.</p>
+<p>Apesar de sua grande aplicabilidade na análise léxica e no reconhecimento de padrões, os Autômatos Finitos Determinísticos possuem uma limitação fundamental que reside na própria natureza de sua memória: ela é <strong>finita</strong>. Um Autômato Finito Determinístico só consegue se <em>lembrar</em> de informações por meio do estado em que se encontra. Como o conjunto de estados <span class="math inline">\(Q\)</span> é finito, a capacidade de memorização da máquina é limitada.</p>
 <p>Esta limitação impede que os Autômatos Finitos Determinísticos reconheçam linguagens que exigem uma memória ilimitada ou a capacidade de contar sem um teto predefinido. O exemplo mais clássico de uma linguagem que um Autômato Finito Determinístico não pode reconhecer é a linguagem de parênteses balanceados ou, de forma análoga, a linguagem <span class="math inline">\(L\)</span>:</p>
 <p><span class="math display">\[
 L = \{0^n1^n \mid n \ge 0\}
@@ -2041,8 +2035,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./parsers.html" class="pagination-link" aria-label="Parsers LL(1): O Mundo da Análise Sintática">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-Gramaticas.html" class="pagination-link" aria-label="Gramáticas e Linguagens Livres de Contexto">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

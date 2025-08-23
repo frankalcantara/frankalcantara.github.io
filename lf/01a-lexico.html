@@ -219,20 +219,14 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parsers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Parsers LL(1): O Mundo da Análise Sintática</span></span></a>
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./first-follow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tabela-derivacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Tabelas de Derivação (Análise) LL(1)</span></span></a>
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
   </div>
 </li>
       </ul>
@@ -249,7 +243,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
       </ul>
@@ -257,13 +251,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -495,7 +489,7 @@ Tip
 <section id="substrings-prefixos-e-sufixos-entendendo-as-partes-de-uma-string" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="substrings-prefixos-e-sufixos-entendendo-as-partes-de-uma-string"><span class="header-section-number">3.2.3</span> Substrings, Prefixos e Sufixos: Entendendo as Partes de uma String</h3>
 <p>Ao trabalhar com texto e linguagens de programação, raramente tratamos uma <em>string</em> como uma unidade indivisível. Quase sempre precisamos inspecionar, extrair ou analisar suas partes internas. Os conceitos de <strong>substring</strong>, <strong>prefixo</strong> e <strong>sufixo</strong> nos dão um vocabulário formal e preciso para descrever essas partes.</p>
-<p>Este vocabulário formado de termos para as partes em que podemos dividir <em>strings</em> será relevante quando: estivermos estudando analisadores léxicos e sintáticos, pois eles frequentemente operam sobre essas partes para identificar padrões, validar estruturas e extrair informações significativas; criando ferramentas de busca e análise de texto, onde precisamos localizar ocorrências de padrões dentro de grandes volumes de texto; ou desenvolvendo algoritmos que manipulam ou processam <em>strings</em> de maneira eficiente; ou ainda, ao implementar funcionalidades de autocompletar em editores de texto e IDEs, onde o sistema sugere palavras ou comandos com base no que o usuário já digitou.</p>
+<p>Este vocabulário formado de termos para as partes em que podemos dividir <em>strings</em> será relevante quando: estivermos estudando analisadores léxicos e sintáticos. Estes analisadores frequentemente operam sobre essas partes para identificar padrões, validar estruturas e extrair informações significativas; criando ferramentas de busca e análise de texto, onde precisamos localizar ocorrências de padrões dentro de grandes volumes de texto; ou desenvolvendo algoritmos que manipulam ou processam <em>strings</em> de maneira eficiente; ou ainda, ao implementar funcionalidades de autocompletar em editores de texto e IDEs, onde o sistema sugere palavras ou comandos com base no que o usuário já digitou.</p>
 <section id="substring" class="level4" data-number="3.2.3.1">
 <h4 data-number="3.2.3.1" class="anchored" data-anchor-id="substring"><span class="header-section-number">3.2.3.1</span> Substring</h4>
 <p>Uma substring é simplesmente um pedaço ou um segmento contínuo de caracteres que está dentro de outra <em>string</em>. Formalmente dizemos que uma <em>string</em> <code>$v$</code> é uma substring de <code>$w$</code> se for possível encontrar duas outras <em>strings</em>, <code>$x$</code> (a parte que vem antes) e <code>$y$</code> (a parte que vem depois), de forma que <code>$w = xvy$</code>. As <em>strings</em> <code>$x$</code> ou <code>$y$</code> podem, inclusive, ser vazias.</p>
@@ -519,7 +513,7 @@ Tip
 <h5 data-number="3.2.3.3.1" class="anchored" data-anchor-id="sufixo-próprio"><span class="header-section-number">3.2.3.3.1</span> Sufixo Próprio</h5>
 <p>Dizemos que uma <em>string</em> é um sufixo próprio se for qualquer sufixo que não seja a própria <em>string</em> inteira. Formalmente, um sufixo <code>$v$</code> de <code>$w$</code> é dito próprio se `<span class="math inline">\(v \neq w\)</span>.</p>
 <p><strong>Exemplo</strong>: Para <code>$w = compilador$</code>, <code>lador</code> é um sufixo próprio, mas <code>compilador</code> não é.</p>
-<p>Definir formalmente essas <em>partes</em> de uma <em>string</em> é fundamental para a ciência da computação, pois elas são a base para inúmeras operações e algoritmos:</p>
+<p>Definir formalmente as <em>partes</em> de uma <em>string</em> é fundamental para a ciência da computação. Estas partes são a base para inúmeras operações e algoritmos:</p>
 </section>
 </section>
 </section>
@@ -605,13 +599,13 @@ Tip
 <p>A palavra <em>ou</em> aqui é inclusiva: uma <em>string</em> pertence à união se está em <span class="math inline">\(L_1\)</span>, ou em <span class="math inline">\(L_2\)</span>, ou em ambas.</p>
 <section id="exemplos-de-união" class="level5" data-number="3.3.3.1.1">
 <h5 data-number="3.3.3.1.1" class="anchored" data-anchor-id="exemplos-de-união"><span class="header-section-number">3.3.3.1.1</span> Exemplos de União</h5>
-<p><strong>Exemplo 1</strong>: Linguagens de Tokens Simples</p>
+<p><strong>Exemplo 1</strong>: Linguagens de <em>tokens</em> Simples</p>
 <ul>
 <li><span class="math inline">\(L_{\text{num}} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}\)</span> (dígitos);</li>
 <li><span class="math inline">\(L_{\text{op}} = \{+, -, *, /\}\)</span> (operadores);</li>
 <li><span class="math inline">\(L_{\text{token}} = L_{\text{num}} \cup L_{\text{op}} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, /\}\)</span>.</li>
 </ul>
-<p>Esta união modela os tokens básicos de uma calculadora simples.</p>
+<p>Esta união modela os <em>tokens</em> básicos de uma calculadora simples.</p>
 <p><strong>Exemplo 2</strong>: Linguagens de Comprimentos Específicos</p>
 <ul>
 <li><span class="math inline">\(L_{\text{par}} = \{w \in \{a, b\}^* \mid |w| \text{ é par}\}\)</span>;</li>
@@ -800,7 +794,7 @@ Tip
 <p>A diferença fundamental é que <span class="math inline">\(L^+\)</span> exige <strong>pelo menos uma</strong> escolha de <span class="math inline">\(L\)</span>, enquanto <span class="math inline">\(L^*\)</span> permite zero escolhas.</p>
 <p>A relação entre fechamento de Kleene e o fechamento positivo depende crucialmente de um fator: se a <em>string</em> vazia <span class="math inline">\(\epsilon\)</span> pertence ou não à linguagem original <span class="math inline">\(L\)</span>.</p>
 <p><strong>Caso 1</strong>: Se <span class="math inline">\(\epsilon \notin L\)</span>, então: <span class="math display">\[L^+ = L^* - \{\epsilon\}\]</span></p>
-<p>Neste caso, como <span class="math inline">\(\epsilon \notin L\)</span>, ela só pode aparecer em <span class="math inline">\(L^*\)</span> através de <span class="math inline">\(L^0 = \{\epsilon\}\)</span>. Todas as outras potências <span class="math inline">\(L^i\)</span> para <span class="math inline">\(i \geq 1\)</span> não contêm <span class="math inline">\(\epsilon\)</span>, pois são formadas por concatenações de elementos de <span class="math inline">\(L\)</span> que não incluem <span class="math inline">\(\epsilon\)</span>.</p>
+<p>Neste caso, como <span class="math inline">\(\epsilon \notin L\)</span>, ela só pode aparecer em <span class="math inline">\(L^*\)</span> por meio de <span class="math inline">\(L^0 = \{\epsilon\}\)</span>. Todas as outras potências <span class="math inline">\(L^i\)</span> para <span class="math inline">\(i \geq 1\)</span> não contêm <span class="math inline">\(\epsilon\)</span>. Estas potências que não contêm <span class="math inline">\(\epsilon\)</span> são formadas por concatenações de elementos de <span class="math inline">\(L\)</span> que não incluem <span class="math inline">\(\epsilon\)</span>.</p>
 <p><strong>Caso 2</strong>: Se <span class="math inline">\(\epsilon \in L\)</span>, então: <span class="math display">\[L^+ = L^*\]</span></p>
 <p>Neste caso, se <span class="math inline">\(\epsilon \in L = L^1\)</span>, então <span class="math inline">\(\epsilon \in L^+\)</span>. Como <span class="math inline">\(\epsilon\)</span> também está em <span class="math inline">\(L^*\)</span> (via <span class="math inline">\(L^0\)</span>), e ambos contêm todas as outras potências, os conjuntos são idênticos.</p>
 <section id="exemplos" class="level5" data-number="3.3.3.5.1">
@@ -855,7 +849,7 @@ Tip
 <h5 data-number="3.3.3.5.6" class="anchored" data-anchor-id="fechamento-como-operação-universal"><span class="header-section-number">3.3.3.5.6</span> Fechamento como Operação Universal</h5>
 <p>Uma perspectiva interessante é que o fechamento de Kleene pode ser visto como a <strong>menor</strong> solução para a equação: <span class="math display">\[X = \{\epsilon\} \cup L \cdot X\]</span></p>
 <p>Esta caracterização como ponto fixo mínimo conecta os fechamentos de Kleene com áreas avançadas da ciência da computação, incluindo semântica denotacional e análise de programas.</p>
-<p>O fechamento de Kleene, portanto, não é apenas uma operação matemática abstrata, mas uma ferramenta conceitual poderosa que captura a essência da computação iterativa e da geração de linguagens através de repetição controlada.</p>
+<p>O fechamento de Kleene, portanto, não é apenas uma operação matemática abstrata, mas uma ferramenta conceitual poderosa que captura a essência da computação iterativa e da geração de linguagens por meio de repetição controlada.</p>
 </section>
 </section>
 <section id="propriedades-e-fechamento" class="level4" data-number="3.3.3.6">
@@ -1305,8 +1299,8 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <p>A leitora atenta deve notar que as expressões regulares definidas formalmente neste capítulo, baseadas apenas em união, concatenação e Fechamento de Kleene, são o alicerce matemático da teoria. No entanto, as ferramentas que usamos no dia a dia, conhecidas como <strong>regex engines</strong>, são equipadas com funções que vão além dessa definição.</p>
 <p>Esses <em>engines</em>, como o <strong>PCRE</strong> (<strong>P</strong>erl <strong>C</strong>ompatible <strong>R</strong>egular <strong>E</strong>xpressions), que influencia as implementações em linguagens como Python, PHP e JavaScript, estendem a notação formal com recursos para maior conveniência e poder expressivo. Os mais notáveis são:</p>
 <ol type="a">
-<li><p><strong><code>Lookarounds</code> (<code>lookaheads</code> e <code>lookbehinds</code>):</strong> Permitem verificar a existência de um padrão antes (<code>lookbehind</code>) ou depois (<code>lookahead</code>) da posição atual, <strong>sem consumir</strong> os caracteres verificados (ou seja, sem incluí-los no resultado da captura). Um exemplo clássico é a expressão <code>q(?=u)</code>, que encontra a letra <code>q</code> apenas se ela for imediatamente seguida pela letra <code>u</code>, mas sem incluir o <code>u</code> no resultado.</p></li>
-<li><p><strong><code>Backreferences</code> (Retrovisores):</strong> Permitem referenciar um grupo que foi previamente capturado dentro da mesma expressão. Por exemplo, a expressão <code>(\w)\1</code> encontra qualquer caractere alfanumérico (<code>\w</code>) que é seguido imediatamente por ele mesmo. É com esta capacidade que um motor de regex pode reconhecer a linguagem não-regular <span class="math inline">\(L = \{ww \mid w \in \{a,b\}^*\}\)</span>.</p></li>
+<li><p><strong><code>Lookarounds</code> (<code>lookaheads</code> e <code>lookbehinds</code>)</strong>: Permitem verificar a existência de um padrão antes (<code>lookbehind</code>) ou depois (<code>lookahead</code>) da posição atual, <strong>sem consumir</strong> os caracteres verificados (ou seja, sem incluí-los no resultado da captura). Um exemplo clássico é a expressão <code>q(?=u)</code>, que encontra a letra <code>q</code> apenas se ela for imediatamente seguida pela letra <code>u</code>, mas sem incluir o <code>u</code> no resultado.</p></li>
+<li><p><strong><code>Backreferences</code> (Retrovisores)</strong>: Permitem referenciar um grupo que foi previamente capturado dentro da mesma expressão. Por exemplo, a expressão <code>(\w)\1</code> encontra qualquer caractere alfanumérico (<code>\w</code>) que é seguido imediatamente por ele mesmo. É com esta capacidade que um motor de regex pode reconhecer a linguagem não-regular <span class="math inline">\(L = \{ww \mid w \in \{a,b\}^*\}\)</span>.</p></li>
 </ol>
 <p>A consequência mais importante é que esses sistemas de regex modernos podem reconhecer linguagens que <strong>não são regulares</strong> no sentido estrito da teoria. Enquanto uma expressão regular formal jamais poderia reconhecer a linguagem <span class="math inline">\(L = \{a^n b^n \mid n \geq 1\}\)</span>, as extensões práticas oferecem um poder que transcende os limites dos Autômatos Finitos.</p>
 <p>Portanto, é valioso distinguir entre a <strong>classe teórica das Linguagens Regulares</strong> e o conjunto de padrões que as <strong>ferramentas de software</strong> podem processar. O formalismo discutido neste livro é a base para entender o poder, as limitações e a complexidade computacional por trás dessas operações, enquanto as extensões práticas oferecem conveniência e expressividade para resolver problemas do mundo real.</p>
@@ -1359,7 +1353,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <section id="sec-ex-regex5" class="level3" data-number="3.4.8">
 <h3 data-number="3.4.8" class="anchored" data-anchor-id="sec-ex-regex5"><span class="header-section-number">3.4.8</span> Exercícios 8</h3>
 <ol type="1">
-<li>Projete expressões regulares para tokens de uma linguagem de programação simples:
+<li>Projete expressões regulares para <em>tokens</em> de uma linguagem de programação simples:
 <ol type="a">
 <li>Palavras-chave: <span class="math inline">\(\{\text{if}, \text{then}, \text{else}, \text{while}, \text{do}\}\)</span>;</li>
 <li>Números inteiros (incluindo negativos);</li>
@@ -1419,7 +1413,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="propriedades-fundamentais-das-linguagens-regulares"><span class="header-section-number">3.5.2</span> Propriedades Fundamentais das Linguagens Regulares</h3>
 <p>A utilidade prática das linguagens regulares não se limita à sua capacidade de descrever padrões, mas também se baseia em um conjunto de garantias matemáticas. Duas propriedades centrais neste contexto são:</p>
 <ol type="1">
-<li><p><strong>Fechamento sob Operações</strong>: a classe das Linguagens Regulares é fechada sob todas as operações que vimos: <strong>união</strong>, <strong>concatenação</strong>, <strong>fechamento de Kleene</strong>, e também sob <strong>interseção</strong> e <strong>complemento</strong>. Isso significa que se combinarmos Linguagens Regulares usando essas operações, o resultado será <em>sempre</em> outra Linguagem Regular. Essa propriedade é de grande valor prático, pois garante que podemos construir sistemas de reconhecimento complexos a partir de componentes simples com a certeza de que o todo permanecerá computacionalmente tratável.</p></li>
+<li><p><strong>Fechamento sob Operações</strong>: a classe das Linguagens Regulares é fechada sob todas as operações que vimos: <strong>união</strong>, <strong>concatenação</strong>, <strong>fechamento de Kleene</strong>, e também sob <strong>interseção</strong> e <strong>complemento</strong>. Isso significa que se combinarmos Linguagens Regulares usando essas operações, o resultado será <em>sempre</em> outra Linguagem Regular. Essa propriedade é de grande valor prático, ela garante que podemos construir sistemas de reconhecimento complexos a partir de componentes simples com a certeza de que o todo permanecerá computacionalmente tratável.</p></li>
 <li><p><strong>Decidibilidade</strong>: Para as Linguagens Regulares, questões fundamentais são sempre <em>decidíveis</em>, ou seja, existe um algoritmo que pode respondê-las em um tempo finito. Podemos sempre construir um programa para determinar, por exemplo:</p>
 <ol type="a">
 <li>Se uma <em>string</em> <span class="math inline">\(w\)</span> pertence à linguagem <span class="math inline">\(L(r)\)</span>;</li>
@@ -1458,7 +1452,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <ol type="1">
 <li><strong>Assunção Inicial (para Contradição)</strong>: assumimos que <span class="math inline">\(L\)</span> <strong>é</strong> uma linguagem regular.</li>
 <li><strong>Aplicação do Lema</strong>: se <span class="math inline">\(L\)</span> é regular, então o Lema do Bombeamento deve se aplicar. Isso significa que existe uma constante, o <em>comprimento de bombeamento</em> <span class="math inline">\(p\)</span>, para a linguagem <span class="math inline">\(L\)</span>.</li>
-<li><strong>Escolha da String</strong>: escolhemos uma <em>string</em> <span class="math inline">\(w\)</span> que pertence a <span class="math inline">\(L\)</span> e que seja longa o suficiente, ou seja, <span class="math inline">\(|w| \geq p\)</span>. A escolha mais estratégica é <span class="math inline">\(w = a^p b^p\)</span>. Esta <em>string</em> claramente pertence a <span class="math inline">\(L\)</span> (pois o número de <span class="math inline">\(a\)</span>’s é igual ao de <span class="math inline">\(b\)</span>’s) e seu comprimento é <span class="math inline">\(2p\)</span>, que é maior ou igual a <span class="math inline">\(p\)</span>.</li>
+<li><strong>Escolha da String</strong>: escolhemos uma <em>string</em> <span class="math inline">\(w\)</span> que pertence a <span class="math inline">\(L\)</span> e que seja longa o suficiente, ou seja, <span class="math inline">\(|w| \geq p\)</span>. A escolha mais estratégica é <span class="math inline">\(w = a^p b^p\)</span>. Esta <em>string</em> claramente pertence a <span class="math inline">\(L\)</span> (o número de <span class="math inline">\(a\)</span>’s é igual ao de <span class="math inline">\(b\)</span>’s) e seu comprimento é <span class="math inline">\(2p\)</span>, que é maior ou igual a <span class="math inline">\(p\)</span>.</li>
 <li><strong>Divisão da String</strong>: de acordo com o lema, <span class="math inline">\(w\)</span> pode ser dividida em três partes, <span class="math inline">\(w=xyz\)</span>, que devem satisfazer as seguintes condições:
 <ol type="a">
 <li><span class="math inline">\(|y| &gt; 0\)</span>;</li>
@@ -1473,7 +1467,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <li>Portanto, <span class="math inline">\(w' = a^{p+k} b^p\)</span>.</li>
 <li>Como sabemos que <span class="math inline">\(k \geq 1\)</span>, o número de <span class="math inline">\(a\)</span>’s (<span class="math inline">\(p+k\)</span>) não é mais igual ao número de <span class="math inline">\(b\)</span>’s (<span class="math inline">\(p\)</span>). Logo, a <em>string</em> <span class="math inline">\(w' = a^{p+k} b^p\)</span> <strong>não pertence</strong> a <span class="math inline">\(L\)</span>.</li>
 </ol></li>
-<li><strong>Conclusão</strong>: chegamos a uma contradição. Nossa suposição inicial de que <span class="math inline">\(L\)</span> era regular nos levou, através do Lema do Bombeamento, à conclusão de que uma <em>string</em> gerada pelo bombeamento (<span class="math inline">\(w'\)</span>) deveria estar em <span class="math inline">\(L\)</span>, mas mostramos que ela viola a definição de <span class="math inline">\(L\)</span>. Portanto, a suposição inicial estava errada. A linguagem <span class="math inline">\(L = \{a^n b^n \mid n \geq 0\}\)</span> não é regular.</li>
+<li><strong>Conclusão</strong>: chegamos a uma contradição. Nossa suposição inicial de que <span class="math inline">\(L\)</span> era regular nos levou, por meio do Lema do Bombeamento, à conclusão de que uma <em>string</em> gerada pelo bombeamento (<span class="math inline">\(w'\)</span>) deveria estar em <span class="math inline">\(L\)</span>, mas mostramos que ela viola a definição de <span class="math inline">\(L\)</span>. Portanto, a suposição inicial estava errada. A linguagem <span class="math inline">\(L = \{a^n b^n \mid n \geq 0\}\)</span> não é regular.</li>
 </ol>
 <section id="por-que-o-lema-do-bombeamento-é-importante" class="level4" data-number="3.5.5.1">
 <h4 data-number="3.5.5.1" class="anchored" data-anchor-id="por-que-o-lema-do-bombeamento-é-importante"><span class="header-section-number">3.5.5.1</span> Por que o Lema do Bombeamento é Importante?</h4>
@@ -1497,7 +1491,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <li><p><strong>Prova usando o Lema do Bombeamento</strong>:</p></li>
 </ol>
 <p>Assumimos por contradição que <span class="math inline">\(L\)</span> é regular. Então existe uma constante <span class="math inline">\(p\)</span> tal que qualquer <em>string</em> <span class="math inline">\(w \in L\)</span> com <span class="math inline">\(|w| \geq p\)</span> pode ser dividida como <span class="math inline">\(w = xyz\)</span> satisfazendo: a. <span class="math inline">\(|y| &gt; 0\)</span>; b. <span class="math inline">\(|xy| \leq p\)</span>; c.&nbsp;<span class="math inline">\(xy^iz \in L\)</span> para todo <span class="math inline">\(i \geq 0\)</span>.</p>
-<p>Escolhemos <span class="math inline">\(w = a^p c^p \in L\)</span> (pois <span class="math inline">\(p + 2 \cdot 0 = p\)</span>). Como <span class="math inline">\(|xy| \leq p\)</span> e <span class="math inline">\(w\)</span> começa com <span class="math inline">\(p\)</span> símbolos <span class="math inline">\(a\)</span>, temos que <span class="math inline">\(y = a^k\)</span> para algum <span class="math inline">\(1 \leq k \leq p\)</span>.</p>
+<p>Escolhemos <span class="math inline">\(w = a^p c^p \in L\)</span> (neste caso, <span class="math inline">\(p + 2 \cdot 0 = p\)</span>). Como <span class="math inline">\(|xy| \leq p\)</span> e <span class="math inline">\(w\)</span> começa com <span class="math inline">\(p\)</span> símbolos <span class="math inline">\(a\)</span>, temos que <span class="math inline">\(y = a^k\)</span> para algum <span class="math inline">\(1 \leq k \leq p\)</span>.</p>
 <p>Para <span class="math inline">\(i = 2\)</span>: <span class="math inline">\(w' = xy^2z = a^{p+k}c^p\)</span></p>
 <p>Na <em>string</em> <span class="math inline">\(w'\)</span>: <span class="math inline">\(|w'|_a = p + k\)</span>, <span class="math inline">\(|w'|_b = 0\)</span>, <span class="math inline">\(|w'|_c = p\)</span></p>
 <p>A condição requer: <span class="math inline">\((p + k) + 2 \cdot 0 = p\)</span>, ou seja, <span class="math inline">\(p + k = p\)</span>, logo <span class="math inline">\(k = 0\)</span>.</p>
@@ -1551,8 +1545,8 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <ol type="1">
 <li><strong>Simplificação Estrutural</strong>:
 <ol type="a">
-<li>A expressão original, <span class="math inline">\(r_1 = (01)^*0(10)^*\)</span>, descreve a linguagem através de uma concatenação de três partes. Isso exige que qualquer <em>string</em> da linguagem seja mentalmente dividida em um prefixo de <span class="math inline">\((01)^*\)</span>, um <span class="math inline">\(0\)</span> central e um sufixo de <span class="math inline">\((10)^*\)</span>.</li>
-<li>A expressão <span class="math inline">\(r_2\)</span>, já comprovada como equivalente na letra (a), descreve a mesma linguagem como a união de dois padrões mais diretos. Essa forma é frequentemente considerada mais simples, pois representa a linguagem como <em>strings que pertencem ao padrão A <strong>OU</strong> ao padrão B</em>, o que pode ser mais fácil de analisar e implementar.</li>
+<li>A expressão original, <span class="math inline">\(r_1 = (01)^*0(10)^*\)</span>, descreve a linguagem por meio de uma concatenação de três partes. Isso exige que qualquer <em>string</em> da linguagem seja mentalmente dividida em um prefixo de <span class="math inline">\((01)^*\)</span>, um <span class="math inline">\(0\)</span> central e um sufixo de <span class="math inline">\((10)^*\)</span>.</li>
+<li>A expressão <span class="math inline">\(r_2\)</span>, já comprovada como equivalente na letra (a), descreve a mesma linguagem como a união de dois padrões mais diretos. Essa forma é frequentemente considerada mais simples por representar a linguagem como <em>strings que pertencem ao padrão A <strong>OU</strong> ao padrão B</em>, o que pode ser mais fácil de analisar e implementar.</li>
 </ol></li>
 <li><strong>Análise de Minimalidade</strong>:
 <ol type="a">
@@ -1619,8 +1613,8 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <ul>
 <li><span class="math inline">\(\( D_{nz} D \) (\epsilon \cup \text{ })\)</span>;</li>
 <li><span class="math inline">\(\(\)</span> corresponde ao símbolo literal <span class="math inline">\((\)</span>;</li>
-<li><span class="math inline">\(1\)</span> pertence a <span class="math inline">\(L(D_{nz})\)</span> pois <span class="math inline">\(1 \in \{1,2,3,4,5,6,7,8,9\}\)</span>;</li>
-<li><span class="math inline">\(1\)</span> pertence a <span class="math inline">\(L(D)\)</span> pois <span class="math inline">\(1 \in \{0,1,2,3,4,5,6,7,8,9\}\)</span>;</li>
+<li><span class="math inline">\(1\)</span> pertence a <span class="math inline">\(L(D_{nz})\)</span> neste caso, <span class="math inline">\(1 \in \{1,2,3,4,5,6,7,8,9\}\)</span>;</li>
+<li><span class="math inline">\(1\)</span> pertence a <span class="math inline">\(L(D)\)</span> neste caso, <span class="math inline">\(1 \in \{0,1,2,3,4,5,6,7,8,9\}\)</span>;</li>
 <li><span class="math inline">\(\)\)</span> corresponde ao símbolo literal <span class="math inline">\()\)</span>;</li>
 <li>O espaço pertence a <span class="math inline">\(L(\epsilon \cup \text{ })\)</span>;</li>
 <li>Portanto, <span class="math inline">\(w_{ddd} \in L(r_{ddd})\)</span>. Ok!</li>
@@ -1656,11 +1650,11 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <li><span class="math inline">\(|xy| \leq p\)</span>;</li>
 <li><span class="math inline">\(xy^iz \in L_1\)</span> para todo <span class="math inline">\(i \geq 0\)</span>.</li>
 </ul>
-<p><strong>Passo 3 - Escolha da string</strong>: Escolhemos <span class="math inline">\(w = a^pb^p \in L_1\)</span> (válida pois <span class="math inline">\(p \geq p \geq 0\)</span>).</p>
+<p><strong>Passo 3 - Escolha da string</strong>: Escolhemos <span class="math inline">\(w = a^pb^p \in L_1\)</span> (válida porque <span class="math inline">\(p \geq p \geq 0\)</span>).</p>
 <p><strong>Passo 4 - Análise da divisão</strong>: Como <span class="math inline">\(|xy| \leq p\)</span> e <span class="math inline">\(w\)</span> inicia com <span class="math inline">\(p\)</span> símbolos <span class="math inline">\(a\)</span> seguidos de <span class="math inline">\(p\)</span> símbolos <span class="math inline">\(b\)</span>, a substring <span class="math inline">\(xy\)</span> está inteiramente contida no bloco inicial de <span class="math inline">\(a\)</span>’s. Portanto, <span class="math inline">\(y = a^k\)</span> para algum <span class="math inline">\(k\)</span> com <span class="math inline">\(1 \leq k \leq p\)</span>.</p>
 <p><strong>Passo 5 - Teste do bombeamento</strong>: Consideramos <span class="math inline">\(i = 2\)</span>: <span class="math display">\[xy^2z = a^{p+k}b^p\]</span></p>
 <p><strong>Passo 6 - Verificação da condição</strong>: Para que <span class="math inline">\(xy^2z \in L_1\)</span>, devemos ter: <span class="math display">\[\text{número de } a\text{'s} \geq \text{número de } b\text{'s}\]</span> <span class="math display">\[p + k \geq p\]</span> <span class="math display">\[k \geq 0\]</span></p>
-<p>Como <span class="math inline">\(k \geq 1\)</span> (pois <span class="math inline">\(|y| &gt; 0\)</span>), a condição <span class="math inline">\(k \geq 0\)</span> é sempre satisfeita.</p>
+<p>Como <span class="math inline">\(k \geq 1\)</span> (porque <span class="math inline">\(|y| &gt; 0\)</span>), a condição <span class="math inline">\(k \geq 0\)</span> é sempre satisfeita.</p>
 <p><strong>Passo 7 - Teste com <span class="math inline">\(i = 0\)</span></strong>: Consideramos <span class="math inline">\(i = 0\)</span>: <span class="math display">\[xy^0z = xz = a^{p-k}b^p\]</span></p>
 <p>Para que <span class="math inline">\(xz \in L_1\)</span>, devemos ter: <span class="math display">\[p - k \geq p\]</span> <span class="math display">\[-k \geq 0\]</span> <span class="math display">\[k \leq 0\]</span></p>
 <p><strong>Passo 8 - Contradição</strong>: Temos <span class="math inline">\(k \geq 1\)</span> (de <span class="math inline">\(|y| &gt; 0\)</span>) e <span class="math inline">\(k \leq 0\)</span> (da condição de bombeamento), o que é uma contradição.</p>
@@ -1788,7 +1782,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 </ol>
 <ul>
 <li><strong>Regra</strong>: Reconhecer <code>//</code> e <code>/*</code> antes de qualquer outra análise</li>
-<li><strong>Justificativa</strong>: Comentários alteram fundamentalmente o processamento (podem “comentar” outros tokens)</li>
+<li><strong>Justificativa</strong>: Comentários alteram fundamentalmente o processamento (podem “comentar” outros <em>tokens</em>)</li>
 <li><strong>Implementação</strong>: Scanner deve verificar comentários primeiro em cada posição</li>
 </ul>
 <ol start="2" type="1">
@@ -1810,7 +1804,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <ul>
 <li><strong>Regra</strong>: Sempre consumir a maior sequência válida como número</li>
 <li><strong>Ordem de tentativa</strong>: <span class="math inline">\(r_{sci} \succ r_{dec} \succ r_{int}\)</span></li>
-<li><strong>Exemplo</strong>: <code>1.5e-3</code> deve ser reconhecido como um token científico, não como três tokens separados</li>
+<li><strong>Exemplo</strong>: <code>1.5e-3</code> deve ser reconhecido como um token científico, não como três <em>tokens</em> separados</li>
 </ul>
 <ol start="4" type="1">
 <li><strong>Nível 4: Operadores Compostos (Regra do Maior Match)</strong></li>
@@ -2242,7 +2236,7 @@ Token: NUMERO | Valor: '42'</code></pre>
 <h2 data-number="3.9" class="anchored" data-anchor-id="exercício-6-classes-de-equivalência"><span class="header-section-number">3.9</span> Exercício 6: Classes de Equivalência</h2>
 <p>Considere a linguagem <span class="math inline">\(L = \{w \in \{0,1\}^* \mid w \text{ contém um número par de } 0\text{'s e um número ímpar de } 1\text{'s}\}\)</span>.</p>
 <ol type="a">
-<li>Determine quantas classes de equivalência existem na relação de Myhill-Nerode para <span class="math inline">\(L\)</span> (ver <a href="apend1.html" class="quarto-xref"><span>Chapter 9</span></a>).</li>
+<li>Determine quantas classes de equivalência existem na relação de Myhill-Nerode para <span class="math inline">\(L\)</span> (ver <a href="apend1.html" class="quarto-xref"><span>Chapter 8</span></a>).</li>
 <li>Construa o autômato finito correspondente.</li>
 </ol>
 <p><strong>Solução Letra a</strong></p>
@@ -2303,7 +2297,7 @@ Token: NUMERO | Valor: '42'</code></pre>
 <li><strong>Prova usando Lema do Bombeamento</strong>:</li>
 </ol>
 <p>Assumimos que <span class="math inline">\(L\)</span> é regular. Seja <span class="math inline">\(p\)</span> a constante do bombeamento.</p>
-<p>Escolhemos <span class="math inline">\(w = 0^p1^{2p}0^p \in L\)</span> (pois <span class="math inline">\(p + p = 2p\)</span>).</p>
+<p>Escolhemos <span class="math inline">\(w = 0^p1^{2p}0^p \in L\)</span> (porque <span class="math inline">\(p + p = 2p\)</span>).</p>
 <p>Como <span class="math inline">\(|w| = 4p \geq p\)</span>, podemos dividir <span class="math inline">\(w = xyz\)</span> onde: - <span class="math inline">\(|y| &gt; 0\)</span> - <span class="math inline">\(|xy| \leq p\)</span><br>
 - <span class="math inline">\(xy^iz \in L\)</span> para todo <span class="math inline">\(i \geq 0\)</span></p>
 <p>Como <span class="math inline">\(|xy| \leq p\)</span> e <span class="math inline">\(w\)</span> começa com <span class="math inline">\(p\)</span> zeros, temos <span class="math inline">\(y = 0^m\)</span> para algum <span class="math inline">\(1 \leq m \leq p\)</span>.</p>

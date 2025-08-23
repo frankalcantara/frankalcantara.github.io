@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 5&nbsp; Gramáticas e Linguagens Livres de Contexto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-parsersLL1.html" rel="next">
+<link href="./02-lexico.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./04-Gramaticas.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projeto da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#hierarquia-de-chomsky-história-e-contexto" id="toc-hierarquia-de-chomsky-história-e-contexto" class="nav-link active" data-scroll-target="#hierarquia-de-chomsky-história-e-contexto"><span class="header-section-number">5.1</span> Hierarquia de Chomsky: História e Contexto</a>
+  <ul class="collapse">
+  <li><a href="#a-revolução-cognitiva-e-o-ambiente-do-mit" id="toc-a-revolução-cognitiva-e-o-ambiente-do-mit" class="nav-link" data-scroll-target="#a-revolução-cognitiva-e-o-ambiente-do-mit"><span class="header-section-number">5.1.1</span> A revolução cognitiva e o ambiente do MIT</a></li>
+  <li><a href="#a-elegância-matemática-dos-quatro-tipos" id="toc-a-elegância-matemática-dos-quatro-tipos" class="nav-link" data-scroll-target="#a-elegância-matemática-dos-quatro-tipos"><span class="header-section-number">5.1.2</span> A elegância matemática dos quatro tipos</a></li>
+  <li><a href="#aplicações-práticas-em-compiladores-e-processamento-de-linguagem" id="toc-aplicações-práticas-em-compiladores-e-processamento-de-linguagem" class="nav-link" data-scroll-target="#aplicações-práticas-em-compiladores-e-processamento-de-linguagem"><span class="header-section-number">5.1.3</span> Aplicações práticas em compiladores e processamento de linguagem</a></li>
+  <li><a href="#o-poder-e-as-limitações-das-linguagens-regulares-tipo-3" id="toc-o-poder-e-as-limitações-das-linguagens-regulares-tipo-3" class="nav-link" data-scroll-target="#o-poder-e-as-limitações-das-linguagens-regulares-tipo-3"><span class="header-section-number">5.1.4</span> O Poder e as Limitações das Linguagens Regulares (Tipo 3)</a></li>
+  <li><a href="#a-ascensão-às-linguagens-livres-de-contexto-tipo-2" id="toc-a-ascensão-às-linguagens-livres-de-contexto-tipo-2" class="nav-link" data-scroll-target="#a-ascensão-às-linguagens-livres-de-contexto-tipo-2"><span class="header-section-number">5.1.5</span> A Ascensão às Linguagens Livres de Contexto (Tipo 2)</a></li>
+  <li><a href="#exemplos-práticos-que-distinguem-as-duas-classes" id="toc-exemplos-práticos-que-distinguem-as-duas-classes" class="nav-link" data-scroll-target="#exemplos-práticos-que-distinguem-as-duas-classes"><span class="header-section-number">5.1.6</span> Exemplos Práticos que Distinguem as Duas Classes</a></li>
+  </ul></li>
+  <li><a href="#sec-anatomia-gramaticas-livres-de-contexto" id="toc-sec-anatomia-gramaticas-livres-de-contexto" class="nav-link" data-scroll-target="#sec-anatomia-gramaticas-livres-de-contexto"><span class="header-section-number">5.2</span> A Anatomia das Gramáticas Livres de Contexto</a>
+  <ul class="collapse">
+  <li><a href="#exemplo-canônico-a-linguagem-dos-palíndromos" id="toc-exemplo-canônico-a-linguagem-dos-palíndromos" class="nav-link" data-scroll-target="#exemplo-canônico-a-linguagem-dos-palíndromos"><span class="header-section-number">5.2.1</span> Exemplo Canônico: A Linguagem dos Palíndromos</a></li>
+  <li><a href="#sec-execicios-derivacao" id="toc-sec-execicios-derivacao" class="nav-link" data-scroll-target="#sec-execicios-derivacao"><span class="header-section-number">5.2.2</span> Exercícios de Derivação</a></li>
+  </ul></li>
+  <li><a href="#sec-notacao-BNF" id="toc-sec-notacao-BNF" class="nav-link" data-scroll-target="#sec-notacao-BNF"><span class="header-section-number">5.3</span> A Notação <span class="math inline">\(BNF\)</span></a>
+  <ul class="collapse">
+  <li><a href="#contexto-histórico-e-desenvolvimento" id="toc-contexto-histórico-e-desenvolvimento" class="nav-link" data-scroll-target="#contexto-histórico-e-desenvolvimento"><span class="header-section-number">5.3.1</span> Contexto Histórico e Desenvolvimento</a></li>
+  <li><a href="#estrutura-e-componentes-da-notação-bnf" id="toc-estrutura-e-componentes-da-notação-bnf" class="nav-link" data-scroll-target="#estrutura-e-componentes-da-notação-bnf"><span class="header-section-number">5.3.2</span> Estrutura e Componentes da Notação <span class="math inline">\(BNF\)</span></a></li>
+  <li><a href="#exemplo-fundamental-expressões-aritméticas-simples" id="toc-exemplo-fundamental-expressões-aritméticas-simples" class="nav-link" data-scroll-target="#exemplo-fundamental-expressões-aritméticas-simples"><span class="header-section-number">5.3.3</span> Exemplo Fundamental: Expressões Aritméticas Simples</a></li>
+  <li><a href="#comparação-com-gramáticas-livres-de-contexto" id="toc-comparação-com-gramáticas-livres-de-contexto" class="nav-link" data-scroll-target="#comparação-com-gramáticas-livres-de-contexto"><span class="header-section-number">5.3.4</span> Comparação com Gramáticas Livres de Contexto</a></li>
+  <li><a href="#aplicações-e-influência" id="toc-aplicações-e-influência" class="nav-link" data-scroll-target="#aplicações-e-influência"><span class="header-section-number">5.3.5</span> Aplicações e Influência</a></li>
+  </ul></li>
+  <li><a href="#geração-de-sentenças-derivações-árvores-e-ambiguidade" id="toc-geração-de-sentenças-derivações-árvores-e-ambiguidade" class="nav-link" data-scroll-target="#geração-de-sentenças-derivações-árvores-e-ambiguidade"><span class="header-section-number">5.4</span> Geração de Sentenças: Derivações, Árvores e Ambiguidade</a>
+  <ul class="collapse">
+  <li><a href="#a-construção-de-árvores-de-derivação" id="toc-a-construção-de-árvores-de-derivação" class="nav-link" data-scroll-target="#a-construção-de-árvores-de-derivação"><span class="header-section-number">5.4.1</span> A Construção de Árvores de Derivação</a></li>
+  </ul></li>
+  <li><a href="#o-problema-da-ambiguidade-em-gramáticas-formais" id="toc-o-problema-da-ambiguidade-em-gramáticas-formais" class="nav-link" data-scroll-target="#o-problema-da-ambiguidade-em-gramáticas-formais"><span class="header-section-number">5.5</span> O Problema da Ambiguidade em Gramáticas Formais</a>
+  <ul class="collapse">
+  <li><a href="#características-e-taxonomia-da-ambiguidade" id="toc-características-e-taxonomia-da-ambiguidade" class="nav-link" data-scroll-target="#características-e-taxonomia-da-ambiguidade"><span class="header-section-number">5.5.1</span> Características e Taxonomia da Ambiguidade</a></li>
+  </ul></li>
+  <li><a href="#técnicas-de-eliminação-de-ambiguidade" id="toc-técnicas-de-eliminação-de-ambiguidade" class="nav-link" data-scroll-target="#técnicas-de-eliminação-de-ambiguidade"><span class="header-section-number">5.6</span> Técnicas de Eliminação de Ambiguidade</a>
+  <ul class="collapse">
+  <li><a href="#reescrita-sistemática-da-gramática" id="toc-reescrita-sistemática-da-gramática" class="nav-link" data-scroll-target="#reescrita-sistemática-da-gramática"><span class="header-section-number">5.6.1</span> Reescrita Sistemática da Gramática</a></li>
+  <li><a href="#declarações-explícitas-de-precedência-e-associatividade" id="toc-declarações-explícitas-de-precedência-e-associatividade" class="nav-link" data-scroll-target="#declarações-explícitas-de-precedência-e-associatividade"><span class="header-section-number">5.6.2</span> Declarações Explícitas de Precedência e Associatividade</a></li>
+  <li><a href="#detecção-sistemática-de-ambiguidade" id="toc-detecção-sistemática-de-ambiguidade" class="nav-link" data-scroll-target="#detecção-sistemática-de-ambiguidade"><span class="header-section-number">5.6.3</span> Detecção Sistemática de Ambiguidade</a></li>
+  </ul></li>
+  <li><a href="#autômatos-com-pilha-a-máquina-por-trás-das-linguagens-livres-de-contexto" id="toc-autômatos-com-pilha-a-máquina-por-trás-das-linguagens-livres-de-contexto" class="nav-link" data-scroll-target="#autômatos-com-pilha-a-máquina-por-trás-das-linguagens-livres-de-contexto"><span class="header-section-number">5.7</span> Autômatos com Pilha: A Máquina por Trás das Linguagens Livres de Contexto</a>
+  <ul class="collapse">
+  <li><a href="#a-equivalência-fundamental" id="toc-a-equivalência-fundamental" class="nav-link" data-scroll-target="#a-equivalência-fundamental"><span class="header-section-number">5.7.1</span> A Equivalência Fundamental</a></li>
+  </ul></li>
+  <li><a href="#as-fronteiras-do-contexto-livre-o-lema-do-bombeamento" id="toc-as-fronteiras-do-contexto-livre-o-lema-do-bombeamento" class="nav-link" data-scroll-target="#as-fronteiras-do-contexto-livre-o-lema-do-bombeamento"><span class="header-section-number">5.8</span> As Fronteiras do Contexto Livre: O Lema do Bombeamento</a>
+  <ul class="collapse">
+  <li><a href="#aplicação-prática-prova-de-que-l-anbncn-mid-n-geq-0-não-é-livre-de-contexto" id="toc-aplicação-prática-prova-de-que-l-anbncn-mid-n-geq-0-não-é-livre-de-contexto" class="nav-link" data-scroll-target="#aplicação-prática-prova-de-que-l-anbncn-mid-n-geq-0-não-é-livre-de-contexto"><span class="header-section-number">5.8.1</span> Aplicação Prática: Prova de que <span class="math inline">\(L = \{a^nb^nc^n \mid n \geq 0\}\)</span> não é Livre de Contexto</a></li>
+  </ul></li>
+  <li><a href="#os-analisadores-sintáticos" id="toc-os-analisadores-sintáticos" class="nav-link" data-scroll-target="#os-analisadores-sintáticos"><span class="header-section-number">5.9</span> Os Analisadores Sintáticos</a>
+  <ul class="collapse">
+  <li><a href="#estratégias-de-análise-descendente-top-down" id="toc-estratégias-de-análise-descendente-top-down" class="nav-link" data-scroll-target="#estratégias-de-análise-descendente-top-down"><span class="header-section-number">5.9.1</span> Estratégias de Análise Descendente (<em>Top-Down</em>)</a></li>
+  <li><a href="#estratégias-de-análise-ascendente-bottom-up" id="toc-estratégias-de-análise-ascendente-bottom-up" class="nav-link" data-scroll-target="#estratégias-de-análise-ascendente-bottom-up"><span class="header-section-number">5.9.2</span> Estratégias de Análise Ascendente (Bottom-Up)</a></li>
+  <li><a href="#sec-impacto-ambiguidade-compilacao" id="toc-sec-impacto-ambiguidade-compilacao" class="nav-link" data-scroll-target="#sec-impacto-ambiguidade-compilacao"><span class="header-section-number">5.9.3</span> Impacto da Ambiguidade no Processo de Compilação</a></li>
+  <li><a href="#automatizando-a-construção-ferramentas-geradoras-de-parsers" id="toc-automatizando-a-construção-ferramentas-geradoras-de-parsers" class="nav-link" data-scroll-target="#automatizando-a-construção-ferramentas-geradoras-de-parsers"><span class="header-section-number">5.9.4</span> Automatizando a Construção: Ferramentas Geradoras de Parsers</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/04-Gramaticas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./04-Gramaticas.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-lingagens-livres-de-contexto" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>No campo da ciência da computação teórica, a Hierarquia de Chomsky serve como o principal sistema de classificação para linguagens formais. Proposta por <a href="https://en.wikipedia.org/wiki/Noam_Chomsky">Noam Chomsky</a>, esta hierarquia organiza as linguagens em uma série de quatro níveis aninhados, cada um sendo um subconjunto do nível anterior <span class="math inline">\(\text{Tipo 3} \subset \text{Tipo 2} \subset \text{Tipo 1} \subset \text{Tipo 0}\)</span>. A classificação baseia-se na complexidade das regras gramaticais necessárias para gerar as <em>strings</em> de uma linguagem, estabelecendo uma correspondência direta entre a classe da linguagem, o tipo de gramática que a gera e o modelo de autômato capaz de reconhecê-la. Os níveis são:</p>
+<ul>
+<li><strong>Tipo 3: Linguagens Regulares</strong>, geradas por gramáticas regulares e reconhecidas por autômatos finitos.</li>
+<li><strong>Tipo 2: Linguagens Livres de Contexto</strong>, geradas por Gramáticas Livres de Contexto e reconhecidas por autômatos com pilha.</li>
+<li><strong>Tipo 1: Linguagens Sensíveis ao Contexto</strong>, geradas por gramáticas sensíveis ao contexto e reconhecidas por autômatos linearmente limitados.</li>
+<li><strong>Tipo 0: Linguagens Recursivamente Enumeráveis</strong>, geradas por gramáticas irrestritas e reconhecidas por Máquinas de Turing.</li>
+</ul>
+<p>Há uma história rica e complexa por trás do desenvolvimento da Hierarquia de Chomsky, que reflete as mudanças nas necessidades e nas compreensões da linguística e da computação ao longo do tempo.</p>
+<section id="hierarquia-de-chomsky-história-e-contexto" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="hierarquia-de-chomsky-história-e-contexto"><span class="header-section-number">5.1</span> Hierarquia de Chomsky: História e Contexto</h2>
+<p>A Hierarquia de Chomsky representa um dos marcos mais elegantes da ciência do século XX, estabelecendo pontes entre linguística, matemática e ciência da computação. <strong>Desenvolvida por Noam Chomsky entre 1956 e 1959</strong>, esta classificação não apenas transformou os estudos linguísticos de uma disciplina descritiva em uma ciência formal rigorosa, mas também <strong>forneceu as bases teóricas para a construção de compiladores e o processamento computacional de linguagens</strong>. A hierarquia emergiu de uma convergência única de fatores históricos: a revolução cognitiva dos anos 1950, o desenvolvimento da teoria da computação, e a genialidade de um jovem linguista que soube sintetizar influências matemáticas diversas em uma estrutura unificada que perdura até hoje.</p>
+<p>A história da Hierarquia de Chomsky começa com um encontro transformador que ocorreu em 1947, quando Chomsky, então com 19 anos e considerando abandonar a universidade, conheceu <a href="https://en.wikipedia.org/wiki/Zellig_Harris">Zellig S. Harris</a> na Universidade da Pensilvânia. Harris era um dos fundadores da linguística estrutural americana e tinha estabelecido o primeiro departamento moderno de linguística dos Estados Unidos em 1946. Sob a orientação de Harris, Chomsky também estudou matemática com <a href="https://en.wikipedia.org/wiki/Nathan_Fine">Nathan Fine</a> em Harvard. <strong>Essas influências foram cruciais para moldar sua abordagem aos sistemas formais e metodologia científica</strong>. Sua tese de mestrado de 1951, <em>A Morfofonêmica do Hebraico Moderno</em>, e especialmente seu trabalho em <em>A Estrutura Lógica da Teoria Linguística</em> (LSLT), escrito enquanto era fellow júnior em Harvard (1951-55), começaram a transformar a abordagem estrutural de Harris em algo inteiramente novo.</p>
+<section id="a-revolução-cognitiva-e-o-ambiente-do-mit" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="a-revolução-cognitiva-e-o-ambiente-do-mit"><span class="header-section-number">5.1.1</span> A revolução cognitiva e o ambiente do MIT</h3>
+<p>Os anos 1950 representavam um período de fermentação intelectual que se tornaria conhecido como a <strong>Revolução Cognitiva</strong>. <a href="https://en.wikipedia.org/wiki/George_Armitage_Miller">George Miller</a>, uma das figuras-chave, datou o início dessa revolução em 11 de setembro de 1956, quando pesquisadores de psicologia experimental, ciência da computação e linguística teórica apresentaram trabalhos sobre temas relacionados à ciência cognitiva em uma reunião do <em>Special Interest Group in Information Theory</em> no MIT.</p>
+<p>Durante esse período, vários paradigmas dominantes estavam sendo desafiados. O behaviorismo era a doutrina dominante em psicologia e linguística, enfatizando organização de dados e classificação taxonômica enquanto rejeitava o estudo de estados mentais internos. A linguística estrutural, liderada por figuras como Leonard Bloomfield, tratava a linguagem como um fenômeno social estudado por meio de análise de corpus.</p>
+<p>A Hierarquia de Chomsky emergiu de uma convergência sofisticada de lógica matemática, teoria dos autômatos e teoria das funções recursivas desenvolvidas entre as décadas de 1930 e 1950. Chomsky construiu sistematicamente sobre trabalhos matemáticos anteriores, criando uma síntese notável.</p>
+<p><strong>O trabalho de <a href="https://en.wikipedia.org/wiki/Emil_Leon_Post">Emil Post</a> (1936, 1944)</strong> foi fundamental. Post desenvolveu <em>sistemas canônicos de Post</em> usando técnicas de reescrita de <em>strings</em> que se tornaram fundamentais para a abordagem de Chomsky. Seu trabalho de 1936 <em>Processos combinatórios finitos – Formulação 1</em> criou modelos computacionais essencialmente equivalentes às máquinas de Turing. Post queria <em>derivar mecanicamente inferências de uma sentença axiomática inicial</em>, e Chomsky aplicou diretamente essa estrutura lógica para descrever conjuntos de <em>strings</em> na linguagem humana.</p>
+<p><strong>O modelo de <a href="https://www.historyofinformation.com/detail.php?entryid=782">McCulloch-Pitt</a>s de 1943</strong> forneceu a ponte computacional. Seu trabalho <em>Um Cálculo Lógico das Ideias Imanentes na Atividade Nervosa</em> ofereceu o primeiro modelo matemático conectando redes neurais à computação, levando diretamente à noção de autômatos finitos que se tornaram o Tipo-3 na Hierarquia de Chomsky. Eles demonstraram que neurônios poderiam funcionar como portas lógicas, estabelecendo a conexão entre sistemas biológicos e modelos computacionais formais.</p>
+<p><strong>O trabalho de <a href="https://en.wikipedia.org/wiki/Stephen_Cole_Kleene">Stephen Cole Kleene</a></strong> estabeleceu a equivalência fundamental entre expressões regulares e máquinas de estado finito (Teorema de Kleene), fornecendo a base matemática para as gramáticas do Tipo-3. Suas propriedades de fechamento para linguagens regulares sob união, concatenação e operação estrela de Kleene criaram o framework teórico necessário.</p>
+<p>A estrutura teórica se baseou explicitamente na <strong>teoria das funções recursivas</strong>. Chomsky declarou que a gramática gerativa se desenvolveu dentro de <em>uma teoria matemática particular, a saber, a teoria das funções recursivas</em>. Isso foi importante porque a teoria das funções recursivas nas décadas de 1930-1940 formalizou a noção de <em>computação</em>, construindo <strong><em>sobre a tese de Church-Turing</em></strong> e as provas de equivalência entre diferentes modelos de computação.</p>
+</section>
+<section id="a-elegância-matemática-dos-quatro-tipos" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="a-elegância-matemática-dos-quatro-tipos"><span class="header-section-number">5.1.2</span> A elegância matemática dos quatro tipos</h3>
+<p>O desenvolvimento dos <strong>quatro tipos específicos de gramáticas emergiu da aplicação de restrições matemáticas crescentes</strong>. A classificação não foi arbitrária, mas resultou de uma lógica matemática rigorosa que Chomsky articulou em seus trabalhos seminais de 1956 (<em>Três Modelos para a Descrição da Linguagem</em>) e 1959 (<em>Sobre Certas Propriedades Formais das Gramáticas</em>).</p>
+<p><strong>A estrutura hierárquica aninhada</strong> representa uma beleza matemática notável. Cada classe é um subconjunto próprio da próxima classe menos restritiva: <span class="math inline">\(\text{Tipo 3} ⊂ \text{Tipo 2} ⊂ \text{Tipo 1} ⊂ \text{Tipo 0}\)</span>. Cada tipo de gramática corresponde exatamente a uma classe de autômatos com poder computacional correspondente, criando uma correspondência perfeita entre restrições gramaticais e modelos computacionais.</p>
+<ul>
+<li><p>O <strong>Tipo 0 (Gramáticas Irrestritas)</strong> não possui restrições nas regras de produção (<span class="math inline">\(\alpha \rightarrow \beta\)</span>), sendo equivalente às máquinas de Turing e capaz de gerar linguagens recursivamente enumeráveis.</p></li>
+<li><p>O <strong>Tipo 1 (Gramáticas Sensíveis ao Contexto)</strong> adiciona a propriedade não-contrativa (<span class="math inline">\(\mid \alpha \mid ≤ \mid \beta \mid\)</span>), correspondendo aos autômatos linearmente limitados.</p></li>
+<li><p>O <strong>Tipo 2 (Gramáticas Livres de Contexto)</strong> restringe o lado esquerdo a um único não-terminal (<span class="math inline">\(A \rightarrow γ\)</span>), equivalendo aos autômatos de pilha.</p></li>
+<li><p>O <strong>Tipo 3 (Gramáticas Regulares)</strong> impõe as restrições mais específicas em padrões terminal/não-terminal, correspondendo aos autômatos finitos.</p></li>
+</ul>
+<p><strong>A elegância conceitual reside na relação inversa</strong> entre liberdade gramatical e complexidade computacional: gramáticas mais restritas (Tipo 3) requerem menor poder computacional (autômatos finitos), enquanto gramáticas menos restritas (Tipo 0) necessitam do maior poder computacional (máquinas de Turing).</p>
+<p>Na ciência da computação, a hierarquia estabeleceu <strong>as bases matemáticas para a teoria das linguagens formais</strong>, criando uma classificação sistemática que permanece fundamental para a ciência da computação teórica. A realização de Chomsky de que <em>a descrição de um tipo de autômato e de um tipo de linguagem estão relacionadas</em> conectou campos anteriormente desconectados da linguística e computação.</p>
+</section>
+<section id="aplicações-práticas-em-compiladores-e-processamento-de-linguagem" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="aplicações-práticas-em-compiladores-e-processamento-de-linguagem"><span class="header-section-number">5.1.3</span> Aplicações práticas em compiladores e processamento de linguagem</h3>
+<p>Na análise léxica, gramáticas do Tipo-3 (regulares) e autômatos finitos tornaram-se fundamentais para <em>tokenizar</em> código fonte, identificando palavras-chave, <em>strings</em> e identificadores. Na análise sintática, gramáticas do Tipo-2 (livres de contexto) formam a base teórica para analisar a maioria das linguagens de programação, lidando com estruturas aninhadas como parênteses, chamadas de função e estruturas de controle.</p>
+<p><strong>Geradores de parser modernos usam especificações de Gramáticas Livres de Contextos</strong> para gerar automaticamente parsers, com ferramentas implementando diretamente conceitos da Hierarquia de Chomsky. Classes de Gramáticas Livres de Contexto (<strong>LL</strong>, <strong>LR</strong>) tornaram-se padrão para parsing eficiente, tornando a compilação tratável mantendo poder expressivo suficiente.</p>
+<p>A <strong>Forma de Backus-Naur (<span class="math inline">\(BNF\)</span>)</strong> desenvolvida por <a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a> e <a href="https://en.wikipedia.org/wiki/Peter_Naur">Peter Naur</a> para <strong>ALGOL 60</strong> foi criada com conhecimento explícito do trabalho anterior de Chomsky sobre Gramáticas Livres de Contexto, tornando-se o padrão da indústria para definir sintaxe de linguagens de programação e implementando diretamente conceitos de gramática formal de Chomsky.</p>
+<p>Não bastasse o que a atenta leitora viu até o momento, cada nível da hierarquia possui propriedades de complexidade computacional bem definidas. Linguagens regulares (Tipo 3) podem ser reconhecidas em tempo linear <span class="math inline">\(O(n)\)</span> com espaço constante. Linguagens livres de contexto (Tipo 2) são decidíveis em tempo polinomial <span class="math inline">\(O(n^3)\)</span> usando o algoritmo CYK, formando a base para a maioria dos compiladores de linguagens de programação. Linguagens sensíveis ao contexto (Tipo 1) são PSPACE-completas, com complexidade de tempo exponencial no pior caso, mas complexidade de espaço linear. Linguagens recursivamente enumeráveis (Tipo 0) são indecidíveis em geral.</p>
+<div class="{callout-tip}">
+<p><strong>Algoritmo CYK (Cocke-Younger-Kasami)</strong></p>
+<p>O algoritmo CYK é um método de programação dinâmica para determinar se uma <em>string</em> pertence a uma linguagem livre de contexto. Desenvolvido independentemente por Cocke, Younger e Kasami, o algoritmo requer que a gramática esteja na Forma Normal de Chomsky, na qual todas as produções têm a forma <span class="math inline">\(A \rightarrow BC\)</span> ou <span class="math inline">\(A \rightarrow a\)</span>.</p>
+<p>O algoritmo constrói uma tabela triangular de tamanho <span class="math inline">\(n \times n\)</span>, na qual <span class="math inline">\(n\)</span> é o comprimento da <em>string</em> de entrada. Cada entrada <span class="math inline">\((i,j)\)</span> da tabela indica quais não-terminais podem derivar a sub_string_ que inicia na posição <span class="math inline">\(i\)</span> com comprimento <span class="math inline">\(j\)</span>. O preenchimento ocorre bottom-up: primeiro as <em>substrings</em> de comprimento 1, depois 2, e assim sucessivamente até <span class="math inline">\(n\)</span>.</p>
+<p>A complexidade <span class="math inline">\(O(n^3)\)</span> resulta de três loops aninhados: dois para percorrer a tabela (<span class="math inline">\(O(n^2)\)</span> entradas) e um terceiro para testar todas as possíveis divisões de cada sub_string_ (<span class="math inline">\(O(n)\)</span> divisões por entrada). Esta complexidade polinomial torna o CYK prático para parsing de linguagens de programação, sendo fundamental na construção de parsers bottom-up.</p>
+</div>
+<div class="{callout-tip}">
+<p><strong>PSPACE-Completas</strong></p>
+<p>PSPACE é a classe de complexidade que contém todos os problemas de decisão solucionáveis por uma máquina de Turing determinística usando espaço polinomial. Um problema é PSPACE-completo se pertence ao PSPACE e qualquer problema em PSPACE pode ser reduzido a ele em tempo polinomial.</p>
+<p>As linguagens sensíveis ao contexto (Tipo 1) são PSPACE-completas porque seu reconhecimento requer espaço proporcional ao comprimento da entrada, mas pode demandar tempo exponencial. Isso ocorre porque um autômato linearmente limitado (que reconhece essas linguagens) possui número finito de configurações possíveis, mas esse número cresce exponencialmente com o tamanho da entrada.</p>
+<p>A aparente contradição entre “espaço linear” e “PSPACE-completo” se resolve considerando que PSPACE inclui problemas que usam espaço polinomial, e espaço linear é um caso particular de espaço polinomial (<span class="math inline">\(O(n) \subset O(n^k)\)</span>). O tempo exponencial surge porque, mesmo com espaço limitado, o número de estados alcançáveis pode crescer exponencialmente, exigindo exploração exaustiva no pior caso.</p>
+</div>
+<p>Além disso, os lemas de bombeamento para cada classe fornecem ferramentas matemáticas para provar que linguagens NÃO pertencem às classes inferiores. As propriedades de fechamento variam sistematicamente: <strong>linguagens regulares são fechadas sob todas as operações padrão, linguagens livres de contexto são fechadas sob união, concatenação e estrela de Kleene mas NÃO sob interseção e complemento</strong>.</p>
+</section>
+<section id="o-poder-e-as-limitações-das-linguagens-regulares-tipo-3" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="o-poder-e-as-limitações-das-linguagens-regulares-tipo-3"><span class="header-section-number">5.1.4</span> O Poder e as Limitações das Linguagens Regulares (Tipo 3)</h3>
+<p>As linguagens regulares representam a classe mais fundamental e restrita da hierarquia. Elas são formalmente definidas como o conjunto de linguagens que podem ser descritas por expressões regulares ou, equivalentemente, geradas por gramáticas regulares.</p>
+<p>A estrutura de uma gramática regular é estritamente limitada. Suas regras de produção, que ditam como os símbolos podem ser reescritos, devem aderir a um formato rígido. Em uma gramática linear à direita, por exemplo, todas as regras devem ser da forma <span class="math inline">\(A \rightarrow tN\)</span> ou <span class="math inline">\(A \rightarrow t\)</span>, na qual <span class="math inline">\(A\)</span> e <span class="math inline">\(N\)</span> são símbolos não terminais e <span class="math inline">\(t\)</span> é uma <em>string</em> de símbolos terminais que pode ser vazia. Uma restrição similar se aplica às gramáticas lineares à esquerda. Esta limitação estrutural não é meramente uma convenção; ela é a fonte da principal limitação computacional das linguagens regulares: a incapacidade de modelar dependências aninhadas ou recursivas.</p>
+<p>O autômato finito, o reconhecedor para a classe das linguagens regulares, opera sem uma memória externa; seu único <em>histórico</em> está contido no estado atual em que se encontra. Consequentemente, ele não pode <em>lembrar</em> ou <em>contar</em> ocorrências de símbolos para garantir correspondências em uma <em>string</em>. O exemplo canônico das limitações de um autômato finito são os parênteses aninhados. Um autômato finito não pode verificar se uma <em>string</em> contém um número igual de parênteses abertos e fechados se estes parênteses puderem ser aninhados.</p>
+</section>
+<section id="a-ascensão-às-linguagens-livres-de-contexto-tipo-2" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="a-ascensão-às-linguagens-livres-de-contexto-tipo-2"><span class="header-section-number">5.1.5</span> A Ascensão às Linguagens Livres de Contexto (Tipo 2)</h3>
+<p>A necessidade de modelar estruturas sintáticas mais complexas, como expressões aritméticas com parênteses aninhados, blocos de código delimitados (´begin´…´end´) ou estruturas de dados recursivas, revela a insuficiência das linguagens regulares. Para superar essas limitações, ascendemos na hierarquia para as linguagens livres de contexto.</p>
+<p>As Linguagens Livres de Contexto formam um superconjunto estrito das linguagens regulares; toda linguagem regular é, por definição, livre de contexto, mas o inverso não é verdadeiro. O poder expressivo adicional das Linguagens Livres de Contexto emana diretamente de uma flexibilização nas regras de produção de suas gramáticas. Em uma Gramática Livre de Contexto, uma regra de produção tem a forma <span class="math inline">\(A \rightarrow \beta\)</span>, na qual <span class="math inline">\(A\)</span> é um único símbolo não-terminal e <span class="math inline">\(\beta\)</span> é uma <em>string</em> qualquer de símbolos terminais e não terminais. A ausência de restrições sobre a posição dos não terminais em <span class="math inline">\(\beta\)</span> permite a definição de recursão central, como na regra <span class="math inline">\(S \rightarrow aSb\)</span>, que é a chave para modelar estruturas aninhadas.</p>
+</section>
+<section id="exemplos-práticos-que-distinguem-as-duas-classes" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="exemplos-práticos-que-distinguem-as-duas-classes"><span class="header-section-number">5.1.6</span> Exemplos Práticos que Distinguem as Duas Classes</h3>
+<p>A distinção teórica entre essas duas classes é melhor ilustrada pelo exemplo canônico da linguagem <span class="math inline">\(L={a^n b^n \mid n \geq 0}\)</span>, que consiste em <strong>strings</strong> com um número de <code>a</code>s seguido pelo mesmo número de <code>b</code>s.</p>
+<p>Esta linguagem não é regular. A tentativa de construir um autômato finito para reconhecê-la falha porque a máquina precisaria de uma quantidade infinita de estados para <em>lembrar</em> o número exato de <code>a</code>s lidos e garantir que o número de <code>b</code>s corresponda. Uma prova formal de que <span class="math inline">\(L\)</span> não é uma linguagem regular pode ser rigorosamente construída usando o Lema do Bombeamento para linguagens regulares. Este lema afirma que, para qualquer <em>string</em> suficientemente longa em uma linguagem regular, existe uma sub_string_ que pode ser <em>bombeada</em> (repetida um número arbitrário de vezes) e a nova <em>string</em> resultante ainda pertencerá à linguagem. Ao aplicar o lema à <em>string</em> com <span class="math inline">\(p\)</span> ’a’s seguidos de <span class="math inline">\(p\)</span> ’b’s é a <span class="math inline">\(a^pb^p\)</span>, no qual <span class="math inline">\(p\)</span> é o comprimento de bombeamento, a sub_string_ bombeada consistirá inteiramente de <code>a</code>s, quebrando o equilíbrio entre <code>a</code>s e <code>b</code>s e provando que a linguagem não pode ser regular. No entanto, <span class="math inline">\(L\)</span> é uma linguagem livre de contexto por excelência. Ela pode ser gerada pela gramática extremamente simples e elegante:</p>
+<p><span class="math display">\[S \rightarrow aSb&nbsp;\mid&nbsp;\epsilon\]</span></p>
+<p>Nesta gramática o símbolo <span class="math inline">\(\epsilon\)</span> representa a <em>string</em> vazia. A regra recursiva <span class="math inline">\(S \rightarrow aSb\)</span> encapsula perfeitamente a capacidade de aninhamento que define as Linguagens Livres de Contexto. Outros exemplos práticos que exigem o poder das Linguagens Livres de Contexto incluem a linguagem dos palíndromos (ex.: <em>radar</em>) e a validação estrutural de documentos XML, no qual as <em>tags</em> de abertura e fechamento devem ser corretamente aninhadas, uma tarefa impossível para expressões regulares.</p>
+<p>A atenta leitora deve observar que essa progressão não é apenas um exercício teórico. A necessidade prática de analisar a sintaxe de linguagens de programação, que são repletas de construções aninhadas como laços, condicionais e chamadas de função, é a força motriz que torna as linguagens regulares insuficientes e as linguagens livres de contexto absolutamente essenciais para a ciência da computação. A Tabela #tbl-resumo1 condensa as diferenças entre linguagens regulares e linguagens livres de contexto.</p>
+<table class="table">
+<caption>Resumo das características e diferenças das linguagens regulares e livres de contexto.{#tbl-resumo1}</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;">Linguagens Regulares (Tipo 3)</th>
+<th style="text-align: left;">Linguagens Livres de Contexto (Tipo 2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tipo de Gramática</strong></td>
+<td style="text-align: left;">Gramática Regular</td>
+<td style="text-align: left;">Gramática Livre de Contexto</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Formato das Regras</strong></td>
+<td style="text-align: left;">Restrito (ex.: <span class="math inline">\(A \rightarrow aB\)</span> ou <span class="math inline">\(A\rightarrow a\)</span>)</td>
+<td style="text-align: left;">Irrestrito (ex.: <span class="math inline">\(A \rightarrow \beta\)</span>, na qual <span class="math inline">\(\beta\)</span> é qualquer <em>string</em>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Autômato Reconhecedor</strong></td>
+<td style="text-align: left;">Autômato Finito</td>
+<td style="text-align: left;">Autômato com Pilha</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Capacidade de <em>Memória</em></strong></td>
+<td style="text-align: left;">Nenhuma (limitada a estados finitos)</td>
+<td style="text-align: left;">Ilimitada (via pilha LIFO)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Exemplo Característico</strong></td>
+<td style="text-align: left;"><span class="math inline">\(a(ba)^∗\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a^nb^n\)</span> para <span class="math inline">\(n \geq 0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Exemplo Não-Pertencente</strong></td>
+<td style="text-align: left;"><span class="math inline">\(a^nb^n\)</span> para <span class="math inline">\(n \geq 0\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a^nb^nc^n\)</span> para <span class="math inline">\(n \geq 0\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="sec-anatomia-gramaticas-livres-de-contexto" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-anatomia-gramaticas-livres-de-contexto"><span class="header-section-number">5.2</span> A Anatomia das Gramáticas Livres de Contexto</h2>
+<p>A atenta leitora verá que para analisar e processar linguagens com estruturas aninhadas, é imprescindível o uso de um formalismo matemático preciso. Uma Gramática Livre de Contexto fornece a base formal necessária.</p>
+<p>O termo <em>livre de contexto</em> é fundamental para a compreensão da natureza das gramáticas que a atenta leitora estudará neste capítulo. Esse termo significa que a aplicação de uma regra de produção <span class="math inline">\(A\rightarrow \beta\)</span> a um símbolo não-terminal <span class="math inline">\(A\)</span> é incondicional; ela pode ocorrer independentemente dos símbolos que cercam <span class="math inline">\(A\)</span>, seu <em>contexto</em>, em uma forma sentencial intermediária. Esta propriedade simplifica a análise sintática em comparação com gramáticas mais complexas, como as sensíveis ao contexto (Tipo 1).</p>
+<p>Formalmente, uma Gramática Livre de Contexto é definida como uma quádrupla <span class="math inline">\(G=(N,\Sigma,P,S)\)</span>, na qual cada componente é um conjunto e tem um papel específico na geração das <em>strings</em> da linguagem. Os quatro componentes da tupla que define uma Gramática Livre de Contexto são:</p>
+<ol type="1">
+<li><p><strong>N: O Conjunto de Símbolos Não Terminais.</strong> Este é um conjunto finito de variáveis que representam as diferentes construções sintáticas ou categorias gramaticais da linguagem. Por exemplo, em uma gramática para uma linguagem de programação, os não terminais podem incluir EXPRESSÃO, COMANDO e DECLARAÇÃO. Eles são os elementos que podem ser substituídos ou expandidos durante o processo de derivação e que aqui, neste livro, serão representados por letras maiúsculas do alfabeto latino.</p></li>
+<li><p><strong><span class="math inline">\(\Sigma\)</span>: O Conjunto de Símbolos Terminais.</strong> Este é um conjunto finito, disjunto de <em>N</em>, que constitui o alfabeto da linguagem. Os terminais são os símbolos literais, os <em>átomos</em> que compõem as <em>strings</em> finais da linguagem e não podem ser mais decompostos. Exemplos incluem palavras-chave (<code>if</code>, <code>while</code>, etc.), operadores (<code>+</code>, <code>\</code>, <code>*</code>, etc.) e identificadores (<code>contador</code>, <code>salario</code>, etc.).</p></li>
+<li><p><strong>P: O Conjunto de Regras de Produção.</strong> Este é um conjunto finito de regras que definem como os não terminais podem ser substituídos. Cada regra tem a forma <span class="math inline">\(A \rightarrow β\)</span>, na qual <span class="math inline">\(A\in N\)</span> é um único não-terminal (a <em>cabeça</em> da produção) e <span class="math inline">\(\beta \in (N∪Σ)^∗\)</span> é uma <em>string</em>, possivelmente vazia, de símbolos terminais e/ou não terminais que chamaremos de <em>corpo</em> da produção. Essas regras são o motor do sistema gerativo.</p></li>
+<li><p><strong>S: O Símbolo Inicial.</strong> Um não-terminal especial, <span class="math inline">\(S \in N\)</span>, que serve como ponto de partida para todas as derivações. Ele geralmente representa a construção sintática mais abrangente da linguagem, como um programa ou uma sentença.</p></li>
+</ol>
+<p>A linguagem gerada por uma gramática <span class="math inline">\(G\)</span>, denotada por <span class="math inline">\(L(G)\)</span>, é o conjunto de todas as <em>strings</em> de símbolos terminais que podem ser derivadas a partir do símbolo inicial <span class="math inline">\(S\)</span> por meio da aplicação sucessiva das regras de produção em <span class="math inline">\(P\)</span>.</p>
+<p>Embora a definição formal de uma Gramática Livre de Contexto seja inerentemente gerativa, descrevendo como construir sentenças válidas a partir de <span class="math inline">\(S\)</span>, sua aplicação primária em compiladores é reconhecedora. O objetivo de um analisador sintático não é gerar programas aleatórios, mas sim verificar se uma dada sequência de <em>tokens</em>, produzida pelo programador, pode ser gerada pela gramática. A gramática, portanto, atua como a especificação formal contra a qual o processo de reconhecimento é executado. O parser, na prática, tenta reverter o processo de derivação para validar a estrutura do programa fonte.</p>
+<section id="exemplo-canônico-a-linguagem-dos-palíndromos" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="exemplo-canônico-a-linguagem-dos-palíndromos"><span class="header-section-number">5.2.1</span> Exemplo Canônico: A Linguagem dos Palíndromos</h3>
+<p>Para solidificar esses conceitos abstratos, vamos construir uma Gramática Livre de Contexto para a linguagem dos palíndromos sobre o alfabeto <span class="math inline">\(\Sigma = \{0,1\}\)</span>. Só para refrescar a memória: um palíndromo é uma <em>string</em> que se lê da mesma forma da esquerda para a direita e da direita para a esquerda.</p>
+<p>A estrutura recursiva dos palíndromos pode ser definida da seguinte forma:</p>
+<ol type="1">
+<li><strong>Casos Base</strong>: A <em>string</em> vazia (<span class="math inline">\(\epsilon\)</span>), <code>0</code> e <code>1</code> são palíndromos.</li>
+<li><strong>Passo Indutivo</strong>: Se <span class="math inline">\(w\)</span> é um palíndromo, então <span class="math inline">\(0w0\)</span> e <span class="math inline">\(1w1\)</span> também são palíndromos.</li>
+</ol>
+<p>Esta definição recursiva pode ser traduzida diretamente em um conjunto de regras de produção para uma Gramática Livre de Contexto. Seja <span class="math inline">\(K\)</span> o nosso símbolo não-terminal para <em>palíndromo</em>:</p>
+<ol type="1">
+<li><span class="math inline">\(K \rightarrow \epsilon\)</span><br>
+</li>
+<li><span class="math inline">\(K \rightarrow 0\)</span><br>
+</li>
+<li><span class="math inline">\(K \rightarrow 1\)</span><br>
+</li>
+<li><span class="math inline">\(K \rightarrow 0K0\)</span><br>
+</li>
+<li><span class="math inline">\(K \rightarrow 1K1\)</span></li>
+</ol>
+<p>Neste exemplo, a gramática completa <span class="math inline">\(G_{pal}\)</span> é definida pela quádrupla:</p>
+<ul>
+<li><span class="math inline">\(N = \{K\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{0,1\}\)</span></li>
+<li><span class="math inline">\(P\)</span> é o conjunto das cinco regras listadas acima.</li>
+<li><span class="math inline">\(S = K\)</span></li>
+</ul>
+<p>Esta gramática pode gerar qualquer palíndromo sobre <span class="math inline">\(\{0,1\}\)</span>. Por exemplo, a <em>string</em> <em>0110</em> pode ser derivada da seguinte forma:</p>
+<p>A derivação da <em>string</em> <code>0110</code> a partir do símbolo inicial <span class="math inline">\(K\)</span> é feita aplicando-se as regras da gramática sequencialmente.</p>
+<ol type="1">
+<li><strong>Passo 1: Iniciar com o símbolo inicial.</strong>
+<ul>
+<li>Começamos com o símbolo inicial da gramática, que é <span class="math inline">\(K\)</span>.</li>
+<li><span class="math inline">\(K\)</span></li>
+</ul></li>
+<li><strong>Passo 2: Aplicar a Regra 4 (<span class="math inline">\(K \rightarrow 0K0\)</span>).</strong>
+<ul>
+<li>Para gerar uma <em>string</em> que começa e termina com <code>0</code>, aplicamos a regra 4.</li>
+<li><span class="math inline">\(K \Rightarrow 0K0\)</span></li>
+</ul></li>
+<li><strong>Passo 3: Aplicar a Regra 5 (<span class="math inline">\(K \rightarrow 1K1\)</span>).</strong>
+<ul>
+<li>Agora, precisamos gerar a parte interna do palíndromo. Substituímos o <span class="math inline">\(K\)</span> restante pela regra 5 para obter os <code>1</code>s internos.</li>
+<li><span class="math inline">\(0K0 \Rightarrow 0(1K1)0 = 01K10\)</span></li>
+</ul></li>
+<li><strong>Passo 4: Aplicar a Regra 1 (<span class="math inline">\(K \rightarrow \epsilon\)</span>).</strong>
+<ul>
+<li>O centro do palíndromo <code>0110</code> é vazio. Para finalizar a derivação, substituímos o último <span class="math inline">\(K\)</span> pela cadeia vazia, <span class="math inline">\(\epsilon\)</span> (epsilon), usando a regra 1.</li>
+<li><span class="math inline">\(01K10 \Rightarrow 01(\epsilon)10 = 0110\)</span></li>
+</ul></li>
+</ol>
+<p>A sequência completa da derivação será:</p>
+<p><span class="math display">\[K \Rightarrow 0K0 \Rightarrow 01K10 \Rightarrow 01\epsilon10 \Rightarrow 0110\]</span></p>
+</section>
+<section id="sec-execicios-derivacao" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="sec-execicios-derivacao"><span class="header-section-number">5.2.2</span> Exercícios de Derivação</h3>
+<section id="exercício-1-palíndromo-ímpar" class="level4" data-number="5.2.2.1">
+<h4 data-number="5.2.2.1" class="anchored" data-anchor-id="exercício-1-palíndromo-ímpar"><span class="header-section-number">5.2.2.1</span> Exercício 1: Palíndromo Ímpar</h4>
+<p>Dada a gramática de palíndromos <span class="math inline">\(G_{pal}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(N = \{K\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{0,1\}\)</span></li>
+<li><span class="math inline">\(P = \{ K \rightarrow \epsilon, K \rightarrow 0, K \rightarrow 1, K \rightarrow 0K0, K \rightarrow 1K1 \}\)</span></li>
+<li><span class="math inline">\(S = K\)</span></li>
+</ul>
+<p>Faça a derivação da <em><em>string</em></em> <code>101</code>.</p>
+</section>
+<section id="exercício-2-expressão-aritmética-simples" class="level4" data-number="5.2.2.2">
+<h4 data-number="5.2.2.2" class="anchored" data-anchor-id="exercício-2-expressão-aritmética-simples"><span class="header-section-number">5.2.2.2</span> Exercício 2: Expressão Aritmética Simples</h4>
+<p>Considere uma gramática simplificada para expressões aritméticas, <span class="math inline">\(G_{exp}\)</span> dada por:</p>
+<ul>
+<li><span class="math inline">\(N = \{E\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{id, +, *, (, )\}\)</span></li>
+<li><span class="math inline">\(P = \{ E \rightarrow E + E, E \rightarrow E * E, E \rightarrow (E), E \rightarrow id \}\)</span></li>
+<li><span class="math inline">\(S = E\)</span></li>
+</ul>
+<p>Faça a derivação da <em><em>string</em></em> <code>id * id + id</code>.</p>
+</section>
+<section id="exercício-3-palíndromo-de-comprimento-par-e-aninhado" class="level4" data-number="5.2.2.3">
+<h4 data-number="5.2.2.3" class="anchored" data-anchor-id="exercício-3-palíndromo-de-comprimento-par-e-aninhado"><span class="header-section-number">5.2.2.3</span> Exercício 3: Palíndromo de Comprimento Par e Aninhado</h4>
+<p>Usando a gramática de palíndromos <span class="math inline">\(G_{pal}\)</span> dada a seguir, faça a derivação da <em><em>string</em></em> <code>011110</code>.</p>
+<ul>
+<li><span class="math inline">\(N = \{K\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{0,1\}\)</span></li>
+<li><span class="math inline">\(P = \{ K \rightarrow \epsilon, K \rightarrow 0, K \rightarrow 1, K \rightarrow 0K0, K \rightarrow 1K1 \}\)</span></li>
+<li><span class="math inline">\(S = K\)</span></li>
+</ul>
+</section>
+<section id="exercício-4-linguagem-anbn" class="level4" data-number="5.2.2.4">
+<h4 data-number="5.2.2.4" class="anchored" data-anchor-id="exercício-4-linguagem-anbn"><span class="header-section-number">5.2.2.4</span> Exercício 4: Linguagem <span class="math inline">\(a^nb^n\)</span></h4>
+<p>Considere a gramática <span class="math inline">\(G_{ab}\)</span> que gera <em><em>strings</em></em> com um número de <code>a``s seguido pelo mesmo número de</code>b``s:</p>
+<ul>
+<li><span class="math inline">\(N = \{S\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{a, b\}\)</span></li>
+<li><span class="math inline">\(P = \{ S \rightarrow aSb, S \rightarrow \epsilon \}\)</span></li>
+<li><span class="math inline">\(S = S\)</span></li>
+</ul>
+<p>Faça a derivação da <em><em>string</em></em> <code>aaabbb</code>.</p>
+</section>
+<section id="exercício-5-comando-condicional-if-else" class="level4" data-number="5.2.2.5">
+<h4 data-number="5.2.2.5" class="anchored" data-anchor-id="exercício-5-comando-condicional-if-else"><span class="header-section-number">5.2.2.5</span> Exercício 5: Comando Condicional <code>if-else</code></h4>
+<p>Seja uma gramática para um comando <code>if-else</code> simplificado, <span class="math inline">\(G_{if}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(N = \{C, A\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{ \text{if}, \text{then}, \text{else}, id, :=, 0 \}\)</span></li>
+<li><span class="math inline">\(P = \{ C \rightarrow \text{if } id \text{ then } A \text{ else } A, A \rightarrow id := 0 \}\)</span></li>
+<li><span class="math inline">\(S = C\)</span></li>
+</ul>
+<p>Faça a derivação da <em><em>string</em></em> <code>if id then id := 0 else id := 0</code>.</p>
+</section>
+<section id="exercício-6-parênteses-balanceados" class="level4" data-number="5.2.2.6">
+<h4 data-number="5.2.2.6" class="anchored" data-anchor-id="exercício-6-parênteses-balanceados"><span class="header-section-number">5.2.2.6</span> Exercício 6: Parênteses Balanceados</h4>
+<p>Considere a gramática <span class="math inline">\(G_{par}\)</span> para gerar sequências de parênteses balanceados:</p>
+<ul>
+<li><span class="math inline">\(N = \{B\}\)</span></li>
+<li><span class="math inline">\(\Sigma = \{ (, ) \}\)</span></li>
+<li><span class="math inline">\(P = \{ B \rightarrow (B), B \rightarrow BB, B \rightarrow \epsilon \}\)</span></li>
+<li><span class="math inline">\(S = B\)</span></li>
+</ul>
+<p>Faça a derivação da <em><em>string</em></em> <code>()(())</code>.</p>
+</section>
+<section id="exercício-7-palíndromo-vazio" class="level4" data-number="5.2.2.7">
+<h4 data-number="5.2.2.7" class="anchored" data-anchor-id="exercício-7-palíndromo-vazio"><span class="header-section-number">5.2.2.7</span> Exercício 7: Palíndromo Vazio</h4>
+<p>Usando a gramática de palíndromos <span class="math inline">\(G_{pal}\)</span> do primeiro exercício, faça a derivação da <em><em>string</em></em> vazia, <span class="math inline">\(\epsilon\)</span>.</p>
+</section>
+</section>
+</section>
+<section id="sec-notacao-BNF" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-notacao-BNF"><span class="header-section-number">5.3</span> A Notação <span class="math inline">\(BNF\)</span></h2>
+<p>A <strong>F</strong>orma de <strong>B</strong>ackus-<strong>N</strong>aur, universalmente conhecida pela sigla <strong><span class="math inline">\(BNF\)</span></strong>, representa um dos sistemas de notação mais elegantes e influentes da ciência da computação teórica. Desenvolvida no final da década de 1950 para descrever formalmente a sintaxe da linguagem de programação <strong>ALGOL 60</strong>, a <span class="math inline">\(BNF\)</span> tornou-se o padrão <em>de facto</em> para especificar a sintaxe de linguagens de programação e protocolos de comunicação.</p>
+<section id="contexto-histórico-e-desenvolvimento" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="contexto-histórico-e-desenvolvimento"><span class="header-section-number">5.3.1</span> Contexto Histórico e Desenvolvimento</h3>
+<p>A criação da <span class="math inline">\(BNF\)</span> emergiu de uma necessidade prática urgente durante o desenvolvimento de <strong>ALGOL 60</strong>. <strong><a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a></strong>, líder do projeto, enfrentava o desafio de descrever a sintaxe da linguagem de forma precisa e não ambígua para uma audiência internacional de implementadores. As descrições informais em linguagem natural mostravam-se inadequadas, gerando interpretações divergentes e implementações incompatíveis.</p>
+<p>A solução veio através da colaboração entre Backus e <strong><a href="https://en.wikipedia.org/wiki/Peter_Naur">Peter Naur</a></strong>, que refinou e popularizou a notação. Naur, como editor do relatório <strong>ALGOL 60</strong>, foi responsável por sistematizar e formalizar o que inicialmente eram esboços conceituais de Backus. A notação resultante combinava a precisão matemática das gramáticas formais com uma legibilidade que a tornava acessível tanto para teóricos quanto para implementadores práticos.</p>
+<p>A <span class="math inline">\(BNF\)</span> foi desenvolvida com conhecimento explícito dos trabalhos de Chomsky sobre Gramáticas Livres de Contexto. Backus e Naur compreenderam que estavam essencialmente criando uma notação prática para expressar gramáticas do Tipo 2 da Hierarquia de Chomsky, estabelecendo assim uma ponte fundamental entre a teoria formal e a aplicação industrial.</p>
+</section>
+<section id="estrutura-e-componentes-da-notação-bnf" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="estrutura-e-componentes-da-notação-bnf"><span class="header-section-number">5.3.2</span> Estrutura e Componentes da Notação <span class="math inline">\(BNF\)</span></h3>
+<p>A <span class="math inline">\(BNF\)</span> define uma gramática através de um conjunto de <strong>regras de produção</strong> (ou <strong>regras de reescrita</strong>), na qual cada regra especifica como um símbolo não-terminal pode ser expandido em uma sequência de símbolos terminais e não-terminais. A estrutura básica de uma regra <span class="math inline">\(BNF\)</span> segue o padrão:</p>
+<pre class="bnf"><code>&lt;símbolo-não-terminal&gt; ::= expressão-alternativa</code></pre>
+<p>Os elementos fundamentais da notação <span class="math inline">\(BNF\)</span> são:</p>
+<ol type="1">
+<li><p><strong>Símbolos Não-terminais</strong>: representados entre colchetes angulares (<code>&lt; &gt;</code>), estes são os elementos que podem ser definidos por outras regras. Exemplos: <code>&lt;expressão&gt;</code>, <code>&lt;comando&gt;</code>, <code>&lt;identificador&gt;</code>.</p></li>
+<li><p><strong>Símbolos Terminais</strong>: representam os elementos atômicos da linguagem - palavras-chave, operadores, delimitadores. São escritos literalmente, frequentemente entre aspas. Exemplos: <code>"if"</code>, <code>"+"</code>, <code>";"</code>.</p></li>
+<li><p><strong>Operador de Definição</strong> (<code>::=</code>): lê-se “é definido como” ou “pode ser substituído por”. Estabelece a relação entre o lado esquerdo (não-terminal) e o lado direito (expressão de definição).</p></li>
+<li><p><strong>Operador de Alternativa</strong> (<code>|</code>): indica escolhas mutuamente exclusivas. Lê-se “ou”. Permite múltiplas definições para um mesmo não-terminal.</p></li>
+<li><p><strong>Agrupamento</strong>: parênteses são utilizados para agrupar elementos e controlar a precedência das operações.</p></li>
+</ol>
+</section>
+<section id="exemplo-fundamental-expressões-aritméticas-simples" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="exemplo-fundamental-expressões-aritméticas-simples"><span class="header-section-number">5.3.3</span> Exemplo Fundamental: Expressões Aritméticas Simples</h3>
+<p>Para ilustrar a aplicação prática da <span class="math inline">\(BNF\)</span>, consideremos uma gramática para expressões aritméticas básicas que inclui adição, multiplicação, parênteses e identificadores:</p>
+<pre class="bnf"><code>&lt;expressão&gt;     ::= &lt;termo&gt; "+" &lt;expressão&gt; | &lt;termo&gt;
+&lt;termo&gt;         ::= &lt;fator&gt; "*" &lt;termo&gt; | &lt;fator&gt;
+&lt;fator&gt;         ::= "(" &lt;expressão&gt; ")" | &lt;identificador&gt;
+&lt;identificador&gt; ::= &lt;letra&gt; | &lt;letra&gt; &lt;identificador&gt;
+&lt;letra&gt;         ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | 
+                    "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | 
+                    "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | 
+                    "y" | "z"</code></pre>
+<p>Esta gramática demonstra características essenciais da <span class="math inline">\(BNF\)</span>:</p>
+<ul>
+<li><strong>Hierarquia de Precedência</strong>: a estrutura <code>&lt;expressão&gt;</code> → <code>&lt;termo&gt;</code> → <code>&lt;fator&gt;</code> estabelece que multiplicação tem precedência sobre adição.</li>
+<li><strong>Recursão</strong>: <code>&lt;expressão&gt;</code> referencia a si mesma, permitindo expressões de comprimento arbitrário.</li>
+<li><strong>Associatividade</strong>: a recursão à direita em <code>&lt;termo&gt; "+" &lt;expressão&gt;</code> define associatividade à esquerda para adição.</li>
+</ul>
+<p>Utilizando a gramática acima, podemos derivar a expressão <code>a + b * c</code>:</p>
+<pre class="bnf"><code>&lt;expressão&gt;
+→ &lt;termo&gt; "+" &lt;expressão&gt;
+→ &lt;fator&gt; "+" &lt;expressão&gt;
+→ &lt;identificador&gt; "+" &lt;expressão&gt;
+→ &lt;letra&gt; "+" &lt;expressão&gt;
+→ "a" "+" &lt;expressão&gt;
+→ "a" "+" &lt;termo&gt;
+→ "a" "+" &lt;fator&gt; "*" &lt;termo&gt;
+→ "a" "+" &lt;identificador&gt; "*" &lt;termo&gt;
+→ "a" "+" &lt;letra&gt; "*" &lt;termo&gt;
+→ "a" "+" "b" "*" &lt;termo&gt;
+→ "a" "+" "b" "*" &lt;fator&gt;
+→ "a" "+" "b" "*" &lt;identificador&gt;
+→ "a" "+" "b" "*" &lt;letra&gt;
+→ "a" "+" "b" "*" "c"</code></pre>
+<p>Esta derivação demonstra como a gramática força a interpretação <code>a + (b * c)</code>, respeitando a precedência de operadores.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Extensões da <span class="math inline">\(BNF\)</span></strong></p>
+<p>A <span class="math inline">\(BNF\)</span> original foi posteriormente estendida para aumentar sua expressividade e conveniência:</p>
+<ul>
+<li><p><strong><span class="math inline">\(EBNF\)</span> (Extended <span class="math inline">\(BNF\)</span>)</strong>: introduz operadores adicionais como <code>{}</code> para repetição (zero ou mais), <code>[]</code> para elementos opcionais, e <code>()</code> para agrupamento explícito.</p></li>
+<li><p><strong><span class="math inline">\(ABNF\)</span> (Augmented <span class="math inline">\(BNF\)</span>)</strong>: usado em RFCs da Internet, adiciona suporte para especificação de repetições numéricas e valores em diferentes bases.</p></li>
+</ul>
+<p>Exemplo em EBNF:</p>
+<pre class="ebnf"><code>identificador = letra, { letra | dígito };
+letra = "a" | "b" | ... | "z";
+dígito = "0" | "1" | ... | "9";</code></pre>
+<p>Esta notação é equivalente à <span class="math inline">\(BNF\)</span> original, mas significativamente mais concisa.</p>
+</div>
+</div>
+</section>
+<section id="comparação-com-gramáticas-livres-de-contexto" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="comparação-com-gramáticas-livres-de-contexto"><span class="header-section-number">5.3.4</span> Comparação com Gramáticas Livres de Contexto</h3>
+<p>A <span class="math inline">\(BNF\)</span> é essencialmente uma notação alternativa para Gramáticas Livres de Contexto. A correspondência é direta, como pode ser visto na <a href="#tbl-compara2" class="quarto-xref">Table&nbsp;<span>5.1</span></a>:</p>
+<div id="tbl-compara2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Correspondência entre elementos de Gramáticas Livres de Contexto e notação <span class="math inline">\(BNF\)</span>.
+</figcaption>
+<div aria-describedby="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Elemento GLC</th>
+<th style="text-align: left;">Notação <span class="math inline">\(BNF\)</span></th>
+<th style="text-align: left;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Não-terminal</td>
+<td style="text-align: left;"><code>&lt;símbolo&gt;</code></td>
+<td style="text-align: left;"><code>&lt;expressão&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Terminal</td>
+<td style="text-align: left;">Literal ou entre aspas</td>
+<td style="text-align: left;"><code>"if"</code>, <code>+</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Regra de produção</td>
+<td style="text-align: left;"><code>::=</code></td>
+<td style="text-align: left;"><code>&lt;E&gt; ::= &lt;E&gt; + &lt;T&gt;</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Alternativas</td>
+<td style="text-align: left;"><code>\|</code></td>
+<td style="text-align: left;"><code>&lt;E&gt; ::= &lt;T&gt; \| &lt;E&gt; + &lt;T&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="aplicações-e-influência" class="level3" data-number="5.3.5">
+<h3 data-number="5.3.5" class="anchored" data-anchor-id="aplicações-e-influência"><span class="header-section-number">5.3.5</span> Aplicações e Influência</h3>
+<p>A <span class="math inline">\(BNF\)</span> estabeleceu um precedente que influenciou profundamente o desenvolvimento de linguagens de programação e ferramentas de compilação:</p>
+<p><strong>Especificação de Linguagens</strong>: praticamente todas as linguagens modernas utilizam variações da <span class="math inline">\(BNF\)</span> para definir sintaxe formal. Exemplos incluem C, Pascal, Ada, e mais recentemente, linguagens como Python e Rust.</p>
+<p><strong>Geradores de Parsers</strong>: ferramentas como YACC, Bison, ANTLR e muitas outras utilizam sintaxe baseada em <span class="math inline">\(BNF\)</span> como entrada, traduzindo especificações declarativas em código de análise sintática.</p>
+<p><strong>Protocolos de Rede</strong>: muitos <a href="https://en.wikipedia.org/wiki/Request_for_Comments">RFCs</a> da Internet utilizam <span class="math inline">\(ABNF\)</span> para especificar protocolos como HTTP, SMTP, e URI.</p>
+<p><strong>Documentação Técnica</strong>: A <span class="math inline">\(BNF\)</span> tornou-se linguagem franca para comunicar especificações sintáticas de forma precisa e não ambígua.</p>
+<p>A elegância da <span class="math inline">\(BNF\)</span> reside em sua capacidade de tornar formal acessível. Ela democratizou a especificação rigorosa de linguagens, permitindo que desenvolvedores sem formação profunda em teoria formal pudessem criar e comunicar especificações precisas. Esta contribuição para a prática da engenharia de software não pode ser subestimada: a <span class="math inline">\(BNF\)</span> facilitou o desenvolvimento sistemático e a interoperabilidade de linguagens de programação, estabelecendo as fundações sobre as quais repousa muito do ecossistema computacional contemporâneo.</p>
+</section>
+</section>
+<section id="geração-de-sentenças-derivações-árvores-e-ambiguidade" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="geração-de-sentenças-derivações-árvores-e-ambiguidade"><span class="header-section-number">5.4</span> Geração de Sentenças: Derivações, Árvores e Ambiguidade</h2>
+<p>Uma <strong>derivação</strong> é a sequência de passos que transforma o símbolo inicial em uma <em>string</em> final de terminais por meio da aplicação das regras de produção. Exatamente o processo que a esforçada leitora aprendeu na seção <a href="#sec-anatomia-gramaticas-livres-de-contexto" class="quarto-xref"><span>Section 5.2</span></a>. Em cada passo, um não-terminal é escolhido e substituído pelo corpo de uma da regras de produção deste não-terminal. Como uma forma sentencial intermediária pode conter múltiplos não terminais, precisaremos de uma convenção para determinar qual deles expandir. Isso leva a duas estratégias de derivação:</p>
+<ol type="1">
+<li><strong>Derivação Mais à Esquerda (<em>Leftmost Derivation</em>)</strong>: em cada passo, o símbolo não-terminal que aparece mais à esquerda na forma sentencial é sempre o escolhido para ser substituído.<br>
+</li>
+<li><strong>Derivação Mais à Direita (<em>Rightmost Derivation</em>)</strong>: em cada passo, o símbolo não-terminal que aparece mais à direita é o escolhido para ser substituído.</li>
+</ol>
+<p>Para uma gramática não ambígua, embora as sequências de passos sejam diferentes, tanto a derivação mais à esquerda quanto a mais à direita para uma dada sentença resultarão na mesma estrutura sintática. Como exemplo, a atenta leitora pode estudar o exemplo a seguir:</p>
+<p><strong>Exemplo 1</strong>: Gramática Não Ambígua para Expressões Aritméticas</p>
+<p>Considere a seguinte gramática:</p>
+<ul>
+<li><strong>Símbolos não-terminais (N)</strong>: <span class="math inline">\(\{E, T, F\}\)</span></li>
+<li><strong>Símbolos terminais ()</strong>: <span class="math inline">\(\{id, +, *, (, )\}\)</span></li>
+<li><strong>Símbolo inicial (S)</strong>: <span class="math inline">\(E\)</span></li>
+<li><strong>Regras de produção (P)</strong>:
+<ol type="1">
+<li><span class="math inline">\(E \rightarrow E + T\)</span></li>
+<li><span class="math inline">\(E \rightarrow T\)</span></li>
+<li><span class="math inline">\(T \rightarrow T * F\)</span></li>
+<li><span class="math inline">\(T \rightarrow F\)</span></li>
+<li><span class="math inline">\(F \rightarrow (E)\)</span></li>
+<li><span class="math inline">\(F \rightarrow id\)</span></li>
+</ol></li>
+</ul>
+<p>Vamos fazer a Derivação da <em>string</em> “id + id * id”, primeiro usando a derivação Mais à Esquerda (<em>Leftmost</em>):</p>
+<p><span class="math display">\[
+\begin{align}
+E &amp;\Rightarrow E + T                &amp;&amp;\text{[regra 1: expandir E]}\
+  &amp;\Rightarrow T + T                &amp;&amp;\text{[regra 2: expandir E mais à esquerda]}\
+  &amp;\Rightarrow F + T                &amp;&amp;\text{[regra 4: expandir T mais à esquerda]}\
+  &amp;\Rightarrow id + T               &amp;&amp;\text{[regra 6: expandir F mais à esquerda]}\
+  &amp;\Rightarrow id + T * F           &amp;&amp;\text{[regra 3: expandir T]}\
+  &amp;\Rightarrow id + F * F           &amp;&amp;\text{[regra 4: expandir T mais à esquerda]}\
+  &amp;\Rightarrow id + id * F          &amp;&amp;\text{[regra 6: expandir F mais à esquerda]}\
+  &amp;\Rightarrow id + id * id         &amp;&amp;\text{[regra 6: expandir F]}
+\end{align}
+\]</span></p>
+<p>Agora vamos derivar a mesma <em>string</em> usando a derivação Mais à Direita (<em>Rightmost</em>):</p>
+<p><span class="math display">\[
+\begin{align}
+E &amp;\Rightarrow E + T                &amp;&amp;\text{[regra 1: expandir E]}\
+  &amp;\Rightarrow E + T * F            &amp;&amp;\text{[regra 3: expandir T mais à direita]}\
+  &amp;\Rightarrow E + T * id           &amp;&amp;\text{[regra 6: expandir F mais à direita]}\
+  &amp;\Rightarrow E + F * id           &amp;&amp;\text{[regra 4: expandir T mais à direita]}\
+  &amp;\Rightarrow E + id * id          &amp;&amp;\text{[regra 6: expandir F mais à direita]}\
+  &amp;\Rightarrow T + id * id          &amp;&amp;\text{[regra 2: expandir E]}\
+  &amp;\Rightarrow F + id * id          &amp;&amp;\text{[regra 4: expandir T]}\
+  &amp;\Rightarrow id + id * id         &amp;&amp;\text{[regra 6: expandir F]}
+\end{align}
+\]</span></p>
+<p>Observando as duas derivações é possível perceber que a gramática usada neste exemplo, não é ambígua. Observe que:</p>
+<ol type="1">
+<li><strong>Precedência clara</strong>: A multiplicação <span class="math inline">\((*)\)</span> tem precedência maior que a adição <span class="math inline">\((+)\)</span>
+<ul>
+<li><span class="math inline">\(T\)</span> (termo) gera multiplicações</li>
+<li><span class="math inline">\(E\)</span> (expressão) gera adições de termos</li>
+</ul></li>
+<li><strong>Associatividade definida</strong>: Operadores associam à esquerda
+<ul>
+<li><span class="math inline">\(E \rightarrow E + T\)</span> (não <span class="math inline">\(E \rightarrow T + E\)</span>)</li>
+<li><span class="math inline">\(T \rightarrow T * F\)</span> (não <span class="math inline">\(T \rightarrow F * T\)</span>)</li>
+</ul></li>
+<li><strong>Estrutura única</strong>: Para qualquer <em>string</em> válida, existe exatamente uma árvore de derivação, independentemente da ordem de derivação (leftmost ou rightmost).</li>
+</ol>
+<p>A atenta leitora deve notar que embora a sequência de passos seja diferente nas duas derivações, ambas produzem a mesma estrutura sintática: <span class="math inline">\(id + (id * id)\)</span>, na qual a multiplicação tem precedência sobre a adição.</p>
+<section id="a-construção-de-árvores-de-derivação" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="a-construção-de-árvores-de-derivação"><span class="header-section-number">5.4.1</span> A Construção de Árvores de Derivação</h3>
+<p>O processo mais intuitivo de visualizar a estrutura hierárquica imposta por uma gramática a uma sentença é por meio de uma <strong>árvore de derivação</strong>, ou <strong>árvore sintática</strong>. Uma árvore de derivação é uma representação gráfica de uma derivação que abstrai a ordem em que as produções foram aplicadas. Suas propriedades são definidas por:</p>
+<ol type="1">
+<li>A raiz da árvore é rotulada com o símbolo inicial <span class="math inline">\(S\)</span>.</li>
+<li>Cada nó interno é rotulado com um símbolo não-terminal.</li>
+<li>Cada folha é rotulada com um símbolo terminal ou com <span class="math inline">\(\epsilon\)</span>.</li>
+<li>Se um nó interno é rotulado com <span class="math inline">\(A\)</span> e seus filhos, da esquerda para a direita, são rotulados com <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, …, <span class="math inline">\(X_n\)</span>, então deve existir uma regra de produção <span class="math inline">\(A \rightarrow X_1 X_2 ... X_n\)</span> na gramática.</li>
+</ol>
+<p>A concatenação das folhas da árvore, lidas da esquerda para a direita, forma a sentença gerada, também conhecida como <em>yield</em> da árvore. A árvore de derivação captura a estrutura sintática essencial da sentença, tornando explícitas as relações entre suas subpartes.</p>
+<p><strong>Exemplo 2:</strong> Gramática Não Ambígua para Listas</p>
+<p>Considere a gramática definida como:</p>
+<ul>
+<li><strong>Símbolos não-terminais (N)</strong>: <span class="math inline">\(\{L, E\}\)</span></li>
+<li><strong>Símbolos terminais (Σ)</strong>: <span class="math inline">\(\{a, b, [, ], ,\}\)</span></li>
+<li><strong>Símbolo inicial (S)</strong>: <span class="math inline">\(L\)</span></li>
+<li><strong>Regras de produção (P)</strong>:
+<ol type="1">
+<li><span class="math inline">\(L \rightarrow [E]\)</span></li>
+<li><span class="math inline">\(L \rightarrow [\,]\)</span></li>
+<li><span class="math inline">\(E \rightarrow E, a\)</span></li>
+<li><span class="math inline">\(E \rightarrow E, b\)</span></li>
+<li><span class="math inline">\(E \rightarrow a\)</span></li>
+<li><span class="math inline">\(E \rightarrow b\)</span></li>
+</ol></li>
+</ul>
+<p>Vamos derivar a <em>string</em> “[a, b, a]”. Primeiro com a Derivação Mais à Esquerda (<em>Leftmost</em>):</p>
+<p><span class="math display">\[
+\begin{align}
+L &amp;\Rightarrow [E]                  &amp;&amp;\text{[regra 1: expandir L]}\\
+  &amp;\Rightarrow [E, a]               &amp;&amp;\text{[regra 3: expandir E]}\\
+  &amp;\Rightarrow [E, b, a]            &amp;&amp;\text{[regra 4: expandir E mais à esquerda]}\\
+  &amp;\Rightarrow [a, b, a]            &amp;&amp;\text{[regra 5: expandir E mais à esquerda]}
+\end{align}
+\]</span></p>
+<p>Agora com a Derivação Mais à Direita (<em>Rightmost</em>):</p>
+<p><span class="math display">\[
+\begin{align}
+L &amp;\Rightarrow [E]                  &amp;&amp;\text{[regra 1: expandir L]}\\
+  &amp;\Rightarrow [E, a]               &amp;&amp;\text{[regra 3: expandir E]}\\
+  &amp;\Rightarrow [E, b, a]            &amp;&amp;\text{[regra 4: expandir E]}\\
+  &amp;\Rightarrow [a, b, a]            &amp;&amp;\text{[regra 5: expandir E]}
+\end{align}
+\]</span></p>
+<p>A <a href="#fig-deriva1" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> apresenta duas árvores geradas por dois processos de derivação, um à esquerda e outro à direita, para a <em>string</em> “[a, b, a]”. A atenta leitora deve observar que as árvores são iguais.</p>
+<div id="fig-deriva1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-deriva1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/deriva1.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-deriva1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Apresentação das árvores de derivação à esquerda e à direita da <em>string</em> “[a, b, a]” de forma gráfica.
+</figcaption>
+</figure>
+</div>
+<p><strong>Exemplo 3</strong>: Considerando a gramática do Exemplo 2, faça a derivação da <em>string</em> “[b]”</p>
+<p>Novamente, começando com a Derivação Mais à Esquerda (<em>Leftmost</em>):</p>
+<p><span class="math display">\[
+\begin{align}
+L &amp;\Rightarrow [E]                  &amp;&amp;\text{[regra 1: expandir L]}\\
+  &amp;\Rightarrow [b]                  &amp;&amp;\text{[regra 6: expandir E]}
+\end{align}
+\]</span></p>
+<p>Finalmente, a Derivação Mais à Direita (Rightmost):</p>
+<p><span class="math display">\[
+\begin{align}
+L &amp;\Rightarrow [E]                  &amp;&amp;\text{[regra 1: expandir L]}\\
+  &amp;\Rightarrow [b]                  &amp;&amp;\text{[regra 6: expandir E]}
+\end{align}
+\]</span></p>
+<p>A atenta leitora deve perceber que esta gramática não é ambígua. Considerando que:</p>
+<ol type="1">
+<li><strong>Estrutura hierárquica clara</strong>:
+<ul>
+<li><span class="math inline">\(L\)</span> gera apenas a estrutura de lista com colchetes;</li>
+<li><span class="math inline">\(E\)</span> gera apenas a sequência de elementos separados por vírgula.</li>
+</ul></li>
+<li><strong>Associatividade única</strong>:
+<ul>
+<li>As regras <span class="math inline">\(E \rightarrow E, a\)</span> e <span class="math inline">\(E \rightarrow E, b\)</span> forçam associatividade à esquerda;</li>
+<li>Não há regras como <span class="math inline">\(E \rightarrow a, E\)</span> que criariam ambiguidade.</li>
+</ul></li>
+<li><strong>Sem sobreposição de produções</strong>:
+<ul>
+<li>Cada não-terminal tem um papel específico e não conflitante;</li>
+<li>Lista vazia <span class="math inline">\([\,]\)</span> é tratada separadamente, evitando ambiguidade.</li>
+</ul></li>
+</ol>
+<p><strong>Nota</strong>: A gramática usada nos exemplos 2 e 3 garante que elementos são adicionados sempre à direita da lista, construindo-a da esquerda para a direita. A estrutura <span class="math inline">\([a, b, a]\)</span> só pode ser interpretada de uma forma: uma lista contendo três elementos na ordem especificada.</p>
+</section>
+</section>
+<section id="o-problema-da-ambiguidade-em-gramáticas-formais" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="o-problema-da-ambiguidade-em-gramáticas-formais"><span class="header-section-number">5.5</span> O Problema da Ambiguidade em Gramáticas Formais</h2>
+<p><strong>Uma gramática G = (V, T, P, S) é ambígua</strong> se e somente se existe pelo menos uma cadeia <span class="math inline">\(w \in L(G)\)</span> que possui duas ou mais árvores de derivação distintas. Em termos práticos, isto quer dizer que a mesma sentença pode ser construída através de diferentes sequências de aplicação de regras de produção. A existência de diferentes estruturas sintáticas implica na existência de interpretações semânticas diferentes. Neste caso, o parser não consegue determinar univocamente qual estrutura sintática representa a intenção do programador.</p>
+<p><strong>Exemplo 1</strong>: Considerando a gramática <span class="math inline">\(G_1\)</span>, mostre que a sentença <code>id + id * id</code> é ambígua.</p>
+<p><span class="math display">\[G_1 = (\{E\}, \{+, *, (, ), id\}, P, E)\]</span></p>
+<p>Na qual <span class="math inline">\(P\)</span> consiste das produções:</p>
+<p><span class="math display">\[
+\begin{align}
+E &amp;\Rightarrow E + E \\
+E &amp;\Rightarrow E * E \\
+E &amp;\Rightarrow (E) \\
+E &amp;\Rightarrow id
+\end{align}
+\]</span></p>
+<p>Analisando a sequência <code>id + id * id</code>, podemos observar que esta <em>string</em> pode ser interpretada de duas maneiras diferentes, dependendo da ordem em que as operações são realizadas:</p>
+<ol type="1">
+<li>Derivação 1 (Multiplicação com maior precedência):</li>
+</ol>
+<p><span class="math display">\[
+  \begin{align}
+  E &amp;\Rightarrow E + E \\
+  &amp;\Rightarrow id + E \\
+  &amp;\Rightarrow id + E * E \\
+  &amp;\Rightarrow id + id * E \\
+  &amp;\Rightarrow id + id * id
+  \end{align}
+  \]</span></p>
+<p>O resultado da primeira derivação permite que a <em>string</em> <code>id + id * id</code> seja interpretada como <code>id + (id * id)</code>.</p>
+<ol start="2" type="1">
+<li>Derivação 2 (Adição com maior precedência):</li>
+</ol>
+<p><span class="math display">\[
+  \begin{align}
+  E &amp;\Rightarrow E * E \\
+    &amp;\Rightarrow E + E * E \\
+    &amp;\Rightarrow id + E * E \\
+    &amp;\Rightarrow id + id * E \\
+    &amp;\Rightarrow id + id * id
+  \end{align}
+  \]</span></p>
+<p>O resultado da segunda derivação permite que a <em>string</em> <code>id + id * id</code> seja interpretada como <code>(id + id) * id</code>.</p>
+<section id="características-e-taxonomia-da-ambiguidade" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="características-e-taxonomia-da-ambiguidade"><span class="header-section-number">5.5.1</span> Características e Taxonomia da Ambiguidade</h3>
+<p>A ambiguidade em gramáticas formais manifesta-se de diferentes formas e com distintos níveis de penetração na estrutura da linguagem:</p>
+<p>A <strong>ambiguidade local</strong> representa conflitos que afetam construções sintáticas específicas e bem delimitadas dentro da gramática. O exemplo mais emblemático desta categoria são os problemas de precedência de operadores, nos quais a gramática permite múltiplas interpretações para expressões como <code>id + id * id</code>. Neste caso, a ambiguidade está circunscrita às regras que governam operadores aritméticos e pode ser resolvida através da reescrita da gramática ou da especificação explícita de precedência e associatividade.</p>
+<p>A <strong>ambiguidade global</strong>, por outro lado, permeia toda a estrutura da gramática e afeta a arquitetura fundamental da linguagem. O problema clássico do <em>dangling else</em> exemplifica perfeitamente esta categoria. Quando uma construção como <code>if (c1) if (c2) s1 else s2</code> pode ser interpretada de duas formas distintas, a ambiguidade não está limitada a uma regra específica, mas emerge da interação complexa entre múltiplas produções que definem comandos condicionais aninhados.</p>
+<p>As manifestações da ambiguidade podem ser classificadas em três categorias fundamentais que refletem diferentes aspectos da análise sintática.</p>
+<p>A <strong>ambiguidade de precedência</strong> surge quando operadores de diferentes níveis hierárquicos não possuem uma ordem de avaliação claramente definida pela gramática. Esta forma de ambiguidade é particularmente comum em linguagens que incluem operadores aritméticos, lógicos e relacionais. A ausência de uma hierarquia bem estabelecida força o parser a tomar decisões arbitrárias sobre qual operação deve ser executada primeiro, podendo resultar em interpretações semânticas drasticamente diferentes.</p>
+<p>A <strong>ambiguidade de associatividade</strong> manifesta-se quando operadores do mesmo nível de precedência podem ser agrupados tanto à esquerda quanto à direita, alterando o resultado da computação. Por exemplo, em uma expressão como <code>a - b - c</code>, a associatividade à esquerda produz <code>(a - b) - c</code>, enquanto a associatividade à direita resulta em <code>a - (b - c)</code>. Embora matematicamente equivalentes para operações comutativas como adição, essa distinção torna-se crítica para operações não-comutativas.</p>
+<p>A <strong>ambiguidade estrutural</strong> representa a forma mais complexa e desafiadora de ambiguidade, na qual diferentes agrupamentos de construções sintáticas produzem estruturas hierárquicas distintas. Esta categoria transcende questões operacionais e atinge o núcleo da organização sintática da linguagem, afetando como blocos de código, estruturas de controle e definições de escopo são interpretados pelo compilador.</p>
+<p><strong>Exemplo 2</strong>: o Problema do <em>Dangling Else</em></p>
+<p>Considere a gramática <span class="math inline">\(G_2\)</span> (Ambígua para <code>if-then-else</code>) definida por:</p>
+<p><span class="math display">\[G_2 = (\{S, E\}, \{if, then, else, (, ), c, s\}, P, S)\]</span></p>
+<p>Na qual <span class="math inline">\(P\)</span> consiste das produções:</p>
+<p><span class="math display">\[
+\begin{align}
+S &amp;\Rightarrow if (E) S \\
+&amp;\Rightarrow if (E) S else S \\
+&amp;\Rightarrow s \\
+E &amp;\Rightarrow c
+\end{align}
+\]</span></p>
+<p>Para entender a ambiguidade vamos analisar a sentença <code>if (c1) if (c2) s1 else s2</code>.</p>
+<ol type="1">
+<li>Nesta interpretação, a estrutura <code>if (c2) s1 else s2</code> é tratada como um único comando <span class="math inline">\(S\)</span>, que por sua vez está aninhado dentro do primeiro <code>if</code>. A derivação ocorre da seguinte forma:</li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+S &amp;\Rightarrow \text{if } (E) S \\
+&amp;\Rightarrow \text{if } (c_1) S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (E) S \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (c_2) S \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (c_2) s_1 \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (c_2) s_1 \text{ else } s_2
+\end{align}
+\]</span></p>
+<p>Resultando em:</p>
+<pre><code>if (c1) {
+    if (c2)
+        s1
+    else
+        s2
+}</code></pre>
+<ol start="2" type="1">
+<li>Nesta interpretação, a estrutura <code>if (c2) s1</code> é o corpo do <code>if</code> principal, e o <code>else s2</code> está associado a este <code>if</code> mais externo.</li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+S &amp;\Rightarrow \text{if } (E) S \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) S \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (E) S \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (c_2) S \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (c_2) s_1 \text{ else } S \\
+&amp;\Rightarrow \text{if } (c_1) \text{ if } (c_2) s_1 \text{ else } s_2
+\end{align}
+\]</span></p>
+<pre><code>if (c1) {
+    if (c2)
+        s1
+}
+else
+    s2</code></pre>
+<p>Como existem duas derivações à esquerda distintas para a mesma sentença, a gramática <span class="math inline">\(G_2\)</span> é formalmente ambígua.</p>
+</section>
+</section>
+<section id="técnicas-de-eliminação-de-ambiguidade" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="técnicas-de-eliminação-de-ambiguidade"><span class="header-section-number">5.6</span> Técnicas de Eliminação de Ambiguidade</h2>
+<p>A atenta leitora deve compreender que a ambiguidade em uma gramática não é uma fatalidade irreversível. Ao longo do desenvolvimento da teoria das linguagens formais, foram desenvolvidas técnicas sistemáticas para transformar gramáticas ambíguas em equivalentes não-ambíguas, preservando a linguagem gerada. Estas técnicas representam não apenas exercícios teóricos, mas ferramentas práticas essenciais no projeto de compiladores modernos.</p>
+<section id="reescrita-sistemática-da-gramática" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="reescrita-sistemática-da-gramática"><span class="header-section-number">5.6.1</span> Reescrita Sistemática da Gramática</h3>
+<p>A técnica mais fundamental para eliminar ambiguidade consiste na <strong>reescrita estruturada da gramática</strong>. Esta abordagem requer uma análise cuidadosa das fontes de ambiguidade e sua eliminação através da introdução de níveis hierárquicos explícitos na estrutura gramatical.</p>
+<p>Considere novamente a gramática ambígua <span class="math inline">\(G_1\)</span> para expressões aritméticas:</p>
+<p><span class="math display">\[G_1 = (\{E\}, \{+, *, (, ), id\}, P_1, E)\]</span></p>
+<p>Na qual <span class="math inline">\(P_1\)</span> consiste das produções:</p>
+<ul>
+<li><span class="math inline">\(E \rightarrow E + E\)</span></li>
+<li><span class="math inline">\(E \rightarrow E * E\)</span></li>
+<li><span class="math inline">\(E \rightarrow (E)\)</span></li>
+<li><span class="math inline">\(E \rightarrow id\)</span></li>
+</ul>
+<p>A transformação desta gramática em sua versão não-ambígua <span class="math inline">\(G_3\)</span> segue um princípio arquitetural elegante: <strong>a estratificação sintática</strong>. Cada nível de precedência é codificado como um não-terminal distinto:</p>
+<p><span class="math display">\[G_3 = (\{E, T, F\}, \{+, *, (, ), id\}, P_3, E)\]</span></p>
+<p>Na qual <span class="math inline">\(P_3\)</span> consiste das produções:</p>
+<ul>
+<li><span class="math inline">\(E \rightarrow E + T \mid T\)</span></li>
+<li><span class="math inline">\(T \rightarrow T * F \mid F\)</span></li>
+<li><span class="math inline">\(F \rightarrow (E) \mid id\)</span></li>
+</ul>
+<p>Esta hierarquia de não-terminais estabelece inequivocamente que:</p>
+<ol type="1">
+<li><p><strong>Precedência operacional</strong>: A multiplicação, governada por <span class="math inline">\(T\)</span>, tem precedência sobre a adição, governada por <span class="math inline">\(E\)</span>. Uma expressão como <code>id + id * id</code> só pode ser derivada como <code>id + (id * id)</code>.</p></li>
+<li><p><strong>Associatividade uniforme</strong>: Ambos operadores associam à esquerda devido à recursão à esquerda nas produções <span class="math inline">\(E \rightarrow E + T\)</span> e <span class="math inline">\(T \rightarrow T * F\)</span>. A expressão <code>a + b + c</code> é interpretada como <code>(a + b) + c</code>.</p></li>
+<li><p><strong>Preservação da linguagem</strong>: <span class="math inline">\(L(G_1) = L(G_3)\)</span>, ou seja, ambas gramáticas geram exatamente o mesmo conjunto de <em>strings</em>, diferindo apenas na estrutura de derivação.</p></li>
+</ol>
+</section>
+<section id="declarações-explícitas-de-precedência-e-associatividade" class="level3" data-number="5.6.2">
+<h3 data-number="5.6.2" class="anchored" data-anchor-id="declarações-explícitas-de-precedência-e-associatividade"><span class="header-section-number">5.6.2</span> Declarações Explícitas de Precedência e Associatividade</h3>
+<p>O desenvolvimento de <strong>geradores de parsers</strong> como <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/yacc.html">YACC</a> (<strong>Y</strong>et <strong>A</strong>nother <strong>C</strong>ompiler-<strong>C</strong>ompiler) e seu sucessor <a href="https://www.gnu.org/software/bison/">GNU Bison</a> introduziu uma abordagem pragmática: permitir que o desenvolvedor especifique diretamente as regras de desambiguação sem reescrever a gramática.</p>
+<pre><code>%left '+'     /* menor precedência, associa à esquerda */
+%left '*'     /* precedência intermediária */
+%right '^'    /* maior precedência, associa à direita */
+%%
+expr: expr '+' expr
+| expr '*' expr
+| expr '^' expr
+| '(' expr ')'
+| ID;</code></pre>
+<p>Estas declarações instruem o gerador de parser a resolver conflitos <em>shift</em>/<em>reduce</em> de forma determinística. Quando confrontado com <code>a + b * c</code>, o parser saberá que deve realizar o shift do <code>*</code> (maior precedência) antes de reduzir a adição. Assim, os eventuais problemas de ambiguidade decorrentes da gramática original podem ser resolvidos.</p>
+<section id="resolução-do-problema-do-dangling-else" class="level4" data-number="5.6.2.1">
+<h4 data-number="5.6.2.1" class="anchored" data-anchor-id="resolução-do-problema-do-dangling-else"><span class="header-section-number">5.6.2.1</span> Resolução do Problema do <em>Dangling Else</em></h4>
+<p>Para a ambiguidade estrutural do <em>dangling else</em>, a solução canônica adotada pela maioria das linguagens modernas é a <strong>convenção do else mais próximo</strong>. Esta pode ser formalizada através de uma gramática cuidadosamente estruturada:</p>
+<p><span class="math display">\[G_{if} = (\{S, M, U\}, \{if, else, (, ), c, s\}, P_{if}, S)\]</span></p>
+<p>na qual <span class="math inline">\(P_{if}\)</span> consiste das seguintes produções:</p>
+<ul>
+<li><span class="math inline">\(S \rightarrow M \mid U\)</span>;</li>
+<li><span class="math inline">\(M \rightarrow \text{if } (E) \text{ } M \text{ else } M \mid s\)</span>;</li>
+<li><span class="math inline">\(U \rightarrow \text{if } (E) \text{ } S \mid \text{if } (E) \text{ } M \text{ else } U\)</span>.</li>
+</ul>
+<p>Nesta gramática, <span class="math inline">\(M\)</span> (matched) representa comandos completos nos quais todo <code>if</code> tem seu <code>else</code> correspondente, enquanto <span class="math inline">\(U\)</span> (<em>unmatched</em>) representa comandos com <code>if</code> sem <code>else</code>. A estrutura garante que um <code>else</code> sempre se associa ao <code>if</code> mais interno ainda não pareado.</p>
+</section>
+</section>
+<section id="detecção-sistemática-de-ambiguidade" class="level3" data-number="5.6.3">
+<h3 data-number="5.6.3" class="anchored" data-anchor-id="detecção-sistemática-de-ambiguidade"><span class="header-section-number">5.6.3</span> Detecção Sistemática de Ambiguidade</h3>
+<p>A identificação de ambiguidade em uma gramática arbitrária é, em geral, um <strong>problema indecidível</strong>. Ou seja, não existe um algoritmo que sempre termine e determine se qualquer gramática é ambígua. Entretanto, a atenta leitora pode empregar uma das seguintes estratégias práticas:</p>
+<ol type="1">
+<li><p><strong>Abordagens Algorítmicas</strong></p>
+<p><strong>Verificação exaustiva limitada</strong>: Para gramáticas pequenas, pode-se enumerar sistematicamente todas as derivações para <em>strings</em> até um comprimento <span class="math inline">\(n\)</span> fixo. Se duas árvores de derivação distintas forem encontradas para a mesma <em>string</em>, a ambiguidade está provada. Esta técnica, embora computacionalmente intensiva, é conclusiva quando encontra ambiguidade.</p>
+<p><strong>Análise de tabelas de parsing</strong>: Ferramentas como YACC e Bison constroem tabelas de ação/transição para parsers <span class="math inline">\(LR\)</span>. A presença de <strong>conflitos shift/reduce</strong> ou <strong>reduce/reduce</strong> nestas tabelas indica potencial ambiguidade. Um conflito shift/reduce ocorre quando o parser não consegue decidir entre consumir mais entrada ou aplicar uma redução; um conflito reduce/reduce surge quando múltiplas produções podem ser aplicadas.</p>
+<p><strong>Verificadores especializados</strong>: Ferramentas como o <a href="https://github.com/stepchowfun/cfg-checker">CFG checker</a> empregam técnicas sofisticadas de análise estática para detectar ambiguidade, incluindo aproximações conservativas que podem provar não-ambiguidade para classes específicas de gramáticas.</p></li>
+<li><p><strong>Heurísticas e Padrões Problemáticos</strong></p></li>
+</ol>
+<p>A experiência acumulada na construção de compiladores identificou padrões gramaticais que frequentemente indicam ambiguidade:</p>
+<p><strong>Produções recursivas bilaterais</strong>: Regras da forma <span class="math inline">\(A \rightarrow A \alpha A\)</span> são quase sempre ambíguas, pois permitem múltiplas formas de agrupar três ou mais ocorrências de <span class="math inline">\(A\)</span>.</p>
+<p><strong>Prefixos comuns extensos</strong>: Quando múltiplas produções para o mesmo não-terminal compartilham longos prefixos, como <span class="math inline">\(A \rightarrow \alpha\beta\gamma\)</span> e <span class="math inline">\(A \rightarrow \alpha\beta\delta\)</span>, a decisão sobre qual produção aplicar pode requerer _Lookahead_arbitrariamente longo.</p>
+<p><strong>Aninhamento sem delimitadores explícitos</strong>: Construções que permitem aninhamento sem marcadores claros de início e fim, como o problema clássico do <em>dangling else</em>, invariavelmente levam a ambiguidade estrutural.</p>
+</section>
+</section>
+<section id="autômatos-com-pilha-a-máquina-por-trás-das-linguagens-livres-de-contexto" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="autômatos-com-pilha-a-máquina-por-trás-das-linguagens-livres-de-contexto"><span class="header-section-number">5.7</span> Autômatos com Pilha: A Máquina por Trás das Linguagens Livres de Contexto</h2>
+<p>Como estabelecido anteriormente, os autômatos finitos, os reconhecedores para linguagens regulares, são fundamentalmente limitados por sua falta de memória. A capacidade de <em>lembrar</em> está restrita ao conjunto finito de estados da máquina. Essa limitação os impede de reconhecer linguagens que exigem a correspondência de símbolos ou contagem, como a linguagem <span class="math inline">\(L=\{a^n b^n \mid n \geq 0\}\)</span>.</p>
+<p>Para reconhecer a classe mais ampla das linguagens livres de contexto, é necessário um modelo de computação mais poderoso. O <strong>autômato de pilha</strong> é esse modelo. Um Autômato de Pilha pode ser concebido como um autômato finito não determinístico ao qual foi adicionada uma memória auxiliar: uma <strong>pilha</strong>, do inglês <em>stack</em>.</p>
+<p>A pilha é uma estrutura de dados com acesso restrito, operando no modo <strong>LIFO</strong> (<em><strong>L</strong>ast-<strong>I</strong>n, <strong>F</strong>irst-<strong>O</strong>ut</em>), o que significa que o último elemento inserido é o primeiro a ser removido. As transições de um Autômato de Pilha são mais complexas que as de um Autômato Finito. A decisão de qual transição tomar depende de três fatores: o estado atual, o próximo símbolo na <em>string</em> de entrada e o símbolo que está no topo da pilha.</p>
+<p>Em cada transição, além de mudar de estado e, opcionalmente, consumir um símbolo de entrada, o Autômato de Pilha pode realizar uma de três operações na pilha:</p>
+<ol type="1">
+<li><strong>Empilhar (<em>Push</em>)</strong>: Adicionar um ou mais símbolos ao topo da pilha;</li>
+<li><strong>Desempilhar (<em>Pop</em>)</strong>: Remover o símbolo do topo da pilha;</li>
+<li><strong>Manter</strong>: Não alterar o conteúdo da pilha.</li>
+</ol>
+<p>Esta capacidade de armazenar e recuperar informações de forma estruturada confere ao Autômato de Pilha seu poder computacional superior.</p>
+<section id="a-equivalência-fundamental" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="a-equivalência-fundamental"><span class="header-section-number">5.7.1</span> A Equivalência Fundamental</h3>
+<p><strong>O resultado mais importante da teoria das Linguagens Livres de Contexto é a equivalência formal entre Gramáticas Livres de Contexto e autômatos com pilha. Uma linguagem é livre de contexto se, e somente se, existe um autômato com pilha que a reconhece.</strong></p>
+<p>Esta equivalência é a espinha dorsal da análise sintática. Ela garante que para qualquer sintaxe de linguagem de programação que possa ser descrita por uma Gramática Livre de Contexto, podemos construir um mecanismo computacional o Autômato de Pilha para reconhecer programas escritos nessa linguagem. É importante notar que a classe de linguagens reconhecidas por Autômatos de Pilha não determinísticos é estritamente maior que a classe reconhecida por Autômatos de Pilha Determinísticos. <strong>São os Autômatos de Pilha não Determinísticos que são equivalentes em poder às Gramáticas Livres de Contexto em geral</strong>.</p>
+<p>A escolha de uma pilha como o mecanismo de memória para reconhecer Linguagens Livres de Contexto não é acidental. A estrutura <strong>LIFO</strong> de uma pilha espelha perfeitamente a natureza recursiva e aninhada das derivações em uma Gramática Livre de Contexto. Considere novamente a gramática <span class="math inline">\(S \rightarrow aSb\)</span> para a linguagem <span class="math inline">\(a^nb^n\)</span>. A derivação de <code>aabb</code> será dada por <span class="math inline">\(S\Rightarrow aSb \Rightarrow aaSbb \Rightarrow aabb\)</span>. Observe como a estrutura se expande simetricamente <em>de dentro para fora</em>. Um Autômato de Pilha para esta linguagem implementa essa simetria de forma operacional: ao ler um <code>a</code>, ele empilha um símbolo de marcador (ex.: <span class="math inline">\(X\)</span>); ao ler o próximo <code>a</code>, empilha outro <span class="math inline">\(X\)</span>. Quando começa a ler os <code>b</code>s, ele desempilha um <span class="math inline">\(X\)</span> para cada <code>b</code> lido. Se a entrada terminar exatamente quando a pilha se esvaziar, a <em>string</em> é aceita. O processo de empilhar na primeira metade e desempilhar na ordem inversa na segunda metade é a encarnação mecânica da recursão gramatical. A pilha <em>lembra</em> as obrigações sintáticas (gerar um <code>b</code> correspondente para cada <code>a</code>) e as descarrega na ordem correta, tornando-a a estrutura de dados canônica para processar estruturas livres de contexto.</p>
+</section>
+</section>
+<section id="as-fronteiras-do-contexto-livre-o-lema-do-bombeamento" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="as-fronteiras-do-contexto-livre-o-lema-do-bombeamento"><span class="header-section-number">5.8</span> As Fronteiras do Contexto Livre: O Lema do Bombeamento</h2>
+<p>Assim como existe uma ferramenta para provar que uma linguagem não é regular, existe um análogo para as linguagens livres de contexto: o <strong>Lema do Bombeamento para Linguagens Livres de Contexto</strong>, também conhecido como Lema de Bar-Hillel. Sua principal aplicação é demonstrar, por contradição, que uma determinada linguagem <strong>não</strong> é livre de contexto.</p>
+<p>A intuição por trás do lema está enraizada na estrutura finita das gramáticas e na natureza das árvores de derivação. Para uma Gramática Livre de Contexto com um número finito de não terminais, qualquer <em>string</em> suficientemente longa gerada por ela deve ter uma árvore de derivação <em>alta</em>. Pelo princípio da casa dos pombos, um caminho longo da raiz a uma folha nessa árvore deve necessariamente conter pelo menos um não-terminal repetido. Essa repetição cria uma sub-árvore que pode ser podada ou duplicada, <em>bombeando</em> a <em>string</em> de uma maneira específica.</p>
+<p>O lema afirma formalmente que para qualquer linguagem livre de contexto <span class="math inline">\(L\)</span>, existe um inteiro <span class="math inline">\(p \geq 1\)</span>, o <em>comprimento de bombeamento</em>, tal que qualquer <em>string</em> <span class="math inline">\(s \in L\)</span> com comprimento <span class="math inline">\(\mid s \mid  \geq p\)</span> pode ser decomposta em cinco <em>substrings</em>, <span class="math inline">\(s = uvxyz\)</span>, que devem satisfazer as seguintes três condições:</p>
+<ol type="1">
+<li><span class="math inline">\(\mid vxy \mid \leq p\)</span>: a <em>substring</em> que contém as partes bombeáveis não é excessivamente longa;</li>
+<li><span class="math inline">\(\mid vy \mid \geq 1\)</span>: pelo menos uma das duas <em>substrings</em> bombeáveis (<span class="math inline">\(v\)</span> ou <span class="math inline">\(y\)</span>) não é vazia. Isso garante que o bombeamento realmente altera a <em>string</em>;</li>
+<li><span class="math inline">\(uv^nxy^nz \in L\)</span> para todo inteiro <span class="math inline">\(n \geq 0\)</span>: as duas <em>substrings</em>, <span class="math inline">\(v\)</span> e <span class="math inline">\(y\)</span>, podem ser bombeadas (repetidas) em conjunto um número arbitrário de vezes, incluindo zero, o que corresponde a removê-las), e a <em>string</em> resultante permanecerá na linguagem <span class="math inline">\(L\)</span>.</li>
+</ol>
+<section id="aplicação-prática-prova-de-que-l-anbncn-mid-n-geq-0-não-é-livre-de-contexto" class="level3" data-number="5.8.1">
+<h3 data-number="5.8.1" class="anchored" data-anchor-id="aplicação-prática-prova-de-que-l-anbncn-mid-n-geq-0-não-é-livre-de-contexto"><span class="header-section-number">5.8.1</span> Aplicação Prática: Prova de que <span class="math inline">\(L = \{a^nb^nc^n \mid n \geq 0\}\)</span> não é Livre de Contexto</h3>
+<p>A linguagem <span class="math inline">\(L=\{a^nb^nc^n \mid n \geq 0\}\)</span> é o exemplo clássico de uma linguagem que está além do alcance das Gramáticas Livres de Contexto. Podemos provar isso rigorosamente usando o lema do bombeamento.</p>
+<p>A prova segue por contradição:</p>
+<ol type="1">
+<li><strong>Suposição</strong>: Suponha que <span class="math inline">\(L\)</span> é livre de contexto.</li>
+<li><strong>Invocação do Lema</strong>: Pelo lema, deve existir um comprimento de bombeamento <span class="math inline">\(p\)</span>.</li>
+<li><strong>Escolha da <em>string</em></strong>: Selecionamos a <em>string</em> <span class="math inline">\(s=a^pb^pc^p\)</span>. Claramente, <span class="math inline">\(s \in L\)</span> e seu comprimento, <span class="math inline">\(3p\)</span>, é maior ou igual a <span class="math inline">\(p\)</span>.</li>
+<li><strong>Análise da Decomposição</strong>: O lema garante que <span class="math inline">\(s\)</span> pode ser decomposta como <span class="math inline">\(s=uvxyz\)</span>, sujeita às condições do lema. A condição <span class="math inline">\(\mid vxy \mid \leq p\)</span> é a chave. Dada a estrutura de <span class="math inline">\(s\)</span> (um bloco de <code>a</code>s, seguido por um bloco de <code>b</code>s, seguido por um bloco de <code>c</code>s), esta condição implica que a sub_string_ <span class="math inline">\(vxy\)</span> não pode conter ocorrências de todos os três símbolos (<code>a</code>, <code>b</code> e <code>c</code>). Ela pode estar inteiramente dentro do bloco de <code>a</code>s, inteiramente dentro do de <code>b</code>s, ou abranger a fronteira entre <code>a</code>s e <code>b</code>s, ou entre <code>b</code>s e <code>c</code>s.</li>
+<li><strong>Contradição</strong>: A condição <span class="math inline">\(\mid vy \mid \geq 1\)</span> garante que o bombeamento adicionará (ou removerá) pelo menos um símbolo. Vamos considerar o bombeamento para cima, com <span class="math inline">\(n=2\)</span>, resultando na <em>string</em> <span class="math inline">\(s′=uv^2xy^2z\)</span>.
+<ul>
+<li>Se <span class="math inline">\(vxy\)</span> contivesse apenas <code>a</code>s, então <span class="math inline">\(v\)</span> e <span class="math inline">\(y\)</span> conteriam apenas <code>a</code>s. A <em>string</em> <span class="math inline">\(s′\)</span> teria mais <code>a</code>s do que <code>b</code>s e <code>c</code>s, violando a condição da linguagem.</li>
+<li>Se <span class="math inline">\(vxy\)</span> contivesse uma mistura de <code>a</code>s e <code>b</code>s, então <span class="math inline">\(v\)</span> e <span class="math inline">\(y\)</span> poderiam conter <code>a</code>s e <code>b</code>s, mas nenhum <code>c</code>. A <em>string</em> <span class="math inline">\(s′\)</span> teria um número aumentado de <code>a</code>s e/ou <code>b</code>s, mas o número de <code>c</code>s permaneceria <span class="math inline">\(p\)</span>. Novamente, a igualdade <span class="math inline">\(n=n=n\)</span> seria quebrada.</li>
+<li>O mesmo raciocínio se aplica a todas as outras localizações possíveis de <span class="math inline">\(vxy\)</span>. Em nenhum caso, o bombeamento pode aumentar o número de <code>a</code>s, <code>b</code>s e <code>c</code>s na mesma proporção.</li>
+</ul></li>
+<li><strong>Conclusão</strong>: A <em>string</em> bombeada <span class="math inline">\(s′\)</span> não pertence a <span class="math inline">\(L\)</span>. Isso contradiz a terceira condição do lema. Portanto, a suposição inicial de que <span class="math inline">\(L\)</span> é livre de contexto deve ser falsa.</li>
+</ol>
+<p>A estrutura de bombeamento duplo (<span class="math inline">\(v\)</span> e <span class="math inline">\(y\)</span>) do lema não é arbitrária. Ela revela a limitação fundamental das Linguagens Livres de Contexto a dependências de, no máximo, <em>dois pontos</em>. Uma Gramática Livre de Contexto, por meio de recursão como <span class="math inline">\(S→aSb\)</span>, pode correlacionar duas partes de uma <em>string</em> (os <code>a</code>s no início e os <code>b</code>s no fim), que correspondem às partes <span class="math inline">\(v\)</span> e <span class="math inline">\(y\)</span> que são bombeadas em conjunto. A linguagem <span class="math inline">\(a^nb^nc^n\)</span> exige uma dependência de <em>três pontos</em>. Um autômato com pilha <em>gasta</em> sua memória para verificar a correspondência entre <code>a</code>s e <code>b</code>s, não restando capacidade para verificar os <code>c</code>s contra a contagem original. O lema do bombeamento formaliza essa limitação, mostrando que o bombeamento inevitavelmente quebra essa dependência tripla.</p>
+</section>
+</section>
+<section id="os-analisadores-sintáticos" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="os-analisadores-sintáticos"><span class="header-section-number">5.9</span> Os Analisadores Sintáticos</h2>
+<p>A análise sintática, ou <em>parsing</em>, é a segunda fase do processo de compilação, posicionada entre a análise léxica e a análise semântica. O analisador sintático atua como o guardião da gramática da linguagem. Enquanto o analisador léxico verifica a <em>ortografia</em>, se as palavras, ou <em>tokens</em>, são válidas, o analisador sintático verifica a <em>gramática</em>, se a sequência de <em>tokens</em> forma sentenças estruturalmente corretas. O objetivo principal do analisador sintático é determinar se o fluxo de <em>tokens</em> de entrada pode ser gerado pela gramática livre de contexto que define a linguagem e, em caso afirmativo, construir uma representação explícita dessa estrutura.</p>
+<p>A entrada para o analisador sintático é o fluxo de <em>tokens</em> produzido pelo analisador léxico. A saída, para um programa sintaticamente correto, é uma estrutura de dados que representa a estrutura hierárquica do código. Embora a árvore de derivação seja a representação teórica direta, na prática, os compiladores constroem uma <strong>Árvore Sintática Abstrata</strong>. A Árvore Sintática Abstrata é uma versão condensada e mais abstrata da árvore de derivação, que omite detalhes sintáticos intermediários, como parênteses para agrupamento ou não terminais que apenas passam a derivação adiante, e captura a estrutura lógica e semântica essencial do programa, tornando-a mais adequada para as fases subsequentes de análise e geração de código.</p>
+<p>A maneira como a árvore de derivação é construída em relação à entrada define as duas principais estratégias de parsing, cada uma com suas próprias características, pontos fortes e limitações:</p>
+<ol type="1">
+<li><strong>Análise Descendente (<em>Top-Down Parsing</em>)</strong>: A construção da árvore de derivação começa no topo, a raiz, que é o símbolo inicial da gramática, e avança para baixo, em direção às folhas, a <em>string</em> de <em>tokens</em> de entrada. Este método tenta encontrar a derivação mais à esquerda para a entrada.<br>
+</li>
+<li><strong>Análise Ascendente (<em>Bottom-Up Parsing</em>)</strong>: A construção da árvore de derivação começa na base, as folhas, que são a <em>string</em> de <em>tokens</em> de entrada, e avança para cima, em direção à raiz, o símbolo inicial. Este método efetivamente reverte uma derivação mais à direita.</li>
+</ol>
+<p>Um erro sintático detectado pelo parser é um erro fatal que interrompe o processo de compilação. Sem uma estrutura sintática válida e inequívoca representada pela Árvore Sintática Abstrata, as fases subsequentes, que dependem dessa estrutura para realizar a verificação de tipos e a geração de código, não podem prosseguir.</p>
+<section id="estratégias-de-análise-descendente-top-down" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="estratégias-de-análise-descendente-top-down"><span class="header-section-number">5.9.1</span> Estratégias de Análise Descendente (<em>Top-Down</em>)</h3>
+<p>A análise descendente tenta construir uma árvore de derivação para a <em>string</em> de entrada começando pela raiz (símbolo inicial) e criando os nós da árvore em pré-ordem. Isso equivale a encontrar uma derivação mais à esquerda para a <em>string</em> de entrada.</p>
+<section id="analisadores-de-descida-recursiva-recursive-descent" class="level4" data-number="5.9.1.1">
+<h4 data-number="5.9.1.1" class="anchored" data-anchor-id="analisadores-de-descida-recursiva-recursive-descent"><span class="header-section-number">5.9.1.1</span> <strong>Analisadores de Descida Recursiva (<em>Recursive-Descent</em>)</strong></h4>
+<p>Uma das implementações mais diretas e intuitivas de um parser descendente é o analisador de descida recursiva. Nesta abordagem, um conjunto de procedimentos mutuamente recursivos é escrito, geralmente um para cada não-terminal na gramática. O procedimento associado a um não-terminal A é responsável por reconhecer na entrada uma sub_string_ que pode ser derivada de A. A simplicidade e a facilidade de implementação manual tornam esta técnica atraente. No entanto, analisadores de descida recursiva ingênuos podem ser ineficientes. Estes analisadores podem exigir retrocesso, <em>backtracking</em>, se a escolha de uma produção se revelar incorreta. Além disso, eles não conseguem lidar com gramáticas que contêm recursão à esquerda, regras da forma <span class="math inline">\(A\rightarrow A \beta\)</span>. Isso levaria a uma recursão infinita.</p>
+</section>
+<section id="analisadores-preditivos-ll" class="level4" data-number="5.9.1.2">
+<h4 data-number="5.9.1.2" class="anchored" data-anchor-id="analisadores-preditivos-ll"><span class="header-section-number">5.9.1.2</span> <strong>Analisadores Preditivos (<span class="math inline">\(LL\)</span>)</strong></h4>
+<p>Para superar as desvantagens do retrocesso, foi desenvolvida uma classe de parsers descendentes chamada de <strong>analisadores preditivos</strong>. Estes são parsers que podem <em>prever</em> qual produção aplicar a um não-terminal olhando para a frente na <em>string</em> de entrada, sem precisar adivinhar e retroceder. O tipo mais comum é o</p>
+<p><strong>parser <span class="math inline">\(LL(1)\)</span></strong>. A notação <span class="math inline">\(LL(1)\)</span> significa:</p>
+<ul>
+<li><strong>L</strong> (primeiro): A entrada é lida da esquerda, <em><strong>L</strong>eft</em> para a direita;</li>
+<li><strong>L</strong> (segundo): O parser constrói uma derivação mais à esquerda, <em><strong>L</strong>eftmost</em>;</li>
+<li><strong>(1)</strong>: Ele usa <strong>1</strong> símbolo de <em>Lookahead</em> (antecipação) para tomar suas decisões.</li>
+</ul>
+<p>Um parser <span class="math inline">\(LL(1)\)</span> opera com três componentes: uma <strong>pilha de análise</strong>, um <strong>ponteiro de entrada</strong> e uma <strong>tabela de análise</strong>. A tabela de análise é uma matriz na qual as linhas correspondem aos não terminais e as colunas aos terminais. Cada célula <span class="math inline">\(M[A,a]\)</span> contém a regra de produção que deve ser usada se o não-terminal A estiver no topo da pilha e o terminal a for o próximo símbolo de entrada, o <em>lookahead</em>. O algoritmo é determinístico: para cada par, não-terminal no topo da pilha, símbolo de <em>Lookahead</em>, há no máximo uma ação a ser tomada. Se a célula estiver vazia, um erro sintático é detectado.</p>
+<p>Os parsers <span class="math inline">\(LL\)</span> são <em>ansiosos</em>. No momento em que um não-terminal <span class="math inline">\(A\)</span> está no topo da pilha, eles devem se comprometer <em>imediatamente</em> com uma única regra <span class="math inline">\(A\rightarrow \beta\)</span>, baseando sua decisão exclusivamente no próximo <em>token</em> de entrada. Essa necessidade de uma decisão precoce e inequívoca é a razão pela qual as gramáticas <span class="math inline">\(LL(1)\)</span> não podem ter ambiguidades, recursão à esquerda ou prefixos comuns, duas produções para o mesmo não-terminal que começam com o mesmo símbolo. Tais características tornam impossível para o parser fazer uma escolha determinística com apenas um símbolo de <em>Lookahead</em>.</p>
+</section>
+</section>
+<section id="estratégias-de-análise-ascendente-bottom-up" class="level3" data-number="5.9.2">
+<h3 data-number="5.9.2" class="anchored" data-anchor-id="estratégias-de-análise-ascendente-bottom-up"><span class="header-section-number">5.9.2</span> Estratégias de Análise Ascendente (Bottom-Up)</h3>
+<p>Em contraste com a abordagem descendente, a análise ascendente constrói a árvore de derivação a partir das folhas, a <em>string</em> de entrada, em direção à raiz, o símbolo inicial da gramática. O processo pode ser visto como uma tentativa de <em>reduzir</em> a <em>string</em> de entrada de volta ao símbolo inicial, essencialmente traçando uma derivação mais à direita ao contrário.</p>
+<section id="a-abordagem-shift-reduce" class="level4" data-number="5.9.2.1">
+<h4 data-number="5.9.2.1" class="anchored" data-anchor-id="a-abordagem-shift-reduce"><span class="header-section-number">5.9.2.1</span> A Abordagem <em>Shift-Reduce</em></h4>
+<p>O mecanismo fundamental por trás da maioria dos parsers ascendentes é o <em><strong>shift-reduce</strong></em> (<em>deslocar-reduzir</em>). O parser utiliza uma pilha para armazenar símbolos da gramática e toma uma de quatro ações possíveis em cada passo:</p>
+<ol type="1">
+<li><strong>Shift (Deslocar)</strong>: o próximo símbolo de entrada é movido (deslocado) para o topo da pilha;</li>
+<li><strong>Reduce (Reduzir)</strong>: o parser reconhece que uma sequência de símbolos <span class="math inline">\(\beta\)</span> no topo da pilha corresponde ao lado direito de uma regra de produção <span class="math inline">\(A\rightarrow \beta\)</span>. Ele então substitui (reduz) <span class="math inline">\(\beta\)</span> na pilha pelo não-terminal <span class="math inline">\(A\)</span>;</li>
+<li><strong>Accept (Aceitar)</strong>: a análise é concluída com sucesso. Isso ocorre quando a entrada foi totalmente consumida e a pilha contém apenas o símbolo inicial.</li>
+<li><strong>Error (Erro)</strong>: um erro sintático é encontrado, e o parser não pode continuar.</li>
+</ol>
+<p>A principal dificuldade em um parser <em>shift-reduce</em> é decidir quando deslocar e quando reduzir (um <strong>conflito shift/reduce</strong>) ou, ao decidir reduzir, qual regra usar se múltiplas corresponderem (um <strong>conflito reduce/reduce</strong>).</p>
+</section>
+<section id="a-família-de-analisadores-lr" class="level4" data-number="5.9.2.2">
+<h4 data-number="5.9.2.2" class="anchored" data-anchor-id="a-família-de-analisadores-lr"><span class="header-section-number">5.9.2.2</span> A Família de Analisadores <span class="math inline">\(LR\)</span></h4>
+<p>A classe mais poderosa e amplamente utilizada de parsers ascendentes é a família <strong><span class="math inline">\(LR\)</span></strong>. Eles são capazes de analisar uma classe de gramáticas significativamente maior do que os parsers <span class="math inline">\(LL\)</span>. A notação <span class="math inline">\(LR\)</span> significa:</p>
+<ul>
+<li><strong>L</strong>: A entrada é lida da esquerda, <em><strong>L</strong>eft</em> para a direita;</li>
+<li><strong>R</strong>: O parser constrói uma derivação mais à direita, <em><strong>R</strong>ightmost</em>, ao contrário.</li>
+</ul>
+<p>Existem várias variantes de parsers <span class="math inline">\(LR\)</span>, que diferem principalmente na forma como suas tabelas de análise são construídas e na quantidade de informação de <em>Lookahead</em> que utilizam para resolver conflitos:</p>
+<ul>
+<li><strong>LR(0)</strong>: o mais simples, não usa <em>Lookahead</em>;</li>
+<li><strong>SLR (Simple LR)</strong>: usa os conjuntos FOLLOW do não-terminal para decidir sobre as reduções;</li>
+<li><strong>LALR(1) (Look-Ahead LR)</strong>: uma versão otimizada do <span class="math inline">\(LR(1)\)</span> com tabelas menores, mas poder de reconhecimento ligeiramente reduzido. É a base para ferramentas como YACC e Bison;</li>
+<li><strong>LR(1) Canônico</strong>: o mais poderoso da família, mas que gera tabelas de análise muito grandes.</li>
+</ul>
+<p>Ao contrário dos parsers <span class="math inline">\(LL\)</span> <em>ansiosos</em>, os parsers <span class="math inline">\(LR\)</span> são <em>pacientes</em>. Eles não precisam decidir qual regra de produção usar no momento em que veem o primeiro símbolo de seu lado direito. Em vez disso, eles continuam a deslocar símbolos para a pilha até que o lado direito <em>completo</em> de uma produção, conhecido como <em><strong>handle</strong></em>, esteja no topo da pilha. Somente então eles realizam a redução. Essa capacidade de adiar a decisão até que mais contexto esteja disponível é a fonte de seu maior poder e de sua capacidade de lidar com uma gama mais ampla e natural de gramáticas sem a necessidade de reescritas extensivas.</p>
+<p>O <strong>parser LALR(1)</strong> (<em><strong>L</strong>ook-<strong>A</strong>head <strong>LR</strong></em>) merece destaque. Esta família de <em>parsers</em> representa uma solução engenhosa para um problema prático fundamental: os parsers LR(1), embora teoricamente mais poderosos, geram tabelas de análise de tamanho proibitivo para gramáticas reais de linguagens de programação. O LALR(1) resolve essa limitação através de uma técnica de <strong>fusão de estados</strong> (<em>state merging</em>). Durante a construção do autômato LR(1), estados que possuem o mesmo <em>core</em> — isto é, a mesma coleção de itens LR(0), mas diferentes conjuntos de <em>lookahead</em>, são consolidados em um único estado. O conjunto de <em>lookahead</em> do estado resultante torna-se a união dos conjuntos originais. Esta fusão reduz drasticamente o número de estados, frequentemente de milhares para centenas, tornando as tabelas de análise praticamente viáveis sem sacrificar significativamente o poder de reconhecimento.</p>
+<p>A diferença fundamental entre LALR(1) e LR(1) manifesta-se tanto em termos de eficiência quanto de capacidade de reconhecimento. <strong>Em termos de eficiência</strong>, o LR(1) pode gerar tabelas com dezenas de milhares de estados para gramáticas complexas, consumindo megabytes de memória e tornando o parser lento, enquanto o LALR(1) produz tabelas compactas com centenas de estados, adequadas para uso industrial. <strong>Em termos de poder de reconhecimento</strong>, o LR(1) aceita rigorosamente todas as gramáticas LR(1), enquanto o LALR(1) constitui um subconjunto próprio dessa classe, algumas gramáticas LR(1) podem se tornar ambíguas durante o processo de fusão de estados, gerando conflitos <em>reduce/reduce</em>. Contudo, esta limitação raramente impacta gramáticas práticas de linguagens de programação, razão pela qual ferramentas como YACC e Bison adotaram LALR(1) como padrão, estabelecendo um equilíbrio ótimo entre expressividade teórica e viabilidade implementacional.</p>
+</section>
+</section>
+<section id="sec-impacto-ambiguidade-compilacao" class="level3" data-number="5.9.3">
+<h3 data-number="5.9.3" class="anchored" data-anchor-id="sec-impacto-ambiguidade-compilacao"><span class="header-section-number">5.9.3</span> Impacto da Ambiguidade no Processo de Compilação</h3>
+<p>A atenta leitora deve compreender que a ambiguidade em uma gramática não é uma mera curiosidade teórica; ela representa uma falha fundamental na especificação de uma linguagem, com consequências diretas e severas em todas as principais fases do processo de compilação. Um compilador é uma ferramenta determinística que deve traduzir um único código-fonte em um único programa executável. A ambiguidade quebra essa premissa, introduzindo incerteza que se propaga desde a análise sintática até a geração do código final.</p>
+<section id="fase-de-análise-sintática" class="level4" data-number="5.9.3.1">
+<h4 data-number="5.9.3.1" class="anchored" data-anchor-id="fase-de-análise-sintática"><span class="header-section-number">5.9.3.1</span> Fase de Análise Sintática</h4>
+<p>A análise sintática é a primeira e mais direta vítima da ambiguidade. O objetivo do <em>parser</em> é construir uma única árvore de derivação que represente a estrutura do código-fonte. Quando a gramática é ambígua, essa tarefa torna-se impossível sem regras externas de desambiguação.</p>
+<ul>
+<li><p><strong>Geração de Múltiplas Árvores de Derivação</strong>: Para uma sentença ambígua, o analisador sintático é inerentemente não-determinístico. Ele pode construir duas ou mais árvores de derivação distintas, cada uma representando uma interpretação estrutural válida. Sem um critério para escolher entre elas, o <em>parser</em> não pode prosseguir de forma unívoca.</p></li>
+<li><p><strong>Conflitos em Parsers LR</strong>: Em analisadores sintáticos <em>bottom-up</em>, como os da família LR (LR, SLR, LALR), a ambiguidade manifesta-se diretamente como <strong>conflitos shift/reduce</strong> ou <strong>reduce/reduce</strong>. Por exemplo, na gramática ambígua de expressões, ao processar <code>id + id * id</code>, o <em>parser</em> chegará a um estado no qual encontrou <code>E + E</code>. Neste ponto, ele não sabe se deve reduzir a expressão pela regra <span class="math inline">\(E \rightarrow E+E\)</span> (um <em>reduce</em>) ou aguardar o próximo símbolo <code>*</code> para processar a multiplicação primeiro (um <em>shift</em>). Ferramentas geradoras de <em>parsers</em>, como o YACC ou Bison, relatarão esses conflitos como erros fatais durante a geração do analisador.</p></li>
+<li><p><strong>Ineficiência em Parsers Top-Down</strong>: Para analisadores sintáticos <em>top-down</em>, como os de descida recursiva, a ambiguidade pode levar a um <strong>backtracking excessivo</strong>. O <em>parser</em> pode ser forçado a explorar múltiplos caminhos de derivação, apenas para descobrir que um deles falha mais tarde. Em casos mal projetados, especialmente com recursão à esquerda, isso pode levar a <em>loops</em> infinitos, paralisando a compilação.</p></li>
+</ul>
+</section>
+<section id="fase-de-análise-semântica" class="level4" data-number="5.9.3.2">
+<h4 data-number="5.9.3.2" class="anchored" data-anchor-id="fase-de-análise-semântica"><span class="header-section-number">5.9.3.2</span> Fase de Análise Semântica</h4>
+<p>Supondo que a fase sintática tenha conseguido, de alguma forma, produzir uma árvore, talvez escolhendo arbitrariamente uma das opções, os problemas de ambiguidade se transformam em problemas semânticos. A árvore sintática é a base para toda a análise de significado, e diferentes árvores levam a semânticas drasticamente diferentes.</p>
+<ul>
+<li><p><strong>Atribuição de Tipos Inconsistente</strong>: A estrutura da árvore de derivação dita como os tipos são verificados e inferidos. Na expressão <code>(id_float + id_int) * id_int</code>, a adição ocorreria primeiro, possivelmente promovendo o <code>id_int</code> a <code>float</code>. Na interpretação <code>id_float + (id_int * id_int)</code>, a multiplicação de inteiros ocorreria primeiro. As duas árvores podem resultar em tipos finais diferentes ou até mesmo em erros de tipo distintos.</p></li>
+<li><p><strong>Resolução de Escopo Ambígua</strong>: A ambiguidade estrutural, como a do <em>dangling else</em>, afeta diretamente a determinação do escopo. Uma variável declarada dentro de um bloco <code>if</code> terá seu escopo e tempo de vida definidos pela árvore sintática. Se não está claro a qual <code>if</code> um bloco <code>else</code> pertence, também não estará claro o escopo das construções dentro daquele bloco.</p></li>
+<li><p><strong>Ordem de Avaliação Indefinida</strong>: A semântica de uma linguagem define a ordem de avaliação de subexpressões. Isso é fundamental quando há <strong>efeitos colaterais</strong> (por exemplo, <code>f() + g()</code>, no quais <code>f</code> e <code>g</code> modificam uma variável global). Uma gramática ambígua que permite duas árvores de derivação para esta expressão deixa indefinido qual função será chamada primeiro, tornando o resultado da expressão imprevisível.</p></li>
+</ul>
+</section>
+<section id="fase-de-geração-de-código" class="level4" data-number="5.9.3.3">
+<h4 data-number="5.9.3.3" class="anchored" data-anchor-id="fase-de-geração-de-código"><span class="header-section-number">5.9.3.3</span> Fase de Geração de Código</h4>
+<p>Finalmente, as inconsistências estruturais e semânticas culminam em um processo de geração de código que é, na melhor das hipóteses, não-determinístico e, na pior, incorreto.</p>
+<ul>
+<li><p><strong>Geração de Código Não-Determinístico</strong>: Cada Árvore Sintática Abstrata distinta mapeia para uma sequência diferente de código intermediário ou de máquina. A expressão <code>(a+b)*c</code> gera uma instrução de <code>ADD</code> seguida por uma de <code>MUL</code>. Já <code>a+(b*c)</code> gera uma <code>MUL</code> seguida por uma <code>ADD</code>. Se o compilador escolher uma árvore arbitrariamente, o código gerado será igualmente arbitrário.</p></li>
+<li><p><strong>Impossibilidade de Otimização</strong>: As otimizações de código dependem de uma análise rigorosa e inequívoca do fluxo de controle e de dados, que é derivada da Árvore Sintática Abstrata. Se o compilador não pode garantir a estrutura correta do programa (por exemplo, a precedência de operadores), ele não pode aplicar otimizações de forma segura. Otimizar uma estrutura que não representa a intenção do programador pode alterar drasticamente a lógica do programa.</p></li>
+<li><p><strong>Comportamento Imprevisível do Programa</strong>: A consequência final é a mais grave. Um programa compilado a partir de uma gramática ambígua pode exibir <strong>comportamentos diferentes</strong> dependendo da versão do compilador ou até mesmo de fatores aparentemente não relacionados. Isso viola o princípio fundamental de que a compilação deve ser um processo reprodutível e confiável, tornando a linguagem inadequada para qualquer aplicação séria.</p></li>
+</ul>
+</section>
+</section>
+<section id="automatizando-a-construção-ferramentas-geradoras-de-parsers" class="level3" data-number="5.9.4">
+<h3 data-number="5.9.4" class="anchored" data-anchor-id="automatizando-a-construção-ferramentas-geradoras-de-parsers"><span class="header-section-number">5.9.4</span> Automatizando a Construção: Ferramentas Geradoras de Parsers</h3>
+<p>A construção manual de um analisador sintático, especialmente um parser <span class="math inline">\(LR\)</span>, é uma tarefa complexa, tediosa e propensa a erros. Para mitigar essa complexidade, foram desenvolvidas ferramentas especializadas conhecidas como <strong>geradores de parsers</strong>. Essas ferramentas automatizam o processo de criação de um parser a partir de uma especificação de alto nível da gramática da linguagem.</p>
+<section id="yacc-e-gnu-bison" class="level4" data-number="5.9.4.1">
+<h4 data-number="5.9.4.1" class="anchored" data-anchor-id="yacc-e-gnu-bison"><span class="header-section-number">5.9.4.1</span> YACC e GNU Bison**</h4>
+<p>As ferramentas mais conhecidas e influentes nesta categoria são YACC e seu sucessor, Bison.</p>
+<ul>
+<li><strong>YACC (Yet Another Compiler-Compiler)</strong>: desenvolvido na Bell Labs, YACC é a ferramenta canônica para gerar parsers <span class="math inline">\(LALR(1)\)</span>. Ele se tornou um padrão de fato em sistemas Unix.</li>
+<li><strong>GNU Bison</strong>: É a implementação do projeto GNU de um gerador de parsers. É amplamente compatível com YACC, mas oferece recursos adicionais, como a geração de parsers <span class="math inline">\(GLR\)</span>, <em>Generalized LR</em> para lidar com gramáticas ambíguas e a geração de código em múltiplas linguagens (C, C++, Java).</li>
+</ul>
+<p>O fluxo de trabalho com YACC ou Bison pode ser resumido da seguinte forma:</p>
+<ol type="1">
+<li><strong>Entrada</strong>: o desenvolvedor cria um arquivo de especificação, geralmente com a extensão <code>.y</code>. Este arquivo contém três seções: declarações, a gramática da linguagem escrita em uma notação semelhante à <strong><span class="math inline">\(BNF\)</span></strong>, e uma seção de código auxiliar. O desenvolvedor pode associar <strong>ações</strong> de código (em C ou C++) a cada regra da gramática.</li>
+<li><strong>Processamento</strong>: A ferramenta (YACC ou Bison) lê o arquivo de especificação. Ela analisa a gramática, constrói o autômato <span class="math inline">\(LR\)</span> e a tabela de análise correspondente, e verifica a existência de conflitos (<em>shift/reduce</em> ou <em>reduce/reduce</em>).</li>
+<li><strong>Saída</strong>: Se a gramática for adequada (ex.: <span class="math inline">\(LALR(1)\)</span>), a ferramenta gera um arquivo de código fonte (ex.: <code>y.tab.c</code>) que implementa a função do parser (tipicamente chamada <code>yyparse</code>). Esta função implementa o algoritmo <em>shift-reduce</em> dirigido pela tabela gerada. As ações de código fornecidas pelo desenvolvedor são incorporadas à função e são executadas sempre que a regra correspondente é reduzida. Essas ações são tipicamente usadas para construir a Árvore Sintática Abstrata.</li>
+</ol>
+</section>
+<section id="sinergia-com-lexflex" class="level4" data-number="5.9.4.2">
+<h4 data-number="5.9.4.2" class="anchored" data-anchor-id="sinergia-com-lexflex"><span class="header-section-number">5.9.4.2</span> Sinergia com Lex/Flex</h4>
+<p>YACC/Bison são projetados para lidar com a análise sintática e quase sempre são usados em conjunto com um gerador de analisador léxico, como <strong>Lex</strong> ou seu sucessor <strong>Flex</strong>. O Flex recebe uma especificação de padrões de <em>tokens</em>, usando expressões regulares, e gera um <em>scanner</em> (a função <code>yylex</code>). O parser gerado pelo Bison chama <code>yylex</code> para obter o próximo <em>token</em> da entrada, formando um pipeline coeso que transforma o texto fonte em uma Árvore Sintática Abstrata.</p>
+<p>O uso de ferramentas como YACC e Bison representa uma mudança de paradigma fundamental na construção de compiladores: da programação <em>imperativa</em> para a <em>declarativa</em>. Em vez de implementar manualmente o complexo algoritmo de um parser shift-reduce, a abordagem imperativa, o desenvolvedor fornece uma especificação de alto nível da gramática da linguagem, a abordagem declarativa. A ferramenta se encarrega de gerar a implementação de baixo nível. Essa separação de interesses, o <em>quê</em>, a sintaxe da linguagem, do <em>como</em>, o algoritmo de parsing, aumenta drasticamente a produtividade, a robustez e a manutenibilidade do compilador.</p>
+<p>Além disso, a utilização de geradores de parsers permite que os desenvolvedores se concentrem na lógica da linguagem que estão implementando, em vez de se perderem nos detalhes de implementação do parser. Isso resulta em um desenvolvimento mais rápido e menos propenso a erros, uma vez que a ferramenta cuida de muitos dos aspectos técnicos e repetitivos da construção do parser.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-lexico.html" class="pagination-link" aria-label="Autômatos Finitos Determinísticos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-parsersLL1.html" class="pagination-link" aria-label="Parsers LL(1): Começando a Análise Sintática">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/04-Gramaticas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

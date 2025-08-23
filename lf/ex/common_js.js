@@ -11,8 +11,21 @@ function toggleTOC() {
     }
 }
 
+// Configuração MathJax
+window.MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+};
+
 // Inicialização principal quando DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize highlight.js
+    if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+    }
+    
     initializeTOC();
     initializeSmoothScrolling();
     initializeFadeAnimations();
