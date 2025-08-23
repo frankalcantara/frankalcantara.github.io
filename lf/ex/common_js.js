@@ -21,9 +21,15 @@ window.MathJax = {
 
 // Inicialização principal quando DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize highlight.js
+    // Initialize custom code highlighting BEFORE highlight.js
+    initializeCustomCodeHighlighting();
+    
+    // Initialize highlight.js for other code blocks
     if (typeof hljs !== 'undefined') {
-        hljs.highlightAll();
+        // Only highlight pre > code elements, not our custom .code-highlight divs
+        document.querySelectorAll('pre code:not(.no-highlight)').forEach((block) => {
+            hljs.highlightElement(block);
+        });
     }
     
     initializeTOC();
@@ -210,4 +216,71 @@ if (typeof MutationObserver !== 'undefined') {
             });
         }
     });
+}
+
+// Custom code highlighting for YACC/Bison and grammar notations
+function initializeCustomCodeHighlighting() {
+    // Highlight code in .code-highlight divs
+    const codeHighlightElements = document.querySelectorAll('.code-highlight');
+    
+    codeHighlightElements.forEach(element => {
+        const text = element.textContent || element.innerText;
+        
+        // Detect type of content and apply appropriate highlighting
+        if (text.includes('%left') || text.includes('%right') || text.includes('%%')) {
+            highlightYaccBison(element);
+        } else if (text.includes('→') || text.includes('::=') || /^[A-Z]\s*(→|::=)/.test(text)) {
+            highlightGrammarRules(element);
+        }
+    });
+}
+
+function highlightYaccBison(element) {
+    const originalText = element.textContent || element.innerText;
+    let content = originalText;
+    
+    // Split by lines to preserve structure
+    const lines = content.split('\n');
+    const processedLines = lines.map(line => {
+        // YACC directives (%left, %right, %token, etc.)
+        line = line.replace(/(%\w+)/g, '<span class="yacc-directive">$1</span>');
+        
+        // YACC separator %%
+        line = line.replace(/(%%)/g, '<span class="yacc-separator">$1</span>');
+        
+        // Rule names (word followed by colon)
+        line = line.replace(/^(\w+)(\s*:)/g, '<span class="yacc-rule">$1</span>$2');
+        
+        // Terminals in single quotes
+        line = line.replace(/('[^']*')/g, '<span class="yacc-terminal">$1</span>');
+        
+        // Comments /* ... */
+        line = line.replace(/(\/\*[^*]*\*+(?:[^/*][^*]*\*+)*\/)/g, '<span class="yacc-comment">$1</span>');
+        
+        return line;
+    });
+    
+    element.innerHTML = processedLines.join('<br>');
+}
+
+function highlightGrammarRules(element) {
+    const originalText = element.textContent || element.innerText;
+    let content = originalText;
+    
+    // Split by lines to preserve structure
+    const lines = content.split('\n');
+    const processedLines = lines.map(line => {
+        // Grammar arrows (→, ::=)
+        line = line.replace(/(→|::=)/g, '<span class="grammar-arrow">$1</span>');
+        
+        // Production rule left side (before arrow)
+        line = line.replace(/^([A-Z]+)\s*(→|::=)/g, '<span class="grammar-rule">$1</span> <span class="grammar-arrow">$2</span>');
+        
+        // Simple non-terminals (single letters like K, E, T, F) - but not if already in a span
+        line = line.replace(/(?<!<[^>]*)\b([A-Z])\b(?![^<]*>)/g, '<span class="grammar-nonterminal">$1</span>');
+        
+        return line;
+    });
+    
+    element.innerHTML = processedLines.join('<br>');
 }

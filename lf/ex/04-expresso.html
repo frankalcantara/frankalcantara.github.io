@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Gramáticas e Linguagens Livres de Contexto</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <!-- Custom CSS and JS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="common_js.js"></script>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#hierarquia-chomsky" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Hierarquia de Chomsky</a></li>
+                <li class="mb-2"><a href="#anatomia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Anatomia das GLC</a></li>
+                <li class="mb-2"><a href="#notacao-bnf" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Notação BNF</a></li>
+                <li class="mb-2"><a href="#derivacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Derivações e Árvores</a></li>
+                <li class="mb-2"><a href="#ambiguidade" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Problema da Ambiguidade</a></li>
+                <li class="mb-2"><a href="#eliminacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Eliminação de Ambiguidade</a></li>
+                <li class="mb-2"><a href="#automatos-pilha" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Autômatos com Pilha</a></li>
+                <li class="mb-2"><a href="#lema-bombeamento" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Lema do Bombeamento</a></li>
+                <li class="mb-2"><a href="#analisadores" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Analisadores Sintáticos</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-layer-group me-2 text-primary"></i><small class="text-primary fw-medium">Hierarquia</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-sitemap me-2 text-success"></i><small class="text-success fw-medium">Gramáticas</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-code me-2 text-warning"></i><small class="text-warning fw-medium">BNF</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-project-diagram me-2 text-info"></i><small class="text-info fw-medium">Parsers</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Gramáticas e Linguagens</em>
+                                    <span class="d-block">Livres de Contexto</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Da Hierarquia de Chomsky aos compiladores modernos
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">1956</div>
+                            <div class="fs-6 text-muted">Noam Chomsky</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">Tipo 2</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Linguagens Livres de Contexto</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-layer-group fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Hierarquia</h3>
+                                <p class="fs-7 text-muted">4 níveis aninhados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-sitemap fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Gramáticas</h3>
+                                <p class="fs-7 text-muted">Regras de produção</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-stack fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Autômatos</h3>
+                                <p class="fs-7 text-muted">Pilha LIFO</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-project-diagram fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Parsers</h3>
+                                <p class="fs-7 text-muted">Análise sintática</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introdução Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução às Linguagens Formais</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        No campo da ciência da computação teórica, a Hierarquia de Chomsky serve como o principal sistema de classificação para linguagens formais. Esta hierarquia organiza as linguagens em uma série de quatro níveis aninhados, cada um sendo um subconjunto do nível anterior.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote text-center mb-0">
+                            <p class="fs-4 fw-light fst-italic" style="color: var(--sage-800);">
+                                "A classificação baseia-se na complexidade das regras gramaticais necessárias para gerar as strings de uma linguagem"
+                            </p>
+                            <footer class="blockquote-footer mt-3">
+                                <cite title="Hierarquia de Chomsky">Teoria das Linguagens Formais</cite>
+                            </footer>
+                        </blockquote>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Relação Hierárquica</div>
+                        <p class="mb-3">A hierarquia estabelece uma relação de inclusão estrita entre as classes:</p>
+                        <div class="text-center my-3">
+                            $$\text{Tipo 3} \subset \text{Tipo 2} \subset \text{Tipo 1} \subset \text{Tipo 0}$$
+                        </div>
+                        <p class="mb-0">Esta estrutura aninhada revela uma elegância matemática notável, com correspondência perfeita entre restrições gramaticais e modelos computacionais.</p>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4">
+                        <div class="col">
+                            <div class="hierarchy-level type-3">
+                                <h3 class="fs-5 fw-semibold mb-2 text-success">Tipo 3: Linguagens Regulares</h3>
+                                <p class="mb-2">Geradas por gramáticas regulares e reconhecidas por autômatos finitos.</p>
+                                <small class="text-muted">Exemplos: tokens, palavras-chave, identificadores</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="hierarchy-level type-2">
+                                <h3 class="fs-5 fw-semibold mb-2 text-primary">Tipo 2: Linguagens Livres de Contexto</h3>
+                                <p class="mb-2">Geradas por Gramáticas Livres de Contexto e reconhecidas por autômatos com pilha.</p>
+                                <small class="text-muted">Exemplos: linguagens de programação, expressões aninhadas</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="hierarchy-level type-1">
+                                <h3 class="fs-5 fw-semibold mb-2 text-warning">Tipo 1: Linguagens Sensíveis ao Contexto</h3>
+                                <p class="mb-2">Geradas por gramáticas sensíveis ao contexto e reconhecidas por autômatos linearmente limitados.</p>
+                                <small class="text-muted">PSPACE-completas, complexidade exponencial</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="hierarchy-level type-0">
+                                <h3 class="fs-5 fw-semibold mb-2 text-danger">Tipo 0: Linguagens Recursivamente Enumeráveis</h3>
+                                <p class="mb-2">Geradas por gramáticas irrestritas e reconhecidas por Máquinas de Turing.</p>
+                                <small class="text-muted">Indecidíveis em geral, máximo poder computacional</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hierarquia de Chomsky -->
+        <section id="hierarquia-chomsky" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Hierarquia de Chomsky: História e Contexto</h2>
+                    
+                    <div class="historical-figure mb-5">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-3 text-center">
+                                <div class="icon-badge badge-primary mx-auto" style="width: 80px; height: 80px; font-size: 2rem;">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <h4 class="fs-5 fw-semibold mt-3" style="color: var(--copper-800);">1956-1959</h4>
+                                <p class="text-muted">Era da Formalização</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h3 class="fs-4 fw-semibold mb-3" style="color: var(--copper-800);">Noam Chomsky e a Revolução Cognitiva</h3>
+                                <p class="mb-3">A Hierarquia de Chomsky representa um dos marcos mais elegantes da ciência do século XX, estabelecendo pontes entre linguística, matemática e ciência da computação. Desenvolvida entre 1956 e 1959, esta classificação transformou os estudos linguísticos de uma disciplina descritiva em uma ciência formal rigorosa.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Influências Fundamentais</h3>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">Emil Post (1936, 1944)</h4>
+                            <p>Desenvolveu sistemas canônicos usando técnicas de reescrita de strings que se tornaram fundamentais. Seu trabalho sobre processos combinatórios finitos criou modelos computacionais equivalentes às máquinas de Turing.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">McCulloch-Pitts (1943)</h4>
+                            <p>Ofereceram o primeiro modelo matemático conectando redes neurais à computação, levando diretamente à noção de autômatos finitos que se tornaram o Tipo-3 na Hierarquia.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">Stephen Cole Kleene</h4>
+                            <p>Estabeleceu a equivalência fundamental entre expressões regulares e máquinas de estado finito (Teorema de Kleene), fornecendo a base matemática para as gramáticas do Tipo-3.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4 class="fs-5 fw-semibold mb-3">Teoria das Funções Recursivas</h4>
+                            <p>Chomsky declarou que a gramática gerativa se desenvolveu dentro da teoria das funções recursivas, formalizando a noção de computação sobre a tese de Church-Turing.</p>
+                        </div>
+                    </div>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Elegância Matemática dos Quatro Tipos</div>
+                        <p class="mb-3">A estrutura hierárquica revela uma beleza matemática notável através da aplicação de restrições matemáticas crescentes:</p>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong>Tipo 0:</strong> Sem restrições nas regras ($\alpha \rightarrow \beta$)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Tipo 1:</strong> Propriedade não-contrativa ($|\alpha| \leq |\beta|$)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Tipo 2:</strong> Lado esquerdo é um não-terminal ($A \rightarrow \gamma$)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Tipo 3:</strong> Restrições específicas (padrões lineares)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-info-subtle rounded">
+                            <strong>Relação Inversa:</strong> Gramáticas mais restritas (Tipo 3) requerem menor poder computacional (autômatos finitos), enquanto gramáticas menos restritas (Tipo 0) necessitam do maior poder computacional (máquinas de Turing).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anatomia das GLC -->
+        <section id="anatomia" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. A Anatomia das Gramáticas Livres de Contexto</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Para analisar e processar linguagens com estruturas aninhadas, é imprescindível o uso de um formalismo matemático preciso. Uma Gramática Livre de Contexto fornece a base formal necessária.
+                    </p>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição Formal</div>
+                        <p class="mb-3">Uma Gramática Livre de Contexto é definida como uma quádrupla:</p>
+                        <div class="text-center my-3">
+                            $$G = (N, \Sigma, P, S)$$
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>N:</strong> Conjunto finito de símbolos não-terminais (variáveis que representam construções sintáticas)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Σ:</strong> Conjunto finito de símbolos terminais (alfabeto da linguagem)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>P:</strong> Conjunto finito de regras de produção ($A \rightarrow \beta$)
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>S:</strong> Símbolo inicial (ponto de partida para derivações)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo Canônico: Linguagem dos Palíndromos</h3>
+                        
+                        <p class="mb-3">Para ilustrar esses conceitos, vamos construir uma GLC para a linguagem dos palíndromos sobre o alfabeto $\Sigma = \{0,1\}$:</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Definição Recursiva</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>Casos Base:</strong> ε, '0' e '1' são palíndromos</li>
+                                    <li class="list-group-item"><strong>Passo Indutivo:</strong> Se w é palíndromo, então 0w0 e 1w1 também são</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Regras de Produção</h5>
+                                <div class="code-highlight">
+K → ε
+K → 0
+K → 1
+K → 0K0
+K → 1K1
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="definition-box mt-4">
+                            <div class="definition-title">Gramática Completa $G_{pal}$</div>
+                            <ul class="list-unstyled mb-0">
+                                <li><strong>N:</strong> {K}</li>
+                                <li><strong>Σ:</strong> {0, 1}</li>
+                                <li><strong>P:</strong> {K → ε, K → 0, K → 1, K → 0K0, K → 1K1}</li>
+                                <li><strong>S:</strong> K</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-play me-2"></i>Derivação da String '0110'
+                        </h4>
+                        
+                        <div class="derivation-steps">
+                            <div class="derivation-step">1. $K$ (iniciar com símbolo inicial)</div>
+                            <div class="derivation-step">2. $K \Rightarrow 0K0$ (aplicar regra K → 0K0)</div>
+                            <div class="derivation-step">3. $0K0 \Rightarrow 0(1K1)0 = 01K10$ (aplicar regra K → 1K1)</div>
+                            <div class="derivation-step">4. $01K10 \Rightarrow 01(\epsilon)10 = 0110$ (aplicar regra K → ε)</div>
+                        </div>
+                        
+                        <div class="mt-3 p-3 bg-success-subtle rounded">
+                            <strong>Sequência completa:</strong> $K \Rightarrow 0K0 \Rightarrow 01K10 \Rightarrow 01\epsilon10 \Rightarrow 0110$
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notação BNF -->
+        <section id="notacao-bnf" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. A Notação BNF</h2>
+                    
+                    <div class="historical-figure mb-5">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-3 text-center">
+                                <div class="icon-badge badge-success mx-auto" style="width: 80px; height: 80px; font-size: 2rem;">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h4 class="fs-5 fw-semibold mt-3" style="color: var(--copper-800);">1958-1960</h4>
+                                <p class="text-muted">ALGOL 60</p>
+                            </div>
+                            <div class="col-md-9">
+                                <h3 class="fs-4 fw-semibold mb-3" style="color: var(--copper-800);">Backus-Naur Form</h3>
+                                <p class="mb-3">A **F**orma de **B**ackus-**N**aur representa um dos sistemas de notação mais elegantes e influentes da ciência da computação. Desenvolvida para descrever formalmente a sintaxe da linguagem ALGOL 60, a BNF tornou-se o padrão <em>de facto</em> para especificar a sintaxe de linguagens de programação.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Estrutura e Componentes da BNF</h3>
+                        
+                        <p class="mb-4">A BNF define uma gramática através de regras de produção, onde cada regra especifica como um símbolo não-terminal pode ser expandido:</p>
+                        
+                        <div class="bnf-code">
+&lt;<span class="bnf-nonterminal">símbolo-não-terminal</span>&gt; <span class="bnf-operator">::=</span> <span class="bnf-terminal">expressão-alternativa</span>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Elementos Fundamentais</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>Não-terminais:</strong> &lt;expressão&gt;, &lt;comando&gt;</li>
+                                    <li class="list-group-item"><strong>Terminais:</strong> "if", "+", ";"</li>
+                                    <li class="list-group-item"><strong>Definição:</strong> ::= ("é definido como")</li>
+                                    <li class="list-group-item"><strong>Alternativa:</strong> | ("ou")</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Exemplo: Expressões Aritméticas</h5>
+                                <div class="bnf-code">
+&lt;<span class="bnf-nonterminal">expressão</span>&gt; <span class="bnf-operator">::=</span> &lt;<span class="bnf-nonterminal">termo</span>&gt; <span class="bnf-terminal">"+"</span> &lt;<span class="bnf-nonterminal">expressão</span>&gt; <span class="bnf-operator">|</span> &lt;<span class="bnf-nonterminal">termo</span>&gt;
+&lt;<span class="bnf-nonterminal">termo</span>&gt; <span class="bnf-operator">::=</span> &lt;<span class="bnf-nonterminal">fator</span>&gt; <span class="bnf-terminal">"*"</span> &lt;<span class="bnf-nonterminal">termo</span>&gt; <span class="bnf-operator">|</span> &lt;<span class="bnf-nonterminal">fator</span>&gt;
+&lt;<span class="bnf-nonterminal">fator</span>&gt; <span class="bnf-operator">::=</span> <span class="bnf-terminal">"("</span> &lt;<span class="bnf-nonterminal">expressão</span>&gt; <span class="bnf-terminal">")"</span> <span class="bnf-operator">|</span> &lt;<span class="bnf-nonterminal">id</span>&gt;
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Correspondência com GLC</h3>
+                        
+                        <div class="table-responsive-custom">
+                            <table class="table table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Elemento GLC</th>
+                                        <th>Notação BNF</th>
+                                        <th>Exemplo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Não-terminal</td>
+                                        <td>&lt;símbolo&gt;</td>
+                                        <td>&lt;expressão&gt;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terminal</td>
+                                        <td>Literal ou entre aspas</td>
+                                        <td>"if", +</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Regra de produção</td>
+                                        <td>::=</td>
+                                        <td>&lt;E&gt; ::= &lt;E&gt; + &lt;T&gt;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alternativas</td>
+                                        <td>|</td>
+                                        <td>&lt;E&gt; ::= &lt;T&gt; | &lt;E&gt; + &lt;T&gt;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="definition-box">
+                        <div class="definition-title">Impacto e Influência</div>
+                        <p class="mb-2">A BNF estabeleceu um precedente que influenciou profundamente o desenvolvimento de linguagens:</p>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Especificação de Linguagens:</strong> C, Pascal, Python, Rust usam variações da BNF
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Geradores de Parsers:</strong> YACC, Bison, ANTLR utilizam sintaxe baseada em BNF
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Protocolos de Rede:</strong> RFCs da Internet utilizam ABNF para especificar protocolos
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <strong>Documentação Técnica:</strong> Linguagem franca para especificações precisas
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Derivações e Árvores -->
+        <section id="derivacoes" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Geração de Sentenças: Derivações, Árvores e Ambiguidade</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-primary">
+                                <h3 class="fs-4 fw-semibold mb-3 text-primary">Derivação Mais à Esquerda</h3>
+                                <p class="mb-3">Em cada passo, o símbolo não-terminal que aparece mais à esquerda na forma sentencial é sempre o escolhido para ser substituído.</p>
+                                
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>Característica:</strong> Determinística e sistemática, constrói a árvore de derivação de forma pré-ordem
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-4 fw-semibold mb-3 text-success">Derivação Mais à Direita</h3>
+                                <p class="mb-3">Em cada passo, o símbolo não-terminal que aparece mais à direita é o escolhido para ser substituído.</p>
+                                
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Característica:</strong> Equivale a traçar uma derivação mais à direita ao contrário (parsing bottom-up)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo: Gramática Não Ambígua para Expressões</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática</h5>
+                                <div class="code-highlight">
+E → E + T | T
+T → T * F | F  
+F → (E) | id
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Características</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Precedência clara: * > +</li>
+                                    <li class="list-group-item">Associatividade à esquerda</li>
+                                    <li class="list-group-item">Estrutura única para qualquer string</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="derivation-steps mt-4">
+                            <h6 class="fs-6 fw-semibold mb-3">Derivação Leftmost de "id + id * id"</h6>
+                            <div class="derivation-step">$E \Rightarrow E + T$ [expandir E]</div>
+                            <div class="derivation-step">$\Rightarrow T + T$ [expandir E mais à esquerda]</div>
+                            <div class="derivation-step">$\Rightarrow F + T$ [expandir T mais à esquerda]</div>
+                            <div class="derivation-step">$\Rightarrow id + T$ [expandir F mais à esquerda]</div>
+                            <div class="derivation-step">$\Rightarrow id + T * F$ [expandir T]</div>
+                            <div class="derivation-step">$\Rightarrow id + F * F$ [expandir T mais à esquerda]</div>
+                            <div class="derivation-step">$\Rightarrow id + id * F$ [expandir F mais à esquerda]</div>
+                            <div class="derivation-step">$\Rightarrow id + id * id$ [expandir F]</div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Árvores de Derivação</h3>
+                        
+                        <p class="mb-4">Uma árvore de derivação é uma representação gráfica que abstrai a ordem de aplicação das produções, capturando apenas a estrutura hierárquica essencial.</p>
+                        
+                        <div class="definition-box">
+                            <div class="definition-title">Propriedades das Árvores de Derivação</div>
+                            <ul class="list-unstyled mb-0">
+                                <li>• A raiz é rotulada com o símbolo inicial S</li>
+                                <li>• Cada nó interno é rotulado com um não-terminal</li>
+                                <li>• Cada folha é rotulada com um terminal ou ε</li>
+                                <li>• Se um nó A tem filhos X₁, X₂, ..., Xₙ, deve existir A → X₁X₂...Xₙ</li>
+                                <li>• O <strong>yield</strong> (concatenação das folhas) forma a sentença gerada</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong>Importante:</strong> Para gramáticas não ambíguas, embora as sequências de derivação leftmost e rightmost sejam diferentes, ambas resultam na mesma árvore de derivação, capturando a única estrutura sintática válida.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problema da Ambiguidade -->
+        <section id="ambiguidade" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. O Problema da Ambiguidade em Gramáticas Formais</h2>
+                    
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Definição de Ambiguidade</div>
+                        <p class="mb-3">Uma gramática G = (V, T, P, S) é <strong>ambígua</strong> se e somente se existe pelo menos uma cadeia w ∈ L(G) que possui duas ou mais árvores de derivação distintas.</p>
+                        
+                        <div class="p-3 bg-danger-subtle rounded">
+                            <strong>Consequência:</strong> A mesma sentença pode ser construída através de diferentes sequências de aplicação de regras, resultando em interpretações semânticas diferentes e tornando o parser incapaz de determinar univocamente a estrutura sintática.
+                        </div>
+                    </div>
+
+                    <div class="ambiguity-example mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4">Exemplo 1: Gramática Ambígua para Expressões</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática G₁ (Ambígua)</h5>
+                                <div class="code-highlight">
+E → E + E
+E → E * E  
+E → (E)
+E → id
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">String: "id + id * id"</h5>
+                                <p class="mb-3">Esta string pode ser interpretada de duas maneiras diferentes:</p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">id + (id * id) - multiplicação primeiro</li>
+                                    <li class="list-group-item">(id + id) * id - adição primeiro</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mt-3">
+                            <div class="col-md-6">
+                                <h6 class="fs-6 fw-semibold mb-3">Derivação 1 (Multiplicação prioritária)</h6>
+                                <div class="derivation-steps">
+                                    <div class="derivation-step">E ⇒ E + E</div>
+                                    <div class="derivation-step">⇒ id + E</div>
+                                    <div class="derivation-step">⇒ id + E * E</div>
+                                    <div class="derivation-step">⇒ id + id * E</div>
+                                    <div class="derivation-step">⇒ id + id * id</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="fs-6 fw-semibold mb-3">Derivação 2 (Adição prioritária)</h6>
+                                <div class="derivation-steps">
+                                    <div class="derivation-step">E ⇒ E * E</div>
+                                    <div class="derivation-step">⇒ E + E * E</div>
+                                    <div class="derivation-step">⇒ id + E * E</div>
+                                    <div class="derivation-step">⇒ id + id * E</div>
+                                    <div class="derivation-step">⇒ id + id * id</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Exemplo 2: O Problema do Dangling Else</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática G₂ (if-then-else)</h5>
+                                <div class="code-highlight">
+S → if (E) S
+S → if (E) S else S
+S → s
+E → c
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">String Ambígua</h5>
+                                <div class="code-highlight">
+if (c1) if (c2) s1 else s2
+                                </div>
+                                <p class="mt-3">O <code>else</code> pode se associar a qual <code>if</code>?</p>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4 mt-3">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <h6 class="fw-semibold">Interpretação 1</h6>
+                                    <div class="code-highlight">
+if (c1) {
+    if (c2)
+        s1
+    else
+        s2
+}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h6 class="fw-semibold">Interpretação 2</h6>
+                                    <div class="code-highlight">
+if (c1) {
+    if (c2)
+        s1
+}
+else
+    s2
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Taxonomia da Ambiguidade</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-warning">
+                                    <h4 class="fs-6 fw-semibold mb-3 text-warning">Ambiguidade de Precedência</h4>
+                                    <p class="fs-7">Operadores de diferentes níveis sem hierarquia clara</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-info">
+                                    <h4 class="fs-6 fw-semibold mb-3 text-info">Ambiguidade de Associatividade</h4>
+                                    <p class="fs-7">Operadores do mesmo nível podem agrupar à esquerda ou direita</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-danger">
+                                    <h4 class="fs-6 fw-semibold mb-3 text-danger">Ambiguidade Estrutural</h4>
+                                    <p class="fs-7">Diferentes agrupamentos de construções sintáticas</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eliminação de Ambiguidade -->
+        <section id="eliminacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Técnicas de Eliminação de Ambiguidade</h2>
+                    
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Reescrita Sistemática da Gramática</h3>
+                        
+                        <p class="mb-4">A técnica mais fundamental consiste na reescrita estruturada através da <strong>estratificação sintática</strong>, onde cada nível de precedência é codificado como um não-terminal distinto.</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática Ambígua G₁</h5>
+                                <div class="code-highlight">
+E → E + E
+E → E * E
+E → (E)
+E → id
+                                </div>
+                                <div class="mt-3 p-3 bg-danger-subtle rounded">
+                                    <strong>Problema:</strong> Permite múltiplas interpretações para expressões como "id + id * id"
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática Não-Ambígua G₃</h5>
+                                <div class="code-highlight">
+E → E + T | T
+T → T * F | F
+F → (E) | id
+                                </div>
+                                <div class="mt-3 p-3 bg-success-subtle rounded">
+                                    <strong>Solução:</strong> Hierarquia explícita garante precedência * > + e associatividade à esquerda
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="definition-box mt-4">
+                            <div class="definition-title">Princípios da Transformação</div>
+                            <ul class="list-unstyled mb-0">
+                                <li><strong>1. Precedência Operacional:</strong> Multiplicação (T) tem precedência sobre adição (E)</li>
+                                <li><strong>2. Associatividade Uniforme:</strong> Ambos operadores associam à esquerda via recursão à esquerda</li>
+                                <li><strong>3. Preservação da Linguagem:</strong> L(G₁) = L(G₃), apenas a estrutura de derivação muda</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Declarações Explícitas de Precedência</h3>
+                        
+                        <p class="mb-4">Geradores de parsers como YACC e Bison permitem especificar regras de desambiguação sem reescrever a gramática:</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Declarações YACC/Bison</h5>
+                                <div class="code-highlight">
+%left '+'     /* menor precedência, associa à esquerda */
+%left '*'     /* precedência intermediária */
+%right '^'    /* maior precedência, associa à direita */
+%%
+expr: expr '+' expr
+    | expr '*' expr
+    | expr '^' expr
+    | '(' expr ')'
+    | ID;
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Funcionamento</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Instruem o parser a resolver conflitos shift/reduce deterministicamente</li>
+                                    <li class="list-group-item">Para "a + b * c", o parser realiza shift do '*' (maior precedência) antes de reduzir a adição</li>
+                                    <li class="list-group-item">Resolve ambiguidade sem alterar a estrutura da gramática</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-tools me-2"></i>Resolução do Dangling Else
+                        </h4>
+                        
+                        <p class="mb-4">A solução canônica é a <strong>convenção do else mais próximo</strong>, formalizada através de uma gramática estruturada:</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Gramática $G_{if}$ (Não-ambígua)</h5>
+                                <div class="code-highlight">
+S → M | U
+M → if (E) M else M | s
+U → if (E) S | if (E) M else U
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Explicação</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>M (matched):</strong> Comandos completos onde todo if tem seu else</li>
+                                    <li class="list-group-item"><strong>U (unmatched):</strong> Comandos com if sem else</li>
+                                    <li class="list-group-item">Garante que else sempre se associa ao if mais interno não pareado</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-success-subtle rounded">
+                            <strong>Resultado:</strong> A estrutura garante interpretação única: "if (c1) if (c2) s1 else s2" sempre associa o else ao if mais interno (c2).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Autômatos com Pilha -->
+        <section id="automatos-pilha" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Autômatos com Pilha: A Máquina por Trás das Linguagens Livres de Contexto</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-danger">
+                                <h3 class="fs-4 fw-semibold mb-3 text-danger">Limitações dos Autômatos Finitos</h3>
+                                <p class="mb-3">Os autômatos finitos são fundamentalmente limitados por sua falta de memória externa. Sua capacidade de "lembrar" está restrita ao conjunto finito de estados.</p>
+                                
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <strong>Exemplo:</strong> Não conseguem reconhecer $L = \{a^n b^n \mid n \geq 0\}$ porque precisariam de infinitos estados para contar os a's e garantir correspondência com os b's.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card border-start border-4 border-success">
+                                <h3 class="fs-4 fw-semibold mb-3 text-success">Solução: Autômato de Pilha</h3>
+                                <p class="mb-3">Um autômato de pilha é um autômato finito não determinístico com memória auxiliar: uma <strong>pilha</strong> (stack) que opera no modo LIFO.</p>
+                                
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>Poder:</strong> A pilha permite armazenar e recuperar informações de forma estruturada, conferindo poder computacional superior.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Operações e Funcionamento</h3>
+                        
+                        <p class="mb-4">As transições de um Autômato de Pilha dependem de três fatores: estado atual, próximo símbolo na entrada, e símbolo no topo da pilha.</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-primary">
+                                    <div class="icon-badge badge-primary mx-auto mb-3">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                    <h4 class="fs-6 fw-semibold mb-3">Push (Empilhar)</h4>
+                                    <p class="fs-7">Adicionar um ou mais símbolos ao topo da pilha</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-warning">
+                                    <div class="icon-badge badge-warning mx-auto mb-3">
+                                        <i class="fas fa-minus"></i>
+                                    </div>
+                                    <h4 class="fs-6 fw-semibold mb-3">Pop (Desempilhar)</h4>
+                                    <p class="fs-7">Remover o símbolo do topo da pilha</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="concept-card text-center border-start border-4 border-info">
+                                    <div class="icon-badge badge-info mx-auto mb-3">
+                                        <i class="fas fa-pause"></i>
+                                    </div>
+                                    <h4 class="fs-6 fw-semibold mb-3">Manter</h4>
+                                    <p class="fs-7">Não alterar o conteúdo da pilha</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">A Equivalência Fundamental</div>
+                        <p class="mb-3">O resultado mais importante da teoria das Linguagens Livres de Contexto é:</p>
+                        
+                        <div class="text-center p-4 bg-primary text-white rounded mb-3">
+                            <strong>Uma linguagem é livre de contexto se, e somente se, existe um autômato com pilha que a reconhece.</strong>
+                        </div>
+                        
+                        <p class="mb-2">Esta equivalência é a espinha dorsal da análise sintática, garantindo que para qualquer sintaxe de linguagem de programação descrita por uma GLC, podemos construir um mecanismo computacional para reconhecer programas.</p>
+                        
+                        <div class="p-3 bg-warning-subtle rounded">
+                            <strong>Importante:</strong> São os Autômatos de Pilha <em>não determinísticos</em> que são equivalentes às GLC em geral. A classe reconhecida por Autômatos de Pilha Determinísticos é estritamente menor.
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-cogs me-2"></i>Exemplo: Reconhecendo $a^n b^n$
+                        </h4>
+                        
+                        <p class="mb-4">Para a gramática $S \rightarrow aSb | \varepsilon$, um Autômato de Pilha implementa a simetria operacionalmente:</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Processo de Reconhecimento</h5>
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item">Ao ler um 'a', empilha um marcador X</li>
+                                    <li class="list-group-item">Continue empilhando X para cada 'a' adicional</li>
+                                    <li class="list-group-item">Ao ler um 'b', desempilha um X</li>
+                                    <li class="list-group-item">Continue desempilhando para cada 'b'</li>
+                                    <li class="list-group-item">Aceita se entrada termina quando pilha se esvazia</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Exemplo: String "aabb"</h5>
+                                <div class="derivation-steps">
+                                    <div class="derivation-step">Estado inicial: Pilha = [], Entrada = "aabb"</div>
+                                    <div class="derivation-step">Lê 'a': Pilha = [X], Entrada = "abb"</div>
+                                    <div class="derivation-step">Lê 'a': Pilha = [X,X], Entrada = "bb"</div>
+                                    <div class="derivation-step">Lê 'b': Pilha = [X], Entrada = "b"</div>
+                                    <div class="derivation-step">Lê 'b': Pilha = [], Entrada = ""</div>
+                                    <div class="derivation-step"><strong>ACEITA!</strong> Pilha vazia e entrada consumida</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong>Insight:</strong> A estrutura LIFO da pilha espelha perfeitamente a natureza recursiva das derivações em GLC. O processo de empilhar na primeira metade e desempilhar na ordem inversa é a encarnação mecânica da recursão gramatical.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lema do Bombeamento -->
+        <section id="lema-bombeamento" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. As Fronteiras do Contexto Livre: O Lema do Bombeamento</h2>
+                    
+                    <p class="fs-5 text-muted mb-4">
+                        Assim como existe uma ferramenta para provar que uma linguagem não é regular, existe um análogo para as linguagens livres de contexto: o <strong>Lema do Bombeamento para Linguagens Livres de Contexto</strong>, também conhecido como Lema de Bar-Hillel.
+                    </p>
+
+                    <div class="definition-box mb-5">
+                        <div class="definition-title">Lema do Bombeamento para Linguagens Livres de Contexto</div>
+                        <p class="mb-3">Para qualquer linguagem livre de contexto L, existe um inteiro p ≥ 1 (comprimento de bombeamento) tal que qualquer string s ∈ L com |s| ≥ p pode ser decomposta em cinco substrings:</p>
+                        
+                        <div class="pumping-visual">
+                            <span class="part-u">u</span>
+                            <span class="part-v">v</span>
+                            <span class="part-x">x</span>
+                            <span class="part-y">y</span>
+                            <span class="part-z">z</span>
+                        </div>
+                        
+                        <p class="mb-3">Que devem satisfazer as seguintes três condições:</p>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <strong>1.</strong> |vxy| ≤ p<br>
+                                    <small>A substring que contém as partes bombeáveis não é excessivamente longa</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <strong>2.</strong> |vy| ≥ 1<br>
+                                    <small>Pelo menos uma das substrings bombeáveis não é vazia</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>3.</strong> uv<sup>n</sup>xy<sup>n</sup>z ∈ L para todo n ≥ 0<br>
+                                    <small>As substrings v e y podem ser bombeadas juntas</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Intuição por Trás do Lema</h3>
+                        
+                        <p class="mb-4">A intuição está enraizada na estrutura finita das gramáticas e na natureza das árvores de derivação:</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <h5 class="fs-6 fw-semibold mb-3">Princípio da Casa dos Pombos</h5>
+                                    <p class="mb-2">Para uma GLC com número finito de não-terminais, qualquer string suficientemente longa deve ter uma árvore de derivação alta.</p>
+                                    <p class="mb-0">Um caminho longo deve conter pelo menos um não-terminal repetido.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h5 class="fs-6 fw-semibold mb-3">Estrutura de Bombeamento</h5>
+                                    <p class="mb-2">A repetição cria uma sub-árvore que pode ser podada ou duplicada.</p>
+                                    <p class="mb-0">O bombeamento duplo (v e y) revela a limitação a dependências de dois pontos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-microscope me-2"></i>Aplicação Prática: Prova de que $L = \{a^n b^n c^n \mid n \geq 0\}$ não é Livre de Contexto
+                        </h4>
+                        
+                        <p class="mb-4">Esta linguagem é o exemplo clássico que está além do alcance das GLC. Podemos provar isso rigorosamente:</p>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">1. Suposição</h5>
+                            <p>Suponha que L é livre de contexto.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">2. Invocação do Lema</h5>
+                            <p>Pelo lema, deve existir um comprimento de bombeamento p.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">3. Escolha da String</h5>
+                            <p>Selecionamos s = a<sup>p</sup>b<sup>p</sup>c<sup>p</sup>. Claramente, s ∈ L e |s| = 3p ≥ p.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">4. Análise da Decomposição</h5>
+                            <p>A condição |vxy| ≤ p é crucial. Dada a estrutura de s (bloco de a's, seguido de b's, seguido de c's), vxy não pode conter ocorrências de todos os três símbolos.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">5. Contradição</h5>
+                            <div class="p-3 bg-danger-subtle rounded">
+                                <strong>Para n = 2:</strong> A string bombeada s' = uv²xy²z terá um número aumentado de no máximo dois tipos de símbolos, mas o terceiro permanecerá com p ocorrências. A igualdade n = n = n será quebrada, então s' ∉ L.
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">6. Conclusão</h5>
+                            <p>Isso contradiz a terceira condição do lema. Portanto, L não é livre de contexto.</p>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-warning-subtle rounded">
+                            <strong>Limitação Fundamental:</strong> GLC podem correlacionar duas partes de uma string (v e y bombeadas juntas), mas $a^n b^n c^n$ exige dependência de três pontos. Um autômato com pilha "gasta" sua memória verificando a correspondência entre a's e b's, não restando capacidade para os c's.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analisadores Sintáticos -->
+        <section id="analisadores" class="py-5" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Os Analisadores Sintáticos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A análise sintática, ou <em>parsing</em>, é a segunda fase do processo de compilação. O analisador sintático atua como o guardião da gramática da linguagem, verificando se a sequência de tokens forma sentenças estruturalmente corretas.
+                    </p>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Estratégias Principais de Parsing</h3>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="concept-card border-start border-4 border-primary">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-arrow-down fs-3 me-3 text-primary"></i>
+                                        <h4 class="fs-5 fw-semibold mb-0 text-primary">Análise Descendente</h4>
+                                    </div>
+                                    <p class="mb-3"><strong>Top-Down Parsing:</strong> Construção da árvore começando na raiz (símbolo inicial) e avançando para as folhas (tokens de entrada).</p>
+                                    
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Tenta encontrar derivação mais à esquerda</li>
+                                        <li class="list-group-item">Exemplos: Descida Recursiva, LL(1)</li>
+                                        <li class="list-group-item">Analisadores "ansiosos" - decisão precoce</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="concept-card border-start border-4 border-success">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-arrow-up fs-3 me-3 text-success"></i>
+                                        <h4 class="fs-5 fw-semibold mb-0 text-success">Análise Ascendente</h4>
+                                    </div>
+                                    <p class="mb-3"><strong>Bottom-Up Parsing:</strong> Construção começando nas folhas (tokens) e avançando para a raiz (símbolo inicial).</p>
+                                    
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Reverte uma derivação mais à direita</li>
+                                        <li class="list-group-item">Exemplos: Shift-Reduce, LR, LALR</li>
+                                        <li class="list-group-item">Analisadores "pacientes" - decisão tardia</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Analisadores LL(1): Análise Preditiva</h3>
+                        
+                        <p class="mb-4">Os parsers LL(1) representam uma das implementações mais elegantes da análise descendente preditiva:</p>
+                        
+                        <div class="definition-box mb-4">
+                            <div class="definition-title">Significado de LL(1)</div>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong>L:</strong> Left-to-right scan (entrada da esquerda para direita)
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong>L:</strong> Leftmost derivation (derivação mais à esquerda)
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <strong>(1):</strong> 1 símbolo de lookahead para decisões
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Componentes do Parser LL(1)</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item"><strong>Pilha de análise:</strong> Armazena símbolos esperados</li>
+                                    <li class="list-group-item"><strong>Ponteiro de entrada:</strong> Lê tokens da esquerda para direita</li>
+                                    <li class="list-group-item"><strong>Tabela de análise:</strong> Matriz [não-terminal, terminal] → produção</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold mb-3">Limitações das Gramáticas LL(1)</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">Não podem ter ambiguidades</li>
+                                    <li class="list-group-item">Não podem ter recursão à esquerda</li>
+                                    <li class="list-group-item">Não podem ter prefixos comuns longos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">A Família de Analisadores LR</h3>
+                        
+                        <p class="mb-4">Os parsers LR representam a classe mais poderosa de analisadores ascendentes, capazes de reconhecer uma gama significativamente maior de gramáticas:</p>
+                        
+                        <div class="definition-box mb-4">
+                            <div class="definition-title">Significado de LR</div>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong>L:</strong> Left-to-right scan (entrada da esquerda para direita)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong>R:</strong> Rightmost derivation (derivação mais à direita ao contrário)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-3">
+                                <div class="concept-card text-center border-start border-4 border-info">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-info">LR(0)</h5>
+                                    <p class="fs-7">Mais simples, sem lookahead</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="concept-card text-center border-start border-4 border-success">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-success">SLR</h5>
+                                    <p class="fs-7">Simple LR, usa conjuntos FOLLOW</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="concept-card text-center border-start border-4 border-warning">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-warning">LALR(1)</h5>
+                                    <p class="fs-7">Look-Ahead LR, base para YACC/Bison</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="concept-card text-center border-start border-4 border-danger">
+                                    <h5 class="fs-6 fw-semibold mb-3 text-danger">LR(1)</h5>
+                                    <p class="fs-7">Mais poderoso, tabelas muito grandes</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-info-subtle rounded">
+                            <strong>Vantagem dos LR:</strong> São analisadores "pacientes" que podem adiar decisões até que mais contexto esteja disponível, ao contrário dos LL que são "ansiosos" e devem decidir imediatamente.
+                        </div>
+                    </div>
+
+                    <div class="concept-card mb-5">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">LALR(1): O Equilíbrio Perfeito</h3>
+                        
+                        <p class="mb-4">O parser LALR(1) representa uma solução engenhosa para um problema prático fundamental:</p>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <h5 class="fs-6 fw-semibold mb-3">Problema: LR(1) Puro</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li>• Tabelas de tamanho proibitivo</li>
+                                        <li>• Dezenas de milhares de estados</li>
+                                        <li>• Consome megabytes de memória</li>
+                                        <li>• Parser lento</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h5 class="fs-6 fw-semibold mb-3">Solução: LALR(1)</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li>• Fusão de estados com mesmo core</li>
+                                        <li>• Centenas de estados (vs milhares)</li>
+                                        <li>• Tabelas compactas e viáveis</li>
+                                        <li>• Adequado para uso industrial</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="definition-box mt-4">
+                            <div class="definition-title">Técnica de Fusão de Estados</div>
+                            <p class="mb-2">Durante a construção do autômato LR(1), estados que possuem o mesmo <em>core</em> (mesma coleção de itens LR(0)) mas diferentes conjuntos de lookahead são consolidados em um único estado.</p>
+                            <p class="mb-0">O conjunto de lookahead resultante torna-se a união dos conjuntos originais, reduzindo drasticamente o número de estados sem sacrificar significativamente o poder de reconhecimento.</p>
+                        </div>
+                    </div>
+
+                    <div class="exercise-section">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: var(--sage-800);">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Impacto da Ambiguidade no Processo de Compilação
+                        </h4>
+                        
+                        <p class="mb-4">A ambiguidade representa uma falha fundamental na especificação de uma linguagem, com consequências severas em todas as fases da compilação:</p>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">Fase de Análise Sintática</h5>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-danger-subtle rounded">
+                                        <strong>Múltiplas Árvores:</strong> Parser não pode construir estrutura única
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <strong>Conflitos LR:</strong> Conflitos shift/reduce e reduce/reduce
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-3 bg-info-subtle rounded">
+                                        <strong>Backtracking:</strong> Exploração excessiva em parsers top-down
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">Fase de Análise Semântica</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-primary-subtle rounded">
+                                        <strong>Tipos Inconsistentes:</strong> Diferentes árvores levam a verificações de tipo distintas
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-success-subtle rounded">
+                                        <strong>Escopo Ambíguo:</strong> Determinação de escopo afetada pela estrutura
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h5 class="fs-6 fw-semibold mb-3">Fase de Geração de Código</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-warning-subtle rounded">
+                                        <strong>Código Não-Determinístico:</strong> Diferentes árvores geram sequências distintas
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-danger-subtle rounded">
+                                        <strong>Otimização Impossível:</strong> Sem estrutura garantida, otimizações são inseguras
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3 class="fs-4 fw-semibold mb-4" style="color: var(--sage-800);">Ferramentas Geradoras de Parsers</h3>
+                        
+                        <p class="mb-4">A construção manual de analisadores sintáticos é complexa e propensa a erros. Ferramentas especializadas automatizam este processo:</p>
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="concept-card border-start border-4 border-primary">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-primary">YACC & GNU Bison</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Geram parsers LALR(1) automaticamente</li>
+                                        <li class="list-group-item">Entrada: arquivo .y com gramática em BNF</li>
+                                        <li class="list-group-item">Saída: código C/C++ com função yyparse</li>
+                                        <li class="list-group-item">Detectam e reportam conflitos na gramática</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="concept-card border-start border-4 border-success">
+                                    <h4 class="fs-5 fw-semibold mb-3 text-success">Sinergia com Lex/Flex</h4>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Flex gera analisador léxico (yylex)</li>
+                                        <li class="list-group-item">Bison gera analisador sintático (yyparse)</li>
+                                        <li class="list-group-item">Pipeline coeso: texto → tokens → AST</li>
+                                        <li class="list-group-item">Separação clara de responsabilidades</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="definition-box">
+                            <div class="definition-title">Mudança de Paradigma</div>
+                            <p class="mb-0">O uso de geradores representa uma transição fundamental: da programação <strong>imperativa</strong> (implementar manualmente algoritmos complexos) para a <strong>declarativa</strong> (especificar o quê, não o como). Isso resulta em maior produtividade, robustez e manutenibilidade dos compiladores.</p>
+                        </div>
+                    </div>
+
+                    <!-- Síntese Final -->
+                    <div class="text-center mt-5">
+                        <div class="d-inline-block p-4 rounded-3 shadow" style="background: linear-gradient(to right, var(--sage-600), var(--copper-600));">
+                            <h4 class="fs-3 fw-bold mb-3 text-white">Síntese</h4>
+                            <p class="fs-5 mb-0 text-white">
+                                Das <strong>Linguagens Regulares</strong> às <strong>Linguagens Livres de Contexto</strong>, a Hierarquia de Chomsky revela a elegante correspondência entre restrições gramaticais e poder computacional. Esta teoria fundamental continua a ser a <strong>espinha dorsal</strong> da construção de compiladores e do processamento de linguagens formais.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript para TOC e Navegação -->
+</body>
+</html>

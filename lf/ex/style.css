@@ -627,3 +627,180 @@ pre[style*="font-size"] code.hljs {
     margin-right: 1rem;
     font-weight: bold;
 }
+
+/* BNF Code Styling */
+.bnf-code {
+    background: var(--sage-800);
+    color: #f8fafc;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    border-left: 4px solid var(--copper-600);
+}
+
+.bnf-nonterminal {
+    color: #60a5fa; /* Blue for non-terminals */
+    font-weight: 600;
+}
+
+.bnf-operator {
+    color: #10b981; /* Green for ::= */
+    font-weight: 600;
+}
+
+.bnf-terminal {
+    color: #0284c7; /* Light blue for terminals */
+}
+
+/* Enhanced Code Highlight for YACC/Bison and other languages */
+.code-highlight {
+    background: var(--sage-800);
+    color: #f8fafc;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    border-left: 4px solid var(--sage-600);
+    position: relative;
+}
+
+/* YACC/Bison specific highlighting */
+.code-highlight .yacc-directive {
+    color: #10b981; /* Green for %left, %right, etc */
+    font-weight: 600;
+}
+
+.code-highlight .yacc-separator {
+    color: #ef4444; /* Red for %% */
+    font-weight: bold;
+}
+
+.code-highlight .yacc-rule {
+    color: #60a5fa; /* Blue for rule names */
+    font-weight: 600;
+}
+
+.code-highlight .yacc-terminal {
+    color: #0284c7; /* Light blue for terminals */
+}
+
+.code-highlight .yacc-comment {
+    color: #94a3b8; /* Gray for comments */
+    font-style: italic;
+}
+
+/* Grammar production rules styling */
+.grammar-rule {
+    color: #60a5fa;
+    font-weight: 600;
+}
+
+.grammar-arrow {
+    color: #10b981;
+    font-weight: bold;
+    margin: 0 0.5rem;
+}
+
+.grammar-terminal {
+    color: #0284c7;
+}
+
+.grammar-nonterminal {
+    color: #60a5fa;
+}
+
+/* Derivation steps styling */
+.derivation-steps {
+    background: var(--sage-50);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.derivation-step {
+    font-family: 'Courier New', monospace;
+    padding: 0.25rem 0;
+    color: var(--sage-800);
+    border-left: 3px solid var(--copper-400);
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.derivation-step:last-child {
+    margin-bottom: 0;
+}
+
+/* Exercise sections */
+.exercise-section {
+    background: linear-gradient(135deg, var(--sage-50), var(--copper-50));
+    border: 1px solid var(--sage-200);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-left: 4px solid var(--sage-600);
+}
+
+/* Ambiguity examples */
+.ambiguity-example {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-left: 4px solid #ef4444;
+}
+
+/* Hierarchy levels styling */
+.hierarchy-level {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.hierarchy-level:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.hierarchy-level.type-3 {
+    border-left: 4px solid #10b981;
+}
+
+.hierarchy-level.type-2 {
+    border-left: 4px solid #3b82f6;
+}
+
+.hierarchy-level.type-1 {
+    border-left: 4px solid #f59e0b;
+}
+
+.hierarchy-level.type-0 {
+    border-left: 4px solid #ef4444;
+}
+
+/* Pumping lemma visual */
+.pumping-visual {
+    font-family: 'Courier New', monospace;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--sage-50);
+    border-radius: 8px;
+}
+
+.part-u { color: #ef4444; font-weight: bold; }
+.part-v { color: #10b981; font-weight: bold; }
+.part-x { color: #3b82f6; font-weight: bold; }
+.part-y { color: #f59e0b; font-weight: bold; }
+.part-z { color: #8b5cf6; font-weight: bold; }
