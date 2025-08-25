@@ -204,7 +204,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formas Clausais e A Cláusula de Horn</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -340,7 +340,7 @@ Tip
 </div>
 </div>
 <p>Neste porto da nossa jornada a aventureira leitora verá que as formas normais são como as diferentes rotas de navegação padronizadas que organizam o tráfego marítimo em um porto movimentado. Assim como um capitão de porto pode reorganizar águas caóticas em canais bem definidos com rotas padronizadas, as formas normais reorganizam fórmulas lógicas complexas em estruturas elegantes e uniformes.</p>
-<p>A criativa leitora pode se imaginar tentando navegar em águas desconhecidas sem cartas náuticas, onde as correntes se cruzam caoticamente, sem padrão ou lógica. Seria como tentar compreender uma fórmula lógica sem forma normal, possível, mas desnecessariamente árduo. As formas normais fornecem um mapa claro e consistente para navegar pelas complexidades da lógica, permitindo que a leitora veja o panorama completo de maneira organizada.</p>
+<p>A leitora pode se imaginar tentando navegar em águas desconhecidas sem cartas náuticas, onde as correntes se cruzam caoticamente, sem padrão ou lógica. Seria como tentar compreender uma fórmula lógica sem forma normal, possível, mas desnecessariamente árduo. As formas normais fornecem um mapa claro e consistente para navegar pelas complexidades da lógica, permitindo que a leitora veja o panorama completo de maneira organizada.</p>
 <p>Consideremos, por exemplo, a tarefa de comparar duas proposições para determinar se são equivalentes. Sem uma forma padronizada de representar proposições, essa tarefa pode se tornar complexa e demorada. No entanto, ao utilizar as formas normais, cada proposição é expressa de uma forma padrão, tornando a comparação direta e simples. Além disso, as formas normais também desempenham um papel importante na simplificação de proposições. Ao expressar uma proposição em sua forma normal, é mais fácil identificar oportunidades de simplificação, removendo redundâncias ou simplificando a estrutura lógica. As formas normais não são apenas uma ferramenta para lidar com a complexidade da <strong>Lógica Proposicional</strong>, mas também uma metodologia que facilita a compreensão e manipulação de proposições lógicas.</p>
 <section id="formas-normais-lógica-proposicional" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="formas-normais-lógica-proposicional"><span class="header-section-number">7.1</span> Formas Normais, Lógica Proposicional</h2>
@@ -1256,32 +1256,50 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 \]</span></p>
 <p>A ordem dos quantificadores deve ser preservada para manter o significado original da fórmula.</p>
 </section>
-<section id="exemplo-3---conversão-para-forma-normal-conjuntiva" class="level4" data-number="7.2.1.5">
-<h4 data-number="7.2.1.5" class="anchored" data-anchor-id="exemplo-3---conversão-para-forma-normal-conjuntiva"><span class="header-section-number">7.2.1.5</span> Exemplo 3 - Conversão para Forma Normal Conjuntiva</h4>
-<p>Considere a fórmula original em Forma Normal Prenex:</p>
-<p><span class="math display">\[
-\forall x \exists y (P(x) \wedge Q(y))
-\]</span></p>
-<p>Siga os passos para conversão para Forma Normal Conjuntiva:</p>
+<section id="exemplo-3-fórmula-complexa-com-estrutura-mista" class="level4" data-number="7.2.1.5">
+<h4 data-number="7.2.1.5" class="anchored" data-anchor-id="exemplo-3-fórmula-complexa-com-estrutura-mista"><span class="header-section-number">7.2.1.5</span> Exemplo 3: Fórmula Complexa com Estrutura Mista</h4>
+<p>A fórmula original é:</p>
+<p><span class="math display">\[\forall x(P(x) \leftrightarrow \exists yQ(x, y)) \vee \forall zR(z)\]</span></p>
+<p>O objetivo da Forma Normal Prenex é mover todos os quantificadores (∀, ∃) para o início da fórmula.</p>
+<p><strong>Passo 1: Eliminar a Bicondicional</strong> (<span class="math inline">\(\leftrightarrow\)</span>)</p>
+<p>Primeiro, removemos o operador de bicondicional (<span class="math inline">\(\leftrightarrow\)</span>) usando a equivalência: <span class="math inline">\(A \leftrightarrow B \equiv (A \rightarrow B) \wedge (B \rightarrow A)\)</span></p>
+<p>Aplicando isso à nossa fórmula, a parte <span class="math inline">\(P(x) \leftrightarrow \exists yQ(x, y)\)</span> se torna: <span class="math inline">\((P(x) \rightarrow \exists yQ(x, y)) \wedge (\exists yQ(x, y) \rightarrow P(x))\)</span></p>
+<p>A fórmula completa agora é:</p>
+<p><span class="math display">\[\forall x((P(x) \rightarrow \exists yQ(x, y)) \wedge (\exists yQ(x, y) \rightarrow P(x))) \vee \forall zR(z)\]</span></p>
+<p><strong>Passo 2: Eliminar as Implicações</strong> (<span class="math inline">\(\rightarrow\)</span>)</p>
+<p>Agora, removemos as implicações (<span class="math inline">\(\rightarrow\)</span>) usando a equivalência: <span class="math inline">\(A \rightarrow B \equiv \neg A \vee B\)</span></p>
+<p>Aplicamos isso às duas implicações da fórmula:</p>
 <ol type="1">
-<li><strong>Eliminar os Quantificadores Existenciais (Skolemização)</strong>: O quantificador existencial <span class="math inline">\(\exists y\)</span> tem um quantificador universal <span class="math inline">\(\forall x\)</span> à sua esquerda, então substitua por uma função Skolem <span class="math inline">\(\mathbf{\mathbf{f}}(x)\)</span>:</li>
+<li><span class="math inline">\(P(x) \rightarrow \exists yQ(x, y)\)</span> se torna <span class="math inline">\(\neg P(x) \vee \exists yQ(x, y)\)</span></li>
+<li><span class="math inline">\(\exists yQ(x, y) \rightarrow P(x)\)</span> se torna <span class="math inline">\(\neg(\exists yQ(x, y)) \vee P(x)\)</span></li>
 </ol>
-<p><span class="math display">\[
-\forall x (P(x) \wedge Q(\mathbf{\mathbf{f}}(x)))
-\]</span></p>
-<ol start="2" type="1">
-<li><strong>Eliminar os Quantificadores Universais</strong>: Remova <span class="math inline">\(\forall x\)</span>, tratando <span class="math inline">\(x\)</span> como variável livre:</li>
-</ol>
-<p><span class="math display">\[
-P(x) \wedge Q(\mathbf{\mathbf{f}}(x))
-\]</span></p>
-<ol start="3" type="1">
-<li><strong>Conversão para Forma Normal Conjuntiva</strong>: A matriz já é uma conjunção de literais, resultando em cláusulas:</li>
-</ol>
-<p><span class="math display">\[
-P(x) \wedge Q(\mathbf{\mathbf{f}}(x))
-\]</span></p>
-<p>Isso equivale a duas cláusulas: <span class="math inline">\(\{P(x)\}\)</span> e <span class="math inline">\(\{Q(\mathbf{f}(x))\}\)</span>.</p>
+<p>Substituindo de volta, a fórmula fica:</p>
+<p><span class="math display">\[\forall x((\neg P(x) \vee \exists yQ(x, y)) \wedge (\neg (\exists yQ(x, y)) \vee P(x))) \vee \forall zR(z)\]</span></p>
+<p><strong>Passo 3: Mover as Negações para Dentro</strong> (<span class="math inline">\(\neg\)</span>)</p>
+<p>A negação precisa ser aplicada diretamente aos predicados. Temos um termo <span class="math inline">\(\neg(\exists yQ(x, y))\)</span>. Usamos a regra de negação de quantificadores: <span class="math inline">\(¬(∃v \phi) \equiv ∀v(¬\phi)\)</span></p>
+<p>Então, <span class="math inline">\(\neg(\exists yQ(x, y))\)</span> se torna <span class="math inline">\(\forall y(\neg Q(x, y))\)</span>.</p>
+<p>A fórmula atualizada é:</p>
+<p><span class="math display">\[\forall x((\neg P(x) \vee \exists yQ(x, y)) \wedge (\forall y(\neg Q(x, y)) \vee P(x))) \vee \forall zR(z)\]</span></p>
+<p><strong>Passo 4: Renomear Variáveis (se necessário)</strong></p>
+<p>Para evitar conflitos quando movermos os quantificadores, é uma boa prática garantir que cada quantificador use uma variável única. Na subfórmula dentro de <span class="math inline">\(\forall x\)</span>, temos <span class="math inline">\(\exists y\)</span> e <span class="math inline">\(\forall y\)</span>. Embora estejam em escopos diferentes (separados por um <span class="math inline">\(\wedge\)</span>), quando os movermos para fora, eles podem capturar a variável errada.</p>
+<p>Para evitar isso, vamos renomear uma das variáveis <span class="math inline">\(y\)</span> para uma nova, como <span class="math inline">\(w\)</span>. Vamos renomear o <span class="math inline">\(y\)</span> em <span class="math inline">\(\forall y(\neg Q(x, y))\)</span>.</p>
+<p>A fórmula fica:</p>
+<p><span class="math display">\[\forall x((\neg P(x) \vee \exists yQ(x, y)) \wedge (\forall w(\neg Q(x, w)) \vee P(x))) \vee \forall zR(z)\]</span></p>
+<p><strong>Passo 5: Mover os Quantificadores para o Exterior</strong></p>
+<p>Agora, movemos todos os quantificadores para a esquerda da fórmula, um de cada vez, de fora para dentro.</p>
+<p><strong>5.1.</strong> Temos <span class="math inline">\(\forall x(...) \vee \forall zR(z)\)</span>. Como <span class="math inline">\(x\)</span> não aparece como variável livre em <span class="math inline">\(\forall zR(z)\)</span> e <span class="math inline">\(z\)</span> não aparece como variável livre em <span class="math inline">\(\forall x(...)\)</span>, podemos mover ambos os quantificadores para fora. A ordem entre eles não altera o resultado.</p>
+<p><span class="math display">\[\forall x \forall z ( ((\neg P(x) \vee \exists yQ(x, y)) \wedge (\forall w(\neg Q(x, w)) \vee P(x))) \vee R(z) )\]</span></p>
+<p><strong>5.2.</strong> Agora vamos mover os quantificadores internos, <span class="math inline">\(\exists y\)</span> e <span class="math inline">\(\forall w\)</span>, para fora do escopo de <span class="math inline">\(\forall x\)</span> e <span class="math inline">\(\forall z\)</span>.</p>
+<p>Primeiro, vamos tirá-los de suas cláusulas imediatas. * <span class="math inline">\(\neg P(x) \vee \exists yQ(x, y)\)</span> se torna <span class="math inline">\(\exists y(\neg P(x) \vee Q(x, y))\)</span> (pois <span class="math inline">\(y\)</span> não é livre em <span class="math inline">\(\neg P(x)\)</span>). * <span class="math inline">\(\forall w(\neg Q(x, w)) \vee P(x)\)</span> se torna <span class="math inline">\(\forall w(\neg Q(x, w) \vee P(x))\)</span> (pois <span class="math inline">\(w\)</span> não é livre em <span class="math inline">\(P(x)\)</span>).</p>
+<p>A fórmula fica:</p>
+<p><span class="math display">\[\forall x \forall z ( (\exists y(\neg P(x) \vee Q(x, y)) \wedge \forall w(\neg Q(x, w) \vee P(x))) \vee R(z) )\]</span></p>
+<p><strong>5.3.</strong> Agora, movemos <span class="math inline">\(\exists y\)</span> e <span class="math inline">\(\forall w\)</span> para fora do <span class="math inline">\(\wedge\)</span>. Como <span class="math inline">\(y\)</span> e <span class="math inline">\(w\)</span> são variáveis distintas e não aparecem na outra cláusula, podemos movê-las para fora.</p>
+<p><span class="math display">\[\forall x \forall z ( \exists y \forall w ((\neg P(x) \vee Q(x, y)) \wedge (\neg Q(x, w) \vee P(x))) \vee R(z) )\]</span></p>
+<p><strong>5.4.</strong> Finalmente, movemos <span class="math inline">\(\exists y\)</span> e <span class="math inline">\(\forall w\)</span> para fora do <span class="math inline">\(\vee\)</span>. Como as variáveis <span class="math inline">\(y\)</span> e <span class="math inline">\(w\)</span> não são livres em <span class="math inline">\(R(z)\)</span>, podemos movê-las para o início da fórmula.</p>
+<p><span class="math display">\[\forall x \forall z \exists y \forall w (((\neg P(x) \vee Q(x, y)) \wedge (\neg Q(x, w) \vee P(x))) \vee R(z))\]</span></p>
+<p><strong>Resultado</strong>: a Forma Normal Prenex da fórmula é:</p>
+<p><span class="math display">\[\forall x \forall z \exists y \forall w (((\neg P(x) \vee Q(x, y)) \wedge (\neg Q(x, w) \vee P(x))) \vee R(z))\]</span></p>
+<p>A parte <span class="math inline">\((((\neg P(x) \vee Q(x, y)) \wedge (\neg Q(x, w) \vee P(x))) \vee R(z))\)</span> é chamada de <strong>matriz</strong> e não contém nenhum quantificador.</p>
 </section>
 <section id="exemplo-4-fórmula-complexa-com-estrutura-mista" class="level4" data-number="7.2.1.6">
 <h4 data-number="7.2.1.6" class="anchored" data-anchor-id="exemplo-4-fórmula-complexa-com-estrutura-mista"><span class="header-section-number">7.2.1.6</span> Exemplo 4: Fórmula Complexa com Estrutura Mista</h4>
@@ -2092,11 +2110,7 @@ Q(c_1, x, \mathbf{f}(x), z, \mathbf{g}(x,z))
 <p><span class="math display">\[\forall x (\neg P(x) \vee Q(x)) \wedge \forall y \neg R(y)\]</span></p>
 <ol start="4" type="1">
 <li><p><strong>Não há mais substituições a serem feitas</strong>.</p></li>
-<li><p><strong>Renomear variáveis ligadas (passo 3)</strong>:</p></li>
-</ol>
-<p><span class="math display">\[\forall x (\neg P(x) \vee Q(x)) \wedge \forall z \neg R(z)\]</span></p>
-<ol start="6" type="1">
-<li><strong>Mover quantificadores para o início (prenexação, passo 4)</strong>:</li>
+<li><p><strong>Mover quantificadores para o início (prenexação, passo 4)</strong>:</p></li>
 </ol>
 <p><span class="math display">\[\forall x \forall z ((\neg P(x) \vee Q(x)) \wedge \neg R(z))\]</span></p>
 <p><strong>Resultado</strong>:</p>
@@ -3021,8 +3035,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./06-clausulas-de-horn-e-prolog.html" class="pagination-link" aria-label="Cláusulas de Horn">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Cláusulas de Horn</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./06-clausulas-de-horn-e-prolog.html" class="pagination-link" aria-label="Formas Clausais e A Cláusula de Horn">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formas Clausais e A Cláusula de Horn</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

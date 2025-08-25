@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Formas Clausais e Cláusulas de Horn: Navegando pelas Águas da Lógica Estruturada</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/prolog.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="common_js.js"></script>
+    <style>
+        /* Custom styling for Prolog code blocks */
+        pre code.language-prolog {
+            background: #1e1e1e !important;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+            padding: 1rem;
+        }
+        
+        /* Prolog-specific syntax highlighting enhancements */
+        .hljs-comment { color: #6a9955 !important; }
+        .hljs-string { color: #ce9178 !important; }
+        .hljs-keyword { color: #569cd6 !important; }
+        .hljs-built_in { color: #dcdcaa !important; }
+        .hljs-symbol { color: #4ec9b0 !important; }
+        
+        /* Make code blocks responsive */
+        pre {
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        @media (max-width: 768px) {
+            pre code {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#forma-clausal" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Forma Clausal</a></li>
+                <li class="mb-2"><a href="#conversao-exemplos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Exemplos de Conversão</a></li>
+                <li class="mb-2"><a href="#exercicios" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Exercícios</a></li>
+                <li class="mb-2"><a href="#clausula-horn" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Cláusula de Horn</a></li>
+                <li class="mb-2"><a href="#tipos-clausulas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Tipos de Cláusulas</a></li>
+                <li class="mb-2"><a href="#quantificadores" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Quantificadores</a></li>
+                <li class="mb-2"><a href="#limitacoes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Limitações</a></li>
+                <li class="mb-2"><a href="#problemas-interessantes" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Problemas Interessantes</a></li>
+                <li class="mb-2"><a href="#prolog" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Prolog</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Componentes</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-list me-2 text-primary"></i><small class="text-primary fw-medium">Forma Clausal</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-crown me-2 text-success"></i><small class="text-success fw-medium">Cláusula de Horn</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-code me-2 text-info"></i><small class="text-info fw-medium">Prolog</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-puzzle-piece me-2 text-warning"></i><small class="text-warning fw-medium">Problemas</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"horn\" x=\"0\" y=\"0\" width=\"80\" height=\"80\" patternUnits=\"userSpaceOnUse\"><path d=\"M20,20 L60,20 L60,40 L40,40 L40,60 L20,60 Z\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"50\" cy=\"30\" r=\"5\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M10,50 Q40,30 70,50\" stroke=\"%23ffffff\" stroke-width=\"2\" opacity=\"0.2\" fill=\"none\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23horn)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Formas Clausais e Cláusulas de Horn:</em>
+                                    <span class="d-block">Navegando pelas Águas da Lógica Estruturada</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    Transformando rotas complexas em instruções diretas e uniformes para o piloto automático da lógica
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">⊢</div>
+                            <div class="fs-6 text-muted">Forma Clausal</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">♦</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Horn</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-list fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Forma Clausal</h3>
+                                <p class="fs-7 text-muted">Estrutura Padronizada</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-crown fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Horn</h3>
+                                <p class="fs-7 text-muted">Máximo 1 Positivo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-code fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Prolog</h3>
+                                <p class="fs-7 text-muted">Implementação</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-puzzle-piece fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Problemas</h3>
+                                <p class="fs-7 text-muted">Aplicações</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução às Formas Clausais</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "A lógica é um vasto oceano e as fórmulas complexas são como rotas de navegação intrincadas, cheias de desvios e condições. A Forma Clausal é o equivalente a transformar essa rota complexa em uma série de instruções diretas e uniformes."
+                            </p>
+                            <footer class="blockquote-footer">Metáfora Náutica para Simplificação Lógica</footer>
+                        </blockquote>
+                    </div>
+
+                    <p class="fs-5 text-muted mb-5">
+                        A conversão para a <strong>Forma Clausal</strong> é o processo de desmontar uma fórmula da Lógica de Primeira Ordem em suas partes constituintes mais simples: uma conjunção de disjunções de literais. Esse formato padronizado é essencial para os mecanismos de prova automática, pois simplifica o processo de inferência, permitindo que um algoritmo opere sobre uma estrutura previsível e regular.
+                    </p>
+
+                    <!-- Definition -->
+                    <div class="definition-box">
+                        <div class="definition-title">Definição Formal</div>
+                        <p class="mb-3">Uma <strong>cláusula</strong> é uma disjunção de um ou mais literais, átomos ou suas negações. Uma fórmula está em <strong>Forma Clausal</strong> se ela for uma conjunção de cláusulas.</p>
+                        <p class="mb-0">Essencialmente, é a aplicação da Forma Normal Conjuntiva (FNC) a uma fórmula de lógica de primeira ordem, após a eliminação de todos os quantificadores.</p>
+                    </div>
+
+                    <!-- 7 Steps Process -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Algoritmo de 7 Passos</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Eliminar Implicações e Bicondicionais:</strong> Substituir operadores como $\rightarrow$ e $\leftrightarrow$ por suas equivalências usando $\neg, \vee, \wedge$
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Mover Negações para Dentro:</strong> Usar as Leis de De Morgan e regras de negação de quantificadores
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Padronizar Variáveis:</strong> Renomear variáveis para evitar conflitos de escopo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Converter para a Forma Normal Prenex:</strong> Mover quantificadores para o início
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>
+                                        <strong>Skolemização:</strong> Eliminar quantificadores existenciais com constantes/funções de Skolem
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">6</div>
+                                    <div>
+                                        <strong>Eliminar Quantificadores Universais:</strong> Tornar quantificadores universais implícitos
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">7</div>
+                                    <div>
+                                        <strong>Converter a Matriz para FNC:</strong> Usar distributividade para conjunção de disjunções
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conversion Examples Section -->
+        <section id="conversao-exemplos" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Exemplos de Conversão para Forma Clausal</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Aplicaremos o algoritmo de 7 passos para converter fórmulas da Lógica de Primeira Ordem em sua Forma Clausal, que é a base para a programação em Prolog.
+                    </p>
+
+                    <!-- Example 1: Simple -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Simples</h4>
+                        <p class="mb-3">Converta a seguinte fórmula para a Forma Clausal:</p>
+                        <div class="formula-box bg-light">
+                            $$\forall x (\text{Humano}(x) \rightarrow \text{Mortal}(x))$$
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 1: Eliminar Implicações</h5>
+                            <div class="formula-box bg-light">
+                                $$\forall x (\neg \text{Humano}(x) \vee \text{Mortal}(x))$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passos 2-5: Não aplicáveis</h5>
+                            <p class="text-muted">A fórmula já está na FNN, não há conflitos de variáveis, já está em Prenex, sem quantificadores existenciais.</p>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 6: Eliminar Quantificadores Universais</h5>
+                            <div class="formula-box bg-light">
+                                $$\neg \text{Humano}(x) \vee \text{Mortal}(x)$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 7: FNC</h5>
+                            <p class="text-muted">A matriz já é uma disjunção de literais, portanto está na FNC.</p>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded">
+                            <strong class="text-success">Resultado Final:</strong> A forma clausal é a cláusula única: $\neg \text{Humano}(x) \vee \text{Mortal}(x)$
+                            <br>
+                            <strong>Em Prolog:</strong> <code>mortal(X) :- humano(X).</code>
+                        </div>
+                    </div>
+
+                    <!-- Example 2: Complex -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Desafiador</h4>
+                        <p class="mb-3">Converta a seguinte fórmula para a Forma Clausal:</p>
+                        <div class="formula-box bg-light">
+                            $$(\forall x (\exists y \text{P}(x, y))) \rightarrow (\neg (\exists z \text{Q}(z) \rightarrow \forall w \text{R}(w)))$$
+                        </div>
+                        
+                        <div class="card p-3 mb-3 bg-warning-subtle">
+                            <strong class="text-warning">Nota sobre Ambiguidade:</strong> A fórmula foi escrita com parênteses explícitos para eliminar ambiguidade. Sem os parênteses externos, poderia ser interpretada como escopo restrito ou amplo.
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 1: Eliminar Implicações</h5>
+                            <div class="formula-box bg-light">
+                                $$\neg (\forall x (\exists y \text{P}(x, y))) \vee (\neg (\neg \exists z \text{Q}(z) \vee \forall w \text{R}(w)))$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 2: Mover Negações para Dentro</h5>
+                            <div class="formula-box bg-light">
+                                $$(\exists x \forall y \neg \text{P}(x, y)) \vee ((\exists z \text{Q}(z)) \wedge (\exists w \neg \text{R}(w)))$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 3: Padronizar Variáveis</h5>
+                            <div class="formula-box bg-light">
+                                $$(\exists x \forall y \neg \text{P}(x, y)) \vee ((\exists z \text{Q}(z)) \wedge (\exists u \neg \text{R}(u)))$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 4: Forma Normal Prenex</h5>
+                            <div class="formula-box bg-light">
+                                $$\exists x \forall y \exists z \exists u [ \neg \text{P}(x, y) \vee (\text{Q}(z) \wedge \neg \text{R}(u)) ]$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 5: Skolemização</h5>
+                            <ul class="mb-2">
+                                <li>$\exists x$: Substituído pela constante $c_1$</li>
+                                <li>$\exists z$: Substituído pela função $f(y)$</li>
+                                <li>$\exists u$: Substituído pela função $g(y)$</li>
+                            </ul>
+                            <div class="formula-box bg-light">
+                                $$\forall y [ \neg \text{P}(c_1, y) \vee (\text{Q}(f(y)) \wedge \neg \text{R}(g(y))) ]$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 6: Eliminar Quantificadores Universais</h5>
+                            <div class="formula-box bg-light">
+                                $$\neg \text{P}(c_1, y) \vee (\text{Q}(f(y)) \wedge \neg \text{R}(g(y)))$$
+                            </div>
+                        </div>
+                        
+                        <div class="conversion-steps">
+                            <h5 class="fw-semibold mb-2">Passo 7: Converter para FNC</h5>
+                            <p class="mb-2">Aplicando distributividade: $A \vee (B \wedge C) \equiv (A \vee B) \wedge (A \vee C)$</p>
+                            <div class="formula-box bg-light">
+                                $$(\neg \text{P}(c_1, y) \vee \text{Q}(f(y))) \wedge (\neg \text{P}(c_1, y) \vee \neg \text{R}(g(y)))$$
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded">
+                            <strong class="text-success">Resultado Final:</strong> O conjunto de cláusulas é:
+                            <ol class="mb-0">
+                                <li>$\neg \text{P}(c_1, y) \vee \text{Q}(f(y))$</li>
+                                <li>$\neg \text{P}(c_1, y) \vee \neg \text{R}(g(y))$</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercises Section -->
+        <section id="exercicios" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Exercícios sobre Forma Clausal</h2>
+                    
+                    <div class="exercise-grid">
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold text-primary mb-3">Exercício 1</h4>
+                            <p class="mb-3">Converta $P \wedge (Q \rightarrow R)$ para Forma Clausal.</p>
+                            <div class="p-3 bg-info-subtle rounded">
+                                <strong>Resultado:</strong> Cláusulas: $P$ e $\neg Q \vee R$
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold text-success mb-3">Exercício 2</h4>
+                            <p class="mb-3">Converta $\neg \forall x (P(x) \wedge \neg Q(x))$ para Forma Clausal.</p>
+                            <div class="p-3 bg-success-subtle rounded">
+                                <strong>Resultado:</strong> $\neg P(c_1) \vee Q(c_1)$
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold text-warning mb-3">Exercício 3</h4>
+                            <p class="mb-3">Converta $\exists x \forall y (\text{Ama}(x,y))$ para Forma Clausal.</p>
+                            <div class="p-3 bg-warning-subtle rounded">
+                                <strong>Resultado:</strong> $\text{Ama}(c_{romeo}, y)$
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-card">
+                            <h4 class="fs-5 fw-semibold text-danger mb-3">Exercício 4</h4>
+                            <p class="mb-3">Converta $\forall y \exists x (\text{AmadoPor}(y,x))$ para Forma Clausal.</p>
+                            <div class="p-3 bg-danger-subtle rounded">
+                                <strong>Resultado:</strong> $\text{AmadoPor}(y, f_{admirador}(y))$
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complex Exercise -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exercício 6: Dragões Felizes</h4>
+                        <p class="mb-3">Converta: <em>Todo dragão é feliz se todos os seus filhos puderem voar</em></p>
+                        <div class="formula-box bg-light">
+                            $$\forall x (\text{Dragao}(x) \wedge \forall y (\text{FilhoDe}(y, x) \rightarrow \text{PodeVoar}(y)) \rightarrow \text{Feliz}(x))$$
+                        </div>
+                        
+                        <div class="p-3 bg-success-subtle rounded">
+                            <strong class="text-success">Resultado:</strong> O conjunto de cláusulas é:
+                            <ol class="mb-0">
+                                <li>$\neg \text{Dragao}(x) \vee \text{Feliz}(x) \vee \text{FilhoDe}(f(x), x)$</li>
+                                <li>$\neg \text{Dragao}(x) \vee \text{Feliz}(x) \vee \neg \text{PodeVoar}(f(x))$</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horn Clauses Section -->
+        <section id="clausula-horn" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. A Cláusula de Horn</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">História e Contexto</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            A <strong>Cláusula de Horn</strong> foi nomeada em homenagem ao matemático americano <a href="https://en.wikipedia.org/wiki/Alfred_Horn" class="citation-link">Alfred Horn</a>, que a introduziu em 1951. O contexto histórico está profundamente enraizado na solução do <strong>Problema da Decidibilidade</strong>.
+                        </p>
+                        
+                        <p class="fs-6 mb-4">
+                            Alfred Horn identificou um subconjunto da Lógica de Primeira Ordem que permite resolução em tempo polinomial, tornando-o atraente para aplicações práticas. A pergunta que nos guiará é: por que $P \vee \neg Q \vee \neg R$ é uma Cláusula de Horn e $P \vee Q \vee \neg R$ não é?
+                        </p>
+                    </div>
+
+                    <!-- Definition -->
+                    <div class="definition-box">
+                        <div class="definition-title">Definição da Cláusula de Horn</div>
+                        <p class="mb-3">A <strong>Cláusula de Horn</strong> é uma disjunção de literais que contém, no máximo, um literal positivo.</p>
+                        
+                        <h5 class="fw-semibold mb-3">Formas de Representação:</h5>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <h6 class="fw-semibold text-primary">1. Forma Disjuntiva</h6>
+                                <div class="formula-box bg-primary-subtle">
+                                    $$\neg A_1 \vee \neg A_2 \vee \ldots \vee \neg A_k \vee B$$
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h6 class="fw-semibold text-success">2. Forma Implicativa</h6>
+                                <div class="formula-box bg-success-subtle">
+                                    $$(A_1 \wedge A_2 \wedge \ldots \wedge A_k) \rightarrow B$$
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types of Clauses Section -->
+        <section id="tipos-clausulas" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Tipos de Cláusulas de Horn</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-proposicional">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-2">Fatos</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Cláusulas unitárias positivas. Têm exatamente um literal positivo e nenhum literal negativo.
+                                    </p>
+                                    <div class="formula-box bg-primary-subtle">
+                                        $B$ &nbsp;&nbsp; (ou $\top \rightarrow B$)
+                                    </div>
+                                    <div class="p-2 bg-light rounded mt-2">
+                                        <strong>Exemplo:</strong> $\text{Mortal}(\text{socrates})$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-predicativa">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">Regras</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Cláusulas definidas. Têm exatamente um literal positivo e um ou mais literais negativos.
+                                    </p>
+                                    <div class="formula-box bg-success-subtle">
+                                        $\neg A_1 \vee \ldots \vee \neg A_k \vee B$
+                                    </div>
+                                    <div class="p-2 bg-light rounded mt-2">
+                                        <strong>Exemplo:</strong> $\text{Homem}(x) \rightarrow \text{Mortal}(x)$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-horn">
+                                    <h4 class="fs-4 fw-semibold text-info mb-2">Consultas</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Cláusulas negativas. Não têm literal positivo, apenas literais negativos.
+                                    </p>
+                                    <div class="formula-box bg-info-subtle">
+                                        $\neg A_1 \vee \ldots \vee \neg A_k$
+                                    </div>
+                                    <div class="p-2 bg-light rounded mt-2">
+                                        <strong>Exemplo:</strong> $\leftarrow \text{Mortal}(\text{socrates})$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metaphor Section -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Metáfora do Cenário Mental</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold mb-2 text-primary">🏗️ Fatos</h5>
+                                    <p class="fs-6 mb-0">
+                                        Como pedras fundamentais do cenário. São afirmações simples e diretas que dizem como as coisas são. <em>"O céu é azul"</em> - axiomas que não precisam justificativa.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold mb-2 text-success">⚙️ Regras</h5>
+                                    <p class="fs-6 mb-0">
+                                        Como regras de um jogo que definem relações. <em>"Se chover, a grama ficará molhada"</em> - conectores que permitem inferências e descoberta de novas verdades.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold mb-2 text-info">🔍 Consultas</h5>
+                                    <p class="fs-6 mb-0">
+                                        Perguntas ao mundo lógico. <em>"Está chovendo?"</em> - caminhos para explorar o cenário, usando fatos e regras para encontrar respostas.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limitations Section -->
+        <section id="limitacoes" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Limitações das Cláusulas de Horn</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Embora as Cláusulas de Horn sejam computacionalmente eficientes, possuem limitações expressivas importantes que são consequências diretas da restrição que garante sua eficiência: ter no máximo um literal positivo por cláusula.
+                    </p>
+
+                    <div class="row row-cols-1 row-cols-lg-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-ban fs-3 me-3 text-danger"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Disjunções Positivas</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Impossibilidade de expressar disjunções entre conclusões. Exemplo: <em>"Todo número é positivo ou negativo ou zero"</em>.
+                                </p>
+                                <div class="formula-box bg-danger-subtle">
+                                    $$\neg \text{Numero}(x) \vee \text{Positivo}(x) \vee \text{Negativo}(x) \vee \text{Zero}(x)$$
+                                </div>
+                                <small class="text-muted">Esta possui três literais positivos, violando a definição.</small>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-minus-circle fs-3 me-3 text-warning"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Negação no Antecedente</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Dificuldade com condições negativas. Exemplo: <em>"Se alguém não está doente, então pode trabalhar"</em>.
+                                </p>
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <strong>Soluções:</strong>
+                                    <ul class="mb-0">
+                                        <li>Predicados complementares</li>
+                                        <li>Negação por falha (Prolog)</li>
+                                        <li>Axiomatização completa</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Outras Limitações</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-danger-subtle rounded">
+                                    <h5 class="fw-semibold text-danger mb-2">Equivalências Diretas</h5>
+                                    <p class="fs-6 mb-0">
+                                        Bicondicionais ou definições por casos múltiplos muitas vezes geram cláusulas não-Horn.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h5 class="fw-semibold text-warning mb-2">Raciocínio por Casos</h5>
+                                    <p class="fs-6 mb-0">
+                                        Problemas que requerem análise de casos disjuntivos são difíceis de modelar.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <h5 class="fw-semibold text-info mb-2">Questões de Completude</h5>
+                                    <p class="fs-6 mb-0">
+                                        Algumas propriedades lógicas podem não ser deriváveis usando apenas Cláusulas de Horn.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-success-subtle rounded mt-4">
+                            <strong class="text-success">Impacto Prático:</strong> Essas limitações não tornam as Cláusulas de Horn inúteis - pelo contrário, a restrição é precisamente o que permite algoritmos eficientes, semântica operacional clara e estratégias de busca bem definidas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interesting Problems Section -->
+        <section id="problemas-interessantes" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. Problemas Interessantes com Cláusulas de Horn</h2>
+                    
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-inference">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-3">🧑‍🌾 Agricultor, Raposa, Ganso e Grão</h4>
+                                    <p class="fs-6 mb-3">
+                                        Problema clássico de busca de estados. A lógica define estados "inseguros" que devem ser evitados.
+                                    </p>
+                                    <div class="formula-box bg-primary-subtle">
+                                        $\neg \text{estado}(Ag, M, M, \_) \vee \neg \text{oposta}(Ag, M) \vee \text{inseguro}$
+                                    </div>
+                                    <small class="text-muted">A raposa come o ganso se estiverem sozinhos.</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-form">
+                                    <h4 class="fs-4 fw-semibold text-success mb-3">🌉 Ponte e Tocha</h4>
+                                    <p class="fs-6 mb-3">
+                                        Problema de otimização onde quatro pessoas devem atravessar uma ponte com tempos diferentes.
+                                    </p>
+                                    <div class="formula-box bg-success-subtle">
+                                        $\neg \text{tempo}(P1, T1) \vee \neg \text{tempo}(P2, T2) \vee \text{tempoTravessia}(P1, P2, \text{max}(T1, T2))$
+                                    </div>
+                                    <small class="text-muted">Tempo é o máximo dos tempos individuais.</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-warning mb-3">🗺️ Coloração de Mapas</h4>
+                                    <p class="fs-6 mb-3">
+                                        Colorir um mapa com número limitado de cores, evitando regiões adjacentes com mesma cor.
+                                    </p>
+                                    <div class="formula-box bg-warning-subtle">
+                                        $\neg \text{corDe}(R1, C) \vee \neg \text{corDe}(R2, C) \vee \neg \text{adjacente}(R1, R2) \vee \text{violacao}$
+                                    </div>
+                                    <small class="text-muted">Define violação quando adjacentes têm mesma cor.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Examples -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Exemplos de Sistemas</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold mb-2 text-primary">👔 Sistema de Recomendação de Roupas</h5>
+                                    <p class="fs-6 mb-2"><strong>Fatos:</strong> ensolarado, temperatura_acima_de_20</p>
+                                    <p class="fs-6 mb-2"><strong>Regras:</strong> se ensolarado ∧ temp>20 → óculos</p>
+                                    <p class="fs-6 mb-0"><strong>Consulta:</strong> o que vestir?</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold mb-2 text-success">🏥 Sistema de Diagnóstico</h5>
+                                    <p class="fs-6 mb-2"><strong>Fatos:</strong> febre, tosse, viajou</p>
+                                    <p class="fs-6 mb-2"><strong>Regras:</strong> febre ∧ tosse ∧ viagem → malária</p>
+                                    <p class="fs-6 mb-0"><strong>Consulta:</strong> qual diagnóstico?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prolog Section -->
+        <section id="prolog" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. O Prolog Entra em Cena</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Conexão Direta com Cláusulas de Horn</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e semântica do Prolog são diretamente mapeadas para Cláusulas de Horn.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <h5 class="fw-semibold text-primary mb-2">Fatos</h5>
+                                    <p class="fs-6 mb-2">Cláusulas sem antecedentes</p>
+                                    <pre><code class="language-prolog">humano(john).</code></pre>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h5 class="fw-semibold text-success mb-2">Regras</h5>
+                                    <p class="fs-6 mb-2">Implicações com :- </p>
+                                    <pre><code class="language-prolog">mortal(X) :- humano(X).</code></pre>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <h5 class="fw-semibold text-info mb-2">Consultas</h5>
+                                    <p class="fs-6 mb-2">Inferências com ?-</p>
+                                    <pre><code class="language-prolog">?- mortal(john).</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prolog Examples -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 1: Sistema Básico</h4>
+                        <pre><code class="language-prolog">% Fatos
+homem(joão).
+mulher(maria).
+
+% Regra
+mortal(X) :- homem(X).
+
+% Consulta
+?- mortal(joão).
+% Resposta: true</code></pre>
+                    </div>
+
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 2: Torre de Hanói</h4>
+                        <pre><code class="language-prolog">% Predicado principal
+hanoi(N) :-
+    format('Solução para ~w discos~n', [N]),
+    mover(N, p1, p3, p2).
+
+% Caso base
+mover(1, Origem, Destino, _) :-
+    format('Mova disco 1 de ~w para ~w~n', [Origem, Destino]).
+
+% Caso recursivo
+mover(N, Origem, Destino, Auxiliar) :-
+    N > 1,
+    M is N - 1,
+    mover(M, Origem, Auxiliar, Destino),
+    format('Mova disco ~w de ~w para ~w~n', [N, Origem, Destino]),
+    mover(M, Auxiliar, Destino, Origem).</code></pre>
+                    </div>
+
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo 3: Relações Familiares</h4>
+                        <pre><code class="language-prolog">% Fatos básicos
+homem(narrador).
+homem(pai_narrador).
+mulher(esposa_w).
+mulher(enteada_d).
+
+casado(narrador, esposa_w).
+casado(pai_narrador, enteada_d).
+
+progenitor(pai_narrador, narrador).
+progenitor(esposa_w, enteada_d).
+
+% Regras
+pai(Pai, Filho) :- homem(Pai), progenitor(Pai, Filho).
+mae(Mae, Filho) :- mulher(Mae), progenitor(Mae, Filho).
+
+% Regra para madrasta
+madrasta(M, Pessoa) :-
+    pai(Pai, Pessoa),
+    esposa(M, Pai).
+
+% Consulta paradoxal
+?- enteada(enteada_d, narrador), madrasta(enteada_d, narrador).</code></pre>
+                    </div>
+
+                    <div class="p-3 bg-success-subtle rounded">
+                        <strong class="text-success">Mecanismo de Resolução:</strong> O Prolog utiliza resolução SLD (Selective Linear Definite clause resolution) baseado em Cláusulas de Horn para responder consultas, aplicando busca em profundidade para encontrar substituições que satisfaçam a consulta.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
