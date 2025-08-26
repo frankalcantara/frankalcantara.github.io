@@ -168,7 +168,7 @@
     "href": "pr-guide.html#clone-do-seu-fork",
     "title": "6  Guia Completo de pull request em Repositório de Terceiros",
     "section": "6.3 2. Clone do Seu fork",
-    "text": "6.3 2. Clone do Seu fork\nApós criar o fork, clone-o para sua máquina local:\ngit clone https://github.com/seu-usuario/nome-repositorio.git\ncd nome-repositorio",
+    "text": "6.3 2. Clone do Seu fork\nApós criar o fork, clone-o para sua máquina local:\ngit clone https://github.com/seu-usuario/nome-repositorio.git\n\ncd nome-repositorio",
     "crumbs": [
       "Introdução",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Guia Completo de _pull request_ em Repositório de Terceiros</span>"
