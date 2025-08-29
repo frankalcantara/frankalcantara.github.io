@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais: Estruturas de Solução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -251,7 +251,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -401,10 +401,10 @@ xs \oplus (ys \oplus zs) = (xs \oplus ys) \oplus zs
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>xs</code>.</p>
-<p><strong>Caso base:</strong> <code>xs = []</code> <span class="math display">\[
+<p><strong>Caso base</strong>: <code>xs = []</code> <span class="math display">\[
 [] \oplus (ys \oplus zs) = ys \oplus zs = ([] \oplus ys) \oplus zs
 \]</span></p>
-<p><strong>Caso indutivo:</strong> <code>xs = h::t</code></p>
+<p><strong>Caso indutivo</strong>: <code>xs = h::t</code></p>
 <p>Assumimos a hipótese indutiva (H.I.): <span class="math inline">\(t \oplus (ys \oplus zs) = (t \oplus ys) \oplus zs\)</span>. <span class="math display">\[
 \begin{aligned}
   (h::t) \oplus (ys \oplus zs) &amp;= h :: (t \oplus (ys \oplus zs)) \\
@@ -426,10 +426,10 @@ xs \oplus (ys \oplus zs) = (xs \oplus ys) \oplus zs
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>t</code>.</p>
-<p><strong>Caso base:</strong> <code>t = Leaf</code> <span class="math display">\[
+<p><strong>Caso base</strong>: <code>t = Leaf</code> <span class="math display">\[
 \text{reflect}(\text{reflect}(\text{Leaf})) = \text{reflect}(\text{Leaf}) = \text{Leaf}
 \]</span></p>
-<p><strong>Caso indutivo:</strong> <code>t = Node(l, v, r)</code></p>
+<p><strong>Caso indutivo</strong>: <code>t = Node(l, v, r)</code></p>
 <p>Assumimos a H.I.: <span class="math inline">\(\text{reflect}(\text{reflect}(l)) = l \land \text{reflect}(\text{reflect}(r)) = r\)</span>. <span class="math display">\[
 \begin{aligned}
   &amp;\text{reflect}(\text{reflect}(\text{Node}(l, v, r))) \\
@@ -451,8 +451,8 @@ xs \oplus (ys \oplus zs) = (xs \oplus ys) \oplus zs
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>A prova é por indução estrutural em <code>lst</code>.</p>
-<p><strong>Caso base:</strong> <code>lst = []</code> O resultado de <code>insertion_sort([])</code> é <code>[]</code>. A lista vazia é ordenada e contém os mesmos elementos que a original.</p>
-<p><strong>Caso indutivo:</strong> <code>lst = h::t</code> Assumimos a H.I.: <span class="math inline">\(\text{sorted}(\text{insertion\_sort}(t)) \land \text{same\_elements}(t, \text{insertion\_sort}(t))\)</span>.</p>
+<p><strong>Caso base</strong>: <code>lst = []</code> O resultado de <code>insertion_sort([])</code> é <code>[]</code>. A lista vazia é ordenada e contém os mesmos elementos que a original.</p>
+<p><strong>Caso indutivo</strong>: <code>lst = h::t</code> Assumimos a H.I.: <span class="math inline">\(\text{sorted}(\text{insertion\_sort}(t)) \land \text{same\_elements}(t, \text{insertion\_sort}(t))\)</span>.</p>
 <p>Sabemos que <code>insertion_sort(h::t)</code> é <code>insert(h, insertion_sort(t))</code>. A prova depende de um <strong>lema auxiliar</strong> que afirma que a função <code>insert</code> preserva tanto a ordenação quanto a coleção de elementos. Assumir a validade do lema nos permite concluir que a propriedade do teorema é mantida.</p>
 </div>
 <p><strong>O uso de lemmas auxiliares</strong> é frequentemente necessário para provas complexas, permitindo decomposição modular das verificações.</p>

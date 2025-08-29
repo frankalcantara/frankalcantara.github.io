@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais: Estruturas de Solução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -251,7 +251,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -274,7 +274,42 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" id="toc-o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="nav-link active" data-scroll-target="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">11.0.1</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</a></li>
+  <li><a href="#o-mentiroso-e-o-verdadeiro" id="toc-o-mentiroso-e-o-verdadeiro" class="nav-link active" data-scroll-target="#o-mentiroso-e-o-verdadeiro"><span class="header-section-number">11.1</span> O Mentiroso e o Verdadeiro</a>
+  <ul class="collapse">
+  <li><a href="#solução-intuitiva" id="toc-solução-intuitiva" class="nav-link" data-scroll-target="#solução-intuitiva"><span class="header-section-number">11.1.1</span> Solução Intuitiva</a></li>
+  <li><a href="#solução-usando-lógica-proposicional" id="toc-solução-usando-lógica-proposicional" class="nav-link" data-scroll-target="#solução-usando-lógica-proposicional"><span class="header-section-number">11.1.2</span> Solução usando Lógica Proposicional</a></li>
+  <li><a href="#solução-usando-lógica-de-primeira-ordem" id="toc-solução-usando-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#solução-usando-lógica-de-primeira-ordem"><span class="header-section-number">11.1.3</span> Solução usando Lógica de Primeira Ordem</a></li>
+  </ul></li>
+  <li><a href="#as-três-lâmpadas" id="toc-as-três-lâmpadas" class="nav-link" data-scroll-target="#as-três-lâmpadas"><span class="header-section-number">11.2</span> As Três Lâmpadas</a>
+  <ul class="collapse">
+  <li><a href="#solução-intuitiva-1" id="toc-solução-intuitiva-1" class="nav-link" data-scroll-target="#solução-intuitiva-1"><span class="header-section-number">11.2.1</span> Solução Intuitiva</a></li>
+  <li><a href="#formalização-usando-lógica-de-primeira-ordem" id="toc-formalização-usando-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#formalização-usando-lógica-de-primeira-ordem"><span class="header-section-number">11.2.2</span> Formalização usando Lógica de Primeira Ordem</a></li>
+  </ul></li>
+  <li><a href="#o-agricultor-a-raposa-o-ganso-e-o-grão" id="toc-o-agricultor-a-raposa-o-ganso-e-o-grão" class="nav-link" data-scroll-target="#o-agricultor-a-raposa-o-ganso-e-o-grão"><span class="header-section-number">11.3</span> O Agricultor, a Raposa, o Ganso e o Grão</a>
+  <ul class="collapse">
+  <li><a href="#solução-intuitiva-2" id="toc-solução-intuitiva-2" class="nav-link" data-scroll-target="#solução-intuitiva-2"><span class="header-section-number">11.3.1</span> Solução Intuitiva</a></li>
+  <li><a href="#formalização-usando-lógica-de-primeira-ordem-1" id="toc-formalização-usando-lógica-de-primeira-ordem-1" class="nav-link" data-scroll-target="#formalização-usando-lógica-de-primeira-ordem-1"><span class="header-section-number">11.3.2</span> Formalização usando Lógica de Primeira Ordem</a></li>
+  </ul></li>
+  <li><a href="#o-problema-da-ponte-e-da-tocha" id="toc-o-problema-da-ponte-e-da-tocha" class="nav-link" data-scroll-target="#o-problema-da-ponte-e-da-tocha"><span class="header-section-number">11.4</span> O Problema da Ponte e da Tocha</a>
+  <ul class="collapse">
+  <li><a href="#solução-intuitiva-3" id="toc-solução-intuitiva-3" class="nav-link" data-scroll-target="#solução-intuitiva-3"><span class="header-section-number">11.4.1</span> Solução Intuitiva</a></li>
+  <li><a href="#formalização-usando-lógica-de-primeira-ordem-2" id="toc-formalização-usando-lógica-de-primeira-ordem-2" class="nav-link" data-scroll-target="#formalização-usando-lógica-de-primeira-ordem-2"><span class="header-section-number">11.4.2</span> Formalização usando Lógica de Primeira Ordem</a></li>
+  </ul></li>
+  <li><a href="#o-problema-de-monty-hall" id="toc-o-problema-de-monty-hall" class="nav-link" data-scroll-target="#o-problema-de-monty-hall"><span class="header-section-number">11.5</span> O Problema de Monty Hall</a>
+  <ul class="collapse">
+  <li><a href="#solução-intuitiva-4" id="toc-solução-intuitiva-4" class="nav-link" data-scroll-target="#solução-intuitiva-4"><span class="header-section-number">11.5.1</span> Solução Intuitiva</a></li>
+  <li><a href="#formalização-usando-lógica-de-primeira-ordem-e-probabilidades" id="toc-formalização-usando-lógica-de-primeira-ordem-e-probabilidades" class="nav-link" data-scroll-target="#formalização-usando-lógica-de-primeira-ordem-e-probabilidades"><span class="header-section-number">11.5.2</span> Formalização usando Lógica de Primeira Ordem e Probabilidades</a></li>
+  </ul></li>
+  <li><a href="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" id="toc-o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="nav-link" data-scroll-target="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">11.6</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</a>
+  <ul class="collapse">
+  <li><a href="#o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" id="toc-o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" class="nav-link" data-scroll-target="#o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood"><span class="header-section-number">11.6.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></a></li>
+  </ul></li>
+  <li><a href="#solução-do-mistério-da-mansão-hollow-1935" id="toc-solução-do-mistério-da-mansão-hollow-1935" class="nav-link" data-scroll-target="#solução-do-mistério-da-mansão-hollow-1935"><span class="header-section-number">11.7</span> Solução do Mistério da Mansão Hollow (1935)</a>
+  <ul class="collapse">
+  <li><a href="#análise-intuitiva" id="toc-análise-intuitiva" class="nav-link" data-scroll-target="#análise-intuitiva"><span class="header-section-number">11.7.1</span> Análise Intuitiva</a></li>
+  <li><a href="#solução-formal-com-lógica-versão-detalhada" id="toc-solução-formal-com-lógica-versão-detalhada" class="nav-link" data-scroll-target="#solução-formal-com-lógica-versão-detalhada"><span class="header-section-number">11.7.2</span> Solução Formal com Lógica (Versão Detalhada)</a></li>
+  <li><a href="#teoria-final" id="toc-teoria-final" class="nav-link" data-scroll-target="#teoria-final"><span class="header-section-number">11.7.3</span> Teoria Final</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/09-desafios-logicos-enigmas-e-misterios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -304,91 +339,304 @@ window.Quarto = {
 </header>
 
 
-<p>Aqui estão cinco quebra-cabeças clássicos juntamente com suas soluções usando <strong>Lógica de Primeira Ordem</strong></p>
+<p>Chegamos ao nosso destino.</p>
+<p>Cruzamos mares revoltos e tempestades mas, finalmente, estamos deitados, em toalhas de banho, à luz do Sol e ao som das ondas. Entre uma taça de champanhe e outra, nos divertimos resolvendo mistérios, usando a areia da praia como a mais pura lousa branca.</p>
+<p>Neste capítulo, a curiosa leitora irá encontrar um conjunto de quebras-cabeça e enigmas, todos resolvidos com lógica. O objetivo é que a leitora possa se divertir e, ao mesmo tempo, praticar os conceitos áridos que permearam esta nossa jornada.</p>
+<section id="o-mentiroso-e-o-verdadeiro" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="o-mentiroso-e-o-verdadeiro"><span class="header-section-number">11.1</span> O Mentiroso e o Verdadeiro</h2>
+<p>Você encontra dois habitantes: <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a <span class="math inline">\(A\)</span>: <em>Você é o verdadeiro?</em>. <span class="math inline">\(A\)</span> responde, mas você não consegue ouvir a resposta dele. <span class="math inline">\(B\)</span> então te diz: <em>A disse que ele é o mentiroso</em>.</p>
+<section id="solução-intuitiva" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="solução-intuitiva"><span class="header-section-number">11.1.1</span> Solução Intuitiva</h3>
+<p><span class="math inline">\(B\)</span> deve ser o mentiroso e <span class="math inline">\(A\)</span> deve ser o verdadeiro.</p>
+<p><strong>Raciocínio</strong>: Se <span class="math inline">\(A\)</span> fosse o verdadeiro, ele responderia <em>Sim</em> à pergunta. Se <span class="math inline">\(A\)</span> fosse o mentiroso, ele mentiria e também responderia <em>Sim</em>. Logo, <span class="math inline">\(A\)</span> sempre responde <em>Sim</em> à pergunta <em>Você é o verdadeiro?</em>.</p>
+<p>Como <span class="math inline">\(B\)</span> diz que <em><span class="math inline">\(A\)</span> disse que ele é o mentiroso</em>, e sabemos que <span class="math inline">\(A\)</span> respondeu <em>Sim</em> (não <em>Sou mentiroso</em>), então <span class="math inline">\(B\)</span> está mentindo. Portanto, <span class="math inline">\(B\)</span> é o mentiroso e <span class="math inline">\(A\)</span> é o verdadeiro.</p>
+</section>
+<section id="solução-usando-lógica-proposicional" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="solução-usando-lógica-proposicional"><span class="header-section-number">11.1.2</span> Solução usando Lógica Proposicional</h3>
+<section id="definições" class="level4" data-number="11.1.2.1">
+<h4 data-number="11.1.2.1" class="anchored" data-anchor-id="definições"><span class="header-section-number">11.1.2.1</span> Definições:</h4>
+<ul>
+<li><span class="math inline">\(V_A\)</span>: <span class="math inline">\(A\)</span> é o verdadeiro;</li>
+<li><span class="math inline">\(M_A\)</span>: <span class="math inline">\(A\)</span> é o mentiroso;<br>
+</li>
+<li><span class="math inline">\(V_B\)</span>: <span class="math inline">\(B\)</span> é o verdadeiro;</li>
+<li><span class="math inline">\(M_B\)</span>: <span class="math inline">\(B\)</span> é o mentiroso;</li>
+<li><span class="math inline">\(R_A\)</span>: <span class="math inline">\(A\)</span> respondeu <em>Sim</em> à pergunta <em>Você é o verdadeiro?</em>.</li>
+</ul>
+</section>
+<section id="axiomas" class="level4" data-number="11.1.2.2">
+<h4 data-number="11.1.2.2" class="anchored" data-anchor-id="axiomas"><span class="header-section-number">11.1.2.2</span> Axiomas</h4>
 <ol type="1">
-<li><p><strong>Quebra-cabeça: O Mentiroso e o Verdadeiro</strong> Você encontra dois habitantes: <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span>. Você sabe que um sempre diz a verdade e o outro sempre mente, mas você não sabe quem é quem. Você pergunta a <span class="math inline">\(A\)</span>, <em>Você é o verdadeiro?</em> A responde, mas você não consegue ouvir a resposta dele. <span class="math inline">\(B\)</span> então te diz, <em>A disse que ele é o mentiroso</em>.</p>
-<p><strong>Solução</strong>: <span class="math inline">\(A\)</span> deve ser o verdadeiro e <span class="math inline">\(B\)</span> deve ser o mentiroso. Se <span class="math inline">\(B\)</span> fosse o verdadeiro, ele nunca diria que é o mentiroso. Portanto, <span class="math inline">\(B\)</span> deve ser o mentiroso e <span class="math inline">\(A\)</span> deve ser o verdadeiro, independentemente do que <span class="math inline">\(B\)</span> disse.</p>
-<p>Usando apenas <strong>Lógica Proposicional</strong> teremos:</p>
-<p><strong>Definições</strong>: VA: A é o verdadeiro MA: A é o mentiroso VB: B é o verdadeiro MB: B é o mentiroso RA: A respondeu “Sim” à pergunta “Você é o verdadeiro?”</p>
-<p><strong>Axiomas</strong>:</p>
-<ol type="1">
-<li><span class="math inline">\(VA \lor MA\)</span> (A é verdadeiro ou mentiroso);</li>
-<li><span class="math inline">\(\neg(VA \land MA)\)</span> (A não é ambos verdadeiro e mentiroso);</li>
-<li><span class="math inline">\(VB \lor MB\)</span> (B é verdadeiro ou mentiroso);</li>
-<li><span class="math inline">\(\neg(VB \land MB)\)</span> (B não é ambos verdadeiro e mentiroso);</li>
-<li><span class="math inline">\(VA \to \neg VB\)</span> (Se A é verdadeiro, B não é verdadeiro);</li>
-<li><span class="math inline">\(VA \to RA\)</span> (Se A é verdadeiro, ele respondeu “Sim”);</li>
-<li><span class="math inline">\(MA \to \neg RA\)</span> (Se A é mentiroso, ele respondeu “Não”);</li>
-<li><span class="math inline">\(VB \to (B \text{ diz } \neg RA)\)</span> (Se B é verdadeiro, ele diz a verdade sobre a resposta de A);</li>
-<li><span class="math inline">\(MB \to (B \text{ diz } RA)\)</span> (Se B é mentiroso, ele mente sobre a resposta de A).</li>
+<li><span class="math inline">\(V_A \lor M_A\)</span> (A é verdadeiro ou mentiroso);</li>
+<li><span class="math inline">\(\neg(V_A \land M_A)\)</span> (A não é ambos);</li>
+<li><span class="math inline">\(V_B \lor M_B\)</span> (B é verdadeiro ou mentiroso);</li>
+<li><span class="math inline">\(\neg(V_B \land M_B)\)</span> (B não é ambos);</li>
+<li><span class="math inline">\(V_A \leftrightarrow \neg V_B\)</span> (Exatamente um é verdadeiro);</li>
+<li><span class="math inline">\(V_A \to R_A\)</span> (Se A é verdadeiro, ele responde <em>Sim</em>);</li>
+<li><span class="math inline">\(M_A \to R_A\)</span> (Se A é mentiroso, ele também responde <em>Sim</em>, pois mente);</li>
+<li><span class="math inline">\(V_B \to \text{B reporta corretamente}\)</span> (Se B é verdadeiro, ele relata a verdade);</li>
+<li><span class="math inline">\(M_B \to \text{B reporta falsamente}\)</span> (Se B é mentiroso, ele mente).</li>
 </ol>
-<p><strong>Fato observado</strong>:</p>
-<p><span class="math display">\[B \text{ diz } \neg RA\]</span></p>
-<p><strong>Prova</strong>:</p>
+</section>
+<section id="fato-observado" class="level4" data-number="11.1.2.3">
+<h4 data-number="11.1.2.3" class="anchored" data-anchor-id="fato-observado"><span class="header-section-number">11.1.2.3</span> Fato Observado</h4>
+<p><span class="math inline">\(B\)</span> diz: <em>A disse que ele é o mentiroso</em> (ou seja, <span class="math inline">\(B\)</span> afirma que <span class="math inline">\(A\)</span> disse <em>Não</em>).</p>
+</section>
+<section id="prova" class="level4" data-number="11.1.2.4">
+<h4 data-number="11.1.2.4" class="anchored" data-anchor-id="prova"><span class="header-section-number">11.1.2.4</span> Prova</h4>
 <ol type="1">
-<li><span class="math inline">\(B \text{ diz } \neg RA\)</span> (Fato observado)</li>
-<li><span class="math inline">\((VB \land \neg RA) \lor (MB \land RA)\)</span> (Por 8, 9 e 1)</li>
-<li>Suponha <span class="math inline">\(MA\)</span>: 3.1. <span class="math inline">\(\neg RA\)</span> (Por 7) 3.2. <span class="math inline">\(VB\)</span> (Por 3, 4 e 5) 3.3. Mas isto contradiz 2, pois teríamos <span class="math inline">\((VB \land RA)\)</span></li>
-<li>Portanto, <span class="math inline">\(\neg MA\)</span> (Por reductio ad absurdum)</li>
-<li><span class="math inline">\(VA\)</span> (Por 1 e 4)</li>
+<li>Por (6) e (7): <span class="math inline">\(R_A\)</span> é sempre verdadeiro (<span class="math inline">\(A\)</span> sempre responde <em>Sim</em>);</li>
+<li><span class="math inline">\(B\)</span> afirma que <span class="math inline">\(\neg R_A\)</span> (<span class="math inline">\(B\)</span> diz que <span class="math inline">\(A\)</span> responde <em>Não</em>/<em>Sou mentiroso</em>);</li>
+<li>Como <span class="math inline">\(R_A\)</span> é verdadeiro e <span class="math inline">\(B\)</span> afirma <span class="math inline">\(\neg R_A\)</span>, então <span class="math inline">\(B\)</span> está mentindo;</li>
+<li>Portanto, <span class="math inline">\(M_B\)</span> (<span class="math inline">\(B\)</span> é o mentiroso);</li>
+<li>Por (5) e (4): <span class="math inline">\(V_A\)</span> (<span class="math inline">\(A\)</span> é o verdadeiro).</li>
 </ol>
-<p>Conclusão:</p>
-<p><span class="math display">\[VA \land \neg MA\]</span></p>
-<p><span class="math inline">\(A\)</span> é o verdadeiro e não é o mentiroso.</p>
-<p>Usando <strong>Lógica de Primeira Ordem</strong> teremos:</p>
+</section>
+<section id="conclusão" class="level4" data-number="11.1.2.5">
+<h4 data-number="11.1.2.5" class="anchored" data-anchor-id="conclusão"><span class="header-section-number">11.1.2.5</span> Conclusão:</h4>
+<p><span class="math display">\[V_A \land M_B\]</span></p>
+<p><span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso.</p>
+</section>
+</section>
+<section id="solução-usando-lógica-de-primeira-ordem" class="level3" data-number="11.1.3">
+<h3 data-number="11.1.3" class="anchored" data-anchor-id="solução-usando-lógica-de-primeira-ordem"><span class="header-section-number">11.1.3</span> Solução usando Lógica de Primeira Ordem</h3>
+<section id="definições-1" class="level4" data-number="11.1.3.1">
+<h4 data-number="11.1.3.1" class="anchored" data-anchor-id="definições-1"><span class="header-section-number">11.1.3.1</span> Definições</h4>
+<ul>
+<li><span class="math inline">\(V(x)\)</span>: <span class="math inline">\(x\)</span> é o verdadeiro;</li>
+<li><span class="math inline">\(M(x)\)</span>: <span class="math inline">\(x\)</span> é o mentiroso;</li>
+<li><span class="math inline">\(R(x, p)\)</span>: <span class="math inline">\(x\)</span> responde <span class="math inline">\(p\)</span> à pergunta;</li>
+<li><span class="math inline">\(D(x, p)\)</span>: <span class="math inline">\(x\)</span> diz que <span class="math inline">\(p\)</span>.</li>
+</ul>
+</section>
+<section id="axiomas-1" class="level4" data-number="11.1.3.2">
+<h4 data-number="11.1.3.2" class="anchored" data-anchor-id="axiomas-1"><span class="header-section-number">11.1.3.2</span> Axiomas</h4>
+<ol type="1">
+<li><span class="math inline">\(\forall x (V(x) \lor M(x))\)</span> (Todo indivíduo é verdadeiro ou mentiroso);</li>
+<li><span class="math inline">\(\forall x \neg(V(x) \land M(x))\)</span> (Ninguém é ambos);</li>
+<li><span class="math inline">\((V(A) \land M(B)) \lor (M(A) \land V(B))\)</span> (Exatamente um de cada tipo);</li>
+<li><span class="math inline">\(V(A) \to R(A, \text{_Sim_})\)</span> (Se A é verdadeiro, responde <em>Sim</em>);</li>
+<li><span class="math inline">\(M(A) \to R(A, \text{_Sim_})\)</span> (Se A é mentiroso, também responde <em>Sim</em>);</li>
+<li><span class="math inline">\(\forall x \forall p (V(x) \to (D(x, p) \leftrightarrow p))\)</span> (Verdadeiros dizem a verdade);</li>
+<li><span class="math inline">\(\forall x \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))\)</span> (Mentirosos mentem).</li>
+</ol>
+</section>
+<section id="fato-observado-1" class="level4" data-number="11.1.3.3">
+<h4 data-number="11.1.3.3" class="anchored" data-anchor-id="fato-observado-1"><span class="header-section-number">11.1.3.3</span> Fato Observado</h4>
+<p><span class="math display">\[D(B, R(A, \text{_Não_}))\]</span></p>
+<p><span class="math inline">\(B\)</span> afirma que <span class="math inline">\(A\)</span> respondeu <em>Não</em> (disse ser mentiroso)</p>
+</section>
+<section id="prova-1" class="level4" data-number="11.1.3.4">
+<h4 data-number="11.1.3.4" class="anchored" data-anchor-id="prova-1"><span class="header-section-number">11.1.3.4</span> Prova</h4>
+<ol type="1">
+<li><p>Por axiomas (4) e (5): <span class="math inline">\(R(A, \text{_Sim_})\)</span> é necessariamente verdadeiro;</p></li>
+<li><p>Fato observado: <span class="math inline">\(D(B, R(A, \text{_Não_}))\)</span>;</p></li>
+<li><p>Como <span class="math inline">\(R(A, \text{_Sim_})\)</span> é verdadeiro, então <span class="math inline">\(R(A, \text{_Não_})\)</span> é falso;</p></li>
+<li><p>B afirma algo falso: <span class="math inline">\(D(B, \text{falso})\)</span>;</p></li>
+<li><p>Por axioma (6): Se <span class="math inline">\(V(B)\)</span>, então <span class="math inline">\(D(B, p) \leftrightarrow p\)</span>;</p>
+<ul>
+<li>Isso implicaria <span class="math inline">\(D(B, \text{falso}) \leftrightarrow \text{falso}\)</span>;</li>
+<li>Logo, <span class="math inline">\(\neg D(B, \text{falso})\)</span>;</li>
+<li>Contradição com (4).</li>
+</ul></li>
+<li><p>Portanto, <span class="math inline">\(\neg V(B)\)</span>, logo <span class="math inline">\(M(B)\)</span> por axioma (1);</p></li>
+<li><p>Por axioma (3) e <span class="math inline">\(M(B)\)</span>: temos <span class="math inline">\(V(A)\)</span>;</p></li>
+</ol>
+</section>
+<section id="conclusão-1" class="level4" data-number="11.1.3.5">
+<h4 data-number="11.1.3.5" class="anchored" data-anchor-id="conclusão-1"><span class="header-section-number">11.1.3.5</span> Conclusão</h4>
+<p><span class="math display">\[V(A) \land M(B)\]</span></p>
+<p><span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso.</p>
+</section>
+</section>
+</section>
+<section id="as-três-lâmpadas" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="as-três-lâmpadas"><span class="header-section-number">11.2</span> As Três Lâmpadas</h2>
+<p>Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?</p>
+<section id="solução-intuitiva-1" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="solução-intuitiva-1"><span class="header-section-number">11.2.1</span> Solução Intuitiva</h3>
+<p>Ligue o primeiro interruptor e espere 10 minutos. Depois desligue-o e ligue o segundo interruptor. Entre na sala imediatamente.</p>
+<ul>
+<li>A lâmpada que está <strong>acesa</strong> corresponde ao segundo interruptor;</li>
+<li>A lâmpada que está <strong>apagada e quente</strong> corresponde ao primeiro interruptor;</li>
+<li>A lâmpada que está <strong>apagada e fria</strong> corresponde ao terceiro interruptor.</li>
+</ul>
+</section>
+<section id="formalização-usando-lógica-de-primeira-ordem" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="formalização-usando-lógica-de-primeira-ordem"><span class="header-section-number">11.2.2</span> Formalização usando Lógica de Primeira Ordem</h3>
 <p><strong>Definições</strong>:</p>
-<ol type="1">
-<li><p><span class="math inline">\(V(x)\)</span>: <span class="math inline">\(x\)</span> é o verdadeiro;</p></li>
-<li><p><span class="math inline">\(M(x)\)</span>: <span class="math inline">\(x\)</span> é o mentiroso;</p></li>
-<li><p><span class="math inline">\(R(x)\)</span>: <span class="math inline">\(x\)</span> respondeu “Sim” à pergunta “Você é o verdadeiro?”;</p></li>
-<li><p><span class="math inline">\(D(x, p)\)</span>: <span class="math inline">\(x\)</span> diz que p é verdadeiro.</p></li>
-</ol>
+<ul>
+<li><span class="math inline">\(S = \{s_1, s_2, s_3\}\)</span>: conjunto de interruptores;</li>
+<li><span class="math inline">\(L = \{l_1, l_2, l_3\}\)</span>: conjunto de lâmpadas;</li>
+<li><span class="math inline">\(\text{Controla}(s, l)\)</span>: interruptor <span class="math inline">\(s\)</span> controla lâmpada <span class="math inline">\(l\)</span>;</li>
+<li><span class="math inline">\(\text{Ligado}(s, t)\)</span>: interruptor <span class="math inline">\(s\)</span> está ligado no tempo <span class="math inline">\(t\)</span>;</li>
+<li><span class="math inline">\(\text{Acesa}(l, t)\)</span>: lâmpada <span class="math inline">\(l\)</span> está acesa no tempo <span class="math inline">\(t\)</span>;</li>
+<li><span class="math inline">\(\text{Quente}(l, t)\)</span>: lâmpada <span class="math inline">\(l\)</span> está quente no tempo <span class="math inline">\(t\)</span>.</li>
+</ul>
 <p><strong>Axiomas</strong>:</p>
 <ol type="1">
-<li><p><span class="math inline">\(\forall x (V(x) \lor M(x))\)</span> (Todo x é verdadeiro ou mentiroso);</p></li>
-<li><p><span class="math inline">\(\forall x (V(x) \to \neg M(x))\)</span> (Ninguém é ambos verdadeiro e mentiroso);</p></li>
-<li><p><span class="math inline">\(\forall x (V(x) \to R(x))\)</span> (Se x é verdadeiro, x responde “Sim”);</p></li>
-<li><p><span class="math inline">\(\forall x (M(x) \to \neg R(x))\)</span> (Se x é mentiroso, x responde “Não”);</p></li>
-<li><p><span class="math inline">\(\forall x \forall y \forall p (V(x) \to (D(x, p) \leftrightarrow p))\)</span> (Se x é verdadeiro, x diz p se e somente se p é verdadeiro);</p></li>
-<li><p><span class="math inline">\(\forall x \forall y \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))\)</span> (Se x é mentiroso, x diz p se e somente se p é falso).</p></li>
+<li><span class="math inline">\(\forall s \in S \, \exists! l \in L \, (\text{Controla}(s, l))\)</span> (cada interruptor controla exatamente uma lâmpada);</li>
+<li><span class="math inline">\(\forall l \in L \, \exists! s \in S \, (\text{Controla}(s, l))\)</span> (cada lâmpada é controlada por exatamente um interruptor)</li>
+<li><span class="math inline">\(\forall s, l, t \, (\text{Controla}(s, l) \land \text{Ligado}(s, t) \to \text{Acesa}(l, t))\)</span>;</li>
+<li><span class="math inline">\(\forall s, l, t \, (\text{Controla}(s, l) \land \neg\text{Ligado}(s, t) \to \neg\text{Acesa}(l, t))\)</span>;</li>
+<li><span class="math inline">\(\forall l, t_1, t_2 \, (\text{Acesa}(l, t_1) \land (t_2 - t_1 &lt; \delta) \land \neg\text{Acesa}(l, t_2) \to \text{Quente}(l, t_2))\)</span>.</li>
 </ol>
-<p><strong>Fatos observados</strong>:</p>
-<p><span class="math display">\[D(B, \neg R(A))\]</span></p>
-<p><strong>Prova</strong>:</p>
+<p>na qual <span class="math inline">\(\delta\)</span> é o tempo de resfriamento.</p>
+<p><strong>Procedimento</strong>:</p>
+<ul>
+<li><span class="math inline">\(t_0\)</span>: Liga <span class="math inline">\(s_1\)</span>;</li>
+<li><span class="math inline">\(t_1 = t_0 + 10\text{min}\)</span>: Desliga <span class="math inline">\(s_1\)</span>, liga <span class="math inline">\(s_2\)</span>;</li>
+<li><span class="math inline">\(t_2 = t_1 + \epsilon\)</span>: Observa o estado das lâmpadas.</li>
+</ul>
+<p><strong>Dedução</strong>:</p>
+<p><span class="math display">\[\text{Controla}(s_2, l) \leftrightarrow \text{Acesa}(l, t_2)\]</span></p>
+<p><span class="math display">\[\text{Controla}(s_1, l) \leftrightarrow (\neg\text{Acesa}(l, t_2) \land \text{Quente}(l, t_2))\]</span></p>
+<p><span class="math display">\[\text{Controla}(s_3, l) \leftrightarrow (\neg\text{Acesa}(l, t_2) \land \neg\text{Quente}(l, t_2))\]</span></p>
+</section>
+</section>
+<section id="o-agricultor-a-raposa-o-ganso-e-o-grão" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="o-agricultor-a-raposa-o-ganso-e-o-grão"><span class="header-section-number">11.3</span> O Agricultor, a Raposa, o Ganso e o Grão</h2>
+<p>Um agricultor precisa atravessar um rio com uma raposa, um ganso e um saco de grãos. Seu barco só comporta ele mesmo e mais um item. Se deixados sozinhos: a raposa come o ganso, o ganso come o grão. Como transportar todos em segurança?</p>
+<section id="solução-intuitiva-2" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="solução-intuitiva-2"><span class="header-section-number">11.3.1</span> Solução Intuitiva</h3>
 <ol type="1">
-<li><p><span class="math inline">\(D(B, \neg R(A))\)</span> (Fato observado);</p></li>
-<li><p><span class="math inline">\(V(A) \lor M(A)\)</span> (Por 1);</p></li>
-<li><p>Suponha <span class="math inline">\(M(A)\)</span>: 3.1. <span class="math inline">\(\neg R(A)\)</span> (Por 4); 3.2. <span class="math inline">\(V(B)\)</span> (Pois apenas um é mentiroso, por 1 e 2); 3.3. <span class="math inline">\(D(B, \neg R(A)) \leftrightarrow \neg R(A)\)</span> (Por 5); 3.4. <span class="math inline">\(\neg R(A)\)</span> (Por 1 e 3.3); 3.5. Mas isto contradiz 3.1 e 3.4.</p></li>
-<li><p>Portanto, <span class="math inline">\(\neg M(A)\)</span> (Por reductio ad absurdum)</p></li>
-<li><p><span class="math inline">\(V(A)\)</span> (Por 2 e 4)</p></li>
+<li>Leva o ganso para o outro lado;</li>
+<li>Volta sozinho;</li>
+<li>Leva a raposa para o outro lado;</li>
+<li>Traz o ganso de volta;</li>
+<li>Leva o grão para o outro lado;</li>
+<li>Volta sozinho;</li>
+<li>Leva o ganso para o outro lado.</li>
 </ol>
-<p><strong>Conclusão</strong>: <span class="math display">\[V(A) \land \neg M(A)\]</span></p>
-<p><span class="math inline">\(A\)</span> é o verdadeiro e não é o mentiroso.</p></li>
-<li><p><strong>Quebra-cabeça: As Três Lâmpadas</strong> Existem três lâmpadas incandescentes em uma sala, e existem três interruptores fora da sala. Você pode manipular os interruptores o quanto quiser, mas só pode entrar na sala uma vez. Como você pode determinar qual interruptor opera qual lâmpada?</p>
-<p><strong>Solução</strong>: ligue um interruptor e espere um pouco. Então desligue esse interruptor e ligue um segundo interruptor. Entre na sala. A lâmpada que está acesa corresponde ao segundo interruptor. A lâmpada que está desligada e quente corresponde ao primeiro interruptor. A lâmpada que está desligada e fria corresponde ao terceiro interruptor.</p>
-<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar os interruptores como <span class="math inline">\(s1, s2, s3\)</span> e as lâmpadas como <span class="math inline">\(b1, b2, b3\)</span>. Podemos definir predicados <span class="math inline">\(On(b, s)\)</span> e <span class="math inline">\(Hot(b)\)</span>.</p>
-<p><span class="math display">\[On(b1, s2) \land Hot(b2) \land \neg (On(b3) \lor Hot(b3))\]</span></p></li>
-<li><p><strong>Quebra-cabeça: O Agricultor, a Raposa, o Ganso e o Grão</strong> Um agricultor quer atravessar um rio e levar consigo uma raposa, um ganso e um saco de grãos. O barco do agricultor só lhe permite levar um item além dele mesmo. Se a raposa e o ganso estiverem sozinhos, a raposa comerá o ganso. Se o ganso e o grão estiverem sozinhos, o ganso comerá o grão. Como o agricultor pode levar todas as suas posses para o outro lado do rio?</p>
-<p><strong>Solução</strong>: o agricultor leva o ganso através do rio primeiro, deixando a raposa e o grão no lado original. Ele deixa o ganso no outro lado e volta para pegar a raposa. Ele deixa a raposa no outro lado, mas leva o ganso de volta ao lado original para pegar o grão. Ele deixa o grão com a raposa no outro lado. Finalmente, ele retorna ao lado original mais uma vez para pegar o ganso.</p>
-<p>Usando <strong>Lógica de Primeira Ordem</strong>: Podemos definir predicados <span class="math inline">\(mesmoLado(x, y)\)</span> e <span class="math inline">\(come (x, y)\)</span>. A solução envolve a sequência de ações que mantêm as seguintes condições:</p>
-<p><span class="math display">\[\neg (mesmoLado(Raposa, Ganso) \land \neg mesmoLado(Raposa, Fazendeiro))\]</span></p>
-<p><span class="math display">\[\neg (mesmoLado(Ganso, Grãos) \land \neg mesmoLado(Ganso, Fazendeiro))\]</span></p></li>
-<li><p><strong>Quebra-cabeça: O Problema da Ponte e da Tocha</strong> Quatro pessoas chegam a um rio à noite. Há uma ponte estreita, mas ela só pode conter duas pessoas de cada vez. Eles têm uma tocha e, por ser noite, a tocha tem que ser usada ao atravessar a ponte. A pessoa <span class="math inline">\(A\)</span> pode atravessar a ponte em um minuto, <span class="math inline">\(B\)</span> em dois minutos, <span class="math inline">\(C\)</span> em cinco minutos e <span class="math inline">\(D\)</span> em oito minutos. Quando duas pessoas atravessam a ponte juntas, elas devem se mover no ritmo da pessoa mais lenta. Qual é a forma mais rápida para todos eles atravessarem a ponte?</p>
-<p><strong>Solução</strong>: primeiro, <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam a ponte, o que leva 2 minutos. <span class="math inline">\(A\)</span> então pega a tocha e volta para o lado original, levando 1 minuto. <span class="math inline">\(A\)</span> fica no lado original enquanto <span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span> atravessam a ponte, levando 8 minutos. <span class="math inline">\(B\)</span> então pega a tocha e volta para o lado original, levando 2 minutos. Finalmente, <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam a ponte novamente, levando 2 minutos. No total, teremos <span class="math inline">\(2+1+8+2+2=15\)</span> minutos.</p>
-<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar o tempo que cada pessoa leva para atravessar a ponte como <span class="math inline">\(t_A, t_B, t_C, t_D\)</span> e o tempo total como <span class="math inline">\(T\)</span>. O problema pode ser representado da seguinte forma:</p>
-<p><span class="math display">\[(t_A + t_B + t_A + t_C + t_D + t_B + t_A) \leq T\]</span></p>
-<p>Substituindo os valores dos tempos resulta em <span class="math inline">\(15 \leq T\)</span>.</p></li>
-<li><p><strong>Quebra-cabeça: O Problema de Monty Hall</strong> Em um programa de game show, os concorrentes tentam adivinhar qual das três portas contém um prêmio valioso. Depois que um concorrente escolhe uma porta, o apresentador, que sabe o que está por trás de cada porta, abre uma das portas não escolhidas para revelar uma cabra, representando nenhum prêmio. O apresentador então pergunta ao concorrente se ele quer mudar sua escolha para a outra porta não aberta ou ficar com sua escolha inicial. O que o concorrente deve fazer para maximizar suas chances de ganhar o prêmio?</p>
-<p><strong>Solução</strong>: o concorrente deve sempre mudar sua escolha. Inicialmente, a chance do prêmio estar atrás da porta escolhida é <span class="math inline">\(1/3\)</span> e a chance de estar atrás de uma das outras portas é <span class="math inline">\(2/3\)</span>. Depois que o apresentador abre uma porta para revelar uma cabra, a chance do prêmio estar atrás da porta não escolhida e não aberta ainda é <span class="math inline">\(2/3\)</span>.</p>
-<p>Usando <strong>Lógica de Primeira Ordem</strong>: Vamos denotar as portas como <span class="math inline">\(d1, d2, d3\)</span> e o prêmio como <span class="math inline">\(P\)</span>. Podemos definir um predicado <span class="math inline">\(contémPrêmio(d)\)</span>. A solução pode ser representada pela seguinte condição:</p>
-<p><span class="math display">\[(contémPrêmio(d1) \land \neg contémPrêmio(d2) \land \neg contémPrêmio(d3)) \\ \lor (contémPrêmio(d2)  \land \neg contémPrêmio(d1) \land \neg contémPrêmio(d3)) \\ \lor (contémPrêmio(d3) \land \neg contémPrêmio(d1) \land \neg contémPrêmio(d2))\]</span></p>
-<p>Esta condição afirma que o prêmio está exatamente atrás de uma das portas, e o concorrente deve mudar sua escolha depois que uma das portas é aberta para revelar nenhum prêmio.</p></li>
+</section>
+<section id="formalização-usando-lógica-de-primeira-ordem-1" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="formalização-usando-lógica-de-primeira-ordem-1"><span class="header-section-number">11.3.2</span> Formalização usando Lógica de Primeira Ordem</h3>
+<p><strong>Definições</strong>:</p>
+<ul>
+<li><span class="math inline">\(E = \{F, R, G, S\}\)</span>: Fazendeiro, Raposa, Ganso, Saco de grãos;</li>
+<li><span class="math inline">\(\text{Margem}(x, t) \in \{0, 1\}\)</span>: margem onde <span class="math inline">\(x\)</span> está no tempo <span class="math inline">\(t\)</span>;</li>
+<li><span class="math inline">\(\text{Seguro}(t)\)</span>: configuração é segura no tempo <span class="math inline">\(t\)</span>;</li>
+<li><span class="math inline">\(\text{Viagem}(x, y, t)\)</span>: <span class="math inline">\(F\)</span> viaja com <span class="math inline">\(y\)</span> (ou sozinho se <span class="math inline">\(y = \emptyset\)</span>) no tempo <span class="math inline">\(t\)</span>.</li>
+</ul>
+<p><strong>Axiomas</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(\forall t \, \forall x, y \in E \setminus \{F\} \, (\text{Margem}(x, t) = \text{Margem}(y, t) \land x \neq y \to \text{Margem}(F, t) = \text{Margem}(x, t) \lor \neg\text{Perigoso}(x, y))\)</span>;</li>
+<li><span class="math inline">\(\text{Perigoso}(R, G) = \text{verdadeiro}\)</span> (raposa come ganso);</li>
+<li><span class="math inline">\(\text{Perigoso}(G, S) = \text{verdadeiro}\)</span> (ganso come grão);</li>
+<li><span class="math inline">\(\forall t \, (\text{Seguro}(t) \leftrightarrow \neg\exists x, y (\text{Perigoso}(x, y) \land \text{Margem}(x, t) = \text{Margem}(y, t) \land \text{Margem}(F, t) \neq \text{Margem}(x, t)))\)</span>.</li>
 </ol>
-<section id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="level3" data-number="11.0.1">
-<h3 data-number="11.0.1" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">11.0.1</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</h3>
-<p><img src=".\images/mansaohollow.webp" class="img-fluid"></p>
-<p><strong>Objetivo</strong>: Aplicar os princípios da <strong>Lógica Proposicional</strong> e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.</p>
-<p><strong>Descrição</strong>: A esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:</p>
+<p><strong>Estado Inicial</strong>:</p>
+<p><span class="math display">\[\forall x \in E \, (\text{Margem}(x, 0) = 0)\]</span></p>
+<p><strong>Estado Final Desejado</strong>:</p>
+<p><span class="math display">\[\forall x \in E \, (\text{Margem}(x, t_{\text{final}}) = 1)\]</span></p>
+<p><strong>Sequência de Transições</strong>:</p>
+<p><span class="math display">\[
+\begin{align}
+t_0 &amp;: \text{Viagem}(F, G, t_0) \to \text{Margem}(F, t_1) = \text{Margem}(G, t_1) = 1 \\
+t_1 &amp;: \text{Viagem}(F, \emptyset, t_1) \to \text{Margem}(F, t_2) = 0 \\
+t_2 &amp;: \text{Viagem}(F, R, t_2) \to \text{Margem}(F, t_3) = \text{Margem}(R, t_3) = 1 \\
+t_3 &amp;: \text{Viagem}(F, G, t_3) \to \text{Margem}(F, t_4) = \text{Margem}(G, t_4) = 0 \\
+t_4 &amp;: \text{Viagem}(F, S, t_4) \to \text{Margem}(F, t_5) = \text{Margem}(S, t_5) = 1 \\
+t_5 &amp;: \text{Viagem}(F, \emptyset, t_5) \to \text{Margem}(F, t_6) = 0 \\
+t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G, t_7) = 1
+\end{align}
+\]</span></p>
+<p><strong>Verificação</strong>:</p>
+<p><span class="math display">\[\forall t \in \{t_0, ..., t_7\} \, (\text{Seguro}(t))\]</span></p>
+</section>
+</section>
+<section id="o-problema-da-ponte-e-da-tocha" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="o-problema-da-ponte-e-da-tocha"><span class="header-section-number">11.4</span> O Problema da Ponte e da Tocha</h2>
+<p>Quatro pessoas (<span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>, <span class="math inline">\(D\)</span>) precisam atravessar uma ponte à noite. A ponte suporta no máximo duas pessoas. Há apenas uma tocha, necessária para atravessar. Tempos de travessia: <span class="math inline">\(A\)</span> = 1 min, <span class="math inline">\(B\)</span> = 2 min, <span class="math inline">\(C\)</span> = 5 min, <span class="math inline">\(D\)</span> = 8 min. Quando duas pessoas atravessam juntas, movem-se na velocidade da mais lenta. Qual o tempo mínimo?</p>
+<section id="solução-intuitiva-3" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="solução-intuitiva-3"><span class="header-section-number">11.4.1</span> Solução Intuitiva</h3>
+<ol type="1">
+<li><span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam (2 min);</li>
+<li><span class="math inline">\(A\)</span> volta com a tocha (1 min);<br>
+</li>
+<li><span class="math inline">\(C\)</span> e <span class="math inline">\(D\)</span> atravessam (8 min);</li>
+<li><span class="math inline">\(B\)</span> volta com a tocha (2 min);</li>
+<li><span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> atravessam (2 min).</li>
+</ol>
+<p>Tempo total: <span class="math inline">\(2 + 1 + 8 + 2 + 2 = 15\)</span> minutos</p>
+</section>
+<section id="formalização-usando-lógica-de-primeira-ordem-2" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="formalização-usando-lógica-de-primeira-ordem-2"><span class="header-section-number">11.4.2</span> Formalização usando Lógica de Primeira Ordem</h3>
+<p><strong>Definições</strong>:</p>
+<ul>
+<li><span class="math inline">\(P = \{A, B, C, D\}\)</span>: conjunto de pessoas;</li>
+<li><span class="math inline">\(\text{Tempo}(x) = \{1, 2, 5, 8\}\)</span>: tempo individual de travessia;</li>
+<li><span class="math inline">\(\text{Lado}(x, t) \in \{0, 1\}\)</span>: lado da ponte onde <span class="math inline">\(x\)</span> está no tempo <span class="math inline">\(t\)</span>;</li>
+<li><span class="math inline">\(\text{Tocha}(t) \in \{0, 1\}\)</span>: lado onde a tocha está no tempo <span class="math inline">\(t\)</span>;</li>
+<li><span class="math inline">\(\text{Atravessa}(X, t, \Delta t)\)</span>: conjunto <span class="math inline">\(X \subseteq P\)</span> atravessa no intervalo <span class="math inline">\([t, t+\Delta t]\)</span>.</li>
+</ul>
+<p><strong>Axiomas</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(|X| \leq 2\)</span> para qualquer travessia;</li>
+<li><span class="math inline">\(\forall X, t \, (\text{Atravessa}(X, t, \Delta t) \to \text{Tocha}(t) = \text{Lado}(x, t) \, \forall x \in X)\)</span>;</li>
+<li><span class="math inline">\(\Delta t = \max_{x \in X} \text{Tempo}(x)\)</span> para travessia do conjunto <span class="math inline">\(X\)</span>;</li>
+<li><span class="math inline">\(\forall t \, (\text{Tocha}(t+\Delta t) = 1 - \text{Tocha}(t))\)</span> após travessia.</li>
+</ol>
+<p><strong>Estado Inicial</strong>:</p>
+<p><span class="math display">\[\forall x \in P \, (\text{Lado}(x, 0) = 0) \land \text{Tocha}(0) = 0\]</span></p>
+<p><strong>Estado Final</strong>:</p>
+<p><span class="math display">\[\forall x \in P \, (\text{Lado}(x, T) = 1)\]</span></p>
+<p><strong>Sequência Ótima</strong>:</p>
+<p><span class="math display">\[
+\begin{align}
+&amp;\text{Atravessa}(\{A, B\}, 0, 2) \\
+&amp;\text{Atravessa}(\{A\}, 2, 1) \\
+&amp;\text{Atravessa}(\{C, D\}, 3, 8) \\
+&amp;\text{Atravessa}(\{B\}, 11, 2) \\
+&amp;\text{Atravessa}(\{A, B\}, 13, 2)
+\end{align}
+\]</span></p>
+<p><strong>Função Objetivo</strong>:</p>
+<p><span class="math display">\[\text{Minimizar } T = \sum_{i} \Delta t_i = 15\]</span></p>
+</section>
+</section>
+<section id="o-problema-de-monty-hall" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="o-problema-de-monty-hall"><span class="header-section-number">11.5</span> O Problema de Monty Hall</h2>
+<p>Em um game show, há três portas. Atrás de uma está um prêmio, atrás das outras duas estão cabras. Você escolhe uma porta. O apresentador (que sabe onde está o prêmio) abre uma das portas não escolhidas, revelando uma cabra. Ele pergunta se você quer trocar para a outra porta fechada. Você deve trocar?</p>
+<section id="solução-intuitiva-4" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="solução-intuitiva-4"><span class="header-section-number">11.5.1</span> Solução Intuitiva</h3>
+<p><strong>Sim, sempre trocar!</strong> A probabilidade de ganhar trocando é <span class="math inline">\(2/3\)</span>, enquanto mantendo é <span class="math inline">\(1/3\)</span>.</p>
+<p><strong>Raciocínio</strong>: Inicialmente, a chance do prêmio estar na porta escolhida é <span class="math inline">\(1/3\)</span> e nas outras duas é <span class="math inline">\(2/3\)</span>. Quando o apresentador revela uma cabra, ele fornece informação sobre as portas não escolhidas, mas não sobre a escolhida. A probabilidade <span class="math inline">\(2/3\)</span> se concentra na porta restante não escolhida.</p>
+</section>
+<section id="formalização-usando-lógica-de-primeira-ordem-e-probabilidades" class="level3" data-number="11.5.2">
+<h3 data-number="11.5.2" class="anchored" data-anchor-id="formalização-usando-lógica-de-primeira-ordem-e-probabilidades"><span class="header-section-number">11.5.2</span> Formalização usando Lógica de Primeira Ordem e Probabilidades</h3>
+<p><strong>Definições</strong>:</p>
+<ul>
+<li><span class="math inline">\(D = \{d_1, d_2, d_3\}\)</span>: conjunto de portas;</li>
+<li><span class="math inline">\(\text{Prêmio}(d)\)</span>: o prêmio está atrás da porta <span class="math inline">\(d\)</span>;</li>
+<li><span class="math inline">\(\text{Escolha}_1 = d_i\)</span>: escolha inicial do jogador;</li>
+<li><span class="math inline">\(\text{Abre}(d_j)\)</span>: apresentador abre porta <span class="math inline">\(d_j\)</span>;</li>
+<li><span class="math inline">\(\text{Escolha}_2 \in \{\text{Manter}, \text{Trocar}\}\)</span>: decisão final.</li>
+</ul>
+<p><strong>Axiomas</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(\exists! d \in D \, (\text{Prêmio}(d))\)</span> (exatamente uma porta tem o prêmio);</li>
+<li><span class="math inline">\(P(\text{Prêmio}(d_i)) = 1/3\)</span> para todo <span class="math inline">\(i \in \{1, 2, 3\}\)</span> (distribuição uniforme inicial);</li>
+<li><span class="math inline">\(\text{Abre}(d_j) \to \neg\text{Prêmio}(d_j) \land d_j \neq \text{Escolha}_1\)</span>;</li>
+<li>Se <span class="math inline">\(\text{Prêmio}(\text{Escolha}_1)\)</span>, então <span class="math inline">\(P(\text{Abre}(d_j) | \text{Prêmio}(\text{Escolha}_1)) = 1/2\)</span> para cada porta <span class="math inline">\(d_j\)</span> com cabra;</li>
+<li>Se <span class="math inline">\(\neg\text{Prêmio}(\text{Escolha}_1)\)</span>, então o apresentador deve abrir a única outra porta com cabra.</li>
+</ol>
+<p><strong>Análise Probabilística</strong>:</p>
+<p>Sem perda de generalidade, assuma <span class="math inline">\(\text{Escolha}_1 = d_1\)</span> e <span class="math inline">\(\text{Abre}(d_2)\)</span>.</p>
+<p><span class="math display">\[P(\text{Prêmio}(d_1) | \text{Abre}(d_2)) = \frac{P(\text{Abre}(d_2) | \text{Prêmio}(d_1)) \cdot P(\text{Prêmio}(d_1))}{P(\text{Abre}(d_2))}\]</span></p>
+<p><span class="math display">\[= \frac{(1/2) \cdot (1/3)}{1/2} = \frac{1}{3}\]</span></p>
+<p><span class="math display">\[P(\text{Prêmio}(d_3) | \text{Abre}(d_2)) = \frac{P(\text{Abre}(d_2) | \text{Prêmio}(d_3)) \cdot P(\text{Prêmio}(d_3))}{P(\text{Abre}(d_2))}\]</span></p>
+<p><span class="math display">\[= \frac{1 \cdot (1/3)}{1/2} = \frac{2}{3}\]</span></p>
+<p><strong>Conclusão</strong>:</p>
+<p><span class="math display">\[P(\text{Ganhar} | \text{Trocar}) = \frac{2}{3} &gt; P(\text{Ganhar} | \text{Manter}) = \frac{1}{3}\]</span></p>
+<p>Portanto, a estratégia ótima é sempre trocar.</p>
+</section>
+</section>
+<section id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">11.6</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</h2>
+<p>::: <img src=".\images/mansaohollow.webp" class="img-fluid"> :::</p>
+<p><strong>Objetivo</strong>: aplicar os princípios da <strong>Lógica Proposicional</strong> e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.</p>
+<p><strong>Descrição</strong>: a esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:</p>
 <ol type="1">
 <li><p>Analisar cuidadosamente todo o material fornecido (descrições de personagens, mapa da mansão, horários, depoimentos, bilhetes).</p></li>
 <li><p>Formalizar as informações relevantes utilizando sentenças da <strong>Lógica Proposicional</strong> e, quando aplicável, da lógica de predicados.</p></li>
@@ -396,20 +644,20 @@ window.Quarto = {
 <li><p>Identificar o(s) responsável(is) pelo desaparecimento do Sr.&nbsp;Blackwood (ou determinar o que de fato aconteceu), justificando cada passo da sua conclusão com base nas deduções lógicas realizadas.</p></li>
 </ol>
 <p>A seguir a descrição do caso, o mapa da mansão e os depoimentos dos envolvidos.</p>
-<section id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" class="level4" data-number="11.0.1.1">
-<h4 data-number="11.0.1.1" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood"><span class="header-section-number">11.0.1.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></h4>
-<p><strong>Data do Incidente</strong>: Segunda-feira, 12 de Maio de 2025 <strong>Local</strong>: Mansão Hollow, uma propriedade rural isolada. <strong>Vítima (Desaparecido)</strong>: Sir Arthur Blackwood, renomado inventor, 58 anos.</p>
+<section id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood"><span class="header-section-number">11.6.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></h3>
+<p><strong>Data do Incidente</strong>: segunda-feira, 18 de Maio de 1935. <strong>Local</strong>: Mansão Hollow, uma propriedade rural isolada. <strong>Vítima (Desaparecido)</strong>: Sir Arthur Blackwood, renomado inventor, 58 anos.</p>
 <p><strong>1. Descrições dos Personagens</strong>:</p>
 <ul>
-<li><p><strong>Sir Arthur Blackwood</strong>: O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado “Quimera”.</p></li>
+<li><p><strong>Sir Arthur Blackwood</strong>: O inventor desaparecido. Gênio excêntrico e recluso, conhecido por sua mente brilhante e comportamento imprevisível. Estava trabalhando febrilmente em um novo projeto secreto chamado <em>Quimera</em>.</p></li>
 <li><p><strong>Sra. Eleanor Blackwood (50 anos)</strong>: Esposa de Arthur. Uma mulher elegante e ambiciosa, visivelmente preocupada com a reputação e fortuna da família. Ela teme que o comportamento errático de Arthur possa arruiná-los.</p></li>
 <li><p><strong>Dr.&nbsp;Alistair Finch (45 anos)</strong>: Um cientista brilhante, antigo protegido de Arthur, mas que se tornou seu principal rival acadêmico e comercial. Chegou à mansão no dia do desaparecimento, alegando buscar uma reconciliação e possível colaboração.</p></li>
-<li><p><strong>Miss Clara Evans (28 anos)</strong>: A jovem e inteligente assistente pessoal de Arthur. Dedicada e leal, trabalhava em estreita colaboração com ele no projeto “Quimera” e conhecia muitos de seus segredos.</p></li>
-<li><p><strong>Sr.&nbsp;Reginald “Reggie” Croft (65 anos)</strong>: O mordomo, trabalha para a família Blackwood há mais de trinta anos. É um homem discreto, observador e extremamente leal à memória do falecido pai de Arthur, mas demonstra certa reserva em relação ao próprio Arthur.</p></li>
+<li><p><strong>Miss Clara Evans (28 anos)</strong>: A jovem e inteligente assistente pessoal de Arthur. Dedicada e leal, trabalhava em estreita colaboração com ele no projeto <em>Quimera</em> e conhecia muitos de seus segredos.</p></li>
+<li><p><strong>Sr.&nbsp;Reginald <em>Reggie</em> Croft (65 anos)</strong>: O mordomo, trabalha para a família Blackwood há mais de trinta anos. É um homem discreto, observador e extremamente leal à memória do falecido pai de Arthur, mas demonstra certa reserva em relação ao próprio Arthur.</p></li>
 <li><p><strong>Sra. Beatrice Croft (62 anos)</strong>: Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.</p></li>
 </ul>
 <p>Nossos personagens podem ser vistos na imagem abaixo:</p>
-<p><img src=".\images/personagens.webp" class="img-fluid">{:class=“lazyload”}</p>
+<p>::: <img src=".\images/personagens.webp" class="img-fluid"> :::</p>
 <p><strong>2. Mapa da Mansão Hollow (Descrição Textual)</strong>: A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto terreno.</p>
 <ul>
 <li><p><strong>Térreo</strong>:</p>
@@ -437,14 +685,14 @@ window.Quarto = {
 </ul></li>
 </ul>
 <p>Alguns ambientes da Mansão Hollow podem ser vistos na imagem abaixo:</p>
-<p><img src=".\images/ambientes.webp" class="img-fluid"></p>
-<p><strong>3. Linha do Tempo (Segunda-feira, 18 de Maio de 1915)</strong>:</p>
+<p>::: <img src=".\images/ambientes.webp" class="img-fluid"> :::</p>
+<p><strong>3. Linha do Tempo (Segunda-feira, 18 de Maio de 1935)</strong></p>
 <ul>
 <li><p><strong>08:00</strong>: Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr.&nbsp;Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.</p></li>
 <li><p><strong>09:00</strong>: Clara Evans leva uma bandeja com café e torradas para o laboratório do Sr.&nbsp;Blackwood.</p></li>
 <li><p><strong>10:00</strong>: Dr.&nbsp;Alistair Finch chega pontualmente à Mansão Hollow. É recebido pelo mordomo, Sr.&nbsp;Croft, e anunciado à Sra. Blackwood.</p></li>
 <li><p><strong>10:15 - 11:00 (aprox.)</strong>: Dr.&nbsp;Finch e Sra. Blackwood conversam na sala de estar.</p></li>
-<li><p><strong>11:00</strong>: Sra. Blackwood acompanha Dr.&nbsp;Finch até a porta do laboratório do Sr.&nbsp;Blackwood. Ela bate. Uma voz abafada, identificada por ela como sendo de Arthur, diz: “Estou no meio de algo crítico! Não me perturbem agora!”. Dr.&nbsp;Finch parece contrariado.</p></li>
+<li><p><strong>11:00</strong>: Sra. Blackwood acompanha Dr.&nbsp;Finch até a porta do laboratório do Sr.&nbsp;Blackwood. Ela bate. Uma voz abafada, identificada por ela como sendo de Arthur, diz: <em>Estou no meio de algo crítico! Não me perturbem agora!</em>. Dr.&nbsp;Finch parece contrariado.</p></li>
 <li><p><strong>11:05 - 13:00</strong>: Período decisivo com movimentações diversas e álibis a serem verificados.</p></li>
 <li><p><strong>13:00</strong>: O almoço é servido. Sr.&nbsp;Blackwood novamente não aparece.</p></li>
 <li><p><strong>14:00</strong>: Sra. Blackwood, demonstrando crescente preocupação, pede a Sr.&nbsp;Croft que vá verificar pessoalmente o Sr.&nbsp;Blackwood em seu laboratório.</p></li>
@@ -454,58 +702,208 @@ window.Quarto = {
 </ul>
 <p><strong>4. Depoimentos Iniciais (Coletados apressadamente pelo Sargento Davis, da polícia local)</strong>:</p>
 <ul>
-<li><p><strong>Sra. Eleanor Clithering</strong>:</p>
+<li><p><strong>Sra. Eleanor Blackwood</strong>:</p>
 <ul>
-<li><p>“Arthur estava impossível nas últimas semanas, totalmente absorvido pelo tal projeto ‘Quimera’. Falava coisas sem sentido sobre revolucionar o mundo, mas também sobre pessoas que queriam roubá-lo. Ele sempre foi um pouco… dramático.”</p></li>
-<li><p>“Quando bati à porta do laboratório às 11:00, ouvi claramente Arthur dizer para não ser perturbado. Sim, a voz parecia um pouco abafada, mas era ele. Dr.&nbsp;Finch estava ao meu lado.”</p></li>
-<li><p>“Depois disso, subi para meus aposentos para descansar e escrever algumas cartas. Não vi mais o Dr.&nbsp;Finch até a hora do almoço.”</p></li>
-<li><p>“A fechadura do laboratório é uma invenção do próprio Arthur. Apenas ele possuía a chave mestra. Ouvi dizer que Clara talvez soubesse algum truque para abri-la, mas forçá-la… faria um barulho terrível, não acha?”</p></li>
-<li><p>“Desaparecer assim… não é do feitio de Arthur, a menos que seja parte de algum plano mirabolante dele. Ou então algo terrível aconteceu.”</p></li>
+<li><p><em>Arthur estava impossível nas últimas semanas, totalmente absorvido pelo tal projeto ‘Quimera’. Falava coisas sem sentido sobre revolucionar o mundo, mas também sobre pessoas que queriam roubá-lo. Ele sempre foi um pouco… dramático.</em>;</p></li>
+<li><p><em>Quando bati à porta do laboratório às 11:00, ouvi claramente Arthur dizer para não ser perturbado. Sim, a voz parecia um pouco abafada, mas era ele. Dr.&nbsp;Finch estava ao meu lado.</em>;</p></li>
+<li><p><em>Depois disso, subi para meus aposentos para descansar e escrever algumas cartas. Não vi mais o Dr.&nbsp;Finch até a hora do almoço.</em>;</p></li>
+<li><p><em>A fechadura do laboratório é uma invenção do próprio Arthur. Apenas ele possuía a chave mestra. Ouvi dizer que Clara talvez soubesse algum truque para abri-la, mas forçá-la… faria um barulho terrível, não acha?</em>;</p></li>
+<li><p><em>Desaparecer assim… não é do feitio de Arthur, a menos que seja parte de algum plano mirabolante dele. Ou então algo terrível aconteceu.</em>.</p></li>
 </ul></li>
 <li><p><strong>Dr.&nbsp;Alistair Finch</strong>:</p>
 <ul>
-<li><p>“Eu vim em uma missão de paz, acreditem. Nossas divergências passadas foram puramente intelectuais. Eu esperava que pudéssemos colaborar. A ideia de roubar o trabalho de Arthur é um insulto.”</p></li>
-<li><p>“Sim, a Sra. Blackwood me acompanhou até a porta do laboratório. Ouvi uma voz masculina dizer para não sermos inoportunos. Não posso jurar que era Arthur, a voz estava abafada, como disse a Sra. Blackwood.”</p></li>
-<li><p>“Após a recusa, senti-me um pouco desconfortável. Decidi caminhar pelos jardins para espairecer, entre aproximadamente 11:05 e 12:45. Andei pela frente da casa e também pelo jardim lateral, perto do gazebo. O tempo estava agradável.”</p></li>
-<li><p>“Não vi ninguém suspeito. Vi o mordomo, Sr.&nbsp;Croft, por um instante, perto da entrada lateral da casa, por volta das 11:20. Ele parecia estar carregando uma caixa ou algo similar em direção à parte de trás da casa ou à adega.”</p></li>
-<li><p>“Eu nunca tocaria na fechadura do laboratório de Arthur sem permissão. Seria uma violação imperdoável da ética científica.”</p></li>
+<li><p><em>Eu vim em uma missão de paz, acreditem. Nossas divergências passadas foram puramente intelectuais. Eu esperava que pudéssemos colaborar. A ideia de roubar o trabalho de Arthur é um insulto.</em></p></li>
+<li><p><em>Sim, a Sra. Blackwood me acompanhou até a porta do laboratório. Ouvi uma voz masculina dizer para não sermos inoportunos. Não posso jurar que era Arthur, a voz estava abafada, como disse a Sra. Blackwood.</em></p></li>
+<li><p><em>Após a recusa, senti-me um pouco desconfortável. Decidi caminhar pelos jardins para espairecer, entre aproximadamente 11:05 e 12:45. Andei pela frente da casa e também pelo jardim lateral, perto do gazebo. O tempo estava agradável.</em></p></li>
+<li><p><em>Não vi ninguém suspeito. Vi o mordomo, Sr.&nbsp;Croft, por um instante, perto da entrada lateral da casa, por volta das 11:20. Ele parecia estar carregando uma caixa ou algo similar em direção à parte de trás da casa ou à adega.</em></p></li>
+<li><p><em>Eu nunca tocaria na fechadura do laboratório de Arthur sem permissão. Seria uma violação imperdoável da ética científica.</em></p></li>
 </ul></li>
 <li><p><strong>Miss Clara Evans</strong>:</p>
 <ul>
-<li><p>“Sr.&nbsp;Blackwood estava muito pressionado, mas também excitado com o ‘Quimera’. Ele dizia que mudaria tudo. Ele confiava em mim implicitamente.”</p></li>
-<li><p>“Sim, ele temia que o Dr.&nbsp;Finch, ou outros, pudessem tentar se apropriar de suas descobertas. Ele tomava muitas precauções.”</p></li>
-<li><p>“Quando levei seu café às 09:00, ele estava um pouco agitado, mas lúcido. Disse-me: ‘Clara, hoje é um dia de grandes decisões. Lembre-se dos nossos protocolos.’”</p></li>
-<li><p>“Entre 11:00 e 13:00, estive principalmente no escritório anexo ao laboratório, compilando dados. A porta entre o escritório e o laboratório estava fechada na maior parte do tempo para que ele tivesse silêncio. Saí brevemente, por volta das 11:30, para ir à biblioteca buscar o ‘Compêndio de Ligas Metálicas Raras’. Fiquei lá uns 15, talvez 20 minutos. Não cruzei com ninguém no corredor ou na biblioteca.”</p></li>
-<li><p>“O laboratório tem um bom isolamento acústico, especialmente com a porta do escritório fechada. Não ouvi nenhum barulho de arrombamento. A fechadura especial é complexa; apenas Sr.&nbsp;Blackwood tinha a chave. Eu conheço o procedimento de abertura manual de emergência, mas é uma sequência demorada e específica.”</p></li>
+<li><p><em>Sr.&nbsp;Blackwood estava muito pressionado, mas também excitado com o ‘Quimera’. Ele dizia que mudaria tudo. Ele confiava em mim implicitamente.</em></p></li>
+<li><p><em>Sim, ele temia que o Dr.&nbsp;Finch, ou outros, pudessem tentar se apropriar de suas descobertas. Ele tomava muitas precauções.</em></p></li>
+<li><p><em>Quando levei seu café às 09:00, ele estava um pouco agitado, mas lúcido. Disse-me: ‘Clara, hoje é um dia de grandes decisões. Lembre-se dos nossos protocolos.’</em></p></li>
+<li><p><em>Entre 11:00 e 13:00, estive principalmente no escritório anexo ao laboratório, compilando dados. A porta entre o escritório e o laboratório estava fechada na maior parte do tempo para que ele tivesse silêncio. Saí brevemente, por volta das 11:30, para ir à biblioteca buscar o ‘Compêndio de Ligas Metálicas Raras’. Fiquei lá uns 15, talvez 20 minutos. Não cruzei com ninguém no corredor ou na biblioteca.</em></p></li>
+<li><p><em>O laboratório tem um bom isolamento acústico, especialmente com a porta do escritório fechada. Não ouvi nenhum barulho de arrombamento. A fechadura especial é complexa; apenas Sr.&nbsp;Blackwood tinha a chave. Eu conheço o procedimento de abertura manual de emergência, mas é uma sequência demorada e específica.</em></p></li>
 </ul></li>
-<li><p><strong>Sr.&nbsp;Reginald “Reggie” Croft (Mordomo)</strong>:</p>
+<li><p><strong>Sr.&nbsp;Reginald <em>Reggie</em> Croft (Mordomo)</strong>:</p>
 <ul>
-<li><p>“Dr.&nbsp;Finch chegou às 10:00. Parecia um pouco nervoso, na minha opinião. Ele e a patroa conversaram na sala de estar por um bom tempo.”</p></li>
-<li><p>“Por volta das 11:00, eu estava no hall polindo a prata, e ouvi as vozes da Sra. Blackwood e do Dr.&nbsp;Finch perto do corredor do laboratório. Não prestei muita atenção ao que foi dito. Logo depois, vi a Sra. Blackwood subir a escadaria principal.”</p></li>
-<li><p>“De fato, por volta das 11:15, eu estava transportando uma caixa de garrafas de vinho da entrada de serviço lateral para a adega no porão. Nesse momento, vi o Dr.&nbsp;Finch caminhando pelo jardim da frente, perto do portão principal. Ele olhava muito para o relógio.”</p></li>
-<li><p>“Quando fui chamado pela Sra. Blackwood às 14:00, encontrei a porta do laboratório como descrito: entreaberta, com arranhões na fechadura, mas destrancada. O Sr.&nbsp;Blackwood era metódico. Se ele não queria ser perturbado, ele trancava a porta de uma forma que ninguém entraria.”</p></li>
+<li><p><em>Dr.&nbsp;Finch chegou às 10:00. Parecia um pouco nervoso, na minha opinião. Ele e a patroa conversaram na sala de estar por um bom tempo.</em></p></li>
+<li><p><em>Por volta das 11:00, eu estava no hall polindo a prata, e ouvi as vozes da Sra. Blackwood e do Dr.&nbsp;Finch perto do corredor do laboratório. Não prestei muita atenção ao que foi dito. Logo depois, vi a Sra. Blackwood subir a escadaria principal.</em></p></li>
+<li><p><em>De fato, por volta das 11:15, eu estava transportando uma caixa de garrafas de vinho da entrada de serviço lateral para a adega no porão. Nesse momento, vi o Dr.&nbsp;Finch caminhando pelo jardim da frente, perto do portão principal. Ele olhava muito para o relógio.</em></p></li>
+<li><p><em>Quando fui chamado pela Sra. Blackwood às 14:00, encontrei a porta do laboratório como descrito: entreaberta, com arranhões na fechadura, mas destrancada. O Sr.&nbsp;Blackwood era metódico. Se ele não queria ser perturbado, ele trancava a porta de uma forma que ninguém entraria.</em></p></li>
 </ul></li>
 <li><p><strong>Sra. Beatrice Croft (Cozinheira)</strong>:</p>
 <ul>
-<li><p>“Da cozinha, não se ouve muito do resto da casa, a menos que seja uma gritaria. Estive ocupada com o almoço toda a manhã.”</p></li>
-<li><p>“Sr.&nbsp;Blackwood não aparecer para as refeições não era novidade quando estava às voltas com suas invenções malucas.”</p></li>
-<li><p>“Uma coisa estranha: Miss Evans passou rapidamente pela cozinha por volta das 12:50. Parecia muito pálida e apressada. Perguntei se estava tudo bem, e ela murmurou algo sobre ir verificar se o Sr.&nbsp;Blackwood queria que o almoço fosse servido no laboratório. Ela voltou alguns minutos depois, ainda mais pálida, e disse que ele não tinha respondido aos chamados dela na porta do laboratório e que era melhor não insistir. Achei estranho ela não ter comentado isso com a Sra. Blackwood imediatamente, antes do alarme oficial.”</p></li>
-<li><p>“A janela do laboratório? Sim, dá para uma parte mais isolada d-o jardim dos fundos, perto da minha horta. Se alguém pulou por ali, e se esgueirou pelas árvores, poderia sumir sem ser visto da casa principal.”</p></li>
+<li><p><em>Da cozinha, não se ouve muito do resto da casa, a menos que seja uma gritaria. Estive ocupada com o almoço toda a manhã.</em></p></li>
+<li><p><em>Sr.&nbsp;Blackwood não aparecer para as refeições não era novidade quando estava às voltas com suas invenções malucas.</em></p></li>
+<li><p><em>Uma coisa estranha: Miss Evans passou rapidamente pela cozinha por volta das 12:50. Parecia muito pálida e apressada. Perguntei se estava tudo bem, e ela murmurou algo sobre ir verificar se o Sr.&nbsp;Blackwood queria que o almoço fosse servido no laboratório. Ela voltou alguns minutos depois, ainda mais pálida, e disse que ele não tinha respondido aos chamados dela na porta do laboratório e que era melhor não insistir. Achei estranho ela não ter comentado isso com a Sra. Blackwood imediatamente, antes do alarme oficial.</em></p></li>
+<li><p><em>A janela do laboratório? Sim, dá para uma parte mais isolada do jardim dos fundos, perto da minha horta. Se alguém pulou por ali, e se esgueirou pelas árvores, poderia sumir sem ser visto da casa principal.</em></p></li>
 </ul></li>
 </ul>
 <p><strong>5. Pistas e Bilhetes Enigmáticos</strong>:</p>
 <ul>
 <li><p><strong>Pista 1: Papel Amassado na Lixeira do Laboratório</strong>: Um pequeno pedaço de papel de anotações, claramente arrancado de um bloco maior, contém a seguinte mensagem escrita à mão por Sr.&nbsp;Blackwood (caligrafia confirmada):</p>
 <blockquote class="blockquote">
-<p>“Se A implica B, e o Corvo visita o Ninho, então a Hipótese se confirma. A negação do consequente é o único caminho seguro. Sigma Ativado.”</p>
+<p><em>Se A implica B, e o Corvo visita o Ninho, então a Hipótese se confirma. A negação do consequente é o único caminho seguro. Sigma Ativado.</em></p>
 </blockquote></li>
 <li><p><strong>Pista 2: Objeto Encontrado no Chão do Laboratório, Perto da Mesa Principal</strong>: Um pequeno e incomum botão de metal fosco, com um desenho de uma engrenagem estilizada. Não parece pertencer a nenhuma roupa do Sr.&nbsp;Blackwood, nem faz parte do vestuário usual dos funcionários.</p></li>
-<li><p><strong>Pista 3: Anotação na Margem de um Livro na Biblioteca</strong>: No livro “Compêndio de Ligas Metálicas Raras” (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:</p>
+<li><p><strong>Pista 3: Anotação na Margem de um Livro na Biblioteca</strong>: No livro <em>Compêndio de Ligas Metálicas Raras</em> (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:</p>
 <blockquote class="blockquote">
-<p>“Onde o passado encontra o futuro, a reflexão é a chave. <span class="math inline">\((\neg P \lor Q)\)</span> é equivalente a ?” A caligrafia parece ser de Sr.&nbsp;Blackwood.</p>
+<p><em>Onde o passado encontra o futuro, a reflexão é a chave.</em> <span class="math inline">\((\neg P \vee Q)\)</span> é equivalente a ? A caligrafia parece ser de Sr.&nbsp;Blackwood.</p>
 </blockquote></li>
 <li><p><strong>Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório</strong>: Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.</p></li>
 <li><p><strong>Pista 5: Na Estufa Abandonada (Jardim dos Fundos)</strong>: Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.</p></li>
+</ul>
+</section>
+</section>
+<section id="solução-do-mistério-da-mansão-hollow-1935" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="solução-do-mistério-da-mansão-hollow-1935"><span class="header-section-number">11.7</span> Solução do Mistério da Mansão Hollow (1935)</h2>
+<section id="análise-intuitiva" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="análise-intuitiva"><span class="header-section-number">11.7.1</span> Análise Intuitiva</h3>
+<section id="avaliação-das-evidências-físicas" class="level4" data-number="11.7.1.1">
+<h4 data-number="11.7.1.1" class="anchored" data-anchor-id="avaliação-das-evidências-físicas"><span class="header-section-number">11.7.1.1</span> Avaliação das Evidências Físicas</h4>
+<p>A cena do crime apresenta uma combinação peculiar de elementos que sugerem tanto violência quanto planejamento meticuloso:</p>
+<ol type="1">
+<li><p><strong>Fechadura arranhada mas destrancada</strong>: Indica tentativa inicial de arrombamento seguida de abertura correta. Apenas duas pessoas conheciam o mecanismo: Sir Arthur e Clara (procedimento de emergência).</p></li>
+<li><p><strong>Laboratório em desordem controlada</strong>: Papéis espalhados e cadeira virada sugerem encenação - uma luta real deixaria mais vestígios (sangue, objetos quebrados).</p></li>
+<li><p><strong>Janela aberta com marca de graxa</strong>: A marca indica que algo mecânico foi apoiado ali - possivelmente equipamento do projeto Quimera sendo removido.</p></li>
+<li><p><strong>Botão com engrenagem</strong>: Design industrial não corresponde a roupas vitorianas. Provavelmente de um uniforme de trabalho ou equipamento técnico.</p></li>
+</ol>
+</section>
+<section id="análise-comportamental" class="level4" data-number="11.7.1.2">
+<h4 data-number="11.7.1.2" class="anchored" data-anchor-id="análise-comportamental"><span class="header-section-number">11.7.1.2</span> Análise Comportamental</h4>
+<p><strong>Clara Evans - Padrão Suspeito</strong>:</p>
+<ul>
+<li>09:00: Recebe mensagem críptica sobre <em>protocolos</em>;</li>
+<li>11:30-11:50: Vai à biblioteca buscar livro específico onde há pista;</li>
+<li>12:50: Passa <em>pálida e apressada</em> pela cozinha;</li>
+<li>12:55: Verifica laboratório mas não alerta ninguém;</li>
+<li>Conhece procedimento de emergência da fechadura.</li>
+</ul>
+<p><strong>Dr.&nbsp;Finch - Bode Expiatório Perfeito</strong>:</p>
+<ul>
+<li>Motivo claro (rivalidade);</li>
+<li>Oportunidade (presente na mansão);</li>
+<li>Visto pelo mordomo às 11:20 nos jardins;</li>
+<li>Nega veementemente qualquer envolvimento.</li>
+</ul>
+</section>
+<section id="interpretação-das-pistas-enigmáticas" class="level4" data-number="11.7.1.3">
+<h4 data-number="11.7.1.3" class="anchored" data-anchor-id="interpretação-das-pistas-enigmáticas"><span class="header-section-number">11.7.1.3</span> Interpretação das Pistas Enigmáticas</h4>
+<p><strong>Pista 1</strong>: <em>A negação do consequente é o único caminho seguro. Sigma Ativado.</em></p>
+<ul>
+<li>Referência a <em>modus tollens</em> em lógica: se <span class="math inline">\(P\rightarrow Q\)</span> e <span class="math inline">\(\neg Q\)</span>, então <span class="math inline">\(\neg P\)</span>;</li>
+<li><em>Sigma</em> pode ser código para protocolo de evacuação;</li>
+<li>Mensagem: <em>Se ameaçado, negue tudo através do desaparecimento</em>.</li>
+</ul>
+<p><strong>Pista 3</strong>: <em><span class="math inline">\((\neg P \lor Q)\)</span> é equivalente a?</em></p>
+<ul>
+<li>Equivalente a <span class="math inline">\((P \to Q)\)</span> (implicação material);</li>
+<li>Localização no livro que Clara pegou não é coincidência;</li>
+<li>Confirmação de que ela deveria seguir o plano.</li>
+</ul>
+<p><strong>Pista 5</strong>: Triângulo com círculo na estufa</p>
+<ul>
+<li>Símbolo alquímico/científico;</li>
+<li>Local de encontro pré-combinado;</li>
+<li>Fósforo queimado: sinal foi deixado recentemente.</li>
+</ul>
+</section>
+</section>
+<section id="solução-formal-com-lógica-versão-detalhada" class="level3" data-number="11.7.2">
+<h3 data-number="11.7.2" class="anchored" data-anchor-id="solução-formal-com-lógica-versão-detalhada"><span class="header-section-number">11.7.2</span> Solução Formal com Lógica (Versão Detalhada)</h3>
+<section id="definições-2" class="level4" data-number="11.7.2.1">
+<h4 data-number="11.7.2.1" class="anchored" data-anchor-id="definições-2"><span class="header-section-number">11.7.2.1</span> Definições</h4>
+<p><strong>Constantes</strong>:</p>
+<ul>
+<li><span class="math inline">\(a\)</span>: Sir Arthur Blackwood;</li>
+<li><span class="math inline">\(c\)</span>: Clara Evans;</li>
+<li><span class="math inline">\(f\)</span>: Dr.&nbsp;Finch;</li>
+<li><span class="math inline">\(L\)</span>: Laboratório;</li>
+<li><span class="math inline">\(P_1, P_3, P_5\)</span>: As pistas 1, 3 e 5;</li>
+<li><span class="math inline">\(Plano_\Sigma\)</span>: O plano de desaparecimento.</li>
+</ul>
+<p><strong>Predicados</strong>:</p>
+<ul>
+<li><span class="math inline">\(\text{ConheceSegredo}(x, s)\)</span>: pessoa <span class="math inline">\(x\)</span> conhece segredo <span class="math inline">\(s\)</span>;</li>
+<li><span class="math inline">\(\text{ExecutouAção}(x, a)\)</span>: pessoa <span class="math inline">\(x\)</span> executou ação <span class="math inline">\(a\)</span>;</li>
+<li><span class="math inline">\(\text{É_Instrução}(p, de, para)\)</span>: <span class="math inline">\(p\)</span> é uma instrução de <span class="math inline">\(de\)</span> para <span class="math inline">\(para\)</span>;</li>
+<li><span class="math inline">\(\text{CooperaCom}(x, y)\)</span>: <span class="math inline">\(x\)</span> coopera com <span class="math inline">\(y\)</span>;</li>
+<li><span class="math inline">\(\text{FoiSequestrado}(x)\)</span>: <span class="math inline">\(x\)</span> foi sequestrado;</li>
+<li><span class="math inline">\(\text{EncenouFuga}(x)\)</span>: <span class="math inline">\(x\)</span> encenou a própria fuga.</li>
+</ul>
+</section>
+<section id="axiomas-e-observações" class="level4" data-number="11.7.2.2">
+<h4 data-number="11.7.2.2" class="anchored" data-anchor-id="axiomas-e-observações"><span class="header-section-number">11.7.2.2</span> Axiomas e Observações</h4>
+<p><strong>A1</strong>: <span class="math inline">\(\text{ConheceSegredo}(a, \text{fechadura}) \land \text{ConheceSegredo}(c, \text{fechadura})\)</span>;</p>
+<p><strong>A2</strong>: <span class="math inline">\(\forall x \, (\text{ExecutouAção}(x, \text{abrir\_corretamente}) \to \text{ConheceSegredo}(x, \text{fechadura}))\)</span>;</p>
+<p><strong>A3</strong>: <span class="math inline">\(\forall x \, (\text{Inocente}(x) \land \text{DescobreCrime}(x) \to \text{ExecutouAção}(x, \text{alertar}))\)</span>;</p>
+<p><strong>O1</strong>: <span class="math inline">\(\text{Porta\_arranhada} \land \text{Porta\_destrancada}\)</span>;</p>
+<p><strong>O2</strong>: <span class="math inline">\(\neg\text{SinaisDeLutaReal}(L)\)</span>;</p>
+<p><strong>O3</strong>: <span class="math inline">\(\text{Observou}(c, \text{situação\_no\_lab}) \land \neg \text{ExecutouAção}(c, \text{alertar})\)</span>;</p>
+<p><strong>O4</strong>: A pista <span class="math inline">\(P_1\)</span> (<em>Sigma Ativado</em>) e <span class="math inline">\(P_3\)</span> (lógica) são mensagens complexas. A pista <span class="math inline">\(P_5\)</span> é um sinal. A ação de <span class="math inline">\(c\)</span> de buscar o livro com <span class="math inline">\(P_3\)</span> conecta-a ao plano.</p>
+</section>
+<section id="dedução" class="level4" data-number="11.7.2.3">
+<h4 data-number="11.7.2.3" class="anchored" data-anchor-id="dedução"><span class="header-section-number">11.7.2.3</span> Dedução</h4>
+<p><strong>Passo 1: Análise da Fechadura</strong></p>
+<p>A observação <span class="math inline">\(O_1\)</span> implica duas ações distintas:</p>
+<p><span class="math display">\[\text{Porta\_arranhada} \land \text{Porta\_destrancada} \to \exists x, y \, (\text{ExecutouAção}(x, \text{tentar\_forçar}) \land \text{ExecutouAção}(y, \text{abrir\_corretamente}))\]</span></p>
+<p>De <span class="math inline">\(A_1\)</span> e <span class="math inline">\(A_2\)</span>, concluímos que o agente <span class="math inline">\(y\)</span> que abriu corretamente a porta pertence ao conjunto <span class="math inline">\(\{a, c\}\)</span>. Isso limita os atores com acesso legítimo.</p>
+<p><strong>Passo 2: Análise do Comportamento de Clara (Modus Tollens)</strong></p>
+<p>Temos a observação <span class="math inline">\(O_3\)</span>: Clara viu a situação e não alertou ninguém. Formalmente: <span class="math inline">\(\neg \text{ExecutouAção}(c, \text{alertar})\)</span>. Usando a contrapositiva do Axioma A3 ($ B A $):</p>
+<p><span class="math display">\[\neg \text{ExecutouAção}(c, \text{alertar}) \to \neg(\text{Inocente}(c) \land \text{DescobreCrime}(c))\]</span></p>
+<p>Pela Lei de De Morgan, isso é equivalente a:</p>
+<p><span class="math display">\[\neg \text{Inocente}(c) \lor \neg \text{DescobreCrime}(c)\]</span></p>
+<p>Esta disjunção é fundamental: ou Clara não é inocente (é cúmplice) ou ela não <em>descobriu</em> um crime (porque já sabia o que estava a acontecer). Ambas as vias apontam para o seu envolvimento.</p>
+<p><strong>Passo 3: Estabelecimento da Cooperação (Análise das Pistas)</strong></p>
+<p>Este passo conecta o plano (pistas) a Arthur e Clara.</p>
+<p><strong>3.1.</strong> As pistas <span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_3\)</span>, <span class="math inline">\(P_5\)</span>, devido à sua natureza lógica e coordenada, não são aleatórias. Elas constituem um plano intencional: <span class="math inline">\(\text{FormamPlano}(P_1, P_3, P_5, Plano_\Sigma)\)</span>.</p>
+<p><strong>3.2.</strong> A ação de Clara de ir diretamente ao local da Pista 3 (o livro), após receber a mensagem sobre <em>protocolos</em>, não é coincidência. Isso estabelece que ela é a destinatária do plano: <span class="math inline">\(\text{É\_Instrução}(Plano_\Sigma, a, c)\)</span>.</p>
+<p><strong>3.3.</strong> A partir da conclusão do Passo 2 (<span class="math inline">\(\neg \text{Inocente}(c) \lor \neg \text{DescobreCrime}(c)\)</span>) e do facto de que ela era a destinatária do plano (3.2), podemos inferir que ela agiu de acordo com o plano.</p>
+<p><span class="math display">\[
+\text{É\_Instrução}(Plano_\Sigma, a, c) \land \text{AçõesConsistentesComPlano}(c) \to \text{CooperaCom}(c, a)
+\]</span></p>
+<p><strong>Passo 4: Exclusão da Hipótese de Sequestro (Silogismo Disjuntivo)</strong></p>
+<p>O mistério central pode ser expresso como uma disjunção: <span class="math inline">\(\text{FoiSequestrado}(a) \lor \text{EncenouFuga}(a)\)</span>.</p>
+<p><strong>4.1.</strong> Um sequestro real (<span class="math inline">\(\text{FoiSequestrado}(a)\)</span>) implicaria evidências de violência real ou uma ameaça externa.</p>
+<p><strong>4.2.</strong> Temos a observação <span class="math inline">\(O_2\)</span>, <span class="math inline">\(\neg\text{SinaisDeLutaReal}(L)\)</span>. A <em>voz abafada</em> (explicada pela tecnologia de 1935) e a cooperação de Clara (Passo 3) são evidências de um plano interno, não de um ataque externo.</p>
+<p><strong>4.3.</strong> Portanto, a premissa para um sequestro é falsa. Podemos concluir com alta confiança: <span class="math inline">\(\neg\text{FoiSequestrado}(a)\)</span>.</p>
+<p><strong>4.4.</strong> Aplicando a regra do silogismo disjuntivo: Se temos <span class="math inline">\((P \lor Q)\)</span> e sabemos <span class="math inline">\((\neg P)\)</span>, podemos concluir <span class="math inline">\(Q\)</span>.</p>
+<p><span class="math display">\[
+(\text{FoiSequestrado}(a) \lor \text{EncenouFuga}(a)) \land \neg\text{FoiSequestrado}(a) \to \text{EncenouFuga}(a)
+\]</span></p>
+</section>
+<section id="conclusão-2" class="level4" data-number="11.7.2.4">
+<h4 data-number="11.7.2.4" class="anchored" data-anchor-id="conclusão-2"><span class="header-section-number">11.7.2.4</span> Conclusão</h4>
+<p>A dedução formal, decomposta em passos rigorosos, leva à seguinte conclusão inevitável:</p>
+<p><span class="math display">\[
+\boxed{\text{EncenouFuga}(a) \land \text{CooperaCom}(c, a) \land \text{ExecutouAção}(f, \text{tentar\_forçar})}
+\]</span></p>
+</section>
+</section>
+<section id="teoria-final" class="level3" data-number="11.7.3">
+<h3 data-number="11.7.3" class="anchored" data-anchor-id="teoria-final"><span class="header-section-number">11.7.3</span> Teoria Final</h3>
+<p><strong>Sir Arthur Blackwood orquestrou sua própria fuga para proteger o projeto Quimera da espionagem industrial</strong>. Ele:</p>
+<ol type="1">
+<li>Preparou um gravador de fio para responder às 11:00;</li>
+<li>Deixou pistas codificadas para Clara;</li>
+<li>Escapou pela janela com equipamento essencial (marca de graxa);</li>
+<li>Foi para a estufa (ponto de encontro).</li>
+</ol>
+<p><strong>Clara Evans foi cúmplice essencial</strong>:</p>
+<ul>
+<li>Recebeu instruções pela manhã;</li>
+<li>Confirmou o plano via livro;</li>
+<li>Abriu a porta após as tentativas de Finch;</li>
+<li>Verificou se tudo estava pronto;</li>
+<li>Manteve a farsa.</li>
+</ul>
+<p><strong>Dr.&nbsp;Finch tentou roubar o projeto</strong>:</p>
+<ul>
+<li>Arranhões provam tentativa de invasão;</li>
+<li>Mas chegou tarde demais;</li>
+<li>Tornou-se o suspeito perfeito.</li>
 </ul>
 
 

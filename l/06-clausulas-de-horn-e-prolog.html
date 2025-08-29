@@ -232,7 +232,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais: Estruturas de Solução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -285,7 +285,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -436,10 +436,10 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Nota:</strong> A fórmula acima foi escrita com parênteses explícitos para eliminar uma ambiguidade comum na Lógica de Primeira Ordem. Sem os parênteses externos, a expressão poderia ser interpretada de duas maneiras:</p>
+<p><strong>Nota</strong>: A fórmula acima foi escrita com parênteses explícitos para eliminar uma ambiguidade comum na Lógica de Primeira Ordem. Sem os parênteses externos, a expressão poderia ser interpretada de duas maneiras:</p>
 <ol type="1">
-<li><p><strong>Escopo Restrito (aqui adotada):</strong> <span class="math inline">\((A) \rightarrow (B)\)</span>. O quantificador <span class="math inline">\(\forall x\)</span> aplica-se apenas ao antecedente. Esta é a interpretação padrão, pois os quantificadores têm maior precedência que a implicação. A solução a seguir baseia-se nesta leitura.</p></li>
-<li><p><strong>Escopo Amplo:</strong> <span class="math inline">\(\forall x [ A \rightarrow B ]\)</span>. O quantificador <span class="math inline">\(\forall x\)</span> aplicar-se-ia a toda a implicação. Essa interpretação levaria a um resultado diferente (com funções de Skolem como <span class="math inline">\(f(x,y)\)</span> em vez de <span class="math inline">\(f(y)\)</span>).</p></li>
+<li><p><strong>Escopo Restrito (aqui adotada)</strong>: <span class="math inline">\((A) \rightarrow (B)\)</span>. O quantificador <span class="math inline">\(\forall x\)</span> aplica-se apenas ao antecedente. Esta é a interpretação padrão, pois os quantificadores têm maior precedência que a implicação. A solução a seguir baseia-se nesta leitura.</p></li>
+<li><p><strong>Escopo Amplo</strong>: <span class="math inline">\(\forall x [ A \rightarrow B ]\)</span>. O quantificador <span class="math inline">\(\forall x\)</span> aplicar-se-ia a toda a implicação. Essa interpretação levaria a um resultado diferente (com funções de Skolem como <span class="math inline">\(f(x,y)\)</span> em vez de <span class="math inline">\(f(y)\)</span>).</p></li>
 </ol>
 <p>O uso de parênteses, como feito aqui, garante que a interpretação seja clara e inequívoca.</p>
 </div>
@@ -1313,10 +1313,10 @@ Important
 <section id="exemplo-3-torre-de-hanói" class="level4" data-number="8.2.0.3">
 <h4 data-number="8.2.0.3" class="anchored" data-anchor-id="exemplo-3-torre-de-hanói"><span class="header-section-number">8.2.0.3</span> Exemplo 3: Torre de Hanói</h4>
 <p>A Torre de Hanói é um quebra-cabeça matemático que consiste em três postes (vamos chamá-los de origem, destino e auxiliar) e um número <code>N</code> de discos de tamanhos variados.</p>
-<p><strong>Estado Inicial:</strong> O quebra-cabeça começa com todos os <code>N</code> discos empilhados no poste de <strong>origem</strong>, em ordem decrescente de tamanho, com o maior disco na base e o menor no topo, formando uma estrutura cônica. Os postes de destino e auxiliar começam vazios.</p>
-<p><strong>Objetivo:</strong> Mover a pilha inteira de discos do poste de <strong>origem</strong> para o poste de <strong>destino</strong>, seguindo um conjunto de regras simples.</p>
-<p><strong>Regras:</strong> 1. Apenas um disco pode ser movido por vez. 2. Um movimento consiste em retirar o disco superior de um dos postes e colocá-lo no topo de outra pilha em outro poste. 3. <strong>Regra Fundamental:</strong> Um disco maior nunca pode ser colocado sobre um disco menor.</p>
-<p><strong>O Desafio:</strong> Qual é a sequência de movimentos, e o número mínimo de passos, para transferir todos os discos do poste de origem para o de destino, obedecendo a todas as regras?</p>
+<p><strong>Estado Inicial</strong>: O quebra-cabeça começa com todos os <code>N</code> discos empilhados no poste de <strong>origem</strong>, em ordem decrescente de tamanho, com o maior disco na base e o menor no topo, formando uma estrutura cônica. Os postes de destino e auxiliar começam vazios.</p>
+<p><strong>Objetivo</strong>: Mover a pilha inteira de discos do poste de <strong>origem</strong> para o poste de <strong>destino</strong>, seguindo um conjunto de regras simples.</p>
+<p><strong>Regras</strong>: 1. Apenas um disco pode ser movido por vez. 2. Um movimento consiste em retirar o disco superior de um dos postes e colocá-lo no topo de outra pilha em outro poste. 3. <strong>Regra Fundamental</strong>: Um disco maior nunca pode ser colocado sobre um disco menor.</p>
+<p><strong>O Desafio</strong>: Qual é a sequência de movimentos, e o número mínimo de passos, para transferir todos os discos do poste de origem para o de destino, obedecendo a todas as regras?</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">% --- Solução Corrigida para a Torre de Hanói em Prolog ---</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Este código resolve o problema da Torre de Hanói para N discos,</span></span>
@@ -1900,8 +1900,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-formas-normais-e-skolemizacao.html" class="pagination-link" aria-label="Formas Normais Organizando o Pensamento Lógico">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span>
+      <a href="./05-formas-normais-e-skolemizacao.html" class="pagination-link" aria-label="Formas Normais: Estruturas de Solução">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais: Estruturas de Solução</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

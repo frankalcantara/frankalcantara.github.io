@@ -198,7 +198,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais Organizando o Pensamento Lógico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais: Estruturas de Solução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -251,7 +251,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -536,7 +536,7 @@ Table&nbsp;4.2: Aridade dos Operadores da <strong>Lógica Proposicional</strong>
 </section>
 <section id="exercícios-tabelas-verdade-e-conectivos-lógicos" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="exercícios-tabelas-verdade-e-conectivos-lógicos"><span class="header-section-number">4.1.1</span> Exercícios: Tabelas-Verdade e Conectivos Lógicos</h3>
-<p><strong>Instrução:</strong> Para cada uma das fórmulas a seguir, construa a tabela-verdade completa.</p>
+<p><strong>Instrução</strong>: Para cada uma das fórmulas a seguir, construa a tabela-verdade completa.</p>
 <ol type="1">
 <li><span class="math inline">\(P \rightarrow \neg Q\)</span></li>
 <li><span class="math inline">\((P \lor Q) \land R\)</span></li>
@@ -865,7 +865,7 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 \]</span></p>
 <p>A expressão final é <span class="math inline">\((P \wedge Q) \vee (P \wedge \neg R) \vee (P \wedge S) \vee (E \wedge \neg P) \vee (P \wedge \neg E)\)</span>.</p>
 <p>Para cinco variáveis proposicionais, uma tabela-verdade completa teria <span class="math inline">\(2^5 = 32\)</span> linhas. Em vez de apresentar toda a tabela, analisemos casos estratégicos para determinar as propriedades da fórmula:</p>
-<p><strong>Casos em que a fórmula é <span class="math inline">\(FALSE\)</span>:</strong></p>
+<p><strong>Casos em que a fórmula é <span class="math inline">\(FALSE\)</span></strong>:</p>
 <ul>
 <li><span class="math inline">\(P = FALSE, Q = FALSE, R = TRUE, S = FALSE, E = FALSE\)</span>:
 <ul>
@@ -877,7 +877,7 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 <li>Resultado: todos os cinco termos da disjunção são falsos</li>
 </ul></li>
 </ul>
-<p><strong>Casos em que a fórmula é <span class="math inline">\(TRUE\)</span>:</strong></p>
+<p><strong>Casos em que a fórmula é <span class="math inline">\(TRUE\)</span></strong>:</p>
 <ul>
 <li><span class="math inline">\(P = TRUE, Q = TRUE, R = TRUE, S = TRUE, E = FALSE\)</span>: <span class="math inline">\((P \wedge Q) = TRUE\)</span></li>
 <li><span class="math inline">\(P = TRUE, Q = FALSE, R = FALSE, S = FALSE, E = FALSE\)</span>: <span class="math inline">\((P \wedge \neg R) = TRUE\)</span></li>
@@ -1091,7 +1091,7 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 </tr>
 </tbody>
 </table>
-<p><strong>Análise dos Casos:</strong></p>
+<p><strong>Análise dos Casos</strong>:</p>
 <ul>
 <li><p><strong>Casos em que a fórmula é TRUE</strong>: Nas primeiras cinco linhas, pelo menos um dos termos da disjunção é verdadeiro:</p>
 <ul>
@@ -1116,14 +1116,14 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 <p><strong>Exemplo 10</strong>: Simplificação e Análise da Fórmula <span class="math inline">\(\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))\)</span></p>
 <p>Vamos simplificar a fórmula <span class="math inline">\(\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))\)</span> passo a passo e analisar suas propriedades lógicas.</p>
 <p>Simplifiquemos ambos os lados da equivalência separadamente:</p>
-<p><strong>Lado Esquerdo:</strong> <span class="math inline">\(\neg(P \wedge (Q \vee R))\)</span></p>
+<p><strong>Lado Esquerdo</strong>: <span class="math inline">\(\neg(P \wedge (Q \vee R))\)</span></p>
 <p><span class="math display">\[
 \begin{align*}
 \neg(P \wedge (Q \vee R)) &amp;\equiv \neg P \vee \neg(Q \vee R) &amp;&amp; \text{Lei 5: Lei de De Morgan} \\
 &amp;\equiv \neg P \vee (\neg Q \wedge \neg R) &amp;&amp; \text{Lei 6: Lei de De Morgan}
 \end{align*}
 \]</span></p>
-<p><strong>Lado Direito:</strong> <span class="math inline">\(\neg(S \rightarrow E) \vee \neg(P \rightarrow Q)\)</span></p>
+<p><strong>Lado Direito</strong>: <span class="math inline">\(\neg(S \rightarrow E) \vee \neg(P \rightarrow Q)\)</span></p>
 <p><span class="math display">\[
 \begin{align*}
 \neg(S \rightarrow E) \vee \neg(P \rightarrow Q) &amp;\equiv \neg(\neg S \vee E) \vee \neg(\neg P \vee Q) &amp;&amp; \text{Lei 7: Definição de Implicação} \\
@@ -1188,28 +1188,28 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 </tr>
 </tbody>
 </table>
-<p><strong>Análise dos Casos:</strong></p>
+<p><strong>Análise dos Casos</strong>:</p>
 <ul>
-<li><strong>Linha 1:</strong> (<span class="math inline">\(P = TRUE, Q = FALSE, R = TRUE, S = FALSE, E = FALSE\)</span>)
+<li><strong>Linha 1</strong>: (<span class="math inline">\(P = TRUE, Q = FALSE, R = TRUE, S = FALSE, E = FALSE\)</span>)
 <ul>
 <li>Lado Esquerdo: <span class="math inline">\(\neg P = FALSE\)</span>, <span class="math inline">\(\neg Q \wedge \neg R = \neg FALSE \wedge \neg TRUE = TRUE \wedge FALSE = FALSE\)</span>, então <span class="math inline">\(\neg P \vee (\neg Q \wedge \neg R) = FALSE \vee FALSE = FALSE\)</span>.</li>
 <li>Lado Direito: <span class="math inline">\(S \wedge \neg E = FALSE \wedge \neg FALSE = FALSE \wedge TRUE = FALSE\)</span>, <span class="math inline">\(P \wedge \neg Q = TRUE \wedge \neg FALSE = TRUE \wedge TRUE = TRUE\)</span>, então <span class="math inline">\((S \wedge \neg E) \vee (P \wedge \neg Q) = FALSE \vee TRUE = TRUE\)</span>.</li>
 <li>Resultado: <span class="math inline">\(FALSE \leftrightarrow TRUE = FALSE\)</span>. A fórmula é falsa nesta valoração.</li>
 </ul></li>
-<li><strong>Linha 2:</strong> (<span class="math inline">\(P = FALSE, Q = TRUE, R = TRUE, S = TRUE, E = TRUE\)</span>)
+<li><strong>Linha 2</strong>: (<span class="math inline">\(P = FALSE, Q = TRUE, R = TRUE, S = TRUE, E = TRUE\)</span>)
 <ul>
 <li>Lado Esquerdo: <span class="math inline">\(\neg P = TRUE\)</span>, <span class="math inline">\(\neg Q \wedge \neg R = \neg TRUE \wedge \neg TRUE = FALSE \wedge FALSE = FALSE\)</span>, então <span class="math inline">\(\neg P \vee (\neg Q \wedge \neg R) = TRUE \vee FALSE = TRUE\)</span>.</li>
 <li>Lado Direito: <span class="math inline">\(S \wedge \neg E = TRUE \wedge \neg TRUE = TRUE \wedge FALSE = FALSE\)</span>, <span class="math inline">\(P \wedge \neg Q = FALSE \wedge \neg TRUE = FALSE \wedge FALSE = FALSE\)</span>, então <span class="math inline">\((S \wedge \neg E) \vee (P \wedge \neg Q) = FALSE \vee FALSE = FALSE\)</span>.</li>
 <li>Resultado: <span class="math inline">\(TRUE \leftrightarrow FALSE = FALSE\)</span>. A fórmula é falsa nesta valoração.</li>
 </ul></li>
-<li><strong>Linha 3:</strong> (<span class="math inline">\(P = TRUE, Q = TRUE, R = FALSE, S = FALSE, E = TRUE\)</span>)
+<li><strong>Linha 3</strong>: (<span class="math inline">\(P = TRUE, Q = TRUE, R = FALSE, S = FALSE, E = TRUE\)</span>)
 <ul>
 <li>Lado Esquerdo: <span class="math inline">\(\neg P = FALSE\)</span>, <span class="math inline">\(\neg Q \wedge \neg R = \neg TRUE \wedge \neg FALSE = FALSE \wedge TRUE = FALSE\)</span>, então <span class="math inline">\(\neg P \vee (\neg Q \wedge \neg R) = FALSE \vee FALSE = FALSE\)</span>.</li>
 <li>Lado Direito: <span class="math inline">\(S \wedge \neg E = FALSE \wedge \neg TRUE = FALSE \wedge FALSE = FALSE\)</span>, <span class="math inline">\(P \wedge \neg Q = TRUE \wedge \neg TRUE = TRUE \wedge FALSE = FALSE\)</span>, então <span class="math inline">\((S \wedge \neg E) \vee (P \wedge \neg Q) = FALSE \vee FALSE = FALSE\)</span>.</li>
 <li>Resultado: <span class="math inline">\(FALSE \leftrightarrow FALSE = TRUE\)</span>. A fórmula é verdadeira nesta valoração.</li>
 </ul></li>
 </ul>
-<p><strong>Propriedades Lógicas:</strong></p>
+<p><strong>Propriedades Lógicas</strong>:</p>
 <ul>
 <li><strong>Não é uma tautologia</strong>: As linhas 1 e 2 mostram que a fórmula pode ser falsa, pois o bicondicional <span class="math inline">\(\leftrightarrow\)</span> resulta em FALSE quando os lados têm valores diferentes.</li>
 <li><strong>Satisfatível</strong>: A linha 3 mostra que há uma valoração em que a fórmula é verdadeira (<span class="math inline">\(FALSE \leftrightarrow FALSE = TRUE\)</span>).</li>
@@ -1227,7 +1227,7 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 </section>
 <section id="exercícios-simplificação-com-equivalências-lógicas" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="exercícios-simplificação-com-equivalências-lógicas"><span class="header-section-number">4.1.4</span> Exercícios: Simplificação com Equivalências Lógicas</h3>
-<p><strong>Instrução:</strong> Use as leis de equivalência lógica (como as da Tabela 3) para simplificar as fórmulas a seguir até a forma mais simples possível. Justifique cada passo com o nome da lei ou propriedade utilizada.</p>
+<p><strong>Instrução</strong>: Use as leis de equivalência lógica (como as da Tabela 3) para simplificar as fórmulas a seguir até a forma mais simples possível. Justifique cada passo com o nome da lei ou propriedade utilizada.</p>
 <ol type="1">
 <li>Simplifique: $ (P Q) $</li>
 <li>Simplifique: $ P (P Q) $</li>
@@ -1951,59 +1951,59 @@ Table&nbsp;4.4: Resumo dos métodos de inferência.
 </section>
 <section id="exercícios-provas-com-regras-de-inferência" class="level3" data-number="4.2.2">
 <h3 data-number="4.2.2" class="anchored" data-anchor-id="exercícios-provas-com-regras-de-inferência"><span class="header-section-number">4.2.2</span> Exercícios: Provas com Regras de Inferência</h3>
-<p><strong>Instrução:</strong> Para cada um dos seguintes conjuntos de premissas, derive a conclusão indicada. Apresente a prova como uma sequência de passos numerados, onde cada passo é justificado pela regra de inferência aplicada e pelos números dos passos anteriores ou premissas utilizadas.</p>
+<p><strong>Instrução</strong>: Para cada um dos seguintes conjuntos de premissas, derive a conclusão indicada. Apresente a prova como uma sequência de passos numerados, onde cada passo é justificado pela regra de inferência aplicada e pelos números dos passos anteriores ou premissas utilizadas.</p>
 <ol type="1">
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(P \rightarrow Q\)</span></li>
-<li><span class="math inline">\(P\)</span> <strong>Conclusão:</strong> <span class="math inline">\(Q\)</span></li>
+<li><span class="math inline">\(P\)</span> <strong>Conclusão</strong>: <span class="math inline">\(Q\)</span></li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(A \rightarrow B\)</span></li>
-<li><span class="math inline">\(\neg B\)</span> <strong>Conclusão:</strong> <span class="math inline">\(\neg A\)</span></li>
+<li><span class="math inline">\(\neg B\)</span> <strong>Conclusão</strong>: <span class="math inline">\(\neg A\)</span></li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(P \land Q\)</span></li>
-<li><span class="math inline">\(P \rightarrow R\)</span> <strong>Conclusão:</strong> <span class="math inline">\(R\)</span></li>
+<li><span class="math inline">\(P \rightarrow R\)</span> <strong>Conclusão</strong>: <span class="math inline">\(R\)</span></li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(S \rightarrow \neg T\)</span></li>
 <li><span class="math inline">\(T\)</span></li>
-<li><span class="math inline">\(S \lor U\)</span> <strong>Conclusão:</strong> <span class="math inline">\(U\)</span></li>
+<li><span class="math inline">\(S \lor U\)</span> <strong>Conclusão</strong>: <span class="math inline">\(U\)</span></li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(A\)</span></li>
 <li><span class="math inline">\(B\)</span></li>
-<li><span class="math inline">\((A \land B) \rightarrow C\)</span> <strong>Conclusão:</strong> <span class="math inline">\(C\)</span></li>
+<li><span class="math inline">\((A \land B) \rightarrow C\)</span> <strong>Conclusão</strong>: <span class="math inline">\(C\)</span></li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(P \rightarrow Q\)</span></li>
-<li><span class="math inline">\(Q \rightarrow R\)</span> <strong>Conclusão:</strong> <span class="math inline">\(P \rightarrow R\)</span> (Esta regra é conhecida como Silogismo Hipotético)</li>
+<li><span class="math inline">\(Q \rightarrow R\)</span> <strong>Conclusão</strong>: <span class="math inline">\(P \rightarrow R\)</span> (Esta regra é conhecida como Silogismo Hipotético)</li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(A \rightarrow B\)</span></li>
 <li><span class="math inline">\(C \rightarrow D\)</span></li>
-<li><span class="math inline">\(A \lor C\)</span> <strong>Conclusão:</strong> <span class="math inline">\(B \lor D\)</span> (Esta regra é conhecida como Dilema Construtivo)</li>
+<li><span class="math inline">\(A \lor C\)</span> <strong>Conclusão</strong>: <span class="math inline">\(B \lor D\)</span> (Esta regra é conhecida como Dilema Construtivo)</li>
 </ol></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\(\neg A \lor B\)</span></li>
 <li><span class="math inline">\(C \rightarrow A\)</span></li>
-<li><span class="math inline">\(C\)</span> <strong>Conclusão:</strong> <span class="math inline">\(B\)</span></li>
+<li><span class="math inline">\(C\)</span> <strong>Conclusão</strong>: <span class="math inline">\(B\)</span></li>
 </ol></li>
-<li><p><strong>Argumento:</strong> “Se o servidor está online (<span class="math inline">\(S\)</span>), então os dados foram processados (<span class="math inline">\(D\)</span>). Se os dados foram processados, o relatório foi gerado (<span class="math inline">\(R\)</span>). O servidor está online. Portanto, o relatório foi gerado.” <strong>Instrução:</strong> Formalize as premissas e a conclusão, e então derive a conclusão.</p></li>
-<li><p><strong>Premissas:</strong></p>
+<li><p><strong>Argumento</strong>: “Se o servidor está online (<span class="math inline">\(S\)</span>), então os dados foram processados (<span class="math inline">\(D\)</span>). Se os dados foram processados, o relatório foi gerado (<span class="math inline">\(R\)</span>). O servidor está online. Portanto, o relatório foi gerado.” <strong>Instrução</strong>: Formalize as premissas e a conclusão, e então derive a conclusão.</p></li>
+<li><p><strong>Premissas</strong>:</p>
 <ol type="1">
 <li><span class="math inline">\((P \land Q) \rightarrow R\)</span></li>
 <li><span class="math inline">\(\neg R \lor S\)</span></li>
 <li><span class="math inline">\(P\)</span></li>
-<li><span class="math inline">\(Q \land T\)</span> <strong>Conclusão:</strong> <span class="math inline">\(S\)</span></li>
+<li><span class="math inline">\(Q \land T\)</span> <strong>Conclusão</strong>: <span class="math inline">\(S\)</span></li>
 </ol></li>
 </ol>
 </section>
@@ -2051,7 +2051,7 @@ $TRUE$ &amp; $TRUE$ &amp; $TRUE$ \\
 </section>
 <section id="exercícios-análise-semântica-de-fórmulas" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="exercícios-análise-semântica-de-fórmulas"><span class="header-section-number">4.3.2</span> Exercícios: Análise Semântica de Fórmulas</h3>
-<p><strong>Instrução:</strong> Para cada uma das fórmulas abaixo, determine se ela é uma <strong>Tautologia</strong>, uma <strong>Contradição</strong> ou uma <strong>Contingência</strong> (satisfatível, mas também falsificável). Use o método que preferir (tabela-verdade ou simplificação por equivalências lógicas) para justificar sua resposta.</p>
+<p><strong>Instrução</strong>: Para cada uma das fórmulas abaixo, determine se ela é uma <strong>Tautologia</strong>, uma <strong>Contradição</strong> ou uma <strong>Contingência</strong> (satisfatível, mas também falsificável). Use o método que preferir (tabela-verdade ou simplificação por equivalências lógicas) para justificar sua resposta.</p>
 <ol type="1">
 <li>Classifique a fórmula: <span class="math inline">\(P \rightarrow (P \land Q)\)</span></li>
 <li>Classifique a fórmula: <span class="math inline">\((P \lor Q) \lor (\neg P \land \neg Q)\)</span></li>
@@ -2070,11 +2070,11 @@ $TRUE$ &amp; $TRUE$ &amp; $TRUE$ \\
 <h2 data-number="4.4" class="anchored" data-anchor-id="exercícios-de-conexão-com-o-prolog"><span class="header-section-number">4.4</span> Exercícios de Conexão com o Prolog</h2>
 <p>Estas questões demonstram conceitos fundamentais que se traduzem diretamente para Prolog:</p>
 <ol type="1">
-<li><strong>Fatos:</strong> Proposições básicas verdadeiras (como “U” na questão 4)</li>
-<li><strong>Regras:</strong> Implicações lógicas (como “C → U” traduzido para <code>pode_compilar(core) :- pode_compilar(utils).</code>)</li>
-<li><strong>Consultas:</strong> Questões que queremos responder usando a base de conhecimento</li>
-<li><strong>Consistência:</strong> Importância de evitar contradições na base de conhecimento</li>
-<li><strong>Dedução:</strong> Como o motor de inferência do Prolog resolve consultas usando fatos e regras</li>
+<li><strong>Fatos</strong>: Proposições básicas verdadeiras (como “U” na questão 4)</li>
+<li><strong>Regras</strong>: Implicações lógicas (como “C → U” traduzido para <code>pode_compilar(core) :- pode_compilar(utils).</code>)</li>
+<li><strong>Consultas</strong>: Questões que queremos responder usando a base de conhecimento</li>
+<li><strong>Consistência</strong>: Importância de evitar contradições na base de conhecimento</li>
+<li><strong>Dedução</strong>: Como o motor de inferência do Prolog resolve consultas usando fatos e regras</li>
 </ol>
 <p>Este conjunto de questões foi elaborado para solidificar os fundamentos da Lógica Proposicional, servindo como base para a modelagem de sistemas e a programação em lógica. Cada problema apresenta um “mundo” a ser modelado com proposições e operadores lógicos, preparando para a construção de bases de conhecimento com <strong>fatos</strong>, <strong>regras</strong> e <strong>consultas</strong>.</p>
 <section id="questão-1-diagnóstico-de-sistema" class="level3" data-number="4.4.1">
@@ -2171,9 +2171,9 @@ $TRUE$ &amp; $TRUE$ &amp; $TRUE$ \\
 <h3 data-number="4.4.9" class="anchored" data-anchor-id="questão-9-política-de-firewall"><span class="header-section-number">4.4.9</span> Questão 9: Política de Firewall</h3>
 <p>Uma política de segurança de rede é definida por duas regras:</p>
 <ol type="1">
-<li><strong>Regra 1:</strong> Se uma requisição vem de uma rede interna (I) E se destina à porta 443 (P), então a requisição é permitida (A).<br>
+<li><strong>Regra 1</strong>: Se uma requisição vem de uma rede interna (I) E se destina à porta 443 (P), então a requisição é permitida (A).<br>
 </li>
-<li><strong>Regra 2:</strong> Se uma requisição vem de uma rede externa (ou seja, <span class="math inline">\(\neg I\)</span>) OU se destina a um serviço de monitoramento (ou seja, <span class="math inline">\(\neg P\)</span>), então a requisição é permitida (A).</li>
+<li><strong>Regra 2</strong>: Se uma requisição vem de uma rede externa (ou seja, <span class="math inline">\(\neg I\)</span>) OU se destina a um serviço de monitoramento (ou seja, <span class="math inline">\(\neg P\)</span>), então a requisição é permitida (A).</li>
 </ol>
 <p>Um pacote chega de uma rede interna (I) e não se destina à porta 443 (<span class="math inline">\(\neg P\)</span>). A requisição será permitida? Use dedução lógica para chegar à conclusão. A política é redundante ou conflitante em algum aspecto?</p>
 </section>
