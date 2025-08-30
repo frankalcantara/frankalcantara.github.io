@@ -249,14 +249,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07a-criando-mundos-praticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Mundos: Raciocínio Lógico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,19 +279,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -293,13 +299,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -411,13 +417,13 @@ window.Quarto = {
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="fundamentos-teóricos"><span class="header-section-number">3.1.2</span> Fundamentos Teóricos</h3>
 <p>O Prolog baseia-se na correspondência entre:</p>
 <ul>
-<li><strong>Lógica de primeira ordem</strong> → Expressividade para representar conhecimento</li>
-<li><strong>Cláusulas de Horn</strong> → Subconjunto decidível da lógica proposicional</li>
-<li><strong>Princípio de resolução</strong> → Método de prova por refutação</li>
-<li><strong>Mundo fechado (<em>Closed World Assumption</em>)</strong> → O que não pode ser provado é falso</li>
+<li><strong>Lógica de primeira ordem</strong> → Expressividade para representar conhecimento;</li>
+<li><strong>Cláusulas de Horn</strong> → Subconjunto da lógica de primeira ordem que permite um mecanismo de prova eficiente;</li>
+<li><strong>Princípio de resolução</strong> → Método de prova por refutação;</li>
+<li><strong>Mundo fechado (<em>Closed World Assumption</em>)</strong> → O que não pode ser provado é falso.</li>
 </ul>
 <p>Para nossos propósitos práticos, utilizaremos o <strong>SWISH</strong>, uma interface web que implementa o interpretador SWI-Prolog.</p>
-<p>O <strong>SWISH</strong> (<strong>SWI</strong>-Prolog for Philippe Rousselaring) é uma plataforma online que permite executar código Prolog diretamente no navegador, sem necessidade de instalação. Existem vários servidores gratuitos na internet com recursos disponíveis, como compartilhamento de código, colaboração em tempo real e uma interface amigável para iniciantes. Eu uso o <a href="https://swish.swi-prolog.org/">SWI</a>. Este servidor é mantido pela comunidade SWI-Prolog, é gratuito e quase sempre está disponível.</p>
+<p>O <strong>SWISH</strong> (<strong>SWI</strong>-Prolog for <strong>SH</strong>aring)é uma plataforma online que permite executar código Prolog diretamente no navegador, sem necessidade de instalação. Existem vários servidores gratuitos na internet com recursos disponíveis, como compartilhamento de código, colaboração em tempo real e uma interface amigável para iniciantes. Eu uso o <a href="https://swish.swi-prolog.org/">SWI</a>. Este servidor é mantido pela comunidade SWI-Prolog, é gratuito e quase sempre está disponível.</p>
 </section>
 <section id="como-acessar-o-swish.swi-prolog" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="como-acessar-o-swish.swi-prolog"><span class="header-section-number">3.1.3</span> Como Acessar o SWISH.SWI-Prolog</h3>
@@ -478,7 +484,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra simples: ∀X (mamifero(X) → animal(X))</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>animal(<span class="dt">X</span>) <span class="kw">:-</span> mamifero(<span class="dt">X</span>)<span class="kw">.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra composta: ∀X (voa(X) ↔ ave(X) ∧ ¬pinguim(X))</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra composta: ∀X (voa(X) → ave(X) ∧ ¬pinguim(X))</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>voa(<span class="dt">X</span>) <span class="kw">:-</span> ave(<span class="dt">X</span>)<span class="kw">,</span> <span class="kw">\+</span> pinguim(<span class="dt">X</span>)<span class="kw">.</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra recursiva: ancestral</span></span>
@@ -515,7 +521,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <li><strong>Números</strong>: inteiros e reais → <code>42</code>, <code>3.14159</code>, <code>-273</code>;</li>
 <li><strong>Variáveis</strong>: começam com maiúscula → <code>X</code>, <code>Lista</code>, <code>_Temp</code>;
 <ul>
-<li><code>_</code> = variável anônima (singleton).</li>
+<li><code>_</code> = variável anônima, usada como um marcador de posição para um valor que não é relevante para o resto da cláusula.</li>
 </ul></li>
 </ul>
 </section>
@@ -832,7 +838,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <div class="sourceCode" id="cb22"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Tabling (memoização) - SWI-Prolog</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">:-</span> table fibonacci<span class="fu">/</span><span class="dv">2</span><span class="kw">.</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>fibonacci(<span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span>) <span class="kw">:-</span> <span class="kw">!.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>fibonacci(<span class="dv">0</span><span class="kw">,</span> <span class="dv">0</span>) <span class="kw">:-</span> <span class="kw">!.</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>fibonacci(<span class="dv">1</span><span class="kw">,</span> <span class="dv">1</span>) <span class="kw">:-</span> <span class="kw">!.</span></span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>fibonacci(<span class="dt">N</span><span class="kw">,</span> <span class="dt">F</span>) <span class="kw">:-</span></span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">N</span> <span class="dt">&gt;</span> <span class="dv">1</span><span class="kw">,</span></span>

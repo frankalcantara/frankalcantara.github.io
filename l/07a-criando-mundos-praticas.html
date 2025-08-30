@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introdução à Programação Lógica - 10&nbsp; Criando Mundos: Raciocínio Lógico</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-verificacao-formal-de-programas.html" rel="next">
+<link href="./07-construcao-de-mundos-logicos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07a-criando-mundos-praticas.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Mundos: Raciocínio Lógico</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à Programação Lógica</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/logica" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Fundamentos da Lógica</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-jornada-programacao-logica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introdução ao Paradigma da Programação Lógica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-introducao-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introdução Prática ao Prolog com Swish</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-fundamentos-logica-proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Proposicional</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-arte-da-prova-e-analise-de-argumentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Arte da Prova e Análise de Argumentos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-logica-predicativa-e-quantificadores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Lógica de Primeira Ordem: Lógica Predicativa</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Aplicações Avançadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-formas-normais-e-skolemizacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Formas Normais: Estruturas de Solução</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-clausulas-de-horn-e-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Formas Clausais e A Cláusula de Horn</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-construcao-de-mundos-logicos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Raciocínio Algorítmico: Criando Mundos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07a-criando-mundos-praticas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Mundos: Raciocínio Lógico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Solução dos Exercícios</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#problema-1-sistema-inteligente-de-recomendação-de-roupas" id="toc-problema-1-sistema-inteligente-de-recomendação-de-roupas" class="nav-link active" data-scroll-target="#problema-1-sistema-inteligente-de-recomendação-de-roupas"><span class="header-section-number">10.1</span> Problema 1: Sistema Inteligente de Recomendação de Roupas</a>
+  <ul class="collapse">
+  <li><a href="#especificação-do-domínio" id="toc-especificação-do-domínio" class="nav-link" data-scroll-target="#especificação-do-domínio"><span class="header-section-number">10.1.1</span> Especificação do Domínio</a></li>
+  <li><a href="#tarefas-a-implementar" id="toc-tarefas-a-implementar" class="nav-link" data-scroll-target="#tarefas-a-implementar"><span class="header-section-number">10.1.2</span> Tarefas a Implementar</a></li>
+  <li><a href="#solução-problema-1" id="toc-solução-problema-1" class="nav-link" data-scroll-target="#solução-problema-1"><span class="header-section-number">10.1.3</span> Solução: Problema 1</a></li>
+  <li><a href="#regras-adicionais" id="toc-regras-adicionais" class="nav-link" data-scroll-target="#regras-adicionais"><span class="header-section-number">10.1.4</span> Regras Adicionais</a></li>
+  <li><a href="#solução-em-prolog" id="toc-solução-em-prolog" class="nav-link" data-scroll-target="#solução-em-prolog"><span class="header-section-number">10.1.5</span> Solução em Prolog</a></li>
+  </ul></li>
+  <li><a href="#problema-2-sistema-de-triagem-médica-automatizada" id="toc-problema-2-sistema-de-triagem-médica-automatizada" class="nav-link" data-scroll-target="#problema-2-sistema-de-triagem-médica-automatizada"><span class="header-section-number">10.2</span> Problema 2: Sistema de Triagem Médica Automatizada</a>
+  <ul class="collapse">
+  <li><a href="#especificação-do-domínio-1" id="toc-especificação-do-domínio-1" class="nav-link" data-scroll-target="#especificação-do-domínio-1"><span class="header-section-number">10.2.1</span> Especificação do Domínio</a></li>
+  <li><a href="#tarefas-a-implementar-1" id="toc-tarefas-a-implementar-1" class="nav-link" data-scroll-target="#tarefas-a-implementar-1"><span class="header-section-number">10.2.2</span> Tarefas a Implementar</a></li>
+  <li><a href="#solução-problema-2" id="toc-solução-problema-2" class="nav-link" data-scroll-target="#solução-problema-2"><span class="header-section-number">10.2.3</span> Solução: Problema 2</a></li>
+  <li><a href="#solução-em-prolog-1" id="toc-solução-em-prolog-1" class="nav-link" data-scroll-target="#solução-em-prolog-1"><span class="header-section-number">10.2.4</span> Solução em Prolog</a></li>
+  </ul></li>
+  <li><a href="#problema-2-melhor-sistema-de-triagem-médica-automatizada" id="toc-problema-2-melhor-sistema-de-triagem-médica-automatizada" class="nav-link" data-scroll-target="#problema-2-melhor-sistema-de-triagem-médica-automatizada"><span class="header-section-number">10.3</span> Problema 2 Melhor: Sistema de Triagem Médica Automatizada</a>
+  <ul class="collapse">
+  <li><a href="#especificação-do-domínio-2" id="toc-especificação-do-domínio-2" class="nav-link" data-scroll-target="#especificação-do-domínio-2"><span class="header-section-number">10.3.1</span> Especificação do Domínio</a></li>
+  <li><a href="#tarefas-a-implementar-2" id="toc-tarefas-a-implementar-2" class="nav-link" data-scroll-target="#tarefas-a-implementar-2"><span class="header-section-number">10.3.2</span> Tarefas a Implementar</a></li>
+  <li><a href="#resolução-do-problema-2-melhor-sistema-de-triagem-médica" id="toc-resolução-do-problema-2-melhor-sistema-de-triagem-médica" class="nav-link" data-scroll-target="#resolução-do-problema-2-melhor-sistema-de-triagem-médica"><span class="header-section-number">10.3.3</span> Resolução do Problema 2 Melhor: Sistema de Triagem Médica</a></li>
+  <li><a href="#solução-em-prolog-2" id="toc-solução-em-prolog-2" class="nav-link" data-scroll-target="#solução-em-prolog-2"><span class="header-section-number">10.3.4</span> Solução em Prolog</a></li>
+  <li><a href="#vantagens-da-abordagem-positiva" id="toc-vantagens-da-abordagem-positiva" class="nav-link" data-scroll-target="#vantagens-da-abordagem-positiva"><span class="header-section-number">10.3.5</span> Vantagens da Abordagem Positiva</a></li>
+  </ul></li>
+  <li><a href="#problema-3-sistema-especialista-astroguia" id="toc-problema-3-sistema-especialista-astroguia" class="nav-link" data-scroll-target="#problema-3-sistema-especialista-astroguia"><span class="header-section-number">10.4</span> Problema 3: Sistema Especialista “AstroGuia”</a>
+  <ul class="collapse">
+  <li><a href="#resolução-do-problema-sistema-especialista-astroguia" id="toc-resolução-do-problema-sistema-especialista-astroguia" class="nav-link" data-scroll-target="#resolução-do-problema-sistema-especialista-astroguia"><span class="header-section-number">10.4.1</span> Resolução do Problema: Sistema Especialista “AstroGuia”</a></li>
+  <li><a href="#solução-em-prolog-3" id="toc-solução-em-prolog-3" class="nav-link" data-scroll-target="#solução-em-prolog-3"><span class="header-section-number">10.4.2</span> 2. Solução em Prolog</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/07a-criando-mundos-praticas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07a-criando-mundos-praticas.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Mundos: Raciocínio Lógico</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Mundos: Raciocínio Lógico</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="problema-1-sistema-inteligente-de-recomendação-de-roupas" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="problema-1-sistema-inteligente-de-recomendação-de-roupas"><span class="header-section-number">10.1</span> Problema 1: Sistema Inteligente de Recomendação de Roupas</h2>
+<p>Você foi contratado para desenvolver um sistema inteligente que recomenda roupas adequadas baseado nas condições climáticas e ocasiões especiais. O sistema deve ser capaz de sugerir peças de vestuário considerando múltiplos fatores ambientais e sociais.</p>
+<section id="especificação-do-domínio" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="especificação-do-domínio"><span class="header-section-number">10.1.1</span> Especificação do Domínio</h3>
+<section id="predicados-base-fatos" class="level4" data-number="10.1.1.1">
+<h4 data-number="10.1.1.1" class="anchored" data-anchor-id="predicados-base-fatos"><span class="header-section-number">10.1.1.1</span> Predicados Base (Fatos)</h4>
+<p><strong>Condições Climáticas</strong>:</p>
+<ul>
+<li>temperatura_alta - Temperatura acima de 25°C;</li>
+<li>temperatura_media - Temperatura entre 15-25°C;</li>
+<li>temperatura_baixa - Temperatura abaixo de 15°C;</li>
+<li>ensolarado - Dia ensolarado;</li>
+<li>nublado - Dia nublado;</li>
+<li>chuvoso - Está chovendo;</li>
+<li>ventoso - Vento forte;</li>
+<li>umidade_alta - Umidade acima de 70%.</li>
+</ul>
+<p><strong>Ocasiões Especiais</strong>:</p>
+<ul>
+<li>trabalho - Ambiente profissional;</li>
+<li>casual - Situação informal;</li>
+<li>festa - Evento social;</li>
+<li>exercicio - Atividade física;</li>
+<li>praia - Ambiente de praia.</li>
+</ul>
+</section>
+</section>
+<section id="tarefas-a-implementar" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="tarefas-a-implementar"><span class="header-section-number">10.1.2</span> Tarefas a Implementar</h3>
+<section id="parte-a-modelagem" class="level4" data-number="10.1.2.1">
+<h4 data-number="10.1.2.1" class="anchored" data-anchor-id="parte-a-modelagem"><span class="header-section-number">10.1.2.1</span> Parte A: Modelagem</h4>
+<ol type="1">
+<li>Declare todos os fatos necessários para representar uma situação específica;</li>
+<li>Implemente todas as 15 regras como cláusulas de Horn em Prolog;</li>
+<li>Adicione pelo menos 3 regras criativas próprias.</li>
+</ol>
+</section>
+<section id="parte-b-cenários-de-teste" class="level4" data-number="10.1.2.2">
+<h4 data-number="10.1.2.2" class="anchored" data-anchor-id="parte-b-cenários-de-teste"><span class="header-section-number">10.1.2.2</span> Parte B: Cenários de Teste</h4>
+<ul>
+<li><strong>Cenário 1</strong>: Dia ensolarado, temperatura alta, ocasião casual;</li>
+<li><strong>Cenário 2</strong>: Dia chuvoso, temperatura baixa, trabalho;</li>
+<li><strong>Cenário 3</strong>: Dia nublado, temperatura média, festa;</li>
+<li><strong>Cenário 4</strong>: Dia ensolarado, temperatura alta, praia;</li>
+<li><strong>Cenário 5</strong>: Dia ventoso, temperatura baixa, exercício.</li>
+</ul>
+</section>
+<section id="parte-c-consultas-avançadas" class="level4" data-number="10.1.2.3">
+<h4 data-number="10.1.2.3" class="anchored" data-anchor-id="parte-c-consultas-avançadas"><span class="header-section-number">10.1.2.3</span> Parte C: Consultas Avançadas</h4>
+<ol type="1">
+<li>“Que roupas devo usar hoje?” (listar todas as recomendações);</li>
+<li>“Preciso levar proteção?” (guarda-chuva, casaco, etc.);</li>
+<li>“Esta roupa é apropriada para a ocasião X?” (validação).</li>
+</ol>
+</section>
+</section>
+<section id="solução-problema-1" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="solução-problema-1"><span class="header-section-number">10.1.3</span> Solução: Problema 1</h3>
+<section id="solução-em-lógica-de-primeira-ordem" class="level4" data-number="10.1.3.1">
+<h4 data-number="10.1.3.1" class="anchored" data-anchor-id="solução-em-lógica-de-primeira-ordem"><span class="header-section-number">10.1.3.1</span> Solução em Lógica de Primeira Ordem</h4>
+<section id="definição-do-mundo-universo-de-discurso" class="level5" data-number="10.1.3.1.1">
+<h5 data-number="10.1.3.1.1" class="anchored" data-anchor-id="definição-do-mundo-universo-de-discurso"><span class="header-section-number">10.1.3.1.1</span> Definição do Mundo (Universo de Discurso)</h5>
+<ul>
+<li><p><strong>Constantes de condições climáticas</strong>:</p>
+<p><span class="math display">\[temperatura\_alta, temperatura\_media, temperatura\_baixa, ensolarado, nublado, chuvoso, ventoso, umidade\_alta\]</span></p></li>
+<li><p><strong>Constantes de ocasiões</strong>:</p>
+<p><span class="math display">\[trabalho, casual, festa, exercicio, praia\]</span></p></li>
+<li><p><strong>Constantes de itens de vestuário</strong>:</p>
+<p><span class="math display">\[oculos\_sol, chapeu, guarda\_chuva, capa\_chuva, roupa\_respiravel, camiseta, shorts, casaco, calca\_longa, jaqueta\_leve, casaco\_pesado, roupa\_formal, roupa\_elegante, roupa\_esportiva, biquini\_sunga, protetor\_solar, casaco\_social, jeans, blusa\]</span></p></li>
+<li><p><strong>Predicados</strong>:</p>
+<ul>
+<li><span class="math inline">\(Clima(condicao)\)</span>: A condição climática está ativa;</li>
+<li><span class="math inline">\(Ocasiao(tipo)\)</span>: A ocasião atual é do tipo especificado;</li>
+<li><span class="math inline">\(Recomendar(item)\)</span>: O item de vestuário é recomendado.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="regras-em-lógica-de-primeira-ordem" class="level4" data-number="10.1.3.2">
+<h4 data-number="10.1.3.2" class="anchored" data-anchor-id="regras-em-lógica-de-primeira-ordem"><span class="header-section-number">10.1.3.2</span> Regras em Lógica de Primeira Ordem</h4>
+<p><strong>Regras de Proteção</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Clima(ensolarado) \wedge Clima(temperatura\_alta) \rightarrow Recomendar(oculos\_sol)\)</span>;</li>
+<li><span class="math inline">\(Clima(ensolarado) \rightarrow Recomendar(chapeu)\)</span>;</li>
+<li><span class="math inline">\(Clima(chuvoso) \rightarrow Recomendar(guarda\_chuva) \wedge Recomendar(capa\_chuva)\)</span>;</li>
+<li><span class="math inline">\(Clima(umidade\_alta) \wedge Clima(temperatura\_alta) \rightarrow Recomendar(roupa\_respiravel)\)</span>.</li>
+</ol>
+<p><strong>Regras de Conforto Térmico</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Clima(temperatura\_alta) \rightarrow Recomendar(camiseta) \wedge Recomendar(shorts)\)</span>;</li>
+<li><span class="math inline">\(Clima(temperatura\_baixa) \rightarrow Recomendar(casaco) \wedge Recomendar(calca\_longa)\)</span>;</li>
+<li><span class="math inline">\(Clima(temperatura\_media) \wedge Clima(ventoso) \rightarrow Recomendar(jaqueta\_leve)\)</span>;</li>
+<li><span class="math inline">\(Clima(temperatura\_baixa) \wedge Clima(ventoso) \rightarrow Recomendar(casaco\_pesado)\)</span>.</li>
+</ol>
+<p><strong>Regras de Ocasião</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Ocasiao(trabalho) \rightarrow Recomendar(roupa\_formal)\)</span>;</li>
+<li><span class="math inline">\(Ocasiao(festa) \rightarrow Recomendar(roupa\_elegante)\)</span>;</li>
+<li><span class="math inline">\(Ocasiao(exercicio) \rightarrow Recomendar(roupa\_esportiva)\)</span>;</li>
+<li><span class="math inline">\(Ocasiao(praia) \wedge Clima(ensolarado) \rightarrow Recomendar(biquini\_sunga) \wedge Recomendar(protetor\_solar)\)</span>.</li>
+</ol>
+<p><strong>Regras Condicionais Complexas</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Ocasiao(trabalho) \wedge Clima(chuvoso) \rightarrow Recomendar(roupa\_formal) \wedge Recomendar(guarda\_chuva)\)</span>;</li>
+<li><span class="math inline">\(Ocasiao(festa) \wedge Clima(temperatura\_baixa) \rightarrow Recomendar(roupa\_elegante) \wedge Recomendar(casaco\_social)\)</span>;</li>
+<li><span class="math inline">\(Ocasiao(casual) \wedge Clima(temperatura\_media) \wedge Clima(nublado) \rightarrow Recomendar(jeans) \wedge Recomendar(blusa)\)</span>.</li>
+</ol>
+</section>
+</section>
+<section id="regras-adicionais" class="level3" data-number="10.1.4">
+<h3 data-number="10.1.4" class="anchored" data-anchor-id="regras-adicionais"><span class="header-section-number">10.1.4</span> Regras Adicionais</h3>
+<ol type="1">
+<li><span class="math inline">\(Clima(umidade\_alta) \wedge Ocasiao(exercicio) \rightarrow Recomendar(toalha) \wedge Recomendar(garrafa\_agua)\)</span>;</li>
+<li><span class="math inline">\(Clima(temperatura\_baixa) \wedge Clima(chuvoso) \rightarrow Recomendar(bota\_impermeavel)\)</span>;</li>
+<li><span class="math inline">\(Ocasiao(festa) \wedge Clima(ensolarado) \wedge Clima(temperatura\_alta) \rightarrow Recomendar(roupa\_leve\_elegante)\)</span>.</li>
+</ol>
+</section>
+<section id="solução-em-prolog" class="level3" data-number="10.1.5">
+<h3 data-number="10.1.5" class="anchored" data-anchor-id="solução-em-prolog"><span class="header-section-number">10.1.5</span> Solução em Prolog</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% --- FATOS (Condições do Dia) ---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">% Para testar diferentes cenários, ative/desative os fatos apropriados</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Cenário 1: Dia ensolarado, temperatura alta, ocasião casual</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">% clima(ensolarado).</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">% clima(temperatura_alta).</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">% ocasiao(casual).</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">% --- REGRAS DE RECOMENDAÇÃO ---</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras de Proteção</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>recomendar(oculos_sol) <span class="kw">:-</span> </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    clima(ensolarado)<span class="kw">,</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_alta)<span class="kw">.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>recomendar(chapeu) <span class="kw">:-</span> </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    clima(ensolarado)<span class="kw">.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>recomendar(guarda_chuva) <span class="kw">:-</span> </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    clima(chuvoso)<span class="kw">.</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>recomendar(capa_chuva) <span class="kw">:-</span> </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    clima(chuvoso)<span class="kw">.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_respiravel) <span class="kw">:-</span> </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    clima(umidade_alta)<span class="kw">,</span> </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_alta)<span class="kw">.</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras de Conforto Térmico</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>recomendar(camiseta) <span class="kw">:-</span> </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_alta)<span class="kw">.</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>recomendar(shorts) <span class="kw">:-</span> </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_alta)<span class="kw">.</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>recomendar(casaco) <span class="kw">:-</span> </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_baixa)<span class="kw">.</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>recomendar(calca_longa) <span class="kw">:-</span> </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_baixa)<span class="kw">.</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>recomendar(jaqueta_leve) <span class="kw">:-</span> </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_media)<span class="kw">,</span> </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    clima(ventoso)<span class="kw">.</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>recomendar(casaco_pesado) <span class="kw">:-</span> </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_baixa)<span class="kw">,</span> </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    clima(ventoso)<span class="kw">.</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras de Ocasião</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_formal) <span class="kw">:-</span> </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    ocasiao(trabalho)<span class="kw">.</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_elegante) <span class="kw">:-</span> </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    ocasiao(festa)<span class="kw">.</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_esportiva) <span class="kw">:-</span> </span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    ocasiao(exercicio)<span class="kw">.</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>recomendar(biquini_sunga) <span class="kw">:-</span> </span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    ocasiao(praia)<span class="kw">,</span> </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    clima(ensolarado)<span class="kw">.</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>recomendar(protetor_solar) <span class="kw">:-</span> </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    ocasiao(praia)<span class="kw">,</span> </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    clima(ensolarado)<span class="kw">.</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras Condicionais Complexas</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_formal) <span class="kw">:-</span> </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    ocasiao(trabalho)<span class="kw">,</span> </span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    clima(chuvoso)<span class="kw">.</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>recomendar(guarda_chuva) <span class="kw">:-</span> </span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    ocasiao(trabalho)<span class="kw">,</span> </span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    clima(chuvoso)<span class="kw">.</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_elegante) <span class="kw">:-</span> </span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    ocasiao(festa)<span class="kw">,</span> </span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_baixa)<span class="kw">.</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>recomendar(casaco_social) <span class="kw">:-</span> </span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    ocasiao(festa)<span class="kw">,</span> </span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_baixa)<span class="kw">.</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>recomendar(jeans) <span class="kw">:-</span> </span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    ocasiao(casual)<span class="kw">,</span> </span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_media)<span class="kw">,</span> </span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    clima(nublado)<span class="kw">.</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>recomendar(blusa) <span class="kw">:-</span> </span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    ocasiao(casual)<span class="kw">,</span> </span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_media)<span class="kw">,</span> </span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    clima(nublado)<span class="kw">.</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="co">% Regras Criativas Adicionais</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>recomendar(toalha) <span class="kw">:-</span> </span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>    clima(umidade_alta)<span class="kw">,</span> </span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    ocasiao(exercicio)<span class="kw">.</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>recomendar(garrafa_agua) <span class="kw">:-</span> </span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>    clima(umidade_alta)<span class="kw">,</span> </span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>    ocasiao(exercicio)<span class="kw">.</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>recomendar(bota_impermeavel) <span class="kw">:-</span> </span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_baixa)<span class="kw">,</span> </span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>    clima(chuvoso)<span class="kw">.</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>recomendar(roupa_leve_elegante) <span class="kw">:-</span> </span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>    ocasiao(festa)<span class="kw">,</span> </span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    clima(ensolarado)<span class="kw">,</span> </span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>    clima(temperatura_alta)<span class="kw">.</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="co">% --- PREDICADOS DE CONSULTA ---</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="co">% Listar todas as recomendações</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>todas_recomendacoes(<span class="dt">Lista</span>) <span class="kw">:-</span> </span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    findall(<span class="dt">Item</span><span class="kw">,</span> recomendar(<span class="dt">Item</span>)<span class="kw">,</span> <span class="dt">ListaDup</span>)<span class="kw">,</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    list_to_set(<span class="dt">ListaDup</span><span class="kw">,</span> <span class="dt">Lista</span>)<span class="kw">.</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="co">% Verificar se precisa de proteção</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>precisa_protecao <span class="kw">:-</span> </span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>    (recomendar(guarda_chuva)<span class="kw">;</span> </span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>     recomendar(casaco)<span class="kw">;</span> </span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>     recomendar(casaco_pesado)<span class="kw">;</span> </span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>     recomendar(capa_chuva)<span class="kw">;</span> </span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>     recomendar(chapeu)<span class="kw">;</span> </span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>     recomendar(oculos_sol))<span class="kw">.</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="co">% Validar se uma roupa é apropriada</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>roupa_apropriada(<span class="dt">Roupa</span>) <span class="kw">:-</span> </span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>    recomendar(<span class="dt">Roupa</span>)<span class="kw">.</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="co">% Categorizar tipo de proteção necessária</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>tipo_protecao(chuva) <span class="kw">:-</span> </span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>    recomendar(guarda_chuva)<span class="kw">.</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>tipo_protecao(frio) <span class="kw">:-</span> </span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    recomendar(casaco)<span class="kw">.</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>tipo_protecao(sol) <span class="kw">:-</span> </span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    recomendar(chapeu)<span class="kw">.</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="co">% Cenários de Teste</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="co">% --- CENÁRIO 1: Dia ensolarado, temperatura alta, ocasião casual ---</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos:</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(ensolarado).</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(temperatura_alta).</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="co">%ocasiao(casual).</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta:</span></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="co">%?- todas_recomendacoes(Lista).</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta esperada: Lista = [oculos_sol, chapeu, camiseta, shorts]</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="co">% --- CENÁRIO 2: Dia chuvoso, temperatura baixa, trabalho ---</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos:</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(chuvoso).</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(temperatura_baixa).</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="co">%ocasiao(trabalho).</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta:</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="co">%?- todas_recomendacoes(Lista).</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta esperada: Lista = [guarda_chuva, capa_chuva, casaco, calca_longa, roupa_formal, bota_impermeavel]</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="co">% --- CENÁRIO 3: Dia nublado, temperatura média, festa ---</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos:</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(nublado).</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(temperatura_media).</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="co">%ocasiao(festa).</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta:</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="co">%?- todas_recomendacoes(Lista).</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta esperada: Lista = [roupa_elegante]</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="co">% --- CENÁRIO 4: Dia ensolarado, temperatura alta, praia ---</span></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos:</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(ensolarado).</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(temperatura_alta).</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="co">%ocasiao(praia).</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta:</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="co">%?- todas_recomendacoes(Lista).</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta esperada: Lista = [oculos_sol, chapeu, camiseta, shorts, biquini_sunga, protetor_solar]</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="co">% --- CENÁRIO 5: Dia ventoso, temperatura baixa, exercício ---</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos:</span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(ventoso).</span></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="co">%clima(temperatura_baixa).</span></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="co">%ocasiao(exercicio).</span></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta:</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="co">%?- todas_recomendacoes(Lista).</span></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta esperada: Lista = [casaco, calca_longa, casaco_pesado, roupa_esportiva]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="problema-2-sistema-de-triagem-médica-automatizada" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="problema-2-sistema-de-triagem-médica-automatizada"><span class="header-section-number">10.2</span> Problema 2: Sistema de Triagem Médica Automatizada</h2>
+<p>Um posto de saúde precisa de um sistema de triagem automática que classifique a urgência dos pacientes baseado em sintomas, histórico e fatores de risco. O sistema deve seguir protocolos médicos simplificados para determinar prioridades de atendimento.</p>
+<section id="especificação-do-domínio-1" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="especificação-do-domínio-1"><span class="header-section-number">10.2.1</span> Especificação do Domínio</h3>
+<section id="predicados-base-sintomas-e-condições" class="level4" data-number="10.2.1.1">
+<h4 data-number="10.2.1.1" class="anchored" data-anchor-id="predicados-base-sintomas-e-condições"><span class="header-section-number">10.2.1.1</span> Predicados Base (Sintomas e Condições)</h4>
+<p><strong>Sintomas Básicos</strong>:</p>
+<ul>
+<li>febre(Paciente) - Temperatura corporal elevada;</li>
+<li>tosse(Paciente) - Tosse presente;</li>
+<li>dor_cabeca(Paciente) - Dor de cabeça;</li>
+<li>dor_peito(Paciente) - Dor no peito;</li>
+<li>falta_ar(Paciente) - Dificuldade respiratória;</li>
+<li>nausea(Paciente) - Náusea ou vômito;</li>
+<li>dor_abdominal(Paciente) - Dor abdominal;</li>
+<li>tontura(Paciente) - Tontura ou vertigem.</li>
+</ul>
+<p><strong>Histórico e Fatores de Risco</strong>:</p>
+<ul>
+<li>idade_avancada(Paciente) - Acima de 65 anos;</li>
+<li>diabetico(Paciente) - Possui diabetes;</li>
+<li>hipertenso(Paciente) - Possui hipertensão;</li>
+<li>cardiopata(Paciente) - Problemas cardíacos;</li>
+<li>viagem_recente(Paciente) - Viajou nos últimos 14 dias;</li>
+<li>contato_doente(Paciente) - Contato com pessoa doente;</li>
+<li>vacinado_gripe(Paciente) - Vacinado contra gripe;</li>
+<li>gravidez(Paciente) - Mulher grávida.</li>
+</ul>
+</section>
+</section>
+<section id="tarefas-a-implementar-1" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="tarefas-a-implementar-1"><span class="header-section-number">10.2.2</span> Tarefas a Implementar</h3>
+<section id="parte-a-base-de-conhecimento" class="level4" data-number="10.2.2.1">
+<h4 data-number="10.2.2.1" class="anchored" data-anchor-id="parte-a-base-de-conhecimento"><span class="header-section-number">10.2.2.1</span> Parte A: Base de Conhecimento</h4>
+<ol type="1">
+<li>Crie uma base de dados com pelo menos <span class="math inline">\(8\)</span> pacientes fictícios;</li>
+<li>Implemente todas as <span class="math inline">\(17\)</span> regras como cláusulas de Horn;</li>
+<li>Adicione <span class="math inline">\(5\)</span> regras próprias baseadas em conhecimento médico básico.</li>
+</ol>
+</section>
+<section id="parte-b-casos-de-teste" class="level4" data-number="10.2.2.2">
+<h4 data-number="10.2.2.2" class="anchored" data-anchor-id="parte-b-casos-de-teste"><span class="header-section-number">10.2.2.2</span> Parte B: Casos de Teste</h4>
+<ul>
+<li><strong>Caso 1</strong>: João, 70 anos, diabético, com febre, tosse e falta de ar;</li>
+<li><strong>Caso 2</strong>: Maria, 30 anos, grávida, com dor de cabeça e náusea;</li>
+<li><strong>Caso 3</strong>: Pedro, 45 anos, cardiopata, com dor no peito e tontura;</li>
+<li><strong>Caso 4</strong>: Ana, 25 anos, saudável, viajou recentemente, com febre e tosse;</li>
+<li><strong>Caso 5</strong>: Carlos, 60 anos, hipertenso, apenas com dor de cabeça leve.</li>
+</ul>
+</section>
+<section id="parte-c-sistema-de-consultas" class="level4" data-number="10.2.2.3">
+<h4 data-number="10.2.2.3" class="anchored" data-anchor-id="parte-c-sistema-de-consultas"><span class="header-section-number">10.2.2.3</span> Parte C: Sistema de Consultas</h4>
+<ol type="1">
+<li>“Qual a prioridade do paciente X?”;</li>
+<li>“Quais pacientes precisam de atendimento urgente?”;</li>
+<li>“Que cuidados especiais o paciente X requer?”;</li>
+<li>“Quantos pacientes estão em cada categoria de prioridade?”.</li>
+</ol>
+</section>
+</section>
+<section id="solução-problema-2" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="solução-problema-2"><span class="header-section-number">10.2.3</span> Solução: Problema 2</h3>
+<section id="solução-em-lógica-de-primeira-ordem-1" class="level4" data-number="10.2.3.1">
+<h4 data-number="10.2.3.1" class="anchored" data-anchor-id="solução-em-lógica-de-primeira-ordem-1"><span class="header-section-number">10.2.3.1</span> Solução em Lógica de Primeira Ordem</h4>
+<section id="definição-do-mundo-universo-de-discurso-1" class="level5" data-number="10.2.3.1.1">
+<h5 data-number="10.2.3.1.1" class="anchored" data-anchor-id="definição-do-mundo-universo-de-discurso-1"><span class="header-section-number">10.2.3.1.1</span> Definição do Mundo (Universo de Discurso)</h5>
+<ul>
+<li><p><strong>Constantes de pacientes</strong>:</p>
+<p><span class="math display">\[joao, maria, pedro, ana, carlos, beatriz, diego, fernanda\]</span></p></li>
+<li><p><strong>Constantes de prioridades</strong>:</p>
+<p><span class="math display">\[urgente, prioridade\_alta, prioridade\_media, prioridade\_baixa\]</span></p></li>
+<li><p><strong>Constantes de ações</strong>:</p>
+<p><span class="math display">\[emergencia, monitorar\_pressao, verificar\_glicemia, isolamento\_preventivo\]</span></p></li>
+<li><p><strong>Predicados</strong>:</p>
+<ul>
+<li>Sintomas: <span class="math inline">\(Febre(p)\)</span>, <span class="math inline">\(Tosse(p)\)</span>, <span class="math inline">\(DorCabeca(p)\)</span>, <span class="math inline">\(DorPeito(p)\)</span>, <span class="math inline">\(FaltaAr(p)\)</span>, <span class="math inline">\(Nausea(p)\)</span>, <span class="math inline">\(DorAbdominal(p)\)</span>, <span class="math inline">\(Tontura(p)\)</span>;</li>
+<li>Fatores: <span class="math inline">\(IdadeAvancada(p)\)</span>, <span class="math inline">\(Diabetico(p)\)</span>, <span class="math inline">\(Hipertenso(p)\)</span>, <span class="math inline">\(Cardiopata(p)\)</span>, <span class="math inline">\(ViagemRecente(p)\)</span>, <span class="math inline">\(ContatoDoente(p)\)</span>, <span class="math inline">\(VacinadoGripe(p)\)</span>, <span class="math inline">\(Gravidez(p)\)</span>;</li>
+<li>Classificação: <span class="math inline">\(Prioridade(p, nivel)\)</span>;</li>
+<li>Ações: <span class="math inline">\(Encaminhar(p, destino)\)</span>, <span class="math inline">\(CuidadoEspecial(p, tipo)\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="regras-em-lógica-de-primeira-ordem-1" class="level5" data-number="10.2.3.1.2">
+<h5 data-number="10.2.3.1.2" class="anchored" data-anchor-id="regras-em-lógica-de-primeira-ordem-1"><span class="header-section-number">10.2.3.1.2</span> Regras em Lógica de Primeira Ordem</h5>
+<p><strong>Prioridade URGENTE</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(DorPeito(p) \wedge FaltaAr(p) \rightarrow Prioridade(p, urgente)\)</span>;</li>
+<li><span class="math inline">\(Febre(p) \wedge FaltaAr(p) \wedge IdadeAvancada(p) \rightarrow Prioridade(p, urgente)\)</span>;</li>
+<li><span class="math inline">\(DorAbdominal(p) \wedge Nausea(p) \rightarrow Prioridade(p, urgente)\)</span>;</li>
+<li><span class="math inline">\(Tontura(p) \wedge DorPeito(p) \wedge Cardiopata(p) \rightarrow Prioridade(p, urgente)\)</span>.</li>
+</ol>
+<p><strong>Prioridade ALTA</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Febre(p) \wedge Tosse(p) \wedge ViagemRecente(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(Febre(p) \wedge DorCabeca(p) \wedge ContatoDoente(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(FaltaAr(p) \wedge Diabetico(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(\exists s(Sintoma(p, s)) \wedge Gravidez(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>.</li>
+</ol>
+<p><strong>Prioridade MÉDIA</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Febre(p) \wedge Tosse(p) \wedge VacinadoGripe(p) \rightarrow Prioridade(p, prioridade\_media)\)</span>;</li>
+<li><span class="math inline">\(DorCabeca(p) \wedge Nausea(p) \wedge \neg (\exists s(OutroSintoma(p, s))) \rightarrow Prioridade(p, prioridade\_media)\)</span>;</li>
+<li><span class="math inline">\(Tosse(p) \wedge \neg Febre(p) \wedge IdadeAvancada(p) \rightarrow Prioridade(p, prioridade\_media)\)</span>.</li>
+</ol>
+<p><strong>Prioridade BAIXA</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(DorCabeca(p) \wedge \neg (\exists f(FatorRisco(p, f))) \rightarrow Prioridade(p, prioridade\_baixa)\)</span>;</li>
+<li><span class="math inline">\(Tosse(p) \wedge \neg IdadeAvancada(p) \wedge \neg (\exists f(FatorRisco(p, f))) \rightarrow Prioridade(p, prioridade\_baixa)\)</span>.</li>
+</ol>
+<p><strong>Regras de Recomendação</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Prioridade(p, urgente) \rightarrow Encaminhar(p, emergencia)\)</span>;</li>
+<li><span class="math inline">\(Prioridade(p, prioridade\_alta) \wedge Hipertenso(p) \rightarrow CuidadoEspecial(p, monitorar\_pressao)\)</span>;</li>
+<li><span class="math inline">\(∀nivel(Prioridade(p, nivel) \wedge Diabetico(p) \rightarrow CuidadoEspecial(p, verificar\_glicemia))\)</span>;</li>
+<li><span class="math inline">\((Tosse(p) ∨ FaltaAr(p) ∨ Febre(p)) \rightarrow CuidadoEspecial(p, isolamento\_preventivo)\)</span>.</li>
+</ol>
+</section>
+</section>
+<section id="regras-adicionais-1" class="level4" data-number="10.2.3.2">
+<h4 data-number="10.2.3.2" class="anchored" data-anchor-id="regras-adicionais-1"><span class="header-section-number">10.2.3.2</span> Regras Adicionais</h4>
+<ol type="1">
+<li><span class="math inline">\(Febre(p) \wedge Tosse(p) \wedge FaltaAr(p) \rightarrow Prioridade(p, urgente) \wedge CuidadoEspecial(p, oxigenio)\)</span>;</li>
+<li><span class="math inline">\(DorAbdominal(p) \wedge Gravidez(p) \rightarrow Prioridade(p, urgente) \wedge Encaminhar(p, obstetricia)\)</span>;</li>
+<li><span class="math inline">\(Tontura(p) \wedge Hipertenso(p) \rightarrow CuidadoEspecial(p, monitorar\_pressao\_imediato)\)</span>;</li>
+<li><span class="math inline">\(IdadeAvancada(p) \wedge Cardiopata(p) \wedge \exists s(Sintoma(p, s)) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(ViagemRecente(p) \wedge Febre(p) \rightarrow CuidadoEspecial(p, exame\_covid)\)</span>.</li>
+</ol>
+</section>
+</section>
+<section id="solução-em-prolog-1" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="solução-em-prolog-1"><span class="header-section-number">10.2.4</span> Solução em Prolog</h3>
+<pre><code>% ========================================
+% FATOS (Base de Dados de Pacientes)
+% ========================================
+
+% Caso 1: João, 70 anos, diabético, com febre, tosse e falta de ar
+idade_avancada(joao).
+diabetico(joao).
+febre(joao).
+tosse(joao).
+falta_ar(joao).
+
+% Caso 2: Maria, 30 anos, grávida, com dor de cabeça e náusea
+gravidez(maria).
+dor_cabeca(maria).
+nausea(maria).
+
+% Caso 3: Pedro, 45 anos, cardiopata, com dor no peito e tontura
+cardiopata(pedro).
+dor_peito(pedro).
+tontura(pedro).
+
+% Caso 4: Ana, 25 anos, saudável, viajou recentemente, com febre e tosse
+viagem_recente(ana).
+febre(ana).
+tosse(ana).
+
+% Caso 5: Carlos, 60 anos, hipertenso, apenas com dor de cabeça leve
+hipertenso(carlos).
+dor_cabeca(carlos).
+
+% Pacientes adicionais para completar a base
+% Caso 6: Beatriz, 35 anos, com tosse leve, vacinada contra gripe
+vacinado_gripe(beatriz).
+tosse(beatriz).
+
+% Caso 7: Diego, 72 anos, diabético e hipertenso, com tontura
+idade_avancada(diego).
+diabetico(diego).
+hipertenso(diego).
+tontura(diego).
+
+% Caso 8: Fernanda, 28 anos, teve contato com pessoa doente, febre e dor de cabeça
+contato_doente(fernanda).
+febre(fernanda).
+dor_cabeca(fernanda).
+
+% ========================================
+% REGRAS DE TRIAGEM
+% ========================================
+
+% Prioridade URGENTE
+prioridade(Paciente, urgente) :-
+    dor_peito(Paciente),
+    falta_ar(Paciente).
+
+prioridade(Paciente, urgente) :-
+    febre(Paciente),
+    falta_ar(Paciente),
+    idade_avancada(Paciente).
+
+prioridade(Paciente, urgente) :-
+    dor_abdominal(Paciente),
+    nausea(Paciente).
+
+prioridade(Paciente, urgente) :-
+    tontura(Paciente),
+    dor_peito(Paciente),
+    cardiopata(Paciente).
+
+% Prioridade ALTA
+prioridade(Paciente, prioridade_alta) :-
+    febre(Paciente),
+    tosse(Paciente),
+    viagem_recente(Paciente),
+    \+ prioridade(Paciente, urgente).
+
+prioridade(Paciente, prioridade_alta) :-
+    febre(Paciente),
+    dor_cabeca(Paciente),
+    contato_doente(Paciente),
+    \+ prioridade(Paciente, urgente).
+
+prioridade(Paciente, prioridade_alta) :-
+    falta_ar(Paciente),
+    diabetico(Paciente),
+    \+ prioridade(Paciente, urgente).
+
+prioridade(Paciente, prioridade_alta) :-
+    tem_sintoma(Paciente),
+    gravidez(Paciente),
+    \+ prioridade(Paciente, urgente).
+
+% Prioridade MÉDIA
+prioridade(Paciente, prioridade_media) :-
+    febre(Paciente),
+    tosse(Paciente),
+    vacinado_gripe(Paciente),
+    \+ prioridade(Paciente, urgente),
+    \+ prioridade(Paciente, prioridade_alta).
+
+prioridade(Paciente, prioridade_media) :-
+    dor_cabeca(Paciente),
+    nausea(Paciente),
+    \+ tem_outros_sintomas_graves(Paciente),
+    \+ prioridade(Paciente, urgente),
+    \+ prioridade(Paciente, prioridade_alta).
+
+prioridade(Paciente, prioridade_media) :-
+    tosse(Paciente),
+    \+ febre(Paciente),
+    idade_avancada(Paciente),
+    \+ prioridade(Paciente, urgente),
+    \+ prioridade(Paciente, prioridade_alta).
+
+% Prioridade BAIXA
+prioridade(Paciente, prioridade_baixa) :-
+    dor_cabeca(Paciente),
+    \+ tem_fator_risco(Paciente),
+    \+ prioridade(Paciente, urgente),
+    \+ prioridade(Paciente, prioridade_alta),
+    \+ prioridade(Paciente, prioridade_media).
+
+prioridade(Paciente, prioridade_baixa) :-
+    tosse(Paciente),
+    \+ idade_avancada(Paciente),
+    \+ tem_fator_risco(Paciente),
+    \+ prioridade(Paciente, urgente),
+    \+ prioridade(Paciente, prioridade_alta),
+    \+ prioridade(Paciente, prioridade_media).
+
+% Regras de Recomendação
+encaminhar(Paciente, emergencia) :-
+    prioridade(Paciente, urgente).
+
+cuidado_especial(Paciente, monitorar_pressao) :-
+    prioridade(Paciente, prioridade_alta),
+    hipertenso(Paciente).
+
+cuidado_especial(Paciente, verificar_glicemia) :-
+    diabetico(Paciente).
+
+cuidado_especial(Paciente, isolamento_preventivo) :-
+    tem_sintomas_respiratorios(Paciente).
+
+% Regras Adicionais Criadas
+prioridade(Paciente, urgente) :-
+    febre(Paciente),
+    tosse(Paciente),
+    falta_ar(Paciente).
+
+cuidado_especial(Paciente, oxigenio) :-
+    febre(Paciente),
+    tosse(Paciente),
+    falta_ar(Paciente).
+
+prioridade(Paciente, urgente) :-
+    dor_abdominal(Paciente),
+    gravidez(Paciente).
+
+encaminhar(Paciente, obstetricia) :-
+    dor_abdominal(Paciente),
+    gravidez(Paciente).
+
+cuidado_especial(Paciente, monitorar_pressao_imediato) :-
+    tontura(Paciente),
+    hipertenso(Paciente).
+
+prioridade(Paciente, prioridade_alta) :-
+    idade_avancada(Paciente),
+    cardiopata(Paciente),
+    tem_sintoma(Paciente),
+    \+ prioridade(Paciente, urgente).
+
+cuidado_especial(Paciente, exame_covid) :-
+    viagem_recente(Paciente),
+    febre(Paciente).
+
+% ========================================
+% PREDICADOS AUXILIARES
+% ========================================
+
+% Verifica se paciente tem algum sintoma
+tem_sintoma(Paciente) :-
+    (febre(Paciente); tosse(Paciente); dor_cabeca(Paciente); 
+     dor_peito(Paciente); falta_ar(Paciente); nausea(Paciente); 
+     dor_abdominal(Paciente); tontura(Paciente)).
+
+% Verifica se tem fatores de risco
+tem_fator_risco(Paciente) :-
+    (idade_avancada(Paciente); diabetico(Paciente); hipertenso(Paciente); 
+     cardiopata(Paciente); gravidez(Paciente)).
+
+% Verifica sintomas respiratórios
+tem_sintomas_respiratorios(Paciente) :-
+    (tosse(Paciente); falta_ar(Paciente); febre(Paciente)).
+
+% Verifica outros sintomas graves além de dor de cabeça e náusea
+tem_outros_sintomas_graves(Paciente) :-
+    (dor_peito(Paciente); falta_ar(Paciente); dor_abdominal(Paciente); 
+     tontura(Paciente); febre(Paciente); tosse(Paciente)).
+
+% ========================================
+% CONSULTAS E TESTES
+% ========================================
+
+% Consulta 1: Qual a prioridade do paciente X?
+consultar_prioridade(Paciente, Prioridade) :-
+    prioridade(Paciente, Prioridade).
+
+% Consulta 2: Quais pacientes precisam de atendimento urgente?
+pacientes_urgentes(ListaPacientes) :-
+    findall(Paciente, prioridade(Paciente, urgente), ListaPacientes).
+
+% Consulta 3: Que cuidados especiais o paciente X requer?
+cuidados_necessarios(Paciente, ListaCuidados) :-
+    findall(Cuidado, cuidado_especial(Paciente, Cuidado), ListaCuidados).
+
+% Consulta 4: Quantos pacientes estão em cada categoria de prioridade?
+contar_prioridades(urgente, Quantidade) :-
+    findall(P, prioridade(P, urgente), Lista),
+    length(Lista, Quantidade).
+
+contar_prioridades(prioridade_alta, Quantidade) :-
+    findall(P, prioridade(P, prioridade_alta), Lista),
+    length(Lista, Quantidade).
+
+contar_prioridades(prioridade_media, Quantidade) :-
+    findall(P, prioridade(P, prioridade_media), Lista),
+    length(Lista, Quantidade).
+
+contar_prioridades(prioridade_baixa, Quantidade) :-
+    findall(P, prioridade(P, prioridade_baixa), Lista),
+    length(Lista, Quantidade).
+
+% Relatório completo de um paciente
+relatorio_paciente(Paciente) :-
+    write('=== RELATÓRIO DO PACIENTE: '), write(Paciente), write(' ==='), nl,
+    (prioridade(Paciente, P) -&gt; 
+        write('Prioridade: '), write(P), nl
+    ; 
+        write('Prioridade: não classificada'), nl),
+    write('Cuidados especiais necessários:'), nl,
+    forall(cuidado_especial(Paciente, C), 
+           (write('  - '), write(C), nl)),
+    (encaminhar(Paciente, Destino) -&gt; 
+        write('Encaminhamento: '), write(Destino), nl
+    ; 
+        true),
+    nl.
+
+% --- TESTES DOS CASOS ---
+
+% Caso 1: João
+% ?- consultar_prioridade(joao, Prioridade).
+% Resposta esperada: Prioridade = urgente (febre + falta_ar + idade_avançada)
+
+% ?- cuidados_necessarios(joao, Cuidados).
+% Resposta esperada: Cuidados = [verificar_glicemia, isolamento_preventivo, oxigenio]
+
+% Caso 2: Maria
+% ?- consultar_prioridade(maria, Prioridade).
+% Resposta esperada: Prioridade = prioridade_alta (gravidez + sintomas)
+
+% ?- cuidados_necessarios(maria, Cuidados).
+% Resposta esperada: Cuidados = []
+
+% Caso 3: Pedro
+% ?- consultar_prioridade(pedro, Prioridade).
+% Resposta esperada: Prioridade = urgente (tontura + dor_peito + cardiopata)
+
+% ?- encaminhar(pedro, Destino).
+% Resposta esperada: Destino = emergencia
+
+% Caso 4: Ana
+% ?- consultar_prioridade(ana, Prioridade).
+% Resposta esperada: Prioridade = prioridade_alta (febre + tosse + viagem_recente)
+
+% ?- cuidados_necessarios(ana, Cuidados).
+% Resposta esperada: Cuidados = [isolamento_preventivo, exame_covid]
+
+% Caso 5: Carlos
+% ?- consultar_prioridade(carlos, Prioridade).
+% Resposta esperada: Prioridade = prioridade_baixa (apenas dor de cabeça, hipertenso não ativado)
+
+% Consultas Gerais
+% ?- pacientes_urgentes(Lista).
+% Resposta esperada: Lista = [joao, pedro]
+
+% ?- contar_prioridades(urgente, N).
+% Resposta esperada: N = 2
+
+?- relatorio_paciente(joao).
+% Saída esperada: Relatório completo com prioridade urgente, 
+% cuidados especiais e encaminhamento para emergência</code></pre>
+</section>
+</section>
+<section id="problema-2-melhor-sistema-de-triagem-médica-automatizada" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="problema-2-melhor-sistema-de-triagem-médica-automatizada"><span class="header-section-number">10.3</span> Problema 2 Melhor: Sistema de Triagem Médica Automatizada</h2>
+<p>Um posto de saúde precisa de um sistema de triagem automática que classifique a urgência dos pacientes baseado em sintomas, histórico e fatores de risco. O sistema deve seguir protocolos médicos simplificados para determinar prioridades de atendimento.</p>
+<section id="especificação-do-domínio-2" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="especificação-do-domínio-2"><span class="header-section-number">10.3.1</span> Especificação do Domínio</h3>
+<section id="predicados-base-sintomas-e-condições-1" class="level4" data-number="10.3.1.1">
+<h4 data-number="10.3.1.1" class="anchored" data-anchor-id="predicados-base-sintomas-e-condições-1"><span class="header-section-number">10.3.1.1</span> Predicados Base (Sintomas e Condições)</h4>
+<p><strong>Sintomas Básicos</strong>:</p>
+<ul>
+<li>febre(Paciente) - Temperatura corporal elevada;</li>
+<li>tosse(Paciente) - Tosse presente;</li>
+<li>dor_cabeca(Paciente) - Dor de cabeça;</li>
+<li>dor_peito(Paciente) - Dor no peito;</li>
+<li>falta_ar(Paciente) - Dificuldade respiratória;</li>
+<li>nausea(Paciente) - Náusea ou vômito;</li>
+<li>dor_abdominal(Paciente) - Dor abdominal;</li>
+<li>tontura(Paciente) - Tontura ou vertigem.</li>
+</ul>
+<p><strong>Histórico e Fatores de Risco</strong>:</p>
+<ul>
+<li>idade_avancada(Paciente) - Acima de 65 anos;</li>
+<li>diabetico(Paciente) - Possui diabetes;</li>
+<li>hipertenso(Paciente) - Possui hipertensão;</li>
+<li>cardiopata(Paciente) - Problemas cardíacos;</li>
+<li>viagem_recente(Paciente) - Viajou nos últimos 14 dias;</li>
+<li>contato_doente(Paciente) - Contato com pessoa doente;</li>
+<li>vacinado_gripe(Paciente) - Vacinado contra gripe;</li>
+<li>gravidez(Paciente) - Mulher grávida.</li>
+</ul>
+</section>
+</section>
+<section id="tarefas-a-implementar-2" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="tarefas-a-implementar-2"><span class="header-section-number">10.3.2</span> Tarefas a Implementar</h3>
+<section id="parte-a-base-de-conhecimento-1" class="level4" data-number="10.3.2.1">
+<h4 data-number="10.3.2.1" class="anchored" data-anchor-id="parte-a-base-de-conhecimento-1"><span class="header-section-number">10.3.2.1</span> Parte A: Base de Conhecimento</h4>
+<ol type="1">
+<li>Crie uma base de dados com pelo menos <span class="math inline">\(8\)</span> pacientes fictícios;</li>
+<li>Implemente todas as <span class="math inline">\(17\)</span> regras como cláusulas de Horn;</li>
+<li>Adicione <span class="math inline">\(5\)</span> regras próprias baseadas em conhecimento médico básico.</li>
+</ol>
+</section>
+<section id="parte-b-casos-de-teste-1" class="level4" data-number="10.3.2.2">
+<h4 data-number="10.3.2.2" class="anchored" data-anchor-id="parte-b-casos-de-teste-1"><span class="header-section-number">10.3.2.2</span> Parte B: Casos de Teste</h4>
+<ul>
+<li><strong>Caso 1</strong>: João, 70 anos, diabético, com febre, tosse e falta de ar;</li>
+<li><strong>Caso 2</strong>: Maria, 30 anos, grávida, com dor de cabeça e náusea;</li>
+<li><strong>Caso 3</strong>: Pedro, 45 anos, cardiopata, com dor no peito e tontura;</li>
+<li><strong>Caso 4</strong>: Ana, 25 anos, saudável, viajou recentemente, com febre e tosse;</li>
+<li><strong>Caso 5</strong>: Carlos, 60 anos, hipertenso, apenas com dor de cabeça leve.</li>
+</ul>
+</section>
+<section id="parte-c-sistema-de-consultas-1" class="level4" data-number="10.3.2.3">
+<h4 data-number="10.3.2.3" class="anchored" data-anchor-id="parte-c-sistema-de-consultas-1"><span class="header-section-number">10.3.2.3</span> Parte C: Sistema de Consultas</h4>
+<ol type="1">
+<li>“Qual a prioridade do paciente X?”;</li>
+<li>“Quais pacientes precisam de atendimento urgente?”;</li>
+<li>“Que cuidados especiais o paciente X requer?”;</li>
+<li>“Quantos pacientes estão em cada categoria de prioridade?”.</li>
+</ol>
+</section>
+</section>
+<section id="resolução-do-problema-2-melhor-sistema-de-triagem-médica" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="resolução-do-problema-2-melhor-sistema-de-triagem-médica"><span class="header-section-number">10.3.3</span> Resolução do Problema 2 Melhor: Sistema de Triagem Médica</h3>
+<p>Esta solução demonstra que é possível implementar sistemas complexos de regras em Prolog sem recorrer a negações explícitas, mantendo a expressividade e melhorando a clareza do código. A abordagem resulta em um sistema mais robusto e eficiente para triagem médica automatizada.</p>
+<section id="solução-em-lógica-de-primeira-ordem-2" class="level4" data-number="10.3.3.1">
+<h4 data-number="10.3.3.1" class="anchored" data-anchor-id="solução-em-lógica-de-primeira-ordem-2"><span class="header-section-number">10.3.3.1</span> Solução em Lógica de Primeira Ordem</h4>
+<section id="definição-do-mundo-universo-de-discurso-2" class="level5" data-number="10.3.3.1.1">
+<h5 data-number="10.3.3.1.1" class="anchored" data-anchor-id="definição-do-mundo-universo-de-discurso-2"><span class="header-section-number">10.3.3.1.1</span> Definição do Mundo (Universo de Discurso)</h5>
+<ul>
+<li><p><strong>Constantes de pacientes</strong>: <span class="math display">\[joao, maria, pedro, ana, carlos, beatriz, diego, fernanda\]</span></p></li>
+<li><p><strong>Constantes de prioridades</strong>: <span class="math display">\[urgente, prioridade\_alta, prioridade\_media, prioridade\_baixa\]</span></p></li>
+<li><p><strong>Constantes de ações</strong>: <span class="math display">\[emergencia, monitorar\_pressao, verificar\_glicemia, isolamento\_preventivo, oxigenio, obstetricia, monitorar\_pressao\_imediato, exame\_covid\]</span></p></li>
+<li><p><strong>Predicados</strong>:</p>
+<ul>
+<li>Sintomas: <span class="math inline">\(Febre(p)\)</span>, <span class="math inline">\(Tosse(p)\)</span>, <span class="math inline">\(DorCabeca(p)\)</span>, <span class="math inline">\(DorPeito(p)\)</span>, <span class="math inline">\(FaltaAr(p)\)</span>, <span class="math inline">\(Nausea(p)\)</span>, <span class="math inline">\(DorAbdominal(p)\)</span>, <span class="math inline">\(Tontura(p)\)</span>;</li>
+<li>Fatores: <span class="math inline">\(IdadeAvancada(p)\)</span>, <span class="math inline">\(Diabetico(p)\)</span>, <span class="math inline">\(Hipertenso(p)\)</span>, <span class="math inline">\(Cardiopata(p)\)</span>, <span class="math inline">\(ViagemRecente(p)\)</span>, <span class="math inline">\(ContatoDoente(p)\)</span>, <span class="math inline">\(VacinadoGripe(p)\)</span>, <span class="math inline">\(Gravidez(p)\)</span>;</li>
+<li>Classificação: <span class="math inline">\(Prioridade(p, nivel)\)</span>;</li>
+<li>Ações: <span class="math inline">\(Encaminhar(p, destino)\)</span>, <span class="math inline">\(CuidadoEspecial(p, tipo)\)</span>;</li>
+<li>Auxiliares: <span class="math inline">\(SemFebre(p)\)</span>, <span class="math inline">\(SemFatorRisco(p)\)</span>, <span class="math inline">\(Jovem(p)\)</span>, <span class="math inline">\(ApenasSintomasLeves(p)\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="regras-em-lógica-de-primeira-ordem-2" class="level5" data-number="10.3.3.1.2">
+<h5 data-number="10.3.3.1.2" class="anchored" data-anchor-id="regras-em-lógica-de-primeira-ordem-2"><span class="header-section-number">10.3.3.1.2</span> Regras em Lógica de Primeira Ordem</h5>
+<p><strong>Prioridade URGENTE</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(DorPeito(p) \wedge FaltaAr(p) \rightarrow Prioridade(p, urgente)\)</span>;</li>
+<li><span class="math inline">\(Febre(p) \wedge FaltaAr(p) \wedge IdadeAvancada(p) \rightarrow Prioridade(p, urgente)\)</span>;</li>
+<li><span class="math inline">\(DorAbdominal(p) \wedge Nausea(p) \rightarrow Prioridade(p, urgente)\)</span>;</li>
+<li><span class="math inline">\(Tontura(p) \wedge DorPeito(p) \wedge Cardiopata(p) \rightarrow Prioridade(p, urgente)\)</span>.</li>
+</ol>
+<p><strong>Prioridade ALTA</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Febre(p) \wedge Tosse(p) \wedge ViagemRecente(p) \wedge SemUrgencia(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(Febre(p) \wedge DorCabeca(p) \wedge ContatoDoente(p) \wedge SemUrgencia(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(FaltaAr(p) \wedge Diabetico(p) \wedge SemUrgencia(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(TemSintoma(p) \wedge Gravidez(p) \wedge SemUrgencia(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>.</li>
+</ol>
+<p><strong>Prioridade MÉDIA</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Febre(p) \wedge Tosse(p) \wedge VacinadoGripe(p) \wedge SemPrioridadeSuper(p) \rightarrow Prioridade(p, prioridade\_media)\)</span>;</li>
+<li><span class="math inline">\(DorCabeca(p) \wedge Nausea(p) \wedge ApenasSintomasLeves(p) \wedge SemPrioridadeSuper(p) \rightarrow Prioridade(p, prioridade\_media)\)</span>;</li>
+<li><span class="math inline">\(Tosse(p) \wedge SemFebre(p) \wedge IdadeAvancada(p) \wedge SemPrioridadeSuper(p) \rightarrow Prioridade(p, prioridade\_media)\)</span>.</li>
+</ol>
+<p><strong>Prioridade BAIXA</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(DorCabeca(p) \wedge SemFatorRisco(p) \wedge SemPrioridadeElevada(p) \rightarrow Prioridade(p, prioridade\_baixa)\)</span>;</li>
+<li><span class="math inline">\(Tosse(p) \wedge Jovem(p) \wedge SemFatorRisco(p) \wedge SemPrioridadeElevada(p) \rightarrow Prioridade(p, prioridade\_baixa)\)</span>.</li>
+</ol>
+<p><strong>Regras de Recomendação</strong>:</p>
+<ol type="1">
+<li><span class="math inline">\(Prioridade(p, urgente) \rightarrow Encaminhar(p, emergencia)\)</span>;</li>
+<li><span class="math inline">\(Prioridade(p, prioridade\_alta) \wedge Hipertenso(p) \rightarrow CuidadoEspecial(p, monitorar\_pressao)\)</span>;</li>
+<li><span class="math inline">\(\forall nivel(Prioridade(p, nivel) \wedge Diabetico(p) \rightarrow CuidadoEspecial(p, verificar\_glicemia))\)</span>;</li>
+<li><span class="math inline">\((Tosse(p) \vee FaltaAr(p) \vee Febre(p)) \rightarrow CuidadoEspecial(p, isolamento\_preventivo)\)</span>.</li>
+</ol>
+</section>
+<section id="regras-adicionais-2" class="level5" data-number="10.3.3.1.3">
+<h5 data-number="10.3.3.1.3" class="anchored" data-anchor-id="regras-adicionais-2"><span class="header-section-number">10.3.3.1.3</span> Regras Adicionais</h5>
+<ol type="1">
+<li><span class="math inline">\(Febre(p) \wedge Tosse(p) \wedge FaltaAr(p) \rightarrow Prioridade(p, urgente) \wedge CuidadoEspecial(p, oxigenio)\)</span>;</li>
+<li><span class="math inline">\(DorAbdominal(p) \wedge Gravidez(p) \rightarrow Prioridade(p, urgente) \wedge Encaminhar(p, obstetricia)\)</span>;</li>
+<li><span class="math inline">\(Tontura(p) \wedge Hipertenso(p) \rightarrow CuidadoEspecial(p, monitorar\_pressao\_imediato)\)</span>;</li>
+<li><span class="math inline">\(IdadeAvancada(p) \wedge Cardiopata(p) \wedge TemSintoma(p) \wedge SemUrgencia(p) \rightarrow Prioridade(p, prioridade\_alta)\)</span>;</li>
+<li><span class="math inline">\(ViagemRecente(p) \wedge Febre(p) \rightarrow CuidadoEspecial(p, exame\_covid)\)</span>.</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="solução-em-prolog-2" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="solução-em-prolog-2"><span class="header-section-number">10.3.4</span> Solução em Prolog</h3>
+<pre><code>% ========================================
+% FATOS (Base de Dados de Pacientes)
+% ========================================
+
+% Caso 1: João, 70 anos, diabético, com febre, tosse e falta de ar
+idade_avancada(joao).
+diabetico(joao).
+febre(joao).
+tosse(joao).
+falta_ar(joao).
+
+% Caso 2: Maria, 30 anos, grávida, com dor de cabeça e náusea
+gravidez(maria).
+dor_cabeca(maria).
+nausea(maria).
+
+% Caso 3: Pedro, 45 anos, cardiopata, com dor no peito e tontura
+cardiopata(pedro).
+dor_peito(pedro).
+tontura(pedro).
+
+% Caso 4: Ana, 25 anos, saudável, viajou recentemente, com febre e tosse
+viagem_recente(ana).
+febre(ana).
+tosse(ana).
+
+% Caso 5: Carlos, 60 anos, hipertenso, apenas com dor de cabeça leve
+hipertenso(carlos).
+dor_cabeca(carlos).
+
+% Pacientes adicionais para completar a base
+% Caso 6: Beatriz, 35 anos, com tosse leve, vacinada contra gripe
+vacinado_gripe(beatriz).
+tosse(beatriz).
+febre(beatriz).  % Adicionado para testar prioridade média
+
+% Caso 7: Diego, 72 anos, diabético e hipertenso, com tontura
+idade_avancada(diego).
+diabetico(diego).
+hipertenso(diego).
+tontura(diego).
+
+% Caso 8: Fernanda, 28 anos, teve contato com pessoa doente, febre e dor de cabeça
+contato_doente(fernanda).
+febre(fernanda).
+dor_cabeca(fernanda).
+
+% ========================================
+% PREDICADOS AUXILIARES POSITIVOS
+% ========================================
+
+% Define pacientes sem febre (todos que não têm febre listados explicitamente)
+sem_febre(pedro).
+sem_febre(carlos).
+sem_febre(diego).
+sem_febre(maria).
+
+% Define pacientes jovens (não idosos)
+jovem(maria).
+jovem(ana).
+jovem(beatriz).
+jovem(fernanda).
+
+% Pacientes sem fatores de risco
+sem_fator_risco(ana).
+sem_fator_risco(beatriz).
+sem_fator_risco(fernanda).
+
+% Verifica se paciente tem algum sintoma
+tem_sintoma(Paciente) :-
+    febre(Paciente).
+tem_sintoma(Paciente) :-
+    tosse(Paciente).
+tem_sintoma(Paciente) :-
+    dor_cabeca(Paciente).
+tem_sintoma(Paciente) :-
+    dor_peito(Paciente).
+tem_sintoma(Paciente) :-
+    falta_ar(Paciente).
+tem_sintoma(Paciente) :-
+    nausea(Paciente).
+tem_sintoma(Paciente) :-
+    dor_abdominal(Paciente).
+tem_sintoma(Paciente) :-
+    tontura(Paciente).
+
+% Verifica se tem fatores de risco
+tem_fator_risco(Paciente) :-
+    idade_avancada(Paciente).
+tem_fator_risco(Paciente) :-
+    diabetico(Paciente).
+tem_fator_risco(Paciente) :-
+    hipertenso(Paciente).
+tem_fator_risco(Paciente) :-
+    cardiopata(Paciente).
+tem_fator_risco(Paciente) :-
+    gravidez(Paciente).
+
+% Verifica sintomas respiratórios
+tem_sintomas_respiratorios(Paciente) :-
+    tosse(Paciente).
+tem_sintomas_respiratorios(Paciente) :-
+    falta_ar(Paciente).
+tem_sintomas_respiratorios(Paciente) :-
+    febre(Paciente).
+
+% Verifica se tem apenas sintomas leves (sem sintomas graves)
+apenas_sintomas_leves(Paciente) :-
+    tem_sintoma(Paciente),
+    sem_sintomas_graves(Paciente).
+
+% Define pacientes sem sintomas graves
+sem_sintomas_graves(Paciente) :-
+    sem_dor_peito(Paciente),
+    sem_falta_ar(Paciente),
+    sem_dor_abdominal(Paciente).
+
+% Predicados para ausência de sintomas específicos
+sem_dor_peito(joao).
+sem_dor_peito(maria).
+sem_dor_peito(ana).
+sem_dor_peito(carlos).
+sem_dor_peito(beatriz).
+sem_dor_peito(diego).
+sem_dor_peito(fernanda).
+
+sem_falta_ar(maria).
+sem_falta_ar(pedro).
+sem_falta_ar(ana).
+sem_falta_ar(carlos).
+sem_falta_ar(beatriz).
+sem_falta_ar(diego).
+sem_falta_ar(fernanda).
+
+sem_dor_abdominal(joao).
+sem_dor_abdominal(maria).
+sem_dor_abdominal(pedro).
+sem_dor_abdominal(ana).
+sem_dor_abdominal(carlos).
+sem_dor_abdominal(beatriz).
+sem_dor_abdominal(diego).
+sem_dor_abdominal(fernanda).
+
+% ========================================
+% REGRAS DE TRIAGEM - PRIORIDADE URGENTE
+% ========================================
+
+% Regra 1: Dor no peito + falta de ar
+prioridade_urgente(Paciente) :-
+    dor_peito(Paciente),
+    falta_ar(Paciente).
+
+% Regra 2: Febre + falta de ar + idade avançada
+prioridade_urgente(Paciente) :-
+    febre(Paciente),
+    falta_ar(Paciente),
+    idade_avancada(Paciente).
+
+% Regra 3: Dor abdominal + náusea
+prioridade_urgente(Paciente) :-
+    dor_abdominal(Paciente),
+    nausea(Paciente).
+
+% Regra 4: Tontura + dor no peito + cardiopata
+prioridade_urgente(Paciente) :-
+    tontura(Paciente),
+    dor_peito(Paciente),
+    cardiopata(Paciente).
+
+% Regra adicional 1: Febre + tosse + falta de ar (tríade respiratória grave)
+prioridade_urgente(Paciente) :-
+    febre(Paciente),
+    tosse(Paciente),
+    falta_ar(Paciente).
+
+% Regra adicional 2: Dor abdominal + gravidez
+prioridade_urgente(Paciente) :-
+    dor_abdominal(Paciente),
+    gravidez(Paciente).
+
+% ========================================
+% REGRAS DE TRIAGEM - PRIORIDADE ALTA
+% ========================================
+
+% Define pacientes sem urgência
+sem_urgencia(Paciente) :-
+    paciente_conhecido(Paciente),
+    nao_urgente(Paciente).
+
+% Lista de pacientes não urgentes (calculado manualmente ou por outro predicado)
+nao_urgente(maria).
+nao_urgente(ana).
+nao_urgente(carlos).
+nao_urgente(beatriz).
+nao_urgente(diego).
+nao_urgente(fernanda).
+
+% Regra 5: Febre + tosse + viagem recente
+prioridade_alta(Paciente) :-
+    febre(Paciente),
+    tosse(Paciente),
+    viagem_recente(Paciente),
+    sem_urgencia(Paciente).
+
+% Regra 6: Febre + dor de cabeça + contato com doente
+prioridade_alta(Paciente) :-
+    febre(Paciente),
+    dor_cabeca(Paciente),
+    contato_doente(Paciente),
+    sem_urgencia(Paciente).
+
+% Regra 7: Falta de ar + diabético
+prioridade_alta(Paciente) :-
+    falta_ar(Paciente),
+    diabetico(Paciente),
+    sem_urgencia(Paciente).
+
+% Regra 8: Qualquer sintoma + gravidez
+prioridade_alta(Paciente) :-
+    tem_sintoma(Paciente),
+    gravidez(Paciente),
+    sem_urgencia(Paciente).
+
+% Regra adicional 4: Idade avançada + cardiopata + sintomas
+prioridade_alta(Paciente) :-
+    idade_avancada(Paciente),
+    cardiopata(Paciente),
+    tem_sintoma(Paciente),
+    sem_urgencia(Paciente).
+
+% ========================================
+% REGRAS DE TRIAGEM - PRIORIDADE MÉDIA
+% ========================================
+
+% Define pacientes sem prioridade superior (urgente ou alta)
+sem_prioridade_superior(Paciente) :-
+    paciente_conhecido(Paciente),
+    sem_urgencia(Paciente),
+    sem_alta_prioridade(Paciente).
+
+% Lista de pacientes sem alta prioridade
+sem_alta_prioridade(carlos).
+sem_alta_prioridade(beatriz).
+sem_alta_prioridade(diego).
+
+% Regra 9: Febre + tosse + vacinado gripe
+prioridade_media(Paciente) :-
+    febre(Paciente),
+    tosse(Paciente),
+    vacinado_gripe(Paciente),
+    sem_prioridade_superior(Paciente).
+
+% Regra 10: Dor de cabeça + náusea (apenas sintomas leves)
+prioridade_media(Paciente) :-
+    dor_cabeca(Paciente),
+    nausea(Paciente),
+    apenas_sintomas_leves(Paciente),
+    sem_prioridade_superior(Paciente).
+
+% Regra 11: Tosse sem febre + idade avançada
+prioridade_media(Paciente) :-
+    tosse(Paciente),
+    sem_febre(Paciente),
+    idade_avancada(Paciente),
+    sem_prioridade_superior(Paciente).
+
+% ========================================
+% REGRAS DE TRIAGEM - PRIORIDADE BAIXA
+% ========================================
+
+% Define pacientes sem prioridade elevada
+sem_prioridade_elevada(Paciente) :-
+    paciente_conhecido(Paciente),
+    sem_prioridade_superior(Paciente),
+    sem_media_prioridade(Paciente).
+
+% Lista de pacientes sem média prioridade
+sem_media_prioridade(carlos).
+
+% Regra 12: Apenas dor de cabeça sem fatores de risco
+prioridade_baixa(Paciente) :-
+    dor_cabeca(Paciente),
+    sem_fator_risco(Paciente),
+    sem_prioridade_elevada(Paciente).
+
+% Regra 13: Tosse leve (jovem, sem fatores de risco)
+prioridade_baixa(Paciente) :-
+    tosse(Paciente),
+    jovem(Paciente),
+    sem_fator_risco(Paciente),
+    sem_prioridade_elevada(Paciente).
+
+% ========================================
+% PREDICADO UNIFICADO DE PRIORIDADE
+% ========================================
+
+prioridade(Paciente, urgente) :-
+    prioridade_urgente(Paciente).
+
+prioridade(Paciente, prioridade_alta) :-
+    prioridade_alta(Paciente).
+
+prioridade(Paciente, prioridade_media) :-
+    prioridade_media(Paciente).
+
+prioridade(Paciente, prioridade_baixa) :-
+    prioridade_baixa(Paciente).
+
+% ========================================
+% REGRAS DE RECOMENDAÇÃO
+% ========================================
+
+% Regra 14: Urgente → emergência
+encaminhar(Paciente, emergencia) :-
+    prioridade(Paciente, urgente).
+
+% Regra 15: Prioridade alta + hipertenso → monitorar pressão
+cuidado_especial(Paciente, monitorar_pressao) :-
+    prioridade(Paciente, prioridade_alta),
+    hipertenso(Paciente).
+
+% Regra 16: Diabético → verificar glicemia
+cuidado_especial(Paciente, verificar_glicemia) :-
+    diabetico(Paciente).
+
+% Regra 17: Sintomas respiratórios → isolamento
+cuidado_especial(Paciente, isolamento_preventivo) :-
+    tem_sintomas_respiratorios(Paciente).
+
+% Regras adicionais de cuidados especiais
+cuidado_especial(Paciente, oxigenio) :-
+    febre(Paciente),
+    tosse(Paciente),
+    falta_ar(Paciente).
+
+encaminhar(Paciente, obstetricia) :-
+    dor_abdominal(Paciente),
+    gravidez(Paciente).
+
+cuidado_especial(Paciente, monitorar_pressao_imediato) :-
+    tontura(Paciente),
+    hipertenso(Paciente).
+
+cuidado_especial(Paciente, exame_covid) :-
+    viagem_recente(Paciente),
+    febre(Paciente).
+
+% ========================================
+% PREDICADOS AUXILIARES PARA CONSULTAS
+% ========================================
+
+% Lista todos os pacientes conhecidos no sistema
+paciente_conhecido(joao).
+paciente_conhecido(maria).
+paciente_conhecido(pedro).
+paciente_conhecido(ana).
+paciente_conhecido(carlos).
+paciente_conhecido(beatriz).
+paciente_conhecido(diego).
+paciente_conhecido(fernanda).
+
+% ========================================
+% CONSULTAS E TESTES
+% ========================================
+
+% Consulta 1: Qual a prioridade do paciente X?
+consultar_prioridade(Paciente, Prioridade) :-
+    prioridade(Paciente, Prioridade).
+
+% Consulta 2: Quais pacientes precisam de atendimento urgente?
+pacientes_urgentes(ListaPacientes) :-
+    findall(Paciente, prioridade(Paciente, urgente), ListaPacientes).
+
+% Consulta 3: Que cuidados especiais o paciente X requer?
+cuidados_necessarios(Paciente, ListaCuidados) :-
+    findall(Cuidado, cuidado_especial(Paciente, Cuidado), ListaCuidadosDup),
+    list_to_set(ListaCuidadosDup, ListaCuidados).
+
+% Consulta 4: Quantos pacientes estão em cada categoria de prioridade?
+contar_prioridades(urgente, Quantidade) :-
+    findall(P, prioridade(P, urgente), Lista),
+    length(Lista, Quantidade).
+
+contar_prioridades(prioridade_alta, Quantidade) :-
+    findall(P, prioridade(P, prioridade_alta), Lista),
+    length(Lista, Quantidade).
+
+contar_prioridades(prioridade_media, Quantidade) :-
+    findall(P, prioridade(P, prioridade_media), Lista),
+    length(Lista, Quantidade).
+
+contar_prioridades(prioridade_baixa, Quantidade) :-
+    findall(P, prioridade(P, prioridade_baixa), Lista),
+    length(Lista, Quantidade).
+
+% Relatório completo de um paciente
+relatorio_paciente(Paciente) :-
+    write('=== RELATÓRIO DO PACIENTE: '), write(Paciente), write(' ==='), nl,
+    (prioridade(Paciente, P) -&gt; 
+        write('Prioridade: '), write(P), nl
+    ; 
+        write('Prioridade: não classificada'), nl),
+    write('Cuidados especiais necessários:'), nl,
+    forall(cuidado_especial(Paciente, C), 
+           (write('  - '), write(C), nl)),
+    (encaminhar(Paciente, Destino) -&gt; 
+        write('Encaminhamento: '), write(Destino), nl
+    ; 
+        true),
+    nl.
+
+% Resumo geral do sistema
+resumo_sistema :-
+    write('=== RESUMO DO SISTEMA DE TRIAGEM ==='), nl,
+    contar_prioridades(urgente, U),
+    contar_prioridades(prioridade_alta, A),
+    contar_prioridades(prioridade_media, M),
+    contar_prioridades(prioridade_baixa, B),
+    write('Pacientes URGENTES: '), write(U), nl,
+    write('Pacientes PRIORIDADE ALTA: '), write(A), nl,
+    write('Pacientes PRIORIDADE MÉDIA: '), write(M), nl,
+    write('Pacientes PRIORIDADE BAIXA: '), write(B), nl,
+    pacientes_urgentes(ListaUrgentes),
+    write('Pacientes que precisam atendimento urgente: '), write(ListaUrgentes), nl.
+
+% Execução dos Casos de Teste
+
+
+% --- TESTES DOS CASOS ---
+
+% Caso 1: João
+% ?- consultar_prioridade(joao, Prioridade).
+% Resposta esperada: Prioridade = urgente 
+% Justificativa: febre + falta_ar + idade_avançada (Regra 2)
+
+% ?- cuidados_necessarios(joao, Cuidados).
+% Resposta esperada: Cuidados = [verificar_glicemia, isolamento_preventivo, oxigenio]
+% Justificativa: diabético + sintomas respiratórios + tríade grave
+
+% Caso 2: Maria
+% ?- consultar_prioridade(maria, Prioridade).
+% Resposta esperada: Prioridade = prioridade_alta 
+% Justificativa: gravidez + sintomas (Regra 8)
+
+% ?- cuidados_necessarios(maria, Cuidados).
+% Resposta esperada: Cuidados = []
+% Justificativa: sem condições especiais além da gravidez
+
+% Caso 3: Pedro
+% ?- consultar_prioridade(pedro, Prioridade).
+% Resposta esperada: Prioridade = urgente 
+% Justificativa: tontura + dor_peito + cardiopata (Regra 4)
+
+% ?- encaminhar(pedro, Destino).
+% Resposta esperada: Destino = emergencia
+% Justificativa: prioridade urgente
+
+% Caso 4: Ana
+% ?- consultar_prioridade(ana, Prioridade).
+% Resposta esperada: Prioridade = prioridade_alta 
+% Justificativa: febre + tosse + viagem_recente (Regra 5)
+
+% ?- cuidados_necessarios(ana, Cuidados).
+% Resposta esperada: Cuidados = [isolamento_preventivo, exame_covid]
+% Justificativa: sintomas respiratórios + viagem recente
+
+% Caso 5: Carlos
+% ?- consultar_prioridade(carlos, Prioridade).
+% Resposta esperada: Prioridade = prioridade_baixa 
+% Justificativa: apenas dor de cabeça, sem outros fatores graves
+
+% ?- cuidados_necessarios(carlos, Cuidados).
+% Resposta esperada: Cuidados = []
+% Justificativa: hipertenso mas sem sintomas que exijam monitoramento
+
+% Consultas Gerais
+% ?- pacientes_urgentes(Lista).
+% Resposta esperada: Lista = [joao, pedro]
+
+% ?- contar_prioridades(urgente, N).
+% Resposta esperada: N = 2
+
+% ?- resumo_sistema.
+% Saída esperada: 
+% === RESUMO DO SISTEMA DE TRIAGEM ===
+% Pacientes URGENTES: 2
+% Pacientes PRIORIDADE ALTA: 3
+% Pacientes PRIORIDADE MÉDIA: 1
+% Pacientes PRIORIDADE BAIXA: 1
+% Pacientes que precisam atendimento urgente: [joao, pedro]
+
+% ?- relatorio_paciente(joao).
+% Saída esperada: 
+% === RELATÓRIO DO PACIENTE: joao ===
+% Prioridade: urgente
+% Cuidados especiais necessários:
+%   - verificar_glicemia
+%   - isolamento_preventivo
+%   - oxigenio
+% Encaminhamento: emergencia</code></pre>
+</section>
+<section id="vantagens-da-abordagem-positiva" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="vantagens-da-abordagem-positiva"><span class="header-section-number">10.3.5</span> Vantagens da Abordagem Positiva</h3>
+<p>A eliminação de negações explícitas (<code>\+</code>) trouxe várias melhorias:</p>
+<ol type="1">
+<li><p><strong>Maior Clareza Declarativa</strong>: Predicados como <code>sem_febre</code>, <code>jovem</code> e <code>sem_fator_risco</code> expressam condições de forma positiva e clara.</p></li>
+<li><p><strong>Melhor Performance</strong>: Evitamos backtracking desnecessário causado por negações, tornando as consultas mais eficientes.</p></li>
+<li><p><strong>Manutenibilidade</strong>: Adicionar novos pacientes requer apenas declarar seus atributos positivos, sem precisar raciocinar sobre negações.</p></li>
+<li><p><strong>Completude da Base</strong>: Todos os fatos relevantes são explicitamente declarados, facilitando a compreensão do estado completo do sistema.</p></li>
+</ol>
+<section id="estratégias-utilizadas" class="level4" data-number="10.3.5.1">
+<h4 data-number="10.3.5.1" class="anchored" data-anchor-id="estratégias-utilizadas"><span class="header-section-number">10.3.5.1</span> Estratégias Utilizadas</h4>
+<ol type="1">
+<li><p><strong>Predicados Complementares</strong>: Para cada condição que antes seria negada, criamos um predicado positivo correspondente (<code>sem_febre</code>, <code>sem_urgencia</code>, etc.).</p></li>
+<li><p><strong>Hierarquia de Prioridades</strong>: Estabelecemos predicados auxiliares que determinam explicitamente quando um paciente não está em determinada categoria.</p></li>
+<li><p><strong>Listas Explícitas</strong>: Mantemos listas de pacientes em cada categoria auxiliar, tornando o raciocínio mais transparente.</p></li>
+<li><p><strong>Predicados de Estado</strong>: Criamos predicados que descrevem estados completos (<code>apenas_sintomas_leves</code>, <code>sem_sintomas_graves</code>), em vez de negar condições individuais.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="problema-3-sistema-especialista-astroguia" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="problema-3-sistema-especialista-astroguia"><span class="header-section-number">10.4</span> Problema 3: Sistema Especialista “AstroGuia”</h2>
+<p>A Agência Espacial Internacional precisa de um novo sistema de consulta inteligente, o “AstroGuia”, para ajudar astrônomos a rapidamente classificarem e entenderem relações entre objetos celestes. Você foi encarregado de construir o protótipo deste sistema usando Prolog.</p>
+<p>O sistema deve ser alimentado com uma lista de dados primários e, a partir deles, deve ser capaz de responder a perguntas complexas que exigem raciocínio. Cabe a você determinar quais são as perguntas complexas e quão complexas elas serão.</p>
+<p>Sua única fonte de informação é a lista a seguir:</p>
+<ul>
+<li>O Sol é uma estrela;</li>
+<li>A Terra, Marte, Vênus, Júpiter, Netuno, Saturno e Mercúrio são planetas que orbitam o Sol;</li>
+<li>A Lua é um satélite da Terra, Fobos e Deimos são satélites de Marte, Ganimedes e Io são satélites de Júpiter. Cada satélite orbita o seu planeta;</li>
+<li>A Terra, Marte, Mercúrio e Venus são planetas rochosas;</li>
+<li>Júpiter, Saturno e Netuno são planetas gasosos.</li>
+</ul>
+<p>Você deve implementar a lógica (as <strong>regras</strong>) que permita ao AstroGuia realizar as seguintes tarefas:</p>
+<ol type="1">
+<li><strong>Classificação Rápida</strong>: O sistema precisa de uma maneira eficiente de confirmar se um objeto é um planeta. Crie o predicado <code>planeta/1</code>.</li>
+<li><strong>Filtragem por Composição</strong>: Astrônomos frequentemente buscam por planetas com características específicas. Implemente o predicado <code>planeta_rochoso/1</code> para encontrar todos os planetas que são rochosos.</li>
+<li><strong>Análise de Sistemas Lua-Planeta</strong>: Uma consulta comum é verificar hierarquias. O sistema precisa de um predicado <code>satelite_de/2</code> para confirmar se um corpo celeste é um satélite de outro corpo que seja, de fato, um planeta.</li>
+<li><strong>Mapeamento do Sistema Solar</strong>: Para estudos locais, os cientistas precisam listar todos os corpos que orbitam diretamente nossa estrela. Implemente o predicado <code>sistema_solar/1</code>.</li>
+</ol>
+<section id="resolução-do-problema-sistema-especialista-astroguia" class="level3" data-number="10.4.1">
+<h3 data-number="10.4.1" class="anchored" data-anchor-id="resolução-do-problema-sistema-especialista-astroguia"><span class="header-section-number">10.4.1</span> Resolução do Problema: Sistema Especialista “AstroGuia”</h3>
+<p>Esta solução aborda o problema proposto em duas etapas: primeiro, a modelagem do conhecimento usando a sintaxe formal da Lógica de Primeira Ordem (LPO) e, em segundo lugar, a implementação prática dessa lógica em uma base de conhecimento Prolog.</p>
+<section id="solução-em-lógica-de-primeira-ordem-3" class="level4" data-number="10.4.1.1">
+<h4 data-number="10.4.1.1" class="anchored" data-anchor-id="solução-em-lógica-de-primeira-ordem-3"><span class="header-section-number">10.4.1.1</span> Solução em Lógica de Primeira Ordem</h4>
+<p><strong>Definição do Mundo</strong>:</p>
+<ul>
+<li><p><strong>Constantes</strong>: <span class="math inline">\(sol, terra, marte, venus, jupiter, netuno, saturno, mercurio, lua, fobos, deimos, ganimedes, io, estrela, planeta, satelite, rochoso, gasoso\)</span>.</p></li>
+<li><p><strong>Predicados</strong>:</p>
+<ul>
+<li><span class="math inline">\(Tipo(objeto, categoria)\)</span>: O objeto pertence à categoria.</li>
+<li><span class="math inline">\(Orbita(orbitante, orbitado)\)</span>: O objeto orbitante gira em torno do orbitado.</li>
+<li><span class="math inline">\(Composicao(objeto, tipo)\)</span>: O objeto possui uma composição física.</li>
+</ul></li>
+</ul>
+<p>A seguir, a tradução da fonte de informação para axiomas lógicos.</p>
+<p><strong>Fatos sobre <span class="math inline">\(Tipo\)</span></strong>:</p>
+<p><span class="math display">\[
+Tipo(sol, estrela) \\
+Tipo(terra, planeta) \\
+Tipo(marte, planeta) \\
+Tipo(venus, planeta) \\
+Tipo(jupiter, planeta) \\
+Tipo(netuno, planeta) \\
+Tipo(saturno, planeta) \\
+Tipo(mercurio, planeta) \\
+Tipo(lua, satelite) \\
+Tipo(fobos, satelite) \\
+Tipo(deimos, satelite) \\
+Tipo(ganimedes, satelite) \\
+Tipo(io, satelite)
+\]</span></p>
+<p><strong>Fatos sobre <span class="math inline">\(Orbita\)</span></strong>:</p>
+<p><span class="math display">\[
+Orbita(terra, sol) \\
+Orbita(marte, sol) \\
+Orbita(venus, sol) \\
+Orbita(jupiter, sol) \\
+Orbita(netuno, sol) \\
+Orbita(saturno, sol) \\
+Orbita(mercurio, sol) \\
+Orbita(lua, terra) \\
+Orbita(fobos, marte) \\
+Orbita(deimos, marte) \\
+Orbita(ganimedes, jupiter) \\
+Orbita(io, jupiter)
+\]</span></p>
+<p><strong>Fatos sobre <span class="math inline">\(Composicao\)</span></strong>:</p>
+<p><span class="math display">\[
+Composicao(terra, rochoso) \\
+Composicao(marte, rochoso) \\
+Composicao(mercurio, rochoso) \\
+Composicao(venus, rochoso) \\
+Composicao(jupiter, gasoso) \\
+Composicao(saturno, gasoso) \\
+Composicao(netuno, gasoso)
+\]</span></p>
+<p><strong>Regras</strong>:</p>
+<p>As regras dedutivas correspondem aos requisitos do sistema.</p>
+<ol type="1">
+<li><p><strong>Regra <code>planeta</code></strong>: Para todo <span class="math inline">\(x\)</span>, <span class="math inline">\(x\)</span> é um planeta se seu tipo for planeta.</p>
+<p><span class="math display">\[\forall x (Tipo(x, planeta) \rightarrow Planeta(x))\]</span></p></li>
+<li><p><strong>Regra <code>planeta_rochoso</code></strong>: Para todo <span class="math inline">\(x\)</span>, <span class="math inline">\(x\)</span> é um planeta rochoso se <span class="math inline">\(x\)</span> é um planeta E (<span class="math inline">\(\wedge\)</span>) sua composição é rochosa.</p>
+<p><span class="math display">\[\forall x (Planeta(x) \wedge Composicao(x, rochoso) \rightarrow PlanetaRochoso(x))\]</span></p></li>
+<li><p><strong>Regra <code>satelite_de</code></strong>: Para todos <span class="math inline">\(x\)</span> e <span class="math inline">\(y\)</span>, <span class="math inline">\(x\)</span> é um satélite de <span class="math inline">\(y\)</span> se <span class="math inline">\(x\)</span> orbita <span class="math inline">\(y\)</span> E <span class="math inline">\(y\)</span> é um planeta.</p>
+<p><span class="math display">\[\forall x \forall y (Orbita(x, y) \wedge Planeta(y) \rightarrow SateliteDe(x, y))\]</span></p></li>
+<li><p><strong>Regra <code>sistema_solar</code></strong>: Para todo <span class="math inline">\(x\)</span>, <span class="math inline">\(x\)</span> pertence ao sistema solar se <span class="math inline">\(x\)</span> orbita o sol.</p>
+<p><span class="math display">\[\forall x (Orbita(x, sol) \rightarrow SistemaSolar(x))\]</span></p></li>
+</ol>
+<p><strong>Definição das Consultas</strong>:</p>
+<p>Aqui definimos as perguntas complexas que nosso sistema deve ser capaz de responder.</p>
+<ol type="1">
+<li><p><strong>Consulta 1: Quais planetas rochosos possuem satélites?</strong> “Existe um <span class="math inline">\(x\)</span> e existe um <span class="math inline">\(y\)</span> tal que <span class="math inline">\(x\)</span> é um planeta rochoso E <span class="math inline">\(y\)</span> é um satélite de <span class="math inline">\(x\)</span>?”</p>
+<p><span class="math display">\[\exists x \exists y (PlanetaRochoso(x) \wedge SateliteDe(y, x))\]</span></p></li>
+<li><p><strong>Consulta 2: Quais corpos orbitam um planeta gasoso?</strong> “Existe um <span class="math inline">\(x\)</span> e existe um <span class="math inline">\(y\)</span> tal que <span class="math inline">\(x\)</span> orbita <span class="math inline">\(y\)</span> E a composição de <span class="math inline">\(y\)</span> é gasosa?”</p>
+<p><span class="math display">\[\exists x \exists y (Orbita(x, y) \wedge Composicao(y, gasoso))\]</span></p></li>
+<li><p><strong>Consulta 3: Quais satélites estão em um sistema “neto-avô” com o Sol? (i.e., orbitam um planeta que orbita o Sol)</strong> “Existe um <span class="math inline">\(x\)</span> e um <span class="math inline">\(y\)</span> tal que <span class="math inline">\(x\)</span> é um satélite de <span class="math inline">\(y\)</span> E <span class="math inline">\(y\)</span> orbita o Sol?”</p>
+<p><span class="math display">\[\exists x \exists y (SateliteDe(x, y) \wedge Orbita(y, sol))\]</span></p></li>
+</ol>
+</section>
+</section>
+<section id="solução-em-prolog-3" class="level3" data-number="10.4.2">
+<h3 data-number="10.4.2" class="anchored" data-anchor-id="solução-em-prolog-3"><span class="header-section-number">10.4.2</span> 2. Solução em Prolog</h3>
+<p>A seguir, a implementação da lógica formal em uma base de conhecimento Prolog.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% --- FATOS ---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">% tipo(Corpo, Categoria)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>tipo(sol<span class="kw">,</span> estrela)<span class="kw">.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>tipo(terra<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tipo(marte<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>tipo(venus<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>tipo(jupiter<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>tipo(netuno<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>tipo(saturno<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>tipo(mercurio<span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>tipo(lua<span class="kw">,</span> satelite)<span class="kw">.</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>tipo(fobos<span class="kw">,</span> satelite)<span class="kw">.</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>tipo(deimos<span class="kw">,</span> satelite)<span class="kw">.</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>tipo(ganimedes<span class="kw">,</span> satelite)<span class="kw">.</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>tipo(io<span class="kw">,</span> satelite)<span class="kw">.</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">% orbita(Orbitante, Orbitado)</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>orbita(terra<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>orbita(marte<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>orbita(venus<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>orbita(jupiter<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>orbita(netuno<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>orbita(saturno<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>orbita(mercurio<span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>orbita(lua<span class="kw">,</span> terra)<span class="kw">.</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>orbita(fobos<span class="kw">,</span> marte)<span class="kw">.</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>orbita(deimos<span class="kw">,</span> marte)<span class="kw">.</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>orbita(ganimedes<span class="kw">,</span> jupiter)<span class="kw">.</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>orbita(io<span class="kw">,</span> jupiter)<span class="kw">.</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">% composicao(Corpo, Tipo)</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>composicao(terra<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>composicao(marte<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>composicao(mercurio<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>composicao(venus<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>composicao(jupiter<span class="kw">,</span> gasoso)<span class="kw">.</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>composicao(saturno<span class="kw">,</span> gasoso)<span class="kw">.</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>composicao(netuno<span class="kw">,</span> gasoso)<span class="kw">.</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">% --- REGRAS (Requisitos do Sistema) ---</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">% 1. Classificação Rápida: Um corpo é um planeta se seu tipo for planeta.</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>planeta(<span class="dt">X</span>) <span class="kw">:-</span> </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    tipo(<span class="dt">X</span><span class="kw">,</span> planeta)<span class="kw">.</span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">% 2. Filtragem por Composição: Um corpo é um planeta rochoso se for um planeta</span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">%    e sua composição for rochosa.</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>planeta_rochoso(<span class="dt">X</span>) <span class="kw">:-</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    planeta(<span class="dt">X</span>)<span class="kw">,</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    composicao(<span class="dt">X</span><span class="kw">,</span> rochoso)<span class="kw">.</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co">% 3. Análise de Sistemas: S é satélite de P se S orbita P e P é um planeta.</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>satelite_de(<span class="dt">S</span><span class="kw">,</span> <span class="dt">P</span>) <span class="kw">:-</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    orbita(<span class="dt">S</span><span class="kw">,</span> <span class="dt">P</span>)<span class="kw">,</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    planeta(<span class="dt">P</span>)<span class="kw">.</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co">% 4. Mapeamento do Sistema Solar: Um corpo está no sistema solar se orbita o sol.</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>sistema_solar(<span class="dt">X</span>) <span class="kw">:-</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    orbita(<span class="dt">X</span><span class="kw">,</span> sol)<span class="kw">.</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co">% Aqui estão as consultas em Prolog e suas respostas esperadas, demonstrando a capacidade de raciocínio da base de conhecimento.</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Quais planetas rochosos possuem satélites?</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co">% (Encontra um planeta P e um satélite S que satisfazem ambas as condições)</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- planeta_rochoso(Planeta), satelite_de(Satelite, Planeta).</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta Esperada:</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">% Planeta = terra, Satelite = lua ;</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="co">% Planeta = marte, Satelite = fobos ;</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="co">% Planeta = marte, Satelite = deimos.</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="co">%------------------------------------------------------------------</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Quais corpos (satélites) orbitam um planeta gasoso?</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="co">% (Encontra um Corpo e um Planeta tal que o corpo orbite o planeta e este seja gasoso)</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- orbita(Corpo, Planeta), composicao(Planeta, gasoso).</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta Esperada:</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co">% Corpo = ganimedes, Planeta = jupiter ;</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="co">% Corpo = io, Planeta = jupiter.</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="co">%------------------------------------------------------------------</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Quais satélites estão em um sistema "neto-avô" com o Sol?</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co">% (Encontra satélites que orbitam planetas que, por sua vez, orbitam o sol)</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- satelite_de(Satelite, Planeta), sistema_solar(Planeta).</span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta Esperada:</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = lua, Planeta = terra ;</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = fobos, Planeta = marte ;</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = deimos, Planeta = marte ;</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = ganimedes, Planeta = jupiter ;</span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = io, Planeta = jupiter.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-construcao-de-mundos-logicos.html" class="pagination-link" aria-label="Raciocínio Algorítmico: Criando Mundos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Raciocínio Algorítmico: Criando Mundos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/07a-criando-mundos-praticas.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
