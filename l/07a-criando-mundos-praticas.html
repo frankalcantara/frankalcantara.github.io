@@ -818,9 +818,26 @@ window.Quarto = {
 </section>
 <section id="solução-em-prolog-1" class="level3" data-number="10.2.4">
 <h3 data-number="10.2.4" class="anchored" data-anchor-id="solução-em-prolog-1"><span class="header-section-number">10.2.4</span> Solução em Prolog</h3>
-<pre><code>% ========================================
+<pre><code>%% Para permitir fatos desagrupados
+:- discontiguous cuidado_especial/2.
+:- discontiguous prioridade/2.
+:- discontiguous encaminhar/2.
+:- discontiguous dor_cabeca/1.
+:- discontiguous febre/1.
+:- discontiguous tontura/1.
+:- discontiguous hipertenso/1.
+:- discontiguous diabetico/1.
+:- discontiguous tosse/1.
+:- discontiguous idade_avancada/1. 
+% ========================================
 % FATOS (Base de Dados de Pacientes)
 % ========================================
+
+% --- Definição de predicados sem fatos ---
+% O predicado dor_abdominal/1 é usado nas regras, mas nenhum paciente o possui.
+% Esta linha o define para evitar o erro "procedure does not exist".
+% A regra "fail" garante que ele sempre será falso.
+dor_abdominal(_) :- fail.
 
 % Caso 1: João, 70 anos, diabético, com febre, tosse e falta de ar
 idade_avancada(joao).
@@ -1001,13 +1018,13 @@ cuidado_especial(Paciente, exame_covid) :-
 
 % Verifica se paciente tem algum sintoma
 tem_sintoma(Paciente) :-
-    (febre(Paciente); tosse(Paciente); dor_cabeca(Paciente); 
-     dor_peito(Paciente); falta_ar(Paciente); nausea(Paciente); 
+    (febre(Paciente); tosse(Paciente); dor_cabeca(Paciente);
+     dor_peito(Paciente); falta_ar(Paciente); nausea(Paciente);
      dor_abdominal(Paciente); tontura(Paciente)).
 
 % Verifica se tem fatores de risco
 tem_fator_risco(Paciente) :-
-    (idade_avancada(Paciente); diabetico(Paciente); hipertenso(Paciente); 
+    (idade_avancada(Paciente); diabetico(Paciente); hipertenso(Paciente);
      cardiopata(Paciente); gravidez(Paciente)).
 
 % Verifica sintomas respiratórios
@@ -1016,7 +1033,7 @@ tem_sintomas_respiratorios(Paciente) :-
 
 % Verifica outros sintomas graves além de dor de cabeça e náusea
 tem_outros_sintomas_graves(Paciente) :-
-    (dor_peito(Paciente); falta_ar(Paciente); dor_abdominal(Paciente); 
+    (dor_peito(Paciente); falta_ar(Paciente); dor_abdominal(Paciente);
      tontura(Paciente); febre(Paciente); tosse(Paciente)).
 
 % ========================================
@@ -1055,16 +1072,16 @@ contar_prioridades(prioridade_baixa, Quantidade) :-
 % Relatório completo de um paciente
 relatorio_paciente(Paciente) :-
     write('=== RELATÓRIO DO PACIENTE: '), write(Paciente), write(' ==='), nl,
-    (prioridade(Paciente, P) -&gt; 
+    (prioridade(Paciente, P) -&gt;
         write('Prioridade: '), write(P), nl
-    ; 
+    ;
         write('Prioridade: não classificada'), nl),
     write('Cuidados especiais necessários:'), nl,
-    forall(cuidado_especial(Paciente, C), 
+    forall(cuidado_especial(Paciente, C),
            (write('  - '), write(C), nl)),
-    (encaminhar(Paciente, Destino) -&gt; 
+    (encaminhar(Paciente, Destino) -&gt;
         write('Encaminhamento: '), write(Destino), nl
-    ; 
+    ;
         true),
     nl.
 
@@ -1245,124 +1262,115 @@ relatorio_paciente(Paciente) :-
 </section>
 <section id="solução-em-prolog-2" class="level3" data-number="10.3.4">
 <h3 data-number="10.3.4" class="anchored" data-anchor-id="solução-em-prolog-2"><span class="header-section-number">10.3.4</span> Solução em Prolog</h3>
-<pre><code>% ========================================
+<pre><code>% Remover o warning de descontinuidade
+:- style_check(-discontiguous).
+
+% Remover o warning de descontinuidade
+:- discontiguous cuidado_especial/2.
+:- discontiguous encaminhar/2.
+
+% ========================================
 % FATOS (Base de Dados de Pacientes)
 % ========================================
 
-% Caso 1: João, 70 anos, diabético, com febre, tosse e falta de ar
+% --- Paciente: joao ---
 idade_avancada(joao).
 diabetico(joao).
 febre(joao).
 tosse(joao).
 falta_ar(joao).
+paciente_conhecido(joao).
 
-% Caso 2: Maria, 30 anos, grávida, com dor de cabeça e náusea
+% --- Paciente: maria ---
 gravidez(maria).
 dor_cabeca(maria).
 nausea(maria).
+jovem(maria).
+paciente_conhecido(maria).
 
-% Caso 3: Pedro, 45 anos, cardiopata, com dor no peito e tontura
+% --- Paciente: pedro ---
 cardiopata(pedro).
 dor_peito(pedro).
 tontura(pedro).
+paciente_conhecido(pedro).
 
-% Caso 4: Ana, 25 anos, saudável, viajou recentemente, com febre e tosse
+% --- Paciente: ana ---
 viagem_recente(ana).
 febre(ana).
 tosse(ana).
+jovem(ana).
+sem_fator_risco(ana).
+paciente_conhecido(ana).
 
-% Caso 5: Carlos, 60 anos, hipertenso, apenas com dor de cabeça leve
+% --- Paciente: carlos ---
 hipertenso(carlos).
 dor_cabeca(carlos).
+paciente_conhecido(carlos).
 
-% Pacientes adicionais para completar a base
-% Caso 6: Beatriz, 35 anos, com tosse leve, vacinada contra gripe
+% --- Paciente: beatriz ---
 vacinado_gripe(beatriz).
 tosse(beatriz).
-febre(beatriz).  % Adicionado para testar prioridade média
+febre(beatriz).
+jovem(beatriz).
+sem_fator_risco(beatriz).
+paciente_conhecido(beatriz).
 
-% Caso 7: Diego, 72 anos, diabético e hipertenso, com tontura
+% --- Paciente: diego ---
 idade_avancada(diego).
 diabetico(diego).
 hipertenso(diego).
 tontura(diego).
+paciente_conhecido(diego).
 
-% Caso 8: Fernanda, 28 anos, teve contato com pessoa doente, febre e dor de cabeça
+% --- Paciente: fernanda ---
 contato_doente(fernanda).
 febre(fernanda).
 dor_cabeca(fernanda).
+jovem(fernanda).
+sem_fator_risco(fernanda).
+paciente_conhecido(fernanda).
+
+% ========================================
+% CORREÇÃO DO ERRO: DEFINIÇÃO DE PREDICADO AUSENTE
+% ========================================
+
+% O predicado 'dor_abdominal/1' era chamado mas não existia.
+% Para corrigir o erro sem alterar a lógica, definimos que ele sempre falha.
+% Para que um paciente tenha dor abdominal, adicione um fato explícito, como:
+% dor_abdominal(joao).
+dor_abdominal(_) :- fail.
 
 % ========================================
 % PREDICADOS AUXILIARES POSITIVOS
 % ========================================
 
-% Define pacientes sem febre (todos que não têm febre listados explicitamente)
-sem_febre(pedro).
-sem_febre(carlos).
-sem_febre(diego).
-sem_febre(maria).
-
-% Define pacientes jovens (não idosos)
-jovem(maria).
-jovem(ana).
-jovem(beatriz).
-jovem(fernanda).
-
-% Pacientes sem fatores de risco
-sem_fator_risco(ana).
-sem_fator_risco(beatriz).
-sem_fator_risco(fernanda).
-
 % Verifica se paciente tem algum sintoma
-tem_sintoma(Paciente) :-
-    febre(Paciente).
-tem_sintoma(Paciente) :-
-    tosse(Paciente).
-tem_sintoma(Paciente) :-
-    dor_cabeca(Paciente).
-tem_sintoma(Paciente) :-
-    dor_peito(Paciente).
-tem_sintoma(Paciente) :-
-    falta_ar(Paciente).
-tem_sintoma(Paciente) :-
-    nausea(Paciente).
-tem_sintoma(Paciente) :-
-    dor_abdominal(Paciente).
-tem_sintoma(Paciente) :-
-    tontura(Paciente).
+tem_sintoma(Paciente) :- febre(Paciente).
+tem_sintoma(Paciente) :- tosse(Paciente).
+tem_sintoma(Paciente) :- dor_cabeca(Paciente).
+tem_sintoma(Paciente) :- dor_peito(Paciente).
+tem_sintoma(Paciente) :- falta_ar(Paciente).
+tem_sintoma(Paciente) :- nausea(Paciente).
+tem_sintoma(Paciente) :- dor_abdominal(Paciente).
+tem_sintoma(Paciente) :- tontura(Paciente).
 
 % Verifica se tem fatores de risco
-tem_fator_risco(Paciente) :-
-    idade_avancada(Paciente).
-tem_fator_risco(Paciente) :-
-    diabetico(Paciente).
-tem_fator_risco(Paciente) :-
-    hipertenso(Paciente).
-tem_fator_risco(Paciente) :-
-    cardiopata(Paciente).
-tem_fator_risco(Paciente) :-
-    gravidez(Paciente).
+tem_fator_risco(Paciente) :- idade_avancada(Paciente).
+tem_fator_risco(Paciente) :- diabetico(Paciente).
+tem_fator_risco(Paciente) :- hipertenso(Paciente).
+tem_fator_risco(Paciente) :- cardiopata(Paciente).
+tem_fator_risco(Paciente) :- gravidez(Paciente).
 
 % Verifica sintomas respiratórios
-tem_sintomas_respiratorios(Paciente) :-
-    tosse(Paciente).
-tem_sintomas_respiratorios(Paciente) :-
-    falta_ar(Paciente).
-tem_sintomas_respiratorios(Paciente) :-
-    febre(Paciente).
+tem_sintomas_respiratorios(Paciente) :- tosse(Paciente).
+tem_sintomas_respiratorios(Paciente) :- falta_ar(Paciente).
+tem_sintomas_respiratorios(Paciente) :- febre(Paciente).
 
-% Verifica se tem apenas sintomas leves (sem sintomas graves)
-apenas_sintomas_leves(Paciente) :-
-    tem_sintoma(Paciente),
-    sem_sintomas_graves(Paciente).
+% ========================================
+% PREDICADOS AUXILIARES NEGATIVOS (LÓGICA ORIGINAL)
+% ========================================
 
-% Define pacientes sem sintomas graves
-sem_sintomas_graves(Paciente) :-
-    sem_dor_peito(Paciente),
-    sem_falta_ar(Paciente),
-    sem_dor_abdominal(Paciente).
-
-% Predicados para ausência de sintomas específicos
+% Definição explícita de ausência de sintomas graves
 sem_dor_peito(joao).
 sem_dor_peito(maria).
 sem_dor_peito(ana).
@@ -1388,53 +1396,38 @@ sem_dor_abdominal(beatriz).
 sem_dor_abdominal(diego).
 sem_dor_abdominal(fernanda).
 
+sem_sintomas_graves(Paciente) :-
+    sem_dor_peito(Paciente),
+    sem_falta_ar(Paciente),
+    sem_dor_abdominal(Paciente).
+
+apenas_sintomas_leves(Paciente) :-
+    tem_sintoma(Paciente),
+    sem_sintomas_graves(Paciente).
+
+% Definição explícita de ausência de febre
+sem_febre(pedro).
+sem_febre(carlos).
+sem_febre(diego).
+sem_febre(maria).
+
 % ========================================
 % REGRAS DE TRIAGEM - PRIORIDADE URGENTE
 % ========================================
 
-% Regra 1: Dor no peito + falta de ar
-prioridade_urgente(Paciente) :-
-    dor_peito(Paciente),
-    falta_ar(Paciente).
-
-% Regra 2: Febre + falta de ar + idade avançada
-prioridade_urgente(Paciente) :-
-    febre(Paciente),
-    falta_ar(Paciente),
-    idade_avancada(Paciente).
-
-% Regra 3: Dor abdominal + náusea
-prioridade_urgente(Paciente) :-
-    dor_abdominal(Paciente),
-    nausea(Paciente).
-
-% Regra 4: Tontura + dor no peito + cardiopata
-prioridade_urgente(Paciente) :-
-    tontura(Paciente),
-    dor_peito(Paciente),
-    cardiopata(Paciente).
-
-% Regra adicional 1: Febre + tosse + falta de ar (tríade respiratória grave)
-prioridade_urgente(Paciente) :-
-    febre(Paciente),
-    tosse(Paciente),
-    falta_ar(Paciente).
-
-% Regra adicional 2: Dor abdominal + gravidez
-prioridade_urgente(Paciente) :-
-    dor_abdominal(Paciente),
-    gravidez(Paciente).
+prioridade_urgente(Paciente) :- dor_peito(Paciente), falta_ar(Paciente).
+prioridade_urgente(Paciente) :- febre(Paciente), falta_ar(Paciente), idade_avancada(Paciente).
+prioridade_urgente(Paciente) :- dor_abdominal(Paciente), nausea(Paciente).
+prioridade_urgente(Paciente) :- tontura(Paciente), dor_peito(Paciente), cardiopata(Paciente).
+prioridade_urgente(Paciente) :- febre(Paciente), tosse(Paciente), falta_ar(Paciente).
+prioridade_urgente(Paciente) :- dor_abdominal(Paciente), gravidez(Paciente).
 
 % ========================================
 % REGRAS DE TRIAGEM - PRIORIDADE ALTA
 % ========================================
 
-% Define pacientes sem urgência
-sem_urgencia(Paciente) :-
-    paciente_conhecido(Paciente),
-    nao_urgente(Paciente).
-
-% Lista de pacientes não urgentes (calculado manualmente ou por outro predicado)
+% Lógica original restaurada: checa se o paciente está na lista de não urgentes
+sem_urgencia(Paciente) :- paciente_conhecido(Paciente), nao_urgente(Paciente).
 nao_urgente(maria).
 nao_urgente(ana).
 nao_urgente(carlos).
@@ -1442,155 +1435,111 @@ nao_urgente(beatriz).
 nao_urgente(diego).
 nao_urgente(fernanda).
 
-% Regra 5: Febre + tosse + viagem recente
-prioridade_alta(Paciente) :-
-    febre(Paciente),
-    tosse(Paciente),
-    viagem_recente(Paciente),
-    sem_urgencia(Paciente).
-
-% Regra 6: Febre + dor de cabeça + contato com doente
-prioridade_alta(Paciente) :-
-    febre(Paciente),
-    dor_cabeca(Paciente),
-    contato_doente(Paciente),
-    sem_urgencia(Paciente).
-
-% Regra 7: Falta de ar + diabético
-prioridade_alta(Paciente) :-
-    falta_ar(Paciente),
-    diabetico(Paciente),
-    sem_urgencia(Paciente).
-
-% Regra 8: Qualquer sintoma + gravidez
-prioridade_alta(Paciente) :-
-    tem_sintoma(Paciente),
-    gravidez(Paciente),
-    sem_urgencia(Paciente).
-
-% Regra adicional 4: Idade avançada + cardiopata + sintomas
-prioridade_alta(Paciente) :-
-    idade_avancada(Paciente),
-    cardiopata(Paciente),
-    tem_sintoma(Paciente),
-    sem_urgencia(Paciente).
+prioridade_alta(Paciente) :- febre(Paciente), tosse(Paciente), viagem_recente(Paciente), sem_urgencia(Paciente).
+prioridade_alta(Paciente) :- febre(Paciente), dor_cabeca(Paciente), contato_doente(Paciente), sem_urgencia(Paciente).
+prioridade_alta(Paciente) :- falta_ar(Paciente), diabetico(Paciente), sem_urgencia(Paciente).
+prioridade_alta(Paciente) :- tem_sintoma(Paciente), gravidez(Paciente), sem_urgencia(Paciente).
+prioridade_alta(Paciente) :- idade_avancada(Paciente), cardiopata(Paciente), tem_sintoma(Paciente), sem_urgencia(Paciente).
 
 % ========================================
 % REGRAS DE TRIAGEM - PRIORIDADE MÉDIA
 % ========================================
 
-% Define pacientes sem prioridade superior (urgente ou alta)
-sem_prioridade_superior(Paciente) :-
-    paciente_conhecido(Paciente),
-    sem_urgencia(Paciente),
-    sem_alta_prioridade(Paciente).
-
-% Lista de pacientes sem alta prioridade
+% Lógica original restaurada
+sem_prioridade_superior(Paciente) :- paciente_conhecido(Paciente), sem_urgencia(Paciente), sem_alta_prioridade(Paciente).
 sem_alta_prioridade(carlos).
 sem_alta_prioridade(beatriz).
 sem_alta_prioridade(diego).
 
-% Regra 9: Febre + tosse + vacinado gripe
-prioridade_media(Paciente) :-
-    febre(Paciente),
-    tosse(Paciente),
-    vacinado_gripe(Paciente),
-    sem_prioridade_superior(Paciente).
-
-% Regra 10: Dor de cabeça + náusea (apenas sintomas leves)
-prioridade_media(Paciente) :-
-    dor_cabeca(Paciente),
-    nausea(Paciente),
-    apenas_sintomas_leves(Paciente),
-    sem_prioridade_superior(Paciente).
-
-% Regra 11: Tosse sem febre + idade avançada
-prioridade_media(Paciente) :-
-    tosse(Paciente),
-    sem_febre(Paciente),
-    idade_avancada(Paciente),
-    sem_prioridade_superior(Paciente).
+prioridade_media(Paciente) :- febre(Paciente), tosse(Paciente), vacinado_gripe(Paciente), sem_prioridade_superior(Paciente).
+prioridade_media(Paciente) :- dor_cabeca(Paciente), nausea(Paciente), apenas_sintomas_leves(Paciente), sem_prioridade_superior(Paciente).
+prioridade_media(Paciente) :- tosse(Paciente), sem_febre(Paciente), idade_avancada(Paciente), sem_prioridade_superior(Paciente).
 
 % ========================================
 % REGRAS DE TRIAGEM - PRIORIDADE BAIXA
 % ========================================
 
-% Define pacientes sem prioridade elevada
-sem_prioridade_elevada(Paciente) :-
-    paciente_conhecido(Paciente),
-    sem_prioridade_superior(Paciente),
-    sem_media_prioridade(Paciente).
-
-% Lista de pacientes sem média prioridade
+% Lógica original restaurada
+sem_prioridade_elevada(Paciente) :- paciente_conhecido(Paciente), sem_prioridade_superior(Paciente), sem_media_prioridade(Paciente).
 sem_media_prioridade(carlos).
+sem_media_prioridade(fernanda). % Fernanda deveria ser baixa prioridade (dor de cabeça sem fator de risco)
+sem_media_prioridade(ana). % Ana (viagem recente) é alta, não baixa
 
-% Regra 12: Apenas dor de cabeça sem fatores de risco
-prioridade_baixa(Paciente) :-
-    dor_cabeca(Paciente),
-    sem_fator_risco(Paciente),
-    sem_prioridade_elevada(Paciente).
-
-% Regra 13: Tosse leve (jovem, sem fatores de risco)
-prioridade_baixa(Paciente) :-
-    tosse(Paciente),
-    jovem(Paciente),
-    sem_fator_risco(Paciente),
-    sem_prioridade_elevada(Paciente).
+prioridade_baixa(Paciente) :- dor_cabeca(Paciente), \+ tem_fator_risco(Paciente), sem_prioridade_elevada(Paciente).
+prioridade_baixa(Paciente) :- tosse(Paciente), jovem(Paciente), sem_fator_risco(Paciente), sem_prioridade_elevada(Paciente).
 
 % ========================================
 % PREDICADO UNIFICADO DE PRIORIDADE
 % ========================================
 
-prioridade(Paciente, urgente) :-
-    prioridade_urgente(Paciente).
-
-prioridade(Paciente, prioridade_alta) :-
-    prioridade_alta(Paciente).
-
-prioridade(Paciente, prioridade_media) :-
-    prioridade_media(Paciente).
-
-prioridade(Paciente, prioridade_baixa) :-
-    prioridade_baixa(Paciente).
+prioridade(Paciente, urgente) :- prioridade_urgente(Paciente).
+prioridade(Paciente, alta) :- prioridade_alta(Paciente).
+prioridade(Paciente, media) :- prioridade_media(Paciente).
+prioridade(Paciente, baixa) :- prioridade_baixa(Paciente).
 
 % ========================================
-% REGRAS DE RECOMENDAÇÃO
+% REGRAS DE RECOMENDAÇÃO E CUIDADOS
 % ========================================
 
-% Regra 14: Urgente → emergência
-encaminhar(Paciente, emergencia) :-
-    prioridade(Paciente, urgente).
+encaminhar(Paciente, emergencia) :- prioridade(Paciente, urgente).
+encaminhar(Paciente, obstetricia) :- dor_abdominal(Paciente), gravidez(Paciente).
 
-% Regra 15: Prioridade alta + hipertenso → monitorar pressão
-cuidado_especial(Paciente, monitorar_pressao) :-
-    prioridade(Paciente, prioridade_alta),
-    hipertenso(Paciente).
+cuidado_especial(Paciente, monitorar_pressao) :- prioridade(Paciente, alta), hipertenso(Paciente).
+cuidado_especial(Paciente, verificar_glicemia) :- diabetico(Paciente).
+cuidado_especial(Paciente, isolamento_preventivo) :- tem_sintomas_respiratorios(Paciente).
+cuidado_especial(Paciente, oxigenio) :- febre(Paciente), tosse(Paciente), falta_ar(Paciente).
+cuidado_especial(Paciente, monitorar_pressao_imediato) :- tontura(Paciente), hipertenso(Paciente).
+cuidado_especial(Paciente, exame_covid) :- viagem_recente(Paciente), febre(Paciente).
 
-% Regra 16: Diabético → verificar glicemia
-cuidado_especial(Paciente, verificar_glicemia) :-
-    diabetico(Paciente).
+% ========================================
+% CONSULTAS E RELATÓRIOS
+% ========================================
 
-% Regra 17: Sintomas respiratórios → isolamento
-cuidado_especial(Paciente, isolamento_preventivo) :-
-    tem_sintomas_respiratorios(Paciente).
+consultar_prioridade(Paciente, Prioridade) :- prioridade(Paciente, Prioridade).
+pacientes_urgentes(ListaPacientes) :- findall(Paciente, prioridade(Paciente, urgente), ListaPacientes).
+cuidados_necessarios(Paciente, ListaCuidados) :- findall(Cuidado, cuidado_especial(Paciente, Cuidado), ListaCuidadosDup), list_to_set(ListaCuidadosDup, ListaCuidados).
 
-% Regras adicionais de cuidados especiais
-cuidado_especial(Paciente, oxigenio) :-
-    febre(Paciente),
-    tosse(Paciente),
-    falta_ar(Paciente).
+contar_prioridades(urgente, Quantidade) :- findall(P, prioridade(P, urgente), Lista), length(Lista, Quantidade).
+contar_prioridades(alta, Quantidade) :- findall(P, prioridade(P, alta), Lista), length(Lista, Quantidade).
+contar_prioridades(media, Quantidade) :- findall(P, prioridade(P, media), Lista), length(Lista, Quantidade).
+contar_prioridades(baixa, Quantidade) :- findall(P, prioridade(P, baixa), Lista), length(Lista, Quantidade).
 
-encaminhar(Paciente, obstetricia) :-
-    dor_abdominal(Paciente),
-    gravidez(Paciente).
+relatorio_paciente(Paciente) :-
+    write('=== RELATÓRIO DO PACIENTE: '), write(Paciente), write(' ==='), nl,
+    (prioridade(Paciente, P) -&gt;
+        write('Prioridade: '), write(P), nl
+    ;
+        write('Prioridade: não classificada'), nl),
+    write('Cuidados especiais necessários:'), nl,
+    (findall(C, cuidado_especial(Paciente, C), Cs), Cs \= [] -&gt;
+        forall(member(Cuidado, Cs), (write('  - '), write(Cuidado), nl))
+    ;
+        write('  Nenhum.'), nl
+    ),
+    (encaminhar(Paciente, Destino) -&gt;
+        write('Encaminhamento: '), write(Destino), nl
+    ;
+        true),
+    nl.
 
-cuidado_especial(Paciente, monitorar_pressao_imediato) :-
-    tontura(Paciente),
-    hipertenso(Paciente).
+resumo_sistema :-
+    write('=== RESUMO DO SISTEMA DE TRIAGEM ==='), nl,
+    contar_prioridades(urgente, U),
+    contar_prioridades(alta, A),
+    contar_prioridades(media, M),
+    contar_prioridades(baixa, B),
+    write('Pacientes URGENTES: '), write(U), nl,
+    write('Pacientes com PRIORIDADE ALTA: '), write(A), nl,
+    write('Pacientes com PRIORIDADE MÉDIA: '), write(M), nl,
+    write('Pacientes com PRIORIDADE BAIXA: '), write(B), nl,
+    pacientes_urgentes(ListaUrgentes),
+    write('Lista de pacientes urgentes: '), write(ListaUrgentes), nl.
 
-cuidado_especial(Paciente, exame_covid) :-
-    viagem_recente(Paciente),
-    febre(Paciente).
+% Teste para verificar todos os pacientes
+testar_todos_pacientes :-
+    forall(paciente_conhecido(P), relatorio_paciente(P)).
+
+
 
 % ========================================
 % PREDICADOS AUXILIARES PARA CONSULTAS
