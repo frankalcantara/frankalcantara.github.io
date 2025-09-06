@@ -221,14 +221,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07b-inferencia-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desvendando o Processo de Inferência do Prolog</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -245,19 +251,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="#sec-formas-normais" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="#sec-formas-normais" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -265,13 +271,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -1714,14 +1720,14 @@ Q(c_1, x, \mathbf{f}(x), z, \mathbf{g}(x,z))
 \]</span></p>
 <p><strong>Observação</strong>: a estrutura da fórmula original, uma grande disjunção (<span class="math inline">\(P \vee Q\)</span>), faz com que ela seja naturalmente próxima da Forma Normal Disjuntiva, exigindo poucos ou nenhum passo de conversão. Em contraste, para chegar à Forma Normal Conjuntiva, foi necessário aplicar a lei da distributividade, resultando em uma expressão mais complexa.</p>
 <div class="{callout-note}">
-<p><strong>Nota</strong>: a forma resultante após Skolemização e conversão para FNC, quando todos os quantificadores universais são removidos (ficam implícitos), resulta em um conjunto de cláusulas - exatamente o formato necessário para o método de resolução e para identificar cláusulas de Horn, como veremos no próximo capítulo.</p>
+<p><strong>Nota</strong>: a forma resultante após Skolemização e conversão para FNC, quando todos os quantificadores universais são removidos (ficam implícitos), resulta em um conjunto de cláusulas - exatamente o formato necessário para o método de resolução e para identificar Cláusulas de Horn, como veremos no próximo capítulo.</p>
 </div>
 </section>
 </section>
 <section id="expansão-do-vocabulário-e-conexão-com-programação-lógica" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="expansão-do-vocabulário-e-conexão-com-programação-lógica"><span class="header-section-number">7.2.3</span> Expansão do Vocabulário e Conexão com Programação Lógica</h3>
 <p>Ao introduzir constantes e funções Skolem, a Skolemização adiciona novos identificadores ao alfabeto que definimos para a <strong>Lógica de Primeira Ordem</strong>. Pense nisso como registrar novos navios ou rotas no sistema do mestre de porto: uma constante Skolem <span class="math inline">\(c\)</span> é como um navio recém-batizado, e uma função Skolem <span class="math inline">\(\mathbf{f}(x)\)</span> é como uma regra para nomear navios de apoio com base na embarcação principal <span class="math inline">\(x\)</span>. Esses novos símbolos são essenciais quando transformamos fórmulas em <strong>cláusulas</strong>, que são as unidades básicas usadas em sistemas de programação lógica, como o Prolog.</p>
-<p>Essa expansão do vocabulário também nos conecta ao <strong>teorema de Herbrand</strong>, uma ideia fundamental em programação lógica. O teorema garante que, após a Skolemização, podemos verificar se uma fórmula é satisfatível testando combinações finitas de termos. Isso é especialmente importante para <strong>cláusulas de Horn</strong>, um tipo especial de cláusula com no máximo um literal positivo, que forma a base de programas em Prolog. Assim, a Skolemização não apenas elimina ambiguidades existenciais, mas também prepara o terreno para sistemas automatizados que navegam por essas cláusulas em busca de respostas lógicas.</p>
+<p>Essa expansão do vocabulário também nos conecta ao <strong>teorema de Herbrand</strong>, uma ideia fundamental em programação lógica. O teorema garante que, após a Skolemização, podemos verificar se uma fórmula é satisfatível testando combinações finitas de termos. Isso é especialmente importante para <strong>Cláusulas de Horn</strong>, um tipo especial de cláusula com no máximo um literal positivo, que forma a base de programas em Prolog. Assim, a Skolemização não apenas elimina ambiguidades existenciais, mas também prepara o terreno para sistemas automatizados que navegam por essas cláusulas em busca de respostas lógicas.</p>
 </section>
 <section id="sec-exercicios-skolemizacao" class="level3" data-number="7.2.4">
 <h3 data-number="7.2.4" class="anchored" data-anchor-id="sec-exercicios-skolemizacao"><span class="header-section-number">7.2.4</span> Exercícios de Skolemização</h3>

@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08-verificacao-formal-de-programas.html" rel="next">
+<link href="./07b-inferencia-prolog.html" rel="next">
 <link href="./07-construcao-de-mundos-logicos.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -255,14 +255,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07b-inferencia-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desvendando o Processo de Inferência do Prolog</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,19 +285,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -299,13 +305,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -405,7 +411,7 @@ window.Quarto = {
 <h4 data-number="10.1.2.1" class="anchored" data-anchor-id="parte-a-modelagem"><span class="header-section-number">10.1.2.1</span> Parte A: Modelagem</h4>
 <ol type="1">
 <li>Declare todos os fatos necessários para representar uma situação específica;</li>
-<li>Implemente todas as 15 regras como cláusulas de Horn em Prolog;</li>
+<li>Implemente todas as 15 regras como Cláusulas de Horn em Prolog;</li>
 <li>Adicione pelo menos 3 regras criativas próprias.</li>
 </ol>
 </section>
@@ -723,7 +729,7 @@ window.Quarto = {
 <h4 data-number="10.2.2.1" class="anchored" data-anchor-id="parte-a-base-de-conhecimento"><span class="header-section-number">10.2.2.1</span> Parte A: Base de Conhecimento</h4>
 <ol type="1">
 <li>Crie uma base de dados com pelo menos <span class="math inline">\(8\)</span> pacientes fictícios;</li>
-<li>Implemente todas as <span class="math inline">\(17\)</span> regras como cláusulas de Horn;</li>
+<li>Implemente todas as <span class="math inline">\(17\)</span> regras como Cláusulas de Horn;</li>
 <li>Adicione <span class="math inline">\(5\)</span> regras próprias baseadas em conhecimento médico básico.</li>
 </ol>
 </section>
@@ -1168,7 +1174,7 @@ relatorio_paciente(Paciente) :-
 <h4 data-number="10.3.2.1" class="anchored" data-anchor-id="parte-a-base-de-conhecimento-1"><span class="header-section-number">10.3.2.1</span> Parte A: Base de Conhecimento</h4>
 <ol type="1">
 <li>Crie uma base de dados com pelo menos <span class="math inline">\(8\)</span> pacientes fictícios;</li>
-<li>Implemente todas as <span class="math inline">\(17\)</span> regras como cláusulas de Horn;</li>
+<li>Implemente todas as <span class="math inline">\(17\)</span> regras como Cláusulas de Horn;</li>
 <li>Adicione <span class="math inline">\(5\)</span> regras próprias baseadas em conhecimento médico básico.</li>
 </ol>
 </section>
@@ -1818,100 +1824,7 @@ Composicao(netuno, gasoso)
 <section id="solução-em-prolog-3" class="level3" data-number="10.4.2">
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="solução-em-prolog-3"><span class="header-section-number">10.4.2</span> 2. Solução em Prolog</h3>
 <p>A seguir, a implementação da lógica formal em uma base de conhecimento Prolog.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% --- FATOS ---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">% tipo(Corpo, Categoria)</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>tipo(sol<span class="kw">,</span> estrela)<span class="kw">.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>tipo(terra<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>tipo(marte<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>tipo(venus<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>tipo(jupiter<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>tipo(netuno<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>tipo(saturno<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>tipo(mercurio<span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>tipo(lua<span class="kw">,</span> satelite)<span class="kw">.</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>tipo(fobos<span class="kw">,</span> satelite)<span class="kw">.</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>tipo(deimos<span class="kw">,</span> satelite)<span class="kw">.</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>tipo(ganimedes<span class="kw">,</span> satelite)<span class="kw">.</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>tipo(io<span class="kw">,</span> satelite)<span class="kw">.</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">% orbita(Orbitante, Orbitado)</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>orbita(terra<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>orbita(marte<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>orbita(venus<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>orbita(jupiter<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>orbita(netuno<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>orbita(saturno<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>orbita(mercurio<span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>orbita(lua<span class="kw">,</span> terra)<span class="kw">.</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>orbita(fobos<span class="kw">,</span> marte)<span class="kw">.</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>orbita(deimos<span class="kw">,</span> marte)<span class="kw">.</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>orbita(ganimedes<span class="kw">,</span> jupiter)<span class="kw">.</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>orbita(io<span class="kw">,</span> jupiter)<span class="kw">.</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">% composicao(Corpo, Tipo)</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>composicao(terra<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>composicao(marte<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>composicao(mercurio<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>composicao(venus<span class="kw">,</span> rochoso)<span class="kw">.</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>composicao(jupiter<span class="kw">,</span> gasoso)<span class="kw">.</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>composicao(saturno<span class="kw">,</span> gasoso)<span class="kw">.</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>composicao(netuno<span class="kw">,</span> gasoso)<span class="kw">.</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">% --- REGRAS (Requisitos do Sistema) ---</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">% 1. Classificação Rápida: Um corpo é um planeta se seu tipo for planeta.</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>planeta(<span class="dt">X</span>) <span class="kw">:-</span> </span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    tipo(<span class="dt">X</span><span class="kw">,</span> planeta)<span class="kw">.</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">% 2. Filtragem por Composição: Um corpo é um planeta rochoso se for um planeta</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">%    e sua composição for rochosa.</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>planeta_rochoso(<span class="dt">X</span>) <span class="kw">:-</span></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    planeta(<span class="dt">X</span>)<span class="kw">,</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    composicao(<span class="dt">X</span><span class="kw">,</span> rochoso)<span class="kw">.</span></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co">% 3. Análise de Sistemas: S é satélite de P se S orbita P e P é um planeta.</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>satelite_de(<span class="dt">S</span><span class="kw">,</span> <span class="dt">P</span>) <span class="kw">:-</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    orbita(<span class="dt">S</span><span class="kw">,</span> <span class="dt">P</span>)<span class="kw">,</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    planeta(<span class="dt">P</span>)<span class="kw">.</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co">% 4. Mapeamento do Sistema Solar: Um corpo está no sistema solar se orbita o sol.</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>sistema_solar(<span class="dt">X</span>) <span class="kw">:-</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    orbita(<span class="dt">X</span><span class="kw">,</span> sol)<span class="kw">.</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co">% Aqui estão as consultas em Prolog e suas respostas esperadas, demonstrando a capacidade de raciocínio da base de conhecimento.</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 1: Quais planetas rochosos possuem satélites?</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co">% (Encontra um planeta P e um satélite S que satisfazem ambas as condições)</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- planeta_rochoso(Planeta), satelite_de(Satelite, Planeta).</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta Esperada:</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">% Planeta = terra, Satelite = lua ;</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="co">% Planeta = marte, Satelite = fobos ;</span></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="co">% Planeta = marte, Satelite = deimos.</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="co">%------------------------------------------------------------------</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 2: Quais corpos (satélites) orbitam um planeta gasoso?</span></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="co">% (Encontra um Corpo e um Planeta tal que o corpo orbite o planeta e este seja gasoso)</span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- orbita(Corpo, Planeta), composicao(Planeta, gasoso).</span></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta Esperada:</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co">% Corpo = ganimedes, Planeta = jupiter ;</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="co">% Corpo = io, Planeta = jupiter.</span></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="co">%------------------------------------------------------------------</span></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta 3: Quais satélites estão em um sistema "neto-avô" com o Sol?</span></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co">% (Encontra satélites que orbitam planetas que, por sua vez, orbitam o sol)</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="co">% ?- satelite_de(Satelite, Planeta), sistema_solar(Planeta).</span></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta Esperada:</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = lua, Planeta = terra ;</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = fobos, Planeta = marte ;</span></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = deimos, Planeta = marte ;</span></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = ganimedes, Planeta = jupiter ;</span></span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="co">% Satelite = io, Planeta = jupiter.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -2334,8 +2247,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07b-inferencia-prolog.html" class="pagination-link" aria-label="Desvendando o Processo de Inferência do Prolog">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desvendando o Processo de Inferência do Prolog</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

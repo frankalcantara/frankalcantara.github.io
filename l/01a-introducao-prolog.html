@@ -255,14 +255,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07b-inferencia-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Desvendando o Processo de Inferência do Prolog</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -279,19 +285,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -299,13 +305,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -402,7 +408,7 @@ window.Quarto = {
 
 <section id="o-que-é-prolog" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="o-que-é-prolog"><span class="header-section-number">3.1</span> O que é Prolog?</h2>
-<p>O <strong>Prolog</strong> (<strong>Pro</strong>gramming in <strong>Log</strong>ic) é uma linguagem de programação declarativa baseada na lógica de primeira ordem e no princípio de resolução SLD (<em>Selective Linear Definite clause resolution</em>). Desenvolvida por <a href="https://en.wikipedia.org/wiki/Alain_Colmerauer">Alain Colmerauer</a> e Philippe Roussel na Universidade de Marselha em 1972, representa um paradigma fundamentalmente diferente das linguagens imperativas tradicionais.</p>
+<p>O <strong>Prolog</strong> (<strong>Pro</strong>gramming in <strong>Log</strong>ic) é uma linguagem de programação declarativa baseada na lógica de primeira ordem e no princípio de Resolução SLD (<em>Selective Linear Definite clause resolution</em>). Desenvolvida por <a href="https://en.wikipedia.org/wiki/Alain_Colmerauer">Alain Colmerauer</a> e Philippe Roussel na Universidade de Marselha em 1972, representa um paradigma fundamentalmente diferente das linguagens imperativas tradicionais.</p>
 <section id="paradigma-declarativo-vs.-imperativo" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="paradigma-declarativo-vs.-imperativo"><span class="header-section-number">3.1.1</span> Paradigma Declarativo vs.&nbsp;Imperativo</h3>
 <p>Em linguagens <strong>imperativas</strong> (C, Java, Python), o programador especifica <em>como</em> resolver um problema através de uma sequência de comandos que modificam o estado do programa. Em <strong>Prolog</strong>, o programador especifica <em>o que</em> constitui uma solução através de:</p>
@@ -429,7 +435,7 @@ window.Quarto = {
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="como-acessar-o-swish.swi-prolog"><span class="header-section-number">3.1.3</span> Como Acessar o SWISH.SWI-Prolog</h3>
 <ol type="1">
 <li>Vá para: <strong>https://swish.swi-prolog.org/</strong></li>
-<li>Clique em <strong>“Create a program”</strong> para criar um novo programa</li>
+<li>Clique em <strong><em>Create a program</em></strong> para criar um novo programa</li>
 <li>Você verá uma interface dividida em duas partes:
 <ul>
 <li><strong>Lado esquerdo</strong>: Editor de código no qual você escreve fatos e regras;</li>
@@ -456,10 +462,10 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 </section>
 <section id="estrutura-básica-do-prolog-cláusulas-de-horn" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="estrutura-básica-do-prolog-cláusulas-de-horn"><span class="header-section-number">3.2</span> Estrutura Básica do Prolog: Cláusulas de Horn</h2>
-<p>O Prolog trabalha exclusivamente com <strong>cláusulas de Horn</strong>, uma forma restrita de fórmulas lógicas que possuem no máximo um literal positivo. Esta restrição garante a decidibilidade e eficiência do processo de inferência.</p>
+<p>O Prolog trabalha exclusivamente com <strong>Cláusulas de Horn</strong>, uma forma restrita de fórmulas lógicas que possuem no máximo um literal positivo. Esta restrição garante a decidibilidade e eficiência do processo de inferência.</p>
 <section id="fatos-cláusulas-unitárias" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="fatos-cláusulas-unitárias"><span class="header-section-number">3.2.1</span> Fatos (Cláusulas Unitárias)</h3>
-<p>Fatos são <strong>cláusulas de Horn unitárias</strong> da forma <span class="math inline">\(P(t_1, t_2, ..., t_n)\)</span>, onde <span class="math inline">\(P\)</span> é um predicado e <span class="math inline">\(t_i\)</span> são termos. Representam conhecimento básico incondicional sobre o domínio:</p>
+<p>Fatos são <strong>Cláusulas de Horn unitárias</strong> da forma <span class="math inline">\(P(t_1, t_2, ..., t_n)\)</span>, onde <span class="math inline">\(P\)</span> é um predicado e <span class="math inline">\(t_i\)</span> são termos. Representam conhecimento básico incondicional sobre o domínio:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Predicados unários</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mamifero(gato)<span class="kw">.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mamifero(cachorro)<span class="kw">.</span></span>
@@ -470,15 +476,15 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Predicados n-ários</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>distancia(sao_paulo<span class="kw">,</span> rio_janeiro<span class="kw">,</span> <span class="dv">400</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Interpretação formal</strong>: Cada fato <span class="math inline">\(P(a_1, ..., a_n)\)</span> é interpretado como “é verdade que <span class="math inline">\(P(a_1, ..., a_n)\)</span>” no modelo mínimo de Herbrand.</p>
+<p><strong>Interpretação formal</strong>: Cada fato <span class="math inline">\(P(a_1, ..., a_n)\)</span> é interpretado como <em>é verdade que <span class="math inline">\(P(a_1, ..., a_n)\)</span></em> no modelo mínimo de Herbrand.</p>
 </section>
 <section id="regras-cláusulas-definidas" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="regras-cláusulas-definidas"><span class="header-section-number">3.2.2</span> Regras (Cláusulas Definidas)</h3>
-<p>Regras são <strong>cláusulas de Horn definidas</strong> da forma <span class="math inline">\(H \leftarrow B_1 \land B_2 \land ... \land B_n\)</span>, representadas como <code>H :- B1, B2, ..., Bn.</code> onde:</p>
+<p>Regras são <strong>Cláusulas de Horn definidas</strong> da forma <span class="math inline">\(H \leftarrow B_1 \land B_2 \land ... \land B_n\)</span>, representadas como <code>H :- B1, B2, ..., Bn.</code> onde:</p>
 <ul>
 <li><strong><span class="math inline">\(H\)</span> (cabeça)</strong>: Consequente da implicação;</li>
 <li><strong><span class="math inline">\(B_i\)</span> (corpo)</strong>: Antecedentes que devem ser satisfeitos;</li>
-<li><strong><span class="math inline">\(\leftarrow\)</span></strong>: Implicação reversa (“se”);</li>
+<li><strong><span class="math inline">\(\leftarrow\)</span></strong>: Implicação reversa (<em>se</em>);</li>
 <li><strong><span class="math inline">\(\land\)</span></strong>: Conjunção lógica (vírgula em Prolog).</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra simples: ∀X (mamifero(X) → animal(X))</span></span>
@@ -494,7 +500,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 </section>
 <section id="consultas-goals" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="consultas-goals"><span class="header-section-number">3.2.3</span> Consultas (Goals)</h3>
-<p>Consultas são <strong>cláusulas de Horn negativas</strong> da forma <span class="math inline">\(\leftarrow B_1 \land B_2 \land ... \land B_n\)</span>, representadas como <code>?- B1, B2, ..., Bn.</code> O interpretador tenta encontrar uma <strong>refutação</strong> da negação da consulta.</p>
+<p>Consultas são <strong>Cláusulas de Horn negativas</strong> da forma <span class="math inline">\(\leftarrow B_1 \land B_2 \land ... \land B_n\)</span>, representadas como <code>?- B1, B2, ..., Bn.</code> O interpretador tenta encontrar uma <strong>refutação</strong> da negação da consulta.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta ground (sem variáveis)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> mamifero(gato)<span class="kw">.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Resposta: true/false</span></span>
@@ -530,7 +536,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <ul>
 <li><strong>Estruturas</strong>: <code>functor(arg1, arg2, ..., argN)</code>;</li>
 <li><strong>Listas</strong>: <code>[H|T]</code> onde H é cabeça e T é cauda;</li>
-<li><strong>Strings</strong>: <code>"texto"</code> (lista de códigos ASCII).</li>
+<li><strong>Strings</strong>: <code>_texto_</code> (lista de códigos ASCII).</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Estruturas complexas</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pessoa(nome(joao<span class="kw">,</span> silva)<span class="kw">,</span> idade(<span class="dv">25</span>)<span class="kw">,</span> endereco(rua(x)<span class="kw">,</span> numero(<span class="dv">123</span>)))<span class="kw">.</span></span>
@@ -557,7 +563,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <h4 data-number="3.3.2.2" class="anchored" data-anchor-id="negação-por-falha"><span class="header-section-number">3.3.2.2</span> Negação por Falha (<code>\+</code>)</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% NAF (Negation as Failure) - não é negação clássica!</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>voa(<span class="dt">X</span>) <span class="kw">:-</span> ave(<span class="dt">X</span>)<span class="kw">,</span> <span class="kw">\+</span> pinguim(<span class="dt">X</span>)<span class="kw">.</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Lê-se: "X voa se X é ave E não pode ser provado que X é pinguim"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Lê-se: _X voa se X é ave E não pode ser provado que X é pinguim_</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">% CUIDADO: \+ é não-monotônica</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Se pinguim(tweety) for adicionado depois, voa(tweety) muda de true para false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -690,7 +696,7 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <h3 data-number="3.6.3" class="anchored" data-anchor-id="complexidade-e-limitações"><span class="header-section-number">3.6.3</span> Complexidade e Limitações</h3>
 <ul>
 <li><strong>Decidibilidade</strong>: Programas Prolog podem não terminar;</li>
-<li><strong>Completude</strong>: SLD-resolution é completa para cláusulas de Horn;</li>
+<li><strong>Completude</strong>: SLD-resolution é completa para Cláusulas de Horn;</li>
 <li><strong>Complexidade</strong>: Exponencial no pior caso (backtracking);</li>
 <li><strong>Ordem das cláusulas</strong>: Afeta eficiência e terminação.</li>
 </ul>

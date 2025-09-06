@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Desvendando o Processo de Inferência do Prolog</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <script src="common_js.js"></script>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#arquitetura" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Arquitetura de um Programa</a></li>
+                <li class="mb-2"><a href="#termos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Termos e Dados</a></li>
+                <li class="mb-2"><a href="#clausulas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Cláusulas e Lógica</a></li>
+                <li class="mb-2"><a href="#consultas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Consultas</a></li>
+                <li class="mb-2"><a href="#cwa" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Hipótese do Mundo Fechado</a></li>
+                <li class="mb-2"><a href="#unificacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Unificação</a></li>
+                <li class="mb-2"><a href="#sld" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Resolução SLD</a></li>
+                <li class="mb-2"><a href="#backtracking" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Backtracking</a></li>
+                <li class="mb-2"><a href="#estruturas" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Estruturas de Dados</a></li>
+                <li class="mb-2"><a href="#corte" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">11. Operador de Corte</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-link me-2 text-primary"></i><small class="text-primary fw-medium">Unificação</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-project-diagram me-2 text-success"></i><small class="text-success fw-medium">Resolução SLD</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-undo me-2 text-info"></i><small class="text-info fw-medium">Backtracking</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-cut me-2 text-warning"></i><small class="text-warning fw-medium">Operador de Corte</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"logic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><circle cx=\"45\" cy=\"15\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"15\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.3\"/><circle cx=\"45\" cy=\"45\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/><path d=\"M15,15 L45,15 M15,15 L15,45 M45,15 L45,45 M15,45 L45,45\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23logic)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Desvendando o Processo de</em>
+                                    <span class="d-block">Inferência do Prolog</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    A mágica por trás da capacidade do Prolog de responder perguntas complexas e encontrar soluções lógicas
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">⊨</div>
+                            <div class="fs-6 text-muted">Inferência Lógica</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">SLD</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Resolução Linear</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-link fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Unificação</h3>
+                                <p class="fs-7 text-muted">Operação Fundamental</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-project-diagram fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Resolução</h3>
+                                <p class="fs-7 text-muted">Procedimento de Prova</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-undo fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Backtracking</h3>
+                                <p class="fs-7 text-muted">Busca Sistemática</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-database fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Base de Conhecimento</h3>
+                                <p class="fs-7 text-muted">Fatos e Regras</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução ao Paradigma Lógico</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "O Prolog representa uma mudança de paradigma em relação às linguagens imperativas. Em vez de fornecer instruções sobre <strong>como</strong> executar uma tarefa, especificamos <strong>o que é verdade</strong> sobre um domínio."
+                            </p>
+                            <footer class="blockquote-footer">Programming in Logic</footer>
+                        </blockquote>
+                    </div>
+
+                    <p class="fs-5 text-muted mb-5">
+                        A mágica por trás da capacidade do Prolog de responder a perguntas complexas não é arbitrária. É o resultado direto da interação sistemática de três processos distintos que formam seu mecanismo de inferência:
+                    </p>
+
+                    <!-- Three Pillars of Prolog -->
+                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-link fs-3 me-3 text-primary"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Unificação</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Algoritmo de correspondência de padrões que serve como a <strong>operação computacional primária</strong>.
+                                </p>
+                                <div class="border-start border-4 border-primary ps-3">
+                                    <div class="fw-bold text-primary">Papel</div>
+                                    <div class="fs-6 text-muted">Torna dois termos sintaticamente idênticos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-project-diagram fs-3 me-3 text-success"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--copper-800);">Resolução SLD</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--copper-700);">
+                                    Procedimento de prova formal que fornece a <strong>base lógica para a inferência</strong>.
+                                </p>
+                                <div class="border-start border-4 border-success ps-3">
+                                    <div class="fw-bold text-success">Função</div>
+                                    <div class="fs-6 text-muted">Constrói provas por refutação</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="fas fa-undo fs-3 me-3 text-warning"></i>
+                                    <h3 class="fs-3 fw-semibold mb-0" style="color: var(--sage-800);">Backtracking</h3>
+                                </div>
+                                <p class="fs-6 mb-3" style="color: var(--sage-700);">
+                                    Estratégia de busca em profundidade com mecanismo robusto de <strong>tentativa e erro</strong>.
+                                </p>
+                                <div class="border-start border-4 border-warning ps-3">
+                                    <div class="fw-bold text-warning">Estratégia</div>
+                                    <div class="fs-6 text-muted">Explora sistematicamente alternativas</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Paradigma Declarativo</h3>
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Um programa em Prolog é uma <strong>especificação executável</strong> de um subconjunto da Lógica de Primeira Ordem, permitindo que os programadores se concentrem na descrição da lógica e das relações do problema.
+                        </p>
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Separação Fundamental:</strong>
+                            <span class="text-info">Dados (fatos) • Lógica (regras) • Controle (mecanismo de inferência)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section id="arquitetura" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. A Arquitetura de um Programa Prolog</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Todos os programas Prolog são estruturados a partir da <strong>base de conhecimento</strong> (knowledge base), um repositório estruturado de asserções lógicas que descrevem um domínio específico.
+                    </p>
+
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Base de Conhecimento</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            O texto do programa não é uma sequência de instruções, mas sim uma declaração estática de verdades. <em>Executar</em> um programa é, na verdade, o ato de submeter uma consulta à base de conhecimento.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-primary mb-2">Fatos</h4>
+                                    <p class="fs-6 mb-0">
+                                        Dados brutos do domínio, verdades incondicionais
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">Regras</h4>
+                                    <p class="fs-6 mb-0">
+                                        Conhecimento condicional, implicações lógicas
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-info-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-info mb-2">Consultas</h4>
+                                    <p class="fs-6 mb-0">
+                                        Perguntas ao sistema, objetivos a provar
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms Section -->
+        <section id="termos" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Termos: Os Dados do Prolog</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Estrutura Unificada de Dados</h3>
+                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                            Em Prolog, toda a representação de dados é feita através de uma única estrutura: o <strong>termo</strong>. Não existem tipos de dados distintos no sentido convencional.
+                        </p>
+                    </div>
+
+                    <!-- Types of Terms -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-syntax">
+                                    <h4 class="fs-4 fw-semibold text-primary mb-2">Átomos</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Constantes que representam objetos, propriedades ou relações. Começam com letra minúscula.
+                                    </p>
+                                    <div class="formula-box bg-primary-subtle">
+                                        <code>socrates, gosta, vermelho</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-semantics">
+                                    <h4 class="fs-4 fw-semibold text-success mb-2">Variáveis</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Espaços reservados para termos desconhecidos. Começam com letra maiúscula ou underscore.
+                                    </p>
+                                    <div class="formula-box bg-success-subtle">
+                                        <code>X, Pessoa, _Nome, _</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-inference">
+                                    <h4 class="fs-4 fw-semibold text-info mb-2">Números</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Literais numéricos, inteiros e ponto flutuante.
+                                    </p>
+                                    <div class="formula-box bg-info-subtle">
+                                        <code>42, 3.14, -17</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="logic-component component-form">
+                                    <h4 class="fs-4 fw-semibold text-warning mb-2">Estruturas</h4>
+                                    <p class="fs-6 mb-3 text-muted">
+                                        Termos compostos com functor e argumentos. Principal meio de criar dados complexos.
+                                    </p>
+                                    <div class="formula-box bg-warning-subtle">
+                                        <code>functor(arg1, arg2, ...)</code><br>
+                                        <code>pessoa(nome(joao), idade(25))</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Special Note about Lists -->
+                    <div class="card p-4 rounded-3 shadow bg-warning-subtle">
+                        <h3 class="fs-3 fw-semibold mb-4 text-warning">Listas: Estruturas Especiais</h3>
+                        <p class="fs-6 mb-3 text-dark">
+                            Listas são estruturas com sintaxe especial. A lista <code>[a, b, c]</code> é internamente representada como:
+                        </p>
+                        <div class="formula-box bg-white">
+                            <code>'.'(a, '.'(b, '.'(c, [])))</code>
+                        </div>
+                        <p class="fs-6 mt-3 mb-0 text-dark">
+                            A notação <code>[H|T]</code> decompõe uma lista em cabeça (H) e cauda (T).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clauses Section -->
+        <section id="clausulas" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Cláusulas: A Lógica do Prolog</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        As cláusulas constituem as unidades fundamentais de conhecimento em um programa Prolog. Elas codificam tanto conhecimento factual quanto inferencial sobre um domínio específico.
+                    </p>
+
+                    <!-- Facts -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Fatos: Conhecimento Incondicional</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Fatos são cláusulas unitárias que declaram verdades incondicionais. Correspondem a <strong>cláusulas de Horn unitárias</strong> da forma $P(t_1, t_2, \cdots, t_n)$.
+                        </p>
+                        
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplos de Fatos</h4>
+                            <pre class="bg-light p-3 rounded"><code class="language-prolog">% Predicados unários - propriedades
+mortal(socrates).
+mamifero(gato).
+ave(canario).
+
+% Predicados binários - relações
+pai(joao, pedro).
+maior_que(5, 3).
+capital(brasil, brasilia).
+
+% Predicados n-ários - relações complexas
+distancia(sao_paulo, rio_janeiro, 400).
+nasceu(socrates, atenas, 470).</code></pre>
+                        </div>
+                        
+                        <div class="p-3 bg-info-subtle rounded mt-3">
+                            <strong class="text-info">Interpretação Formal:</strong>
+                            <span class="text-info">Cada fato P(a1, ..., an) é interpretado como "é verdadeiro que P(a1, ..., an)" no modelo mínimo de Herbrand.</span>
+                        </div>
+                    </div>
+
+                    <!-- Rules -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Regras: Conhecimento Condicional</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Regras estabelecem verdades condicionais através de implicações lógicas. Correspondem a <strong>cláusulas de Horn definidas</strong>:
+                        </p>
+                        
+                        <div class="formula-box bg-white mb-4">
+                            $H \leftarrow B_1 \land B_2 \land ... \land B_n$
+                        </div>
+                        
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplos de Regras</h4>
+                            <pre class="bg-light p-3 rounded"><code class="language-prolog">% Regra simples: ∀X (mamifero(X) → animal(X))
+animal(X) :- mamifero(X).
+
+% Regra com múltiplas condições
+pode_voar(X) :- 
+    ave(X), 
+    \+ pinguim(X), 
+    \+ avestruz(X).
+
+% Regra recursiva para ancestralidade
+ancestral(X, Y) :- pai(X, Y).
+ancestral(X, Z) :- pai(X, Y), ancestral(Y, Z).</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Quantification -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Quantificação e Estrutura Lógica</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-primary-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-primary mb-2">Quantificação Universal</h4>
+                                    <p class="fs-6 mb-0">
+                                        Variáveis em regras são universalmente quantificadas:<br>
+                                        <code>animal(X) :- mamifero(X)</code><br>
+                                        significa: $\forall X (mamifero(X) \rightarrow animal(X))$
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h4 class="fs-5 fw-semibold text-success mb-2">Disjunção por Múltiplas Cláusulas</h4>
+                                    <p class="fs-6 mb-0">
+                                        Múltiplas cláusulas com mesma cabeça expressam disjunção:<br>
+                                        <code>voa(X) :- ave(X).</code><br>
+                                        <code>voa(X) :- inseto_voador(X).</code>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Queries Section -->
+        <section id="consultas" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Consultas: Interrogando a Base de Conhecimento</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Natureza Formal das Consultas</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Consultas são o mecanismo através do qual fazemos perguntas à base de conhecimento. Correspondem a <strong>cláusulas de Horn negativas</strong> da forma:
+                        </p>
+                        
+                        <div class="formula-box">
+                            $\leftarrow B_1 \land B_2 \land ... \land B_n$
+                        </div>
+                        
+                        <p class="fs-6 mt-3" style="color: var(--sage-700);">
+                            O mecanismo de inferência tenta encontrar uma <strong>refutação</strong> da negação da consulta, implementando prova por contradição.
+                        </p>
+                    </div>
+
+                    <!-- Types of Queries -->
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-primary mb-2">Consultas Ground</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Sem variáveis, perguntam sobre veracidade de fato específico.
+                                </p>
+                                <div class="formula-box bg-primary-subtle">
+                                    <code>?- pai(joao, pedro).</code><br>
+                                    <small>Resposta: true/false</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-success mb-2">Com Variáveis Livres</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Solicitam instanciações que tornam a afirmação verdadeira.
+                                </p>
+                                <div class="formula-box bg-success-subtle">
+                                    <code>?- pai(X, pedro).</code><br>
+                                    <small>X = joao</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-info mb-2">Consultas Conjuntivas</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Múltiplas condições que devem ser satisfeitas.
+                                </p>
+                                <div class="formula-box bg-info-subtle">
+                                    <code>?- pai(X, Y), mae(Z, Y).</code><br>
+                                    <small>Encontra X, Y, Z</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Query Resolution Process -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Processo de Resolução de Consultas</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Decomposição:</strong> Múltiplos objetivos tratados como conjunção
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Busca por Correspondência:</strong> Sistema busca cláusulas unificáveis
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Aplicação de Regras:</strong> Objetivo substituído pelos objetivos do corpo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Construção de Provas:</strong> Processo continua recursivamente
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closed World Assumption Section -->
+        <section id="cwa" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. A Hipótese do Mundo Fechado</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Princípio Fundamental</h3>
+                        
+                        <div class="p-3 bg-danger-subtle rounded mb-4">
+                            <strong class="text-danger">CWA - Closed World Assumption:</strong>
+                            <span class="text-danger">Tudo o que não pode ser provado verdadeiro a partir da base de conhecimento é assumido como <strong>falso</strong>.</span>
+                        </div>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Na lógica clássica, a ausência de informação não permite conclusões. O Prolog adota a hipótese contrária: a ignorância implica falsidade.
+                        </p>
+                        
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo Demonstrativo</h4>
+                            <pre class="bg-light p-3 rounded"><code class="language-prolog">% Base de conhecimento
+ave(canario).
+ave(papagaio).
+voa(canario).
+
+% Consultas demonstrando a CWA
+?- ave(canario).   % true - pode ser provado
+?- ave(cachorro).  % false - não pode ser provado
+?- voa(papagaio).  % false - não pode ser provado</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Consequences of CWA -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-success mb-2">Consequências Práticas</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Comportamento determinístico</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Negação por falha (\+)</li>
+                                    <li class="mb-2"><i class="fas fa-check me-2 text-success"></i>Sistema completo para o domínio</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-warning mb-2">Limitações</h4>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Monotonicidade quebrada</li>
+                                    <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Colapso falso/desconhecido</li>
+                                    <li class="mb-2"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Sensível a mudanças na base</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Negation as Failure -->
+                    <div class="card p-4 rounded-3 shadow bg-warning-subtle">
+                        <h3 class="fs-3 fw-semibold mb-4 text-warning">Negação por Falha</h3>
+                        
+                        <p class="fs-6 mb-3 text-dark">
+                            O operador <code>\+</code> não representa negação lógica clássica, mas sim "falha em provar":
+                        </p>
+                        
+                        <pre class="bg-white p-3 rounded"><code class="language-prolog">solteiro(X) :- pessoa(X), \+ casado(X).
+
+% Se casado(joao) não pode ser provado,
+% então solteiro(joao) é verdadeiro</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unification Section -->
+        <section id="unificacao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. O Coração do Mecanismo: Unificação</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <blockquote class="blockquote mb-4">
+                            <p class="fs-5 fst-italic">
+                                "A unificação é a operação fundamental que impulsiona toda a computação em Prolog."
+                            </p>
+                        </blockquote>
+                        
+                        <p class="fs-6" style="color: var(--sage-700);">
+                            Mais do que simples correspondência de padrões, é um algoritmo sofisticado para tornar dois termos sintaticamente idênticos, resolvendo equações simbólicas. Processo <strong>bidirecional</strong> que pode instanciar variáveis em qualquer termo.
+                        </p>
+                    </div>
+
+                    <!-- Unification Algorithm -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Algoritmo de Unificação</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Constantes idênticas:</strong> Unificação tem sucesso
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Variável não instanciada:</strong> Liga-se ao outro termo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Duas variáveis livres:</strong> Tornam-se co-referenciadas
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Estruturas:</strong> Mesmo functor/aridade + argumentos unificam
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>
+                                        <strong>Outros casos:</strong> Unificação falha
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Unification Examples Table -->
+                    <div class="table-responsive mb-5">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Termo 1</th>
+                                    <th>Termo 2</th>
+                                    <th>Unifica?</th>
+                                    <th>MGU (Unificador Mais Geral)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>gato(tom)</code></td>
+                                    <td><code>gato(tom)</code></td>
+                                    <td><span class="badge bg-success">Sim</span></td>
+                                    <td>{} (substituição vazia)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>gato(X)</code></td>
+                                    <td><code>gato(tom)</code></td>
+                                    <td><span class="badge bg-success">Sim</span></td>
+                                    <td>X = tom</td>
+                                </tr>
+                                <tr>
+                                    <td><code>pai(X, Y)</code></td>
+                                    <td><code>pai(joao, maria)</code></td>
+                                    <td><span class="badge bg-success">Sim</span></td>
+                                    <td>X = joao, Y = maria</td>
+                                </tr>
+                                <tr>
+                                    <td><code>f(X, X)</code></td>
+                                    <td><code>f(a, b)</code></td>
+                                    <td><span class="badge bg-danger">Não</span></td>
+                                    <td>Falha (a ≠ b)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>lista([a,b])</code></td>
+                                    <td><code>lista([X|Y])</code></td>
+                                    <td><span class="badge bg-success">Sim</span></td>
+                                    <td>X = a, Y = [b]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- MGU and Occurs Check -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col">
+                            <div class="card p-4 rounded-3 shadow bg-primary-subtle">
+                                <h4 class="fs-4 fw-semibold text-primary mb-3">Unificador Mais Geral (MGU)</h4>
+                                <p class="fs-6 mb-0">
+                                    O MGU é a substituição que faz o menor número de compromissos, deixando variáveis tão livres quanto possível. Maximiza opções para futuras unificações.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card p-4 rounded-3 shadow bg-warning-subtle">
+                                <h4 class="fs-4 fw-semibold text-warning mb-3">Occurs Check</h4>
+                                <p class="fs-6 mb-0">
+                                    Verificação omitida por eficiência. Previne termos cíclicos como X = f(X). Disponível via <code>unify_with_occurs_check/2</code>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLD Resolution Section -->
+        <section id="sld" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Resolução SLD: O Mecanismo de Inferência Lógico</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Prova por Refutação</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Para provar que uma consulta Q é verdadeira, o mecanismo assume temporariamente que ela é falsa (¬Q) e tenta derivar uma contradição lógica.
+                        </p>
+                        
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">SLD significa:</strong>
+                            <ul class="list-unstyled mb-0 mt-2">
+                                <li><strong>S</strong>elective - Seleção do objetivo mais à esquerda</li>
+                                <li><strong>L</strong>inear - Sequência linear de passos de prova</li>
+                                <li><strong>D</strong>efinite - Opera sobre cláusulas de Horn definidas</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SLD Algorithm Steps -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Algoritmo de Resolução SLD</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Seleção:</strong> Escolhe o objetivo mais à esquerda
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Pesquisa:</strong> Busca cláusula unificável de cima para baixo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Fato encontrado:</strong> Remove objetivo, aplica MGU
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Regra encontrada:</strong> Substitui objetivo pelo corpo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>
+                                        <strong>Sem unificação:</strong> Objetivo falha
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">6</div>
+                                    <div>
+                                        <strong>Sucesso:</strong> Lista de objetivos vazia
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLD Tree Example -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo: Árvore de Busca SLD</h4>
+                        
+                        <pre class="bg-light p-3 rounded"><code class="language-prolog">% Base de conhecimento
+pai(joao, maria).
+pai(joao, pedro).
+pai(pedro, ana).
+
+progenitor(X, Y) :- pai(X, Y).
+progenitor(X, Y) :- mae(X, Y).
+
+ancestral(X, Y) :- progenitor(X, Y).
+ancestral(X, Y) :- progenitor(X, Z), ancestral(Z, Y).
+
+% Consulta: ?- ancestral(joao, ana).</code></pre>
+                        
+                        <div class="p-3 bg-success-subtle rounded mt-3">
+                            <strong class="text-success">Processo de Resolução:</strong>
+                            <ol class="mb-0">
+                                <li>Tenta primeira cláusula: ancestral(X,Y) :- progenitor(X,Y)</li>
+                                <li>Busca progenitor(joao, ana) - FALHA</li>
+                                <li>Backtrack, tenta segunda cláusula</li>
+                                <li>Encontra progenitor(joao, maria) - SUCESSO</li>
+                                <li>Resolve ancestral(maria, ana) recursivamente</li>
+                                <li>Encontra caminho completo - SUCESSO</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Backtracking Section -->
+        <section id="backtracking" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. Navegando no Espaço de Soluções: Backtracking</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Busca em Profundidade</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            O Prolog emprega uma estratégia de <strong>busca em profundidade (DFS)</strong>, seguindo uma única linha de raciocínio o mais profundamente possível antes de considerar alternativas.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h5 class="fw-semibold text-success">Vantagens</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-check me-2"></i>Eficiente em memória</li>
+                                        <li><i class="fas fa-check me-2"></i>Comportamento previsível</li>
+                                        <li><i class="fas fa-check me-2"></i>Determinístico</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h5 class="fw-semibold text-warning">Limitações</h5>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><i class="fas fa-exclamation-triangle me-2"></i>Sistema incompleto</li>
+                                        <li><i class="fas fa-exclamation-triangle me-2"></i>Pode prender em loops</li>
+                                        <li><i class="fas fa-exclamation-triangle me-2"></i>Sensível à ordem</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backtracking Mechanism -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Mecanismo de Backtracking</h3>
+                        
+                        <div class="row row-cols-1 g-3">
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">1</div>
+                                    <div>
+                                        <strong>Ponto de Escolha:</strong> Criado quando existem alternativas
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">2</div>
+                                    <div>
+                                        <strong>Execução para Frente:</strong> Segue caminho escolhido
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">3</div>
+                                    <div>
+                                        <strong>Ativação:</strong> Quando objetivo falha
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">4</div>
+                                    <div>
+                                        <strong>Retorno:</strong> Volta ao ponto de escolha mais recente
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">5</div>
+                                    <div>
+                                        <strong>Desfazer Ligações:</strong> Desinstancia variáveis
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="step">
+                                    <div class="step-number">6</div>
+                                    <div>
+                                        <strong>Nova Tentativa:</strong> Explora próxima alternativa
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Path Finding Example -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo: Busca de Caminhos com Backtracking</h4>
+                        
+                        <pre class="bg-light p-3 rounded"><code class="language-prolog">edge(a,b). 
+edge(a,c). 
+edge(b,d). 
+edge(c,d). 
+edge(d,e).
+
+path(X,Y) :- path(X,Y,[]).
+
+% Caso base: aresta direta
+path(X,Y,_) :- edge(X,Y).
+
+% Caso recursivo: caminho via Z
+path(X,Y,V) :-  
+    \+ member(X,V),  
+    edge(X,Z),  
+    path(Z,Y,[X|V]).
+
+% Consulta: ?- path(a, e).</code></pre>
+                        
+                        <div class="p-3 bg-info-subtle rounded mt-3">
+                            <strong class="text-info">Rastreamento do Backtracking:</strong>
+                            <p class="mb-0">
+                                1. Tenta caminho via b: a→b→d→e ✓<br>
+                                2. Se pedir mais soluções (;), backtrack<br>
+                                3. Tenta caminho via c: a→c→d→e ✓<br>
+                                4. Explora sistematicamente todas as alternativas
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Structures Section -->
+        <section id="estruturas" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Estruturas de Dados como Lente para a Mecânica</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A manipulação de estruturas de dados em Prolog demonstra a aplicação prática de unificação e recursão. O código não descreve <em>como</em> manipular, mas <em>o que</em> define a estrutura.
+                    </p>
+
+                    <!-- Lists -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Listas: A Estrutura Fundamental</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            A lista é a única estrutura com sintaxe própria em Prolog, definida recursivamente:
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                            <div class="col">
+                                <div class="formula-box bg-primary-subtle">
+                                    <strong>Lista vazia:</strong> <code>[]</code>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="formula-box bg-success-subtle">
+                                    <strong>Lista não-vazia:</strong> <code>[Head|Tail]</code>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <h5 class="fs-5 fw-semibold mb-3">Predicado member/2</h5>
+                            <pre class="bg-light p-3 rounded"><code class="language-prolog">% Caso base: elemento é a cabeça
+member(X, [X|_]).
+
+% Caso recursivo: procura na cauda
+member(X, [_|T]) :- member(X, T).</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Stacks -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Pilhas: Ajuste Natural</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Estrutura LIFO trivialmente implementada usando a cabeça como topo:
+                        </p>
+                        
+                        <pre class="bg-white p-3 rounded"><code class="language-prolog">% Pilha vazia
+is_empty([]).
+
+% Adiciona ao topo
+push(Elem, Stack, [Elem|Stack]).
+
+% Remove do topo
+pop(Elem, [Elem|Stack], Stack).
+
+% Vê o topo sem remover
+peek(Elem, [Elem|_]).</code></pre>
+                        
+                        <div class="p-3 bg-info-subtle rounded">
+                            <strong class="text-info">Nota:</strong> Operações não modificam a pilha original; geram nova versão (imutabilidade).
+                        </div>
+                    </div>
+
+                    <!-- Binary Trees -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Árvores Binárias de Busca</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            Estrutura recursiva ideal para Prolog: <code>tree(Esq, Valor, Dir)</code> ou <code>nil</code>
+                        </p>
+                        
+                        <pre class="bg-light p-3 rounded"><code class="language-prolog">% Busca em árvore
+lookup(Value, tree(_, Value, _)).
+lookup(Value, tree(Left, NodeVal, _)) :-
+    Value < NodeVal,
+    lookup(Value, Left).
+lookup(Value, tree(_, NodeVal, Right)) :-
+    Value > NodeVal,
+    lookup(Value, Right).
+
+% Inserção em árvore
+insert(Value, nil, tree(nil, Value, nil)).
+insert(Value, tree(L, V, R), tree(NL, V, R)) :-
+    Value < V,
+    insert(Value, L, NL).
+insert(Value, tree(L, V, R), tree(L, V, NR)) :-
+    Value > V,
+    insert(Value, R, NR).</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cut Operator Section -->
+        <section id="corte" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">11. Controle Manual: O Operador de Corte (!)</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Concessão ao Pragmatismo</h3>
+                        
+                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                            O corte (<code>!</code>) representa uma concessão do modelo declarativo ao pragmatismo procedural, permitindo intervir diretamente no comportamento de busca.
+                        </p>
+                        
+                        <div class="p-3 bg-danger-subtle rounded">
+                            <strong class="text-danger">Efeitos do Corte:</strong>
+                            <ul class="mb-0">
+                                <li>Descarta outras cláusulas do predicado abaixo</li>
+                                <li>Descarta pontos de escolha à esquerda</li>
+                                <li>Compromete com escolhas feitas</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Types of Cuts -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-success mb-2">Cortes Verdes</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Não alteram significado declarativo, apenas melhoram eficiência.
+                                </p>
+                                <pre class="bg-light p-3 rounded"><code class="language-prolog">max(X, Y, X) :- X >= Y, !.
+max(X, Y, Y) :- X < Y.</code></pre>
+                                <p class="fs-6 text-muted">
+                                    Remove redundância sem alterar resultados.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <h4 class="fs-4 fw-semibold text-danger mb-2">Cortes Vermelhos</h4>
+                                <p class="fs-6 mb-3 text-muted">
+                                    Alteram significado do programa, tornam correção dependente da ordem.
+                                </p>
+                                <pre class="bg-light p-3 rounded"><code class="language-prolog">ifte(C, T, _) :- C, !, T.
+ifte(_, _, E) :- E.</code></pre>
+                                <p class="fs-6 text-muted">
+                                    Segunda cláusula só funciona protegida pelo corte.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Negation as Failure -->
+                    <div class="card p-4 rounded-3 shadow bg-warning-subtle">
+                        <h3 class="fs-3 fw-semibold mb-4 text-warning">Negação como Falha</h3>
+                        
+                        <p class="fs-6 mb-3 text-dark">
+                            A implementação do operador <code>\+</code> usa corte vermelho com <code>fail</code>:
+                        </p>
+                        
+                        <pre class="bg-white p-3 rounded"><code class="language-prolog">not(Goal) :- call(Goal), !, fail.
+not(_).
+
+% Se Goal tem sucesso → corte → fail → not(Goal) falha
+% Se Goal falha → backtrack → segunda cláusula → not(Goal) sucesso</code></pre>
+                        
+                        <p class="fs-6 mt-3 mb-0 text-dark">
+                            Inverte efetivamente sucesso/falha do objetivo original.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark text-white">
+            <div class="container text-center">
+                <p class="mb-0">© 2024 - Desvendando o Processo de Inferência do Prolog</p>
+                <p class="mb-0 mt-2"><small>Material educacional sobre programação lógica e Prolog</small></p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

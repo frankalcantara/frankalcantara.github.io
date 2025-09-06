@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://frankalcantara.com/index.html</loc>
-    <lastmod>2025-07-30T17:59:24.324Z</lastmod>
+    <lastmod>2025-09-04T18:43:05.900Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01-jornada-programacao-logica.html</loc>
@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/01a-introducao-prolog.html</loc>
-    <lastmod>2025-08-29T18:50:57.299Z</lastmod>
+    <lastmod>2025-09-04T18:46:10.845Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/02-fundamentos-logica-proposicional.html</loc>
@@ -26,11 +26,11 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/05-formas-normais-e-skolemizacao.html</loc>
-    <lastmod>2025-08-26T18:55:44.306Z</lastmod>
+    <lastmod>2025-09-04T18:43:05.987Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/06-clausulas-de-horn-e-prolog.html</loc>
-    <lastmod>2025-08-26T18:28:16.128Z</lastmod>
+    <lastmod>2025-09-04T18:43:35.273Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/07-construcao-de-mundos-logicos.html</loc>
@@ -38,7 +38,11 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/07a-criando-mundos-praticas.html</loc>
-    <lastmod>2025-09-01T13:05:10.708Z</lastmod>
+    <lastmod>2025-09-04T18:43:05.940Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/07b-inferencia-prolog.html</loc>
+    <lastmod>2025-09-06T22:00:38.640Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/08-verificacao-formal-de-programas.html</loc>
@@ -58,14 +62,14 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/03-Sol-Normais.html</loc>
-    <lastmod>2025-08-26T18:28:16.037Z</lastmod>
+    <lastmod>2025-09-04T18:43:05.987Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/apendice-a-glossario.html</loc>
-    <lastmod>2025-07-29T12:20:41.745Z</lastmod>
+    <lastmod>2025-09-04T18:43:05.940Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/apendice-b-referencias.html</loc>
-    <lastmod>2025-07-28T20:57:18.150Z</lastmod>
+    <lastmod>2025-09-06T21:27:59.874Z</lastmod>
   </url>
 </urlset>
