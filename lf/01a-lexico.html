@@ -1353,41 +1353,49 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <section id="sec-ex-regex5" class="level3" data-number="3.4.8">
 <h3 data-number="3.4.8" class="anchored" data-anchor-id="sec-ex-regex5"><span class="header-section-number">3.4.8</span> Exercícios 8</h3>
 <ol type="1">
-<li>Projete expressões regulares para <em>tokens</em> de uma linguagem de programação simples:
+<li><p>Projete expressões regulares para <em>tokens</em> de uma linguagem de programação simples:</p>
 <ol type="a">
 <li>Palavras-chave: <span class="math inline">\(\{\text{if}, \text{then}, \text{else}, \text{while}, \text{do}\}\)</span>;</li>
 <li>Números inteiros (incluindo negativos);</li>
 <li>Comentários de linha iniciados por <span class="math inline">\(//\)</span>;</li>
 <li>Operadores relacionais: <span class="math inline">\(\{&lt;, &gt;, &lt;=, &gt;=, ==, !=\}\)</span>.</li>
 </ol></li>
-<li>Construa expressões regulares para validar:
+<li><p>Construa expressões regulares para validar:</p>
 <ol type="a">
 <li>Telefone celular: <span class="math inline">\((11) 99999-9999\)</span>;</li>
 <li>RG: <span class="math inline">\(99.999.999-9\)</span>;</li>
 <li>CNPJ: <span class="math inline">\(99.999.999/9999-99\)</span>;</li>
 <li>CEP: <span class="math inline">\(99999-999\)</span> ou <span class="math inline">\(99.999-999\)</span>.</li>
 </ol></li>
-<li>Projete expressões para encontrar:
+<li><p>Projete expressões para encontrar:</p>
 <ol type="a">
 <li>Endereços de email em um texto;</li>
 <li>Valores monetários no formato <span class="math inline">\(R\$ 99,99\)</span>;</li>
 <li>Datas em formatos variados: <span class="math inline">\(dd/mm/aaaa\)</span>, <span class="math inline">\(dd-mm-aaaa\)</span>, <span class="math inline">\(dd.mm.aaaa\)</span>;</li>
 <li>Números de cartão de crédito (formato <span class="math inline">\(9999-9999-9999-9999\)</span>).</li>
 </ol></li>
-<li>Identifique e corrija os erros nas seguintes expressões:
+<li><p>Identifique e corrija os erros nas seguintes expressões:</p>
 <ol type="a">
 <li>Para validar email: <span class="math inline">\([a-z]+@[a-z]+.[a-z]+\)</span> (problema: ponto literal);</li>
 <li>Para números decimais: <span class="math inline">\([0-9]*.[0-9]*\)</span> (problema: pontos opcionais);</li>
 <li>Para identificadores: <span class="math inline">\([a-zA-Z][a-zA-Z0-9]?\)</span> (problema: comprimento mínimo).</li>
 </ol></li>
-<li>Para cada expressão, proponha uma versão otimizada:
+<li><p>Para cada expressão, proponha uma versão otimizada:</p>
 <ol type="a">
 <li><span class="math inline">\((abc|abd|abe)\)</span> → <span class="math inline">\(ab(c|d|e)\)</span>;</li>
 <li><span class="math inline">\([0-9][0-9][0-9][0-9]\)</span> → <span class="math inline">\([0-9]\{4\}\)</span>;</li>
 <li><span class="math inline">\((a^*b^*|b^*a^*)\)</span> → <span class="math inline">\((a|b)^*\)</span> (verifique se são realmente equivalentes);</li>
 <li>Analise qual versão seria mais eficiente em uma implementação real.</li>
 </ol></li>
-<li>Defina o alfabeto, e as expressões regulares que sejam capazes de validar expressões aritméticas entre números inteiros considerando apenas as operações de soma, subtração, divisão e multiplicação.</li>
+<li><p>Defina o alfabeto, e as expressões regulares que sejam capazes de validar expressões aritméticas entre números inteiros considerando apenas as operações de soma, subtração, divisão e multiplicação.</p></li>
+<li><p>Construa expressões regulares para descrever as seguintes linguagens sobre o alfabeto <span class="math inline">\(\Sigma=\{a,b,c\}\)</span>, usando apenas as operações de <strong>união (</strong>∪<strong>)</strong>, <strong>concatenação</strong> e <strong>fechamento de Kleene (</strong>∗<strong>)</strong>.</p></li>
+</ol>
+<ol type="a">
+<li>Todas as cadeias que começam com a, terminam com <span class="math inline">\(c\)</span> e contêm pelo menos um <span class="math inline">\(b\)</span> no meio.<br>
+</li>
+<li>Todas as cadeias em que cada <span class="math inline">\(a\)</span> é imediatamente seguido por um <span class="math inline">\(b\)</span> ou por outro <span class="math inline">\(a\)</span>.<br>
+</li>
+<li>Todas as cadeias que não contêm a substring <span class="math inline">\(ac\)</span>.</li>
 </ol>
 </section>
 <section id="limitações-das-expressões-regulares" class="level3" data-number="3.4.9">
