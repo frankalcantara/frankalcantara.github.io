@@ -311,11 +311,13 @@ window.Quarto = {
   <li><a href="#conjunto-follow" id="toc-conjunto-follow" class="nav-link" data-scroll-target="#conjunto-follow"><span class="header-section-number">6.7.2</span> Conjunto FOLLOW</a></li>
   <li><a href="#nullable-2" id="toc-nullable-2" class="nav-link" data-scroll-target="#nullable-2"><span class="header-section-number">6.7.3</span> Nullable</a></li>
   <li><a href="#resumo-dos-conjuntos" id="toc-resumo-dos-conjuntos" class="nav-link" data-scroll-target="#resumo-dos-conjuntos"><span class="header-section-number">6.7.4</span> Resumo dos Conjuntos</a></li>
+  <li><a href="#tipos-de-conflitos-nas-tabelas-de-derivação" id="toc-tipos-de-conflitos-nas-tabelas-de-derivação" class="nav-link" data-scroll-target="#tipos-de-conflitos-nas-tabelas-de-derivação"><span class="header-section-number">6.7.5</span> Tipos de Conflitos Nas Tabelas de Derivação</a></li>
+  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">6.7.6</span> Resolução de Conflitos</a></li>
   </ul></li>
-  <li><a href="#tipos-de-conflitos-nas-tabelas-de-derivação" id="toc-tipos-de-conflitos-nas-tabelas-de-derivação" class="nav-link" data-scroll-target="#tipos-de-conflitos-nas-tabelas-de-derivação"><span class="header-section-number">6.8</span> Tipos de Conflitos Nas Tabelas de Derivação</a>
+  <li><a href="#pseudocódigo-para-a-criação-da-tabela-de-derivação" id="toc-pseudocódigo-para-a-criação-da-tabela-de-derivação" class="nav-link" data-scroll-target="#pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">6.8</span> Pseudocódigo para a Criação da Tabela de Derivação</a></li>
+  <li><a href="#exemplo-prático-análise-sintática-de-laços-for-na-linguagem-c" id="toc-exemplo-prático-análise-sintática-de-laços-for-na-linguagem-c" class="nav-link" data-scroll-target="#exemplo-prático-análise-sintática-de-laços-for-na-linguagem-c"><span class="header-section-number">6.9</span> Exemplo Prático: Análise Sintática de Laços ‘for’ na Linguagem C</a>
   <ul class="collapse">
-  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">6.8.1</span> Resolução de Conflitos</a></li>
-  <li><a href="#pseudocódigo-para-a-criação-da-tabela-de-derivação" id="toc-pseudocódigo-para-a-criação-da-tabela-de-derivação" class="nav-link" data-scroll-target="#pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">6.8.2</span> Pseudocódigo para a Criação da Tabela de Derivação</a></li>
+  <li><a href="#solução" id="toc-solução" class="nav-link" data-scroll-target="#solução"><span class="header-section-number">6.9.1</span> Solução</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/05-parsersLL1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -2045,16 +2047,16 @@ Nullable(T) &amp;= false
 <p>Nesta tabela podemos ver um conflito explícito. O não-terminal <span class="math inline">\(E\)</span> possui duas produções para os símbolos <span class="math inline">\(int\)</span> e <span class="math inline">\((\)</span>.</p>
 <p>Sempre que na criação de Tabelas de Derivação existir um conflito estaremos gerando ambiguidades na derivação. A gramática é ambígua, sempre que uma sentença puder ser derivada de duas ou mais formas diferentes, gerando árvores sintáticas diferentes. Por exemplo, na gramática do <strong>Exemplo 1</strong>, a sentença <span class="math inline">\(int + int\)</span> pode ser derivada tanto como <span class="math inline">\(E → T → int\)</span> seguido de <span class="math inline">\(E → T + E → int + int\)</span> quanto como <span class="math inline">\(E → T + E → T + T → int + int\)</span>.</p>
 </section>
-</section>
-<section id="tipos-de-conflitos-nas-tabelas-de-derivação" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="tipos-de-conflitos-nas-tabelas-de-derivação"><span class="header-section-number">6.8</span> Tipos de Conflitos Nas Tabelas de Derivação</h2>
+<section id="tipos-de-conflitos-nas-tabelas-de-derivação" class="level3" data-number="6.7.5">
+<h3 data-number="6.7.5" class="anchored" data-anchor-id="tipos-de-conflitos-nas-tabelas-de-derivação"><span class="header-section-number">6.7.5</span> Tipos de Conflitos Nas Tabelas de Derivação</h3>
 <p>Conflitos na Tabela de Derivação, ou tabela de análise, <span class="math inline">\(LL(1)\)</span> podem ser classificados em dois tipos principais:</p>
 <ol type="1">
 <li><p><strong>Conflito</strong> <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FIRST\)</span>: ocorre quando o conjunto <span class="math inline">\(FIRST\)</span> de duas ou mais produções de um mesmo não-terminal possui um terminal em comum. Na gramática do <strong>Exemplo 1</strong>, as produções <span class="math inline">\(E \rightarrow T + E\)</span> e <span class="math inline">\(E \rightarrow T\)</span> possuem os terminais <span class="math inline">\(int\)</span> e <span class="math inline">\((\)</span> em seus conjuntos <span class="math inline">\(FIRST\)</span>. Ao encontrar <span class="math inline">\(int\)</span> ou <span class="math inline">\((\)</span> na entrada, o <em>parser</em> não sabe se deve aplicar a regra que deriva uma expressão com um operador <span class="math inline">\(+\)</span> ou a regra que deriva um termo. Neste momento do processo de <em>parsing</em> determinismo saiu pela janela e o <em>parser</em> <span class="math inline">\(LL(1)\)</span> é inútil.</p></li>
 <li><p><strong>Conflito</strong> <span class="math inline">\(FIRST\)</span>/<span class="math inline">\(FOLLOW\)</span>: ocorre quando uma produção tem <span class="math inline">\(\varepsilon\)</span> (a <em>string</em> vazia) em seu conjunto <span class="math inline">\(FIRST\)</span> e o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal da produção possui um terminal em comum com o <span class="math inline">\(FIRST\)</span> de outra produção do mesmo não-terminal. Por exemplo, na gramática do <strong>Exemplo 1</strong>, se <span class="math inline">\(E \rightarrow \varepsilon\)</span> fosse uma produção e o conjunto <span class="math inline">\(FOLLOW(E)\)</span> contivesse <span class="math inline">\(+\)</span>, que também está no <span class="math inline">\(FIRST\)</span> da produção <span class="math inline">\(E \rightarrow T + E\)</span>, ao encontrar o fim de uma expressão (representado por um símbolo em <span class="math inline">\(FOLLOW(E)\)</span>), o <em>parser</em> não saberia se deve aplicar a regra que deriva apenas um termo ou a regra que deriva uma expressão com um operador <span class="math inline">\(+\)</span>.</p></li>
 </ol>
-<section id="resolução-de-conflitos" class="level3" data-number="6.8.1">
-<h3 data-number="6.8.1" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">6.8.1</span> Resolução de Conflitos</h3>
+</section>
+<section id="resolução-de-conflitos" class="level3" data-number="6.7.6">
+<h3 data-number="6.7.6" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">6.7.6</span> Resolução de Conflitos</h3>
 <p>Conflitos na tabela <span class="math inline">\(LL(1)\)</span> podem ser resolvidos das seguintes formas:</p>
 <ol type="1">
 <li><strong>Refatoração da gramática</strong>: A gramática pode ser reescrita para eliminar ambiguidades e recursões à esquerda, evitando assim os conflitos.</li>
@@ -2071,8 +2073,8 @@ Nullable(T) &amp;= false
 \end{aligned}
 \]</span></p>
 <p>Se calcularmos os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> novamente, teremos:</p>
-<section id="conjunto-first-1" class="level4" data-number="6.8.1.1">
-<h4 data-number="6.8.1.1" class="anchored" data-anchor-id="conjunto-first-1"><span class="header-section-number">6.8.1.1</span> Conjunto FIRST</h4>
+<section id="conjunto-first-1" class="level4" data-number="6.7.6.1">
+<h4 data-number="6.7.6.1" class="anchored" data-anchor-id="conjunto-first-1"><span class="header-section-number">6.7.6.1</span> Conjunto FIRST</h4>
 <ol type="1">
 <li><strong>Para o não-terminal E</strong>:
 <ul>
@@ -2098,8 +2100,8 @@ FIRST(E) &amp;= FIRST(T) = \{ int, ( \}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="conjunto-follow-1" class="level4" data-number="6.8.1.2">
-<h4 data-number="6.8.1.2" class="anchored" data-anchor-id="conjunto-follow-1"><span class="header-section-number">6.8.1.2</span> Conjunto FOLLOW</h4>
+<section id="conjunto-follow-1" class="level4" data-number="6.7.6.2">
+<h4 data-number="6.7.6.2" class="anchored" data-anchor-id="conjunto-follow-1"><span class="header-section-number">6.7.6.2</span> Conjunto FOLLOW</h4>
 <ol type="1">
 <li><strong>Para o símbolo inicial E</strong>:
 <ul>
@@ -2137,8 +2139,8 @@ FOLLOW(T) &amp;= \{ +, \$, ) \}
 \end{aligned}
 \]</span></p>
 </section>
-<section id="nullable-3" class="level4" data-number="6.8.1.3">
-<h4 data-number="6.8.1.3" class="anchored" data-anchor-id="nullable-3"><span class="header-section-number">6.8.1.3</span> Nullable</h4>
+<section id="nullable-3" class="level4" data-number="6.7.6.3">
+<h4 data-number="6.7.6.3" class="anchored" data-anchor-id="nullable-3"><span class="header-section-number">6.7.6.3</span> Nullable</h4>
 <p>Para determinar se algum não-terminal é <em>nullable</em>, verificamos se ele pode derivar a string vazia <span class="math inline">\(\varepsilon\)</span>.</p>
 <ol type="1">
 <li><strong>Para E</strong>:
@@ -2165,8 +2167,8 @@ Nullable(T) &amp;= false
 \end{aligned}
 \]</span></p>
 </section>
-<section id="resumo-dos-conjuntos-1" class="level4" data-number="6.8.1.4">
-<h4 data-number="6.8.1.4" class="anchored" data-anchor-id="resumo-dos-conjuntos-1"><span class="header-section-number">6.8.1.4</span> Resumo dos Conjuntos</h4>
+<section id="resumo-dos-conjuntos-1" class="level4" data-number="6.7.6.4">
+<h4 data-number="6.7.6.4" class="anchored" data-anchor-id="resumo-dos-conjuntos-1"><span class="header-section-number">6.7.6.4</span> Resumo dos Conjuntos</h4>
 <p><span class="math display">\[
 \begin{aligned}
 FIRST(E) &amp;= \{ int, ( \} \\
@@ -2231,8 +2233,9 @@ Nullable(T) &amp;= false
 <p>Assim como fiz nos artigos anteriores, vou sugerir um pseudocódigo, um tanto inocente, para a criação de tabelas de derivação. Acredito que, com um pouco de cuidado, depois que a amável leitora dominar esta técnica possa criar um pseudocódigo mais eficiente. A fé move montanhas.</p>
 </section>
 </section>
-<section id="pseudocódigo-para-a-criação-da-tabela-de-derivação" class="level3" data-number="6.8.2">
-<h3 data-number="6.8.2" class="anchored" data-anchor-id="pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">6.8.2</span> Pseudocódigo para a Criação da Tabela de Derivação</h3>
+</section>
+<section id="pseudocódigo-para-a-criação-da-tabela-de-derivação" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="pseudocódigo-para-a-criação-da-tabela-de-derivação"><span class="header-section-number">6.8</span> Pseudocódigo para a Criação da Tabela de Derivação</h2>
 <pre class="pseudo"><code>função construir_tabela(gramatica, nao_terminais, terminais, FIRST, FOLLOW):
     // Inicializa a tabela com entradas vazias (erro)
     Tabela = criar um dicionário aninhado [nao_terminal][terminal]
@@ -2343,8 +2346,310 @@ Nullable(T) &amp;= false
 <span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>    imprimir_tabela(tabela_final)</span>
 <span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
 <span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Erro ao gerar tabela: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exemplo-prático-análise-sintática-de-laços-for-na-linguagem-c" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="exemplo-prático-análise-sintática-de-laços-for-na-linguagem-c"><span class="header-section-number">6.9</span> Exemplo Prático: Análise Sintática de Laços ‘for’ na Linguagem C</h2>
+<p>Considere o seguinte fragmento de código em linguagem C que implementa um laço simples:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Este código representa um laço <code>for</code> típico da linguagem C, que inicializa uma variável de controle, verifica uma condição a cada iteração e atualiza a variável de controle após cada execução do bloco.</p>
+<p>Crie uma tabela de derivação LL(1) para analisar este tipo de estrutura de laço <code>for</code> na linguagem C, considerando:</p>
+<ul>
+<li>A estrutura completa do laço <code>for</code> com seus três componentes: inicialização, condição e incremento.</li>
+<li>Expressões aritméticas simples que podem aparecer na inicialização, condição e corpo do laço.</li>
+<li>Blocos de código contendo instruções de atribuição.</li>
+</ul>
+<p><strong>Sua solução deve incluir</strong>:</p>
+<ol type="1">
+<li>A definição da <strong>gramática original</strong> para este fragmento da linguagem C.</li>
+<li>A <strong>correção da gramática</strong> para torná-la adequada para análise LL(1) (eliminando recursão à esquerda).</li>
+<li>O cálculo dos conjuntos <strong>FIRST</strong> e <strong>FOLLOW</strong> para a gramática corrigida.</li>
+<li>A construção da <strong>tabela de derivação LL(1)</strong>.</li>
+<li>A <strong>análise passo a passo</strong> da entrada de exemplo usando a tabela construída.</li>
+</ol>
+<p><strong>Observações</strong>:</p>
+<ul>
+<li>Considere que <code>ID</code> representa identificadores (como <code>i</code>, <code>x</code>).</li>
+<li>Considere que <code>NUM</code> representa literais numéricos (como <code>0</code>, <code>10</code>, <code>1</code>).</li>
+<li>A gramática deve suportar expressões aritméticas com adição e multiplicação.</li>
+<li>A gramática deve ser capaz de analisar corretamente o exemplo fornecido.</li>
+</ul>
+<section id="solução" class="level3" data-number="6.9.1">
+<h3 data-number="6.9.1" class="anchored" data-anchor-id="solução"><span class="header-section-number">6.9.1</span> Solução</h3>
+<section id="definição-da-gramática-inocente" class="level4" data-number="6.9.1.1">
+<h4 data-number="6.9.1.1" class="anchored" data-anchor-id="definição-da-gramática-inocente"><span class="header-section-number">6.9.1.1</span> 1. Definição da Gramática Inocente</h4>
+<p><span class="math display">\[
+\begin{aligned}
+E &amp;\rightarrow E + T \mid T \\
+T &amp;\rightarrow T \times F \mid F \\
+F &amp;\rightarrow (E) \mid id
+\end{aligned}
+\]</span></p>
+</section>
+<section id="verificação-da-gramática" class="level4" data-number="6.9.1.2">
+<h4 data-number="6.9.1.2" class="anchored" data-anchor-id="verificação-da-gramática"><span class="header-section-number">6.9.1.2</span> 2. Verificação da Gramática</h4>
+<p>Esta gramática não é <span class="math inline">\(LL(1)\)</span> porque possui <strong>recursão à esquerda</strong> (ex: <span class="math inline">\(E \rightarrow E + T\)</span>), o que causaria um <em>loop</em> infinito em um analisador descendente. O primeiro passo é eliminar a recursão à esquerda. Aplicamos a regra de transformação padrão: uma produção da forma <span class="math inline">\(A \rightarrow A\alpha \mid \beta\)</span> é convertida para <span class="math inline">\(A \rightarrow \beta A'\)</span> e <span class="math inline">\(A' \rightarrow \alpha A' \mid \varepsilon\)</span>.</p>
+<p><strong>Gramática Corrigida para <span class="math inline">\(LL(1)\)</span> (<span class="math inline">\(G'\)</span>)</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+E &amp;\rightarrow T E' \\
+E' &amp;\rightarrow + T E' \mid \varepsilon \\
+T &amp;\rightarrow F T' \\
+T' &amp;\rightarrow \times F T' \mid \varepsilon \\
+F &amp;\rightarrow (E) \mid id
+\end{aligned}
+\]</span></p>
+<p>Onde <span class="math inline">\(\varepsilon\)</span> representa a cadeia vazia e <span class="math inline">\(id\)</span> representa um identificador ou número. Agora a gramática é adequada para a análise <span class="math inline">\(LL(1)\)</span>.</p>
+</section>
+<section id="cálculo-dos-conjuntos-first-e-follow" class="level4" data-number="6.9.1.3">
+<h4 data-number="6.9.1.3" class="anchored" data-anchor-id="cálculo-dos-conjuntos-first-e-follow"><span class="header-section-number">6.9.1.3</span> 3. Cálculo dos Conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></h4>
+<p>Com base na gramática corrigida (<span class="math inline">\(G'\)</span>), calculamos os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>.</p>
+<section id="conjunto-first-2" class="level5" data-number="6.9.1.3.1">
+<h5 data-number="6.9.1.3.1" class="anchored" data-anchor-id="conjunto-first-2"><span class="header-section-number">6.9.1.3.1</span> Conjunto <span class="math inline">\(FIRST\)</span></h5>
+<p>O conjunto <span class="math inline">\(FIRST(A)\)</span> contém os terminais que podem iniciar uma sentença derivada de <span class="math inline">\(A\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+FIRST(F) &amp;= \{ '(', id \} \\
+FIRST(T') &amp;= \{ '\times', \varepsilon \} \\
+FIRST(T) &amp;= FIRST(F) = \{ '(', id \} \\
+FIRST(E') &amp;= \{ '+', \varepsilon \} \\
+FIRST(E) &amp;= FIRST(T) = \{ '(', id \}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="conjunto-follow-2" class="level5" data-number="6.9.1.3.2">
+<h5 data-number="6.9.1.3.2" class="anchored" data-anchor-id="conjunto-follow-2"><span class="header-section-number">6.9.1.3.2</span> Conjunto <span class="math inline">\(FOLLOW\)</span></h5>
+<p>O conjunto <span class="math inline">\(FOLLOW(A)\)</span> contém os terminais que podem aparecer imediatamente após uma sentença derivada de <span class="math inline">\(A\)</span>.</p>
+<p><span class="math display">\[
+\begin{aligned}
+FOLLOW(E) &amp;= \{ \$, ')' \} \\
+FOLLOW(E') &amp;= FOLLOW(E) = \{ \$, ')' \} \\
+FOLLOW(T) &amp;= FIRST(E') - \{\varepsilon\} \cup FOLLOW(E) = \{ '+' \} \cup \{ \$, ')' \} = \{ '+', \$, ')' \} \\
+FOLLOW(T') &amp;= FOLLOW(T) = \{ '+', \$, ')' \} \\
+FOLLOW(F) &amp;= FIRST(T') - \{\varepsilon\} \cup FOLLOW(T) = \{ '\times' \} \cup \{ '+', \$, ')' \} = \{ '\times', '+', \$, ')' \}
+\end{aligned}
+\]</span></p>
+</section>
+</section>
+<section id="construção-da-tabela-de-derivação-ll1" class="level4" data-number="6.9.1.4">
+<h4 data-number="6.9.1.4" class="anchored" data-anchor-id="construção-da-tabela-de-derivação-ll1"><span class="header-section-number">6.9.1.4</span> 4. Construção da Tabela de Derivação <span class="math inline">\(LL(1)\)</span></h4>
+<p>Usando os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, construímos a tabela de derivação.</p>
+<ul>
+<li>Para uma produção <span class="math inline">\(A \rightarrow \alpha\)</span>:
+<ul>
+<li>Adicione <span class="math inline">\(A \rightarrow \alpha\)</span> em <span class="math inline">\(Tabela[A, a]\)</span> para cada terminal <span class="math inline">\(a \in FIRST(\alpha)\)</span>.</li>
+<li>Se <span class="math inline">\(\varepsilon \in FIRST(\alpha)\)</span>, adicione <span class="math inline">\(A \rightarrow \alpha\)</span> em <span class="math inline">\(Tabela[A, b]\)</span> para cada terminal <span class="math inline">\(b \in FOLLOW(A)\)</span>.</li>
+</ul></li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;"><strong>id</strong></th>
+<th style="text-align: left;"><strong>+</strong></th>
+<th style="text-align: left;"><strong>×</strong></th>
+<th style="text-align: left;"><strong>(</strong></th>
+<th style="text-align: left;"><strong>)</strong></th>
+<th style="text-align: left;"><strong>$</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>E</strong></td>
+<td style="text-align: left;"><span class="math inline">\(E \to T E'\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(E \to T E'\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>E’</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(E' \to + T E'\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(E' \to \varepsilon\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(E' \to \varepsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>T</strong></td>
+<td style="text-align: left;"><span class="math inline">\(T \to F T'\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(T \to F T'\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>T’</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(T' \to \varepsilon\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(T' \to \times F T'\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(T' \to \varepsilon\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(T' \to \varepsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>F</strong></td>
+<td style="text-align: left;"><span class="math inline">\(F \to id\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(F \to (E)\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>As células vazias representam erros de sintaxe.</p>
+</section>
+<section id="análise-sintática-da-entrada-id-id-id" class="level4" data-number="6.9.1.5">
+<h4 data-number="6.9.1.5" class="anchored" data-anchor-id="análise-sintática-da-entrada-id-id-id"><span class="header-section-number">6.9.1.5</span> 5. Análise Sintática da Entrada <code>(id + id) * id</code></h4>
+<p>Vamos rastrear a análise da <em>string</em> usando o algoritmo de análise preditiva com uma pilha.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;">Entrada</th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E</code></td>
+<td style="text-align: left;"><code>( id + id ) * id $</code></td>
+<td style="text-align: left;"><code>E \to T E'</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T</code></td>
+<td style="text-align: left;"><code>( id + id ) * id $</code></td>
+<td style="text-align: left;"><code>T \to F T'</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' F</code></td>
+<td style="text-align: left;"><code>( id + id ) * id $</code></td>
+<td style="text-align: left;"><code>F \to (E)</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E (</code></td>
+<td style="text-align: left;"><code>( id + id ) * id $</code></td>
+<td style="text-align: left;"><code>match (</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' ) E</code></td>
+<td style="text-align: left;"><code>id + id ) * id $</code></td>
+<td style="text-align: left;"><code>E \to T E'</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E' T</code></td>
+<td style="text-align: left;"><code>id + id ) * id $</code></td>
+<td style="text-align: left;"><code>T \to F T'</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' ) E' T' F</code></td>
+<td style="text-align: left;"><code>id + id ) * id $</code></td>
+<td style="text-align: left;"><code>F \to id</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E' T' id</code></td>
+<td style="text-align: left;"><code>id + id ) * id $</code></td>
+<td style="text-align: left;"><code>match id</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' ) E' T'</code></td>
+<td style="text-align: left;"><code>+ id ) * id $</code></td>
+<td style="text-align: left;"><code>T' \to \varepsilon</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E'</code></td>
+<td style="text-align: left;"><code>+ id ) * id $</code></td>
+<td style="text-align: left;"><code>E' \to + T E'</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' ) E' T +</code></td>
+<td style="text-align: left;"><code>+ id ) * id $</code></td>
+<td style="text-align: left;"><code>match +</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E' T</code></td>
+<td style="text-align: left;"><code>id ) * id $</code></td>
+<td style="text-align: left;"><code>T \to F T'</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' ) E' T' F</code></td>
+<td style="text-align: left;"><code>id ) * id $</code></td>
+<td style="text-align: left;"><code>F \to id</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E' T' id</code></td>
+<td style="text-align: left;"><code>id ) * id $</code></td>
+<td style="text-align: left;"><code>match id</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' ) E' T'</code></td>
+<td style="text-align: left;"><code>) * id $</code></td>
+<td style="text-align: left;"><code>T' \to \varepsilon</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' ) E'</code></td>
+<td style="text-align: left;"><code>) * id $</code></td>
+<td style="text-align: left;"><code>E' \to \varepsilon</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' )</code></td>
+<td style="text-align: left;"><code>) * id $</code></td>
+<td style="text-align: left;"><code>match )</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T'</code></td>
+<td style="text-align: left;"><code>* id $</code></td>
+<td style="text-align: left;"><code>T' \to \times F T'</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' F \times</code></td>
+<td style="text-align: left;"><code>* id $</code></td>
+<td style="text-align: left;"><code>match \times</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T' F</code></td>
+<td style="text-align: left;"><code>id $</code></td>
+<td style="text-align: left;"><code>F \to id</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E' T' id</code></td>
+<td style="text-align: left;"><code>id $</code></td>
+<td style="text-align: left;"><code>match id</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$ E' T'</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>T' \to \varepsilon</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$ E'</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>E' \to \varepsilon</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><strong>Aceito</strong></td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 </section>
 </section>
 
