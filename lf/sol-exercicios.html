@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 9&nbsp; Solução dos Exercícios</title>
+<title>Linguagens Formais e Autômatos - 10&nbsp; Solução dos Exercícios</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -111,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sol-exercicios.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sol-exercicios.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -212,18 +246,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -238,22 +278,18 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#capítulo-sec-alfabeto-linguagem-string" id="toc-capítulo-sec-alfabeto-linguagem-string" class="nav-link active" data-scroll-target="#capítulo-sec-alfabeto-linguagem-string"><span class="header-section-number">9.1</span> Capítulo: <span>Chapter 3</span></a>
+  <li><a href="#capítulo-sec-alfabeto-linguagem-string" id="toc-capítulo-sec-alfabeto-linguagem-string" class="nav-link active" data-scroll-target="#capítulo-sec-alfabeto-linguagem-string"><span class="header-section-number">10.1</span> Capítulo: <span>Chapter 3</span></a>
   <ul class="collapse">
-  <li><a href="#exercícios-1-sec-ex-alfabeto" id="toc-exercícios-1-sec-ex-alfabeto" class="nav-link" data-scroll-target="#exercícios-1-sec-ex-alfabeto"><span class="header-section-number">9.1.1</span> Exercícios 1: <span>Section 3.1.3</span></a></li>
-  <li><a href="#exercícios-2-sec-ex-strings" id="toc-exercícios-2-sec-ex-strings" class="nav-link" data-scroll-target="#exercícios-2-sec-ex-strings"><span class="header-section-number">9.1.2</span> Exercícios 2: <span>Section 3.2.4</span></a></li>
-  <li><a href="#exercícios-3-sec-ex-linguagens2" id="toc-exercícios-3-sec-ex-linguagens2" class="nav-link" data-scroll-target="#exercícios-3-sec-ex-linguagens2"><span class="header-section-number">9.1.3</span> Exercícios 3: <span>Section 3.3.5</span></a></li>
+  <li><a href="#exercícios-1-sec-ex-alfabeto" id="toc-exercícios-1-sec-ex-alfabeto" class="nav-link" data-scroll-target="#exercícios-1-sec-ex-alfabeto"><span class="header-section-number">10.1.1</span> Exercícios 1: <span>Section 3.1.3</span></a></li>
+  <li><a href="#exercícios-2-sec-ex-strings" id="toc-exercícios-2-sec-ex-strings" class="nav-link" data-scroll-target="#exercícios-2-sec-ex-strings"><span class="header-section-number">10.1.2</span> Exercícios 2: <span>Section 3.2.4</span></a></li>
+  <li><a href="#exercícios-3-sec-ex-linguagens2" id="toc-exercícios-3-sec-ex-linguagens2" class="nav-link" data-scroll-target="#exercícios-3-sec-ex-linguagens2"><span class="header-section-number">10.1.3</span> Exercícios 3: <span>Section 3.3.5</span></a></li>
+  <li><a href="#exercícios-4-sec-ex-regex" id="toc-exercícios-4-sec-ex-regex" class="nav-link" data-scroll-target="#exercícios-4-sec-ex-regex"><span class="header-section-number">10.1.4</span> Exercícios 4: <span>Section 3.4.3.1</span></a></li>
+  <li><a href="#exercícios-5-sec-ex-regex2" id="toc-exercícios-5-sec-ex-regex2" class="nav-link" data-scroll-target="#exercícios-5-sec-ex-regex2"><span class="header-section-number">10.1.5</span> Exercícios 5: <span>Section 3.4.4.1</span></a></li>
+  <li><a href="#exercícios-6-sec-ex-regex3" id="toc-exercícios-6-sec-ex-regex3" class="nav-link" data-scroll-target="#exercícios-6-sec-ex-regex3"><span class="header-section-number">10.1.6</span> Exercícios 6: {<span>Section 3.4.5.3</span>}</a></li>
+  <li><a href="#exercícios-7-sec-ex-regex4" id="toc-exercícios-7-sec-ex-regex4" class="nav-link" data-scroll-target="#exercícios-7-sec-ex-regex4"><span class="header-section-number">10.1.7</span> Exercícios 7: {<span>Section 3.4.6.1</span>}</a></li>
+  <li><a href="#exercícios-8-sec-ex-regex5" id="toc-exercícios-8-sec-ex-regex5" class="nav-link" data-scroll-target="#exercícios-8-sec-ex-regex5"><span class="header-section-number">10.1.8</span> Exercícios 8: {<span>Section 3.4.8</span>}</a></li>
   </ul></li>
-  <li><a href="#exercícios-4-sec-ex-regex" id="toc-exercícios-4-sec-ex-regex" class="nav-link" data-scroll-target="#exercícios-4-sec-ex-regex"><span class="header-section-number">10</span> Exercícios 4: <span>Section 3.4.3.1</span></a>
-  <ul class="collapse">
-  <li><a href="#exercícios-5-sec-ex-regex2" id="toc-exercícios-5-sec-ex-regex2" class="nav-link" data-scroll-target="#exercícios-5-sec-ex-regex2"><span class="header-section-number">10.0.1</span> Exercícios 5: <span>Section 3.4.4.1</span></a></li>
-  <li><a href="#exercícios-6-sec-ex-regex3" id="toc-exercícios-6-sec-ex-regex3" class="nav-link" data-scroll-target="#exercícios-6-sec-ex-regex3"><span class="header-section-number">10.0.2</span> Exercícios 6: {<span>Section 3.4.5.3</span>}</a></li>
-  <li><a href="#exercícios-7-sec-ex-regex4" id="toc-exercícios-7-sec-ex-regex4" class="nav-link" data-scroll-target="#exercícios-7-sec-ex-regex4"><span class="header-section-number">10.0.3</span> Exercícios 7: {<span>Section 3.4.6.1</span>}</a></li>
-  <li><a href="#exercícios-8-sec-ex-regex5" id="toc-exercícios-8-sec-ex-regex5" class="nav-link" data-scroll-target="#exercícios-8-sec-ex-regex5"><span class="header-section-number">10.0.4</span> Exercícios 8: {<span>Section 3.4.8</span>}</a></li>
-  <li><a href="#a-começa-com-a-termina-com-c-contém-b" id="toc-a-começa-com-a-termina-com-c-contém-b" class="nav-link" data-scroll-target="#a-começa-com-a-termina-com-c-contém-b"><span class="header-section-number">10.1.1</span> <strong>a) Começa com a, termina com c, contém b</strong></a></li>
-  <li><a href="#b-cada-a-é-seguido-por-a-ou-b" id="toc-b-cada-a-é-seguido-por-a-ou-b" class="nav-link" data-scroll-target="#b-cada-a-é-seguido-por-a-ou-b"><span class="header-section-number">10.1.2</span> <strong>b) Cada a é seguido por a ou b</strong></a></li>
-  <li><a href="#c-não-contém-a-substring-ac" id="toc-c-não-contém-a-substring-ac" class="nav-link" data-scroll-target="#c-não-contém-a-substring-ac"><span class="header-section-number">10.1.3</span> <strong>c) Não contém a substring ac</strong></a></li>
-  <li><a href="#capítulo-sec-aut-finitos-deterministicos" id="toc-capítulo-sec-aut-finitos-deterministicos" class="nav-link" data-scroll-target="#capítulo-sec-aut-finitos-deterministicos"><span class="header-section-number">10.2</span> Capítulo sec-aut-finitos-deterministicos</a>
+  <li><a href="#capítulo-sec-aut-finitos-deterministicos" id="toc-capítulo-sec-aut-finitos-deterministicos" class="nav-link" data-scroll-target="#capítulo-sec-aut-finitos-deterministicos"><span class="header-section-number">10.2</span> Capítulo <span>Chapter 4</span></a>
   <ul class="collapse">
   <li><a href="#exercícios-1-sec-definicao-formal" id="toc-exercícios-1-sec-definicao-formal" class="nav-link" data-scroll-target="#exercícios-1-sec-definicao-formal"><span class="header-section-number">10.2.1</span> Exercícios 1 {<span>Section 4.1</span>}</a></li>
   <li><a href="#exercícios-2" id="toc-exercícios-2" class="nav-link" data-scroll-target="#exercícios-2"><span class="header-section-number">10.2.2</span> Exercícios 2</a></li>
@@ -269,7 +305,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#exercícios-de-derivação-sec-execicios-derivacao" id="toc-exercícios-de-derivação-sec-execicios-derivacao" class="nav-link" data-scroll-target="#exercícios-de-derivação-sec-execicios-derivacao"><span class="header-section-number">10.3.1</span> Exercícios de Derivação <span>Section 5.2.2</span></a></li>
   </ul></li>
-  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/sol-exercicios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -282,7 +317,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></h1>
 </div>
 
 
@@ -299,10 +334,10 @@ window.Quarto = {
 </header>
 
 
-<section id="capítulo-sec-alfabeto-linguagem-string" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="capítulo-sec-alfabeto-linguagem-string"><span class="header-section-number">9.1</span> Capítulo: <a href="01a-lexico.html" class="quarto-xref"><span>Chapter 3</span></a></h2>
-<section id="exercícios-1-sec-ex-alfabeto" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="exercícios-1-sec-ex-alfabeto"><span class="header-section-number">9.1.1</span> Exercícios 1: <a href="01a-lexico.html#sec-ex-alfabeto" class="quarto-xref"><span>Section 3.1.3</span></a></h3>
+<section id="capítulo-sec-alfabeto-linguagem-string" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="capítulo-sec-alfabeto-linguagem-string"><span class="header-section-number">10.1</span> Capítulo: <a href="01a-lexico.html" class="quarto-xref"><span>Chapter 3</span></a></h2>
+<section id="exercícios-1-sec-ex-alfabeto" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="exercícios-1-sec-ex-alfabeto"><span class="header-section-number">10.1.1</span> Exercícios 1: <a href="01a-lexico.html#sec-ex-alfabeto" class="quarto-xref"><span>Section 3.1.3</span></a></h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -386,8 +421,8 @@ window.Quarto = {
 </ul>
 <p><strong>Conclusão</strong>: <span class="math inline">\(\Sigma_A\)</span> é mais eficiente para representação binária, enquanto <span class="math inline">\(\Sigma_B\)</span> oferece maior capacidade expressiva para outras aplicações devido ao seu maior tamanho.</p>
 </section>
-<section id="exercícios-2-sec-ex-strings" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" class="anchored" data-anchor-id="exercícios-2-sec-ex-strings"><span class="header-section-number">9.1.2</span> Exercícios 2: <a href="01a-lexico.html#sec-ex-strings" class="quarto-xref"><span>Section 3.2.4</span></a></h3>
+<section id="exercícios-2-sec-ex-strings" class="level3" data-number="10.1.2">
+<h3 data-number="10.1.2" class="anchored" data-anchor-id="exercícios-2-sec-ex-strings"><span class="header-section-number">10.1.2</span> Exercícios 2: <a href="01a-lexico.html#sec-ex-strings" class="quarto-xref"><span>Section 3.2.4</span></a></h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -460,8 +495,8 @@ window.Quarto = {
 <p><strong>Propriedade geral</strong>: Para qualquer string <span class="math inline">\(u\)</span> e inteiro positivo <span class="math inline">\(n\)</span>: <span class="math display">\[(u^n)^R = (u^R)^n\]</span></p>
 <p>No nosso caso, como <span class="math inline">\(w^R = w\)</span>, ambos os lados se tornam <span class="math inline">\(w^2 = abaaba\)</span>.</p>
 </section>
-<section id="exercícios-3-sec-ex-linguagens2" class="level3" data-number="9.1.3">
-<h3 data-number="9.1.3" class="anchored" data-anchor-id="exercícios-3-sec-ex-linguagens2"><span class="header-section-number">9.1.3</span> Exercícios 3: <a href="01a-lexico.html#sec-ex-linguagens2" class="quarto-xref"><span>Section 3.3.5</span></a></h3>
+<section id="exercícios-3-sec-ex-linguagens2" class="level3" data-number="10.1.3">
+<h3 data-number="10.1.3" class="anchored" data-anchor-id="exercícios-3-sec-ex-linguagens2"><span class="header-section-number">10.1.3</span> Exercícios 3: <a href="01a-lexico.html#sec-ex-linguagens2" class="quarto-xref"><span>Section 3.3.5</span></a></h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -542,9 +577,8 @@ window.Quarto = {
 <p><strong>Resposta</strong>: <strong>VERDADEIRO</strong> (propriedade geral válida)</p>
 <p><strong>Para nosso caso específico</strong>: A propriedade não se aplica porque <span class="math inline">\(\epsilon \notin \{a\}\)</span>.</p>
 </section>
-</section>
-<section id="exercícios-4-sec-ex-regex" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Exercícios 4: <a href="01a-lexico.html#sec-ex-regex" class="quarto-xref"><span>Section 3.4.3.1</span></a></h1>
+<section id="exercícios-4-sec-ex-regex" class="level3" data-number="10.1.4">
+<h3 data-number="10.1.4" class="anchored" data-anchor-id="exercícios-4-sec-ex-regex"><span class="header-section-number">10.1.4</span> Exercícios 4: <a href="01a-lexico.html#sec-ex-regex" class="quarto-xref"><span>Section 3.4.3.1</span></a></h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -648,8 +682,9 @@ window.Quarto = {
 <p><span class="math display">\[r_3 = (a \cup b)^*a\]</span></p>
 <p><strong>Verificação com exemplos</strong>: - <span class="math inline">\(a = \epsilon \cdot a\)</span> ∈ <span class="math inline">\(L(r_3)\)</span> - <span class="math inline">\(ba = b \cdot a\)</span> ∈ <span class="math inline">\(L(r_3)\)</span><br>
 - <span class="math inline">\(aba = ab \cdot a\)</span> ∈ <span class="math inline">\(L(r_3)\)</span> - <span class="math inline">\(ab = a \cdot b\)</span> ∉ <span class="math inline">\(L(r_3)\)</span> (não termina com <span class="math inline">\(a\)</span>)</p>
-<section id="exercícios-5-sec-ex-regex2" class="level3" data-number="10.0.1">
-<h3 data-number="10.0.1" class="anchored" data-anchor-id="exercícios-5-sec-ex-regex2"><span class="header-section-number">10.0.1</span> Exercícios 5: <a href="01a-lexico.html#sec-ex-regex2" class="quarto-xref"><span>Section 3.4.4.1</span></a></h3>
+</section>
+<section id="exercícios-5-sec-ex-regex2" class="level3" data-number="10.1.5">
+<h3 data-number="10.1.5" class="anchored" data-anchor-id="exercícios-5-sec-ex-regex2"><span class="header-section-number">10.1.5</span> Exercícios 5: <a href="01a-lexico.html#sec-ex-regex2" class="quarto-xref"><span>Section 3.4.4.1</span></a></h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -822,8 +857,8 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="exercícios-6-sec-ex-regex3" class="level3" data-number="10.0.2">
-<h3 data-number="10.0.2" class="anchored" data-anchor-id="exercícios-6-sec-ex-regex3"><span class="header-section-number">10.0.2</span> Exercícios 6: {<a href="01a-lexico.html#sec-ex-regex3" class="quarto-xref"><span>Section 3.4.5.3</span></a>}</h3>
+<section id="exercícios-6-sec-ex-regex3" class="level3" data-number="10.1.6">
+<h3 data-number="10.1.6" class="anchored" data-anchor-id="exercícios-6-sec-ex-regex3"><span class="header-section-number">10.1.6</span> Exercícios 6: {<a href="01a-lexico.html#sec-ex-regex3" class="quarto-xref"><span>Section 3.4.5.3</span></a>}</h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -903,8 +938,8 @@ window.Quarto = {
 <p>Como os conjuntos são idênticos, a simplificação está correta.</p>
 <p><strong>Benefício da otimização</strong>: - <strong>Expressão original</strong>: 3 termos unidos - <strong>Expressão otimizada</strong>: 1 termo simples - <strong>Eficiência</strong>: Redução significativa na complexidade de avaliação</p>
 </section>
-<section id="exercícios-7-sec-ex-regex4" class="level3" data-number="10.0.3">
-<h3 data-number="10.0.3" class="anchored" data-anchor-id="exercícios-7-sec-ex-regex4"><span class="header-section-number">10.0.3</span> Exercícios 7: {<a href="01a-lexico.html#sec-ex-regex4" class="quarto-xref"><span>Section 3.4.6.1</span></a>}</h3>
+<section id="exercícios-7-sec-ex-regex4" class="level3" data-number="10.1.7">
+<h3 data-number="10.1.7" class="anchored" data-anchor-id="exercícios-7-sec-ex-regex4"><span class="header-section-number">10.1.7</span> Exercícios 7: {<a href="01a-lexico.html#sec-ex-regex4" class="quarto-xref"><span>Section 3.4.6.1</span></a>}</h3>
 <ol type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -1020,11 +1055,10 @@ window.Quarto = {
 <p><strong>Versão otimizada</strong>: <span class="math display">\[[a-zA-Z]\]</span></p>
 <p>A redução é de aproximadamente <strong>98%</strong> no tamanho da expressão!</p>
 </section>
-<section id="exercícios-8-sec-ex-regex5" class="level3" data-number="10.0.4">
-<h3 data-number="10.0.4" class="anchored"><span class="header-section-number">10.0.4</span> Exercícios 8: {<a href="01a-lexico.html#sec-ex-regex5" class="quarto-xref"><span>Section 3.4.8</span></a>}</h3>
-<ol type="1">
-<li><strong>Solução</strong>:</li>
-</ol>
+<section id="exercícios-8-sec-ex-regex5" class="level3" data-number="10.1.8">
+<h3 data-number="10.1.8" class="anchored" data-anchor-id="exercícios-8-sec-ex-regex5"><span class="header-section-number">10.1.8</span> Exercícios 8: {<a href="01a-lexico.html#sec-ex-regex5" class="quarto-xref"><span>Section 3.4.8</span></a>}</h3>
+<section id="solução" class="level4" data-number="10.1.8.1">
+<h4 data-number="10.1.8.1" class="anchored" data-anchor-id="solução"><span class="header-section-number">10.1.8.1</span> Solução</h4>
 <p><strong>Palavras-chave: <span class="math inline">\(\{\text{if}, \text{then}, \text{else}, \text{while}, \text{do}\}\)</span></strong></p>
 <p><span class="math display">\[r_1 = \text{if} \cup \text{then} \cup \text{else} \cup \text{while} \cup \text{do}\]</span></p>
 <p><strong>Implementação mais eficiente</strong>: <span class="math display">\[r_1 = \text{if} \cup \text{then} \cup \text{else} \cup \text{while} \cup \text{do}\]</span></p>
@@ -1037,9 +1071,9 @@ window.Quarto = {
 <p><strong>Operadores relacionais: <span class="math inline">\(\{&lt;, &gt;, &lt;=, &gt;=, ==, !=\}\)</span></strong></p>
 <p><span class="math display">\[r_4 = &lt;= \cup &gt;= \cup == \cup != \cup &lt; \cup &gt;\]</span></p>
 <p><strong>Observação</strong>: A ordem é importante - operadores de dois caracteres devem vir antes dos de um caractere para evitar conflitos durante o parsing.</p>
-<ol start="2" type="1">
-<li><strong>Solução</strong>:</li>
-</ol>
+</section>
+<section id="solução-1" class="level4" data-number="10.1.8.2">
+<h4 data-number="10.1.8.2" class="anchored" data-anchor-id="solução-1"><span class="header-section-number">10.1.8.2</span> Solução</h4>
 <p><strong>Telefone celular: <span class="math inline">\((11) 99999-9999\)</span></strong></p>
 <p><span class="math display">\[r_1 = \([0-9]\{2\} [0-9]\{5\}-[0-9]\{4\}\]</span></p>
 <p><strong>Versão mais flexível (com espaço opcional)</strong>: <span class="math display">\[r_1' = \([0-9]\{2\) ?[0-9]\{5\}-[0-9]\{4\}\]</span></p>
@@ -1049,13 +1083,13 @@ window.Quarto = {
 <p><span class="math display">\[r_3 = [0-9]\{2\}\.[0-9]\{3\}\.[0-9]\{3\}/[0-9]\{4\}-[0-9]\{2\}\]</span></p>
 <p><strong>CEP: <span class="math inline">\(99999-999\)</span> ou <span class="math inline">\(99.999-999\)</span></strong></p>
 <p><span class="math display">\[r_4 = [0-9]\{5\}[-.]?[0-9]\{3\}\]</span></p>
-<p><strong>Explicação</strong>: - <span class="math inline">\([0-9]\{5\}\)</span>: cinco dígitos iniciais - <span class="math inline">\([-.]?\)</span>: hífen ou ponto opcional (alguns CEPs não têm separador) - <span class="math inline">\([0-9]\{3\}\)</span>: três dígitos finais</p>
-<ol start="3" type="1">
-<li><strong>Solução</strong>:</li>
-</ol>
+<p><strong>Explicação</strong>: - <span class="math inline">\([0-9]\{5\}\)</span>: cinco dígitos iniciais; - <span class="math inline">\([-.]?\)</span>: hífen ou ponto opcional, alguns CEPs não têm separador; - <span class="math inline">\([0-9]\{3\}\)</span>: três dígitos finais.</p>
+</section>
+<section id="solução-2" class="level4" data-number="10.1.8.3">
+<h4 data-number="10.1.8.3" class="anchored" data-anchor-id="solução-2"><span class="header-section-number">10.1.8.3</span> Solução</h4>
 <p><strong>Endereços de email em um texto</strong>:</p>
 <p><span class="math display">\[r_1 = [a-zA-Z0-9._%+-]^+@[a-zA-Z0-9.-]^+\.[a-zA-Z]\{2,\}\]</span></p>
-<p><strong>Explicação</strong>: - <span class="math inline">\([a-zA-Z0-9._%+-]^+\)</span>: parte local (antes do @) - <span class="math inline">\(@\)</span>: símbolo obrigatório - <span class="math inline">\([a-zA-Z0-9.-]^+\)</span>: domínio - <span class="math inline">\(\.\)</span>: ponto literal - <span class="math inline">\([a-zA-Z]\{2,\}\)</span>: extensão com pelo menos 2 letras</p>
+<p><strong>Explicação</strong>: - <span class="math inline">\([a-zA-Z0-9._%+-]^+\)</span>: parte local (antes do @); - <span class="math inline">\(@\)</span>: símbolo obrigatório; - <span class="math inline">\([a-zA-Z0-9.-]^+\)</span>: domínio; - <span class="math inline">\(\.\)</span>: ponto literal; - <span class="math inline">\([a-zA-Z]\{2,\}\)</span>: extensão com pelo menos <span class="math inline">\(2\)</span> letras.</p>
 <p><strong>Valores monetários no formato <span class="math inline">\(R\$ 99,99\)</span></strong>:</p>
 <p><span class="math display">\[r_2 = R\$ ?[0-9]^+,[0-9]\{2\}\]</span></p>
 <p><strong>Versão mais robusta</strong>: <span class="math display">\[r_2' = R\$ ?[0-9]\{1,3\}(\.[0-9]\{3\})^*,[0-9]\{2\}\]</span></p>
@@ -1066,9 +1100,9 @@ window.Quarto = {
 <p><strong>Números de cartão de crédito (formato <span class="math inline">\(9999-9999-9999-9999\)</span>)</strong>:</p>
 <p><span class="math display">\[r_4 = [0-9]\{4\}-[0-9]\{4\}-[0-9]\{4\}-[0-9]\{4\}\]</span></p>
 <p><strong>Versão flexível (com separadores opcionais)</strong>: <span class="math display">\[r_4' = [0-9]\{4\} ?-? ?[0-9]\{4\} ?-? ?[0-9]\{4\} ?-? ?[0-9]\{4\}\]</span></p>
-<ol start="4" type="1">
-<li><strong>Solução</strong>:</li>
-</ol>
+</section>
+<section id="solução-3" class="level4" data-number="10.1.8.4">
+<h4 data-number="10.1.8.4" class="anchored" data-anchor-id="solução-3"><span class="header-section-number">10.1.8.4</span> Solução</h4>
 <p><strong>Para validar email: <span class="math inline">\([a-z]+@[a-z]+.[a-z]+\)</span> (problema: ponto literal)</strong></p>
 <p><strong>Problema identificado</strong>: O ponto <span class="math inline">\(.\)</span> é um metacaractere que corresponde a “qualquer caractere”. Para representar um ponto literal, deve ser escapado.</p>
 <p><strong>Correção</strong>: <span class="math display">\[[a-z]^+@[a-z]^+\.[a-z]^+\]</span></p>
@@ -1081,9 +1115,9 @@ window.Quarto = {
 <p><strong>Problema identificado</strong>: O <span class="math inline">\(?\)</span> torna o segundo caractere opcional, permitindo identificadores de apenas 1 caractere, mas limitando a 2 caracteres no máximo.</p>
 <p><strong>Correção para identificadores normais</strong>: <span class="math display">\[[a-zA-Z][a-zA-Z0-9]^*\]</span></p>
 <p><strong>Se realmente quiser 1-2 caracteres apenas</strong>: <span class="math display">\[[a-zA-Z][a-zA-Z0-9]?\]</span></p>
-<ol start="5" type="1">
-<li><strong>Solução</strong>:</li>
-</ol>
+</section>
+<section id="solução-4" class="level4" data-number="10.1.8.5">
+<h4 data-number="10.1.8.5" class="anchored" data-anchor-id="solução-4"><span class="header-section-number">10.1.8.5</span> Solução</h4>
 <p><strong><span class="math inline">\((abc|abd|abe) \rightarrow ab(c|d|e)\)</span></strong></p>
 <p><strong>Análise</strong>: Fatoração do prefixo comum <span class="math inline">\(ab\)</span>.</p>
 <p><strong>Verificação da equivalência</strong>: - Original: <span class="math inline">\(\{abc, abd, abe\}\)</span> - Otimizada: <span class="math inline">\(ab(c \cup d \cup e) = ab \{c, d, e\} = \{abc, abd, abe\}\)</span></p>
@@ -1098,9 +1132,9 @@ window.Quarto = {
 <p><strong>Lado direito</strong>: <span class="math inline">\((a \cup b)^*\)</span> - Qualquer sequência de <span class="math inline">\(a\)</span>’s e <span class="math inline">\(b\)</span>’s em qualquer ordem</p>
 <p><strong>Contraexemplo</strong>: A string <span class="math inline">\(aba\)</span> - <span class="math inline">\(aba \in L((a|b)^*)\)</span> - <span class="math inline">\(aba \notin L(a^*b^*)\)</span> (porque tem <span class="math inline">\(a\)</span> após <span class="math inline">\(b\)</span>) - <span class="math inline">\(aba \notin L(b^*a^*)\)</span> (porque tem <span class="math inline">\(b\)</span> entre <span class="math inline">\(a\)</span>’s) - Portanto: <span class="math inline">\(aba \notin L((a^*b^*|b^*a^*))\)</span></p>
 <p><strong>Conclusão</strong>: As expressões <strong>NÃO</strong> são equivalentes.</p>
-<ol start="6" type="1">
-<li><strong>Solução</strong>:</li>
-</ol>
+</section>
+<section id="solução-5" class="level4" data-number="10.1.8.6">
+<h4 data-number="10.1.8.6" class="anchored" data-anchor-id="solução-5"><span class="header-section-number">10.1.8.6</span> Solução</h4>
 <p><strong>Definição do Alfabeto</strong> <span class="math display">\[\sigma = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, /, (, ), }\]</span></p>
 <p><strong>Subconjuntos Úteis</strong> - Dígitos: <span class="math inline">\(D = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}\)</span>; - Dígitos não-zero: <span class="math inline">\(D_{nz} = {1, 2, 3, 4, 5, 6, 7, 8, 9}\)</span>; - Operadores: <span class="math inline">\(Op = {+, -, *, /}\)</span>; - Delimitadores: <span class="math inline">\(Del = {(, )}\)</span> - Espaço: <span class="math inline">\(Esp = { }\)</span>.</p>
 <p><strong>Expressões Regulares por Componente</strong></p>
@@ -1116,7 +1150,7 @@ window.Quarto = {
 <p><span class="math display">\[
 r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
                (r_op r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp)^*
-               \]</span></p>
+\]</span></p>
 <p><strong>Expressão Regular Completa, Versão Compacta</strong></p>
 <p><span class="math display">\[r_expr = r_esp^* Termo (Op r_esp^* Termo)^* r_esp^*\]</span></p>
 <p>na qual:</p>
@@ -1124,8 +1158,7 @@ r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
 <p><span class="math display">\[Numero = (+|-)?( 0 | D_nz D^* )\]</span></p>
 <p><span class="math display">\[Op = +|-|*|/\]</span></p>
 <p><span class="math display">\[Esp = ( )^*\]</span></p>
-<section id="versão-expandida" class="level4" data-number="10.0.4.1">
-<h4 data-number="10.0.4.1" class="anchored"><span class="header-section-number">10.0.4.1</span> Versão Expandida</h4>
+<p><strong>Versão Expandida</strong></p>
 <p><span class="math display">\[r_expr = ( )^* ((+|-)?( 0 | [1-9][0-9]^* ) |
          \(( )^* (+|-)?( 0 | [1-9][0-9]^* ) ( )^*
          (+|-|*|/) ( )^* (+|-)?( 0 | [1-9][0-9]^* ) ( )^* \))
@@ -1136,13 +1169,10 @@ r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
 \]</span></p>
 <p><strong>Expressões Válidas</strong> - <span class="math inline">\(42\)</span> - <span class="math inline">\(3 + 5\)</span> - <span class="math inline">\(-10 * 2\)</span> - <span class="math inline">\((5 + 3) / 2\)</span> - <span class="math inline">\(15 - 7 + 2\)</span> - <span class="math inline">\((8 * 3) - (4 / 2)\)</span></p>
 <p><strong>Expressões Inválidas</strong> - <span class="math inline">\(3 +\)</span> // operador sem segundo operando - <span class="math inline">\(+ 5\)</span> // operador sem primeiro operando - <span class="math inline">\((3 + 5\)</span> // parênteses não balanceados - <span class="math inline">\(3 ++ 5\)</span> // operador duplo - <span class="math inline">\(07 + 3\)</span> // número com zero à esquerda - <span class="math inline">\(3.5 + 2\)</span> // número decimal</p>
-<ol start="7" type="1">
-<li><h2 id="solução" data-number="10.1" class="anchored" data-anchor-id="versão-expandida"><span class="header-section-number">10.1</span> <strong>Solução</strong></h2></li>
-</ol>
 </section>
-</section>
-<section id="a-começa-com-a-termina-com-c-contém-b" class="level3" data-number="10.1.1">
-<h3 data-number="10.1.1" class="anchored" data-anchor-id="a-começa-com-a-termina-com-c-contém-b"><span class="header-section-number">10.1.1</span> <strong>a) Começa com a, termina com c, contém b</strong></h3>
+<section id="solução-6" class="level4" data-number="10.1.8.7">
+<h4 data-number="10.1.8.7" class="anchored" data-anchor-id="solução-6"><span class="header-section-number">10.1.8.7</span> Solução</h4>
+<p><strong>a) Começa com a, termina com c, contém b</strong></p>
 <p><strong>Expressão Regular:</strong></p>
 <p><span class="math display">\[a(a\cup b\cup c)^∗b(a\cup b\cup c)^∗c\]</span></p>
 <p><strong>Análise:</strong></p>
@@ -1157,9 +1187,7 @@ r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
 </li>
 <li><span class="math inline">\(c\)</span>: A expressão termina com o caractere literal <span class="math inline">\(c\)</span>.</li>
 </ul>
-</section>
-<section id="b-cada-a-é-seguido-por-a-ou-b" class="level3" data-number="10.1.2">
-<h3 data-number="10.1.2" class="anchored" data-anchor-id="b-cada-a-é-seguido-por-a-ou-b"><span class="header-section-number">10.1.2</span> <strong>b) Cada a é seguido por a ou b</strong></h3>
+<p><strong>b) Cada a é seguido por a ou b</strong></p>
 <p><strong>Expressão Regular:</strong></p>
 <p><span class="math display">\[(b\cup c\cup aa\cup ab)^∗\]</span></p>
 <p><strong>Análise:</strong></p>
@@ -1170,27 +1198,26 @@ r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
 <li><span class="math inline">\(aa\)</span> e <span class="math inline">\(ab\)</span>: São blocos que começam com <span class="math inline">\(a\)</span> e satisfazem a regra. A concatenação é usada para formar esses blocos.</li>
 </ul>
 <p>A expressão <span class="math inline">\((b\cup c\cup aa\cup ab)^∗\)</span> permite a repetição de qualquer um desses blocos, garantindo que qualquer <span class="math inline">\(a\)</span> que apareça na cadeia seja sempre seguido por <span class="math inline">\(a\)</span> ou <span class="math inline">\(b\)</span>.</p>
-</section>
-<section id="c-não-contém-a-substring-ac" class="level3" data-number="10.1.3">
-<h3 data-number="10.1.3" class="anchored" data-anchor-id="c-não-contém-a-substring-ac"><span class="header-section-number">10.1.3</span> <strong>c) Não contém a substring ac</strong></h3>
+<p><strong>c) Não contém a substring ac</strong></p>
 <p><strong>Expressão Regular:</strong></p>
 <p><span class="math display">\[(b\cup c\cup aa^∗b)^∗a^∗\]</span></p>
 <p><strong>Análise:</strong></p>
 <p>A estratégia é garantir que um <span class="math inline">\(c\)</span> nunca possa ser imediatamente precedido por um <span class="math inline">\(a\)</span>.</p>
 <ul>
-<li><span class="math inline">\((b\cup c\cup aa^∗b)^∗\)</span>: Esta é a parte principal que constrói sequências válidas. Ela permite a repetição de três tipos de blocos:
-<ul>
+<li><span class="math inline">\((b\cup c\cup aa^∗b)^∗\)</span>: Esta é a parte principal que constrói sequências válidas. Ela permite a repetição de três tipos de blocos:<br>
+</li>
 <li><span class="math inline">\(b\)</span> ou <span class="math inline">\(c\)</span>: Caracteres que não criam risco de formar <span class="math inline">\(ac\)</span>.<br>
 </li>
 <li><span class="math inline">\(aa^∗b\)</span>: Este bloco é fundamental. Ele representa “um ou mais <span class="math inline">\(a\)</span>s, seguidos por um <span class="math inline">\(b\)</span>”. O trecho <span class="math inline">\(aa^∗\)</span> é a forma de representar “um ou mais <span class="math inline">\(a\)</span>s” (<span class="math inline">\(a^+\)</span>) usando apenas os operadores permitidos (concatenação e Kleene star). Este bloco garante que qualquer sequência de <span class="math inline">\(a\)</span>s que não esteja no final da cadeia seja “terminada” por um <span class="math inline">\(b\)</span>.<br>
 </li>
-</ul></li>
 <li><span class="math inline">\(a^∗\)</span>: Este sufixo permite que a cadeia termine com qualquer número de <span class="math inline">\(a\)</span>s (incluindo nenhum). Como é o final da cadeia, não há risco de um <span class="math inline">\(c\)</span> aparecer depois.</li>
 </ul>
 <p>Juntas, essas partes garantem que um <span class="math inline">\(c\)</span> nunca possa seguir imediatamente um <span class="math inline">\(a\)</span>.</p>
 </section>
+</section>
+</section>
 <section id="capítulo-sec-aut-finitos-deterministicos" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="capítulo-sec-aut-finitos-deterministicos"><span class="header-section-number">10.2</span> Capítulo sec-aut-finitos-deterministicos</h2>
+<h2 data-number="10.2" class="anchored" data-anchor-id="capítulo-sec-aut-finitos-deterministicos"><span class="header-section-number">10.2</span> Capítulo <a href="02-lexico.html" class="quarto-xref"><span>Chapter 4</span></a></h2>
 <section id="exercícios-1-sec-definicao-formal" class="level3" data-number="10.2.1">
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="exercícios-1-sec-definicao-formal"><span class="header-section-number">10.2.1</span> Exercícios 1 {<a href="02-lexico.html#sec-definicao-formal" class="quarto-xref"><span>Section 4.1</span></a>}</h3>
 <p><strong>1.</strong></p>
@@ -1357,24 +1384,19 @@ r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">rightarrowq_A</td>
-<td style="text-align: left;">q_B</td>
-<td style="text-align: left;">q_A</td>
+<td style="text-align: left;"><span class="math inline">\(\rightarrow q_A\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(q_B\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(q_A\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">q_B</td>
-<td style="text-align: left;">q_B</td>
-<td style="text-align: left;">q_C</td>
+<td style="text-align: left;"><span class="math inline">\(q_C\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\rightarrow q_D\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(q_A\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">q_C</td>
-<td style="text-align: left;">\*q_D</td>
-<td style="text-align: left;">q_A</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">\*q_D</td>
-<td style="text-align: left;">q_B</td>
-<td style="text-align: left;">q_A</td>
+<td style="text-align: left;"><span class="math inline">\(\rightarrow q_D\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(q_B\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(q_A\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -1383,43 +1405,44 @@ r_expr_paren = r_esp (r_num | (r_esp r_num r_esp r_op r_esp r_num r_esp)) r_esp
 <h3 data-number="10.2.4" class="anchored" data-anchor-id="exercícios-4"><span class="header-section-number">10.2.4</span> Exercícios 4</h3>
 <p><strong>1.</strong></p>
 <ol type="1">
-<li>Começa em q_A.<br>
+<li>Começa em <span class="math inline">\(q_A\)</span>.<br>
 </li>
-<li>Lê ‘0’: q_Arightarrowq_B. Estado atual: q_B.<br>
+<li>Lê ‘0’: <span class="math inline">\(q_A \rightarrow q_B\)</span>. Estado atual: <span class="math inline">\(q_B\)</span>.<br>
 </li>
-<li>Lê ‘1’: q_Brightarrowq_C. Estado atual: q_C.<br>
+<li>Lê ‘1’: <span class="math inline">\(q_B \rightarrow q_C\)</span>. Estado atual: <span class="math inline">\(q_C\)</span>.<br>
 </li>
-<li>Lê ‘1’: q_Crightarrowq_A. Estado atual: q_A.<br>
+<li>Lê ‘1’: <span class="math inline">\(q_C \rightarrow q_A\)</span>. Estado atual: <span class="math inline">\(q_A\)</span>.<br>
 </li>
-<li>Lê ‘0’: q_Arightarrowq_B. Estado atual: q_B.<br>
+<li>Lê ‘0’: <span class="math inline">\(q_A \rightarrow q_B\)</span>. Estado atual: <span class="math inline">\(q_B\)</span>.<br>
 </li>
-<li>Lê ‘1’: q_Brightarrowq_C. Estado atual: q_C.<br>
-A computação termina em q_C, que é um estado de aceitação. Portanto, a string 01101 é aceita.</li>
+<li>Lê ‘1’: <span class="math inline">\(q_B \rightarrow q_C\)</span>. Estado atual: <span class="math inline">\(q_C\)</span>.<br>
+A computação termina em <span class="math inline">\(q_C\)</span>, que é um estado de aceitação. Portanto, a string 01101 é aceita.</li>
 </ol>
 <p><strong>2.</strong></p>
 <ol type="1">
-<li>Começa em q_0.<br>
+<li>Começa em <span class="math inline">\(q_0\)</span>.<br>
 </li>
-<li>Lê ‘&lt;’: q_0rightarrowq_\&lt;. Estado atual: q_\&lt;.<br>
+<li>Lê ‘&lt;’: <span class="math inline">\(q_0 \rightarrow q_\lt\)</span>. Estado atual: <span class="math inline">\(q_\lt\)</span>.<br>
 </li>
-<li>Lê ‘=’: q_\&lt;rightarrowq_leq. Estado atual: q_leq.<br>
-A computação termina em q_leq, que é um estado de aceitação. A string &lt;= é aceita.</li>
+<li>Lê ‘=’: <span class="math inline">\(q_\lt \rightarrow q_\leq\)</span>. Estado atual: <span class="math inline">\(q_\leq\)</span>.<br>
+A computação termina em <span class="math inline">\(q_\leq\)</span>, que é um estado de aceitação. A string <span class="math inline">\(&lt;=\)</span> é aceita.</li>
 </ol>
 <p><strong>3.</strong></p>
 <ul>
-<li>Para !=: q_0xrightarrowq_xrightarrow=q_neq. Termina em q_neq (aceitação). <strong>Aceita</strong>.<br>
+<li>Para !=: <span class="math inline">\(q_0 \rightarrow q_\neq\)</span>. Termina em <span class="math inline">\(q_\neq\)</span> (aceitação). <strong>Aceita</strong>.<br>
 </li>
-<li>Para =!: q_0xrightarrow=q_=xrightarrowq_erro. Termina em q_erro (rejeição). <strong>Rejeitada</strong>.</li>
+<li>Para =!: <span class="math inline">\(q_0 \rightarrow q_\neq \rightarrow q_\erro\)</span>. Termina em <span class="math inline">\(q_\erro\)</span> (rejeição).</li>
 </ul>
+<p><strong>Rejeitada</strong>.</p>
 <p><strong>4.</strong> Não. A definição formal de aceitação exige que o estado final, após o processamento de <strong>toda</strong> a <em>string</em>, pertença ao conjunto F. Passar por um estado de aceitação no meio do caminho é irrelevante para a decisão final.</p>
 <p><strong>5.</strong></p>
 <ul>
-<li><strong>Aceita</strong>: ababa. Caminho: q_ppxrightarrowaq_ipxrightarrowbq_iixrightarrowaq_pixrightarrowbq_ppxrightarrowaq_ip. Ops, essa é rejeitada. Vamos tentar aabb.
+<li><strong>Aceita</strong>: ababa. Caminho: <span class="math inline">\(q_{pp} \xrightarrow{a} q_{ip} \xrightarrow{b} q_{ii} \xrightarrow{a} q_{pi} \xrightarrow{b} q_{pp} \xrightarrow{a} q_{ip}\)</span>. Ops, essa é rejeitada. Vamos tentar aabb.
 <ul>
-<li><strong>Aceita</strong>: aabb. Caminho: q_ppxrightarrowaq_ipxrightarrowaq_ppxrightarrowbq_pixrightarrowbq_pp.&nbsp;Termina em q_ppinF. Aceita.<br>
+<li><strong>Aceita</strong>: aabb. Caminho: <span class="math inline">\(q_{pp} \xrightarrow{a} q_{ip} \xrightarrow{a} q_{pp} \xrightarrow{b} q_{pi} \xrightarrow{b} q_{pp}\)</span>. Termina em <span class="math inline">\(q_{pp} \in F\)</span>. Aceita.<br>
 </li>
 </ul></li>
-<li><strong>Rejeitada</strong>: ababa. Caminho: q_ppxrightarrowaq_ipxrightarrowbq_iixrightarrowaq_pixrightarrowbq_ppxrightarrowaq_ip. Termina em q_ipnotinF. Rejeitada.</li>
+<li><strong>Rejeitada</strong>: ababa. Caminho: <span class="math inline">\(q_{pp} \xrightarrow{a} q_{ip} \xrightarrow{b} q_{ii} \xrightarrow{a} q_{pi} \xrightarrow{b} q_{pp} \xrightarrow{a} q_{ip}\)</span>. Termina em <span class="math inline">\(q_{ip} \notin F\)</span>. Rejeitada.</li>
 </ul>
 </section>
 <section id="exercícios-5" class="level3" data-number="10.2.5">
@@ -1758,7 +1781,7 @@ A computação termina em q_leq, que é um estado de aceitação. A string &lt;=
 <p>Estados finais: - <span class="math inline">\(((s_1, t_0), u_2)\)</span>, <span class="math inline">\(((s_1, t_1), u_2)\)</span>, <span class="math inline">\(((s_1, t_2), u_2)\)</span>, <span class="math inline">\(((s_0, t_0), u_2)\)</span>, <span class="math inline">\(((s_2, t_0), u_2)\)</span></p>
 <p><strong>Passo 5: Função de transição</strong></p>
 <p>Para cada estado <span class="math inline">\(((s_i, t_j), u_k)\)</span> e símbolo <span class="math inline">\(x\)</span>: <span class="math display">\[\delta(((s_i, t_j), u_k), x) = ((\delta_1(s_i, x), \delta_2(t_j, x)), \delta_3(u_k, x))\]</span></p>
-<p><strong>Resposta final</strong>: - <strong>Número de estados</strong>: 27 estados - <strong>Linguagem aceita</strong>: Strings que (começam com ‘a’ OU têm comprimento múltiplo de 3) <strong>E</strong> contêm ‘bb’ - <strong>Exemplos</strong>: “abb”, “abba”, “aabbb”, “bbaaa”, “bbbbbb”</p>
+<p><strong>Resposta final</strong>: - <strong>Número de estados</strong>: 27 estados; - <strong>Linguagem aceita</strong>: Strings que (começam com ‘a’ OU têm comprimento múltiplo de 3) <strong>E</strong> contêm ‘bb’; - <strong>Exemplos</strong>: “abb”, “abba”, “aabbb”, “bbaaa”, “bbbbbb”.</p>
 <p>O autômato resultante aceita strings que satisfazem simultaneamente a condição de união (começa com ‘a’ ou comprimento múltiplo de 3) e a condição de <span class="math inline">\(M_3\)</span> (contém ‘bb’).</p>
 </section>
 <section id="exercícios-8" class="level3" data-number="10.2.8">
@@ -1871,7 +1894,8 @@ A computação termina em q_leq, que é um estado de aceitação. A string &lt;=
 </section>
 <section id="exercícios-10" class="level3" data-number="10.2.9">
 <h3 data-number="10.2.9" class="anchored" data-anchor-id="exercícios-10"><span class="header-section-number">10.2.9</span> Exercícios 10</h3>
-<p><strong>1.</strong></p>
+<section id="section" class="level4" data-number="10.2.9.1">
+<h4 data-number="10.2.9.1" class="anchored" data-anchor-id="section"><span class="header-section-number">10.2.9.1</span> 1</h4>
 <p><strong>a) Classes de equivalência de <span class="math inline">\(\equiv_L\)</span></strong>:</p>
 <p>Para <span class="math inline">\(L = \{w \mid w \text{ contém } 00\}\)</span>, temos três classes de equivalência:</p>
 <ol type="1">
@@ -1910,27 +1934,35 @@ A computação termina em q_leq, que é um estado de aceitação. A string &lt;=
 \end{aligned}
 $$</code></pre>
 <p><strong>d) Verificação</strong>: O Autômato Finito Determinístico mínimo tem 3 estados, correspondendo exatamente às 3 classes de equivalência de Myhill-Nerode.</p>
-<p><strong>2.</strong></p>
+</section>
+<section id="section-1" class="level4" data-number="10.2.9.2">
+<h4 data-number="10.2.9.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">10.2.9.2</span> 2</h4>
 <p><strong>Prova de que <span class="math inline">\(L = \{0^i1^j \mid i &gt; j \geq 0\}\)</span> não é regular</strong>:</p>
 <p>Considere as strings <span class="math inline">\(s_n = 0^n\)</span> para <span class="math inline">\(n = 1, 2, 3, ...\)</span></p>
 <p><strong>Afirmação</strong>: Para <span class="math inline">\(m \neq n\)</span>, temos <span class="math inline">\(s_m \not\equiv_L s_n\)</span>.</p>
 <p><strong>Prova</strong>: Considere o sufixo <span class="math inline">\(z = 1^m\)</span>. Então: - <span class="math inline">\(s_m \cdot z = 0^m1^m \notin L\)</span> (porque <span class="math inline">\(m = m\)</span>, não <span class="math inline">\(m &gt; m\)</span>) - <span class="math inline">\(s_n \cdot z = 0^n1^m\)</span>: - Se <span class="math inline">\(n &gt; m\)</span>, então <span class="math inline">\(0^n1^m \in L\)</span> - Se <span class="math inline">\(n &lt; m\)</span>, então <span class="math inline">\(0^n1^m \notin L\)</span></p>
 <p>Como <span class="math inline">\(n \neq m\)</span>, pelo menos um dos casos acima distingue <span class="math inline">\(s_m\)</span> de <span class="math inline">\(s_n\)</span>.</p>
 <p>Portanto, existem infinitas classes de equivalência (uma para cada <span class="math inline">\(n \in \mathbb{N}\)</span>), logo <span class="math inline">\(L\)</span> não é regular pelo Teorema de Myhill-Nerode.</p>
-<p><strong>3.</strong></p>
+</section>
+<section id="section-2" class="level4" data-number="10.2.9.3">
+<h4 data-number="10.2.9.3" class="anchored" data-anchor-id="section-2"><span class="header-section-number">10.2.9.3</span> 3</h4>
 <p><strong>Eliminação de estados para encontrar ER</strong>:</p>
 <p><strong>Estado inicial</strong>: Autômato Finito Determinístico com 3 estados</p>
 <p><strong>Passo 1</strong>: Eliminar <span class="math inline">\(q_1\)</span> - Aresta <span class="math inline">\(q_0 \to q_2\)</span>: <span class="math inline">\(ab\)</span> (via <span class="math inline">\(q_1\)</span>) - Aresta <span class="math inline">\(q_0 \to q_0\)</span>: <span class="math inline">\(b\)</span> (direto) - Nova transição: <span class="math inline">\(q_0 \xrightarrow{ab} q_2\)</span></p>
 <p><strong>Passo 2</strong>: Eliminar <span class="math inline">\(q_2\)</span> (estado final) - De <span class="math inline">\(q_0\)</span> para <span class="math inline">\(q_2\)</span>: <span class="math inline">\(ab(a|b)^*\)</span> - Loop em <span class="math inline">\(q_0\)</span>: <span class="math inline">\(b^*\)</span></p>
 <p><strong>Expressão regular final</strong>: <span class="math display">\[r = b^*ab(a|b)^*\]</span></p>
 <p>Esta ER descreve strings que: 1. Começam com zero ou mais <span class="math inline">\(b\)</span>’s 2. Seguidos por <span class="math inline">\(ab\)</span> 3. Terminam com qualquer sequência de <span class="math inline">\(a\)</span>’s e <span class="math inline">\(b\)</span>’s</p>
-<p><strong>4.</strong></p>
+</section>
+<section id="section-3" class="level4" data-number="10.2.9.4">
+<h4 data-number="10.2.9.4" class="anchored" data-anchor-id="section-3"><span class="header-section-number">10.2.9.4</span> 4</h4>
 <p><strong>a) Teste de equivalência via produto</strong>:</p>
 <p>Construindo <span class="math inline">\((L(M_1) - L(M_2)) \cup (L(M_2) - L(M_1))\)</span>:</p>
 <p><strong>Análise das linguagens</strong>: - <span class="math inline">\(L(M_1)\)</span>: strings com número par de <span class="math inline">\(a\)</span>’s - <span class="math inline">\(L(M_2)\)</span>: NÃO é equivalente (aceita baseado em posição)</p>
 <p><strong>b) Teste com strings</strong>: - <span class="math inline">\(\epsilon\)</span>: <span class="math inline">\(M_1\)</span> aceita (0 <span class="math inline">\(a\)</span>’s = par), <span class="math inline">\(M_2\)</span> aceita → ambos aceitam ✓ - <span class="math inline">\(a\)</span>: <span class="math inline">\(M_1\)</span> rejeita (1 <span class="math inline">\(a\)</span> = ímpar), <span class="math inline">\(M_2\)</span> rejeita (posição 1 é ímpar) → ambos rejeitam ✓ - <span class="math inline">\(b\)</span>: <span class="math inline">\(M_1\)</span> aceita (0 <span class="math inline">\(a\)</span>’s), <span class="math inline">\(M_2\)</span> aceita → ambos aceitam ✓ - <span class="math inline">\(aa\)</span>: <span class="math inline">\(M_1\)</span> aceita (2 <span class="math inline">\(a\)</span>’s = par), <span class="math inline">\(M_2\)</span> rejeita → <strong>DIFEREM</strong> ✗ - <span class="math inline">\(ba\)</span>: <span class="math inline">\(M_1\)</span> rejeita (1 <span class="math inline">\(a\)</span>), <span class="math inline">\(M_2\)</span> aceita (posição 2 é par) → <strong>DIFEREM</strong> ✗</p>
 <p><strong>Conclusão</strong>: <span class="math inline">\(L(M_1) \neq L(M_2)\)</span></p>
-<p><strong>5.</strong></p>
+</section>
+<section id="section-4" class="level4" data-number="10.2.9.5">
+<h4 data-number="10.2.9.5" class="anchored" data-anchor-id="section-4"><span class="header-section-number">10.2.9.5</span> 5</h4>
 <p><strong>a) Minimização de Hopcroft</strong>:</p>
 <p>Autômato Finito Determinístico original para strings terminadas em <span class="math inline">\(01\)</span>:</p>
 <p>Estados iniciais: <span class="math inline">\(\{q_0, q_1, ..., q_7\}\)</span></p>
@@ -1939,26 +1971,29 @@ $$</code></pre>
 <p><strong>b) Complexidade</strong>: - Hopcroft: <span class="math inline">\(O(k \cdot n \log n) = O(2 \cdot 8 \log 8) = O(48)\)</span> operações</p>
 <p><strong>c) Comparação para Autômato Finito Determinísticos com 8 e 10 estados</strong>: - Via minimização: <span class="math inline">\(O(8 \log 8) + O(10 \log 10) + O(1)\)</span> ≈ <span class="math inline">\(O(57)\)</span> - Via produto: <span class="math inline">\(O(8 \times 10) = O(80)\)</span></p>
 <p>Para este caso, minimização é mais eficiente.</p>
-<p><strong>6.</strong></p>
+</section>
+<section id="section-5" class="level4" data-number="10.2.9.6">
+<h4 data-number="10.2.9.6" class="anchored" data-anchor-id="section-5"><span class="header-section-number">10.2.9.6</span> 6</h4>
 <p><strong>a) Autômato Finito Determinísticos individuais</strong>:</p>
 <p>Este autômato reconhece sequências não vazias de dígitos.</p>
 <p>Representação Algébrica:</p>
 <p><span class="math inline">\(A_{int} = (Q_{int}, \Sigma_{int}, \delta_{int}, q_{0,int}, F_{int})\)</span>, onde:</p>
 <ul>
-<li><strong>Conjunto de estados</strong>: <span class="math inline">\(Q_{int} = \{q_0, q_1, q_d\}\)</span></li>
-<li><strong>Alfabeto (classes)</strong>: <span class="math inline">\(\Sigma_{int} = \{\text{dígito}, \text{outro}\}\)</span>, onde <code>dígito</code> é qualquer caractere de ‘0’ a ‘9’ e <code>outro</code> é qualquer caractere que não seja um dígito.</li>
-<li><strong>Estado inicial</strong>: <span class="math inline">\(q_{0,int} = q_0\)</span></li>
-<li><strong>Conjunto de estados finais</strong>: <span class="math inline">\(F_{int} = \{q_1\}\)</span></li>
-<li><strong>Função de transição <span class="math inline">\(\delta_{int}\)</span></strong>: <span class="math display">\[
-  \begin{aligned}
-  \delta(q_0, \text{dígito}) &amp;= q_1 \\
-  \delta(q_0, \text{outro}) &amp;= q_d \\
-  \delta(q_1, \text{dígito}) &amp;= q_1 \\
-  \delta(q_1, \text{outro}) &amp;= q_d \\
-  \delta(q_d, \text{dígito}) &amp;= q_d \\
-  \delta(q_d, \text{outro}) &amp;= q_d
-  \end{aligned}
-  \]</span></li>
+<li><p><strong>Conjunto de estados</strong>: <span class="math inline">\(Q_{int} = \{q_0, q_1, q_d\}\)</span></p></li>
+<li><p><strong>Alfabeto (classes)</strong>: <span class="math inline">\(\Sigma_{int} = \{\text{dígito}, \text{outro}\}\)</span>, onde <code>dígito</code> é qualquer caractere de ‘0’ a ‘9’ e <code>outro</code> é qualquer caractere que não seja um dígito.</p></li>
+<li><p><strong>Estado inicial</strong>: <span class="math inline">\(q_{0,int} = q_0\)</span></p></li>
+<li><p><strong>Conjunto de estados finais</strong>: <span class="math inline">\(F_{int} = \{q_1\}\)</span></p></li>
+<li><p><strong>Função de transição <span class="math inline">\(\delta_{int}\)</span></strong>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\delta(q_0, \text{dígito}) &amp;= q_1 \\
+\delta(q_0, \text{outro}) &amp;= q_d \\
+\delta(q_1, \text{dígito}) &amp;= q_1 \\
+\delta(q_1, \text{outro}) &amp;= q_d \\
+\delta(q_d, \text{dígito}) &amp;= q_d \\
+\delta(q_d, \text{outro}) &amp;= q_d
+\end{aligned}
+\]</span></p></li>
 </ul>
 <p>Tabela de Transição:</p>
 <table class="table">
@@ -1996,18 +2031,18 @@ $$</code></pre>
 <li><strong>Estado inicial</strong>: <span class="math inline">\(q_{0,id} = q_0\)</span></li>
 <li><strong>Conjunto de estados finais</strong>: <span class="math inline">\(F_{id} = \{q_1\}\)</span></li>
 <li><strong>Função de transição <span class="math inline">\(\delta_{id}\)</span></strong>: <span class="math display">\[
-  \begin{aligned}
-  \delta(q_0, \text{letra}) &amp;= q_1 \\
-  \delta(q_0, \text{dígito}) &amp;= q_d \\
-  \delta(q_0, \text{outro}) &amp;= q_d \\
-  \delta(q_1, \text{letra}) &amp;= q_1 \\
-  \delta(q_1, \text{dígito}) &amp;= q_1 \\
-  \delta(q_1, \text{outro}) &amp;= q_d \\
-  \delta(q_d, \text{letra}) &amp;= q_d \\
-  \delta(q_d, \text{dígito}) &amp;= q_d \\
-  \delta(q_d, \text{outro}) &amp;= q_d
-  \end{aligned}
-  \]</span></li>
+\begin{aligned}
+\delta(q_0, \text{letra}) &amp;= q_1 \\
+\delta(q_0, \text{dígito}) &amp;= q_d \\
+\delta(q_0, \text{outro}) &amp;= q_d \\
+\delta(q_1, \text{letra}) &amp;= q_1 \\
+\delta(q_1, \text{dígito}) &amp;= q_1 \\
+\delta(q_1, \text{outro}) &amp;= q_d \\
+\delta(q_d, \text{letra}) &amp;= q_d \\
+\delta(q_d, \text{dígito}) &amp;= q_d \\
+\delta(q_d, \text{outro}) &amp;= q_d
+\end{aligned}
+\]</span></li>
 </ul>
 <p>Tabela de Transição:</p>
 <table class="table">
@@ -2049,12 +2084,12 @@ $$</code></pre>
 <li><strong>Estado inicial</strong>: <span class="math inline">\(q_{0,op} = q_0\)</span></li>
 <li><strong>Conjunto de estados finais</strong>: <span class="math inline">\(F_{op} = \{q_2, q_3, q_5, q_6\}\)</span></li>
 <li><strong>Função de transição <span class="math inline">\(\delta_{op}\)</span></strong>: <span class="math display">\[
-  \begin{aligned}
-  \delta(q_0, +) &amp;= q_1 \quad &amp; \delta(q_0, -) &amp;= q_4 \quad &amp; \delta(q_0, =) &amp;= q_d \quad &amp; \delta(q_0, \text{outro}) &amp;= q_d \\
-  \delta(q_1, +) &amp;= q_2 \quad &amp; \delta(q_1, =) &amp;= q_3 \quad &amp; \delta(q_1, -) &amp;= q_d \quad &amp; \delta(q_1, \text{outro}) &amp;= q_d \\
-  \delta(q_4, -) &amp;= q_5 \quad &amp; \delta(q_4, =) &amp;= q_6 \quad &amp; \delta(q_4, +) &amp;= q_d \quad &amp; \delta(q_4, \text{outro}) &amp;= q_d \\
-  \end{aligned}
-  \]</span></li>
+\begin{aligned}
+\delta(q_0, +) &amp;= q_1 \quad &amp; \delta(q_0, -) &amp;= q_4 \quad &amp; \delta(q_0, =) &amp;= q_d \quad &amp; \delta(q_0, \text{outro}) &amp;= q_d \\
+\delta(q_1, +) &amp;= q_2 \quad &amp; \delta(q_1, =) &amp;= q_3 \quad &amp; \delta(q_1, -) &amp;= q_d \quad &amp; \delta(q_1, \text{outro}) &amp;= q_d \\
+\delta(q_4, -) &amp;= q_5 \quad &amp; \delta(q_4, =) &amp;= q_6 \quad &amp; \delta(q_4, +) &amp;= q_d \quad &amp; \delta(q_4, \text{outro}) &amp;= q_d \\
+\end{aligned}
+\]</span></li>
 </ul>
 <p>Para todos os outros estados <span class="math inline">\(q \in \{q_2, q_3, q_5, q_6, q_d\}\)</span> e para qualquer símbolo <span class="math inline">\(s \in \Sigma_{op}\)</span>, a transição é <span class="math inline">\(\delta(q, s) = q_d\)</span>.</p>
 <p>Tabela de Transição:</p>
@@ -2130,34 +2165,34 @@ $$</code></pre>
 <p><strong>b. Construção do Autômato Finito Determinístico Combinado</strong></p>
 <p>Para criar um único Autômato Finito Determinístico que reconheça a união das linguagens dos três autômatos individuais (<span class="math inline">\(A_{int}\)</span>, <span class="math inline">\(A_{id}\)</span>, <span class="math inline">\(A_{op}\)</span>), utilizamos o método da <strong>construção do produto</strong>. Este método gera um novo Autômato Finito Determinístico cujos estados representam a simulação simultânea dos três autômatos originais.</p>
 <p>O novo autômato, <span class="math inline">\(A_{comb}\)</span>, é definido pela 5-tupla <span class="math inline">\(A_{comb} = (Q_{comb}, \Sigma_{comb}, \delta_{comb}, q_{0,comb}, F_{comb})\)</span>.</p>
-<p><strong>1. Alfabeto (<span class="math inline">\(\Sigma_{comb}\)</span>)</strong>: O alfabeto combinado é a união de todos os caracteres e classes de caracteres dos autômatos individuais. <span class="math inline">\(\Sigma_{comb} = \{\text{letra}, \text{dígito}, +, -, =, \text{outro}\}\)</span></p>
-<p><strong>2. Conjunto de Estados (<span class="math inline">\(Q_{comb}\)</span>)</strong>: O novo conjunto de estados é o produto cartesiano dos conjuntos de estados dos autômatos originais. Cada estado em <span class="math inline">\(A_{comb}\)</span> é uma tupla que rastreia o estado atual de cada autômato individual.</p>
+<p><strong>1. Alfabeto (<span class="math inline">\(\Sigma_{comb}\)</span>)</strong>: o alfabeto combinado é a união de todos os caracteres e classes de caracteres dos autômatos individuais. <span class="math inline">\(\Sigma_{comb} = \{\text{letra}, \text{dígito}, +, -, =, \text{outro}\}\)</span></p>
+<p><strong>2. Conjunto de Estados (<span class="math inline">\(Q_{comb}\)</span>)</strong>: o novo conjunto de estados é o produto cartesiano dos conjuntos de estados dos autômatos originais. Cada estado em <span class="math inline">\(A_{comb}\)</span> é uma tupla que rastreia o estado atual de cada autômato individual.</p>
 <p><span class="math inline">\(Q_{comb} = Q_{int} \times Q_{id} \times Q_{op}\)</span></p>
 <p>O número total de estados seria <span class="math inline">\(|Q_{int}| \times |Q_{id}| \times |Q_{op}| = 3 \times 3 \times 8 = 72\)</span> estados. Devido ao grande número, a construção explícita da tabela de transição é impraticável, mas o princípio é o seguinte:</p>
-<p><strong>3. Estado Inicial (<span class="math inline">\(q_{0,comb}\)</span>)</strong>: O estado inicial do autômato combinado é a tupla contendo os estados iniciais de cada autômato individual.</p>
+<p><strong>3. Estado Inicial (<span class="math inline">\(q_{0,comb}\)</span>)</strong>: o estado inicial do autômato combinado é a tupla contendo os estados iniciais de cada autômato individual.</p>
 <p><span class="math inline">\(q_{0,comb} = (q_{0,int}, q_{0,id}, q_{0,op})\)</span></p>
-<p><strong>4. Função de Transição (<span class="math inline">\(\delta_{comb}\)</span>)</strong>: A função de transição é aplicada componente a componente. Para um estado tupla <span class="math inline">\((p, q, r) \in Q_{comb}\)</span> e um símbolo de entrada <span class="math inline">\(s \in \Sigma_{comb}\)</span>, a transição é definida como:</p>
+<p><strong>4. Função de Transição (<span class="math inline">\(\delta_{comb}\)</span>)</strong>: a função de transição é aplicada componente a componente. Para um estado tupla <span class="math inline">\((p, q, r) \in Q_{comb}\)</span> e um símbolo de entrada <span class="math inline">\(s \in \Sigma_{comb}\)</span>, a transição é definida como:</p>
 <p><span class="math inline">\(\delta_{comb}((p, q, r), s) = (\delta_{int}(p, s), \delta_{id}(q, s), \delta_{op}(r, s))\)</span></p>
-<p>Exemplos de Transição: vamos calcular a transição a partir do estado inicial para dois símbolos diferentes:</p>
+<p><strong>Exemplos de Transição</strong>: vamos calcular a transição a partir do estado inicial para dois símbolos diferentes:</p>
 <ol type="a">
 <li><strong>Entrada ‘7’ (um <code>dígito</code>)</strong>:
 <ul>
-<li>Estado atual: <span class="math inline">\((q_{0,int}, q_{0,id}, q_{0,op})\)</span></li>
-<li><span class="math inline">\(\delta_{int}(q_{0,int}, \text{dígito}) = q_{1,int}\)</span></li>
-<li><span class="math inline">\(\delta_{id}(q_{0,id}, \text{dígito}) = q_{d,id}\)</span></li>
-<li><span class="math inline">\(\delta_{op}(q_{0,op}, \text{dígito}) = q_{d,op}\)</span></li>
-<li><strong>Novo estado</strong>: <span class="math inline">\((q_{1,int}, q_{d,id}, q_{d,op})\)</span></li>
+<li>Estado atual: <span class="math inline">\((q_{0,int}, q_{0,id}, q_{0,op})\)</span>;</li>
+<li><span class="math inline">\(\delta_{int}(q_{0,int}, \text{dígito}) = q_{1,int}\)</span>;</li>
+<li><span class="math inline">\(\delta_{id}(q_{0,id}, \text{dígito}) = q_{d,id}\)</span>;</li>
+<li><span class="math inline">\(\delta_{op}(q_{0,op}, \text{dígito}) = q_{d,op}\)</span>;</li>
+<li><strong>Novo estado</strong>: <span class="math inline">\((q_{1,int}, q_{d,id}, q_{d,op})\)</span>.</li>
 </ul></li>
 <li><strong>Entrada ‘+’ (o símbolo <code>+</code>)</strong>:
 <ul>
-<li>Estado atual: <span class="math inline">\((q_{0,int}, q_{0,id}, q_{0,op})\)</span></li>
-<li><span class="math inline">\(\delta_{int}(q_{0,int}, +) = q_{d,int}\)</span></li>
-<li><span class="math inline">\(\delta_{id}(q_{0,id}, +) = q_{d,id}\)</span></li>
-<li><span class="math inline">\(\delta_{op}(q_{0,op}, +) = q_{1,op}\)</span></li>
-<li><strong>Novo estado</strong>: <span class="math inline">\((q_{d,int}, q_{d,id}, q_{1,op})\)</span></li>
+<li>Estado atual: <span class="math inline">\((q_{0,int}, q_{0,id}, q_{0,op})\)</span>;</li>
+<li><span class="math inline">\(\delta_{int}(q_{0,int}, +) = q_{d,int}\)</span>;</li>
+<li><span class="math inline">\(\delta_{id}(q_{0,id}, +) = q_{d,id}\)</span>;</li>
+<li><span class="math inline">\(\delta_{op}(q_{0,op}, +) = q_{1,op}\)</span>;</li>
+<li><strong>Novo estado</strong>: <span class="math inline">\((q_{d,int}, q_{d,id}, q_{1,op})\)</span>.</li>
 </ul></li>
 </ol>
-<p><strong>5. Conjunto de Estados Finais (<span class="math inline">\(F_{comb}\)</span>)</strong>: Um estado no autômato combinado é final se <strong>pelo menos um</strong> de seus componentes for um estado final no seu respectivo autômato original. Isso corresponde à operação de união.</p>
+<p><strong>5. Conjunto de Estados Finais (<span class="math inline">\(F_{comb}\)</span>)</strong>: um estado no autômato combinado é final se <strong>pelo menos um</strong> de seus componentes for um estado final no seu respectivo autômato original. Isso corresponde à operação de união.</p>
 <p><span class="math inline">\(F_{comb} = \{ (p, q, r) \in Q_{comb} \mid p \in F_{int} \lor q \in F_{id} \lor r \in F_{op} \}\)</span></p>
 <p>Por exemplo, o estado <span class="math inline">\((q_{1,int}, q_{d,id}, q_{d,op})\)</span> seria um estado final em <span class="math inline">\(A_{comb}\)</span> porque <span class="math inline">\(q_{1,int}\)</span> é um estado final em <span class="math inline">\(A_{int}\)</span>. Da mesma forma, um estado como <span class="math inline">\((q_{d,int}, q_{d,id}, q_{2,op})\)</span> também seria final, porque <span class="math inline">\(q_{2,op}\)</span> pertence a <span class="math inline">\(F_{op}\)</span>.</p>
 <p><strong>c.&nbsp;Distinção entre os Tipos de <em>tokens</em></strong></p>
@@ -2176,36 +2211,34 @@ $$</code></pre>
 <li><p><strong>Mapear para um Tipo de Token</strong>: no código, isso se traduz em uma estrutura de decisão. Em vez de ter um único tipo de estado final, cada estado final no modelo teórico é associado a uma ação ou tipo de token no código prático. A sua sugestão de <code>switch/case</code> é uma excelente forma de representar isso.</p></li>
 </ol>
 <p>Para fins de implementação, não se criam as 72 tuplas explicitamente. Em vez disso, mantém-se três variáveis de estado (uma para cada autômato) e as atualiza em paralelo. O tipo do token é determinado pela primeira máquina que atingir um estado final.</p>
-<p>```c // Pseudocódigo da lógica do analisador enum TokenType { TOKEN_UNKNOWN, TOKEN_INTEGER, TOKEN_IDENTIFIER, TOKEN_OPERATOR_PLUSPLUS, … };</p>
-<pre><code>TokenType recognize_token(string input) {
-    // Simulação do estado combinado
-    State state_int = q0_int;
-    State state_id  = q0_id;
-    State state_op  = q0_op;
-
-    for (char c : input) {
-        state_int = delta_int(state_int, c);
-        state_id  = delta_id(state_id, c);
-        state_op  = delta_op(state_op, c);
-    }
-
-    // Mapeia o estado final para o tipo de token
-    if (is_final_int(state_int)) {
-        return TOKEN_INTEGER;
-    }
-    if (is_final_id(state_id)) {
-        // Em um sistema real, aqui haveria uma verificação de palavras-chave
-        return TOKEN_IDENTIFIER;
-    }
-    if (is_final_op(state_op)) {
-        // O estado específico (q2, q3, q5, q6) diria qual operador é
-        return map_final_op_state_to_token(state_op); // ex: q2 -&gt; TOKEN_OPERATOR_PLUSPLUS
-    }
-
-    return TOKEN_UNKNOWN; // ou lança um erro léxico
-}
-```</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Pseudocódigo da lógica do analisador</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> TokenType <span class="op">{</span> TOKEN_UNKNOWN<span class="op">,</span> TOKEN_INTEGER<span class="op">,</span> TOKEN_IDENTIFIER<span class="op">,</span> TOKEN_OPERATOR_PLUSPLUS<span class="op">,</span> <span class="op">...</span> <span class="op">};</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>TokenType recognize_token<span class="op">(</span>string input<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Simulação do estado combinado</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    State state_int <span class="op">=</span> q0_int<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    State state_id  <span class="op">=</span> q0_id<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    State state_op  <span class="op">=</span> q0_op<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">char</span> c <span class="op">:</span> input<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        state_int <span class="op">=</span> delta_int<span class="op">(</span>state_int<span class="op">,</span> c<span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        state_id  <span class="op">=</span> delta_id<span class="op">(</span>state_id<span class="op">,</span> c<span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        state_op  <span class="op">=</span> delta_op<span class="op">(</span>state_op<span class="op">,</span> c<span class="op">);</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Mapeia o estado final para o tipo de token</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>is_final_int<span class="op">(</span>state_int<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> TOKEN_INTEGER<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>is_final_id<span class="op">(</span>state_id<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Em um sistema real, aqui haveria uma verificação de palavras-chave</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> TOKEN_IDENTIFIER<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>is_final_op<span class="op">(</span>state_op<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// O estado específico (q2, q3, q5, q6) diria qual operador é</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> map_final_op_state_to_token<span class="op">(</span>state_op<span class="op">);</span> <span class="co">// ex: q2 -&gt; TOKEN_OPERATOR_PLUSPLUS</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> TOKEN_UNKNOWN<span class="op">;</span> <span class="co">// ou lança um erro léxico</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Precedência</strong>: Embora não haja ambiguidade neste problema, em sistemas mais complexos (ex: palavras-chave vs.&nbsp;identificadores), a regra da <em>maior precedência</em> ou do <em>maior casamento</em> (<em>longest match</em>) é aplicada. Se <code>if</code> pudesse ser um identificador e uma palavra-chave, a tabela de símbolos ou a lógica do analisador priorizaria o <code>TOKEN_KEYWORD_IF</code> sobre o <code>TOKEN_IDENTIFIER</code>.</p>
+</section>
 </section>
 </section>
 <section id="capítulo-sec-lingagens-livres-de-contexto" class="level2" data-number="10.3">
@@ -2315,7 +2348,6 @@ K \Rightarrow \epsilon
 \]</span></p>
 
 
-</section>
 </section>
 </section>
 </section>
@@ -2733,7 +2765,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./apend1.html" class="pagination-link" aria-label="Apêndice 1: A Relação de Myhill-Nerode">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
