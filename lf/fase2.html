@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 8&nbsp; Fase 2 - Analisador Sintático \(LL(1)\)</title>
+<title>Linguagens Formais e Autômatos - 10&nbsp; Fase 2 - Analisador Sintático \(LL(1)\)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase1.html">Projeto da Disciplina - 2025-2</a></li><li class="breadcrumb-item"><a href="./fase2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase1.html">Projetos da Disciplina - 2025-2</a></li><li class="breadcrumb-item"><a href="./fase2.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -195,12 +195,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projeto da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -209,13 +221,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -223,13 +235,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -244,46 +256,46 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo"><span class="header-section-number">8.1</span> 1. Objetivo</a></li>
-  <li><a href="#descrição-do-trabalho" id="toc-descrição-do-trabalho" class="nav-link" data-scroll-target="#descrição-do-trabalho"><span class="header-section-number">8.2</span> 2. Descrição do Trabalho</a>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo"><span class="header-section-number">10.1</span> 1. Objetivo</a></li>
+  <li><a href="#descrição-do-trabalho" id="toc-descrição-do-trabalho" class="nav-link" data-scroll-target="#descrição-do-trabalho"><span class="header-section-number">10.2</span> 2. Descrição do Trabalho</a>
   <ul class="collapse">
-  <li><a href="#características-da-linguagem" id="toc-características-da-linguagem" class="nav-link" data-scroll-target="#características-da-linguagem"><span class="header-section-number">8.2.1</span> 2.1. Características da Linguagem</a></li>
-  <li><a href="#comandos-especiais" id="toc-comandos-especiais" class="nav-link" data-scroll-target="#comandos-especiais"><span class="header-section-number">8.2.2</span> 2.2. Comandos Especiais</a></li>
-  <li><a href="#novas-estruturas-tomada-de-decisão-e-laços" id="toc-novas-estruturas-tomada-de-decisão-e-laços" class="nav-link" data-scroll-target="#novas-estruturas-tomada-de-decisão-e-laços"><span class="header-section-number">8.2.3</span> 2.3. Novas Estruturas: Tomada de Decisão e Laços</a></li>
+  <li><a href="#características-da-linguagem" id="toc-características-da-linguagem" class="nav-link" data-scroll-target="#características-da-linguagem"><span class="header-section-number">10.2.1</span> 2.1. Características da Linguagem</a></li>
+  <li><a href="#comandos-especiais" id="toc-comandos-especiais" class="nav-link" data-scroll-target="#comandos-especiais"><span class="header-section-number">10.2.2</span> 2.2. Comandos Especiais</a></li>
+  <li><a href="#novas-estruturas-tomada-de-decisão-e-laços" id="toc-novas-estruturas-tomada-de-decisão-e-laços" class="nav-link" data-scroll-target="#novas-estruturas-tomada-de-decisão-e-laços"><span class="header-section-number">10.2.3</span> 2.3. Novas Estruturas: Tomada de Decisão e Laços</a></li>
   </ul></li>
-  <li><a href="#analisador-sintático-com-parser-ll1" id="toc-analisador-sintático-com-parser-ll1" class="nav-link" data-scroll-target="#analisador-sintático-com-parser-ll1"><span class="header-section-number">8.3</span> 3. Analisador Sintático com <em>parser</em> <span class="math inline">\(LL(1)\)</span></a>
+  <li><a href="#analisador-sintático-com-parser-ll1" id="toc-analisador-sintático-com-parser-ll1" class="nav-link" data-scroll-target="#analisador-sintático-com-parser-ll1"><span class="header-section-number">10.3</span> 3. Analisador Sintático com <em>parser</em> <span class="math inline">\(LL(1)\)</span></a>
   <ul class="collapse">
-  <li><a href="#gramática-ll1" id="toc-gramática-ll1" class="nav-link" data-scroll-target="#gramática-ll1"><span class="header-section-number">8.3.1</span> 3.1. Gramática <span class="math inline">\(LL(1)\)</span></a></li>
-  <li><a href="#conjuntos-first-e-follow" id="toc-conjuntos-first-e-follow" class="nav-link" data-scroll-target="#conjuntos-first-e-follow"><span class="header-section-number">8.3.2</span> 3.2. Conjuntos FIRST e FOLLOW</a></li>
-  <li><a href="#tabela-de-análise-parsing-table" id="toc-tabela-de-análise-parsing-table" class="nav-link" data-scroll-target="#tabela-de-análise-parsing-table"><span class="header-section-number">8.3.3</span> 3.3. Tabela de Análise (<em>parsing</em> Table)</a></li>
-  <li><a href="#parser-descendente-recursivo" id="toc-parser-descendente-recursivo" class="nav-link" data-scroll-target="#parser-descendente-recursivo"><span class="header-section-number">8.3.4</span> 3.4. <em>parser</em> Descendente Recursivo</a></li>
-  <li><a href="#funções-de-teste" id="toc-funções-de-teste" class="nav-link" data-scroll-target="#funções-de-teste"><span class="header-section-number">8.3.5</span> 3.5. Funções de Teste</a></li>
+  <li><a href="#gramática-ll1" id="toc-gramática-ll1" class="nav-link" data-scroll-target="#gramática-ll1"><span class="header-section-number">10.3.1</span> 3.1. Gramática <span class="math inline">\(LL(1)\)</span></a></li>
+  <li><a href="#conjuntos-first-e-follow" id="toc-conjuntos-first-e-follow" class="nav-link" data-scroll-target="#conjuntos-first-e-follow"><span class="header-section-number">10.3.2</span> 3.2. Conjuntos FIRST e FOLLOW</a></li>
+  <li><a href="#tabela-de-análise-parsing-table" id="toc-tabela-de-análise-parsing-table" class="nav-link" data-scroll-target="#tabela-de-análise-parsing-table"><span class="header-section-number">10.3.3</span> 3.3. Tabela de Análise (<em>parsing</em> Table)</a></li>
+  <li><a href="#parser-descendente-recursivo" id="toc-parser-descendente-recursivo" class="nav-link" data-scroll-target="#parser-descendente-recursivo"><span class="header-section-number">10.3.4</span> 3.4. <em>parser</em> Descendente Recursivo</a></li>
+  <li><a href="#funções-de-teste" id="toc-funções-de-teste" class="nav-link" data-scroll-target="#funções-de-teste"><span class="header-section-number">10.3.5</span> 3.5. Funções de Teste</a></li>
   </ul></li>
-  <li><a href="#arquivos-de-teste" id="toc-arquivos-de-teste" class="nav-link" data-scroll-target="#arquivos-de-teste"><span class="header-section-number">8.4</span> 4. Arquivos de Teste</a></li>
-  <li><a href="#hospedagem-no-github" id="toc-hospedagem-no-github" class="nav-link" data-scroll-target="#hospedagem-no-github"><span class="header-section-number">8.5</span> 5. Hospedagem no GitHub</a></li>
-  <li><a href="#requisitos-do-código" id="toc-requisitos-do-código" class="nav-link" data-scroll-target="#requisitos-do-código"><span class="header-section-number">8.6</span> 6. Requisitos do Código</a></li>
-  <li><a href="#sec-divisao-tarefas" id="toc-sec-divisao-tarefas" class="nav-link" data-scroll-target="#sec-divisao-tarefas"><span class="header-section-number">8.7</span> 7. Divisão de Tarefas para a Fase 2</a>
+  <li><a href="#arquivos-de-teste" id="toc-arquivos-de-teste" class="nav-link" data-scroll-target="#arquivos-de-teste"><span class="header-section-number">10.4</span> 4. Arquivos de Teste</a></li>
+  <li><a href="#hospedagem-no-github" id="toc-hospedagem-no-github" class="nav-link" data-scroll-target="#hospedagem-no-github"><span class="header-section-number">10.5</span> 5. Hospedagem no GitHub</a></li>
+  <li><a href="#requisitos-do-código" id="toc-requisitos-do-código" class="nav-link" data-scroll-target="#requisitos-do-código"><span class="header-section-number">10.6</span> 6. Requisitos do Código</a></li>
+  <li><a href="#sec-divisao-tarefas" id="toc-sec-divisao-tarefas" class="nav-link" data-scroll-target="#sec-divisao-tarefas"><span class="header-section-number">10.7</span> 7. Divisão de Tarefas para a Fase 2</a>
   <ul class="collapse">
-  <li><a href="#aluno-1-função-construirgramatica-e-análise-ll1" id="toc-aluno-1-função-construirgramatica-e-análise-ll1" class="nav-link" data-scroll-target="#aluno-1-função-construirgramatica-e-análise-ll1"><span class="header-section-number">8.7.1</span> 7.1. Aluno 1: Função <code>construirGramatica</code> e Análise <span class="math inline">\(LL(1)\)</span></a></li>
-  <li><a href="#aluno-2-função-parsear-e-parser-descendente-recursivo" id="toc-aluno-2-função-parsear-e-parser-descendente-recursivo" class="nav-link" data-scroll-target="#aluno-2-função-parsear-e-parser-descendente-recursivo"><span class="header-section-number">8.7.2</span> 7.2. Aluno 2: Função <code>parsear</code> e <em>parser</em> Descendente Recursivo</a></li>
-  <li><a href="#aluno-3-função-lertokens-e-estruturas-de-controle" id="toc-aluno-3-função-lertokens-e-estruturas-de-controle" class="nav-link" data-scroll-target="#aluno-3-função-lertokens-e-estruturas-de-controle"><span class="header-section-number">8.7.3</span> 7.3. Aluno 3: Função <code>lerTokens</code> e Estruturas de Controle</a></li>
-  <li><a href="#aluno-4-função-gerararvore-interface-e-integração" id="toc-aluno-4-função-gerararvore-interface-e-integração" class="nav-link" data-scroll-target="#aluno-4-função-gerararvore-interface-e-integração"><span class="header-section-number">8.7.4</span> 7.4. Aluno 4: Função <code>gerarArvore</code>, Interface e Integração</a></li>
+  <li><a href="#aluno-1-função-construirgramatica-e-análise-ll1" id="toc-aluno-1-função-construirgramatica-e-análise-ll1" class="nav-link" data-scroll-target="#aluno-1-função-construirgramatica-e-análise-ll1"><span class="header-section-number">10.7.1</span> 7.1. Aluno 1: Função <code>construirGramatica</code> e Análise <span class="math inline">\(LL(1)\)</span></a></li>
+  <li><a href="#aluno-2-função-parsear-e-parser-descendente-recursivo" id="toc-aluno-2-função-parsear-e-parser-descendente-recursivo" class="nav-link" data-scroll-target="#aluno-2-função-parsear-e-parser-descendente-recursivo"><span class="header-section-number">10.7.2</span> 7.2. Aluno 2: Função <code>parsear</code> e <em>parser</em> Descendente Recursivo</a></li>
+  <li><a href="#aluno-3-função-lertokens-e-estruturas-de-controle" id="toc-aluno-3-função-lertokens-e-estruturas-de-controle" class="nav-link" data-scroll-target="#aluno-3-função-lertokens-e-estruturas-de-controle"><span class="header-section-number">10.7.3</span> 7.3. Aluno 3: Função <code>lerTokens</code> e Estruturas de Controle</a></li>
+  <li><a href="#aluno-4-função-gerararvore-interface-e-integração" id="toc-aluno-4-função-gerararvore-interface-e-integração" class="nav-link" data-scroll-target="#aluno-4-função-gerararvore-interface-e-integração"><span class="header-section-number">10.7.4</span> 7.4. Aluno 4: Função <code>gerarArvore</code>, Interface e Integração</a></li>
   </ul></li>
-  <li><a href="#considerações-para-integração" id="toc-considerações-para-integração" class="nav-link" data-scroll-target="#considerações-para-integração"><span class="header-section-number">8.8</span> 8. Considerações para Integração</a></li>
-  <li><a href="#avaliação" id="toc-avaliação" class="nav-link" data-scroll-target="#avaliação"><span class="header-section-number">8.9</span> 9. Avaliação</a>
+  <li><a href="#considerações-para-integração" id="toc-considerações-para-integração" class="nav-link" data-scroll-target="#considerações-para-integração"><span class="header-section-number">10.8</span> 8. Considerações para Integração</a></li>
+  <li><a href="#avaliação" id="toc-avaliação" class="nav-link" data-scroll-target="#avaliação"><span class="header-section-number">10.9</span> 9. Avaliação</a>
   <ul class="collapse">
-  <li><a href="#funcionalidades-do-analisador-70" id="toc-funcionalidades-do-analisador-70" class="nav-link" data-scroll-target="#funcionalidades-do-analisador-70"><span class="header-section-number">8.9.1</span> 9.1. Funcionalidades do Analisador (70%)</a></li>
-  <li><a href="#organização-e-legibilidade-do-código-15" id="toc-organização-e-legibilidade-do-código-15" class="nav-link" data-scroll-target="#organização-e-legibilidade-do-código-15"><span class="header-section-number">8.9.2</span> 9.2. Organização e Legibilidade do Código (15%)</a></li>
-  <li><a href="#robustez-15" id="toc-robustez-15" class="nav-link" data-scroll-target="#robustez-15"><span class="header-section-number">8.9.3</span> 9.3. Robustez (15%)</a></li>
+  <li><a href="#funcionalidades-do-analisador-70" id="toc-funcionalidades-do-analisador-70" class="nav-link" data-scroll-target="#funcionalidades-do-analisador-70"><span class="header-section-number">10.9.1</span> 9.1. Funcionalidades do Analisador (70%)</a></li>
+  <li><a href="#organização-e-legibilidade-do-código-15" id="toc-organização-e-legibilidade-do-código-15" class="nav-link" data-scroll-target="#organização-e-legibilidade-do-código-15"><span class="header-section-number">10.9.2</span> 9.2. Organização e Legibilidade do Código (15%)</a></li>
+  <li><a href="#robustez-15" id="toc-robustez-15" class="nav-link" data-scroll-target="#robustez-15"><span class="header-section-number">10.9.3</span> 9.3. Robustez (15%)</a></li>
   </ul></li>
-  <li><a href="#sec-prova-autoria" id="toc-sec-prova-autoria" class="nav-link" data-scroll-target="#sec-prova-autoria"><span class="header-section-number">8.10</span> 10. Prova de Autoria</a></li>
-  <li><a href="#entrega" id="toc-entrega" class="nav-link" data-scroll-target="#entrega"><span class="header-section-number">8.11</span> 11. Entrega</a>
+  <li><a href="#sec-prova-autoria" id="toc-sec-prova-autoria" class="nav-link" data-scroll-target="#sec-prova-autoria"><span class="header-section-number">10.10</span> 10. Prova de Autoria</a></li>
+  <li><a href="#entrega" id="toc-entrega" class="nav-link" data-scroll-target="#entrega"><span class="header-section-number">10.11</span> 11. Entrega</a>
   <ul class="collapse">
-  <li><a href="#código-fonte" id="toc-código-fonte" class="nav-link" data-scroll-target="#código-fonte"><span class="header-section-number">8.11.1</span> 11.1. Código-fonte</a></li>
-  <li><a href="#arquivos-de-teste-1" id="toc-arquivos-de-teste-1" class="nav-link" data-scroll-target="#arquivos-de-teste-1"><span class="header-section-number">8.11.2</span> 11.2. Arquivos de Teste</a></li>
-  <li><a href="#documentação" id="toc-documentação" class="nav-link" data-scroll-target="#documentação"><span class="header-section-number">8.11.3</span> 11.3. Documentação</a></li>
-  <li><a href="#arquivo-de-saída" id="toc-arquivo-de-saída" class="nav-link" data-scroll-target="#arquivo-de-saída"><span class="header-section-number">8.11.4</span> 11.4. Arquivo de Saída</a></li>
-  <li><a href="#formato-de-execução" id="toc-formato-de-execução" class="nav-link" data-scroll-target="#formato-de-execução"><span class="header-section-number">8.11.5</span> 11.5. Formato de Execução</a></li>
+  <li><a href="#código-fonte" id="toc-código-fonte" class="nav-link" data-scroll-target="#código-fonte"><span class="header-section-number">10.11.1</span> 11.1. Código-fonte</a></li>
+  <li><a href="#arquivos-de-teste-1" id="toc-arquivos-de-teste-1" class="nav-link" data-scroll-target="#arquivos-de-teste-1"><span class="header-section-number">10.11.2</span> 11.2. Arquivos de Teste</a></li>
+  <li><a href="#documentação" id="toc-documentação" class="nav-link" data-scroll-target="#documentação"><span class="header-section-number">10.11.3</span> 11.3. Documentação</a></li>
+  <li><a href="#arquivo-de-saída" id="toc-arquivo-de-saída" class="nav-link" data-scroll-target="#arquivo-de-saída"><span class="header-section-number">10.11.4</span> 11.4. Arquivo de Saída</a></li>
+  <li><a href="#formato-de-execução" id="toc-formato-de-execução" class="nav-link" data-scroll-target="#formato-de-execução"><span class="header-section-number">10.11.5</span> 11.5. Formato de Execução</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/fase2.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -295,9 +307,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase1.html">Projeto da Disciplina - 2025-2</a></li><li class="breadcrumb-item"><a href="./fase2.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase1.html">Projetos da Disciplina - 2025-2</a></li><li class="breadcrumb-item"><a href="./fase2.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></h1>
 </div>
 
 
@@ -315,13 +327,28 @@ window.Quarto = {
 
 
 <p>Este trabalho pode ser realizado em grupos de até <strong>4</strong> alunos. Grupos com mais de 4 membros terão o trabalho anulado. Leia todo este documento antes de começar e siga o seguinte código de ética: você pode discutir as questões com colegas, professores e amigos, consultar livros da disciplina, bibliotecas virtuais ou físicas, e a Internet em geral, em qualquer idioma. Com ou sem o uso de ferramentas de Inteligência Artificial. Contudo, o trabalho é seu e deve ser realizado por você. Plágio resultará na anulação do trabalho.</p>
-<p>Os trabalhos entregues serão avaliados por uma ferramenta de Inteligência Artificial, que verificará a originalidade do texto e a autoria do código e o cumprimento de todas as regras de entrega e desenvolvimento. Para isso, o trabalho deve ser entregue em um repositório público no GitHub. O resultado desta avaliação automatizada será a nota base do trabalho, que poderá ser alterada em resultado da prova de autoria (ver seção 10, <a href="#sec-prova-autoria" class="quarto-xref"><span>Section 8.10</span></a>).</p>
-<section id="objetivo" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="objetivo"><span class="header-section-number">8.1</span> 1. Objetivo</h2>
+<p>Os trabalhos entregues serão avaliados por uma ferramenta de Inteligência Artificial, que verificará a originalidade do texto e a autoria do código e o cumprimento de todas as regras de entrega e desenvolvimento. Para isso, o trabalho deve ser entregue em um repositório público no GitHub. O resultado desta avaliação automatizada será a nota base do trabalho, que poderá ser alterada em resultado da prova de autoria (ver seção 10, <a href="#sec-prova-autoria" class="quarto-xref"><span>Section 10.10</span></a>).</p>
+<p>Este é um projeto “Aumentado por Inteligência Artificial”. O uso de ferramentas de Inteligência Artificial não é apenas permitido, mas incentivado para tarefas específicas. No entanto, seu uso é governado por um princípio fundamental: <strong>Você é o arquiteto e o engenheiro; a Inteligência Artificial é sua assistente. Você mantém total responsabilidade pelo código que envia</strong>. Você poderá usar as ferramentas de Inteligência Artificial para:</p>
+<ul>
+<li>Gerar código repetitivo (<em>boilerplate</em>) e arquivos de configuração;</li>
+<li>Explicar conceitos complexos e documentação;</li>
+<li>Depurar mensagens de erro e sugerir correções;</li>
+<li>Escrever testes unitários e documentação;</li>
+<li>Otimizar e refatorar código existente;</li>
+<li>Fazer <em>brainstorming</em> de ideias de projetos e arquitetura.</li>
+</ul>
+<p>Não é permitido:</p>
+<ul>
+<li><strong>Envio às Cegas</strong>: enviar código gerado por uma Inteligência Artificial sem revisão, compreensão ou modificação é uma violação da integridade acadêmica. Você deve ser capaz de explicar qualquer código do seu projeto, linha por linha.</li>
+<li><strong>Contornar o Aprendizado</strong>: usar Inteligência Artificial para completar os objetivos centrais de aprendizado por você é proibido, por exemplo, pedir a uma Inteligência Artificial para construir um componente inteiro do projeto que você tem a tarefa de aprender.</li>
+<li><strong>Violação de Licenças</strong>: é proibido enviar código que viole as políticas de honestidade acadêmica da universidade, a licença dos dados de treinamento, ou qualquer outra restrição legal.</li>
+</ul>
+<section id="objetivo" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="objetivo"><span class="header-section-number">10.1</span> 1. Objetivo</h2>
 <p>Pesquisar e praticar os conceitos de analisadores léxico e sintático para desenvolver um programa em Python, C, ou C++. O objetivo é complementar o material de aula, aprimorando sua formação acadêmica e profissional através da construção de um <em>parser</em> <span class="math display">\[LL(1)\]</span> para a linguagem de programação simplificada que está descrita neste documento, utilizando como entrada o vetor de <em>tokens</em> gerado na Fase 1.</p>
 </section>
-<section id="descrição-do-trabalho" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="descrição-do-trabalho"><span class="header-section-number">8.2</span> 2. Descrição do Trabalho</h2>
+<section id="descrição-do-trabalho" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="descrição-do-trabalho"><span class="header-section-number">10.2</span> 2. Descrição do Trabalho</h2>
 <p>O objetivo é desenvolver um programa capaz de:</p>
 <ol type="1">
 <li>Ler um arquivo de texto contendo o código-fonte de um programa escrito na linguagem especificada neste documento (uma expressão ou declaração por linha);</li>
@@ -332,8 +359,8 @@ window.Quarto = {
 <li>Detectar e reportar erros sintáticos de forma clara e informativa.</li>
 </ol>
 <p>Nesta fase, não será necessário gerar código Assembly.</p>
-<section id="características-da-linguagem" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="características-da-linguagem"><span class="header-section-number">8.2.1</span> 2.1. Características da Linguagem</h3>
+<section id="características-da-linguagem" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="características-da-linguagem"><span class="header-section-number">10.2.1</span> 2.1. Características da Linguagem</h3>
 <p>As declarações continuam sendo escritas em notação polonesa reversa (RPN), no formato <code>(A B op)</code>, no qual <code>A</code> e <code>B</code> são operandos (números reais ou inteiros, ou referências a memória), e <code>op</code> é um operador aritmético, ou <em>keyword</em>, ou identificador, entre os listados neste documento.</p>
 <p><strong>Operadores Suportados</strong>:</p>
 <ul>
@@ -363,8 +390,8 @@ window.Quarto = {
 </ul>
 <p>Nestes exemplos, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, e <code>E</code> podem ser números literais ou referências a memórias.</p>
 </section>
-<section id="comandos-especiais" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="comandos-especiais"><span class="header-section-number">8.2.2</span> 2.2. Comandos Especiais</h3>
+<section id="comandos-especiais" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="comandos-especiais"><span class="header-section-number">10.2.2</span> 2.2. Comandos Especiais</h3>
 <p>A linguagem inclui os mesmos comandos especiais da fase anterior para manipulação de memória e resultados:</p>
 <ul>
 <li><code>(N RES)</code>: Retorna o resultado da expressão N linhas anteriores (<code>N</code> é um inteiro não negativo);</li>
@@ -378,16 +405,16 @@ window.Quarto = {
 <li><code>RES</code> é uma keyword da linguagem.</li>
 </ul>
 </section>
-<section id="novas-estruturas-tomada-de-decisão-e-laços" class="level3" data-number="8.2.3">
-<h3 data-number="8.2.3" class="anchored" data-anchor-id="novas-estruturas-tomada-de-decisão-e-laços"><span class="header-section-number">8.2.3</span> 2.3. Novas Estruturas: Tomada de Decisão e Laços</h3>
+<section id="novas-estruturas-tomada-de-decisão-e-laços" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="novas-estruturas-tomada-de-decisão-e-laços"><span class="header-section-number">10.2.3</span> 2.3. Novas Estruturas: Tomada de Decisão e Laços</h3>
 <p>Você deverá criar e documentar a sintaxe para estruturas de tomada de decisão e laços de repetição. A única restrição é que estas estruturas mantenham o padrão da linguagem: devem estar contidas entre parênteses e seguir a lógica de operadores pós-fixados.</p>
 </section>
 </section>
-<section id="analisador-sintático-com-parser-ll1" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="analisador-sintático-com-parser-ll1"><span class="header-section-number">8.3</span> 3. Analisador Sintático com <em>parser</em> <span class="math inline">\(LL(1)\)</span></h2>
+<section id="analisador-sintático-com-parser-ll1" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="analisador-sintático-com-parser-ll1"><span class="header-section-number">10.3</span> 3. Analisador Sintático com <em>parser</em> <span class="math inline">\(LL(1)\)</span></h2>
 <p>O analisador sintático deve ser implementado como um <em>parser</em> descendente recursivo do tipo <span class="math inline">\(LL(1)\)</span>. A implementação deve incluir:</p>
-<section id="gramática-ll1" class="level3" data-number="8.3.1">
-<h3 data-number="8.3.1" class="anchored" data-anchor-id="gramática-ll1"><span class="header-section-number">8.3.1</span> 3.1. Gramática <span class="math inline">\(LL(1)\)</span></h3>
+<section id="gramática-ll1" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="gramática-ll1"><span class="header-section-number">10.3.1</span> 3.1. Gramática <span class="math inline">\(LL(1)\)</span></h3>
 <p>Definir o conjunto completo de regras de produção para a linguagem, incluindo:</p>
 <ul>
 <li>Expressões aritméticas em RPN;</li>
@@ -396,16 +423,16 @@ window.Quarto = {
 <li>Tratamento de aninhamento.</li>
 </ul>
 </section>
-<section id="conjuntos-first-e-follow" class="level3" data-number="8.3.2">
-<h3 data-number="8.3.2" class="anchored" data-anchor-id="conjuntos-first-e-follow"><span class="header-section-number">8.3.2</span> 3.2. Conjuntos FIRST e FOLLOW</h3>
+<section id="conjuntos-first-e-follow" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="conjuntos-first-e-follow"><span class="header-section-number">10.3.2</span> 3.2. Conjuntos FIRST e FOLLOW</h3>
 <p>Calcular e documentar os conjuntos <strong>FIRST</strong> e <strong>FOLLOW</strong> para cada não-terminal da gramática. Estes conjuntos devem ser incluídos na documentação do projeto.</p>
 </section>
-<section id="tabela-de-análise-parsing-table" class="level3" data-number="8.3.3">
-<h3 data-number="8.3.3" class="anchored" data-anchor-id="tabela-de-análise-parsing-table"><span class="header-section-number">8.3.3</span> 3.3. Tabela de Análise (<em>parsing</em> Table)</h3>
+<section id="tabela-de-análise-parsing-table" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="tabela-de-análise-parsing-table"><span class="header-section-number">10.3.3</span> 3.3. Tabela de Análise (<em>parsing</em> Table)</h3>
 <p>Construir a tabela de análise <span class="math inline">\(LL(1)\)</span> baseada nos conjuntos <strong>FIRST</strong> e <strong>FOLLOW</strong>. A tabela deve mapear pares (não-terminal, terminal) para regras de produção.</p>
 </section>
-<section id="parser-descendente-recursivo" class="level3" data-number="8.3.4">
-<h3 data-number="8.3.4" class="anchored" data-anchor-id="parser-descendente-recursivo"><span class="header-section-number">8.3.4</span> 3.4. <em>parser</em> Descendente Recursivo</h3>
+<section id="parser-descendente-recursivo" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="parser-descendente-recursivo"><span class="header-section-number">10.3.4</span> 3.4. <em>parser</em> Descendente Recursivo</h3>
 <p>Implementar o <em>parser</em> utilizando:</p>
 <ul>
 <li>Buffer de entrada para os <em>tokens</em>;</li>
@@ -414,8 +441,8 @@ window.Quarto = {
 <li>Geração da árvore sintática durante o <em>parsing</em>.</li>
 </ul>
 </section>
-<section id="funções-de-teste" class="level3" data-number="8.3.5">
-<h3 data-number="8.3.5" class="anchored" data-anchor-id="funções-de-teste"><span class="header-section-number">8.3.5</span> 3.5. Funções de Teste</h3>
+<section id="funções-de-teste" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="funções-de-teste"><span class="header-section-number">10.3.5</span> 3.5. Funções de Teste</h3>
 <p>Criar funções de teste específicas para validar o analisador sintático, cobrindo:</p>
 <ul>
 <li>Expressões válidas simples e aninhadas;</li>
@@ -425,8 +452,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="arquivos-de-teste" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="arquivos-de-teste"><span class="header-section-number">8.4</span> 4. Arquivos de Teste</h2>
+<section id="arquivos-de-teste" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="arquivos-de-teste"><span class="header-section-number">10.4</span> 4. Arquivos de Teste</h2>
 <p>Fornecer um mínimo de <strong>3 arquivos de texto</strong>, cada um com pelo menos <strong>10 linhas</strong> de expressões segundo as especificações deste documento.</p>
 <p><strong>Requisitos dos Arquivos de Teste</strong>:</p>
 <ul>
@@ -439,8 +466,8 @@ window.Quarto = {
 </ul>
 <p>Os arquivos devem estar no mesmo diretório do código-fonte e ser processados via argumento de linha de comando (ex.: <code>./AnalisadorSintatico teste1.txt</code>).</p>
 </section>
-<section id="hospedagem-no-github" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="hospedagem-no-github"><span class="header-section-number">8.5</span> 5. Hospedagem no GitHub</h2>
+<section id="hospedagem-no-github" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="hospedagem-no-github"><span class="header-section-number">10.5</span> 5. Hospedagem no GitHub</h2>
 <p>O projeto deve ser hospedado em um repositório público no GitHub criado exclusivamente para este projeto. O repositório deve ser criado por um dos alunos do grupo.</p>
 <p>O repositório deve conter:</p>
 <ul>
@@ -471,8 +498,8 @@ Important
 </div>
 </div>
 </section>
-<section id="requisitos-do-código" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="requisitos-do-código"><span class="header-section-number">8.6</span> 6. Requisitos do Código</h2>
+<section id="requisitos-do-código" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="requisitos-do-código"><span class="header-section-number">10.6</span> 6. Requisitos do Código</h2>
 <p>As primeiras linhas do código devem conter:</p>
 <pre class="shell"><code>// Integrantes do grupo (ordem alfabética):
 // Nome Completo 1 - username1
@@ -482,10 +509,10 @@ Important
 //
 // Nome do grupo no Canvas: [Nome do Grupo]</code></pre>
 <p>O programa deve receber o nome do arquivo de teste como argumento na linha de comando.</p>
-<p>O código deve ser escrito em Python, C, ou C++, com as funções nomeadas como está explicitado na Seção 7 <a href="#sec-divisao-tarefas" class="quarto-xref"><span>Section 8.7</span></a>.</p>
+<p>O código deve ser escrito em Python, C, ou C++, com as funções nomeadas como está explicitado na Seção 7 <a href="#sec-divisao-tarefas" class="quarto-xref"><span>Section 10.7</span></a>.</p>
 </section>
-<section id="sec-divisao-tarefas" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="sec-divisao-tarefas"><span class="header-section-number">8.7</span> 7. Divisão de Tarefas para a Fase 2</h2>
+<section id="sec-divisao-tarefas" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-divisao-tarefas"><span class="header-section-number">10.7</span> 7. Divisão de Tarefas para a Fase 2</h2>
 <p>Para resolver o problema de análise sintática da <strong>Fase 2</strong>, o trabalho será dividido entre até quatro alunos, trabalhando independentemente, na mesma sala, ou de forma remota. Cada aluno será responsável por uma parte específica do sistema, com interfaces claras para facilitar a integração. Abaixo está uma sugestão de divisão das tarefas, considerando as funções solicitadas: <code>lerTokens</code>, <code>construirGramatica</code>, <code>parsear</code>, e <code>gerarArvore</code>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -501,8 +528,8 @@ Note
 <p><strong>Nota</strong>: A árvore sintática gerada pelo <em>parser</em> além de estar na documentação em markdown, deve ser salva em formato texto ou JSON para uso nas próximas fases do projeto. Cabe ao grupo decidir o formato que será usado para salvar a árvore.</p>
 </div>
 </div>
-<section id="aluno-1-função-construirgramatica-e-análise-ll1" class="level3" data-number="8.7.1">
-<h3 data-number="8.7.1" class="anchored" data-anchor-id="aluno-1-função-construirgramatica-e-análise-ll1"><span class="header-section-number">8.7.1</span> 7.1. Aluno 1: Função <code>construirGramatica</code> e Análise <span class="math inline">\(LL(1)\)</span></h3>
+<section id="aluno-1-função-construirgramatica-e-análise-ll1" class="level3" data-number="10.7.1">
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="aluno-1-função-construirgramatica-e-análise-ll1"><span class="header-section-number">10.7.1</span> 7.1. Aluno 1: Função <code>construirGramatica</code> e Análise <span class="math inline">\(LL(1)\)</span></h3>
 <p><strong>Responsabilidades</strong>:</p>
 <ul>
 <li>Implementar <code>construirGramatica()</code> para definir as regras de produção da linguagem;</li>
@@ -526,8 +553,8 @@ Note
 <li>Fornece tabela <span class="math inline">\(LL(1)\)</span> para a função <code>parsear()</code>.</li>
 </ul>
 </section>
-<section id="aluno-2-função-parsear-e-parser-descendente-recursivo" class="level3" data-number="8.7.2">
-<h3 data-number="8.7.2" class="anchored" data-anchor-id="aluno-2-função-parsear-e-parser-descendente-recursivo"><span class="header-section-number">8.7.2</span> 7.2. Aluno 2: Função <code>parsear</code> e <em>parser</em> Descendente Recursivo</h3>
+<section id="aluno-2-função-parsear-e-parser-descendente-recursivo" class="level3" data-number="10.7.2">
+<h3 data-number="10.7.2" class="anchored" data-anchor-id="aluno-2-função-parsear-e-parser-descendente-recursivo"><span class="header-section-number">10.7.2</span> 7.2. Aluno 2: Função <code>parsear</code> e <em>parser</em> Descendente Recursivo</h3>
 <p><strong>Responsabilidades</strong>:</p>
 <ul>
 <li>Implementar <code>parsear(_tokens_, tabela_ll1)</code> para análise sintática descendente recursiva;</li>
@@ -551,8 +578,8 @@ Note
 <li>Fornece estrutura de derivação para <code>gerarArvore()</code>.</li>
 </ul>
 </section>
-<section id="aluno-3-função-lertokens-e-estruturas-de-controle" class="level3" data-number="8.7.3">
-<h3 data-number="8.7.3" class="anchored" data-anchor-id="aluno-3-função-lertokens-e-estruturas-de-controle"><span class="header-section-number">8.7.3</span> 7.3. Aluno 3: Função <code>lerTokens</code> e Estruturas de Controle</h3>
+<section id="aluno-3-função-lertokens-e-estruturas-de-controle" class="level3" data-number="10.7.3">
+<h3 data-number="10.7.3" class="anchored" data-anchor-id="aluno-3-função-lertokens-e-estruturas-de-controle"><span class="header-section-number">10.7.3</span> 7.3. Aluno 3: Função <code>lerTokens</code> e Estruturas de Controle</h3>
 <p><strong>Responsabilidades</strong>:</p>
 <ul>
 <li>Implementar <code>lerTokens(arquivo)</code> para ler <em>tokens</em> salvos da Fase 1;</li>
@@ -576,8 +603,8 @@ Note
 <li>Fornece <em>tokens</em> para a função <code>parsear()</code>.</li>
 </ul>
 </section>
-<section id="aluno-4-função-gerararvore-interface-e-integração" class="level3" data-number="8.7.4">
-<h3 data-number="8.7.4" class="anchored" data-anchor-id="aluno-4-função-gerararvore-interface-e-integração"><span class="header-section-number">8.7.4</span> 7.4. Aluno 4: Função <code>gerarArvore</code>, Interface e Integração</h3>
+<section id="aluno-4-função-gerararvore-interface-e-integração" class="level3" data-number="10.7.4">
+<h3 data-number="10.7.4" class="anchored" data-anchor-id="aluno-4-função-gerararvore-interface-e-integração"><span class="header-section-number">10.7.4</span> 7.4. Aluno 4: Função <code>gerarArvore</code>, Interface e Integração</h3>
 <p><strong>Responsabilidades</strong>:</p>
 <ul>
 <li>Implementar <code>gerarArvore(derivacao)</code> para construir a árvore sintática;</li>
@@ -602,8 +629,8 @@ Note
 </ul>
 </section>
 </section>
-<section id="considerações-para-integração" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="considerações-para-integração"><span class="header-section-number">8.8</span> 8. Considerações para Integração</h2>
+<section id="considerações-para-integração" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="considerações-para-integração"><span class="header-section-number">10.8</span> 8. Considerações para Integração</h2>
 <p><strong>Interfaces</strong>: Concordar com assinaturas das funções e formatos de dados (ex.: estrutura de <em>tokens</em>, formato da árvore).</p>
 <p><strong>Depuração</strong>: Testar cada parte isoladamente, simulando entradas/saídas.</p>
 <p><strong>Passos de Integração</strong>:</p>
@@ -617,11 +644,11 @@ Note
 <p><strong>Resolução de Conflitos</strong>: Discutir problemas imediatamente na sala ou de forma remota.</p>
 <p><strong>Depuração Final</strong>: Testar o programa com os 3 arquivos de teste, verificando expressões, estruturas de controle, e árvore sintática.</p>
 </section>
-<section id="avaliação" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="avaliação"><span class="header-section-number">8.9</span> 9. Avaliação</h2>
+<section id="avaliação" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="avaliação"><span class="header-section-number">10.9</span> 9. Avaliação</h2>
 <p>O trabalho será pré-avaliado de forma automática e novamente durante a prova de autoria, com os seguintes critérios:</p>
-<section id="funcionalidades-do-analisador-70" class="level3" data-number="8.9.1">
-<h3 data-number="8.9.1" class="anchored" data-anchor-id="funcionalidades-do-analisador-70"><span class="header-section-number">8.9.1</span> 9.1. Funcionalidades do Analisador (70%)</h3>
+<section id="funcionalidades-do-analisador-70" class="level3" data-number="10.9.1">
+<h3 data-number="10.9.1" class="anchored" data-anchor-id="funcionalidades-do-analisador-70"><span class="header-section-number">10.9.1</span> 9.1. Funcionalidades do Analisador (70%)</h3>
 <ul>
 <li>Entrega e validação do <em>string</em> de <em>tokens</em>: Base da nota;</li>
 <li>Cada operação aritmética não identificada corretamente: <strong>-10%</strong>;</li>
@@ -632,8 +659,8 @@ Note
 <li>Gramática não-<span class="math inline">\(LL(1)\)</span> ou com conflitos: <strong>-20%</strong>.</li>
 </ul>
 </section>
-<section id="organização-e-legibilidade-do-código-15" class="level3" data-number="8.9.2">
-<h3 data-number="8.9.2" class="anchored" data-anchor-id="organização-e-legibilidade-do-código-15"><span class="header-section-number">8.9.2</span> 9.2. Organização e Legibilidade do Código (15%)</h3>
+<section id="organização-e-legibilidade-do-código-15" class="level3" data-number="10.9.2">
+<h3 data-number="10.9.2" class="anchored" data-anchor-id="organização-e-legibilidade-do-código-15"><span class="header-section-number">10.9.2</span> 9.2. Organização e Legibilidade do Código (15%)</h3>
 <ul>
 <li>Código claro, comentado e bem estruturado</li>
 <li>README bem escrito contendo:
@@ -646,8 +673,8 @@ Note
 <li>Repositório GitHub organizado com <em>commits</em> claros.</li>
 </ul>
 </section>
-<section id="robustez-15" class="level3" data-number="8.9.3">
-<h3 data-number="8.9.3" class="anchored" data-anchor-id="robustez-15"><span class="header-section-number">8.9.3</span> 9.3. Robustez (15%)</h3>
+<section id="robustez-15" class="level3" data-number="10.9.3">
+<h3 data-number="10.9.3" class="anchored" data-anchor-id="robustez-15"><span class="header-section-number">10.9.3</span> 9.3. Robustez (15%)</h3>
 <ul>
 <li>Tratamento de erros em expressões complexas e entradas inválidas;</li>
 <li>Mensagens de erro claras indicando linha e tipo de erro;</li>
@@ -659,8 +686,8 @@ Note
 </blockquote>
 </section>
 </section>
-<section id="sec-prova-autoria" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="sec-prova-autoria"><span class="header-section-number">8.10</span> 10. Prova de Autoria</h2>
+<section id="sec-prova-autoria" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="sec-prova-autoria"><span class="header-section-number">10.10</span> 10. Prova de Autoria</h2>
 <ul>
 <li>Um aluno do grupo será sorteado usando um aplicativo online;</li>
 <li>Depois de explicar o projeto, o aluno sorteado escolherá um número de <span class="math inline">\(1\)</span> a <span class="math inline">\(10\)</span>, que corresponderá a uma pergunta sobre o projeto;</li>
@@ -680,26 +707,26 @@ Important
 </div>
 </div>
 </section>
-<section id="entrega" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="entrega"><span class="header-section-number">8.11</span> 11. Entrega</h2>
+<section id="entrega" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="entrega"><span class="header-section-number">10.11</span> 11. Entrega</h2>
 <p>O repositório no GitHub deve conter:</p>
-<section id="código-fonte" class="level3" data-number="8.11.1">
-<h3 data-number="8.11.1" class="anchored" data-anchor-id="código-fonte"><span class="header-section-number">8.11.1</span> 11.1. Código-fonte</h3>
+<section id="código-fonte" class="level3" data-number="10.11.1">
+<h3 data-number="10.11.1" class="anchored" data-anchor-id="código-fonte"><span class="header-section-number">10.11.1</span> 11.1. Código-fonte</h3>
 <ul>
 <li>Programa completo em Python, C, ou C++;</li>
 <li>Todas as funções especificadas implementadas.</li>
 </ul>
 </section>
-<section id="arquivos-de-teste-1" class="level3" data-number="8.11.2">
-<h3 data-number="8.11.2" class="anchored" data-anchor-id="arquivos-de-teste-1"><span class="header-section-number">8.11.2</span> 11.2. Arquivos de Teste</h3>
+<section id="arquivos-de-teste-1" class="level3" data-number="10.11.2">
+<h3 data-number="10.11.2" class="anchored" data-anchor-id="arquivos-de-teste-1"><span class="header-section-number">10.11.2</span> 11.2. Arquivos de Teste</h3>
 <ul>
 <li>Mínimo de <span class="math inline">\(3\)</span> arquivos com <span class="math inline">\(10\)</span> linhas, ou mais, cada;</li>
 <li>Casos de teste válidos e inválidos;</li>
 <li>Exemplos com estruturas de controle.</li>
 </ul>
 </section>
-<section id="documentação" class="level3" data-number="8.11.3">
-<h3 data-number="8.11.3" class="anchored" data-anchor-id="documentação"><span class="header-section-number">8.11.3</span> 11.3. Documentação</h3>
+<section id="documentação" class="level3" data-number="10.11.3">
+<h3 data-number="10.11.3" class="anchored" data-anchor-id="documentação"><span class="header-section-number">10.11.3</span> 11.3. Documentação</h3>
 <ul>
 <li><strong>README.md</strong> bem formatado com:
 <ul>
@@ -710,8 +737,8 @@ Important
 </ul></li>
 </ul>
 </section>
-<section id="arquivo-de-saída" class="level3" data-number="8.11.4">
-<h3 data-number="8.11.4" class="anchored" data-anchor-id="arquivo-de-saída"><span class="header-section-number">8.11.4</span> 11.4. Arquivo de Saída</h3>
+<section id="arquivo-de-saída" class="level3" data-number="10.11.4">
+<h3 data-number="10.11.4" class="anchored" data-anchor-id="arquivo-de-saída"><span class="header-section-number">10.11.4</span> 11.4. Arquivo de Saída</h3>
 <p>Um arquivo markdown contendo:</p>
 <ul>
 <li>O conjunto de regras de produção da gramática;</li>
@@ -720,8 +747,8 @@ Important
 <li>A representação da árvore sintática de um arquivo de teste.</li>
 </ul>
 </section>
-<section id="formato-de-execução" class="level3" data-number="8.11.5">
-<h3 data-number="8.11.5" class="anchored" data-anchor-id="formato-de-execução"><span class="header-section-number">8.11.5</span> 11.5. Formato de Execução</h3>
+<section id="formato-de-execução" class="level3" data-number="10.11.5">
+<h3 data-number="10.11.5" class="anchored" data-anchor-id="formato-de-execução"><span class="header-section-number">10.11.5</span> 11.5. Formato de Execução</h3>
 <p>O programa deve ser executado com: <code>./AnalisadorSintatico teste1.txt</code>.</p>
 
 
@@ -1141,12 +1168,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./apend1.html" class="pagination-link" aria-label="Apêndice 1: A Relação de Myhill-Nerode">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

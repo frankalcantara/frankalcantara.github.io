@@ -1,0 +1,2240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 8&nbsp; Parsers \(LR(1)\): Análise Sintática bottom-up</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./fase1.html" rel="next">
+<link href="./06-first-follow.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./07-parserLR1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#bottom-up-vs-top-down-uma-mudança-de-paradigma" id="toc-bottom-up-vs-top-down-uma-mudança-de-paradigma" class="nav-link active" data-scroll-target="#bottom-up-vs-top-down-uma-mudança-de-paradigma"><span class="header-section-number">8.1</span> <em>bottom-up</em> vs <em>top-down</em>: Uma Mudança de Paradigma</a></li>
+  <li><a href="#o-algoritmo-shift-reduce" id="toc-o-algoritmo-shift-reduce" class="nav-link" data-scroll-target="#o-algoritmo-shift-reduce"><span class="header-section-number">8.2</span> O Algoritmo <em>Shift-Reduce</em></a>
+  <ul class="collapse">
+  <li><a href="#rastreamento-passo-a-passo-versão-canônica" id="toc-rastreamento-passo-a-passo-versão-canônica" class="nav-link" data-scroll-target="#rastreamento-passo-a-passo-versão-canônica"><span class="header-section-number">8.2.1</span> Rastreamento Passo a Passo (Versão Canônica)</a></li>
+  </ul></li>
+  <li><a href="#construção-da-tabela-lr1-um-exemplo-guiado" id="toc-construção-da-tabela-lr1-um-exemplo-guiado" class="nav-link" data-scroll-target="#construção-da-tabela-lr1-um-exemplo-guiado"><span class="header-section-number">8.3</span> Construção da Tabela LR(1): Um Exemplo Guiado</a>
+  <ul class="collapse">
+  <li><a href="#passo-1-gramática-aumentada" id="toc-passo-1-gramática-aumentada" class="nav-link" data-scroll-target="#passo-1-gramática-aumentada"><span class="header-section-number">8.3.1</span> Passo 1: Gramática Aumentada</a></li>
+  <li><a href="#passo-2-itens-lr1-e-a-operação-closure" id="toc-passo-2-itens-lr1-e-a-operação-closure" class="nav-link" data-scroll-target="#passo-2-itens-lr1-e-a-operação-closure"><span class="header-section-number">8.3.2</span> Passo 2: Itens <span class="math inline">\(LR(1)\)</span> e a Operação <code>CLOSURE</code></a></li>
+  <li><a href="#passo-3-a-operação-goto-e-a-criação-de-estados" id="toc-passo-3-a-operação-goto-e-a-criação-de-estados" class="nav-link" data-scroll-target="#passo-3-a-operação-goto-e-a-criação-de-estados"><span class="header-section-number">8.3.3</span> Passo 3: A Operação <code>GOTO</code> e a Criação de Estados</a></li>
+  <li><a href="#passo-4-construindo-a-tabela-actiongoto" id="toc-passo-4-construindo-a-tabela-actiongoto" class="nav-link" data-scroll-target="#passo-4-construindo-a-tabela-actiongoto"><span class="header-section-number">8.3.4</span> Passo 4: Construindo a Tabela ACTION/GOTO</a></li>
+  </ul></li>
+  <li><a href="#conflitos-em-parsers-lr1-uma-análise-detalhada" id="toc-conflitos-em-parsers-lr1-uma-análise-detalhada" class="nav-link" data-scroll-target="#conflitos-em-parsers-lr1-uma-análise-detalhada"><span class="header-section-number">8.4</span> Conflitos em Parsers <span class="math inline">\(LR(1)\)</span>: Uma Análise Detalhada</a>
+  <ul class="collapse">
+  <li><a href="#conflito-shift-reduce" id="toc-conflito-shift-reduce" class="nav-link" data-scroll-target="#conflito-shift-reduce"><span class="header-section-number">8.4.1</span> Conflito <em>Shift-Reduce</em></a></li>
+  <li><a href="#conflito-reduce-reduce" id="toc-conflito-reduce-reduce" class="nav-link" data-scroll-target="#conflito-reduce-reduce"><span class="header-section-number">8.4.2</span> Conflito <em>reduce</em>-Reduce</a></li>
+  <li><a href="#resolução-de-conflitos" id="toc-resolução-de-conflitos" class="nav-link" data-scroll-target="#resolução-de-conflitos"><span class="header-section-number">8.4.3</span> Resolução de Conflitos</a></li>
+  </ul></li>
+  <li><a href="#implementação-do-lr1em-python" id="toc-implementação-do-lr1em-python" class="nav-link" data-scroll-target="#implementação-do-lr1em-python"><span class="header-section-number">8.5</span> Implementação do LR(1)em Python</a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">8.6</span> Exercícios</a>
+  <ul class="collapse">
+  <li><a href="#exercício-1-gramática-de-parênteses-balanceados" id="toc-exercício-1-gramática-de-parênteses-balanceados" class="nav-link" data-scroll-target="#exercício-1-gramática-de-parênteses-balanceados"><span class="header-section-number">8.6.1</span> Exercício 1: Gramática de Parênteses Balanceados</a></li>
+  <li><a href="#exercício-2-expressões-aritméticas-com-as-quatro-operações" id="toc-exercício-2-expressões-aritméticas-com-as-quatro-operações" class="nav-link" data-scroll-target="#exercício-2-expressões-aritméticas-com-as-quatro-operações"><span class="header-section-number">8.6.2</span> Exercício 2: Expressões Aritméticas com as Quatro Operações</a></li>
+  <li><a href="#exercício-3-linguagem-de-comandos" id="toc-exercício-3-linguagem-de-comandos" class="nav-link" data-scroll-target="#exercício-3-linguagem-de-comandos"><span class="header-section-number">8.6.3</span> Exercício 3: Linguagem de Comandos</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/07-parserLR1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./07-parserLR1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Watson, o jogo está começando!</strong> Se no texto sobre parsers <span class="math inline">\(LL(1)\)</span> invoquei Sherlock Holmes, agora preciso do Dr.&nbsp;Watson para me ajudar com uma abordagem completamente diferente. Enquanto Holmes (nosso <em>parser</em> <span class="math inline">\(LL(1)\)</span>) deduz do geral para o específico (<em>top-down</em>), Watson (nosso <em>parser</em> <span class="math inline">\(LR(1)\)</span>) observa os detalhes e constrói a solução de baixo para cima (<em>bottom-up</em>). É uma mudança fundamental de perspectiva: em vez de prever o que virá, vamos coletar evidências e montar o quebra-cabeça peça por peça.</p>
+<p>Parsers <span class="math inline">\(LR(1)\)</span> representam uma classe de analisadores sintáticos que utilizam a abordagem <em>bottom-up</em>, lendo a entrada da esquerda para a direita e construindo uma derivação mais à direita em ordem reversa. Introduzidos por <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> em 1965 no trabalho seminal <em><a href="https://www.sciencedirect.com/science/article/pii/S0019995865904262">On the Translation of Languages from Left to Right</a></em>, esses parsers revolucionaram a análise sintática por sua capacidade de reconhecer uma classe muito mais ampla de gramáticas do que os parsers <span class="math inline">\(LL(1)\)</span>.</p>
+<p>A notação <span class="math inline">\(LR(k)\)</span> tem significado preciso:</p>
+<ul>
+<li><strong><span class="math inline">\(L\)</span></strong>: <em>Left-to-Right scan</em> (varredura da esquerda para a direita);</li>
+<li><strong><span class="math inline">\(R\)</span></strong>: <em>Rightmost derivation in reverse</em> (derivação mais à direita em ordem reversa);</li>
+<li><strong><span class="math inline">\(k\)</span></strong>: número de símbolos de <em>lookahead</em> (no <span class="math inline">\(LR(1)\)</span>, apenas 1 símbolo).</li>
+</ul>
+<p>Diferentemente dos parsers <span class="math inline">\(LL(1)\)</span>, que não conseguem lidar com recursão à esquerda, os parsers <span class="math inline">\(LR(1)\)</span> tratam essa característica de forma natural e eficiente. Além disso, embora gramáticas ambíguas gerem conflitos, as ferramentas baseadas em <span class="math inline">\(LR\)</span> permitem resolvê-los com diretivas de precedência e associatividade, tornando-as muito mais flexíveis.</p>
+<section id="bottom-up-vs-top-down-uma-mudança-de-paradigma" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="bottom-up-vs-top-down-uma-mudança-de-paradigma"><span class="header-section-number">8.1</span> <em>bottom-up</em> vs <em>top-down</em>: Uma Mudança de Paradigma</h2>
+<p>Para entender profundamente os parsers <span class="math inline">\(LR(1)\)</span>, precisamos primeiro compreender a diferença fundamental entre as abordagens <em>top-down</em> e <em>bottom-up</em>.</p>
+<ol type="1">
+<li><p><strong><em>parser</em> <span class="math inline">\(LL(1)\)</span> - <em>top-down</em></strong>: a criativa leitora pode imaginar que está tentando montar um quebra-cabeça começando pela imagem da caixa. Você sabe que precisa formar uma árvore, então começa buscando as peças de borda e vai preenchendo os detalhes de cima para baixo.</p></li>
+<li><p><strong><em>parser</em> <span class="math inline">\(LR(1)\)</span> - <em>bottom-up</em></strong>: agora imagine a abordagem oposta: você pega as peças individuais e vai juntando pequenos grupos que fazem sentido. Dois pedaços verdes formam uma folha, três folhas formam um galho, vários galhos formam a copa. Você constrói de baixo para cima até ter a árvore completa.</p></li>
+</ol>
+<p>Essa diferença não é apenas conceitual — ela esconde implicações profundas:</p>
+<ul>
+<li><strong>Poder de reconhecimento</strong>: <span class="math inline">\(LR(1)\)</span> reconhece praticamente todas as gramáticas livres de contexto determinísticas;</li>
+<li><strong>Tratamento de recursão</strong>: recursão à esquerda é natural e eficiente;</li>
+<li><strong>Detecção de erros</strong>: erros são detectados no momento mais cedo possível;</li>
+<li><strong>Complexidade</strong>: a construção das tabelas é mais complexa, mas o parsing é igualmente eficiente.</li>
+</ul>
+</section>
+<section id="o-algoritmo-shift-reduce" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="o-algoritmo-shift-reduce"><span class="header-section-number">8.2</span> O Algoritmo <em>Shift-Reduce</em></h2>
+<p>O <em>parser</em> <span class="math inline">\(LR(1)\)</span> é usa uma pilha, um <em>buffer</em> de entrada e uma tabela de <em>parser</em> como pode ser visto na <a href="#fig-parser" class="quarto-xref">Figure&nbsp;<span>8.1</span></a>.</p>
+<div id="fig-parser" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-parser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fig-parser-fig" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-parser-fig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/parser.webp" class="img-fluid figure-img" data-ref-parent="fig-parser">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-parser-fig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Parser LR(1)
+</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-parser-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1
+</figcaption>
+</figure>
+</div>
+<p>O coração de um <em>parser</em> <span class="math inline">\(LR(1)\)</span> é o algoritmo <em>Shift-Reduce</em>, que utiliza uma pilha e um <em>buffer</em> de entrada. O nome vem das duas operações principais:</p>
+<ul>
+<li><p><strong>Shift</strong>: consome o próximo símbolo do <em>buffer</em> de entrada e transita para um novo estado, conforme especificado na tabela <code>ACTION</code>. Por exemplo, se a ação for <code>ACTION[estado_atual, simbolo] = sN</code>, o parser empilha o estado <code>N</code> no topo da sua pilha de estados e avança a entrada.</p></li>
+<li><p><strong>Reduce</strong>: substitui um conjunto de símbolos no topo da pilha, que corresponde ao lado direito de uma produção, pelo não-terminal do lado esquerdo da produção. Chamamos este conjunto de símbolos de <code>handle</code>. Um exemplo custuma clarear as ideias. Considere a gramática a seguir:</p></li>
+</ul>
+<pre class="bnf"><code>1. S' → S
+2. S → a A B e
+3. A → A b
+4. A → b
+5. B → d</code></pre>
+<p>Nesta gramática eu já tomei o cuidado de <strong>numerar</strong> as produções e de incluir uma regra para aumentar a gramática, a regra <code>S' → S</code>. Para ilustrar como o <em>parser</em> usa a tabela <code>ACTION/GOTO</code>, a seguir, a amável leitora encontrará uma tabela parcial, previamente calculada para esta gramática, como exemplo do que veremos mais adiante:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>b</strong></td>
+<td style="text-align: center;"><strong>d</strong></td>
+<td style="text-align: center;"><strong>e</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>S</strong></td>
+<td style="text-align: center;"><strong>A</strong></td>
+<td style="text-align: center;"><strong>B</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>0</strong></td>
+<td style="text-align: center;">s2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>3</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s6</td>
+<td style="text-align: center;">s7</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>5</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s8</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>6</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>7</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>8</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<section id="rastreamento-passo-a-passo-versão-canônica" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="rastreamento-passo-a-passo-versão-canônica"><span class="header-section-number">8.2.1</span> Rastreamento Passo a Passo (Versão Canônica)</h3>
+<p>O algoritmo percorre a <em>string</em> de entrada e aplica as operações de <em>shift</em> e <em>reduce</em> de acordo com as regras da tabela <code>ACTION/GOTO</code>. Para alinhar nossa análise com a implementação computacional padrão, a pilha conterá apenas os números dos estados. A lógica da operação de redução é a parte que requer atenção especial:</p>
+<ol type="1">
+<li>para uma produção <code>k: A → β</code>, o <em>parser</em> desempilha um número de estados igual ao número de símbolos em <code>β</code> (ou seja, <code>|β|</code>).</li>
+<li>após desempilhar, o estado <code>s</code> que agora está no topo da pilha representa o ponto na análise imediatamente <em>antes</em> de <code>β</code> ser reconhecido.</li>
+<li>o <em>parser</em> então consulta <code>GOTO[s, A]</code> para determinar o próximo estado <code>s'</code>, que será empilhado.</li>
+</ol>
+<p>Para que a criativa leitora entenda, basta seguir o rastreamento para a <em>string</em> <code>abbde$</code>, utilizando uma pilha que armazena apenas estados.</p>
+<table class="table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha de Estados</th>
+<th style="text-align: left;"><em>Buffer</em> de Entrada</th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>abbde$</code></td>
+<td style="text-align: left;"><code>ACTION[0,a] = s2</code>. Empilha estado 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0, 2]</code></td>
+<td style="text-align: left;"><code>bbde$</code></td>
+<td style="text-align: left;"><code>ACTION[2,b] = s4</code>. Empilha estado 4.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0, 2, 4]</code></td>
+<td style="text-align: left;"><code>bde$</code></td>
+<td style="text-align: left;"><code>ACTION[4,b] = r4</code> (Reduce por <code>A → b</code>). <code>|b|=1</code>, desempilha 1 estado.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0, 2]</code></td>
+<td style="text-align: left;"><code>bde$</code></td>
+<td style="text-align: left;">Pilha expõe estado 2. <code>GOTO[2,A] = 3</code>. Empilha estado 3.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0, 2, 3]</code></td>
+<td style="text-align: left;"><code>bde$</code></td>
+<td style="text-align: left;"><code>ACTION[3,b] = s6</code>. Empilha estado 6.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0, 2, 3, 6]</code></td>
+<td style="text-align: left;"><code>de$</code></td>
+<td style="text-align: left;"><code>ACTION[6,d] = r3</code> (Reduce por <code>A → A b</code>). <code>|A b|=2</code>, desempilha 2 estados.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0, 2]</code></td>
+<td style="text-align: left;"><code>de$</code></td>
+<td style="text-align: left;">Pilha expõe estado 2. <code>GOTO[2,A] = 3</code>. Empilha estado 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;"><code>[0, 2, 3]</code></td>
+<td style="text-align: left;"><code>de$</code></td>
+<td style="text-align: left;"><code>ACTION[3,d] = s7</code>. Empilha estado 7.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;"><code>[0, 2, 3, 7]</code></td>
+<td style="text-align: left;"><code>e$</code></td>
+<td style="text-align: left;"><code>ACTION[7,e] = r5</code> (Reduce por <code>B → d</code>). <code>|d|=1</code>, desempilha 1 estado.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>[0, 2, 3]</code></td>
+<td style="text-align: left;"><code>e$</code></td>
+<td style="text-align: left;">Pilha expõe estado 3. <code>GOTO[3,B] = 5</code>. Empilha estado 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: left;"><code>[0, 2, 3, 5]</code></td>
+<td style="text-align: left;"><code>e$</code></td>
+<td style="text-align: left;"><code>ACTION[5,e] = s8</code>. Empilha estado 8.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: left;"><code>[0, 2, 3, 5, 8]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[8,$] = r2</code> (Reduce por <code>S → a A B e</code>). <code>|a A B e|=4</code>, desempilha 4 estados.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;">Pilha expõe estado 0. <code>GOTO[0,S] = 1</code>. Empilha estado 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: left;"><code>[0, 1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="construção-da-tabela-lr1-um-exemplo-guiado" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="construção-da-tabela-lr1-um-exemplo-guiado"><span class="header-section-number">8.3</span> Construção da Tabela LR(1): Um Exemplo Guiado</h2>
+<p>Entender como o <em>parser</em> funciona, é apenas o primeiro estágio. A construção da tabela <span class="math inline">\(LR(1)\)</span> é um processo algorítmico sistemático, detalhado e que requerer atenção e cuidado da atenta leitora. Para tentar entender este processo vamos construir uma tabela de <em>parsing</em> para uma gramática simples, acompanhando cada etapa em um passo a passo detalhado. Nossa gramática de exemplo terá apenas duas produções:</p>
+<pre class="bnf"><code>1. E → E + n
+2. E → n</code></pre>
+<p>O que estamos tentando fazer aqui é construir uma tabela de <em>parsing</em> que possa guiar o <em>parser</em> através da gramática. Para isso, precisamos seguir um processo sistemático, que envolve a criação de conjuntos de itens <span class="math inline">\(LR(1)\)</span>, a definição de estados e transições, e finalmente o preenchimento da tabela <code>ACTION/GOTO</code>. Este processo está sintetizado no pseudocódigo a seguir:</p>
+<pre class="pseudocode"><code>ALGORITMO CONSTRUIR_COLECAO_CANONICA_E_TABELA_LR1(G')
+
+// ENTRADA: Uma gramática aumentada G' com símbolo inicial S'
+// SAÍDA: As tabelas de parsing LR(1) ACTION e GOTO
+
+// Parte 1: Construção da Coleção Canônica de Itens LR(1)
+
+1.  Inicialize C, a coleção de conjuntos de itens, como um conjunto vazio.
+2.  Calcule I₀ = CLOSURE({[S' → •S, $]}).
+3.  Adicione I₀ a C.
+4.  Marque I₀ como "não processado".
+
+5.  ENQUANTO houver um conjunto Iᵢ em C marcado como "não processado":
+6.      Marque Iᵢ como "processado".
+7.      PARA CADA símbolo gramatical X (terminal ou não-terminal):
+8.          Calcule Iⱼ = GOTO(Iᵢ, X).
+9.          SE Iⱼ não for vazio E Iⱼ não estiver em C:
+10.             Adicione Iⱼ a C.
+11.             Marque Iⱼ como "não processado".
+12.         FIM SE
+13.     FIM PARA
+14. FIM ENQUANTO
+
+// Parte 2: Construção das Tabelas ACTION e GOTO a partir da Coleção C
+
+15. PARA CADA conjunto Iᵢ em C (onde i é o número do estado):
+16.     PARA CADA item no conjunto Iᵢ:
+
+17.         // Caso 1: Item de Shift
+18.         SE o item tem a forma [A → α • t β, a], onde t é um TERMINAL:
+19.             Calcule Iⱼ = GOTO(Iᵢ, t).
+20.             Seja j o índice de Iⱼ em C.
+21.             // Se ACTION[i, t] já estiver preenchido, há um conflito.
+22.             Defina ACTION[i, t] = "shift j".
+23.         FIM SE
+
+24.         // Caso 2: Item de Reduce
+25.         SE o item tem a forma [A → α •, a], onde A ≠ S':
+26.             Seja k o número da produção A → α.
+27.             // Se ACTION[i, a] já estiver preenchido, há um conflito.
+28.             Defina ACTION[i, a] = "reduce k".
+29.         FIM SE
+
+30.         // Caso 3: Item de Aceitação
+31.         SE o item tem a forma [S' → S •, $]:
+32.             Defina ACTION[i, $] = "accept".
+33.         FIM SE
+34.     FIM PARA
+
+35.     // Preenchimento da tabela GOTO para o estado i
+36.     PARA CADA NÃO-TERMINAL B:
+37.         Calcule Iⱼ = GOTO(Iᵢ, B).
+38.         Seja j o índice de Iⱼ em C.
+39.         SE Iⱼ não for vazio:
+40.             Defina GOTO[i, B] = j.
+41.         FIM SE
+42.     FIM PARA
+43. FIM PARA
+
+44. // --- Funções Auxiliares ---
+
+45. FUNÇÃO CLOSURE(I):
+46.    J = I
+47.    REPETIR
+48.        PARA CADA item [A → α • B β, a] em J:
+49.            PARA CADA produção B → γ na gramática G':
+50.                PARA CADA terminal b em FIRST(βa):
+51.                    Adicione o item [B → •γ, b] a J.
+52.                FIM PARA
+53.            FIM PARA
+54.        FIM PARA
+55.    ATÉ que nenhum novo item possa ser adicionado a J.
+56.    RETORNE J.
+
+57. FUNÇÃO GOTO(I, X):
+58.    Inicialize J como um conjunto vazio.
+59.    PARA CADA item [A → α • X β, a] em I:
+60.        Adicione o item [A → α X • β, a] a J.
+61.    FIM PARA
+62.    RETORNE CLOSURE(J).</code></pre>
+<p>Para entender este processo, vamos seguir cada passo com nossa gramática de exemplo, começando por criar uma gramática adequada ao algoritmo que descrevemos no pseudocódigo acima e depois seguimos passo a passo.</p>
+<section id="passo-1-gramática-aumentada" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="passo-1-gramática-aumentada"><span class="header-section-number">8.3.1</span> Passo 1: Gramática Aumentada</h3>
+<p>Primeiro, aumentamos a gramática adicionando uma nova produção. Esta produção ajudará a definir o estado de aceitação do <em>parser</em>.</p>
+<pre class="bnf"><code>0. E' → E
+1. E → E + n
+2. E → n</code></pre>
+</section>
+<section id="passo-2-itens-lr1-e-a-operação-closure" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="passo-2-itens-lr1-e-a-operação-closure"><span class="header-section-number">8.3.2</span> Passo 2: Itens <span class="math inline">\(LR(1)\)</span> e a Operação <code>CLOSURE</code></h3>
+<p>Agora que temos a gramática aumentada, criamos o estado inicial do nosso analisador, o conjunto de itens <code>I₀</code>. Para isso, precisamos entender dois conceitos fundamentais: o <strong>Item LR(1)</strong> e a operação <strong><code>CLOSURE</code></strong>.</p>
+<p>Pense em um <strong>item LR(1)</strong> como um <em>marcador de progresso</em> para o <em>parser</em>. Um item <span class="math inline">\(LR(1)\)</span> nos dirá três coisas:</p>
+<ol type="1">
+<li><strong>Qual regra estamos tentando reconhecer?</strong> (Ex: <code>E → E + n</code>);</li>
+<li><strong>Até onde já avançamos?</strong> O ponto (<code>•</code>) indicará o que já foi visto e o que esperamos ver a seguir;</li>
+<li><strong>O que esperamos encontrar depois que a regra for completada?</strong> Isto que esperamos encontrar chamamos de <strong><em>lookahead</em></strong> e, em geral, será o símbolo terminal que deverá aparecer na entrada para que a redução da regra seja válida.</li>
+</ol>
+<p>Por exemplo, quando encontrarmos o item <code>[E → E • + n, $]</code> ele significará:</p>
+<ul>
+<li>estamos tentando reconhecer a regra <code>E → E + n</code>;</li>
+<li>já reconhecemos um <code>E</code>;</li>
+<li>esperamos ver um <code>+</code> seguido por um <code>n</code>;</li>
+<li>após reconhecermos <code>E + n</code> e reduzirmos para <code>E</code>, esperamos que o próximo símbolo na entrada seja o fim da string (<code>$</code>).</li>
+</ul>
+<p>A operação <code>CLOSURE</code>, fechamento em inglês, irá garantir que um determinado estado contenha <strong>todas as informações sobre todas as regras que poderiam ser iniciadas a partir daquele ponto</strong>.</p>
+<div id="fig-lr1-items" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lr1-items-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="fig-lr1-items-fig" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-lr1-items-fig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/itens.webp" class="img-fluid figure-img" data-ref-parent="fig-lr1-items">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-lr1-items-fig-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Itens LR(1)
+</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-lr1-items-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2
+</figcaption>
+</figure>
+</div>
+<p>A regra para a construção <span class="math inline">\(LR(1)\)</span> canônica é precisa: para cada item da forma <code>[A → α • B β, a]</code> em um conjunto, onde <code>B</code> é um não-terminal, devemos adicionar ao conjunto um item <code>[B → • γ, b]</code> para cada produção <code>B → γ</code>. O novo <em>lookahead</em> <code>b</code> será cada símbolo terminal no conjunto <code>FIRST(βa)</code>. É este cálculo rigoroso do <em>lookahead</em> que diferencia o <span class="math inline">\(LR(1)\)</span> do seu primo mais simples, o <span class="math inline">\(SLR(1)\)</span> que veremos adiante.</p>
+<section id="construindo-i₀" class="level4" data-number="8.3.2.1">
+<h4 data-number="8.3.2.1" class="anchored" data-anchor-id="construindo-i₀"><span class="header-section-number">8.3.2.1</span> Construindo <code>I₀</code></h4>
+<p>Vamos construir o estado <code>I₀</code> para nossa gramática aumentada com três regras (<code>E' → E</code>, <code>E → E + n</code>, <code>E → n</code>) aplicando a lógica completa da criação do conjunto de itens e da operação <code>CLOSURE</code> do <span class="math inline">\(LR(1)\)</span>.</p>
+<p><strong>1. O Ponto de Partida (O Núcleo de <code>I₀</code>)</strong>: todo o processo começa com um único item, derivado da primeira regra da gramática aumentada. O <em>lookahead</em> inicial é sempre <code>$</code>, o marcador de fim de entrada. Como nossa primeira regra é <code>E' → E</code>, o ponto está no início da produção e o <em>lookahead</em> é <code>$</code>, logo:</p>
+<ul>
+<li>nosso conjunto inicial será: <code>{ [E' → •E, $] }</code>. Para enfatizar este conjunto diz que: <em>Estamos no início de tudo. Esperamos encontrar uma estrutura que corresponda a uma Expressão (<code>E</code>), e depois dela, esperamos o fim da entrada (<code>$</code>).</em></li>
+</ul>
+<p><strong>2. Primeira Aplicação da Regra <code>CLOSURE</code></strong>: o algoritmo analisa o item no nosso conjunto:</p>
+<ul>
+<li>O item está no formato <code>[A → α • B β, a]</code>, onde <code>A = E'</code>, <code>α = ε</code> a <em>string</em> vazia, <code>B = E</code>, <code>β = ε</code> a <em>string</em> vazia, e <code>a = $</code>. Neste caso, o algoritmo vê que o ponto <code>•</code> está antes do não-terminal <code>E</code>. A regra <code>CLOSURE</code> é acionada.</li>
+<li>Precisamos adicionar as produções de <code>E</code>. Para calcular o <em>lookahead</em> dos novos itens, calculamos <code>FIRST(βa)</code> que como <code>β = ε</code>, calculamos o <code>FIRST(ε$) = {$}</code>.</li>
+</ul>
+<p>Portanto, adicionamos os itens correspondentes às produções de <code>E</code>, com <code>$</code> como <em>lookahead</em>. Na nossa gramática temos duas produções para <code>E</code> (<code>E → E + n</code> e <code>E → n</code>). Para criar os novos itens, o ponto (<code>•</code>) será sempre colocado no início das produções quando elas forem adicionadas durante a operação <code>CLOSURE</code>. Isso ocorre porque o ponto (<code>•</code>) representa o estado de <em>ainda não começamos a reconhecer esta regra</em>. logo:</p>
+<ul>
+<li><code>[E → •E + n, $]</code>;</li>
+<li><code>[E → •n, $]</code>.</li>
+</ul>
+<p>Nosso conjunto de itens <code>I₀</code> cresceu. Agora temos:</p>
+<ul>
+<li><code>[E' → •E, $]</code>;</li>
+<li><code>[E → •E + n, $]</code>;</li>
+<li><code>[E → •n, $]</code>.</li>
+</ul>
+<p><strong>3. Segunda Aplicação da Regra <code>CLOSURE</code> (A Recursividade)</strong>: a operação <code>CLOSURE</code> é recursiva. O algoritmo deve reexaminar o conjunto para ver se os novos itens adicionados exigem mais expansões. O procedimento será:</p>
+<ul>
+<li>analisamos o novo item <code>[E → •E + n, $]</code>;</li>
+<li>novamente, o ponto <code>•</code> está antes do não-terminal <code>E</code>. A regra <code>CLOSURE</code> é acionada novamente.</li>
+<li>desta vez, o item está na forma <code>[A → α • B β, a]</code>, na qual <code>A = E</code>, <code>α = ε</code>, <code>B = E</code>, <code>β = + n</code>, e <code>a = $</code>.</li>
+<li>calculamos o <em>lookahead</em> para as produções de <code>E</code>: <code>FIRST(βa)</code>, neste caso, <code>FIRST(+ n $) = {+}</code>.</li>
+</ul>
+<p>Como o <em>lookahead</em> que encontramos é <code>+</code>, adicionamos às produções de <code>E</code> com este novo <em>lookahead</em>:</p>
+<ul>
+<li><code>[E → •E + n, +]</code>;</li>
+<li><code>[E → •n, +]</code>;</li>
+</ul>
+<p>A atenta leitora deve notar que estes novos itens foram adicionados ao mesmo conjunto <code>I₀</code> que está em construção. A operação <code>CLOSURE</code> continua analisando todos os itens do conjunto, incluindo os recém-adicionados, até que nenhuma nova adição seja possível.</p>
+<p><strong>4. Verificação de Estabilidade</strong>: o algoritmo continua e analisa os itens recém-adicionados (por exemplo, <code>[E → •E + n, +]</code>). Se aplicarmos a regra <code>CLOSURE</code> novamente, o <em>lookahead</em> calculado será <code>FIRST(+ n +) = {+}</code>. Os itens que seriam gerados (<code>[E → •E + n, +]</code> e <code>[E → •n, +]</code>) já estão no conjunto. Como nenhuma nova informação é adicionada, o processo <code>CLOSURE</code> para. Neste cenário a atenta leitora pode dizer que o conjunto está fechado e estável.</p>
+<p>O conjunto estado <code>I₀</code> completo, que representa o ponto de partida do nosso <em>parser</em> <span class="math inline">\(LR(1)\)</span>, é o conjunto final de itens que calculamos:</p>
+<ul>
+<li><code>[E' → •E, $]</code></li>
+<li><code>[E → •E + n, $]</code></li>
+<li><code>[E → •n, $]</code></li>
+<li><code>[E → •E + n, +]</code></li>
+<li><code>[E → •n, +]</code></li>
+</ul>
+<p>Este estado indica que, no início da análise, o <em>parser</em> espera ver uma estrutura <code>E</code> que pode ser seguida pelo fim da entrada (<code>$</code>) ou por um operador <code>+</code>.</p>
+</section>
+</section>
+<section id="passo-3-a-operação-goto-e-a-criação-de-estados" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="passo-3-a-operação-goto-e-a-criação-de-estados"><span class="header-section-number">8.3.3</span> Passo 3: A Operação <code>GOTO</code> e a Criação de Estados</h3>
+<p>Se a operação <code>CLOSURE</code> indica tudo o que é possível em um único estado, a operação <strong><code>GOTO</code></strong> mostra como se mover <em>entre</em> os estados. A operação <code>GOTO</code> irá responder à pergunta: <em>Se estamos no estado <code>I</code> e o próximo símbolo da entrada é <code>X</code>, para qual novo estado de conhecimento nós vamos?</em> Para isso, a operação <code>GOTO(I, X)</code> é um processo de duas etapas:</p>
+<ol type="1">
+<li><p><strong>Avanço do Ponto</strong>: primeiro, criamos um novo conjunto de itens pegando todos os itens no estado <code>I</code> nos quais o ponto <code>•</code> está imediatamente antes do símbolo <code>X</code>. Para cada um desses itens, movemos o ponto uma posição para a direita, passando por cima de <code>X</code>. Isso simboliza o <em>consumo</em>, o reconhecimento bem-sucedido do símbolo <code>X</code>.</p></li>
+<li><p><strong>Fechamento do Novo Conjunto</strong>: em seguida, aplicamos a operação <code>CLOSURE</code> a este novo conjunto de itens. Isso é fundamental para garantir que o novo estado para o qual chegamos também seja completo e contenha todas as produções que podem ser iniciadas a partir deste novo ponto de progresso.</p></li>
+</ol>
+<p>Vamos aplicar esse processo passo a passo para construir os estados <code>I₁</code> a <code>I₄</code> a partir do nosso estado inicial <code>I₀</code> completo.</p>
+<p>Lembrando que o nosso estado <code>I₀</code> foi definido como: <code>{ [E' → •E, $], [E → •E + n, $], [E → •n, $], [E → •E + n, +], [E → •n, +] }</code></p>
+<ol type="1">
+<li><p><strong>Cálculo de <code>GOTO(I₀, E)</code> → <code>I₁</code></strong>: estamos tentando responder à pergunta: <em>O que acontece se, a partir do estado <code>I₀</code>, reconhecermos uma Expressão (<code>E</code>)?</em> Neste caso, teremos:</p>
+<ol type="a">
+<li><p><strong>Avanço do Ponto</strong>: Procuramos em <code>I₀</code> por itens com <code>•E</code>. Encontramos três: <code>[E' → •E, $]</code>, <code>[E → •E + n, $]</code>, e <code>[E → •E + n, +]</code>. Movemos o ponto em todos, criando o núcleo do novo estado: <code>{ [E' → E•, $], [E → E• + n, $], [E → E• + n, +] }</code></p></li>
+<li><p><strong>Fechamento (CLOSURE)</strong>: Nos itens <code>[E → E• + n, $]</code> e <code>[E → E• + n, +]</code>, o ponto está antes de um terminal (<code>+</code>), então a operação <code>CLOSURE</code> não adiciona novos itens. O conjunto está estável.</p></li>
+</ol>
+<p>Este novo conjunto é o nosso <strong>Estado <code>I₁</code></strong>:</p>
+<ul>
+<li><code>[E' → E•, $]</code> <em>(Item de aceitação)</em></li>
+<li><code>[E → E• + n, $]</code></li>
+<li><code>[E → E• + n, +]</code></li>
+</ul>
+<p><strong>Interpretação de <code>I₁</code></strong>: <em>Nós acabamos de analisar uma <code>Expressão</code>. Se o próximo símbolo for <code>$</code>, a análise termina (aceitação). Se for <code>+</code>, continuaremos a análise.</em></p></li>
+<li><p><strong>Cálculo de <code>GOTO(I₀, n)</code> → <code>I₂</code></strong>: agora perguntamos: <em>E se, a partir de <code>I₀</code>, o símbolo que virmos for um <code>n</code>?</em>, teremos:</p>
+<ol type="a">
+<li><p><strong>Avanço do Ponto</strong>: procuramos em <code>I₀</code> por itens com <code>•n</code>. Encontramos dois: <code>[E → •n, $]</code> e <code>[E → •n, +]</code>. Movemos o ponto em ambos: <code>{ [E → n•, $], [E → n•, +] }</code></p></li>
+<li><p><strong>Fechamento (CLOSURE)</strong>: o ponto está no final da produção em ambos os itens. Nenhuma expansão é necessária.</p></li>
+</ol>
+<p>O conjunto está estável. Este é o nosso <strong>Estado <code>I₂</code></strong>:</p>
+<ul>
+<li><code>[E → n•, $]</code> <em>(Item de redução)</em></li>
+<li><code>[E → n•, +]</code> <em>(Item de redução)</em></li>
+</ul>
+<p><strong>Interpretação de <code>I₂</code></strong>: <em>Nós acabamos de analisar um <code>n</code>. O <em>parser</em> deve agora reduzir <code>n</code> para <code>E</code> se o próximo símbolo for <code>$</code> ou <code>+</code>.</em></p></li>
+<li><p><strong>Cálculo de <code>GOTO(I₁, +)</code> → <code>I₃</code></strong>: continuamos o processo. O que acontece se estivermos no estado <code>I₁</code> e virmos um <code>+</code>?</p>
+<ol type="a">
+<li><p><strong>Avanço do Ponto</strong>: procuramos em <code>I₁</code> por itens com <code>•+</code>. Encontramos dois: <code>[E → E• + n, $]</code> e <code>[E → E• + n, +]</code>. Movemos o ponto: <code>{[E → E + •n, $], [E → E + •n, +]}</code></p></li>
+<li><p><strong>Fechamento (CLOSURE)</strong>: O ponto está antes do terminal <code>n</code>. Nenhuma expansão é necessária.</p></li>
+</ol>
+<p>O conjunto está estável. Este é o nosso <strong>Estado <code>I₃</code></strong>:</p>
+<ul>
+<li><code>[E → E + •n, $]</code></li>
+<li><code>[E → E + •n, +]</code></li>
+</ul>
+<p><strong>Interpretação de <code>I₃</code></strong>: <em>Vimos uma <code>Expressão</code> seguida de <code>+</code>. Agora, esperamos um <code>n</code> para completar a regra, e após a redução, o símbolo seguinte poderá ser <code>$</code> ou <code>+</code>.</em></p></li>
+<li><p><strong>Cálculo de <code>GOTO(I₃, n)</code> → <code>I₄</code></strong>: finalmente, o que acontece se estivermos em <code>I₃</code> e virmos um <code>n</code>?</p>
+<ol type="a">
+<li><p><strong>Avanço do Ponto</strong>: Procuramos em <code>I₃</code> por itens com <code>•n</code>: <code>[E → E + •n, $]</code> e <code>[E → E + •n, +]</code>. Movemos o ponto: <code>{ [E → E + n•, $], [E → E + n•, +] }</code></p></li>
+<li><p><strong>Fechamento (CLOSURE)</strong>: O ponto está no final. Nenhuma expansão.</p></li>
+</ol>
+<p>O conjunto está estável. Este é o nosso <strong>Estado <code>I₄</code></strong>:</p>
+<ul>
+<li><code>[E → E + n•, $]</code> <em>(Item de redução)</em></li>
+<li><code>[E → E + n•, +]</code> <em>(Item de redução)</em></li>
+</ul>
+<p><strong>Interpretação de <code>I₄</code></strong>: “Vimos a sequência <code>E + n</code>. O <em>parser</em> deve agora reduzir <code>E + n</code> para <code>E</code> se o próximo símbolo for <code>$</code> ou <code>+</code>.”</p></li>
+</ol>
+<p>Este processo continua até que nenhum novo estado possa ser criado. A operação <code>GOTO</code> constrói efetivamente o <strong>autômato de estados</strong>, que é o mapa completo que o <em>parser</em> usará para navegar pela análise da entrada.</p>
+<section id="o-autômato-lr1-a-máquina-de-estados-por-trás-do-parser" class="level4" data-number="8.3.3.1">
+<h4 data-number="8.3.3.1" class="anchored" data-anchor-id="o-autômato-lr1-a-máquina-de-estados-por-trás-do-parser"><span class="header-section-number">8.3.3.1</span> O Autômato LR(1): A Máquina de Estados por Trás do <em>parser</em></h4>
+<p>O processo que acabamos de ver nas seções de <code>CLOSURE</code> e <code>GOTO</code> não é um exercício puramente abstrato. Na verdade, estamos construindo o componente central de nosso <em>parser</em>: um <strong>Autômato Finito Determinístico (AFD)</strong>, também conhecido como máquina de estados finitos. É este autômato que irá guiar todas as decisões de <em>shift</em> do analisador. Para entender isso, a atenta leitora deve fazer a seguinte associação:</p>
+<ol type="1">
+<li><p><strong>Os Estados</strong>: cada conjunto de itens <span class="math inline">\(LR(1)\)</span> que calculamos (<span class="math inline">\(I_0\)</span>, <span class="math inline">\(I_1\)</span>, <span class="math inline">\(I_2\)</span>, etc.) corresponde a um <strong>único estado</strong> no nosso autômato. Cada estado encapsula todo o conhecimento que o <em>parser</em> tem sobre o progresso da análise sintática até aquele momento. Ou seja, quais regras podem estar sendo reconhecidas e o que se espera ver a seguir. <span class="math inline">\(I_0\)</span> é, por definição, o estado inicial do autômato.</p></li>
+<li><p><strong>As Transições</strong>: A função <span class="math inline">\(GOTO(I_i, X) = I_j\)</span> define formalmente as <strong>transições</strong> entre os estados. Se o autômato está no estado <span class="math inline">\(I_i\)</span> e o próximo símbolo na entrada, ou no topo da pilha após uma redução, é <span class="math inline">\(X\)</span>, ele se move para o estado <span class="math inline">\(I_j\)</span>. As operações de <em>shift</em> do <em>parser</em> nada mais são do que seguir essas transições com os terminais da entrada.</p></li>
+</ol>
+<p>No nosso exemplo, a operação <span class="math inline">\(GOTO(I_0, n) = I_2\)</span> significa que há uma transição do estado inicial <span class="math inline">\(I_0\)</span> para o estado <span class="math inline">\(I_2\)</span> ao ler o símbolo <span class="math inline">\(n\)</span>. O diagrama de transição que veremos mais adiante é a visualização exata deste autômato.</p>
+<p>O <em>parser</em> <span class="math inline">\(LR(1)\)</span> não é apenas um Autômato Finito Determinístico, ele é um <strong>Autômato de Pilha Determinístico (APD)</strong>. A diferença é fundamental:</p>
+<ul>
+<li>O <strong>Autômato Finito</strong>: o conjunto de estados <span class="math inline">\(I\)</span> e transições <span class="math inline">\(GOTO\)</span> atua como a “unidade de controle” ou o “cérebro” do <em>parser</em>. Ele olha para o estado atual e o próximo símbolo e decide para onde ir.</li>
+<li>A <strong>Pilha</strong> serve como a memória do <em>parser</em>. Ela armazena o histórico de estados visitados. Sem a pilha, o <em>parser</em> não teria como lembrar o aninhamento de estruturas — por exemplo, quantos parênteses foram abertos e ainda não fechados.</li>
+</ul>
+<p>Quando o <em>parser</em> executa uma ação de <em>reduce</em> <span class="math inline">\(A \rightarrow \beta\)</span>, ele desempilha um número de estados correspondente ao tamanho de <span class="math inline">\(\beta\)</span>. O estado que então aparece no topo da pilha revela o contexto em que a regra foi encontrada, permitindo que o <em>parser</em> consulte a tabela <code>GOTO</code> (<span class="math inline">\(GOTO[estado\_do\_topo, A]\)</span>) para saber qual o próximo estado.</p>
+<p>Portanto, um <em>parser</em> <span class="math inline">\(LR(1)\)</span> é a combinação elegante de um Autômato Finito, que reconhece os padrões locais, com uma pilha, que gerencia a estrutura hierárquica da gramática.</p>
+</section>
+</section>
+<section id="passo-4-construindo-a-tabela-actiongoto" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="passo-4-construindo-a-tabela-actiongoto"><span class="header-section-number">8.3.4</span> Passo 4: Construindo a Tabela ACTION/GOTO</h3>
+<p>Depois de termos construído todos os conjuntos de itens (os estados <code>I₀</code> a <code>I₄</code>), o passo final é traduzir essa informação em uma tabela de decisões. Esta tabela é o verdadeiro <em>cérebro</em> do <em>parser</em>, dizendo-lhe exatamente o que fazer a cada momento. Ela é dividida em duas partes:</p>
+<ol type="1">
+<li><p><strong><code>ACTION</code></strong>: esta parte da tabela é consultada para símbolos <strong>terminais</strong> (<code>n</code>, <code>+</code>, <code>$</code>). Ela dita uma de quatro possíveis ações:</p>
+<ul>
+<li><code>sN</code> (<strong>shift N</strong>): empilhe o terminal atual e vá para o estado <code>N</code>;</li>
+<li><code>rK</code> (<strong>reduce K</strong>): reduza os símbolos no topo da pilha usando a produção de número <code>K</code>;</li>
+<li><code>acc</code> (<strong>accept</strong>): a análise foi um sucesso;</li>
+<li><em>célula vazia</em>: indica um erro de sintaxe.</li>
+</ul></li>
+<li><p><strong><code>GOTO</code></strong>: esta parte da tabela é consultada para símbolos <strong>não-terminais</strong> (<code>E</code>). Ela nos diz para qual estado ir <em>após</em> uma ação de <em>reduce</em>. Vamos preencher a tabela linha por linha, analisando cada um dos nossos estados (<code>I₀</code> a <code>I₄</code>) e as transições <code>GOTO</code> que calculamos.</p></li>
+</ol>
+<ol type="a">
+<li><p><strong>Preenchendo a Linha do Estado 0 (<code>I₀</code>)</strong>:</p>
+<ul>
+<li>a transição <code>GOTO(I₀, n) = I₂</code> resulta em <code>ACTION[0, n] = s2</code>;</li>
+<li>a transição <code>GOTO(I₀, E) = I₁</code> resulta em <code>GOTO[0, E] = 1</code>.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"><strong>E</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>s2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>1</strong></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Preenchendo a Linha do Estado 1 (<code>I₁</code>)</strong>:</p></li>
+</ol>
+<ul>
+<li><p>a transição <code>GOTO(I₁, +) = I₃</code> resulta em <code>ACTION[1, +] = s3</code>;</p></li>
+<li><p>o item <code>[E' → E•, $]</code> indica aceitação no <em>lookahead</em> <code>$</code> ⇒ <code>ACTION[1, $] = acc</code>.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"><strong>E</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>s3</strong></td>
+<td style="text-align: center;"><strong>acc</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+</ul>
+<ol start="3" type="a">
+<li><p><strong>Preenchendo a Linha do Estado 2 (<code>I₂</code>)</strong>:</p>
+<ul>
+<li>o estado <code>I₂</code> é <code>{ [E → n•, $], [E → n•, +] }</code>;
+<ul>
+<li>ambos são itens de redução para a produção <code>E → n</code> (produção nº 2);</li>
+</ul></li>
+<li>o primeiro item, com <em>lookahead</em> <code>$</code>, gera a ação <code>ACTION[2, $] = r2</code>;</li>
+<li>o segundo item, com <em>lookahead</em> <code>+</code>, gera a ação <code>ACTION[2, +] = r2</code>.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"><strong>E</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>r2</strong></td>
+<td style="text-align: center;"><strong>r2</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Preenchendo a Linha do Estado 3 (<code>I₃</code>)</strong>:</p>
+<ul>
+<li>a transição <code>GOTO(I₃, n) = I₄</code> resulta em <code>ACTION[3, n] = s4</code>.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"><strong>E</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>s4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Preenchendo a Linha do Estado 4 (<code>I₄</code>)</strong>:</p>
+<ul>
+<li>o estado <code>I₄</code> é <code>{ [E → E + n•, $], [E → E + n•, +] }</code>;</li>
+<li>ambos são itens de redução para a produção <code>E → E + n</code> (produção nº 1);</li>
+<li>o primeiro item, com <em>lookahead</em> <code>$</code>, gera a ação <code>ACTION[4, $] = r1</code>;</li>
+<li>o segundo item, com <em>lookahead</em> <code>+</code>, gera a ação <code>ACTION[4, +] = r1</code>.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"><strong>E</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>r1</strong></td>
+<td style="text-align: center;"><strong>r1</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Tabela Consolidada</strong>: juntando todas as linhas que preenchemos, obtemos a tabela completa e canônica, que guiará o <em>parser</em> de forma inequívoca durante a análise de qualquer string de entrada.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;">ACTION</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">GOTO</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>+</strong></td>
+<td style="text-align: center;"><strong>$</strong></td>
+<td style="text-align: center;"><strong>E</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">s2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s3</td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+<p>Uma vez definidos os estados e as transições, podemos construir o diagrama de transição do <em>nosso</em> autômato <span class="math inline">\(LR(1)\)</span> como pode ser visto na <a href="#fig-lr1-1" class="quarto-xref">Figure&nbsp;<span>8.3</span></a>.</p>
+<div id="fig-lr1-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/LR1.webp" class="img-fluid figure-img"></p>
+<figcaption>Diagrama de transição do autômato LR(1)</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-lr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="conflitos-em-parsers-lr1-uma-análise-detalhada" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="conflitos-em-parsers-lr1-uma-análise-detalhada"><span class="header-section-number">8.4</span> Conflitos em Parsers <span class="math inline">\(LR(1)\)</span>: Uma Análise Detalhada</h2>
+<p>Apesar de seu poder, os parsers <span class="math inline">\(LR(1)\)</span> podem encontrar situações em que a próxima ação não é única. Esses cenários, chamados de <strong>conflitos</strong>, são detectados durante a <strong>construção da tabela <code>ACTION</code></strong>. Um conflito ocorre quando uma única célula da tabela (<code>ACTION[estado, terminal]</code>) precisa conter mais de uma ação válida. Isso significa que a gramática, como está escrita, é ambígua para o algoritmo <span class="math inline">\(LR(1)\)</span>.</p>
+<section id="conflito-shift-reduce" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="conflito-shift-reduce"><span class="header-section-number">8.4.1</span> Conflito <em>Shift-Reduce</em></h3>
+<p>Esta é a forma mais comum de conflito. Um conflito <em>Shift-Reduce</em> ocorre quando o <em>parser</em>, em um determinado estado e com um determinado símbolo de <em>lookahead</em>, tem uma escolha válida entre empilhar esse símbolo (<strong>shift</strong>) e reduzir uma regra que já está completa no topo da pilha (<strong>reduce</strong>).</p>
+<p><strong>Causa Raiz</strong>: um conflito de <em>shift-reduce</em> é identificado se, em um mesmo estado <code>I</code>, coexistem dois tipos de itens:</p>
+<ol type="1">
+<li>Um <strong>item de redução</strong>: <code>[A → α•, a]</code>, onde o ponto está no final da produção;</li>
+<li>Um <strong>item de <em>shift</em></strong>: <code>[B → β•aγ, b]</code>, onde o ponto está antes do mesmo terminal <code>a</code> que é o <em>lookahead</em> do item de redução.</li>
+</ol>
+<p>Se o próximo símbolo na entrada for <code>a</code>, o <em>parser</em> não sabe se deve reduzir por <code>A → α</code> ou empilhar <code>a</code>.</p>
+<section id="análise-do-exemplo-clássico-o-dangling-else" class="level4" data-number="8.4.1.1">
+<h4 data-number="8.4.1.1" class="anchored" data-anchor-id="análise-do-exemplo-clássico-o-dangling-else"><span class="header-section-number">8.4.1.1</span> Análise do Exemplo Clássico: O “<em>dangling else</em>”</h4>
+<p>O exemplo clássico é a ambiguidade do <code>else</code> em linguagens como C ou Java. Considere esta gramática simplificada:</p>
+<pre class="bnf"><code>STMT → if EXPR then STMT
+ | if EXPR then STMT else STMT</code></pre>
+<p>Agora, imagine que o <em>parser</em> analisou a entrada <code>if EXPR then STMT</code> e o próximo símbolo no <em>buffer</em> é <code>else</code>. Ele se encontrará em um estado, digamos <code>Ik</code>, que conterá (entre outros) os seguintes itens:</p>
+<ol type="1">
+<li><code>[STMT → if EXPR then STMT •, else]</code></li>
+<li><code>[STMT → if EXPR then STMT • else STMT, $]</code></li>
+</ol>
+<p>Vamos analisar a situação quando o <em>lookahead</em> é <code>else</code>:</p>
+<ul>
+<li><strong>O item 1</strong> está completo (<code>•</code> no final). Ele diz ao <em>parser</em>: “A regra <code>STMT → if EXPR then STMT</code> já foi vista. Se o próximo token for <code>else</code>, uma ação válida é <strong>reduzir</strong> o que temos na pilha.” Isso implicaria que o <code>if-then</code> interno é uma declaração completa por si só.</li>
+<li><strong>O item 2</strong> tem o ponto antes de <code>else</code>. Ele diz ao <em>parser</em>: “Se o próximo token for <code>else</code>, uma ação válida é <strong>empilhá-lo (shift)</strong> e continuar a análise para formar uma declaração <code>if-then-else</code>.”</li>
+</ul>
+<p><strong>O Conflito</strong>: A célula <code>ACTION[Ik, else]</code> precisa conter tanto uma ação de <em>reduce</em> (baseada no item 1) quanto uma de <em>shift</em> (baseada no item 2). O <em>parser</em> está paralisado: o <code>else</code> pertence ao <code>if</code> mais interno (shift) ou o <code>if</code> interno já acabou (reduce)?</p>
+</section>
+</section>
+<section id="conflito-reduce-reduce" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="conflito-reduce-reduce"><span class="header-section-number">8.4.2</span> Conflito <em>reduce</em>-Reduce</h3>
+<p>Este conflito é menos comum, mas geralmente indica um problema mais sério na gramática.</p>
+<p><strong>Definição</strong>: Ocorre quando o <em>parser</em>, em um mesmo estado e para o mesmo símbolo de <em>lookahead</em>, encontra duas ou mais regras completas diferentes que poderiam ser reduzidas.</p>
+<p><strong>Causa Raiz</strong>: Um conflito de <em>reduce-reduce</em> é identificado se, em um mesmo estado <code>I</code>, existem dois ou mais itens de redução distintos que compartilham o mesmo símbolo de <em>lookahead</em>.</p>
+<ol type="1">
+<li><code>[A → α•, a]</code></li>
+<li><code>[B → β•, a]</code></li>
+</ol>
+<p>Se o próximo símbolo na entrada for <code>a</code>, o <em>parser</em> não sabe se deve reduzir usando a regra <code>A → α</code> ou a regra <code>B → β</code>.</p>
+<section id="análise-do-exemplo" class="level4" data-number="8.4.2.1">
+<h4 data-number="8.4.2.1" class="anchored" data-anchor-id="análise-do-exemplo"><span class="header-section-number">8.4.2.1</span> Análise do Exemplo</h4>
+<p>Considere uma gramática ambígua onde uma <code>expressão</code> pode ser tanto um <code>comando</code> quanto um <code>valor</code>:</p>
+<pre class="bnf"><code>S → C | V
+C → id
+V → id</code></pre>
+<p>Após o <em>parser</em> ler um <code>id</code>, ele chegará a um estado <code>Ik</code>. A operação <code>CLOSURE</code> fará com que este estado contenha ambos os itens completos (supondo que o <em>lookahead</em> seja <code>$</code>, por exemplo):</p>
+<ol type="1">
+<li><code>[C → id•, $]</code></li>
+<li><code>[V → id•, $]</code></li>
+</ol>
+<p><strong>O Conflito</strong>: Quando o <em>parser</em> estiver no estado <code>Ik</code> e o <em>lookahead</em> for <code>$</code>, ele terá duas opções de redução:</p>
+<ul>
+<li><strong>O item 1</strong> diz: “Reduza usando a regra <code>C → id</code>”.</li>
+<li><strong>O item 2</strong> diz: “Reduza usando a regra <code>V → id</code>”.</li>
+</ul>
+<p>A célula <code>ACTION[Ik, $]</code> precisa conter duas ações de <em>reduce</em> diferentes. Isso é impossível. A gramática, como definida, não fornece contexto suficiente para o <em>parser</em> saber se <code>id</code> deveria ser um <code>Comando</code> ou um <code>Valor</code>.</p>
+</section>
+</section>
+<section id="resolução-de-conflitos" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="resolução-de-conflitos"><span class="header-section-number">8.4.3</span> Resolução de Conflitos</h3>
+<p>Quando conflitos surgem durante a construção da tabela <code>ACTION</code>, precisamos estabelecer regras de decisão manuais. A resolução envolve três etapas: identificação, análise e aplicação de uma estratégia de resolução.</p>
+<section id="identificação-de-conflitos-na-construção-da-tabela" class="level4" data-number="8.4.3.1">
+<h4 data-number="8.4.3.1" class="anchored" data-anchor-id="identificação-de-conflitos-na-construção-da-tabela"><span class="header-section-number">8.4.3.1</span> Identificação de Conflitos na Construção da Tabela</h4>
+<p>Durante a construção da tabela <code>ACTION</code>, um conflito ocorre quando tentamos preencher uma célula que já possui uma ação. Por exemplo:</p>
+<ol type="1">
+<li><strong>Conflito <em>shift</em>-Reduce</strong>: A célula <code>ACTION[i, a]</code> precisa conter tanto <code>s_j</code> quanto <code>r_k</code></li>
+<li><strong>Conflito <em>reduce</em>-Reduce</strong>: A célula <code>ACTION[i, a]</code> precisa conter <code>r_k</code> e <code>r_m</code> onde <code>k ≠ m</code></li>
+</ol>
+</section>
+<section id="estratégias-manuais-de-resolução" class="level4" data-number="8.4.3.2">
+<h4 data-number="8.4.3.2" class="anchored" data-anchor-id="estratégias-manuais-de-resolução"><span class="header-section-number">8.4.3.2</span> Estratégias Manuais de Resolução</h4>
+<ol type="1">
+<li><p><strong>Preferência por <em>shift</em> (Estratégia Padrão)</strong>: quando há um conflito <em>shift-reduce</em>, geralmente preferimos o <em>shift</em>. Esta estratégia resolve naturalmente o problema clássico do “<em>dangling else</em>”, o <code>else</code> sempre se associa ao <code>if</code> mais próximo.</p></li>
+<li><p><strong>Ordenação por Precedência</strong>: atribuímos níveis de precedência aos operadores e regras:</p></li>
+</ol>
+<ul>
+<li>Operadores de multiplicação/divisão: precedência <span class="math inline">\(2\)</span>;</li>
+<li>Operadores de adição/subtração: precedência <span class="math inline">\(1\)</span>;</li>
+<li>Em conflito, escolhemos a ação com maior precedência.</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Associatividade</strong>: para operadores de mesma precedência:</li>
+</ol>
+<ul>
+<li>Associatividade à esquerda: preferir <em>reduce</em>;</li>
+<li>Associatividade à direita: preferir <em>shift</em>.</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Resolução por Análise de Contexto</strong>: examine os itens <span class="math inline">\(LR(1)\)</span> que causam o conflito. Se um item tem <em>lookahead</em> mais específico ou representa uma derivação mais provável sintaticamente, priorize-o.</li>
+</ol>
+</section>
+<section id="exemplo-prático-resolvendo-o-dangling-else" class="level4" data-number="8.4.3.3">
+<h4 data-number="8.4.3.3" class="anchored" data-anchor-id="exemplo-prático-resolvendo-o-dangling-else"><span class="header-section-number">8.4.3.3</span> Exemplo Prático: Resolvendo o “Dangling Else”</h4>
+<p>Considere o estado com conflito:</p>
+<ul>
+<li>Item 1: <code>[STMT → if EXPR then STMT •, else]</code> (sugere <em>reduce</em>);</li>
+<li>Item 2: <code>[STMT → if EXPR then STMT • else STMT, $]</code> (sugere <em>shift</em>);</li>
+</ul>
+<p><strong>Resolução Manual</strong>: marcamos na tabela que, para <code>ACTION[estado, else]</code>, sempre escolhemos <em>shift</em>. Isso garante que o <code>else</code> se associe ao <code>if</code> mais interno.</p>
+</section>
+</section>
+</section>
+<section id="implementação-do-lr1em-python" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="implementação-do-lr1em-python"><span class="header-section-number">8.5</span> Implementação do LR(1)em Python</h2>
+<p>A seguir, uma implementação completa de um <em>parser</em> <span class="math inline">\(LR(1)\)</span> com resolução de conflitos:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Tuple, Dict, Set, Optional</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LR1Item:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Representa um item LR(1): [A → α•β, a]"""</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    lhs: <span class="bu">str</span>    <span class="co"># Lado esquerdo da produção</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    before_dot: <span class="bu">tuple</span>  <span class="co"># Símbolos antes do ponto</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    after_dot: <span class="bu">tuple</span>  <span class="co"># Símbolos após o ponto</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    lookahead: <span class="bu">str</span>   <span class="co"># Símbolo de lookahead</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        before <span class="op">=</span> <span class="st">' '</span>.join(<span class="va">self</span>.before_dot) <span class="cf">if</span> <span class="va">self</span>.before_dot <span class="cf">else</span> <span class="st">''</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        after <span class="op">=</span> <span class="st">' '</span>.join(<span class="va">self</span>.after_dot) <span class="cf">if</span> <span class="va">self</span>.after_dot <span class="cf">else</span> <span class="st">''</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"[</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>lhs<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>before<span class="sc">}</span><span class="ss">•</span><span class="sc">{</span>after<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>lookahead<span class="sc">}</span><span class="ss">]"</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Production:</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Representa uma produção da gramática"""</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    lhs: <span class="bu">str</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    rhs: <span class="bu">tuple</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LR1Parser:</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grammar <span class="op">=</span> {}</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.terminals <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nonterminals <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_symbol <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.original_start <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.productions <span class="op">=</span> []</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.first_sets <span class="op">=</span> {}</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.states <span class="op">=</span> []</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.action_table <span class="op">=</span> {}</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.goto_table <span class="op">=</span> {}</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add_production(<span class="va">self</span>, lhs: <span class="bu">str</span>, rhs: List[<span class="bu">str</span>]):</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Adiciona uma produção à gramática"""</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> lhs <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.grammar:</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.grammar[lhs] <span class="op">=</span> []</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>        rhs_tuple <span class="op">=</span> <span class="bu">tuple</span>(rhs)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grammar[lhs].append(rhs_tuple)</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.productions.append(Production(lhs, rhs_tuple))</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nonterminals.add(lhs)</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> symbol <span class="kw">in</span> rhs:</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> symbol <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.grammar:</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.terminals.add(symbol)</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>.start_symbol:</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.start_symbol <span class="op">=</span> lhs</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.original_start <span class="op">=</span> lhs</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> augment_grammar(<span class="va">self</span>):</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Aumenta a gramática com S' → S"""</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.original_start <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Grammar not set"</span>)</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>        new_start <span class="op">=</span> <span class="va">self</span>.original_start <span class="op">+</span> <span class="st">"'"</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.add_production(new_start, [<span class="va">self</span>.original_start])</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_symbol <span class="op">=</span> new_start</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> compute_first(<span class="va">self</span>):</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calcula os conjuntos FIRST para todos os não-terminais de forma iterativa"""</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.first_sets <span class="op">=</span> {nt: <span class="bu">set</span>() <span class="cf">for</span> nt <span class="kw">in</span> <span class="va">self</span>.nonterminals}</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>        changed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> changed:</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>            changed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> nt <span class="kw">in</span> <span class="va">self</span>.nonterminals:</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>                old_size <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.first_sets[nt])</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> rhs <span class="kw">in</span> <span class="va">self</span>.grammar.get(nt, []):</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> <span class="kw">not</span> rhs:  <span class="co"># Produção vazia</span></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.first_sets[nt].add(<span class="st">'ε'</span>)</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">continue</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Para cada símbolo da produção</span></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>                    all_have_epsilon <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">for</span> sym <span class="kw">in</span> rhs:</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> sym <span class="kw">in</span> <span class="va">self</span>.terminals:</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>                            <span class="va">self</span>.first_sets[nt].add(sym)</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>                            all_have_epsilon <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">break</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">else</span>:  <span class="co"># É não-terminal</span></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Adiciona FIRST(sym) - {ε}</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>                            <span class="va">self</span>.first_sets[nt].update(<span class="va">self</span>.first_sets[sym] <span class="op">-</span> {<span class="st">'ε'</span>})</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">if</span> <span class="st">'ε'</span> <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.first_sets[sym]:</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>                                all_have_epsilon <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">break</span></span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Se todos os símbolos derivam ε, adiciona ε</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> all_have_epsilon:</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.first_sets[nt].add(<span class="st">'ε'</span>)</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Verifica se houve mudança</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>.first_sets[nt]) <span class="op">&gt;</span> old_size:</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>                    changed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> calculate_first(<span class="va">self</span>, symbols: <span class="bu">tuple</span>) <span class="op">-&gt;</span> Set[<span class="bu">str</span>]:</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calcula o conjunto FIRST para uma sequência de símbolos"""</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> symbols:</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> {<span class="st">'ε'</span>}</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>        first <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> sym <span class="kw">in</span> symbols:</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> sym <span class="kw">in</span> <span class="va">self</span>.terminals:</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>                first.add(sym)</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:  <span class="co"># É não-terminal</span></span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>                first.update(<span class="va">self</span>.first_sets[sym] <span class="op">-</span> {<span class="st">'ε'</span>})</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="st">'ε'</span> <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.first_sets[sym]:</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">break</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Todos os símbolos derivam ε</span></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>            first.add(<span class="st">'ε'</span>)</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> first</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> closure(<span class="va">self</span>, items: Set[LR1Item]) <span class="op">-&gt;</span> Set[LR1Item]:</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calcula o fechamento de um conjunto de itens LR(1)"""</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>        closure_set <span class="op">=</span> <span class="bu">set</span>(items)</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>        changed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> changed:</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>            changed <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>            new_items <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">list</span>(closure_set):</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Se não há símbolos após o ponto, continue</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="kw">not</span> item.after_dot:</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>                next_symbol <span class="op">=</span> item.after_dot[<span class="dv">0</span>]</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Se o próximo símbolo não é não-terminal, continue</span></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> next_symbol <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.nonterminals:</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Calcula β (resto após o símbolo)</span></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>                beta <span class="op">=</span> item.after_dot[<span class="dv">1</span>:]</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Calcula FIRST(βa)</span></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a>                beta_a <span class="op">=</span> beta <span class="op">+</span> (item.lookahead,)</span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>                lookaheads <span class="op">=</span> <span class="va">self</span>.calculate_first(beta_a)</span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Para cada produção do não-terminal</span></span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> production <span class="kw">in</span> <span class="va">self</span>.grammar.get(next_symbol, []):</span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Para cada lookahead em FIRST(βa)</span></span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">for</span> la <span class="kw">in</span> lookaheads:</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># O marcador 'ε' nunca é um lookahead real. </span></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># A lógica de calculate_first já garante que o lookahead correto (item.lookahead)</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># foi incluído no conjunto 'lookaheads' se 'beta' era anulável.</span></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> la <span class="op">==</span> <span class="st">'ε'</span>:</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">continue</span></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a>                        new_item <span class="op">=</span> LR1Item(</span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>                            lhs<span class="op">=</span>next_symbol,</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>                            before_dot<span class="op">=</span>(),</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>                            after_dot<span class="op">=</span>production,</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>                            lookahead<span class="op">=</span>la</span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> new_item <span class="kw">not</span> <span class="kw">in</span> closure_set:</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>                            new_items.add(new_item)</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>                            changed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>                closure_set.update(new_items)</span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>         <span class="cf">return</span> closure_set</span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> goto(<span class="va">self</span>, items: Set[LR1Item], symbol: <span class="bu">str</span>) <span class="op">-&gt;</span> Set[LR1Item]:</span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Calcula GOTO(items, symbol)"""</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>        goto_set <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> items:</span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> item.after_dot <span class="kw">and</span> item.after_dot[<span class="dv">0</span>] <span class="op">==</span> symbol:</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a>                new_item <span class="op">=</span> LR1Item(</span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>                    lhs<span class="op">=</span>item.lhs,</span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>                    before_dot<span class="op">=</span>item.before_dot <span class="op">+</span> (symbol,),</span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a>                    after_dot<span class="op">=</span>item.after_dot[<span class="dv">1</span>:],</span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a>                    lookahead<span class="op">=</span>item.lookahead</span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a>                goto_set.add(new_item)</span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> goto_set:</span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="bu">set</span>()</span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.closure(goto_set)</span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> build_states(<span class="va">self</span>):</span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Constrói todos os estados do autômato LR(1)"""</span></span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.compute_first()</span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.terminals.add(<span class="st">'$'</span>)</span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Estado inicial: I₀ = CLOSURE({[S' → •S, $]})</span></span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a>        augmented_prod <span class="op">=</span> <span class="va">self</span>.grammar[<span class="va">self</span>.start_symbol][<span class="dv">0</span>]</span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a>        start_item <span class="op">=</span> LR1Item(</span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a>            lhs<span class="op">=</span><span class="va">self</span>.start_symbol,</span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a>            before_dot<span class="op">=</span>(),</span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>            after_dot<span class="op">=</span>augmented_prod,</span>
+<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a>            lookahead<span class="op">=</span><span class="st">'$'</span></span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>        initial_state <span class="op">=</span> <span class="va">self</span>.closure({start_item})</span>
+<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.states <span class="op">=</span> [initial_state]</span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Constrói os demais estados usando GOTO</span></span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(<span class="va">self</span>.states):</span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a>            current_state <span class="op">=</span> <span class="va">self</span>.states[i]</span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Encontra todos os símbolos possíveis após o ponto</span></span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a>            symbols <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> current_state:</span>
+<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> item.after_dot:</span>
+<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a>                    symbols.add(item.after_dot[<span class="dv">0</span>])</span>
+<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Cria novos estados via GOTO</span></span>
+<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> symbol <span class="kw">in</span> symbols:</span>
+<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>                new_state <span class="op">=</span> <span class="va">self</span>.goto(current_state, symbol)</span>
+<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> new_state <span class="kw">and</span> new_state <span class="kw">not</span> <span class="kw">in</span> <span class="va">self</span>.states:</span>
+<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.states.append(new_state)</span>
+<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a>            i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> build_parsing_table(<span class="va">self</span>):</span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Constrói a tabela ACTION/GOTO seguindo o algoritmo LR(1) canônico"""</span></span>
+<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a>        conflicts <span class="op">=</span> []</span>
+<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, state <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.states):</span>
+<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Para cada item no estado</span></span>
+<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> state:</span>
+<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> item.after_dot:</span>
+<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Item da forma [A → α•aβ, b] onde 'a' é terminal</span></span>
+<span id="cb7-235"><a href="#cb7-235" aria-hidden="true" tabindex="-1"></a>                    symbol <span class="op">=</span> item.after_dot[<span class="dv">0</span>]</span>
+<span id="cb7-236"><a href="#cb7-236" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> symbol <span class="kw">in</span> <span class="va">self</span>.terminals:</span>
+<span id="cb7-237"><a href="#cb7-237" aria-hidden="true" tabindex="-1"></a>                        goto_state <span class="op">=</span> <span class="va">self</span>.goto(state, symbol)</span>
+<span id="cb7-238"><a href="#cb7-238" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> goto_state <span class="kw">in</span> <span class="va">self</span>.states:</span>
+<span id="cb7-239"><a href="#cb7-239" aria-hidden="true" tabindex="-1"></a>                            j <span class="op">=</span> <span class="va">self</span>.states.index(goto_state)</span>
+<span id="cb7-240"><a href="#cb7-240" aria-hidden="true" tabindex="-1"></a>                            key <span class="op">=</span> (i, symbol)</span>
+<span id="cb7-241"><a href="#cb7-241" aria-hidden="true" tabindex="-1"></a>                            </span>
+<span id="cb7-242"><a href="#cb7-242" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">if</span> key <span class="kw">in</span> <span class="va">self</span>.action_table:</span>
+<span id="cb7-243"><a href="#cb7-243" aria-hidden="true" tabindex="-1"></a>                                existing <span class="op">=</span> <span class="va">self</span>.action_table[key]</span>
+<span id="cb7-244"><a href="#cb7-244" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">if</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'reduce'</span>:</span>
+<span id="cb7-245"><a href="#cb7-245" aria-hidden="true" tabindex="-1"></a>                                    conflicts.append(<span class="ss">f"Conflito S/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, símbolo '</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">': preferindo shift"</span>)</span>
+<span id="cb7-246"><a href="#cb7-246" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'shift'</span>, j)</span>
+<span id="cb7-247"><a href="#cb7-247" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">else</span>:</span>
+<span id="cb7-248"><a href="#cb7-248" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'shift'</span>, j)</span>
+<span id="cb7-249"><a href="#cb7-249" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb7-250"><a href="#cb7-250" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Item da forma [A → α•, a] - item de redução</span></span>
+<span id="cb7-251"><a href="#cb7-251" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> (item.lhs <span class="op">==</span> <span class="va">self</span>.start_symbol <span class="kw">and</span> </span>
+<span id="cb7-252"><a href="#cb7-252" aria-hidden="true" tabindex="-1"></a>                        item.before_dot <span class="op">==</span> (<span class="va">self</span>.original_start,) <span class="kw">and</span> </span>
+<span id="cb7-253"><a href="#cb7-253" aria-hidden="true" tabindex="-1"></a>                        item.lookahead <span class="op">==</span> <span class="st">'$'</span>):</span>
+<span id="cb7-254"><a href="#cb7-254" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># Accept: [S' → S•, $]</span></span>
+<span id="cb7-255"><a href="#cb7-255" aria-hidden="true" tabindex="-1"></a>                        key <span class="op">=</span> (i, <span class="st">'$'</span>)</span>
+<span id="cb7-256"><a href="#cb7-256" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'accept'</span>, <span class="va">None</span>)</span>
+<span id="cb7-257"><a href="#cb7-257" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">else</span>:</span>
+<span id="cb7-258"><a href="#cb7-258" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># Reduce: encontra o índice da produção</span></span>
+<span id="cb7-259"><a href="#cb7-259" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">for</span> prod_idx, prod <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.productions):</span>
+<span id="cb7-260"><a href="#cb7-260" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">if</span> (prod.lhs <span class="op">==</span> item.lhs <span class="kw">and</span> </span>
+<span id="cb7-261"><a href="#cb7-261" aria-hidden="true" tabindex="-1"></a>                                prod.rhs <span class="op">==</span> item.before_dot):</span>
+<span id="cb7-262"><a href="#cb7-262" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb7-263"><a href="#cb7-263" aria-hidden="true" tabindex="-1"></a>                                key <span class="op">=</span> (i, item.lookahead)</span>
+<span id="cb7-264"><a href="#cb7-264" aria-hidden="true" tabindex="-1"></a>                                action <span class="op">=</span> (<span class="st">'reduce'</span>, prod_idx)</span>
+<span id="cb7-265"><a href="#cb7-265" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb7-266"><a href="#cb7-266" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">if</span> key <span class="kw">in</span> <span class="va">self</span>.action_table:</span>
+<span id="cb7-267"><a href="#cb7-267" aria-hidden="true" tabindex="-1"></a>                                    existing <span class="op">=</span> <span class="va">self</span>.action_table[key]</span>
+<span id="cb7-268"><a href="#cb7-268" aria-hidden="true" tabindex="-1"></a>                                    <span class="cf">if</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'shift'</span>:</span>
+<span id="cb7-269"><a href="#cb7-269" aria-hidden="true" tabindex="-1"></a>                                        conflicts.append(<span class="ss">f"Conflito S/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, símbolo '</span><span class="sc">{</span>item<span class="sc">.</span>lookahead<span class="sc">}</span><span class="ss">': mantendo shift"</span>)</span>
+<span id="cb7-270"><a href="#cb7-270" aria-hidden="true" tabindex="-1"></a>                                        <span class="cf">continue</span></span>
+<span id="cb7-271"><a href="#cb7-271" aria-hidden="true" tabindex="-1"></a>                                    <span class="cf">elif</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'reduce'</span>:</span>
+<span id="cb7-272"><a href="#cb7-272" aria-hidden="true" tabindex="-1"></a>                                        conflicts.append(<span class="ss">f"Conflito R/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, símbolo '</span><span class="sc">{</span>item<span class="sc">.</span>lookahead<span class="sc">}</span><span class="ss">': mantendo primeira redução"</span>)</span>
+<span id="cb7-273"><a href="#cb7-273" aria-hidden="true" tabindex="-1"></a>                                        <span class="cf">continue</span></span>
+<span id="cb7-274"><a href="#cb7-274" aria-hidden="true" tabindex="-1"></a>                                </span>
+<span id="cb7-275"><a href="#cb7-275" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.action_table[key] <span class="op">=</span> action</span>
+<span id="cb7-276"><a href="#cb7-276" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">break</span></span>
+<span id="cb7-277"><a href="#cb7-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-278"><a href="#cb7-278" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Preenche GOTO para não-terminais</span></span>
+<span id="cb7-279"><a href="#cb7-279" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> symbol <span class="kw">in</span> <span class="va">self</span>.nonterminals:</span>
+<span id="cb7-280"><a href="#cb7-280" aria-hidden="true" tabindex="-1"></a>                goto_state <span class="op">=</span> <span class="va">self</span>.goto(state, symbol)</span>
+<span id="cb7-281"><a href="#cb7-281" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> goto_state <span class="kw">in</span> <span class="va">self</span>.states:</span>
+<span id="cb7-282"><a href="#cb7-282" aria-hidden="true" tabindex="-1"></a>                    j <span class="op">=</span> <span class="va">self</span>.states.index(goto_state)</span>
+<span id="cb7-283"><a href="#cb7-283" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.goto_table[(i, symbol)] <span class="op">=</span> j</span>
+<span id="cb7-284"><a href="#cb7-284" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-285"><a href="#cb7-285" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> conflicts</span>
+<span id="cb7-286"><a href="#cb7-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-287"><a href="#cb7-287" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> print_states(<span class="va">self</span>):</span>
+<span id="cb7-288"><a href="#cb7-288" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Imprime todos os estados construídos"""</span></span>
+<span id="cb7-289"><a href="#cb7-289" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, state <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.states):</span>
+<span id="cb7-290"><a href="#cb7-290" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Estado I</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb7-291"><a href="#cb7-291" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">sorted</span>(state, key<span class="op">=</span><span class="kw">lambda</span> x: (x.lhs, x.before_dot, x.after_dot, x.lookahead)):</span>
+<span id="cb7-292"><a href="#cb7-292" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>item<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-293"><a href="#cb7-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-294"><a href="#cb7-294" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parse(<span class="va">self</span>, input_tokens: List[<span class="bu">str</span>]) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb7-295"><a href="#cb7-295" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Analisa uma string de entrada usando a tabela construída"""</span></span>
+<span id="cb7-296"><a href="#cb7-296" aria-hidden="true" tabindex="-1"></a>        stack <span class="op">=</span> [<span class="dv">0</span>]  <span class="co"># Pilha de estados</span></span>
+<span id="cb7-297"><a href="#cb7-297" aria-hidden="true" tabindex="-1"></a>        symbols <span class="op">=</span> []  <span class="co"># Pilha de símbolos para debug</span></span>
+<span id="cb7-298"><a href="#cb7-298" aria-hidden="true" tabindex="-1"></a>        input_tokens <span class="op">=</span> input_tokens.copy()</span>
+<span id="cb7-299"><a href="#cb7-299" aria-hidden="true" tabindex="-1"></a>        input_tokens.append(<span class="st">'$'</span>)</span>
+<span id="cb7-300"><a href="#cb7-300" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-301"><a href="#cb7-301" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-302"><a href="#cb7-302" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="st">'Passo'</span><span class="sc">:&lt;6}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Pilha'</span><span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Entrada'</span><span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Ação'</span><span class="sc">:&lt;30}</span><span class="ss">"</span>)</span>
+<span id="cb7-303"><a href="#cb7-303" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">75</span>)</span>
+<span id="cb7-304"><a href="#cb7-304" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-305"><a href="#cb7-305" aria-hidden="true" tabindex="-1"></a>        step <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-306"><a href="#cb7-306" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb7-307"><a href="#cb7-307" aria-hidden="true" tabindex="-1"></a>            state <span class="op">=</span> stack[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb7-308"><a href="#cb7-308" aria-hidden="true" tabindex="-1"></a>            token <span class="op">=</span> input_tokens[i]</span>
+<span id="cb7-309"><a href="#cb7-309" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-310"><a href="#cb7-310" aria-hidden="true" tabindex="-1"></a>            action <span class="op">=</span> <span class="va">self</span>.action_table.get((state, token))</span>
+<span id="cb7-311"><a href="#cb7-311" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-312"><a href="#cb7-312" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> action <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-313"><a href="#cb7-313" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"Erro: sem ação para estado </span><span class="sc">{</span>state<span class="sc">}</span><span class="ss"> e token '</span><span class="sc">{</span>token<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb7-314"><a href="#cb7-314" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb7-315"><a href="#cb7-315" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-316"><a href="#cb7-316" aria-hidden="true" tabindex="-1"></a>            stack_str <span class="op">=</span> <span class="bu">str</span>(stack)</span>
+<span id="cb7-317"><a href="#cb7-317" aria-hidden="true" tabindex="-1"></a>            input_str <span class="op">=</span> <span class="st">' '</span>.join(input_tokens[i:])</span>
+<span id="cb7-318"><a href="#cb7-318" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-319"><a href="#cb7-319" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> action[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'shift'</span>:</span>
+<span id="cb7-320"><a href="#cb7-320" aria-hidden="true" tabindex="-1"></a>                action_str <span class="op">=</span> <span class="ss">f"shift para estado </span><span class="sc">{</span>action[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-321"><a href="#cb7-321" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>step<span class="sc">:&lt;6}</span><span class="ss"> </span><span class="sc">{</span>stack_str<span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>input_str<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>action_str<span class="sc">:&lt;30}</span><span class="ss">"</span>)</span>
+<span id="cb7-322"><a href="#cb7-322" aria-hidden="true" tabindex="-1"></a>                stack.append(action[<span class="dv">1</span>])</span>
+<span id="cb7-323"><a href="#cb7-323" aria-hidden="true" tabindex="-1"></a>                symbols.append(token)</span>
+<span id="cb7-324"><a href="#cb7-324" aria-hidden="true" tabindex="-1"></a>                i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-325"><a href="#cb7-325" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-326"><a href="#cb7-326" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> action[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'reduce'</span>:</span>
+<span id="cb7-327"><a href="#cb7-327" aria-hidden="true" tabindex="-1"></a>                prod_idx <span class="op">=</span> action[<span class="dv">1</span>]</span>
+<span id="cb7-328"><a href="#cb7-328" aria-hidden="true" tabindex="-1"></a>                prod <span class="op">=</span> <span class="va">self</span>.productions[prod_idx]</span>
+<span id="cb7-329"><a href="#cb7-329" aria-hidden="true" tabindex="-1"></a>                rhs_str <span class="op">=</span> <span class="st">' '</span>.join(prod.rhs) <span class="cf">if</span> prod.rhs <span class="cf">else</span> <span class="st">'ε'</span></span>
+<span id="cb7-330"><a href="#cb7-330" aria-hidden="true" tabindex="-1"></a>                prod_str <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>prod<span class="sc">.</span>lhs<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>rhs_str<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-331"><a href="#cb7-331" aria-hidden="true" tabindex="-1"></a>                action_str <span class="op">=</span> <span class="ss">f"reduce por </span><span class="sc">{</span>prod_str<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-332"><a href="#cb7-332" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>step<span class="sc">:&lt;6}</span><span class="ss"> </span><span class="sc">{</span>stack_str<span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>input_str<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>action_str<span class="sc">:&lt;30}</span><span class="ss">"</span>)</span>
+<span id="cb7-333"><a href="#cb7-333" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-334"><a href="#cb7-334" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Remove estados e símbolos da pilha</span></span>
+<span id="cb7-335"><a href="#cb7-335" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prod.rhs)):</span>
+<span id="cb7-336"><a href="#cb7-336" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> symbols:</span>
+<span id="cb7-337"><a href="#cb7-337" aria-hidden="true" tabindex="-1"></a>                        symbols.pop()</span>
+<span id="cb7-338"><a href="#cb7-338" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> stack:</span>
+<span id="cb7-339"><a href="#cb7-339" aria-hidden="true" tabindex="-1"></a>                        stack.pop()</span>
+<span id="cb7-340"><a href="#cb7-340" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-341"><a href="#cb7-341" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Adiciona o não-terminal produzido</span></span>
+<span id="cb7-342"><a href="#cb7-342" aria-hidden="true" tabindex="-1"></a>                symbols.append(prod.lhs)</span>
+<span id="cb7-343"><a href="#cb7-343" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-344"><a href="#cb7-344" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Consulta GOTO</span></span>
+<span id="cb7-345"><a href="#cb7-345" aria-hidden="true" tabindex="-1"></a>                goto_state <span class="op">=</span> <span class="va">self</span>.goto_table.get((stack[<span class="op">-</span><span class="dv">1</span>], prod.lhs))</span>
+<span id="cb7-346"><a href="#cb7-346" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> goto_state <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-347"><a href="#cb7-347" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(<span class="ss">f"Erro: sem entrada GOTO para estado </span><span class="sc">{</span>stack[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss"> e símbolo </span><span class="sc">{</span>prod<span class="sc">.</span>lhs<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-348"><a href="#cb7-348" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb7-349"><a href="#cb7-349" aria-hidden="true" tabindex="-1"></a>                stack.append(goto_state)</span>
+<span id="cb7-350"><a href="#cb7-350" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-351"><a href="#cb7-351" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> action[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'accept'</span>:</span>
+<span id="cb7-352"><a href="#cb7-352" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>step<span class="sc">:&lt;6}</span><span class="ss"> </span><span class="sc">{</span>stack_str<span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>input_str<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span><span class="st">'Accept!'</span><span class="sc">:&lt;30}</span><span class="ss">"</span>)</span>
+<span id="cb7-353"><a href="#cb7-353" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb7-354"><a href="#cb7-354" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-355"><a href="#cb7-355" aria-hidden="true" tabindex="-1"></a>            step <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-356"><a href="#cb7-356" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> step <span class="op">&gt;</span> <span class="dv">100</span>:  <span class="co"># Proteção contra loops infinitos</span></span>
+<span id="cb7-357"><a href="#cb7-357" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="st">"Limite de passos excedido"</span>)</span>
+<span id="cb7-358"><a href="#cb7-358" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb7-359"><a href="#cb7-359" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-360"><a href="#cb7-360" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb7-361"><a href="#cb7-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-362"><a href="#cb7-362" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
+<span id="cb7-363"><a href="#cb7-363" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb7-364"><a href="#cb7-364" aria-hidden="true" tabindex="-1"></a>    parser <span class="op">=</span> LR1Parser()</span>
+<span id="cb7-365"><a href="#cb7-365" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-366"><a href="#cb7-366" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define a gramática E → E + n | n</span></span>
+<span id="cb7-367"><a href="#cb7-367" aria-hidden="true" tabindex="-1"></a>    parser.add_production(<span class="st">'E'</span>, [<span class="st">'E'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>])</span>
+<span id="cb7-368"><a href="#cb7-368" aria-hidden="true" tabindex="-1"></a>    parser.add_production(<span class="st">'E'</span>, [<span class="st">'n'</span>])</span>
+<span id="cb7-369"><a href="#cb7-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-370"><a href="#cb7-370" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Aumenta a gramática</span></span>
+<span id="cb7-371"><a href="#cb7-371" aria-hidden="true" tabindex="-1"></a>    parser.augment_grammar()</span>
+<span id="cb7-372"><a href="#cb7-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-373"><a href="#cb7-373" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constrói o parser</span></span>
+<span id="cb7-374"><a href="#cb7-374" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Construindo estados do autômato LR(1)..."</span>)</span>
+<span id="cb7-375"><a href="#cb7-375" aria-hidden="true" tabindex="-1"></a>    parser.build_states()</span>
+<span id="cb7-376"><a href="#cb7-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-377"><a href="#cb7-377" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Estados construídos: </span><span class="sc">{</span><span class="bu">len</span>(parser.states)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-378"><a href="#cb7-378" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-379"><a href="#cb7-379" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Imprime todos os estados</span></span>
+<span id="cb7-380"><a href="#cb7-380" aria-hidden="true" tabindex="-1"></a>    parser.print_states()</span>
+<span id="cb7-381"><a href="#cb7-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-382"><a href="#cb7-382" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constrói a tabela de parsing</span></span>
+<span id="cb7-383"><a href="#cb7-383" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Construindo tabela ACTION/GOTO..."</span>)</span>
+<span id="cb7-384"><a href="#cb7-384" aria-hidden="true" tabindex="-1"></a>    conflicts <span class="op">=</span> parser.build_parsing_table()</span>
+<span id="cb7-385"><a href="#cb7-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-386"><a href="#cb7-386" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> conflicts:</span>
+<span id="cb7-387"><a href="#cb7-387" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Conflitos encontrados: </span><span class="sc">{</span><span class="bu">len</span>(conflicts)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-388"><a href="#cb7-388" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> conflict <span class="kw">in</span> conflicts:</span>
+<span id="cb7-389"><a href="#cb7-389" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f" - </span><span class="sc">{</span>conflict<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-390"><a href="#cb7-390" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-391"><a href="#cb7-391" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Nenhum conflito encontrado."</span>)</span>
+<span id="cb7-392"><a href="#cb7-392" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-393"><a href="#cb7-393" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mostra as produções numeradas</span></span>
+<span id="cb7-394"><a href="#cb7-394" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Produções da gramática aumentada:"</span>)</span>
+<span id="cb7-395"><a href="#cb7-395" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, prod <span class="kw">in</span> <span class="bu">enumerate</span>(parser.productions):</span>
+<span id="cb7-396"><a href="#cb7-396" aria-hidden="true" tabindex="-1"></a>        rhs_str <span class="op">=</span> <span class="st">' '</span>.join(prod.rhs) <span class="cf">if</span> prod.rhs <span class="cf">else</span> <span class="st">'ε'</span></span>
+<span id="cb7-397"><a href="#cb7-397" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f" </span><span class="sc">{</span>idx<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>prod<span class="sc">.</span>lhs<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>rhs_str<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-398"><a href="#cb7-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-399"><a href="#cb7-399" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Testa o parser</span></span>
+<span id="cb7-400"><a href="#cb7-400" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">75</span>)</span>
+<span id="cb7-401"><a href="#cb7-401" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Analisando 'n + n':"</span>)</span>
+<span id="cb7-402"><a href="#cb7-402" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">75</span>)</span>
+<span id="cb7-403"><a href="#cb7-403" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> parser.parse([<span class="st">'n'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>])</span>
+<span id="cb7-404"><a href="#cb7-404" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Resultado: </span><span class="sc">{</span><span class="st">'Aceito'</span> <span class="cf">if</span> result <span class="cf">else</span> <span class="st">'Rejeitado'</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-405"><a href="#cb7-405" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-406"><a href="#cb7-406" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span> <span class="op">+</span> <span class="st">"="</span><span class="op">*</span><span class="dv">75</span>)</span>
+<span id="cb7-407"><a href="#cb7-407" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Analisando 'n + n + n':"</span>)</span>
+<span id="cb7-408"><a href="#cb7-408" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span><span class="op">*</span><span class="dv">75</span>)</span>
+<span id="cb7-409"><a href="#cb7-409" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> parser.parse([<span class="st">'n'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>])</span>
+<span id="cb7-410"><a href="#cb7-410" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Resultado: </span><span class="sc">{</span><span class="st">'Aceito'</span> <span class="cf">if</span> result <span class="cf">else</span> <span class="st">'Rejeitado'</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="exercícios" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">8.6</span> Exercícios</h2>
+<section id="exercício-1-gramática-de-parênteses-balanceados" class="level3" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="exercício-1-gramática-de-parênteses-balanceados"><span class="header-section-number">8.6.1</span> Exercício 1: Gramática de Parênteses Balanceados</h3>
+<p>Desenvolva um <em>parser</em> <span class="math inline">\(LR(1)\)</span> para reconhecer strings de parênteses balanceados considerando a seguinte gramática:</p>
+<pre class="bnf"><code>S → ( S ) S
+S → ε</code></pre>
+<ol type="1">
+<li><p><strong>Aumente a gramática</strong> adicionando a produção inicial <code>S' → S</code>.</p></li>
+<li><p><strong>Construa os estados do autômato <span class="math inline">\(LR(1)\)</span></strong>: &nbsp; &nbsp;- Calcule o estado inicial <span class="math inline">\(I_0\)</span> usando a operação <code>CLOSURE</code> &nbsp; &nbsp;- Determine todos os estados usando a operação <code>GOTO</code> &nbsp; &nbsp;- Liste todos os itens <span class="math inline">\(LR(1)\)</span> em cada estado</p></li>
+<li><p><strong>Construa a tabela ACTION/GOTO completa</strong></p></li>
+<li><p><strong>Teste o <em>parser</em> com as seguintes strings</strong>: &nbsp; &nbsp;- <code>()</code>; &nbsp; &nbsp;- <code>(())</code>; &nbsp; &nbsp;- <code>()()</code>; &nbsp; &nbsp;- <code>(()(()))</code>.</p></li>
+</ol>
+<p><strong>Dica para começar</strong>:</p>
+<p>O estado inicial <span class="math inline">\(I_0\)</span> é derivado do núcleo <code>[S' → •S, $]</code>. Ao aplicar a operação <code>CLOSURE</code> neste item, o <em>lookahead</em> para as produções de <code>S</code> é <code>FIRST(ε$)</code>, que resulta em <code>$</code>. Como nenhuma das produções de <code>S</code> começa com um não-terminal, a operação <code>CLOSURE</code> se estabiliza rapidamente. O estado inicial <span class="math inline">\(I_0\)</span> correto é:</p>
+<pre class="bnf"><code>[S' → •S, $]
+[S → •( S ) S, $]
+[S → •, $]</code></pre>
+<p>Note que esta gramática tem uma produção vazia (<code>S → ε</code>), o que significa que o item <code>[S → •, $]</code> já é um item de redução. Isso levará a uma ação de <code>reduce</code> no estado <span class="math inline">\(I_0\)</span> para o <em>lookahead</em> <code>$</code>.</p>
+</section>
+<section id="exercício-2-expressões-aritméticas-com-as-quatro-operações" class="level3" data-number="8.6.2">
+<h3 data-number="8.6.2" class="anchored" data-anchor-id="exercício-2-expressões-aritméticas-com-as-quatro-operações"><span class="header-section-number">8.6.2</span> Exercício 2: Expressões Aritméticas com as Quatro Operações</h3>
+<p>Desenvolva um <em>parser</em> <span class="math inline">\(LR(1)\)</span> para expressões aritméticas com as quatro operações básicas. A gramática para este exercício é a seguinte:</p>
+<pre class="bnf"><code>E → E + T
+E → E - T
+E → T
+T → T * F
+T → T / F
+T → F
+F → ( E )
+F → num</code></pre>
+<p><strong>Tarefas</strong>:</p>
+<ol type="1">
+<li><p><strong>Aumente a gramática</strong> com <code>E' → E</code>.</p></li>
+<li><p><strong>Construa pelo menos os 5 primeiros estados</strong> do autômato <span class="math inline">\(LR(1)\)</span>: &nbsp; &nbsp;- Estado <span class="math inline">\(I_0\)</span>: estado inicial &nbsp; &nbsp;- Estados resultantes de <span class="math inline">\(GOTO(I_0, E)\)</span>, <span class="math inline">\(GOTO(I_0, T)\)</span>, <span class="math inline">\(GOTO(I_0, F)\)</span> &nbsp; &nbsp;- Estados resultantes de <span class="math inline">\(GOTO(I_0, ()\)</span> e <span class="math inline">\(GOTO(I_0, num)\)</span></p></li>
+<li><p><strong>Identifique possíveis conflitos</strong> na gramática: &nbsp; &nbsp;- Esta gramática não possui conflitos se construída corretamente &nbsp; &nbsp;- A hierarquia E → T → F garante a precedência correta dos operadores</p></li>
+<li><p><strong>Construa a tabela ACTION/GOTO</strong> para os estados que você calculou.</p></li>
+<li><p><strong>Trace a análise</strong> da expressão <code>num + num * num</code> usando sua tabela parcial.</p></li>
+</ol>
+<p><strong>Estrutura do Estado Inicial <span class="math inline">\(I_0\)</span></strong>:</p>
+<p>Para construir o estado <span class="math inline">\(I_0\)</span> canônico, lembre-se de aplicar a regra <code>CLOSURE</code> recursivamente. O processo começa com o núcleo <code>[E' → •E, $]</code>, que gera um conjunto base de itens com <em>lookahead</em> <code>$</code>. Em seguida, cada item com um não-terminal após o ponto (<code>•</code>) irá gerar novos itens com <em>lookaheads</em> específicos.</p>
+<p>Por exemplo:</p>
+<ul>
+<li>O núcleo <code>[E' → •E, $]</code> gera o item <code>[E → •E + T, $]</code>.</li>
+<li>Este item, por sua vez, ao aplicar <code>CLOSURE</code>, gera novos itens para as produções de <code>E</code> com <em>lookahead</em> <code>FIRST(+ T $) = {+}</code>.</li>
+</ul>
+<p>O estado <span class="math inline">\(I_0\)</span> completo é grande. A seguir, uma amostra representativa de sua estrutura, mostrando os itens gerados por diferentes <em>lookaheads</em>:</p>
+<pre class="bnf"><code>/* Itens gerados a partir do lookahead inicial '$' */
+[E' → •E, $]
+[E → •E + T, $]
+[E → •E - T, $]
+[E → •T, $]
+[T → •T * F, $]
+[T → •T / F, $]
+[T → •F, $]
+[F → •( E ), $]
+[F → •num, $]
+
+/* Itens adicionais gerados a partir de [E → •E + T, $] com lookahead '+' */
+[E → •E + T, +]
+[E → •E - T, +]
+[E → •T, +]
+[T → •T * F, +]
+[T → •T / F, +]
+[T → •F, +]
+[F → •( E ), +]
+[F → •num, +]
+
+/* E assim por diante para os lookaheads '-', '*', '/' ... */</code></pre>
+<p><strong>Observações sobre Precedência</strong>:</p>
+<ul>
+<li>A estrutura da gramática implementa naturalmente a precedência: &nbsp; - <code>*</code> e <code>/</code> têm maior precedência (nível T) &nbsp; - <code>+</code> e <code>-</code> têm menor precedência (nível E)</li>
+<li>A associatividade à esquerda é garantida pela recursão à esquerda nas produções</li>
+</ul>
+<p><strong>String de Teste Adicional</strong>: <code>( num + num ) * num</code></p>
+<p>Para esta string, observe como os parênteses forçam a avaliação da soma antes da multiplicação, demonstrando que a gramática respeita corretamente a precedência definida pelos parênteses.</p>
+</section>
+<section id="exercício-3-linguagem-de-comandos" class="level3" data-number="8.6.3">
+<h3 data-number="8.6.3" class="anchored" data-anchor-id="exercício-3-linguagem-de-comandos"><span class="header-section-number">8.6.3</span> Exercício 3: Linguagem de Comandos</h3>
+<p>Desenvolva um <em>parser</em> <span class="math inline">\(LR(1)\)</span> para a mini-linguagem de comandos a seguir:</p>
+<pre class="bnf"><code>PROG → CMDS
+CMDS → CMDS CMD | CMD
+CMD → if EXPR then CMD else CMD
+ | if EXPR then CMD
+ | while EXPR do CMD
+ | begin CMDS end
+ | assign id = EXPR
+EXPR → EXPR &lt; EXPR | EXPR + EXPR | id | num</code></pre>
+<p><strong>Tarefas</strong>:</p>
+<ol type="1">
+<li>Identifique o conflito <em>Shift-Reduce</em> causado pelo “<em>dangling else</em>”</li>
+<li>Resolva o conflito dando preferência ao <em>shift</em> ;</li>
+<li>Construa os primeiros estados do autômato <span class="math inline">\(LR(1)\)</span>.</li>
+</ol>
+<p><strong>Dica para o Estado Inicial (<code>I₀</code>)</strong>:</p>
+<p>Assim como no exercício anterior, o estado <code>I₀</code> será grande devido à propagação de <em>lookaheads</em>. O processo começa com <code>[PROG → •CMDS, $]</code>. A aplicação de <code>CLOSURE</code> neste item irá gerar itens para as produções de <code>CMDS</code> com <em>lookahead</em> <code>$</code>.</p>
+<p>Por sua vez, um item como <code>[CMDS → •CMDS CMD, $]</code> irá gerar novos itens para <code>CMDS</code> e <code>CMD</code> com <em>lookaheads</em> derivados de <code>FIRST(CMD $)</code>. O conjunto <code>FIRST(CMD)</code> inclui terminais como <code>{if, while, begin, assign}</code>.</p>
+<p>Abaixo está uma amostra para ilustrar o conceito, mas a construção completa exigirá aplicar a regra <code>CLOSURE</code> até a estabilização:</p>
+<pre class="bnf"><code>/* Itens base com lookahead '$' */
+[PROG → •CMDS, $]
+[CMDS → •CMDS CMD, $]
+[CMDS → •CMD, $]
+[CMD → •if EXPR then CMD else CMD, $]
+[CMD → •if EXPR then CMD, $]
+/* ...e as outras produções de CMD com lookahead '$' */
+
+/* Itens gerados a partir de [CMDS → •CMDS CMD, $], 
+   com lookaheads de FIRST(CMD) = {if, while, begin, assign} */
+[CMDS → •CMDS CMD, if]
+[CMDS → •CMD, if]
+[CMD → •if EXPR then CMD else CMD, if]
+/* ...e assim por diante para 'if' e os outros terminais */</code></pre>
+<p><strong>String de Teste</strong>: <code>if x &lt; 5 then begin assign y = x + 1 end</code></p>
+<p>A solução completa requer cuidado com conflitos e decisões sobre precedência e associatividade.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-first-follow.html" class="pagination-link" aria-label="Conjuntos FIRST e FOLLOW">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/07-parserLR1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
