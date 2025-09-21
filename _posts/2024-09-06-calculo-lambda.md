@@ -34,17 +34,15 @@ featured: false
 toc: true
 preview: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
 beforetoc: Começamos com os fundamentos teóricos e seguimos para as aplicações práticas em linguagens de programação funcionais. Explicamos abstração, aplicação e recursão. Mostramos exemplos de currying e combinadores de ponto fixo. O cálculo lambda é a base da computação funcional.
-lastmod: 2025-05-06T11:04:17.813Z
+lastmod: 2025-09-21T15:07:51.505Z
 date: 2024-09-08T21:19:30.955Z
 ---
 
 # Introdução, História e Motivações e Limites
 
->Todos os exercícios desta página foram removidos.
->Os exercícios estarão disponíveis apenas no livro que está sendo escrito.
->Removi também o capítulo sobre cálculo lambda simplesmente tipado. E algumas partes aleatórias que não estavam muito boas.
+> Todos os exercícios desta página foram removidos. Os exercícios estarão disponíveis apenas no livro que está sendo escrito. Removi também o capítulo sobre cálculo lambda simplesmente tipado. E algumas partes aleatórias que não estavam muito boas.
 >
->**[O livro está disponível aqui](https://amzn.to/4jIdMEm)**
+> [**O livro está disponível aqui**](https://amzn.to/4jIdMEm)
 
 O cálculo lambda é uma teoria formal para expressar computação por meio da visão de funções como fórmulas. Um sistema para manipular funções como sentenças, desenvolvido por [Alonzo Church](https://en.wikipedia.org/wiki/Alonzo_Church) sob uma visão extensionista das funções na década de 1930. Nesta teoria usamos funções para representar todos os dados e operações. Em cálculo lambda, tudo é uma função e uma função simples é parecida com:
 
@@ -64,20 +62,20 @@ No cálculo lambda, uma função é escrita como $\lambda x.\;E$. Aqui, $\lambda
 >
 > Seja $f$ uma função no cálculo lambda. Dizemos que $f$ é uma função de ordem superior se:
 >
-> 1. $f$ aceita uma função como argumento.
-> 2. $f$ retorna uma função como resultado.
+> 1.  $f$ aceita uma função como argumento.
+> 2.  $f$ retorna uma função como resultado.
 >
 > No cálculo lambda puro, as funções são anônimas. No entanto, em contextos de programação funcional, é comum nomear funções de ordem superior para facilitar seu uso e identificação em operações complexas. Vamos tomar esta licença poética, importada da programação funcional, de forma livre e temerária em todo este texto. Sempre que agradar ao pobre autor.
 >
-> Considere a mesma função de adição de ordem superior, agora nomeada como `adicionar`:
+> Considere a mesma função de adição de ordem superior, agora nomeada como $\text{adicionar}$:
 >
 > $$\text{adicionar} = \lambda x.\; \lambda y.\; x + y$$
 >
-> Essa função nomeada pode ser usada como argumento para outras funções de ordem superior, como `mapear`:
+> Essa função nomeada pode ser usada como argumento para outras funções de ordem superior, como $\text{mapear}$, que aplica uma função a cada elemento de uma lista:
 >
 > $$\text{mapear} \; (\text{adicionar} \; 2) \; [1, 2, 3]$$
 >
-> Neste caso, a aplicação resulta em:
+> Neste caso, a aplicação de $\text{mapear}$ resulta em:
 >
 > $$[3, 4, 5]$$
 
@@ -87,18 +85,18 @@ Vamos começar definindo uma expressão $M$ contendo uma variável $x$, na forma
 
 $$M(x) = x^2 + 2x + 1$$
 
-A medida que $x$ varia no domínio dos números naturais podemos obter a função representada na notação matemática padrão por $x \mapsto x^2 + x + 1$ este relação define o conjunto de valores que $M$ pode apresentar em relação aos valores de $x$. Porém, se fornecermos um valor de entrada específico, por exemplo, $2$, para $x$, valor da função será $2^2 + 4 + 1 = 9$.
+À medida que $x$ varia no domínio dos números naturais podemos obter a função representada na notação matemática padrão por $x \mapsto x^2 + 2x + 1$ esta relação define o conjunto de valores que $M$ pode apresentar em relação aos valores de $x$. Porém, se fornecermos um valor de entrada específico, por exemplo, $2$, para $x$, valor da função será $2^2 + 4 + 1 = 9$.
 
 Avaliando funções desta forma, Church introduziu a notação
 
-$$λx: (x^2 + x + 1)$$
+$$\lambda x.(x^2 + 2x + 1)$$
 
-Para representar a expressão $M$. Nesta representação temos uma abstração. Justamente porque a expressão estática $M(x)$, para $x$ fixo, torna-se uma função *abstrata* representada por $λx:M$.
+Para representar a expressão $M$. Nesta representação temos uma abstração. Justamente porque a expressão estática $M(x)$, para $x$ fixo, torna-se uma função abstrata representada por $\lambda x.M$.
 
 Linguagens de programação modernas, como Python ou JavaScript, têm suas próprias formas de representar funções. Por exemplo, em Python, uma função pode ser representada assim:
 
 ``` haskell
--- Define a função f, que toma um argumento x and devolve x^2 + 2*x + 1
+-- Define a função f, que toma um argumento x e devolve x^2 + 2*x + 1
 f :: Int -> Int
 f x = x^2 + 2*x + 1
 ```
@@ -111,7 +109,7 @@ A notação $\lambda$ indica que estamos criando uma função anônima. Essa abs
 
 A abstração cria uma função sem necessariamente avaliá-la. A variável $x$ em $\lambda x.\;E$ está ligada à função e não é avaliada até que um argumento seja aplicado. **A abstração é puramente declarativa**, descreve o comportamento da função sem produzir um valor imediato.
 
-**A aplicação**, expressa por $M\;N$, **é o processo equivalente a avaliar uma função algébrica em um argumento**. Aqui, $M$ representa a função e $N$ o argumento que é passado para essa função. Ou, como dizemos em cálculo lambda, **o argumento que será aplicado a função**\*. Considere a expressão:
+**A aplicação**, expressa por $M\;N$, **é o processo equivalente a avaliar uma função algébrica em um argumento**. Aqui, $M$ representa a função e $N$ o argumento que é passado para essa função. Ou, como dizemos em cálculo lambda, **o argumento que será aplicado a função**. Considere a expressão:
 
 $$(\lambda x.\;x + 5)\;3$$
 
@@ -146,8 +144,8 @@ Uma das características principais do cálculo lambda é representar valores, d
 $$\begin{align*}
 0 &= \lambda s.\;\lambda z.\;z \\
 1 &= \lambda s.\;\lambda z.\;s\;z \\
-2 &= \lambda s.\;\lambda z. s\;(s\;z) \\
-3 &= \lambda s.\;\lambda z.\;s\;(s (s\;z))
+2 &= \lambda s.\;\lambda z.\;s\;(s\;z) \\
+3 &= \lambda s.\;\lambda z.\;s\;(s\;(s\;z))
 \end{align*}$$
 
 Essa codificação permite que operações aritméticas sejam definidas inteiramente em termos de funções. Por exemplo, a função sucessor, usada para provar a criação de conjuntos de números contáveis, como os naturais e os inteiros, pode ser expressa como:
@@ -182,7 +180,7 @@ Formalmente dizemos que:
 
 2.  Se $M$ e $N$ são termos lambda, então $(M\; N)$ é um termo lambda chamado de aplicação.
 
-3.  Se $E$ é um termo lambda, e $x$ é uma variável, então a expressão $(λx. E)$ é um termo lambda chamado de abstração lambda.
+3.  Se $E$ é um termo lambda, e $x$ é uma variável, então a expressão $(\lambda x. E)$ é um termo lambda chamado de abstração lambda.
 
 Esses elementos básicos, *variáveis, abstração e aplicação*, formam a base do cálculo lambda. Eles permitem definir e aplicar funções de forma simples sem a necessidade de nomes ou símbolos adicionais.
 
@@ -220,12 +218,23 @@ $$
 \downarrow \\
 \lambda y \\
 \downarrow \\
+\begin{array}{c}
+@ \\
+\diagup \qquad \diagdown \\
+\begin{array}{c}
+@ \\
 \diagup \quad \diagdown \\
-\begin{array}{cc}
-\quad x \quad & \quad \lambda z \quad \\
-& \downarrow \\
-& \begin{array}{cc}
-\;y &\;z
+ x \quad \quad y
+\end{array}
+&
+\begin{array}{c}
+\lambda z \\
+\downarrow \\
+\begin{array}{c}
+@ \\
+\diagup \quad \diagdown \\
+ y \quad \quad z
+\end{array}
 \end{array}
 \end{array}
 \end{array}
@@ -279,7 +288,7 @@ No contexto do cálculo lambda, a semântica operacional se concentra em como os
 
 Abaixo, são apresentadas as principais reduções operacionais utilizadas no cálculo lambda:
 
-1.  Redução Beta: A regra que define a ação de aplicação e chamada de *redução beta ou redução-*$beta$. Usamos a redução beta quando uma função é aplicada a um argumento. Neste caso, a redução beta substitui a variável ligada no corpo da função pelo argumento fornecido:
+1.  Redução Beta: A regra que define a ação de aplicação e chamada de redução beta ou $\text{redução-}\beta$. Usamos a redução beta quando uma função é aplicada a um argumento. Neste caso, a redução beta substitui a variável ligada no corpo da função pelo argumento fornecido:
 
     $$(\lambda x.\;e_1)\;e_2\;\rightarrow\;e_1[x := e_2]$$
 
@@ -339,9 +348,9 @@ Abaixo, são apresentadas as principais reduções operacionais utilizadas no c�
 
     $$\lambda x.\;f(x) \rightarrow f$$
 
-Essas regras garantem que a avaliação seja consistente. Por fim, mas não menos importante, o **Teorema de Church-Rosser** parece implicar que, *se uma expressão pode ser reduzida de várias formas então todas chegarão à mesma forma normal, se esta forma existir*[^6].
+Essas regras garantem que a avaliação seja consistente. Por fim, mas não menos importante, o **Teorema de Church-Rosser** parece implicar que, *se uma expressão pode ser reduzida de várias formas então todas chegarão à mesma forma normal, se esta forma existir*[^1].
 
-[^6]: Alonzo Church and J.B. Rosser. **Some properties of conversion**. Transactions of the American Mathematical Society, 39(3):472–482, May 1936. <https://www.ams.org/journals/tran/1936-039-03/S0002-9947-1936-1501858-0/S0002-9947-1936-1501858-0.pdf>
+[^1]: Alonzo Church and J.B. Rosser. **Some properties of conversion**. Transactions of the American Mathematical Society, 39(3):472–482, May 1936. <https://www.ams.org/journals/tran/1936-039-03/S0002-9947-1936-1501858-0/S0002-9947-1936-1501858-0.pdf>
 
 > No cálculo lambda, podemos dizer que um termo está em *forma normal* quando não é possível realizar mais nenhuma redução beta sobre ele. Ou seja, é um termo que não contém nenhum *redex*, expressão redutível e, portanto, não pode ser simplificado ou reescrito de nenhuma outra forma. Formalmente: um termo $M$ está em forma normal se:
 >
@@ -355,10 +364,10 @@ Essas regras garantem que a avaliação seja consistente. Por fim, mas não meno
 
 A substituição é a operação estrutural do cálculo lambda. Ela funciona substituindo uma variável livre por um termo, e sua formalização evita a captura de variáveis, garantindo que ocorra de forma correta. A substituição é definida recursivamente:
 
-1.  $[N/x] x\;N$
-2.  $[N/x] y\;y, \quad \text{se}\;x \neq y$
-3.  $[N/x]\;(M_1 \, M_2) ([N/x]M_1)([N/x]M_2)$
-4.  $[N/x]\;(\lambda Y \, M) \lambda Y \, ([N/x]M), \quad \text{se} ; x \neq Y \quad \text{e} \quad Y \notin FV(N)$
+1.  $[N/x] x\; := N$
+2.  $[N/x] y\; := y, \quad \text{se}\; x \neq y$
+3.  $[N/x]\;(M_1 \, M_2) := ([N/x]M_1)([N/x]M_2)$
+4.  $[N/x]\;(\lambda Y \, M) := \lambda Y \, ([N/x]M), \quad \text{se} ; x \neq Y \quad \text{e} \quad Y \notin FV(N)$
 
 Aqui, $FV(N)$ é o conjunto de variáveis livres, *Free Variable* de $N$. A condição $y \notin FV(N)$ é necessária para evitar a captura de variáveis livres.
 
@@ -370,7 +379,7 @@ Formalmente dizemos que: para qualquer termo lambda $M$, o conjunto $FV(M)$ de v
 2.  Se $M = (M_1 M_2)$, então:
     -   $FV(M) = FV(M_1) \cup FV(M_2)$
     -   $BV(M) = BV(M_1) \cup BV(M_2)$
-3.  Se $M = (\lambda x: M_1)$, então:
+3.  Se $M = (\lambda x. M_1)$, então:
     -   $FV(M) = FV(M_1) \setminus \{x\}$
     -   $BV(M) = BV(M_1) \cup \{x\}$
 
@@ -379,7 +388,7 @@ Se $x \in FV(M_1)$, dizemos que as ocorrências da variável $x$ ocorrem no esco
 **Exemplo**:
 
 $$
-FV\left((\lambda x: yx)z\right) = \{y, z\}, \quad BV\left((\lambda x: yx)z\right) = \{x\}
+FV\left((\lambda x. yx)z\right) = \{y, z\}, \quad BV\left((\lambda x. yx)z\right) = \{x\}
 $$
 
 e
@@ -440,7 +449,7 @@ Neste exemplo, se realizássemos a substituição diretamente, a variável livre
 
 2.  **Substituição**: Aplicamos $[y/x]\;(x)$, resultando em $y$.
 
-3.  **Resultado**: A expressão torna-se $\lambda z.\;y $, e $y$ permanece livre.
+3.  **Resultado**: A expressão torna-se $\lambda z.\;y$, e $y$ permanece livre.
 
 Evitamos a captura da variável livre $y$ pela abstração lambda.
 
@@ -476,7 +485,7 @@ A interpretação denotacional é formalmente definida pelas seguintes regras:
 
     Isso significa que a interpretação de $\lambda x.\;E$ é uma função que, dado um valor $v$, avalia o corpo $E$ no ambiente no qual $x$ está associado a $v$. Em bom português esta regra significa que uma abstração $\lambda x.\;E$ representa uma função anônima. Na semântica denotacional, mapeamos essa abstração para uma função matemática que, dado um valor de entrada, produz um valor de saída. Neste caso, teremos dois passos:
 
-    1.  **Definição da Função** $f$: A abstração é interpretada como uma função $f$. Neste caso, para cada valor de entrada $v$, calculamos o significado do corpo $e$ no ambiente estendido $\rho[x \mapsto v]$.
+    1.  **Definição da Função** $f$: A abstração é interpretada como uma função $f$. Neste caso, para cada valor de entrada $v$, calculamos o significado do corpo $E$ no ambiente estendido $\rho[x \mapsto v]$.
 
     2.  **Ambiente Estendido**: O ambiente $\rho[x \mapsto v]$ é igual a $\rho$, exceto que a variável $x$ agora está associada ao valor $v$.
 
@@ -526,11 +535,11 @@ O ambiente $\rho$ armazena as associações entre variáveis e seus valores corr
 
 **Exemplo de Atualização**:
 
--   Ambiente inicial: $\rho = \{ Y \mapsto 2 \}$
+-   Ambiente inicial: $\rho = \{ y \mapsto 2 \}$
 
 -   Avaliando $\lambda x.\;x + y$ com $x = 3$:
 
--   Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ Y \mapsto 2, x \mapsto 3 \}$
+-   Novo ambiente: $\rho' = \rho[x \mapsto 3] = \{ y \mapsto 2, x \mapsto 3 \}$
 
 -   Avaliamos $x + y$ em $\rho'$:
 
@@ -542,7 +551,7 @@ A experta leitora deve concordar que exemplos, facilitam o entendimento e nunca 
 
 **Exemplo 1**: Com Variáveis Livres: considere a expressão $\lambda x.\;x + y$, na qual $y$ é uma variável livre.
 
--   Ambiente Inicial: $\rho = \{ Y \mapsto 4 \}$
+-   Ambiente Inicial: $\rho = \{ y \mapsto 4 \}$
 -   Interpretação da Abstração:
 
 $$
@@ -559,13 +568,13 @@ $$
 
     $$
      [\lambda x.\;\lambda y.\;x + y]_\rho = f, \quad \text{tal que} \quad f(v) \, = [\lambda y.\;x + y]_{\rho[x \mapsto v]}
-     $$
+    $$
 
     -   Agora, interpretamos a abstração interna no ambiente estendido:
 
     $$
-     f(v) \, = g, \quad \text{tal que} \quad g(w) \, = [x + y]_{\rho[x \mapsto v, Y \mapsto w]} = v + w
-     $$
+     f(v) \, = g, \quad \text{tal que} \quad g(w) \, = [x + y]_{\rho[x \mapsto v, y \mapsto w]} = v + w
+    $$
 
 -   Aplicação:
 
@@ -577,7 +586,6 @@ $$
 > Observe que a **Semântica Operacional** é geralmente mais adequada para descrever a execução procedural de linguagens que usam passagem por referência, pois permite capturar facilmente como os estados mudam durante a execução. Por outro lado, a **Semântica Denotacional** é mais alinhada com linguagens puras, que preferem passagem por cópia, evitando efeitos colaterais e garantindo que o comportamento das funções possa ser entendido matematicamente.
 >
 > Existe uma conexão direta entre a forma como a semântica de uma linguagem é modelada e o mecanismo de passagem de valor que a linguagem suporta. Linguagens que favorecem efeitos colaterais tendem a ser descritas de forma mais natural por semântica operacional, enquanto aquelas que evitam efeitos colaterais são mais bem descritas por semântica denotacional.
->
 
 # Técnicas de Redução, Confluência e Combinadores
 
@@ -601,15 +609,15 @@ $$y \notin \text{FV}(E)$$
 
 O termo $\text{FV}(E)$ representa o conjunto de variáveis livres em $E$, e $E[x \mapsto y]$ indica o termo resultante da substituição de todas as ocorrências da variável $x$ por $y$ em $E$, respeitando as ligações de variáveis para evitar a captura. A substituição $E[x \mapsto y]$ é definida formalmente por indução na estrutura de $E$. As possibilidades que devemos analisar são:
 
-1. Se $E$ é uma variável, e for igual a $x$, a substituição resulta em $y$; caso contrário, $E[x \mapsto y]$ é o próprio $E$.
+1.  Se $E$ é uma variável, e for igual a $x$, a substituição resulta em $y$; caso contrário, $E[x \mapsto y]$ é o próprio $E$.
 
-2. Se $E$ é uma aplicação $E_1\;E_2$, a substituição é aplicada a ambos os componentes, ou seja, $E[x \mapsto y] = E_1[x \mapsto y]\;E_2[x \mapsto y]$.
+2.  Se $E$ é uma aplicação $E_1\;E_2$, a substituição é aplicada a ambos os componentes, ou seja, $E[x \mapsto y] = E_1[x \mapsto y]\;E_2[x \mapsto y]$.
 
-3. Se $E$ é uma abstração $\lambda z.\;E'$, a situação depende da relação entre $z$ e $x$.
+3.  Se $E$ é uma abstração $\lambda z.\;E'$, a situação depende da relação entre $z$ e $x$.
 
-    - Se $z$ é igual a $x$, então $E[x \mapsto y]$ é $\lambda z.\;E'$, pois $x$ está ligada por $\lambda z$ e não deve ser substituída dentro de seu próprio escopo.
+    -   Se $z$ é igual a $x$, então $E[x \mapsto y]$ é $\lambda z.\;E'$, pois $x$ está ligada por $\lambda z$ e não deve ser substituída dentro de seu próprio escopo.
 
-    - Se $z$ é diferente de $x$, e $y$ não aparece livre em $E'$ e $z$ é diferente de $y$, então $E[x \mapsto y]$ é $\lambda z.\;E'[x \mapsto y]$.
+    -   Se $z$ é diferente de $x$, e $y$ não aparece livre em $E'$ e $z$ é diferente de $y$, então $E[x \mapsto y]$ é $\lambda z.\;E'[x \mapsto y]$.
 
 4.  Se $y$ aparece livre em $E'$ ou $z$ é igual a $y$, é necessário renomear a variável ligada $z$ para uma nova variável $w$ que não apareça em $E'$ nem em $y$, reescrevendo $E$ como $\lambda w.\;E'[z \mapsto w]$ e então procedendo com a substituição: $E[x \mapsto y] = \lambda w.\;E'[z \mapsto w][x \mapsto y]$.
 
@@ -821,9 +829,7 @@ Isso mostra que, embora $h$ seja definido como uma função que aplica $f$ a $x$
 
 ## Teorema de Church-Rosser
 
-Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^8]. Este teorema, chamado de propriedade da confluência local, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado\;se existir, é o mesmo** Figura 3.4.A.
-
-[^8]: Alonzo Church and J.B. Rosser. **Some properties of conversion**. Transactions of the American Mathematical Society, 39(3):472–482, May 1936. <https://www.ams.org/journals/tran/1936-039-03/S0002-9947-1936-1501858-0/S0002-9947-1936-1501858-0.pdf>
+Um dos obstáculos enfrentado por Church durante o desenvolvimento do cálculo lambda dizia respeito a consistência do processo de redução. Ou seja, provar que um termo lambda mesmo que reduzido de formas diferentes, chegaria a mesma forma normal, caso esta forma existisse. Em busca desta consistência, Church e [J. Barkley Rosser](https://en.wikipedia.org/wiki/J._Barkley_Rosser), seu estudante de doutorado, formularam o teorema que viria a ser chamado de **Teorema de Church-Rosser**[^1]. Este teorema, chamado de propriedade da confluência local, garante a consistência e a previsibilidade do sistema de redução beta, afirmando que, **independentemente da ordem em que as reduções beta são aplicadas, o resultado;se existir, é o mesmo**.
 
 ![Um diagrama com um termo principal, M e dois caminhos de redução chegando ao mesmo ponto](/assets/images/conflu.webp)
 
@@ -847,12 +853,12 @@ O símbolo $\twoheadrightarrow_\beta$ representa uma sequência, possivelmente v
 >
 > 1.  Confluência Local: a confluência local é definida da seguinte forma:
 >
-> Se $M$ é um termo no cálculo lambda e pode ser reduzido em um passo para dois termos distintos $N_1$ e $N_2$, então existe um termo comum $ P$ tal que $N_1$ e $N_2$ podem ser reduzidos em um número finito de passos para $P$. Formalmente:
+> Se $M$ é um termo no cálculo lambda e pode ser reduzido em um passo para dois termos distintos $N_1$ e $N_2$, então existe um termo comum $P$ tal que $N_1$ e $N_2$ podem ser reduzidos em um número finito de passos para $P$. Formalmente:
 >
 > $$M \rightarrow N_1 \quad \text{e} \quad M \rightarrow N_2 \implies \exists P \, : \, N_1 \twoheadrightarrow P \quad \text{e} \quad N_2 \twoheadrightarrow P
 > $$
 >
-> Por exemplo: considere o termo $ M = (\lambda x. x\;x) (\lambda x. x\;x)$. Esse termo pode ser reduzido de duas formas diferentes:
+> Por exemplo: considere o termo $M = (\lambda x. x;x) (\lambda x. x;x)$. Esse termo pode ser reduzido de duas formas diferentes:
 >
 > 1.  Redução da aplicação externa: $(\lambda x.\;x\;x) (\lambda x.\;x\;x) \rightarrow (\lambda x.\;x\;x) (\lambda x.\;x\;x)$ (permanece o mesmo)
 >
@@ -870,7 +876,7 @@ O símbolo $\twoheadrightarrow_\beta$ representa uma sequência, possivelmente v
 >
 > Como o cálculo lambda satisfaz ambas as condições, ele é confluente e terminante globalmente.
 >
-> A prova completa envolve mostrar que, mesmo quando existem múltiplos \>redexes, subtermos que podem ser reduzidos, a ordem de redução não interfere no resultado . Barendregt utiliza as técnicas de *reescrita paralela* e *substituição simultânea* para lidar com as reduções múltiplas.
+> A prova completa envolve mostrar que, mesmo quando existem múltiplos redexes, subtermos que podem ser reduzidos, a ordem de redução não interfere no resultado . Barendregt utiliza as técnicas de *reescrita paralela* e *substituição simultânea* para lidar com as reduções múltiplas.
 >
 > A reescrita paralela envolve a ideia de aplicar todas as reduções possíveis de um termo ao mesmo tempo. Por exemplo, se um termo $M$ contém dois redexes diferentes, como $(\lambda x.\;x)\;(\lambda y.\;y)$, a reescrita paralela reduz ambos os redexes simultaneamente:
 >
@@ -880,9 +886,9 @@ O símbolo $\twoheadrightarrow_\beta$ representa uma sequência, possivelmente v
 >
 > Já substituição simultânea é usada para manter a consistência ao aplicar várias reduções ao mesmo tempo. Por exemplo, se temos um termo $(\lambda x.\;M)\;N$, a substituição simultânea permite que o termo $M[N/x]$ seja avaliado sem considerar ordens de substituição diferentes.
 >
-> A prova de confluência de Barendregt é considerada elegante devido à sua simplicidade e clareza ao estruturar a demonstração de confluência no cálculo lambda. Notadamente porque: assegura a consistência do cálculo lambda, permite que linguagens de programação baseadas no cálculo lambda sejam previsíveis e determinísticas e tem implicações diretas na teoria da prova, nas linguagens de programação funcional e na lógica computacional. [^9]
+> A prova de confluência de Barendregt é considerada elegante devido à sua simplicidade e clareza ao estruturar a demonstração de confluência no cálculo lambda. Notadamente porque: assegura a consistência do cálculo lambda, permite que linguagens de programação baseadas no cálculo lambda sejam previsíveis e determinísticas e tem implicações diretas na teoria da prova, nas linguagens de programação funcional e na lógica computacional. [^3]
 
-[^9]: BARENDREGT, H. P. (1984). **The Lambda Calculus: Its Syntax and Semantics**. North-Holland.
+[^3]: BARENDREGT, H. P. (1984). **The Lambda Calculus: Its Syntax and Semantics**. North-Holland.
 
 O Teorema de Church-Rosser ao estabelecer que o cálculo lambda é um sistema *confluente*, estabelece que, embora possam existir diferentes caminhos de redução a partir de um termo inicial, todos os caminhos levam a um resultado comum. além de provar a consistência do cálculo lambda, O Teorema de Church-Rosser teve impacto na prova da existência da unicidade da forma normal e da independência da estratégia de redução.
 
@@ -1038,9 +1044,9 @@ Finalmente:
 
 $$7$$
 
-Assim, $(add \;3) \;4$ é avaliado para $7$ após a aplicação sequencial de argumentos à função currificada. A Figura 3.5.A, apresenta a aplicação $(add \; 3) = (\lambda x.\;(\lambda y.\;(x + y))) \; 3$ que explicamos acima.
+Assim, $(add \;3) \;4$ é avaliado para $7$ após a aplicação sequencial de argumentos à função currificada. A Figura 3.5. A, apresenta a aplicação $(add \; 3) = (\lambda x.\;(\lambda y.\;(x + y))) \; 3$ que explicamos acima.
 
-![Diagrama da função add currificada como explicado anteriormente](/assets/images/curry.webp) \_Figura 3.5.A: Diagrama mostrando o processo de *currying_em Cálculo lambda*{: class="legend"}
+![Diagrama da função add currificada como explicado anteriormente](/assets/images/curry.webp) _Figura 3.5. A: Diagrama mostrando o processo de *currying_em Cálculo lambda_{: class="legend"}
 
 No *currying*, uma função que originalmente recebe dois argumentos, como $f: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}$, é transformada em uma função que recebe um argumento e retorna outra função. O resultado é uma função da forma $f': \mathbb{N} \rightarrow (\mathbb{N} \rightarrow \mathbb{N})$. Assim, $f'$ recebe o primeiro argumento e retorna uma nova função que espera o segundo argumento para realizar o cálculo final.
 
@@ -1108,7 +1114,7 @@ Schönfinkel apresentou combinadores para representar as operações da lógica 
 >
 > Esta operação foi introduzida pelo filósofo e lógico [Henry Maurice Sheffer](https://en.wikipedia.org/wiki/Henry_M._Sheffer), por isso o nome, em 1913.
 >
-> O trabalho que definiu o traço de Sheffer demonstrou que todas as operações booleanas podem ser expressas usando somente a operação *NAND*, simplificando a lógica proposicional. Em lógica de primeira ordem representamos esta a operação *NAND* por $ \mid $, $\uparrow$, ou $\overline{\wedge}$. Não é raro que neófitos confundam a representação do traço de Sheffer com $ \vert  \vert $, que normalmente é usado para representar disjunção. A precavida leitora deve tomar cuidado com isso.
+> O trabalho que definiu o traço de Sheffer demonstrou que todas as operações booleanas podem ser expressas usando somente a operação *NAND*, simplificando a lógica proposicional. Em lógica de primeira ordem representamos esta a operação *NAND* por $\mid$, $\uparrow$, ou $\overline{\wedge}$. Não é raro que neófitos confundam a representação do traço de Sheffer com $\vert \vert$, que normalmente é usado para representar disjunção. A precavida leitora deve tomar cuidado com isso.
 >
 > Formalmente, a operação $p \mid q$ pode ser expressa como:
 >
@@ -1193,31 +1199,41 @@ Este combinador ignora o segundo argumento e retorna o primeiro.
 
 $$K\;7\;4 \rightarrow_\beta (\lambda x.\lambda y.\;x)\;7\;4 \rightarrow_\beta (\lambda y.\;7)\;4 \rightarrow_\beta 7$$
 
-Aqui, o valor $7$ é retornado, e o valor $4$ ignorando.
+Nesta expressão a atenta leitora pode ver que o valor $7$ é retornado, e o valor $4$ é ignorado, como era esperado.
 
 3.**Combinador S (Substituição)**:
 
 $$S = \lambda f.\lambda g.\lambda x.\;fx(gx)$$
 
-Este combinador é mais complexo, pois aplica a função $f$ ao argumento $x$ e, simultaneamente, aplica a função $g$ a $x$, passando o resultado de $g(x)$ como argumento para $f$.
+Este combinador é mais complexo. Aplica a função $f$ ao argumento $x$ e, simultaneamente, aplica a função $g$ a $x$, passando o resultado de $g(x)$ como argumento para $f$.
 
-**Exemplo**: Vamos aplicar o combinador $S$ com as funções $f = \lambda z.\;z^2$ e $g = \lambda z.\;z + 1$, e o valor $3$:
+**Exemplo**: Vamos aplicar o combinador `S` com as funções $f = \lambda z.\;z^2$ e $g = \lambda z.\;z + 1$, e o valor $3$:
 
-$$S\;(\lambda z.\;z^2)\;(\lambda z.\;z + 1)\;3$$
+$$
+S\;(\lambda z.\;z^2)\;(\lambda z.\;z + 1)\;3
+$$
 
-Primeiro, substituímos $f$ e $g$:
+A definição de $S$ é $\lambda f.\lambda g.\lambda x. (f x) (g x)$. Aplicando essa regra, o combinador $S$ distribui o argumento $3$ para ambas as funções $f$ e $g$:
 
-$$\rightarrow_\beta (\lambda x.(\lambda z.\;z^2)\;x\;((\lambda z.\;z + 1)\;x))\;3$$
+$$
+\rightarrow_\beta ((\lambda z.\;z^2)\;3)\;((\lambda z.\;z + 1)\;3)
+$$
 
-Agora, aplicamos as funções:
+Agora, aplicamos cada função ao seu argumento:
 
-$$\rightarrow_\beta (\lambda z.\;z^2)\;3\;((\lambda z.\;z + 1)\;3)$$
+$$
+\rightarrow_\beta (3^2)\;(3 + 1)
+$$
 
-$$\rightarrow_\beta 3^2\;(3 + 1)$$
+Avaliando as expressões aritméticas, chegamos a:
 
-$$\rightarrow_\beta 9\;4$$
+$$
+\rightarrow_\beta 9\;4
+$$
 
-Assim, $S\;(\lambda z.\;z^2)\;(\lambda z.\;z + 1)\;3$ resulta em $9$.
+Neste ponto, a redução para. É importante que a esforçada leitora entenda que a expressão `9 4` **não é uma multiplicação**, mas sim a **aplicação** do termo `9` ao termo `4`. No cálculo lambda puro, onde `9` e `4` seriam representados por Numerais de Church (funções), esta seria a aplicação de uma função (9) à outra (4).
+
+Assim, o combinador `S` funcionou exatamente como esperado: ele aplicou `f` a `3` (resultando em `9`) e `g` a `3` (resultando em `4`), e então aplicou o primeiro resultado ao segundo, produzindo a expressão final `9 4`.
 
 No cálculo lambda as funções são anônimas. Desta forma, sempre é possível construir funções sem a atribuição nomes explícitos. Aqui estamos próximos da álgebra e longe das linguagens de programação imperativas, baseadas na Máquina de Turing. Isso é possível, como a atenta leitora deve lembrar, graças a existência das *abstrações lambda*:
 
@@ -1285,7 +1301,7 @@ $$M = (\lambda f.\;(\lambda x.\;f\;(x\;x))\;(\lambda x.\;f\;(x\;x)))\;(\lambda y
 
 Vamos reduzir $M$ usando a ordem normal.
 
-**Passo 3**: Identificamos o redex mais externo à esquerda:
+**Passo 1**: Identificamos o redex mais externo à esquerda:
 
 $$\underline{(\lambda f.\;(\lambda x.\;f\;(x\;x))\;(\lambda x.\;f\;(x\;x)))\;(\lambda y.\;y + 1)}$$
 
@@ -1315,7 +1331,7 @@ $$\to_\beta (\lambda y.\;y + 1)\;\left( (\lambda y.\;y + 1)\;\left( (\lambda y.\
 
 Na estratégia de ordem normal, a redução do termo $M$ não termina, pois entra em um ciclo infinito de reduções. Não é possível alcançar uma forma normal para $M$ usando esta estratégia, já que continuaremos expandindo o termo indefinidamente sem simplificá-lo a um resultado . Este exemplo ilustra como a ordem normal pode levar a reduções infinitas em certos casos, especialmente quando lidamos com termos autoreferenciados ou combinadores que causam expansão infinita.
 
-Observamos que a expressão começa a repetir a si mesma, indicando um ciclo infinito. Contudo, na ordem normal, como o argumento não é necessário para o resultado\;a redução pode ser concluída sem avaliá-lo.
+Observamos que a expressão começa a repetir a si mesma, indicando um ciclo infinito. **Isso demonstra que, embora a ordem normal garanta encontrar uma forma normal se ela existir, alguns termos simplesmente não a possuem e levam a uma redução infinita.**
 
 ## Ordem Aplicativa (Applicative-Order)
 
@@ -1437,7 +1453,7 @@ Formalmente, a relação $\to_\beta$ é a menor relação de equivalência que s
 
     Esta regra mostra que a equivalência se propaga para as aplicações de funções, mantendo a consistência da equivalência.
 
-É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado\;devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
+É importante notar que a ordem em que as reduções são aplicadas não afeta o resultado;devido à propriedade de Church-Rosser do cálculo lambda. Isso garante que, independentemente de como o termo é avaliado, se ele tem uma forma normal, a avaliação eventualmente a encontrará.
 
 A relação $\to_\beta$ é uma **relação de equivalência**, o que significa que ela possui três propriedades: é uma relação **Reflexiva**. Ou seja, para todo termo $M$, temos que $M\to_\beta M$. O que significa que qualquer termo é equivalente a si mesmo, o que é esperado; é uma relação **Simétrica**. Isso significa que se $M\to_\beta N$, então $N\to_\beta M$. Se um termo $M$ pode ser transformado em $N$, então o oposto é similarmente verdade. E, finalmente, é uma relação **Transitiva**. Neste caso, se $M\to_\beta N$ e $N\to_\beta P$, então $M\to_\beta P$. Isso implica que, se podemos transformar $M$ em $N$ e $N$ em $P$, então podemos transformar diretamente $M$ em $P$.
 
@@ -1611,7 +1627,7 @@ y f = f (y f)
 
 -- Definição da função fatorial usando o Y-combinator
 factorial :: Integer -> Integer
-factorial = Y \f n -> if n == 0 then 1 else n * f (n - 1)
+factorial = y \f n -> if n == 0 then 1 else n * f (n - 1)
 
 main :: IO ()
 main = do
@@ -2022,24 +2038,27 @@ Vamos refazer esta mesma aplicação, porém em cálculo lambda puro:
 
 $$
 \begin{align*}
-\text{And}\;\text{True}\;\text{False} &= (\lambda x.\; \lambda y.\; x\; y\; (\lambda x.\; \lambda y.\; y))\; (\lambda x.\; \lambda y.\; x)\; (\lambda x.\; \lambda y.\; y) \\
+&\text{Or}\;\text{True}\;\text{False} \\
 \\
-&\text{Substituímos $\text{True}$, $\text{False}$ e $\text{And}$ por suas definições em cálculo lambda:} \\
-&= (\lambda x.\; \lambda y.\; x\; y\; (\lambda x.\; \lambda y.\; y))\; (\lambda x.\; \lambda y.\; x)\; (\lambda x.\; \lambda y.\; y) \\
+&\text{Substituímos Or, True e False por suas definições em cálculo lambda:} \\
+&= (\lambda a.\lambda b. a\; (\lambda x.\lambda y.x)\; b)\; (\lambda x.\lambda y.x)\; (\lambda x.\lambda y.y) \\
 \\
-&\text{Aplicamos a primeira redução beta, substituindo $x$ por $(\lambda x.\; \lambda y.\; x)$:} \\
-&\to_\beta (\lambda y.\; (\lambda x.\; \lambda y.\; x)\; y\; (\lambda x.\; \lambda y.\; y))\; (\lambda x.\; \lambda y.\; y) \\
+&\text{Aplicamos a primeira redução beta, substituindo $a$ por True $(\lambda x.\lambda y.x)$:} \\
+&\to_\beta (\lambda b. (\lambda x.\lambda y.x)\; (\lambda x.\lambda y.x)\; b)\; (\lambda x.\lambda y.y) \\
 \\
-&\text{Aplicamos a segunda redução beta, substituindo $y$ por $(\lambda x.\; \lambda y.\; y)$:} \\
-&\to_\beta (\lambda x.\; \lambda y.\; x)\; (\lambda x.\; \lambda y.\; y)\; (\lambda x.\; \lambda y.\; y) \\
+&\text{Aplicamos a segunda redução beta, substituindo $b$ por False $(\lambda x.\lambda y.y)$:} \\
+&\to_\beta (\lambda x.\lambda y.x)\; (\lambda x.\lambda y.x)\; (\lambda x.\lambda y.y) \\
 \\
-&\text{Aplicamos a terceira redução beta, aplicando $\lambda x.\; \lambda y.\; x$ ao primeiro argumento $\text{False}$:} \\
-&\to_\beta \lambda y.\; (\lambda x.\; \lambda y.\; y) \\
+&\text{Agora, a função True externa $(\lambda x. \lambda y. x)$ é aplicada ao seu primeiro argumento (True) e ignora o segundo (False):} \\
+&\to_\beta (\lambda y. (\lambda x.\lambda y.x))\; (\lambda x.\lambda y.y) \\
 \\
-&\text{Neste ponto, a função resultante é $\lambda y.\; y$, que é a definição de $\text{False}$.} \\
+&\text{A função resultante, $(\lambda y. \text{True})$, ignora seu argumento (False) e retorna o corpo da função, que é True:} \\
+&\to_\beta \lambda x.\lambda y.x \\
+\\
+&\text{Esta é exatamente a definição de True no cálculo lambda.} \\
 \\
 &\text{Portanto, o resultado será:} \\
-&= \text{False}
+&= \text{True}
 \end{align*}
 $$
 
@@ -2126,7 +2145,7 @@ $$
 >
 > $$\text{XNOR} = \lambda b.\; \lambda c.\; (\text{Not}\; (\text{Xor}\; b\; c))$$
 >
-> Em lambda puro precisaremos substitui r $XOR$ e $Not$ por suas definições lambda, para transformar tudo em uma expressão pura.
+> Em lambda puro precisaremos substituir $XOR$ e $Not$ por suas definições lambda, para transformar tudo em uma expressão pura.
 >
 > $$\text{XNOR} = \lambda b.\; \lambda c.\; (\lambda b.\; b\; \text{False}\; \text{True}) ((\lambda b.\; \lambda c.\; b\; (\lambda b.\; b\; \text{False}\; \text{True})\; c)\; b\; c)$$
 >
@@ -2516,13 +2535,13 @@ Listas são um tipo de dado composto útil para a maior parte das linguagens de 
 
 Definimos uma tupla de dois elementos, que pode representar um par ordenado, como:
 
-$$(x, y) \, = \lambda f.\;F\;x\;y$$
+$$(x, y) \, = \lambda f.\;f\;x\;y$$
 
 A tupla $(3,4)$ é representada assim:
 
-$$(3, 4) \, = \lambda f.\;F\;3\;4$$
+$$(3, 4) \, = \lambda f.\;f\;3\;4$$
 
-Para que uma tupla seja útil, precisamos ser capazes de trabalhar com seus elementos individualmente. Para isso, podemos definir duas funções: $\text{first}$ e $\text{follow}$.
+Para que uma tupla seja útil, precisamos ser capazes de trabalhar com seus elementos individualmente. Para isso, podemos definir duas funções: $\text{first}$ e $\text{last}$.
 
 ### Função First
 
@@ -2532,33 +2551,51 @@ $$\text{first} = \lambda p. p\;(\lambda x. \lambda y.\;x)$$
 
 **Exemplo**: Aplicação a $(3,4)$:
 
-$$\text{first}\;(3, 4) \, = (\lambda p. p\;(\lambda x. \lambda y.\;x))\;(\lambda f.\;F\;3\;4)$$
+$$
+\text{first}\;(3, 4) \, = (\lambda p. p\;(\lambda x. \lambda y.\;x))\;(\lambda f.\;f\;3\;4)
+$$
 
 Redução:
 
-$$(\lambda f.\;F\;3\;4)\;(\lambda x. \lambda y.\;x)$$
+$$
+(\lambda f.\;f\;3\;4)\;(\lambda x. \lambda y.\;x)
+$$
 
-$$(\lambda x. \lambda y.\;x)\;3\;4$$
+$$
+(\lambda x. \lambda y.\;x)\;3\;4
+$$
 
-$$3$$
+$$
+3
+$$
 
 ### Função Last
 
 A função Last retorna o último elemento da tupla:
 
-$$\text{last} = \lambda p. p\;(\lambda x. \lambda y.\;y)$$
+$$
+\text{last} = \lambda p. p\;(\lambda x. \lambda y.\;y)
+$$
 
 **Exemplo 2**: Aplicação a $(3,4)$:
 
-$$\text{last}\;(3, 4) \, = (\lambda p. p\;(\lambda x. \lambda y.\;y))\;(\lambda f.\;F\;3\;4)$$
+$$
+\text{last}\;(3, 4) \, = (\lambda p. p\;(\lambda x. \lambda y.\;y))\;(\lambda f.\;f\;3\;4)
+$$
 
 Redução:
 
-$$(\lambda f.\;F\;3\;4)\;(\lambda x. \lambda y.\;y)$$
+$$
+(\lambda f.\;f\;3\;4)\;(\lambda x. \lambda y.\;y)
+$$
 
-$$(\lambda x. \lambda y.\;y)\;3\;4$$
+$$
+(\lambda x. \lambda y.\;y)\;3\;4
+$$
 
-$$4$$
+$$
+4
+$$
 
 > **Questão de Prova 1**: usando cálculo lambda puro crie uma tupla para o par $(3,5)$ e aplique a ela as funções $first$ e $last$.
 >
