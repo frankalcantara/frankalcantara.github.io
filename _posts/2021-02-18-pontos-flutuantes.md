@@ -15,7 +15,7 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-09-21T02:28:23.413Z
+lastmod: 2025-09-21T02:46:54.190Z
 date: 2024-12-20T20:07:14.934Z
 published: true
 ---
@@ -60,88 +60,20 @@ $$0.001 = \frac{0}{2}+\frac{0}{4}+\frac{1}{8} = \frac{0}{2^1}+\frac{0}{2^2}+\fra
 
 Novamente, sou portador de notícias ruins. Os números fracionários na base $2$ padecem da mesma dor que os números reais na base $10$. A maioria dos números binários fracionários, não pode ser representada de forma exata por uma operação de frações. Não bastando isso, a conversão entre as bases $10$ e $2$, acaba criando números binários que não têm fim. Um bom exemplo pode ser visto com a fração $\frac{1}{3}$ que seria representada, em conversão direta para o binário, por $(\frac{1}{11})_2 = 0.0101010101010101_2$ este valor terá que ser arredondado, ou truncado. Esta conversão pode ser vista na Tabela 1:
 
-<table class="table table-striped">
-  <tr>
-    <th>Passo</th>
-    <th>Operação</th>
-    <th>Resultado Decimal</th>
-    <th>Parte Inteira</th>
-    <th>Parte Fracionária (Binário)</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>$1 \div 3$</td>
-    <td>0.3333...</td>
-    <td>0</td>
-    <td>0</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>$0.3333... \times 2$</td>
-    <td>0.6666...</td>
-    <td>0</td>
-    <td>0</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>$0.6666... \times 2$</td>
-    <td>1.3333...</td>
-    <td>1</td>
-    <td>01</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>$0.3333... \times 2$</td>
-    <td>0.6666...</td>
-    <td>0</td>
-    <td>010</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>$0.6666... \times 2$</td>
-    <td>1.3333...</td>
-    <td>1</td>
-    <td>0101</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>$0.3333... \times 2$</td>
-    <td>0.6666...</td>
-    <td>0</td>
-    <td>01010</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>$0.6666... \times 2$</td>
-    <td>1.3333...</td>
-    <td>1</td>
-    <td>010101</td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td>$0.3333... \times 2$</td>
-    <td>0.6666...</td>
-    <td>0</td>
-    <td>0101010</td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td>$0.6666... \times 2$</td>
-    <td>1.3333...</td>
-    <td>1</td>
-    <td>01010101</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td>$0.3333... \times 2$</td>
-    <td>0.6666...</td>
-    <td>0</td>
-    <td>010101010</td>
-  </tr>
-</table>
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 1 - Conversão de $(\frac{1}{3})_{10}$ em binário.</legend>
+| Passo | Operação | Resultado Decimal | Parte Inteira | Parte Fracionária (Binário) |
+|---|---|---|---|---|
+| 1 | $1 \div 3$ | 0.3333... | 0 | 0 |
+| 2 | $0.3333... \times 2$ | 0.6666... | 0 | 0 |
+| 3 | $0.6666... \times 2$ | 1.3333... | 1 | 01 |
+| 4 | $0.3333... \times 2$ | 0.6666... | 0 | 010 |
+| 5 | $0.6666... \times 2$ | 1.3333... | 1 | 0101 |
+| 6 | $0.3333... \times 2$ | 0.6666... | 0 | 01010 |
+| 7 | $0.6666... \times 2$ | 1.3333... | 1 | 010101 |
+| 8 | $0.3333... \times 2$ | 0.6666... | 0 | 0101010 |
+| 9 | $0.6666... \times 2$ | 1.3333... | 1 | 01010101 |
+| 10 | $0.3333... \times 2$ | 0.6666... | 0 | 010101010 |
+
+_Tabela 1 - Conversão de $(\frac{1}{3})_{10}$ em binário._{: class="legend"}
 
 Definir o ponto no qual iremos parar a divisão, determinará a precisão com que conseguiremos representar o valor $(\frac{1}{11})_2$. Além disso, precisaremos encontrar uma forma de armazenar esta representação em memória.
 
@@ -161,11 +93,11 @@ Converta o número decimal $29_{10}$ para sua representação binária.
 **Resolução**:
 Utilizamos o método de divisões sucessivas por 2, anotando os restos de cada divisão.
 
-1.  $29 \div 2 = 14$ com resto **1** (LSB - Bit Menos Significativo)
-2.  $14 \div 2 = 7$ com resto **0**
-3.  $7 \div 2 = 3$ com resto **1**
-4.  $3 \div 2 = 1$ com resto **1**
-5.  $1 \div 2 = 0$ com resto **1** (MSB - Bit Mais Significativo)
+1. $29 \div 2 = 14$ com resto **1** (LSB - Bit Menos Significativo)
+2. $14 \div 2 = 7$ com resto **0**
+3. $7 \div 2 = 3$ com resto **1**
+4. $3 \div 2 = 1$ com resto **1**
+5. $1 \div 2 = 0$ com resto **1** (MSB - Bit Mais Significativo)
 
 Lendo os restos de baixo para cima, obtemos o resultado: $11101_2$.
 
@@ -175,9 +107,9 @@ Converta o número decimal $0.375_{10}$ para sua representação binária.
 **Resolução**:
 Utilizamos o método de multiplicações sucessivas por 2, anotando a parte inteira de cada resultado.
 
-1.  $0.375 \times 2 = \mathbf{0}.75$
-2.  $0.75 \times 2 = \mathbf{1}.50$
-3.  $0.50 \times 2 = \mathbf{1}.00$
+1. $0.375 \times 2 = \mathbf{0}.75$
+2. $0.75 \times 2 = \mathbf{1}.50$
+3. $0.50 \times 2 = \mathbf{1}.00$
 
 A parte fracionária se tornou zero, então o processo termina. Lendo as partes inteiras de cima para baixo, obtemos o resultado: $0.011_2$.
 
@@ -200,11 +132,11 @@ Encontre a representação binária para a fração decimal $0.2_{10}$.
 **Resolução**:
 Aplicamos novamente o método de multiplicações sucessivas.
 
-1.  $0.2 \times 2 = \mathbf{0}.4$
-2.  $0.4 \times 2 = \mathbf{0}.8$
-3.  $0.8 \times 2 = \mathbf{1}.6$
-4.  $0.6 \times 2 = \mathbf{1}.2$
-5.  $0.2 \times 2 = \mathbf{0}.4$ (O processo se repete a partir daqui)
+1. $0.2 \times 2 = \mathbf{0}.4$
+2. $0.4 \times 2 = \mathbf{0}.8$
+3. $0.8 \times 2 = \mathbf{1}.6$
+4. $0.6 \times 2 = \mathbf{1}.2$
+5. $0.2 \times 2 = \mathbf{0}.4$ (O processo se repete a partir daqui)
 
 Observamos que a sequência `0011` se repetirá infinitamente. Portanto, a representação é uma dízima periódica em binário: $0.00110011..._2$.
 
@@ -213,8 +145,11 @@ Dado o número $\pi \approx 3.14159265$, represente-o com 4 casas decimais usand
 
 **Resolução**:
 a) **Truncamento**: Simplesmente cortamos todos os algarismos após a 4ª casa decimal.
+
    - Resultado: $3.1415$
+
 b) **Arredondamento**: Olhamos para o 5º algarismo decimal. Como ele é $9$ (que é $\ge 5$), somamos 1 ao último algarismo mantido.
+
    - Resultado: $3.1416$
 
 ## Lá vem o homem com suas imperfeições
@@ -229,45 +164,14 @@ Na matemática e nas ciências, frequentemente nos deparamos com números muito 
   
 Para exemplos desta representação veja a Tabela 2.
 
-<table class="table table-striped" style="text-align: center;">
-  <thead>
-    <tr>
-      <th>Mantissa</th>
-      <th>Expoente</th>
-      <th>Notação Científica</th>
-      <th>Valor em Ponto Fixo</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>$2.7$</td>
-      <td>$4$</td>
-      <td>$2.7 \times 10^4$</td>
-      <td>$27000$</td>
-    </tr>
-    <tr>
-      <td>$-3.501$</td>
-      <td>$2$</td>
-      <td>$-3.501 \times 10^2$</td>
-      <td>$-350.1$</td>
-    </tr>
-    <tr>
-      <td>$7$</td>
-      <td>$-3$</td>
-      <td>$7 \times 10^{-3}$</td>
-      <td>$0.007$</td>
-    </tr>
-    <tr>
-      <td>$6.667$</td>
-      <td>$-11$</td>
-      <td>$6.667 \times 10^{-11}$</td>
-      <td>$0.00000000006667$</td>
-    </tr>
-  </tbody>
-</table>
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 2 - Exemplos de representação de valor em notação científica.</legend>
+| Mantissa | Expoente | Notação Científica | Valor em Ponto Fixo |
+|:--:|:--:|:--:|:--:|
+| $2.7$ | $4$ | $2.7 \times 10^4$ | $27000$ |
+| $-3.501$ | $2$ | $-3.501 \times 10^2$ | $-350.1$ |
+| $7$ | $-3$ | $7 \times 10^{-3}$ | $0.007$ |
+| $6.667$ | $-11$ | $6.667 \times 10^{-11}$ | $0.00000000006667$ |
+
+_Tabela 2 - Exemplos de representação de valor em notação científica._{: class="legend"}
 
 Uma boa prática no uso da notação científica é deixar apenas um algarismo antes da vírgula e tantos algarismos significativos quanto necessário para o cálculo específico que pretendemos realizar depois da vírgula. Escolhemos a quantidade de números significativos de acordo com a aplicação. Estes algarismos depois da vírgula terão impacto na precisão do seu cálculo. O $\pi$, com sua infinitude de dígitos depois da vírgula, é um bom exemplo de precisão relativa à aplicação.
 
@@ -407,63 +311,23 @@ Esta parte foi fácil $0_{10}$ é igual a $0_2$.
 
 Em seguida precisamos converter a parte fracionária do número $0.1$ multiplicando este algarismo repetidamente por dois até que a parte fracionária, aquilo que fica depois da vírgula, seja igual a zero e já vamos separando a parte inteira, resultado da multiplicação da parte fracionária. Vamos armazenar a parte inteira enquanto estamos multiplicando por dois a parte fracionária do resultado de cada operação anterior. Ou seja, começamos com $0.1 \times 2 = 0.2$ temos $0$ parte inteira do resultado da multiplicação e $0.2$ parte fracionária do resultado que vamos representar por $0.1 \times 2 = 0 + 0.2$ e assim sucessivamente:
 
-<table class="table table-striped">
-  <tr>
-    <td>1. </td><td>$0.1 × 2 = 0 + 0.2$ </td>
-    <td style="text-align: right;">13. </td><td>$0.2 × 2 = 0 + 0.4$ </td>
-  </tr>
-  <tr>
-    <td>2. </td><td>$0.2 × 2 = 0 + 0.4$ </td>
-    <td style="text-align: right;">14. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-  </tr>
-  <tr>
-    <td>3. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-    <td style="text-align: right;">15. </td><td>$0.8 × 2 = 1 + 0.6$ </td>
-  </tr>
-  <tr> 
-    <td>4. </td><td>$0.8 × 2 = 1 + 0.6$ </td>
-    <td style="text-align: right;">16. </td><td>$0.6 × 2 = 1 + 0.2$ </td>
-  </tr>
-  <tr>
-    <td>5. </td><td>$0.6 × 2 = 1 + 0.2$ </td>
-    <td style="text-align: right;">17. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-  </tr>
-  <tr>
-    <td>6. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-    <td style="text-align: right;">18. </td><td>$0.8 × 2 = 1 + 0.6$ </td>
-  </tr>
-  <tr>
-    <td>7. </td><td>$0.8 × 2 = 1 + 0.6$ </td>
-    <td style="text-align: right;">19. </td><td>$0.6 × 2 = 1 + 0.2$ </td>
-  </tr>
-  <tr>
-    <td>8. </td><td>$0.6 × 2 = 1 + 0.2$ </td>
-    <td style="text-align: right;">20. </td><td>$0.2 × 2 = 0 + 0.4$ </td>
-  </tr>
-  <tr>
-    <td>9. </td><td>$0.2 × 2 = 0 + 0.4$ </td>
-    <td style="text-align: right;">21. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-  </tr>
-  <tr>
-    <td>10. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-    <td style="text-align: right;">22. </td><td>$0.8 × 2 = 1 + 0.6$ </td>
-  </tr>
-  <tr>
-    <td>11. </td><td>$0.8 × 2 = 1 + 0.6$ </td>
-    <td style="text-align: right;">23. </td><td>$0.6 × 2 = 1 + 0.2$ </td>
-  </tr>
-  <tr>
-    <td>12. </td><td>$0.6 × 2 = 1 + 0.2$ </td>
-    <td style="text-align: right;">24. </td><td>$0.2 × 2 = 0 + 0.4$ </td>
-  </tr>
-  <tr>
-    <td><td> </td> </td>
-    <td style="text-align: right;">25. </td><td>$0.4 × 2 = 0 + 0.8$ </td>
-  </tr>
-</table>
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 3 - Conversão de $0.1_{10}$ em binário.</legend>
+| Passos 1-12 | Passos 13-25 |
+|---|---|
+| 1. &nbsp; `$0.1 × 2 = 0 + 0.2$` | 13. `$0.2 × 2 = 0 + 0.4$` |
+| 2. &nbsp; `$0.2 × 2 = 0 + 0.4$` | 14. `$0.4 × 2 = 0 + 0.8$` |
+| 3. &nbsp; `$0.4 × 2 = 0 + 0.8$` | 15. `$0.8 × 2 = 1 + 0.6$` |
+| 4. &nbsp; `$0.8 × 2 = 1 + 0.6$` | 16. `$0.6 × 2 = 1 + 0.2$` |
+| 5. &nbsp; `$0.6 × 2 = 1 + 0.2$` | 17. `$0.4 × 2 = 0 + 0.8$` |
+| 6. &nbsp; `$0.4 × 2 = 0 + 0.8$` | 18. `$0.8 × 2 = 1 + 0.6$` |
+| 7. &nbsp; `$0.8 × 2 = 1 + 0.6$` | 19. `$0.6 × 2 = 1 + 0.2$` |
+| 8. &nbsp; `$0.6 × 2 = 1 + 0.2$` | 20. `$0.2 × 2 = 0 + 0.4$` |
+| 9. &nbsp; `$0.2 × 2 = 0 + 0.4$` | 21. `$0.4 × 2 = 0 + 0.8$` |
+| 10. `$0.4 × 2 = 0 + 0.8$` | 22. `$0.8 × 2 = 1 + 0.6$` |
+| 11. `$0.8 × 2 = 1 + 0.6$` | 23. `$0.6 × 2 = 1 + 0.2$` |
+| 12. `$0.6 × 2 = 1 + 0.2$` | 24. `$0.2 × 2 = 0 + 0.4$` |
+| | 25. `$0.4 × 2 = 0 + 0.8$` |
+
+_Tabela 3 - Conversão de $0.1_{10}$ em binário._{: class="legend"}
 
 Podemos continuar e não vamos conseguir encontrar um resultado de multiplicação cuja parte fracionária seja igual a $0$, contudo como na mantissa, em precisão simples, cabem 23 bits, acho que já chegamos a um nível suficiente de precisão. Precisamos agora ordenar todas as partes inteiras que encontramos para formar nosso binário:
 
@@ -480,21 +344,14 @@ Precisamos agora normalizar nosso expoente. Como estamos trabalhando com precis�
 
 Até agora temos o sinal do número, $0$ e o expoente $01111011$ resta-nos terminar de trabalhar a mantissa. Podemos remover a parte inteira já que em binário esta será sempre $1$ devido ao $0$ não ser permitido. Feito isso, precisamos ajustar seu comprimento para $23$ bits e, temos nossa mantissa: $10011001100110011001100$. Linda! E resumo temos:
 
-<table class="table table-striped">
-  <tr>
-    <th style="text-align:center !important;"> Elemento </th>
-    <th style="text-align:center !important;"> Valor </th>
-  </tr>
-  <tbody>
-    <tr><td style="text-align:center !important;">Sinal</td><td>$(+) = 0$</td></tr>
-    <tr><td style="text-align:center !important;">Expoente</td><td>$(123_{10}) = 01111011_2$</td></tr>
-    <tr><td style="text-align:center !important;">Mantissa</td><td>$10011001100110011001100$</td></tr>
-    <tr><td style="text-align:right !important;">Total</td><td>$32 \space bits$</td></tr>
-  </tbody>
-</table>
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 4 - Explicação dos bits no número 10011001100110011001100 segundo a norma IEEE754.</legend>
+| Elemento | Valor |
+|:---:|:---|
+| Sinal | $(+) = 0$ |
+| Expoente | $(123_{10}) = 01111011_2$ |
+| Mantissa | $10011001100110011001100$ |
+| Total | $32 \text{ bits}$ |
+
+_Tabela 4 - Explicação dos bits no número 10011001100110011001100 segundo a norma IEEE754._{: class="legend"}
 
 ### Bloco de Exercícios 2: Codificação no Padrão IEEE 754
 
@@ -504,37 +361,40 @@ Agora que a conversão entre bases está fresca na memória, vamos praticar a co
 Codifique o número $25.5_{10}$ no formato IEEE 754 de 32 bits.
 
 **Resolução**:
-1.  **Sinal**: O número é positivo, logo o bit de sinal é **0**.
-2.  **Conversão para binário**: $25_{10} = 11001_2$ e $0.5_{10} = 0.1_2$. Portanto, $25.5_{10} = 11001.1_2$.
-3.  **Normalização**: Movemos a vírgula 4 posições para a esquerda: $1.10011_2 \times 2^4$. O expoente é $E=4$.
-4.  **Expoente (com bias)**: O campo do expoente é $E + 127 = 4 + 127 = 131_{10}$. Em binário de 8 bits, $131_{10} = \mathbf{10000011_2}$.
-5.  **Mantissa**: Pegamos a parte fracionária do número normalizado (`10011`) e completamos com zeros até 23 bits: **10011000000000000000000**.
-6.  **Montagem**: `S | Expoente | Mantissa` = `0 | 10000011 | 10011000000000000000000`. Em hexadecimal, isso é `0x41CC0000`.
+
+1. **Sinal**: O número é positivo, logo o bit de sinal é **0**.
+2. **Conversão para binário**: $25_{10} = 11001_2$ e $0.5_{10} = 0.1_2$. Portanto, $25.5_{10} = 11001.1_2$.
+3. **Normalização**: Movemos a vírgula 4 posições para a esquerda: $1.10011_2 \times 2^4$. O expoente é $E=4$.
+4. **Expoente (com bias)**: O campo do expoente é $E + 127 = 4 + 127 = 131_{10}$. Em binário de 8 bits, $131_{10} = \mathbf{10000011_2}$.
+5. **Mantissa**: Pegamos a parte fracionária do número normalizado (`10011`) e completamos com zeros até 23 bits: **10011000000000000000000**.
+6. **Montagem**: `S | Expoente | Mantissa` = `0 | 10000011 | 10011000000000000000000`. Em hexadecimal, isso é `0x41CC0000`.
 
 **Exercício 2.2: Codificação de Número Negativo**
 Codifique o número $-0.125_{10}$ no formato IEEE 754 de 32 bits.
 
 **Resolução**:
-1.  **Sinal**: O número é negativo, logo o bit de sinal é **1**.
-2.  **Conversão para binário**: $0.125_{10} = 1/8 = 0.001_2$.
-3.  **Normalização**: Movemos a vírgula 3 posições para a direita: $1.0_2 \times 2^{-3}$. O expoente é $E=-3$.
-4.  **Expoente (com bias)**: $E + 127 = -3 + 127 = 124_{10}$. Em binário de 8 bits, $124_{10} = \mathbf{01111100_2}$.
-5.  **Mantissa**: A parte fracionária do número normalizado é `0`. Completando com zeros: **00000000000000000000000**.
-6.  **Montagem**: `1 | 01111100 | 00000000000000000000000`. Em hexadecimal, isso é `0xBE000000`.
+
+1. **Sinal**: O número é negativo, logo o bit de sinal é **1**.
+2. **Conversão para binário**: $0.125_{10} = 1/8 = 0.001_2$.
+3. **Normalização**: Movemos a vírgula 3 posições para a direita: $1.0_2 \times 2^{-3}$. O expoente é $E=-3$.
+4. **Expoente (com bias)**: $E + 127 = -3 + 127 = 124_{10}$. Em binário de 8 bits, $124_{10} = \mathbf{01111100_2}$.
+5. **Mantissa**: A parte fracionária do número normalizado é `0`. Completando com zeros: **00000000000000000000000**.
+6. **Montagem**: `1 | 01111100 | 00000000000000000000000`. Em hexadecimal, isso é `0xBE000000`.
 
 **Exercício 2.3: Decodificação de IEEE 754**
 Decodifique o valor IEEE 754 de 32 bits representado por `0xC1A80000`.
 
 **Resolução**:
-1.  **Converter para binário**: `C1A80000` = `1100 0001 1010 1000 0000 0000 0000 0000`.
-2.  **Separar os campos**:
+
+1. **Converter para binário**: `C1A80000` = `1100 0001 1010 1000 0000 0000 0000 0000`.
+2. **Separar os campos**:
     * Sinal (1 bit): **1** (número negativo).
     * Expoente (8 bits): **10000011**.
     * Mantissa (23 bits): **01010000000000000000000**.
-3.  **Calcular expoente real**: O campo do expoente $10000011_2 = 131_{10}$. O expoente real é $131 - 127 = 4$.
-4.  **Reconstruir o número binário**: O número normalizado é $1.M \times 2^E$. Adicionando o bit implícito, temos $1.0101_2 \times 2^4$.
-5.  **Converter para decimal**: $1.0101_2 \times 2^4 = 10101_2 = 16 + 4 + 1 = 21_{10}$.
-6.  **Aplicar o sinal**: O resultado final é **-21.0**.
+3. **Calcular expoente real**: O campo do expoente $10000011_2 = 131_{10}$. O expoente real é $131 - 127 = 4$.
+4. **Reconstruir o número binário**: O número normalizado é $1.M \times 2^E$. Adicionando o bit implícito, temos $1.0101_2 \times 2^4$.
+5. **Converter para decimal**: $1.0101_2 \times 2^4 = 10101_2 = 16 + 4 + 1 = 21_{10}$.
+6. **Aplicar o sinal**: O resultado final é **-21.0**.
 
 **Exercício 2.4: Normalização Prática**
 Normalize o número binário $0.001011_2$ no formato de notação científica binária.
@@ -542,10 +402,10 @@ Normalize o número binário $0.001011_2$ no formato de notação científica bi
 **Resolução**:
 Para normalizar, a vírgula precisa ser movida para a direita até que haja um único `1` antes dela.
 
-1.  Número original: $0.001011_2$.
-2.  Movemos a vírgula 3 posições para a direita.
-3.  Isso equivale a multiplicar por $2^3$, então devemos multiplicar também por $2^{-3}$ para manter o valor.
-4.  Resultado: $1.011_2 \times 2^{-3}$.
+1. Número original: $0.001011_2$.
+2. Movemos a vírgula 3 posições para a direita.
+3. Isso equivale a multiplicar por $2^3$, então devemos multiplicar também por $2^{-3}$ para manter o valor.
+4. Resultado: $1.011_2 \times 2^{-3}$.
 
 **Exercício 2.5: Cálculo do Expoente com Bias**
 Qual é a representação de 8 bits para um expoente real de $E = -126$?
@@ -553,67 +413,23 @@ Qual é a representação de 8 bits para um expoente real de $E = -126$?
 **Resolução**:
 A fórmula para o campo do expoente em precisão simples é $E_{campo} = E_{real} + 127$.
 
-1.  $E_{campo} = -126 + 127 = 1$.
-2.  O número $1_{10}$ em 8 bits é `00000001`.
-3.  Portanto, o campo do expoente é **00000001**. Este é o menor expoente possível para um número normalizado.
+1. $E_{campo} = -126 + 127 = 1$.
+2. O número $1_{10}$ em 8 bits é `00000001`.
+3. Portanto, o campo do expoente é **00000001**. Este é o menor expoente possível para um número normalizado.
 
 ### Os valores especiais
 
 A leitora deve lembrar da expressão que pedi que colocasse um pin: **são reservados para representações especiais**. Está na hora de tocar neste assunto delicado. A verdade é que não utilizamos a `IEEE754` apenas para números propriamente ditos, utilizamos para representar todos os valores possíveis de representação em um ambiente computacional que sejam relacionados a aritmética dos números reais. Isto quer dizer que temos que armazenar o zero, o infinito e valores que não são numéricos, os famosos **NAN**, abreviação da expressão em inglês _Not A Number_ que em tradução livre significa **não é um número**. A forma como armazenamos estes valores especiais estão sintetizados na tabela a seguir:
 
-<table class="table table-striped">
-<tr>
-  <th colspan="2" style="text-align:center !important;">Precisão Simples</th>
-  <th colspan="2" style="text-align:center !important;">Precisão Dupla</th>
-  <th></th>
-</tr>
-<tbody>
-<tr>
-  <td style="text-align:center !important;">Expoente</td>
-  <td style="text-align:center !important;">Mantissa</td>
-  <td style="text-align:center !important;">Expoente</td>
-  <td style="text-align:center !important;">Mantissa</td>
-  <td style="text-align:center !important;">Valor Representado</td>
-</tr>
-<tr>
-  <td> $0$ </td>
-  <td> $0$ </td>
-  <td> $0$ </td>
-  <td> $0$ </td>
-  <td> $\pm 0$ </td>
-</tr>
-<tr>
-  <td> $0$ </td>
-  <td> $ \neq 0$ </td>
-  <td> $0$ </td>
-  <td> $ \neq 0$ </td>
-  <td> $\pm \space Número \space Subnormal$</td>
-</tr>
-<tr>
-  <td> $1-254$ </td>
-  <td> $Qualquer \space valor$ </td>
-  <td> $1-2046$ </td>
-  <td> $Qualquer \space valor$ </td>
-  <td> $\pm \space Número \space Normal $</td>
-</tr>
-<tr>
-  <td> $255$ </td>
-  <td> $0$ </td>
-  <td> $2047$ </td>
-  <td> $0$ </td>
-  <td> $\pm \space Infinito$</td>
-</tr>
-<tr>
-<td> $255$ </td>
-<td> $\neq 0$ </td>
-<td> $2047$ </td>
-<td> $\neq 0$ </td>
-<td> $NaN \space (Not \space a \space Number)$</td>
-</tr>
-</tbody></table>
-<legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 5 - Resumo dos valores especiais que podem ser representados segundo a norma IEEE754.</legend>
+| Expoente (Simples) | Mantissa (Simples) | Expoente (Dupla) | Mantissa (Dupla) | Valor Representado |
+|:--:|:--:|:--:|:--:|:--:|
+| $0$ | $0$ | $0$ | $0$ | $\pm 0$ |
+| $0$ | $\neq 0$ | $0$ | $\neq 0$ | $\pm$ Número Subnormal |
+| $1-254$ | Qualquer valor | $1-2046$ | Qualquer valor | $\pm$ Número Normal |
+| $255$ | $0$ | $2047$ | $0$ | $\pm$ Infinito |
+| $255$ | $\neq 0$ | $2047$ | $\neq 0$ | NaN (Not a Number) |
+
+_Tabela 5 - Resumo dos valores especiais que podem ser representados segundo a norma IEEE754._{: class="legend"}
 
 Resta-nos entender o que estes valores representam e seu impacto na computação.
 
@@ -643,73 +459,24 @@ O conceito de **NaN** foi criado para representar valores, principalmente result
 
 O primeiro caso **QNaN**, _(Quiet NaN)_, ocorre quando o bit mais significativo da mantissa é $1_2$. O **QNaN** se propaga na maior parte das operações aritméticas e é utilizado para indicar que o resultado de uma determinada operação não é matematicamente definido. já, o **SNaN**, _(Signalling NaN)_, que ocorre quando o bit mais significativo da mantissa é $0_2$ é utilizado para sinalizar alguma exceção como o uso de variáveis não inicializadas. Podemos sintetizar estes conceitos memorizando que **QNaN** indica operações indeterminadas enquanto **SNaN** indica operações inválidas.
 
-  <table class="table table-striped">
-        <tr style="text-align: center;">
-          <th>Operação</th>
-          <th>Resultado</th>
-        </tr>
-    <tbody>
-        <tr style="text-align: center;">
-          <td>$(Número) \div (\pm \infty)$ </td>
-          <td> $0$ </td>
-        </tr>
-        <tr style="text-align: center;">
-            <td>$(\pm \infty) \times (\pm \infty)$</td>
-            <td>$\pm \infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(\pm \neq 0) \div (\pm 0)$</td>
-          <td>$\pm \infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-            <td>$(\pm Número) \times (\pm \infty)$</td>
-            <td>$\pm \infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(\infty) + (\infty)$</td>
-          <td>$+\infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(\infty) - (-\infty)$</td>
-          <td>$+\infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(-\infty) + (-\infty)$</td>
-          <td>$-\infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(-\infty) - (\infty)$</td>
-          <td>$-\infty$</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(\infty) - (\infty)$</td>
-          <td>`NaN`</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(-\infty) + (\infty)$</td>
-          <td>`NaN`</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(\pm 0) \div (\pm 0)$</td>
-          <td>`NaN`</td>
-        </tr>
-        <tr style="text-align: center;">
-           <td>$(\pm \infty) \div (\pm \infty)$</td>
-           <td>`NaN`</td>
-        </tr>
-        <tr style="text-align: center;">
-          <td>$(\pm \infty) \times (0)$</td>
-          <td>`NaN`</td>
-        </tr>
-        <tr style="text-align: center;">
-            <td>$(NaN) == (NaN)$</td>
-            <td>$false$</td>
-        </tr>
-    </tbody>
-  </table>
-  <legend style="font-size: 1em;
-  text-align: center;
-  margin-bottom: 20px;">Tabela 6 - Operações especiais e seus resultados segundo a norma IEEE754.</legend>
+  | Operação | Resultado |
+|:---:|:---:|
+| $(Número) \div (\pm \infty)$ | $0$ |
+| $(\pm \infty) \times (\pm \infty)$ | $\pm \infty$ |
+| $(\pm \neq 0) \div (\pm 0)$ | $\pm \infty$ |
+| $(\pm \text{Número}) \times (\pm \infty)$ | $\pm \infty$ |
+| $(\infty) + (\infty)$ | $+\infty$ |
+| $(\infty) - (-\infty)$ | $+\infty$ |
+| $(-\infty) + (-\infty)$ | $-\infty$ |
+| $(-\infty) - (\infty)$ | $-\infty$ |
+| $(\infty) - (\infty)$ | `NaN` |
+| $(-\infty) + (\infty)$ | `NaN` |
+| $(\pm 0) \div (\pm 0)$ | `NaN` |
+| $(\pm \infty) \div (\pm \infty)$ | `NaN` |
+| $(\pm \infty) \times (0)$ | `NaN` |
+| `(NaN) == (NaN)` | `$false$` |
+
+_Tabela 6 - Operações especiais e seus resultados segundo a norma IEEE754._{: class="legend"}
 
 ### Bloco de Exercícios 3: Valores Especiais
 
@@ -719,9 +486,9 @@ Vamos agora praticar a identificação dos valores especiais e as regras de oper
 O que representa o padrão de 32 bits `11111111 10000000 00000000 00000000`?
 
 **Resolução**:
-1.  **Sinal**: O primeiro bit é **1**, indicando um valor negativo.
-2.  **Expoente**: Os 8 bits do expoente são **11111111** (valor máximo, 255). Este é o padrão reservado para Infinito e NaN.
-3.  **Mantissa**: Os 23 bits da mantissa são todos **0**.
+1. **Sinal**: O primeiro bit é **1**, indicando um valor negativo.
+2. **Expoente**: Os 8 bits do expoente são **11111111** (valor máximo, 255). Este é o padrão reservado para Infinito e NaN.
+3. **Mantissa**: Os 23 bits da mantissa são todos **0**.
 
 A combinação de expoente máximo e mantissa nula define o **Infinito**. Com o bit de sinal em 1, o valor é **Infinito Negativo** ($-\infty$).
 
@@ -731,10 +498,10 @@ Qual é o resultado da operação $15.0 \div (-0.0)$ segundo a norma IEEE 754?
 **Resolução**:
 A divisão de um número finito não nulo por zero resulta em infinito. O sinal do resultado é determinado pela operação XOR entre os sinais dos operandos.
 
-1.  Sinal de 15.0: Positivo (0).
-2.  Sinal de -0.0: Negativo (1).
-3.  Sinal do resultado: $0 \oplus 1 = 1$ (Negativo).
-4.  Resultado: **$-\infty$**.
+1. Sinal de 15.0: Positivo (0).
+2. Sinal de -0.0: Negativo (1).
+3. Sinal do resultado: $0 \oplus 1 = 1$ (Negativo).
+4. Resultado: **$-\infty$**.
 
 **Exercício 3.3: Operação Indeterminada**
 Qual é o resultado da operação $\infty \times 0$ segundo a norma IEEE 754?
@@ -746,9 +513,9 @@ Esta é uma das formas indeterminadas da matemática. A norma IEEE 754 define qu
 O que representa o padrão de 32 bits `00000000 01000000 00000000 00000000`?
 
 **Resolução**:
-1.  **Sinal**: O bit de sinal é **0** (positivo).
-2.  **Expoente**: O campo do expoente é **00000000**. Isso indica um número subnormal ou zero.
-3.  **Mantissa**: A mantissa é **100...0**, que é diferente de zero.
+1. **Sinal**: O bit de sinal é **0** (positivo).
+2. **Expoente**: O campo do expoente é **00000000**. Isso indica um número subnormal ou zero.
+3. **Mantissa**: A mantissa é **100...0**, que é diferente de zero.
 
 Como o expoente é zero e a mantissa não é zero, este é um **número subnormal**. Seu valor é calculado como $0.M \times 2^{-126}$.
 -   Valor: $0.1_2 \times 2^{-126} = (1 \cdot 2^{-1}) \times 2^{-126} = 2^{-127}$.
@@ -845,9 +612,9 @@ Antes de enfrentarmos os algoritmos e técnicas usados nas operações aritméti
 
 O modo `roundTiesToEven` é o padrão da norma `IEEE754` e o mais amplamente utilizado devido às suas propriedades estatísticas superiores. Este algoritmo minimiza o erro de arredondamento acumulado em sequências longas de operações, apresentando um comportamento mais previsível и equilibrado. Em geral, podemos destacar as seguintes vantagens:
 
-1.  **Redução de viés estatístico**: em sequências longas de operações, o número de arredondamentos para cima e para baixo tende a se equilibrar;
-2.  **Propriedade de convergência**: minimiza o erro acumulado em cálculos extensos;
-3.  **Compatibilidade**: padrão universalmente aceito, garantindo portabilidade entre sistemas;
+1. **Redução de viés estatístico**: em sequências longas de operações, o número de arredondamentos para cima e para baixo tende a se equilibrar;
+2. **Propriedade de convergência**: minimiza o erro acumulado em cálculos extensos;
+3. **Compatibilidade**: padrão universalmente aceito, garantindo portabilidade entre sistemas;
 
 Este algoritmo pode ser demonstrado como sendo o melhor método para a maioria das aplicações numéricas.
 
@@ -874,8 +641,8 @@ Para uma implementação precisa, o algoritmo `roundTiesToEven` utiliza três bi
 
 O arredondamento segue a seguinte lógica hierárquica:
 
-1.  Se o **Guard bit (G) for 0**, a parte descartada é menor que 0.5. O resultado **não é arredondado**.
-2.  Se o **Guard bit (G) for 1**, a parte descartada é maior ou igual a 0.5. Neste caso, temos duas sub-regras:
+1. Se o **Guard bit (G) for 0**, a parte descartada é menor que 0.5. O resultado **não é arredondado**.
+2. Se o **Guard bit (G) for 1**, a parte descartada é maior ou igual a 0.5. Neste caso, temos duas sub-regras:
     * Se **Round bit (R) ou Sticky bit (S) for 1**, a parte descartada é estritamente maior que 0.5. O resultado é **arredondado para cima**.
     * Se **Round bit (R) e Sticky bit (S) forem 0**, a parte descartada é exatamente 0.5. Este é o caso do **empate**, e a regra "ties-to-even" é aplicada: arredonda-se para cima apenas se o **LSB** (bit menos significativo) da mantissa for **1** (ímpar).
 
@@ -898,24 +665,28 @@ _Figura 4: Processo de preservação de precisão e arredondamento IEEE754 usand
 #### Exemplos Práticos
 
 **Exemplo 1**: Arredondar para cima (fração > 0.5)
--   Mantissa = `1.10110`, GRS = `110`
--   G=1, R=1, S=0. Como G=1 e R=1, a fração é > 0.5. **Arredonda para cima**.
--   Resultado: `1.10111`.
+
+- Mantissa = `1.10110`, GRS = `110`
+- G=1, R=1, S=0. Como G=1 e R=1, a fração é > 0.5. **Arredonda para cima**.
+- Resultado: `1.10111`.
 
 **Exemplo 2**: Empate, arredondar para cima (LSB = 1, ímpar)
--   Mantissa = `1.10111`, GRS = `100`
--   G=1, R=0, S=0. Fração exatamente 0.5. O LSB da mantissa é 1 (ímpar). **Arredonda para cima**.
--   Resultado: `1.11000`.
+
+- Mantissa = `1.10111`, GRS = `100`
+- G=1, R=0, S=0. Fração exatamente 0.5. O LSB da mantissa é 1 (ímpar). **Arredonda para cima**.
+- Resultado: `1.11000`.
 
 **Exemplo 3**: Empate, não arredondar (LSB = 0, par)
--   Mantissa = `1.10110`, GRS = `100`
--   G=1, R=0, S=0. Fração exatamente 0.5. O LSB da mantissa é 0 (par). **Não arredonda**.
--   Resultado: `1.10110`.
+
+- Mantissa = `1.10110`, GRS = `100`
+- G=1, R=0, S=0. Fração exatamente 0.5. O LSB da mantissa é 0 (par). **Não arredonda**.
+- Resultado: `1.10110`.
 
 **Exemplo 4**: Não arredondar (fração < 0.5)
--   Mantissa = `1.10111`, GRS = `011`
--   G=0. A fração é < 0.5. **Não arredonda**.
--   Resultado: `1.10111`.
+
+- Mantissa = `1.10111`, GRS = `011`
+- G=0. A fração é < 0.5. **Não arredonda**.
+- Resultado: `1.10111`.
 
 ### Implementação em Pseudocódigo
 
@@ -3192,62 +2963,68 @@ Esta implementação completa da divisão IEEE754 mantém **100% de compatibilid
 Uma mantissa intermediária de um cálculo é `1.01101`. Os bits G, R e S são `100`. Qual é o resultado após o arredondamento?
 
 **Resolução**:
-1.  A mantissa é `1.01101`, e seu LSB (bit menos significativo) é **1** (ímpar).
-2.  Os bits extras são G=1, R=0, S=0. Esta combinação (`100`) significa que a parte descartada é exatamente 0.5.
-3.  Estamos no caso de **empate**. A regra `ties-to-even` diz que devemos arredondar para que o LSB se torne par.
-4.  Como o LSB atual é 1, **arredondamos para cima**.
-5.  Resultado: $1.01101 + 0.00001 = 1.01110$.
+
+1. A mantissa é `1.01101`, e seu LSB (bit menos significativo) é **1** (ímpar).
+2. Os bits extras são G=1, R=0, S=0. Esta combinação (`100`) significa que a parte descartada é exatamente 0.5.
+3. Estamos no caso de **empate**. A regra `ties-to-even` diz que devemos arredondar para que o LSB se torne par.
+4. Como o LSB atual é 1, **arredondamos para cima**.
+5. Resultado: $1.01101 + 0.00001 = 1.01110$.
 
 **Exercício 4.2: Adição Passo a Passo**
 Some os números $A = 12.5_{10}$ e $B = 0.75_{10}$ mostrando os passos principais.
 
 **Resolução**:
-1.  **Representação**:
+
+1. **Representação**:
     * $A = 12.5 = 1100.1_2 = 1.1001_2 \times 2^3$.
     * $B = 0.75 = 0.11_2 = 1.1_2 \times 2^{-1}$.
-2.  **Alinhamento de Expoentes**: O expoente de A é 3; o de B é -1. A diferença é 4. Alinhamos B para o expoente de A.
+2. **Alinhamento de Expoentes**: O expoente de A é 3; o de B é -1. A diferença é 4. Alinhamos B para o expoente de A.
     * $B = 1.1_2 \times 2^{-1} = 0.00011_2 \times 2^3$.
-3.  **Soma das Mantissas**:
-    ```
+3. **Soma das Mantissas**:
+
+    ```shell
       1.10010
     + 0.00011
     ----------
       1.10101
     ```
-4.  **Normalização e Arredondamento**: O resultado $1.10101_2 \times 2^3$ já está normalizado e não há bits extras, então não há arredondamento.
-5.  **Resultado Final**: $1.10101_2 \times 2^3 = 1101.01_2 = 8+4+1+0.25 = 13.25_{10}$.
+
+4. **Normalização e Arredondamento**: O resultado $1.10101_2 \times 2^3$ já está normalizado e não há bits extras, então não há arredondamento.
+5. **Resultado Final**: $1.10101_2 \times 2^3 = 1101.01_2 = 8+4+1+0.25 = 13.25_{10}$.
 
 **Exercício 4.3: Multiplicação Passo a Passo**
 Multiplique $A = 5.0_{10}$ por $B = 0.5_{10}$.
 
 **Resolução**:
-1.  **Representação**:
+
+1. **Representação**:
     * $A = 5.0 = 101_2 = 1.01_2 \times 2^2$. (S=0, E=2, M=01)
     * $B = 0.5 = 0.1_2 = 1.0_2 \times 2^{-1}$. (S=0, E=-1, M=0)
-2.  **Sinal**: Sinal de A (0) $\oplus$ Sinal de B (0) = **0** (Positivo).
-3.  **Soma dos Expoentes**: $E_{final} = E_A + E_B = 2 + (-1) = 1$.
-4.  **Multiplicação das Mantissas**: (Incluindo o bit implícito)
+2. **Sinal**: Sinal de A (0) $\oplus$ Sinal de B (0) = **0** (Positivo).
+3. **Soma dos Expoentes**: $E_{final} = E_A + E_B = 2 + (-1) = 1$.
+4. **Multiplicação das Mantissas**: (Incluindo o bit implícito)
     * $1.01 \times 1.0 = 1.01$.
-5.  **Normalização e Resultado**: O produto $1.01_2 \times 2^1$ já está normalizado. Convertendo de volta: $10.1_2 = 2.5_{10}$.
+5. **Normalização e Resultado**: O produto $1.01_2 \times 2^1$ já está normalizado. Convertendo de volta: $10.1_2 = 2.5_{10}$.
 
 **Exercício 4.4: O Desafio da Adição vs. Multiplicação**
 Qual é o principal desafio algorítmico na adição/subtração que é simples na multiplicação, e vice-versa?
 
 **Resolução**:
--   Na **adição/subtração**, o principal desafio é o **alinhamento de expoentes**. Isso exige deslocar uma das mantissas, preservando a precisão com os bits G, R e S, e pode levar ao cancelamento catastrófico.
--   Na **multiplicação/divisão**, o desafio é a **operação com as mantissas**, que envolve uma multiplicação de N bits (resultando em 2N bits) ou uma divisão iterativa complexa. Em contrapartida, o tratamento dos expoentes é uma simples soma/subtração.
+
+- Na **adição/subtração**, o principal desafio é o **alinhamento de expoentes**. Isso exige deslocar uma das mantissas, preservando a precisão com os bits G, R e S, e pode levar ao cancelamento catastrófico.
+- Na **multiplicação/divisão**, o desafio é a **operação com as mantissas**, que envolve uma multiplicação de N bits (resultando em 2N bits) ou uma divisão iterativa complexa. Em contrapartida, o tratamento dos expoentes é uma simples soma/subtração.
 
 **Exercício 4.5: Cancelamento Catastrófico**
 Explique com um exemplo simples por que a operação $(10^{10} + 0.001) - 10^{10}$ pode resultar em `0.0` em vez de `0.001` em precisão finita.
 
 **Resolução**:
-1.  Seja a precisão de 12 dígitos decimais.
-2.  O número $10^{10}$ é `10,000,000,000.0`.
-3.  O número $0.001$ é `0.001`.
-4.  A soma $10^{10} + 0.001$ é `10,000,000,000.001`.
-5.  Para armazenar este resultado com 12 dígitos significativos, a representação em ponto flutuante arredonda o valor para `1.00000000000 \times 10^{10}`, que é exatamente $10^{10}$. O `0.001` é perdido no arredondamento.
-6.  A operação final se torna $10^{10} - 10^{10} = 0.0$. A informação do `0.001` foi completamente perdida, caracterizando o cancelamento catastrófico.
 
+1. Seja a precisão de 12 dígitos decimais.
+2. O número $10^{10}$ é `10,000,000,000.0`.
+3. O número $0.001$ é `0.001`.
+4. A soma $10^{10} + 0.001$ é `10,000,000,000.001`.
+5. Para armazenar este resultado com 12 dígitos significativos, a representação em ponto flutuante arredonda o valor para `1.00000000000 \times 10^{10}`, que é exatamente $10^{10}$. O `0.001` é perdido no arredondamento.
+6. A operação final se torna $10^{10} - 10^{10} = 0.0$. A informação do `0.001` foi completamente perdida, caracterizando o cancelamento catastrófico.
 
 ### Fundamentos e Detalhes da Implementação da Aritmética Básica na norma IEEE754
 
@@ -3381,7 +3158,7 @@ if (final_exponent >= 0xFF) {
 }
 ```
 
-Este trecho garante que qualquer cálculo que ultrapasse o limite da representação de precisão simples resulte em <span class="math-inline">\\pm\\infty</span>, conforme especificado pela norma.
+Este trecho garante que qualquer cálculo que ultrapasse o limite da representação de precisão simples resulte em $\pm\infty$, conforme especificado pela norma.
 
 #### Implementação de Underflow Gradual
 
@@ -3651,10 +3428,10 @@ Considere os seguintes valores:
 `b = -1.0e30`
 `c = 1.0`
 
-1.  **Cálculo `(a + b) + c`**:
+1. **Cálculo `(a + b) + c`**:
     * `a + b` = `1.0e30 - 1.0e30` = `0.0`.
     * `0.0 + c` = `0.0 + 1.0` = **1.0**. (Resultado correto)
-2.  **Cálculo `a + (b + c)` (reordenado)**:
+2. **Cálculo `a + (b + c)` (reordenado)**:
     * `b + c` = `-1.0e30 + 1.0`. Devido à precisão finita do `float`, `1.0` é muito pequeno para alterar `-1.0e30`. O resultado da soma é arredondado para `-1.0e30`.
     * `a + (-1.0e30)` = `1.0e30 - 1.0e30` = **0.0**. (Resultado incorreto)
 Um compilador com `-ffast-math` poderia fazer essa reordenação e alterar o resultado.
@@ -3678,15 +3455,16 @@ Para um software que calcula juros compostos em grandes volumes de transações 
 **Resolução**:
 Cálculos financeiros exigem alta precisão e a minimização de erros de arredondamento cumulativos.
 
-1.  **Precisão**: `float` oferece cerca de 7 dígitos decimais de precisão, o que é insuficiente para valores monetários que podem ir de frações de centavos a bilhões. `double` oferece cerca de 15 a 17 dígitos, o que é muito mais seguro.
-2.  **Erro Cumulativo**: Em juros compostos, o resultado de um cálculo é a base para o próximo. Pequenos erros de arredondamento de um `float` em cada passo podem se acumular ao longo de milhares de transações ou períodos, levando a diferenças significativas e inaceitáveis no resultado final.
+1. **Precisão**: `float` oferece cerca de 7 dígitos decimais de precisão, o que é insuficiente para valores monetários que podem ir de frações de centavos a bilhões. `double` oferece cerca de 15 a 17 dígitos, o que é muito mais seguro.
+2. **Erro Cumulativo**: Em juros compostos, o resultado de um cálculo é a base para o próximo. Pequenos erros de arredondamento de um `float` em cada passo podem se acumular ao longo de milhares de transações ou períodos, levando a diferenças significativas e inaceitáveis no resultado final.
 
 **Exercício 5.5: Hardware vs. Software**
 Explique por que um microcontrolador sem uma FPU (Floating-Point Unit) é ordens de magnitude mais lento ao executar `y = x * 3.14` do que um processador de desktop comum.
 
 **Resolução**:
--   O **processador de desktop** possui uma FPU, que é um circuito de hardware especializado. Ele executa a multiplicação de ponto flutuante em poucos ciclos de clock (tipicamente de 1 a 5 ciclos) por meio de lógica de silício otimizada.
--   O **microcontrolador sem FPU** precisa **emular** a operação por software. Isso significa que a simples linha `y = x * 3.14` é traduzida pelo compilador em uma chamada a uma sub-rotina de biblioteca. Essa sub-rotina executa dezenas ou centenas de instruções inteiras (deslocamentos de bits, somas, comparações) para realizar manualmente cada passo do algoritmo de multiplicação IEEE 754 (separar campos, somar expoentes, multiplicar mantissas, normalizar, etc.). Essa emulação é drasticamente mais lenta, podendo levar centenas ou milhares de ciclos de clock para completar uma única multiplicação.
+
+- O **processador de desktop** possui uma FPU, que é um circuito de hardware especializado. Ele executa a multiplicação de ponto flutuante em poucos ciclos de clock (tipicamente de 1 a 5 ciclos) por meio de lógica de silício otimizada.
+- O **microcontrolador sem FPU** precisa **emular** a operação por software. Isso significa que a simples linha `y = x * 3.14` é traduzida pelo compilador em uma chamada a uma sub-rotina de biblioteca. Essa sub-rotina executa dezenas ou centenas de instruções inteiras (deslocamentos de bits, somas, comparações) para realizar manualmente cada passo do algoritmo de multiplicação IEEE 754 (separar campos, somar expoentes, multiplicar mantissas, normalizar, etc.). Essa emulação é drasticamente mais lenta, podendo levar centenas ou milhares de ciclos de clock para completar uma única multiplicação.
 
 ## Glossário
 
