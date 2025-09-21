@@ -1074,7 +1074,7 @@ expr: expr '+' expr
 <li><p><strong>Heurísticas e Padrões Problemáticos</strong></p></li>
 </ol>
 <p>A experiência acumulada na construção de compiladores identificou padrões gramaticais que frequentemente indicam ambiguidade:</p>
-<p><strong>Produções recursivas bilaterais</strong>: Regras da forma <span class="math inline">\(A \rightarrow A \alpha A\)</span> são quase sempre ambíguas, pois permitem múltiplas formas de agrupar três ou mais ocorrências de <span class="math inline">\(A\)</span>.</p>
+<p><strong>Produções recursivas bilaterais</strong>: Regras da forma <span class="math inline">\(A \rightarrow A \alpha A\)</span> são quase sempre ambíguas, permitem múltiplas formas de agrupar três ou mais ocorrências de <span class="math inline">\(A\)</span>.</p>
 <p><strong>Prefixos comuns extensos</strong>: Quando múltiplas produções para o mesmo não-terminal compartilham longos prefixos, como <span class="math inline">\(A \rightarrow \alpha\beta\gamma\)</span> e <span class="math inline">\(A \rightarrow \alpha\beta\delta\)</span>, a decisão sobre qual produção aplicar pode requerer _Lookahead_arbitrariamente longo.</p>
 <p><strong>Aninhamento sem delimitadores explícitos</strong>: Construções que permitem aninhamento sem marcadores claros de início e fim, como o problema clássico do <em>dangling else</em>, invariavelmente levam a ambiguidade estrutural.</p>
 </section>

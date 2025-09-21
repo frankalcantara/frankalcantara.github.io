@@ -1234,7 +1234,7 @@ Figure&nbsp;4.6
 <section id="fechamento-sob-interseção" class="level4" data-number="4.6.1.2">
 <h4 data-number="4.6.1.2" class="anchored" data-anchor-id="fechamento-sob-interseção"><span class="header-section-number">4.6.1.2</span> Fechamento sob Interseção</h4>
 <p><strong>Teorema (Fechamento sob Interseção)</strong>: Sejam <span class="math inline">\(M_1\)</span> e <span class="math inline">\(M_2\)</span> dois Autômatos Finitos Determinísticos que reconhecem as linguagens <span class="math inline">\(L_1\)</span> e <span class="math inline">\(L_2\)</span>, respectivamente. Então existe um Autômato Finito Determinístico <span class="math inline">\(M\)</span> que reconhece <span class="math inline">\(L_1 \cap L_2\)</span>.</p>
-<p>A elegante leitora notará que a construção da interseção é notavelmente similar à da união. A diferença crucial reside apenas na definição dos estados finais: enquanto a união implementa uma lógica <strong>OU</strong>, a interseção implementa uma lógica <strong>E</strong>.</p>
+<p>A elegante leitora notará que a construção da interseção é notavelmente similar à da união. A diferença reside apenas na definição dos estados finais: enquanto a união implementa uma lógica <strong>OU</strong>, a interseção implementa uma lógica <strong>E</strong>.</p>
 <p><strong>Construção Formal</strong>: Utilizamos a mesma estrutura de produto cartesiano, mas com:</p>
 <p><span class="math display">\[F = F_1 \times F_2\]</span></p>
 <p>Ou seja, um estado <span class="math inline">\((q_1, q_2)\)</span> é final se, e somente se, <strong>ambos</strong> <span class="math inline">\(q_1 \in F_1\)</span> <strong>e</strong> <span class="math inline">\(q_2 \in F_2\)</span>.</p>

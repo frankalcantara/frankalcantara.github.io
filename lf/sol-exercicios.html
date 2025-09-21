@@ -673,7 +673,7 @@ window.Quarto = {
 <p><strong>Passo 2</strong>: Calcular <span class="math inline">\(L((a \cup b)c)\)</span></p>
 <p>Usando a regla da concatenação: <span class="math inline">\(L(rs) = L(r) \cdot L(s)\)</span> <span class="math display">\[L((a \cup b)c) = L(a \cup b) \cdot L(c) = \{a, b\} \cdot \{c\}\]</span></p>
 <p><strong>Passo 3</strong>: Calcular o produto cartesiano <span class="math display">\[\{a, b\} \cdot \{c\} = \{ac, bc\}\]</span></p>
-<p><strong>Resultado final</strong>: <span class="math display">\[L((a \cup b)c) = \{ac, bc\}\]</span></p>
+<p><strong>Resultado</strong>: <span class="math display">\[L((a \cup b)c) = \{ac, bc\}\]</span></p>
 <ol start="5" type="1">
 <li><strong>Solução</strong>:</li>
 </ol>
@@ -897,7 +897,7 @@ window.Quarto = {
 <p><strong>Passo 4</strong>: Aplicar comutatividade para agrupar termos iguais <span class="math display">\[aa \cup aa \cup ba\]</span></p>
 <p><strong>Passo 5</strong>: Aplicar idempotência da união: <span class="math inline">\(r \cup r \equiv r\)</span> <span class="math display">\[aa \cup ba\]</span></p>
 <p><strong>Passo 6</strong>: Aplicar distributividade reversa <span class="math display">\[aa \cup ba \equiv (a \cup b)a\]</span></p>
-<p><strong>Resultado final</strong>: <span class="math display">\[((a \cup b)a) \cup (aa) \equiv (a \cup b)a\]</span></p>
+<p><strong>Resultado</strong>: <span class="math display">\[((a \cup b)a) \cup (aa) \equiv (a \cup b)a\]</span></p>
 <p><strong>Verificação com strings específicas</strong>: - Original aceita: <span class="math inline">\(\{aa, ba\}\)</span> - Simplificada aceita: <span class="math inline">\(\{aa, ba\}\)</span></p>
 <ol start="3" type="1">
 <li><strong>Solução</strong>:</li>
@@ -943,7 +943,7 @@ window.Quarto = {
 <p><span class="math display">\[ab^* \cup abb^* \cup abbb^* \equiv a(b^* \cup bb^* \cup bbb^*)\]</span></p>
 <p><strong>Simplificação do termo entre parênteses</strong>:</p>
 <p>Como <span class="math inline">\(bb^* \subseteq b^*\)</span> e <span class="math inline">\(bbb^* \subseteq b^*\)</span>: <span class="math display">\[b^* \cup bb^* \cup bbb^* \equiv b^*\]</span></p>
-<p><strong>Resultado final</strong>: <span class="math display">\[ab^* \cup abb^* \cup abbb^* \equiv ab^*\]</span></p>
+<p><strong>Resultado</strong>: <span class="math display">\[ab^* \cup abb^* \cup abbb^* \equiv ab^*\]</span></p>
 <p><strong>Verificação da equivalência</strong>:</p>
 <p><strong>Linguagem original</strong>: <span class="math display">\[L(ab^* \cup abb^* \cup abbb^*) = L(ab^*) \cup L(abb^*) \cup L(abbb^*)\]</span> <span class="math display">\[= \{a, ab, abb, \ldots\} \cup \{ab, abb, \ldots\} \cup \{abb, abbb, \ldots\}\]</span> <span class="math display">\[= \{a, ab, abb, abbb, \ldots\}\]</span></p>
 <p><strong>Linguagem simplificada</strong>: <span class="math display">\[L(ab^*) = \{a, ab, abb, abbb, \ldots\}\]</span></p>

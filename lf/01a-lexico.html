@@ -723,7 +723,7 @@ Tip
 <p>A linguagem contendo apenas a <em>string</em> vazia atua como elemento neutro para a concatenação.</p>
 <p><strong>3. Elemento Anulador</strong>: <span class="math display">\[L \cdot \emptyset = \emptyset \cdot L = \emptyset\]</span></p>
 <p>A linguagem vazia anula qualquer concatenação.</p>
-<p><strong>4. Não-Comutatividade</strong> (propriedade crucial): <span class="math display">\[L_1 \cdot L_2 \neq L_2 \cdot L_1 \text{ (em geral)}\]</span></p>
+<p><strong>4. Não-Comutatividade</strong>: <span class="math display">\[L_1 \cdot L_2 \neq L_2 \cdot L_1 \text{ (em geral)}\]</span></p>
 <p>A ordem na concatenação importa fundamentalmente. Do exemplo anterior:</p>
 <ul>
 <li><span class="math inline">\(L_1 \cdot L_2 = \{ac, add, bbc, bbdd\}\)</span>;</li>
@@ -765,7 +765,7 @@ Tip
 </section>
 <section id="autômatos-e-complexidade" class="level5" data-number="3.3.3.2.5">
 <h5 data-number="3.3.3.2.5" class="anchored" data-anchor-id="autômatos-e-complexidade"><span class="header-section-number">3.3.3.2.5</span> Autômatos e Complexidade</h5>
-<p>A concatenação de linguagens finitas tem complexidade <span class="math inline">\(O(|L_1| \times |L_2|)\)</span> no caso geral, mas pode ser otimizada quando as linguagens têm estruturas específicas. Esta consideração é crucial em implementações práticas de analisadores léxicos e sintáticos.</p>
+<p>A concatenação de linguagens finitas tem complexidade <span class="math inline">\(O(|L_1| \times |L_2|)\)</span> no caso geral, mas pode ser otimizada quando as linguagens têm estruturas específicas. Esta consideração é importante em implementações práticas de analisadores léxicos e sintáticos.</p>
 <p>Na teoria de autômatos, a concatenação corresponde à construção sequencial: aceitar uma <em>string</em> em <span class="math inline">\(L_1 \cdot L_2\)</span> significa processar uma parte inicial com um autômato para <span class="math inline">\(L_1\)</span> e a parte restante com um autômato para <span class="math inline">\(L_2\)</span>. Esta intuição será fundamental para construções como a de Thompson para expressões regulares.</p>
 <p>A concatenação, portanto, não é apenas uma operação matemática, mas a operação que captura a essência da <strong>sequencialidade</strong> na computação e na especificação de linguagens.</p>
 </section>
@@ -810,7 +810,7 @@ Tip
 <p><strong>Fechamento Positivo</strong>: O fechamento positivo de <span class="math inline">\(L\)</span> é uma variação que exclui a possibilidade de <em>não escolher nada</em>:</p>
 <p><span class="math display">\[L^+ = L^1 \cup L^2 \cup L^3 \cup \ldots = \bigcup_{i=1}^{\infty} L^i = L \cdot L^*\]</span></p>
 <p>A diferença fundamental é que <span class="math inline">\(L^+\)</span> exige <strong>pelo menos uma</strong> escolha de <span class="math inline">\(L\)</span>, enquanto <span class="math inline">\(L^*\)</span> permite zero escolhas.</p>
-<p>A relação entre fechamento de Kleene e o fechamento positivo depende crucialmente de um fator: se a <em>string</em> vazia <span class="math inline">\(\epsilon\)</span> pertence ou não à linguagem original <span class="math inline">\(L\)</span>.</p>
+<p>A relação entre fechamento de Kleene e o fechamento positivo depende de um fator: se a <em>string</em> vazia <span class="math inline">\(\epsilon\)</span> pertence ou não à linguagem original <span class="math inline">\(L\)</span>.</p>
 <p><strong>Caso 1</strong>: Se <span class="math inline">\(\epsilon \notin L\)</span>, então: <span class="math display">\[L^+ = L^* - \{\epsilon\}\]</span></p>
 <p>Neste caso, como <span class="math inline">\(\epsilon \notin L\)</span>, ela só pode aparecer em <span class="math inline">\(L^*\)</span> por meio de <span class="math inline">\(L^0 = \{\epsilon\}\)</span>. Todas as outras potências <span class="math inline">\(L^i\)</span> para <span class="math inline">\(i \geq 1\)</span> não contêm <span class="math inline">\(\epsilon\)</span>. Estas potências que não contêm <span class="math inline">\(\epsilon\)</span> são formadas por concatenações de elementos de <span class="math inline">\(L\)</span> que não incluem <span class="math inline">\(\epsilon\)</span>.</p>
 <p><strong>Caso 2</strong>: Se <span class="math inline">\(\epsilon \in L\)</span>, então: <span class="math display">\[L^+ = L^*\]</span></p>
@@ -1004,7 +1004,7 @@ Tip
 <li><span class="math inline">\(L(rs) = L(r) \cdot L(s)\)</span></li>
 <li><span class="math inline">\(L(r^*) = (L(r))^*\)</span></li>
 </ul>
-<p>Este processo de definição nos permite <em>computar</em> a linguagem de qualquer expressão. Por exemplo, para decodificar <span class="math inline">\(r = (a \cup b)c\)</span>, aplicamos as regras indutivamente: partindo dos casos base <span class="math inline">\(L(a)=\{a\}\)</span>, <span class="math inline">\(L(b)=\{b\}\)</span> e <span class="math inline">\(L(c)=\{c\}\)</span>, usamos a regra da união para obter <span class="math inline">\(L(a \cup b) = \{a, b\}\)</span>. Por fim, a regra da concatenação nos dá o resultado final: <span class="math inline">\(L(r) = L(a \cup b) \cdot L(c) = \{a, b\} \cdot \{c\} = \{ac, bc\}\)</span>.</p>
+<p>Este processo de definição nos permite <em>computar</em> a linguagem de qualquer expressão. Por exemplo, para decodificar <span class="math inline">\(r = (a \cup b)c\)</span>, aplicamos as regras indutivamente: partindo dos casos base <span class="math inline">\(L(a)=\{a\}\)</span>, <span class="math inline">\(L(b)=\{b\}\)</span> e <span class="math inline">\(L(c)=\{c\}\)</span>, usamos a regra da união para obter <span class="math inline">\(L(a \cup b) = \{a, b\}\)</span>. Por fim, a regra da concatenação nos dá o resultado: <span class="math inline">\(L(r) = L(a \cup b) \cdot L(c) = \{a, b\} \cdot \{c\} = \{ac, bc\}\)</span>.</p>
 <section id="sec-ex-regex" class="level4" data-number="3.4.3.1">
 <h4 data-number="3.4.3.1" class="anchored" data-anchor-id="sec-ex-regex"><span class="header-section-number">3.4.3.1</span> Exercícios 4</h4>
 <ol type="1">
@@ -1031,7 +1031,7 @@ Tip
 <ol type="a">
 <li>Identifique os casos base aplicáveis;</li>
 <li>Aplique as regras indutivas passo a passo;</li>
-<li>Apresente o resultado final.</li>
+<li>Apresente o resultado.</li>
 </ol></li>
 <li>Construa expressões regulares que denotem as seguintes linguagens:
 <ol type="a">
