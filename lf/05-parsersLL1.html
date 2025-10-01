@@ -252,7 +252,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Analisadores Semânticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -260,14 +260,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +304,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -481,12 +510,12 @@ Tip
 <p>Antes de detalharmos o <span class="math inline">\(FIRST\)</span> e o <span class="math inline">\(FOLLOW\)</span>, precisamos de um conceito fundamental: o conjunto de símbolos <strong>NULLABLE</strong>. Um símbolo não-terminal é considerado <em>NULLABLE</em> se ele pode derivar a cadeia vazia (<span class="math inline">\(\varepsilon\)</span>), ou seja, se ele pode efetivamente “desaparecer” em uma derivação. Saber se um símbolo pode ou não desaparecer é essencial para os cálculos seguintes.</p>
 <p>O conjunto <span class="math inline">\(FIRST\)</span> de um símbolo não-terminal será composto dos símbolos terminais que podem aparecer como <strong>primeiro símbolo</strong> de qualquer sequência de símbolos que seja derivada desse não-terminal, incluindo <span class="math inline">\(\varepsilon\)</span> se o símbolo for <em>NULLABLE</em>. Em outras palavras, o conjunto <span class="math inline">\(FIRST\)</span> indica quais terminais podem iniciar uma declaração válida (frase) dentro da estrutura gramática definida por um não-terminal. Por exemplo, considere uma gramática para definir expressões aritméticas. O não-terminal <em>EXPR</em> pode derivar diversas sequências de símbolos, como <em>2 + 3</em>, <em>(4</em> 5)<em>,</em> x - y<em>. O conjunto</em> <span class="math inline">\(FIRST\)</span> do não-terminal EXPR* seria, neste caso específico, <span class="math inline">\({número, '+', '-', '('}\)</span>, porque esses são os símbolos que podem iniciar qualquer expressão aritmética válida nesta gramática até onde podemos saber com as informações passadas neste parágrafo.</p>
 <p>O conjunto <span class="math inline">\(FOLLOW\)</span>, por sua vez, determina o conjunto de símbolos terminais que podem aparecer <strong>imediatamente após</strong> um não-terminal em alguma derivação da gramática. Ou colocando de outra forma, o conjunto <span class="math inline">\(FOLLOW\)</span> indica quais terminais podem seguir (<em>follow</em>) um não-terminal em uma declaração válida da linguagem.</p>
-<p>Diferentemente do <span class="math inline">\(FIRST\)</span>, que se concentra no início de uma derivação, o <span class="math inline">\(FOLLOW\)</span> analisa o contexto no qual um não-terminal aparece. Seu cálculo depende criticamente de saber quais símbolos são <em>NULLABLE</em>, se um símbolo <span class="math inline">\(y\)</span> que segue um não-terminal <span class="math inline">\(X\)</span> pode desaparecer, então tudo o que pode seguir a regra na qual <span class="math inline">\(X\)</span> e <span class="math inline">\(y\)</span> aparecem também pode seguir <span class="math inline">\(X\)</span>. Por exemplo, considere uma gramática que define declarações de variáveis. O não-terminal <em>DECLARACAO_VAR</em> pode ser seguido por diferentes símbolos, dependendo do contexto. Em uma linguagem como a linguagem C, por exemplo, uma declaração de variável pode terminar com um ponto e vírgula, ser seguida por um operador de atribuição e uma expressão, ou até mesmo ser parte de uma estrutura maior. Neste cenário, o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal <em>DECLARACAO_VAR</em> incluiria o ponto e vírgula ‘;’, o sinal de igual ‘=’, e todos os outros símbolos que podem iniciar uma expressão ou um comando que a linguagem permita ocorrer na mesma linha da declaração da variável.</p>
+<p>Diferentemente do <span class="math inline">\(FIRST\)</span>, que se concentra no início de uma derivação, o <span class="math inline">\(FOLLOW\)</span> analisa o contexto no qual um não-terminal aparece. Seu cálculo depende de saber quais símbolos são <em>NULLABLE</em>, se um símbolo <span class="math inline">\(y\)</span> que segue um não-terminal <span class="math inline">\(X\)</span> pode desaparecer, então tudo o que pode seguir a regra na qual <span class="math inline">\(X\)</span> e <span class="math inline">\(y\)</span> aparecem também pode seguir <span class="math inline">\(X\)</span>. Por exemplo, considere uma gramática que define declarações de variáveis. O não-terminal <em>DECLARACAO_VAR</em> pode ser seguido por diferentes símbolos, dependendo do contexto. Em uma linguagem como a linguagem C, por exemplo, uma declaração de variável pode terminar com um ponto e vírgula, ser seguida por um operador de atribuição e uma expressão, ou até mesmo ser parte de uma estrutura maior. Neste cenário, o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal <em>DECLARACAO_VAR</em> incluiria o ponto e vírgula ‘;’, o sinal de igual ‘=’, e todos os outros símbolos que podem iniciar uma expressão ou um comando que a linguagem permita ocorrer na mesma linha da declaração da variável.</p>
 <p>Os conjuntos <span class="math inline">\(NULLABLE\)</span>, <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> serão utilizados para construir a Tabela de Derivação <span class="math inline">\(LL(1)\)</span>. A forma tecnicamente mais correta seria dizer que estes conjuntos formam a Tabela De Análise <span class="math inline">\(LL(1)\)</span>. Entretanto, pobre de mim, prefiro chamar de Tabela de Derivação.</p>
 <p>As Tabelas de Derivação são tabelas que guiam o processo de análise sintática descendente preditiva no <em>parser</em> <span class="math inline">\(LL(1)\)</span> deterministicamente. Cada célula dessas tabelas corresponde a relação que existe em um par não-terminal, terminal. De forma que o valor da célula apontada por este par indica qual regra de produção deve ser aplicada quando o analisador encontrar este par específico durante a análise preditiva <span class="math inline">\(LL(1)\)</span>.</p>
 <section id="o-conjunto-nullable" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="o-conjunto-nullable"><span class="header-section-number">6.4.1</span> O Conjunto NULLABLE</h3>
-<p>Antes de nos aprofundarmos nos conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, é essencial entender um conceito preliminar: o conjunto dos símbolos <span class="math inline">\(NULLABLE\)</span>. Um símbolo não-terminal é considerado <span class="math inline">\(NULLABLE\)</span> se ele pode derivar a cadeia vazia (<span class="math inline">\(\varepsilon\)</span>) através de qualquer sequência de derivações possível.</p>
+<p>Antes de nos aprofundarmos nos conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, é essencial entender um conceito preliminar: o conjunto dos símbolos <span class="math inline">\(NULLABLE\)</span>. Um símbolo não-terminal é considerado <span class="math inline">\(NULLABLE\)</span> se ele pode derivar a cadeia vazia (<span class="math inline">\(\varepsilon\)</span>) por meio de qualquer sequência de derivações possível.</p>
 <p><strong>Importante:</strong> Um símbolo pode ser <span class="math inline">\(NULLABLE\)</span> de três formas distintas:</p>
 <ol type="1">
 <li><strong>Nullable Direto</strong>: Quando existe uma produção explícita <span class="math inline">\(A \rightarrow \varepsilon\)</span>;</li>
@@ -511,7 +540,7 @@ Tip
 <p>Identificar quais símbolos são <span class="math inline">\(NULLABLE\)</span> é um passo preparatório fundamental. Essa informação é usada para determinar:</p>
 <ol type="a">
 <li>Quando incluir <span class="math inline">\(\varepsilon\)</span> no conjunto <span class="math inline">\(FIRST\)</span> de um não-terminal;</li>
-<li>Quando o analisador deve “olhar através” de um símbolo em uma produção para calcular o <span class="math inline">\(FIRST\)</span> do que vem a seguir;</li>
+<li>Quando o analisador deve “olhar por meio” de um símbolo em uma produção para calcular o <span class="math inline">\(FIRST\)</span> do que vem a seguir;</li>
 <li>Quando o conjunto <span class="math inline">\(FOLLOW\)</span> de um não-terminal deve herdar símbolos do <span class="math inline">\(FOLLOW\)</span> de outro, porque o símbolo que o sucede pode “desaparecer” (derivar em <span class="math inline">\(\varepsilon\)</span>).</li>
 </ol>
 <section id="regras-de-criação-do-conjunto-nullable" class="level4" data-number="6.4.1.1">
@@ -2738,7 +2767,7 @@ FOLLOW(F) &amp;= FIRST(T^{\prime}) - \{\varepsilon\} \cup FOLLOW(T) = \{ \times 
 <h3 data-number="6.10.2" class="anchored" data-anchor-id="observações"><span class="header-section-number">6.10.2</span> Observações</h3>
 <ul>
 <li>Considere que <code>ID</code> representa identificadores (como <code>i</code>, <code>x</code>).</li>
-<li>Considere que <code>NUM</code> representa literais numéricos (como <code>0</code>, <code>10</code>, <code>1</code>).</li>
+<li>Considere que <code>em um</code> representa literais numéricos (como <code>0</code>, <code>10</code>, <code>1</code>).</li>
 <li>A gramática deve suportar expressões aritméticas com adição e multiplicação.</li>
 <li>A gramática deve ser capaz de analisar corretamente o exemplo fornecido.</li>
 </ul>
@@ -2763,7 +2792,7 @@ FOLLOW(F) &amp;= FIRST(T^{\prime}) - \{\varepsilon\} \cup FOLLOW(T) = \{ \times 
 \text{STMT} &amp;\rightarrow \text{ID} = \text{EXPR} ; \\
 \text{EXPR} &amp;\rightarrow \text{EXPR} + \text{TERM} \mid \text{TERM} \\
 \text{TERM} &amp;\rightarrow \text{TERM} * \text{FACTOR} \mid \text{FACTOR} \\
-\text{FACTOR} &amp;\rightarrow ( \text{EXPR} ) \mid \text{ID} \mid \text{NUM}
+\text{FACTOR} &amp;\rightarrow ( \text{EXPR} ) \mid \text{ID} \mid \text{em um}
 \end{aligned}
 \]</span></p>
 <p>Para corrigir, eliminamos a recursão à esquerda nas regras <strong>EXPR</strong> e <strong>TERM</strong>.</p>
@@ -2783,7 +2812,7 @@ FOLLOW(F) &amp;= FIRST(T^{\prime}) - \{\varepsilon\} \cup FOLLOW(T) = \{ \times 
 \text{EXPR\_TAIL} &amp;\rightarrow + \text{TERM} \, \text{EXPR\_TAIL} \mid \varepsilon \\
 \text{TERM} &amp;\rightarrow \text{FACTOR} \, \text{TERM\_TAIL} \\
 \text{TERM\_TAIL} &amp;\rightarrow * \text{FACTOR} \, \text{TERM\_TAIL} \mid \varepsilon \\
-\text{FACTOR} &amp;\rightarrow ( \text{EXPR} ) \mid \text{ID} \mid \text{NUM}
+\text{FACTOR} &amp;\rightarrow ( \text{EXPR} ) \mid \text{ID} \mid \text{em um}
 \end{aligned}
 \]</span></p>
 <p>Onde <span class="math inline">\(\varepsilon\)</span> representa a cadeia vazia. Agora a gramática é adequada para a análise <span class="math inline">\(LL(1)\)</span>.</p>
@@ -2797,15 +2826,15 @@ FOLLOW(F) &amp;= FIRST(T^{\prime}) - \{\varepsilon\} \cup FOLLOW(T) = \{ \times 
 <p>O conjunto <strong>FIRST(A)</strong> contém os terminais que podem iniciar uma sentença derivada de <span class="math inline">\(A\)</span>.</p>
 <p><span class="math display">\[
 \begin{aligned}
-FIRST(\text{FACTOR}) &amp;= \{ (, \text{ID}, \text{NUM} \} \\
+FIRST(\text{FACTOR}) &amp;= \{ (, \text{ID}, \text{em um} \} \\
 FIRST(\text{TERM\_TAIL}) &amp;= \{ *, \varepsilon \} \\
-FIRST(\text{TERM}) &amp;= FIRST(\text{FACTOR}) = \{ (, \text{ID}, \text{NUM} \} \\
+FIRST(\text{TERM}) &amp;= FIRST(\text{FACTOR}) = \{ (, \text{ID}, \text{em um} \} \\
 FIRST(\text{EXPR\_TAIL}) &amp;= \{ +, \varepsilon \} \\
-FIRST(\text{EXPR}) &amp;= FIRST(\text{TERM}) = \{ (, \text{ID}, \text{NUM} \} \\
+FIRST(\text{EXPR}) &amp;= FIRST(\text{TERM}) = \{ (, \text{ID}, \text{em um} \} \\
 FIRST(\text{STMT}) &amp;= \{ \text{ID} \} \\
 FIRST(\text{BLOCK}) &amp;= \{ \{ \} \\
 FIRST(\text{INCR}) &amp;= \{ \text{ID} \} \\
-FIRST(\text{COND}) &amp;= FIRST(\text{EXPR}) = \{ (, \text{ID}, \text{NUM} \} \\
+FIRST(\text{COND}) &amp;= FIRST(\text{EXPR}) = \{ (, \text{ID}, \text{em um} \} \\
 FIRST(\text{INIT}) &amp;= \{ \text{ID} \} \\
 FIRST(\text{FOR\_STMT}) &amp;= \{ \text{for} \}
 \end{aligned}
@@ -2856,7 +2885,7 @@ FOLLOW(\text{FACTOR}) &amp;= FIRST(\text{TERM\_TAIL}) - \{\varepsilon\} \cup FOL
 <th style="text-align: left;">Não-Terminal</th>
 <th style="text-align: left;"><strong>for</strong></th>
 <th style="text-align: left;"><strong>ID</strong></th>
-<th style="text-align: left;"><strong>NUM</strong></th>
+<th style="text-align: left;"><strong>em um</strong></th>
 <th style="text-align: left;"><strong>+</strong></th>
 <th style="text-align: left;"><strong>*</strong></th>
 <th style="text-align: left;"><strong>&lt;</strong></th>
@@ -3023,7 +3052,7 @@ FOLLOW(\text{FACTOR}) &amp;= FIRST(\text{TERM\_TAIL}) - \{\varepsilon\} \cup FOL
 <td style="text-align: left;"><strong>FACTOR</strong></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>→ ID</code></td>
-<td style="text-align: left;"><code>→ NUM</code></td>
+<td style="text-align: left;"><code>→ em um</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"></td>
@@ -3099,12 +3128,12 @@ FOLLOW(\text{FACTOR}) &amp;= FIRST(\text{TERM\_TAIL}) - \{\varepsilon\} \cup FOL
 <tr class="odd">
 <td style="text-align: left;"><code>FACTOR TERM_TAIL EXPR_T...) $</code></td>
 <td style="text-align: left;"><code>0;...) $</code></td>
-<td style="text-align: left;"><code>FACTOR → NUM</code></td>
+<td style="text-align: left;"><code>FACTOR → em um</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>NUM TERM_TAIL EXPR_T...) $</code></td>
+<td style="text-align: left;"><code>em um TERM_TAIL EXPR_T...) $</code></td>
 <td style="text-align: left;"><code>0;...) $</code></td>
-<td style="text-align: left;"><strong>Match</strong> <code>NUM</code> (0)</td>
+<td style="text-align: left;"><strong>Match</strong> <code>em um</code> (0)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>TERM_TAIL EXPR_TAIL;...) $</code></td>
@@ -3229,12 +3258,12 @@ FOLLOW(\text{FACTOR}) &amp;= FIRST(\text{TERM\_TAIL}) - \{\varepsilon\} \cup FOL
 <tr class="odd">
 <td style="text-align: left;"><code>FACTOR TERM_TAIL EXPR_T; } $</code></td>
 <td style="text-align: left;"><code>1;} $</code></td>
-<td style="text-align: left;"><code>FACTOR → NUM</code></td>
+<td style="text-align: left;"><code>FACTOR → em um</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>NUM TERM_TAIL EXPR_T; } $</code></td>
+<td style="text-align: left;"><code>em um TERM_TAIL EXPR_T; } $</code></td>
 <td style="text-align: left;"><code>1;} $</code></td>
-<td style="text-align: left;"><strong>Match</strong> <code>NUM</code> (1)</td>
+<td style="text-align: left;"><strong>Match</strong> <code>em um</code> (1)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>TERM_TAIL EXPR_TAIL; } $</code></td>

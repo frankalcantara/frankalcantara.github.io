@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 12&nbsp; Tabela de Símbolos em Compiladores Modernos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./fase1.html" rel="next">
+<link href="./10a-semantico.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./11-tabelaSimbolos.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#um-pouco-de-história-a-evolução-da-tabela-de-símbolos" id="toc-um-pouco-de-história-a-evolução-da-tabela-de-símbolos" class="nav-link active" data-scroll-target="#um-pouco-de-história-a-evolução-da-tabela-de-símbolos"><span class="header-section-number">12.1</span> Um pouco de História: A Evolução da <strong>Tabela de Símbolos</strong></a></li>
+  <li><a href="#interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida" id="toc-interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida" class="nav-link" data-scroll-target="#interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida"><span class="header-section-number">12.2</span> Interação com as Fases do Compilador: Uma Perspetiva de Ciclo de Vida</a></li>
+  <li><a href="#informação-armazenada-os-atributos-de-um-identificador" id="toc-informação-armazenada-os-atributos-de-um-identificador" class="nav-link" data-scroll-target="#informação-armazenada-os-atributos-de-um-identificador"><span class="header-section-number">12.3</span> Informação Armazenada: Os Atributos de um Identificador</a></li>
+  <li><a href="#estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos" id="toc-estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos" class="nav-link" data-scroll-target="#estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos"><span class="header-section-number">12.4</span> Estruturas de Dados Fundamentais para a Implementação da <strong>Tabela de Símbolos</strong></a>
+  <ul class="collapse">
+  <li><a href="#hash-tables-hash-tables-o-padrão-de-fato" id="toc-hash-tables-hash-tables-o-padrão-de-fato" class="nav-link" data-scroll-target="#hash-tables-hash-tables-o-padrão-de-fato"><span class="header-section-number">12.4.1</span> <em>hash tables</em> (<em>Hash Tables</em>): O Padrão De Fato</a></li>
+  <li><a href="#estruturas-baseadas-em-árvores-a-alternativa-ordenada" id="toc-estruturas-baseadas-em-árvores-a-alternativa-ordenada" class="nav-link" data-scroll-target="#estruturas-baseadas-em-árvores-a-alternativa-ordenada"><span class="header-section-number">12.4.2</span> Estruturas Baseadas em Árvores: A Alternativa Ordenada</a></li>
+  <li><a href="#uma-análise-comparativa-de-desempenho-memória-e-funcionalidade" id="toc-uma-análise-comparativa-de-desempenho-memória-e-funcionalidade" class="nav-link" data-scroll-target="#uma-análise-comparativa-de-desempenho-memória-e-funcionalidade"><span class="header-section-number">12.4.3</span> Uma Análise Comparativa de Desempenho, Memória e Funcionalidade</a></li>
+  </ul></li>
+  <li><a href="#implementação-avançada-o-desafio-dos-escopos-lexicais" id="toc-implementação-avançada-o-desafio-dos-escopos-lexicais" class="nav-link" data-scroll-target="#implementação-avançada-o-desafio-dos-escopos-lexicais"><span class="header-section-number">12.5</span> Implementação Avançada: O Desafio dos escopos Lexicais</a>
+  <ul class="collapse">
+  <li><a href="#o-modelo-de-pilha-de-tabelas" id="toc-o-modelo-de-pilha-de-tabelas" class="nav-link" data-scroll-target="#o-modelo-de-pilha-de-tabelas"><span class="header-section-number">12.5.1</span> O Modelo de Pilha de Tabelas</a></li>
+  <li><a href="#algoritmo-implementando-escopos-com-uma-pilha-de-dicionários" id="toc-algoritmo-implementando-escopos-com-uma-pilha-de-dicionários" class="nav-link" data-scroll-target="#algoritmo-implementando-escopos-com-uma-pilha-de-dicionários"><span class="header-section-number">12.5.2</span> Algoritmo: Implementando Escopos com uma Pilha de Dicionários</a></li>
+  <li><a href="#implementação-em-python-uma-tabela-de-símbolos-funcional" id="toc-implementação-em-python-uma-tabela-de-símbolos-funcional" class="nav-link" data-scroll-target="#implementação-em-python-uma-tabela-de-símbolos-funcional"><span class="header-section-number">12.5.3</span> Implementação em Python: Uma <strong>Tabela de Símbolos</strong> Funcional</a></li>
+  <li><a href="#o-modelo-de-tabela-única-com-encadeamento-de-escopo" id="toc-o-modelo-de-tabela-única-com-encadeamento-de-escopo" class="nav-link" data-scroll-target="#o-modelo-de-tabela-única-com-encadeamento-de-escopo"><span class="header-section-number">12.5.4</span> O Modelo de Tabela Única com Encadeamento de Escopo</a></li>
+  <li><a href="#representações-de-escopo-hierárquicas-e-baseadas-em-árvores" id="toc-representações-de-escopo-hierárquicas-e-baseadas-em-árvores" class="nav-link" data-scroll-target="#representações-de-escopo-hierárquicas-e-baseadas-em-árvores"><span class="header-section-number">12.5.5</span> Representações de Escopo Hierárquicas e Baseadas em Árvores</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/11-tabelaSimbolos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./11-tabelaSimbolos.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-symbol-table" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A <strong>Tabela de Símbolos</strong> é um tipo de dados abstrato que mapeia identificadores, chamados de símbolos, para a sua informação semântica associada. Essa é a principal estrutura de dados utilizada por um compilador, ou interpretador, para rastrear as entidades declaradas em um código fonte. A função primária da <strong>Tabela de Símbolos</strong> é registar a informação sobre cada identificador em um programa, atuando como um dicionário para o processo de tradução.</p>
+<p>É importante distinguir entre um identificador e um símbolo. Um identificador é uma cadeia de caracteres, um lexema, como por exemplo <code>x</code>. Um símbolo, por outro lado, é um nome único dentro de um contexto específico. Um único identificador pode representar múltiplos símbolos distintos, dependendo do seu escopo ou da sua classe. Por exemplo, na linguagem FORTRAN, o identificador <code>X</code> pode representar três nomes distintos: o nome de um bloco comum, um elemento dentro desse bloco e uma variável em uma definição de função, como pode ser visto na Figura <a href="#fig-Symbolfortran" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>. Em linguagens com estrutura de blocos, o mesmo identificador pode ser declarado em escopos aninhados, representando diferentes símbolos. Esta distinção é fundamental para o propósito da <strong>Tabela de Símbolos</strong>: <strong>resolver a qual entidade um determinado uso de um identificador se refere</strong>.</p>
+<div id="fig-Symbolfortran" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Symbolfortran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/symbolsFortran.webp" class="img-fluid figure-img"></p>
+<figcaption>Exemplo de Identificadores e Símbolos em FORTRAN</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-Symbolfortran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1
+</figcaption>
+</figure>
+</div>
+<p>A <strong>Tabela de Símbolos</strong> é preenchida de forma incremental. A informação sobre os vários artefatos do programa (classes, variáveis, métodos, etc.) e as suas propriedades (tipos, argumentos, visibilidade, etc.) é recolhida e refinada ao longo das várias fases da compilação. As associações entre nomes e aos artefatos que eles denotam são estabelecidas com base na estrutura sintática do programa, conforme determinado pelo analisador sintático e as fases subsequentes do processo de tradução.</p>
+<section id="um-pouco-de-história-a-evolução-da-tabela-de-símbolos" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="um-pouco-de-história-a-evolução-da-tabela-de-símbolos"><span class="header-section-number">12.1</span> Um pouco de História: A Evolução da <strong>Tabela de Símbolos</strong></h2>
+<p>A <strong>Tabela de Símbolos</strong>, embora conceitualmente simples, passou por uma notável evolução ao longo da história da computação. Sua trajetória reflete diretamente o avanço na complexidade das linguagens de programação, as mudanças nas arquiteturas de hardware e a busca contínua por compiladores mais rápidos e eficientes. A Figura <a href="#fig-sb-history" class="quarto-xref">Figure&nbsp;<span>12.2</span></a> sintetiza a história evolutiva das <strong>Tabelas de Símbolos</strong>. Sem medo de errar muito, podemos dizer que tudo começou com o Fortran.</p>
+<div id="fig-sb-history" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sb-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SymbolTableHistory.webp" class="img-fluid figure-img"></p>
+<figcaption>Evolução Histórica das Tabelas de Símbolos</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-sb-history-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2
+</figcaption>
+</figure>
+</div>
+<p>O primeiro compilador FORTRAN (1957) marcou o nascimento da compilação como a conhecemos hoje. As necessidades do compilador Fortran eram relativamente simples: mapear identificadores, nomes de variáveis, sub-rotinas, para seus atributos, tipo, endereço de memória. Para isso, foram utilizadas estruturas de dados lineares, como arrays ou listas. A busca por um símbolo era feita sequencialmente, varrendo a estrutura do início ao fim. Para os programas da época, essa abordagem de complexidade linear, <span class="math inline">\(O(n)\)</span>, era suficiente. Sob o olhar do desenvolvedor moderno pode parecer ineficiente e demasiado inocente, mas estabeleceu o princípio fundamental: <strong>associar um nome a um conjunto de metadados</strong>.</p>
+<p>O próximo passo importante acontece com a introdução do ALGOL 60 (1960). O ALGOL 60 introduziu um conceito transformador: a <strong>estrutura de blocos</strong> (<code>begin</code>…<code>end</code>), que permitia o aninhamento de escopos. Uma variável declarada dentro de um bloco só era visível ali dentro e em seus sub-blocos. Uma <strong>Tabela de Símbolos</strong> linear e global mostrou-se inadequada. É muito difícil e pouco eficiente criar estruturas aninhadas em uma tabela linear. A solução foi o desenvolvimento de <strong>Tabelas de Símbolos hierárquicas ou aninháveis</strong>. Ao percorrer um novo escopo, o compilador cria uma nova tabela, ou se preferir, um novo nível, de forma aninhada. Deste ponto em diante, a busca por um símbolo passou a percorrer uma pilha, do escopo mais interno para o mais externo, modelando perfeitamente as regras de visibilidade de símbolos do ALGOL. Para programas pequenos com escopos rasos, essa abordagem ainda era viável, mas a busca continuava sendo linear em cada nível.</p>
+<p>À medida que os programas se tornaram maiores e mais complexos, o desempenho da busca linear nas tabelas de símbolos transformou-se em um gargalo de performance consumindo tempo significativo. A solução veio com a adoção massiva das <strong>tabelas de dispersão ou <em>hash tables</em></strong>. Oferecendo um tempo de busca médio de complexidade <span class="math inline">\(O(1)\)</span>, estas estruturas de dados representaram um degrau evolutivo em eficiência criando um novo patamar de expectativas. Muito rapidamente a capacidade de encontrar as informações de um identificador com complexidade <span class="math inline">\(O(1)\)</span>, independentemente do tamanho do programa, tornou-se a abordagem padrão. Neste ponto, éramos felizes e sabíamos.</p>
+<p>Na década de 1970 linguagens como Pascal e C popularizaram a <strong>compilação em múltiplas passagens</strong>, na qual o código-fonte é processado em várias etapas (análise léxica, sintática, semântica, otimização, geração de código). Isso exigiu que a <strong>Tabela de Símbolos</strong> <strong>persistisse</strong> entre as passagens. Neste ponto da história a <strong>Tabela de Símbolos</strong> deixou de ser uma estrutura de dados temporária da análise sintática para se tornar um repositório central de informações semânticas, consultado e enriquecido ao longo de todo o processo de compilação. Isso foi fundamental para habilitar recursos como declarações antecipadas <em>forward declarations</em> e otimizações mais complexas.</p>
+<p>Praticamente 20 anos se passaram até a década de 1990 quando a popularização de linguagens orientadas a objetos como <strong>C++</strong> e <strong>Java</strong> introduziu uma nova camada de complexidade. As tabelas de símbolos precisaram evoluir para gerenciar:</p>
+<ul>
+<li><strong>Hierarquias de herança</strong>: mapear a relação entre classes base e derivadas;<br>
+</li>
+<li><strong>Sobrecarga de métodos</strong>: Distinguir entre múltiplos métodos com o mesmo nome, mas assinaturas diferentes;<br>
+</li>
+<li><strong>Resolução de métodos virtuais</strong>: lidar com a vinculação dinâmica (late binding) em tempo de execução; As tabelas de símbolos se tornaram mais estruturadas, frequentemente integradas a outras representações, como árvores de classes, para modelar essas relações complexas.</li>
+</ul>
+<p>Na mesma proporção em que o tempo passa, a evolução tecnológica não para. Chegamos aos anos 2000, a era moderna dos compiladores. Esta era é marcada pela explosão na escala dos projetos de software e pela onipresença de processadores multi-core. O foco se voltou para otimizações de baixo nível e gerenciamento de memória, resultando em inovações como:</p>
+<ul>
+<li><strong>Alocação em arena</strong>: em vez de alocar memória para cada símbolo individualmente, grandes blocos de memória, as arenas, são alocados de uma vez. Símbolos são então “esculpidos” nesses blocos com um simples incremento de ponteiro. Isso acelera drasticamente a alocação e permite que toda a memória da compilação seja liberada de uma só vez, eliminando a sobrecarga de desalocações individuais.<br>
+</li>
+<li><strong>Internalização de <em>strings</em>, <em>String Interning</em></strong>: garante que cada string de identificador idêntico exista apenas uma vez na memória. Todas as ocorrências de <code>minhaVariavel</code>, por exemplo, apontam para a mesma instância de string. Isso reduz o consumo de memória e permite comparações de <em>strings</em> ultrarrápidas através da simples comparação de ponteiros com complexidade <span class="math inline">\(O(1)\)</span>.<br>
+</li>
+<li><strong>Design Consciente de Cache, <em>Cache-Conscious Design</em></strong>: os engenheiros de compiladores começaram a projetar estruturas de dados que minimizam falhas de cache, os <em>cache misses</em>. Técnicas como o armazenamento co-localizado de <em>strings</em>, como pode ser visto no <a href="https://llvm.org/">LLVM</a>, em que o nome do símbolo é armazenado junto com seus metadados na mesma alocação de memória, melhoram a localidade de dados e, consequentemente, o desempenho.</li>
+</ul>
+</section>
+<section id="interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida"><span class="header-section-number">12.2</span> Interação com as Fases do Compilador: Uma Perspetiva de Ciclo de Vida</h2>
+<p>A <strong>Tabela de Símbolos</strong> é uma estrutura de dados dinâmica que evolui ao longo do processo de compilação, servindo como <em>interface</em> entre o <em>frontend</em>, módulos de análise, e o <em>backend</em>, módulos de síntese, do processo de tradução. Seja este processo a compilação, a interpretação ou qualquer outro método misto. O estado de completude da <strong>Tabela de Símbolos</strong> reflete o progresso do processo de tradução em questão. Assim, teremos:</p>
+<ol type="1">
+<li><p><strong>Análise Léxica</strong>: esta é a primeira fase do processo de tradução. É a fase que encontra os identificadores. Pode realizar a inserção inicial na <strong>Tabela de Símbolos</strong>, muitas vezes armazenando apenas o lexema. <strong>Palavras-chave, operadores e identificadores predefinidos são tipicamente pré-carregados na tabela durante a inicialização do compilador</strong>.</p></li>
+<li><p><strong>Análise Sintática e Semântica</strong>: nestas duas fases, a <strong>Tabela de Símbolos</strong> é mais intensamente utilizada e enriquecida. A análise sintática fornece o contexto, por exemplo, uma declaração de variável, para que o analisador semântico adicione atributos detalhados como tipo, escopo e requisitos de memória. A análise semântica depende da <strong>Tabela de Símbolos</strong> para realizar verificações essenciais, como a compatibilidade de tipos, a resolução de escopo e a detecção de variáveis não declaradas ou declaradas múltiplas vezes no mesmo escopo. Historicamente será o analisador semântico o módulo de tradução responsável pelo preenchimento da maior parte da <strong>Tabela de Símbolos</strong>. Apenas durante a análise semântica é possível conhecer informação suficiente para descrever um nome de forma correta e completa.</p></li>
+<li><p><strong>Geração de Código Intermédio e Final</strong>: as fases de <em>backend</em> consomem a informação armazenada na <strong>Tabela de Símbolos</strong> para gerar código de máquina eficiente. Utilizam especificamente os endereços de memória, os deslocamentos, <em>offsets</em>, dentro dos registos de ativação e os tamanhos dos tipos para alocar armazenamento e gerar as diretivas de montagem apropriadas.</p></li>
+</ol>
+<p>O design da estrutura de dados da <strong>Tabela de Símbolos</strong> deve, portanto, acomodar este preenchimento incremental e os padrões de acesso variados de cada fase. Uma operação de inserção ineficiente retardaria o <em>frontend</em> do compilador (analisadores léxico, sintático e semântico), enquanto uma operação de pesquisa, <em>lookup</em>, lenta constituiria um estrangulamento tanto para o <em>frontend</em> como para o <em>backend</em>.</p>
+<p>A Figura <a href="#fig-compliler-lifecycle" class="quarto-xref">Figure&nbsp;<span>12.3</span></a> mostra a relação típica de uma <strong>Tabela de Símbolos</strong> ao longo das várias fases do processo de tradução.</p>
+<div id="fig-compliler-lifecycle" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-compliler-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Compiler_Diagram.webp" class="img-fluid figure-img"></p>
+<figcaption>Relação entre <strong>Tabela de Símbolos</strong> e os módulos do Processo de Tradução</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-compliler-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.3
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="informação-armazenada-os-atributos-de-um-identificador" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="informação-armazenada-os-atributos-de-um-identificador"><span class="header-section-number">12.3</span> Informação Armazenada: Os Atributos de um Identificador</h2>
+<p>Uma entrada na <strong>Tabela de Símbolos</strong> é uma coleção de atributos associados a um símbolo. Os atributos exatos dependem da linguagem, mas tipicamente incluem os seguintes campos:</p>
+<ul>
+<li><strong>Nome</strong>: o lexema ou a representação em cadeia de caracteres do identificador (ex: <code>x</code>, <code>for</code>, <code>1</code>).<br>
+</li>
+<li><strong>Tipo</strong>: o tipo de dados do símbolo (por exemplo, <code>int</code>, <code>float</code>, <code>struct</code>, ponteiro para função). Esta informação é utilizada para a verificação de tipos.<br>
+</li>
+<li><strong>Classe/Tipo (Kind)</strong>: a natureza do símbolo, que pode ser uma variável, constante, procedimento, parâmetro, rótulo, tipo, campo de registo, entre outros.<br>
+</li>
+<li><strong>Escopo (Scope)</strong>: o bloco lexical ou o espaço de nomes, <em>namespace</em> no qual o símbolo é válido. A gestão do escopo é frequentemente uma função da própria estrutura da <strong>Tabela de Símbolos</strong>.<br>
+</li>
+<li><strong>Informação de Memória</strong>: o endereço de tempo de execução, o deslocamento dentro de um registo de ativação ou a classe de armazenamento (por exemplo, estático, automático).<br>
+</li>
+<li><strong>Para Funções/Procedimentos</strong>: o número e os tipos dos parâmetros, bem como o tipo de retorno.<br>
+</li>
+<li><strong>Para Matrizes (Arrays)</strong>: as dimensões e os limites de cada dimensão.<br>
+</li>
+<li><strong>Outros Atributos</strong>: informação adicional, como visibilidade (público, privado), se uma variável é constante, ou referências cruzadas para as linhas nas quais o símbolo é declarado e utilizado.</li>
+</ul>
+</section>
+<section id="estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos"><span class="header-section-number">12.4</span> Estruturas de Dados Fundamentais para a Implementação da <strong>Tabela de Símbolos</strong></h2>
+<p>Nesta secção a curiosa leitora encontrará um estudo das principais estruturas de dados utilizadas para construção e gestão da <strong>Tabela de Símbolos</strong>, estabelecendo por que certas escolhas são dominantes na prática moderna. Originalmente, as <strong>Tabelas de Símbolos</strong> foram implementadas usando listas ligadas simples ou vetores não ordenados. Estas abordagens são fáceis de entender e implementar, mas não escalam bem com o aumento do número de símbolos.</p>
+<p>As listas ligadas e os vetores não ordenados representam as implementações mais simples para uma <strong>Tabela de Símbolos</strong>. Contudo, sua simplicidade vem atrelada a um alto custo computacional. Ambas as estruturas exigem uma pesquisa linear para localizar um símbolo, o que resulta em uma complexidade de tempo de <span class="math inline">\(O(n)\)</span> no pior caso e no caso médio. Para o grande número de símbolos encontrados em programas modernos, nos quais as operações de busca são extremamente frequentes, essa complexidade as torna ineficientes.</p>
+<p>O uso de vetores ordenados pode representar uma melhoria considerável na complexidade da pesquisa. Manter os símbolos em ordem alfabética, por exemplo, permite a utilização de algoritmos de pesquisa binária, que possuem uma complexidade de tempo típica de <span class="math inline">\(O(\log n)\)</span>. Isso representa um ganho de desempenho substancial para as operações de busca em comparação com a abordagem linear. Contudo, neste caso, o problema é transferido para as operações de inserção e exclusão. Para manter a ordem do vetor, a inserção de um novo símbolo pode exigir o deslocamento de uma grande porção dos elementos existentes para abrir espaço, uma operação com complexidade <span class="math inline">\(O(n)\)</span>. Da mesma forma, a remoção de um símbolo pode necessitar que os elementos subsequentes sejam deslocados para preencher a lacuna. Portanto, embora a pesquisa seja otimizada, as operações de inserção e exclusão tornam-se um gargalo significativo, especialmente em cenários onde a <strong>Tabela de Símbolos</strong> é frequentemente modificada.</p>
+<section id="hash-tables-hash-tables-o-padrão-de-fato" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="hash-tables-hash-tables-o-padrão-de-fato"><span class="header-section-number">12.4.1</span> <em>hash tables</em> (<em>Hash Tables</em>): O Padrão De Fato</h3>
+<p>A esmagadora preferência por <em>hash tables</em> na implementação de tabelas de símbolos é uma consequência direta da carga de trabalho típica de um processo de tradução. As pesquisas por símbolos são muito mais frequentes do que as suas inserções. Um símbolo é declarado apenas uma vez, o que corresponde a uma única inserção, mas pode ser referenciado centenas ou milhares de vezes, resultando em múltiplas operações de pesquisa. Portanto, otimizar o tempo médio de pesquisa, que possui complexidade <span class="math inline">\(O(1)\)</span> para <em>hash tables</em>, proporciona o maior benefício de desempenho geral. Esta assimetria na frequência das operações torna a pesquisa de caso médio <span class="math inline">\(O(1)\)</span> de uma <em>hash table</em> o fator decisivo para sua escolha, mesmo que seu desempenho no pior caso seja <span class="math inline">\(O(n)\)</span>, o que ainda é linear, e que a estrutura não possua as características de ordenação inerentes a uma árvore de pesquisa binária.</p>
+<p>O conceito central de uma <em>hash table</em> é mapear chaves, neste caso os nomes dos símbolos, para índices em um vetor. Esses índices, chamados de <em>buckets</em> ou <em>slots</em>, são determinados por meio de uma função de dispersão, conhecida como <em>hash function</em>.</p>
+<p>O design da função de dispersão é o aspecto fundamental para o projeto de uma <em>hash table</em> com bom desempenho. O objetivo principal é distribuir os símbolos de maneira uniforme pelos <em>buckets</em> para minimizar a ocorrência de colisões, que podem acontecer quando duas chaves diferentes geram o mesmo índice. Uma função de dispersão, <em>hash</em>, simples poderia envolver a soma dos valores ASCII dos caracteres de uma <em>string</em> e, em seguida, a aplicação do operador módulo com o tamanho da tabela para obter um índice. No entanto, na prática, são utilizadas funções mais sofisticadas para garantir uma distribuição mais homogênea e evitar agrupamentos. Mesmo com uma boa função de dispersão, as colisões são inevitáveis. Por isso, uma estratégia eficaz de resolução de colisões é essencial.</p>
+<p>Existem duas abordagens comuns para lidar com o problema das colisões em <em>hash tables</em> usadas no processo de tradução. A primeira, conhecida como <strong>encadeamento</strong>, <em>chaining</em> ou <em>closed addressing</em>, consiste em fazer com que cada <em>bucket</em> da tabela aponte para uma lista ligada contendo todos os símbolos que foram mapeados para aquele mesmo índice. Esta é uma abordagem comum e robusta. Porém a atenta leitora deve observar que nesta solução, a performance degrada de forma gradual com o aumento do número de elementos em colisão devido a complexidade de busca na lista ligada em cada <em>bucket</em>, uma lista ligada tem complexidade <span class="math inline">\(O(n)\)</span> nos casos médio e pior e <span class="math inline">\(O(1)\)</span> no melhor caso.</p>
+<p>A segunda abordagem é o <strong>endereçamento aberto</strong>, <em>open addressing</em> ou <em>open hashing</em>. Nesta técnica, se um <em>bucket</em> já estiver ocupado, o algoritmo procura o próximo espaço disponível dentro da própria tabela para inserir o novo elemento. Existem métodos diferentes para encontrar o próximo <em>bucket</em> livre, incluindo a <strong>sondagem linear</strong>, que verifica sequencialmente os índices (<code>i + 1</code>, <code>i + 2</code>, …), e a <strong>sondagem quadrática</strong>, que verifica os índices (<code>i + 1²</code>, <code>i + 2²</code>, …), ajudando a mitigar problemas de agrupamento primário que podem ocorrer com a sondagem linear.</p>
+<p>O <strong>problema de agrupamento primário</strong>, ou <em>primary clustering</em>, é um fenômeno negativo que ocorre especificamente com o método de <strong>sondagem linear</strong> em <em>hash tables</em> que usam endereçamento aberto. Em termos simples, ele pode ser descrito da seguinte forma:</p>
+<ol type="1">
+<li><p><strong>Causa</strong>: na sondagem linear, quando uma colisão ocorre em um índice <code>i</code>, o algoritmo procura o próximo <em>bucket</em> livre verificando sequencialmente os índices <code>i + 1</code>, <code>i + 2</code>, <code>i + 3</code>, e assim por diante.</p></li>
+<li><p><strong>Efeito</strong>: essa abordagem sequencial faz com que chaves que colidem na mesma região da tabela comecem a formar <em>aglomerados</em> ou <em>clusters</em>, longas sequências de <em>buckets</em> ocupados um após o outro.</p></li>
+<li><p><strong>Problema</strong>: uma vez que um aglomerado se forma, ele tende a crescer cada vez mais rápido. Qualquer nova chave que seja mapeada para qualquer posição dentro desse aglomerado terá que percorrer o aglomerado inteiro até encontrar um espaço vazio no final, aumentando ainda mais o seu tamanho.</p></li>
+</ol>
+<p>O resultado é que o desempenho da <em>hash table</em> se degrada significativamente. Em vez de se aproximar da complexidade de busca de <span class="math inline">\(O(1)\)</span> (tempo constante), o tempo de busca começa a se parecer com o de uma busca linear (<span class="math inline">\(O(n)\)</span>), pois o algoritmo gasta muito tempo percorrendo esses longos aglomerados.</p>
+<p>A <strong>sondagem quadrática</strong> ajuda a mitigar esse problema porque, em vez de verificar o próximo espaço sequencial (<code>+1</code>, <code>+2</code>, …), essa solução cria saltos pela tabela de forma não sequencial (<code>+1²</code>, <code>+2²</code>, …), o que ajuda a espalhar os elementos e a evitar a formação desses aglomerados contíguos.</p>
+</section>
+<section id="estruturas-baseadas-em-árvores-a-alternativa-ordenada" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="estruturas-baseadas-em-árvores-a-alternativa-ordenada"><span class="header-section-number">12.4.2</span> Estruturas Baseadas em Árvores: A Alternativa Ordenada</h3>
+<p>As estruturas baseadas em árvores representam a principal alternativa ordenada às <em>hash tables</em> na implementação das <strong>Tabelas de Símbolos</strong>. O conceito central por trás desta abordagem é o uso dos algoritmos de árvores de pesquisa binária, de <em><strong>B</strong>inary <strong>S</strong>earch <strong>T</strong>ree</em>, <strong>BST</strong> autobalanceadas, como as árvores <strong>AVL</strong> ou as árvores <strong>Vermelho-Preto</strong>, <em>Red-Black Trees</em>, que mantêm os símbolos em uma ordem lexicográfica constante. Esta propriedade de ordenação é a sua vantagem mais significativa em relação às <em>hash tables</em>.</p>
+<p>A propriedade chave que define uma <strong>BST</strong> garante que, para qualquer vértice, todas as chaves em sua subárvore esquerda são menores que a chave do próprio vértice, e todas as chaves em sua subárvore direita são maiores. Em uma <strong>BST</strong> simples, inserções sequenciais poderiam levar à degeneração da árvore, fazendo-a se comportar como uma lista ligada com desempenho <span class="math inline">\(O(n)\)</span>. Para evitar isso, os algoritmos de autobalanceamento, como os das árvores <strong>AVL</strong> e <strong>Vermelho-Preto</strong>, realizam rotações para assegurar que a altura da árvore permaneça logarítmica (<span class="math inline">\(O(\log n)\)</span>) em relação ao número de vértices, garantindo assim a eficiência das operações.</p>
+<p>Essa ordenação inerente aos algoritmos das árvores <strong>AVL</strong> e <strong>Vermelho-Preto</strong>, permite a implementação eficiente de funcionalidades com as quais as <em>hash tables</em> têm grande dificuldade. Por exemplo, é possível realizar um percurso ordenado para listar todos os símbolos em ordem alfabética de forma trivial. Além disso, operações como encontrar o símbolo sucessor ou predecessor de um dado símbolo e realizar consultas de intervalo, como encontrar todos os símbolos entre inicio e fim, por exemplo, podem ser executadas de maneira computacionalmente eficiente, capacidades que não são suportadas nativamente por uma <em>hash table</em> padrão.</p>
+</section>
+<section id="uma-análise-comparativa-de-desempenho-memória-e-funcionalidade" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="uma-análise-comparativa-de-desempenho-memória-e-funcionalidade"><span class="header-section-number">12.4.3</span> Uma Análise Comparativa de Desempenho, Memória e Funcionalidade</h3>
+<p>Ao comparar as duas estruturas aparentemente viáveis que vimos até o momento, <em>hash tables</em> e árvores de pesquisa binária, é essencial que a atenta leitora analise as contrapartidas relacionadas ao uso de memória e ao desempenho do hardware, como a localidade de cache. Em termos de <strong>sobrecarga de memória</strong>, <em>memory overhead</em>, as <em>hash tables</em> exigem a pré-alocação de um vetor de tamanho fixo. Se o número de símbolos for muito inferior a esse tamanho, resultando em um baixo fator de carga, uma quantidade significativa de memória pode ser desperdiçada. Além disso, a estratégia de encadeamento para resolução de colisões adiciona a sobrecarga de um ponteiro para cada entrada na tabela. Em contrapartida, as <strong>BST</strong>s autobalanceadas tipicamente possuem uma sobrecarga por elemento maior, pois cada vértice precisa armazenar, no mínimo, dois ponteiros para os filhos e, frequentemente, informações adicionais para o balanceamento, como a cor em árvores Vermelho-Preto. No entanto, sua alocação de memória é dinâmica, vértice a vértice, o que evita o desperdício de um grande bloco de memória pré-alocado e não utilizado.</p>
+<p>A <strong>localidade de cache</strong> é outro diferenciador de desempenho importante. As <em>hash tables</em> que utilizam endereçamento aberto, especialmente com sondagem linear, podem exibir uma excelente localidade de cache. Isso ocorre porque as sondagens para resolver colisões são sequenciais na memória, aumentando a probabilidade de que os dados necessários já estejam na mesma linha de cache. Por outro lado, estruturas baseadas em ponteiros, como <em>hash tables</em> com encadeamento e todas as BSTs, frequentemente sofrem de má localidade de cache. Percorrer uma lista ligada ou os ramos de uma árvore envolve seguir ponteiros que podem apontar para endereços de memória distantes e dispersos. Esse processo, conhecido como <em>pointer chasing</em>, leva a uma maior taxa de falhas de cache, <em>cache misses</em>, o que pode impactar negativamente o desempenho.</p>
+<p>Do ponto de vista funcional, existem diferenças claras. As <strong>BST</strong>s suportam naturalmente o <strong>percurso ordenado</strong> dos símbolos; por exemplo, um percurso <em>in-order</em> percorre os vértices em ordem alfabética, o que é útil para gerar listagens ordenadas em saídas de depuração ou para implementar certas características de linguagem. Essa não é uma operação natural ou eficiente para <em>hash tables</em>. Da mesma forma, as <strong>BST</strong>s se destacam em <strong>consultas de intervalo e proximidade</strong>, como encontrar a chave mais próxima de um valor ou todas as chaves dentro de um determinado intervalo, funcionalidades que não são suportadas de forma eficiente por <em>hash tables</em>.</p>
+<p>Finalmente, a <strong>complexidade de implementação</strong> é um fator prático a ser considerado. Embora implementações de bibliotecas padrão para ambas as estruturas estejam prontamente disponíveis, construir uma <em>hash table</em> personalizada e de alta qualidade — o que envolve projetar uma boa função de dispersão e uma estratégia de redimensionamento eficiente — pode ser uma tarefa complexa. No entanto, as BSTs autobalanceadas são notoriamente mais difíceis de implementar corretamente do zero, devido à complexidade dos algoritmos de rotação e manutenção das propriedades de balanceamento. A Tabela <span class="quarto-unresolved-ref">?tbl-comp1</span> resume as principais características comparativas dessas estruturas de dados.</p>
+<table class="table">
+<caption>Tabela 1: Comparação das principais estruturas de dados para <strong>Tabelas de Símbolos</strong>.{#tbl-comp1}</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;"><em>hash tables</em> (Encadeamento)</th>
+<th style="text-align: left;"><em>hash tables</em> (End. Aberto)</th>
+<th style="text-align: left;">BST Balanceada</th>
+<th style="text-align: left;">Vetor Ordenado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pesquisa (Média)</strong></td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Pesquisa (Pior Caso)</strong></td>
+<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Inserção (Média)</strong></td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Inserção (Pior Caso)</strong></td>
+<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Sobrecarga de Memória</strong></td>
+<td style="text-align: left;">Moderada (ponteiros + vetor)</td>
+<td style="text-align: left;">Baixa a Alta (depende do fator de carga)</td>
+<td style="text-align: left;">Alta (ponteiros por vértice)</td>
+<td style="text-align: left;">Baixa</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Localidade de Cache</strong></td>
+<td style="text-align: left;">Fraca</td>
+<td style="text-align: left;">Boa (sondagem linear)</td>
+<td style="text-align: left;">Fraca</td>
+<td style="text-align: left;">Excelente</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Suporte a Percurso Ordenado</strong></td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: left;">Não</td>
+<td style="text-align: left;">Sim (eficiente)</td>
+<td style="text-align: left;">Sim (trivial)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Complexidade de Implementação</strong></td>
+<td style="text-align: left;">Moderada</td>
+<td style="text-align: left;">Moderada a Alta</td>
+<td style="text-align: left;">Alta</td>
+<td style="text-align: left;">Baixa</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="implementação-avançada-o-desafio-dos-escopos-lexicais" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="implementação-avançada-o-desafio-dos-escopos-lexicais"><span class="header-section-number">12.5</span> Implementação Avançada: O Desafio dos escopos Lexicais</h2>
+<p>Desde o ALGOL 60, com seus blocos de código, que as linguagens de programação modernas suportam <strong>escopos lexicais aninhados. Isto significa que uma variável declarada dentro de um bloco só é visível dentro desse bloco e em seus sub-blocos</strong>. A gestão eficaz destes escopos aninhados é um desafio fundamental na implementação de uma <strong>Tabela de Símbolos</strong>. A estrutura de dados selecionada para a <strong>Tabela de Símbolos</strong> deve não apenas armazenar os símbolos, mas também refletir a hierarquia dos escopos para garantir que as regras de visibilidade sejam corretamente aplicadas durante o processo de tradução.</p>
+<section id="o-modelo-de-pilha-de-tabelas" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="o-modelo-de-pilha-de-tabelas"><span class="header-section-number">12.5.1</span> O Modelo de Pilha de Tabelas</h3>
+<p>Esta abordagem, amplamente utilizada por sua simplicidade e intuição, gerencia escopos mantendo uma pilha de <strong>Tabelas de Símbolos</strong>, que são tipicamente implementadas como <em>hash tables</em>. O mecanismo espelha diretamente a estrutura de escopos aninhados de uma linguagem de programação. Quando um novo escopo é introduzido no código-fonte, como o corpo de uma função, um laço ou um bloco condicional, uma nova <em>hash table</em> vazia é empurrada (<em>pushed</em>) para o topo da pilha, representando o escopo atual. Ao final desse escopo, a tabela correspondente é simplesmente retirada (<em>popped</em>) da pilha e descartada, restaurando o escopo anterior.</p>
+<p>As operações são diretas e eficientes. A <strong>inserção</strong> de um novo símbolo ocorre sempre na tabela que está no topo da pilha, ou seja, no escopo local. A <strong>pesquisa</strong> por um símbolo começa na tabela do topo e, caso o símbolo não seja encontrado, prossegue para as tabelas abaixo na pilha, uma a uma, em direção à base. A primeira correspondência encontrada é retornada. Este método de busca implementa naturalmente a regra de ocultação (<em>shadowing</em>), na qual as declarações em escopos internos têm precedência sobre as de escopos externos. Como pode ser visto na Figura <a href="#fig-busca-escopo" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>.</p>
+<div id="fig-busca-escopo" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-busca-escopo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ScopeSearch.webp" class="img-fluid figure-img"></p>
+<figcaption>Busca de Símbolos em Escopos Aninhados</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-busca-escopo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.4
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="algoritmo-implementando-escopos-com-uma-pilha-de-dicionários" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="algoritmo-implementando-escopos-com-uma-pilha-de-dicionários"><span class="header-section-number">12.5.2</span> Algoritmo: Implementando Escopos com uma Pilha de Dicionários</h3>
+<p>A lógica para gerenciar uma <strong>Tabela de Símbolos</strong> com escopo pode ser formalizada por meio de um pseudocódigo simples. Assumimos que nossa estrutura é uma pilha de tabelas, na qual cada tabela mapeia nomes a atributos.</p>
+<pre class="pseudocode"><code>// Estrutura de dados global
+pilha_de_escopos = []  // Inicia com uma tabela para o escopo global
+
+PROCEDIMENTO enter_scope():
+    nova_tabela = criar_tabela_vazia()
+    pilha_de_escopos.push(nova_tabela)
+
+PROCEDIMENTO exit_scope():
+    SE tamanho(pilha_de_escopos) &gt; 1 ENTÃO
+        pilha_de_escopos.pop()
+    SENÃO
+        erro("Não é possível sair do escopo global")
+
+PROCEDIMENTO declare(nome, atributos):
+    tabela_atual = pilha_de_escopos.top()
+    SE nome JÁ EXISTE em tabela_atual ENTÃO
+        erro("Símbolo já declarado neste escopo")
+    SENÃO
+        inserir(nome, atributos) em tabela_atual
+
+FUNÇÃO lookup(nome):
+    PARA cada tabela em pilha_de_escopos (do topo para a base):
+        SE nome EXISTE em tabela ENTÃO
+            RETORNAR atributos_de(nome) em tabela
+    // Se o loop terminar, o nome não foi encontrado
+    RETORNAR nulo  // Ou lançar erro de "símbolo não declarado"</code></pre>
+</section>
+<section id="implementação-em-python-uma-tabela-de-símbolos-funcional" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="implementação-em-python-uma-tabela-de-símbolos-funcional"><span class="header-section-number">12.5.3</span> Implementação em Python: Uma <strong>Tabela de Símbolos</strong> Funcional</h3>
+<p>Como exemplo simples, podemos traduzir diretamente o pseudocódigo para uma classe Python funcional. Usaremos uma lista de dicionários para representar a pilha de escopos.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pprint</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Symbol:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, category, <span class="bu">type</span>):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.category <span class="op">=</span> category</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">type</span> <span class="op">=</span> <span class="bu">type</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"&lt;Symbol(name='</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>name<span class="sc">}</span><span class="ss">', category='</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>category<span class="sc">}</span><span class="ss">', type='</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span><span class="bu">type</span><span class="sc">}</span><span class="ss">')&gt;"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SymbolTable:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Uma **Tabela de Símbolos** que gerencia escopos aninhados usando uma pilha.</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># A pilha de escopos, onde cada escopo é um dicionário (tabela de _hash_).</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Começa com o escopo global.</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scoped_tables <span class="op">=</span> [{}]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enter_scope(<span class="va">self</span>):</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Inicia um novo escopo empilhando um novo dicionário. """</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"--- Entrando em um novo escopo ---"</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scoped_tables.append({})</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> exit_scope(<span class="va">self</span>):</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Finaliza o escopo atual desempilhando seu dicionário. """</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"--- Saindo do escopo atual ---"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>.scoped_tables) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.scoped_tables.pop()</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Idealmente, isso seria um erro do compilador</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Aviso: Tentativa de sair do escopo global."</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> declare(<span class="va">self</span>, symbol):</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Declara um símbolo no escopo atual. """</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        current_scope <span class="op">=</span> <span class="va">self</span>.scoped_tables[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> symbol.name <span class="kw">in</span> current_scope:</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">NameError</span>(<span class="ss">f"Erro: Símbolo '</span><span class="sc">{</span>symbol<span class="sc">.</span>name<span class="sc">}</span><span class="ss">' já declarado no escopo atual."</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        current_scope[symbol.name] <span class="op">=</span> symbol</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Declarado: </span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lookup(<span class="va">self</span>, name):</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Procura por um símbolo do escopo mais interno para o mais externo. """</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Buscando por '</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">'..."</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Iterar de trás para frente na lista (do topo para a base da pilha)</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> scope <span class="kw">in</span> <span class="bu">reversed</span>(<span class="va">self</span>.scoped_tables):</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> name <span class="kw">in</span> scope:</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                symbol <span class="op">=</span> scope[name]</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"Encontrado: </span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> symbol</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NameError</span>(<span class="ss">f"Erro: Símbolo '</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">' não foi declarado."</span>)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> display(<span class="va">self</span>):</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Exibe o estado atual da **Tabela de Símbolos**. """</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Estado da **Tabela de Símbolos** ==="</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, scope <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">list</span>(<span class="bu">enumerate</span>(<span class="va">self</span>.scoped_tables))):</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"--- Escopo Nível </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> ---"</span>)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>            pprint.pprint(scope)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"==================================</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    st <span class="op">=</span> SymbolTable()</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Declarando no escopo global</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    st.declare(Symbol(<span class="st">"g"</span>, <span class="st">"variavel"</span>, <span class="st">"int"</span>))</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    st.declare(Symbol(<span class="st">"PI"</span>, <span class="st">"constante"</span>, <span class="st">"float"</span>))</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Entrando em um novo escopo (ex.: uma função)</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    st.enter_scope()</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    st.declare(Symbol(<span class="st">"x"</span>, <span class="st">"parametro"</span>, <span class="st">"int"</span>))</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    st.declare(Symbol(<span class="st">"g"</span>, <span class="st">"variavel"</span>, <span class="st">"float"</span>))  <span class="co"># Ocultando (shadowing) o 'g' global</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Buscando símbolos</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"x"</span>)   <span class="co"># Encontra 'x' local</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"g"</span>)   <span class="co"># Encontra 'g' local (float), não o global</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"PI"</span>)  <span class="co"># Não encontra local, busca no global e encontra</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Entrando em um escopo aninhado (ex.: um bloco if)</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    st.enter_scope()</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>    st.declare(Symbol(<span class="st">"y"</span>, <span class="st">"variavel"</span>, <span class="st">"bool"</span>))</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"y"</span>)</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"x"</span>)  <span class="co"># Encontra no escopo da função</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Saindo dos escopos</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    st.exit_scope()</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>        st.lookup(<span class="st">"y"</span>)  <span class="co"># Deve falhar, 'y' estava no escopo interno</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">NameError</span> <span class="im">as</span> e:</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    st.exit_scope()</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"g"</span>)  <span class="co"># Agora encontra o 'g' global (int)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Uma implementação deste mesmo modelo, em <strong>C++</strong>23 pode ser vista no bloco de código a seguir:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> </span><span class="cv">SymbolTable.h</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Gemini</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@date</span><span class="co"> 26 de Setembro de 2025</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Implementação de uma **Tabela de Símbolos** com escopo em **C++**23.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@copyright</span><span class="co"> </span><span class="do">Copyright</span><span class="co"> </span><span class="do">(c)</span><span class="co"> </span><span class="do">2025</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"> * Este arquivo contém uma implementação didática de uma **Tabela de Símbolos**</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"> * com escopo, baseada no modelo clássico "pilha de tabelas" popularizado</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"> * em cursos de compiladores como o de Stanford (CS143). O objetivo é</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"> * demonstrar de forma clara como o aninhamento de escopos e o sombreamento</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"> * de variáveis (variable shadowing) podem ser gerenciados.</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stack&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;unordered_map&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;optional&gt;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string_view&gt;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@class</span><span class="co"> </span><span class="cv">SymbolTable</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Gerencia símbolos e seus tipos em escopos aninhados.</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co"> * A classe SymbolTable implementa o modelo de "pilha de tabelas de símbolos".</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"> * Cada escopo léxico (ex: corpo de uma função, um bloco 'if', um laço 'for')</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"> * é representado por uma tabela de hash (std::unordered_map) separada.</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"> * Uma pilha (std::stack) é usada para gerenciar essas tabelas, refletindo</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co"> * a natureza aninhada dos escopos no código-fonte.</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co"> * A tabela no topo da pilha sempre representa o escopo mais interno, ou seja,</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"> * o escopo atual.</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SymbolTable <span class="op">{</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@brief</span><span class="co"> Construtor da **Tabela de Símbolos**.</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">     * Ao ser instanciada, a **Tabela de Símbolos** cria automaticamente o primeiro</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">     * escopo, que representa o escopo global do programa. Todas as declarações</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">     * feitas antes de qualquer outro escopo aninhado residirão aqui.</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    SymbolTable<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Empurra a primeira tabela na pilha para representar o escopo global.</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>        enterScope<span class="op">();</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@brief</span><span class="co"> Inicia um novo escopo aninhado.</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co">     * Esta função deve ser chamada sempre que o analisador do compilador</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co">     * encontra o início de um novo bloco léxico (ex: o caractere '{').</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">     * Ela empurra uma nova tabela de hash vazia para o topo da pilha, que</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">     * se torna o escopo ativo para novas declarações de símbolos.</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> enterScope<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[SYSTEM] Entrando em um novo escopo...</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        <span class="va">m_scopes</span><span class="op">.</span>push<span class="op">({});</span> <span class="co">// Empurra um map (hash table) vazio na pilha.</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@brief</span><span class="co"> Finaliza o escopo atual.</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co">     * Esta função deve ser chamada quando o analisador encontra o fim de um</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co">     * bloco léxico (ex: o caractere '}'). Ela remove (dá 'pop') a tabela de</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="co">     * hash do topo da pilha. Com isso, todos os símbolos declarados nesse</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co">     * escopo são efetivamente destruídos e se tornam inacessíveis,</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="co">     * implementando corretamente as regras de escopo da maioria das linguagens.</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">     * Protege contra a remoção do escopo global.</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> exitScope<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span><span class="va">m_scopes</span><span class="op">.</span>size<span class="op">()</span> <span class="op">&gt;</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[SYSTEM] Saindo do escopo atual...</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>            <span class="va">m_scopes</span><span class="op">.</span>pop<span class="op">();</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[SYSTEM] Aviso: Tentativa de sair do escopo global. Ação ignorada.</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@brief</span><span class="co"> Adiciona um novo símbolo ao escopo atual.</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@param</span><span class="co"> </span><span class="cv">name</span><span class="co"> O nome do símbolo (identificador).</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@param</span><span class="co"> </span><span class="cv">type</span><span class="co"> O tipo associado ao símbolo (ex: "int", "string").</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@return</span><span class="co"> true se o símbolo foi adicionado com sucesso.</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@return</span><span class="co"> false se um símbolo com o mesmo nome já existe no escopo ATUAL.</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="co">     * A inserção ocorre exclusivamente na tabela do topo da pilha, ou seja,</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co">     * no escopo mais interno. A função verifica se já existe uma declaração</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co">     * com o mesmo nome NESTE escopo para evitar redeclarações.</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> addSymbol<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> name<span class="op">,</span> <span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> type<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Acessa a tabela do topo (escopo atual) sem removê-la.</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>        <span class="kw">auto</span><span class="op">&amp;</span> current_scope <span class="op">=</span> <span class="va">m_scopes</span><span class="op">.</span>top<span class="op">();</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>        <span class="co">// O método 'contains' (**C++**20) é uma forma eficiente de verificar a existência da chave.</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>current_scope<span class="op">.</span>contains<span class="op">(</span>name<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>            <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[ERROR] Símbolo '"</span> <span class="op">&lt;&lt;</span> name <span class="op">&lt;&lt;</span> <span class="st">"' já declarado neste escopo.</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>        current_scope<span class="op">[</span>name<span class="op">]</span> <span class="op">=</span> type<span class="op">;</span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[ADD] Adicionado símbolo '"</span> <span class="op">&lt;&lt;</span> name <span class="op">&lt;&lt;</span> <span class="st">"' com tipo '"</span> <span class="op">&lt;&lt;</span> type <span class="op">&lt;&lt;</span> <span class="st">"' ao escopo atual.</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@brief</span><span class="co"> Procura por um símbolo a partir do escopo atual para o mais externo.</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@param</span><span class="co"> </span><span class="cv">name</span><span class="co"> O nome do símbolo a ser procurado.</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@return</span><span class="co"> std::optional</span><span class="kw">&lt;std::string&gt;</span><span class="co"> contendo o tipo do símbolo se encontrado.</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="co">     * </span><span class="an">@return</span><span class="co"> std::nullopt se o símbolo não for encontrado em nenhum escopo visível.</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="co">     * Esta é a operação mais importante para a análise semântica. A busca</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="co">     * começa na tabela do topo da pilha (escopo mais interno) e, se o símbolo</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="co">     * não for encontrado, a busca continua na tabela imediatamente abaixo, e</span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="co">     * assim por diante, até a base da pilha (escopo global).</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="co">     * Este mecanismo de busca implementa naturalmente o **sombreamento de variáveis**</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="co">     * (variable shadowing): a primeira ocorrência do símbolo encontrada (a mais interna)</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="co">     * "esconde" quaisquer outras com o mesmo nome em escopos mais externos.</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="co">     * O uso de `std::optional` (**C++**17) é a forma moderna e segura de retornar um</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="co">     * valor que pode ou não existir, evitando o uso de ponteiros nulos ou</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="co">     * valores mágicos (como uma string vazia).</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>optional<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> lookupSymbol<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> name<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Para percorrer a pilha sem destruí-la (pois o método é const),</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>        <span class="co">// criamos uma cópia. Para uma implementação de compilador real,</span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>        <span class="co">// uma estrutura de dados com iteradores (como std::vector) seria</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>        <span class="co">// mais performática, mas std::stack é conceitualmente mais clara</span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>        <span class="co">// para este exemplo didático.</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>stack<span class="op">&lt;</span><span class="bu">std::</span>unordered_map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;&gt;</span> temp_stack <span class="op">=</span> <span class="va">m_scopes</span><span class="op">;</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> scope_level <span class="op">=</span> temp_stack<span class="op">.</span>size<span class="op">();</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(!</span>temp_stack<span class="op">.</span>empty<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>            <span class="kw">auto</span><span class="op">&amp;</span> scope <span class="op">=</span> temp_stack<span class="op">.</span>top<span class="op">();</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>            <span class="kw">auto</span> it <span class="op">=</span> scope<span class="op">.</span>find<span class="op">(</span>name<span class="op">);</span> <span class="co">// Procura na hash table do escopo atual</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>it <span class="op">!=</span> scope<span class="op">.</span>end<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>                <span class="co">// Símbolo encontrado!</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>                <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[LOOKUP] Símbolo '"</span> <span class="op">&lt;&lt;</span> name <span class="op">&lt;&lt;</span> <span class="st">"' encontrado no nível de escopo "</span> <span class="op">&lt;&lt;</span> scope_level <span class="op">&lt;&lt;</span> <span class="st">".</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> it<span class="op">-&gt;</span>second<span class="op">;</span> <span class="co">// Retorna o tipo (o valor no map)</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>            temp_stack<span class="op">.</span>pop<span class="op">();</span> <span class="co">// Não encontrou, vá para o escopo pai (abaixo na pilha)</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>            scope_level<span class="op">--;</span></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Se o loop terminar, o símbolo não foi encontrado em nenhum escopo.</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"[LOOKUP] Símbolo '"</span> <span class="op">&lt;&lt;</span> name <span class="op">&lt;&lt;</span> <span class="st">"' não encontrado em nenhum escopo visível.</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">std::</span>nullopt<span class="op">;</span></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>    <span class="co">/// </span><span class="an">@brief</span><span class="co"> A pilha de tabelas de hash que gerencia os escopos.</span></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>stack<span class="op">&lt;</span><span class="bu">std::</span>unordered_map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>string<span class="op">&gt;&gt;</span> <span class="va">m_scopes</span><span class="op">;</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Função principal para demonstrar o uso da SymbolTable.</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="co"> * O código a seguir simula o processo de um compilador analisando</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="co"> * um código com escopos aninhados.</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>    SymbolTable table<span class="op">;</span> <span class="co">// Escopo global é criado automaticamente.</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- DECLARAÇÕES NO ESCOPO GLOBAL ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>addSymbol<span class="op">(</span><span class="st">"g_var"</span><span class="op">,</span> <span class="st">"int"</span><span class="op">);</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>addSymbol<span class="op">(</span><span class="st">"PI"</span><span class="op">,</span> <span class="st">"const double"</span><span class="op">);</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>    <span class="co">// { // Entrando no escopo de uma função, por exemplo.</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>enterScope<span class="op">();</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- DECLARAÇÕES NO ESCOPO DA FUNÇÃO 'main' ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>addSymbol<span class="op">(</span><span class="st">"x"</span><span class="op">,</span> <span class="st">"string"</span><span class="op">);</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tenta sombrear a variável global 'g_var'</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>addSymbol<span class="op">(</span><span class="st">"g_var"</span><span class="op">,</span> <span class="st">"char*"</span><span class="op">);</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- BUSCAS DENTRO DA FUNÇÃO 'main' ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Deve encontrar a versão 'char*' de 'g_var' (sombreamento)</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"g_var"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'g_var' é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Deve encontrar 'x' como 'string'</span></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"x"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'x' é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Deve encontrar a variável global 'PI'</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"PI"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'PI' é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   { // Entrando em um bloco 'if' interno</span></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>enterScope<span class="op">();</span></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- DECLARAÇÕES NO BLOCO 'IF' INTERNO ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>addSymbol<span class="op">(</span><span class="st">"y"</span><span class="op">,</span> <span class="st">"bool"</span><span class="op">);</span></span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tenta sombrear 'x' do escopo da função</span></span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>addSymbol<span class="op">(</span><span class="st">"x"</span><span class="op">,</span> <span class="st">"float"</span><span class="op">);</span></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- BUSCAS DENTRO DO BLOCO 'IF' INTERNO ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Deve encontrar 'x' como 'float' (sombreamento mais interno)</span></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"x"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'x' é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Deve encontrar 'y'</span></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"y"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'y' é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tentando buscar um símbolo que não existe</span></span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"z"</span><span class="op">);</span></span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a>    <span class="co">//   } // Saindo do bloco 'if'</span></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>exitScope<span class="op">();</span></span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- APÓS SAIR DO BLOCO 'IF', DE VOLTA À FUNÇÃO 'main' ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Agora 'x' deve voltar a ser 'string'</span></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"x"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'x' agora é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 'y' não deve mais existir</span></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Buscando por 'y' que não deve mais existir...</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"y"</span><span class="op">);</span></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a>    <span class="co">// } // Saindo da função 'main'</span></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>exitScope<span class="op">();</span></span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">--- APÓS SAIR DA FUNÇÃO 'main', DE VOLTA AO ESCOPO GLOBAL ---</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 'g_var' deve voltar a ser 'int'</span></span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="kw">auto</span> type <span class="op">=</span> table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"g_var"</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Tipo de 'g_var' agora é: "</span> <span class="op">&lt;&lt;</span> <span class="op">*</span>type <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 'x' não deve mais existir</span></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"  -&gt; Buscando por 'x' que não deve mais existir...</span><span class="sc">\n</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a>    table<span class="op">.</span>lookupSymbol<span class="op">(</span><span class="st">"x"</span><span class="op">);</span></span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>No código <strong>C++</strong>23 acima, a classe <code>SymbolTable</code> encapsula toda a funcionalidade necessária para gerenciar escopos aninhados usando uma pilha de tabelas de símbolos. Cada tabela é implementada como um <code>std::unordered_map</code>, que oferece acesso eficiente aos símbolos por meio de <em>hashing</em>. O uso de <code>std::optional</code> para o método <code>lookupSymbol</code> permite um tratamento elegante dos casos em que um símbolo não é encontrado.</p>
+</section>
+<section id="o-modelo-de-tabela-única-com-encadeamento-de-escopo" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="o-modelo-de-tabela-única-com-encadeamento-de-escopo"><span class="header-section-number">12.5.4</span> O Modelo de Tabela Única com Encadeamento de Escopo</h3>
+<p>Este modelo adota uma abordagem diferente, utilizando uma única <em>hash table</em> global para armazenar todos os símbolos de todos os escopos. Para gerenciar os diferentes escopos, as entradas para um mesmo identificador são encadeadas em uma lista ligada dentro do <em>bucket</em> correspondente. Geralmente, essa lista é ordenada do escopo mais interno para o mais externo, de modo que a declaração mais recente esteja no início da lista.</p>
+<p>As operações neste modelo são mais complexas. Para <strong>entrar em um escopo</strong>, um marcador especial, que não é um símbolo válido da linguagem, é empurrado para uma pilha de escopos auxiliar, simplesmente para registrar a fronteira do novo escopo. A <strong>inserção</strong> de um símbolo envolve adicionar uma nova entrada ao início da lista ligada no <em>bucket</em> apropriado, ligando-a a quaisquer entradas pré-existentes para esse mesmo nome. A <strong>pesquisa</strong> começa com a função de dispersão, que localiza o início da lista ligada para o identificador. Em seguida, essa lista é percorrida para encontrar a primeira entrada válida que corresponda ao escopo atual ou a um escopo envolvente. A principal desvantagem surge ao <strong>sair de um escopo</strong>. É necessário identificar e remover da <em>hash table</em> todos os símbolos que foram inseridos desde que o último marcador de escopo foi empurrado. Este processo de limpeza é consideravelmente mais complexo e menos eficiente do que a simples operação de <code>pop</code> do modelo de pilha.</p>
+</section>
+<section id="representações-de-escopo-hierárquicas-e-baseadas-em-árvores" class="level3" data-number="12.5.5">
+<h3 data-number="12.5.5" class="anchored" data-anchor-id="representações-de-escopo-hierárquicas-e-baseadas-em-árvores"><span class="header-section-number">12.5.5</span> Representações de Escopo Hierárquicas e Baseadas em Árvores</h3>
+<p>Nesta abordagem, a estrutura aninhada dos escopos de um programa é representada explicitamente como uma árvore, frequentemente chamada de “árvore de escopos”. O escopo global atua como o vértice raiz da árvore, e os blocos de código aninhados (funções, classes, laços, etc.) são representados como vértices filhos. Cada vértice nesta árvore contém sua própria <strong>Tabela de Símbolos</strong> local, que pode ser uma <em>hash table</em>, uma árvore de pesquisa binária ou outra estrutura de dados.</p>
+<p>As operações de busca refletem a estrutura da árvore. A pesquisa por um identificador começa na <strong>Tabela de Símbolos</strong> do vértice correspondente ao escopo atual, que pode ser um vértice folha ou um vértice interno. Se o símbolo não for encontrado localmente, a busca continua na <strong>Tabela de Símbolos</strong> do vértice pai, depois no avô, e assim por diante, subindo pela árvore até a raiz (o escopo global). Esse percurso ascendente do vértice atual até a raiz espelha funcionalmente a busca descendente no modelo de pilha de tabelas, mas o faz dentro de uma estrutura de dados explícita e persistente, que pode ser mais flexível para certas análises do compilador. A Tabela <span class="quarto-unresolved-ref">?tbl-comp2</span> resume as principais características comparativas dessas estratégias de gestão de escopos.</p>
+<table class="table">
+<caption>Tabela 2: Comparação das principais estratégias para gestão de escopos em <strong>Tabelas de Símbolos</strong>.{#tbl-comp2}</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Estratégia</th>
+<th style="text-align: left;">Complexidade Enter Scope</th>
+<th style="text-align: left;">Complexidade Exit Scope</th>
+<th style="text-align: left;">Complexidade Lookup</th>
+<th style="text-align: left;">Gestão de Memória</th>
+<th style="text-align: left;">Complexidade de Implementação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pilha de Tabelas</strong></td>
+<td style="text-align: left;">O(1)</td>
+<td style="text-align: left;">O(1)</td>
+<td style="text-align: left;">O(D) (D = profundidade do escopo)</td>
+<td style="text-align: left;">Simples (tabelas inteiras são alocadas/desalocadas)</td>
+<td style="text-align: left;">Baixa a Moderada</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tabela Única com Encadeamento</strong></td>
+<td style="text-align: left;">O(1)</td>
+<td style="text-align: left;">O(k) (k = símbolos no escopo)</td>
+<td style="text-align: left;">O(L) (L = comprimento da cadeia)</td>
+<td style="text-align: left;">Complexa (requer limpeza seletiva)</td>
+<td style="text-align: left;">Moderada a Alta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Árvore de escopos Explícita</strong></td>
+<td style="text-align: left;">O(logS) ou O(1) (S = n.º de escopos)</td>
+<td style="text-align: left;">O(1)</td>
+<td style="text-align: left;">O(D)</td>
+<td style="text-align: left;">Moderada (vértices da árvore + tabelas)</td>
+<td style="text-align: left;">Alta</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10a-semantico.html" class="pagination-link" aria-label="Fundamentos Matemáticos da Semântica">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/11-tabelaSimbolos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

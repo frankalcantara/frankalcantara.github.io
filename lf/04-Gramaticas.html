@@ -218,7 +218,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Analisadores Semânticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -226,14 +226,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -241,13 +270,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -489,7 +518,7 @@ Tip
 <li><p><strong>S: O Símbolo Inicial.</strong> Um não-terminal especial, <span class="math inline">\(S \in N\)</span>, que serve como ponto de partida para todas as derivações. Ele geralmente representa a construção sintática mais abrangente da linguagem, como um programa ou uma sentença.</p></li>
 </ol>
 <p>A linguagem gerada por uma gramática <span class="math inline">\(G\)</span>, denotada por <span class="math inline">\(L(G)\)</span>, é o conjunto de todas as <em>strings</em> de símbolos terminais que podem ser derivadas a partir do símbolo inicial <span class="math inline">\(S\)</span> por meio da aplicação sucessiva das regras de produção em <span class="math inline">\(P\)</span>.</p>
-<p>Embora a definição formal de uma Gramática Livre de Contexto seja inerentemente gerativa, descrevendo como construir sentenças válidas a partir de <span class="math inline">\(S\)</span>, sua aplicação primária em compiladores é reconhecedora. O objetivo de um analisador sintático não é gerar programas aleatórios, mas sim verificar se uma dada sequência de <em>tokens</em>, produzida pelo programador, pode ser gerada pela gramática. A gramática, portanto, atua como a especificação formal contra a qual o processo de reconhecimento é executado. O parser, na prática, tenta reverter o processo de derivação para validar a estrutura do programa fonte.</p>
+<p>Embora a definição formal de uma Gramática Livre de Contexto seja inerentemente gerativa, descrevendo como construir sentenças válidas a partir de <span class="math inline">\(S\)</span>, sua aplicação primária em compiladores é reconhecedora. O objetivo de um analisador sintático não é gerar programas aleatórios, mas sim verificar se uma dada sequência de <em>tokens</em>, produzida pelo programador, pode ser gerada pela gramática. A gramática, portanto, atua como a especificação formal contra a qual o processo de reconhecimento é executado. O parser, na prática, tenta reverter o processo de derivação para validar a estrutura do código fonte.</p>
 <section id="exemplo-canônico-a-linguagem-dos-palíndromos" class="level3" data-number="5.2.1">
 <h3 data-number="5.2.1" class="anchored" data-anchor-id="exemplo-canônico-a-linguagem-dos-palíndromos"><span class="header-section-number">5.2.1</span> Exemplo Canônico: A Linguagem dos Palíndromos</h3>
 <p>Para solidificar esses conceitos abstratos, vamos construir uma Gramática Livre de Contexto para a linguagem dos palíndromos sobre o alfabeto <span class="math inline">\(\Sigma = \{0,1\}\)</span>. Só para refrescar a memória: um palíndromo é uma <em>string</em> que se lê da mesma forma da esquerda para a direita e da direita para a esquerda.</p>
@@ -623,12 +652,12 @@ Tip
 <section id="contexto-histórico-e-desenvolvimento" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="contexto-histórico-e-desenvolvimento"><span class="header-section-number">5.3.1</span> Contexto Histórico e Desenvolvimento</h3>
 <p>A criação da <span class="math inline">\(BNF\)</span> emergiu de uma necessidade prática urgente durante o desenvolvimento de <strong>ALGOL 60</strong>. <strong><a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a></strong>, líder do projeto, enfrentava o desafio de descrever a sintaxe da linguagem de forma precisa e não ambígua para uma audiência internacional de implementadores. As descrições informais em linguagem natural mostravam-se inadequadas, gerando interpretações divergentes e implementações incompatíveis.</p>
-<p>A solução veio através da colaboração entre Backus e <strong><a href="https://en.wikipedia.org/wiki/Peter_Naur">Peter Naur</a></strong>, que refinou e popularizou a notação. Naur, como editor do relatório <strong>ALGOL 60</strong>, foi responsável por sistematizar e formalizar o que inicialmente eram esboços conceituais de Backus. A notação resultante combinava a precisão matemática das gramáticas formais com uma legibilidade que a tornava acessível tanto para teóricos quanto para implementadores práticos.</p>
+<p>A solução veio por meio da colaboração entre Backus e <strong><a href="https://en.wikipedia.org/wiki/Peter_Naur">Peter Naur</a></strong>, que refinou e popularizou a notação. Naur, como editor do relatório <strong>ALGOL 60</strong>, foi responsável por sistematizar e formalizar o que inicialmente eram esboços conceituais de Backus. A notação resultante combinava a precisão matemática das gramáticas formais com uma legibilidade que a tornava acessível tanto para teóricos quanto para implementadores práticos.</p>
 <p>A <span class="math inline">\(BNF\)</span> foi desenvolvida com conhecimento explícito dos trabalhos de Chomsky sobre Gramáticas Livres de Contexto. Backus e Naur compreenderam que estavam essencialmente criando uma notação prática para expressar gramáticas do Tipo 2 da Hierarquia de Chomsky, estabelecendo assim uma ponte fundamental entre a teoria formal e a aplicação industrial.</p>
 </section>
 <section id="estrutura-e-componentes-da-notação-bnf" class="level3" data-number="5.3.2">
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="estrutura-e-componentes-da-notação-bnf"><span class="header-section-number">5.3.2</span> Estrutura e Componentes da Notação <span class="math inline">\(BNF\)</span></h3>
-<p>A <span class="math inline">\(BNF\)</span> define uma gramática através de um conjunto de <strong>regras de produção</strong> (ou <strong>regras de reescrita</strong>), na qual cada regra especifica como um símbolo não-terminal pode ser expandido em uma sequência de símbolos terminais e não-terminais. A estrutura básica de uma regra <span class="math inline">\(BNF\)</span> segue o padrão:</p>
+<p>A <span class="math inline">\(BNF\)</span> define uma gramática por meio de um conjunto de <strong>regras de produção</strong> (ou <strong>regras de reescrita</strong>), na qual cada regra especifica como um símbolo não-terminal pode ser expandido em uma sequência de símbolos terminais e não-terminais. A estrutura básica de uma regra <span class="math inline">\(BNF\)</span> segue o padrão:</p>
 <pre class="bnf"><code>&lt;símbolo-não-terminal&gt; ::= expressão-alternativa</code></pre>
 <p>Os elementos fundamentais da notação <span class="math inline">\(BNF\)</span> são:</p>
 <ol type="1">
@@ -910,7 +939,7 @@ L &amp;\Rightarrow [E]                  &amp;&amp;\text{[regra 1: expandir L]}\\
 </section>
 <section id="o-problema-da-ambiguidade-em-gramáticas-formais" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="o-problema-da-ambiguidade-em-gramáticas-formais"><span class="header-section-number">5.5</span> O Problema da Ambiguidade em Gramáticas Formais</h2>
-<p><strong>Uma gramática G = (V, T, P, S) é ambígua</strong> se e somente se existe pelo menos uma cadeia <span class="math inline">\(w \in L(G)\)</span> que possui duas ou mais árvores de derivação distintas. Em termos práticos, isto quer dizer que a mesma sentença pode ser construída através de diferentes sequências de aplicação de regras de produção. A existência de diferentes estruturas sintáticas implica na existência de interpretações semânticas diferentes. Neste caso, o parser não consegue determinar univocamente qual estrutura sintática representa a intenção do programador.</p>
+<p><strong>Uma gramática G = (V, T, P, S) é ambígua</strong> se e somente se existe pelo menos uma cadeia <span class="math inline">\(w \in L(G)\)</span> que possui duas ou mais árvores de derivação distintas. Em termos práticos, isto quer dizer que a mesma sentença pode ser construída por meio de diferentes sequências de aplicação de regras de produção. A existência de diferentes estruturas sintáticas implica na existência de interpretações semânticas diferentes. Neste caso, o parser não consegue determinar univocamente qual estrutura sintática representa a intenção do programador.</p>
 <p><strong>Exemplo 1</strong>: Considerando a gramática <span class="math inline">\(G_1\)</span>, mostre que a sentença <code>id + id * id</code> é ambígua.</p>
 <p><span class="math display">\[G_1 = (\{E\}, \{+, *, (, ), id\}, P, E)\]</span></p>
 <p>Na qual <span class="math inline">\(P\)</span> consiste das produções:</p>
@@ -952,7 +981,7 @@ E &amp;\Rightarrow id
 <section id="características-e-taxonomia-da-ambiguidade" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="características-e-taxonomia-da-ambiguidade"><span class="header-section-number">5.5.1</span> Características e Taxonomia da Ambiguidade</h3>
 <p>A ambiguidade em gramáticas formais manifesta-se de diferentes formas e com distintos níveis de penetração na estrutura da linguagem:</p>
-<p>A <strong>ambiguidade local</strong> representa conflitos que afetam construções sintáticas específicas e bem delimitadas dentro da gramática. O exemplo mais emblemático desta categoria são os problemas de precedência de operadores, nos quais a gramática permite múltiplas interpretações para expressões como <code>id + id * id</code>. Neste caso, a ambiguidade está circunscrita às regras que governam operadores aritméticos e pode ser resolvida através da reescrita da gramática ou da especificação explícita de precedência e associatividade.</p>
+<p>A <strong>ambiguidade local</strong> representa conflitos que afetam construções sintáticas específicas e bem delimitadas dentro da gramática. O exemplo mais emblemático desta categoria são os problemas de precedência de operadores, nos quais a gramática permite múltiplas interpretações para expressões como <code>id + id * id</code>. Neste caso, a ambiguidade está circunscrita às regras que governam operadores aritméticos e pode ser resolvida por meio da reescrita da gramática ou da especificação explícita de precedência e associatividade.</p>
 <p>A <strong>ambiguidade global</strong>, por outro lado, permeia toda a estrutura da gramática e afeta a arquitetura fundamental da linguagem. O problema clássico do <em>dangling else</em> exemplifica perfeitamente esta categoria. Quando uma construção como <code>if (c1) if (c2) s1 else s2</code> pode ser interpretada de duas formas distintas, a ambiguidade não está limitada a uma regra específica, mas emerge da interação complexa entre múltiplas produções que definem comandos condicionais aninhados.</p>
 <p>As manifestações da ambiguidade podem ser classificadas em três categorias fundamentais que refletem diferentes aspectos da análise sintática.</p>
 <p>A <strong>ambiguidade de precedência</strong> surge quando operadores de diferentes níveis hierárquicos não possuem uma ordem de avaliação claramente definida pela gramática. Esta forma de ambiguidade é particularmente comum em linguagens que incluem operadores aritméticos, lógicos e relacionais. A ausência de uma hierarquia bem estabelecida força o parser a tomar decisões arbitrárias sobre qual operação deve ser executada primeiro, podendo resultar em interpretações semânticas drasticamente diferentes.</p>
@@ -1018,7 +1047,7 @@ else
 <p>A atenta leitora deve compreender que a ambiguidade em uma gramática não é uma fatalidade irreversível. Ao longo do desenvolvimento da teoria das linguagens formais, foram desenvolvidas técnicas sistemáticas para transformar gramáticas ambíguas em equivalentes não-ambíguas, preservando a linguagem gerada. Estas técnicas representam não apenas exercícios teóricos, mas ferramentas práticas essenciais no projeto de compiladores modernos.</p>
 <section id="reescrita-sistemática-da-gramática" class="level3" data-number="5.6.1">
 <h3 data-number="5.6.1" class="anchored" data-anchor-id="reescrita-sistemática-da-gramática"><span class="header-section-number">5.6.1</span> Reescrita Sistemática da Gramática</h3>
-<p>A técnica mais fundamental para eliminar ambiguidade consiste na <strong>reescrita estruturada da gramática</strong>. Esta abordagem requer uma análise cuidadosa das fontes de ambiguidade e sua eliminação através da introdução de níveis hierárquicos explícitos na estrutura gramatical.</p>
+<p>A técnica mais fundamental para eliminar ambiguidade consiste na <strong>reescrita estruturada da gramática</strong>. Esta abordagem requer uma análise cuidadosa das fontes de ambiguidade e sua eliminação por meio da introdução de níveis hierárquicos explícitos na estrutura gramatical.</p>
 <p>Considere novamente a gramática ambígua <span class="math inline">\(G_1\)</span> para expressões aritméticas:</p>
 <p><span class="math display">\[G_1 = (\{E\}, \{+, *, (, ), id\}, P_1, E)\]</span></p>
 <p>Na qual <span class="math inline">\(P_1\)</span> consiste das produções:</p>
@@ -1058,7 +1087,7 @@ expr: expr '+' expr
 <p>Estas declarações instruem o gerador de parser a resolver conflitos <em>shift</em>/<em>reduce</em> de forma determinística. Quando confrontado com <code>a + b * c</code>, o parser saberá que deve realizar o shift do <code>*</code> (maior precedência) antes de reduzir a adição. Assim, os eventuais problemas de ambiguidade decorrentes da gramática original podem ser resolvidos.</p>
 <section id="resolução-do-problema-do-dangling-else" class="level4" data-number="5.6.2.1">
 <h4 data-number="5.6.2.1" class="anchored" data-anchor-id="resolução-do-problema-do-dangling-else"><span class="header-section-number">5.6.2.1</span> Resolução do Problema do <em>Dangling Else</em></h4>
-<p>Para a ambiguidade estrutural do <em>dangling else</em>, a solução canônica adotada pela maioria das linguagens modernas é a <strong>convenção do else mais próximo</strong>. Esta pode ser formalizada através de uma gramática cuidadosamente estruturada:</p>
+<p>Para a ambiguidade estrutural do <em>dangling else</em>, a solução canônica adotada pela maioria das linguagens modernas é a <strong>convenção do else mais próximo</strong>. Esta pode ser formalizada por meio de uma gramática cuidadosamente estruturada:</p>
 <p><span class="math display">\[G_{if} = (\{S, M, U\}, \{if, else, (, ), c, s\}, P_{if}, S)\]</span></p>
 <p>na qual <span class="math inline">\(P_{if}\)</span> consiste das seguintes produções:</p>
 <ul>
@@ -1194,7 +1223,7 @@ expr: expr '+' expr
 <li><strong>LR(1) Canônico</strong>: o mais poderoso da família, mas que gera tabelas de análise muito grandes.</li>
 </ul>
 <p>Ao contrário dos parsers <span class="math inline">\(LL\)</span> <em>ansiosos</em>, os parsers <span class="math inline">\(LR\)</span> são <em>pacientes</em>. Eles não precisam decidir qual regra de produção usar no momento em que veem o primeiro símbolo de seu lado direito. Em vez disso, eles continuam a deslocar símbolos para a pilha até que o lado direito <em>completo</em> de uma produção, conhecido como <em><strong>handle</strong></em>, esteja no topo da pilha. Somente então eles realizam a redução. Essa capacidade de adiar a decisão até que mais contexto esteja disponível é a fonte de seu maior poder e de sua capacidade de lidar com uma gama mais ampla e natural de gramáticas sem a necessidade de reescritas extensivas.</p>
-<p>O <strong>parser LALR(1)</strong> (<em><strong>L</strong>ook-<strong>A</strong>head <strong>LR</strong></em>) merece destaque. Esta família de <em>parsers</em> representa uma solução engenhosa para um problema prático fundamental: os parsers LR(1), embora teoricamente mais poderosos, geram tabelas de análise de tamanho proibitivo para gramáticas reais de linguagens de programação. O LALR(1) resolve essa limitação através de uma técnica de <strong>fusão de estados</strong> (<em>state merging</em>). Durante a construção do autômato LR(1), estados que possuem o mesmo <em>core</em> — isto é, a mesma coleção de itens LR(0), mas diferentes conjuntos de <em>lookahead</em>, são consolidados em um único estado. O conjunto de <em>lookahead</em> do estado resultante torna-se a união dos conjuntos originais. Esta fusão reduz drasticamente o número de estados, frequentemente de milhares para centenas, tornando as tabelas de análise praticamente viáveis sem sacrificar significativamente o poder de reconhecimento.</p>
+<p>O <strong>parser LALR(1)</strong> (<em><strong>L</strong>ook-<strong>A</strong>head <strong>LR</strong></em>) merece destaque. Esta família de <em>parsers</em> representa uma solução engenhosa para um problema prático fundamental: os parsers LR(1), embora teoricamente mais poderosos, geram tabelas de análise de tamanho proibitivo para gramáticas reais de linguagens de programação. O LALR(1) resolve essa limitação por meio de uma técnica de <strong>fusão de estados</strong> (<em>state merging</em>). Durante a construção do autômato LR(1), estados que possuem o mesmo <em>core</em> — isto é, a mesma coleção de itens LR(0), mas diferentes conjuntos de <em>lookahead</em>, são consolidados em um único estado. O conjunto de <em>lookahead</em> do estado resultante torna-se a união dos conjuntos originais. Esta fusão reduz drasticamente o número de estados, frequentemente de milhares para centenas, tornando as tabelas de análise praticamente viáveis sem sacrificar significativamente o poder de reconhecimento.</p>
 <p>A diferença fundamental entre LALR(1) e LR(1) manifesta-se tanto em termos de eficiência quanto de capacidade de reconhecimento. <strong>Em termos de eficiência</strong>, o LR(1) pode gerar tabelas com dezenas de milhares de estados para gramáticas complexas, consumindo megabytes de memória e tornando o parser lento, enquanto o LALR(1) produz tabelas compactas com centenas de estados, adequadas para uso industrial. <strong>Em termos de poder de reconhecimento</strong>, o LR(1) aceita rigorosamente todas as gramáticas LR(1), enquanto o LALR(1) constitui um subconjunto próprio dessa classe, algumas gramáticas LR(1) podem se tornar ambíguas durante o processo de fusão de estados, gerando conflitos <em>reduce/reduce</em>. Contudo, esta limitação raramente impacta gramáticas práticas de linguagens de programação, razão pela qual ferramentas como YACC e Bison adotaram LALR(1) como padrão, estabelecendo um equilíbrio ótimo entre expressividade teórica e viabilidade implementacional.</p>
 </section>
 </section>
@@ -1237,11 +1266,11 @@ expr: expr '+' expr
 <p>As ferramentas mais conhecidas e influentes nesta categoria são YACC e seu sucessor, Bison.</p>
 <ul>
 <li><strong>YACC (Yet Another Compiler-Compiler)</strong>: desenvolvido na Bell Labs, YACC é a ferramenta canônica para gerar parsers <span class="math inline">\(LALR(1)\)</span>. Ele se tornou um padrão de fato em sistemas Unix.</li>
-<li><strong>GNU Bison</strong>: É a implementação do projeto GNU de um gerador de parsers. É amplamente compatível com YACC, mas oferece recursos adicionais, como a geração de parsers <span class="math inline">\(GLR\)</span>, <em>Generalized LR</em> para lidar com gramáticas ambíguas e a geração de código em múltiplas linguagens (C, C++, Java).</li>
+<li><strong>GNU Bison</strong>: É a implementação do projeto GNU de um gerador de parsers. É amplamente compatível com YACC, mas oferece recursos adicionais, como a geração de parsers <span class="math inline">\(GLR\)</span>, <em>Generalized LR</em> para lidar com gramáticas ambíguas e a geração de código em múltiplas linguagens (C, <strong>C++</strong>, <strong>Java</strong>).</li>
 </ul>
 <p>O fluxo de trabalho com YACC ou Bison pode ser resumido da seguinte forma:</p>
 <ol type="1">
-<li><strong>Entrada</strong>: o desenvolvedor cria um arquivo de especificação, geralmente com a extensão <code>.y</code>. Este arquivo contém três seções: declarações, a gramática da linguagem escrita em uma notação semelhante à <strong><span class="math inline">\(BNF\)</span></strong>, e uma seção de código auxiliar. O desenvolvedor pode associar <strong>ações</strong> de código (em C ou C++) a cada regra da gramática.</li>
+<li><strong>Entrada</strong>: o desenvolvedor cria um arquivo de especificação, geralmente com a extensão <code>.y</code>. Este arquivo contém três seções: declarações, a gramática da linguagem escrita em uma notação semelhante à <strong><span class="math inline">\(BNF\)</span></strong>, e uma seção de código auxiliar. O desenvolvedor pode associar <strong>ações</strong> de código (em C ou <strong>C++</strong>) a cada regra da gramática.</li>
 <li><strong>Processamento</strong>: A ferramenta (YACC ou Bison) lê o arquivo de especificação. Ela analisa a gramática, constrói o autômato <span class="math inline">\(LR\)</span> e a tabela de análise correspondente, e verifica a existência de conflitos (<em>shift/reduce</em> ou <em>reduce/reduce</em>).</li>
 <li><strong>Saída</strong>: Se a gramática for adequada (ex.: <span class="math inline">\(LALR(1)\)</span>), a ferramenta gera um arquivo de código fonte (ex.: <code>y.tab.c</code>) que implementa a função do parser (tipicamente chamada <code>yyparse</code>). Esta função implementa o algoritmo <em>shift-reduce</em> dirigido pela tabela gerada. As ações de código fornecidas pelo desenvolvedor são incorporadas à função e são executadas sempre que a regra correspondente é reduzida. Essas ações são tipicamente usadas para construir a Árvore Sintática Abstrata.</li>
 </ol>

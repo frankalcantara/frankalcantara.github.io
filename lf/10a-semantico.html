@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 11&nbsp; Fundamentos Matemáticos da Semântica</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-tabelaSimbolos.html" rel="next">
+<link href="./10-semantico.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./10a-semantico.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#as-três-abordagens-semânticas" id="toc-as-três-abordagens-semânticas" class="nav-link active" data-scroll-target="#as-três-abordagens-semânticas"><span class="header-section-number">11.0.1</span> As Três Abordagens Semânticas</a></li>
+  <li><a href="#fundamentos-da-semântica-denotacional" id="toc-fundamentos-da-semântica-denotacional" class="nav-link" data-scroll-target="#fundamentos-da-semântica-denotacional"><span class="header-section-number">11.0.2</span> Fundamentos da Semântica Denotacional</a></li>
+  <li><a href="#a-função-de-interpretação-semântica" id="toc-a-função-de-interpretação-semântica" class="nav-link" data-scroll-target="#a-função-de-interpretação-semântica"><span class="header-section-number">11.0.3</span> A Função de Interpretação Semântica</a></li>
+  <li><a href="#composicionalidade" id="toc-composicionalidade" class="nav-link" data-scroll-target="#composicionalidade"><span class="header-section-number">11.0.4</span> Composicionalidade</a></li>
+  <li><a href="#construindo-a-semântica-de-uma-linguagem-imperativa-a-linguagem-imp" id="toc-construindo-a-semântica-de-uma-linguagem-imperativa-a-linguagem-imp" class="nav-link" data-scroll-target="#construindo-a-semântica-de-uma-linguagem-imperativa-a-linguagem-imp"><span class="header-section-number">11.1</span> Construindo a Semântica de uma Linguagem Imperativa: A Linguagem IMP</a>
+  <ul class="collapse">
+  <li><a href="#decisão-1-três-categorias-sintáticas" id="toc-decisão-1-três-categorias-sintáticas" class="nav-link" data-scroll-target="#decisão-1-três-categorias-sintáticas"><span class="header-section-number">11.1.1</span> Decisão 1: Três Categorias Sintáticas</a></li>
+  <li><a href="#decisão-2-uso-de-funções-matemáticas-para-semântica" id="toc-decisão-2-uso-de-funções-matemáticas-para-semântica" class="nav-link" data-scroll-target="#decisão-2-uso-de-funções-matemáticas-para-semântica"><span class="header-section-number">11.1.2</span> Decisão 2: Uso de Funções Matemáticas para Semântica</a></li>
+  <li><a href="#decisão-3-estado-como-função-matemática" id="toc-decisão-3-estado-como-função-matemática" class="nav-link" data-scroll-target="#decisão-3-estado-como-função-matemática"><span class="header-section-number">11.1.3</span> Decisão 3: Estado como Função Matemática</a></li>
+  <li><a href="#decisão-4-definição-composicional" id="toc-decisão-4-definição-composicional" class="nav-link" data-scroll-target="#decisão-4-definição-composicional"><span class="header-section-number">11.1.4</span> Decisão 4: Definição Composicional</a></li>
+  <li><a href="#decisão-5-semântica-completa-de-expressões" id="toc-decisão-5-semântica-completa-de-expressões" class="nav-link" data-scroll-target="#decisão-5-semântica-completa-de-expressões"><span class="header-section-number">11.1.5</span> Decisão 5: Semântica Completa de Expressões</a></li>
+  <li><a href="#decisão-6-tratamento-do-comando-skip" id="toc-decisão-6-tratamento-do-comando-skip" class="nav-link" data-scroll-target="#decisão-6-tratamento-do-comando-skip"><span class="header-section-number">11.1.6</span> Decisão 6: Tratamento do Comando Skip</a></li>
+  <li><a href="#decisão-7-sequência-como-composição-de-funções" id="toc-decisão-7-sequência-como-composição-de-funções" class="nav-link" data-scroll-target="#decisão-7-sequência-como-composição-de-funções"><span class="header-section-number">11.1.7</span> Decisão 7: Sequência como Composição de Funções</a></li>
+  <li><a href="#decisão-8-semântica-da-atribuição" id="toc-decisão-8-semântica-da-atribuição" class="nav-link" data-scroll-target="#decisão-8-semântica-da-atribuição"><span class="header-section-number">11.1.8</span> Decisão 8: Semântica da Atribuição</a></li>
+  <li><a href="#decisão-9-semântica-do-condicional" id="toc-decisão-9-semântica-do-condicional" class="nav-link" data-scroll-target="#decisão-9-semântica-do-condicional"><span class="header-section-number">11.1.9</span> Decisão 9: Semântica do Condicional</a></li>
+  <li><a href="#decisão-10-valores-vs.-efeitos-colaterais" id="toc-decisão-10-valores-vs.-efeitos-colaterais" class="nav-link" data-scroll-target="#decisão-10-valores-vs.-efeitos-colaterais"><span class="header-section-number">11.1.10</span> Decisão 10: Valores vs.&nbsp;Efeitos Colaterais</a></li>
+  <li><a href="#decisão-11-semântica-de-loops-via-pontos-fixos" id="toc-decisão-11-semântica-de-loops-via-pontos-fixos" class="nav-link" data-scroll-target="#decisão-11-semântica-de-loops-via-pontos-fixos"><span class="header-section-number">11.1.11</span> Decisão 11: Semântica de Loops via Pontos Fixos</a></li>
+  <li><a href="#decisão-12-separação-entre-sintaxe-e-semântica" id="toc-decisão-12-separação-entre-sintaxe-e-semântica" class="nav-link" data-scroll-target="#decisão-12-separação-entre-sintaxe-e-semântica"><span class="header-section-number">11.1.12</span> Decisão 12: Separação Entre Sintaxe e Semântica</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10a-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./10a-semantico.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Para entender como a análise semântica funciona, precisamos primeiro compreender o que significa o termo <em>semântica</em> no contexto das linguagens de programação. Como disse antes, a semântica é o estudo do significado dos programas, ou seja, o que um programa faz quando é executado. Diferente da sintaxe, que se preocupa com a forma e a estrutura do código, a semântica lida com o comportamento e os efeitos do código. Considere o seguinte fragmento de código:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>y <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> y <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Um analisador sintático confirma que o código está bem formado segundo a gramática da linguagem. Mas questões fundamentais permanecem:</p>
+<ul>
+<li>O que significa executar este código?</li>
+<li>Qual será o valor final de <code>x</code>?</li>
+<li>Como garantir que dois compiladores diferentes produzirão o mesmo resultado?</li>
+<li>Como provar que uma otimização não alterará o comportamento do programa?</li>
+</ul>
+<p>A semântica denotacional fornece respostas matemáticas rigorosas para todas essas questões.</p>
+<p>Esta seção mergulha fundo na teoria matemática que formaliza o conceito de <em>significado</em>. Para a leitora focada na implementação, os conceitos de Gramáticas de Atributos e o Catálogo de Verificações são o ferramental prático essencial. Para aquela que deseja compreender a ciência por trás da engenharia de compiladores e as garantias de correção que ela nos dá, esta seção é fundamental.</p>
+<section id="as-três-abordagens-semânticas" class="level3" data-number="11.0.1">
+<h3 data-number="11.0.1" class="anchored" data-anchor-id="as-três-abordagens-semânticas"><span class="header-section-number">11.0.1</span> As Três Abordagens Semânticas</h3>
+<p>Existem três formas principais de definir formalmente o significado de um programa de computador, cada uma com uma perspectiva e um propósito distintos. Elas não são excludentes, mas sim ferramentas diferentes para responder à pergunta fundamental: <em>o que este código realmente significa?</em>.</p>
+<ol type="1">
+<li><p><strong>Semântica Operacional</strong>: a semântica operacional descreve o significado de um programa em termos de como ele é executado, passo a passo. A principal pergunta que ela responde é: <strong><em>Como a computação acontece?</em></strong>. Pense nela como um manual de instruções detalhado para uma máquina abstrata. Ela define um conjunto de regras de transição que especificam como os comandos alteram o estado, a memória, do programa em cada etapa.</p>
+<p>Por exemplo, para a expressão <code>(2 + 3) * 4</code>, a semântica operacional definiria regras que a transformariam primeiro em <code>5 * 4</code> e, em seguida, no resultado final <code>20</code>. Por ser tão próxima do processo de execução, essa abordagem é extremamente útil para a implementação de interpretadores e para a depuração passo a passo, pois fornece um modelo claro de como um programa se comporta ao longo do tempo.</p></li>
+<li><p><strong>Semântica Axiomática</strong>: a semântica axiomática adota uma abordagem mais declarativa, focada em provar propriedades sobre o programa. Em vez de descrever como executar, ela define o que pode ser afirmado como verdadeiro antes e depois da execução de um trecho de código. A pergunta que ela responde é: <strong><em>O que este programa realiza?</em></strong>.</p>
+<p>Ela é baseada na Lógica de Hoare e utiliza asserções lógicas conhecidas como pré-condições e pós-condições. Uma <strong>tripla de Hoare</strong> <span class="math inline">\(\{P\} C \{Q\}\)</span> afirma que, se a pré-condição <span class="math inline">\(P\)</span> for verdadeira antes de executar o comando <span class="math inline">\(C\)</span>, então, após sua conclusão, a pós-condição <span class="math inline">\(Q\)</span> será verdadeira. Por exemplo, <code>{x &gt; 0} y = x * 2 {y &gt; 0}</code>. Essa abordagem não se preocupa com os passos intermediários da execução, apenas com a validade do resultado final. Por isso, é a base para a verificação formal de programas, permitindo provar matematicamente que um software está correto e livre de certos tipos de bugs, como divisões por zero ou acesso a memória inválida.</p></li>
+<li><p><strong>Semântica Denotacional</strong>: a semântica denotacional oferece a visão mais abstrata. Ela define o significado de um programa mapeando suas construções sintáticas, comandos, expressões, diretamente para objetos matemáticos, como funções e conjuntos. A pergunta que ela responde é: <strong>Qual é a essência matemática deste programa?</strong>.</p>
+<p>Nesta abordagem, um comando como <code>y = x + 1</code> não é visto como uma sequência de passos de execução, nem como uma relação lógica, mas sim como uma função matemática que transforma um estado de entrada, o valor de todas as variáveis antes do comando, em um estado de saída. A grande vantagem é a <strong>composicionalidade</strong>: o significado de um programa complexo é construído a partir do significado de suas partes menores. Ao abstrair completamente os detalhes da implementação, a semântica denotacional é fundamental para a análise e a otimização em compiladores. Ela permite provar que duas construções de código diferentes são equivalentes, pois denotam a mesma função matemática, e, portanto, uma pode ser substituída pela outra, justificando transformações de código que melhoram o desempenho sem alterar o comportamento do programa.</p></li>
+</ol>
+<p>Existe uma pergunta que deve estar incomodando a curiosa leitora: <strong>qual tipo de semântica formal é utilizada por compiladores industriais como GCC, LLVM e MSVC?</strong> A resposta direta é que eles <strong>não implementam uma semântica formal (denotacional, axiomática ou operacional) de maneira explícita e rigorosa</strong>. Em vez disso, a abordagem deles é guiada por um pragmatismo de engenharia, fundamentado em uma especificação informal que se assemelha em espírito à <strong>semântica operacional</strong>.</p>
+<p>O significado de uma linguagem como <strong>C++</strong> ou <strong>C</strong> é definido por um padrão, um documento extenso em linguagem natural que descreve o comportamento de uma máquina abstrata. O trabalho do compilador é traduzir o código fonte para um código de máquina que se comporte de acordo com as regras dessa máquina abstrata. As otimizações são validadas não por provas matemáticas formais, mas por um raciocínio rigoroso de que elas preservam o comportamento observável do programa, conforme definido no padrão.</p>
+<p>A escolha por não usar uma semântica denotacional completa no <em>backend</em> desses compiladores se deve a razões práticas e fundamentais:</p>
+<ul>
+<li><strong>Complexidade das Linguagens Reais</strong>: linguagens como C++ possuem uma especificação com mais de 1.400 páginas, cheia de casos especiais, comportamento indefinido e interações complexas. Modelar tudo isso em uma semântica denotacional seria um esforço hercúleo, provavelmente resultando em uma especificação matemática tão complexa quanto o próprio compilador.</li>
+<li><strong>Pragmatismo e Desempenho</strong>: a prioridade de um compilador industrial é gerar código rápido e compilar de forma eficiente. Algoritmos de otimização, mesmo que inspirados em princípios formais, são implementados como heurísticas e transformações eficientes, não como a busca por pontos fixos em domínios matemáticos, que seria computacionalmente inviável.</li>
+<li><strong>Cultura de Engenharia</strong>: a engenharia de compiladores valoriza algoritmos eficazes, suítes de testes massivas e <em>benchmarks</em> de desempenho sobre provas de correção formais, que são difíceis de desenvolver, manter e exigem uma especialização rara.</li>
+</ul>
+<p>Apesar de não ser implementada diretamente, a semântica formal, especialmente a denotacional, exerce uma influência indispensável e profunda em quase todos os aspectos de um compilador moderno. Ela funciona como a física teórica para a engenharia: os engenheiros não resolvem as equações de Schrödinger para projetar um chip, mas a mecânica quântica é o fundamento de toda a eletrônica moderna.</p>
+<ol type="1">
+<li><p><strong>Design de Sistemas de Tipos</strong>: A teoria dos tipos, que é a base para a segurança e expressividade de linguagens modernas, está intrinsecamente ligada à semântica formal. O sistema de <em>ownership</em> e o <em>borrow checker</em> do Rust, por exemplo, não foram criados por tentativa e erro; eles foram projetados com base em sistemas de tipos formais, como tipos de região e tipos afins, para garantir matematicamente a segurança de memória. Da mesma forma, linguagens como TypeScript, Scala e Swift devem a robustez de seus sistemas de tipos à pesquisa em semântica formal.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// O tipo Result&lt;T, E&gt; em Rust ou Swift é uma soma de tipos,</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// um conceito diretamente modelado na teoria dos tipos.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">enum</span> <span class="dt">Result</span><span class="op">&lt;</span>T<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>   <span class="cn">Ok</span>(T)<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>   <span class="cn">Err</span>(E)<span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Fundamento para Análises Estáticas e Otimizações</strong>: muitas otimizações poderosas são implementações práticas da <strong>interpretação abstrata</strong>, uma técnica que aproxima a semântica de um programa para permitir análises em tempo finito. Análises de ponteiros nulos em <strong>Java</strong> ou <strong>Kotlin</strong>, análise de fluxo de dados, <em>taint analysis</em> e otimizações clássicas no <strong>LLVM</strong> como propagação de constantes e eliminação de código morto são algoritmos eficientes cuja correção é justificada por essa teoria. Eles não calculam a denotação exata <span class="math inline">\([\![programa]\!]\)</span>, mas uma aproximação segura dela.</p></li>
+<li><p><strong>Desenvolvimento de Ferramentas de Verificação</strong>: ferramentas que provam a correção de software, como <a href="https://dafny.org/dafny/DafnyRef/DafnyRef.html">Dafny</a> e <a href="https://www.microsoft.com/en-us/research/project/the-f-project/">F* da Microsoft</a>, usam semântica formal, geralmente axiomática, de forma explícita para verificar se o código atende às suas especificações. Elas funcionam como assistentes que garantem propriedades que um compilador padrão não pode.</p></li>
+<li><p><strong>Projeto de Novas Funcionalidades de Linguagem</strong>: conceitos modernos de linguagens são projetados com rigor semântico. Os <em>Concepts</em> do C++20, por exemplo, são uma forma de especificar restrições em tipos de template que se baseiam em princípios de semântica axiomática.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// C++20 Concepts: uma especificação formal de requisitos</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">concept</span> Addable <span class="op">=</span> <span class="kw">requires</span><span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> a <span class="op">+</span> b <span class="op">}</span> <span class="op">-&gt;</span> <span class="bu">std::</span>same_as<span class="op">&lt;</span>T<span class="op">&gt;;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<p>Existe uma classe de compiladores, principalmente acadêmicos ou para nichos de altíssima criticidade, que levam a semântica formal ao extremo. O mais famoso é o <strong><a href="https://compcert.org/">CompCert</a></strong>, um compilador para a linguagem <strong>C</strong>, escrito e verificado usando o assistente de provas <a href="https://softwarefoundations.cis.upenn.edu/lf-current/Basics.html"><strong>Coq</strong></a>.</p>
+<p>Cada passo da compilação, da análise sintática à geração de código assembly, vem acompanhado de uma prova matemática de que a semântica do programa foi preservada. Isso fornece um nível de confiança impossível de ser alcançado apenas com testes. Não é surpresa que a CompCert seja usada em indústrias como aviação, pela Airbus, e sistemas nucleares, nas quais um erro no compilador poderia ter consequências catastróficas.</p>
+<p>A tendência é uma aproximação cada vez maior entre o mundo pragmático e o formal. O sucesso do Rust provou que é possível embutir garantias formais, como segurança de memória, em uma linguagem de sistemas de alto desempenho. O <strong>WebAssembly (Wasm)</strong>, um padrão moderno para código executável na web e fora dela, possui uma <a href="https://webassembly.github.io/spec/">especificação de referência totalmente formal</a>, permitindo implementações verificadas.</p>
+<p>Para quem estuda compiladores, aprender semântica denotacional e outras formalidades não tem como objetivo implementá-las diretamente em algum compilador. O objetivo é adquirir o arcabouço intelectual para compreender profundamente o que os programas significam, raciocinar sobre a correção de transformações e, finalmente, estar apto a criar as próximas inovações em linguagens e compiladores. Neste documento, focaremos na semântica denotacional por sua importância central neste entendimento.</p>
+</section>
+<section id="fundamentos-da-semântica-denotacional" class="level3" data-number="11.0.2">
+<h3 data-number="11.0.2" class="anchored" data-anchor-id="fundamentos-da-semântica-denotacional"><span class="header-section-number">11.0.2</span> Fundamentos da Semântica Denotacional</h3>
+<p>Um <strong>domínio semântico</strong> é um conjunto matemático que contém todos os possíveis valores que podem aparecer durante a computação. Para uma linguagem de programação típica, precisamos de vários domínios:</p>
+<section id="domínio-de-valores-básicos" class="level4" data-number="11.0.2.1">
+<h4 data-number="11.0.2.1" class="anchored" data-anchor-id="domínio-de-valores-básicos"><span class="header-section-number">11.0.2.1</span> Domínio de Valores Básicos</h4>
+<p><span class="math display">\[D_{val} = \mathbb{Z} \cup \mathbb{B} \cup \mathbb{R} \cup \text{String} \cup \{\perp\}\]</span></p>
+<p>Na qual:</p>
+<ul>
+<li><span class="math inline">\(\mathbb{Z}\)</span> representa inteiros;</li>
+<li><span class="math inline">\(\mathbb{B} = \{\text{true}, \text{false}\}\)</span> representa booleanos;</li>
+<li><span class="math inline">\(\mathbb{R}\)</span> representa números reais;</li>
+<li><span class="math inline">\(\text{String}\)</span> representa cadeias de caracteres;</li>
+<li><span class="math inline">\(\perp\)</span> (bottom) representa computação indefinida ou erro.</li>
+</ul>
+</section>
+<section id="domínio-de-estados" class="level4" data-number="11.0.2.2">
+<h4 data-number="11.0.2.2" class="anchored" data-anchor-id="domínio-de-estados"><span class="header-section-number">11.0.2.2</span> Domínio de Estados</h4>
+<p>Um <strong>estado</strong> representa o conteúdo da memória em um dado momento:</p>
+<p><span class="math display">\[\text{Estado} = \text{Var} \rightarrow D_{val}\]</span></p>
+<p>No qual <span class="math inline">\(\text{Var}\)</span> é o conjunto de identificadores de variáveis.</p>
+</section>
+<section id="domínio-de-funções" class="level4" data-number="11.0.2.3">
+<h4 data-number="11.0.2.3" class="anchored" data-anchor-id="domínio-de-funções"><span class="header-section-number">11.0.2.3</span> Domínio de Funções</h4>
+<p>Para modelar procedimentos e funções:</p>
+<p><span class="math display">\[D_{func} = D_{val} \rightarrow D_{val}\]</span></p>
+</section>
+</section>
+<section id="a-função-de-interpretação-semântica" class="level3" data-number="11.0.3">
+<h3 data-number="11.0.3" class="anchored" data-anchor-id="a-função-de-interpretação-semântica"><span class="header-section-number">11.0.3</span> A Função de Interpretação Semântica</h3>
+<p>A função de interpretação semântica, denotada por <span class="math inline">\([\![\cdot]\!]\)</span>, é o coração da semântica denotacional. Ela mapeia construções sintáticas para elementos do domínio semântico. Para entender este processo vamos usar a seguinte notação:</p>
+<ul>
+<li><span class="math inline">\([\![e]\!]\)</span> : significado da expressão <span class="math inline">\(e\)</span>;</li>
+<li><span class="math inline">\([\![e]\!]\sigma\)</span> : significado de <span class="math inline">\(e\)</span> no estado <span class="math inline">\(\sigma\)</span>;</li>
+<li><span class="math inline">\([\![S]\!]\)</span> : significado do comando <span class="math inline">\(S\)</span>;</li>
+<li><span class="math inline">\(\sigma[x \mapsto v]\)</span> : estado <span class="math inline">\(\sigma\)</span> atualizado com <span class="math inline">\(x\)</span> mapeado para <span class="math inline">\(v\)</span>.</li>
+</ul>
+</section>
+<section id="composicionalidade" class="level3" data-number="11.0.4">
+<h3 data-number="11.0.4" class="anchored" data-anchor-id="composicionalidade"><span class="header-section-number">11.0.4</span> Composicionalidade</h3>
+<p>Um princípio fundamental da semântica denotacional é a <strong>composicionalidade</strong>: o significado de uma construção é determinado pelos significados de suas partes constituintes. Por exemplo, o significado de <code>e1 + e2</code> é composto dos significados de <code>e1</code> e <code>e2</code>:</p>
+<p><span class="math display">\[[\![e_1 + e_2]\!]\sigma = [\![e_1]\!]\sigma + [\![e_2]\!]\sigma\]</span></p>
+<p>Este princípio garante que podemos entender programas complexos analisando suas partes.</p>
+</section>
+<section id="construindo-a-semântica-de-uma-linguagem-imperativa-a-linguagem-imp" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="construindo-a-semântica-de-uma-linguagem-imperativa-a-linguagem-imp"><span class="header-section-number">11.1</span> Construindo a Semântica de uma Linguagem Imperativa: A Linguagem IMP</h2>
+<p>A Linguagem <strong>IMP</strong> é uma linguagem de programação de sistemas desenvolvida por <a href="https://en.wikipedia.org/wiki/Edgar_T._Irons">Edgar T. Irons</a> no final dos anos 1960 e começo dos anos 1970 para a <strong>N</strong>ational <strong>S</strong>ecurity <strong>A</strong>gency, <strong>NSA</strong>. Vamos definir formalmente a semântica de IMP, uma linguagem imperativa simples mas completa.</p>
+<p>A sintaxe de IMP é definida pela seguinte gramática:</p>
+<pre class="ebnf"><code>// Expressões Aritméticas
+AExp ::= n                    // numeral
+       | x                    // variável
+       | AExp + AExp         // adição
+       | AExp - AExp         // subtração  
+       | AExp * AExp         // multiplicação
+
+// Expressões Booleanas
+BExp ::= true | false        // constantes booleanas
+       | AExp = AExp         // igualdade
+       | AExp ≤ AExp         // menor ou igual
+       | ¬BExp               // negação
+       | BExp ∧ BExp         // conjunção
+       | BExp ∨ BExp         // disjunção
+
+// Comandos
+Cmd ::= skip                 // comando vazio
+      | x := AExp            // atribuição
+      | Cmd ; Cmd            // sequência
+      | if BExp then Cmd else Cmd   // condicional
+      | while BExp do Cmd    // repetição</code></pre>
+<p>A linguagem <strong>IMP</strong> serve como um caso de estudo perfeito para entender a análise semântica porque é simples o suficiente para ser compreendida, mas completa o suficiente para demonstrar os conceitos fundamentais.</p>
+<p>Para entender a semântica de IMP, precisamos fazer algumas decisões de projeto importantes. Vamos explorar essas decisões e suas justificativas.</p>
+<section id="decisão-1-três-categorias-sintáticas" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="decisão-1-três-categorias-sintáticas"><span class="header-section-number">11.1.1</span> Decisão 1: Três Categorias Sintáticas</h3>
+<p>Começamos dividindo a linguagem <strong>IMP</strong> em três categorias sintáticas distintas:</p>
+<pre><code>AExp: Expressões Aritméticas (produzem números)
+BExp: Expressões Booleanas (produzem verdadeiro/falso)
+Cmd:  Comandos (modificam o estado do programa)</code></pre>
+<p>A atenta leitora verá que esta divisão não é arbitrária. Cada categoria tem um papel semântico diferente. Expressões aritméticas calculam valores numéricos mas não modificam nada. Expressões booleanas tomam decisões mas não calculam números. Comandos modificam o estado mas não retornam valores diretamente.</p>
+<p>Para formalizar matematicamente essas três categorias, precisamos primeiro definir os domínios semânticos sobre os quais elas operam. O domínio de valores básicos de IMP é dado por:</p>
+<p><span class="math display">\[D_{val} = \mathbb{Z} \cup \mathbb{B} \cup \{\perp\}\]</span></p>
+<p>Nesta definição, <span class="math inline">\(\mathbb{Z}\)</span> representa o conjunto dos números inteiros, <span class="math inline">\(\mathbb{B} = \{\text{true}, \text{false}\}\)</span> representa os valores booleanos, e <span class="math inline">\(\perp\)</span> (bottom) representa computação indefinida ou erro. Com este domínio estabelecido, podemos definir as funções semânticas para cada categoria sintática:</p>
+<p><span class="math display">\[[\![\cdot]\!]_{aexp} : \text{AExp} \times \text{Estado} \rightarrow \mathbb{Z} \cup \{\perp\}\]</span></p>
+<p><span class="math display">\[[\![\cdot]\!]_{bexp} : \text{BExp} \times \text{Estado} \rightarrow \mathbb{B} \cup \{\perp\}\]</span></p>
+<p><span class="math display">\[[\![\cdot]\!]_{cmd} : \text{Cmd} \rightarrow (\text{Estado} \rightarrow \text{Estado})\]</span></p>
+<p>Essa separação permite detectar erros como tentar usar um número em um ponto no qual se espera um booleano:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// ERRO: x + 3 não é booleano</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">+</span> <span class="dv">3</span> then y <span class="op">:=</span> <span class="dv">5</span> <span class="cf">else</span> skip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Na hora em que criamos a gramática poderíamos ter escolhido usar uma única categoria, por exemplo <em>Expressão</em> para englobar tudo, como em linguagens como Scheme. Neste ponto, rejeitamos essa abordagem porque uma única categoria sintática dificulta a detecção de erros de tipo, complica a definição semântica e não reflete claramente a intenção do programador, reduzindo as metáforas e analogias que podemos usar para explicar o significado de cada construção.</p>
+</section>
+<section id="decisão-2-uso-de-funções-matemáticas-para-semântica" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="decisão-2-uso-de-funções-matemáticas-para-semântica"><span class="header-section-number">11.1.2</span> Decisão 2: Uso de Funções Matemáticas para Semântica</h3>
+<p>Nosso objetivo é entender a análise semântica de maneira rigorosa e precisa. Para isso, escolhemos definir a semântica de <strong>IMP</strong> usando funções matemáticas. Essa decisão é fundamental para garantir clareza, precisão e a capacidade de provar propriedades sobre programas. A função semântica para expressões aritméticas, que já introduzimos, pode ser lida como: <em>a função semântica para expressões aritméticas recebe uma expressão e um estado, e produz um inteiro ou um valor indefinido</em>.</p>
+<p>O rigor da matemática é essencial porque a linguagem natural é ambígua. Esta ambiguidade pode levar a interpretações errôneas. Para destacar isso, vamos comparar duas definições possíveis para a adição. Uma descrição informal seria <em>Some os valores das duas expressões</em>, enquanto a definição formal é <span class="math inline">\([\![e_1 + e_2]\!]_{aexp}\sigma = [\![e_1]\!]_{aexp}\sigma + [\![e_2]\!]_{aexp}\sigma\)</span>. A notação matemática não deixa espaço para interpretação.</p>
+<p>Além disso, com as definições matemáticas, podemos provar propriedades sobre programas. Por exemplo, será possível provar que <code>x := 5; y := x</code> sempre resulta em <code>y</code> contendo o valor <code>5</code>. Finalmente, a notação matemática é diretamente traduzível em código. Isso significa que as definições que criamos podem ser implementadas diretamente no compilador, garantindo que o comportamento do compilador corresponda exatamente à semântica formal que definimos. No caso da definição formal da adição que acabamos de ver, poderíamos ter uma implementação em Python como:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eval_aexp(expr, state):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(expr, Numeral):</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> expr.value</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(expr, Variable):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> state[expr.name]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(expr, Addition):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> eval_aexp(expr.left, state) <span class="op">+</span> eval_aexp(expr.right, state)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... outros casos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A atenta leitora não deve perder de vista que poderíamos descrever a semântica apenas em linguagem natural. Isso, com certeza, funcionaria para exemplos pequenos, mas se tornaria inconsistente, impreciso e muito extenso para casos complexos.</p>
+</section>
+<section id="decisão-3-estado-como-função-matemática" class="level3" data-number="11.1.3">
+<h3 data-number="11.1.3" class="anchored" data-anchor-id="decisão-3-estado-como-função-matemática"><span class="header-section-number">11.1.3</span> Decisão 3: Estado como Função Matemática</h3>
+<p>Uma parte crucial da semântica de qualquer linguagem imperativa é o conceito de <strong>estado</strong>. O estado representa o conteúdo da memória do programa em um dado momento, ou seja, o valor atual de todas as variáveis. Para mantermos nossa coerência, precisamos de uma maneira precisa e matemática para representar esse estado. Neste caso, escolhemos representar o estado como uma função matemática que mapeia variáveis para seus valores atuais:</p>
+<p><span class="math display">\[\sigma : \text{Var} \rightarrow \mathbb{Z}\]</span></p>
+<p>Nesta definição, <span class="math inline">\(\sigma(x)\)</span> retorna o valor atual da variável <span class="math inline">\(x\)</span>.</p>
+<p>Na realidade, variáveis são identificadores, nomes, que atribuímos a endereços de memória. Mas para análise semântica, não precisamos desses detalhes de implementação. O importante é a relação <code>variável → valor</code>. A notação <span class="math inline">\(\sigma[x \mapsto v]\)</span> representa um novo estado que é idêntico a <span class="math inline">\(\sigma\)</span>, exceto que <span class="math inline">\(x\)</span> agora tem valor <span class="math inline">\(v\)</span>. Isso captura formalmente o que acontece em uma atribuição. Podemos definir essa operação de atualização precisamente:</p>
+<p><span class="math display">\[\sigma[x \mapsto v](y) = \begin{cases} v &amp; \text{se } y = x \\ \sigma(y) &amp; \text{se } y \neq x \end{cases}\]</span></p>
+<p>Vamos ver como isso funciona na prática. Considere o comando <code>x := 20</code> em um estado inicial onde <code>x</code> vale <code>5</code> e <code>y</code> vale <code>10</code>. Neste caso, teremos um estado inicial <span class="math inline">\(\sigma = \{x \mapsto 5, y \mapsto 10\}\)</span>. Após a execução de <code>x := 20</code>, o estado final será formalmente dado por:</p>
+<p><span class="math display">\[\sigma' = \sigma[x \mapsto 20] = \{x \mapsto 20, y \mapsto 10\}\]</span></p>
+<p>A notação deixa claro que <span class="math inline">\(y\)</span> não foi alterado, apenas <span class="math inline">\(x\)</span>.</p>
+<p>Para todas as decisões que tomamos existem algumas alternativas possíveis. Neste caso, poderíamos usar uma lista de pares <code>(variável, valor)</code> ou uma estrutura de dados mais complexa como um dicionário. Embora essas representações sejam úteis na implementação, a notação funcional é mais limpa matematicamente e evita questões sobre ordem ou duplicatas.</p>
+</section>
+<section id="decisão-4-definição-composicional" class="level3" data-number="11.1.4">
+<h3 data-number="11.1.4" class="anchored" data-anchor-id="decisão-4-definição-composicional"><span class="header-section-number">11.1.4</span> Decisão 4: Definição Composicional</h3>
+<p>O princípio da <strong>composicionalidade</strong> é fundamental para a semântica denotacional. Ele afirma que o significado de uma construção sintática é determinado pelos significados de suas partes constituintes. Isso nos permite construir o significado de programas complexos a partir do significado de suas partes menores. Neste caso, cada regra semântica é definida em termos dos componentes do construtor. Por exemplo:</p>
+<p><span class="math display">\[[\![e_1 + e_2]\!]_{aexp}\sigma = [\![e_1]\!]_{aexp}\sigma + [\![e_2]\!]_{aexp}\sigma\]</span></p>
+<p>O princípio da composicionalidade nos permite raciocinar sobre a semântica de expressões complexas de forma modular. Isso reflete como o compilador realmente processa o código. Considere o programa <code>(3 + 5) * 2</code> e sua árvore de análise:</p>
+<pre><code>    *
+   / \
+  +   2
+ / \
+3   5</code></pre>
+<p>A avaliação procede de baixo para cima: primeiro <span class="math inline">\([\![3]\!] = 3\)</span>, depois <span class="math inline">\([\![5]\!] = 5\)</span>, em seguida <span class="math inline">\([\![3 + 5]\!] = [\![3]\!] + [\![5]\!] = 8\)</span>, depois <span class="math inline">\([\![2]\!] = 2\)</span>, e finalmente <span class="math inline">\([\![(3 + 5) * 2]\!] = [\![3 + 5]\!] \times [\![2]\!] = 16\)</span>.</p>
+<p>Além disso, existe uma vantagem inestimável: a modularidade. Podemos adicionar novos operadores sem reescrever toda a semântica. Por exemplo, se quisermos adicionar divisão, podemos fazer isso facilmente:</p>
+<p><span class="math display">\[[\![e_1 / e_2]\!]_{aexp}\sigma = [\![e_1]\!]_{aexp}\sigma \div [\![e_2]\!]_{aexp}\sigma\]</span></p>
+</section>
+<section id="decisão-5-semântica-completa-de-expressões" class="level3" data-number="11.1.5">
+<h3 data-number="11.1.5" class="anchored" data-anchor-id="decisão-5-semântica-completa-de-expressões"><span class="header-section-number">11.1.5</span> Decisão 5: Semântica Completa de Expressões</h3>
+<p>Com os fundamentos estabelecidos, podemos agora definir formalmente o significado completo de todas as expressões em IMP. Para expressões aritméticas, começamos com os casos base. Numerais mapeiam diretamente para seus valores matemáticos: <span class="math inline">\([\![n]\!]_{aexp}\sigma = valor(n)\)</span>, onde <span class="math inline">\(valor : \text{Numeral} \rightarrow \mathbb{Z}\)</span> converte a representação sintática em valor matemático. Variáveis obtêm seus valores consultando o estado atual: <span class="math inline">\([\![x]\!]_{aexp}\sigma = \sigma(x)\)</span>.</p>
+<p>As operações binárias seguem o princípio da composicionalidade. A subtração é definida como <span class="math inline">\([\![e_1 - e_2]\!]_{aexp}\sigma = [\![e_1]\!]_{aexp}\sigma - [\![e_2]\!]_{aexp}\sigma\)</span>, e a multiplicação como <span class="math inline">\([\![e_1 * e_2]\!]_{aexp}\sigma = [\![e_1]\!]_{aexp}\sigma \times [\![e_2]\!]_{aexp}\sigma\)</span>. Uma propriedade fundamental das expressões aritméticas é que elas são puras, não modificam o estado. Isso garante que <span class="math inline">\([\![e]\!]_{aexp}\sigma = [\![e]\!]_{aexp}\sigma\)</span>, uma igualdade que parece trivial mas tem implicações profundas para otimização.</p>
+<p>Para expressões booleanas, as constantes são diretas: <span class="math inline">\([\![\text{true}]\!]_{bexp}\sigma = \text{true}\)</span> e <span class="math inline">\([\![\text{false}]\!]_{bexp}\sigma = \text{false}\)</span>. As comparações avaliam primeiro suas subexpressões aritméticas: <span class="math inline">\([\![e_1 = e_2]\!]_{bexp}\sigma\)</span> é true se e somente se <span class="math inline">\([\![e_1]\!]_{aexp}\sigma = [\![e_2]\!]_{aexp}\sigma\)</span>. Similarmente, <span class="math inline">\([\![e_1 \leq e_2]\!]_{bexp}\sigma\)</span> é true se e somente se <span class="math inline">\([\![e_1]\!]_{aexp}\sigma \leq [\![e_2]\!]_{aexp}\sigma\)</span>.</p>
+<p>Os operadores lógicos seguem a semântica padrão da lógica booleana: <span class="math inline">\([\![\neg b]\!]_{bexp}\sigma = \neg([\![b]\!]_{bexp}\sigma)\)</span>, <span class="math inline">\([\![b_1 \land b_2]\!]_{bexp}\sigma = [\![b_1]\!]_{bexp}\sigma \land [\![b_2]\!]_{bexp}\sigma\)</span>, e <span class="math inline">\([\![b_1 \lor b_2]\!]_{bexp}\sigma = [\![b_1]\!]_{bexp}\sigma \lor [\![b_2]\!]_{bexp}\sigma\)</span>. Assim como expressões aritméticas, expressões booleanas são puras, avaliam um valor sem modificar o estado.</p>
+</section>
+<section id="decisão-6-tratamento-do-comando-skip" class="level3" data-number="11.1.6">
+<h3 data-number="11.1.6" class="anchored" data-anchor-id="decisão-6-tratamento-do-comando-skip"><span class="header-section-number">11.1.6</span> Decisão 6: Tratamento do Comando Skip</h3>
+<p>O comando <code>skip</code> é um comando especial que não faz nada. Sua inclusão na linguagem pode parecer trivial, mas tem implicações semânticas importantes. Vamos definir sua semântica:</p>
+<p><span class="math display">\[[\![\text{skip}]\!]_{cmd}\sigma = \sigma\]</span></p>
+<p>O <code>skip</code> funciona como o elemento neutro da composição sequencial. Para que a semântica seja uma estrutura algébrica completa, precisamos de elementos identidade. Para nossa linguagem <strong>IMP</strong>, <code>skip</code> será esse elemento. Isso significa que para qualquer comando <span class="math inline">\(S\)</span>, teremos:</p>
+<p><span class="math display">\[[\![S ; \text{skip}]\!]_{cmd}\sigma = [\![\text{skip}]\!]_{cmd}([\![S]\!]_{cmd}\sigma) = [\![S]\!]_{cmd}\sigma\]</span></p>
+<p>O funcionamento do <code>skip</code> é análogo a como o <span class="math inline">\(0\)</span> é a identidade da adição: <span class="math inline">\(x + 0 = x\)</span>. Ao transformar ou otimizar código, <code>skip</code> serve como <em>placeholder</em>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Antes da otimização</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> then y <span class="op">:=</span> <span class="dv">5</span> <span class="cf">else</span> skip</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Depois de alguma transformação que remove o ramo then</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> then skip <span class="cf">else</span> skip</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Finalmente otimizado para</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>skip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Podemos usar o <code>skip</code> para simplificar a semântica de condicionais e decisões, garantindo que sempre haja um comando em cada ramo. Isso evita a necessidade de tratar casos especiais, como em:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> error then </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    print<span class="op">(</span><span class="st">"Erro encontrado"</span><span class="op">)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    skip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="decisão-7-sequência-como-composição-de-funções" class="level3" data-number="11.1.7">
+<h3 data-number="11.1.7" class="anchored" data-anchor-id="decisão-7-sequência-como-composição-de-funções"><span class="header-section-number">11.1.7</span> Decisão 7: Sequência como Composição de Funções</h3>
+<p>Para dar significado a uma sequência de comandos, como <code>S₁; S₂</code>, precisamos de uma forma que capture rigorosamente a noção de que um comando é executado após o outro. A abordagem escolhida para este caso será definir a semântica da sequência como sendo uma <strong>composição de funções</strong>. A curiosa leitora verá que esta decisão, embora pareça abstrata, é uma das mais elegantes e poderosas que podemos tomar. Formalmente, definiremos a semântica da sequência da seguinte maneira:</p>
+<p><span class="math display">\[[\![S_1 ; S_2]\!]_{cmd}\sigma = [\![S_2]\!]_{cmd}([\![S_1]\!]_{cmd}\sigma)\]</span></p>
+<p>A atenta leitora pode, inicialmente, achar a notação um pouco contra-intuitiva, já que <code>S₂</code> aparece antes de <code>S₁</code> na fórmula. No entanto, esta é a notação padrão para a composição de funções, <span class="math inline">\(g(f(x))\)</span>, em que a função mais interna, <span class="math inline">\(f(x)\)</span>, é aplicada primeiro. A interpretação é direta e alinhada com nossa intuição sobre a execução de programas: primeiro, executamos o comando <code>S₁</code> no estado atual <code>σ</code>, o que produz um novo estado intermediário. Em seguida, pegamos este novo estado e o usamos como entrada para a execução do comando <code>S₂</code>, produzindo o estado final.</p>
+<p>Vamos detalhar isso com um exemplo prático para que não reste nenhuma dúvida. Considere a sequência de comandos <code>x := 5; y := x + 3</code>, partindo de um estado inicial <span class="math inline">\(\sigma_0\)</span> em que <code>x</code> e <code>y</code> valem <code>0</code>. A aplicação da nossa regra semântica se desdobra da seguinte forma: a função semântica para toda a sequência, <span class="math inline">\([\![\text{x := 5; y := x + 3}]\!]_{cmd}\)</span>, aplicada ao estado inicial <span class="math inline">\(\sigma_0\)</span>, é equivalente a aplicar a função de <code>y := x + 3</code> ao resultado da aplicação da função de <code>x := 5</code> a <span class="math inline">\(\sigma_0\)</span>. O primeiro passo, <span class="math inline">\([\![\text{x := 5}]\!]_{cmd}\sigma_0\)</span>, transforma o estado inicial em um novo estado <span class="math inline">\(\{x \mapsto 5, y \mapsto 0\}\)</span>. Este novo estado é, então, usado como argumento para a segunda função, <span class="math inline">\([\![\text{y := x + 3}]\!]_{cmd}\)</span>, que lê o valor de <code>x</code> como <code>5</code>, calcula a soma <code>5 + 3</code>, e produz o estado final <span class="math inline">\(\{x \mapsto 5, y \mapsto 8\}\)</span>.</p>
+<p>Uma das grandes vantagens desta abordagem funcional é que a composição de funções é <strong>associativa</strong>. Isso significa que a semântica de <code>(S₁; S₂) ; S₃</code> é idêntica à de <code>S₁; (S₂; S₃)</code>. Essa propriedade matemática garante que não precisamos nos preocupar com parênteses em longas sequências de comandos, o que reflete perfeitamente como escrevemos e entendemos código imperativo. Embora pudéssemos ter optado por uma abordagem alternativa, como representar a sequência de comandos como uma lista e iterar sobre ela, a escolha pela composição binária é matematicamente mais elegante e robusta. Ela facilita enormemente a realização de provas formais sobre programas, especialmente aquelas que utilizam o método de indução matemática sobre a estrutura dos comandos.</p>
+</section>
+<section id="decisão-8-semântica-da-atribuição" class="level3" data-number="11.1.8">
+<h3 data-number="11.1.8" class="anchored" data-anchor-id="decisão-8-semântica-da-atribuição"><span class="header-section-number">11.1.8</span> Decisão 8: Semântica da Atribuição</h3>
+<p>A atribuição é o comando mais fundamental que modifica o estado do programa. Sua semântica captura a essência da computação imperativa:</p>
+<p><span class="math display">\[[\![x := e]\!]_{cmd}\sigma = \sigma[x \mapsto [\![e]\!]_{aexp}\sigma]\]</span></p>
+<p>A sagaz leitora perceberá que esta definição expressa precisamente o processo de atribuição: primeiro, avalia-se a expressão <span class="math inline">\(e\)</span> no estado atual <span class="math inline">\(\sigma\)</span>, obtendo um valor; em seguida, o estado é atualizado para mapear a variável <span class="math inline">\(x\)</span> para este valor, mantendo todas as outras variáveis inalteradas.</p>
+<p>Considere um exemplo com estado explícito. Para o comando <code>x := y + 1</code> executado em um estado <span class="math inline">\(\sigma = \{x \mapsto 3, y \mapsto 5\}\)</span>, primeiro avaliamos a expressão do lado direito: <span class="math inline">\([\![\text{y + 1}]\!]_{aexp}\sigma = \sigma(y) + 1 = 5 + 1 = 6\)</span>. O estado resultante será <span class="math inline">\(\sigma' = \sigma[x \mapsto 6] = \{x \mapsto 6, y \mapsto 5\}\)</span>, observe que o valor de <code>y</code> permanece inalterado.</p>
+<p>Uma propriedade importante da atribuição é o comportamento de sobreposição em atribuições sucessivas à mesma variável. Para a sequência <code>x := e₁ ; x := e₂</code>, temos:</p>
+<p><span class="math display">\[[\![x := e_1 ; x := e_2]\!]_{cmd}\sigma = \sigma[x \mapsto [\![e_2]\!]_{aexp}(\sigma[x \mapsto [\![e_1]\!]_{aexp}\sigma])]\]</span></p>
+<p>Agora, se a expressão <span class="math inline">\(e_2\)</span> não faz referência a <span class="math inline">\(x\)</span>, então o valor calculado em <span class="math inline">\(e_1\)</span> é irrelevante para o resultado final, e podemos simplificar para:</p>
+<p><span class="math display">\[[\![x := e_1 ; x := e_2]\!]_{cmd}\sigma = \sigma[x \mapsto [\![e_2]\!]_{aexp}\sigma]\]</span></p>
+<p>Esta observação justifica matematicamente a eliminação de atribuições mortas, uma otimização comum em compiladores.</p>
+</section>
+<section id="decisão-9-semântica-do-condicional" class="level3" data-number="11.1.9">
+<h3 data-number="11.1.9" class="anchored" data-anchor-id="decisão-9-semântica-do-condicional"><span class="header-section-number">11.1.9</span> Decisão 9: Semântica do Condicional</h3>
+<p>O condicional realiza seleção de controle baseada em uma expressão booleana. Sua semântica é definida por casos:</p>
+<p><span class="math display">\[[\![\text{if } b \text{ then } S_1 \text{ else } S_2]\!]_{cmd}\sigma = \begin{cases} [\![S_1]\!]_{cmd}\sigma &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{true} \\ [\![S_2]\!]_{cmd}\sigma &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{false} \\ \perp &amp; \text{se } [\![b]\!]_{bexp}\sigma = \perp \end{cases}\]</span></p>
+<p>A interpretação é natural: avalia-se primeiro a condição <span class="math inline">\(b\)</span> no estado atual; se o resultado for verdadeiro, executa-se <span class="math inline">\(S_1\)</span>; se for falso, executa-se <span class="math inline">\(S_2\)</span>; se a avaliação da condição resulta em erro (representado por <span class="math inline">\(\perp\)</span>), o resultado de todo o condicional é indefinido.</p>
+<p>Vejamos um exemplo concreto. Para o comando <code>if x &gt; 0 then y := 1 else y := -1</code> executado em um estado <span class="math inline">\(\sigma = \{x \mapsto 5, y \mapsto 0\}\)</span>, primeiro avaliamos a condição: <span class="math inline">\([\![\text{x &gt; 0}]\!]_{bexp}\sigma = (5 &gt; 0) = \text{true}\)</span>. Como a condição é verdadeira, executamos o ramo then: <span class="math inline">\([\![\text{y := 1}]\!]_{cmd}\sigma = \{x \mapsto 5, y \mapsto 1\}\)</span>.</p>
+<p>Em muitos programas, um dos ramos do condicional pode ser simplesmente <code>skip</code>. Neste caso, a semântica se simplifica para:</p>
+<p><span class="math display">\[[\![\text{if } b \text{ then } S \text{ else skip}]\!]_{cmd}\sigma = \begin{cases} [\![S]\!]_{cmd}\sigma &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{true} \\ \sigma &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{false} \end{cases}\]</span></p>
+<p>Esta definição captura precisamente a semântica de seleção condicional. O tratamento explícito do caso de erro (<span class="math inline">\(\perp\)</span>) na definição geral garante que programas com condições malformadas sejam adequadamente rejeitados.</p>
+</section>
+<section id="decisão-10-valores-vs.-efeitos-colaterais" class="level3" data-number="11.1.10">
+<h3 data-number="11.1.10" class="anchored" data-anchor-id="decisão-10-valores-vs.-efeitos-colaterais"><span class="header-section-number">11.1.10</span> Decisão 10: Valores vs.&nbsp;Efeitos Colaterais</h3>
+<p>Na arquitetura semântica da linguagem <strong>IMP</strong>, estabelecemos uma distinção fundamental e intransigente: <strong>expressões</strong> produzem valores, enquanto <strong>comandos</strong> produzem efeitos colaterais. Uma expressão aritmética ou booleana em <strong>IMP</strong> é “pura”; sua avaliação calcula um resultado, seja um número ou um valor de verdade, mas jamais altera o estado do programa. Em contrapartida, um comando modifica o estado, alterando o valor de variáveis, mas não produz um valor que possa ser usado em outro cálculo.</p>
+<p>A sagaz leitora perceberá que esta decisão de projeto simplifica enormemente o raciocínio sobre o comportamento dos programas. Como as expressões são livres de efeitos colaterais, a igualdade <span class="math inline">\([\![\text{x + y}]\!]_{aexp}\sigma = [\![\text{x + y}]\!]_{aexp}\sigma\)</span> é sempre verdadeira. O valor de <code>x + y</code> depende unicamente do estado atual, e sua avaliação não o modifica. Isso tem implicações diretas e poderosas para a otimização de código. Se uma mesma expressão, como <code>(x + y)</code>, aparece múltiplas vezes em um trecho de código, o compilador pode, com total segurança, calculá-la uma única vez, armazenar o resultado em uma variável temporária e reutilizá-lo. Essa otimização, conhecida como eliminação de subexpressão comum, só é segura porque a pureza das expressões garante que o valor de <code>x</code> e <code>y</code> não mudará entre as avaliações.</p>
+<p>Para contrastar, considere a complexidade introduzida por linguagens como C, que rejeitaram esta separação. Em C, uma expressão como <code>(x++) + (x++)</code> não apenas calcula um valor, mas também modifica a variável <code>x</code> como um efeito colateral. O resultado desta expressão é, de fato, indefinido pela especificação da linguagem, pois não fica claro qual dos incrementos ocorre primeiro. Ao proibir efeitos colaterais em expressões, <strong>IMP</strong> evita completamente essa classe de ambiguidades perigosas, optando por um modelo mais simples e previsível. A alternativa de permitir expressões com efeitos colaterais, embora possa oferecer uma notação mais concisa em alguns casos, introduz uma complexidade significativa, exigindo regras intrincadas sobre ordem de avaliação e “pontos de sequência”, tornando o raciocínio sobre o código e a implementação de otimizações uma tarefa muito mais árdua.</p>
+</section>
+<section id="decisão-11-semântica-de-loops-via-pontos-fixos" class="level3" data-number="11.1.11">
+<h3 data-number="11.1.11" class="anchored" data-anchor-id="decisão-11-semântica-de-loops-via-pontos-fixos"><span class="header-section-number">11.1.11</span> Decisão 11: Semântica de Loops via Pontos Fixos</h3>
+<p>O tratamento de laços de repetição, como o comando <code>while</code>, representa o desafio mais profundo na definição da semântica de uma linguagem imperativa. O problema fundamental reside na possibilidade de não-terminação. Um laço como <code>while true do skip</code> nunca para de executar, e nossa semântica precisa de uma maneira formal e rigorosa para capturar esse comportamento infinito. Uma abordagem recursiva simples, que funcionou para outras estruturas, falhará aqui, pois a definição do significado de um laço parece depender de si mesma, levando a uma regressão infinita.</p>
+<p>A solução para este impasse é uma das ideias mais elegantes da ciência da computação: definir o significado do comando <code>while</code> como o <strong>menor ponto fixo</strong> de uma função de ordem superior. Em vez de definir o significado diretamente, definimos uma função transformadora, que chamaremos de <span class="math inline">\(F\)</span>. Esta função <span class="math inline">\(F\)</span> recebe como entrada uma função candidata a ser o significado do laço, <span class="math inline">\(f\)</span>, e produz uma nova função que representa uma aproximação melhor desse significado. A definição de <span class="math inline">\(F\)</span> captura a lógica de uma única iteração do laço:</p>
+<p><span class="math display">\[F(f) = \lambda\sigma. \begin{cases} f([\![S]\!]_{cmd}\sigma) &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{true} \\ \sigma &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{false} \end{cases}\]</span></p>
+<p>Esta fórmula expressa que, para um estado <span class="math inline">\(\sigma\)</span>, se a condição <span class="math inline">\(b\)</span> for falsa, o laço termina e o estado não se altera. Se a condição for verdadeira, o corpo do laço <span class="math inline">\(S\)</span> é executado, produzindo um novo estado, e então aplicamos a função <span class="math inline">\(f\)</span> a este novo estado para continuar a execução. O significado do comando <code>while b do S</code> é, então, a função que não é alterada quando aplicada a <span class="math inline">\(F\)</span>, ou seja, o ponto fixo de <span class="math inline">\(F\)</span>, denotado por <span class="math inline">\(\text{fix}(F)\)</span>.</p>
+<p>A razão pela qual os pontos fixos são a ferramenta correta é que eles nos permitem construir o significado do laço de forma iterativa, começando do nada. Iniciamos com a função <span class="math inline">\(\bot\)</span>, que representa a indefinição total, o “não sei nada”. A primeira aproximação, <span class="math inline">\(F^1(\bot)\)</span>, nos dá o significado de laços que executam no máximo uma vez. A segunda, <span class="math inline">\(F^2(\bot)\)</span>, captura laços que executam no máximo duas vezes, e assim por diante. O limite desta cadeia de aproximações, <span class="math inline">\(\bigcup_{n=0}^{\infty} F^n(\bot)\)</span>, é o menor ponto fixo e representa o significado completo e exato do laço para todos os casos que terminam. Crucialmente, se para um determinado estado inicial o laço nunca termina, o resultado da aplicação desta função limite será <span class="math inline">\(\perp\)</span>, o que captura formalmente a não-terminação.</p>
+<p>Qualquer outra alternativa apresenta limitações. Descrever o laço com uma definição operacional simples como <em>execute o corpo enquanto a condição for verdadeira</em> é informal e não lida com a não-terminação de maneira matemática. Tentar contar o número de iterações nos prenderia a detalhes de implementação, e simplesmente ignorar a não-terminação seria assumir que todos os programas terminam, o que é factualmente incorreto e impediria a análise de uma vasta classe de programas, como servidores e sistemas operacionais, que são projetados para rodar indefinidamente. A abordagem de pontos fixos, portanto, não é apenas uma escolha técnica, mas uma necessidade fundamental para uma semântica precisa e completa.</p>
+</section>
+<section id="decisão-12-separação-entre-sintaxe-e-semântica" class="level3" data-number="11.1.12">
+<h3 data-number="11.1.12" class="anchored" data-anchor-id="decisão-12-separação-entre-sintaxe-e-semântica"><span class="header-section-number">11.1.12</span> Decisão 12: Separação Entre Sintaxe e Semântica</h3>
+<p>Uma decisão de projeto fundamental, que permeia toda a nossa discussão, é a rigorosa <strong>separação em camadas</strong> entre a sintaxe e a semântica. De um lado, definimos a <strong>sintaxe</strong> da linguagem <strong>IMP</strong>, a forma dos programas que podem ser escritos, através de uma gramática formal em EBNF. Do outro, definimos a <strong>semântica</strong>, o que esses programas significam, utilizando um arcabouço completamente distinto: o de funções matemáticas. Essas duas camadas são deliberadamente independentes, conectadas apenas pela função de interpretação <span class="math inline">\([\![\cdot]\!]\)</span> que mapeia uma na outra.</p>
+<p>Esta separação não é um mero capricho acadêmico; ela oferece vantagens profundas para o projeto e a implementação de linguagens e compiladores. A mais importante delas é a flexibilidade para atribuir <strong>múltiplas semânticas</strong> a uma única sintaxe. O que fizemos até agora foi definir a semântica denotacional, que é ideal para análise e otimização. No entanto, poderíamos, com a mesma facilidade, definir uma semântica operacional para a mesma sintaxe, descrevendo como um programa executa passo a passo, o que seria mais útil para construir um interpretador. Ou ainda, uma semântica axiomática, focada em provar propriedades do programa. A sintaxe permanece estável, servindo como uma fundação sobre a qual diferentes interpretações de significado podem ser construídas.</p>
+<p>Além disso, esta separação é o que torna as otimizações de compiladores possíveis e seguras. Duas sequências de código podem ser sintaticamente muito diferentes, mas se pudermos provar que suas semânticas são equivalentes, o compilador tem a liberdade de substituir uma pela outra. Por exemplo, o código <code>x := 5; x := 5; y := 10</code> é sintaticamente mais longo que <code>x := 5; y := 10</code>, mas, em muitos contextos, seus significados denotacionais são idênticos, justificando a eliminação da atribuição redundante. Por fim, a abstração semântica nos liberta dos detalhes de implementação. Nossa definição de significado não faz menção a como os números são representados em bits, como as variáveis são alocadas na memória ou qual a ordem de avaliação de subexpressões. Esses são problemas para a fase de geração de código, e a separação garante que possamos raciocinar sobre o significado do programa em um nível muito mais alto e limpo.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-semantico.html" class="pagination-link" aria-label="Analisadores Semânticos: a determinação do significado">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-tabelaSimbolos.html" class="pagination-link" aria-label="Tabela de Símbolos em Compiladores Modernos">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10a-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./fase1.html" rel="next">
+<link href="./10-semantico.html" rel="next">
 <link href="./07-parserLR1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -252,7 +252,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Analisadores Semânticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -260,14 +260,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +304,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -368,7 +397,7 @@ window.Quarto = {
 <li><strong><span class="math inline">\(R\)</span></strong>: <em>Rightmost derivation in reverse</em> (derivação mais à direita em ordem reversa);</li>
 <li><strong><span class="math inline">\(1\)</span></strong>: número de símbolos de <em>lookahead</em>.</li>
 </ul>
-<p>A genialidade do <span class="math inline">\(SLR(1)\)</span> está em sua observação fundamental: ao invés de propagar <em>lookaheads</em> específicos através dos itens, como faz o <span class="math inline">\(LR(1)\)</span>, podemos usar uma informação global sobre em que posição os não-terminais podem aparecer, os conjuntos <span class="math inline">\(FOLLOW\)</span>.</p>
+<p>A genialidade do <span class="math inline">\(SLR(1)\)</span> está em sua observação fundamental: ao invés de propagar <em>lookaheads</em> específicos por meio dos itens, como faz o <span class="math inline">\(LR(1)\)</span>, podemos usar uma informação global sobre em que posição os não-terminais podem aparecer, os conjuntos <span class="math inline">\(FOLLOW\)</span>.</p>
 <section id="a-simplificação-fundamental-de-itens-lr1-para-itens-lr0" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="a-simplificação-fundamental-de-itens-lr1-para-itens-lr0"><span class="header-section-number">9.1</span> A Simplificação Fundamental: de Itens <span class="math inline">\(LR(1)\)</span> para Itens <span class="math inline">\(LR(0)\)</span></h2>
 <p>A diferença mais importante entre <span class="math inline">\(SLR(1)\)</span> e <span class="math inline">\(LR(1)\)</span> está na estrutura dos itens. Enquanto o <span class="math inline">\(LR(1)\)</span> usa itens da forma <span class="math inline">\([A \rightarrow \alpha \bullet \beta, a]\)</span> com <em>lookahead</em> específico, o <span class="math inline">\(SLR(1)\)</span> trabalha com <strong>itens <span class="math inline">\(LR(0)\)</span></strong> mais simples: <span class="math inline">\([A \rightarrow \alpha \bullet \beta]\)</span>, sem <em>lookahead</em> embutido.</p>
@@ -1991,8 +2020,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10-semantico.html" class="pagination-link" aria-label="Analisadores Semânticos: a determinação do significado">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

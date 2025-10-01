@@ -219,7 +219,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Analisadores Semânticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -227,14 +227,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -242,13 +271,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -308,22 +337,32 @@ window.Quarto = {
 
 <section id="disciplina-de-linguagens-formais" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Disciplina de Linguagens Formais</h1>
-<p>Este é o material de suporte para a disciplina de Linguagens Formais, que abrange conceitos fundamentais de teoria da computação, autômatos, gramáticas e linguagens formais. O curso é dividido em várias partes, cada uma focando em aspectos específicos do tema.</p>
+<p>Este é o material de suporte para a disciplina de Linguagens Formais, que abrange conceitos fundamentais de teoria da computação, autômatos, gramáticas e linguagens formais.</p>
 <p>Além deste texto o aluno deve consultar os livros e artigos recomendados no plano de ensino da disciplina listados a seguir:</p>
 <p><strong>Bibliografia Básica</strong>:</p>
-<ul>
-<li>MEIRA, Silvio Romero de Lemos. <strong>Introdução à programação funcional</strong>. Campinas: Ed. da UNICAMP, 1988. 290 p.;</li>
-<li>CASANOVA, M.A.; GIORNO, F.A.; FURTADO, A.L..: <strong>Programação em Lógica e a Linguagem Prolog</strong>. São Paulo: Edard Blücher,1987. 461 p.;</li>
-<li>SEBESTA, Robert W. <strong>Conceitos de linguagens de programação</strong>. 4. ed.&nbsp;Porto Alegre: Bookman, 2000.</li>
-</ul>
+<ol type="1">
+<li>AHO, A. V. et al.&nbsp;<strong>Compiladores: princípios, técnicas e ferramentas</strong>. 2º. ed.&nbsp;Boston, MA, USA: Pearson Education Inc., 2007.</li>
+<li>SANTOS, Pedro Reis; LANGLOIS, Thibault. <strong>Compiladores da Teoria à Prática</strong>. Rio de Janeiro: Ltc, 2018.</li>
+<li>LOUDEN, Kenneth C.. <strong>Compiladores: princípios e práticas</strong>. São Paulo: Cenage Learning, 2004.</li>
+<li>JOSÉ NETO, João. <strong>Introdução à compilação</strong>. 2. ed.&nbsp;Rio de Janeiro: Elsevier, 2016.</li>
+<li>HOPCROFT, J.E.; MOTWANI, R.; ULLMAN, J.D. Introdução à teoria de autômatos, linguagens e computação. Ed. Campus, 2002.</li>
+<li>LOUDEN, K. C.; <strong>Compiladores Princípios e práticas</strong>. Editora Thompson, 2004.</li>
+</ol>
 <p><strong>Bibliografia Complementar</strong>:</p>
-<ul>
-<li>THOMPSON, Simon. <strong>Haskell: the craft of functional programming</strong>. Harlow: Addison-Wesley, 1996. 500 p.&nbsp;Prentice-Hall;</li>
-<li>RUSSELL, Stuart J., NORVIG, Peter. <strong>Inteligência artificial</strong>. Rio de Janeiro, Elsevier, 2013;</li>
-<li>COPPIN, Bem. <strong>Inteligência Artificial</strong>. Rio de Janeiro, LTC, 2010;</li>
-<li>SCHWICHTENBERG, Helmut;, Marktoberdorf, Alemanhan. <strong>Berlin</strong>: UFRJ, c1995. 470 p.;</li>
-<li>ARAÚJO, Stenio Longo; ACIÓLY, Benedito Melo. <strong>Introdução ao Haskell</strong>. Vitória da Conquista: Edições UESB, 2008. 86 p..</li>
-</ul>
+<ol type="1">
+<li>LEWIS, R. L., PAPADIMITRIOU C. H.; <strong>Elementos de Teoria da Computação</strong>, 2a Edição. Editora Bookman, 2000.</li>
+<li>KOZEN, D. C.; <strong>Automata and Computability</strong>. Editora Springer, 1997.</li>
+<li>DIVERIO, T. A.; <strong>Teoria da Computação</strong>, 2a Edição. Editora Sagra Luzzatto, 2004.</li>
+<li>NETO, J. J.; <strong>Introdução à Compilação</strong>. Editora LTC, 1987.</li>
+<li>SETZER, V. W.; <strong>A construção de um compilador</strong>, 2a Edição. Editora Campus, 1985.</li>
+<li>SETHI, R.; <strong>Programming Languages Concepts &amp; Constructs</strong>, 2a Edição. Editora Addison Wesley, 1997.</li>
+<li>PRICE, A. M., TOSCANI S. S.; <strong>Implementação de Linguagens de Programação: Compiladores</strong>, 3a Edição. Editora Bookman, 2008.</li>
+</ol>
+<p><strong>Bibliografia de Apoio</strong>:</p>
+<ol type="1">
+<li>DIJKSTRA, E. W. <strong>A Case against the GO TO Statement</strong>. Commun. ACM , v. 3, n.&nbsp;1, p.&nbsp;147-148, Mar.&nbsp;1968.</li>
+<li>ALCANTARA, FRANK COELHO DE. <strong>Compiladores e Interpretadores</strong>. 1. ed.&nbsp;Curitiba: IESDE BRASIL S.A., 2022. v. 1. 170p</li>
+</ol>
 
 
 </section>

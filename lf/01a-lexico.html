@@ -252,7 +252,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Analisadores Semânticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -260,14 +260,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +304,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -625,9 +654,9 @@ Tip
 <h5 data-number="3.3.3.1.1" class="anchored" data-anchor-id="exemplos-de-união"><span class="header-section-number">3.3.3.1.1</span> Exemplos de União</h5>
 <p><strong>Exemplo 1</strong>: Linguagens de <em>tokens</em> Simples</p>
 <ul>
-<li><span class="math inline">\(L_{\text{num}} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}\)</span> (dígitos);</li>
+<li><span class="math inline">\(L_{\text{em um}} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9\}\)</span> (dígitos);</li>
 <li><span class="math inline">\(L_{\text{op}} = \{+, -, *, /\}\)</span> (operadores);</li>
-<li><span class="math inline">\(L_{\text{token}} = L_{\text{num}} \cup L_{\text{op}} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, /\}\)</span>.</li>
+<li><span class="math inline">\(L_{\text{token}} = L_{\text{em um}} \cup L_{\text{op}} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, +, -, *, /\}\)</span>.</li>
 </ul>
 <p>Esta união modela os <em>tokens</em> básicos de uma calculadora simples.</p>
 <p><strong>Exemplo 2</strong>: Linguagens de Comprimentos Específicos</p>
@@ -1321,7 +1350,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 </div>
 <div class="callout-body-container callout-body">
 <p>A leitora atenta deve notar que as expressões regulares definidas formalmente neste capítulo, baseadas apenas em união, concatenação e Fechamento de Kleene, são o alicerce matemático da teoria. No entanto, as ferramentas que usamos no dia a dia, conhecidas como <strong>regex engines</strong>, são equipadas com funções que vão além dessa definição.</p>
-<p>Esses <em>engines</em>, como o <strong>PCRE</strong> (<strong>P</strong>erl <strong>C</strong>ompatible <strong>R</strong>egular <strong>E</strong>xpressions), que influencia as implementações em linguagens como Python, PHP e JavaScript, estendem a notação formal com recursos para maior conveniência e poder expressivo. Os mais notáveis são:</p>
+<p>Esses <em>engines</em>, como o <strong>PCRE</strong> (<strong>P</strong>erl <strong>C</strong>ompatible <strong>R</strong>egular <strong>E</strong>xpressions), que influencia as implementações em linguagens como Python, PHP e <strong>Java</strong>Script, estendem a notação formal com recursos para maior conveniência e poder expressivo. Os mais notáveis são:</p>
 <ol type="a">
 <li><p><strong><code>Lookarounds</code> (<code>lookaheads</code> e <code>lookbehinds</code>)</strong>: Permitem verificar a existência de um padrão antes (<code>lookbehind</code>) ou depois (<code>lookahead</code>) da posição atual, <strong>sem consumir</strong> os caracteres verificados (ou seja, sem incluí-los no resultado da captura). Um exemplo clássico é a expressão <code>q(?=u)</code>, que encontra a letra <code>q</code> apenas se ela for imediatamente seguida pela letra <code>u</code>, mas sem incluir o <code>u</code> no resultado.</p></li>
 <li><p><strong><code>Backreferences</code> (Retrovisores)</strong>: Permitem referenciar um grupo que foi previamente capturado dentro da mesma expressão. Por exemplo, a expressão <code>(\w)\1</code> encontra qualquer caractere alfanumérico (<code>\w</code>) que é seguido imediatamente por ele mesmo. É com esta capacidade que um motor de regex pode reconhecer a linguagem não-regular <span class="math inline">\(L = \{ww \mid w \in \{a,b\}^*\}\)</span>.</p></li>
@@ -1617,29 +1646,29 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <li>A expressão completa para o DDD é a união dos dois formatos:</li>
 </ol>
 <p><span class="math display">\[r_{ddd} = (\( D_{nz} D \) (\epsilon \cup \text{ })) \cup (D_{nz} D (\epsilon \cup \text{ }))\]</span></p></li>
-<li><p><strong>Componente Número (<span class="math inline">\(r_{num}\)</span>)</strong>:</p>
+<li><p><strong>Componente Número (<span class="math inline">\(r_{em um}\)</span>)</strong>:</p>
 <ol type="a">
 <li>O número pode ser de celular (9 dígitos começando com 9) ou fixo (8 dígitos começando com 2-8). Ambos podem ter um hífen opcional;</li>
 <li>Expressão para celular: <span class="math inline">\(9 D^4 (\epsilon \cup -) D^4\)</span>;</li>
 <li>Expressão para fixo: <span class="math inline">\(D_{fixo} D^3 (\epsilon \cup -) D^4\)</span>;</li>
 <li>A expressão completa para o número é a união dos dois tipos.</li>
 </ol>
-<p><span class="math display">\[r_{num} = (9 D^4 (\epsilon \cup -) D^4) \cup (D_{fixo} D^3 (\epsilon \cup -) D^4)\]</span></p></li>
+<p><span class="math display">\[r_{em um} = (9 D^4 (\epsilon \cup -) D^4) \cup (D_{fixo} D^3 (\epsilon \cup -) D^4)\]</span></p></li>
 </ol>
 <p><strong>Solução Letra b</strong>:</p>
 <p>A expressão regular final <span class="math inline">\(r_{tel}\)</span> é a concatenação do componente DDD com o componente Número.</p>
 <ol type="1">
-<li><p><strong>Expressão Final</strong>: <span class="math display">\[r_{tel} = r_{ddd} \cdot r_{num}\]</span></p></li>
+<li><p><strong>Expressão Final</strong>: <span class="math display">\[r_{tel} = r_{ddd} \cdot r_{em um}\]</span></p></li>
 <li><p><strong>Substituindo as definições da letra (a)</strong>:</p>
 <p><span class="math display">\[r_{tel} = [(\( D_{nz} D \) (\epsilon \cup \text{ })) \cup (D_{nz} D (\epsilon \cup \text{ }))] \cdot [(9 D^4 (\epsilon \cup -) D^4) \cup (D_{fixo} D^3 (\epsilon \cup -) D^4)]\]</span></p></li>
 </ol>
 <p><strong>Solução Letra c</strong>:</p>
 <p>Vamos demonstrar que a <em>string</em> <span class="math inline">\(w = (11) 99999-9999\)</span> pertence a <span class="math inline">\(L(r_{tel})\)</span>.</p>
 <ol type="1">
-<li><strong>Divisão da String</strong>: Podemos dividir <span class="math inline">\(w\)</span> em duas partes, <span class="math inline">\(w_{ddd}\)</span> e <span class="math inline">\(w_{num}\)</span>, onde:
+<li><strong>Divisão da String</strong>: Podemos dividir <span class="math inline">\(w\)</span> em duas partes, <span class="math inline">\(w_{ddd}\)</span> e <span class="math inline">\(w_{em um}\)</span>, onde:
 <ul>
 <li><span class="math inline">\(w_{ddd} = (11)\text{ }\)</span> (inclui o espaço);</li>
-<li><span class="math inline">\(w_{num} = 99999-9999\)</span>;</li>
+<li><span class="math inline">\(w_{em um} = 99999-9999\)</span>;</li>
 </ul></li>
 <li><strong>Verificação do Componente DDD</strong>: A substring <span class="math inline">\(w_{ddd}\)</span> deve pertencer a <span class="math inline">\(L(r_{ddd})\)</span>. Ela corresponde ao primeiro termo da união em <span class="math inline">\(r_{ddd}\)</span>:
 <ul>
@@ -1651,16 +1680,16 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <li>O espaço pertence a <span class="math inline">\(L(\epsilon \cup \text{ })\)</span>;</li>
 <li>Portanto, <span class="math inline">\(w_{ddd} \in L(r_{ddd})\)</span>. Ok!</li>
 </ul></li>
-<li><strong>Verificação do Componente Número</strong>: A substring <span class="math inline">\(w_{num}\)</span> deve pertencer a <span class="math inline">\(L(r_{num})\)</span>. Ela corresponde ao primeiro termo da união (celular) em <span class="math inline">\(r_{num}\)</span>:
+<li><strong>Verificação do Componente Número</strong>: A substring <span class="math inline">\(w_{em um}\)</span> deve pertencer a <span class="math inline">\(L(r_{em um})\)</span>. Ela corresponde ao primeiro termo da união (celular) em <span class="math inline">\(r_{em um}\)</span>:
 <ul>
 <li><span class="math inline">\(9 D^4 (\epsilon \cup -) D^4\)</span>;</li>
 <li>O primeiro <span class="math inline">\(9\)</span> corresponde ao símbolo literal <span class="math inline">\(9\)</span>;</li>
 <li><span class="math inline">\(9999\)</span> pertence a <span class="math inline">\(L(D^4) = L(D \cdot D \cdot D \cdot D)\)</span>;</li>
 <li><span class="math inline">\(-\)</span> pertence a <span class="math inline">\(L(\epsilon \cup -)\)</span>;</li>
 <li><span class="math inline">\(9999\)</span> pertence a <span class="math inline">\(L(D^4)\)</span>;</li>
-<li>Portanto, <span class="math inline">\(w_{num} \in L(r_{num})\)</span>. Ok!</li>
+<li>Portanto, <span class="math inline">\(w_{em um} \in L(r_{em um})\)</span>. Ok!</li>
 </ul></li>
-<li><strong>Conclusão</strong>: como <span class="math inline">\(w = w_{ddd} \cdot w_{num}\)</span> e ambas as partes são geradas pelas respectivas subexpressões de <span class="math inline">\(r_{tel}\)</span>, pela definição de concatenação de linguagens, temos que <span class="math inline">\(w \in L(r_{tel})\)</span>.</li>
+<li><strong>Conclusão</strong>: como <span class="math inline">\(w = w_{ddd} \cdot w_{em um}\)</span> e ambas as partes são geradas pelas respectivas subexpressões de <span class="math inline">\(r_{tel}\)</span>, pela definição de concatenação de linguagens, temos que <span class="math inline">\(w \in L(r_{tel})\)</span>.</li>
 </ol>
 <section id="exercício-4" class="level3" data-number="3.8.1">
 <h3 data-number="3.8.1" class="anchored" data-anchor-id="exercício-4"><span class="header-section-number">3.8.1</span> Exercício 4:</h3>
@@ -1751,15 +1780,15 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <p><span class="math display">\[r_{id} = S_{ini} \cdot S_{cont}^*\]</span></p>
 <p><strong>Expandindo as definições</strong>: <span class="math display">\[r_{id} = (L \cup \{\_\}) \cdot (L \cup D \cup \{\_\})^*\]</span></p>
 </section>
-<section id="categoria-números-r_num" class="level4" data-number="3.8.2.2">
-<h4 data-number="3.8.2.2" class="anchored" data-anchor-id="categoria-números-r_num"><span class="header-section-number">3.8.2.2</span> 2. Categoria: Números (<span class="math inline">\(r_{num}\)</span>)</h4>
+<section id="categoria-números-r_em-um" class="level4" data-number="3.8.2.2">
+<h4 data-number="3.8.2.2" class="anchored" data-anchor-id="categoria-números-r_em-um"><span class="header-section-number">3.8.2.2</span> 2. Categoria: Números (<span class="math inline">\(r_{em um}\)</span>)</h4>
 <p><strong>Subcategoria 2.1 - Números Inteiros (<span class="math inline">\(r_{int}\)</span>)</strong>: 1. Zero isolado: <span class="math inline">\(0\)</span>; 2. Números positivos: <span class="math inline">\(D_{nz} \cdot D^*\)</span>; 3. Números com sinal: <span class="math inline">\((+ \cup - \cup \epsilon) \cdot (0 \cup (D_{nz} \cdot D^*))\)</span>.</p>
 <p><span class="math display">\[r_{int} = (+ \cup - \cup \epsilon) \cdot (0 \cup (D_{nz} \cdot D^*))\]</span></p>
 <p><strong>Subcategoria 2.2 - Números Decimais (<span class="math inline">\(r_{dec}\)</span>)</strong>: - Parte inteira obrigatória, ponto, parte fracionária obrigatória:</p>
 <p><span class="math display">\[r_{dec} = r_{int} \cdot \{.\} \cdot D \cdot D^*\]</span></p>
 <p><strong>Subcategoria 2.3 - Notação Científica (<span class="math inline">\(r_{sci}\)</span>)</strong>: - Base (inteiro ou decimal), indicador científico, expoente:</p>
 <p><span class="math display">\[r_{sci} = (r_{int} \cup r_{dec}) \cdot (e \cup E) \cdot (+ \cup - \cup \epsilon) \cdot D \cdot D^*\]</span></p>
-<p><strong>Expressão completa para números</strong>: <span class="math display">\[r_{num} = r_{sci} \cup r_{dec} \cup r_{int}\]</span></p>
+<p><strong>Expressão completa para números</strong>: <span class="math display">\[r_{em um} = r_{sci} \cup r_{dec} \cup r_{int}\]</span></p>
 </section>
 <section id="categoria-operadores-r_op" class="level4" data-number="3.8.2.3">
 <h4 data-number="3.8.2.3" class="anchored" data-anchor-id="categoria-operadores-r_op"><span class="header-section-number">3.8.2.3</span> 3. Categoria: Operadores (<span class="math inline">\(r_{op}\)</span>)</h4>
@@ -1881,8 +1910,8 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 </ol>
 </section>
 <section id="em-c-23" class="level4" data-number="3.8.2.7">
-<h4 data-number="3.8.2.7" class="anchored" data-anchor-id="em-c-23"><span class="header-section-number">3.8.2.7</span> Em C++ 23</h4>
-<p>O código a seguir contém uma implementação do analisador léxico definido neste problema em C++23, usando as características desta linguagem para simplificar a implementação:</p>
+<h4 data-number="3.8.2.7" class="anchored" data-anchor-id="em-c-23"><span class="header-section-number">3.8.2.7</span> Em <strong>C++</strong> 23</h4>
+<p>O código a seguir contém uma implementação do analisador léxico definido neste problema em <strong>C++</strong>23, usando as características desta linguagem para simplificar a implementação:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string_view&gt;</span></span>
@@ -2240,7 +2269,7 @@ Do Formalismo à Prática: Expressões Regulares no Mundo Real
 <span id="cb3-355"><a href="#cb3-355" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb3-356"><a href="#cb3-356" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span><span class="st">"=== Analisador Léxico C++23 ==="</span><span class="op">);</span></span>
+<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span><span class="st">"=== Analisador Léxico **C++**23 ==="</span><span class="op">);</span></span>
 <span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span><span class="st">"Digite expressões linha por linha (Ctrl+C para sair):"</span><span class="op">);</span></span>
 <span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">();</span></span>
 <span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -2268,7 +2297,7 @@ Token: NUMERO | Valor: '42'</code></pre>
 <h2 data-number="3.9" class="anchored" data-anchor-id="exercício-6-classes-de-equivalência"><span class="header-section-number">3.9</span> Exercício 6: Classes de Equivalência</h2>
 <p>Considere a linguagem <span class="math inline">\(L = \{w \in \{0,1\}^* \mid w \text{ contém um número par de } 0\text{'s e um número ímpar de } 1\text{'s}\}\)</span>.</p>
 <ol type="a">
-<li>Determine quantas classes de equivalência existem na relação de Myhill-Nerode para <span class="math inline">\(L\)</span> (ver <a href="apend1.html" class="quarto-xref"><span>Chapter 12</span></a>).</li>
+<li>Determine quantas classes de equivalência existem na relação de Myhill-Nerode para <span class="math inline">\(L\)</span> (ver <a href="apend1.html" class="quarto-xref"><span>Chapter 15</span></a>).</li>
 <li>Construa o autômato finito correspondente.</li>
 </ol>
 <p><strong>Solução Letra a</strong></p>

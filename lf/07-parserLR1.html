@@ -252,7 +252,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+ <span class="menu-text">Analisadores Semânticos</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -260,14 +260,43 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
       </ul>
@@ -275,13 +304,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -663,7 +692,7 @@ Figure&nbsp;8.1
 <p>Entender como o <em>parser</em> funciona, é apenas o primeiro estágio. A construção da tabela <span class="math inline">\(LR(1)\)</span> é um processo algorítmico sistemático, detalhado e que requerer atenção e cuidado da atenta leitora. Para tentar entender este processo vamos construir uma tabela de <em>parsing</em> para uma gramática simples, acompanhando cada etapa em um passo a passo detalhado. Nossa gramática de exemplo terá apenas duas produções:</p>
 <pre class="bnf"><code>1. E → E + n
 2. E → n</code></pre>
-<p>O que estamos tentando fazer aqui é construir uma tabela de <em>parsing</em> que possa guiar o <em>parser</em> através da gramática. Para isso, precisamos seguir um processo sistemático, que envolve a criação de conjuntos de itens <span class="math inline">\(LR(1)\)</span>, a definição de estados e transições, e finalmente o preenchimento da tabela <code>ACTION/GOTO</code>. Este processo está sintetizado no pseudocódigo a seguir:</p>
+<p>O que estamos tentando fazer aqui é construir uma tabela de <em>parsing</em> que possa guiar o <em>parser</em> por meio da gramática. Para isso, precisamos seguir um processo sistemático, que envolve a criação de conjuntos de itens <span class="math inline">\(LR(1)\)</span>, a definição de estados e transições, e finalmente o preenchimento da tabela <code>ACTION/GOTO</code>. Este processo está sintetizado no pseudocódigo a seguir:</p>
 <pre class="pseudocode"><code>ALGORITMO CONSTRUIR_COLECAO_CANONICA_E_TABELA_LR1(G')
 
 // ENTRADA: Uma gramática aumentada G' com símbolo inicial S'
@@ -1181,7 +1210,7 @@ Figure&nbsp;8.3
 <p>Se o próximo símbolo na entrada for <code>a</code>, o <em>parser</em> não sabe se deve reduzir por <code>A → α</code> ou empilhar <code>a</code>.</p>
 <section id="análise-do-exemplo-clássico-o-dangling-else" class="level4" data-number="8.4.1.1">
 <h4 data-number="8.4.1.1" class="anchored" data-anchor-id="análise-do-exemplo-clássico-o-dangling-else"><span class="header-section-number">8.4.1.1</span> Análise do Exemplo Clássico: O “<em>dangling else</em>”</h4>
-<p>O exemplo clássico é a ambiguidade do <code>else</code> em linguagens como C ou Java. Considere esta gramática simplificada:</p>
+<p>O exemplo clássico é a ambiguidade do <code>else</code> em linguagens como C ou <strong>Java</strong>. Considere esta gramática simplificada:</p>
 <pre class="bnf"><code>STMT → if EXPR then STMT
  | if EXPR then STMT else STMT</code></pre>
 <p>Agora, imagine que o <em>parser</em> analisou a entrada <code>if EXPR then STMT</code> e o próximo símbolo no <em>buffer</em> é <code>else</code>. Ele se encontrará em um estado, digamos <code>Ik</code>, que conterá (entre outros) os seguintes itens:</p>
@@ -1714,14 +1743,14 @@ T → T * F
 T → T / F
 T → F
 F → ( E )
-F → num</code></pre>
+F → em um</code></pre>
 <p><strong>Tarefas</strong>:</p>
 <ol type="1">
 <li><p><strong>Aumente a gramática</strong> com <code>E' → E</code>.</p></li>
-<li><p><strong>Construa pelo menos os 5 primeiros estados</strong> do autômato <span class="math inline">\(LR(1)\)</span>: &nbsp; &nbsp;- Estado <span class="math inline">\(I_0\)</span>: estado inicial &nbsp; &nbsp;- Estados resultantes de <span class="math inline">\(GOTO(I_0, E)\)</span>, <span class="math inline">\(GOTO(I_0, T)\)</span>, <span class="math inline">\(GOTO(I_0, F)\)</span> &nbsp; &nbsp;- Estados resultantes de <span class="math inline">\(GOTO(I_0, ()\)</span> e <span class="math inline">\(GOTO(I_0, num)\)</span></p></li>
+<li><p><strong>Construa pelo menos os 5 primeiros estados</strong> do autômato <span class="math inline">\(LR(1)\)</span>: &nbsp; &nbsp;- Estado <span class="math inline">\(I_0\)</span>: estado inicial &nbsp; &nbsp;- Estados resultantes de <span class="math inline">\(GOTO(I_0, E)\)</span>, <span class="math inline">\(GOTO(I_0, T)\)</span>, <span class="math inline">\(GOTO(I_0, F)\)</span> &nbsp; &nbsp;- Estados resultantes de <span class="math inline">\(GOTO(I_0, ()\)</span> e <span class="math inline">\(GOTO(I_0, em um)\)</span></p></li>
 <li><p><strong>Identifique possíveis conflitos</strong> na gramática: &nbsp; &nbsp;- Esta gramática não possui conflitos se construída corretamente &nbsp; &nbsp;- A hierarquia E → T → F garante a precedência correta dos operadores</p></li>
 <li><p><strong>Construa a tabela ACTION/GOTO</strong> para os estados que você calculou.</p></li>
-<li><p><strong>Trace a análise</strong> da expressão <code>num + num * num</code> usando sua tabela parcial.</p></li>
+<li><p><strong>Trace a análise</strong> da expressão <code>em um + em um * em um</code> usando sua tabela parcial.</p></li>
 </ol>
 <p><strong>Estrutura do Estado Inicial <span class="math inline">\(I_0\)</span></strong>:</p>
 <p>Para construir o estado <span class="math inline">\(I_0\)</span> canônico, lembre-se de aplicar a regra <code>CLOSURE</code> recursivamente. O processo começa com o núcleo <code>[E' → •E, $]</code>, que gera um conjunto base de itens com <em>lookahead</em> <code>$</code>. Em seguida, cada item com um não-terminal após o ponto (<code>•</code>) irá gerar novos itens com <em>lookaheads</em> específicos.</p>
@@ -1740,7 +1769,7 @@ F → num</code></pre>
 [T → •T / F, $]
 [T → •F, $]
 [F → •( E ), $]
-[F → •num, $]
+[F → •em um, $]
 
 /* Itens adicionais gerados a partir de [E → •E + T, $] com lookahead '+' */
 [E → •E + T, +]
@@ -1750,7 +1779,7 @@ F → num</code></pre>
 [T → •T / F, +]
 [T → •F, +]
 [F → •( E ), +]
-[F → •num, +]
+[F → •em um, +]
 
 /* E assim por diante para os lookaheads '-', '*', '/' ... */</code></pre>
 <p><strong>Observações sobre Precedência</strong>:</p>
@@ -1758,7 +1787,7 @@ F → num</code></pre>
 <li>A estrutura da gramática implementa naturalmente a precedência: &nbsp; - <code>*</code> e <code>/</code> têm maior precedência (nível T) &nbsp; - <code>+</code> e <code>-</code> têm menor precedência (nível E)</li>
 <li>A associatividade à esquerda é garantida pela recursão à esquerda nas produções</li>
 </ul>
-<p><strong>String de Teste Adicional</strong>: <code>( num + num ) * num</code></p>
+<p><strong>String de Teste Adicional</strong>: <code>( em um + em um ) * em um</code></p>
 <p>Para esta string, observe como os parênteses forçam a avaliação da soma antes da multiplicação, demonstrando que a gramática respeita corretamente a precedência definida pelos parênteses.</p>
 </section>
 <section id="exercício-3-linguagem-de-comandos" class="level3" data-number="8.6.3">
@@ -1771,7 +1800,7 @@ CMD → if EXPR then CMD else CMD
  | while EXPR do CMD
  | begin CMDS end
  | assign id = EXPR
-EXPR → EXPR &lt; EXPR | EXPR + EXPR | id | num</code></pre>
+EXPR → EXPR &lt; EXPR | EXPR + EXPR | id | em um</code></pre>
 <p><strong>Tarefas</strong>:</p>
 <ol type="1">
 <li>Identifique o conflito <em>Shift-Reduce</em> causado pelo “<em>dangling else</em>”</li>
