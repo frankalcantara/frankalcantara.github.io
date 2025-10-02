@@ -1,0 +1,154 @@
+# Kyrion Forms - .gitignore
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# NYC test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build directories
+dist/
+build/
+out/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backup files
+*.bak
+*.backup
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Local development
+.local/
+local/
+
+# Production files
+*.min.js
+*.min.css
+
+# Service worker cache
+sw.js
+workbox-*.js
+
+# PWA
+manifest.json.bak
+
+# Testing
+.jest/
+coverage/
+__tests__/
+
+# Documentation build
+docs/_build/
+
+# Local configuration
+config.local.js
+settings.local.json
+
+# Live reload
+.reload
+
+# Specific to Kyrion Forms
+# Ignore local storage simulation files
+localStorage-backup.json
+indexeddb-backup/
+
+# Ignore demonstration data files
+demo-data.json
+test-forms.json
+
+# Ignore temporary editor files
+*.swp
+*.swo
+.#*
+
+# Ignore deployment files
+deploy.sh
+.deploy/
+
+# Ignore analytics and tracking
+analytics/
+tracking/
+
+# Ignore user uploads (if added later)
+uploads/
+user-content/
+
+# Ignore generated documentation
+api-docs/
+jsdoc/
+
+# Ignore performance testing
+performance/
+benchmarks/

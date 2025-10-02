@@ -1,0 +1,345 @@
+/* Kyrion Forms - Default Theme for Preview Mode */
+/* Este arquivo contém estilos específicos para o tema padrão da visualização do formulário */
+
+/* ========================================
+   PREVIEW MODE - LAYOUT GERAL
+======================================== */
+
+.preview-form {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    background-color: var(--md-sys-color-surface);
+}
+
+.preview-form-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--md-sys-color-outline-variant);
+}
+
+.preview-form-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--md-sys-color-on-surface);
+    margin: 0 0 var(--spacing-md) 0;
+    line-height: 1.2;
+}
+
+.preview-form-description {
+    font-size: 1.1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* ========================================
+   PREVIEW MODE - QUESTÕES
+======================================== */
+
+.preview-question {
+    background-color: transparent;
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-lg) 0;
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.preview-question:last-child {
+    border-bottom: none;
+}
+
+.preview-question-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.preview-question-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--md-sys-color-primary);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.preview-question-statement {
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
+    margin: 0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    flex: 1;
+}
+
+.preview-question-number {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-surface);
+    margin-right: var(--spacing-xs);
+    flex-shrink: 0;
+}
+
+.preview-question-content {
+    margin-bottom: var(--spacing-md);
+}
+
+.preview-question-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: var(--spacing-md);
+}
+
+/* ========================================
+   PREVIEW MODE - OPÇÕES DE MÚLTIPLA ESCOLHA
+======================================== */
+
+.preview-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.preview-option {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.preview-option:hover {
+    background-color: var(--md-sys-color-surface-variant);
+}
+
+.preview-option input[type="radio"],
+.preview-option input[type="checkbox"] {
+    margin-right: var(--spacing-md);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.preview-option-text {
+    flex: 1;
+    color: var(--md-sys-color-on-surface);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* ========================================
+   PREVIEW MODE - CAMPOS DE TEXTO
+======================================== */
+
+.preview-text-input {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
+    background-color: var(--md-sys-color-surface);
+    transition: border-color var(--transition-fast);
+}
+
+.preview-text-input:focus {
+    outline: none;
+    border-color: var(--md-sys-color-primary);
+    box-shadow: 0 0 0 2px rgba(103, 80, 164, 0.2);
+}
+
+.preview-textarea {
+    min-height: 100px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.preview-file-input {
+    padding: var(--spacing-lg);
+    border: 2px dashed var(--md-sys-color-outline);
+    border-radius: var(--radius-md);
+    text-align: center;
+    background-color: var(--md-sys-color-surface-variant);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.preview-file-input:hover {
+    border-color: var(--md-sys-color-primary);
+    background-color: var(--md-sys-color-primary-container);
+}
+
+/* ========================================
+   PREVIEW MODE - SEÇÕES E VÍDEOS
+======================================== */
+
+.preview-section {
+    background-color: var(--md-sys-color-primary-container);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xl);
+    border-left: 4px solid var(--md-sys-color-primary);
+}
+
+.preview-section-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--md-sys-color-on-primary-container);
+    margin: 0;
+}
+
+.preview-video {
+    margin-bottom: var(--spacing-lg);
+}
+
+.preview-video-description {
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+}
+
+.preview-video-embed {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--elevation-2);
+}
+
+.preview-video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ========================================
+   PREVIEW MODE - BOTÕES DE AÇÃO
+======================================== */
+
+.preview-clear-btn {
+    background: transparent;
+    color: var(--md-sys-color-error);
+    border: 1px solid var(--md-sys-color-error);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.preview-clear-btn:hover {
+    background-color: var(--md-sys-color-error);
+    color: var(--md-sys-color-on-error);
+}
+
+.preview-submit-container {
+    text-align: center;
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-xl);
+    border-top: 2px solid var(--md-sys-color-outline-variant);
+}
+
+.preview-submit-btn {
+    background: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    padding: var(--spacing-md) var(--spacing-xxl);
+    border-radius: var(--radius-xl);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: all var(--transition-fast);
+    box-shadow: var(--elevation-2);
+}
+
+.preview-submit-btn:hover {
+    background: var(--md-sys-color-primary);
+    box-shadow: var(--elevation-3);
+    transform: translateY(-1px);
+}
+
+.preview-submit-btn .material-icons {
+    font-size: 20px;
+    color: var(--md-sys-color-on-primary);
+}
+
+/* ========================================
+   PREVIEW MODE - ESTADOS RESPONSIVOS
+======================================== */
+
+@media (max-width: 768px) {
+    .preview-form {
+        padding: var(--spacing-lg);
+    }
+    
+    .preview-form-title {
+        font-size: 2rem;
+    }
+    
+    .preview-question {
+        padding: var(--spacing-md) 0;
+    }
+    
+    .preview-option {
+        padding: var(--spacing-md);
+    }
+    
+    .preview-text-input {
+        font-size: 16px; /* Evita zoom no iOS */
+    }
+}
+
+/* ========================================
+   PREVIEW MODE - ESTADOS DE FOCO
+======================================== */
+
+.preview-question.focused {
+    background-color: var(--md-sys-color-surface-variant);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.preview-option.selected {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.preview-option.selected .preview-option-text {
+    color: var(--md-sys-color-on-primary-container);
+    font-weight: 500;
+}
+
+/* ========================================
+   PREVIEW MODE - INDICADORES VISUAIS
+======================================== */
+
+.preview-required {
+    color: var(--md-sys-color-error);
+    font-weight: 500;
+}
+
+.preview-question-number {
+    display: inline-block;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: var(--spacing-sm);
+}

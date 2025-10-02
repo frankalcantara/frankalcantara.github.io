@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrion Forms - Avaliações com LaTeX e Código</title>
+    
+    <!-- Material Design 3 -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Editor.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script>
+    
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- CodeMirror 6 -->
+    <script type="module" src="https://cdn.skypack.dev/codemirror@6"></script>
+    <script type="module" src="https://cdn.skypack.dev/@codemirror/lang-python"></script>
+    <script type="module" src="https://cdn.skypack.dev/@codemirror/lang-javascript"></script>
+    <script type="module" src="https://cdn.skypack.dev/@codemirror/lang-cpp"></script>
+    <script type="module" src="https://cdn.skypack.dev/@codemirror/lang-java"></script>
+    
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    
+    <!-- Estilos locais -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/default-theme.css">
+    <!-- <link rel="stylesheet" href="css/components.css"> -->
+</head>
+<body>
+    <!-- App Container -->
+    <div id="app" class="app-container">
+        <!-- Navigation Bar -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="icon-button" id="menu-button" aria-label="Menu">
+                        <i class="material-icons">menu</i>
+                    </button>
+                    <h1 class="app-title">Kyrion Forms</h1>
+                </div>
+                <div class="header-right">
+                    <!-- Forms icons for responsive mode -->
+                    <div class="header-forms-icons" id="header-forms-icons">
+                        <!-- Form icons will be inserted here for mobile/tablet -->
+                    </div>
+                    <button class="icon-button" aria-label="Perfil">
+                        <i class="material-icons">account_circle</i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Sidebar Navigation -->
+            <nav class="app-sidebar" id="sidebar">
+                <div class="sidebar-content">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <button class="nav-button" data-route="home">
+                                <i class="material-icons">home</i>
+                                <span>Início</span>
+                            </button>
+                        </li>
+                        <li class="nav-item nav-item-expandable">
+                            <button class="nav-button nav-button-expandable" data-route="forms">
+                                <i class="material-icons">description</i>
+                                <span>Formulários</span>
+                                <i class="material-icons expand-icon">expand_more</i>
+                            </button>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <button class="submenu-button" data-route="forms-created">
+                                        <i class="material-icons">create</i>
+                                        <span>Criados</span>
+                                    </button>
+                                </li>
+                                <li class="submenu-item">
+                                    <button class="submenu-button" data-route="forms-answered">
+                                        <i class="material-icons">assignment_turned_in</i>
+                                        <span>Respondidos</span>
+                                    </button>
+                                </li>
+                                <li class="submenu-item">
+                                    <button class="submenu-button" data-route="forms-grading">
+                                        <i class="material-icons">grading</i>
+                                        <span>Em Correção</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-button" data-route="new-form">
+                                <i class="material-icons">add</i>
+                                <span>Novo Formulário</span>
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-button" data-route="responses">
+                                <i class="material-icons">analytics</i>
+                                <span>Respostas</span>
+                            </button>
+                        </li>
+                    </ul>
+                    
+                    <!-- Bloco Em Memoria -->
+                    <div class="sidebar-section">
+                        <div class="section-header">
+                            <i class="material-icons">content_paste</i>
+                            <span>Clipboard</span>
+                        </div>
+                        <div class="forms-in-memory" id="forms-in-memory">
+                            <!-- Cards dos formularios serao inseridos aqui -->
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <section class="app-content" id="content">
+                <!-- O conteúdo será carregado dinamicamente aqui -->
+                <div class="loading-placeholder">
+                    <div class="loading-spinner"></div>
+                    <p>Carregando...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- FAB para ações rápidas -->
+    <button class="fab" id="main-fab" aria-label="Novo Formulário">
+        <i class="material-icons">add</i>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // Forçar tema claro imediatamente
+        document.documentElement.setAttribute('data-theme', 'light');
+        console.log('Tema claro forcado via script inline');
+        
+        // Debug das variáveis CSS
+        document.addEventListener('DOMContentLoaded', function() {
+            const styles = getComputedStyle(document.documentElement);
+            console.log('CSS Variables Debug:');
+            console.log('--custom-text-color:', styles.getPropertyValue('--custom-text-color'));
+            console.log('--md-sys-color-on-surface:', styles.getPropertyValue('--md-sys-color-on-surface'));
+            console.log('data-theme:', document.documentElement.getAttribute('data-theme'));
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <!-- <script src="js/app.js" type="module"></script> -->
+    <!-- <script src="js/router.js" type="module"></script> -->
+    <!-- <script src="demonstracao.js"></script> -->
+</body>
+</html>
