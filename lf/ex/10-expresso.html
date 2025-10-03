@@ -1,203 +1,263 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Analisadores Semânticos: A Determinação do Significado</title>
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Font Awesome CDN -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <!-- MathJax -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            }
-        };
-    </script>
-    <link rel="stylesheet" href="style.css">
-    <script src="common_js.js"></script>
-</head>
-<body>
-    <!-- Table of Contents -->
-    <nav class="toc-fixed" id="toc">
-        <div class="mb-4">
-            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
-            <ul class="list-unstyled">
-                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
-                <li class="mb-2"><a href="#perspectiva-historica" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. Perspectiva Histórica</a></li>
-                <li class="mb-2"><a href="#necessidade-solucao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Por Que Gramáticas de Atributos?</a></li>
-                <li class="mb-2"><a href="#contexto-compilador" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Contexto do Compilador</a></li>
-                <li class="mb-2"><a href="#estatica-dinamica" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Semântica Estática vs Dinâmica</a></li>
-                <li class="mb-2"><a href="#gramaticas-atributos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Gramáticas de Atributos</a></li>
-                <li class="mb-2"><a href="#verificacao-tipos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Verificação de Tipos</a></li>
-                <li class="mb-2"><a href="#implementacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Implementação Prática</a></li>
-                <li class="mb-2"><a href="#codigo-intermediario" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Código Intermediário</a></li>
-                <li class="mb-2"><a href="#exercicios" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Exercícios</a></li>
-            </ul>
-        </div>
-        <div class="mt-4 pt-4 border-top">
-            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
-            <div class="d-flex flex-column gap-2">
-                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-check-circle me-2 text-primary"></i><small class="text-primary fw-medium">Verificação de Tipos</small></div>
-                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-tree me-2 text-success"></i><small class="text-success fw-medium">AST Atribuída</small></div>
-                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-table me-2 text-info"></i><small class="text-info fw-medium">Tabela de Símbolos</small></div>
-                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-code me-2 text-warning"></i><small class="text-warning fw-medium">Código TAC</small></div>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Analisadores Semânticos: A Determinação do Significado</title>
+        <!-- Bootstrap CSS CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <!-- Font Awesome CDN -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet" />
+        <!-- MathJax -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$'], ['\\(', '\\)']],
+                    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                }
+            };
+        </script>
+        <link rel="stylesheet" href="style.css">
+        <script src="common_js.js"></script>
+    </head>
+
+    <body>
+        <!-- Table of Contents -->
+        <nav class="toc-fixed" id="toc">
+            <div class="mb-4">
+                <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#introducao"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1.
+                            Introdução</a></li>
+                    <li class="mb-2"><a href="#perspectiva-historica"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2.
+                            Perspectiva Histórica</a></li>
+                    <li class="mb-2"><a href="#necessidade-solucao"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Por
+                            Que Gramáticas de Atributos?</a></li>
+                    <li class="mb-2"><a href="#contexto-compilador"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4.
+                            Contexto do Compilador</a></li>
+                    <li class="mb-2"><a href="#estatica-dinamica"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5.
+                            Semântica Estática vs Dinâmica</a></li>
+                    <li class="mb-2"><a href="#gramaticas-atributos"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6.
+                            Gramáticas de Atributos</a></li>
+                    <li class="mb-2"><a href="#verificacao-tipos"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7.
+                            Verificação de Tipos</a></li>
+                    <li class="mb-2"><a href="#implementacao"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8.
+                            Implementação Prática</a></li>
+                    <li class="mb-2"><a href="#codigo-intermediario"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9.
+                            Código Intermediário</a></li>
+                    <li class="mb-2"><a href="#exercicios"
+                            class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10.
+                            Exercícios</a></li>
+                </ul>
             </div>
-        </div>
-    </nav>
+            <div class="mt-4 pt-4 border-top">
+                <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+                <div class="d-flex flex-column gap-2">
+                    <div class="p-2 bg-primary-subtle rounded"><i
+                            class="fas fa-check-circle me-2 text-primary"></i><small
+                            class="text-primary fw-medium">Verificação de Tipos</small></div>
+                    <div class="p-2 bg-success-subtle rounded"><i class="fas fa-tree me-2 text-success"></i><small
+                            class="text-success fw-medium">AST Atribuída</small></div>
+                    <div class="p-2 bg-info-subtle rounded"><i class="fas fa-table me-2 text-info"></i><small
+                            class="text-info fw-medium">Tabela de Símbolos</small></div>
+                    <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-code me-2 text-warning"></i><small
+                            class="text-warning fw-medium">Código TAC</small></div>
+                </div>
+            </div>
+        </nav>
 
-    <!-- Mobile TOC Toggle -->
-    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
-        <i class="fas fa-bars text-dark"></i>
-    </button>
+        <!-- Mobile TOC Toggle -->
+        <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow"
+            onclick="toggleTOC()">
+            <i class="fas fa-bars text-dark"></i>
+        </button>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
-            <div class="container py-5">
-                
-                <div class="bento-grid mb-5">
-                    <div class="bento-main bg-white rounded-3 shadow">
-                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
-                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"semantic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\" patternUnits=\"userSpaceOnUse\"><circle cx=\"30\" cy=\"30\" r=\"20\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.3\"/><path d=\"M30,10 L30,50 M10,30 L50,30\" stroke=\"%23ffffff\" stroke-width=\"1\" opacity=\"0.2\"/><circle cx=\"30\" cy=\"30\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23semantic)\"/></svg>') center/cover;"></div>
-                            <div class="position-relative z-1 text-center text-white p-4">
-                                <h1 class="display-4 fw-bold mb-4">
-                                    <em class="d-block" style="color: var(--copper-200);">Analisadores Semânticos:</em>
-                                    <span class="d-block">A Determinação do Significado</span>
-                                </h1>
-                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
-                                    A ponte entre a estrutura sintática e o significado computacional
-                                </p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section id="hero" class="min-vh-100"
+                style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+                <div class="container py-5">
+
+                    <div class="bento-grid mb-5">
+                        <div class="bento-main bg-white rounded-3 shadow">
+                            <div
+                                class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                                <div class="position-absolute w-100 h-100 opacity-25"
+                                    style="background: url('data:image/svg+xml,<svg xmlns=\"
+                                    http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\">
+                                    <defs>
+                                        <pattern id=\"semantic\" x=\"0\" y=\"0\" width=\"60\" height=\"60\"
+                                            patternUnits=\"userSpaceOnUse\">
+                                            <circle cx=\"30\" cy=\"30\" r=\"20\" fill=\"none\" stroke=\"%23ffffff\"
+                                                stroke-width=\"1\" opacity=\"0.3\" />
+                                            <path d=\"M30,10 L30,50 M10,30 L50,30\" stroke=\"%23ffffff\"
+                                                stroke-width=\"1\" opacity=\"0.2\" />
+                                            <circle cx=\"30\" cy=\"30\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.4\" />
+                                        </pattern>
+                                    </defs>
+                                    <rect width=\"100%25\" height=\"100%25\" fill=\"url(%23semantic)\" /></svg>')
+                                    center/cover;">
+                                </div>
+                                <div class="position-relative z-1 text-center text-white p-4">
+                                    <h1 class="display-4 fw-bold mb-4">
+                                        <em class="d-block" style="color: var(--copper-200);">Analisadores
+                                            Semânticos:</em>
+                                        <span class="d-block">A Determinação do Significado</span>
+                                    </h1>
+                                    <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                        A ponte entre a estrutura sintática e o significado computacional
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                            <div class="text-center">
+                                <div class="stat-highlight text-primary">Γ ⊢</div>
+                                <div class="fs-6 text-muted">Julgamento de Tipos</div>
+                            </div>
+                        </div>
+                        <div class="bento-side-bottom bg-light rounded-3 p-4 shadow"
+                            style="background-color: var(--copper-50);">
+                            <div class="text-center">
+                                <div class="stat-highlight" style="color: var(--copper-800);">τ</div>
+                                <div class="fs-6" style="color: var(--copper-700);">Inferência</div>
                             </div>
                         </div>
                     </div>
-                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
-                        <div class="text-center">
-                            <div class="stat-highlight text-primary">Γ ⊢</div>
-                            <div class="fs-6 text-muted">Julgamento de Tipos</div>
+
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-check-circle fs-2 text-primary mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-primary">Verificação</h3>
+                                    <p class="fs-7 text-muted">Tipos e Contexto</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
-                        <div class="text-center">
-                            <div class="stat-highlight" style="color: var(--copper-800);">τ</div>
-                            <div class="fs-6" style="color: var(--copper-700);">Inferência</div>
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-tree fs-2 text-success mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-success">AST</h3>
+                                    <p class="fs-7 text-muted">Árvore Atribuída</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-table fs-2 text-warning mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-warning">Símbolos</h3>
+                                    <p class="fs-7 text-muted">Tabela de Contexto</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                                <div class="card-body p-4 text-center">
+                                    <i class="fas fa-cogs fs-2 text-info mb-3"></i>
+                                    <h3 class="fs-6 fw-semibold text-info">Síntese</h3>
+                                    <p class="fs-7 text-muted">Código Intermediário</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
-                    <div class="col">
-                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
-                            <div class="card-body p-4 text-center">
-                                <i class="fas fa-check-circle fs-2 text-primary mb-3"></i>
-                                <h3 class="fs-6 fw-semibold text-primary">Verificação</h3>
-                                <p class="fs-7 text-muted">Tipos e Contexto</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
-                            <div class="card-body p-4 text-center">
-                                <i class="fas fa-tree fs-2 text-success mb-3"></i>
-                                <h3 class="fs-6 fw-semibold text-success">AST</h3>
-                                <p class="fs-7 text-muted">Árvore Atribuída</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
-                            <div class="card-body p-4 text-center">
-                                <i class="fas fa-table fs-2 text-warning mb-3"></i>
-                                <h3 class="fs-6 fw-semibold text-warning">Símbolos</h3>
-                                <p class="fs-7 text-muted">Tabela de Contexto</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
-                            <div class="card-body p-4 text-center">
-                                <i class="fas fa-cogs fs-2 text-info mb-3"></i>
-                                <h3 class="fs-6 fw-semibold text-info">Síntese</h3>
-                                <p class="fs-7 text-muted">Código Intermediário</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <!-- Introduction Section -->
+            <section id="introducao" class="py-5 bg-white">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução à Análise
+                            Semântica</h2>
 
-        <!-- Introduction Section -->
-        <section id="introducao" class="py-5 bg-white">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução à Análise Semântica</h2>
-                    
-                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <blockquote class="blockquote mb-4">
-                            <p class="fs-5 fst-italic">
-                                "Colorless green ideas sleep furiously" - Noam Chomsky
-                            </p>
-                            <footer class="blockquote-footer">Uma frase sintaticamente perfeita, mas semanticamente absurda</footer>
-                        </blockquote>
-                    </div>
-
-                    <p class="fs-5 text-muted mb-5">
-                        Após as fases de análise léxica e sintática, um compilador já será capaz de reconhecer a estrutura de um programa. Contudo, a análise sintática é agnóstica ao significado. A análise semântica é a fase que preenche essa lacuna, verificando se as construções sintaticamente válidas formam um conjunto de instruções coerente e com significado.
-                    </p>
-
-                    <!-- Key Questions -->
-                    <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
-                        <div class="col">
-                            <div class="concept-card">
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-question-circle fs-3 me-3 text-primary"></i>
-                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Declarações</h3>
-                                </div>
-                                <p class="fs-6 mb-0" style="color: var(--sage-700);">
-                                    Foram <code>y</code> e <code>z</code> declarados anteriormente?
+                        <div class="card p-4 rounded-3 shadow mb-5"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <blockquote class="blockquote mb-4">
+                                <p class="fs-5 fst-italic">
+                                    "Colorless green ideas sleep furiously" - Noam Chomsky
                                 </p>
-                            </div>
+                                <footer class="blockquote-footer">Uma frase sintaticamente perfeita, mas semanticamente
+                                    absurda</footer>
+                            </blockquote>
                         </div>
-                        <div class="col">
-                            <div class="concept-card">
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-exchange-alt fs-3 me-3 text-success"></i>
-                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--copper-800);">Compatibilidade</h3>
-                                </div>
-                                <p class="fs-6 mb-0" style="color: var(--copper-700);">
-                                    Seus tipos são compatíveis com o operador <code>+</code>?
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="concept-card">
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="fas fa-database fs-3 me-3 text-warning"></i>
-                                    <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Armazenamento</h3>
-                                </div>
-                                <p class="fs-6 mb-0" style="color: var(--sage-700);">
-                                    O resultado pode ser armazenado em uma variável <code>int</code>?
-                                </p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Counter-intuitive Examples -->
-                    <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Contra-intuições Semânticas</h3>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="fs-5 fw-semibold text-primary mb-3">Python</h4>
-                                <pre class="bg-light p-3 rounded"><code class="language-python"># Multiplicação de string por booleano
+                        <p class="fs-5 text-muted mb-5">
+                            Após as fases de análise léxica e sintática, um compilador já será capaz de reconhecer a
+                            estrutura de um programa. Contudo, a análise sintática é agnóstica ao significado. A análise
+                            semântica é a fase que preenche essa lacuna, verificando se as construções sintaticamente
+                            válidas formam um conjunto de instruções coerente e com significado.
+                        </p>
+
+                        <!-- Key Questions -->
+                        <div class="row row-cols-1 row-cols-lg-3 g-4 mb-5">
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-question-circle fs-3 me-3 text-primary"></i>
+                                        <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Declarações
+                                        </h3>
+                                    </div>
+                                    <p class="fs-6 mb-0" style="color: var(--sage-700);">
+                                        Foram <code>y</code> e <code>z</code> declarados anteriormente?
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-exchange-alt fs-3 me-3 text-success"></i>
+                                        <h3 class="fs-4 fw-semibold mb-0" style="color: var(--copper-800);">
+                                            Compatibilidade</h3>
+                                    </div>
+                                    <p class="fs-6 mb-0" style="color: var(--copper-700);">
+                                        Seus tipos são compatíveis com o operador <code>+</code>?
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-database fs-3 me-3 text-warning"></i>
+                                        <h3 class="fs-4 fw-semibold mb-0" style="color: var(--sage-800);">Armazenamento
+                                        </h3>
+                                    </div>
+                                    <p class="fs-6 mb-0" style="color: var(--sage-700);">
+                                        O resultado pode ser armazenado em uma variável <code>int</code>?
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Counter-intuitive Examples -->
+                        <div class="card p-4 rounded-3 shadow bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Contra-intuições
+                                Semânticas</h3>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="fs-5 fw-semibold text-primary mb-3">Python</h4>
+                                    <pre class="bg-light p-3 rounded"><code class="language-python"># Multiplicação de string por booleano
 resultado = "texto" * True  # "texto"
 resultado = "texto" * False  # ""
 
@@ -206,10 +266,10 @@ valor = True + True + False  # 2
 
 # Lista multiplicada por negativo
 lista = [1, 2, 3] * -1  # []</code></pre>
-                            </div>
-                            <div class="col-md-6">
-                                <h4 class="fs-5 fw-semibold text-success mb-3">JavaScript</h4>
-                                <pre class="bg-light p-3 rounded"><code class="language-javascript">// NaN não é igual a si mesmo
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="fs-5 fw-semibold text-success mb-3">JavaScript</h4>
+                                    <pre class="bg-light p-3 rounded"><code class="language-javascript">// NaN não é igual a si mesmo
 NaN === NaN;  // false
 
 // Conversão implícita
@@ -219,636 +279,694 @@ NaN === NaN;  // false
 // Array com buracos
 const arr = [1,,3];
 arr.length;  // 3</code></pre>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Historical Perspective Section -->
-        <section id="perspectiva-historica" class="py-5 bg-light">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Perspectiva Histórica</h2>
-                    
-                    <p class="fs-5 text-muted mb-5">
-                        A análise semântica não nasceu pronta. Sua história é uma jornada que acompanha a própria evolução das linguagens de programação, partindo de verificações simples e dispersas para se tornar uma estrutura formal e sofisticada.
-                    </p>
+            <!-- Historical Perspective Section -->
+            <section id="perspectiva-historica" class="py-5 bg-light">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. Perspectiva Histórica</h2>
 
-                    <!-- Timeline -->
-                    <div class="timeline mb-5">
+                        <p class="fs-5 text-muted mb-5">
+                            A análise semântica não nasceu pronta. Sua história é uma jornada que acompanha a própria
+                            evolução das linguagens de programação, partindo de verificações simples e dispersas para se
+                            tornar uma estrutura formal e sofisticada.
+                        </p>
+
+                        <!-- Timeline -->
+                        <div class="timeline mb-5">
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col">
+                                    <div class="card h-100 shadow">
+                                        <div class="card-body">
+                                            <h4 class="fs-5 fw-bold text-primary">1957 - FORTRAN I</h4>
+                                            <p class="fs-6 text-muted">Análise semântica ad-hoc, verificações
+                                                entrelaçadas com geração de código</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 shadow">
+                                        <div class="card-body">
+                                            <h4 class="fs-5 fw-bold text-success">1960 - ALGOL 60</h4>
+                                            <p class="fs-6 text-muted">Primeira separação clara entre sintaxe e
+                                                semântica, introdução de escopo léxico</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 shadow">
+                                        <div class="card-body">
+                                            <h4 class="fs-5 fw-bold text-warning">1968 - Donald Knuth</h4>
+                                            <p class="fs-6 text-muted">Gramáticas de Atributos - formalismo sistemático
+                                                para análise semântica</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card h-100 shadow">
+                                        <div class="card-body">
+                                            <h4 class="fs-5 fw-bold text-info">1978 - Robin Milner</h4>
+                                            <p class="fs-6 text-muted">Algoritmo W para inferência de tipos, base do
+                                                sistema de tipos ML</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Key Milestones -->
+                        <div class="card p-4 rounded-3 shadow"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Marcos Fundamentais</h3>
+
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-5 fw-semibold text-primary">Formalização</h5>
+                                        <p class="fs-6 mb-0">Floyd (1967) - Semântica com lógica formal através de
+                                            asserções</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-5 fw-semibold text-success">Sistematização</h5>
+                                        <p class="fs-6 mb-0">Aho & Ullman (1977) - Livro do Dragão estabelece estrutura
+                                            canônica</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-5 fw-semibold text-info">Complexidade</h5>
+                                        <p class="fs-6 mb-0">C++ (1985) - Templates e sobrecarga exigem análise complexa
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Need for Attribute Grammars Section -->
+            <section id="necessidade-solucao" class="py-5 bg-white">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Da Necessidade à Solução:
+                            Por Que Gramáticas de Atributos?</h2>
+
+                        <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">O Problema Fundamental
+                            </h3>
+                            <p class="fs-5 mb-4" style="color: var(--sage-700);">
+                                As gramáticas livres de contexto (GLC), poderosas para descrever a sintaxe, revelavam-se
+                                insuficientes para capturar regras semânticas.
+                            </p>
+
+                            <div class="p-3 bg-danger-subtle rounded">
+                                <strong class="text-danger">Limitação das GLCs:</strong>
+                                <span class="text-danger">Uma GLC pode garantir que <code>x = y + z;</code> é
+                                    sintaticamente válida, mas não pode verificar se <code>y</code> e <code>z</code>
+                                    foram declarados.</span>
+                            </div>
+                        </div>
+
+                        <!-- Problems with Ad-hoc Approach -->
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                            <div class="col">
+                                <div class="concept-card">
+                                    <h4 class="fs-4 fw-semibold text-danger mb-3">Problemas do Código Ad-hoc</h4>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i
+                                                class="fas fa-times-circle me-2 text-danger"></i>Não-portabilidade</li>
+                                        <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Verificação
+                                            impossível</li>
+                                        <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Manutenção
+                                            custosa</li>
+                                        <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Falta de
+                                            clareza</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card">
+                                    <h4 class="fs-4 fw-semibold text-success mb-3">Solução de Knuth (1968)</h4>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Estende
+                                            naturalmente as GLCs</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Fluxo de
+                                            informação contextual</li>
+                                        <li class="mb-2"><i
+                                                class="fas fa-check-circle me-2 text-success"></i>Implementação
+                                            sistemática</li>
+                                        <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Base para
+                                            especificação</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card p-4 rounded-3 shadow bg-primary-subtle">
+                            <h3 class="fs-3 fw-semibold mb-4 text-primary">A Ideia Central</h3>
+                            <p class="fs-6 mb-3">
+                                Se as produções da gramática descrevem a estrutura do programa, por que não anotar essas
+                                mesmas produções com regras que descrevem o significado?
+                            </p>
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <div class="col">
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>1. Atributos:</strong> Propriedades associadas aos símbolos gramaticais
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-2 bg-white rounded">
+                                        <strong>2. Regras Semânticas:</strong> Equações que definem como calcular
+                                        atributos
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Compiler Context Section -->
+            <section id="contexto-compilador" class="py-5 bg-light">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. A Análise Semântica no
+                            Contexto do Compilador</h2>
+
+                        <p class="fs-5 text-muted mb-5">
+                            A análise semântica é a terceira fase do front-end de um compilador, posicionando-se logo
+                            após a análise sintática. Sua entrada principal é a Árvore Sintática Abstrata (AST).
+                        </p>
+
+                        <!-- Compiler Phases Diagram -->
+                        <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Fases do Compilador</h3>
+
+                            <div class="row row-cols-1 row-cols-md-5 g-3">
+                                <div class="col">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <i class="fas fa-file-alt fs-2 text-muted mb-2"></i>
+                                        <h5 class="fs-6">Análise Léxica</h5>
+                                        <small class="text-muted">Tokens</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <i class="fas fa-sitemap fs-2 text-muted mb-2"></i>
+                                        <h5 class="fs-6">Análise Sintática</h5>
+                                        <small class="text-muted">AST</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="text-center p-3 bg-primary-subtle rounded">
+                                        <i class="fas fa-check-double fs-2 text-primary mb-2"></i>
+                                        <h5 class="fs-6 text-primary">Análise Semântica</h5>
+                                        <small class="text-primary">AST Atribuída</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <i class="fas fa-code fs-2 text-muted mb-2"></i>
+                                        <h5 class="fs-6">Código Intermediário</h5>
+                                        <small class="text-muted">TAC</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="text-center p-3 bg-light rounded">
+                                        <i class="fas fa-microchip fs-2 text-muted mb-2"></i>
+                                        <h5 class="fs-6">Código Máquina</h5>
+                                        <small class="text-muted">Assembly</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- One-pass vs Multi-pass -->
                         <div class="row row-cols-1 row-cols-md-2 g-4">
                             <div class="col">
                                 <div class="card h-100 shadow">
                                     <div class="card-body">
-                                        <h4 class="fs-5 fw-bold text-primary">1957 - FORTRAN I</h4>
-                                        <p class="fs-6 text-muted">Análise semântica ad-hoc, verificações entrelaçadas com geração de código</p>
+                                        <h4 class="fs-4 fw-semibold text-primary mb-3">Compiladores de Uma Passagem</h4>
+                                        <p class="fs-6 mb-3">
+                                            Intercalam análise léxica, sintática, semântica e geração de código em uma
+                                            única travessia.
+                                        </p>
+                                        <div class="p-2 bg-success-subtle rounded mb-2">
+                                            <small><strong class="text-success">Vantagens:</strong> Extremamente
+                                                rápidos</small>
+                                        </div>
+                                        <div class="p-2 bg-danger-subtle rounded">
+                                            <small><strong class="text-danger">Desvantagens:</strong> Restrições na
+                                                linguagem</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="card h-100 shadow">
                                     <div class="card-body">
-                                        <h4 class="fs-5 fw-bold text-success">1960 - ALGOL 60</h4>
-                                        <p class="fs-6 text-muted">Primeira separação clara entre sintaxe e semântica, introdução de escopo léxico</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card h-100 shadow">
-                                    <div class="card-body">
-                                        <h4 class="fs-5 fw-bold text-warning">1968 - Donald Knuth</h4>
-                                        <p class="fs-6 text-muted">Gramáticas de Atributos - formalismo sistemático para análise semântica</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card h-100 shadow">
-                                    <div class="card-body">
-                                        <h4 class="fs-5 fw-bold text-info">1978 - Robin Milner</h4>
-                                        <p class="fs-6 text-muted">Algoritmo W para inferência de tipos, base do sistema de tipos ML</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Key Milestones -->
-                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Marcos Fundamentais</h3>
-                        
-                        <div class="row row-cols-1 row-cols-md-3 g-4">
-                            <div class="col">
-                                <div class="p-3 bg-white rounded">
-                                    <h5 class="fs-5 fw-semibold text-primary">Formalização</h5>
-                                    <p class="fs-6 mb-0">Floyd (1967) - Semântica com lógica formal através de asserções</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3 bg-white rounded">
-                                    <h5 class="fs-5 fw-semibold text-success">Sistematização</h5>
-                                    <p class="fs-6 mb-0">Aho & Ullman (1977) - Livro do Dragão estabelece estrutura canônica</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3 bg-white rounded">
-                                    <h5 class="fs-5 fw-semibold text-info">Complexidade</h5>
-                                    <p class="fs-6 mb-0">C++ (1985) - Templates e sobrecarga exigem análise complexa</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Need for Attribute Grammars Section -->
-        <section id="necessidade-solucao" class="py-5 bg-white">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Da Necessidade à Solução: Por Que Gramáticas de Atributos?</h2>
-                    
-                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">O Problema Fundamental</h3>
-                        <p class="fs-5 mb-4" style="color: var(--sage-700);">
-                            As gramáticas livres de contexto (GLC), poderosas para descrever a sintaxe, revelavam-se insuficientes para capturar regras semânticas.
-                        </p>
-                        
-                        <div class="p-3 bg-danger-subtle rounded">
-                            <strong class="text-danger">Limitação das GLCs:</strong>
-                            <span class="text-danger">Uma GLC pode garantir que <code>x = y + z;</code> é sintaticamente válida, mas não pode verificar se <code>y</code> e <code>z</code> foram declarados.</span>
-                        </div>
-                    </div>
-
-                    <!-- Problems with Ad-hoc Approach -->
-                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
-                        <div class="col">
-                            <div class="concept-card">
-                                <h4 class="fs-4 fw-semibold text-danger mb-3">Problemas do Código Ad-hoc</h4>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Não-portabilidade</li>
-                                    <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Verificação impossível</li>
-                                    <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Manutenção custosa</li>
-                                    <li class="mb-2"><i class="fas fa-times-circle me-2 text-danger"></i>Falta de clareza</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="concept-card">
-                                <h4 class="fs-4 fw-semibold text-success mb-3">Solução de Knuth (1968)</h4>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Estende naturalmente as GLCs</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Fluxo de informação contextual</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Implementação sistemática</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle me-2 text-success"></i>Base para especificação</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card p-4 rounded-3 shadow bg-primary-subtle">
-                        <h3 class="fs-3 fw-semibold mb-4 text-primary">A Ideia Central</h3>
-                        <p class="fs-6 mb-3">
-                            Se as produções da gramática descrevem a estrutura do programa, por que não anotar essas mesmas produções com regras que descrevem o significado?
-                        </p>
-                        <div class="row row-cols-1 row-cols-md-2 g-3">
-                            <div class="col">
-                                <div class="p-2 bg-white rounded">
-                                    <strong>1. Atributos:</strong> Propriedades associadas aos símbolos gramaticais
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-2 bg-white rounded">
-                                    <strong>2. Regras Semânticas:</strong> Equações que definem como calcular atributos
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Compiler Context Section -->
-        <section id="contexto-compilador" class="py-5 bg-light">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. A Análise Semântica no Contexto do Compilador</h2>
-                    
-                    <p class="fs-5 text-muted mb-5">
-                        A análise semântica é a terceira fase do front-end de um compilador, posicionando-se logo após a análise sintática. Sua entrada principal é a Árvore Sintática Abstrata (AST).
-                    </p>
-
-                    <!-- Compiler Phases Diagram -->
-                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Fases do Compilador</h3>
-                        
-                        <div class="row row-cols-1 row-cols-md-5 g-3">
-                            <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-file-alt fs-2 text-muted mb-2"></i>
-                                    <h5 class="fs-6">Análise Léxica</h5>
-                                    <small class="text-muted">Tokens</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-sitemap fs-2 text-muted mb-2"></i>
-                                    <h5 class="fs-6">Análise Sintática</h5>
-                                    <small class="text-muted">AST</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="text-center p-3 bg-primary-subtle rounded">
-                                    <i class="fas fa-check-double fs-2 text-primary mb-2"></i>
-                                    <h5 class="fs-6 text-primary">Análise Semântica</h5>
-                                    <small class="text-primary">AST Atribuída</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-code fs-2 text-muted mb-2"></i>
-                                    <h5 class="fs-6">Código Intermediário</h5>
-                                    <small class="text-muted">TAC</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <i class="fas fa-microchip fs-2 text-muted mb-2"></i>
-                                    <h5 class="fs-6">Código Máquina</h5>
-                                    <small class="text-muted">Assembly</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- One-pass vs Multi-pass -->
-                    <div class="row row-cols-1 row-cols-md-2 g-4">
-                        <div class="col">
-                            <div class="card h-100 shadow">
-                                <div class="card-body">
-                                    <h4 class="fs-4 fw-semibold text-primary mb-3">Compiladores de Uma Passagem</h4>
-                                    <p class="fs-6 mb-3">
-                                        Intercalam análise léxica, sintática, semântica e geração de código em uma única travessia.
-                                    </p>
-                                    <div class="p-2 bg-success-subtle rounded mb-2">
-                                        <small><strong class="text-success">Vantagens:</strong> Extremamente rápidos</small>
-                                    </div>
-                                    <div class="p-2 bg-danger-subtle rounded">
-                                        <small><strong class="text-danger">Desvantagens:</strong> Restrições na linguagem</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100 shadow">
-                                <div class="card-body">
-                                    <h4 class="fs-4 fw-semibold text-success mb-3">Compiladores de Múltiplas Passagens</h4>
-                                    <p class="fs-6 mb-3">
-                                        Utilizam a AST como representação intermediária entre as fases.
-                                    </p>
-                                    <div class="p-2 bg-success-subtle rounded mb-2">
-                                        <small><strong class="text-success">Vantagens:</strong> Modular e flexível</small>
-                                    </div>
-                                    <div class="p-2 bg-warning-subtle rounded">
-                                        <small><strong class="text-warning">Adequado para:</strong> C++, Java</small>
+                                        <h4 class="fs-4 fw-semibold text-success mb-3">Compiladores de Múltiplas
+                                            Passagens</h4>
+                                        <p class="fs-6 mb-3">
+                                            Utilizam a AST como representação intermediária entre as fases.
+                                        </p>
+                                        <div class="p-2 bg-success-subtle rounded mb-2">
+                                            <small><strong class="text-success">Vantagens:</strong> Modular e
+                                                flexível</small>
+                                        </div>
+                                        <div class="p-2 bg-warning-subtle rounded">
+                                            <small><strong class="text-warning">Adequado para:</strong> C++,
+                                                Java</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Static vs Dynamic Semantics Section -->
-        <section id="estatica-dinamica" class="py-5 bg-white">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Semântica Estática vs. Dinâmica</h2>
-                    
-                    <p class="fs-5 text-muted mb-5">
-                        As regras semânticas de uma linguagem se dividem em duas categorias, que definem o que pode e o que não pode ser verificado antes da execução do programa.
-                    </p>
+            <!-- Static vs Dynamic Semantics Section -->
+            <section id="estatica-dinamica" class="py-5 bg-white">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Semântica Estática vs.
+                            Dinâmica</h2>
 
-                    <!-- Static Semantics -->
-                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Semântica Estática</h3>
-                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
-                            Regras verificadas em <strong>tempo de compilação</strong>, através da análise do código-fonte.
+                        <p class="fs-5 text-muted mb-5">
+                            As regras semânticas de uma linguagem se dividem em duas categorias, que definem o que pode
+                            e o que não pode ser verificado antes da execução do programa.
                         </p>
-                        
-                        <div class="row row-cols-1 row-cols-md-3 g-3">
-                            <div class="col">
-                                <div class="p-3 bg-white rounded">
-                                    <h5 class="fs-6 fw-semibold text-primary">Escopo e Declarações</h5>
-                                    <ul class="small mb-0">
-                                        <li>Variáveis declaradas</li>
-                                        <li>Identificadores únicos</li>
-                                        <li>Ocultação de escopo</li>
-                                    </ul>
+
+                        <!-- Static Semantics -->
+                        <div class="card p-4 rounded-3 shadow mb-5"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Semântica Estática</h3>
+                            <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                                Regras verificadas em <strong>tempo de compilação</strong>, através da análise do
+                                código-fonte.
+                            </p>
+
+                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-6 fw-semibold text-primary">Escopo e Declarações</h5>
+                                        <ul class="small mb-0">
+                                            <li>Variáveis declaradas</li>
+                                            <li>Identificadores únicos</li>
+                                            <li>Ocultação de escopo</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3 bg-white rounded">
-                                    <h5 class="fs-6 fw-semibold text-success">Verificações de Tipos</h5>
-                                    <ul class="small mb-0">
-                                        <li>Compatibilidade de operadores</li>
-                                        <li>Tipos em atribuições</li>
-                                        <li>Expressões condicionais</li>
-                                    </ul>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-6 fw-semibold text-success">Verificações de Tipos</h5>
+                                        <ul class="small mb-0">
+                                            <li>Compatibilidade de operadores</li>
+                                            <li>Tipos em atribuições</li>
+                                            <li>Expressões condicionais</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3 bg-white rounded">
-                                    <h5 class="fs-6 fw-semibold text-info">Controle de Fluxo</h5>
-                                    <ul class="small mb-0">
-                                        <li>break/continue em loops</li>
-                                        <li>return em funções</li>
-                                        <li>Labels de goto</li>
-                                    </ul>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded">
+                                        <h5 class="fs-6 fw-semibold text-info">Controle de Fluxo</h5>
+                                        <ul class="small mb-0">
+                                            <li>break/continue em loops</li>
+                                            <li>return em funções</li>
+                                            <li>Labels de goto</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Dynamic Semantics -->
-                    <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Semântica Dinâmica</h3>
-                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
-                            Aspectos que só podem ser determinados em <strong>tempo de execução</strong>.
-                        </p>
-                        
-                        <div class="row row-cols-1 row-cols-md-2 g-4">
-                            <div class="col">
-                                <div class="example-box">
-                                    <h5 class="fs-6 fw-semibold text-danger mb-2">Erros Aritméticos</h5>
-                                    <pre class="bg-light p-2 rounded small"><code>int divisor = obterValor();
+                        <!-- Dynamic Semantics -->
+                        <div class="card p-4 rounded-3 shadow bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Semântica Dinâmica</h3>
+                            <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                                Aspectos que só podem ser determinados em <strong>tempo de execução</strong>.
+                            </p>
+
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col">
+                                    <div class="example-box">
+                                        <h5 class="fs-6 fw-semibold text-danger mb-2">Erros Aritméticos</h5>
+                                        <pre class="bg-light p-2 rounded small"><code>int divisor = obterValor();
 int resultado = 100 / divisor;  // Erro se divisor == 0</code></pre>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="example-box">
-                                    <h5 class="fs-6 fw-semibold text-danger mb-2">Acesso à Memória</h5>
-                                    <pre class="bg-light p-2 rounded small"><code>int[] nums = new int[10];
+                                <div class="col">
+                                    <div class="example-box">
+                                        <h5 class="fs-6 fw-semibold text-danger mb-2">Acesso à Memória</h5>
+                                        <pre class="bg-light p-2 rounded small"><code>int[] nums = new int[10];
 int indice = calcularIndice();
 int valor = nums[indice];  // Erro se indice < 0 ou >= 10</code></pre>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="p-3 bg-warning-subtle rounded mt-3">
-                            <strong class="text-warning">Indecidibilidade:</strong>
-                            <span class="text-warning">O Problema da Parada de Turing prova que não existe algoritmo geral que possa determinar todos os erros de execução estaticamente.</span>
+
+                            <div class="p-3 bg-warning-subtle rounded mt-3">
+                                <strong class="text-warning">Indecidibilidade:</strong>
+                                <span class="text-warning">O Problema da Parada de Turing prova que não existe algoritmo
+                                    geral que possa determinar todos os erros de execução estaticamente.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Attribute Grammars Section -->
-        <section id="gramaticas-atributos" class="py-5 bg-light">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Gramáticas de Atributos</h2>
-                    
-                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição Formal</h3>
-                        <p class="fs-6 mb-4" style="color: var(--sage-700);">
-                            Uma Gramática de Atributos (AG) é uma tupla $AG = \{G, A, R\}$, onde:
+            <!-- Attribute Grammars Section -->
+            <section id="gramaticas-atributos" class="py-5 bg-light">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Gramáticas de Atributos
+                        </h2>
+
+                        <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Definição Formal</h3>
+                            <p class="fs-6 mb-4" style="color: var(--sage-700);">
+                                Uma Gramática de Atributos (AG) é uma tupla $AG = \{G, A, R\}$, onde:
+                            </p>
+
+                            <div class="formula-box">
+                                <ul class="list-unstyled mb-0">
+                                    <li><strong>$G$</strong>: Gramática Livre de Contexto $(N, T, P, S)$</li>
+                                    <li><strong>$A$</strong>: Conjunto de Atributos $= \bigcup_{X \in N \cup T} A(X)$
+                                    </li>
+                                    <li><strong>$R$</strong>: Conjunto de Regras Semânticas</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Synthesized vs Inherited Attributes -->
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="logic-component component-syntax">
+                                        <h4 class="fs-4 fw-semibold text-primary mb-2">Atributos Sintetizados</h4>
+                                        <p class="fs-6 mb-3 text-muted">
+                                            Valor calculado a partir dos filhos. Informação flui <strong>de baixo para
+                                                cima</strong>.
+                                        </p>
+                                        <div class="formula-box bg-primary-subtle">
+                                            <code>expr.valor = expr1.valor + term.valor</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="concept-card">
+                                    <div class="logic-component component-semantics">
+                                        <h4 class="fs-4 fw-semibold text-success mb-2">Atributos Herdados</h4>
+                                        <p class="fs-6 mb-3 text-muted">
+                                            Valor calculado a partir do pai ou irmãos. Informação flui <strong>de cima
+                                                para baixo</strong>.
+                                        </p>
+                                        <div class="formula-box bg-success-subtle">
+                                            <code>lista_vars.tipo = tipo.tipo_sintetizado</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example: Variable Declaration -->
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo: Declaração de Variáveis
+                            </h4>
+                            <p class="mb-3">Para processar <code>float x, y;</code>, o tipo deve ser distribuído para
+                                cada variável.</p>
+
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Produção</th>
+                                            <th>Regras Semânticas</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>Declaracao → Tipo ListaIDs</code></td>
+                                            <td><code>ListaIDs.tipo_herdado = Tipo.tipo</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>Tipo → float</code></td>
+                                            <td><code>Tipo.tipo = 'real'</code></td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>ListaIDs → ListaIDs₁, id</code></td>
+                                            <td><code>ListaIDs₁.tipo_herdado = ListaIDs.tipo_herdado</code><br>
+                                                <code>adicionar_tipo(id.lexval, ListaIDs.tipo_herdado)</code>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Classes of Attribute Grammars -->
+                        <div class="card p-4 rounded-3 shadow mt-5"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Classes de Gramáticas de
+                                Atributos</h3>
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Classe</th>
+                                            <th>Característica</th>
+                                            <th>Complexidade</th>
+                                            <th>Exemplo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="badge bg-primary">S-atribuída</span></td>
+                                            <td>Apenas atributos sintetizados</td>
+                                            <td>$O(n)$</td>
+                                            <td>Calculadoras</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge bg-success">L-atribuída</span></td>
+                                            <td>Restrições em atributos herdados</td>
+                                            <td>$O(n)$</td>
+                                            <td>C, Java</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge bg-warning">Não-circular</span></td>
+                                            <td>Ordem depende da árvore</td>
+                                            <td>$O(n^2)$</td>
+                                            <td>C++ templates</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="badge bg-danger">Circular</span></td>
+                                            <td>Possui ciclos</td>
+                                            <td>Indecidível</td>
+                                            <td>Não utilizável</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Type Checking Section -->
+            <section id="verificacao-tipos" class="py-5 bg-white">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Verificação de Tipos</h2>
+
+                        <p class="fs-5 text-muted mb-5">
+                            A verificação de tipos é a tarefa central da análise semântica, garantindo que os tipos de
+                            dados sejam usados de maneira consistente e segura.
                         </p>
-                        
-                        <div class="formula-box">
-                            <ul class="list-unstyled mb-0">
-                                <li><strong>$G$</strong>: Gramática Livre de Contexto $(N, T, P, S)$</li>
-                                <li><strong>$A$</strong>: Conjunto de Atributos $= \bigcup_{X \in N \cup T} A(X)$</li>
-                                <li><strong>$R$</strong>: Conjunto de Regras Semânticas</li>
-                            </ul>
-                        </div>
-                    </div>
 
-                    <!-- Synthesized vs Inherited Attributes -->
-                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
-                        <div class="col">
-                            <div class="concept-card">
-                                <div class="logic-component component-syntax">
-                                    <h4 class="fs-4 fw-semibold text-primary mb-2">Atributos Sintetizados</h4>
-                                    <p class="fs-6 mb-3 text-muted">
-                                        Valor calculado a partir dos filhos. Informação flui <strong>de baixo para cima</strong>.
-                                    </p>
-                                    <div class="formula-box bg-primary-subtle">
-                                        <code>expr.valor = expr1.valor + term.valor</code>
+                        <!-- Static vs Dynamic Typing -->
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                            <div class="col">
+                                <div class="card h-100 shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-4 fw-semibold text-primary mb-3">Tipagem Estática</h4>
+                                        <p class="fs-6">Verificação em <strong>tempo de compilação</strong></p>
+                                        <div class="mb-3">
+                                            <span class="badge bg-success me-2">Java</span>
+                                            <span class="badge bg-success me-2">C++</span>
+                                            <span class="badge bg-success me-2">Rust</span>
+                                            <span class="badge bg-success">Haskell</span>
+                                        </div>
+                                        <ul class="small">
+                                            <li>Detecção precoce de erros</li>
+                                            <li>Performance otimizada</li>
+                                            <li>Menos flexível</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card h-100 shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-4 fw-semibold text-warning mb-3">Tipagem Dinâmica</h4>
+                                        <p class="fs-6">Verificação em <strong>tempo de execução</strong></p>
+                                        <div class="mb-3">
+                                            <span class="badge bg-warning text-dark me-2">Python</span>
+                                            <span class="badge bg-warning text-dark me-2">JavaScript</span>
+                                            <span class="badge bg-warning text-dark me-2">Ruby</span>
+                                            <span class="badge bg-warning text-dark">LISP</span>
+                                        </div>
+                                        <ul class="small">
+                                            <li>Flexibilidade</li>
+                                            <li>Menos verboso</li>
+                                            <li>Erros em runtime</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="concept-card">
-                                <div class="logic-component component-semantics">
-                                    <h4 class="fs-4 fw-semibold text-success mb-2">Atributos Herdados</h4>
-                                    <p class="fs-6 mb-3 text-muted">
-                                        Valor calculado a partir do pai ou irmãos. Informação flui <strong>de cima para baixo</strong>.
-                                    </p>
-                                    <div class="formula-box bg-success-subtle">
-                                        <code>lista_vars.tipo = tipo.tipo_sintetizado</code>
+
+                        <!-- Type Judgment -->
+                        <div class="card p-4 rounded-3 shadow mb-5"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Julgamento de Tipo</h3>
+
+                            <div class="formula-box text-center">
+                                <h4>$$\Gamma \vdash e : \tau$$</h4>
+                            </div>
+
+                            <p class="fs-6 text-center mt-3" style="color: var(--sage-700);">
+                                "No contexto Γ, é possível provar que a expressão e tem o tipo τ"
+                            </p>
+
+                            <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded text-center">
+                                        <h5 class="fs-6 fw-semibold">Γ (Gama)</h5>
+                                        <small>Contexto/Tabela de Símbolos</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded text-center">
+                                        <h5 class="fs-6 fw-semibold">⊢ (Turnstile)</h5>
+                                        <small>Símbolo de derivação</small>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-3 bg-white rounded text-center">
+                                        <h5 class="fs-6 fw-semibold">e : τ</h5>
+                                        <small>Expressão tem tipo τ</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Example: Variable Declaration -->
-                    <div class="example-box">
-                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo: Declaração de Variáveis</h4>
-                        <p class="mb-3">Para processar <code>float x, y;</code>, o tipo deve ser distribuído para cada variável.</p>
-                        
-                        <div class="table-responsive">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Produção</th>
-                                        <th>Regras Semânticas</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><code>Declaracao → Tipo ListaIDs</code></td>
-                                        <td><code>ListaIDs.tipo_herdado = Tipo.tipo</code></td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>Tipo → float</code></td>
-                                        <td><code>Tipo.tipo = 'real'</code></td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>ListaIDs → ListaIDs₁, id</code></td>
-                                        <td><code>ListaIDs₁.tipo_herdado = ListaIDs.tipo_herdado</code><br>
-                                            <code>adicionar_tipo(id.lexval, ListaIDs.tipo_herdado)</code></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        <!-- Type Inference Rules -->
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Regras de Inferência de Tipos</h4>
 
-                    <!-- Classes of Attribute Grammars -->
-                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Classes de Gramáticas de Atributos</h3>
-                        
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Classe</th>
-                                        <th>Característica</th>
-                                        <th>Complexidade</th>
-                                        <th>Exemplo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><span class="badge bg-primary">S-atribuída</span></td>
-                                        <td>Apenas atributos sintetizados</td>
-                                        <td>$O(n)$</td>
-                                        <td>Calculadoras</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="badge bg-success">L-atribuída</span></td>
-                                        <td>Restrições em atributos herdados</td>
-                                        <td>$O(n)$</td>
-                                        <td>C, Java</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="badge bg-warning">Não-circular</span></td>
-                                        <td>Ordem depende da árvore</td>
-                                        <td>$O(n^2)$</td>
-                                        <td>C++ templates</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="badge bg-danger">Circular</span></td>
-                                        <td>Possui ciclos</td>
-                                        <td>Indecidível</td>
-                                        <td>Não utilizável</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="row row-cols-1 g-4">
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold text-primary">Regra da Variável</h5>
+                                    <div class="formula-box bg-light">
+                                        $$\frac{x : \tau \in \Gamma}{\Gamma \vdash x : \tau}$$
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold text-success">Regra da Aplicação</h5>
+                                    <div class="formula-box bg-light">
+                                        $$\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 :
+                                        \tau_1}{\Gamma \vdash e_1 \, e_2 : \tau_2}$$
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h5 class="fs-6 fw-semibold text-info">Regra do Operador</h5>
+                                    <div class="formula-box bg-light">
+                                        $$\frac{\Gamma \vdash e_1 : \text{int} \quad \Gamma \vdash e_2 :
+                                        \text{int}}{\Gamma \vdash e_1 + e_2 : \text{int}}$$
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Type Checking Section -->
-        <section id="verificacao-tipos" class="py-5 bg-white">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Verificação de Tipos</h2>
-                    
-                    <p class="fs-5 text-muted mb-5">
-                        A verificação de tipos é a tarefa central da análise semântica, garantindo que os tipos de dados sejam usados de maneira consistente e segura.
-                    </p>
+            <!-- Implementation Section -->
+            <section id="implementacao" class="py-5 bg-light">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Implementação Prática:
+                            Mini-Linguagem Langarit</h2>
 
-                    <!-- Static vs Dynamic Typing -->
-                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
-                        <div class="col">
-                            <div class="card h-100 shadow">
-                                <div class="card-body">
-                                    <h4 class="fs-4 fw-semibold text-primary mb-3">Tipagem Estática</h4>
-                                    <p class="fs-6">Verificação em <strong>tempo de compilação</strong></p>
-                                    <div class="mb-3">
-                                        <span class="badge bg-success me-2">Java</span>
-                                        <span class="badge bg-success me-2">C++</span>
-                                        <span class="badge bg-success me-2">Rust</span>
-                                        <span class="badge bg-success">Haskell</span>
-                                    </div>
-                                    <ul class="small">
-                                        <li>✓ Detecção precoce de erros</li>
-                                        <li>✓ Performance otimizada</li>
-                                        <li>✗ Menos flexível</li>
+                        <p class="fs-5 text-muted mb-5">
+                            Aplicaremos os conceitos construindo um analisador semântico completo para uma linguagem de
+                            expressões aritméticas.
+                        </p>
+
+                        <!-- Language Features -->
+                        <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Características de
+                                Langarit</h3>
+
+                            <div class="row row-cols-1 row-cols-md-2 g-4">
+                                <div class="col">
+                                    <h5 class="fs-5 fw-semibold text-primary">Suportado</h5>
+                                    <ul>
+                                        <li>Declarações de variáveis (<code>int</code>, <code>float</code>)</li>
+                                        <li>Expressões aritméticas (+, -, *, /)</li>
+                                        <li>Atribuições de valores</li>
+                                        <li>Literais numéricos</li>
+                                    </ul>
+                                </div>
+                                <div class="col">
+                                    <h5 class="fs-5 fw-semibold text-danger">Erros Detectados</h5>
+                                    <ul>
+                                        <li>Variável não declarada</li>
+                                        <li>Atribuição de float a int</li>
+                                        <li>Divisão por zero literal</li>
+                                        <li>Redeclaração de variável</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card h-100 shadow">
-                                <div class="card-body">
-                                    <h4 class="fs-4 fw-semibold text-warning mb-3">Tipagem Dinâmica</h4>
-                                    <p class="fs-6">Verificação em <strong>tempo de execução</strong></p>
-                                    <div class="mb-3">
-                                        <span class="badge bg-warning text-dark me-2">Python</span>
-                                        <span class="badge bg-warning text-dark me-2">JavaScript</span>
-                                        <span class="badge bg-warning text-dark me-2">Ruby</span>
-                                        <span class="badge bg-warning text-dark">LISP</span>
-                                    </div>
-                                    <ul class="small">
-                                        <li>✓ Flexibilidade</li>
-                                        <li>✓ Menos verboso</li>
-                                        <li>✗ Erros em runtime</li>
-                                    </ul>
-                                </div>
+
+                        <!-- Grammar -->
+                        <div class="card p-4 rounded-3 shadow mb-5"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Gramática de Langarit</h3>
+
+                            <div class="formula-box bg-white">
+                                $$\begin{align*}
+                                \text{Programa} & \rightarrow \text{Declarações} \; \text{Comandos} \\
+                                \text{Declaração} & \rightarrow \text{Tipo} \; \textbf{id} \; \textbf{;} \\
+                                \text{Tipo} & \rightarrow \textbf{int} \mid \textbf{float} \\
+                                \text{Comando} & \rightarrow \textbf{id} \; \textbf{=} \; \text{Expr} \; \textbf{;} \\
+                                \text{Expr} & \rightarrow \text{Expr} \; \textbf{+} \; \text{Term} \mid \text{Term} \\
+                                \text{Term} & \rightarrow \text{Term} \; \textbf{*} \; \text{Factor} \mid \text{Factor}
+                                \\
+                                \text{Factor} & \rightarrow \textbf{id} \mid \textbf{num}
+                                \end{align*}$$
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Type Judgment -->
-                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Julgamento de Tipo</h3>
-                        
-                        <div class="formula-box text-center">
-                            <h4>$$\Gamma \vdash e : \tau$$</h4>
-                        </div>
-                        
-                        <p class="fs-6 text-center mt-3" style="color: var(--sage-700);">
-                            "No contexto Γ, é possível provar que a expressão e tem o tipo τ"
-                        </p>
-                        
-                        <div class="row row-cols-1 row-cols-md-3 g-3 mt-4">
-                            <div class="col">
-                                <div class="p-3 bg-white rounded text-center">
-                                    <h5 class="fs-6 fw-semibold">Γ (Gama)</h5>
-                                    <small>Contexto/Tabela de Símbolos</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3 bg-white rounded text-center">
-                                    <h5 class="fs-6 fw-semibold">⊢ (Turnstile)</h5>
-                                    <small>Símbolo de derivação</small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3 bg-white rounded text-center">
-                                    <h5 class="fs-6 fw-semibold">e : τ</h5>
-                                    <small>Expressão tem tipo τ</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- Implementation Example -->
+                        <div class="example-box">
+                            <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo de Implementação (Python)
+                            </h4>
 
-                    <!-- Type Inference Rules -->
-                    <div class="example-box">
-                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Regras de Inferência de Tipos</h4>
-                        
-                        <div class="row row-cols-1 g-4">
-                            <div class="col">
-                                <h5 class="fs-6 fw-semibold text-primary">Regra da Variável</h5>
-                                <div class="formula-box bg-light">
-                                    $$\frac{x : \tau \in \Gamma}{\Gamma \vdash x : \tau}$$
-                                </div>
-                            </div>
-                            <div class="col">
-                                <h5 class="fs-6 fw-semibold text-success">Regra da Aplicação</h5>
-                                <div class="formula-box bg-light">
-                                    $$\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1 \, e_2 : \tau_2}$$
-                                </div>
-                            </div>
-                            <div class="col">
-                                <h5 class="fs-6 fw-semibold text-info">Regra do Operador</h5>
-                                <div class="formula-box bg-light">
-                                    $$\frac{\Gamma \vdash e_1 : \text{int} \quad \Gamma \vdash e_2 : \text{int}}{\Gamma \vdash e_1 + e_2 : \text{int}}$$
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Implementation Section -->
-        <section id="implementacao" class="py-5 bg-light">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Implementação Prática: Mini-Linguagem Langarit</h2>
-                    
-                    <p class="fs-5 text-muted mb-5">
-                        Aplicaremos os conceitos construindo um analisador semântico completo para uma linguagem de expressões aritméticas.
-                    </p>
-
-                    <!-- Language Features -->
-                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Características de Langarit</h3>
-                        
-                        <div class="row row-cols-1 row-cols-md-2 g-4">
-                            <div class="col">
-                                <h5 class="fs-5 fw-semibold text-primary">Suportado</h5>
-                                <ul>
-                                    <li>Declarações de variáveis (<code>int</code>, <code>float</code>)</li>
-                                    <li>Expressões aritméticas (+, -, *, /)</li>
-                                    <li>Atribuições de valores</li>
-                                    <li>Literais numéricos</li>
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <h5 class="fs-5 fw-semibold text-danger">Erros Detectados</h5>
-                                <ul>
-                                    <li>Variável não declarada</li>
-                                    <li>Atribuição de float a int</li>
-                                    <li>Divisão por zero literal</li>
-                                    <li>Redeclaração de variável</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Grammar -->
-                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Gramática de Langarit</h3>
-                        
-                        <div class="formula-box bg-white">
-                            $$\begin{align*}
-                            \text{Programa} & \rightarrow \text{Declarações} \; \text{Comandos} \\
-                            \text{Declaração} & \rightarrow \text{Tipo} \; \textbf{id} \; \textbf{;} \\
-                            \text{Tipo} & \rightarrow \textbf{int} \mid \textbf{float} \\
-                            \text{Comando} & \rightarrow \textbf{id} \; \textbf{=} \; \text{Expr} \; \textbf{;} \\
-                            \text{Expr} & \rightarrow \text{Expr} \; \textbf{+} \; \text{Term} \mid \text{Term} \\
-                            \text{Term} & \rightarrow \text{Term} \; \textbf{*} \; \text{Factor} \mid \text{Factor} \\
-                            \text{Factor} & \rightarrow \textbf{id} \mid \textbf{num}
-                            \end{align*}$$
-                        </div>
-                    </div>
-
-                    <!-- Implementation Example -->
-                    <div class="example-box">
-                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Exemplo de Implementação (Python)</h4>
-                        
-                        <pre class="bg-light p-3 rounded"><code class="language-python">class AnalisadorSemantico:
+                            <pre class="bg-light p-3 rounded"><code class="language-python">class AnalisadorSemantico:
     def __init__(self):
         self.tabela = TabelaSimbolos()
         self.erros = []
@@ -878,247 +996,260 @@ int valor = nums[indice];  // Erro se indice < 0 ou >= 10</code></pre>
         if tipo1 == "float" or tipo2 == "float":
             return "float"
         return "int"</code></pre>
-                    </div>
+                        </div>
 
-                    <!-- Example Programs -->
-                    <div class="row row-cols-1 row-cols-md-2 g-4">
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-header bg-success text-white">
-                                    <h5 class="mb-0">✓ Programa Válido</h5>
-                                </div>
-                                <div class="card-body">
-                                    <pre class="small mb-0"><code>int x;
+                        <!-- Example Programs -->
+                        <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="card-header bg-success text-white">
+                                        <h5 class="mb-0">Programa Válido</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre class="small mb-0"><code>int x;
 float y;
 x = 10;
 y = 3.14;
 x = x + 5;
 y = y * 2.0;</code></pre>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-header bg-danger text-white">
-                                    <h5 class="mb-0">✗ Programa com Erros</h5>
-                                </div>
-                                <div class="card-body">
-                                    <pre class="small mb-0"><code>x = 10;        # x não declarado
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="card-header bg-danger text-white">
+                                        <h5 class="mb-0">Programa com Erros</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <pre class="small mb-0"><code>x = 10;        # x não declarado
 int x;
 x = 3.14;      # float para int
 int y;
 y = x / 0;     # divisão por zero</code></pre>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Intermediate Code Section -->
-        <section id="codigo-intermediario" class="py-5 bg-white">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. A Ponte para a Geração de Código Intermediário</h2>
-                    
-                    <p class="fs-5 text-muted mb-5">
-                        A análise semântica marca o fim da fase de análise do compilador. A AST, agora ricamente atribuída com informações de tipo e escopo, está pronta para ser entregue à fase de síntese.
-                    </p>
+            <!-- Intermediate Code Section -->
+            <section id="codigo-intermediario" class="py-5 bg-white">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. A Ponte para a Geração de
+                            Código Intermediário</h2>
 
-                    <!-- TAC Example -->
-                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Código de Três Endereços (TAC)</h3>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5 class="fs-6 fw-semibold mb-3">Código Fonte</h5>
-                                <pre class="bg-white p-3 rounded"><code>w = (a + b) * c;</code></pre>
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="fs-6 fw-semibold mb-3">Código TAC Gerado</h5>
-                                <pre class="bg-white p-3 rounded"><code>t1 = a + b
+                        <p class="fs-5 text-muted mb-5">
+                            A análise semântica marca o fim da fase de análise do compilador. A AST, agora ricamente
+                            atribuída com informações de tipo e escopo, está pronta para ser entregue à fase de síntese.
+                        </p>
+
+                        <!-- TAC Example -->
+                        <div class="card p-4 rounded-3 shadow mb-5"
+                            style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Código de Três Endereços
+                                (TAC)</h3>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="fs-6 fw-semibold mb-3">Código Fonte</h5>
+                                    <pre class="bg-white p-3 rounded"><code>w = (a + b) * c;</code></pre>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="fs-6 fw-semibold mb-3">Código TAC Gerado</h5>
+                                    <pre class="bg-white p-3 rounded"><code>t1 = a + b
 t2 = t1 * c
 w = t2</code></pre>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- TAC Process -->
-                    <div class="card p-4 rounded-3 shadow bg-white">
-                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Processo de Geração</h3>
-                        
-                        <div class="row row-cols-1 g-3">
-                            <div class="col">
-                                <div class="step">
-                                    <div class="step-number">1</div>
-                                    <div>
-                                        <strong>Travessia da AST:</strong> Percorremos a árvore recursivamente
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="step">
-                                    <div class="step-number">2</div>
-                                    <div>
-                                        <strong>Geração de temporárias:</strong> Criamos variáveis t1, t2 para resultados intermediários
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="step">
-                                    <div class="step-number">3</div>
-                                    <div>
-                                        <strong>Emissão de instruções:</strong> Geramos instruções de três endereços
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="step">
-                                    <div class="step-number">4</div>
-                                    <div>
-                                        <strong>Linearização:</strong> Transformamos estrutura hierárquica em sequência linear
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <!-- TAC Process -->
+                        <div class="card p-4 rounded-3 shadow bg-white">
+                            <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Processo de Geração</h3>
 
-                    <!-- Benefits of TAC -->
-                    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
-                        <div class="col">
-                            <div class="text-center">
-                                <i class="fas fa-layer-group fs-2 text-primary mb-3"></i>
-                                <h5 class="fs-6 fw-semibold">Modularidade</h5>
-                                <p class="small">Separa front-end do back-end</p>
+                            <div class="row row-cols-1 g-3">
+                                <div class="col">
+                                    <div class="step">
+                                        <div class="step-number">1</div>
+                                        <div>
+                                            <strong>Travessia da AST:</strong> Percorremos a árvore recursivamente
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="step">
+                                        <div class="step-number">2</div>
+                                        <div>
+                                            <strong>Geração de temporárias:</strong> Criamos variáveis t1, t2 para
+                                            resultados intermediários
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="step">
+                                        <div class="step-number">3</div>
+                                        <div>
+                                            <strong>Emissão de instruções:</strong> Geramos instruções de três endereços
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="step">
+                                        <div class="step-number">4</div>
+                                        <div>
+                                            <strong>Linearização:</strong> Transformamos estrutura hierárquica em
+                                            sequência linear
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="text-center">
-                                <i class="fas fa-exchange-alt fs-2 text-success mb-3"></i>
-                                <h5 class="fs-6 fw-semibold">Portabilidade</h5>
-                                <p class="small">Facilita suporte a múltiplas arquiteturas</p>
+
+                        <!-- Benefits of TAC -->
+                        <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                            <div class="col">
+                                <div class="text-center">
+                                    <i class="fas fa-layer-group fs-2 text-primary mb-3"></i>
+                                    <h5 class="fs-6 fw-semibold">Modularidade</h5>
+                                    <p class="small">Separa front-end do back-end</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="text-center">
-                                <i class="fas fa-tachometer-alt fs-2 text-warning mb-3"></i>
-                                <h5 class="fs-6 fw-semibold">Otimização</h5>
-                                <p class="small">Base para otimizações independentes</p>
+                            <div class="col">
+                                <div class="text-center">
+                                    <i class="fas fa-exchange-alt fs-2 text-success mb-3"></i>
+                                    <h5 class="fs-6 fw-semibold">Portabilidade</h5>
+                                    <p class="small">Facilita suporte a múltiplas arquiteturas</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="text-center">
+                                    <i class="fas fa-tachometer-alt fs-2 text-warning mb-3"></i>
+                                    <h5 class="fs-6 fw-semibold">Otimização</h5>
+                                    <p class="small">Base para otimizações independentes</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Exercises Section -->
-        <section id="exercicios" class="py-5 bg-light">
-            <div class="container">
-                <div class="mx-auto fade-in" style="max-width: 64rem;">
-                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Exercícios</h2>
-                    
-                    <!-- Exercise 1 -->
-                    <div class="card mb-4 shadow">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Exercício 1: Semântica Básica</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-3"><strong>Dado o programa:</strong></p>
-                            <pre class="bg-light p-3 rounded mb-3"><code>x := 3;
+            <!-- Exercises Section -->
+            <section id="exercicios" class="py-5 bg-light">
+                <div class="container">
+                    <div class="mx-auto fade-in" style="max-width: 64rem;">
+                        <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Exercícios</h2>
+
+                        <!-- Exercise 1 -->
+                        <div class="card mb-4 shadow">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">Exercício 1: Semântica Básica</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-3"><strong>Dado o programa:</strong></p>
+                                <pre class="bg-light p-3 rounded mb-3"><code>x := 3;
 y := x * 2;
 x := x + y;</code></pre>
-                            <p class="mb-3"><strong>Trace a execução usando semântica denotacional.</strong></p>
-                            
-                            <div class="p-3 bg-success-subtle rounded">
-                                <h6 class="text-success">Solução:</h6>
-                                <ul class="mb-0">
-                                    <li>$\sigma_0 = \{\}$ (estado inicial)</li>
-                                    <li>$\sigma_1 = \{x \mapsto 3\}$</li>
-                                    <li>$\sigma_2 = \{x \mapsto 3, y \mapsto 6\}$</li>
-                                    <li>$\sigma_3 = \{x \mapsto 9, y \mapsto 6\}$</li>
-                                </ul>
+                                <p class="mb-3"><strong>Trace a execução usando semântica denotacional.</strong></p>
+
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h6 class="text-success">Solução:</h6>
+                                    <ul class="mb-0">
+                                        <li>$\sigma_0 = \{\}$ (estado inicial)</li>
+                                        <li>$\sigma_1 = \{x \mapsto 3\}$</li>
+                                        <li>$\sigma_2 = \{x \mapsto 3, y \mapsto 6\}$</li>
+                                        <li>$\sigma_3 = \{x \mapsto 9, y \mapsto 6\}$</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Exercise 2 -->
-                    <div class="card mb-4 shadow">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0">Exercício 2: Análise de Tipos</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-3"><strong>Verifique se o programa está bem tipado:</strong></p>
-                            <pre class="bg-light p-3 rounded mb-3"><code>int x = 5;
+                        <!-- Exercise 2 -->
+                        <div class="card mb-4 shadow">
+                            <div class="card-header bg-success text-white">
+                                <h5 class="mb-0">Exercício 2: Análise de Tipos</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-3"><strong>Verifique se o programa está bem tipado:</strong></p>
+                                <pre class="bg-light p-3 rounded mb-3"><code>int x = 5;
 bool b = (x > 0);
 int y = if b then x + 1 else x - 1;</code></pre>
-                            
-                            <div class="p-3 bg-success-subtle rounded">
-                                <h6 class="text-success">Solução:</h6>
-                                <p class="mb-2">✓ Programa bem tipado!</p>
-                                <ol class="small mb-0">
-                                    <li>$x : \text{int}$</li>
-                                    <li>$x > 0 : \text{bool}$ (comparação de inteiros)</li>
-                                    <li>$b : \text{bool}$</li>
-                                    <li>$x + 1 : \text{int}$</li>
-                                    <li>$x - 1 : \text{int}$</li>
-                                    <li>$\text{if } b \text{ then int else int} : \text{int}$</li>
-                                    <li>$y : \text{int}$</li>
+
+                                <div class="p-3 bg-success-subtle rounded">
+                                    <h6 class="text-success">Solução:</h6>
+                                    <p class="mb-2">Programa bem tipado!</p>
+                                    <ol class="small mb-0">
+                                        <li>$x : \text{int}$</li>
+                                        <li>$x > 0 : \text{bool}$ (comparação de inteiros)</li>
+                                        <li>$b : \text{bool}$</li>
+                                        <li>$x + 1 : \text{int}$</li>
+                                        <li>$x - 1 : \text{int}$</li>
+                                        <li>$\text{if } b \text{ then int else int} : \text{int}$</li>
+                                        <li>$y : \text{int}$</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exercise 3 -->
+                        <div class="card shadow">
+                            <div class="card-header bg-warning text-dark">
+                                <h5 class="mb-0">Exercício 3: Otimização</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-3"><strong>Identifique otimizações possíveis:</strong></p>
+                                <pre class="bg-light p-3 rounded mb-3"><code>x := 10;
+y := x + 0;
+z := y * 1;
+w := z - z;</code></pre>
+
+                                <div class="p-3 bg-warning-subtle rounded">
+                                    <h6 class="text-warning">Solução:</h6>
+                                    <p class="mb-2">Aplicando regras semânticas de identidade:</p>
+                                    <pre class="small mb-0"><code>x := 10;
+y := x;    # x + 0 → x
+z := y;    # y * 1 → y
+w := 0;    # z - z → 0</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proposed Extensions -->
+                        <div class="card mt-5 shadow">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">Exercícios Propostos para Extensão</h5>
+                            </div>
+                            <div class="card-body">
+                                <ol>
+                                    <li class="mb-2"><strong>Operadores Relacionais:</strong> Adicione suporte para
+                                        &lt;, &gt;, &lt;=, &gt;=, ==, !=</li>
+                                    <li class="mb-2"><strong>Comandos Condicionais:</strong> Implemente if-else com
+                                        verificação de tipo booleano</li>
+                                    <li class="mb-2"><strong>Múltiplas Declarações:</strong> Suporte
+                                        <code>int x, y, z;</code></li>
+                                    <li class="mb-2"><strong>Verificação de Inicialização:</strong> Detecte uso de
+                                        variáveis não inicializadas</li>
+                                    <li class="mb-2"><strong>Funções e Escopo:</strong> Adicione funções com parâmetros
+                                        e variáveis locais</li>
+                                    <li><strong>Mensagens de Erro:</strong> Melhore com números de linha e sugestões
+                                    </li>
                                 </ol>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Exercise 3 -->
-                    <div class="card shadow">
-                        <div class="card-header bg-warning text-dark">
-                            <h5 class="mb-0">Exercício 3: Otimização</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="mb-3"><strong>Identifique otimizações possíveis:</strong></p>
-                            <pre class="bg-light p-3 rounded mb-3"><code>x := 10;
-y := x + 0;
-z := y * 1;
-w := z - z;</code></pre>
-                            
-                            <div class="p-3 bg-warning-subtle rounded">
-                                <h6 class="text-warning">Solução:</h6>
-                                <p class="mb-2">Aplicando regras semânticas de identidade:</p>
-                                <pre class="small mb-0"><code>x := 10;
-y := x;    # x + 0 → x
-z := y;    # y * 1 → y
-w := 0;    # z - z → 0</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Proposed Extensions -->
-                    <div class="card mt-5 shadow">
-                        <div class="card-header bg-info text-white">
-                            <h5 class="mb-0">Exercícios Propostos para Extensão</h5>
-                        </div>
-                        <div class="card-body">
-                            <ol>
-                                <li class="mb-2"><strong>Operadores Relacionais:</strong> Adicione suporte para <, >, <=, >=, ==, !=</li>
-                                <li class="mb-2"><strong>Comandos Condicionais:</strong> Implemente if-else com verificação de tipo booleano</li>
-                                <li class="mb-2"><strong>Múltiplas Declarações:</strong> Suporte <code>int x, y, z;</code></li>
-                                <li class="mb-2"><strong>Verificação de Inicialização:</strong> Detecte uso de variáveis não inicializadas</li>
-                                <li class="mb-2"><strong>Funções e Escopo:</strong> Adicione funções com parâmetros e variáveis locais</li>
-                                <li><strong>Mensagens de Erro:</strong> Melhore com números de linha e sugestões</li>
-                            </ol>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Footer -->
-        <footer class="py-5 bg-dark text-white">
-            <div class="container text-center">
-                <p class="mb-0">© 2024 - Analisadores Semânticos: A Determinação do Significado</p>
-                <p class="mb-0 mt-2"><small>Material educacional sobre compiladores e análise semântica</small></p>
-            </div>
-        </footer>
-    </main>
-</body>
+            <!-- Footer -->
+            <footer class="py-5 bg-dark text-white">
+                <div class="container text-center">
+                    <p class="mb-0">© 2024 - Analisadores Semânticos: A Determinação do Significado</p>
+                    <p class="mb-0 mt-2"><small>Material educacional sobre compiladores e análise semântica</small></p>
+                </div>
+            </footer>
+        </main>
+    </body>
+
 </html>
