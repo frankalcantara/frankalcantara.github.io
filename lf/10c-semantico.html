@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 13&nbsp; O Sistema de Tipos Hindley-Milner</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-tabelaSimbolos.html" rel="next">
+<link href="./10b-semantico.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./10c-semantico.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#introdução-a-joia-da-teoria-dos-tipos" id="toc-introdução-a-joia-da-teoria-dos-tipos" class="nav-link active" data-scroll-target="#introdução-a-joia-da-teoria-dos-tipos"><span class="header-section-number">13.1</span> Introdução: A Joia da Teoria dos Tipos</a></li>
+  <li><a href="#fundamentos-matemáticos-a-estrutura-do-sistema" id="toc-fundamentos-matemáticos-a-estrutura-do-sistema" class="nav-link" data-scroll-target="#fundamentos-matemáticos-a-estrutura-do-sistema"><span class="header-section-number">13.2</span> Fundamentos Matemáticos: A Estrutura do Sistema</a>
+  <ul class="collapse">
+  <li><a href="#sintaxe-dos-tipos" id="toc-sintaxe-dos-tipos" class="nav-link" data-scroll-target="#sintaxe-dos-tipos"><span class="header-section-number">13.2.1</span> Sintaxe dos Tipos</a></li>
+  <li><a href="#contexto-de-tipagem" id="toc-contexto-de-tipagem" class="nav-link" data-scroll-target="#contexto-de-tipagem"><span class="header-section-number">13.2.2</span> Contexto de Tipagem</a></li>
+  <li><a href="#variáveis-de-tipo-livres" id="toc-variáveis-de-tipo-livres" class="nav-link" data-scroll-target="#variáveis-de-tipo-livres"><span class="header-section-number">13.2.3</span> Variáveis de Tipo Livres</a></li>
+  </ul></li>
+  <li><a href="#regras-de-julgamento-de-tipo" id="toc-regras-de-julgamento-de-tipo" class="nav-link" data-scroll-target="#regras-de-julgamento-de-tipo"><span class="header-section-number">13.3</span> Regras de Julgamento de Tipo</a>
+  <ul class="collapse">
+  <li><a href="#regras-fundamentais" id="toc-regras-fundamentais" class="nav-link" data-scroll-target="#regras-fundamentais"><span class="header-section-number">13.3.1</span> Regras Fundamentais</a></li>
+  <li><a href="#exemplo-de-derivação-função-identidade" id="toc-exemplo-de-derivação-função-identidade" class="nav-link" data-scroll-target="#exemplo-de-derivação-função-identidade"><span class="header-section-number">13.3.2</span> Exemplo de Derivação: Função Identidade</a></li>
+  <li><a href="#exemplo-de-derivação-aplicação-polimórfica" id="toc-exemplo-de-derivação-aplicação-polimórfica" class="nav-link" data-scroll-target="#exemplo-de-derivação-aplicação-polimórfica"><span class="header-section-number">13.3.3</span> Exemplo de Derivação: Aplicação Polimórfica</a></li>
+  </ul></li>
+  <li><a href="#unificação-o-coração-do-sistema" id="toc-unificação-o-coração-do-sistema" class="nav-link" data-scroll-target="#unificação-o-coração-do-sistema"><span class="header-section-number">13.4</span> Unificação: O Coração do Sistema</a>
+  <ul class="collapse">
+  <li><a href="#substituições" id="toc-substituições" class="nav-link" data-scroll-target="#substituições"><span class="header-section-number">13.4.1</span> Substituições</a></li>
+  <li><a href="#algoritmo-de-unificação" id="toc-algoritmo-de-unificação" class="nav-link" data-scroll-target="#algoritmo-de-unificação"><span class="header-section-number">13.4.2</span> Algoritmo de Unificação</a></li>
+  </ul></li>
+  <li><a href="#o-algoritmo-w-inferência-sintaxe-dirigida" id="toc-o-algoritmo-w-inferência-sintaxe-dirigida" class="nav-link" data-scroll-target="#o-algoritmo-w-inferência-sintaxe-dirigida"><span class="header-section-number">13.5</span> O Algoritmo W: Inferência Sintaxe-Dirigida</a>
+  <ul class="collapse">
+  <li><a href="#estrutura-do-algoritmo" id="toc-estrutura-do-algoritmo" class="nav-link" data-scroll-target="#estrutura-do-algoritmo"><span class="header-section-number">13.5.1</span> Estrutura do Algoritmo</a></li>
+  <li><a href="#pseudocódigo-completo" id="toc-pseudocódigo-completo" class="nav-link" data-scroll-target="#pseudocódigo-completo"><span class="header-section-number">13.5.2</span> Pseudocódigo Completo</a></li>
+  <li><a href="#traço-de-execução-exemplo-completo" id="toc-traço-de-execução-exemplo-completo" class="nav-link" data-scroll-target="#traço-de-execução-exemplo-completo"><span class="header-section-number">13.5.3</span> Traço de Execução: Exemplo Completo</a></li>
+  <li><a href="#propriedades-do-algoritmo-w" id="toc-propriedades-do-algoritmo-w" class="nav-link" data-scroll-target="#propriedades-do-algoritmo-w"><span class="header-section-number">13.5.4</span> Propriedades do Algoritmo W</a></li>
+  </ul></li>
+  <li><a href="#complexidade-computacional" id="toc-complexidade-computacional" class="nav-link" data-scroll-target="#complexidade-computacional"><span class="header-section-number">13.6</span> Complexidade Computacional</a>
+  <ul class="collapse">
+  <li><a href="#análise-do-algoritmo-w" id="toc-análise-do-algoritmo-w" class="nav-link" data-scroll-target="#análise-do-algoritmo-w"><span class="header-section-number">13.6.1</span> Análise do Algoritmo W</a></li>
+  <li><a href="#prática-vs.-teoria" id="toc-prática-vs.-teoria" class="nav-link" data-scroll-target="#prática-vs.-teoria"><span class="header-section-number">13.6.2</span> Prática vs.&nbsp;Teoria</a></li>
+  </ul></li>
+  <li><a href="#algoritmo-m-uma-alternativa" id="toc-algoritmo-m-uma-alternativa" class="nav-link" data-scroll-target="#algoritmo-m-uma-alternativa"><span class="header-section-number">13.7</span> Algoritmo M: Uma Alternativa</a>
+  <ul class="collapse">
+  <li><a href="#pseudocódigo-do-algoritmo-m" id="toc-pseudocódigo-do-algoritmo-m" class="nav-link" data-scroll-target="#pseudocódigo-do-algoritmo-m"><span class="header-section-number">13.7.1</span> Pseudocódigo do Algoritmo M</a></li>
+  </ul></li>
+  <li><a href="#algoritmo-j-baseado-em-constraint-solving" id="toc-algoritmo-j-baseado-em-constraint-solving" class="nav-link" data-scroll-target="#algoritmo-j-baseado-em-constraint-solving"><span class="header-section-number">13.8</span> Algoritmo J: Baseado em Constraint Solving</a></li>
+  <li><a href="#implementação-prática-em-python" id="toc-implementação-prática-em-python" class="nav-link" data-scroll-target="#implementação-prática-em-python"><span class="header-section-number">13.9</span> Implementação Prática em Python</a></li>
+  <li><a href="#extensões-modernas-do-sistema-hm" id="toc-extensões-modernas-do-sistema-hm" class="nav-link" data-scroll-target="#extensões-modernas-do-sistema-hm"><span class="header-section-number">13.10</span> Extensões Modernas do Sistema HM</a>
+  <ul class="collapse">
+  <li><a href="#type-classes-haskell" id="toc-type-classes-haskell" class="nav-link" data-scroll-target="#type-classes-haskell"><span class="header-section-number">13.10.1</span> Type Classes (Haskell)</a></li>
+  <li><a href="#higher-rank-types" id="toc-higher-rank-types" class="nav-link" data-scroll-target="#higher-rank-types"><span class="header-section-number">13.10.2</span> Higher-Rank Types</a></li>
+  <li><a href="#gadts-generalized-algebraic-data-types" id="toc-gadts-generalized-algebraic-data-types" class="nav-link" data-scroll-target="#gadts-generalized-algebraic-data-types"><span class="header-section-number">13.10.3</span> GADTs (Generalized Algebraic Data Types)</a></li>
+  </ul></li>
+  <li><a href="#limitações-e-o-teorema-da-indecidibilidade" id="toc-limitações-e-o-teorema-da-indecidibilidade" class="nav-link" data-scroll-target="#limitações-e-o-teorema-da-indecidibilidade"><span class="header-section-number">13.11</span> Limitações e o Teorema da Indecidibilidade</a>
+  <ul class="collapse">
+  <li><a href="#limitações-fundamentais-do-hm" id="toc-limitações-fundamentais-do-hm" class="nav-link" data-scroll-target="#limitações-fundamentais-do-hm"><span class="header-section-number">13.11.1</span> Limitações Fundamentais do HM</a></li>
+  <li><a href="#o-trade-off-fundamental" id="toc-o-trade-off-fundamental" class="nav-link" data-scroll-target="#o-trade-off-fundamental"><span class="header-section-number">13.11.2</span> O Trade-off Fundamental</a></li>
+  </ul></li>
+  <li><a href="#comparação-hm-vs.-outros-sistemas" id="toc-comparação-hm-vs.-outros-sistemas" class="nav-link" data-scroll-target="#comparação-hm-vs.-outros-sistemas"><span class="header-section-number">13.12</span> Comparação: <strong>HM</strong> vs.&nbsp;Outros Sistemas</a></li>
+  <li><a href="#conclusão-o-legado-de-hindley-milner" id="toc-conclusão-o-legado-de-hindley-milner" class="nav-link" data-scroll-target="#conclusão-o-legado-de-hindley-milner"><span class="header-section-number">13.13</span> Conclusão: O Legado de Hindley-Milner</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10c-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./10c-semantico.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-hindley-milner" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução-a-joia-da-teoria-dos-tipos" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introdução-a-joia-da-teoria-dos-tipos"><span class="header-section-number">13.1</span> Introdução: A Joia da Teoria dos Tipos</h2>
+<p>O sistema de tipos <strong>Hindley-Milner (HM)</strong>, também conhecido como <strong>Damas-Milner</strong> ou <strong>Damas-Hindley-Milner</strong>, representa uma das conquistas mais elegantes da ciência da computação teórica cuja história é marcada por uma descoberta independente e pelo reconhecimento tardio de seu verdadeiro potencial. Em 1969, o lógico britânico <strong><a href="https://en.wikipedia.org/wiki/J._Roger_Hindley">Roger Hindley</a></strong> publicou um artigo sobre combinadores, no qual descreveu um sistema de tipos polimórfico e um algoritmo de inferência para o cálculo lambda simplesmente tipado com polimorfismo. Contudo, seu trabalho permaneceu relativamente obscuro na comunidade de ciência da computação, circulando principalmente entre lógicos matemáticos. Hindley estava interessado em questões puramente teóricas sobre combinadores e tipos, sem uma aplicação prática imediata em mente. Seu algoritmo, embora correto e completo, não foi implementado nem testado em linguagens de programação reais na época.</p>
+<p>A história ganha impulso em 1978, quando <strong><a href="https://en.wikipedia.org/wiki/Robin_Milner">Robin Milner</a></strong>, trabalhando no desenvolvimento da linguagem <strong>ML</strong> (<em>Meta Language</em>) na Universidade de Edinburgh, redescobriu independentemente o mesmo sistema de tipos e desenvolveu o que ficaria conhecido como <strong>Algoritmo W</strong>. Milner estava enfrentando um problema prático: como criar uma linguagem de programação funcional que combinasse a segurança de tipos com a conveniência de não exigir anotações de tipo explícitas em cada função. Sua motivação era permitir que programadores escrevessem código conciso sem sacrificar as garantias de correção. O trabalho de Milner foi revolucionário porque demonstrou que inferência completa de tipos era não apenas teoricamente possível, mas <strong>praticamente viável</strong>, <strong>ML</strong> foi a primeira linguagem de programação a implementar inferência automática de tipos polimórficos com sucesso. A implementação provou que o algoritmo terminava em tempo razoável para programas reais, dissipando ceticismos sobre sua aplicabilidade.</p>
+<p>O reconhecimento da contribuição dupla veio mais tarde, quando <strong><a href="https://ieeexplore.ieee.org/author/38494159000">Luis Damas</a></strong>, orientando de doutorado de Milner, formalizou rigorosamente o sistema em sua tese de 1985, provando suas propriedades fundamentais de <em>soundness</em>, completude e existência de tipos principais. Damas descobriu o trabalho anterior de Hindley e estabeleceu a conexão formal entre ambas as abordagens, levando à denominação <strong>Hindley-Milner</strong> (ou <strong>Damas-Milner</strong>, ou ainda <strong>Damas-Hindley-Milner</strong>). A tese de Damas forneceu as provas matemáticas rigorosas que transformaram o sistema de uma técnica engenhosa em uma teoria sólida. Desde então, <strong>HM</strong> tornou-se a base para os sistemas de tipos de <strong>Haskell</strong>, <strong>OCaml</strong>, <strong>F#</strong>, <strong>Elm</strong>, e influenciou profundamente <strong>Rust</strong>, <strong>Swift</strong>, <strong>Scala</strong>, e até extensões de <strong>TypeScript</strong>. A história de <strong>HM</strong> ilustra um padrão comum na ciência: descobertas teóricas aguardando aplicações práticas, e como a implementação bem-sucedida pode transformar uma ideia matemática obscura em fundação de toda uma família de linguagens de programação.</p>
+<p>O ponto importante que a curiosa leitora deve ter em mente é que este sistema resolve um problema aparentemente impossível: <strong>como inferir tipos automaticamente em uma linguagem com polimorfismo paramétrico mantendo decidibilidade e completude</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Polimorfismo Paramétrico e Suas Alternativas</strong></p>
+<p>O <strong>polimorfismo paramétrico</strong> (também chamado de polimorfismo universal) é o tipo de polimorfismo implementado por Hindley-Milner. Ele permite que uma única função opere sobre <strong>qualquer tipo</strong> de forma uniforme, sem conhecimento da estrutura interna dos valores. A função identidade <code>id : ∀α. α → α</code> é o exemplo clássico: ela funciona para inteiros, strings, listas - qualquer tipo - porque não inspeciona nem modifica seus argumentos.</p>
+<p><strong>Características fundamentais</strong>:</p>
+<ul>
+<li><strong>Uniformidade</strong>: o mesmo código é executado independente do tipo concreto;</li>
+<li><strong>Type erasure</strong>: em muitas implementações, tipos podem ser apagados após verificação;</li>
+<li><strong>Predicabilidade</strong>: o comportamento é determinado pela estrutura da função, não pelos tipos;</li>
+</ul>
+<p><strong>Alternativas ao Polimorfismo Paramétrico:</strong></p>
+<p><strong>1. Polimorfismo <em>ad-hoc</em> (Sobrecarga)</strong>: múltiplas implementações com o mesmo nome, selecionadas pelo tipo dos argumentos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> soma<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> soma<span class="op">(</span><span class="dt">float</span> a<span class="op">,</span> <span class="dt">float</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>string soma<span class="op">(</span>string a<span class="op">,</span> string b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O operador <code>+</code> em muitas linguagens é polimórfico <em>ad-hoc</em>: comporta-se diferentemente para números (adição) e <em>strings</em> (concatenação). Cada tipo tem sua própria implementação.</p>
+<p><strong><em>Type classes</em></strong> em Haskell são polimorfismo <em>ad-hoc</em> estruturado:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="dt">Eq</span> a <span class="kw">where</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  (==) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Implementações diferentes para cada tipo</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Int</span> <span class="kw">where</span> <span class="op">...</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">String</span> <span class="kw">where</span> <span class="op">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>2. Polimorfismo de Subtipo (Herança)</strong>: baseado em hierarquias de tipos, comum em linguagens orientadas a objetos:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Animal <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">emitirSom</span><span class="op">()</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cachorro <span class="kw">extends</span> Animal <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">emitirSom</span><span class="op">()</span> <span class="op">{</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Au au"</span><span class="op">);</span> <span class="op">}</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">fazer_barulho</span><span class="op">(</span>Animal a<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    a<span class="op">.</span><span class="fu">emitirSom</span><span class="op">();</span>  <span class="co">// Funciona para qualquer subtipo de Animal</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Uma função que aceita Animal também aceita Cachorro, Gato, etc. O comportamento varia por subtipo (dynamic dispatch).</p>
+<p><strong>Comparação</strong>:</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 38%">
+<col style="width: 29%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Quando selecionar</th>
+<th style="text-align: left;">Uniformidade</th>
+<th style="text-align: left;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Paramétrico</strong></td>
+<td style="text-align: left;">Compilação (tipo conhecido)</td>
+<td style="text-align: left;">Sim - mesmo código</td>
+<td style="text-align: left;"><code>reverse :: [a] -&gt; [a]</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong><em>ad-hoc</em></strong></td>
+<td style="text-align: left;">Compilação (sobrecarga) ou Runtime (type classes)</td>
+<td style="text-align: left;">Não - código específico</td>
+<td style="text-align: left;"><code>(+)</code> em Java/C++</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Subtipo</strong></td>
+<td style="text-align: left;">Runtime (dynamic dispatch)</td>
+<td style="text-align: left;">Não - métodos virtuais</td>
+<td style="text-align: left;">Hierarquias OOP</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>A importância do sistema <strong>HM</strong> transcende sua elegância matemática. Ele fundamenta os sistemas de tipos de linguagens como <strong>ML</strong>, <strong>Haskell</strong>, <strong>OCaml</strong>, <strong>F#</strong>, e influencia fortemente <strong>Scala</strong>, <strong>Rust</strong>, <strong>Swift</strong> e <strong>TypeScript</strong>. Sua combinação única de propriedades o torna um marco na teoria das linguagens de programação:</p>
+<ol type="1">
+<li><strong>Inferência completa</strong>: o sistema pode deduzir o tipo mais geral (principal) de qualquer expressão sem anotações;</li>
+<li><strong>Decidibilidade</strong>: existe um algoritmo que sempre termina e determina se um programa é bem-tipado;</li>
+<li><strong>Polimorfismo paramétrico</strong>: funções podem operar sobre tipos arbitrários mantendo segurança de tipos;</li>
+<li><strong><em>soundness</em></strong>: programas bem-tipados não produzem erros de tipo em runtime;</li>
+<li><strong>Completude</strong>: se um programa tem um tipo, o algoritmo o encontrará.</li>
+</ol>
+<p>A atenta leitora deve distinguir claramente: <strong>Hindley-Milner é um sistema de tipos</strong>, enquanto o <strong>Algoritmo W</strong> é uma das formas de implementá-lo. Esta distinção, frequentemente negligenciada, é fundamental para compreender tanto a teoria quanto as implementações práticas.</p>
+</section>
+<section id="fundamentos-matemáticos-a-estrutura-do-sistema" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="fundamentos-matemáticos-a-estrutura-do-sistema"><span class="header-section-number">13.2</span> Fundamentos Matemáticos: A Estrutura do Sistema</h2>
+<section id="sintaxe-dos-tipos" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="sintaxe-dos-tipos"><span class="header-section-number">13.2.1</span> Sintaxe dos Tipos</h3>
+<p>O sistema <strong>HM</strong> define tipos através de uma gramática formal. Seja <span class="math inline">\(\tau\)</span> uma metavariável representando tipos:</p>
+<p><span class="math display">\[\tau ::= \alpha \mid T \mid \tau_1 \rightarrow \tau_2\]</span></p>
+<p>Onde: - <span class="math inline">\(\alpha\)</span> é uma <strong>variável de tipo</strong> (type variable), representando tipos desconhecidos ou polimórficos - <span class="math inline">\(T\)</span> é um <strong>tipo base</strong> (como <code>int</code>, <code>bool</code>, <code>string</code>) - <span class="math inline">\(\tau_1 \rightarrow \tau_2\)</span> é um <strong>tipo de função</strong> que recebe <span class="math inline">\(\tau_1\)</span> e retorna <span class="math inline">\(\tau_2\)</span></p>
+<p><strong>Tipos polimórficos</strong> (também chamados de esquemas de tipo ou type schemes) são introduzidos através de quantificação universal:</p>
+<p><span class="math display">\[\sigma ::= \tau \mid \forall \alpha. \sigma\]</span></p>
+<p><strong>Exemplo</strong>: o tipo da função identidade:</p>
+<p><span class="math display">\[\text{id} : \forall \alpha. \alpha \rightarrow \alpha\]</span></p>
+<p>Que lê-se: “para qualquer tipo α, id é uma função que recebe α e retorna α”.</p>
+</section>
+<section id="contexto-de-tipagem" class="level3" data-number="13.2.2">
+<h3 data-number="13.2.2" class="anchored" data-anchor-id="contexto-de-tipagem"><span class="header-section-number">13.2.2</span> Contexto de Tipagem</h3>
+<p>O <strong>contexto de tipagem</strong> (typing context) <span class="math inline">\(\Gamma\)</span> é um mapeamento de variáveis para esquemas de tipo:</p>
+<p><span class="math display">\[\Gamma = \{x_1 : \sigma_1, x_2 : \sigma_2, \ldots, x_n : \sigma_n\}\]</span></p>
+<p>Operações sobre contextos:</p>
+<ul>
+<li><strong>Extensão</strong>: <span class="math inline">\(\Gamma, x : \sigma\)</span> adiciona uma nova ligação</li>
+<li><strong>Consulta</strong>: <span class="math inline">\(x : \sigma \in \Gamma\)</span> verifica se x está no contexto</li>
+<li><strong>Remoção</strong>: <span class="math inline">\(\Gamma \setminus \{x\}\)</span> remove x do contexto</li>
+</ul>
+</section>
+<section id="variáveis-de-tipo-livres" class="level3" data-number="13.2.3">
+<h3 data-number="13.2.3" class="anchored" data-anchor-id="variáveis-de-tipo-livres"><span class="header-section-number">13.2.3</span> Variáveis de Tipo Livres</h3>
+<p>O conjunto de variáveis de tipo livres em um tipo <span class="math inline">\(\tau\)</span>, denotado <span class="math inline">\(\text{ftv}(\tau)\)</span>, é definido recursivamente:</p>
+<p><span class="math display">\[\begin{align*}
+\text{ftv}(\alpha) &amp;= \{\alpha\} \\
+\text{ftv}(T) &amp;= \emptyset \\
+\text{ftv}(\tau_1 \rightarrow \tau_2) &amp;= \text{ftv}(\tau_1) \cup \text{ftv}(\tau_2) \\
+\text{ftv}(\forall \alpha. \sigma) &amp;= \text{ftv}(\sigma) \setminus \{\alpha\}
+\end{align*}\]</span></p>
+<p>Para contextos:</p>
+<p><span class="math display">\[\text{ftv}(\Gamma) = \bigcup_{x : \sigma \in \Gamma} \text{ftv}(\sigma)\]</span></p>
+<p>Este conceito é crucial para a operação de <strong>generalização</strong>.</p>
+</section>
+</section>
+<section id="regras-de-julgamento-de-tipo" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="regras-de-julgamento-de-tipo"><span class="header-section-number">13.3</span> Regras de Julgamento de Tipo</h2>
+<p>O sistema <strong>HM</strong> é definido por um conjunto de regras de inferência que formam um sistema dedutivo. Um julgamento de tipo tem a forma:</p>
+<p><span class="math display">\[\Gamma \vdash e : \sigma\]</span></p>
+<p>Lê-se: “no contexto <span class="math inline">\(\Gamma\)</span>, a expressão <span class="math inline">\(e\)</span> tem o tipo (ou esquema de tipo) <span class="math inline">\(\sigma\)</span>”.</p>
+<section id="regras-fundamentais" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="regras-fundamentais"><span class="header-section-number">13.3.1</span> Regras Fundamentais</h3>
+<p><strong>Regra [Var] - Variável</strong>:</p>
+<p><span class="math display">\[\frac{x : \sigma \in \Gamma}{\Gamma \vdash x : \sigma}\]</span></p>
+<p>Se <code>x</code> está no contexto com tipo <span class="math inline">\(\sigma\)</span>, então <code>x</code> tem tipo <span class="math inline">\(\sigma\)</span>.</p>
+<p><strong>Regra [Abs] - Abstração (função)</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma, x : \tau_1 \vdash e : \tau_2}{\Gamma \vdash \lambda x. e : \tau_1 \rightarrow \tau_2}\]</span></p>
+<p>Para descobrir o tipo de uma função, assumimos um tipo para o parâmetro e derivamos o tipo do corpo.</p>
+<p><strong>Regra [App] - Aplicação</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1 \, e_2 : \tau_2}\]</span></p>
+<p>Se <span class="math inline">\(e_1\)</span> é uma função de <span class="math inline">\(\tau_1\)</span> para <span class="math inline">\(\tau_2\)</span> e <span class="math inline">\(e_2\)</span> tem tipo <span class="math inline">\(\tau_1\)</span>, então a aplicação tem tipo <span class="math inline">\(\tau_2\)</span>.</p>
+<p><strong>Regra [Let] - Let Polimórfico</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : \sigma \quad \Gamma, x : \sigma \vdash e_2 : \tau}{\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau}\]</span></p>
+<p>Esta é a regra crucial que introduz polimorfismo. O tipo de <span class="math inline">\(e_1\)</span> pode ser generalizado antes de ser usado em <span class="math inline">\(e_2\)</span>.</p>
+<p><strong>Regra [Inst] - Instanciação</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : \forall \alpha. \sigma}{\Gamma \vdash e : \sigma[\alpha := \tau]}\]</span></p>
+<p>Um tipo polimórfico pode ser instanciado substituindo variáveis quantificadas por tipos concretos.</p>
+<p><strong>Regra [Gen] - Generalização</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : \tau \quad \alpha \notin \text{ftv}(\Gamma)}{\Gamma \vdash e : \forall \alpha. \tau}\]</span></p>
+<p>Um tipo pode ser generalizado quantificando sobre variáveis que não aparecem livres no contexto.</p>
+</section>
+<section id="exemplo-de-derivação-função-identidade" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="exemplo-de-derivação-função-identidade"><span class="header-section-number">13.3.2</span> Exemplo de Derivação: Função Identidade</h3>
+<p>Vamos derivar o tipo da função identidade <code>λx. x</code>:</p>
+<p><span class="math display">\[\frac{
+  \frac{
+    x : \alpha \in \{x : \alpha\}
+  }{
+    \{x : \alpha\} \vdash x : \alpha
+  } \text{[Var]}
+}{
+  \emptyset \vdash \lambda x. x : \alpha \rightarrow \alpha
+} \text{[Abs]}\]</span></p>
+<p>Como <span class="math inline">\(\alpha \notin \text{ftv}(\emptyset)\)</span>, podemos generalizar:</p>
+<p><span class="math display">\[\frac{
+  \emptyset \vdash \lambda x. x : \alpha \rightarrow \alpha \quad \alpha \notin \text{ftv}(\emptyset)
+}{
+  \emptyset \vdash \lambda x. x : \forall \alpha. \alpha \rightarrow \alpha
+} \text{[Gen]}\]</span></p>
+</section>
+<section id="exemplo-de-derivação-aplicação-polimórfica" class="level3" data-number="13.3.3">
+<h3 data-number="13.3.3" class="anchored" data-anchor-id="exemplo-de-derivação-aplicação-polimórfica"><span class="header-section-number">13.3.3</span> Exemplo de Derivação: Aplicação Polimórfica</h3>
+<p>Para <code>let id = λx. x in id 42</code>, precisamos usar [Let]:</p>
+<p><span class="math display">\[\frac{
+  \begin{gathered}
+  \emptyset \vdash \lambda x. x : \forall \alpha. \alpha \rightarrow \alpha \\
+  \{id : \forall \alpha. \alpha \rightarrow \alpha\} \vdash id \, 42 : \text{int}
+  \end{gathered}
+}{
+  \emptyset \vdash \text{let } id = \lambda x. x \text{ in } id \, 42 : \text{int}
+} \text{[Let]}\]</span></p>
+<p>A segunda premissa se expande:</p>
+<p><span class="math display">\[\frac{
+  \begin{gathered}
+  \frac{
+    id : \forall \alpha. \alpha \rightarrow \alpha \in \Gamma
+  }{
+    \Gamma \vdash id : \text{int} \rightarrow \text{int}
+  } \text{[Inst]} \quad
+  \frac{}{
+    \Gamma \vdash 42 : \text{int}
+  } \text{[Const]}
+  \end{gathered}
+}{
+  \Gamma \vdash id \, 42 : \text{int}
+} \text{[App]}\]</span></p>
+<p>Onde <span class="math inline">\(\Gamma = \{id : \forall \alpha. \alpha \rightarrow \alpha\}\)</span> e instanciamos <span class="math inline">\(\alpha\)</span> como <code>int</code>.</p>
+</section>
+</section>
+<section id="unificação-o-coração-do-sistema" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="unificação-o-coração-do-sistema"><span class="header-section-number">13.4</span> Unificação: O Coração do Sistema</h2>
+<p>A <strong>unificação</strong> é o algoritmo fundamental que permite resolver equações de tipos. Dado dois tipos <span class="math inline">\(\tau_1\)</span> e <span class="math inline">\(\tau_2\)</span>, o algoritmo de unificação tenta encontrar uma <strong>substituição</strong> <span class="math inline">\(S\)</span> tal que:</p>
+<p><span class="math display">\[S(\tau_1) = S(\tau_2)\]</span></p>
+<section id="substituições" class="level3" data-number="13.4.1">
+<h3 data-number="13.4.1" class="anchored" data-anchor-id="substituições"><span class="header-section-number">13.4.1</span> Substituições</h3>
+<p>Uma <strong>substituição</strong> é um mapeamento finito de variáveis de tipo para tipos:</p>
+<p><span class="math display">\[S = [\alpha_1 := \tau_1, \alpha_2 := \tau_2, \ldots, \alpha_n := \tau_n]\]</span></p>
+<p><strong>Aplicação de substituição</strong>:</p>
+<p><span class="math display">\[\begin{align*}
+S(\alpha) &amp;=
+\begin{cases}
+\tau &amp; \text{se } \alpha := \tau \in S \\
+\alpha &amp; \text{caso contrário}
+\end{cases} \\
+S(T) &amp;= T \\
+S(\tau_1 \rightarrow \tau_2) &amp;= S(\tau_1) \rightarrow S(\tau_2) \\
+S(\forall \alpha. \sigma) &amp;= \forall \alpha. S(\sigma) \quad (\alpha \notin \text{dom}(S))
+\end{align*}\]</span></p>
+<p><strong>Composição de substituições</strong>:</p>
+<p><span class="math display">\[S_2 \circ S_1 = S_1 \cup \{(\alpha := S_2(\tau)) \mid \alpha := \tau \in S_2, \alpha \notin \text{dom}(S_1)\}\]</span></p>
+</section>
+<section id="algoritmo-de-unificação" class="level3" data-number="13.4.2">
+<h3 data-number="13.4.2" class="anchored" data-anchor-id="algoritmo-de-unificação"><span class="header-section-number">13.4.2</span> Algoritmo de Unificação</h3>
+<p>O algoritmo de unificação <span class="math inline">\(\mathcal{U}(\tau_1, \tau_2)\)</span> retorna a substituição mais geral (mgu - most general unifier):</p>
+<pre class="pseudocode"><code>função unify(τ₁, τ₂):
+  caso (τ₁, τ₂) de:
+    // Regra: tipos idênticos
+    (T, T) → ∅
+    
+    // Regra: variável de tipo
+    (α, τ) → 
+      se α ∈ ftv(τ) e α ≠ τ então
+        erro "Occur check: ciclo infinito"
+      senão
+        [α := τ]
+    
+    (τ, α) → unify(α, τ)
+    
+    // Regra: funções
+    (τ₁ → τ₂, τ₃ → τ₄) →
+      S₁ ← unify(τ₁, τ₃)
+      S₂ ← unify(S₁(τ₂), S₁(τ₄))
+      retornar S₂ ∘ S₁
+    
+    // Incompatível
+    caso contrário → erro "Tipos incompatíveis"</code></pre>
+<p><strong>Exemplo de unificação</strong>:</p>
+<p>Unificar <span class="math inline">\((\alpha \rightarrow \beta)\)</span> com <span class="math inline">\((\text{int} \rightarrow \gamma)\)</span>:</p>
+<ol type="1">
+<li>Unificar <span class="math inline">\(\alpha\)</span> com <code>int</code>: <span class="math inline">\(S_1 = [\alpha := \text{int}]\)</span></li>
+<li>Aplicar <span class="math inline">\(S_1\)</span>: <span class="math inline">\(S_1(\beta)\)</span> = <span class="math inline">\(\beta\)</span>, <span class="math inline">\(S_1(\gamma)\)</span> = <span class="math inline">\(\gamma\)</span></li>
+<li>Unificar <span class="math inline">\(\beta\)</span> com <span class="math inline">\(\gamma\)</span>: <span class="math inline">\(S_2 = [\beta := \gamma]\)</span></li>
+<li>Compor: <span class="math inline">\(S_2 \circ S_1 = [\alpha := \text{int}, \beta := \gamma]\)</span></li>
+</ol>
+<p><strong>Occur Check</strong>: a verificação crucial que previne tipos infinitos:</p>
+<pre><code>unify(α, α → β)  // ERRO: α aparece em α → β</code></pre>
+<p>Sem o occur check, teríamos <span class="math inline">\(\alpha = \alpha \rightarrow \beta\)</span>, um tipo infinito.</p>
+</section>
+</section>
+<section id="o-algoritmo-w-inferência-sintaxe-dirigida" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="o-algoritmo-w-inferência-sintaxe-dirigida"><span class="header-section-number">13.5</span> O Algoritmo W: Inferência Sintaxe-Dirigida</h2>
+<p>O <strong>Algoritmo W</strong> (de Robin Milner, 1978) é o algoritmo clássico de inferência de tipos para HM. Ele é <strong>sintaxe-dirigido</strong>: processa a estrutura da expressão recursivamente.</p>
+<section id="estrutura-do-algoritmo" class="level3" data-number="13.5.1">
+<h3 data-number="13.5.1" class="anchored" data-anchor-id="estrutura-do-algoritmo"><span class="header-section-number">13.5.1</span> Estrutura do Algoritmo</h3>
+<p>O algoritmo W tem a assinatura:</p>
+<p><span class="math display">\[\mathcal{W} : \text{Context} \times \text{Expr} \rightarrow \text{Substitution} \times \text{Type}\]</span></p>
+<p>Retorna uma substituição acumulada e o tipo inferido.</p>
+</section>
+<section id="pseudocódigo-completo" class="level3" data-number="13.5.2">
+<h3 data-number="13.5.2" class="anchored" data-anchor-id="pseudocódigo-completo"><span class="header-section-number">13.5.2</span> Pseudocódigo Completo</h3>
+<pre class="pseudocode"><code>função W(Γ, e):
+  caso e de:
+    // Variável
+    x →
+      se x : σ ∈ Γ então
+        τ ← instanciar(σ)  // Remove quantificadores
+        retornar (∅, τ)
+      senão
+        erro "Variável não ligada"
+    
+    // Constante
+    c →
+      retornar (∅, tipo_de(c))
+    
+    // Abstração λx.e₁
+    λx.e₁ →
+      α ← nova_variavel_tipo()
+      (S₁, τ₁) ← W(Γ ∪ {x : α}, e₁)
+      retornar (S₁, S₁(α) → τ₁)
+    
+    // Aplicação e₁ e₂
+    e₁ e₂ →
+      (S₁, τ₁) ← W(Γ, e₁)
+      (S₂, τ₂) ← W(S₁(Γ), e₂)
+      α ← nova_variavel_tipo()
+      S₃ ← unify(S₂(τ₁), τ₂ → α)
+      retornar (S₃ ∘ S₂ ∘ S₁, S₃(α))
+    
+    // Let polimórfico
+    let x = e₁ in e₂ →
+      (S₁, τ₁) ← W(Γ, e₁)
+      σ ← generalizar(S₁(Γ), τ₁)
+      (S₂, τ₂) ← W(S₁(Γ) ∪ {x : σ}, e₂)
+      retornar (S₂ ∘ S₁, τ₂)
+
+função generalizar(Γ, τ):
+  // Quantifica sobre variáveis livres em τ que não estão em Γ
+  vars ← ftv(τ) \ ftv(Γ)
+  retornar ∀vars. τ
+
+função instanciar(∀α₁...αₙ. τ):
+  // Substitui cada αᵢ por uma nova variável fresca
+  βᵢ ← novas_variaveis_tipo(n)
+  retornar [α₁ := β₁, ..., αₙ := βₙ](τ)</code></pre>
+</section>
+<section id="traço-de-execução-exemplo-completo" class="level3" data-number="13.5.3">
+<h3 data-number="13.5.3" class="anchored" data-anchor-id="traço-de-execução-exemplo-completo"><span class="header-section-number">13.5.3</span> Traço de Execução: Exemplo Completo</h3>
+<p>Vamos executar W para <code>let id = λx. x in id 5</code>:</p>
+<p><strong>Passo 1</strong>: Processar <code>let id = λx. x in id 5</code></p>
+<p><strong>Passo 2</strong>: Avaliar <code>λx. x</code>: - Criar variável fresca: <span class="math inline">\(\alpha_1\)</span> - Avaliar corpo <code>x</code> no contexto <span class="math inline">\(\{x : \alpha_1\}\)</span> - Resultado: <span class="math inline">\((\emptyset, \alpha_1)\)</span> - Retornar: <span class="math inline">\((\emptyset, \alpha_1 \rightarrow \alpha_1)\)</span></p>
+<p><strong>Passo 3</strong>: Generalizar: - <span class="math inline">\(\text{ftv}(\alpha_1 \rightarrow \alpha_1) = \{\alpha_1\}\)</span> - <span class="math inline">\(\text{ftv}(\emptyset) = \emptyset\)</span> - Generalizar: <span class="math inline">\(\sigma = \forall \alpha_1. \alpha_1 \rightarrow \alpha_1\)</span></p>
+<p><strong>Passo 4</strong>: Avaliar <code>id 5</code> no contexto <span class="math inline">\(\{id : \forall \alpha_1. \alpha_1 \rightarrow \alpha_1\}\)</span>:</p>
+<p><strong>Passo 4a</strong>: Avaliar <code>id</code>: - Instanciar: <span class="math inline">\(\forall \alpha_1. \alpha_1 \rightarrow \alpha_1\)</span> → <span class="math inline">\(\alpha_2 \rightarrow \alpha_2\)</span> (variável fresca) - Resultado: <span class="math inline">\((\emptyset, \alpha_2 \rightarrow \alpha_2)\)</span></p>
+<p><strong>Passo 4b</strong>: Avaliar <code>5</code>: - Resultado: <span class="math inline">\((\emptyset, \text{int})\)</span></p>
+<p><strong>Passo 4c</strong>: Unificar para aplicação: - Criar variável fresca <span class="math inline">\(\alpha_3\)</span> - Unificar <span class="math inline">\(\alpha_2 \rightarrow \alpha_2\)</span> com <span class="math inline">\(\text{int} \rightarrow \alpha_3\)</span> - <span class="math inline">\(S_1 = \text{unify}(\alpha_2, \text{int}) = [\alpha_2 := \text{int}]\)</span> - <span class="math inline">\(S_2 = \text{unify}(S_1(\alpha_2), S_1(\alpha_3)) = \text{unify}(\text{int}, \alpha_3) = [\alpha_3 := \text{int}]\)</span> - Composição: <span class="math inline">\(S = [\alpha_2 := \text{int}, \alpha_3 := \text{int}]\)</span></p>
+<p><strong>Resultado final</strong>: <span class="math inline">\((S, \text{int})\)</span></p>
+</section>
+<section id="propriedades-do-algoritmo-w" class="level3" data-number="13.5.4">
+<h3 data-number="13.5.4" class="anchored" data-anchor-id="propriedades-do-algoritmo-w"><span class="header-section-number">13.5.4</span> Propriedades do Algoritmo W</h3>
+<p><strong>Teorema (Correção)</strong>: Se <span class="math inline">\(\mathcal{W}(\Gamma, e) = (S, \tau)\)</span>, então <span class="math inline">\(S(\Gamma) \vdash e : \tau\)</span>.</p>
+<p><strong>Teorema (Completude)</strong>: Se <span class="math inline">\(\Gamma \vdash e : \tau\)</span>, então existe <span class="math inline">\((S, \tau')\)</span> tal que <span class="math inline">\(\mathcal{W}(\Gamma, e) = (S, \tau')\)</span> e <span class="math inline">\(\tau'\)</span> é mais geral que <span class="math inline">\(\tau\)</span>.</p>
+<p><strong>Teorema (Tipo Principal)</strong>: Se <span class="math inline">\(e\)</span> é tipável, então existe um tipo <span class="math inline">\(\tau\)</span> (o tipo principal) tal que qualquer outro tipo válido para <span class="math inline">\(e\)</span> é uma instância de <span class="math inline">\(\tau\)</span>.</p>
+</section>
+</section>
+<section id="complexidade-computacional" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="complexidade-computacional"><span class="header-section-number">13.6</span> Complexidade Computacional</h2>
+<section id="análise-do-algoritmo-w" class="level3" data-number="13.6.1">
+<h3 data-number="13.6.1" class="anchored" data-anchor-id="análise-do-algoritmo-w"><span class="header-section-number">13.6.1</span> Análise do Algoritmo W</h3>
+<p>A complexidade do Algoritmo W é surpreendentemente alta:</p>
+<p><strong>Pior caso</strong>: <span class="math inline">\(O(2^n)\)</span> exponencial, onde <span class="math inline">\(n\)</span> é o tamanho da expressão.</p>
+<p><strong>Exemplo patológico</strong>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> f1 = λx. (x, x) <span class="kw">in</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> f2 = λx. f1(f1(x)) <span class="kw">in</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> f3 = λx. f2(f2(x)) <span class="kw">in</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> f4 = λx. f3(f3(x)) <span class="kw">in</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>f4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O tipo de <code>f4</code> tem tamanho exponencial em relação ao código:</p>
+<ul>
+<li><code>f1 : α → (α × α)</code></li>
+<li><code>f2 : α → ((α × α) × (α × α))</code></li>
+<li><code>f3</code> : tipo com 16 componentes</li>
+<li><code>f4</code> : tipo com 256 componentes</li>
+</ul>
+</section>
+<section id="prática-vs.-teoria" class="level3" data-number="13.6.2">
+<h3 data-number="13.6.2" class="anchored" data-anchor-id="prática-vs.-teoria"><span class="header-section-number">13.6.2</span> Prática vs.&nbsp;Teoria</h3>
+<p>Na prática, o Algoritmo W se comporta <strong>quase linearmente</strong> porque:</p>
+<ol type="1">
+<li>Programas reais raramente exibem o pior caso</li>
+<li>Otimizações modernas (como compartilhamento de estrutura)</li>
+<li>Heurísticas de unificação eficientes</li>
+</ol>
+<p><strong>Complexidade prática</strong>: <span class="math inline">\(O(n \log n)\)</span> a <span class="math inline">\(O(n^2)\)</span></p>
+<p>Contudo, a leitora perspicaz deve lembrar: a complexidade teórica permanece exponencial, e casos patológicos existem.</p>
+</section>
+</section>
+<section id="algoritmo-m-uma-alternativa" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="algoritmo-m-uma-alternativa"><span class="header-section-number">13.7</span> Algoritmo M: Uma Alternativa</h2>
+<p>O <strong>Algoritmo M</strong> (de Clement, 1987) é uma reformulação do Algoritmo W que separa as fases:</p>
+<ol type="1">
+<li><strong>Geração de restrições</strong>: produz um conjunto de equações de tipo</li>
+<li><strong>Resolução</strong>: resolve as equações via unificação</li>
+</ol>
+<section id="pseudocódigo-do-algoritmo-m" class="level3" data-number="13.7.1">
+<h3 data-number="13.7.1" class="anchored" data-anchor-id="pseudocódigo-do-algoritmo-m"><span class="header-section-number">13.7.1</span> Pseudocódigo do Algoritmo M</h3>
+<pre class="pseudocode"><code>função M(Γ, e):
+  (τ, C) ← gerar_restrições(Γ, e)
+  S ← resolver(C)
+  retornar (S, S(τ))
+
+função gerar_restrições(Γ, e):
+  caso e de:
+    x →
+      se x : σ ∈ Γ então
+        τ ← instanciar(σ)
+        retornar (τ, ∅)
+      senão erro
+    
+    λx.e₁ →
+      α ← nova_variavel()
+      (τ₁, C₁) ← gerar_restrições(Γ ∪ {x : α}, e₁)
+      retornar (α → τ₁, C₁)
+    
+    e₁ e₂ →
+      (τ₁, C₁) ← gerar_restrições(Γ, e₁)
+      (τ₂, C₂) ← gerar_restrições(Γ, e₂)
+      α ← nova_variavel()
+      retornar (α, C₁ ∪ C₂ ∪ {τ₁ = τ₂ → α})
+    
+    let x = e₁ in e₂ →
+      (τ₁, C₁) ← gerar_restrições(Γ, e₁)
+      S₁ ← resolver(C₁)
+      σ ← generalizar(S₁(Γ), S₁(τ₁))
+      (τ₂, C₂) ← gerar_restrições(S₁(Γ) ∪ {x : σ}, e₂)
+      retornar (τ₂, C₁ ∪ C₂)
+
+função resolver(C):
+  S ← ∅
+  para cada (τ₁ = τ₂) ∈ C:
+    S' ← unify(S(τ₁), S(τ₂))
+    S ← S' ∘ S
+  retornar S</code></pre>
+<p><strong>Vantagem</strong>: separação de concerns facilita otimizações e extensões.</p>
+</section>
+</section>
+<section id="algoritmo-j-baseado-em-constraint-solving" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="algoritmo-j-baseado-em-constraint-solving"><span class="header-section-number">13.8</span> Algoritmo J: Baseado em Constraint Solving</h2>
+<p>O <strong>Algoritmo J</strong> usa um framework moderno de resolução de restrições:</p>
+<pre class="pseudocode"><code>função J(Γ, e):
+  (τ, C) ← collect(Γ, e, ∅)
+  S ← solve(C)
+  retornar S(τ)
+
+função collect(Γ, e, C):
+  caso e de:
+    x → (lookup(Γ, x), C)
+    
+    λx.e₁ →
+      α, β ← novas_variaveis()
+      (τ, C') ← collect(Γ ∪ {x : α}, e₁, C ∪ {β = α → τ})
+      retornar (β, C')
+    
+    e₁ e₂ →
+      α ← nova_variavel()
+      (τ₁, C₁) ← collect(Γ, e₁, C)
+      (τ₂, C₂) ← collect(Γ, e₂, C₁)
+      retornar (α, C₂ ∪ {τ₁ = τ₂ → α})
+
+função solve(C):
+  // Usa técnicas avançadas de constraint solving
+  retornar unify_all(C)</code></pre>
+</section>
+<section id="implementação-prática-em-python" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="implementação-prática-em-python"><span class="header-section-number">13.9</span> Implementação Prática em Python</h2>
+<p>Vamos implementar um interpretador completo com inferência HM:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Dict, Set, Optional, Tuple</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Tipos</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TypeVar:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    name: <span class="bu">str</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TypeInt:</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TypeBool:</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TypeFun:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    arg: <span class="st">'Type'</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    ret: <span class="st">'Type'</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>  </span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TypeScheme:</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">vars</span>: Set[<span class="bu">str</span>]</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">type</span>: <span class="st">'Type'</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>Type <span class="op">=</span> TypeVar <span class="op">|</span> TypeInt <span class="op">|</span> TypeBool <span class="op">|</span> TypeFun</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Substituição</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Substitution:</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, mapping: Dict[<span class="bu">str</span>, Type] <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mapping <span class="op">=</span> mapping <span class="kw">or</span> {}</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> apply_type(<span class="va">self</span>, t: Type) <span class="op">-&gt;</span> Type:</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(t, TypeVar):</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.mapping.get(t.name, t)</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">isinstance</span>(t, TypeFun):</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> TypeFun(</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.apply_type(t.arg),</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.apply_type(t.ret)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> t</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> compose(<span class="va">self</span>, other: <span class="st">'Substitution'</span>) <span class="op">-&gt;</span> <span class="st">'Substitution'</span>:</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>        new_mapping <span class="op">=</span> {</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>            k: other.apply_type(v) </span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k, v <span class="kw">in</span> <span class="va">self</span>.mapping.items()</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        new_mapping.update(other.mapping)</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Substitution(new_mapping)</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Funções auxiliares</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ftv_type(t: Type) <span class="op">-&gt;</span> Set[<span class="bu">str</span>]:</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(t, TypeVar):</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {t.name}</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(t, TypeFun):</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ftv_type(t.arg) <span class="op">|</span> ftv_type(t.ret)</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">set</span>()</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ftv_scheme(s: TypeScheme) <span class="op">-&gt;</span> Set[<span class="bu">str</span>]:</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ftv_type(s.<span class="bu">type</span>) <span class="op">-</span> s.<span class="bu">vars</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ftv_env(env: Dict[<span class="bu">str</span>, TypeScheme]) <span class="op">-&gt;</span> Set[<span class="bu">str</span>]:</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">set</span>().union(<span class="op">*</span>[ftv_scheme(s) <span class="cf">for</span> s <span class="kw">in</span> env.values()])</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Unificação</span></span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> UnificationError(<span class="pp">Exception</span>):</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> occurs_check(var: <span class="bu">str</span>, t: Type) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> var <span class="kw">in</span> ftv_type(t)</span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unify(t1: Type, t2: Type) <span class="op">-&gt;</span> Substitution:</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(t1, TypeInt) <span class="kw">and</span> <span class="bu">isinstance</span>(t2, TypeInt):</span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Substitution()</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(t1, TypeBool) <span class="kw">and</span> <span class="bu">isinstance</span>(t2, TypeBool):</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Substitution()</span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(t1, TypeVar):</span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> t1.name <span class="op">==</span> <span class="bu">getattr</span>(t2, <span class="st">'name'</span>, <span class="va">None</span>):</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Substitution()</span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> occurs_check(t1.name, t2):</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> UnificationError(<span class="ss">f"Occur check: </span><span class="sc">{</span>t1<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> in </span><span class="sc">{</span>t2<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Substitution({t1.name: t2})</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(t2, TypeVar):</span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> unify(t2, t1)</span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(t1, TypeFun) <span class="kw">and</span> <span class="bu">isinstance</span>(t2, TypeFun):</span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>        s1 <span class="op">=</span> unify(t1.arg, t2.arg)</span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>        s2 <span class="op">=</span> unify(s1.apply_type(t1.ret), s1.apply_type(t2.ret))</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> s2.compose(s1)</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> UnificationError(<span class="ss">f"Cannot unify </span><span class="sc">{</span>t1<span class="sc">}</span><span class="ss"> with </span><span class="sc">{</span>t2<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a><span class="co"># Generalização e Instanciação</span></span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>_type_var_counter <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fresh_var() <span class="op">-&gt;</span> TypeVar:</span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> _type_var_counter</span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="ss">f"t</span><span class="sc">{</span>_type_var_counter<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>    _type_var_counter <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> TypeVar(name)</span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generalize(env: Dict[<span class="bu">str</span>, TypeScheme], t: Type) <span class="op">-&gt;</span> TypeScheme:</span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>    <span class="bu">vars</span> <span class="op">=</span> ftv_type(t) <span class="op">-</span> ftv_env(env)</span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> TypeScheme(<span class="bu">vars</span>, t)</span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> instantiate(scheme: TypeScheme) <span class="op">-&gt;</span> Type:</span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>    subst <span class="op">=</span> Substitution({</span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>        var: fresh_var() </span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> var <span class="kw">in</span> scheme.<span class="bu">vars</span></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> subst.apply_type(scheme.<span class="bu">type</span>)</span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="co"># Algoritmo W</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> infer(env: Dict[<span class="bu">str</span>, TypeScheme], expr) <span class="op">-&gt;</span> Tuple[Substitution, Type]:</span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(expr, Var):</span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> expr.name <span class="kw">not</span> <span class="kw">in</span> env:</span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="ss">f"Unbound variable: </span><span class="sc">{</span>expr<span class="sc">.</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Substitution(), instantiate(env[expr.name])</span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(expr, Lit):</span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(expr.value, <span class="bu">int</span>):</span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Substitution(), TypeInt()</span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">isinstance</span>(expr.value, <span class="bu">bool</span>):</span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Substitution(), TypeBool()</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(expr, Lam):</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>        tv <span class="op">=</span> fresh_var()</span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>        new_env <span class="op">=</span> env.copy()</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>        new_env[expr.var] <span class="op">=</span> TypeScheme(<span class="bu">set</span>(), tv)</span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>        s1, t1 <span class="op">=</span> infer(new_env, expr.body)</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> s1, TypeFun(s1.apply_type(tv), t1)</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(expr, App):</span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>        tv <span class="op">=</span> fresh_var()</span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a>        s1, t1 <span class="op">=</span> infer(env, expr.func)</span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>        s2, t2 <span class="op">=</span> infer(apply_subst_env(s1, env), expr.arg)</span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>        s3 <span class="op">=</span> unify(apply_subst(s2, t1), TypeFun(t2, tv))</span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> s3.compose(s2).compose(s1), apply_subst(s3, tv)</span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> <span class="bu">isinstance</span>(expr, Let):</span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>        s1, t1 <span class="op">=</span> infer(env, expr.value)</span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>        new_env <span class="op">=</span> apply_subst_env(s1, env)</span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>        scheme <span class="op">=</span> generalize(new_env, t1)</span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>        new_env[expr.var] <span class="op">=</span> scheme</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>        s2, t2 <span class="op">=</span> infer(new_env, expr.body)</span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> s2.compose(s1), t2</span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_subst(s: Substitution, t: Type) <span class="op">-&gt;</span> Type:</span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> s.apply_type(t)</span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> apply_subst_env(s: Substitution, env: Dict[<span class="bu">str</span>, TypeScheme]) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, TypeScheme]:</span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>        k: TypeScheme(v.<span class="bu">vars</span>, s.apply_type(v.<span class="bu">type</span>))</span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k, v <span class="kw">in</span> env.items()</span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a><span class="co"># AST</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Var:</span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>    name: <span class="bu">str</span></span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Lit:</span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>    value: <span class="bu">int</span> <span class="op">|</span> <span class="bu">bool</span></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Lam:</span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>    var: <span class="bu">str</span></span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a>    body: <span class="st">'Expr'</span></span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> App:</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>    func: <span class="st">'Expr'</span></span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>    arg: <span class="st">'Expr'</span></span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Let:</span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>    var: <span class="bu">str</span></span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>    value: <span class="st">'Expr'</span></span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>    body: <span class="st">'Expr'</span></span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a>Expr <span class="op">=</span> Var <span class="op">|</span> Lit <span class="op">|</span> Lam <span class="op">|</span> App <span class="op">|</span> Let</span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste</span></span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> test():</span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a>    <span class="co"># let id = λx. x in id 5</span></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a>    expr <span class="op">=</span> Let(</span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>        <span class="st">"id"</span>,</span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a>        Lam(<span class="st">"x"</span>, Var(<span class="st">"x"</span>)),</span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>        App(Var(<span class="st">"id"</span>), Lit(<span class="dv">5</span>))</span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>    s, t <span class="op">=</span> infer({}, expr)</span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Tipo inferido: </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># TypeInt()</span></span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>    test()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="extensões-modernas-do-sistema-hm" class="level2" data-number="13.10">
+<h2 data-number="13.10" class="anchored" data-anchor-id="extensões-modernas-do-sistema-hm"><span class="header-section-number">13.10</span> Extensões Modernas do Sistema HM</h2>
+<section id="type-classes-haskell" class="level3" data-number="13.10.1">
+<h3 data-number="13.10.1" class="anchored" data-anchor-id="type-classes-haskell"><span class="header-section-number">13.10.1</span> Type Classes (Haskell)</h3>
+<p>Haskell estende <strong>HM</strong> com <strong>type classes</strong>, permitindo polimorfismo <em>ad-hoc</em>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="dt">Eq</span> a <span class="kw">where</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  (==) ::</span> a <span class="ot">-&gt;</span> a <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Eq</span> <span class="dt">Int</span> <span class="kw">where</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  x <span class="op">==</span> y <span class="ot">=</span> primEqInt x y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O sistema de tipos se torna:</p>
+<p><span class="math display">\[\tau ::= \alpha \mid T \mid \tau_1 \rightarrow \tau_2\]</span> <span class="math display">\[\sigma ::= \tau \mid \forall \alpha. C \Rightarrow \sigma\]</span></p>
+<p>Onde <span class="math inline">\(C\)</span> são restrições de classe (ex: <code>Eq a</code>).</p>
+</section>
+<section id="higher-rank-types" class="level3" data-number="13.10.2">
+<h3 data-number="13.10.2" class="anchored" data-anchor-id="higher-rank-types"><span class="header-section-number">13.10.2</span> Higher-Rank Types</h3>
+<p>HM básico só permite polimorfismo <strong>rank-1</strong> (quantificação apenas no topo). <strong>System F</strong> permite ranks arbitrários:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Rank-1 (HM)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id</span><span class="ot"> ::</span> <span class="kw">forall</span> a<span class="op">.</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Rank-2</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ot">runST ::</span> (<span class="kw">forall</span> s<span class="op">.</span> <span class="dt">ST</span> s a) <span class="ot">-&gt;</span> a</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Rank-n</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ot">applyToFive ::</span> (<span class="kw">forall</span> a<span class="op">.</span> a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> <span class="dt">Int</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>applyToFive f <span class="ot">=</span> f <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Inferência para rank &gt; 1 é <strong>indecidível</strong>, requerendo anotações.</p>
+</section>
+<section id="gadts-generalized-algebraic-data-types" class="level3" data-number="13.10.3">
+<h3 data-number="13.10.3" class="anchored" data-anchor-id="gadts-generalized-algebraic-data-types"><span class="header-section-number">13.10.3</span> GADTs (Generalized Algebraic Data Types)</h3>
+<p>GADTs permitem refinar tipos em pattern matching:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Expr</span> a <span class="kw">where</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">LitInt</span><span class="ot">  ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="dt">Int</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">LitBool</span><span class="ot"> ::</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="dt">Bool</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Add</span><span class="ot">     ::</span> <span class="dt">Expr</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> <span class="dt">Int</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">If</span><span class="ot">      ::</span> <span class="dt">Expr</span> <span class="dt">Bool</span> <span class="ot">-&gt;</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> <span class="dt">Expr</span> a</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ot">eval ::</span> <span class="dt">Expr</span> a <span class="ot">-&gt;</span> a</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>eval (<span class="dt">LitInt</span> n)  <span class="ot">=</span> n</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>eval (<span class="dt">LitBool</span> b) <span class="ot">=</span> b</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>eval (<span class="dt">Add</span> e1 e2) <span class="ot">=</span> eval e1 <span class="op">+</span> eval e2</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>eval (<span class="dt">If</span> c t e)  <span class="ot">=</span> <span class="kw">if</span> eval c <span class="kw">then</span> eval t <span class="kw">else</span> eval e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Inferência com GADTs é <strong>indecidível</strong> no caso geral.</p>
+</section>
+</section>
+<section id="limitações-e-o-teorema-da-indecidibilidade" class="level2" data-number="13.11">
+<h2 data-number="13.11" class="anchored" data-anchor-id="limitações-e-o-teorema-da-indecidibilidade"><span class="header-section-number">13.11</span> Limitações e o Teorema da Indecidibilidade</h2>
+<section id="limitações-fundamentais-do-hm" class="level3" data-number="13.11.1">
+<h3 data-number="13.11.1" class="anchored" data-anchor-id="limitações-fundamentais-do-hm"><span class="header-section-number">13.11.1</span> Limitações Fundamentais do HM</h3>
+<p><strong>Teorema (Wells, 1999)</strong>: Type checking para System F (lambda calculus polimórfico de segunda ordem) é <strong>indecidível</strong>.</p>
+<p><strong>Corolário</strong>: Qualquer extensão de <strong>HM</strong> que permita polimorfismo de ordem superior ou GADTs gerais torna a inferência indecidível.</p>
+<p><strong>O que isso significa</strong>: para sistemas mais expressivos, devemos escolher: 1. Exigir anotações de tipo 2. Aceitar incompletude (o algoritmo pode falhar mesmo para programas tipáveis) 3. Restringir a linguagem</p>
+</section>
+<section id="o-trade-off-fundamental" class="level3" data-number="13.11.2">
+<h3 data-number="13.11.2" class="anchored" data-anchor-id="o-trade-off-fundamental"><span class="header-section-number">13.11.2</span> O Trade-off Fundamental</h3>
+<p>Existe um <strong>trade-off irreconciliável</strong> entre três propriedades desejáveis:</p>
+<ol type="1">
+<li><strong>Expressividade</strong>: poder expressar muitos padrões de programação</li>
+<li><strong>Inferência completa</strong>: deduzir tipos sem anotações</li>
+<li><strong>Decidibilidade</strong>: garantir que o algoritmo sempre termina</li>
+</ol>
+<p><strong>Teorema</strong>: Não é possível ter as três simultaneamente.</p>
+<p>HM escolhe <strong>inferência + decidibilidade</strong>, sacrificando expressividade (sem rank-n types, sem GADTs gerais).</p>
+</section>
+</section>
+<section id="comparação-hm-vs.-outros-sistemas" class="level2" data-number="13.12">
+<h2 data-number="13.12" class="anchored" data-anchor-id="comparação-hm-vs.-outros-sistemas"><span class="header-section-number">13.12</span> Comparação: <strong>HM</strong> vs.&nbsp;Outros Sistemas</h2>
+<table class="table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sistema</th>
+<th style="text-align: left;">Polimorfismo</th>
+<th style="text-align: left;">Inferência</th>
+<th style="text-align: left;">Decidibilidade</th>
+<th style="text-align: left;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Simply Typed λ</strong></td>
+<td style="text-align: left;">Nenhum</td>
+<td style="text-align: left;">Completa</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">C simples</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Hindley-Milner</strong></td>
+<td style="text-align: left;">Paramétrico (rank-1)</td>
+<td style="text-align: left;">Completa</td>
+<td style="text-align: left;">Sim</td>
+<td style="text-align: left;">ML, Haskell base</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>System F</strong></td>
+<td style="text-align: left;">Paramétrico (rank-n)</td>
+<td style="text-align: left;">Incompleta</td>
+<td style="text-align: left;">Indecidível</td>
+<td style="text-align: left;">Haskell + extensões</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>F&lt;:</strong></td>
+<td style="text-align: left;">Paramétrico + Subtyping</td>
+<td style="text-align: left;">Incompleta</td>
+<td style="text-align: left;">PSPACE-completo</td>
+<td style="text-align: left;">Java generics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Dependent Types</strong></td>
+<td style="text-align: left;">Dependente</td>
+<td style="text-align: left;">Manual</td>
+<td style="text-align: left;">Sim (mas difícil)</td>
+<td style="text-align: left;">Coq, Agda</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conclusão-o-legado-de-hindley-milner" class="level2" data-number="13.13">
+<h2 data-number="13.13" class="anchored" data-anchor-id="conclusão-o-legado-de-hindley-milner"><span class="header-section-number">13.13</span> Conclusão: O Legado de Hindley-Milner</h2>
+<p>O sistema Hindley-Milner representa um dos <strong>pontos ótimos</strong> no espaço de design de sistemas de tipos. Sua combinação única de inferência completa, decidibilidade e polimorfismo paramétrico o torna extremamente útil na prática, enquanto sua elegância matemática o estabelece como um objeto de estudo teórico fundamental.</p>
+<p>Contudo, a atenta leitora deve reconhecer suas limitações. Linguagens modernas frequentemente precisam de recursos além do <strong>HM</strong> básico:</p>
+<ul>
+<li><strong>Type classes</strong> para polimorfismo <em>ad-hoc</em></li>
+<li><strong>Higher-rank types</strong> para abstrações mais expressivas<br>
+</li>
+<li><strong>GADTs</strong> para tipos dependentes limitados</li>
+<li><strong>Subtyping</strong> para OOP</li>
+</ul>
+<p>Estas extensões quebram as garantias de HM, exigindo anotações ou aceitando incompletude. O Algoritmo W, em sua forma pura, já não é suficiente. Implementações modernas (GHC, OCaml, Rust) usam variantes sofisticadas: <strong>bidirectional typing</strong>, <strong>constraint-based inference</strong>, <strong>unificação de ordem superior</strong>.</p>
+<p>Ainda assim, <strong>HM</strong> permanece a fundação. Todo sistema de tipos moderno para linguagens funcionais é, essencialmente, “Hindley-Milner + extensões”. Compreender <strong>HM</strong> profundamente é compreender tanto suas possibilidades quanto suas limitações fundamentais - e porque os compiladores modernos fazem as escolhas que fazem.</p>
+<p>O verdadeiro legado de Hindley-Milner não é ter resolvido todos os problemas de tipos, mas ter mostrado que <strong>inferência automática e <em>soundness</em> podem coexistir</strong> - um resultado que parecia impossível antes de 1969.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10b-semantico.html" class="pagination-link" aria-label="Julgamento de Tipos em Linguagens Imperativas">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-tabelaSimbolos.html" class="pagination-link" aria-label="Tabela de Símbolos em Compiladores Modernos">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10c-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

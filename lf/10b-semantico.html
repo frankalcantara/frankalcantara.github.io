@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 12&nbsp; Julgamento de Tipos em Linguagens Imperativas</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10c-semantico.html" rel="next">
+<link href="./10a-semantico.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./10b-semantico.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" id="toc-do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" class="nav-link active" data-scroll-target="#do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta"><span class="header-section-number">12.1</span> Do Elegante ao Pragmático: Por Que o Algoritmo W Não Basta</a></li>
+  <li><a href="#taxonomia-dos-sistemas-de-tipos-imperativos" id="toc-taxonomia-dos-sistemas-de-tipos-imperativos" class="nav-link" data-scroll-target="#taxonomia-dos-sistemas-de-tipos-imperativos"><span class="header-section-number">12.2</span> Taxonomia dos Sistemas de Tipos Imperativos</a>
+  <ul class="collapse">
+  <li><a href="#eixo-1-momento-da-verificação" id="toc-eixo-1-momento-da-verificação" class="nav-link" data-scroll-target="#eixo-1-momento-da-verificação"><span class="header-section-number">12.2.1</span> Eixo 1: Momento da Verificação</a></li>
+  <li><a href="#eixo-2-equivalência-de-tipos" id="toc-eixo-2-equivalência-de-tipos" class="nav-link" data-scroll-target="#eixo-2-equivalência-de-tipos"><span class="header-section-number">12.2.2</span> Eixo 2: Equivalência de Tipos</a></li>
+  <li><a href="#eixo-3-inferência" id="toc-eixo-3-inferência" class="nav-link" data-scroll-target="#eixo-3-inferência"><span class="header-section-number">12.2.3</span> Eixo 3: Inferência</a></li>
+  </ul></li>
+  <li><a href="#python-do-dinâmico-ao-gradual" id="toc-python-do-dinâmico-ao-gradual" class="nav-link" data-scroll-target="#python-do-dinâmico-ao-gradual"><span class="header-section-number">12.3</span> Python: Do Dinâmico ao Gradual</a>
+  <ul class="collapse">
+  <li><a href="#python-puro-duck-typing" id="toc-python-puro-duck-typing" class="nav-link" data-scroll-target="#python-puro-duck-typing"><span class="header-section-number">12.3.1</span> Python Puro: Duck Typing</a></li>
+  <li><a href="#python-com-type-hints-tipagem-gradual" id="toc-python-com-type-hints-tipagem-gradual" class="nav-link" data-scroll-target="#python-com-type-hints-tipagem-gradual"><span class="header-section-number">12.3.2</span> Python com Type Hints: Tipagem Gradual</a></li>
+  </ul></li>
+  <li><a href="#c-tipagem-nominal-minimalista" id="toc-c-tipagem-nominal-minimalista" class="nav-link" data-scroll-target="#c-tipagem-nominal-minimalista"><span class="header-section-number">12.4</span> C: Tipagem Nominal Minimalista</a>
+  <ul class="collapse">
+  <li><a href="#sistema-de-tipos-de-c" id="toc-sistema-de-tipos-de-c" class="nav-link" data-scroll-target="#sistema-de-tipos-de-c"><span class="header-section-number">12.4.1</span> Sistema de Tipos de C</a></li>
+  <li><a href="#a-fraqueza-controlada-casts-e-ponteiros" id="toc-a-fraqueza-controlada-casts-e-ponteiros" class="nav-link" data-scroll-target="#a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">12.4.2</span> A Fraqueza Controlada: Casts e Ponteiros</a></li>
+  </ul></li>
+  <li><a href="#c-templates-e-dedução-de-tipos" id="toc-c-templates-e-dedução-de-tipos" class="nav-link" data-scroll-target="#c-templates-e-dedução-de-tipos"><span class="header-section-number">12.5</span> C++: Templates e Dedução de Tipos</a>
+  <ul class="collapse">
+  <li><a href="#templates-duck-typing-em-tempo-de-compilação" id="toc-templates-duck-typing-em-tempo-de-compilação" class="nav-link" data-scroll-target="#templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">12.5.1</span> Templates: Duck Typing em Tempo de Compilação</a></li>
+  <li><a href="#dedução-de-tipos-com-auto" id="toc-dedução-de-tipos-com-auto" class="nav-link" data-scroll-target="#dedução-de-tipos-com-auto"><span class="header-section-number">12.5.2</span> Dedução de Tipos com <code>auto</code></a></li>
+  <li><a href="#concepts-c20-restrições-explícitas" id="toc-concepts-c20-restrições-explícitas" class="nav-link" data-scroll-target="#concepts-c20-restrições-explícitas"><span class="header-section-number">12.5.3</span> Concepts (C++20): Restrições Explícitas</a></li>
+  <li><a href="#exemplo-completo-de-julgamento-em-c" id="toc-exemplo-completo-de-julgamento-em-c" class="nav-link" data-scroll-target="#exemplo-completo-de-julgamento-em-c"><span class="header-section-number">12.5.4</span> Exemplo Completo de Julgamento em C++</a></li>
+  </ul></li>
+  <li><a href="#rust-hindley-milner-encontra-sistemas" id="toc-rust-hindley-milner-encontra-sistemas" class="nav-link" data-scroll-target="#rust-hindley-milner-encontra-sistemas"><span class="header-section-number">12.6</span> Rust: Hindley-Milner Encontra Sistemas</a>
+  <ul class="collapse">
+  <li><a href="#sistema-base-inferência-hindley-milner" id="toc-sistema-base-inferência-hindley-milner" class="nav-link" data-scroll-target="#sistema-base-inferência-hindley-milner"><span class="header-section-number">12.6.1</span> Sistema Base: Inferência Hindley-Milner</a></li>
+  <li><a href="#trait-based-constraints" id="toc-trait-based-constraints" class="nav-link" data-scroll-target="#trait-based-constraints"><span class="header-section-number">12.6.2</span> 1. Trait-Based Constraints</a></li>
+  <li><a href="#ownership-e-lifetimes" id="toc-ownership-e-lifetimes" class="nav-link" data-scroll-target="#ownership-e-lifetimes"><span class="header-section-number">12.6.3</span> 2. Ownership e Lifetimes</a></li>
+  <li><a href="#inferência-bidirecional" id="toc-inferência-bidirecional" class="nav-link" data-scroll-target="#inferência-bidirecional"><span class="header-section-number">12.6.4</span> 3. Inferência Bidirecional</a></li>
+  <li><a href="#sistema-completo-de-rust" id="toc-sistema-completo-de-rust" class="nav-link" data-scroll-target="#sistema-completo-de-rust"><span class="header-section-number">12.6.5</span> Sistema Completo de Rust</a></li>
+  </ul></li>
+  <li><a href="#casos-especiais-typescript-go-e-swift" id="toc-casos-especiais-typescript-go-e-swift" class="nav-link" data-scroll-target="#casos-especiais-typescript-go-e-swift"><span class="header-section-number">12.7</span> Casos Especiais: TypeScript, Go e Swift</a>
+  <ul class="collapse">
+  <li><a href="#typescript-tipagem-estrutural-gradual" id="toc-typescript-tipagem-estrutural-gradual" class="nav-link" data-scroll-target="#typescript-tipagem-estrutural-gradual"><span class="header-section-number">12.7.1</span> TypeScript: Tipagem Estrutural Gradual</a></li>
+  <li><a href="#go-simplicidade-nominal" id="toc-go-simplicidade-nominal" class="nav-link" data-scroll-target="#go-simplicidade-nominal"><span class="header-section-number">12.7.2</span> Go: Simplicidade Nominal</a></li>
+  <li><a href="#swift-sistema-híbrido" id="toc-swift-sistema-híbrido" class="nav-link" data-scroll-target="#swift-sistema-híbrido"><span class="header-section-number">12.7.3</span> Swift: Sistema Híbrido</a></li>
+  </ul></li>
+  <li><a href="#comparação-complexidade-dos-sistemas" id="toc-comparação-complexidade-dos-sistemas" class="nav-link" data-scroll-target="#comparação-complexidade-dos-sistemas"><span class="header-section-number">12.8</span> Comparação: Complexidade dos Sistemas</a></li>
+  <li><a href="#trade-offs-fundamentais" id="toc-trade-offs-fundamentais" class="nav-link" data-scroll-target="#trade-offs-fundamentais"><span class="header-section-number">12.9</span> Trade-offs Fundamentais</a>
+  <ul class="collapse">
+  <li><a href="#expressividade-vs.-decidibilidade" id="toc-expressividade-vs.-decidibilidade" class="nav-link" data-scroll-target="#expressividade-vs.-decidibilidade"><span class="header-section-number">12.9.1</span> 1. Expressividade vs.&nbsp;Decidibilidade</a></li>
+  <li><a href="#segurança-vs.-performance" id="toc-segurança-vs.-performance" class="nav-link" data-scroll-target="#segurança-vs.-performance"><span class="header-section-number">12.9.2</span> 2. Segurança vs.&nbsp;Performance</a></li>
+  <li><a href="#inferência-vs.-clareza" id="toc-inferência-vs.-clareza" class="nav-link" data-scroll-target="#inferência-vs.-clareza"><span class="header-section-number">12.9.3</span> 3. Inferência vs.&nbsp;Clareza</a></li>
+  </ul></li>
+  <li><a href="#conclusão-o-pragmatismo-vence-a-elegância" id="toc-conclusão-o-pragmatismo-vence-a-elegância" class="nav-link" data-scroll-target="#conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">12.10</span> Conclusão: O Pragmatismo Vence a Elegância</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10b-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./10b-semantico.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta"><span class="header-section-number">12.1</span> Do Elegante ao Pragmático: Por Que o Algoritmo W Não Basta</h2>
+<p>A transição do mundo funcional para o imperativo revela um choque fundamental de filosofias de design. O <strong>Algoritmo W</strong>, com sua elegância matemática e capacidade de inferência completa, foi projetado para linguagens funcionais puras onde o estado é imutável e as funções são valores de primeira classe. Contudo, as linguagens imperativas introduzem características que tornam a inferência completa de tipos não apenas difícil, mas frequentemente <strong>indesejável</strong>:</p>
+<p><strong>Mutabilidade</strong>: em linguagens funcionais, uma vez que <code>x</code> recebe um tipo, ele permanece inalterado. Em linguagens imperativas, <code>x</code> pode ser reatribuído múltiplas vezes, e seu tipo pode precisar ser conhecido explicitamente para cada ponto do programa.</p>
+<p><strong>Efeitos colaterais</strong>: funções imperativas não são puras. Elas podem modificar estado global, realizar I/O, lançar exceções. O tipo de uma função deve capturar não apenas sua assinatura, mas potencialmente seus efeitos.</p>
+<p><strong>Ponteiros e referências</strong>: C e C++ introduzem ponteiros, que criam um segundo nível de indireção no sistema de tipos. Um <code>int*</code> não é apenas “um tipo que aponta para int”, mas carrega semântica sobre propriedade de memória, alinhamento e aritmética de ponteiros.</p>
+<p><strong>Ordem de declaração</strong>: muitas linguagens imperativas permitem que funções sejam chamadas antes de serem declaradas, ou que tipos sejam usados antes de sua definição completa. Isso exige múltiplas passagens ou análise diferida.</p>
+<p><strong>Performance previsível</strong>: em linguagens de sistemas como C e C++, o programador precisa de controle fino sobre representação de dados e layout de memória. Inferência automática poderia gerar código com características de performance surpreendentes.</p>
+<p>A consequência dessas diferenças é que a maioria das linguagens imperativas adota uma filosofia pragmática: <strong>verificação de tipos estrita</strong> combinada com <strong>inferência limitada e previsível</strong>. O objetivo não é maximizar a inferência, mas sim encontrar um equilíbrio entre conveniência do programador, clareza do código e previsibilidade do compilador.</p>
+</section>
+<section id="taxonomia-dos-sistemas-de-tipos-imperativos" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="taxonomia-dos-sistemas-de-tipos-imperativos"><span class="header-section-number">12.2</span> Taxonomia dos Sistemas de Tipos Imperativos</h2>
+<p>Antes de mergulhar nos detalhes de cada linguagem, é útil estabelecer uma taxonomia das abordagens principais. As linguagens imperativas podem ser classificadas ao longo de vários eixos:</p>
+<section id="eixo-1-momento-da-verificação" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="eixo-1-momento-da-verificação"><span class="header-section-number">12.2.1</span> Eixo 1: Momento da Verificação</h3>
+<ul>
+<li><strong>Estática pura</strong>: toda verificação em tempo de compilação (C, Rust)</li>
+<li><strong>Estática com escape</strong>: verificação em compilação, mas com <code>unsafe</code> ou casts (C++, Rust com <code>unsafe</code>)</li>
+<li><strong>Híbrida</strong>: verificação em compilação e runtime (Java, C#)</li>
+<li><strong>Gradual</strong>: opcional em compilação, sempre em runtime (Python com type hints, TypeScript)</li>
+<li><strong>Dinâmica pura</strong>: apenas em runtime (JavaScript, Python sem hints)</li>
+</ul>
+</section>
+<section id="eixo-2-equivalência-de-tipos" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="eixo-2-equivalência-de-tipos"><span class="header-section-number">12.2.2</span> Eixo 2: Equivalência de Tipos</h3>
+<ul>
+<li><strong>Nominal</strong>: tipos são iguais se têm o mesmo nome (Java, C#, C++)</li>
+<li><strong>Estrutural</strong>: tipos são iguais se têm a mesma estrutura (Go, TypeScript)</li>
+<li><strong>Mista</strong>: nominal para tipos nomeados, estrutural para anônimos (OCaml)</li>
+</ul>
+</section>
+<section id="eixo-3-inferência" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="eixo-3-inferência"><span class="header-section-number">12.2.3</span> Eixo 3: Inferência</h3>
+<ul>
+<li><strong>Nenhuma</strong>: tipos sempre explícitos (C até C++03)</li>
+<li><strong>Local</strong>: inferência em expressões simples (C++11 <code>auto</code>, Java <code>var</code>)</li>
+<li><strong>Fluxo-sensitiva</strong>: inferência através de branches (TypeScript, Flow)</li>
+<li><strong>Completa</strong>: inferência global (ML, Haskell, parcialmente em Rust)</li>
+</ul>
+</section>
+</section>
+<section id="python-do-dinâmico-ao-gradual" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="python-do-dinâmico-ao-gradual"><span class="header-section-number">12.3</span> Python: Do Dinâmico ao Gradual</h2>
+<p><strong>Python</strong> representa uma abordagem radicalmente diferente. Historicamente uma linguagem puramente dinâmica, ela evoluiu para um sistema de <strong>tipagem gradual</strong> com a PEP 484 (2014).</p>
+<section id="python-puro-duck-typing" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="python-puro-duck-typing"><span class="header-section-number">12.3.1</span> Python Puro: Duck Typing</h3>
+<p>No Python tradicional, não há julgamento de tipos em tempo de compilação:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a, b):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="dv">3</span>, <span class="dv">5</span>)        <span class="co"># Funciona: 8</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="st">"oi"</span>, <span class="st">"lá"</span>)  <span class="co"># Funciona: "oilá"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="dv">3</span>, <span class="st">"lá"</span>)     <span class="co"># TypeError em runtime</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O sistema de tipos é baseado em <strong>duck typing</strong>: “se anda como pato e faz quack como pato, então é um pato”. O que importa não é o tipo nominal de um objeto, mas sim quais operações ele suporta.</p>
+<p>Formalmente, não há julgamento de tipo estático. O “tipo” de uma expressão só é conhecido em runtime:</p>
+<p><span class="math display">\[\text{typeof}(e, \sigma) = \tau\]</span></p>
+<p>Onde <span class="math inline">\(\sigma\)</span> é o estado do programa (valores concretos) e <span class="math inline">\(\tau\)</span> é o tipo descoberto em runtime.</p>
+</section>
+<section id="python-com-type-hints-tipagem-gradual" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="python-com-type-hints-tipagem-gradual"><span class="header-section-number">12.3.2</span> Python com Type Hints: Tipagem Gradual</h3>
+<p>A PEP 484 introduziu <strong>anotações de tipo opcionais</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Type checker (mypy) pode detectar erro:</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>resultado: <span class="bu">int</span> <span class="op">=</span> soma(<span class="dv">3</span>, <span class="st">"olá"</span>)  <span class="co"># Type error em análise estática</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O sistema de julgamento de tipos para Python anotado usa <strong>equivalência estrutural</strong> com <strong>subtipagem</strong>:</p>
+<p><strong>Regra de Subtipagem (Subsumption)</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : T_1 \quad T_1 &lt;: T_2}{\Gamma \vdash e : T_2}\]</span></p>
+<p>Se <code>e</code> tem tipo <code>T₁</code> e <code>T₁</code> é subtipo de <code>T₂</code>, então <code>e</code> pode ser usado onde <code>T₂</code> é esperado.</p>
+<p><strong>Exemplo prático</strong>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Desenhavel(Protocol):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>: ...</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Circulo:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"○"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Quadrado:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"□"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renderizar(obj: Desenhavel) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    obj.desenhar()</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Type checker aceita ambos:</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>renderizar(Circulo())   <span class="co"># OK: Circulo é estruturalmente compatível</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>renderizar(Quadrado())  <span class="co"># OK: Quadrado é estruturalmente compatível</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O julgamento aqui é:</p>
+<p><span class="math display">\[\frac{\text{Circulo} &lt;: \text{Desenhavel}}{\Gamma \vdash \text{Circulo()} : \text{Desenhavel}}\]</span></p>
+<p><strong>Características únicas do sistema Python</strong>:</p>
+<ol type="1">
+<li><strong>Verificação é opcional</strong>: código sem anotações é válido</li>
+<li><strong>Structural subtyping</strong>: protocols definem interfaces estruturais</li>
+<li><strong>Tipo <code>Any</code></strong>: escape hatch que é compatível com tudo</li>
+<li><strong>Union types</strong>: <code>int | str</code> permite múltiplos tipos</li>
+<li><strong>Type narrowing</strong>: refinamento de tipos em branches</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> processar(valor: <span class="bu">int</span> <span class="op">|</span> <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(valor, <span class="bu">int</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: int</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: str</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="c-tipagem-nominal-minimalista" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="c-tipagem-nominal-minimalista"><span class="header-section-number">12.4</span> C: Tipagem Nominal Minimalista</h2>
+<p><strong>C</strong> representa o extremo oposto: um sistema de tipos <strong>estático</strong>, <strong>fraco</strong> e <strong>nominal</strong>, projetado para estar o mais próximo possível do hardware.</p>
+<section id="sistema-de-tipos-de-c" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="sistema-de-tipos-de-c"><span class="header-section-number">12.4.1</span> Sistema de Tipos de C</h3>
+<p>O sistema de tipos de C é deliberadamente minimalista. As regras de julgamento são simples, mas permissivas:</p>
+<p><strong>Regra de Declaração de Variável</strong>:</p>
+<p><span class="math display">\[\frac{T \in \{\text{int, float, char, ...}\}}{\Gamma \vdash (T \, x;) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : T\}}\]</span></p>
+<p><strong>Regra de Coerção Aritmética</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2 \quad T_1, T_2 \in \text{NumericTypes}}{\Gamma \vdash e_1 + e_2 : \text{promote}(T_1, T_2)}\]</span></p>
+<p>Onde <code>promote</code> segue a hierarquia: <code>char</code> &lt; <code>short</code> &lt; <code>int</code> &lt; <code>long</code> &lt; <code>float</code> &lt; <code>double</code></p>
+<p><strong>Exemplo</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>  <span class="co">// x promovido para float, resultado promovido para double</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="a-fraqueza-controlada-casts-e-ponteiros" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">12.4.2</span> A Fraqueza Controlada: Casts e Ponteiros</h3>
+<p>O que torna C “fracamente tipado” é sua permissividade com <strong>casts</strong> e <strong>aritmética de ponteiros</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span><span class="op">*</span> p <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">*)&amp;</span>x<span class="op">;</span>  <span class="co">// Cast inseguro: reinterpreta bits</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>              <span class="co">// Comportamento indefinido</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span><span class="op">*</span> str <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> offset <span class="op">=</span> str<span class="op">[</span><span class="dv">2</span><span class="op">];</span>    <span class="co">// 'l' interpretado como int</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Cast (Conversão Explícita)</strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : T_1}{\Gamma \vdash (T_2)e : T_2}\]</span></p>
+<p>Esta regra é <strong>perigosamente permissiva</strong>: ela aceita qualquer cast, transferindo a responsabilidade de correção para o programador. O compilador confia que você sabe o que está fazendo.</p>
+<p><strong>Exemplo de julgamento em C</strong>:</p>
+<p>Para o código:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="op">*</span>p <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A derivação seria:</p>
+<p><span class="math display">\[\frac{
+  \frac{}{\Gamma_0 \vdash 10 : \text{int}} \quad \Gamma_1 = \{x : \text{int}\}
+}{
+  \Gamma_1 \vdash (x = 10) : \text{ok}
+}\]</span></p>
+<p><span class="math display">\[\frac{
+  \frac{x : \text{int} \in \Gamma_1}{\Gamma_1 \vdash \&amp;x : \text{int*}} \quad \Gamma_2 = \Gamma_1 \cup \{p : \text{int*}\}
+}{
+  \Gamma_2 \vdash (p = \&amp;x) : \text{ok}
+}\]</span></p>
+<p><span class="math display">\[\frac{
+  \frac{p : \text{int*} \in \Gamma_2}{\Gamma_2 \vdash *p : \text{int}} \quad
+  \frac{}{\Gamma_2 \vdash 5 : \text{int}}
+}{
+  \Gamma_2 \vdash *p + 5 : \text{int}
+}\]</span></p>
+</section>
+</section>
+<section id="c-templates-e-dedução-de-tipos" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="c-templates-e-dedução-de-tipos"><span class="header-section-number">12.5</span> C++: Templates e Dedução de Tipos</h2>
+<p><strong>C++</strong> estende C com um sistema de tipos significativamente mais rico, mas mantém compatibilidade com a fraqueza controlada de C.</p>
+<section id="templates-duck-typing-em-tempo-de-compilação" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">12.5.1</span> Templates: Duck Typing em Tempo de Compilação</h3>
+<p>Templates em C++ são essencialmente <strong>duck typing estático</strong>. Um template é instanciado apenas quando usado, e o compilador verifica se todas as operações requeridas existem:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>T max<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">&gt;</span> b <span class="op">?</span> a <span class="op">:</span> b<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> max<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span>        <span class="co">// T deduzido como int</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> y <span class="op">=</span> max<span class="op">(</span><span class="fl">3.1</span><span class="op">,</span> <span class="fl">2.9</span><span class="op">);</span> <span class="co">// T deduzido como double</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Instanciação de Template</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma \vdash e_1 : T \quad \Gamma \vdash e_2 : T \quad
+  T \text{ suporta } &gt;
+}{
+  \Gamma \vdash \text{max}(e_1, e_2) : T
+}\]</span></p>
+<p>Esta verificação acontece <strong>por instanciação</strong>: o compilador substitui <code>T</code> por cada tipo concreto usado e então verifica se as operações são válidas.</p>
+</section>
+<section id="dedução-de-tipos-com-auto" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="dedução-de-tipos-com-auto"><span class="header-section-number">12.5.2</span> Dedução de Tipos com <code>auto</code></h3>
+<p>C++11 introduziu <code>auto</code>, que realiza <strong>inferência de tipo local</strong>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>           <span class="co">// x : int</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>         <span class="co">// y : double</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>        <span class="co">// z : double</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> f <span class="op">=</span> <span class="op">[](</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span>   <span class="co">// f : lambda com tipo deduzido</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Dedução para <code>auto</code></strong>:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : \tau}{\Gamma \vdash (\text{auto } x = e) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : \tau\}}\]</span></p>
+<p>O tipo de <code>x</code> é <strong>exatamente</strong> o tipo de <code>e</code>, sem coerções automáticas.</p>
+</section>
+<section id="concepts-c20-restrições-explícitas" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="concepts-c20-restrições-explícitas"><span class="header-section-number">12.5.3</span> Concepts (C++20): Restrições Explícitas</h3>
+<p>C++20 introduziu <strong>concepts</strong> para adicionar restrições explícitas a templates:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">concept</span> Numeric <span class="op">=</span> <span class="bu">std::</span>is_arithmetic_v<span class="op">&lt;</span>T<span class="op">&gt;;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span>Numeric T<span class="op">&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>T quadrado<span class="op">(</span>T x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> quadrado<span class="op">(</span><span class="dv">5</span><span class="op">);</span>      <span class="co">// OK</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> quadrado<span class="op">(</span><span class="fl">3.14</span><span class="op">);</span> <span class="co">// OK</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">// std::string c = quadrado("oi"); // ERRO: string não satisfaz Numeric</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Concept</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma \vdash T \models C \quad \Gamma, x : T \vdash e : \tau
+}{
+  \Gamma \vdash (\text{concept } C\, T \Rightarrow e) : \tau
+}\]</span></p>
+<p>Onde <span class="math inline">\(T \models C\)</span> significa “T satisfaz as restrições do concept C”.</p>
+</section>
+<section id="exemplo-completo-de-julgamento-em-c" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="exemplo-completo-de-julgamento-em-c"><span class="header-section-number">12.5.4</span> Exemplo Completo de Julgamento em C++</h3>
+<p>Para o código:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma_dobro<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> resultado <span class="op">=</span> soma_dobro<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A derivação envolve múltiplas etapas:</p>
+<ol type="1">
+<li><p><strong>Dedução do parâmetro de template</strong>: <span class="math display">\[\frac{\Gamma \vdash 3 : \text{int} \quad \Gamma \vdash 5 : \text{int}}{T = \text{int}}\]</span></p></li>
+<li><p><strong>Dedução do tipo de retorno</strong> (usando <code>decltype</code>): <span class="math display">\[\frac{\Gamma \vdash (a + b) : \text{int}}{\text{decltype}(a + b) = \text{int}}\]</span></p></li>
+<li><p><strong>Verificação do corpo</strong>: <span class="math display">\[\frac{
+  \Gamma, a : \text{int}, b : \text{int} \vdash (a + b) * 2 : \text{int}
+}{
+  \Gamma \vdash \text{soma\_dobro}&lt;\text{int}&gt; : (\text{int}, \text{int}) \rightarrow \text{int}
+}\]</span></p></li>
+<li><p><strong>Dedução de <code>auto</code></strong>: <span class="math display">\[\frac{\Gamma \vdash \text{soma\_dobro}(3, 5) : \text{int}}{\Gamma \vdash \text{auto resultado} : \text{int}}\]</span></p></li>
+</ol>
+</section>
+</section>
+<section id="rust-hindley-milner-encontra-sistemas" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="rust-hindley-milner-encontra-sistemas"><span class="header-section-number">12.6</span> Rust: Hindley-Milner Encontra Sistemas</h2>
+<p><strong>Rust</strong> é a linguagem imperativa moderna que mais se aproxima da elegância dos sistemas de tipos funcionais, mas com extensões cruciais para programação de sistemas.</p>
+<section id="sistema-base-inferência-hindley-milner" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="sistema-base-inferência-hindley-milner"><span class="header-section-number">12.6.1</span> Sistema Base: Inferência Hindley-Milner</h3>
+<p>O sistema de tipos de Rust é baseado em Hindley-Milner, permitindo inferência quase completa:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">+</span> b</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>           <span class="co">// Tipo inferido: i32</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> y <span class="op">=</span> soma(x<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span> <span class="co">// Tipo inferido: i32</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Contudo, Rust adiciona três extensões fundamentais:</p>
+</section>
+<section id="trait-based-constraints" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="trait-based-constraints"><span class="header-section-number">12.6.2</span> 1. Trait-Based Constraints</h3>
+<p>Traits em Rust são similares a type classes em Haskell, mas com semântica de sistemas:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">trait</span> Adicionavel <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> adicionar(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> outro<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Self</span>) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma_generica<span class="op">&lt;</span>T<span class="op">:</span> Adicionavel<span class="op">&gt;</span>(a<span class="op">:</span> T<span class="op">,</span> b<span class="op">:</span> T) <span class="op">-&gt;</span> T <span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    a<span class="op">.</span>adicionar(<span class="op">&amp;</span>b)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Trait Bound</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma \vdash T : \text{trait } C \quad
+  \Gamma, x : T \vdash e : \tau
+}{
+  \Gamma \vdash \text{fn}(x : T \text{ where } T : C) \rightarrow \tau : (T \rightarrow \tau)
+}\]</span></p>
+</section>
+<section id="ownership-e-lifetimes" class="level3" data-number="12.6.3">
+<h3 data-number="12.6.3" class="anchored" data-anchor-id="ownership-e-lifetimes"><span class="header-section-number">12.6.3</span> 2. Ownership e Lifetimes</h3>
+<p>A característica mais distintiva de Rust é seu sistema de <strong>ownership</strong> e <strong>lifetimes</strong>, que são parte integrante do sistema de tipos:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> primeiro<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span>split_whitespace()<span class="op">.</span>next()<span class="op">.</span>unwrap_or(<span class="st">""</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Lifetime</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma; \Delta \vdash e : \tau \quad
+  \Delta \vdash \tau : 'a \quad
+  'a \text{ outlives todas as refs em } \tau
+}{
+  \Gamma; \Delta \vdash e : \tau_{/'a}
+}\]</span></p>
+<p>Onde <span class="math inline">\(\Delta\)</span> é o contexto de lifetimes e <span class="math inline">\(\tau_{/'a}\)</span> é o tipo <span class="math inline">\(\tau\)</span> anotado com lifetime <span class="math inline">\('a\)</span>.</p>
+<p><strong>Exemplo de julgamento com lifetimes</strong>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> maior<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s1<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> s2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s1<span class="op">.</span>len() <span class="op">&gt;</span> s2<span class="op">.</span>len() <span class="op">{</span> s1 <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> s2 <span class="op">}</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> resultado<span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> texto1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"curto"</span>)<span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> texto2 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"mais longo"</span>)<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> maior(<span class="op">&amp;</span>texto1<span class="op">,</span> <span class="op">&amp;</span>texto2)<span class="op">;</span> <span class="co">// ERRO: texto1 não vive o suficiente</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A derivação falharia:</p>
+<p><span class="math display">\[\frac{
+  \Gamma; \{\text{texto1} : 'b\} \vdash \&amp;\text{texto1} : \&amp;'b \text{str}
+}{
+  \text{ERRO: } 'b \not\sqsupseteq 'a \text{ (lifetime esperado)}
+}\]</span></p>
+</section>
+<section id="inferência-bidirecional" class="level3" data-number="12.6.4">
+<h3 data-number="12.6.4" class="anchored" data-anchor-id="inferência-bidirecional"><span class="header-section-number">12.6.4</span> 3. Inferência Bidirecional</h3>
+<p>Rust usa <strong>inferência bidirecional</strong> para combinar anotações explícitas com dedução:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> v<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> <span class="co">// Vec&lt;i32&gt; inferido</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> soma <span class="op">=</span> v<span class="op">.</span>iter()<span class="op">.</span>sum()<span class="op">;</span>      <span class="co">// Tipo de retorno inferido do contexto</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Inferência Bidirecional</strong>:</p>
+<ul>
+<li><strong>Modo de síntese</strong> (<span class="math inline">\(\Gamma \vdash e \Rightarrow \tau\)</span>): deduz o tipo de <code>e</code></li>
+<li><strong>Modo de checagem</strong> (<span class="math inline">\(\Gamma \vdash e \Leftarrow \tau\)</span>): verifica se <code>e</code> tem tipo <span class="math inline">\(\tau\)</span></li>
+</ul>
+<p><span class="math display">\[\frac{
+  \Gamma \vdash e \Rightarrow \tau_1 \quad
+  \tau_1 = \tau_2
+}{
+  \Gamma \vdash e \Leftarrow \tau_2
+}\]</span></p>
+</section>
+<section id="sistema-completo-de-rust" class="level3" data-number="12.6.5">
+<h3 data-number="12.6.5" class="anchored" data-anchor-id="sistema-completo-de-rust"><span class="header-section-number">12.6.5</span> Sistema Completo de Rust</h3>
+<p>O sistema de tipos de Rust pode ser formalizado como uma tupla:</p>
+<p><span class="math display">\[\text{RustTypes} = (\text{HM}, \text{Traits}, \text{Ownership}, \text{Lifetimes})\]</span></p>
+<p><strong>Exemplo de derivação completa</strong>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> processar<span class="op">&lt;</span><span class="ot">'a</span><span class="op">,</span> T<span class="op">:</span> <span class="bu">Clone</span><span class="op">&gt;</span>(dados<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> [T]) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    dados<span class="op">.</span>iter()<span class="op">.</span>cloned()<span class="op">.</span>collect()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A derivação verifica:</p>
+<ol type="1">
+<li><strong>Trait bound</strong>: <code>T : Clone</code></li>
+<li><strong>Lifetime</strong>: <code>'a</code> para a referência de slice</li>
+<li><strong>Inferência</strong>: tipo de retorno é <code>Vec&lt;T&gt;</code></li>
+<li><strong>Ownership</strong>: <code>cloned()</code> cria cópias, satisfazendo ownership</li>
+</ol>
+<p><span class="math display">\[\frac{
+  \begin{gathered}
+  T : \text{Clone} \\
+  \Gamma; \{'a\} \vdash \text{dados} : \&amp;'a [T] \\
+  \Gamma \vdash \text{iter}() : \text{Iter}&lt;\&amp;T&gt; \\
+  \Gamma \vdash \text{cloned}() : \text{Iter}&lt;T&gt; \\
+  \Gamma \vdash \text{collect}() : \text{Vec}&lt;T&gt;
+  \end{gathered}
+}{
+  \Gamma \vdash \text{processar} : \forall 'a, T : \text{Clone}. \, \&amp;'a[T] \rightarrow \text{Vec}&lt;T&gt;
+}\]</span></p>
+</section>
+</section>
+<section id="casos-especiais-typescript-go-e-swift" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="casos-especiais-typescript-go-e-swift"><span class="header-section-number">12.7</span> Casos Especiais: TypeScript, Go e Swift</h2>
+<section id="typescript-tipagem-estrutural-gradual" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="typescript-tipagem-estrutural-gradual"><span class="header-section-number">12.7.1</span> TypeScript: Tipagem Estrutural Gradual</h3>
+<p><strong>TypeScript</strong> combina tipagem estrutural com inferência flow-sensitive:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processar</span>(valor<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">typeof</span> valor <span class="op">===</span> <span class="st">"string"</span>) {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: string</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: number</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Type Narrowing</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma \vdash e : T_1 | T_2 \quad
+  \Gamma, e : T_1 \vdash b_1 : \tau \quad
+  \Gamma, e : T_2 \vdash b_2 : \tau
+}{
+  \Gamma \vdash (\text{if typeof}(e) \text{ then } b_1 \text{ else } b_2) : \tau
+}\]</span></p>
+</section>
+<section id="go-simplicidade-nominal" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2" class="anchored" data-anchor-id="go-simplicidade-nominal"><span class="header-section-number">12.7.2</span> Go: Simplicidade Nominal</h3>
+<p><strong>Go</strong> usa um sistema simples e nominal, mas com interfaces estruturais:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Desenhavel <span class="kw">interface</span> <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    Desenhar<span class="op">()</span> <span class="dt">string</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Circulo <span class="kw">struct</span><span class="op">{}</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>c Circulo<span class="op">)</span> Desenhar<span class="op">()</span> <span class="dt">string</span> <span class="op">{</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"○"</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Circulo implementa Desenhavel implicitamente</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Regra de Interface Implícita</strong>:</p>
+<p><span class="math display">\[\frac{
+  \forall m \in \text{methods}(I), \quad T \text{ implementa } m
+}{
+  T &lt;: I
+}\]</span></p>
+</section>
+<section id="swift-sistema-híbrido" class="level3" data-number="12.7.3">
+<h3 data-number="12.7.3" class="anchored" data-anchor-id="swift-sistema-híbrido"><span class="header-section-number">12.7.3</span> Swift: Sistema Híbrido</h3>
+<p><strong>Swift</strong> combina inferência local forte com type classes (protocols) e tipos opcionais:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="fu">processar</span><span class="op">&lt;</span><span class="dt">T</span><span class="op">:</span> <span class="dt">Numeric</span><span class="op">&gt;(</span><span class="va">valor</span><span class="op">:</span> <span class="dt">T</span><span class="op">?)</span> -&gt; <span class="fu">T</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> valor <span class="op">??</span> <span class="dv">0</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="comparação-complexidade-dos-sistemas" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="comparação-complexidade-dos-sistemas"><span class="header-section-number">12.8</span> Comparação: Complexidade dos Sistemas</h2>
+<p>A tabela a seguir resume as características dos sistemas de tipos discutidos:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 20%">
+<col style="width: 21%">
+<col style="width: 18%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Linguagem</th>
+<th style="text-align: left;">Verificação</th>
+<th style="text-align: left;">Equivalência</th>
+<th style="text-align: left;">Inferência</th>
+<th style="text-align: left;">Complexidade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Python</strong></td>
+<td style="text-align: left;">Gradual</td>
+<td style="text-align: left;">Estrutural</td>
+<td style="text-align: left;">Nenhuma (puro) / Flow-sensitive (hints)</td>
+<td style="text-align: left;">O(n) (hints)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>C</strong></td>
+<td style="text-align: left;">Estática fraca</td>
+<td style="text-align: left;">Nominal</td>
+<td style="text-align: left;">Nenhuma</td>
+<td style="text-align: left;">O(n)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>C++</strong></td>
+<td style="text-align: left;">Estática fraca</td>
+<td style="text-align: left;">Nominal</td>
+<td style="text-align: left;">Local (auto) / Instanciação (templates)</td>
+<td style="text-align: left;">O(n) (base) / Exponencial (templates)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Rust</strong></td>
+<td style="text-align: left;">Estática forte</td>
+<td style="text-align: left;">Nominal</td>
+<td style="text-align: left;">Global (quase HM)</td>
+<td style="text-align: left;">O(n³) (pior caso)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>TypeScript</strong></td>
+<td style="text-align: left;">Gradual</td>
+<td style="text-align: left;">Estrutural</td>
+<td style="text-align: left;">Flow-sensitive</td>
+<td style="text-align: left;">O(n²)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Go</strong></td>
+<td style="text-align: left;">Estática forte</td>
+<td style="text-align: left;">Nominal (estrutural p/ interfaces)</td>
+<td style="text-align: left;">Nenhuma</td>
+<td style="text-align: left;">O(n)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Java</strong></td>
+<td style="text-align: left;">Estática forte</td>
+<td style="text-align: left;">Nominal</td>
+<td style="text-align: left;">Local (var)</td>
+<td style="text-align: left;">O(n)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="trade-offs-fundamentais" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="trade-offs-fundamentais"><span class="header-section-number">12.9</span> Trade-offs Fundamentais</h2>
+<p>A evolução dos sistemas de tipos em linguagens imperativas revela três trade-offs fundamentais:</p>
+<section id="expressividade-vs.-decidibilidade" class="level3" data-number="12.9.1">
+<h3 data-number="12.9.1" class="anchored" data-anchor-id="expressividade-vs.-decidibilidade"><span class="header-section-number">12.9.1</span> 1. Expressividade vs.&nbsp;Decidibilidade</h3>
+<ul>
+<li><strong>C</strong>: Sistema simples e sempre decidível, mas expressividade limitada</li>
+<li><strong>C++</strong>: Templates Turing-completos, decidibilidade sacrificada</li>
+<li><strong>Rust</strong>: Máxima expressividade mantendo decidibilidade (com restrições)</li>
+</ul>
+</section>
+<section id="segurança-vs.-performance" class="level3" data-number="12.9.2">
+<h3 data-number="12.9.2" class="anchored" data-anchor-id="segurança-vs.-performance"><span class="header-section-number">12.9.2</span> 2. Segurança vs.&nbsp;Performance</h3>
+<ul>
+<li><strong>C</strong>: Segurança mínima, performance máxima</li>
+<li><strong>Java/C#</strong>: Segurança com verificações runtime quando necessário</li>
+<li><strong>Rust</strong>: Segurança sem custo em runtime (zero-cost abstractions)</li>
+</ul>
+</section>
+<section id="inferência-vs.-clareza" class="level3" data-number="12.9.3">
+<h3 data-number="12.9.3" class="anchored" data-anchor-id="inferência-vs.-clareza"><span class="header-section-number">12.9.3</span> 3. Inferência vs.&nbsp;Clareza</h3>
+<ul>
+<li><strong>ML/Haskell</strong>: Inferência máxima, pode ser confuso</li>
+<li><strong>C/Go</strong>: Tipos explícitos, sempre claro mas verboso</li>
+<li><strong>Rust/C++</strong>: Inferência local, balanceando ambos</li>
+</ul>
+</section>
+</section>
+<section id="conclusão-o-pragmatismo-vence-a-elegância" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">12.10</span> Conclusão: O Pragmatismo Vence a Elegância</h2>
+<p>A comparação entre o <strong>Algoritmo W</strong> e os sistemas de tipos imperativos revela uma verdade fundamental sobre design de linguagens: <strong>não existe solução universal</strong>. O Algoritmo W é uma maravilha matemática para linguagens funcionais puras, mas as necessidades do mundo imperativo exigem abordagens diferentes.</p>
+<p>As linguagens imperativas modernas convergem para um modelo híbrido:</p>
+<ol type="1">
+<li><strong>Verificação estática rigorosa</strong> onde possível</li>
+<li><strong>Inferência local previsível</strong> para conveniência</li>
+<li><strong>Escape hatches controlados</strong> para flexibilidade</li>
+<li><strong>Sistemas de restrições</strong> (traits, concepts, protocols) para polimorfismo</li>
+</ol>
+<p>O futuro provavelmente verá mais convergência: linguagens funcionais adotando características imperativas (efeitos, mutabilidade controlada) e linguagens imperativas adotando ideias funcionais (inferência, imutabilidade por padrão, pattern matching). O sistema de tipos de <strong>Rust</strong> pode representar um vislumbre desse futuro: a ponte entre a elegância teórica e as necessidades práticas da programação de sistemas.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10a-semantico.html" class="pagination-link" aria-label="Fundamentos Matemáticos da Semântica">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10c-semantico.html" class="pagination-link" aria-label="O Sistema de Tipos Hindley-Milner">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10b-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
