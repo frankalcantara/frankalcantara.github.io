@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tabela de Símbolos em Compiladores Modernos</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <script src="common_js.js"></script>
+</head>
+<body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+        <div class="mb-4">
+            <h3 class="fs-5 fw-bold text-dark mb-3">Sumário</h3>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#introducao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">1. Introdução</a></li>
+                <li class="mb-2"><a href="#historia" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">2. História da Evolução</a></li>
+                <li class="mb-2"><a href="#interacao-fases" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">3. Interação com as Fases</a></li>
+                <li class="mb-2"><a href="#informacao-armazenada" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">4. Informação Armazenada</a></li>
+                <li class="mb-2"><a href="#estruturas-dados" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">5. Estruturas de Dados</a></li>
+                <li class="mb-2"><a href="#hash-tables" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">6. Hash Tables</a></li>
+                <li class="mb-2"><a href="#arvores" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">7. Estruturas em Árvore</a></li>
+                <li class="mb-2"><a href="#comparacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">8. Análise Comparativa</a></li>
+                <li class="mb-2"><a href="#escopos" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">9. Escopos Lexicais</a></li>
+                <li class="mb-2"><a href="#implementacao" class="d-block p-2 rounded text-dark text-decoration-none hover-lift hover-bg-light">10. Implementação</a></li>
+            </ul>
+        </div>
+        <div class="mt-4 pt-4 border-top">
+            <h4 class="fs-6 fw-semibold text-dark mb-3">Conceitos Chave</h4>
+            <div class="d-flex flex-column gap-2">
+                <div class="p-2 bg-primary-subtle rounded"><i class="fas fa-table me-2 text-primary"></i><small class="text-primary fw-medium">Hash Tables</small></div>
+                <div class="p-2 bg-success-subtle rounded"><i class="fas fa-layer-group me-2 text-success"></i><small class="text-success fw-medium">Escopos Aninhados</small></div>
+                <div class="p-2 bg-info-subtle rounded"><i class="fas fa-search me-2 text-info"></i><small class="text-info fw-medium">Busca O(1)</small></div>
+                <div class="p-2 bg-warning-subtle rounded"><i class="fas fa-code-branch me-2 text-warning"></i><small class="text-warning fw-medium">Shadowing</small></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="d-lg-none position-fixed top-0 start-0 m-3 z-3 bg-white p-2 rounded shadow" onclick="toggleTOC()">
+        <i class="fas fa-bars text-dark"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="min-vh-100" style="background: linear-gradient(to bottom right, var(--sage-100), var(--copper-100));">
+            <div class="container py-5">
+                
+                <div class="bento-grid mb-5">
+                    <div class="bento-main bg-white rounded-3 shadow">
+                        <div class="hero-gradient h-100 d-flex align-items-center justify-content-center position-relative">
+                            <div class="position-absolute w-100 h-100 opacity-25" style="background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 300\"><defs><pattern id=\"table\" x=\"0\" y=\"0\" width=\"50\" height=\"50\" patternUnits=\"userSpaceOnUse\"><rect x=\"5\" y=\"5\" width=\"40\" height=\"40\" fill=\"none\" stroke=\"%23ffffff\" stroke-width=\"2\" opacity=\"0.3\"/><circle cx=\"25\" cy=\"25\" r=\"3\" fill=\"%23ffffff\" opacity=\"0.5\"/></pattern></defs><rect width=\"100%25\" height=\"100%25\" fill=\"url(%23table)\"/></svg>') center/cover;"></div>
+                            <div class="position-relative z-1 text-center text-white p-4">
+                                <h1 class="display-4 fw-bold mb-4">
+                                    <em class="d-block" style="color: var(--copper-200);">Tabela de Símbolos</em>
+                                    <span class="d-block">em Compiladores Modernos</span>
+                                </h1>
+                                <p class="fs-4 text-light fw-light mx-auto" style="max-width: 32rem;">
+                                    O dicionário central que mapeia identificadores ao seu significado semântico
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bento-side-top bg-white rounded-3 p-4 shadow">
+                        <div class="text-center">
+                            <div class="stat-highlight text-primary">O(1)</div>
+                            <div class="fs-6 text-muted">Busca Média</div>
+                        </div>
+                    </div>
+                    <div class="bento-side-bottom bg-light rounded-3 p-4 shadow" style="background-color: var(--copper-50);">
+                        <div class="text-center">
+                            <div class="stat-highlight" style="color: var(--copper-800);">∞</div>
+                            <div class="fs-6" style="color: var(--copper-700);">Escopos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-hashtag fs-2 text-primary mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-primary">Hash</h3>
+                                <p class="fs-7 text-muted">Acesso Rápido</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-layer-group fs-2 text-success mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-success">Escopo</h3>
+                                <p class="fs-7 text-muted">Pilha de Tabelas</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-database fs-2 text-warning mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-warning">Atributos</h3>
+                                <p class="fs-7 text-muted">Metadados</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100 bg-white rounded-3 shadow hover-lift">
+                            <div class="card-body p-4 text-center">
+                                <i class="fas fa-search fs-2 text-info mb-3"></i>
+                                <h3 class="fs-6 fw-semibold text-info">Lookup</h3>
+                                <p class="fs-7 text-muted">Resolução</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introducao" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">1. Introdução à Tabela de Símbolos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A Tabela de Símbolos é um tipo de dados abstrato que mapeia identificadores, chamados de símbolos, para a sua informação semântica associada. Essa é a principal estrutura de dados utilizada por um compilador, ou interpretador, para rastrear as entidades declaradas em um código fonte.
+                    </p>
+
+                    <!-- Key Distinction -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Identificador vs Símbolo</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold text-primary mb-3">Identificador</h5>
+                                    <p class="mb-0">Uma cadeia de caracteres, um lexema, como <code>x</code> ou <code>minhaVariavel</code></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-5 fw-semibold text-success mb-3">Símbolo</h5>
+                                    <p class="mb-0">Um nome único dentro de um contexto específico. Um identificador pode representar múltiplos símbolos distintos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Primary Purpose -->
+                    <div class="card p-4 rounded-3 shadow bg-primary-subtle">
+                        <h3 class="fs-3 fw-semibold mb-3 text-primary">Propósito Fundamental</h3>
+                        <p class="fs-5 mb-0">
+                            <strong>Resolver a qual entidade um determinado uso de um identificador se refere</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="historia" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">2. A Evolução da Tabela de Símbolos</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A Tabela de Símbolos, embora conceitualmente simples, passou por uma notável evolução ao longo da história da computação, refletindo diretamente o avanço na complexidade das linguagens de programação.
+                    </p>
+
+                    <!-- Timeline -->
+                    <div class="timeline mb-5">
+                        <div class="row row-cols-1 g-4">
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-5 fw-bold text-primary">1957 - FORTRAN I</h4>
+                                        <p class="fs-6 text-muted mb-2">Estruturas lineares simples (arrays, listas)</p>
+                                        <div class="p-2 bg-danger-subtle rounded">
+                                            <small><strong>Complexidade:</strong> O(n) - busca sequencial</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-5 fw-bold text-success">1960 - ALGOL 60</h4>
+                                        <p class="fs-6 text-muted mb-2">Tabelas hierárquicas para estrutura de blocos</p>
+                                        <div class="p-2 bg-info-subtle rounded">
+                                            <small><strong>Inovação:</strong> Escopos aninhados (begin...end)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-5 fw-bold text-warning">1970s - Hash Tables</h4>
+                                        <p class="fs-6 text-muted mb-2">Revolução em performance</p>
+                                        <div class="p-2 bg-success-subtle rounded">
+                                            <small><strong>Complexidade:</strong> O(1) médio - busca constante</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-5 fw-bold text-info">1990s - OOP</h4>
+                                        <p class="fs-6 text-muted mb-2">Hierarquias, sobrecarga, métodos virtuais</p>
+                                        <div class="p-2 bg-warning-subtle rounded">
+                                            <small><strong>Desafio:</strong> Gerenciar heranças e polimorfismo</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card shadow">
+                                    <div class="card-body">
+                                        <h4 class="fs-5 fw-bold text-danger">2000s - Era Moderna</h4>
+                                        <p class="fs-6 text-muted mb-2">Otimizações avançadas</p>
+                                        <ul class="small mb-0">
+                                            <li>Alocação em arena</li>
+                                            <li>String interning</li>
+                                            <li>Cache-conscious design</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compiler Phases Section -->
+        <section id="interacao-fases" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">3. Interação com as Fases do Compilador</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A Tabela de Símbolos é uma estrutura dinâmica que evolui ao longo do processo de compilação, servindo como interface entre o frontend e o backend.
+                    </p>
+
+                    <!-- Phases -->
+                    <div class="row row-cols-1 g-4 mb-5">
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="step-number me-3">1</div>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-primary">Análise Léxica</h4>
+                                </div>
+                                <p class="fs-6 mb-2">Primeira fase - encontra os identificadores</p>
+                                <ul class="small">
+                                    <li>Inserção inicial na tabela (apenas lexema)</li>
+                                    <li>Palavras-chave pré-carregadas</li>
+                                    <li>Operadores predefinidos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="step-number me-3">2</div>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-success">Análise Sintática/Semântica</h4>
+                                </div>
+                                <p class="fs-6 mb-2">Uso mais intenso - enriquecimento</p>
+                                <ul class="small">
+                                    <li>Adiciona atributos detalhados (tipo, escopo)</li>
+                                    <li>Verificações de compatibilidade</li>
+                                    <li>Detecção de redeclarações</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="concept-card">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="step-number me-3">3</div>
+                                    <h4 class="fs-4 fw-semibold mb-0 text-info">Geração de Código</h4>
+                                </div>
+                                <p class="fs-6 mb-2">Backend consome informação</p>
+                                <ul class="small">
+                                    <li>Endereços de memória</li>
+                                    <li>Offsets em registros de ativação</li>
+                                    <li>Tamanhos de tipos</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Insight -->
+                    <div class="card p-4 rounded-3 shadow" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Implicação de Design</h3>
+                        <p class="fs-5 mb-0">
+                            O design da estrutura deve acomodar <strong>preenchimento incremental</strong> e <strong>padrões de acesso variados</strong> de cada fase do compilador.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stored Information Section -->
+        <section id="informacao-armazenada" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">4. Informação Armazenada: Atributos de um Identificador</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Uma entrada na Tabela de Símbolos é uma coleção de atributos associados a um símbolo. Os atributos exatos dependem da linguagem.
+                    </p>
+
+                    <!-- Attributes Grid -->
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="fs-5 fw-semibold text-primary mb-3"><i class="fas fa-tag me-2"></i>Nome</h5>
+                                    <p class="small mb-0">Lexema ou representação em string do identificador (ex: <code>x</code>, <code>for</code>)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="fs-5 fw-semibold text-success mb-3"><i class="fas fa-code me-2"></i>Tipo</h5>
+                                    <p class="small mb-0">Tipo de dados do símbolo (<code>int</code>, <code>float</code>, <code>struct</code>)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="fs-5 fw-semibold text-warning mb-3"><i class="fas fa-folder me-2"></i>Classe/Tipo</h5>
+                                    <p class="small mb-0">Natureza do símbolo (variável, constante, procedimento, parâmetro)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="fs-5 fw-semibold text-info mb-3"><i class="fas fa-layer-group me-2"></i>Escopo</h5>
+                                    <p class="small mb-0">Bloco léxico ou namespace onde o símbolo é válido</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="fs-5 fw-semibold text-danger mb-3"><i class="fas fa-memory me-2"></i>Memória</h5>
+                                    <p class="small mb-0">Endereço de execução, offset em registro de ativação</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-body">
+                                    <h5 class="fs-5 fw-semibold text-secondary mb-3"><i class="fas fa-ellipsis-h me-2"></i>Outros</h5>
+                                    <p class="small mb-0">Visibilidade, constantes, dimensões de arrays, parâmetros de funções</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Structures Section -->
+        <section id="estruturas-dados" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">5. Estruturas de Dados Fundamentais</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Estudo das principais estruturas de dados para construção e gestão da Tabela de Símbolos.
+                    </p>
+
+                    <!-- Simple Structures -->
+                    <div class="card p-4 rounded-3 shadow mb-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Estruturas Simples</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <div class="p-3 bg-light rounded">
+                                    <h5 class="fs-6 fw-semibold text-danger mb-2">Listas Ligadas / Vetores Não Ordenados</h5>
+                                    <div class="mb-2">
+                                        <span class="badge bg-danger">Busca: O(n)</span>
+                                        <span class="badge bg-danger">Inserção: O(1)</span>
+                                    </div>
+                                    <p class="small mb-0"><i class="fas fa-times-circle text-danger me-1"></i>Não escalam bem</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-light rounded">
+                                    <h5 class="fs-6 fw-semibold text-warning mb-2">Vetores Ordenados</h5>
+                                    <div class="mb-2">
+                                        <span class="badge bg-success">Busca: O(log n)</span>
+                                        <span class="badge bg-danger">Inserção: O(n)</span>
+                                    </div>
+                                    <p class="small mb-0"><i class="fas fa-exclamation-triangle text-warning me-1"></i>Inserção é gargalo</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hash Tables Section -->
+        <section id="hash-tables" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">6. Hash Tables: O Padrão De Facto</h2>
+                    
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Por Que Hash Tables?</h3>
+                        <p class="fs-5 mb-3">
+                            A preferência esmagadora por hash tables é consequência direta da carga de trabalho típica:
+                        </p>
+                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold text-success">Buscas</h5>
+                                    <p class="mb-0 small">Muito mais frequentes - um símbolo é referenciado centenas de vezes</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold text-primary">Inserções</h5>
+                                    <p class="mb-0 small">Raras - um símbolo é declarado apenas uma vez</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collision Resolution -->
+                    <div class="row row-cols-1 row-cols-md-2 g-4 mb-5">
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">Encadeamento (Chaining)</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="fs-6 mb-3">Cada bucket aponta para uma lista ligada</p>
+                                    <ul class="small">
+                                        <li>Robusto e comum</li>
+                                        <li>Performance degrada gradualmente</li>
+                                        <li>Lista ligada em cada bucket: O(n) pior caso</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 shadow">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0">Endereçamento Aberto</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="fs-6 mb-3">Busca próximo espaço livre na própria tabela</p>
+                                    <ul class="small">
+                                        <li><strong>Sondagem Linear:</strong> i+1, i+2, ...</li>
+                                        <li><strong>Sondagem Quadrática:</strong> i+1², i+2², ...</li>
+                                        <li>Mitiga agrupamento primário</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Primary Clustering -->
+                    <div class="card p-4 rounded-3 shadow bg-warning-subtle">
+                        <h3 class="fs-3 fw-semibold mb-3 text-warning">Agrupamento Primário</h3>
+                        <p class="fs-6 mb-2">Problema específico da sondagem linear:</p>
+                        <ol class="small mb-0">
+                            <li>Colisões formam clusters (aglomerados contíguos)</li>
+                            <li>Clusters crescem cada vez mais rápido</li>
+                            <li>Performance degrada de O(1) para O(n)</li>
+                            <li>Sondagem quadrática ajuda a mitigar</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tree Structures Section -->
+        <section id="arvores" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">7. Estruturas Baseadas em Árvores</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        A principal alternativa ordenada às hash tables, usando BST autobalanceadas (AVL, Red-Black).
+                    </p>
+
+                    <!-- Advantages -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Vantagens da Ordenação</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded text-center">
+                                    <i class="fas fa-sort-alpha-down fs-2 text-primary mb-2"></i>
+                                    <h5 class="fs-6 fw-semibold">Percurso Ordenado</h5>
+                                    <p class="small mb-0">Listar símbolos alfabeticamente</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded text-center">
+                                    <i class="fas fa-search-location fs-2 text-success mb-2"></i>
+                                    <h5 class="fs-6 fw-semibold">Sucessor/Predecessor</h5>
+                                    <p class="small mb-0">Encontrar símbolos adjacentes</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded text-center">
+                                    <i class="fas fa-filter fs-2 text-info mb-2"></i>
+                                    <h5 class="fs-6 fw-semibold">Consultas de Intervalo</h5>
+                                    <p class="small mb-0">Todos símbolos entre A e Z</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance -->
+                    <div class="card p-4 rounded-3 shadow bg-white">
+                        <h3 class="fs-3 fw-semibold mb-3" style="color: var(--sage-800);">Complexidade de Tempo</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold text-success mb-2">BST Balanceadas</h5>
+                                <ul class="small">
+                                    <li>Busca: O(log n)</li>
+                                    <li>Inserção: O(log n)</li>
+                                    <li>Remoção: O(log n)</li>
+                                    <li>Altura sempre logarítmica</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="fs-6 fw-semibold text-danger mb-2">Desvantagens</h5>
+                                <ul class="small">
+                                    <li>Maior sobrecarga de memória</li>
+                                    <li>Má localidade de cache</li>
+                                    <li>Pointer chasing</li>
+                                    <li>Implementação complexa</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="comparacao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">8. Análise Comparativa</h2>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-custom shadow">
+                            <thead>
+                                <tr>
+                                    <th>Característica</th>
+                                    <th>Hash (Encadeamento)</th>
+                                    <th>Hash (End. Aberto)</th>
+                                    <th>BST Balanceada</th>
+                                    <th>Vetor Ordenado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pesquisa (Média)</strong></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(log n)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(log n)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pesquisa (Pior)</strong></td>
+                                    <td><span class="badge bg-danger">O(n)</span></td>
+                                    <td><span class="badge bg-danger">O(n)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(log n)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(log n)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inserção (Média)</strong></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(log n)</span></td>
+                                    <td><span class="badge bg-danger">O(n)</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Sobrecarga Memória</strong></td>
+                                    <td>Moderada</td>
+                                    <td>Baixa a Alta</td>
+                                    <td>Alta</td>
+                                    <td>Baixa</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Localidade Cache</strong></td>
+                                    <td>Fraca</td>
+                                    <td>Boa</td>
+                                    <td>Fraca</td>
+                                    <td>Excelente</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Percurso Ordenado</strong></td>
+                                    <td><i class="fas fa-times text-danger"></i></td>
+                                    <td><i class="fas fa-times text-danger"></i></td>
+                                    <td><i class="fas fa-check text-success"></i></td>
+                                    <td><i class="fas fa-check text-success"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scopes Section -->
+        <section id="escopos" class="py-5 bg-white">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">9. O Desafio dos Escopos Lexicais</h2>
+                    
+                    <p class="fs-5 text-muted mb-5">
+                        Desde o ALGOL 60, as linguagens modernas suportam escopos lexicais aninhados. Uma variável declarada dentro de um bloco só é visível dentro desse bloco e em seus sub-blocos.
+                    </p>
+
+                    <!-- Stack Model -->
+                    <div class="card p-4 rounded-3 shadow mb-5" style="background: linear-gradient(135deg, var(--sage-50), var(--copper-50));">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Modelo de Pilha de Tabelas</h3>
+                        
+                        <p class="fs-6 mb-4">
+                            Abordagem amplamente utilizada: pilha de hash tables que espelha a estrutura de escopos aninhados.
+                        </p>
+                        
+                        <div class="row row-cols-1 row-cols-md-3 g-3">
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold text-primary">Entrar Escopo</h5>
+                                    <p class="small mb-0">Push de nova hash table vazia no topo da pilha</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold text-success">Inserção</h5>
+                                    <p class="small mb-0">Sempre na tabela do topo (escopo local)</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="p-3 bg-white rounded">
+                                    <h5 class="fs-6 fw-semibold text-info">Busca</h5>
+                                    <p class="small mb-0">Do topo para a base - implementa shadowing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Algorithm -->
+                    <div class="example-box">
+                        <h4 class="fs-4 fw-semibold mb-3" style="color: #92400e;">Algoritmo: Pilha de Dicionários</h4>
+                        
+                        <pre class="bg-light p-3 rounded"><code>// Estrutura de dados global
+pilha_de_escopos = []  // Inicia com escopo global
+
+PROCEDIMENTO enter_scope():
+    nova_tabela = criar_tabela_vazia()
+    pilha_de_escopos.push(nova_tabela)
+
+PROCEDIMENTO exit_scope():
+    SE tamanho(pilha_de_escopos) > 1 ENTÃO
+        pilha_de_escopos.pop()
+
+PROCEDIMENTO declare(nome, atributos):
+    tabela_atual = pilha_de_escopos.top()
+    SE nome JÁ EXISTE em tabela_atual ENTÃO
+        erro("Símbolo já declarado")
+    SENÃO
+        inserir(nome, atributos) em tabela_atual
+
+FUNÇÃO lookup(nome):
+    PARA cada tabela em pilha_de_escopos (topo→base):
+        SE nome EXISTE em tabela ENTÃO
+            RETORNAR atributos
+    RETORNAR nulo  // Símbolo não declarado</code></pre>
+                    </div>
+
+                    <!-- Alternative Models -->
+                    <div class="card p-4 rounded-3 shadow mt-5 bg-white">
+                        <h3 class="fs-3 fw-semibold mb-4" style="color: var(--sage-800);">Modelos Alternativos</h3>
+                        
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            <div class="col">
+                                <h5 class="fs-5 fw-semibold text-warning">Tabela Única com Encadeamento</h5>
+                                <ul class="small">
+                                    <li>Uma hash table global</li>
+                                    <li>Entradas encadeadas em lista ligada</li>
+                                    <li>Exit scope é complexo (limpeza seletiva)</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <h5 class="fs-5 fw-semibold text-info">Árvore de Escopos</h5>
+                                <ul class="small">
+                                    <li>Estrutura explícita em árvore</li>
+                                    <li>Escopo global como raiz</li>
+                                    <li>Busca sobe do nó atual até raiz</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Section -->
+        <section id="implementacao" class="py-5 bg-light">
+            <div class="container">
+                <div class="mx-auto fade-in" style="max-width: 64rem;">
+                    <h2 class="display-5 fw-bold mb-4" style="color: var(--sage-900);">10. Implementação Funcional</h2>
+                    
+                    <!-- Python Implementation -->
+                    <div class="card mb-5 shadow">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fab fa-python me-2"></i>Implementação em Python</h5>
+                        </div>
+                        <div class="card-body">
+                            <pre class="bg-light p-3 rounded" style="font-size: 0.85rem;"><code>class Symbol:
+    def __init__(self, name, category, type):
+        self.name = name
+        self.category = category
+        self.type = type
+
+class SymbolTable:
+    def __init__(self):
+        self.scoped_tables = [{}]  # Começa com escopo global
+
+    def enter_scope(self):
+        self.scoped_tables.append({})
+
+    def exit_scope(self):
+        if len(self.scoped_tables) > 1:
+            self.scoped_tables.pop()
+
+    def declare(self, symbol):
+        current_scope = self.scoped_tables[-1]
+        if symbol.name in current_scope:
+            raise NameError(f"Símbolo '{symbol.name}' já declarado")
+        current_scope[symbol.name] = symbol
+
+    def lookup(self, name):
+        for scope in reversed(self.scoped_tables):
+            if name in scope:
+                return scope[name]
+        raise NameError(f"Símbolo '{name}' não declarado")</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- C++ Implementation Highlight -->
+                    <div class="card shadow">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fab fa-cuttlefish me-2"></i>Características C++23</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li><code>std::unordered_map</code> para hash tables eficientes</li>
+                                <li><code>std::stack</code> para gestão de escopos</li>
+                                <li><code>std::optional</code> para retornos seguros (C++17)</li>
+                                <li><code>.contains()</code> para verificação eficiente (C++20)</li>
+                                <li>Implementa shadowing naturalmente</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="table-responsive mt-5">
+                        <table class="table table-custom shadow">
+                            <thead>
+                                <tr>
+                                    <th>Estratégia</th>
+                                    <th>Enter Scope</th>
+                                    <th>Exit Scope</th>
+                                    <th>Lookup</th>
+                                    <th>Complexidade Impl.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pilha de Tabelas</strong></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(D)</span></td>
+                                    <td>Baixa a Moderada</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tabela Única</strong></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-danger">O(k)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(L)</span></td>
+                                    <td>Moderada a Alta</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Árvore de Escopos</strong></td>
+                                    <td><span class="badge bg-warning text-dark">O(log S)</span></td>
+                                    <td><span class="badge bg-success">O(1)</span></td>
+                                    <td><span class="badge bg-warning text-dark">O(D)</span></td>
+                                    <td>Alta</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark text-white">
+            <div class="container text-center">
+                <p class="mb-0">© 2024 - Tabela de Símbolos em Compiladores Modernos</p>
+                <p class="mb-0 mt-2"><small>Material educacional sobre estruturas de dados em compiladores</small></p>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

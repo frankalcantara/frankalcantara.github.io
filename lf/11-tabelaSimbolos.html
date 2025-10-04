@@ -383,6 +383,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Está sem tempo? Leia o <a href=".\ex\11-expresso.html">Expresso</a>.</p>
+</div>
+</div>
 <p>A <strong>Tabela de Símbolos</strong> é um tipo de dados abstrato que mapeia identificadores, chamados de símbolos, para a sua informação semântica associada. Essa é a principal estrutura de dados utilizada por um compilador, ou interpretador, para rastrear as entidades declaradas em um código fonte. A função primária da <strong>Tabela de Símbolos</strong> é registar a informação sobre cada identificador em um programa, atuando como um dicionário para o processo de tradução.</p>
 <p>É importante distinguir entre um identificador e um símbolo. Um identificador é uma cadeia de caracteres, um lexema, como por exemplo <code>x</code>. Um símbolo, por outro lado, é um nome único dentro de um contexto específico. Um único identificador pode representar múltiplos símbolos distintos, dependendo do seu escopo ou da sua classe. Por exemplo, na linguagem FORTRAN, o identificador <code>X</code> pode representar três nomes distintos: o nome de um bloco comum, um elemento dentro desse bloco e uma variável em uma definição de função, como pode ser visto na Figura <a href="#fig-Symbolfortran" class="quarto-xref">Figure&nbsp;<span>14.1</span></a>. Em linguagens com estrutura de blocos, o mesmo identificador pode ser declarado em escopos aninhados, representando diferentes símbolos. Esta distinção é fundamental para o propósito da <strong>Tabela de Símbolos</strong>: <strong>resolver a qual entidade um determinado uso de um identificador se refere</strong>.</p>
 <div id="fig-Symbolfortran" class="quarto-figure quarto-figure-center quarto-float anchored">
