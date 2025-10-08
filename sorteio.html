@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 15px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            text-align: center;
+            min-height: 30px;
+        }
+        @media (min-width: 600px) {
+            .buttons {
+                flex-direction: row;
+            }
+            button {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorteio</h1>
+    <div class="buttons">
+        <button onclick="sortear(4)">1 de 4</button>
+        <button onclick="sortear(3)">1 de 3</button>
+        <button onclick="sortear(2)">1 de 2</button>
+    </div>
+    <div id="resultado"></div>
+
+    <script>
+        function sortear(max) {
+            const numero = Math.floor(Math.random() * max) + 1;
+            document.getElementById('resultado').textContent = `Número sorteado: ${numero}`;
+        }
+    </script>
+</body>
+</html>
