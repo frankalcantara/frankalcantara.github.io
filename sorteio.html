@@ -1,75 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorteio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        button {
-            padding: 15px 20px;
-            font-size: 18px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #resultado {
-            font-size: 24px;
-            font-weight: bold;
-            color: #28a745;
-            text-align: center;
-            min-height: 30px;
-        }
-        @media (min-width: 600px) {
-            .buttons {
-                flex-direction: row;
-            }
-            button {
-                min-width: 120px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>Sorteio</h1>
-    <div class="buttons">
-        <button onclick="sortear(4)">1 de 4</button>
-        <button onclick="sortear(3)">1 de 3</button>
-        <button onclick="sortear(2)">1 de 2</button>
-    </div>
-    <div id="resultado"></div>
 
-    <script>
-        function sortear(max) {
-            const numero = Math.floor(Math.random() * max) + 1;
-            document.getElementById('resultado').textContent = `Número sorteado: ${numero}`;
-        }
-    </script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sorteio</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+
+            h1 {
+                color: #333;
+                text-align: center;
+            }
+
+            .buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .action-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            button {
+                padding: 15px 20px;
+                font-size: 18px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            button:hover:not(:disabled) {
+                background-color: #0056b3;
+            }
+
+            button:disabled {
+                background-color: #6c757d;
+                cursor: not-allowed;
+            }
+
+            .clear-btn {
+                background-color: #dc3545;
+            }
+
+            .clear-btn:hover:not(:disabled) {
+                background-color: #c82333;
+            }
+
+            .read-btn {
+                background-color: #28a745;
+                display: none;
+                /* Escondido inicialmente */
+            }
+
+            .read-btn:hover:not(:disabled) {
+                background-color: #218838;
+            }
+
+            #resultado {
+                font-size: 24px;
+                font-weight: bold;
+                color: #28a745;
+                text-align: center;
+                min-height: 30px;
+            }
+
+            @media (min-width: 600px) {
+                .buttons {
+                    flex-direction: row;
+                }
+
+                .action-buttons {
+                    flex-direction: row;
+                }
+
+                button {
+                    min-width: 120px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Sorteio</h1>
+        <div class="buttons">
+            <button id="btn4" onclick="sortear(4)">1 de 4</button>
+            <button id="btn3" onclick="sortear(3)">1 de 3</button>
+            <button id="btn2" onclick="sortear(2)">1 de 2</button>
+        </div>
+        <div class="action-buttons">
+            <button class="clear-btn" onclick="limpar()">Limpar</button>
+            <button class="read-btn" id="btnLer" onclick="lerResultado()">Eu li o resultado</button>
+        </div>
+        <div id="resultado"></div>
+
+        <script>
+            function sortear(max) {
+                const numero = Math.floor(Math.random() * max) + 1;
+                document.getElementById('resultado').textContent = `Número sorteado: ${numero}`;
+
+                // Desabilita os botões de sorteio
+                document.getElementById('btn4').disabled = true;
+                document.getElementById('btn3').disabled = true;
+                document.getElementById('btn2').disabled = true;
+
+                // Mostra o botão de ler
+                document.getElementById('btnLer').style.display = 'block';
+            }
+
+            function lerResultado() {
+                // Reabilita os botões de sorteio
+                document.getElementById('btn4').disabled = false;
+                document.getElementById('btn3').disabled = false;
+                document.getElementById('btn2').disabled = false;
+
+                // Esconde o botão de ler
+                document.getElementById('btnLer').style.display = 'none';
+            }
+
+            function limpar() {
+                document.getElementById('resultado').textContent = '';
+                lerResultado(); // Reabilita os botões e esconde o botão de ler
+            }
+        </script>
+    </body>
+
 </html>
