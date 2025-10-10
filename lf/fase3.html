@@ -319,6 +319,7 @@ window.Quarto = {
   <li><a href="#analisador-semântico" id="toc-analisador-semântico" class="nav-link" data-scroll-target="#analisador-semântico"><span class="header-section-number">17.3</span> 3. Analisador Semântico</a>
   <ul class="collapse">
   <li><a href="#gramática-de-atributos" id="toc-gramática-de-atributos" class="nav-link" data-scroll-target="#gramática-de-atributos"><span class="header-section-number">17.3.1</span> 3.1 Gramática de Atributos</a></li>
+  <li><a href="#regras-aderentes-ao-documento" id="toc-regras-aderentes-ao-documento" class="nav-link" data-scroll-target="#regras-aderentes-ao-documento"><span class="header-section-number">17.3.2</span> Regras Aderentes ao Documento</a></li>
   </ul></li>
   <li><a href="#arquivos-de-teste" id="toc-arquivos-de-teste" class="nav-link" data-scroll-target="#arquivos-de-teste"><span class="header-section-number">17.4</span> 4. Arquivos de Teste</a></li>
   <li><a href="#hospedagem-no-github" id="toc-hospedagem-no-github" class="nav-link" data-scroll-target="#hospedagem-no-github"><span class="header-section-number">17.5</span> 5. Hospedagem no GitHub</a></li>
@@ -327,7 +328,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#aluno-1-função-definirgramaticaatributos-e-regras-semânticas" id="toc-aluno-1-função-definirgramaticaatributos-e-regras-semânticas" class="nav-link" data-scroll-target="#aluno-1-função-definirgramaticaatributos-e-regras-semânticas"><span class="header-section-number">17.7.1</span> 7.1. Aluno 1: Função <code>definirGramaticaAtributos</code> e Regras Semânticas</a></li>
   <li><a href="#aluno-2-função-analisarsemantica-e-verificação-de-tipos" id="toc-aluno-2-função-analisarsemantica-e-verificação-de-tipos" class="nav-link" data-scroll-target="#aluno-2-função-analisarsemantica-e-verificação-de-tipos"><span class="header-section-number">17.7.2</span> 7.2. Aluno 2: Função <code>analisarSemantica</code> e Verificação de Tipos</a></li>
-  <li><a href="#aluno-3-verificação-de-memória-e-estruturas-de-controle" id="toc-aluno-3-verificação-de-memória-e-estruturas-de-controle" class="nav-link" data-scroll-target="#aluno-3-verificação-de-memória-e-estruturas-de-controle"><span class="header-section-number">17.7.3</span> 7.3. Aluno 3: Verificação de Memória e Estruturas de Controle</a></li>
+  <li><a href="#aluno-3-funções-analisarsemanticamemoria-e-analisarsemanticacontrole" id="toc-aluno-3-funções-analisarsemanticamemoria-e-analisarsemanticacontrole" class="nav-link" data-scroll-target="#aluno-3-funções-analisarsemanticamemoria-e-analisarsemanticacontrole"><span class="header-section-number">17.7.3</span> 7.3. Aluno 3: Funções <code>analisarSemanticaMemoria</code> e <code>analisarSemanticaControle</code></a></li>
   <li><a href="#aluno-4-função-gerararvoreatribuida-interface-e-integração" id="toc-aluno-4-função-gerararvoreatribuida-interface-e-integração" class="nav-link" data-scroll-target="#aluno-4-função-gerararvoreatribuida-interface-e-integração"><span class="header-section-number">17.7.4</span> 7.4. Aluno 4: Função <code>gerarArvoreAtribuida</code>, Interface e Integração</a></li>
   </ul></li>
   <li><a href="#considerações-para-integração" id="toc-considerações-para-integração" class="nav-link" data-scroll-target="#considerações-para-integração"><span class="header-section-number">17.8</span> 8. Considerações para Integração</a></li>
@@ -423,14 +424,14 @@ window.Quarto = {
 <li><strong>Potenciação</strong>: <code>^</code> (ex.: <code>(A B ^)</code>, onde B é um inteiro positivo).</li>
 </ul>
 <p><strong>Precisão Numérica</strong>:</p>
-<p>A precisão dos números de ponto flutuante depende da arquitetura do processador:</p>
+<p>A precisão dos números de ponto flutuante depende da arquitetura do processador onde o programa será executado para avaliação:</p>
 <ul>
 <li>Se a arquitetura for de 8 bits: use meia precisão (16 bits, IEEE 754);</li>
 <li>Se a arquitetura for de 16 bits: use precisão simples (32 bits, IEEE 754);</li>
 <li>Se a arquitetura for de 32 bits: use precisão dupla (64 bits, IEEE 754);</li>
 <li>Se a arquitetura for de 64 bits: use precisão quádrupla (128 bits, IEEE 754).</li>
 </ul>
-<p>As operações de divisão inteira e resto são realizadas exclusivamente com números inteiros.</p>
+<p>As operações de divisão inteira e resto são realizadas exclusivamente com números inteiros. <strong>Além disso, lembre-se, para esta avaliação você deve considerar apenas a arquitetura do Arduino Uno R3, Arduino Mega, ou qualquer outro processador de 8 bits.</strong></p>
 <p><strong>Expressões Aninhadas</strong>:</p>
 <p>Expressões podem ser aninhadas sem limite definido, por exemplo:</p>
 <ul>
@@ -439,6 +440,19 @@ window.Quarto = {
 <li><code>((A B +) (C D *) |)</code>: Divide (usando divisão real) a soma de <code>A</code> e <code>B</code> pelo produto de <code>C</code> e <code>D</code>.</li>
 </ul>
 <p>Nestes exemplos, <code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>, e <code>E</code> podem ser números literais ou referências a memórias.</p>
+<p><strong>Tipos de Dados</strong>:</p>
+<p>A linguagem suporta três tipos de dados:</p>
+<ul>
+<li><code>int</code>: Números inteiros</li>
+<li><code>real</code> (ou <code>float</code>): Números de ponto flutuante</li>
+<li><code>booleano</code>: Resultado de operações relacionais (usado internamente)</li>
+</ul>
+<p><strong>Observação</strong>: O tipo booleano não pode ser armazenado em memórias (MEM), sendo usado apenas como resultado de expressões relacionais em estruturas de controle.</p>
+<p>Agora que temos laços e estruturas de decisão, nossa gramática deve ser capaz de lidar com expressões que retornam valores booleanos. Portanto, você deve implementar os seguintes operadores relacionais, tanto na gramática quanto no analisador semântico:</p>
+<p><strong>Operadores Relacionais</strong> (retornam tipo booleano): - <code>&gt;</code> : maior que - <code>&lt;</code> : menor que<br>
+- <code>&gt;=</code> : maior ou igual - <code>&lt;=</code> : menor ou igual - <code>==</code> : igual - <code>!=</code> : diferente</p>
+<p>Todos aceitam operandos <code>int</code> ou <code>real</code> e retornam <code>booleano</code>.</p>
+<p><strong>Observação</strong>: a inclusão dos operadores relacionais implica na necessidade de atualizar a gramática, o <em>parser</em> e o analisador semântico para suportar expressões que envolvem esses operadores, garantindo a correta verificação de tipos e a geração da árvore sintática abstrata atribuída.</p>
 </section>
 <section id="comandos-especiais" class="level3" data-number="17.2.2">
 <h3 data-number="17.2.2" class="anchored" data-anchor-id="comandos-especiais"><span class="header-section-number">17.2.2</span> 2.2. Comandos Especiais</h3>
@@ -446,8 +460,9 @@ window.Quarto = {
 <ul>
 <li><code>(N RES)</code>: Retorna o resultado da expressão N linhas anteriores (<code>N</code> é um inteiro não negativo);</li>
 <li><code>(V MEM)</code>: Armazena o valor real <code>V</code> em uma memória chamada <code>MEM</code>;</li>
-<li><code>(MEM)</code>: Retorna o valor armazenado em <code>MEM</code>. Se a memória não foi inicializada, retorna 0.</li>
+<li><code>(MEM)</code>: Retorna o valor armazenado em <code>MEM</code>. Se a memória não foi inicializada, apresenta um erro semântico.</li>
 </ul>
+<p><strong>Observação</strong>: O tratamento de <code>MEM</code>, mudou desde a FASE 2. Agora, <code>MEM</code> retorna um erro semântico se não foi inicializada e deve ser verificada no analisador semântico.</p>
 <p><strong>Regras de Escopo</strong>:</p>
 <ul>
 <li>Cada arquivo de texto representa um escopo de memória independente;</li>
@@ -469,13 +484,74 @@ window.Quarto = {
 <li><strong>Verificação de Comandos Especiais</strong>: Validar o uso correto dos comandos especiais <code>(N RES)</code>, <code>(V MEM)</code>, e <code>(MEM)</code>;</li>
 <li><strong>Verificação de Estruturas de Controle</strong>: Garantir que as estruturas de tomada de decisão e laços de repetição estão corretamente formadas e que suas condições são válidas.</li>
 <li><strong>Detecção de Erros Semânticos</strong>: Reportar erros semânticos com mensagens claras, indicando a linha do arquivo onde o erro ocorreu e a natureza do erro.</li>
-<li><strong>Verificação de Aninhamento</strong>: Garantir que as expressões aninhadas estão corretamente formadas e que não há conflitos de escopo.</li>
 <li><strong>Geração de Relatório</strong>: Criar um documento de análise semântica que detalhe todas as verificações realizadas, os erros encontrados, e a estrutura da árvore sintática abstrata atribuída.</li>
 </ul>
 <section id="gramática-de-atributos" class="level3" data-number="17.3.1">
 <h3 data-number="17.3.1" class="anchored" data-anchor-id="gramática-de-atributos"><span class="header-section-number">17.3.1</span> 3.1 Gramática de Atributos</h3>
 <p>Você deve definir a Gramática de Atributos para a linguagem descrita neste documento. A gramática deve incluir regras para todas as operações, comandos especiais, e estruturas de controle mencionadas. Cada regra de produção deve ser acompanhada por atributos que descrevem o tipo e o valor dos elementos envolvidos.</p>
 <p>Esta gramática de atributos será composta de atributos e regras de produção e deve estar documentada em um arquivo markdown no repositório do GitHub.</p>
+<p><strong>Tipos de Atributos</strong>:</p>
+<ul>
+<li><strong>Atributos Sintetizados</strong>: Calculados a partir dos atributos dos nós filhos (propagam informação de baixo para cima na árvore).</li>
+<li><strong>Atributos Herdados</strong>: Calculados a partir dos atributos do nó pai ou irmãos (propagam informação de cima para baixo na árvore).</li>
+</ul>
+<p><strong>Atributos Principais</strong>:</p>
+<p>Para cada não-terminal e terminal da gramática, você deve definir atributos como:</p>
+<ul>
+<li><code>tipo</code>: O tipo da expressão (inteiro, real, booleano)</li>
+<li><code>valor</code>: O valor calculado da expressão (quando aplicável)</li>
+<li><code>inicializada</code>: Para memórias, indica se foram inicializadas</li>
+<li><code>escopo</code>: Nível de escopo da variável</li>
+</ul>
+<p><strong>Exemplos de Regras de Produção com Atributos</strong>:</p>
+<p>A seguir, apresentamos exemplos de como as regras de produção devem ser documentadas com seus atributos e regras semânticas:</p>
+</section>
+<section id="regras-aderentes-ao-documento" class="level3" data-number="17.3.2">
+<h3 data-number="17.3.2" class="anchored" data-anchor-id="regras-aderentes-ao-documento"><span class="header-section-number">17.3.2</span> Regras Aderentes ao Documento</h3>
+<section id="adição-de-inteiros" class="level4" data-number="17.3.2.1">
+<h4 data-number="17.3.2.1" class="anchored" data-anchor-id="adição-de-inteiros"><span class="header-section-number">17.3.2.1</span> 1. Adição de Inteiros</h4>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : \text{int} \quad \Gamma \vdash e_2 : \text{int}}{\Gamma \vdash e_1 + e_2 : \text{int}}\]</span></p>
+</section>
+<section id="adição-com-promoção-de-tipo" class="level4" data-number="17.3.2.2">
+<h4 data-number="17.3.2.2" class="anchored" data-anchor-id="adição-com-promoção-de-tipo"><span class="header-section-number">17.3.2.2</span> 2. Adição com Promoção de Tipo</h4>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : \text{int} \quad \Gamma \vdash e_2 : \text{float}}{\Gamma \vdash e_1 + e_2 : \text{float}}\]</span></p>
+<p>Ou usando a função promover_tipo do documento: <span class="math display">\[\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2}{\Gamma \vdash e_1 + e_2 : \text{promover\_tipo}(T_1, T_2)}\]</span></p>
+</section>
+<section id="estrutura-condicional-simplificada" class="level4" data-number="17.3.2.3">
+<h4 data-number="17.3.2.3" class="anchored" data-anchor-id="estrutura-condicional-simplificada"><span class="header-section-number">17.3.2.3</span> 3. Estrutura Condicional (Simplificada)</h4>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : \text{booleano} \quad \Gamma \vdash e_2 : T \quad \Gamma \vdash e_3 : T}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : T}\]</span></p>
+</section>
+<section id="declaração-de-variável" class="level4" data-number="17.3.2.4">
+<h4 data-number="17.3.2.4" class="anchored" data-anchor-id="declaração-de-variável"><span class="header-section-number">17.3.2.4</span> 4. Declaração de Variável</h4>
+<p><span class="math display">\[\frac{\Gamma \vdash e : T' \quad T' \leq T \quad \Gamma[x \mapsto T] \vdash e_{corpo} : T_{corpo}}{\Gamma \vdash (x : T \leftarrow e; e_{corpo}) : T_{corpo}}\]</span></p>
+</section>
+<section id="chamada-de-função" class="level4" data-number="17.3.2.5">
+<h4 data-number="17.3.2.5" class="anchored" data-anchor-id="chamada-de-função"><span class="header-section-number">17.3.2.5</span> 5. Chamada de Função</h4>
+<p><span class="math display">\[\frac{\text{tabela}(f) = (T_1, \ldots, T_n) \rightarrow T_{ret} \quad \Gamma \vdash e_i : T_i' \quad T_i' \leq T_i \text{ para } i=1..n}{\Gamma \vdash f(e_1, \ldots, e_n) : T_{ret}}\]</span></p>
+<p><strong>Observações Importantes</strong>:</p>
+<ol type="a">
+<li>Os exemplos de regras acima usam notação infixa padrão para facilitar o entendimento. Ao implementar o analisador semântico, você deve adaptar essas regras para a notação RPN da linguagem. Por exemplo:</li>
+</ol>
+<ul>
+<li>Notação infixa (nas regras): <code>if e₁ then e₂ else e₃</code></li>
+<li>Notação RPN (no código): <code>(e₁ e₂ e₃ IF)</code></li>
+</ul>
+<p>A semântica de tipagem permanece a mesma, apenas a sintaxe de superfície muda.</p>
+<ol start="2" type="a">
+<li>Todas as regras devem verificar a compatibilidade de tipos antes de realizar operações.</li>
+<li>A Tabela de Símbolos deve ser atualizada sempre que uma memória for declarada ou modificada.</li>
+<li>Operações que misturam inteiros e reais devem promover o resultado para real.</li>
+<li>Todas as verificações de erro devem incluir o número da linha onde o erro ocorreu.</li>
+<li>A gramática completa deve cobrir todas as construções da linguagem descritas neste documento.</li>
+</ol>
+</section>
+<section id="exemplo-de-aplicação-em-rpn" class="level4" data-number="17.3.2.6">
+<h4 data-number="17.3.2.6" class="anchored" data-anchor-id="exemplo-de-aplicação-em-rpn"><span class="header-section-number">17.3.2.6</span> Exemplo de Aplicação em RPN</h4>
+<p>Para a expressão: <code>(5 3 +)</code></p>
+<p>Aplicação das regras: 1. <code>Γ ⊢ 5 : int</code> (literal inteiro) 2. <code>Γ ⊢ 3 : int</code> (literal inteiro) 3. Pela regra de adição: <code>Γ ⊢ 5 + 3 : int</code></p>
+<p>Para a expressão: <code>(5.0 3 +)</code></p>
+<p>Aplicação das regras: 1. <code>Γ ⊢ 5.0 : float</code> (literal real) 2. <code>Γ ⊢ 3 : int</code> (literal inteiro) 3. Pela regra de promoção: <code>Γ ⊢ 5.0 + 3 : float</code></p>
+</section>
 </section>
 </section>
 <section id="arquivos-de-teste" class="level2" data-number="17.4">
@@ -495,7 +571,7 @@ window.Quarto = {
 </section>
 <section id="hospedagem-no-github" class="level2" data-number="17.5">
 <h2 data-number="17.5" class="anchored" data-anchor-id="hospedagem-no-github"><span class="header-section-number">17.5</span> 5. Hospedagem no GitHub</h2>
-<p>O projeto deve ser hospedado em um repositório público no GitHub criado exclusivamente para este projeto. O repositório deve ser criado por um dos alunos do grupo. E apenas este aluno do grupo deve ter permissão para criar <em>branches</em> e <em>tags</em>. Os demais alunos do grupo devem contribuir por meio de <em>pull requests</em>.</p>
+<p>O projeto deve ser hospedado em um repositório público no GitHub criado exclusivamente para este projeto. O repositório deve ser criado por um dos alunos, que será o responsável por revisar e aprovar todos os pull requests antes do merge. Os demais alunos do grupo devem contribuir por meio de <em>pull requests</em>.</p>
 <p><strong>Atenção:</strong> a colaboração entre os membros do grupo deve ser feita de forma equitativa. Todos os alunos devem contribuir com o projeto e entender o funcionamento completo do código.</p>
 <p>O repositório deve conter:</p>
 <ul>
@@ -544,6 +620,7 @@ Important
 // Nome Completo 4 - username4
 //
 // Nome do grupo no Canvas: [Nome do Grupo]</code></pre>
+<p><strong>Observação</strong>: os comentários acima são um exemplo para C/C++/Rust. Em Python, use <code>#</code> no lugar de <code>//</code>.</p>
 <p>O programa deve receber o nome do arquivo de teste como argumento na linha de comando e rodar os analisadores léxico, sintático e semântico em sequência, gravando a árvore sintática abstrata atribuída e os demais arquivos de documentação em markdown. Os erros semânticos (se houver) devem ser apresentados no console.</p>
 <p>O código deve ser escrito em Python, C, ou <strong>C++</strong>, com as funções nomeadas como está explicitado na Seção a seguir:</p>
 </section>
@@ -560,7 +637,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Nota</strong>: As tarefas podem ser divididas da forma que cada grupo achar mais conveniente, desde que as funções e interfaces sejam respeitadas. <strong>Nota</strong>: A árvore sintática abstrata atribuída, além de estar na documentação, deve ser salva em formato texto ou JSON para uso na próxima fase do projeto. Cabe ao grupo decidir o formato.</p>
+<p><strong>Nota</strong>: As tarefas podem ser divididas da forma que cada grupo achar mais conveniente, desde que as funções e interfaces sejam respeitadas. <strong>Nota</strong>: A árvore sintática abstrata atribuída, além de estar na documentação, deve ser salva em JSON para facilitar a interoperabilidade com a próxima fase da disciplina. O formato deve incluir pelo menos: tipo do nó, tipo inferido, filhos, e número da linha.</p>
 </div>
 </div>
 <section id="aluno-1-função-definirgramaticaatributos-e-regras-semânticas" class="level3" data-number="17.7.1">
@@ -592,9 +669,17 @@ Note
 <ul>
 <li>Implementar <code>analisarSemantica(arvoreSintatica, gramaticaAtributos, tabelaSimbolos)</code> para percorrer a árvore sintática abstrata.</li>
 <li>Aplicar as regras semânticas definidas na gramática de atributos para realizar a verificação de tipos.</li>
-<li>Detectar e reportar erros de tipo com mensagens claras (ex: “Operação <code>^</code> requer um expoente inteiro na linha X.”).</li>
+<li>Detectar e reportar erros de tipo com mensagens claras.</li>
 <li>Implementar a coerção de tipos quando aplicável (ex: <code>inteiro</code> para <code>real</code> em operações mistas).</li>
 </ul>
+<p><strong>Formato de Mensagens de Erro</strong>:</p>
+<pre class="shell"><code>ERRO SEMÂNTICO [Linha X]: &lt;descrição&gt;
+Contexto: &lt;trecho relevante do código&gt;
+``
+Exemplo:
+```shell
+ERRO SEMÂNTICO [Linha 5]: Memória 'CONTADOR' utilizada sem inicialização
+Contexto: (CONTADOR)</code></pre>
 <p><strong>Tarefas Específicas</strong>:</p>
 <ul>
 <li>Implementar um algoritmo de percurso da árvore (ex: pós-ordem).</li>
@@ -610,11 +695,12 @@ Note
 <li>Fornece a árvore anotada para a função <code>gerarArvoreAtribuida()</code>.</li>
 </ul>
 </section>
-<section id="aluno-3-verificação-de-memória-e-estruturas-de-controle" class="level3" data-number="17.7.3">
-<h3 data-number="17.7.3" class="anchored" data-anchor-id="aluno-3-verificação-de-memória-e-estruturas-de-controle"><span class="header-section-number">17.7.3</span> 7.3. Aluno 3: Verificação de Memória e Estruturas de Controle</h3>
+<section id="aluno-3-funções-analisarsemanticamemoria-e-analisarsemanticacontrole" class="level3" data-number="17.7.3">
+<h3 data-number="17.7.3" class="anchored" data-anchor-id="aluno-3-funções-analisarsemanticamemoria-e-analisarsemanticacontrole"><span class="header-section-number">17.7.3</span> 7.3. Aluno 3: Funções <code>analisarSemanticaMemoria</code> e <code>analisarSemanticaControle</code></h3>
 <p><strong>Responsabilidades</strong>:</p>
 <ul>
-<li>Estender a função <code>analisarSemantica</code> para validar o uso de memórias e estruturas de controle.</li>
+<li>Implementar <code>analisarSemanticaMemoria(arvoreSintatica, tabelaSimbolos)</code> para validar o uso de memórias.</li>
+<li>Implementar <code>analisarSemanticaControle(arvoreSintatica, tabelaSimbolos)</code> para validar estruturas de controle.</li>
 <li>Garantir que as memórias (<code>MEM</code>) são inicializadas antes de serem lidas.</li>
 <li>Validar o uso correto dos comandos <code>(N RES)</code> e <code>(V MEM)</code>.</li>
 <li>Verificar se as condições nas estruturas de controle resultam em um valor booleano (ou equivalente).</li>
@@ -625,13 +711,16 @@ Note
 <li>Popular a Tabela de Símbolos com informações sobre a inicialização de memórias.</li>
 <li>Implementar verificações para garantir que <code>(MEM)</code> não seja usado antes de <code>(V MEM)</code>.</li>
 <li>Validar se o <code>N</code> em <code>(N RES)</code> é um inteiro não negativo e aponta para uma expressão válida.</li>
+<li>Verificar se as condições em estruturas de decisão e laços são expressões válidas.</li>
+<li>Validar o escopo correto de variáveis dentro de estruturas de controle aninhadas.</li>
 <li>Criar arquivos de teste com erros semânticos relacionados a memórias e controle de fluxo.</li>
 </ul>
 <p><strong>Interface</strong>:</p>
 <ul>
 <li>Entrada: Árvore sintática, Tabela de Símbolos.</li>
-<li>Saída: Atualização da Tabela de Símbolos e detecção de erros semânticos.</li>
-<li>Colabora diretamente com o Aluno 2 na implementação da função <code>analisarSemantica</code>.</li>
+<li>Saída: Lista de erros semânticos relacionados a memórias e estruturas de controle, além da Tabela de Símbolos atualizada.</li>
+<li>As funções <code>analisarSemanticaMemoria</code> e <code>analisarSemanticaControle</code> devem ser chamadas sequencialmente após <code>analisarSemantica</code> do Aluno 2.</li>
+<li>Colabora diretamente com o Aluno 2, recebendo a árvore já anotada com tipos e complementando com validações de memória e controle de fluxo.</li>
 </ul>
 </section>
 <section id="aluno-4-função-gerararvoreatribuida-interface-e-integração" class="level3" data-number="17.7.4">
@@ -689,16 +778,17 @@ Note
 <section id="organização-e-legibilidade-do-código-15" class="level3" data-number="17.9.2">
 <h3 data-number="17.9.2" class="anchored" data-anchor-id="organização-e-legibilidade-do-código-15"><span class="header-section-number">17.9.2</span> 9.2. Organização e Legibilidade do Código (15%)</h3>
 <ul>
-<li>Código claro, comentado e bem estruturado.</li>
-<li>README bem escrito contendo:
+<li>Código claro, adequadamente comentado (funções principais e lógica complexa) e bem estruturado. Na dúvida, use ferramentas de IA para melhorar a qualidade dos comentários usando como referência o Google <a href="https://google.github.io/styleguide/cppguide.html#Comments">C++ Style Guide</a> ou o <a href="https://peps.python.org/pep-0008/">PEP 8</a> para Python.</li>
+<li>README bem escrito contendo, no mínimo:
 <ul>
 <li>Nome da instituição de ensino, ano, disciplina, professor;</li>
 <li>Integrantes do grupo em ordem alfabética;</li>
 <li>Instruções para compilar, executar e depurar;</li>
 <li>Documentação da sintaxe das estruturas de controle.</li>
 </ul></li>
-<li>Repositório GitHub organizado com <em>commits</em> claros e <em>pull requests</em>. Equitativamente distribuídos entre os membros do grupo.</li>
+<li>Repositório GitHub organizado com <em>commits</em> claros e <em>pull requests</em>.</li>
 </ul>
+<p><strong>Atenção</strong>: a participação dos integrantes do grupo é fundamental para o sucesso do projeto. Esta participação será avaliada automaticamente, o desbalanceamento na participação dos integrantes do grupo resultará na redução da nota final do trabalho.</p>
 </section>
 <section id="robustez-15" class="level3" data-number="17.9.3">
 <h3 data-number="17.9.3" class="anchored" data-anchor-id="robustez-15"><span class="header-section-number">17.9.3</span> 9.3. Robustez (15%)</h3>
