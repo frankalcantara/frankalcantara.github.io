@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 500"
+   version="1.1"
+   id="svg31"
+   sodipodi:docname="comparacao_steppers_pmsm.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview31"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.855"
+     inkscape:cx="249.12281"
+     inkscape:cy="215.78947"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg31" />
+  <!-- Definições -->
+  <defs
+     id="defs4">
+    <!-- Gradiente para área do stepper -->
+    <linearGradient
+       id="stepperGrad"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         style="stop-color:#EF4444;stop-opacity:0.3"
+         id="stop1" />
+      <stop
+         offset="100%"
+         style="stop-color:#EF4444;stop-opacity:0.05"
+         id="stop2" />
+    </linearGradient>
+    <!-- Gradiente para área do PMSM -->
+    <linearGradient
+       id="pmsmGrad"
+       x1="0"
+       y1="157.11688"
+       x2="0"
+       y2="523.72294"
+       gradientTransform="matrix(1.7457431,0,0,0.57282196,80,70)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0%"
+         style="stop-color:#10B981;stop-opacity:0.3"
+         id="stop3" />
+      <stop
+         offset="100%"
+         style="stop-color:#10B981;stop-opacity:0.05"
+         id="stop4" />
+    </linearGradient>
+    <!-- Sombra para cards -->
+    <filter
+       id="shadow"
+       x="-0.0017857143"
+       y="-0.0076923077"
+       width="1.0035714"
+       height="1.0153846">
+      <feDropShadow
+         dx="0"
+         dy="2"
+         stdDeviation="3"
+         flood-opacity="0.15" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#stepperGrad"
+       id="linearGradient31"
+       x1="0"
+       y1="433.13388"
+       x2="0"
+       y2="702.05766"
+       gradientTransform="matrix(2.3798565,0,0,0.42019341,80,70)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#stepperGrad"
+       id="linearGradient32"
+       x1="0"
+       y1="423.85799"
+       x2="0"
+       y2="698.66701"
+       gradientTransform="matrix(2.32889,0,0,0.4293891,80,70)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- Background -->
+  <rect
+     width="800"
+     height="500"
+     fill="#FFFFFF"
+     id="rect4" />
+  <!-- Título -->
+  <text
+     x="396.49124"
+     y="62.485378"
+     font-family="Arial, Helvetica, sans-serif"
+     font-size="22px"
+     font-weight="700"
+     text-anchor="middle"
+     fill="#1f2937"
+     id="text4">Comparação de Torque: Motor de Passo vs. PMSM</text>
+  <!-- Área do gráfico -->
+  <line
+     x1="80"
+     y1="70"
+     x2="720"
+     y2="70"
+     stroke="#e5e7eb"
+     stroke-width="1"
+     id="line4" />
+  <line
+     x1="80"
+     y1="145"
+     x2="720"
+     y2="145"
+     stroke="#e5e7eb"
+     stroke-width="1"
+     id="line5" />
+  <line
+     x1="80"
+     y1="220"
+     x2="720"
+     y2="220"
+     stroke="#e5e7eb"
+     stroke-width="1"
+     id="line6" />
+  <line
+     x1="80"
+     y1="295"
+     x2="720"
+     y2="295"
+     stroke="#e5e7eb"
+     stroke-width="1"
+     id="line7" />
+  <line
+     x1="80"
+     y1="370"
+     x2="720"
+     y2="370"
+     stroke="#e5e7eb"
+     stroke-width="1"
+     id="line8" />
+  <line
+     x1="80"
+     y1="70"
+     x2="80"
+     y2="370"
+     stroke="#374151"
+     stroke-width="2"
+     id="line9" />
+  <line
+     x1="80"
+     y1="370"
+     x2="720"
+     y2="370"
+     stroke="#374151"
+     stroke-width="2"
+     id="line10" />
+  <text
+     x="65"
+     y="75"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="end"
+     fill="#6b7280"
+     id="text10">5.0</text>
+  <text
+     x="65"
+     y="150"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="end"
+     fill="#6b7280"
+     id="text11">4.0</text>
+  <text
+     x="65"
+     y="225"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="end"
+     fill="#6b7280"
+     id="text12">3.0</text>
+  <text
+     x="65"
+     y="300"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="end"
+     fill="#6b7280"
+     id="text13">2.0</text>
+  <text
+     x="65"
+     y="375"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="end"
+     fill="#6b7280"
+     id="text14">1.0</text>
+  <text
+     x="94.035088"
+     y="71.023392"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#6b7280"
+     id="text15">0</text>
+  <text
+     x="254.0351"
+     y="71.023392"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#6b7280"
+     id="text16">250</text>
+  <text
+     x="400"
+     y="395"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#6b7280"
+     id="text17">500</text>
+  <text
+     x="560"
+     y="395"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#6b7280"
+     id="text18">750</text>
+  <text
+     x="720"
+     y="395"
+     font-family="Arial, sans-serif"
+     font-size="12px"
+     text-anchor="middle"
+     fill="#6b7280"
+     id="text19">1000</text>
+  <text
+     x="-220"
+     y="30"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="600"
+     text-anchor="middle"
+     fill="#374151"
+     transform="rotate(-90)"
+     id="text20">Torque (Nm)</text>
+  <text
+     x="400"
+     y="412.7193"
+     font-family="Arial, sans-serif"
+     font-size="14px"
+     font-weight="600"
+     text-anchor="middle"
+     fill="#374151"
+     id="text21">Velocidade (RPM)</text>
+  <path
+     d="m 80,310 20,-5 20,10 20,-15 20,20 20,-25 20,30 20,-35 20,40 20,-45 20,50 20,-55 20,60 20,-65 20,70 20,-75 20,80 20,-85 20,90 20,-95 20,98 20,-100 20,102 20,-104 20,105 20,-106 20,107 20,-108 20,109 20,-110 20,111 20,-112 20,113"
+     fill="url(#stepperGrad)"
+     stroke="none"
+     id="path21"
+     style="fill:url(#linearGradient31)" />
+  <path
+     d="m 80,310 20,-5 20,10 20,-15 20,20 20,-25 20,30 20,-35 20,40 20,-45 20,50 20,-55 20,60 20,-65 20,70 20,-75 20,80 20,-85 20,90 20,-95 20,98 20,-100 20,102 20,-104 20,105 20,-106 20,107 20,-108 20,109 20,-110 20,111 20,-112 20,113 v 5 H 80 Z"
+     fill="url(#stepperGrad)"
+     id="path22"
+     style="fill:url(#linearGradient32)" />
+  <path
+     d="m 80,310 20,-5 20,10 20,-15 20,20 20,-25 20,30 20,-35 20,40 20,-45 20,50 20,-55 20,60 20,-65 20,70 20,-75 20,80 20,-85 20,90 20,-95 20,98 20,-100 20,102 20,-104 20,105 20,-106 20,107 20,-108 20,109 20,-110 20,111 20,-112 20,113"
+     fill="none"
+     stroke="#ef4444"
+     stroke-width="3"
+     id="path23" />
+  <path
+     d="M 80,250 Q 400,190 720,160"
+     fill="none"
+     stroke="#10b981"
+     stroke-width="3"
+     id="path24" />
+  <path
+     d="M 80,250 Q 400,190 720,160 V 370 H 80 Z"
+     fill="url(#pmsmGrad)"
+     id="path25"
+     style="fill:url(#pmsmGrad)" />
+  <!-- Legenda -->
+  <!-- Anotações -->
+  <!-- Cogging no Stepper -->
+  <path
+     d="m 302.38761,273.3696 72.24233,-90.83277"
+     stroke="#ef4444"
+     stroke-width="3.50766"
+     fill="none"
+     marker-end="url(#arrowRed)"
+     id="path26"
+     style="stroke-width:1.908;stroke-dasharray:none" />
+  <rect
+     x="355.67252"
+     y="148.6842"
+     width="150"
+     height="28"
+     rx="6"
+     fill="#fee2e2"
+     stroke="#ef4444"
+     stroke-width="1"
+     id="rect26"
+     ry="6" />
+  <text
+     x="430.67252"
+     y="166.00584"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="600"
+     text-anchor="middle"
+     fill="#991b1b"
+     id="text27">Cogging irregular</text>
+  <!-- Suavidade no PMSM -->
+  <path
+     d="m 545.40286,172.84276 34.51592,-32.76154"
+     stroke="#10b981"
+     stroke-width="1.5"
+     fill="none"
+     marker-end="url(#arrowGreen)"
+     id="path27"
+     style="stroke-width:1.908;stroke-dasharray:none" />
+  <rect
+     x="585"
+     y="115"
+     width="130"
+     height="28"
+     rx="6"
+     fill="#d1fae5"
+     stroke="#10b981"
+     stroke-width="1"
+     id="rect27" />
+  <text
+     x="650"
+     y="137"
+     font-family="Arial, sans-serif"
+     font-size="11px"
+     font-weight="600"
+     text-anchor="middle"
+     fill="#065f46"
+     id="text28">Torque suave</text>
+  <!-- Markers para setas -->
+  <defs
+     id="defs29">
+    <marker
+       id="arrowRed"
+       markerWidth="10"
+       markerHeight="10"
+       refX="9"
+       refY="3"
+       orient="auto"
+       markerUnits="strokeWidth">
+      <path
+         d="M0,0 L0,6 L9,3 z"
+         fill="#EF4444"
+         id="path28" />
+    </marker>
+    <marker
+       id="arrowGreen"
+       markerWidth="10"
+       markerHeight="10"
+       refX="9"
+       refY="3"
+       orient="auto"
+       markerUnits="strokeWidth">
+      <path
+         d="M0,0 L0,6 L9,3 z"
+         fill="#10B981"
+         id="path29" />
+    </marker>
+  </defs>
+  <!-- Ícones de motores -->
+  <!-- Stepper Icon -->
+  <g
+     transform="translate(97.368421,77.309942)"
+     id="g30">
+    <rect
+       x="0"
+       y="0"
+       width="60"
+       height="60"
+       rx="8"
+       fill="#fee2e2"
+       stroke="#ef4444"
+       stroke-width="2"
+       id="rect29"
+       ry="8" />
+    <circle
+       cx="30"
+       cy="30"
+       r="18"
+       fill="none"
+       stroke="#ef4444"
+       stroke-width="2.5"
+       id="circle29" />
+    <line
+       x1="30"
+       y1="15"
+       x2="30"
+       y2="45"
+       stroke="#ef4444"
+       stroke-width="2.5"
+       id="line29" />
+    <line
+       x1="15"
+       y1="30"
+       x2="45"
+       y2="30"
+       stroke="#ef4444"
+       stroke-width="2.5"
+       id="line30" />
+    <text
+       x="30"
+       y="75"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       font-weight="600"
+       text-anchor="middle"
+       fill="#991b1b"
+       id="text30">Stepper</text>
+  </g>
+  <!-- PMSM Icon -->
+  <g
+     transform="translate(177.36842,77.309942)"
+     id="g31">
+    <rect
+       x="0"
+       y="0"
+       width="60"
+       height="60"
+       rx="8"
+       fill="#d1fae5"
+       stroke="#10b981"
+       stroke-width="2"
+       id="rect30"
+       ry="8" />
+    <circle
+       cx="30"
+       cy="30"
+       r="18"
+       fill="none"
+       stroke="#10b981"
+       stroke-width="2.5"
+       id="circle30" />
+    <path
+       d="M 30,15 A 15,15 0 0 1 42,26"
+       fill="none"
+       stroke="#10b981"
+       stroke-width="2.5"
+       id="path30" />
+    <path
+       d="M 30,45 A 15,15 0 0 1 18,34"
+       fill="none"
+       stroke="#10b981"
+       stroke-width="2.5"
+       id="path31" />
+    <circle
+       cx="30"
+       cy="30"
+       r="4"
+       fill="#10b981"
+       id="circle31" />
+    <text
+       x="30"
+       y="75"
+       font-family="Arial, sans-serif"
+       font-size="11px"
+       font-weight="600"
+       text-anchor="middle"
+       fill="#065f46"
+       id="text31">PMSM</text>
+  </g>
+</svg>
