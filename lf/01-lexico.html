@@ -469,7 +469,7 @@ Note
 <li><span class="math inline">\(F\)</span> é o conjunto de estados de aceitação.</li>
 </ul>
 <p>O conceito de <strong>estado</strong> é o coração da Máquina de Estado Finito.</p>
-<p>Um estado é uma abstração que resume todo o histórico de entradas que a máquina processou até um determinado momento, contendo apenas a informação necessária para decidir sobre as futuras transições e saídas. Uma Máquina de Estados Finitos transita de um estado para outro com base na entrada atual. Este comportamento é frequentemente visualizado por meio de um <strong>diagrama de transição de estados</strong>. Este diagrama é um grafo em que os nós representam os estados e as arestas direcionadas e rotuladas representam as transições. Como pode ser visto na <a href="#fig-maq1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
+<p>Um estado é uma abstração que resume todo o histórico de entradas que a máquina processou até um determinado momento, contendo apenas a informação necessária para decidir sobre as futuras transições e saídas. Uma Máquina de Estados Finitos transita de um estado para outro com base na entrada atual. Este comportamento é frequentemente visualizado por meio de um <strong>diagrama de transição de estados</strong>. Este diagrama é um grafo em que os vértices representam os estados e as arestas direcionadas e rotuladas representam as transições. Como pode ser visto na <a href="#fig-maq1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>.</p>
 <p>Uma cadeia de entrada será <em>aceita</em> pela Máquina de Estado Finito se, começando no estado inicial <span class="math inline">\(q_0\)</span>, a sequência de transições correspondente à cadeia de entrada termina em um dos estados de aceitação que estejam no conjunto <span class="math inline">\(F\)</span>, no caso da <a href="#fig-maq1" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>, o estado de aceitação é <span class="math inline">\(q_2\)</span>.</p>
 <div id="fig-maq1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -521,7 +521,7 @@ Note
 <li>Como <span class="math inline">\(x &lt; y\)</span>, pode-se provar que <span class="math inline">\(x &lt; z &lt; y\)</span>.</li>
 </ul></li>
 </ol>
-<p>A prova funciona porque nós <strong>construímos</strong> um valor específico para <span class="math inline">\(z\)</span> e demonstramos que ele satisfaz as condições exigidas.</p>
+<p>A prova funciona porque vértices <strong>construímos</strong> um valor específico para <span class="math inline">\(z\)</span> e demonstramos que ele satisfaz as condições exigidas.</p>
 </div>
 </div>
 <p>No caso do <strong>Teorema de Kleene</strong>, a prova construtiva é dividida em duas partes fundamentais, cada uma correspondendo a uma direção da equivalência.</p>
@@ -583,7 +583,7 @@ Table&nbsp;2.1: Comparação Detalhada entre Máquinas de Moore e Mealy
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Representação em Diagrama</strong></td>
-<td style="text-align: left;">Associada ao nó do estado</td>
+<td style="text-align: left;">Associada ao vértice do estado</td>
 <td style="text-align: left;">Associada ao arco da transição</td>
 </tr>
 <tr class="odd">

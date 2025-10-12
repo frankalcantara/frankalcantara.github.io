@@ -903,7 +903,7 @@ Figure&nbsp;8.2
 </section>
 <section id="passo-3-a-operação-goto-e-a-criação-de-estados" class="level3" data-number="8.3.3">
 <h3 data-number="8.3.3" class="anchored" data-anchor-id="passo-3-a-operação-goto-e-a-criação-de-estados"><span class="header-section-number">8.3.3</span> Passo 3: A Operação <code>GOTO</code> e a Criação de Estados</h3>
-<p>Se a operação <code>CLOSURE</code> indica tudo o que é possível em um único estado, a operação <strong><code>GOTO</code></strong> mostra como se mover <em>entre</em> os estados. A operação <code>GOTO</code> irá responder à pergunta: <em>Se estamos no estado <code>I</code> e o próximo símbolo da entrada é <code>X</code>, para qual novo estado de conhecimento nós vamos?</em> Para isso, a operação <code>GOTO(I, X)</code> é um processo de duas etapas:</p>
+<p>Se a operação <code>CLOSURE</code> indica tudo o que é possível em um único estado, a operação <strong><code>GOTO</code></strong> mostra como se mover <em>entre</em> os estados. A operação <code>GOTO</code> irá responder à pergunta: <em>Se estamos no estado <code>I</code> e o próximo símbolo da entrada é <code>X</code>, para qual novo estado de conhecimento vértices vamos?</em> Para isso, a operação <code>GOTO(I, X)</code> é um processo de duas etapas:</p>
 <ol type="1">
 <li><p><strong>Avanço do Ponto</strong>: primeiro, criamos um novo conjunto de itens pegando todos os itens no estado <code>I</code> nos quais o ponto <code>•</code> está imediatamente antes do símbolo <code>X</code>. Para cada um desses itens, movemos o ponto uma posição para a direita, passando por cima de <code>X</code>. Isso simboliza o <em>consumo</em>, o reconhecimento bem-sucedido do símbolo <code>X</code>.</p></li>
 <li><p><strong>Fechamento do Novo Conjunto</strong>: em seguida, aplicamos a operação <code>CLOSURE</code> a este novo conjunto de itens. Isso é fundamental para garantir que o novo estado para o qual chegamos também seja completo e contenha todas as produções que podem ser iniciadas a partir deste novo ponto de progresso.</p></li>
@@ -922,7 +922,7 @@ Figure&nbsp;8.2
 <li><code>[E → E• + n, $]</code></li>
 <li><code>[E → E• + n, +]</code></li>
 </ul>
-<p><strong>Interpretação de <code>I₁</code></strong>: <em>Nós acabamos de analisar uma <code>Expressão</code>. Se o próximo símbolo for <code>$</code>, a análise termina (aceitação). Se for <code>+</code>, continuaremos a análise.</em></p></li>
+<p><strong>Interpretação de <code>I₁</code></strong>: <em>vértices acabamos de analisar uma <code>Expressão</code>. Se o próximo símbolo for <code>$</code>, a análise termina (aceitação). Se for <code>+</code>, continuaremos a análise.</em></p></li>
 <li><p><strong>Cálculo de <code>GOTO(I₀, n)</code> → <code>I₂</code></strong>: agora perguntamos: <em>E se, a partir de <code>I₀</code>, o símbolo que virmos for um <code>n</code>?</em>, teremos:</p>
 <ol type="a">
 <li><p><strong>Avanço do Ponto</strong>: procuramos em <code>I₀</code> por itens com <code>•n</code>. Encontramos dois: <code>[E → •n, $]</code> e <code>[E → •n, +]</code>. Movemos o ponto em ambos: <code>{ [E → n•, $], [E → n•, +] }</code></p></li>
@@ -933,7 +933,7 @@ Figure&nbsp;8.2
 <li><code>[E → n•, $]</code> <em>(Item de redução)</em></li>
 <li><code>[E → n•, +]</code> <em>(Item de redução)</em></li>
 </ul>
-<p><strong>Interpretação de <code>I₂</code></strong>: <em>Nós acabamos de analisar um <code>n</code>. O <em>parser</em> deve agora reduzir <code>n</code> para <code>E</code> se o próximo símbolo for <code>$</code> ou <code>+</code>.</em></p></li>
+<p><strong>Interpretação de <code>I₂</code></strong>: <em>vértices acabamos de analisar um <code>n</code>. O <em>parser</em> deve agora reduzir <code>n</code> para <code>E</code> se o próximo símbolo for <code>$</code> ou <code>+</code>.</em></p></li>
 <li><p><strong>Cálculo de <code>GOTO(I₁, +)</code> → <code>I₃</code></strong>: continuamos o processo. O que acontece se estivermos no estado <code>I₁</code> e virmos um <code>+</code>?</p>
 <ol type="a">
 <li><p><strong>Avanço do Ponto</strong>: procuramos em <code>I₁</code> por itens com <code>•+</code>. Encontramos dois: <code>[E → E• + n, $]</code> e <code>[E → E• + n, +]</code>. Movemos o ponto: <code>{[E → E + •n, $], [E → E + •n, +]}</code></p></li>

@@ -361,7 +361,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#perspectiva-histórica-a-evolução-das-representações-intermediárias" id="toc-perspectiva-histórica-a-evolução-das-representações-intermediárias" class="nav-link active" data-scroll-target="#perspectiva-histórica-a-evolução-das-representações-intermediárias"><span class="header-section-number">15.1</span> Perspectiva Histórica: A Evolução das Representações Intermediárias</a></li>
-  <li><a href="#fundamentos-teóricos-propriedades-e-tipos-de-ci" id="toc-fundamentos-teóricos-propriedades-e-tipos-de-ci" class="nav-link" data-scroll-target="#fundamentos-teóricos-propriedades-e-tipos-de-ci"><span class="header-section-number">15.2</span> Fundamentos Teóricos: Propriedades e Tipos de CI</a>
+  <li><a href="#fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" id="toc-fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" class="nav-link" data-scroll-target="#fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias"><span class="header-section-number">15.2</span> Fundamentos Teóricos: Propriedades e Tipos de Representações Intermediárias</a>
   <ul class="collapse">
   <li><a href="#propriedades-de-uma-boa-ri" id="toc-propriedades-de-uma-boa-ri" class="nav-link" data-scroll-target="#propriedades-de-uma-boa-ri"><span class="header-section-number">15.2.1</span> Propriedades de uma Boa RI</a></li>
   <li><a href="#categorização-dos-tipos-de-ci" id="toc-categorização-dos-tipos-de-ci" class="nav-link" data-scroll-target="#categorização-dos-tipos-de-ci"><span class="header-section-number">15.2.2</span> Categorização dos Tipos de CI</a></li>
@@ -370,8 +370,9 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#definição-formal-e-instruções" id="toc-definição-formal-e-instruções" class="nav-link" data-scroll-target="#definição-formal-e-instruções"><span class="header-section-number">15.3.1</span> Definição Formal e Instruções</a></li>
   <li><a href="#implementações-do-tac" id="toc-implementações-do-tac" class="nav-link" data-scroll-target="#implementações-do-tac"><span class="header-section-number">15.3.2</span> Implementações do <strong>TAC</strong></a></li>
-  <li><a href="#exemplos-práticos-de-tradução-sdt" id="toc-exemplos-práticos-de-tradução-sdt" class="nav-link" data-scroll-target="#exemplos-práticos-de-tradução-sdt"><span class="header-section-number">15.3.3</span> Exemplos Práticos de Tradução (SDT)</a></li>
+  <li><a href="#exemplos-práticos-de-tradução" id="toc-exemplos-práticos-de-tradução" class="nav-link" data-scroll-target="#exemplos-práticos-de-tradução"><span class="header-section-number">15.3.3</span> Exemplos Práticos de Tradução</a></li>
   <li><a href="#exemplo-completo-tradução-de-função-para-tac" id="toc-exemplo-completo-tradução-de-função-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">15.3.4</span> Exemplo Completo: Tradução de Função para TAC</a></li>
+  <li><a href="#exemplo-completo-tradução-de-função-com-laço-while-para-tac" id="toc-exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">15.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</a></li>
   </ul></li>
   <li><a href="#representações-intermediárias-modernas-o-ecossistema-llvm" id="toc-representações-intermediárias-modernas-o-ecossistema-llvm" class="nav-link" data-scroll-target="#representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema LLVM</a>
   <ul class="collapse">
@@ -413,28 +414,28 @@ window.Quarto = {
 
 <p>Prezada leitora, nos capítulos anteriores, navegamos pelos mares turbulentos da fase de análise de um compilador. Culminamos nossa jornada com a construção de uma <strong>Á</strong>rvore de <strong>S</strong>intaxe <strong>A</strong>bstrata <strong>A</strong>tribuída, <strong>ASTA</strong>. Esta estrutura de dados não é apenas uma representação sintática do código-fonte; ela está semanticamente enriquecida, validada e anotada com informações importantes e definitivas, como tipos de dados, escopos de variáveis e referências a declarações. Em posse desta <strong>ASTA</strong>, temos uma representação completa e inequívoca do significado do programa original. A primeira parte da nossa viagem, a fase de análise está concluída e é apenas uma doce lembrança. Adentramos agora a fase de síntese, cujo primeiro e fundamental passo é a geração de código intermediário. O mar está calmo, o céu é azul, os ventos sopram a favor e o horizonte é promissor.</p>
 <p>Quando colocamos as mãos em em uma <strong>ASTA</strong> uma questão emerge: com uma representação tão rica e completa como a <strong>ASTA</strong>, por que não a traduzimos diretamente para o código de máquina da arquitetura-alvo? A curiosa leitora vai descobrir que a resposta a esta pergunta revelará um dos pilares da arquitetura de compiladores modernos: o desacoplamento.</p>
-<p>Para começar a entender, considere que gerar código de máquina diretamente da <strong>ASTA</strong> criaria um acoplamento forte entre o <em>front-end</em>, responsável pela análise da linguagem-fonte, e o <em>back-end</em>, responsável pela geração de código para a arquitetura-alvo. Imagine a tarefa de construir compiladores para <span class="math inline">\(M\)</span> linguagens de programação diferentes, visando <span class="math inline">\(N\)</span> arquiteturas de hardware distintas. Uma abordagem direta exigiria a construção de <span class="math inline">\(M \times N\)</span> compiladores completos, um esforço de engenharia monumental e redundante. Além disso, a estrutura hierárquica da <strong>ASTA</strong>, ideal para verificações semânticas, é pouco prática para muitas das otimizações de código mais poderosas, que dependem da análise do fluxo de controle e de dados de forma mais linear.</p>
+<p>Para começar a entender, considere que gerar código de máquina diretamente da <strong>ASTA</strong> criaria um acoplamento forte entre o <em>front-end</em>, responsável pela análise do código-fonte, e o <em>back-end</em>, responsável pela geração de código para a arquitetura-alvo. Imagine a tarefa de construir compiladores para <span class="math inline">\(M\)</span> linguagens de programação diferentes, visando <span class="math inline">\(N\)</span> arquiteturas de hardware distintas. Uma abordagem direta exigiria a construção de <span class="math inline">\(M \times N\)</span> compiladores completos, um esforço de engenharia monumental e redundante. Além disso, a estrutura hierárquica da <strong>ASTA</strong>, ideal para verificações semânticas, é pouco prática para muitas das otimizações de código mais poderosas, que dependem da análise do fluxo de controle e de dados de forma mais linear.</p>
 <p>A solução para este dilema é a introdução de uma <strong>R</strong>epresentação <strong>I</strong>ntermediária, <strong>RI</strong>, também chamada de Código Intermediário. A <strong>RI</strong> atua como uma “linguagem universal” ou uma <em>lingua franca</em> dentro do compilador. O <em>front-end</em> traduz a <strong>ASTA</strong> para esta <strong>RI</strong> comum, e o <em>back-end</em> traduz a <strong>RI</strong> para o código da arquitetura-alvo. Esta arquitetura transforma este problema, um problema <span class="math inline">\(M \times N\)</span> em um problema <span class="math inline">\(M + N\)</span>: precisamos apenas de <span class="math inline">\(M\)</span> <em>front-ends</em> e <span class="math inline">\(N\)</span> <em>back-ends</em>. Mais importante, uma boa <strong>RI</strong> é projetada para ser um substrato ideal para as fases de otimização. Ela se posiciona em um nível de abstração ideal: mais baixo e linear que a <strong>ASTA</strong>, facilitando análises de fluxo, mas mais alto e abstrato que o código de máquina, permanecendo independente de detalhes de hardware como registradores específicos ou convenções de chamada. Neste capítulo, viajaremos pela natureza, a história e a implementação dessas linguagens universais, que formam a espinha dorsal da compilação moderna.</p>
 <section id="perspectiva-histórica-a-evolução-das-representações-intermediárias" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="perspectiva-histórica-a-evolução-das-representações-intermediárias"><span class="header-section-number">15.1</span> Perspectiva Histórica: A Evolução das Representações Intermediárias</h2>
 <p>A concepção e o uso de representações intermediárias não são uma invenção recente; sua evolução espelha as prioridades cambiantes da engenharia de software ao longo das décadas.</p>
 <p>Nos anos 1970, o cenário de hardware era extremamente fragmentado. Muitas empresas produziam máquinas completamente independentes. A portabilidade de software era um desafio colossal. Foi nesse contexto que <a href="https://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a>, o criador da linguagem <strong>Pascal</strong>, popularizou uma abordagem revolucionária com seu compilador. Em vez de gerar código nativo para uma máquina específica, o compilador <strong>Pascal</strong> da ETH Zurich produzia um código intermediário simples para uma máquina de pilha virtual, conhecido como <strong>P-code</strong>.</p>
-<p>A influência do <strong>P-code</strong> estendeu-se muito além de sua época. Décadas depois, nos anos 1990, a Sun Microsystems adotou uma arquitetura conceitual similar ao projetar a <strong>Java Virtual Machine (JVM)</strong>. Assim como o <strong>P-code</strong>, o bytecode da <strong>JVM</strong> é um código intermediário para uma máquina de pilha abstrata, permitindo que programas <strong>Java</strong> sejam compilados uma vez e executados em qualquer plataforma que possua uma <strong>JVM</strong>. O famoso slogan “Write Once, Run Anywhere” de <strong>Java</strong> é, em essência, uma reformulação do princípio de portabilidade que Wirth pioneirou com o <strong>P-code</strong>. Esta linhagem conceitual demonstra como soluções elegantes para problemas fundamentais de engenharia transcendem gerações de tecnologia.</p>
+<p>A influência do <strong>P-code</strong> estendeu-se muito além de sua época. Décadas depois, nos anos 1990, a Sun Microsystems adotou uma arquitetura conceitual similar ao projetar a <strong>Java Virtual Machine (JVM)</strong>. Assim como o <strong>P-code</strong>, o <em>bytecode</em> da <strong>JVM</strong> é um código intermediário para uma máquina de pilha abstrata, permitindo que programas <strong>Java</strong> sejam compilados uma vez e executados em qualquer plataforma que possua uma <strong>JVM</strong>. O famoso slogan “Write Once, Run Anywhere” de <strong>Java</strong> é, em essência, uma reformulação do princípio de portabilidade que Wirth pioneirou com o <strong>P-code</strong>. Esta linhagem conceitual demonstra como soluções elegantes para problemas fundamentais de engenharia transcendem gerações de tecnologia.</p>
 <p>Para executar um programa <strong>Pascal</strong> em uma nova arquitetura, não era mais necessário reescrever o compilador inteiro. Bastava implementar um pequeno e simples interpretador de P-code para a nova máquina. Essa estratégia reduziu drasticamente o esforço de portabilidade e foi um fator chave para a disseminação do <strong>Pascal</strong>, especialmente em plataformas emergentes como os computadores pessoais Apple II com o sistema UCSD <strong>Pascal</strong>. No caso do <strong>Pascal</strong>, a prioridade era clara: portabilidade, mesmo que ao custo de alguma performance, já que o código era interpretado em vez de executado nativamente.</p>
 <p>Avançando para as décadas de 1980 e 1990, a complexidade do software cresceu graças aos sistemas operacionais e as grandes aplicações sendo escritas em <strong>C</strong>. O modelo de compilação do <strong>C</strong>, embora não centrado em uma <strong>RI</strong> para otimização, introduziu um conceito fundamental: a <strong>compilação separada</strong>. O compilador <strong>C</strong> traduz cada arquivo-fonte (<code>.c</code>) em um arquivo-objeto (<code>.o</code> ou <code>.obj</code>). Um arquivo-objeto é, em si, uma forma de código intermediário. Ele contém código de máquina relocável. Ou seja, as instruções já estão em formato binário, mas os endereços de memória ainda não são finais, e uma tabela de símbolos que lista as funções e variáveis que ele define e as que ele precisa de outros módulos. Um programa final é criado por um aplicativo de <em>linker</em>, que combina múltiplos arquivos-objeto e bibliotecas, resolvendo essas referências cruzadas. Este modelo de modularidade permitiu gerenciar a complexidade de grandes projetos de software, mantendo a separação de preocupações. O modelo criado pelo <strong>C</strong> também solidificou a ideia de traduzir o código-fonte para uma forma linear, autocontida e próxima da máquina, que serviu de inspiração para o design de <strong>RI</strong>s lineares como o Código de Três Endereços, que veremos neste capítulo.</p>
 <p>A partir dos anos 2000, a prioridade da indústria mudou outra vez. O hardware, embora mais padronizado, como as máquinas x86 e ARM, tornou-se imensamente complexo internamente, <em>pipelines</em> profundos, <em>caches</em> multinível, paralelismo em nível de instrução. O desafio principal passou a ser extrair o máximo de performance dessas arquiteturas. É nesse contexto que surge o <strong>LLVM</strong>. Originalmente um projeto de pesquisa na Universidade de Illinois, originalmente chamado de <strong>L</strong>ow <strong>L</strong>evel <strong>V</strong>irtual <strong>M</strong>achine, o <strong>LLVM</strong> foi concebido como uma infraestrutura de compilação, modular e reutilizável.</p>
 <p>O <strong>LLVM</strong> representou uma mudança de paradigma. Sua representação intermediária, a <strong>LLVM IR</strong>, não foi projetada apenas como um formato de passagem de dados, mas como o coração de uma infraestrutura de compilação completa, modular e reutilizável. O <strong>LLVM</strong> fornece um conjunto de bibliotecas, e aplicativos. para a análise, transformação e otimização que operam diretamente sobre a <strong>LLVM IR</strong>. Neste ponto da história, o código intermediário deixou de ser um mero produto do <em>front-end</em> para se tornar uma linguagem de programação por si só, na qual otimizadores de propósito geral são escritos e compartilhados por múltiplos <em>front-ends</em>, tais como <a href="https://clang.llvm.org/">Clang</a> para C/C++ e <a href="https://rust-lang.org/">rustc</a> para Rust) e <em>back-ends</em>. Esta evolução, da portabilidade, P-code, à modularidade, arquivos-objeto e, finalmente, à performance com o <strong>LLVM IR</strong>, demonstra como as <strong>RI</strong>s são artefatos capazes de encapsular e permitir a solução dos desafios de engenharia mais prementes de sua época.</p>
 </section>
-<section id="fundamentos-teóricos-propriedades-e-tipos-de-ci" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="fundamentos-teóricos-propriedades-e-tipos-de-ci"><span class="header-section-number">15.2</span> Fundamentos Teóricos: Propriedades e Tipos de CI</h2>
+<section id="fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias"><span class="header-section-number">15.2</span> Fundamentos Teóricos: Propriedades e Tipos de Representações Intermediárias</h2>
 <p>Para que uma Representação Intermediária seja eficaz, ela deve possuir um conjunto de propriedades bem definidas. Além disso, as <strong>RI</strong>s podem ser classificadas em diferentes categorias, cada uma com suas próprias forças e fraquezas.</p>
 <section id="propriedades-de-uma-boa-ri" class="level3" data-number="15.2.1">
 <h3 data-number="15.2.1" class="anchored" data-anchor-id="propriedades-de-uma-boa-ri"><span class="header-section-number">15.2.1</span> Propriedades de uma Boa RI</h3>
 <p>Uma <strong>RI</strong> robusta e útil deve exibir as seguintes características:</p>
 <ul>
-<li><strong>Independência da Linguagem-Fonte</strong>: a <strong>RI</strong> deve ser genérica o suficiente para representar as construções semânticas de diversas linguagens de programação de alto nível, desde C++ e Rust até Python e Swift.</li>
-<li><strong>Independência da arquitetura-alvo</strong>: a <strong>RI</strong> deve abstrair detalhes específicos da arquitetura de hardware, como o número de registradores, o conjunto de instruções e as convenções de chamada de procedimento. Isso é crucial para a portabilidade do <em>front-end</em> e dos otimizadores.</li>
-<li><strong>Facilidade de Geração</strong>: a tradução da <strong>AST</strong> para a <strong>RI</strong> deve ser um processo relativamente direto e algorítmico, tipicamente implementado através de um percurso na árvore.</li>
+<li><strong>Independência do código-fonte</strong>: a <strong>RI</strong> deve ser genérica o suficiente para representar as construções semânticas de diversas linguagens de programação de alto nível, desde C++ e Rust até Python e Swift.</li>
+<li><strong>Independência da arquitetura-alvo</strong>: a <strong>RI</strong> deve abstrair detalhes específicos da arquitetura de hardware, como o número de registradores, o conjunto de instruções e as convenções de chamada de procedimento. Isso é importante para a portabilidade do <em>front-end</em> e dos otimizadores.</li>
+<li><strong>Facilidade de Geração</strong>: a tradução da <strong>ASTA</strong> para a <strong>RI</strong> deve ser um processo relativamente direto e algorítmico, tipicamente implementado através de um percurso na árvore.</li>
 <li><strong>Adequação para Otimizações</strong>: esta é, talvez, a propriedade mais crítica em compiladores modernos. A estrutura da <strong>RI</strong> deve facilitar a análise e a transformação do código. Por exemplo, a identificação de operandos e resultados deve ser explícita, e a estrutura de controle do programa deve ser claramente representável.</li>
 </ul>
 </section>
@@ -442,12 +443,13 @@ window.Quarto = {
 <h3 data-number="15.2.2" class="anchored" data-anchor-id="categorização-dos-tipos-de-ci"><span class="header-section-number">15.2.2</span> Categorização dos Tipos de CI</h3>
 <p>As representações intermediárias são geralmente classificadas em três categorias principais:</p>
 <ol type="1">
-<li><p><strong>Representações Gráficas</strong>: estas <strong>RI</strong>s mantêm a estrutura hierárquica ou de grafo do programa. Os exemplos mais comuns são a própria <strong>Árvore de Sintaxe Abstrata (AST)</strong> e os <strong>Grafos Acíclicos Dirigidos (DAGs)</strong>. Um <strong>DAG</strong> é uma otimização da <strong>AST</strong> onde subexpressões comuns são representadas por um único nó, eliminando a redundância e tornando explícita a reutilização de cálculos. <strong>RI</strong>s gráficas são excelentes para capturar a estrutura do código, mas podem ser complexas de manipular para otimizações que dependem do fluxo de execução.</p></li>
-<li><p><strong>Representações Lineares</strong>: estas <strong>RI</strong>s se assemelham a uma linguagem de montagem para uma máquina abstrata. O código é uma sequência linear de instruções simples. Os principais exemplos são o <strong>Código de Pilha</strong>, na qual os operandos são implicitamente colocados e retirados de uma pilha, e, mais proeminentemente, o <strong>Código de Três Endereços (TAC)</strong>, que será o foco principal de nossa análise.</p></li>
-<li><p><strong>Representações Híbridas</strong>: compiladores otimizadores modernos quase sempre utilizam uma abordagem híbrida. Eles combinam uma representação gráfica de alto nível para o fluxo de controle com uma representação linear para as computações. A estrutura mais comum é o <strong>Grafo de Fluxo de Controle (CFG)</strong>, no qual cada nó do grafo é um <strong>Bloco Básico</strong>. Um bloco básico é uma sequência de instruções lineares, tipicamente em <strong>TAC</strong>, que possui um único ponto de entrada, a primeira instrução, e um único ponto de saída, a última instrução, sem saltos para dentro ou para fora do meio do bloco. Esta combinação oferece o melhor dos dois mundos: o grafo de fluxo de controle expõe a estrutura de laços e desvios para otimizações de fluxo de controle, enquanto o <strong>TAC</strong> dentro de cada bloco facilita a otimização de expressões locais.</p></li>
+<li><p><strong>Representações em Grafos</strong>: estas <strong>RI</strong>s mantêm a estrutura hierárquica, ou de grafo, do programa. Os exemplos mais comuns são a própria <strong>Árvore de Sintaxe Abstrata (AST)</strong> e os <strong>Grafos Acíclicos Dirigidos (DAGs)</strong>. Um <strong>DAG</strong> é uma otimização da <strong>ASTA</strong> na qual subexpressões comuns são representadas por um único vértice, eliminando a redundância e tornando explícita a reutilização de cálculos. <strong>RI</strong>s gráficas são excelentes para capturar a estrutura do código, mas podem ser complexas de manipular para otimizações que dependem do fluxo de execução.</p></li>
+<li><p><strong>Representações Lineares</strong>: estas <strong>RI</strong>s se assemelham a uma linguagem de montagem, Assembly, para uma máquina abstrata. O código é uma sequência linear de instruções simples. Os principais exemplos são o <strong>Código de Pilha</strong>, ou <strong>Código de Um Endereço</strong>, na qual os operandos são implicitamente colocados e retirados de uma pilha, e, mais proeminentemente, o <strong>Código de Três Endereços (TAC)</strong>, que será o foco principal de nossa análise.</p></li>
+<li><p><strong>Representações Híbridas</strong>: otimizadores modernos quase sempre utilizam uma abordagem híbrida. Eles combinam uma representação gráfica de alto nível para o fluxo de controle com uma representação linear para as computações. A estrutura mais comum é o <strong>Grafo de Fluxo de Controle (CFG)</strong>, no qual cada vértice do grafo é um <strong>Bloco Básico</strong>. Um bloco básico é uma sequência de instruções lineares, tipicamente em <strong>TAC</strong>, que possui um único ponto de entrada, a primeira instrução, ou líder, e um único ponto de saída, a última instrução, sem saltos para dentro ou para fora do meio do bloco. Esta combinação oferece o melhor dos dois mundos: o grafo de fluxo de controle expõe a estrutura de laços e desvios para otimizações de fluxo de controle, enquanto o <strong>TAC</strong> dentro de cada bloco facilita a otimização de expressões locais.</p></li>
 </ol>
-<p>A tabela a seguir resume e compara essas categorias.</p>
+<p>A tabela a #tbl-categorias-ri resume e compara essas categorias.</p>
 <table class="table">
+<caption>Comparação das Categorias de Representações Intermediárias.</caption>
 <colgroup>
 <col style="width: 6%">
 <col style="width: 8%">
@@ -517,50 +519,57 @@ window.Quarto = {
 <section id="definição-formal-e-instruções" class="level3" data-number="15.3.1">
 <h3 data-number="15.3.1" class="anchored" data-anchor-id="definição-formal-e-instruções"><span class="header-section-number">15.3.1</span> Definição Formal e Instruções</h3>
 <p>O <strong>TAC</strong> consiste em uma sequência de instruções que se assemelham a uma linguagem <strong>Assembly</strong>. A forma geral de uma instrução é:</p>
-<p><span class="math display">\[resultado:= argumento_1 \text{ operador } argumento_2\]</span></p>
-<p>A característica definidora do <strong>TAC</strong> é a restrição de que há no máximo um operador no lado direito de cada instrução de atribuição. Isso significa que expressões complexas da linguagem-fonte devem ser decompostas em múltiplas instruções <strong>TAC</strong>, utilizando variáveis temporárias geradas pelo compilador para armazenar resultados intermediários. Por exemplo, a instrução <code>w = (a + b) * c;</code> seria traduzida para:</p>
+<p><span class="math display">\[resultado := argumento_1 \text{ operador } argumento_2\]</span></p>
+<p>A característica definidora do <strong>TAC</strong> é a restrição de que há <strong>no máximo um operador no lado direito de cada instrução de atribuição</strong>. Isso significa que expressões complexas do código-fonte devem ser decompostas em múltiplas instruções <strong>TAC</strong>, utilizando variáveis temporárias geradas pelo compilador para armazenar resultados intermediários. Por exemplo, a instrução <code>w = (a + b) * c;</code> seria traduzida para:</p>
 <pre class="shell"><code>t1:= a + b
 t2:= t1 * c
 w:= t2</code></pre>
-<p>O conjunto de instruções do <strong>TAC</strong> normalmente inclui:</p>
+<p>Um código <strong>TAC</strong> deve ter máximo um operador no lado direito de cada instrução de atribuição. Mas, isso quer dizer que podemos ter um conjunto diverso de instruções. As mais comuns são:</p>
+<ol type="a">
+<li><strong>Atribuições</strong>:</li>
+</ol>
 <ul>
-<li><p><strong>Atribuições</strong>:</p>
+<li>Binária: <code>x := y op z</code>;</li>
+<li>Unária: <code>x := op y</code>;</li>
+<li>Cópia: <code>x := y</code>.</li>
+</ul>
+<ol start="2" type="a">
+<li><strong>Saltos</strong>:</li>
+</ol>
 <ul>
-<li>Binária: <code>x:= y op z</code></li>
-<li>Unária: <code>x:= op y</code></li>
-<li>Cópia: <code>x:= y</code></li>
-</ul></li>
-<li><p><strong>Saltos</strong>:</p>
+<li>Incondicional: <code>goto L</code>;</li>
+<li>Condicional: <code>if x relop y goto L</code>.</li>
+</ul>
+<ol start="3" type="a">
+<li><strong>Chamadas de Procedimento</strong>:</li>
+</ol>
 <ul>
-<li>Incondicional: <code>goto L</code></li>
-<li>Condicional: <code>if x relop y goto L</code></li>
-</ul></li>
-<li><p><strong>Chamadas de Procedimento</strong>:</p>
+<li><code>param x</code> (para passar um parâmetro);</li>
+<li><code>call p, n</code> (para chamar o procedimento <code>p</code> com <code>n</code> parâmetros);</li>
+<li><code>return y</code> (para retornar de um procedimento).</li>
+</ul>
+<ol start="4" type="a">
+<li><strong>Acesso a Arrays e Ponteiros</strong>:</li>
+</ol>
 <ul>
-<li><code>param x</code> (para passar um parâmetro)</li>
-<li><code>call p, n</code> (para chamar o procedimento <code>p</code> com <code>n</code> parâmetros)</li>
-<li><code>return y</code> (para retornar de um procedimento)</li>
-</ul></li>
-<li><p><strong>Acesso a Arrays e Ponteiros</strong>:</p>
-<ul>
-<li><code>x:= y[i]</code> (leitura de array)</li>
-<li><code>x[i]:= y</code> (escrita em array)</li>
-<li><code>x:= &amp;y</code> (endereço de <code>y</code>)</li>
-<li><code>x:= *y</code> (leitura via ponteiro)</li>
-<li><code>*x:= y</code> (escrita via ponteiro)</li>
-</ul></li>
+<li><code>x := y[i]</code> (leitura de array);</li>
+<li><code>x[i] := y</code> (escrita em array);</li>
+<li><code>x := &amp;y</code> (endereço de <code>y</code>);</li>
+<li><code>x := *y</code> (leitura via ponteiro);</li>
+<li><code>*x := y</code> (escrita via ponteiro).</li>
 </ul>
 </section>
 <section id="implementações-do-tac" class="level3" data-number="15.3.2">
 <h3 data-number="15.3.2" class="anchored" data-anchor-id="implementações-do-tac"><span class="header-section-number">15.3.2</span> Implementações do <strong>TAC</strong></h3>
-<p>Existem três maneiras clássicas de implementar o <strong>TAC</strong> em uma estrutura de dados:</p>
+<p>Existem três formas clássicas de implementar o <strong>TAC</strong> em uma estrutura de dados:</p>
 <ol type="1">
-<li><p><strong>Quádruplas</strong>: Cada instrução é um registro (ou <em>struct</em>) com quatro campos: <code>(operador, arg1, arg2, resultado)</code>. O resultado de cada operação é armazenado explicitamente. Esta é a forma mais fácil de manipular, pois as instruções são autocontidas. Mover uma instrução durante a otimização é trivial, pois não há referências implícitas a ela.</p></li>
-<li><p><strong>Triplas</strong>: Para economizar espaço, podemos omitir o campo do resultado. Cada instrução é um registro com três campos: <code>(operador, arg1, arg2)</code>. Os resultados intermediários não recebem nomes explícitos; em vez disso, eles são referenciados pela posição (ou índice) da instrução que os calcula. A principal desvantagem é que mover uma instrução durante a otimização se torna uma operação cara, pois todas as outras instruções que se referem a ela por seu índice precisariam ser atualizadas.</p></li>
-<li><p><strong>Triplas Indiretas</strong>: Esta abordagem combina os benefícios das duas anteriores. As triplas são armazenadas em um array, como antes. No entanto, a execução do programa é ditada por um segundo array, que contém ponteiros para as triplas. Para reordenar o código, o compilador simplesmente reorganiza os ponteiros neste segundo array, sem mover as triplas em si. Isso torna a otimização eficiente, mantendo a vantagem de espaço das triplas.</p></li>
+<li><p><strong>Quádruplas</strong>: cada instrução é um registro, ou <em>struct</em>, com quatro campos: <code>(operador, arg1, arg2, resultado)</code>. O resultado de cada operação é armazenado explicitamente. Esta é a forma mais fácil de manipular, pois as instruções são autocontidas. Mover uma instrução durante a otimização é trivial, pois não há referências implícitas a ela.</p></li>
+<li><p><strong>Triplas</strong>: para economizar espaço, podemos omitir o campo do resultado. Cada instrução é um registro com três campos: <code>(operador, arg1, arg2)</code>. Os resultados intermediários não recebem nomes explícitos; em vez disso, eles são referenciados pela posição, ou índice, da instrução que os calcula. A principal desvantagem é que mover uma instrução durante a otimização se torna uma operação cara, pois todas as outras instruções que se referem a ela por seu índice precisariam ser atualizadas.</p></li>
+<li><p><strong>Triplas Indiretas</strong>: esta abordagem combina os benefícios das duas anteriores. As triplas são armazenadas em um array, como antes. No entanto, a execução do programa é ditada por um segundo array, que contém ponteiros para as triplas. Para reordenar o código, o compilador simplesmente reorganiza os ponteiros neste segundo array, sem mover as triplas em si. Isso torna a otimização eficiente, mantendo a vantagem de espaço das triplas.</p></li>
 </ol>
-<p>A tabela abaixo resume as características dessas implementações, incluindo considerações sobre consumo de memória.</p>
+<p>A tabela #tbl-implementacoes-tac resume as características dessas implementações, incluindo considerações sobre consumo de memória.</p>
 <table class="table">
+<caption>Comparação das Implementações de Código de Três Endereços.</caption>
 <colgroup>
 <col style="width: 9%">
 <col style="width: 12%">
@@ -606,29 +615,29 @@ w:= t2</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Para ilustrar concretamente, considere uma instrução <code>t1 := a + b</code>. Uma quádrupla requer quatro campos (operador <code>+</code>, argumentos <code>a</code> e <code>b</code>, resultado <code>t1</code>), tipicamente 16-32 bytes dependendo da implementação. Uma tripla armazena apenas três campos (operador <code>+</code>, argumentos <code>a</code> e <code>b</code>), resultando em 12-24 bytes. A tripla indireta adiciona o custo de um ponteiro (4-8 bytes) no array de indireção, mas esse overhead é amortizado ao longo de muitas instruções e é amplamente compensado pela eficiência nas operações de reordenamento durante a otimização.</p>
-<p>A escolha entre essas representações envolve um trade-off clássico entre espaço e flexibilidade. Compiladores modernos frequentemente optam por quádruplas ou uma variante delas durante as fases de otimização intensiva, onde a facilidade de manipulação supera a preocupação com memória, especialmente considerando que o código intermediário é transitório e existe apenas durante a compilação.</p>
+<p>Para ilustrar concretamente, considere uma instrução <code>t1 := a + b</code>. Uma quádrupla requer quatro campos (operador <code>+</code>, argumentos <code>a</code> e <code>b</code>, resultado <code>t1</code>), tipicamente entre <span class="math inline">\(16\)</span> e <span class="math inline">\(32 bytes\)</span> dependendo da implementação. Uma tripla armazena apenas três campos (operador <code>+</code>, argumentos <code>a</code> e <code>b</code>), resultando em um espaço entre <span class="math inline">\(12\)</span> e <span class="math inline">\(24 bytes\)</span>. A tripla indireta adiciona o custo de um ponteiro, de <span class="math inline">\(4\)</span> a <span class="math inline">\(8 bytes\)</span> no array de indireção, mas esse custo extra é amortizado ao longo de muitas instruções e é amplamente compensado pela eficiência nas operações de reordenamento durante a otimização.</p>
+<p>A escolha entre essas representações envolve uma análise de balanceamento clássica entre espaço e flexibilidade. Compiladores modernos frequentemente optam por quádruplas ou uma variante delas durante as fases de otimização intensiva, na qual a facilidade de manipulação supera a preocupação com memória, especialmente considerando que o código intermediário é, na maior parte das vezes, transitório e existe apenas durante a compilação.</p>
 </section>
-<section id="exemplos-práticos-de-tradução-sdt" class="level3" data-number="15.3.3">
-<h3 data-number="15.3.3" class="anchored" data-anchor-id="exemplos-práticos-de-tradução-sdt"><span class="header-section-number">15.3.3</span> Exemplos Práticos de Tradução (SDT)</h3>
-<p>A geração de Código de Três Endereços é formalmente especificada usando <strong>Esquemas de Tradução Dirigida por Sintaxe (SDT)</strong>. Um SDT anexa ações semânticas às produções de uma gramática, que geram o código intermediário à medida que a árvore de sintaxe é percorrida.</p>
+<section id="exemplos-práticos-de-tradução" class="level3" data-number="15.3.3">
+<h3 data-number="15.3.3" class="anchored" data-anchor-id="exemplos-práticos-de-tradução"><span class="header-section-number">15.3.3</span> Exemplos Práticos de Tradução</h3>
+<p>A geração de Código de Três Endereços é formalmente especificada usando Esquemas de Tradução Dirigida por Sintaxe, ou em inglês <strong>S</strong>yntax <strong>D</strong>irected <strong>T</strong>ranslation, <strong>SDT</strong>. Um <strong>SDT</strong> anexa ações semânticas às produções de uma gramática, que geram o código intermediário à medida que a árvore de sintaxe é percorrida.</p>
 <section id="tradução-de-expressões-aritméticas" class="level4" data-number="15.3.3.1">
 <h4 data-number="15.3.3.1" class="anchored" data-anchor-id="tradução-de-expressões-aritméticas"><span class="header-section-number">15.3.3.1</span> Tradução de Expressões Aritméticas</h4>
 <p>Consideremos a produção gramatical para uma adição: <span class="math inline">\(E \rightarrow E_1 + E_2\)</span>. A ação semântica associada gera o código para <span class="math inline">\(E_1\)</span>, depois o código para <span class="math inline">\(E_2\)</span>, e finalmente emite uma nova instrução de adição.</p>
 <p><strong>Produção</strong>: <span class="math inline">\(S \rightarrow \textbf{id}:= E\)</span></p>
 <p><strong>Ação Semântica</strong>: <span class="math display">\[
 \begin{array}{l}
-\text{S.code}:= \text{E.code} \ || \\
-\qquad \qquad \text{gen}(\text{id.place} \ `:=` \ \text{E.place})
+\text{S.code}:= \text{E.code} \ \vert  \\
+\qquad \qquad \text{gen}(\text{id.place} \, := \, \text{E.place})
 \end{array}
 \]</span></p>
 <p><strong>Produção</strong>: <span class="math inline">\(E \rightarrow E_1 + E_2\)</span></p>
 <p><strong>Ação Semântica</strong>: <span class="math display">\[
 \begin{array}{l}
-\text{E.place}:= \text{newtemp}() \\
-\text{E.code}:= \text{E}_1\text{.code} \ || \\
-\qquad \qquad \text{E}_2\text{.code} \ || \\
-\qquad \qquad \text{gen}(\text{E.place} \ `:=` \ \text{E}_1\text{.place} \ `+` \ \text{E}_2\text{.place})
+\text{E.place} \ := \text{newtemp}() \\
+\text{E.code} \ := \text{E}_1\text{.code} \ \vert  \\
+\qquad \qquad \text{E}_2\text{.code} \ \vert  \\
+\qquad \qquad \text{gen}(\text{E.place} \, := \, \text{E}_1\text{.place} \, + \, \text{E}_2\text{.place})
 \end{array}
 \]</span></p>
 <p>Aqui, <code>E.place</code> é um atributo que armazena o nome do temporário ou variável que contém o valor de <span class="math inline">\(E\)</span>, e <code>E.code</code> armazena a sequência de instruções <strong>TAC</strong> geradas. A função <code>newtemp()</code> cria um novo nome de variável temporária.</p>
@@ -645,12 +654,12 @@ w:= t2</code></pre>
 \text{B.true}:= \text{newlabel}() \\
 \text{B.false}:= \text{newlabel}() \\
 \text{S.next}:= \text{newlabel}() \\
-\text{S.code}:= \text{B.code} \ || \\
-\qquad \qquad \text{gen}(\text{B.true} \ `:`) \ || \\
-\qquad \qquad S_1\text{.code} \ || \\
-\qquad \qquad \text{gen}(`\text{goto}` \ \text{S.next}) \ || \\
-\qquad \qquad \text{gen}(\text{B.false} \ `:`) \ || \\
-\qquad \qquad S_2\text{.code} \ || \\
+\text{S.code}:= \text{B.code} \ \vert  \\
+\qquad \qquad \text{gen}(\text{B.true} \ `:`) \ \vert  \\
+\qquad \qquad S_1\text{.code} \ \vert  \\
+\qquad \qquad \text{gen}(\text{goto} \ \text{S.next}) \ \vert  \\
+\qquad \qquad \text{gen}(\text{B.false} \ `:`) \ \vert  \\
+\qquad \qquad S_2\text{.code} \ \vert  \\
 \qquad \qquad \text{gen}(\text{S.next} \ `:`)
 \end{array}
 \]</span></p>
@@ -665,11 +674,11 @@ w:= t2</code></pre>
 \text{S.begin}:= \text{newlabel}() \\
 \text{B.true}:= \text{newlabel}() \\
 \text{S.next}:= \text{newlabel}() \\
-\text{S.code}:= \text{gen}(\text{S.begin} \ `:`) \ || \\
-\qquad \qquad \text{B.code} \ || \\
-\qquad \qquad \text{gen}(\text{B.true} \ `:`) \ || \\
-\qquad \qquad S_1\text{.code} \ || \\
-\qquad \qquad \text{gen}(`\text{goto}` \ \text{S.begin}) \ || \\
+\text{S.code}:= \text{gen}(\text{S.begin} \ `:`) \ \vert  \\
+\qquad \qquad \text{B.code} \ \vert  \\
+\qquad \qquad \text{gen}(\text{B.true} \ `:`) \ \vert  \\
+\qquad \qquad S_1\text{.code} \ \vert  \\
+\qquad \qquad \text{gen}(`\text{goto}` \ \text{S.begin}) \ \vert  \\
 \qquad \qquad \text{gen}(\text{S.next} \ `:`)
 \end{array}
 \]</span></p>
@@ -679,16 +688,16 @@ w:= t2</code></pre>
 </section>
 <section id="exemplo-completo-tradução-de-função-para-tac" class="level3" data-number="15.3.4">
 <h3 data-number="15.3.4" class="anchored" data-anchor-id="exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">15.3.4</span> Exemplo Completo: Tradução de Função para TAC</h3>
-<p>Para consolidar nossa compreensão do Código de Três Endereços, vamos traduzir uma função completa de uma linguagem de alto nível para <strong>TAC</strong>, incluindo declaração, parâmetros, corpo e retorno. Este exemplo ilustrará como todas as construções se integram em uma tradução real.</p>
+<p>Para que a esforçada leitora possa solidificar seu entendimento sobre o Código de Três Endereços, vamos traduzir uma função completa de uma linguagem de alto nível para <strong>TAC</strong>, incluindo declaração, parâmetros, corpo e retorno. Este exemplo ilustrará como todas as construções se integram em uma tradução real.</p>
 <section id="função-em-linguagem-de-alto-nível" class="level4" data-number="15.3.4.1">
 <h4 data-number="15.3.4.1" class="anchored" data-anchor-id="função-em-linguagem-de-alto-nível"><span class="header-section-number">15.3.4.1</span> Função em Linguagem de Alto Nível</h4>
-<p>Considere a seguinte função em C que calcula o máximo entre dois números e retorna o dobro desse valor:</p>
+<p>Considere a seguinte função em <strong>C</strong> que calcula o máximo entre dois números e retorna o dobro desse valor:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> double_max<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> max<span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>a <span class="op">&gt;</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>          max <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    max <span class="op">=</span> a<span class="op">;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>          max <span class="op">=</span> b<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    max <span class="op">=</span> b<span class="op">;</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> result <span class="op">=</span> max <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
@@ -704,7 +713,7 @@ w:= t2</code></pre>
 </section>
 <section id="tradução-para-código-de-três-endereços" class="level4" data-number="15.3.4.2">
 <h4 data-number="15.3.4.2" class="anchored" data-anchor-id="tradução-para-código-de-três-endereços"><span class="header-section-number">15.3.4.2</span> Tradução para Código de Três Endereços</h4>
-<p>A tradução completa para <strong>TAC</strong> segue abaixo. Utilizamos rótulos para delimitar blocos e instruções específicas para gerenciar parâmetros e retorno:</p>
+<p>A tradução completa para <strong>TAC</strong> segue abaixo. Utilizamos rótulos para delimitar blocos, o padrão de comentários em linha do <strong>C</strong> e instruções específicas para gerenciar parâmetros e retorno:</p>
 <pre class="shell"><code>// Prólogo da função
 begin_function double_max
 // Declaração de parâmetros (recebidos na pilha ou registradores)
@@ -732,7 +741,7 @@ return result
 // Epílogo da função
 end_function</code></pre>
 <p>Vamos examinar cada seção da tradução:</p>
-<p><strong>1. Prólogo e Parâmetros</strong></p>
+<p><strong>1. Prólogo e Parâmetros</strong>:</p>
 <pre class="shell"><code>begin_function double_max
 param a
 param b</code></pre>
@@ -742,7 +751,7 @@ param b</code></pre>
 t1 := a &gt; b
 if t1 goto L2
 goto L3</code></pre>
-<p>A condição <code>a &gt; b</code> é avaliada e armazenada no temporário <code>t1</code>. A instrução <code>if t1 goto L2</code> implementa o salto condicional: se verdadeiro, executa o ramo <code>then</code> (L2); caso contrário, o <code>goto L3</code> explícito direciona para o ramo <code>else</code>.</p>
+<p>A condição <code>a &gt; b</code> é avaliada e armazenada no temporário <code>t1</code>. A instrução <code>if t1 goto L2</code> implementa o salto condicional: se verdadeiro, executa o ramo <code>then</code> (<code>L2</code>); caso contrário, o <code>goto L3</code> explícito direciona para o ramo <code>else</code>.</p>
 <p><strong>3. Blocos Then e Else</strong></p>
 <pre class="shell"><code>L2:
 max := a
@@ -761,8 +770,9 @@ end_function</code></pre>
 </section>
 <section id="implementação-em-quádruplas" class="level4" data-number="15.3.4.3">
 <h4 data-number="15.3.4.3" class="anchored" data-anchor-id="implementação-em-quádruplas"><span class="header-section-number">15.3.4.3</span> Implementação em Quádruplas</h4>
-<p>Para tornar a tradução ainda mais concreta, vejamos como estas instruções seriam representadas usando a implementação de <strong>quádruplas</strong>:</p>
+<p>Para tornar a tradução ainda mais concreta, vejamos como estas instruções seriam representadas, na tabela #tbl-implementacoes-tac2, usando a implementação de <strong>quádruplas</strong>:</p>
 <table class="table">
+<caption>Representação em Quádruplas do Código de Três Endereços para <code>double_max</code>.</caption>
 <thead>
 <tr class="header">
 <th>Índice</th>
@@ -896,13 +906,349 @@ end_function</code></pre>
 </table>
 <p>Esta representação tabular torna explícito como cada campo da quádrupla é preenchido. Note que operações unárias e de controle de fluxo deixam alguns campos vazios, marcados com <code>-</code>.</p>
 </section>
-<section id="variações-e-otimizações" class="level4" data-number="15.3.4.4">
-<h4 data-number="15.3.4.4" class="anchored" data-anchor-id="variações-e-otimizações"><span class="header-section-number">15.3.4.4</span> Variações e Otimizações</h4>
-<p>Vale mencionar que esta tradução é deliberadamente não otimizada, preservando a estrutura do código original. Um compilador otimizador poderia aplicar várias transformações:</p>
+<section id="implementação-em-triplas" class="level4" data-number="15.3.4.4">
+<h4 data-number="15.3.4.4" class="anchored" data-anchor-id="implementação-em-triplas"><span class="header-section-number">15.3.4.4</span> Implementação em Triplas</h4>
+<p>Na representação por <strong>triplas</strong>, cada instrução é composta por três campos: operador, argumento 1 e argumento 2. O resultado de uma operação é implícito e representado pelo índice da própria tripla. Variáveis temporárias e locais apontam para esses índices. Operações de controle de fluxo (como <code>goto</code> e <code>if</code>) usam índices de rótulos como alvos. A tabela abaixo adapta a tradução anterior para triplas, mantendo a mesma sequência lógica das quádruplas originais:</p>
+<div id="tbl-implementacoes-triplas" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-implementacoes-triplas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;15.1: Representação em Triplas do Código de Três Endereços para <code>double_max</code>. Aqui, <code>max</code> aponta para o índice 7 ou 10 (dependendo do ramo), <code>t1</code> para 3, <code>t2</code> para 13 e <code>result</code> para 14. Os alvos de saltos (como <code>(6)</code> para L2) referenciam os índices das triplas de rótulos. Campos vazios são marcados com <code>-</code>.
+</figcaption>
+<div aria-describedby="tbl-implementacoes-triplas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Operador</th>
+<th>Arg1</th>
+<th>Arg2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><code>begin_func</code></td>
+<td><code>double_max</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><code>param</code></td>
+<td><code>a</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><code>param</code></td>
+<td><code>b</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><code>&gt;</code></td>
+<td><code>a</code></td>
+<td><code>b</code></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><code>if_true</code></td>
+<td>(3)</td>
+<td>(6)</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td><code>goto</code></td>
+<td>(9)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td><code>label</code></td>
+<td><code>L2</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td><code>:=</code></td>
+<td><code>a</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td><code>goto</code></td>
+<td>(12)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td><code>label</code></td>
+<td><code>L3</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td><code>:=</code></td>
+<td><code>b</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td><code>goto</code></td>
+<td>(12)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td><code>label</code></td>
+<td><code>L4</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td><code>*</code></td>
+<td><code>max</code></td>
+<td><code>2</code></td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td><code>:=</code></td>
+<td>(13)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td><code>return</code></td>
+<td>(14)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td><code>end_func</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Esta estrutura economiza espaço em comparação às quádruplas, pois o resultado é o índice da tripla, mas requer uma tabela de símbolos para mapear variáveis aos índices apropriados.</p>
+</section>
+<section id="implementação-em-triplas-indiretas" class="level4" data-number="15.3.4.5">
+<h4 data-number="15.3.4.5" class="anchored" data-anchor-id="implementação-em-triplas-indiretas"><span class="header-section-number">15.3.4.5</span> Implementação em Triplas Indiretas</h4>
+<p>As <strong>triplas indiretas</strong> adicionam uma camada de indireção: uma tabela principal de ponteiros (índices) aponta para entradas em uma tabela de triplas reais (onde ficam o operador, arg1 e arg2). Isso facilita otimizações, como a remoção de instruções mortas, ao permitir a substituição de ponteiros sem alterar as triplas subjacentes. A tabela abaixo mostra a estrutura para o mesmo exemplo:</p>
+<p><strong>Tabela de Ponteiros (Índices Indiretos)</strong>:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Ponteiro para Tripla</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>13</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabela de Triplas Reais</strong> (acessadas via ponteiros):</p>
+<div id="tbl-implementacoes-triplas-indiretas" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-implementacoes-triplas-indiretas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;15.2: Representação em Triplas Indiretas do Código de Três Endereços para <code>double_max</code>. A tabela de ponteiros mapeia os índices lógicos para as triplas reais, permitindo flexibilidade em otimizações. As referências (como <code>(3)</code>) apontam para índices na tabela de ponteiros, que por sua vez levam às triplas.
+</figcaption>
+<div aria-describedby="tbl-implementacoes-triplas-indiretas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice da Tripla</th>
+<th>Operador</th>
+<th>Arg1</th>
+<th>Arg2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td><code>begin_func</code></td>
+<td><code>double_max</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><code>param</code></td>
+<td><code>a</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><code>param</code></td>
+<td><code>b</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td><code>&gt;</code></td>
+<td><code>a</code></td>
+<td><code>b</code></td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td><code>if_true</code></td>
+<td>(3)</td>
+<td>(6)</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td><code>goto</code></td>
+<td>(9)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td><code>label</code></td>
+<td><code>L2</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td><code>:=</code></td>
+<td><code>a</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td><code>goto</code></td>
+<td>(12)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td><code>label</code></td>
+<td><code>L3</code></td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td><code>:=</code></td>
+<td><code>b</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td><code>goto</code></td>
+<td>(12)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td><code>label</code></td>
+<td><code>L4</code></td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td><code>*</code></td>
+<td><code>max</code></td>
+<td><code>2</code></td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td><code>:=</code></td>
+<td>(13)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td><code>return</code></td>
+<td>(14)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td><code>end_func</code></td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Essa representação é particularmente útil em compiladores que realizam análises de fluxo de dados, pois modificar um ponteiro pode “desconectar” uma tripla sem afetar outras partes do código.</p>
+</section>
+<section id="variações-e-otimizações" class="level4" data-number="15.3.4.6">
+<h4 data-number="15.3.4.6" class="anchored" data-anchor-id="variações-e-otimizações"><span class="header-section-number">15.3.4.6</span> Variações e Otimizações</h4>
+<p>Vale mencionar que esta tradução é deliberadamente não otimizada, preservando a estrutura do código original. Um otimizador poderia aplicar várias transformações:</p>
 <ol type="1">
-<li><p><strong>Eliminação de Cópia</strong>: A atribuição <code>result := t2</code> é redundante; poderíamos retornar <code>t2</code> diretamente.</p></li>
-<li><p><strong>Propagação de Constantes</strong>: Se os valores de <code>a</code> e <code>b</code> fossem conhecidos em tempo de compilação, a comparação e toda a estrutura condicional poderiam ser resolvidas estaticamente.</p></li>
-<li><p><strong>Dobramento de Constantes</strong>: A multiplicação por 2 poderia ser substituída por uma operação de deslocamento à esquerda (<code>max &lt;&lt; 1</code>), que é mais eficiente em muitas arquiteturas.</p></li>
+<li><p><strong>Eliminação de Cópia</strong>: a atribuição <code>result := t2</code> é redundante; poderíamos retornar <code>t2</code> diretamente.</p></li>
+<li><p><strong>Propagação de Constantes</strong>: se os valores de <code>a</code> e <code>b</code> fossem conhecidos em tempo de compilação, a comparação e toda a estrutura condicional poderiam ser resolvidas estaticamente.</p></li>
+<li><p><strong>Dobramento de Constantes</strong>: a multiplicação por 2 poderia ser substituída por uma operação de deslocamento à esquerda (<code>max &lt;&lt; 1</code>), que é mais eficiente em muitas arquiteturas.</p></li>
 </ol>
 <p>A versão otimizada poderia se reduzir a algo como:</p>
 <pre class="shell"><code>begin_function double_max
@@ -921,13 +1267,623 @@ end_function</code></pre>
 <p>Este exemplo completo demonstra como o <strong>TAC</strong> serve como uma ponte entre a abstração da linguagem de alto nível e a concretude do código de máquina, mantendo uma estrutura simples e regular que facilita tanto a geração quanto a otimização.</p>
 </section>
 </section>
+<section id="exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="level3" data-number="15.3.5">
+<h3 data-number="15.3.5" class="anchored" data-anchor-id="exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">15.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</h3>
+<p>Para ilustrar a tradução de uma estrutura de controle com laço <strong>while</strong>, vamos criar e resolver um exemplo simples em C. A função calcula a soma dos números de 1 até <code>n</code> (soma triangular), usando um laço <strong>while</strong>. Este exemplo integra:</p>
+<ul>
+<li>Parâmetro de entrada (<code>n</code>).</li>
+<li>Declarações de variáveis locais (<code>sum</code> e <code>i</code>).</li>
+<li>Inicialização de variáveis.</li>
+<li>Condição booleana no <strong>while</strong>.</li>
+<li>Operações aritméticas dentro do laço (adição e incremento).</li>
+<li>Retorno do resultado.</li>
+</ul>
+<p>Seguiremos o <strong>mesmo padrão do exemplo anterior</strong> (<code>double_max</code>): - Código C original. - Tradução para TAC em formato textual (com rótulos, temporários e saltos). - Análise seção por seção. - Representação em <strong>Quádruplas</strong> (tabela). - Representação em <strong>Triplas</strong> (tabela). - Representação em <strong>Triplas Indiretas</strong> (tabelas). - Uma versão otimizada breve para comparação.</p>
+<section id="função-em-linguagem-de-alto-nível-c" class="level4" data-number="15.3.5.1">
+<h4 data-number="15.3.5.1" class="anchored" data-anchor-id="função-em-linguagem-de-alto-nível-c"><span class="header-section-number">15.3.5.1</span> Função em Linguagem de Alto Nível (C)</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sum_up_to<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;=</span> n<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        sum <span class="op">=</span> sum <span class="op">+</span> i<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sum<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><strong>Destaques</strong>: Parâmetro <code>n</code>, inicializações, condição <code>i &lt;= n</code>, corpo do laço com adição e incremento, retorno.</li>
+</ul>
+</section>
+<section id="tradução-para-código-de-três-endereços-tac" class="level4" data-number="15.3.5.2">
+<h4 data-number="15.3.5.2" class="anchored" data-anchor-id="tradução-para-código-de-três-endereços-tac"><span class="header-section-number">15.3.5.2</span> Tradução para Código de Três Endereços (TAC)</h4>
+<p>A tradução completa para <strong>TAC</strong> segue abaixo. Utilizamos rótulos para delimitar o início do laço (<code>L2</code>), o corpo (<code>L3</code>) e a saída (<code>L4</code>). O código é gerado via SDT, como nos exemplos anteriores (percorrendo a AST bottom-up).</p>
+<pre class="shell"><code>// Prólogo da função
+begin_function sum_up_to
+// Declaração de parâmetro
+param n
+// Inicializações
+L1:
+sum := 0
+i := 1
+// Início do while: teste da condição
+L2:
+t1 := i &lt;= n
+if t1 goto L3
+goto L4
+// Corpo do while
+L3:
+t2 := sum + i
+sum := t2
+t3 := i + 1
+i := t3
+// Volta ao teste da condição
+goto L2
+// Saída do while e retorno
+L4:
+return sum
+// Epílogo da função
+end_function</code></pre>
+</section>
+<section id="análise-da-tradução-tac" class="level4" data-number="15.3.5.3">
+<h4 data-number="15.3.5.3" class="anchored" data-anchor-id="análise-da-tradução-tac"><span class="header-section-number">15.3.5.3</span> Análise da Tradução TAC</h4>
+<p>Vamos examinar cada seção da tradução, destacando como o SDT gera o código para o <strong>while</strong> (similar ao exemplo de SDT para <code>while (B) do S1</code>):</p>
+<p><strong>1. Prólogo e Parâmetro</strong>:</p>
+<pre class="shell"><code>begin_function sum_up_to
+param n</code></pre>
+<ul>
+<li>Marca o início da função. <code>param n</code> indica o parâmetro recebido (da pilha ou registradores).</li>
+</ul>
+<p><strong>2. Inicializações</strong>:</p>
+<pre class="shell"><code>L1:
+sum := 0
+i := 1</code></pre>
+<ul>
+<li>Atribuições simples antes do laço. <code>L1</code> é o ponto de entrada após as inicializações.</li>
+</ul>
+<p><strong>3. Estrutura do While</strong>:</p>
+<pre class="shell"><code>L2:
+t1 := i &lt;= n
+if t1 goto L3
+goto L4</code></pre>
+<ul>
+<li><code>L2</code>: Rótulo do teste da condição (<code>B.code</code> no SDT: avalia <code>i &lt;= n</code> em <code>t1</code>).</li>
+<li>Salto condicional: Se verdadeiro (<code>t1</code>), vai para o corpo (<code>L3</code> = <code>B.true</code>); senão, sai (<code>L4</code> = <code>S.next</code> = <code>B.false</code>).</li>
+</ul>
+<p><strong>4. Corpo do While</strong>:</p>
+<pre class="shell"><code>L3:
+t2 := sum + i
+sum := t2
+t3 := i + 1
+i := t3
+goto L2</code></pre>
+<ul>
+<li><code>L3</code>: Rótulo do corpo (<code>B.true</code> no SDT).</li>
+<li>Adição: <code>sum + i</code> em temporário <code>t2</code>, depois atribui a <code>sum</code>.</li>
+<li>Incremento: <code>i + 1</code> em <code>t3</code>, depois atribui a <code>i</code>.</li>
+<li><code>goto L2</code>: Volta ao teste da condição (como no SDT: <code>gen(goto S.begin)</code>).</li>
+</ul>
+<p><strong>5. Saída e Retorno</strong>:</p>
+<pre class="shell"><code>L4:
+return sum
+end_function</code></pre>
+<ul>
+<li><code>L4</code>: Ponto de convergência após o laço.</li>
+<li><code>return sum</code>: Retorna o valor acumulado.</li>
+</ul>
+<p>Este TAC é <strong>não otimizado</strong>, preservando a estrutura original para clareza. O laço forma um ciclo via saltos: <code>L2</code> → <code>L3</code> → <code>L2</code> (se condição verdadeira).</p>
+</section>
+<section id="implementação-em-quádruplas-1" class="level4" data-number="15.3.5.4">
+<h4 data-number="15.3.5.4" class="anchored" data-anchor-id="implementação-em-quádruplas-1"><span class="header-section-number">15.3.5.4</span> Implementação em Quádruplas</h4>
+<p>Representação tabular em <strong>quádruplas</strong> (cada linha: <code>(operador, arg1, arg2, resultado)</code>). Campos vazios: <code>-</code>.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Operador</th>
+<th>Arg1</th>
+<th>Arg2</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>begin_func</td>
+<td>sum_up_to</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>param</td>
+<td>n</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>label</td>
+<td>L1</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>:=</td>
+<td>0</td>
+<td>-</td>
+<td>sum</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>:=</td>
+<td>1</td>
+<td>-</td>
+<td>i</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>label</td>
+<td>L2</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>&lt;=</td>
+<td>i</td>
+<td>n</td>
+<td>t1</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>if_true</td>
+<td>t1</td>
+<td>L3</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>goto</td>
+<td>L4</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>label</td>
+<td>L3</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>+</td>
+<td>sum</td>
+<td>i</td>
+<td>t2</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>:=</td>
+<td>t2</td>
+<td>-</td>
+<td>sum</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>+</td>
+<td>i</td>
+<td>1</td>
+<td>t3</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>:=</td>
+<td>t3</td>
+<td>-</td>
+<td>i</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>goto</td>
+<td>L2</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>label</td>
+<td>L4</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>return</td>
+<td>sum</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>end_func</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Vantagem</strong>: Resultados explícitos (<code>t1</code>, <code>t2</code>, etc.); fácil reordenar durante otimizações.</li>
+</ul>
+</section>
+<section id="implementação-em-triplas-1" class="level4" data-number="15.3.5.5">
+<h4 data-number="15.3.5.5" class="anchored" data-anchor-id="implementação-em-triplas-1"><span class="header-section-number">15.3.5.5</span> Implementação em Triplas</h4>
+<p>Em <strong>triplas</strong> (<code>(operador, arg1, arg2)</code>), o resultado é o índice da tripla. Variáveis mapeiam para índices (ex.: <code>sum</code> aponta para 3 ou 11; <code>t1</code> = 6).</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Operador</th>
+<th>Arg1</th>
+<th>Arg2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>begin_func</td>
+<td>sum_up_to</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>param</td>
+<td>n</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>label</td>
+<td>L1</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>:=</td>
+<td>0</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>:=</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>label</td>
+<td>L2</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>&lt;=</td>
+<td>i</td>
+<td>n</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>if_true</td>
+<td>(6)</td>
+<td>(9)</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>goto</td>
+<td>(15)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>label</td>
+<td>L3</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>+</td>
+<td>sum</td>
+<td>i</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>:=</td>
+<td>(10)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>+</td>
+<td>i</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>:=</td>
+<td>(12)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>goto</td>
+<td>(5)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>label</td>
+<td>L4</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>return</td>
+<td>sum</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>end_func</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Observação</strong>: Referências como <code>(6)</code> apontam para o índice da tripla que define o valor. Reordenar exige atualizar todos os ponteiros.</li>
+</ul>
+</section>
+<section id="implementação-em-triplas-indiretas-1" class="level4" data-number="15.3.5.6">
+<h4 data-number="15.3.5.6" class="anchored" data-anchor-id="implementação-em-triplas-indiretas-1"><span class="header-section-number">15.3.5.6</span> Implementação em Triplas Indiretas</h4>
+<p>Adiciona uma <strong>tabela de ponteiros</strong> (índices lógicos → triplas reais) para facilitar otimizações (mover ponteiros sem alterar triplas).</p>
+<p><strong>Tabela de Ponteiros (Índices Indiretos)</strong>:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice</th>
+<th>Ponteiro para Tripla</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>13</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>15</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tabela de Triplas Reais</strong> (acessadas via ponteiros):</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Índice da Tripla</th>
+<th>Operador</th>
+<th>Arg1</th>
+<th>Arg2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>begin_func</td>
+<td>sum_up_to</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>param</td>
+<td>n</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>label</td>
+<td>L1</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>:=</td>
+<td>0</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>:=</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>label</td>
+<td>L2</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>&lt;=</td>
+<td>i</td>
+<td>n</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>if_true</td>
+<td>(6)</td>
+<td>(9)</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>goto</td>
+<td>(15)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>9</td>
+<td>label</td>
+<td>L3</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>10</td>
+<td>+</td>
+<td>sum</td>
+<td>i</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>:=</td>
+<td>(10)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>+</td>
+<td>i</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>:=</td>
+<td>(12)</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>goto</td>
+<td>(5)</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>15</td>
+<td>label</td>
+<td>L4</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td>16</td>
+<td>return</td>
+<td>sum</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td>17</td>
+<td>end_func</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Vantagem</strong>: Otimizações como remoção de código morto só reorganizam ponteiros.</li>
+</ul>
+</section>
+<section id="variações-e-otimizações-1" class="level4" data-number="15.3.5.7">
+<h4 data-number="15.3.5.7" class="anchored" data-anchor-id="variações-e-otimizações-1"><span class="header-section-number">15.3.5.7</span> Variações e Otimizações</h4>
+<p>Esta tradução é deliberadamente não otimizada. Um otimizador poderia aplicar:</p>
+<ol type="1">
+<li><strong>Eliminação de Cópias</strong>: Remover <code>sum := t2</code> e <code>i := t3</code> (usar resultados diretamente).</li>
+<li><strong>Indução de Laço</strong>: Reconhecer o incremento de <code>i</code> como padrão e transformar em soma fechada (fórmula: <code>n*(n+1)/2</code>).</li>
+<li><strong>Dobrar Constantes</strong>: <code>i + 1</code> poderia ser otimizado em registradores.</li>
+</ol>
+<p><strong>Versão Otimizada</strong> (exemplo simplificado, após eliminação de cópias e força de laço):</p>
+<pre class="shell"><code>begin_function sum_up_to
+param n
+t1 := n * (n + 1)
+t2 := t1 / 2  // Soma triangular fechada
+return t2
+end_function</code></pre>
+<ul>
+<li><strong>Impacto</strong>: De ~18 instruções para 4 – Muito mais eficiente para execução!</li>
+</ul>
+<p>Este exemplo reforça como o TAC captura laços via rótulos e saltos, facilitando análises de fluxo em otimizadores. Se quiser variações (ex.: com arrays ou mais complexidade), é só pedir!</p>
+</section>
+</section>
 </section>
 <section id="representações-intermediárias-modernas-o-ecossistema-llvm" class="level2" data-number="15.4">
 <h2 data-number="15.4" class="anchored" data-anchor-id="representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema LLVM</h2>
 <p>Enquanto o Código de Três Endereços representa os fundamentos clássicos das <strong>RI</strong>s, o cenário moderno é dominado pela infraestrutura LLVM. É crucial que a leitora compreenda o <strong>LLVM</strong> não apenas como um formato de RI, mas como um ecossistema completo que redefiniu a construção de compiladores.</p>
 <section id="llvm-como-infraestrutura" class="level3" data-number="15.4.1">
 <h3 data-number="15.4.1" class="anchored" data-anchor-id="llvm-como-infraestrutura"><span class="header-section-number">15.4.1</span> <strong>LLVM</strong> como Infraestrutura</h3>
-<p>O <strong>LLVM</strong> é uma coleção de bibliotecas modulares e reutilizáveis escritas em C++ que fornecem todas as fases de um <em>back-end</em> de compilador: otimização, geração de código, montagem, etc..¹ A <strong>LLVM Intermediate Representation (LLVM IR)</strong> é a linguagem que une todas essas componentes.¹ Qualquer linguagem que possa ser traduzida para <strong>LLVM IR</strong> pode, instantaneamente, se beneficiar de seu otimizador de classe mundial e de seus <em>back-ends</em> que suportam dezenas de arquiteturas de hardware.</p>
+<p>O <strong>LLVM</strong> é uma coleção de bibliotecas modulares e reutilizáveis escritas em C++ que fornecem todas as fases de um <em>back-end</em> de compilador: otimização, geração de código, montagem, etc.. A <strong>LLVM Intermediate Representation (LLVM IR)</strong> é a linguagem que une todas essas componentes. Qualquer linguagem que possa ser traduzida para <strong>LLVM IR</strong> pode, instantaneamente, se beneficiar de seu otimizador de classe mundial e de seus <em>back-ends</em> que suportam dezenas de arquiteturas de hardware.</p>
 </section>
 <section id="características-da-llvm-ir" class="level3" data-number="15.4.2">
 <h3 data-number="15.4.2" class="anchored" data-anchor-id="características-da-llvm-ir"><span class="header-section-number">15.4.2</span> Características da <strong>LLVM IR</strong></h3>
@@ -936,36 +1892,36 @@ end_function</code></pre>
 <h4 data-number="15.4.2.1" class="anchored" data-anchor-id="representação-textual-legível"><span class="header-section-number">15.4.2.1</span> Representação Textual Legível</h4>
 <p>Uma das decisões de design mais impactantes do <strong>LLVM</strong> foi tornar sua representação intermediária legível por humanos. A <strong>LLVM IR</strong> pode ser serializada em três formatos equivalentes:</p>
 <ol type="1">
-<li><p><strong>Formato Textual (<code>.ll</code>)</strong>: Uma representação em ASCII que se assemelha a uma linguagem assembly de alto nível, com sintaxe clara e tipagem explícita.</p></li>
+<li><p><strong>Formato Textual (<code>.ll</code>)</strong>: Uma representação em ASCII que se assemelha a uma linguagem Assembly de alto nível, com sintaxe clara e tipagem explícita.</p></li>
 <li><p><strong>Formato Bitcode (<code>.bc</code>)</strong>: Uma representação binária compacta, otimizada para armazenamento e transmissão eficiente.</p></li>
 <li><p><strong>Representação em Memória</strong>: Estruturas de dados C++ usadas internamente pelo compilador durante a otimização.</p></li>
 </ol>
 <p>O formato textual é particularmente valioso para o desenvolvimento e depuração de compiladores. Considere este exemplo de uma função simples:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> <span class="dt">i32</span> <span class="fu">@factorial</span>(<span class="dt">i32</span> <span class="fu">%n</span>) {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">entry:</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%cmp</span> = <span class="kw">icmp</span> <span class="kw">sle</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">br</span> <span class="dt">i1</span> <span class="fu">%cmp</span>, <span class="dt">label</span> <span class="fu">%base_case</span>, <span class="dt">label</span> <span class="fu">%recursive_case</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_case:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ret</span> <span class="dt">i32</span> <span class="dv">1</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">recursive_case:</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%n_minus_1</span> = <span class="kw">sub</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%rec_result</span> = <span class="kw">call</span> <span class="dt">i32</span> <span class="fu">@factorial</span>(<span class="dt">i32</span> <span class="fu">%n_minus_1</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%result</span> = <span class="kw">mul</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="fu">%rec_result</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%result</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> <span class="dt">i32</span> <span class="fu">@factorial</span>(<span class="dt">i32</span> <span class="fu">%n</span>) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">entry:</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%cmp</span> = <span class="kw">icmp</span> <span class="kw">sle</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">br</span> <span class="dt">i1</span> <span class="fu">%cmp</span>, <span class="dt">label</span> <span class="fu">%base_case</span>, <span class="dt">label</span> <span class="fu">%recursive_case</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">base_case:</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ret</span> <span class="dt">i32</span> <span class="dv">1</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">recursive_case:</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%n_minus_1</span> = <span class="kw">sub</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%rec_result</span> = <span class="kw">call</span> <span class="dt">i32</span> <span class="fu">@factorial</span>(<span class="dt">i32</span> <span class="fu">%n_minus_1</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%result</span> = <span class="kw">mul</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="fu">%rec_result</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%result</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Mesmo sem conhecimento prévio de <strong>LLVM IR</strong>, um programador experiente pode compreender rapidamente a estrutura desta função: ela compara <code>%n</code> com 1, ramifica para um caso base ou recursivo, e realiza uma multiplicação. Esta legibilidade facilita:</p>
 <ul>
 <li><p><strong>Depuração de Transformações</strong>: Desenvolvedores de otimizações podem inspecionar visualmente o código antes e depois de cada passe de otimização, usando ferramentas como <code>opt -S -pass-name</code>.</p></li>
 <li><p><strong>Educação e Experimentação</strong>: Estudantes e pesquisadores podem escrever <strong>LLVM IR</strong> manualmente para testar hipóteses sobre otimizações sem precisar construir um <em>front-end</em> completo.</p></li>
-<li><p><strong>Reprodução de Bugs</strong>: Quando um bug é encontrado, o código <strong>LLVM IR</strong> que o expõe pode ser extraído e compartilhado como um caso de teste mínimo, independentemente da linguagem-fonte original.</p></li>
+<li><p><strong>Reprodução de Bugs</strong>: Quando um bug é encontrado, o código <strong>LLVM IR</strong> que o expõe pode ser extraído e compartilhado como um caso de teste mínimo, independentemente do código-fonte original.</p></li>
 </ul>
-<p>A conversão entre formatos é trivial: <code>llvm-as</code> converte <code>.ll</code> para <code>.bc</code>, e <code>llvm-dis</code> faz o caminho inverso. Esta flexibilidade é um diferencial significativo em relação a sistemas como a JVM, onde o bytecode é primariamente binário e ferramentas de desmontagem são necessárias para inspeção humana.</p>
+<p>A conversão entre formatos é trivial: <code>llvm-as</code> converte <code>.ll</code> para <code>.bc</code>, e <code>llvm-dis</code> faz o caminho inverso. Esta flexibilidade é um diferencial significativo em relação a sistemas como a JVM, onde o <em>bytecode</em> é primariamente binário e ferramentas de desmontagem são necessárias para inspeção humana.</p>
 </section>
 <section id="sistema-de-tipos-forte-e-verificação-estática" class="level4" data-number="15.4.2.2">
 <h4 data-number="15.4.2.2" class="anchored" data-anchor-id="sistema-de-tipos-forte-e-verificação-estática"><span class="header-section-number">15.4.2.2</span> Sistema de Tipos Forte e Verificação Estática</h4>
-<p>Diferentemente de linguagens assembly tradicionais, onde operações operam sobre registradores não tipados ou fracamente tipados, a <strong>LLVM IR</strong> implementa um sistema de tipos robusto e expressivo. Cada valor na <strong>LLVM IR</strong> possui um tipo explícito, e operações inválidas são rejeitadas estaticamente pelo verificador.</p>
+<p>Diferentemente de linguagens Assembly tradicionais, onde operações operam sobre registradores não tipados ou fracamente tipados, a <strong>LLVM IR</strong> implementa um sistema de tipos robusto e expressivo. Cada valor na <strong>LLVM IR</strong> possui um tipo explícito, e operações inválidas são rejeitadas estaticamente pelo verificador.</p>
 <section id="tipos-primitivos-e-compostos" class="level5" data-number="15.4.2.2.1">
 <h5 data-number="15.4.2.2.1" class="anchored" data-anchor-id="tipos-primitivos-e-compostos"><span class="header-section-number">15.4.2.2.1</span> Tipos Primitivos e Compostos</h5>
 <p>A <strong>LLVM IR</strong> suporta uma hierarquia rica de tipos:</p>
@@ -980,18 +1936,18 @@ end_function</code></pre>
 <section id="verificação-em-tempo-de-compilação" class="level5" data-number="15.4.2.2.2">
 <h5 data-number="15.4.2.2.2" class="anchored" data-anchor-id="verificação-em-tempo-de-compilação"><span class="header-section-number">15.4.2.2.2</span> Verificação em Tempo de Compilação</h5>
 <p>O verificador de <strong>LLVM IR</strong> (<code>opt -verify</code>) executa uma série de verificações que garantem a consistência do código:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">; Exemplo VÁLIDO</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">%ptr</span> = <span class="kw">alloca</span> <span class="dt">i32</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">store</span> <span class="dt">i32</span> <span class="dv">42</span>, <span class="dt">i32</span>* <span class="fu">%ptr</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">%value</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%ptr</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">; Exemplo INVÁLIDO - erro de tipo detectado</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">%ptr</span> = <span class="kw">alloca</span> <span class="dt">i32</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">store</span> <span class="dt">i64</span> <span class="dv">42</span>, <span class="dt">i32</span>* <span class="fu">%ptr</span>  <span class="co">; ERRO: tentando armazenar i64 em ponteiro i32*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">; Exemplo VÁLIDO</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">%ptr</span> = <span class="kw">alloca</span> <span class="dt">i32</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">store</span> <span class="dt">i32</span> <span class="dv">42</span>, <span class="dt">i32</span>* <span class="fu">%ptr</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">%value</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%ptr</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">; Exemplo INVÁLIDO - erro de tipo detectado</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">%ptr</span> = <span class="kw">alloca</span> <span class="dt">i32</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="kw">store</span> <span class="dt">i64</span> <span class="dv">42</span>, <span class="dt">i32</span>* <span class="fu">%ptr</span>  <span class="co">; ERRO: tentando armazenar i64 em ponteiro i32*</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Se tentarmos compilar o código inválido, o verificador rejeitará com uma mensagem clara:</p>
 <pre class="shell"><code>error: stored value and pointer type do not match
 store i64 42, i32* %ptr</code></pre>
-<p>Esta verificação previne uma categoria inteira de bugs que, em assembly tradicional, apenas se manifestariam em tempo de execução como corrupção de memória ou comportamento indefinido.</p>
+<p>Esta verificação previne uma categoria inteira de bugs que, em Assembly tradicional, apenas se manifestariam em tempo de execução como corrupção de memória ou comportamento indefinido.</p>
 </section>
 <section id="benefícios-para-otimização" class="level5" data-number="15.4.2.2.3">
 <h5 data-number="15.4.2.2.3" class="anchored" data-anchor-id="benefícios-para-otimização"><span class="header-section-number">15.4.2.2.3</span> Benefícios para Otimização</h5>
@@ -1001,8 +1957,9 @@ store i64 42, i32* %ptr</code></pre>
 <li><p><strong>Vetorização Automática</strong>: Tipos vetoriais explícitos como <code>&lt;4 x float&gt;</code> permitem que o otimizador identifique oportunidades de usar instruções SIMD (SSE, AVX, NEON).</p></li>
 <li><p><strong>Propagação de Informação de Tamanho</strong>: Saber que um tipo é <code>i8</code> (1 byte) versus <code>i64</code> (8 bytes) permite otimizações de layout de memória e eliminação de extensões de sinal redundantes.</p></li>
 </ol>
-<p>A tabela a seguir ilustra o contraste entre assembly tradicional x86-64 e <strong>LLVM IR</strong> tipada:</p>
+<p>A tabela a #tbl-contrast1 ilustra o contraste entre Assembly tradicional x86-64 e <strong>LLVM IR</strong> tipada:</p>
 <table class="table">
+<caption>Contraste entre Assembly Tradicional e <strong>LLVM IR</strong> Tipada.</caption>
 <colgroup>
 <col style="width: 23%">
 <col style="width: 43%">
@@ -1106,29 +2063,29 @@ L3:
 <section id="exemplo-prático-c-para-llvm-ir" class="level3" data-number="15.4.4">
 <h3 data-number="15.4.4" class="anchored" data-anchor-id="exemplo-prático-c-para-llvm-ir"><span class="header-section-number">15.4.4</span> Exemplo Prático: C++ para <strong>LLVM IR</strong></h3>
 <p>Vamos observar um exemplo simples. Considere a seguinte função em C++:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> <span class="dt">int</span> result <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a> <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="dt">int</span> result <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Podemos usar o Clang (o <em>front-end</em> C++ para LLVM) para gerar a <strong>LLVM IR</strong> correspondente. O comando <code>clang++ -S -emit-llvm -O0 exemplo.cpp</code> produzirá um arquivo <code>exemplo.ll</code>. O <code>-O0</code> desabilita as otimizações para que possamos ver o código não otimizado, que é mais próximo da tradução direta. O conteúdo será semelhante a este:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">;ModuleID = 'exemplo.cpp'</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">target</span> <span class="kw">triple</span> = <span class="st">"x86_64-pc-linux-gnu"</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">; Function Attrs: noinline nounwind optnone uwtable</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> dso_local <span class="dt">i32</span> <span class="fu">@_Z3addii</span>(<span class="dt">i32</span> <span class="fu">%a</span>, <span class="dt">i32</span> <span class="fu">%b</span>) #<span class="dv">0</span> {</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">entry:</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">%a.addr</span> = <span class="kw">alloca</span> <span class="dt">i32</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">%b.addr</span> = <span class="kw">alloca</span> <span class="dt">i32</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">%result</span> = <span class="kw">alloca</span> <span class="dt">i32</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a> <span class="kw">store</span> <span class="dt">i32</span> <span class="fu">%a</span>, <span class="dt">i32</span>* <span class="fu">%a.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a> <span class="kw">store</span> <span class="dt">i32</span> <span class="fu">%b</span>, <span class="dt">i32</span>* <span class="fu">%b.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">%0</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%a.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">%1</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%b.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">%add</span> = <span class="kw">add</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%0</span>, <span class="fu">%1</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a> <span class="kw">store</span> <span class="dt">i32</span> <span class="fu">%add</span>, <span class="dt">i32</span>* <span class="fu">%result</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">%2</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%result</span>, <span class="kw">align</span> <span class="dv">4</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a> <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%2</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">;ModuleID = 'exemplo.cpp'</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">target</span> <span class="kw">triple</span> = <span class="st">"x86_64-pc-linux-gnu"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">; Function Attrs: noinline nounwind optnone uwtable</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> dso_local <span class="dt">i32</span> <span class="fu">@_Z3addii</span>(<span class="dt">i32</span> <span class="fu">%a</span>, <span class="dt">i32</span> <span class="fu">%b</span>) #<span class="dv">0</span> {</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">entry:</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">%a.addr</span> = <span class="kw">alloca</span> <span class="dt">i32</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">%b.addr</span> = <span class="kw">alloca</span> <span class="dt">i32</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a> <span class="fu">%result</span> = <span class="kw">alloca</span> <span class="dt">i32</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a> <span class="kw">store</span> <span class="dt">i32</span> <span class="fu">%a</span>, <span class="dt">i32</span>* <span class="fu">%a.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a> <span class="kw">store</span> <span class="dt">i32</span> <span class="fu">%b</span>, <span class="dt">i32</span>* <span class="fu">%b.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a> <span class="fu">%0</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%a.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">%1</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%b.addr</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a> <span class="fu">%add</span> = <span class="kw">add</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%0</span>, <span class="fu">%1</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a> <span class="kw">store</span> <span class="dt">i32</span> <span class="fu">%add</span>, <span class="dt">i32</span>* <span class="fu">%result</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a> <span class="fu">%2</span> = <span class="kw">load</span> <span class="dt">i32</span>, <span class="dt">i32</span>* <span class="fu">%result</span>, <span class="kw">align</span> <span class="dv">4</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a> <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%2</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Analisando o código não otimizado:</p>
 <ul>
 <li><code>define... @_Z3addii(i32 %a, i32 %b)</code>: Define a função <code>add</code>, que recebe dois inteiros de 32 bits (<code>%a</code>, <code>%b</code>) e retorna um <code>i32</code>. O nome <code>@_Z3addii</code> é a versão “<em>mangled</em>” do nome da função C++.</li>
@@ -1139,15 +2096,15 @@ L3:
 <li><code>ret i32 %2</code>: Retorna o valor final.</li>
 </ul>
 <p>Agora, vejamos o que acontece quando habilitamos as otimizações com o comando <code>clang++ -S -emit-llvm -O2 exemplo.cpp</code>:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">; ModuleID = 'exemplo.cpp'</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">target</span> <span class="kw">triple</span> = <span class="st">"x86_64-pc-linux-gnu"</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">; Function Attrs: mustprogress nofree norecurse nosync nounwind readnone willreturn uwtable</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> dso_local <span class="dt">i32</span> <span class="fu">@_Z3addii</span>(<span class="dt">i32</span> <span class="fu">%a</span>, <span class="dt">i32</span> <span class="fu">%b</span>) local_unnamed_addr #<span class="dv">0</span> {</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">entry:</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">%add</span> = <span class="kw">add</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%b</span>, <span class="fu">%a</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%add</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">; ModuleID = 'exemplo.cpp'</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">target</span> <span class="kw">triple</span> = <span class="st">"x86_64-pc-linux-gnu"</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">; Function Attrs: mustprogress nofree norecurse nosync nounwind readnone willreturn uwtable</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> dso_local <span class="dt">i32</span> <span class="fu">@_Z3addii</span>(<span class="dt">i32</span> <span class="fu">%a</span>, <span class="dt">i32</span> <span class="fu">%b</span>) local_unnamed_addr #<span class="dv">0</span> {</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">entry:</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">%add</span> = <span class="kw">add</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%b</span>, <span class="fu">%a</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%add</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A transformação é impressionante. O otimizador <strong>LLVM</strong> aplicou múltiplas otimizações:</p>
 <ol type="1">
 <li><p><strong>Eliminação de Alocações de Memória</strong>: As três instruções <code>alloca</code> foram completamente removidas. O otimizador detectou que as variáveis nunca precisavam residir na memória e poderiam permanecer em registradores virtuais.</p></li>
@@ -1170,36 +2127,33 @@ L3:
 <ol type="1">
 <li><strong>(Prático)</strong> Dado o seguinte trecho de código, traduza-o para Código de Três Endereços usando a representação de Quádruplas. Mostre explicitamente os rótulos e os saltos gerados.</li>
 </ol>
-<code>
-<pre><code class="language-c">int total = 0;
-for (int i = 0; i &lt; 10; i = i + 1) {
- if (i % 2 == 0) {
- total = total + i;
- } else {
- total = total - 1;
- }
-}
-</code></pre>
-</code><p><code></code></p>
-<ol start="2" type="1">
+<div class="sourceCode" id="cb27"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> total <span class="op">+</span> i<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> total <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="1">
 <li><p><strong>(Teórico/Analítico)</strong> Explique, com um exemplo de código, por que a Forma SSA, utilizada no <strong>LLVM IR</strong>, simplifica a implementação da otimização de propagação de constantes em comparação com uma <strong>RI</strong> que permite múltiplas atribuições à mesma variável. Discuta o papel da função-<span class="math inline">\(\Phi\)</span> no seu exemplo.</p></li>
 <li><p><strong>(Comparativo)</strong> Compare as vantagens e desvantagens de usar Triplas em vez de Quádruplas para representar o <strong>TAC</strong>, especificamente no contexto de um compilador que realiza muitas otimizações de reordenamento de código (como <em>code motion</em>). Por que as Triplas Indiretas são consideradas um bom meio-termo?</p></li>
 <li><p><strong>(Interpretação)</strong> Analise o trecho de <strong>LLVM IR</strong> abaixo. Descreva, em alto nível, o que a função correspondente em C/C++ provavelmente faz. Identifique as instruções de alocação de memória na pilha, as operações aritméticas e o controle de fluxo.</p></li>
 </ol>
-<div class="sourceCode" id="cb19"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> <span class="dt">i32</span> <span class="fu">@mystery</span>(<span class="dt">i32</span> <span class="fu">%n</span>) {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">entry:</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">%cmp</span> = <span class="kw">icmp</span> <span class="kw">sgt</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">br</span> <span class="dt">i1</span> <span class="fu">%cmp</span>, <span class="dt">label</span> <span class="fu">%if.then</span>, <span class="dt">label</span> <span class="fu">%if.else</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">if.then:</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">%sub</span> = <span class="kw">sub</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">%call</span> = <span class="kw">call</span> <span class="dt">i32</span> <span class="fu">@mystery</span>(<span class="dt">i32</span> <span class="fu">%sub</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">%mul</span> = <span class="kw">mul</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="fu">%call</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%mul</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">if.else:</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="kw">ret</span> <span class="dt">i32</span> <span class="dv">1</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">define</span> <span class="dt">i32</span> <span class="fu">@mystery</span>(<span class="dt">i32</span> <span class="fu">%n</span>) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">entry:</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">%cmp</span> = <span class="kw">icmp</span> <span class="kw">sgt</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">br</span> <span class="dt">i1</span> <span class="fu">%cmp</span>, <span class="dt">label</span> <span class="fu">%if.then</span>, <span class="dt">label</span> <span class="fu">%if.else</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">if.then:</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">%sub</span> = <span class="kw">sub</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="dv">1</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">%call</span> = <span class="kw">call</span> <span class="dt">i32</span> <span class="fu">@mystery</span>(<span class="dt">i32</span> <span class="fu">%sub</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">%mul</span> = <span class="kw">mul</span> <span class="kw">nsw</span> <span class="dt">i32</span> <span class="fu">%n</span>, <span class="fu">%call</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%mul</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">if.else:</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="kw">ret</span> <span class="dt">i32</span> <span class="dv">1</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="1">
 <li><strong>(Design)</strong> Proponha um conjunto de regras de Tradução Dirigida por Sintaxe (SDT) para traduzir uma construção <code>switch-case</code> (com <code>break</code>) para Código de Três Endereços. Sua solução deve ser eficiente e, se possível, evitar uma cadeia de testes <code>if-then-else</code> sequenciais (sugestão: pense em como uma tabela de saltos poderia ser usada).</li>
 </ol>
