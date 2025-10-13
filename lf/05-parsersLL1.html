@@ -368,8 +368,9 @@ window.Quarto = {
   <li><a href="#o-conjunto-nullable" id="toc-o-conjunto-nullable" class="nav-link" data-scroll-target="#o-conjunto-nullable"><span class="header-section-number">6.4.1</span> O Conjunto NULLABLE</a></li>
   <li><a href="#o-conjunto-first" id="toc-o-conjunto-first" class="nav-link" data-scroll-target="#o-conjunto-first"><span class="header-section-number">6.4.2</span> O Conjunto FIRST</a></li>
   <li><a href="#o-conjunto-follow" id="toc-o-conjunto-follow" class="nav-link" data-scroll-target="#o-conjunto-follow"><span class="header-section-number">6.4.3</span> O Conjunto FOLLOW</a></li>
-  <li><a href="#algoritmo-para-calcular-o-conjunto-follow-versão-revisada" id="toc-algoritmo-para-calcular-o-conjunto-follow-versão-revisada" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-follow-versão-revisada"><span class="header-section-number">6.4.4</span> Algoritmo para calcular o conjunto FOLLOW (Versão Revisada)</a></li>
-  <li><a href="#aplicando-as-regras-um-primeiro-exemplo" id="toc-aplicando-as-regras-um-primeiro-exemplo" class="nav-link" data-scroll-target="#aplicando-as-regras-um-primeiro-exemplo"><span class="header-section-number">6.4.5</span> Aplicando as Regras: Um Primeiro Exemplo</a></li>
+  <li><a href="#algoritmo-para-calcular-o-conjunto-follow" id="toc-algoritmo-para-calcular-o-conjunto-follow" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">6.4.4</span> Algoritmo para calcular o conjunto FOLLOW</a></li>
+  <li><a href="#usando-os-conjuntos-para-decidir-entre-múltiplas-produções" id="toc-usando-os-conjuntos-para-decidir-entre-múltiplas-produções" class="nav-link" data-scroll-target="#usando-os-conjuntos-para-decidir-entre-múltiplas-produções"><span class="header-section-number">6.4.5</span> Usando os Conjuntos para Decidir Entre Múltiplas Produções</a></li>
+  <li><a href="#aplicando-as-regras-um-primeiro-exemplo" id="toc-aplicando-as-regras-um-primeiro-exemplo" class="nav-link" data-scroll-target="#aplicando-as-regras-um-primeiro-exemplo"><span class="header-section-number">6.4.6</span> Aplicando as Regras: Um Primeiro Exemplo</a></li>
   </ul></li>
   <li><a href="#o-exemplo-mais-comum-de-todos" id="toc-o-exemplo-mais-comum-de-todos" class="nav-link" data-scroll-target="#o-exemplo-mais-comum-de-todos"><span class="header-section-number">6.5</span> O Exemplo Mais Comum de Todos</a>
   <ul class="collapse">
@@ -551,11 +552,11 @@ Tip
 <section id="o-conjunto-nullable" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="o-conjunto-nullable"><span class="header-section-number">6.4.1</span> O Conjunto NULLABLE</h3>
 <p>Antes de nos aprofundarmos nos conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, é essencial entender um conceito preliminar: o conjunto dos símbolos <span class="math inline">\(NULLABLE\)</span>. Um símbolo não-terminal é considerado <span class="math inline">\(NULLABLE\)</span> se ele pode derivar a cadeia vazia (<span class="math inline">\(\varepsilon\)</span>) por meio de qualquer sequência de derivações possível.</p>
-<p><strong>Importante:</strong> Um símbolo pode ser <span class="math inline">\(NULLABLE\)</span> de três formas distintas:</p>
+<p><strong>Importante</strong>: um símbolo pode ser <span class="math inline">\(NULLABLE\)</span> de três formas distintas:</p>
 <ol type="1">
-<li><strong>Nullable Direto</strong>: Quando existe uma produção explícita <span class="math inline">\(A \rightarrow \varepsilon\)</span>;</li>
-<li><strong>Nullable Indireto Simples</strong>: Quando <span class="math inline">\(A \rightarrow B\)</span> e <span class="math inline">\(B\)</span> é <span class="math inline">\(NULLABLE\)</span>;</li>
-<li><strong>Nullable Indireto Múltiplo</strong>: Quando <span class="math inline">\(A \rightarrow B_1 B_2 ... B_n\)</span> e <strong>todos</strong> os símbolos <span class="math inline">\(B_1, B_2, ..., B_n\)</span> são <span class="math inline">\(NULLABLE\)</span> (seja direta ou indiretamente).</li>
+<li><strong>Nullable Direto</strong>: quando existe uma produção explícita <span class="math inline">\(A \rightarrow \varepsilon\)</span>;</li>
+<li><strong>Nullable Indireto Simples</strong>: quando <span class="math inline">\(A \rightarrow B\)</span> e <span class="math inline">\(B\)</span> é <span class="math inline">\(NULLABLE\)</span>;</li>
+<li><strong>Nullable Indireto Múltiplo</strong>: quando <span class="math inline">\(A \rightarrow B_1 B_2 ... B_n\)</span> e <strong>todos</strong> os símbolos <span class="math inline">\(B_1, B_2, ..., B_n\)</span> são <span class="math inline">\(NULLABLE\)</span> (seja direta ou indiretamente).</li>
 </ol>
 <p>Por exemplo, considere as produções listadas a seguir:</p>
 <ul>
@@ -582,8 +583,8 @@ Tip
 <h4 data-number="6.4.1.1" class="anchored" data-anchor-id="regras-de-criação-do-conjunto-nullable"><span class="header-section-number">6.4.1.1</span> Regras de Criação do Conjunto NULLABLE</h4>
 <p>Para construir o conjunto de todos os símbolos não-terminais <em>NULLABLE</em> de uma gramática, aplicamos as seguintes regras de forma iterativa até que o conjunto não mude mais:</p>
 <ol type="1">
-<li><strong>Regra Base (Nulidade Direta):</strong> Se existe uma produção da forma <span class="math inline">\(A \rightarrow ε\)</span>, então <span class="math inline">\(A\)</span> é adicionado ao conjunto <em>NULLABLE</em>.</li>
-<li><strong>Regra de Indução (Nulidade Indireta):</strong> Se existe uma produção da forma <span class="math inline">\(A \rightarrow Y₁Y₂...Yₙ\)</span>, e <strong>todos</strong> os símbolos <span class="math inline">\(Y₁\)</span>, <span class="math inline">\(Y₂\)</span>, …, <span class="math inline">\(Yₙ\)</span> já foram identificados como <em>NULLABLE</em>, então <span class="math inline">\(A\)</span> também é adicionado ao conjunto.</li>
+<li><strong>Regra Base (Nulidade Direta)</strong>: Se existe uma produção da forma <span class="math inline">\(A \rightarrow ε\)</span>, então <span class="math inline">\(A\)</span> é adicionado ao conjunto <em>NULLABLE</em>.</li>
+<li><strong>Regra de Indução (Nulidade Indireta)</strong>: Se existe uma produção da forma <span class="math inline">\(A \rightarrow Y₁Y₂...Yₙ\)</span>, e <strong>todos</strong> os símbolos <span class="math inline">\(Y₁\)</span>, <span class="math inline">\(Y₂\)</span>, …, <span class="math inline">\(Yₙ\)</span> já foram identificados como <em>NULLABLE</em>, então <span class="math inline">\(A\)</span> também é adicionado ao conjunto.</li>
 </ol>
 </section>
 <section id="exemplo-de-criação-do-conjunto-nullable" class="level4" data-number="6.4.1.2">
@@ -600,17 +601,17 @@ S \rightarrow A B C \\
 \]</span></p>
 <p>O processo de construção do conjunto <em>NULLABLE</em> seria:</p>
 <ol type="1">
-<li><strong>Iteração 1:</strong> Analisando as regras diretas, encontramos <code>A \rightarrow ε</code> e <code>C \rightarrow ε</code>. <em>Conjunto Nullable = { A, C }</em></li>
-<li><strong>Iteração 2:</strong> Agora, verificamos as outras regras com base no que já sabemos.
+<li><strong>Iteração 1</strong>: Analisando as regras diretas, encontramos <code>A \rightarrow ε</code> e <code>C \rightarrow ε</code>. <em>Conjunto Nullable = { A, C }</em></li>
+<li><strong>Iteração 2</strong>: Agora, verificamos as outras regras com base no que já sabemos.
 <ul>
 <li>Na regra <code>D \rightarrow A</code>, como <code>A</code> está no conjunto, <code>D</code> também se torna <em>NULLABLE</em>.</li>
 <li>Na regra <code>B \rightarrow C D</code>, agora sabemos que tanto <code>C</code> quanto <code>D</code> são <em>NULLABLE</em>. Portanto, <code>B</code> também se torna <em>NULLABLE</em>. <em>Conjunto Nullable = { A, C, D, B }</em></li>
 </ul></li>
-<li><strong>Iteração 3:</strong> Revisitamos as regras com o conjunto atualizado.
+<li><strong>Iteração 3</strong>: Revisitamos as regras com o conjunto atualizado.
 <ul>
 <li>Na regra <code>S \rightarrow A B C</code>, agora sabemos que <code>A</code>, <code>B</code> e <code>C</code> são todos <em>NULLABLE</em>. Portanto, <code>S</code> também se torna <em>NULLABLE</em>. <em>Conjunto Nullable = { A, C, D, B, S }</em></li>
 </ul></li>
-<li><strong>Iteração 4:</strong> Nenhuma nova adição é feita ao conjunto. O algoritmo termina.</li>
+<li><strong>Iteração 4</strong>: Nenhuma nova adição é feita ao conjunto. O algoritmo termina.</li>
 </ol>
 <p>O conjunto final de símbolos <em>NULLABLE</em> para esta gramática é <code>{ S, A, B, C, D }</code>.</p>
 </section>
@@ -649,7 +650,7 @@ S \rightarrow A B C \\
                         quebrar // Já sabemos que A é NULLABLE, podemos passar para o próximo não-terminal.
     
     retornar NULLABLE</code></pre>
-<p>Sobre este pseudocódigo podemos construir um código em Python. Porém, antes da esforçada leitora continuar de observar que ao transpor os conceitos teóricos para os algoritmos em Python, a representação muda de <span class="math inline">\(\varepsilon\)</span> para a string ‘EPSILON’. É importante esclarecer que essa não é uma contradição, mas sim uma adaptação necessária para a implementação. O símbolo <span class="math inline">\(\varepsilon\)</span> é universalmente aceito na teoria de linguagens formais e compiladores para representar a cadeia vazia.</p>
+<p>Sobre este pseudocódigo podemos construir um código em Python. Porém, antes da esforçada leitora continuar de observar que ao transpor os conceitos teóricos para os algoritmos em Python, a representação muda de <span class="math inline">\(\varepsilon\)</span> para a string ‘EPSILON’. É importante esclarecer que essa não é uma contradição, mas sim uma adaptação necessária para a implementação. O símbolo <span class="math inline">\(\varepsilon\)</span> é universalmente aceito na teoria de linguagens formais e compiladores para representar a cadeia vazia. Mas, é muito chato usar caracteres especiais em Python, C++ ou qualquer outra linguagem de programação.</p>
 <p>Na prática, em um programa de computador que manipula regras de produção como texto, é necessário ter um marcador explícito para a produção vazia. Usar uma string vazia de fato (’‘) poderia levar a ambiguidades no processamento do código. Portanto, vamos adotar a string ’EPSILON’, para representar de forma inequívoca o conceito teórico de <span class="math inline">\(\varepsilon\)</span>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Código 1: Cálculo do conjunto NULLABLE</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -954,13 +955,13 @@ função calcular_FIRST(gramatica, NULLABLE):
 </tbody>
 </table>
 </section>
-<section id="algoritmo-para-calcular-o-conjunto-follow-versão-revisada" class="level3" data-number="6.4.4">
-<h3 data-number="6.4.4" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-follow-versão-revisada"><span class="header-section-number">6.4.4</span> Algoritmo para calcular o conjunto FOLLOW (Versão Revisada)</h3>
+<section id="algoritmo-para-calcular-o-conjunto-follow" class="level3" data-number="6.4.4">
+<h3 data-number="6.4.4" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">6.4.4</span> Algoritmo para calcular o conjunto FOLLOW</h3>
 <p>Com os conjuntos <code>NULLABLE</code> e <code>FIRST</code> em mãos, podemos finalmente calcular o conjunto <code>FOLLOW</code>. A seguir estão os pseudocódigos e a implementação final em Python, ambos utilizando a estrutura de dados de dicionário para manter a consistência.</p>
 <section id="pseudocódigo-da-função-auxiliar-calcular_first_da_sequencia" class="level4" data-number="6.4.4.1">
 <h4 data-number="6.4.4.1" class="anchored" data-anchor-id="pseudocódigo-da-função-auxiliar-calcular_first_da_sequencia"><span class="header-section-number">6.4.4.1</span> Pseudocódigo da Função Auxiliar: <code>calcular_first_da_sequencia</code></h4>
 <p>Para calcular <code>FOLLOW</code>, precisamos de uma função auxiliar que calcule o conjunto <code>FIRST</code> de uma sequência arbitrária de símbolos (ex: <code>FIRST(B C D)</code>), o que é um pouco diferente de calcular o <code>FIRST</code> de um único símbolo.</p>
-<pre class="pseudo"><code>### Algoritmo para calcular o conjunto FOLLOW (Versão Revisada)
+<pre class="pseudo"><code>### Algoritmo para calcular o conjunto FOLLOW 
 
 Com os conjuntos `NULLABLE` e `FIRST` em mãos, podemos finalmente calcular o conjunto `FOLLOW`. A seguir estão os pseudocódigos e a implementação final em Python, ambos utilizando a estrutura de dados de dicionário para manter a consistência.
 
@@ -1110,8 +1111,56 @@ função calcular_FOLLOW(gramatica, simbolo_inicial, nao_terminais, FIRST, NULLA
 <span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> FOLLOW</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="aplicando-as-regras-um-primeiro-exemplo" class="level3" data-number="6.4.5">
-<h3 data-number="6.4.5" class="anchored" data-anchor-id="aplicando-as-regras-um-primeiro-exemplo"><span class="header-section-number">6.4.5</span> Aplicando as Regras: Um Primeiro Exemplo</h3>
+<section id="usando-os-conjuntos-para-decidir-entre-múltiplas-produções" class="level3" data-number="6.4.5">
+<h3 data-number="6.4.5" class="anchored" data-anchor-id="usando-os-conjuntos-para-decidir-entre-múltiplas-produções"><span class="header-section-number">6.4.5</span> Usando os Conjuntos para Decidir Entre Múltiplas Produções</h3>
+<p>Agora que conhecemos os conjuntos <span class="math inline">\(NULLABLE\)</span>, <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, podemos entender como o <em>parser</em> <span class="math inline">\(LL(1)\)</span> utiliza estas informações para decidir qual regra de produção aplicar quando um não-terminal possui múltiplas alternativas.</p>
+<p>Para um não-terminal <span class="math inline">\(A\)</span> com produções <span class="math inline">\(A \rightarrow \alpha_1 \mid \alpha_2 \mid ... \mid \alpha_n\)</span>, o processo de decisão utiliza o <em>lookahead</em> (próximo símbolo no <em>buffer</em>) da seguinte forma:</p>
+<ol type="1">
+<li><strong>Examine o próximo símbolo</strong> no <em>buffer</em> (sem consumi-lo);</li>
+<li><strong>Escolha a produção</strong> <span class="math inline">\(\alpha_i\)</span> onde o símbolo pertence a <span class="math inline">\(FIRST(\alpha_i)\)</span>;</li>
+<li><strong>Se alguma produção deriva</strong> <span class="math inline">\(\varepsilon\)</span>, use <span class="math inline">\(FOLLOW(A)\)</span> para decidir quando aplicá-la.</li>
+</ol>
+<p>Em um <em>parser</em> <em>recursive descent</em>, este mecanismo se traduz em estruturas condicionais:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parseA(<span class="va">self</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">    A -&gt; alpha1 | alpha2 | alpha3</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> <span class="va">self</span>.lookahead()  <span class="co"># Consulta sem consumir</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> token <span class="kw">in</span> FIRST(alpha1):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aplica produção A -&gt; alpha1</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.parse_alpha1()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> token <span class="kw">in</span> FIRST(alpha2):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aplica produção A -&gt; alpha2</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.parse_alpha2()</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> token <span class="kw">in</span> FIRST(alpha3):</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aplica produção A -&gt; alpha3</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.parse_alpha3()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.error(<span class="ss">f"Terminal inesperado: </span><span class="sc">{</span>token<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Exemplo de ambiguidade</strong>: Considere a gramática:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E &amp;\rightarrow T + E \mid T \\
+T &amp;\rightarrow \text{num} \mid (E)
+\end{aligned}
+\]</span></p>
+<p>Para o não-terminal <span class="math inline">\(E\)</span>, temos <span class="math inline">\(FIRST(T + E) = \{\text{num}, (\}\)</span> e <span class="math inline">\(FIRST(T) = \{\text{num}, (\}\)</span>. Os conjuntos <span class="math inline">\(FIRST\)</span> são idênticos, criando um conflito. Para resolver, refatoramos a gramática:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E &amp;\rightarrow T E' \\
+E' &amp;\rightarrow + E \mid \varepsilon
+\end{aligned}
+\]</span></p>
+<p>Agora a decisão é determinística: se <em>lookahead</em> é <code>+</code>, aplica <span class="math inline">\(E' \rightarrow + E\)</span>; se está em <span class="math inline">\(FOLLOW(E')\)</span>, aplica <span class="math inline">\(E' \rightarrow \varepsilon\)</span>.</p>
+<p><strong>Condição LL(1)</strong>: Uma gramática é <span class="math inline">\(LL(1)\)</span> se, para cada não-terminal <span class="math inline">\(A\)</span> com produções <span class="math inline">\(A \rightarrow \alpha_1 \mid \alpha_2\)</span>:</p>
+<p><span class="math display">\[FIRST(\alpha_1) \cap FIRST(\alpha_2) = \emptyset\]</span></p>
+<p>E se <span class="math inline">\(\alpha_i \Rightarrow^* \varepsilon\)</span>, então:</p>
+<p><span class="math display">\[FIRST(\alpha_j) \cap FOLLOW(A) = \emptyset \quad \text{para todo } j \neq i\]</span></p>
+<p>Se a gramática não satisfaz estas condições, será necessário refatorá-la antes de construir o <em>parser</em> <span class="math inline">\(LL(1)\)</span>.</p>
+</section>
+<section id="aplicando-as-regras-um-primeiro-exemplo" class="level3" data-number="6.4.6">
+<h3 data-number="6.4.6" class="anchored" data-anchor-id="aplicando-as-regras-um-primeiro-exemplo"><span class="header-section-number">6.4.6</span> Aplicando as Regras: Um Primeiro Exemplo</h3>
 <p>Para solidificar o entendimento, vamos aplicar as regras de construção em uma gramática simples e ideal, antes de partirmos para casos mais complexos.</p>
 <p><strong>Exemplo 1</strong>: Considere a gramática definida pelo seguinte conjunto de regras de produção:</p>
 <p><span class="math display">\[
@@ -1254,10 +1303,10 @@ função calcular_FOLLOW(gramatica, simbolo_inicial, nao_terminais, FIRST, NULLA
 </section>
 <section id="nullable" class="level3" data-number="6.5.2">
 <h3 data-number="6.5.2" class="anchored" data-anchor-id="nullable"><span class="header-section-number">6.5.2</span> <span class="math inline">\(NULLABLE\)</span></h3>
-<p>Analisando a nova gramática, identificamos quais não-terminais podem derivar a cadeia vazia (<span class="math inline">\(\varepsilon\)</span>).</p>
+<p>Analisando a nova gramática, identificamos quais não-terminais podem derivar a cadeia vazia (<span class="math inline">\(\varepsilon\)</span>):</p>
 <ul>
-<li><span class="math inline">\(E' \rightarrow \varepsilon\)</span>, portanto <span class="math inline">\(E'\)</span> é <em>NULLABLE</em>.</li>
-<li><span class="math inline">\(T' \rightarrow \varepsilon\)</span>, portanto <span class="math inline">\(T'\)</span> é <em>NULLABLE</em>.</li>
+<li><span class="math inline">\(E' \rightarrow \varepsilon\)</span>, portanto <span class="math inline">\(E'\)</span> é <em>NULLABLE</em>;</li>
+<li><span class="math inline">\(T' \rightarrow \varepsilon\)</span>, portanto <span class="math inline">\(T'\)</span> é <em>NULLABLE</em>;</li>
 <li><span class="math inline">\(S, E, T, F\)</span> não podem derivar <span class="math inline">\(\varepsilon\)</span> diretamente e suas produções sempre contêm símbolos que não são <em>NULLABLE</em>, então eles não são <em>NULLABLE</em>.</li>
 </ul>
 </section>
@@ -1432,7 +1481,7 @@ função calcular_FOLLOW(gramatica, simbolo_inicial, nao_terminais, FIRST, NULLA
 <section id="processo-de-parser-testando-com-id-id-id" class="level3" data-number="6.5.6">
 <h3 data-number="6.5.6" class="anchored" data-anchor-id="processo-de-parser-testando-com-id-id-id"><span class="header-section-number">6.5.6</span> Processo de Parser Testando com <span class="math inline">\(id + id * id\)</span></h3>
 <p>Vamos agora rastrear a análise da <em>string</em> <code>id + id * id</code> usando a pilha, a entrada e a Tabela de Derivação corrigida em relação ao apontamento feito. A inconsistência estava no passo <code>T(T', +)</code>, no qual a tabela indica <code>T' -&gt; ε</code> (o que é o correto, <code>+</code> pertence ao <code>FOLLOW(T')</code>), e o rastreamento anterior poderia gerar dúvida. O rastreamento correto é o seguinte.</p>
-<p><strong>Notação utilizada no rastreamento:</strong></p>
+<p><strong>Notação utilizada no rastreamento</strong>:</p>
 <ul>
 <li><code>T(X, a)</code> significa “consultar a Tabela de Derivação na linha do não-terminal X e coluna do terminal a”;</li>
 <li>Por exemplo, <code>T(S, id)</code> significa consultar a tabela na linha S, coluna id;</li>
@@ -2364,86 +2413,86 @@ Nullable(T) &amp;= false
     
     retornar Tabela</code></pre>
 <p>Em fim, este código pode ser implementado em Python por:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> construir_tabela_ll1(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    gramatica: <span class="bu">dict</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    simbolo_inicial: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">list</span> <span class="op">|</span> <span class="va">None</span>]]:</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Constrói a Tabela de Análise LL(1) completa a partir de uma gramática.</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Esta função serve como um integrador para todas as funções anteriores.</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Identificar todos os símbolos</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    nao_terminais <span class="op">=</span> <span class="bu">set</span>(gramatica.keys())</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    simbolos <span class="op">=</span> <span class="bu">set</span>(nao_terminais)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> producoes <span class="kw">in</span> gramatica.values():</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> producao <span class="kw">in</span> producoes:</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            simbolos.update(producao)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    terminais <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(simbolos <span class="op">-</span> nao_terminais <span class="op">-</span> {<span class="st">'EPSILON'</span>})) <span class="op">+</span> [<span class="st">'$'</span>]</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Calcular os conjuntos</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    nullable <span class="op">=</span> calcular_NULLABLE(gramatica)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    first <span class="op">=</span> calcular_FIRST(gramatica, nao_terminais, nullable)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    follow <span class="op">=</span> calcular_FOLLOW(gramatica, simbolo_inicial, nao_terminais, first, nullable)</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Inicializar e preencher a tabela</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    tabela <span class="op">=</span> {nt: {t: <span class="va">None</span> <span class="cf">for</span> t <span class="kw">in</span> terminais} <span class="cf">for</span> nt <span class="kw">in</span> nao_terminais}</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nt_head, producoes <span class="kw">in</span> gramatica.items():</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> producao <span class="kw">in</span> producoes:</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>            first_producao <span class="op">=</span> calcular_first_da_sequencia(producao, first, nullable, nao_terminais)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Regra 1: FIRST</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> terminal <span class="kw">in</span> first_producao <span class="op">-</span> {<span class="st">'EPSILON'</span>}:</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> tabela[nt_head][terminal] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Conflito FIRST/FIRST em [</span><span class="sc">{</span>nt_head<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>terminal<span class="sc">}</span><span class="ss">]!"</span>)</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>                tabela[nt_head][terminal] <span class="op">=</span> producao</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Regra 2: FOLLOW</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'EPSILON'</span> <span class="kw">in</span> first_producao:</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> terminal <span class="kw">in</span> follow[nt_head]:</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> tabela[nt_head][terminal] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Conflito FIRST/FOLLOW em [</span><span class="sc">{</span>nt_head<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>terminal<span class="sc">}</span><span class="ss">]!"</span>)</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>                    tabela[nt_head][terminal] <span class="op">=</span> producao</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tabela</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> imprimir_tabela(tabela: <span class="bu">dict</span>):</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Função auxiliar para exibir a tabela de forma legível no console."""</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    nao_terminais <span class="op">=</span> <span class="bu">sorted</span>(tabela.keys())</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> nao_terminais: <span class="cf">return</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    terminais <span class="op">=</span> <span class="bu">sorted</span>(tabela[nao_terminais[<span class="dv">0</span>]].keys())</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Imprimir cabeçalho</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span><span class="st">'Não-Terminal'</span><span class="sc">:&lt;15}</span><span class="ss">"</span> <span class="op">+</span> <span class="st">""</span>.join([<span class="ss">f"</span><span class="sc">{</span>t<span class="sc">:&lt;18}</span><span class="ss">"</span> <span class="cf">for</span> t <span class="kw">in</span> terminais])</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(header)</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="bu">len</span>(header))</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Imprimir linhas</span></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nt <span class="kw">in</span> nao_terminais:</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>        row_str <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>nt<span class="sc">:&lt;15}</span><span class="ss">"</span></span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> t <span class="kw">in</span> terminais:</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>            producao <span class="op">=</span> tabela[nt][t]</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> producao <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>                cell <span class="op">=</span> <span class="st">" "</span></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Formata a produção como "A -&gt; α"</span></span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>                cell <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>nt<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span><span class="st">' '</span><span class="sc">.</span>join(producao)<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>            row_str <span class="op">+=</span> <span class="ss">f"</span><span class="sc">{</span>cell<span class="sc">:&lt;18}</span><span class="ss">"</span></span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(row_str)</span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Exemplo de uso para a gramática refatorada (Exemplo 2) ---</span></span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>gramatica_sem_conflito <span class="op">=</span> {</span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: [[<span class="st">'T'</span>, <span class="st">"E'"</span>]],</span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E'"</span>: [[<span class="st">'+'</span>, <span class="st">'E'</span>], [<span class="st">'EPSILON'</span>]],</span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T'</span>: [[<span class="st">'int'</span>], [<span class="st">'('</span>, <span class="st">'E'</span>, <span class="st">')'</span>]]</span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>    tabela_final <span class="op">=</span> construir_tabela_ll1(gramatica_sem_conflito, <span class="st">'E'</span>)</span>
-<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Tabela de Análise LL(1) gerada com sucesso:</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>    imprimir_tabela(tabela_final)</span>
-<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
-<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Erro ao gerar tabela: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> construir_tabela_ll1(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    gramatica: <span class="bu">dict</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    simbolo_inicial: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">list</span> <span class="op">|</span> <span class="va">None</span>]]:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">    Constrói a Tabela de Análise LL(1) completa a partir de uma gramática.</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Esta função serve como um integrador para todas as funções anteriores.</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Identificar todos os símbolos</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    nao_terminais <span class="op">=</span> <span class="bu">set</span>(gramatica.keys())</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    simbolos <span class="op">=</span> <span class="bu">set</span>(nao_terminais)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> producoes <span class="kw">in</span> gramatica.values():</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> producao <span class="kw">in</span> producoes:</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            simbolos.update(producao)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    terminais <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(simbolos <span class="op">-</span> nao_terminais <span class="op">-</span> {<span class="st">'EPSILON'</span>})) <span class="op">+</span> [<span class="st">'$'</span>]</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Calcular os conjuntos</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    nullable <span class="op">=</span> calcular_NULLABLE(gramatica)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    first <span class="op">=</span> calcular_FIRST(gramatica, nao_terminais, nullable)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    follow <span class="op">=</span> calcular_FOLLOW(gramatica, simbolo_inicial, nao_terminais, first, nullable)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Inicializar e preencher a tabela</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    tabela <span class="op">=</span> {nt: {t: <span class="va">None</span> <span class="cf">for</span> t <span class="kw">in</span> terminais} <span class="cf">for</span> nt <span class="kw">in</span> nao_terminais}</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nt_head, producoes <span class="kw">in</span> gramatica.items():</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> producao <span class="kw">in</span> producoes:</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>            first_producao <span class="op">=</span> calcular_first_da_sequencia(producao, first, nullable, nao_terminais)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Regra 1: FIRST</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> terminal <span class="kw">in</span> first_producao <span class="op">-</span> {<span class="st">'EPSILON'</span>}:</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> tabela[nt_head][terminal] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Conflito FIRST/FIRST em [</span><span class="sc">{</span>nt_head<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>terminal<span class="sc">}</span><span class="ss">]!"</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>                tabela[nt_head][terminal] <span class="op">=</span> producao</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Regra 2: FOLLOW</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="st">'EPSILON'</span> <span class="kw">in</span> first_producao:</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> terminal <span class="kw">in</span> follow[nt_head]:</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> tabela[nt_head][terminal] <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Conflito FIRST/FOLLOW em [</span><span class="sc">{</span>nt_head<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>terminal<span class="sc">}</span><span class="ss">]!"</span>)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>                    tabela[nt_head][terminal] <span class="op">=</span> producao</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tabela</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> imprimir_tabela(tabela: <span class="bu">dict</span>):</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Função auxiliar para exibir a tabela de forma legível no console."""</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    nao_terminais <span class="op">=</span> <span class="bu">sorted</span>(tabela.keys())</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> nao_terminais: <span class="cf">return</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    terminais <span class="op">=</span> <span class="bu">sorted</span>(tabela[nao_terminais[<span class="dv">0</span>]].keys())</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Imprimir cabeçalho</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span><span class="st">'Não-Terminal'</span><span class="sc">:&lt;15}</span><span class="ss">"</span> <span class="op">+</span> <span class="st">""</span>.join([<span class="ss">f"</span><span class="sc">{</span>t<span class="sc">:&lt;18}</span><span class="ss">"</span> <span class="cf">for</span> t <span class="kw">in</span> terminais])</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(header)</span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="bu">len</span>(header))</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Imprimir linhas</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nt <span class="kw">in</span> nao_terminais:</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>        row_str <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>nt<span class="sc">:&lt;15}</span><span class="ss">"</span></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> t <span class="kw">in</span> terminais:</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>            producao <span class="op">=</span> tabela[nt][t]</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> producao <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>                cell <span class="op">=</span> <span class="st">" "</span></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Formata a produção como "A -&gt; α"</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>                cell <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>nt<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span><span class="st">' '</span><span class="sc">.</span>join(producao)<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>            row_str <span class="op">+=</span> <span class="ss">f"</span><span class="sc">{</span>cell<span class="sc">:&lt;18}</span><span class="ss">"</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(row_str)</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Exemplo de uso para a gramática refatorada (Exemplo 2) ---</span></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>gramatica_sem_conflito <span class="op">=</span> {</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: [[<span class="st">'T'</span>, <span class="st">"E'"</span>]],</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">"E'"</span>: [[<span class="st">'+'</span>, <span class="st">'E'</span>], [<span class="st">'EPSILON'</span>]],</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">'T'</span>: [[<span class="st">'int'</span>], [<span class="st">'('</span>, <span class="st">'E'</span>, <span class="st">')'</span>]]</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a>    tabela_final <span class="op">=</span> construir_tabela_ll1(gramatica_sem_conflito, <span class="st">'E'</span>)</span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Tabela de Análise LL(1) gerada com sucesso:</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a>    imprimir_tabela(tabela_final)</span>
+<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> e:</span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Erro ao gerar tabela: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="um-exemplo-mais-completo-análise-sintática-ll1-para-expressões-aritméticas" class="level2" data-number="6.9">
 <h2 data-number="6.9" class="anchored" data-anchor-id="um-exemplo-mais-completo-análise-sintática-ll1-para-expressões-aritméticas"><span class="header-section-number">6.9</span> Um Exemplo mais Completo: Análise Sintática LL(1) para Expressões Aritméticas</h2>
@@ -2458,8 +2507,8 @@ Nullable(T) &amp;= false
 <section id="tarefa" class="level3" data-number="6.9.2">
 <h3 data-number="6.9.2" class="anchored" data-anchor-id="tarefa"><span class="header-section-number">6.9.2</span> Tarefa</h3>
 <p>Desenvolva um analisador sintático <span class="math inline">\(LL(1)\)</span> para reconhecer expressões aritméticas com as seguintes características:</p>
-<p><strong>Requisitos da Gramática:</strong> - Deve suportar operações de <strong>adição</strong> (<span class="math inline">\(+\)</span>) e <strong>multiplicação</strong> (<span class="math inline">\(\times\)</span>) - Deve respeitar a <strong>precedência de operadores</strong> (multiplicação antes da adição) - Deve permitir o uso de <strong>parênteses</strong> para alterar a precedência - Os operandos são representados por <strong>identificadores</strong> (<code>id</code>)</p>
-<p><strong>Sua solução deve incluir:</strong></p>
+<p><strong>Requisitos da Gramática</strong>: - Deve suportar operações de <strong>adição</strong> (<span class="math inline">\(+\)</span>) e <strong>multiplicação</strong> (<span class="math inline">\(\times\)</span>) - Deve respeitar a <strong>precedência de operadores</strong> (multiplicação antes da adição) - Deve permitir o uso de <strong>parênteses</strong> para alterar a precedência - Os operandos são representados por <strong>identificadores</strong> (<code>id</code>)</p>
+<p><strong>Sua solução deve incluir</strong>:</p>
 <ol type="1">
 <li><p><strong>Definição da gramática original</strong> usando a notação BNF tradicional para expressões aritméticas, mesmo que contenha recursão à esquerda</p></li>
 <li><p><strong>Verificação e correção da gramática</strong> para torná-la adequada para análise <span class="math inline">\(LL(1)\)</span>:</p>
@@ -2497,7 +2546,7 @@ Nullable(T) &amp;= false
 <section id="exemplo-de-saída-esperada" class="level3" data-number="6.9.4">
 <h3 data-number="6.9.4" class="anchored" data-anchor-id="exemplo-de-saída-esperada"><span class="header-section-number">6.9.4</span> Exemplo de Saída Esperada</h3>
 <p>A análise deve demonstrar que a expressão <code>(id + id) * id</code> é aceita pela gramática, mostrando como a precedência dos operadores é respeitada e como os parênteses forçam a adição a ser executada antes da multiplicação.</p>
-<p><strong>Nota:</strong> Este exercício é fundamental para compreender os princípios de análise sintática descendente e a construção de <em>parsers</em> eficientes para expressões matemáticas em compiladores e interpretadores.</p>
+<p><strong>Nota</strong>: Este exercício é fundamental para compreender os princípios de análise sintática descendente e a construção de <em>parsers</em> eficientes para expressões matemáticas em compiladores e interpretadores.</p>
 </section>
 <section id="solução" class="level3" data-number="6.9.5">
 <h3 data-number="6.9.5" class="anchored" data-anchor-id="solução"><span class="header-section-number">6.9.5</span> Solução</h3>
@@ -2777,9 +2826,9 @@ FOLLOW(F) &amp;= FIRST(T^{\prime}) - \{\varepsilon\} \cup FOLLOW(T) = \{ \times 
 <section id="um-exemplo-com-linguagens-de-programação-laço-for-em-c" class="level2" data-number="6.10">
 <h2 data-number="6.10" class="anchored" data-anchor-id="um-exemplo-com-linguagens-de-programação-laço-for-em-c"><span class="header-section-number">6.10</span> Um Exemplo Com Linguagens de Programação: Laço For em C</h2>
 <p>Considere o seguinte fragmento de código em linguagem C que implementa um laço simples:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Este código representa um laço <code>for</code> típico da linguagem C, que inicializa uma variável de controle, verifica uma condição a cada iteração e atualiza a variável de controle após cada execução do bloco.</p>
 <section id="tarefa-1" class="level3" data-number="6.10.1">
 <h3 data-number="6.10.1" class="anchored" data-anchor-id="tarefa-1"><span class="header-section-number">6.10.1</span> Tarefa</h3>
