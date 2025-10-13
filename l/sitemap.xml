@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://frankalcantara.com/index.html</loc>
-    <lastmod>2025-09-04T18:43:05.900Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.860Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01-jornada-programacao-logica.html</loc>
-    <lastmod>2025-08-03T19:50:25.499Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.652Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01a-introducao-prolog.html</loc>
-    <lastmod>2025-09-04T18:46:10.845Z</lastmod>
+    <lastmod>2025-09-07T21:35:25.590Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/02-fundamentos-logica-proposicional.html</loc>
-    <lastmod>2025-08-26T18:28:16.037Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.652Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/03-arte-da-prova-e-analise-de-argumentos.html</loc>
-    <lastmod>2025-08-26T18:28:16.037Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.653Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/04-logica-predicativa-e-quantificadores.html</loc>
@@ -26,15 +26,15 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/05-formas-normais-e-skolemizacao.html</loc>
-    <lastmod>2025-09-04T18:43:05.987Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.654Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/06-clausulas-de-horn-e-prolog.html</loc>
-    <lastmod>2025-09-04T18:43:35.273Z</lastmod>
+    <lastmod>2025-10-13T12:20:24.694Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/07-construcao-de-mundos-logicos.html</loc>
-    <lastmod>2025-08-29T01:37:07.696Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.726Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/07a-criando-mundos-praticas.html</loc>
@@ -42,23 +42,27 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/07b-inferencia-prolog.html</loc>
-    <lastmod>2025-09-06T23:58:16.417Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.793Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/07c-programar-prolog.html</loc>
+    <lastmod>2025-09-07T21:32:23.013Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/08-verificacao-formal-de-programas.html</loc>
-    <lastmod>2025-08-26T18:28:16.131Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.749Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/09-desafios-logicos-enigmas-e-misterios.html</loc>
-    <lastmod>2025-08-29T18:35:35.592Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.860Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01-Sol-Proposicional.html</loc>
-    <lastmod>2025-08-17T22:40:48.393Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.543Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/02-Sol-Predicativa.html</loc>
-    <lastmod>2025-08-29T01:07:42.664Z</lastmod>
+    <lastmod>2025-09-07T12:50:01.653Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/03-Sol-Normais.html</loc>
@@ -70,6 +74,6 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/apendice-b-referencias.html</loc>
-    <lastmod>2025-09-06T21:27:59.874Z</lastmod>
+    <lastmod>2025-09-07T21:18:07.649Z</lastmod>
   </url>
 </urlset>

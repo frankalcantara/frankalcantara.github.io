@@ -261,14 +261,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07c-programar-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -285,19 +291,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -305,13 +311,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -411,7 +417,7 @@ window.Quarto = {
 <p>O <strong>Prolog</strong> (<strong>Pro</strong>gramming in <strong>Log</strong>ic) é uma linguagem de programação declarativa baseada na lógica de primeira ordem e no princípio de Resolução SLD (<em>Selective Linear Definite clause resolution</em>). Desenvolvida por <a href="https://en.wikipedia.org/wiki/Alain_Colmerauer">Alain Colmerauer</a> e Philippe Roussel na Universidade de Marselha em 1972, representa um paradigma fundamentalmente diferente das linguagens imperativas tradicionais.</p>
 <section id="paradigma-declarativo-vs.-imperativo" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="paradigma-declarativo-vs.-imperativo"><span class="header-section-number">3.1.1</span> Paradigma Declarativo vs.&nbsp;Imperativo</h3>
-<p>Em linguagens <strong>imperativas</strong> (C, Java, Python), o programador especifica <em>como</em> resolver um problema através de uma sequência de comandos que modificam o estado do programa. Em <strong>Prolog</strong>, o programador especifica <em>o que</em> constitui uma solução através de:</p>
+<p>Em linguagens <strong>imperativas</strong> (C, Java, Python), o programador especifica <em>como</em> resolver um problema por meio de uma sequência de comandos que modificam o estado do programa. Em <strong>Prolog</strong>, o programador especifica <em>o que</em> constitui uma solução por meio de:</p>
 <ul>
 <li><strong>Fatos</strong>: Afirmações básicas sobre o domínio do problema</li>
 <li><strong>Regras</strong>: Relações lógicas entre fatos</li>
@@ -873,9 +879,9 @@ Figure&nbsp;3.1: Página padrão do Swish-swi-prolog.org com o editor de código
 <li><strong>Uso criterioso do cut</strong>: Evitar backtracking desnecessário;</li>
 <li><strong>Tail recursion</strong>: Para evitar estouro de pilha;</li>
 <li><strong>Indexação</strong>: SWI-Prolog indexa primeiro argumento automaticamente;</li>
-<li><strong>Avoid ground/1 quando possível</strong>: Use type checking específico.</li>
+<li><strong>Avoid ground/1 quando possível</strong>: Use <em>type checking</em> específico.</li>
 </ol>
-<p>Nós vamos voltar a esses tópicos ao longo do livro, mas é importante ter uma visão geral desde o início. Principalmente porque a partir deste ponto, podemos incluir testes com o Prolog para validar a lógica que suporta o funcionamento do próprio Prolog. Mais um círculo virtuoso de aprendizado e desenvolvimento tecnológico.</p>
+<p>Nós vamos voltar a esses tópicos ao longo do livro, mas é importante ter uma visão geral desde o início. Principalmente porque a partir deste ponto, podemos incluir testes com o Prolog para validar a lógica que suporta o funcionamento do próprio Prolog. Mais um círculo virtuoso de aprendizado e desenvolvimento tecnológico. Finalmente, se tudo que a leitora quiser é brincar com o Prolog, pode pular para o capítulo <a href="07c-programar-prolog.html" class="quarto-xref"><span>Chapter 12</span></a>.</p>
 
 
 </section>

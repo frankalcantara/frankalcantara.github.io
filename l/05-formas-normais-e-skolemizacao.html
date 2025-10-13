@@ -227,14 +227,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07c-programar-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -251,19 +257,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="#sec-formas-normais" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="#sec-formas-normais" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -271,13 +277,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -377,7 +383,7 @@ Tip
 <p><span class="math display">\[(A \wedge B) \vee (C \wedge D) \vee (A \wedge C) \vee (B \wedge D)\]</span></p></li>
 <li><p><strong>Forma Normal Prenex</strong>: uma proposição está na Forma Normal Prenex se todos os quantificadores, para a <strong>Lógica de Primeira Ordem</strong>, estiverem à esquerda, precedendo uma matriz quantificadora livre. Esta forma é útil na <strong>Lógica de Primeira Ordem</strong> e na teoria da prova.</p>
 <p><span class="math display">\[\forall x \exists y \forall z (P(x,y) \wedge \neg Q(z))\]</span></p></li>
-<li><p><strong>Forma Normal Skolem</strong>: na <strong>Lógica de Primeira Ordem</strong>, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado através de um processo conhecido como Skolemização. Por exemplo, dada a fórmula:</p></li>
+<li><p><strong>Forma Normal Skolem</strong>: na <strong>Lógica de Primeira Ordem</strong>, uma fórmula está na Forma Normal de Skolem se estiver na Forma Normal Prenex e se todos os quantificadores existenciais forem eliminados. Isto é realizado por meio de um processo conhecido como Skolemização. Por exemplo, dada a fórmula:</p></li>
 </ol>
 <p><span class="math display">\[\forall x \exists y (P(x,y))\]</span></p>
 <p>Sua forma após a Skolemização, que preserva a satisfatibilidade, será:</p>
@@ -836,7 +842,7 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>Observação importante - Por que a conversão direta não funciona</strong>:</p>
-<p>A conversão direta de Forma Normal Disjuntiva para Forma Normal Conjuntiva através de distributividade simples frequentemente resulta em uma explosão exponencial de termos. Vamos ver por que:</p>
+<p>A conversão direta de Forma Normal Disjuntiva para Forma Normal Conjuntiva por meio de distributividade simples frequentemente resulta em uma explosão exponencial de termos. Vamos ver por que:</p>
 <p>Para converter <span class="math inline">\((P \wedge Q) \vee (P \wedge R) \vee (\neg P \wedge \neg Q)\)</span> diretamente para Forma Normal Conjuntiva, precisaríamos aplicar a distributividade do <span class="math inline">\(\wedge\)</span> sobre <span class="math inline">\(\vee\)</span>, usando a regra <span class="math inline">\((A \vee B) \wedge (C \vee D) \equiv (A \wedge C) \vee (A \wedge D) \vee (B \wedge C) \vee (B \wedge D)\)</span>.</p>
 <p>Se tentássemos aplicar isso sistematicamente:</p>
 <ol type="1">
@@ -1148,7 +1154,7 @@ Important
 <section id="forma-normal-prenex" class="level3" data-number="7.2.1">
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="forma-normal-prenex"><span class="header-section-number">7.2.1</span> Forma Normal Prenex</h3>
 <p>A Forma Normal Prenex é como um almirante experiente organizando a cadeia de comando antes de uma operação naval complexa.</p>
-<p>A criativa leitora pode imaginar uma esquadra na qual as ordens estão sendo transmitidas de forma caótica, alguns capitães recebem instruções diretas, outros recebem ordens através de subordinados, e as responsabilidades estão misturadas com as tarefas operacionais. A Forma Normal Prenex é como este almirante que, antes de qualquer manobra, convoca todos os comandantes para a ponte principal, estabelecendo claramente a hierarquia completa, quem comanda o quê e em que ordem, antes de transmitir as instruções operacionais.</p>
+<p>A criativa leitora pode imaginar uma esquadra na qual as ordens estão sendo transmitidas de forma caótica, alguns capitães recebem instruções diretas, outros recebem ordens por meio de subordinados, e as responsabilidades estão misturadas com as tarefas operacionais. A Forma Normal Prenex é como este almirante que, antes de qualquer manobra, convoca todos os comandantes para a ponte principal, estabelecendo claramente a hierarquia completa, quem comanda o quê e em que ordem, antes de transmitir as instruções operacionais.</p>
 <p>Assim como o almirante separa completamente a estrutura de comando (todos os quantificadores universais <span class="math inline">\(\forall\)</span> e existenciais <span class="math inline">\(\exists\)</span> movidos para frente) das ordens de execução (a matriz livre de quantificadores), a Forma Normal Prenex cria uma divisão clara entre <em>quem decide</em> e <em>o que fazer</em>.</p>
 <p>Com um pouco de formalidade a atenta leitora verá que a Forma Normal Prenex é uma padronização para fórmulas da lógica de primeira ordem. Nela, todos os quantificadores são deslocados para a frente da fórmula, deixando a matriz da fórmula livre de quantificadores. A Forma Normal Prenex apresenta três características principais:</p>
 <ol type="1">
@@ -1384,7 +1390,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p><span class="math display">\[
 \forall x (\forall y \neg P(x,y) \vee \forall z \exists w \, R(x,z,w))
 \]</span></p>
-<p><strong>Passo 4</strong>: Mover os quantificadores internos para fora. Para mover quantificadores através de disjunção, precisamos garantir que as variáveis não ocorrem livres no outro disjunto:</p>
+<p><strong>Passo 4</strong>: Mover os quantificadores internos para fora. Para mover quantificadores por meio de disjunção, precisamos garantir que as variáveis não ocorrem livres no outro disjunto:</p>
 <ul>
 <li><span class="math inline">\(\forall y\)</span> pode sair já que <span class="math inline">\(y\)</span> não ocorre em <span class="math inline">\(R(x,z,w)\)</span>;</li>
 <li><span class="math inline">\(\forall z\)</span> e <span class="math inline">\(\exists w\)</span> podem sair, isso porque <span class="math inline">\(z\)</span> e <span class="math inline">\(w\)</span> não ocorrem em <span class="math inline">\(P(x,y)\)</span>.</li>
@@ -1392,7 +1398,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p><span class="math display">\[
 \forall x \forall y \forall z \exists w (\neg P(x,y) \vee R(x,z,w))
 \]</span></p>
-<p>Nota: Quando movemos <span class="math inline">\(\forall\)</span> através de <span class="math inline">\(\vee\)</span>, usamos a equivalência: <span class="math inline">\((\forall y \, A(y)) \vee B \equiv \forall y \, (A(y) \vee B)\)</span> quando <span class="math inline">\(y\)</span> não ocorre livre em <span class="math inline">\(B\)</span>.</p>
+<p>Nota: Quando movemos <span class="math inline">\(\forall\)</span> por meio de <span class="math inline">\(\vee\)</span>, usamos a equivalência: <span class="math inline">\((\forall y \, A(y)) \vee B \equiv \forall y \, (A(y) \vee B)\)</span> quando <span class="math inline">\(y\)</span> não ocorre livre em <span class="math inline">\(B\)</span>.</p>
 <p><strong>Passo 5</strong>: Reordenar quantificadores (opcional para clareza). Como quantificadores universais consecutivos podem ser permutados, podemos manter a ordem atual:</p>
 <p><span class="math display">\[
 \forall x \exists y \forall z \exists w (\neg P(x,y) \vee R(x,z,w))
@@ -1557,7 +1563,7 @@ Q_1 x_1 \, Q_2 x_2 \, \ldots \, Q_n x_n \, M(x_1, x_2, \ldots, x_n)
 <p>A Skolemização resultará em:</p>
 <p><span class="math display">\[\forall x \forall z R(x,\mathbf{f}(x),z,\mathbf{g}(x,z))\]</span></p>
 <p><span class="math inline">\(\mathbf{f}(x)\)</span> e $(x,z)$ são Funções Skolem introduzidas para substituir as variáveis existenciais <span class="math inline">\(y\)</span> e $w $ respectivamente. A escolha entre Constante e Função Skolem é como decidir entre definir valores definitivos ou sua ação e aplicação:</p>
-<p>Se nossa expedição marítima já tem os tripulantes estabelecidos, as variáveis universais, então nosso novo tripulante existencial precisa se adaptar a eles através de uma função. Isso pode ser feito com as fórmulas lógicas seguindo os seguintes passos:</p>
+<p>Se nossa expedição marítima já tem os tripulantes estabelecidos, as variáveis universais, então nosso novo tripulante existencial precisa se adaptar a eles por meio de uma função. Isso pode ser feito com as fórmulas lógicas seguindo os seguintes passos:</p>
 <p><strong>Passo 1: Identificar os Quantificadores Existenciais</strong>: comece identificando os quantificadores existenciais na fórmula.</p>
 <p><strong>Passo 2: Determinar se a Variável Existencial Depende de Variáveis Universais</strong>: para cada variável ligada a um quantificador existencial, determinamos se ela depende ou não de alguma variável universal. Isso significa verificar se existem quantificadores universais que precedem (ou <em>dominam</em>) a variável existencial na sequência de quantificadores da forma prenex.</p>
 <ul>
@@ -2596,7 +2602,7 @@ Use o Princípio da Resolução para provar que o seguinte conjunto de cláusula
 </section>
 <section id="limitações-na-mobilidade" class="level4" data-number="7.5.2.2">
 <h4 data-number="7.5.2.2" class="anchored" data-anchor-id="limitações-na-mobilidade"><span class="header-section-number">7.5.2.2</span> 2.2. Limitações na Mobilidade</h4>
-<p>Diferente dos quantificadores clássicos, os quantificadores numéricos têm <strong>mobilidade restrita</strong>. Nem sempre podemos movê-los livremente através de conectivos lógicos:</p>
+<p>Diferente dos quantificadores clássicos, os quantificadores numéricos têm <strong>mobilidade restrita</strong>. Nem sempre podemos movê-los livremente por meio de conectivos lógicos:</p>
 <p><span class="math display">\[(\exists_{=2} x: P(x)) \lor (\exists_{=3} x: P(x)) \not\equiv \exists_{=?} x: P(x)\]</span></p>
 <p>Não existe um único quantificador numérico que capture <em>2 ou 3</em>. Isto força a criação de <strong>formas normais prenex disjuntivas</strong>:</p>
 <p><span class="math display">\[\bigvee_{i \in I} \left( Q_1^i x_1 Q_2^i x_2 \ldots Q_n^i x_n : \phi_i \right)\]</span></p>

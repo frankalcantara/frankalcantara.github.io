@@ -227,14 +227,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07c-programar-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -251,19 +257,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -271,13 +277,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -330,7 +336,7 @@ Tip
 <p>Na Programação Lógica, um dos paradigmas da <strong>Programação Declarativa</strong>, usamos a dedução para resolver problemas. Começamos com hipóteses e conjecturas.</p>
 <p>Uma hipótese é uma suposição, expressa na forma de proposição, que é acreditada ser verdadeira, mas que ainda não foi provada. Uma conjectura, por sua vez, é uma proposição ou sentença declarativa assumida como verdadeira, mas que ainda não foi formalmente provada ou refutada. Com um pouco mais de formalidade, já que a formalidade é o combustível da lógica, podemos dizer:</p>
 <p><strong>Conjectura</strong> é uma proposição provisoriamente aceita como verdadeira com base em evidências incompletas ou raciocínio plausível, mas que ainda não foi provada ou refutada. É essencialmente uma suposição educada que serve como ponto de partida para investigação posterior. Conjecturas são frequentemente formuladas quando há padrões observáveis ou intuições teóricas, mas falta rigor demonstrativo. A conjetura de <a href="https://en.wikipedia.org/wiki/Christian_Goldbach">Goldbach</a>, que afirma que todo número par maior que <span class="math inline">\(2\)</span> pode ser expresso como a soma de dois números primos, é um exemplo clássico de conjectura. Embora muitos números pares tenham sido verificados e a conjectura pareça verdadeira, ainda não foi provada para todos os números pares.</p>
-<p><strong>Hipótese</strong> é uma proposição formulada de maneira mais sistemática e específica, que pode ser testada através de métodos empíricos ou dedutivos. Uma hipótese deve ser formulada de modo que seja possível, em princípio, confirmá-la ou refutá-la através de evidências ou procedimentos lógicos específicos. Por exemplo, a hipótese de que “a temperatura afeta a taxa de crescimento das plantas” pode ser testada através de experimentos controlados. Se os resultados do experimento confirmarem a relação entre temperatura e crescimento, a hipótese é apoiada; caso contrário, ela pode ser refutada ou modificada.</p>
+<p><strong>Hipótese</strong> é uma proposição formulada de maneira mais sistemática e específica, que pode ser testada por meio de métodos empíricos ou dedutivos. Uma hipótese deve ser formulada de modo que seja possível, em princípio, confirmá-la ou refutá-la por meio de evidências ou procedimentos lógicos específicos. Por exemplo, a hipótese de que “a temperatura afeta a taxa de crescimento das plantas” pode ser testada por meio de experimentos controlados. Se os resultados do experimento confirmarem a relação entre temperatura e crescimento, a hipótese é apoiada; caso contrário, ela pode ser refutada ou modificada.</p>
 <p>Na <strong>Lógica de Primeira Ordem</strong>, conjecturas são expressas como fórmulas lógicas que precisam ser verificadas por meio de demonstrações ou contraexemplos. Por exemplo, considere a conjectura: “Todos os números primos são ímpares.” Em <strong>Lógica de Primeira Ordem</strong>, isso pode ser expresso como:</p>
 <p><span class="math display">\[
 \forall x (\text{Primo}(x) \rightarrow \text{Ímpar}(x))
@@ -352,7 +358,7 @@ Tip
 <li>Premissa 2: Sócrates é humano ((())).</li>
 </ul>
 <p>Usando a inferência lógica, podemos deduzir que Sócrates é mortal ((())). Aqui, as premissas são as “pistas”, e a inferência é o raciocínio que nos leva à conclusão. Esse processo é incontestável na lógica: se as premissas são verdadeiras, a conclusão também será. Assim, a inferência nos permite extrair verdades novas a partir de verdades conhecidas, de forma clara e estruturada, como um detetive que resolve o caso sem deixar margem para dúvidas.</p>
-<p>Nossos mares não serão brandos, mas não nos furtaremos a enfrentar os desafios da <strong>Cláusula de Horn</strong>, um conceito um pouco mais estranho. Uma restrição sintática sobre as cláusulas de uma fórmula lógica que torna o problema de satisfatibilidade mais fácil de resolver. Como um mapa que, se seguido corretamente, reduz a complexidade computacional de exponencial para polinomial. Muito mais simples, até mesmo passível de automatização eficiente através de algoritmos como <em>unit propagation</em>.</p>
+<p>Nossos mares não serão brandos, mas não nos furtaremos a enfrentar os desafios da <strong>Cláusula de Horn</strong>, um conceito um pouco mais estranho. Uma restrição sintática sobre as cláusulas de uma fórmula lógica que torna o problema de satisfatibilidade mais fácil de resolver. Como um mapa que, se seguido corretamente, reduz a complexidade computacional de exponencial para polinomial. Muito mais simples, até mesmo passível de automatização eficiente por meio de algoritmos como <em>unit propagation</em>.</p>
 <p>As águas se agitarão um pouco mais quando cruzarmos o território da <strong>satisfatibilidade</strong>, o problema central que governa toda a <strong>Lógica Proposicional</strong>. A questão fundamental de determinar se existe uma atribuição de valores de verdade que torna uma fórmula lógica verdadeira. Como um detetive que busca descobrir se uma combinação específica de pistas pode resolver completamente um mistério. Este problema, aparentemente simples em sua formulação, revela-se NP-completo, uma classe de problemas para os quais não se conhece algoritmo de tempo polinomial. Desafiando os limites da computação eficiente e impulsionando o desenvolvimento de algoritmos sofisticados como DPLL e CDCL.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">

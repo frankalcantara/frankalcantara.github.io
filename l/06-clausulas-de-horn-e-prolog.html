@@ -261,14 +261,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07c-programar-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -285,19 +291,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -305,13 +311,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -574,7 +580,7 @@ Important
 </section>
 <section id="exercício-5" class="level4" data-number="8.0.2.5">
 <h4 data-number="8.0.2.5" class="anchored" data-anchor-id="exercício-5"><span class="header-section-number">8.0.2.5</span> Exercício 5</h4>
-<p>Converta $x (P(x) Q(x)) (x P(x) x Q(x)) $ para Forma Clausal.</p>
+<p>Converta <span class="math inline">\(\forall x (P(x) \rightarrow Q(x)) \rightarrow (\forall x P(x) \rightarrow \forall x Q(x))\)</span> para Forma Clausal.</p>
 <p><strong>Solução</strong>:</p>
 <ol type="1">
 <li><strong>Padronizar Variáveis</strong>: Renomeamos as variáveis para evitar conflitos.</li>
@@ -711,7 +717,7 @@ Important
 <li><span class="math inline">\(A_1, \ldots, A_k\)</span> são os átomos no corpo (antecedente) da implicação.</li>
 <li><span class="math inline">\(B\)</span> é o átomo na cabeça (consequente) da implicação.</li>
 </ul>
-<p><strong>Tipos de Cláusulas de Horn (baseado na forma disjuntiva <span class="math inline">\(\neg A_1 \vee \ldots \vee \neg A_k \vee B\)</span>)</strong>:</p>
+<p><strong>Tipos de Cláusulas de Horn (baseado na forma disjuntiva</strong> <span class="math inline">\(\neg A_1 \vee \ldots \vee \neg A_k \vee B\)</span>):</p>
 <ul>
 <li><p><strong>Fatos (Cláusulas Unitárias Positivas)</strong>: Têm exatamente um literal positivo e nenhum literal negativo (<span class="math inline">\(k=0\)</span>).</p></li>
 <li><p>Forma disjuntiva: <span class="math inline">\(B\)</span></p></li>
@@ -732,8 +738,8 @@ Important
 <p><strong>1. Fatos</strong>: os fatos são como pedras fundamentais desse cenário. Eles são afirmações simples e diretas que dizem como as coisas são. Considere, por exemplo: <em>O céu é azul</em>, <span class="math inline">\(P\)</span> e <em>A grama é verde</em><span class="math inline">\(Q\)</span>. Essas são verdades que não precisam de justificativa. Elas simplesmente são. os Fatos são axiomas.</p>
 <p><strong>2. Regras</strong>: as regras são um pouco mais intrigantes. Elas são como as regras de um jogo que definem como as coisas se relacionam umas com as outras. <em>Se chover, a grama ficará molhada.</em> Essa é uma regra. Ela nos diz o que esperar se certas condições forem atendidas. As regras são como os conectores em nosso mundo lógico, ligando fatos e permitindo que façamos inferências. Elas são o motor que nos permite raciocinar e descobrir novas verdades a partir das que já conhecemos. Por exemplo:</p>
 <ul>
-<li><span class="math inline">\(P \wedge Q \rightarrow R\)</span>: <em>Se chover, <span class="math inline">\(P\)</span> e ventar, <span class="math inline">\(Q\)</span>, então não faremos um piquenique, <span class="math inline">\(R\)</span></em>.</li>
-<li><span class="math inline">\(A \wedge B \wedge C \rightarrow D\)</span>: <em>Se <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> e <span class="math inline">\(C\)</span> forem verdadeiros, então <span class="math inline">\(D\)</span> é verdadeiro</em>.</li>
+<li><span class="math inline">\(P \wedge Q \rightarrow R\)</span>: <em>Se chover,</em> <span class="math inline">\(P\)</span> e ventar, <span class="math inline">\(Q\)</span>, então não faremos um piquenique, <span class="math inline">\(R\)</span>.</li>
+<li><span class="math inline">\(A \wedge B \wedge C \rightarrow D\)</span>: <em>Se</em> <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> e <span class="math inline">\(C\)</span> forem verdadeiros, então <span class="math inline">\(D\)</span> é verdadeiro.</li>
 </ul>
 <div class="{callout-important}">
 <p><strong>Nota sobre Negação</strong>: Em Cláusulas de Horn puras, os antecedentes das regras contêm apenas literais positivos. Quando queremos expressar condições negativas como “não está chovendo”, precisamos modelá-las de forma diferente:</p>
@@ -747,7 +753,7 @@ Important
 <p><strong>3. Metas ou Consultas</strong>: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. <em>Está chovendo?</em>, <em>A grama está molhada?</em> São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a forma de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:</p>
 <ul>
 <li><span class="math inline">\(\neg P \wedge \neg Q\)</span>: <em>É verdade que hoje não está chovendo e não está ventando?</em></li>
-<li><span class="math inline">\(\neg X \wedge \neg Y \wedge \neg Z\)</span>: <em><span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> e $Z $ são falsos?</em></li>
+<li><span class="math inline">\(\neg X \wedge \neg Y \wedge \neg Z\)</span>: <span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> e $Z $ são falsos?</li>
 </ul>
 <p>Podemos tentar avaliar alguns exemplos de uso de Fatos, Regras e Consultas:</p>
 <section id="exemplo-1---sistema-de-recomendação-de-roupas" class="level4" data-number="8.1.1.1">
@@ -867,7 +873,7 @@ Important
 <p><span class="math display">\[
 \forall X \forall Y \forall Z (\neg Homem(X) \vee \neg Progenitor(Z, X) \vee \neg Progenitor(Z, Y) \vee X = Y \vee MeioIrmao(X, Y))
 \]</span></p>
-<p><em><em>Nota: Esta não é uma Cláusula de Horn, pois a sua forma disjuntiva contém dois literais positivos: <code>X = Y</code> e <code>MeioIrmao(X, Y)</code>. Uma Cláusula de Horn pode ter no máximo um literal positivo.</em></em></p>
+<p><em>Nota: Esta não é uma Cláusula de Horn, pois a sua forma disjuntiva contém dois literais positivos: <code>X = Y</code> e <code>MeioIrmao(X, Y)</code>. Uma Cláusula de Horn pode ter no máximo um literal positivo.</em></p>
 <p><strong>4. Meio-Irmã</strong>: com pelo menos um progenitor em comum e não sendo a mesma pessoa.</p>
 <ul>
 <li>Forma Implicativa:</li>
@@ -881,7 +887,7 @@ Important
 <p><span class="math display">\[
 \forall X \forall Y \forall Z (\neg Mulher(X) \vee \neg Progenitor(Z, X) \vee \neg Progenitor(Z, Y) \vee X = Y \vee MeioIrma(X, Y))
 \]</span></p>
-<p><em><em>Nota: Esta também não é uma Cláusula de Horn, pois contém os literais positivos <code>X = Y</code> e <code>MeioIrma(X, Y)</code>. </em></em></p>
+<p><em>Nota: Esta também não é uma Cláusula de Horn, pois contém os literais positivos <code>X = Y</code> e <code>MeioIrma(X, Y)</code>.</em></p>
 <p><strong>5. Irmão</strong>: com ambos os pais em comum e não sendo a mesma pessoa.</p>
 <ul>
 <li>Forma Implicativa:</li>
@@ -895,7 +901,7 @@ Important
 <p><span class="math display">\[
 \forall X \forall Y \forall P \forall M (\neg Homem(X) \vee \neg Pai(P,X) \vee \neg Pai(P,Y) \vee \neg Mae(M,X) \vee \neg Mae(M,Y) \vee X = Y \vee Irmao(X,Y))
 \]</span></p>
-<p><em><em>Nota: Esta cláusula também não é de Horn devido aos dois literais positivos <code>X = Y</code> e <code>Irmao(X,Y)</code>. </em></em></p>
+<p><em>Nota: Esta cláusula também não é de Horn devido aos dois literais positivos <code>X = Y</code> e <code>Irmao(X,Y)</code>.</em></p>
 <p><strong>6. Irmã</strong>: com ambos os pais em comum e não sendo a mesma pessoa.</p>
 <ul>
 <li>Forma Implicativa:</li>
@@ -909,7 +915,7 @@ Important
 <p><span class="math display">\[
 \forall X \forall Y \forall P \forall M (\neg Mulher(X) \vee \neg Pai(P,X) \vee \neg Pai(P,Y) \vee \neg Mae(M,X) \vee \neg Mae(M,Y) \vee X = Y \vee Irma(X,Y))
 \]</span></p>
-<p><em><em>Nota: Novamente, a presença de <code>X = Y</code> e <code>Irma(X,Y)</code> impede que esta seja uma Cláusula de Horn.</em></em></p>
+<p><em>Nota: Novamente, a presença de <code>X = Y</code> e <code>Irma(X,Y)</code> impede que esta seja uma Cláusula de Horn.</em></p>
 <p><strong>7. Avô</strong>:</p>
 <ul>
 <li>Forma Implicativa:</li>
@@ -1003,7 +1009,7 @@ Important
 <p><span class="math display">\[
 \neg Disco(x) \vee \neg Disco(y) \vee \neg Poste(z) \vee \neg Poste(w) \vee \neg MovimentoValido(y, z, w) \vee x = y \vee MovimentoUnico(x)
 \]</span></p>
-<p><em><em>Nota: Esta cláusula não é de Horn, pois contém dois literais positivos: <code>x = y</code> e <code>MovimentoUnico(x)</code>. A lógica visa garantir que, se um movimento válido com o disco <code>y</code> está ocorrendo, qualquer outra verificação para <code>MovimentoUnico(x)</code> só pode ser verdadeira se <code>x</code> for o mesmo disco <code>y</code>.</em></em></p>
+<p><em>Nota: Esta cláusula não é de Horn, pois contém dois literais positivos: <code>x = y</code> e <code>MovimentoUnico(x)</code>. A lógica visa garantir que, se um movimento válido com o disco <code>y</code> está ocorrendo, qualquer outra verificação para <code>MovimentoUnico(x)</code> só pode ser verdadeira se <code>x</code> for o mesmo disco <code>y</code>.</em></p>
 <ol start="5" type="1">
 <li>Estado inicial:</li>
 </ol>
@@ -1057,13 +1063,13 @@ Important
 </section>
 <section id="quantificadores-em-cláusulas-de-horn" class="level3" data-number="8.1.2">
 <h3 data-number="8.1.2" class="anchored" data-anchor-id="quantificadores-em-cláusulas-de-horn"><span class="header-section-number">8.1.2</span> Quantificadores em Cláusulas de Horn</h3>
-<p>Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada através de fatos específicos ou construção de termos.</p>
+<p>Os quantificadores podem ser incluídos nas Cláusulas de Horn. Contudo, é importante notar que a forma padrão de Cláusulas de Horn em programação lógica geralmente lida com quantificação de forma implícita. A quantificação universal é comum e é geralmente assumida em regras, enquanto a quantificação existencial é muitas vezes tratada por meio de fatos específicos ou construção de termos.</p>
 <p>Precisamos tomar cuidado porque a inclusão explícita de quantificadores pode levar a uma <strong>Lógica de Primeira Ordem</strong> mais rica, permitindo expressões mais complexas e poderosas. No entanto, isso também pode aumentar a complexidade do raciocínio e da resolução.</p>
-<p>O quantificador universal (representado por $$) afirma que uma propriedade é verdadeira para todos os membros de um domínio. Em Cláusulas de Horn, isso é geralmente representado implicitamente através de regras gerais que se aplicam a todos os membros de um conjunto. Por exemplo, considere a regra: <em>Todos os pássaros podem voar</em>. Em uma Cláusula de Horn, isso pode ser representado como:</p>
+<p>O quantificador universal (representado por $$) afirma que uma propriedade é verdadeira para todos os membros de um domínio. Em Cláusulas de Horn, isso é geralmente representado implicitamente por meio de regras gerais que se aplicam a todos os membros de um conjunto. Por exemplo, considere a regra: <em>Todos os pássaros podem voar</em>. Em uma Cláusula de Horn, isso pode ser representado como:</p>
 <p>Em programação lógica e Cláusulas de Horn, a quantificação é frequentemente tratada implicitamente.</p>
 <p><strong>Quantificador Universal em Regras</strong>: considere a afirmação: __Para todo x, se x é um pássaro, então x pode voar_._</p>
 <ul>
-<li><strong>Fórmula em </strong>Lógica de Primeira Ordem** (LPO)**: <span class="math inline">\(\forall x (\text{Pássaro}(x) \rightarrow \text{Voa}(x))\)</span></li>
+<li><strong>Fórmula em</strong> Lógica de Primeira Ordem** (LPO)**: <span class="math inline">\(\forall x (\text{Pássaro}(x) \rightarrow \text{Voa}(x))\)</span></li>
 <li><strong>Forma clausal (Cláusula de Horn equivalente)</strong>: <span class="math inline">\(\neg \text{Pássaro}(x) \vee \text{Voa}(x)\)</span> (Aqui, <span class="math inline">\(x\)</span> é implicitamente quantificado universalmente.)</li>
 <li><strong>Representação em Prolog</strong>: <code>voa(X) :- passaro(X).</code> (A variável <code>X</code> é implicitamente quantificada universalmente.)</li>
 </ul>
@@ -1168,7 +1174,7 @@ Important
 <li>Semântica operacional clara em linguagens de programação lógica</li>
 <li>Estratégias de busca bem definidas e previsíveis</li>
 </ul>
-<p>Na prática, sistemas baseados em Cláusulas de Horn como Prolog contornam essas limitações através de:</p>
+<p>Na prática, sistemas baseados em Cláusulas de Horn como Prolog contornam essas limitações por meio de:</p>
 <ul>
 <li><strong>Extensões à lógica pura</strong>: negação por falha, cut (!), assert/retract</li>
 <li><strong>Modelagem criativa</strong>: reformulação de problemas para se adequarem ao paradigma</li>
@@ -1286,7 +1292,7 @@ Important
 <p>Os fatos indicam que <em>João é homem</em> e <em>maria é mulher</em>.</p>
 <p><strong>Regra</strong>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mortal(<span class="dt">X</span>) <span class="kw">:-</span> homem(<span class="dt">X</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A regra estabelece que <em>Se <span class="math inline">\(X\)</span> é homem, então <span class="math inline">\(X\)</span> é mortal</em>. O símbolo <span class="math inline">\(:-\)</span> representa implicação.</p>
+<p>A regra estabelece que <em>Se</em> <span class="math inline">\(X\)</span> é homem, então <span class="math inline">\(X\)</span> é mortal. O símbolo <span class="math inline">\(:-\)</span> representa implicação.</p>
 <p><strong>Consulta</strong>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mortal(jo<span class="er">ã</span>o)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A consulta verifica se <em>João é mortal</em>, aplicando a regra definida anteriormente. O Prolog responderá <strong>True</strong> (verdadeiro ou <span class="math inline">\(\top\)</span>) pois a regra se aplica dado o fato de que João é homem.</p>

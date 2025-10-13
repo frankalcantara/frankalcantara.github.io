@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08-verificacao-formal-de-programas.html" rel="next">
+<link href="./07c-programar-prolog.html" rel="next">
 <link href="./07a-criando-mundos-praticas.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -261,14 +261,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./07c-programar-prolog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./08-verificacao-formal-de-programas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-desafios-logicos-enigmas-e-misterios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></span></a>
   </div>
 </li>
       </ul>
@@ -285,19 +291,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-Sol-Proposicional.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Proposicional </span></span></a><a href="02-fundamentos-logica-proposicional.html" class="quarto-xref"><span>Chapter 4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-Sol-Predicativa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Lógica Predicativa </span></span></a><a href="04-logica-predicativa-e-quantificadores.html" class="quarto-xref"><span>Chapter 6</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-Sol-Normais.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Formas Normais Proposicionais </span></span></a><a href="05-formas-normais-e-skolemizacao.html" class="quarto-xref"><span>Chapter 7</span></a>
   </div>
 </li>
       </ul>
@@ -305,13 +311,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-a-glossario.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Glossário</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apendice-b-referencias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
     </ul>
@@ -395,14 +401,14 @@ Tip
 </div>
 </div>
 <p>O Prolog, <em>Programming in Logic</em>, representa uma mudança de paradigma em relação às linguagens de programação imperativas. Em vez de fornecer ao computador uma sequência de instruções sobre <em>como</em> executar uma tarefa, um programa em Prolog consiste numa especificação declarativa do que <em>é verdade</em> sobre um determinado domínio. Um programa em Prolog é, em essência, uma especificação executável de um subconjunto da <strong>Lógica de Primeira Ordem</strong>, permitindo que os programadores se concentrem na descrição da lógica e das relações do problema, enquanto o <em>mecanismo de inferência</em> subjacente se encarrega da estratégia de execução.</p>
-<p>A mágica por trás da surpresa que a atenta leitora teve ao perceber a capacidade do Prolog de responder a perguntas complexas e encontrar soluções para problemas lógicos não é arbitrária. Pelo contrário, esta estupefação é o resultado direto da observação da parte visível de uma interação sistemática e bem definida de três processos distintos que formam o seu mecanismo de inferência. O primeiro é um algoritmo de correspondência de padrões chamado <strong>Unificação</strong>, que serve como a operação computacional primária. O segundo é um procedimento de prova formal conhecido como <strong>Resolução SLD</strong>, que fornece a base lógica para a inferência. O terceiro é uma estratégia de busca determinística, a <strong>Busca em Profundidade (<em>Depth-First Search</em>)</strong>, implementada através de um mecanismo robusto de tentativa e erro chamado <strong><em>Backtracking</em></strong>.</p>
+<p>A mágica por trás da surpresa que a atenta leitora teve ao perceber a capacidade do Prolog de responder a perguntas complexas e encontrar soluções para problemas lógicos não é arbitrária. Pelo contrário, esta estupefação é o resultado direto da observação da parte visível de uma interação sistemática e bem definida de três processos distintos que formam o seu mecanismo de inferência. O primeiro é um algoritmo de correspondência de padrões chamado <strong>Unificação</strong>, que serve como a operação computacional primária. O segundo é um procedimento de prova formal conhecido como <strong>Resolução SLD</strong>, que fornece a base lógica para a inferência. O terceiro é uma estratégia de busca determinística, a <strong>Busca em Profundidade (<em>Depth-First Search</em>)</strong>, implementada por meio de um mecanismo robusto de tentativa e erro chamado <strong><em>Backtracking</em></strong>.</p>
 <section id="a-arquitetura-de-um-programa-prolog-a-base-de-conhecimento" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="a-arquitetura-de-um-programa-prolog-a-base-de-conhecimento"><span class="header-section-number">11.1</span> A Arquitetura de um Programa Prolog: A Base de Conhecimento</h2>
 <p>Todos os programas Prolog são estruturados a partir da sua <strong>base de conhecimento</strong>, <em>knowledge base</em>, um repositório estruturado de asserções lógicas que descrevem um domínio específico. Esta arquitetura impõe uma separação rigorosa entre os dados (fatos), a lógica (regras) e o controle (o mecanismo de inferência), que é a pedra angular do paradigma declarativo que suporta o Prolog. O texto do programa não é uma sequência de instruções, mas sim uma declaração estática de verdades. <em>Executar</em> um programa é, na verdade, o ato de submeter uma consulta a base de conhecimento.</p>
 <p>Tudo começa com fatos, o equivalente aos dados brutos.</p>
 <section id="termos-os-dados-do-prolog" class="level3" data-number="11.1.1">
 <h3 data-number="11.1.1" class="anchored" data-anchor-id="termos-os-dados-do-prolog"><span class="header-section-number">11.1.1</span> Termos: Os Dados do Prolog</h3>
-<p>Em Prolog, toda a representação de dados é feita através de uma única estrutura: o <strong>termo</strong>. Não existem tipos de dados distintos no sentido convencional; tudo, desde um simples número a uma árvore complexa, é um termo. Assim, temos:</p>
+<p>Em Prolog, toda a representação de dados é feita por meio de uma única estrutura: o <strong>termo</strong>. Não existem tipos de dados distintos no sentido convencional; tudo, desde um simples número a uma árvore complexa, é um termo. Assim, temos:</p>
 <ul>
 <li><strong>Átomos</strong>: são constantes que representam objetos, propriedades ou relações específicas. Sintaticamente, os átomos devem começar com uma letra minúscula, como <code>socrates</code>, <code>gosta</code> ou <code>vermelho</code>;</li>
 <li><strong>Números</strong>: literais numéricos, como inteiros e números de ponto flutuante;</li>
@@ -453,7 +459,7 @@ Note
 <li><p><strong>Interpretações e o Modelo Mínimo</strong>: uma <strong>interpretação de Herbrand</strong> é qualquer subconjunto da base de Herbrand. Ela especifica quais átomos <em>ground</em> são considerados verdadeiros, aqueles que estão presentes no subconjunto, e quais são falsos, os ausentes.</p>
 <p>Um <strong>modelo de Herbrand</strong> é uma interpretação que satisfaz todas as cláusulas do programa. O <strong>modelo mínimo de Herbrand</strong> <span class="math inline">\(M_H\)</span> é o menor modelo possível, a interseção de todos os modelos de Herbrand do programa.</p></li>
 </ol>
-<p>O modelo mínimo pode ser construído através do <strong>operador de consequência imediata</strong> <span class="math inline">\(T_P\)</span>:</p>
+<p>O modelo mínimo pode ser construído por meio do <strong>operador de consequência imediata</strong> <span class="math inline">\(T_P\)</span>:</p>
 <ol type="1">
 <li><strong>Passo inicial</strong>: <span class="math inline">\(M_0 = \emptyset\)</span>;</li>
 <li><strong>Aplicação iterativa</strong>: <span class="math inline">\(M_{i+1} = T_P(M_i)\)</span>, onde <span class="math inline">\(T_P\)</span> adiciona todos os átomos que podem ser derivados em um passo de inferência;</li>
@@ -471,7 +477,7 @@ Note
 <p><strong>Significado para o Prolog</strong>: quando dizemos que um fato <code>P(a₁, ..., aₙ)</code> é verdadeiro <em>no modelo mínimo de Herbrand</em>, estamos afirmando que:</p>
 <ol type="1">
 <li><strong>Semântica Declarativa</strong>: este átomo <em>ground</em> pertence ao menor conjunto de verdades que satisfaz logicamente o programa;</li>
-<li><strong>Semântica Operacional</strong>: este fato pode ser derivado através da aplicação finita das regras do programa;</li>
+<li><strong>Semântica Operacional</strong>: este fato pode ser derivado por meio da aplicação finita das regras do programa;</li>
 <li><strong>Hipótese do Mundo Fechado</strong>: tudo que <strong>não</strong> está no modelo mínimo é considerado falso.</li>
 </ol>
 <p>Esta correspondência entre a semântica declarativa, modelo mínimo, e a semântica operacional, o que pode ser provado via <strong>Resolução SLD</strong>, é o que torna o Prolog uma implementação executável da lógica de primeira ordem restrita às cláusulas de Horn. O modelo mínimo de Herbrand é, portanto, a interpretação canônica que captura exatamente o conhecimento codificado no programa, nem mais, nem menos.</p>
@@ -480,7 +486,7 @@ Note
 </section>
 <section id="regras-conhecimento-condicional" class="level4" data-number="11.1.2.2">
 <h4 data-number="11.1.2.2" class="anchored" data-anchor-id="regras-conhecimento-condicional"><span class="header-section-number">11.1.2.2</span> Regras: Conhecimento Condicional</h4>
-<p><strong>Regras</strong> são cláusulas que estabelecem verdades condicionais através de implicações lógicas. Uma regra consiste em uma <strong>cabeça</strong>, <em>head</em>, que representa a conclusão, e um <strong>corpo</strong>, <em>body</em>, que especifica as condições que devem ser satisfeitas. A cabeça e o corpo são conectados pelo operador <code>:-</code>, que se lê como <em>se</em> ou <em>é verdadeiro se</em>.</p>
+<p><strong>Regras</strong> são cláusulas que estabelecem verdades condicionais por meio de implicações lógicas. Uma regra consiste em uma <strong>cabeça</strong>, <em>head</em>, que representa a conclusão, e um <strong>corpo</strong>, <em>body</em>, que especifica as condições que devem ser satisfeitas. A cabeça e o corpo são conectados pelo operador <code>:-</code>, que se lê como <em>se</em> ou <em>é verdadeiro se</em>.</p>
 <p>Na lógica de primeira ordem, as regras correspondem a <strong>cláusulas de Horn definidas</strong> da forma <span class="math inline">\(H \leftarrow B_1 \land B_2 \land ... \land B_n\)</span>, na qual <span class="math inline">\(H\)</span> é a cabeça e <span class="math inline">\(B_i\)</span> são os literais do corpo.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra simples: ∀X (mamifero(X) → animal(X))</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>animal(<span class="dt">X</span>) <span class="kw">:-</span> mamifero(<span class="dt">X</span>)<span class="kw">.</span></span>
@@ -510,9 +516,9 @@ Note
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> animal(cachorro)<span class="kw">.</span> <span class="co">% true - pela regra e pelo fato mamifero(cachorro)</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">?-</span> animal(baleia)<span class="kw">.</span>  <span class="co">% true - pela regra e pelo fato mamifero(baleia)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="disjunção-através-de-múltiplas-cláusulas" class="level4" data-number="11.1.2.4">
-<h4 data-number="11.1.2.4" class="anchored" data-anchor-id="disjunção-através-de-múltiplas-cláusulas"><span class="header-section-number">11.1.2.4</span> Disjunção através de Múltiplas Cláusulas</h4>
-<p>O Prolog não possui um operador para criar disjunção entre cláusulas completas. Em vez disso, a disjunção no nível das cláusulas é expressa através de <strong>múltiplas cláusulas</strong> com a mesma cabeça:</p>
+<section id="disjunção-por-meio-de-múltiplas-cláusulas" class="level4" data-number="11.1.2.4">
+<h4 data-number="11.1.2.4" class="anchored" data-anchor-id="disjunção-por-meio-de-múltiplas-cláusulas"><span class="header-section-number">11.1.2.4</span> Disjunção por meio de Múltiplas Cláusulas</h4>
+<p>O Prolog não possui um operador para criar disjunção entre cláusulas completas. Em vez disso, a disjunção no nível das cláusulas é expressa por meio de <strong>múltiplas cláusulas</strong> com a mesma cabeça:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Disjunção implícita: ∀X (voa(X) ← ave(X) ∨ inseto_voador(X))</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>voa(<span class="dt">X</span>) <span class="kw">:-</span> ave(<span class="dt">X</span>)<span class="kw">.</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>voa(<span class="dt">X</span>) <span class="kw">:-</span> inseto_voador(<span class="dt">X</span>)<span class="kw">.</span></span>
@@ -531,7 +537,7 @@ Note
 </section>
 <section id="consultas-interrogando-a-base-de-conhecimento" class="level3" data-number="11.1.3">
 <h3 data-number="11.1.3" class="anchored" data-anchor-id="consultas-interrogando-a-base-de-conhecimento"><span class="header-section-number">11.1.3</span> Consultas: Interrogando a Base de Conhecimento</h3>
-<p>As <strong>consultas</strong>, <em>queries</em>, são o mecanismo através do qual fazemos perguntas à base de conhecimento Prolog. Representam objetivos, <em>goals</em>, que submetemos ao mecanismo de inferência para determinar se podem ser provados verdadeiros com base nos fatos e regras disponíveis.</p>
+<p>As <strong>consultas</strong>, <em>queries</em>, são o mecanismo por meio do qual fazemos perguntas à base de conhecimento Prolog. Representam objetivos, <em>goals</em>, que submetemos ao mecanismo de inferência para determinar se podem ser provados verdadeiros com base nos fatos e regras disponíveis.</p>
 <section id="natureza-formal-das-consultas" class="level4" data-number="11.1.3.1">
 <h4 data-number="11.1.3.1" class="anchored" data-anchor-id="natureza-formal-das-consultas"><span class="header-section-number">11.1.3.1</span> Natureza Formal das Consultas</h4>
 <p>Na teoria lógica subjacente, as consultas correspondem a <strong>cláusulas de Horn negativas</strong> da forma <span class="math inline">\(\leftarrow B_1 \land B_2 \land ... \land B_n\)</span>. O mecanismo de inferência tenta encontrar uma <strong>refutação</strong> da negação da consulta, implementando uma estratégia de prova por contradição.</p>
@@ -717,7 +723,7 @@ Note
 </section>
 <section id="impacto-da-cwa-no-comportamento-procedural-do-prolog" class="level4" data-number="11.1.4.4">
 <h4 data-number="11.1.4.4" class="anchored" data-anchor-id="impacto-da-cwa-no-comportamento-procedural-do-prolog"><span class="header-section-number">11.1.4.4</span> Impacto da CWA no Comportamento Procedural do Prolog</h4>
-<p>A <strong>Hipótese do Mundo Fechado</strong> é importante para compreender por que o Prolog se comporta de forma tão diferente das linguagens imperativas. Ela estabelece uma semântica clara para a ausência de informação, permitindo que o sistema de inferência tome decisões definitivas e siga adiante na computação. A atenta leitora não deve perder de vista que o Prolog não é simplesmente uma linguagem de consulta; é uma linguagem de programação completa, onde a lógica e o controle estão entrelaçados através da <strong>CWA</strong>.</p>
+<p>A <strong>Hipótese do Mundo Fechado</strong> é importante para compreender por que o Prolog se comporta de forma tão diferente das linguagens imperativas. Ela estabelece uma semântica clara para a ausência de informação, permitindo que o sistema de inferência tome decisões definitivas e siga adiante na computação. A atenta leitora não deve perder de vista que o Prolog não é simplesmente uma linguagem de consulta; é uma linguagem de programação completa, onde a lógica e o controle estão entrelaçados por meio da <strong>CWA</strong>.</p>
 <p>Esta suposição está intrinsecamente ligada à estratégia de busca do Prolog: quando o mecanismo de inferência não consegue encontrar uma prova para um objetivo, ele <strong>não suspende</strong> a execução aguardando mais informação, assume imediatamente que o objetivo é falso e prossegue de acordo.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">% A CWA permite decisões rápidas em estruturas condicionais</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>processar_animal(<span class="dt">X</span>) <span class="kw">:-</span></span>
@@ -842,8 +848,39 @@ Table&nbsp;11.1: Exemplos de Unificação.
 </section>
 <section id="o-mecanismo-de-inferência-lógico-resolução-sld" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="o-mecanismo-de-inferência-lógico-resolução-sld"><span class="header-section-number">11.3</span> O mecanismo de inferência Lógico: Resolução SLD</h2>
-<p>Se a unificação é a operação fundamental, a <strong>Resolução SLD</strong> é o procedimento de inferência formal que a orquestra. O mecanismo de inferência do Prolog não está simplesmente a <em>executar código</em>; está a construir uma prova formal para a consulta submetida.</p>
-<p>A estratégia central do Prolog é a <strong>prova por refutação</strong>, do inglês <em>proof by refutation</em>. Para provar que uma consulta <span class="math inline">\(Q\)</span> é verdadeira, o mecanismo de inferência assume temporariamente que ela é falsa (<span class="math inline">\(\neg Q\)</span>) e tenta derivar uma contradição lógica, a cláusula vazia, que representa falso, a partir desta suposição, em conjunto com a base de conhecimento.8 Se uma contradição é encontrada, a suposição inicial (<span class="math inline">\(\neg Q\)</span>) deve ser falsa, o que, por sua vez, prova que a consulta original <span class="math inline">\(Q\)</span> deve ser verdadeira. Este é um princípio fundamental da prova automática de teoremas.</p>
+<p>Se a unificação é a operação fundamental, a <strong>Resolução SLD</strong> é o procedimento de inferência formal que a orquestra.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O <strong>Modus Ponens Generalizado</strong> é uma regra de inferência da lógica de primeira ordem que amplia o clássico <em>Modus Ponens</em> (<span class="math inline">\(P \rightarrow Q, P \vdash Q\)</span>) para lidar com variáveis. Ele é o alicerce de muitos sistemas de inferência, incluindo a base conceitual do que o Prolog faz.</p>
+<p>O Modus Ponens Generalizado estabelece que, dadas as premissas:</p>
+<ol type="1">
+<li>Uma regra geral na forma de uma implicação: <span class="math inline">\(\forall x_1, ..., x_k (P_1 \land P_2 \land ... \land P_n \rightarrow Q)\)</span>;</li>
+<li>Um conjunto de fatos específicos: <span class="math inline">\(P'_1, P'_2, ..., P'_n\)</span>.</li>
+</ol>
+<p>Se for possível encontrar uma <strong>substituição</strong> <span class="math inline">\(\theta\)</span> que torne as premissas da regra (<span class="math inline">\(P_i\)</span>) idênticas aos fatos conhecidos (<span class="math inline">\(P'_i\)</span>), então podemos inferir uma nova conclusão, que é o consequente da regra (<span class="math inline">\(Q\)</span>) com a mesma substituição aplicada (<span class="math inline">\(\theta Q\)</span>).</p>
+<p>Formalmente, para todo <span class="math inline">\(i=1, ..., n\)</span>, se <span class="math inline">\(\theta P_i = P'_i\)</span>, então podemos concluir <span class="math inline">\(\theta Q\)</span>.</p>
+<p>O processo de encontrar essa substituição <span class="math inline">\(\theta\)</span> é exatamente o que o algoritmo de <strong>Unificação</strong> faz. Por exemplo, considere a regra:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra: Para todo X, Y, Z, se X é pai de Y e Y é pai de Z, então X é avô de Z.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">% Formalmente: ∀X,Y,Z (pai(X,Y) ∧ pai(Y,Z) → avo(X,Z))</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>avo(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>) <span class="kw">:-</span> pai(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">,</span> pai(<span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">.</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">% Fatos</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>pai(joao<span class="kw">,</span> pedro)<span class="kw">.</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>pai(pedro<span class="kw">,</span> maria)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ao aplicar o Modus Ponens Generalizado, o sistema busca uma substituição que satisfaça as premissas <code>pai(X, Y)</code> e <code>pai(Y, Z)</code> com os fatos disponíveis. A unificação encontra a substituição <span class="math inline">\(\theta = \{X/joao, Y/pedro, Z/maria\}\)</span>. Como a unificação foi bem-sucedida, a regra pode ser aplicada, e a conclusão <span class="math inline">\(\theta \, avo(X,Z)\)</span>, ou seja, <code>avo(joao, maria)</code>, é inferida como um novo conhecimento.</p>
+<p>O Prolog implementa este processo por meio de um mecanismo mais específico e orientado a objetivos chamado <strong>Resolução SLD</strong>, que veremos neste capítulo. A ideia central de unificar fatos com as premissas de uma regra para derivar uma nova conclusão é a mesma herdada do Modus Ponens Generalizado.</p>
+</div>
+</div>
+<p>O mecanismo de inferência do Prolog não está simplesmente <em>executando código</em>; está construindo uma prova formal para a consulta submetida.</p>
+<p>A estratégia central do Prolog é a <strong>prova por refutação</strong>, do inglês <em>proof by refutation</em>. Para provar que uma consulta <span class="math inline">\(Q\)</span> é verdadeira, o mecanismo de inferência assume temporariamente que ela é falsa (<span class="math inline">\(\neg Q\)</span>) e tenta derivar uma contradição lógica, a cláusula vazia, que representa falso, a partir desta suposição, em conjunto com a base de conhecimento. Se uma contradição é encontrada, a suposição inicial (<span class="math inline">\(\neg Q\)</span>) deve ser falsa, o que, por sua vez, prova que a consulta original <span class="math inline">\(Q\)</span> deve ser verdadeira. Este é um princípio fundamental da prova automática de teoremas.</p>
 <p>O acrônimo <strong>SLD</strong> tem origem no inglês e significa Resolução linear seletiva para cláusulas definidas. Cada termo tem um significado preciso:</p>
 <ul>
 <li><strong>D (Definidas)</strong>: o procedimento opera sobre Cláusulas de Horn definidas, que é a forma lógica das regras e fatos do Prolog;</li>
@@ -874,25 +911,25 @@ Table&nbsp;11.1: Exemplos de Unificação.
 <section id="exemplo-em-prolog" class="level3" data-number="11.3.2">
 <h3 data-number="11.3.2" class="anchored" data-anchor-id="exemplo-em-prolog"><span class="header-section-number">11.3.2</span> Exemplo em Prolog</h3>
 <p>O código a seguir define uma pequena base de conhecimento sobre relações familiares e uma regra para inferir ancestralidade.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Base de conhecimento</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>pai(joao<span class="kw">,</span> maria)<span class="kw">.</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>pai(joao<span class="kw">,</span> pedro)<span class="kw">.</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>pai(pedro<span class="kw">,</span> ana)<span class="kw">.</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>pai(pedro<span class="kw">,</span> carlos)<span class="kw">.</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>mae(rosa<span class="kw">,</span> maria)<span class="kw">.</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>mae(rosa<span class="kw">,</span> pedro)<span class="kw">.</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>mae(maria<span class="kw">,</span> ana)<span class="kw">.</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>mae(maria<span class="kw">,</span> carlos)<span class="kw">.</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra para definir progenitor</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> pai(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> mae(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra para definir ancestral</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>ancestral(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>ancestral(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> ancestral(<span class="dt">Z</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- ancestral(joao, ana).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Base de conhecimento</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pai(joao<span class="kw">,</span> maria)<span class="kw">.</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pai(joao<span class="kw">,</span> pedro)<span class="kw">.</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>pai(pedro<span class="kw">,</span> ana)<span class="kw">.</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>pai(pedro<span class="kw">,</span> carlos)<span class="kw">.</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>mae(rosa<span class="kw">,</span> maria)<span class="kw">.</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>mae(rosa<span class="kw">,</span> pedro)<span class="kw">.</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>mae(maria<span class="kw">,</span> ana)<span class="kw">.</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>mae(maria<span class="kw">,</span> carlos)<span class="kw">.</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra para definir progenitor</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> pai(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> mae(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">% Regra para definir ancestral</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>ancestral(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>ancestral(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> progenitor(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> ancestral(<span class="dt">Z</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">% Consulta: ?- ancestral(joao, ana).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Para a consulta <code>?- ancestral(joao, ana)</code>, o mecanismo de inferência Prolog constrói a seguinte árvore de busca, explorando um ramo de cada vez, busca em profundidade:</p>
 <ol type="1">
 <li><strong>vértice raiz</strong>: <code>ancestral(joao, ana)</code>
@@ -985,24 +1022,24 @@ Figure&nbsp;11.1
 <li><strong>Esgotar as Possibilidades</strong>: Se todas as alternativas num ponto de escolha forem tentadas e falharem, o ponto de escolha é removido, e o objetivo original que o criou falha, desencadeando mais backtracking. A consulta inteira falha se o mecanismo de inferência fizer backtracking para além do primeiro ponto de escolha.</li>
 </ol>
 <p>Vamos usar um algoritmo de procura de caminhos num grafo para traçar este processo em detalhe. Considere o fragmento de código a seguir:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>edge(a<span class="kw">,</span>b)<span class="kw">.</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>edge(a<span class="kw">,</span>c)<span class="kw">.</span> </span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>edge(b<span class="kw">,</span>d)<span class="kw">.</span> </span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>edge(c<span class="kw">,</span>d)<span class="kw">.</span> </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>edge(d<span class="kw">,</span>e)<span class="kw">.</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span>[])<span class="kw">.</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso base: há um caminho se houver uma aresta direta. </span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span><span class="dt">_</span>) <span class="kw">:-</span> edge(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso recursivo: há um caminho se houver uma aresta para Z  </span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">% e um caminho de Z para Y, desde que X não tenha sido visitado. </span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span><span class="dt">V</span>) <span class="kw">:-</span>  </span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> member(<span class="dt">X</span><span class="kw">,</span><span class="dt">V</span>)<span class="kw">,</span>  </span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    edge(<span class="dt">X</span><span class="kw">,</span><span class="dt">Z</span>)<span class="kw">,</span>  </span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    path(<span class="dt">Z</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span>[<span class="dt">X</span><span class="fu">|</span><span class="dt">V</span>])<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>edge(a<span class="kw">,</span>b)<span class="kw">.</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>edge(a<span class="kw">,</span>c)<span class="kw">.</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>edge(b<span class="kw">,</span>d)<span class="kw">.</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>edge(c<span class="kw">,</span>d)<span class="kw">.</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>edge(d<span class="kw">,</span>e)<span class="kw">.</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>) <span class="kw">:-</span> path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span>[])<span class="kw">.</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso base: há um caminho se houver uma aresta direta. </span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span><span class="dt">_</span>) <span class="kw">:-</span> edge(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span>)<span class="kw">.</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso recursivo: há um caminho se houver uma aresta para Z  </span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co">% e um caminho de Z para Y, desde que X não tenha sido visitado. </span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>path(<span class="dt">X</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span><span class="dt">V</span>) <span class="kw">:-</span>  </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">\+</span> member(<span class="dt">X</span><span class="kw">,</span><span class="dt">V</span>)<span class="kw">,</span>  </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    edge(<span class="dt">X</span><span class="kw">,</span><span class="dt">Z</span>)<span class="kw">,</span>  </span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    path(<span class="dt">Z</span><span class="kw">,</span><span class="dt">Y</span><span class="kw">,</span>[<span class="dt">X</span><span class="fu">|</span><span class="dt">V</span>])<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Agora podemos analisar o algoritmo, passo a passo para a solução da consulta <code>?- path(a, e).</code>:</p>
 <ol type="1">
 <li><strong>Chamada Inicial</strong>: o objetivo é <code>path(a, e)</code>. Unifica com a cabeça de <code>path/2</code>, que chama <code>path(a, e, [])</code>.</li>
@@ -1046,7 +1083,7 @@ Figure&nbsp;11.2
 <section id="estruturas-de-dados-como-uma-lente-para-a-mecânica-do-prolog" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="estruturas-de-dados-como-uma-lente-para-a-mecânica-do-prolog"><span class="header-section-number">11.4</span> Estruturas de Dados como uma Lente para a Mecânica do Prolog</h2>
 <p>A manipulação de estruturas de dados em Prolog serve como um exemplo prático da aplicação de seus mecanismos fundamentais: a unificação e a recursão. Diferente das linguagens imperativas, o Prolog não se destaca por comandos que modificam dados diretamente, como <em>obtenha o filho esquerdo de uma árvore</em>. Em vez disso, sua força está na capacidade de definir de forma declarativa as propriedades e relações que governam essas estruturas. O código Prolog não descreve <em>como</em> manipular a estrutura, mas sim <em>o que</em> a define. Por exemplo, em vez de um procedimento para navegar numa árvore, uma regra em Prolog especificaria: <em>esta relação é verdadeira para uma árvore se o seu valor satisfaz uma determinada condição</em>, deixando que o mecanismo de inferência encontre as soluções que correspondem a essa declaração.</p>
-<p>Nós podemos tentar entender como o Prolog lida com estruturas de dados através de quatro exemplos clássicos de estruturas de dados: listas, pilhas, filas e árvores de busca binária.</p>
+<p>Nós podemos tentar entender como o Prolog lida com estruturas de dados por meio de quatro exemplos clássicos de estruturas de dados: listas, pilhas, filas e árvores de busca binária.</p>
 <section id="a-estrutura-de-dados-fundamental-listas-em-prolog" class="level3" data-number="11.4.1">
 <h3 data-number="11.4.1" class="anchored" data-anchor-id="a-estrutura-de-dados-fundamental-listas-em-prolog"><span class="header-section-number">11.4.1</span> A Estrutura de Dados Fundamental: Listas em Prolog</h3>
 <p>No coração do Prolog, a lista é a única estrutura de dados com sintaxe própria, tornando-a uma ferramenta central para quase todas as aplicações. Uma lista é uma sequência ordenada de elementos que pode conter qualquer tipo de termo Prolog (átomos, números, variáveis ou outras estruturas, incluindo outras listas). A sua elegância reside na sua definição recursiva, que se alinha perfeitamente com a natureza do Prolog.</p>
@@ -1056,13 +1093,13 @@ Figure&nbsp;11.2
 <li>A estrutura <code>[Head | Tail]</code>, onde <code>Head</code> é o primeiro elemento e <code>Tail</code> é uma lista contendo o resto dos elementos.</li>
 </ol>
 <p>Esta notação <code>[H|T]</code> é, na verdade, uma forma mais legível para o operador canônico do Prolog, o ponto (<code>.</code>). Assim, a lista <code>[a, b, c]</code> é internamente representada como <code>.(a, .(b, .(c, [])))</code>. Compreender esta representação interna é essencial para desmistificar a sintaxe das listas e perceber por que a unificação com <code>[H|T]</code> é tão eficiente. O functor <code>.</code> permite que o mecanismo de inferência decomponha listas como termos compostos genéricos, tratando-as de forma idêntica a outras estruturas. Por exemplo, podemos manipular listas diretamente usando o functor <code>.</code>, embora a notação <code>[H|T]</code> seja preferível pela legibilidade e conveniência.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Exemplo usando functor '.' explicitamente</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>eh_lista_vazia([])<span class="kw">.</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>eh_lista_vazia(<span class="fu">.</span>(<span class="dt">_</span><span class="kw">,</span> <span class="dt">_</span>)) <span class="kw">:-</span> <span class="kw">fail.</span>  <span class="co">% Uma lista não vazia tem functor '.' com dois argumentos</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Equivalente ao padrão [H|T]</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>primeiro_elemento(<span class="fu">.</span>(<span class="dt">H</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">,</span> <span class="dt">H</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Exemplo usando functor '.' explicitamente</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>eh_lista_vazia([])<span class="kw">.</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>eh_lista_vazia(<span class="fu">.</span>(<span class="dt">_</span><span class="kw">,</span> <span class="dt">_</span>)) <span class="kw">:-</span> <span class="kw">fail.</span>  <span class="co">% Uma lista não vazia tem functor '.' com dois argumentos</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Equivalente ao padrão [H|T]</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>primeiro_elemento(<span class="fu">.</span>(<span class="dt">H</span><span class="kw">,</span> <span class="dt">_</span>)<span class="kw">,</span> <span class="dt">H</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1078,19 +1115,19 @@ Note
 </div>
 <section id="unificação-e-recursão-as-ferramentas-de-manipulação-de-listas" class="level4" data-number="11.4.1.1">
 <h4 data-number="11.4.1.1" class="anchored" data-anchor-id="unificação-e-recursão-as-ferramentas-de-manipulação-de-listas"><span class="header-section-number">11.4.1.1</span> Unificação e Recursão: As Ferramentas de Manipulação de Listas</h4>
-<p>Como o Prolog não possui laços (<code>for</code>, <code>while</code>), a única forma de processar os elementos de uma lista é através da <strong>recursão</strong>. O padrão <code>[Head|Tail]</code> é a chave para este processo, permitindo decompor a lista a cada passo recursivo. O padrão geral para processar uma lista é:</p>
+<p>Como o Prolog não possui laços (<code>for</code>, <code>while</code>), a única forma de processar os elementos de uma lista é por meio da <strong>recursão</strong>. O padrão <code>[Head|Tail]</code> é a chave para este processo, permitindo decompor a lista a cada passo recursivo. O padrão geral para processar uma lista é:</p>
 <ul>
 <li><strong>Caso Base</strong>: define o que acontece quando a lista está vazia (<code>[]</code>). Este é o critério usado para parar a recursão;</li>
 <li><strong>Caso Recursivo</strong>: processa a <code>Head</code> da lista e faz uma chamada recursiva para o predicado, passando o <code>Tail</code> como o novo argumento da lista.</li>
 </ul>
 <p>Vejamos o exemplo clássico do predicado <code>member/2</code>, que verifica se um elemento pertence a uma lista.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">% member(Elemento, Lista)</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Base: O elemento é membro se for a cabeça da lista.</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">X</span><span class="fu">|</span><span class="dt">_</span>])<span class="kw">.</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Recursivo: O elemento é membro se pertencer ao resto da lista.</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">_</span><span class="fu">|</span><span class="dt">T</span>]) <span class="kw">:-</span> member(<span class="dt">X</span><span class="kw">,</span> <span class="dt">T</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">% member(Elemento, Lista)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Base: O elemento é membro se for a cabeça da lista.</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">X</span><span class="fu">|</span><span class="dt">_</span>])<span class="kw">.</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Recursivo: O elemento é membro se pertencer ao resto da lista.</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">_</span><span class="fu">|</span><span class="dt">T</span>]) <span class="kw">:-</span> member(<span class="dt">X</span><span class="kw">,</span> <span class="dt">T</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>O funcionamento, impulsionado pela unificação, é o seguinte:</p>
 <ol type="1">
 <li><strong>Consulta</strong>: <code>?- member(b, [a, b, c]).</code>;</li>
@@ -1119,21 +1156,21 @@ Note
 <section id="a-pilha-um-ajuste-natural-para-as-listas-do-prolog" class="level3" data-number="11.4.2">
 <h3 data-number="11.4.2" class="anchored" data-anchor-id="a-pilha-um-ajuste-natural-para-as-listas-do-prolog"><span class="header-section-number">11.4.2</span> A Pilha: Um Ajuste Natural para as Listas do Prolog</h3>
 <p>Uma pilha (<em>stack</em>) é uma estrutura de dados <strong>LIFO</strong> (<em>Last-In, First-Out</em>), na qual o último elemento adicionado é o primeiro a ser removido. Esta estrutura é trivialmente implementada em Prolog, que trata a cabeça da lista (<code>Head</code>) como o topo da pilha e o resto da lista (<code>Tail</code>) como o corpo. A sintaxe <code>[Head|Tail]</code> permite a construção (adição) e a decomposição (remoção) de elementos com extrema eficiência.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">% is_empty(Pilha)</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">% A pilha está vazia se for a lista vazia.</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>is_empty([])<span class="kw">.</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">% push(Elemento, Pilha_Antiga, Nova_Pilha)</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Adiciona um elemento ao topo da pilha.</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>push(<span class="dt">Elem</span><span class="kw">,</span> <span class="dt">Stack</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">Stack</span>])<span class="kw">.</span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">% pop(Elemento, Pilha_Antiga, Nova_Pilha)</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Remove o elemento do topo da pilha.</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>pop(<span class="dt">Elem</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">Stack</span>]<span class="kw">,</span> <span class="dt">Stack</span>)<span class="kw">.</span></span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">% peek(Elemento, Pilha)</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Vê o elemento no topo sem o remover.</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>peek(<span class="dt">Elem</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">_</span>])<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">% is_empty(Pilha)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">% A pilha está vazia se for a lista vazia.</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>is_empty([])<span class="kw">.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">% push(Elemento, Pilha_Antiga, Nova_Pilha)</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">% Adiciona um elemento ao topo da pilha.</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>push(<span class="dt">Elem</span><span class="kw">,</span> <span class="dt">Stack</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">Stack</span>])<span class="kw">.</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">% pop(Elemento, Pilha_Antiga, Nova_Pilha)</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">% Remove o elemento do topo da pilha.</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>pop(<span class="dt">Elem</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">Stack</span>]<span class="kw">,</span> <span class="dt">Stack</span>)<span class="kw">.</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">% peek(Elemento, Pilha)</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">% Vê o elemento no topo sem o remover.</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>peek(<span class="dt">Elem</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">_</span>])<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Este design elegante demonstra o poder da unificação para manipulação de dados:</p>
 <ul>
 <li><strong>Unificação para Decomposição (pop)</strong>: Uma consulta como <code>?- pop(X, [a, b, c], S).</code> tenta unificar a sua estrutura com a cabeça da regra <code>pop(Elem, [Elem|Stack], Stack)</code>. A unificação acontece da seguinte forma:
@@ -1150,19 +1187,19 @@ Note
 <section id="a-fila-o-desafio-do-primeiro-a-entrar" class="level3" data-number="11.4.3">
 <h3 data-number="11.4.3" class="anchored" data-anchor-id="a-fila-o-desafio-do-primeiro-a-entrar"><span class="header-section-number">11.4.3</span> A Fila: O Desafio do “Primeiro a Entrar”</h3>
 <p>Uma fila (<em>queue</em>) é uma estrutura _<strong>F</strong>irst-<strong>I</strong>n, <strong>F</strong>irst-<strong>O</strong>ut*, <strong>FIFO</strong>, na qual o primeiro elemento a entrar é o primeiro a sair. Implementar uma fila de forma eficiente em Prolog é um pouco mais complexo. Adicionar um elemento no fim de uma lista é uma operação lenta (requer percorrer a lista inteira). A solução mais comum é usar duas listas para representar a fila: uma lista <em>frontal</em> para remoções rápidas e uma lista <em>traseira</em> para adições rápidas.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Estrutura: queue(Frente, Tras)</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">% enqueue(Elemento, Fila_Antiga, Nova_Fila)</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Adiciona um elemento ao fim da fila (na lista de trás).</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>enqueue(<span class="dt">Elem</span><span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> <span class="dt">B</span>)<span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">B</span>]))<span class="kw">.</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">% dequeue(Elemento, Fila_Antiga, Nova_Fila)</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">% Remove o elemento da frente da fila.</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso 1: A lista da frente não está vazia.</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>dequeue(<span class="dt">Elem</span><span class="kw">,</span> queue([<span class="dt">Elem</span><span class="fu">|</span><span class="dt">F</span>]<span class="kw">,</span> <span class="dt">B</span>)<span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> <span class="dt">B</span>))<span class="kw">.</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso 2: A lista da frente está vazia. Inverte-se a de trás.</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>dequeue(<span class="dt">Elem</span><span class="kw">,</span> queue([]<span class="kw">,</span> <span class="dt">B</span>)<span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> [])) <span class="kw">:-</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    reverse(<span class="dt">B</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">F</span>])<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Estrutura: queue(Frente, Tras)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">% enqueue(Elemento, Fila_Antiga, Nova_Fila)</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Adiciona um elemento ao fim da fila (na lista de trás).</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>enqueue(<span class="dt">Elem</span><span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> <span class="dt">B</span>)<span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">B</span>]))<span class="kw">.</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">% dequeue(Elemento, Fila_Antiga, Nova_Fila)</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">% Remove o elemento da frente da fila.</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso 1: A lista da frente não está vazia.</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>dequeue(<span class="dt">Elem</span><span class="kw">,</span> queue([<span class="dt">Elem</span><span class="fu">|</span><span class="dt">F</span>]<span class="kw">,</span> <span class="dt">B</span>)<span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> <span class="dt">B</span>))<span class="kw">.</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso 2: A lista da frente está vazia. Inverte-se a de trás.</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>dequeue(<span class="dt">Elem</span><span class="kw">,</span> queue([]<span class="kw">,</span> <span class="dt">B</span>)<span class="kw">,</span> queue(<span class="dt">F</span><span class="kw">,</span> [])) <span class="kw">:-</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    reverse(<span class="dt">B</span><span class="kw">,</span> [<span class="dt">Elem</span><span class="fu">|</span><span class="dt">F</span>])<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>O mecanismo inteligente acontece na segunda cláusula de <code>dequeue</code>:</p>
 <ol type="1">
 <li><strong>Chamada:</strong> <code>?- enqueue(c, queue([a], [b]), Q1), enqueue(d, Q1, Q2).</code>
@@ -1190,26 +1227,26 @@ Note
 <section id="árvores-de-busca-binária-unificação-em-estruturas-recursivas" class="level3" data-number="11.4.4">
 <h3 data-number="11.4.4" class="anchored" data-anchor-id="árvores-de-busca-binária-unificação-em-estruturas-recursivas"><span class="header-section-number">11.4.4</span> Árvores de Busca Binária: Unificação em Estruturas Recursivas</h3>
 <p>Uma Árvore de Busca Binária é uma estrutura de dados recursiva ideal para o Prolog. Podemos representá-la com a estrutura <code>tree(Esquerda, Valor, Direita)</code> para um vértice e o átomo <code>nil</code> para uma árvore vazia. A implementação dos predicados de busca (<code>lookup</code>) e inserção (<code>insert</code>) demonstra como a unificação, guiada por comparações aritméticas, navega e constrói estas estruturas de forma declarativa.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">% lookup(Valor, Arvore)</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">% Verifica se um valor existe na árvore.</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>lookup(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> <span class="dt">_</span>))<span class="kw">.</span> <span class="co">% Caso base: o valor está no vértice atual.</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>lookup(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">NodeVal</span><span class="kw">,</span> <span class="dt">_</span>)) <span class="kw">:-</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&lt;</span> <span class="dt">NodeVal</span><span class="kw">,</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    lookup(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">Left</span>)<span class="kw">.</span>         <span class="co">% Recurso à esquerda.</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>lookup(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">_</span><span class="kw">,</span> <span class="dt">NodeVal</span><span class="kw">,</span> <span class="dt">Right</span>)) <span class="kw">:-</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&gt;</span> <span class="dt">NodeVal</span><span class="kw">,</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    lookup(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">Right</span>)<span class="kw">.</span>        <span class="co">% Recurso à direita.</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">% insert(Valor, Arvore_Antiga, Nova_Arvore)</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Insere um valor na árvore, criando uma nova árvore.</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> nil<span class="kw">,</span> tree(nil<span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> nil))<span class="kw">.</span> <span class="co">% Caso base: insere numa árvore vazia.</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">R</span>)<span class="kw">,</span> tree(<span class="dt">NL</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">R</span>)) <span class="kw">:-</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&lt;</span> <span class="dt">V</span><span class="kw">,</span></span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    insert(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">L</span><span class="kw">,</span> <span class="dt">NL</span>)<span class="kw">.</span>        <span class="co">% Constrói uma nova sub-árvore à esquerda.</span></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">R</span>)<span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">NR</span>)) <span class="kw">:-</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&gt;</span> <span class="dt">V</span><span class="kw">,</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    insert(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">R</span><span class="kw">,</span> <span class="dt">NR</span>)<span class="kw">.</span>        <span class="co">% Constrói uma nova sub-árvore à direita.</span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> <span class="dt">R</span>)<span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> <span class="dt">R</span>))<span class="kw">.</span> <span class="co">% Valor já existe, não faz nada.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">% lookup(Valor, Arvore)</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">% Verifica se um valor existe na árvore.</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>lookup(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">_</span><span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> <span class="dt">_</span>))<span class="kw">.</span> <span class="co">% Caso base: o valor está no vértice atual.</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>lookup(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">NodeVal</span><span class="kw">,</span> <span class="dt">_</span>)) <span class="kw">:-</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&lt;</span> <span class="dt">NodeVal</span><span class="kw">,</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    lookup(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">Left</span>)<span class="kw">.</span>         <span class="co">% Recurso à esquerda.</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>lookup(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">_</span><span class="kw">,</span> <span class="dt">NodeVal</span><span class="kw">,</span> <span class="dt">Right</span>)) <span class="kw">:-</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&gt;</span> <span class="dt">NodeVal</span><span class="kw">,</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    lookup(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">Right</span>)<span class="kw">.</span>        <span class="co">% Recurso à direita.</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">% insert(Valor, Arvore_Antiga, Nova_Arvore)</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">% Insere um valor na árvore, criando uma nova árvore.</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> nil<span class="kw">,</span> tree(nil<span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> nil))<span class="kw">.</span> <span class="co">% Caso base: insere numa árvore vazia.</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">R</span>)<span class="kw">,</span> tree(<span class="dt">NL</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">R</span>)) <span class="kw">:-</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&lt;</span> <span class="dt">V</span><span class="kw">,</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    insert(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">L</span><span class="kw">,</span> <span class="dt">NL</span>)<span class="kw">.</span>        <span class="co">% Constrói uma nova sub-árvore à esquerda.</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">R</span>)<span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">V</span><span class="kw">,</span> <span class="dt">NR</span>)) <span class="kw">:-</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Value</span> <span class="dt">&gt;</span> <span class="dt">V</span><span class="kw">,</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    insert(<span class="dt">Value</span><span class="kw">,</span> <span class="dt">R</span><span class="kw">,</span> <span class="dt">NR</span>)<span class="kw">.</span>        <span class="co">% Constrói uma nova sub-árvore à direita.</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>insert(<span class="dt">Value</span><span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> <span class="dt">R</span>)<span class="kw">,</span> tree(<span class="dt">L</span><span class="kw">,</span> <span class="dt">Value</span><span class="kw">,</span> <span class="dt">R</span>))<span class="kw">.</span> <span class="co">% Valor já existe, não faz nada.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>O processo de transversalidade é impulsionado pela busca do Prolog por uma cabeça de cláusula que possa unificar:</p>
 <ul>
 <li><strong>Busca (<code>lookup</code>)</strong>: Numa consulta <code>?- lookup(15, tree(nil, 20, nil)).</code>:
@@ -1243,28 +1280,28 @@ Note
 <li>Descarta todas as outras cláusulas para o predicado atual que aparecem abaixo daquela que contém o corte.</li>
 <li>Descarta todos os pontos de escolha criados pelos objetivos à <strong>esquerda</strong> do corte, dentro do corpo da cláusula atual.</li>
 </ol>
-<p>Uma metáfora útil é pensar no corte como uma barreira ou um portão de sentido único na árvore de busca. O <em>backtracking</em> pode ocorrer livremente entre os objetivos à direita do corte. No entanto, se a computação falhar à direita do corte e tentar fazer <em>backtrack</em> <em>através</em> dele, o objetivo pai falha imediatamente, e nenhuma outra alternativa é considerada.</p>
+<p>Uma metáfora útil é pensar no corte como uma barreira ou um portão de sentido único na árvore de busca. O <em>backtracking</em> pode ocorrer livremente entre os objetivos à direita do corte. No entanto, se a computação falhar à direita do corte e tentar fazer <em>backtrack</em> <em>por meio</em> dele, o objetivo pai falha imediatamente, e nenhuma outra alternativa é considerada.</p>
 <section id="cortes-verdes-poda-para-eficiência" class="level3" data-number="11.5.1">
 <h3 data-number="11.5.1" class="anchored" data-anchor-id="cortes-verdes-poda-para-eficiência"><span class="header-section-number">11.5.1</span> Cortes Verdes: Poda para Eficiência</h3>
 <p>Um <strong>corte verde</strong>, do inglês <em>green cut</em>, é aquele cujo uso não altera o significado declarativo do programa, ou seja, não altera o conjunto de soluções encontradas. A sua única função é melhorar a eficiência, podando ramos da árvore de busca que se sabe serem redundantes ou que levarão a uma falha garantida. O exemplo clássico é o predicado <code>max/3</code> para encontrar o máximo de dois números:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>) <span class="kw">:-</span> <span class="dt">X</span> \&gt;= <span class="dt">Y</span><span class="kw">,</span><span class="al">\</span><span class="kw">!.</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> <span class="dt">X</span> \&lt; <span class="dt">Y</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>) <span class="kw">:-</span> <span class="dt">X</span> \&gt;= <span class="dt">Y</span><span class="kw">,</span><span class="al">\</span><span class="kw">!.</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> <span class="dt">X</span> \&lt; <span class="dt">Y</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Neste caso, as duas cláusulas são mutuamente exclusivas. Se a condição <code>X &gt;= Y</code> for verdadeira, sabemos que <code>X</code> é o máximo, e a segunda cláusula (<code>X &lt; Y</code>) será necessariamente falsa. O corte simplesmente informa o mecanismo de inferência: <em>Em contraste a única resposta correta para este caso. Não se preocupe em criar um ponto de escolha para tentar a outra cláusula, pois seria uma perda de tempo</em>. A remoção do corte não alteraria as respostas corretas, mas faria com que o mecanismo de inferência realizasse trabalho desnecessário.</p>
 </section>
 <section id="cortes-vermelhos-alterando-a-lógica" class="level3" data-number="11.5.2">
 <h3 data-number="11.5.2" class="anchored" data-anchor-id="cortes-vermelhos-alterando-a-lógica"><span class="header-section-number">11.5.2</span> Cortes Vermelhos: Alterando a Lógica</h3>
 <p>Um <strong>corte vermelho</strong>, do inglês <em>red cut</em>, é aquele que <em>altera</em> o significado declarativo do programa. A sua remoção levaria à produção de mais soluções ou de soluções diferentes e, muitas vezes, incorretas. Os cortes vermelhos tornam a correção do programa dependente da ordem específica das cláusulas e do fluxo procedural, comprometendo a sua pureza lógica. Um exemplo comum é a implementação de uma estrutura <em>if-then-else</em>:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ifte(Condicao, Entao, Senao)</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ifte(<span class="dt">C</span><span class="kw">,</span> <span class="dt">T</span><span class="kw">,</span> <span class="dt">_</span>) <span class="kw">:-</span> <span class="dt">C</span><span class="kw">,</span> <span class="kw">!,</span> <span class="dt">T</span><span class="kw">.</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ifte(<span class="dt">_</span><span class="kw">,</span> <span class="dt">_</span><span class="kw">,</span> <span class="dt">E</span>) <span class="kw">:-</span> <span class="dt">E</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">% ifte(Condicao, Entao, Senao)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ifte(<span class="dt">C</span><span class="kw">,</span> <span class="dt">T</span><span class="kw">,</span> <span class="dt">_</span>) <span class="kw">:-</span> <span class="dt">C</span><span class="kw">,</span> <span class="kw">!,</span> <span class="dt">T</span><span class="kw">.</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>ifte(<span class="dt">_</span><span class="kw">,</span> <span class="dt">_</span><span class="kw">,</span> <span class="dt">E</span>) <span class="kw">:-</span> <span class="dt">E</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Aqui, se <code>C</code> tiver sucesso, o corte é executado, comprometendo o mecanismo de inferência com a primeira cláusula, e <code>T</code> é executado. Se <code>C</code> falhar, o mecanismo de inferência faz <em>backtrack</em>, pois o corte não foi alcançado, tenta a segunda cláusula e executa <code>E</code>. Este corte é <em>vermelho</em> porque a segunda cláusula, <code>ifte(_, _, E) :- E.</code>, não é logicamente correta por si só; ela só funciona como o ramo <em>else</em> porque está protegida pelo corte na primeira cláusula. Sem o corte, a consulta <code>ifte(true, success, fail)</code> produziria duas soluções, <code>success</code> e <code>fail</code>, o que é logicamente incorreto.</p>
 </section>
 <section id="caso-de-uso-comum-negação-como-falha" class="level3" data-number="11.5.3">
 <h3 data-number="11.5.3" class="anchored" data-anchor-id="caso-de-uso-comum-negação-como-falha"><span class="header-section-number">11.5.3</span> Caso de Uso Comum: Negação como Falha</h3>
 <p>A implementação do operador de negação do Prolog, <code>\+</code>, lê-se <em>não provável</em>, é o exemplo de um corte vermelho combinado com o predicado <code>fail</code>, que falha sempre.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>not(<span class="dt">Goal</span>) <span class="kw">:-</span> <span class="kw">call</span>(<span class="dt">Goal</span>)<span class="kw">,</span> <span class="kw">!,</span> <span class="kw">fail.</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>not(<span class="dt">_</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A lógica é a seguinte: para provar <code>not(Goal)</code>, o Prolog primeiro tenta provar <code>Goal</code> através de <code>call(Goal)</code>. Se <code>call(Goal)</code> tiver sucesso, o corte é executado, comprometendo a execução com esta cláusula, e de seguida <code>fail</code> é chamado, o que faz com que o predicado <code>not(Goal)</code> falhe. Se, no entanto, <code>call(Goal)</code> falhar inicialmente, o mecanismo de inferência faz <em>backtrack</em> para a segunda cláusula, <code>not(_)</code>, que tem sempre sucesso. Este mecanismo inverte efetivamente o sucesso/falha do objetivo original, implementando a <strong>negação como falha</strong>, do inglês, <em>negation as failure</em>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>not(<span class="dt">Goal</span>) <span class="kw">:-</span> <span class="kw">call</span>(<span class="dt">Goal</span>)<span class="kw">,</span> <span class="kw">!,</span> <span class="kw">fail.</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>not(<span class="dt">_</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A lógica é a seguinte: para provar <code>not(Goal)</code>, o Prolog primeiro tenta provar <code>Goal</code> por meio de <code>call(Goal)</code>. Se <code>call(Goal)</code> tiver sucesso, o corte é executado, comprometendo a execução com esta cláusula, e de seguida <code>fail</code> é chamado, o que faz com que o predicado <code>not(Goal)</code> falhe. Se, no entanto, <code>call(Goal)</code> falhar inicialmente, o mecanismo de inferência faz <em>backtrack</em> para a segunda cláusula, <code>not(_)</code>, que tem sempre sucesso. Este mecanismo inverte efetivamente o sucesso/falha do objetivo original, implementando a <strong>negação como falha</strong>, do inglês, <em>negation as failure</em>.</p>
 
 
 </section>
@@ -1687,8 +1724,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07c-programar-prolog.html" class="pagination-link" aria-label="Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
