@@ -673,7 +673,7 @@ Important
 </ol>
 <p><span class="math display">\[\neg \text{Barbeiro}(x) \vee ((\text{Barbeia}(x, f(x)) \wedge \neg \text{Barbeia}(f(x), f(x))) \vee (\neg \text{Barbeia}(x, f(x)) \wedge \text{Barbeia}(f(x), f(x))))\]</span></p>
 <ol start="6" type="1">
-<li><strong>Converter para FNC</strong>: A matriz está em FND. Para convertê-la para FNC, aplicamos a distributividade repetidamente. Seja $A = (x) $. A expressão é $ A ((B C) (D E))$$.</li>
+<li><strong>Converter para FNC</strong>: A matriz está em FND. Para convertê-la para FNC, aplicamos a distributividade repetidamente. Seja <span class="math inline">\(A = \neg \text{Barbeiro}(x)\)</span>. A expressão é <span class="math inline">\(A \vee ((B \wedge C) \vee (D \wedge E))\)</span>.</li>
 </ol>
 <p>Isso se expande para quatro cláusulas:</p>
 <p><span class="math display">\[(A \vee B \vee D) \wedge (A \vee B \vee E) \wedge (A \vee C \vee D) \wedge (A \vee C \vee E)\]</span></p>
@@ -753,7 +753,7 @@ Important
 <p><strong>3. Metas ou Consultas</strong>: finalmente, temos as metas ou consultas. Essas são as perguntas que fazemos ao nosso mundo lógico. <em>Está chovendo?</em>, <em>A grama está molhada?</em> São os caminhos que usaremos para explorar o cenário criado, olhando ao redor e tentando entender o que está acontecendo. As consultas são a forma de interagir com nosso mundo lógico, usando os fatos e regras que estabelecemos para encontrar respostas e alcançar objetivos. Por exemplo:</p>
 <ul>
 <li><span class="math inline">\(\neg P \wedge \neg Q\)</span>: <em>É verdade que hoje não está chovendo e não está ventando?</em></li>
-<li><span class="math inline">\(\neg X \wedge \neg Y \wedge \neg Z\)</span>: <span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> e $Z $ são falsos?</li>
+<li><span class="math inline">\(\neg X \wedge \neg Y \wedge \neg Z\)</span>: <span class="math inline">\(x\)</span>, <span class="math inline">\(Y\)</span> e <span class="math inline">\(Z\)</span> são falsos?</li>
 </ul>
 <p>Podemos tentar avaliar alguns exemplos de uso de Fatos, Regras e Consultas:</p>
 <section id="exemplo-1---sistema-de-recomendação-de-roupas" class="level4" data-number="8.1.1.1">
