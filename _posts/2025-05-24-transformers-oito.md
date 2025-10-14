@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Transformers, Do Código à Geração
-author: Frank (Adaptado por IA)
+author: Frank
 categories: |-
     disciplina
     Matemática
@@ -33,7 +33,7 @@ keywords: |-
     GPT
 toc: true
 published: false
-lastmod: 2025-05-25T20:09:24.212Z
+lastmod: 2025-10-14T11:44:22.055Z
 ---
 
 ## Navegando a Arquitetura Completa: Do Código à Geração
