@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio de Questões - Prova de Autoria</title>
+    <!-- Inclusão do Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para garantir que os botões de aumentar/diminuir do input numérico fiquem visíveis no tema escuro */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: auto;
+            opacity: 1;
+        }
+        /* Ajuste de fonte para melhor legibilidade */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+
+    <main class="bg-gray-800 p-8 rounded-xl shadow-2xl max-w-3xl w-full border border-gray-700">
+        
+        <!-- Cabeçalho -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-cyan-400">Sorteio de Questões</h1>
+            <p class="text-gray-400 mt-2">Prova de Autoria - Projeto de Algoritmos de Cache</p>
+        </div>
+
+        <!-- Seção de Sorteio -->
+        <div id="drawSection">
+            <label for="studentNumber" class="block mb-2 text-sm font-medium text-gray-300">Aluno, por favor, escolha um número de 1 a 10:</label>
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <input type="number" id="studentNumber" min="1" max="10" class="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 block w-full p-3 transition-all" placeholder="Ex: 7" required>
+                <button id="drawButton" class="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-800 font-bold rounded-lg text-lg px-8 py-3 transition-colors duration-300 whitespace-nowrap">
+                    Sortear Questão
+                </button>
+            </div>
+            <p id="errorMessage" class="text-red-500 text-center mt-4 h-6"></p>
+        </div>
+
+        <!-- Seção do Resultado -->
+        <div id="resultSection" class="hidden">
+            <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-600 mt-6">
+                <h2 class="text-xl font-bold text-cyan-400 mb-3">Questão Sorteada:</h2>
+                <p id="questionText" class="text-gray-300 text-lg leading-relaxed"></p>
+            </div>
+            <div class="text-center mt-6">
+                <button id="resetButton" class="bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-800 font-bold rounded-lg text-md px-6 py-2 transition-colors duration-300">
+                    Novo Sorteio
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- Banco de Questões ---
+        const questions = [
+            { id: 1, text: "Qual foi a principal estrutura de dados que vocês usaram para implementar a base do sistema de cache? Justifique por que essa escolha foi adequada e discuta uma alternativa com suas vantagens e desvantagens." },
+            { id: 2, text: "Explique em detalhes como o algoritmo LRU (Least Recently Used) ou LFU (Least Frequently Used) decide qual texto remover quando o cache está cheio. Como vocês controlaram o estado de 'usado recentemente' ou 'frequentemente usado' de cada texto?" },
+            { id: 3, text: "No modo de simulação, um dos padrões de acesso era uma distribuição de Poisson. Qual é a principal característica dessa distribuição e por que ela é um modelo mais realista para simular acesso a arquivos do que um sorteio puramente aleatório?" },
+            { id: 4, text: "O objetivo do projeto era minimizar o tempo de carregamento. Descreva precisamente como o seu programa media o tempo. Onde no código a contagem de tempo começava e terminava para um 'cache hit' e para um 'cache miss'?" },
+            { id: 5, text: "Como a estrutura principal conseguia utilizar os diferentes algoritmos de cache (FIFO, LRU, LFU) sem precisar conhecer os detalhes de cada um? Descreva a 'interface' ou o contrato que os módulos dos algoritmos precisavam seguir para se integrarem ao sistema." },
+            { id: 6, text: "O trabalho exigia o uso de branches e Pull Requests (PRs). Descreva o passo a passo que seu grupo seguia para integrar uma nova funcionalidade ao código principal. Houve algum conflito de merge? Se sim, como foi resolvido?" },
+            { id: 7, text: "Com base nos gráficos da sua simulação, qual algoritmo teve o melhor desempenho para o padrão de acesso ponderado (43% para textos 30-40)? Por que, teoricamente, esse algoritmo se beneficia desse tipo de padrão?" },
+            { id: 8, text: "Qual foi o problema técnico ou o 'bug' mais desafiador que vocês enfrentaram durante o desenvolvimento? Descreva o sintoma do problema e o processo que vocês seguiram para identificá-lo e corrigi-lo." },
+            { id: 9, text: "Imagine que o requisito mudasse para 10.000 textos, mas o cache continuasse com apenas 10 posições. A sua escolha do 'melhor' algoritmo de cache continuaria a mesma? Justifique sua resposta." },
+            { id: 10, text: "Peça ao professor para selecionar um trecho de código do repositório. Explique exatamente o que aquela parte do código faz e qual a sua importância para o funcionamento do programa." }
+        ];
+
+        // --- Elementos do DOM ---
+        const studentNumberInput = document.getElementById('studentNumber');
+        const drawButton = document.getElementById('drawButton');
+        const resetButton = document.getElementById('resetButton');
+        const errorMessage = document.getElementById('errorMessage');
+        const resultSection = document.getElementById('resultSection');
+        const questionText = document.getElementById('questionText');
+        const drawSection = document.getElementById('drawSection');
+
+        // --- Funções ---
+
+        /**
+         * Embaralha um array no local usando o algoritmo Fisher-Yates.
+         * @param {Array} array O array a ser embaralhado.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function drawQuestion() {
+            // 1. Validar a entrada
+            const number = parseInt(studentNumberInput.value);
+            if (isNaN(number) || number < 1 || number > 10) {
+                errorMessage.textContent = "Por favor, insira um número válido entre 1 e 10.";
+                studentNumberInput.focus();
+                return;
+            }
+            errorMessage.textContent = ""; // Limpa a mensagem de erro
+
+            // 2. Embaralhar as questões
+            const shuffledQuestions = [...questions]; // Cria uma cópia para não alterar o original
+            shuffleArray(shuffledQuestions);
+
+            // 3. Selecionar a questão
+            const selectedQuestion = shuffledQuestions[number - 1]; // Ajuste para índice 0
+
+            // 4. Exibir o resultado
+            questionText.textContent = selectedQuestion.text;
+            resultSection.classList.remove('hidden');
+            drawSection.classList.add('hidden');
+        }
+
+        function resetInterface() {
+            // Limpa e oculta a seção de resultado
+            resultSection.classList.add('hidden');
+            questionText.textContent = "";
+
+            // Limpa e exibe a seção de sorteio
+            studentNumberInput.value = "";
+            drawSection.classList.remove('hidden');
+            errorMessage.textContent = "";
+        }
+        
+        // --- Event Listeners ---
+        drawButton.addEventListener('click', drawQuestion);
+        resetButton.addEventListener('click', resetInterface);
+        
+        // Permite sortear pressionando "Enter" no campo de número
+        studentNumberInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                drawQuestion();
+            }
+        });
+
+    </script>
+</body>
+</html>

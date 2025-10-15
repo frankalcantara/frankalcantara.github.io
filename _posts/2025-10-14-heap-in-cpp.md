@@ -3,7 +3,6 @@ layout: post
 title: Heaps na Standard Template Library do C++23
 author: Frank
 categories: |-
-    disciplina
     Matemática
     artigo
 tags: |-
@@ -12,18 +11,18 @@ tags: |-
     computação competitiva
     Estruturas de Dados
     Heaps
-image: assets/images/transformer_architecture.webp
+image: null
 featured: false
 rating: 5
 description: Explicando a estrutura Heap como implementada em C++23.
 date: 2025-10-14T11:21:10.761Z
-preview: Um estudo detalhado da estrutura heap, em c++ como base para um artigo do livro sobre computação competitiva
+preview: Um estudo detalhado da estrutura heap em c++ como base para um artigo do livro sobre computação competitiva
 keywords: |-
     Algoritmos
     computação competitiva
 toc: true
 published: true
-lastmod: 2025-10-14T11:44:35.823Z
+lastmod: 2025-10-14T11:46:43.911Z
 draft: 2025-10-14T11:22:19.148Z
 ---
 
