@@ -11,7 +11,7 @@ tags: |-
     computação competitiva
     Estruturas de Dados
     Heaps
-image: null
+image: assets/images/cpp.webp
 featured: false
 rating: 5
 description: Explicando a estrutura Heap como implementada em C++23.
@@ -22,7 +22,7 @@ keywords: |-
     computação competitiva
 toc: true
 published: true
-lastmod: 2025-10-14T11:46:43.911Z
+lastmod: 2025-10-15T21:36:13.724Z
 draft: 2025-10-14T11:22:19.148Z
 ---
 
