@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Frank Coelho de Alcantara">
-<meta name="dcterms.date" content="2025-06-20">
 
-<title>Sistemas Operacionais</title>
+<title>Sistemas Operacionais - 19&nbsp; Gestão de Memória - Referências</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./intro.html" rel="next">
+<link href="./13gerfiles.html" rel="next">
+<link href="./12Bgermem.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,11 +73,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles/styles.css">
-<meta property="og:title" content="Sistemas Operacionais">
-<meta property="og:description" content="Uma abordagem profunda">
+<meta property="og:title" content="Sistemas Operacionais - 19&nbsp; Gestão de Memória - Referências">
+<meta property="og:description" content="">
 <meta property="og:site_name" content="Sistemas Operacionais">
-<meta name="twitter:title" content="Sistemas Operacionais">
-<meta name="twitter:description" content="Uma abordagem profunda">
+<meta name="twitter:title" content="Sistemas Operacionais - 19&nbsp; Gestão de Memória - Referências">
+<meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -91,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html">Gestão de Memória</a></li><li class="breadcrumb-item"><a href="./12Zgermem.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
   </div>
 </li>
@@ -261,7 +260,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12Zgermem.html" class="sidebar-item-text sidebar-link">
+  <a href="./12Zgermem.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></span></a>
   </div>
 </li>
@@ -331,36 +330,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#apresentação" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação"><span class="header-section-number">1</span> Apresentação</a></li>
+  <li><a href="#referências-hierarquia-de-memória" id="toc-referências-hierarquia-de-memória" class="nav-link active" data-scroll-target="#referências-hierarquia-de-memória"><span class="header-section-number">19.1</span> Referências Hierarquia de Memória</a></li>
+  <li><a href="#referências-histórico-de-memória" id="toc-referências-histórico-de-memória" class="nav-link" data-scroll-target="#referências-histórico-de-memória"><span class="header-section-number">19.2</span> Referências Histórico de Memória</a></li>
+  <li><a href="#referências-memória-virtual" id="toc-referências-memória-virtual" class="nav-link" data-scroll-target="#referências-memória-virtual"><span class="header-section-number">19.3</span> Referências Memória Virtual</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/edit/main/12Zgermem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html">Gestão de Memória</a></li><li class="breadcrumb-item"><a href="./12Zgermem.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Sistemas Operacionais</h1>
-<p class="subtitle lead">Uma abordagem profunda</p>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Frank Coelho de Alcantara </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 20, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -370,46 +358,134 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="apresentação" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Apresentação</h1>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Este livro ainda está em desenvolvimento. A versão atual é um rascunho inicial, e muitas seções ainda estão sendo escritas. Agradecemos por sua paciência e compreensão enquanto trabalhamos para criar um conteúdo de alta qualidade.</strong></p>
-<p>Muito bem-vinda, audaciosa leitora!</p>
-<p>Lembre-se de que este livro também é um dos materiais de apoio da disciplina de Sistemas Computacionais do curso de Engenharia de Computação da Pontifícia Universidade Católica do Paraná.</p>
-<p><strong>Um dos materiais de apoio!</strong> Não é o único, nem o melhor. Isso significa que a atenta leitora não deve se limitar a este material. Consulte, por exemplo, os livros sugeridos na Bibliografia da disciplina, listada no plano de ensino. Os livros sugeridos nesta bibliografia estão disponíveis nas bibliotecas do Campus Curitiba. Este livros são:</p>
-<p><strong>Bibliografia Básica</strong>:</p>
+<p>Muito há que ser corrigido aqui… por enquanto é só uma lista sem verificações. O histórico do meu navegador e dos meus downloads.</p>
+<section id="referências-hierarquia-de-memória" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="referências-hierarquia-de-memória"><span class="header-section-number">19.1</span> Referências Hierarquia de Memória</h2>
+<p>CULLER, D.; SINGH, J. P.; GUPTA, A. <strong>Parallel Computer Architecture: A Hardware/Software Approach</strong>. San Francisco: Morgan Kaufmann, 1999.</p>
+<p>DENNING, P. J. The Working Set Model for Program Behavior. <strong>Communications of the ACM</strong>, v. 11, n.&nbsp;5, p.&nbsp;323-333, 1968.</p>
+<p>HENNESSY, J. L.; PATTERSON, D. A. <strong>Computer Architecture: A Quantitative Approach</strong>. 6. ed.&nbsp;Cambridge: Morgan Kaufmann, 2019.</p>
+<p>JACOB, B.; NG, S. W.; WANG, D. T. <strong>Memory Systems: <em>cache</em>, DRAM, Disk</strong>. Burlington: Morgan Kaufmann, 2008.</p>
+<p>MIN, R.; KANG, Y.; EREZ, M. Understanding and Optimizing Flash-based SSD Performance. <strong>ACM Computing Surveys</strong>, v. 49, n.&nbsp;3, p.&nbsp;1-35, 2017.</p>
+<p>PATTERSON, D. A.; HENNESSY, J. L. <strong>Computer Organization and Design: The Hardware/Software Interface</strong>. 5. ed.&nbsp;Waltham: Morgan Kaufmann, 2014.</p>
+<p>SHEN, J. P.; LIPASTI, M. H. <strong>Modern Processor Design: Fundamentals of Superscalar Processors</strong>. Long Grove: Waveland Press, 2013.</p>
+<p>STALLINGS, W. <strong>Computer Organization and Architecture: Designing for Performance</strong>. 10. ed.&nbsp;Boston: Pearson, 2018.</p>
+<p>WULF, W. A.; MCKEE, S. A. Hitting the Memory Wall: Implications of the Obvious. <strong>ACM SIGARCH Computer Architecture News</strong>, v. 23, n.&nbsp;1, p.&nbsp;20-24, 1995.</p>
+</section>
+<section id="referências-histórico-de-memória" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="referências-histórico-de-memória"><span class="header-section-number">19.2</span> Referências Histórico de Memória</h2>
+<p>AMELIO, G. F.; TOMPSETT, M. F.; SMITH, G. E. Experimental verification of the charge coupled device concept. <strong>Bell System Technical Journal</strong>, v. 49, n.&nbsp;4, p.&nbsp;593-600, 1970.</p>
+<p>ANANDTECH. Intel to wind down Optane memory business. <strong>AnandTech</strong>, 2022. Disponível em: https://www.anandtech.com/show/17515/intel-to-wind-down-optane-memory-business. Acesso em: 1 set. 2025.</p>
+<p>BASHE, C. J. et al.&nbsp;<strong>IBM’s early computers</strong>. Cambridge: MIT Press, 1986.</p>
+<p>BOBECK, A. H. Properties and device applications of magnetic domains in orthoferrites. <strong>Bell System Technical Journal</strong>, v. 46, n.&nbsp;8, p.&nbsp;1901-1925, 1967.</p>
+<p>BOBECK, A. H.; DELLA TORRE, E. <strong>Magnetic bubbles</strong>. Amsterdam: North-Holland Publishing, 1975.</p>
+<p>BURKS, A. W.; GOLDSTINE, H. H.; VON NEUMANN, J. Preliminary discussion of the logical design of an electronic computing instrument. <strong>Institute for Advanced Study</strong>, Princeton, 1946.</p>
+<p>CAMPBELL-KELLY, M. Programming the EDSAC: Early programming activity at the University of Cambridge. <strong>Annals of the History of Computing</strong>, v. 20, n.&nbsp;4, p.&nbsp;46-61, 1998.</p>
+<p>CAMPBELL-KELLY, M.; ASPRAY, W. <strong>Computer: A history of the information machine</strong>. 2. ed.&nbsp;Boulder: Westview Press, 2004.</p>
+<p>CHEN, T.; YEACK-SCRANTON, C. E. An analysis of the decline of bubble memory technology. <strong>IEEE Transactions on Magnetics</strong>, v. 26, n.&nbsp;6, p.&nbsp;3141-3146, 1990.</p>
+<p>COMPUTER HISTORY MUSEUM. <strong>Magnetic core memory</strong>. Mountain View: Computer History Museum, 2006.</p>
+<p>COMPUTER HISTORY MUSEUM. <strong>Timeline of computer history: Memory &amp; storage</strong>. Mountain View: Computer History Museum, 2018. Disponível em: https://www.computerhistory.org/timeline/memory-storage/. Acesso em: 1 set. 2025.</p>
+<p>COPELAND, B. J. (Ed.). <strong>Colossus: The secrets of Bletchley Park’s code-breaking computers</strong>. Oxford: Oxford University Press, 2006.</p>
+<p>CULLER, D.; SINGH, J. P.; GUPTA, A. <strong>Parallel computer architecture: A hardware/software approach</strong>. San Francisco: Morgan Kaufmann, 1999.</p>
+<p>DENNARD, R. H. Field-effect transistor memory. US Patent 3,387,286, 1968.</p>
+<p>DENNING, P. J. The locality principle. <strong>Communications of the ACM</strong>, v. 48, n.&nbsp;7, p.&nbsp;19-24, 2005.</p>
+<p>DENNING, P. J. The working set model for program behavior. <strong>Communications of the ACM</strong>, v. 11, n.&nbsp;5, p.&nbsp;323-333, 1968.</p>
+<p>DRAM EXCHANGE. <strong>DRAM market share by manufacturer Q4 2023</strong>. TrendForce, 2023. Disponível em: https://www.dramexchange.com. Acesso em: 1 set. 2025.</p>
+<p>FAGGIN, F.; HOFF, M. E.; MAZOR, S. The history of the 4004. <strong>IEEE Micro</strong>, v. 16, n.&nbsp;6, p.&nbsp;10-20, 1996.</p>
+<p>FORRESTER, J. W. Digital information storage in three dimensions using magnetic cores. <strong>Journal of Applied Physics</strong>, v. 22, n.&nbsp;1, p.&nbsp;44-48, 1951.</p>
+<p>FUJITSU. <strong>MB85RC256V FeRAM datasheet</strong>. Tokyo: Fujitsu Semiconductor, 2016.</p>
+<p>GARDNER, W. D.; WONG, K. K. <strong>Modern computer memories: Technologies and applications</strong>. New York: Academic Press, 2019.</p>
+<p>GOLDSTINE, H. H.; GOLDSTINE, A. The Electronic Numerical Integrator and Computer (ENIAC). <strong>Mathematical Tables and Other Aids to Computation</strong>, v. 2, n.&nbsp;15, p.&nbsp;97-110, 1946.</p>
+<p>HENNESSY, J. L.; PATTERSON, D. A. <strong>Computer architecture: A quantitative approach</strong>. 6. ed.&nbsp;Cambridge: Morgan Kaufmann, 2019.</p>
+<p>IBM RESEARCH. Breakthrough in phase change memory technology. <strong>IBM Research Blog</strong>, 2016. Disponível em: https://www.ibm.com/blogs/research. Acesso em: 1 set. 2025.</p>
+<p>IC INSIGHTS. <strong>Global semiconductor industry outlook 2022</strong>. Scottsdale: IC Insights, 2022.</p>
+<p>IKEDA, S. et al.&nbsp;A perpendicular-anisotropy CoFeB-MgO magnetic tunnel junction. <strong>Nature Materials</strong>, v. 9, n.&nbsp;9, p.&nbsp;721-724, 2010.</p>
+<p>INTEL CORPORATION. Intel and Micron produce breakthrough memory technology. <strong>Intel Newsroom</strong>, 2015. Disponível em: https://newsroom.intel.com. Acesso em: 1 set. 2025.</p>
+<p>INTERNATIONAL ROADMAP FOR DEVICES AND SYSTEMS. <strong>IRDS 2022 Edition</strong>. IEEE, 2022. Disponível em: https://irds.ieee.org. Acesso em: 1 set. 2025.</p>
+<p>JACOB, B.; NG, S. W.; WANG, D. T. <strong>Memory systems: <em>cache</em>, DRAM, disk</strong>. Burlington: Morgan Kaufmann, 2008.</p>
+<p>JACOB, B.; WANG, D.; NG, S. <strong>Memory systems: <em>cache</em>, DRAM, disk</strong>. 2. ed.&nbsp;San Francisco: Morgan Kaufmann, 2021.</p>
+<p>JEDEC. <strong>JESD79: DDR SDRAM specification</strong>. Arlington: JEDEC Solid State Technology Association, 2000.</p>
+<p>JEDEC. <strong>JESD79-2: DDR2 SDRAM specification</strong>. Arlington: JEDEC Solid State Technology Association, 2003.</p>
+<p>JEDEC. <strong>JESD79-3: DDR3 SDRAM specification</strong>. Arlington: JEDEC Solid State Technology Association, 2007.</p>
+<p>JEDEC. <strong>JESD79-4: DDR4 SDRAM specification</strong>. Arlington: JEDEC Solid State Technology Association, 2014.</p>
+<p>JEDEC. <strong>JESD79-5: DDR5 SDRAM specification</strong>. Arlington: JEDEC Solid State Technology Association, 2020.</p>
+<p>KOOMEY, J. et al.&nbsp;Implications of historical trends in the electrical efficiency of computing. <strong>IEEE Annals of the History of Computing</strong>, v. 33, n.&nbsp;3, p.&nbsp;46-54, 2011.</p>
+<p>LAVINGTON, S. <strong>A history of Manchester computers</strong>. Manchester: NCC Publications, 1980.</p>
+<p>LAVINGTON, S. <strong>Early British computers</strong>. 2. ed.&nbsp;Manchester: Manchester University Press, 1998.</p>
+<p>LUKOFF, H. <strong>From dits to bits: A personal history of the electronic computer</strong>. Portland: Robotics Press, 1979.</p>
+<p>MACK, C. Fifty years of Moore’s law. <strong>IEEE Transactions on Semiconductor Manufacturing</strong>, v. 24, n.&nbsp;2, p.&nbsp;202-207, 2011.</p>
+<p>MARINELLA, M. J. et al.&nbsp;Multiscale co-design analysis of energy, latency, area, and accuracy of a ReRAM analog neural training accelerator. <strong>IEEE Journal on Emerging and Selected Topics in Circuits and Systems</strong>, v. 8, n.&nbsp;1, p.&nbsp;86-101, 2018.</p>
+<p>MORDOR INTELLIGENCE. <strong>Magnetoresistive RAM market - growth, trends, and forecasts (2024-2032)</strong>. Hyderabad: Mordor Intelligence, 2024.</p>
+<p>MOSTEK CORPORATION. <strong>MK4096 4096-bit dynamic RAM datasheet</strong>. Carrollton: Mostek, 1973.</p>
+<p>NAPPER, R. B. E. The Manchester Mark 1 computers. In: ROJAS, R.; HASHAGEN, U. (Eds.). <strong>The first computers: History and architectures</strong>. Cambridge: MIT Press, 2000. p.&nbsp;356-377.</p>
+<p>PATTERSON, D. A.; HENNESSY, J. L. <strong>Computer organization and design: The hardware/software interface</strong>. 6. ed.&nbsp;Cambridge: Morgan Kaufmann, 2021.</p>
+<p>PUGH, E. W. <strong>Memories that shaped an industry</strong>. Cambridge: MIT Press, 1984.</p>
+<p>PUGH, E. W.; JOHNSON, L. R.; PALMER, J. H. <strong>IBM’s 360 and early 370 systems</strong>. Cambridge: MIT Press, 1991.</p>
+<p>ROJAS, R. (April–June 1997). <strong>Konrad Zuse’s Legacy: The Architecture of the Z1 and Z3</strong> (PDF). IEEE Annals of the History of Computing. 19 (2): 5–16 [7–8]. doi:10.1109/85.586067. Archived (PDF) from the original on 2022-07-03. Retrieved 2022-07-03. (12 pages)</p>
+<p>SAMSUNG ELECTRONICS. Samsung develops world’s first 1 gigabit DRAM. <strong>Samsung Newsroom</strong>, 1996. Disponível em: https://news.samsung.com. Acesso em: 1 set. 2025.</p>
+<p>SAMSUNG ELECTRONICS. Samsung starts mass production of eMRAM. <strong>Samsung Newsroom</strong>, 2019. Disponível em: https://news.samsung.com. Acesso em: 1 set. 2025.</p>
+<p>STERN, N. <strong>From ENIAC to UNIVAC: An appraisal of the Eckert-Mauchly computers</strong>. Bedford: Digital Press, 1981.</p>
+<p>TEXAS INSTRUMENTS. <strong>MSP430FRxx FeRAM microcontrollers</strong>. Dallas: Texas Instruments, 2018.</p>
+<p>VON NEUMANN, J. First draft of a report on the EDVAC. <strong>Moore School of Electrical Engineering</strong>, University of Pennsylvania, 1945.</p>
+<p>WANG, A. Magnetic delay line storage. <strong>Proceedings of the IRE</strong>, v. 39, n.&nbsp;4, p.&nbsp;401-407, 1951.</p>
+<p>WASER, R. et al.&nbsp;Redox-based resistive switching memories: Nanoionic mechanisms, prospects, and challenges. <strong>Advanced Materials</strong>, v. 21, n.&nbsp;25-26, p.&nbsp;2632-2663, 2009.</p>
+<p>WESTE, N.; HARRIS, D. <strong>CMOS VLSI design: A circuits and systems perspective</strong>. 4. ed.&nbsp;Boston: Pearson, 2015.</p>
+<p>WILKES, M. V. <strong>Memoirs of a computer pioneer</strong>. Cambridge: MIT Press, 1985.</p>
+<p>WILKES, M. V.; RENWICK, W. The EDSAC, an electronic calculating machine. <strong>Journal of Scientific Instruments</strong>, v. 26, n.&nbsp;12, p.&nbsp;385-391, 1949.</p>
+<p>WILLIAMS, F. C.; KILBURN, T. Electronic digital computers. <strong>Nature</strong>, v. 162, n.&nbsp;4117, p.&nbsp;487, 1948.</p>
+<p>WILLIAMS, F. C.; KILBURN, T. A storage system for use with binary-digital computing machines. <strong>Proceedings of the IEE</strong>, v. 96, n.&nbsp;81, p.&nbsp;183-200, 1949.</p>
+<p>WONG, H. S. P. et al.&nbsp;Phase change memory. <strong>Proceedings of the IEEE</strong>, v. 98, n.&nbsp;12, p.&nbsp;2201-2227, 2010.</p>
+<p>WONG, H. S. P.; SALAHUDDIN, S. Memory leads the way to better computing. <strong>Nature Nanotechnology</strong>, v. 10, n.&nbsp;3, p.&nbsp;191-194, 2015.</p>
+<p>WULF, W. A.; MCKEE, S. A. Hitting the memory wall: Implications of the obvious. <strong>ACM SIGARCH Computer Architecture News</strong>, v. 23, n.&nbsp;1, p.&nbsp;20-24, 1995.</p>
+</section>
+<section id="referências-memória-virtual" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="referências-memória-virtual"><span class="header-section-number">19.3</span> Referências Memória Virtual</h2>
 <ol type="1">
-<li>TANENBAUM, Andrew S.; BOS, Herbert. <strong>Sistemas Operacionais Modernos</strong>. 4ª ed.&nbsp;São Paulo: Pearson, 2016.</li>
-<li>SILBERSCHATZ, Abraham; GALVIN, Peter B.; GAGNE, Greg. <strong>Sistemas Operacionais: Conceitos e Aplicações</strong>. 9ª ed.&nbsp;Rio de Janeiro: LTC, 2015.</li>
-<li>STALLINGS, William. <strong>Arquitetura e Organização de Computadores</strong>. 10ª ed.&nbsp;São Paulo: Pearson, 2017.</li>
+<li>Sistemas Operacionais - Gerência de Memória - Blog Gran Cursos Online, acessado em setembro 7, 2025, <a href="https://blog.grancursosonline.com.br/sistemas-operacionais-gerencia-de-memoria/">https://blog.grancursosonline.com.br/sistemas-operacionais-gerencia-de-memoria/</a><br>
+</li>
+<li>Sistemas Operacionais -- Memória Virtual - UFRJ, acessado em setembro 7, 2025, <a href="https://cos.ufrj.br/~vitor/aulas/COS773/slides/aulas_8.html">https://cos.ufrj.br/~vitor/aulas/COS773/slides/aulas_8.html</a><br>
+</li>
+<li>Unidade de gerenciamento de memória – Wikipédia, a enciclopédia livre, acessado em setembro 7, 2025, <a href="https://pt.wikipedia.org/wiki/Unidade_de_gerenciamento_de_mem%C3%B3ria">https://pt.wikipedia.org/wiki/Unidade_de_gerenciamento_de_mem%C3%B3ria</a><br>
+</li>
+<li>Como A Memória Virtual Funciona - FasterCapital, acessado em setembro 7, 2025, <a href="https://fastercapital.com/pt/tema/como-a-mem%C3%B3ria-virtual-funciona.html/1">https://fastercapital.com/pt/tema/como-a-mem%C3%B3ria-virtual-funciona.html/1</a><br>
+</li>
+<li>Endereço Lógico vs.&nbsp;Físico na Gerenciamento de Memória : r/compsci - Reddit, acessado em setembro 7, 2025, <a href="https://www.reddit.com/r/compsci/comments/35e0zz/logical_vs_physical_address_in_memory_management/?tl=pt-br">https://www.reddit.com/r/compsci/comments/35e0zz/logical_vs_physical_address_in_memory_management/?tl=pt-br</a><br>
+</li>
+<li>Qual a diferença entre endereço físico e endereço virtual, acessado em setembro 7, 2025, <a href="https://xcoworking.com.br/qual-a-diferenca-entre-endereco-fisico-e-endereco-virtual/">https://xcoworking.com.br/qual-a-diferenca-entre-endereco-fisico-e-endereco-virtual/</a><br>
+</li>
+<li>Endereço fiscal ou comercial: saiba a diferença - Company Hero, acessado em setembro 7, 2025, <a href="https://www.companyhero.com/videos/diferenca-entre-endereco-fiscal-e-comercial">https://www.companyhero.com/videos/diferenca-entre-endereco-fiscal-e-comercial</a><br>
+</li>
+<li>Gerenciamento de memória. partições, realocação, memória virtual… | by Célio Normando | Medium, acessado em setembro 7, 2025, <a href="https://medium.com/@celionormando/gerenciamento-de-mem%C3%B3ria-7f8ee4d9b020">https://medium.com/<span class="citation" data-cites="celionormando/gerenciamento-de-mem%C3%B3ria-7f8ee4d9b020">(<span><strong>celionormando/gerenciamento-de-mem%C3%B3ria-7f8ee4d9b020?</strong></span>)</span></a><br>
+</li>
+<li>Memória virtual - paginação e segmentação - IME-USP, acessado em setembro 7, 2025, <a href="https://www.ime.usp.br/~song/mac344/slides07-virtual-memory.pdf">https://www.ime.usp.br/~song/mac344/slides07-virtual-memory.pdf</a><br>
+</li>
+<li>O que é memória virtual e como ela funciona? - Blog Faspec, acessado em setembro 7, 2025, <a href="https://faspecblog.com.br/memoria-virtual/">https://faspecblog.com.br/memoria-virtual/</a><br>
+</li>
+<li>O que é memória virtual - Profissão Cloud, acessado em setembro 7, 2025, <a href="https://profissaocloud.com.br/glossario/o-que-e-memoria-virtual-entenda-sua-importancia/">https://profissaocloud.com.br/glossario/o-que-e-memoria-virtual-entenda-sua-importancia/</a><br>
+</li>
+<li>Gerenciamento de Memória - CIn UFPE, acessado em setembro 7, 2025, <a href="https://www.cin.ufpe.br/~can/Arquivos/gerenciamento-de-memoria.htm">https://www.cin.ufpe.br/~can/Arquivos/gerenciamento-de-memoria.htm</a><br>
+</li>
+<li>SOsim: SIMULADOR PARA O ENSINO DE SISTEMAS OPERACIONAIS - Página do Professor André, acessado em setembro 7, 2025, <a href="http://www.lapolli.pro.br/escolas/unicid/SistOpera/laboratorio/Tese.pdf">http://www.lapolli.pro.br/escolas/unicid/SistOpera/laboratorio/Tese.pdf</a><br>
+</li>
+<li>Sistemas Operacionais - Instituto de Informática - UFRGS, acessado em setembro 7, 2025, <a href="http://www.inf.ufrgs.br/~asc/sisop/pdf/aula20.pdf">http://www.inf.ufrgs.br/~asc/sisop/pdf/aula20.pdf</a><br>
+</li>
+<li>Translation Lookaside Buffer (TLB) in Paging - GeeksforGeeks, acessado em setembro 7, 2025, <a href="https://www.geeksforgeeks.org/operating-systems/translation-lookaside-buffer-tlb-in-paging/">https://www.geeksforgeeks.org/operating-systems/translation-lookaside-buffer-tlb-in-paging/</a><br>
+</li>
+<li>Translation lookaside buffer - Wikipedia, acessado em setembro 7, 2025, <a href="https://en.wikipedia.org/wiki/Translation_lookaside_buffer">https://en.wikipedia.org/wiki/Translation_lookaside_buffer</a><br>
+</li>
+<li>Translation Lookaside Buffer (TLB) in OS- Scaler Topics, acessado em setembro 7, 2025, <a href="https://www.scaler.com/topics/tlb-in-os/">https://www.scaler.com/topics/tlb-in-os/</a><br>
+</li>
+<li>Falta de página – Wikipédia, a enciclopédia livre, acessado em setembro 7, 2025, <a href="https://pt.wikipedia.org/wiki/Falta_de_p%C3%A1gina">https://pt.wikipedia.org/wiki/Falta_de_p%C3%A1gina</a><br>
+</li>
+<li>O que é page fault? - Stack Overflow em Português, acessado em setembro 7, 2025, <a href="https://pt.stackoverflow.com/questions/207174/o-que-%C3%A9-page-fault">https://pt.stackoverflow.com/questions/207174/o-que-%C3%A9-page-fault</a><br>
+</li>
+<li>Sistemas Operacionais - Instituto de Informática - UFRGS, acessado em setembro 7, 2025, <a href="http://www.inf.ufrgs.br/~asc/livro/transparencias/cap7.pdf">http://www.inf.ufrgs.br/~asc/livro/transparencias/cap7.pdf</a><br>
+</li>
+<li>Posso evitar que ocorram falhas de página? | Lenovo Brasil, acessado em setembro 7, 2025, <a href="https://www.lenovo.com/br/pt/glossary/page-fault/">https://www.lenovo.com/br/pt/glossary/page-fault/</a><br>
+</li>
+<li>Trabalho II: Simulador de Memória Virtual, acessado em setembro 7, 2025, <a href="https://www.dcc.fc.up.pt/~ricroc/aulas/0607/so/prat/trabII.html">https://www.dcc.fc.up.pt/~ricroc/aulas/0607/so/prat/trabII.html</a><br>
+</li>
+<li>Prática - Simulação de Substituição de Páginas em Memória Virtual, acessado em setembro 7, 2025, <a href="https://lesandrop.github.io/site/teaching/SO/praticas/pratica-sistemas-operacionais-substituicao-de-paginas-memoria-virtual.html">https://lesandrop.github.io/site/teaching/SO/praticas/pratica-sistemas-operacionais-substituicao-de-paginas-memoria-virtual.html</a></li>
 </ol>
-<p><strong>Bibliografia Complementar</strong>:</p>
-<ol type="1">
-<li>LOVE, Robert. <strong>Linux Kernel Development</strong>. 3ª ed.&nbsp;Addison-Wesley Professional, 2010.</li>
-<li>ARPACI-DUSSEAU, Remzi H.; ARPACI-DUSSEAU, Andrea C. <strong>Operating Systems: Three Easy Pieces</strong>. Arpaci-Dusseau Books, 2018.</li>
-<li>BURNS, Brendan; BEDA, Joe; HIGHTOWER, Kelsey. <strong>Kubernetes: Up and Running</strong>. 2ª ed.&nbsp;O’Reilly Media, 2019.</li>
-<li>MOUAT, Adrian. <strong>Using Docker: Developing and Deploying Software with Containers</strong>. O’Reilly Media, 2015.</li>
-<li>KLEPPMANN, Martin. <strong>Designing Data-Intensive Applications</strong>. O’Reilly Media, 2017.</li>
-<li>BOVET, Daniel P.; CESATI, Marco. <strong>Understanding the Linux Kernel</strong>. 3ª ed.&nbsp;O’Reilly Media, 2005.</li>
-</ol>
-<p>Além disso, observe que o texto está sendo escrito visando a publicação. Ou seja, existem seções que só serão revisadas, escritas e finalizadas ao longo da disciplina. Portanto, não se surpreenda se encontrar erros de digitação, gramática ou mesmo de conteúdo. Agradeço caso possa indicar possíveis correções e melhorias.</p>
-<p>Um indício importante é a existência de um arquivo <code>expresso</code> para um determinado capítulo. A existência do <code>expresso</code> indica que o capítulo foi revisado pelo menos uma vez. Se não houver o <code>expresso</code>, é porque o capítulo ainda está em fase de escrita e revisão.</p>
-</div>
-</div>
-<p>Este livro é o resultado de uma longa jornada pelo fascinante mundo dos <strong>Sistemas Operacionais</strong>. O objetivo é fornecer uma base sólida, desde os conceitos históricos até as fronteiras mais modernas da tecnologia. Abordaremos tópicos essenciais como gerenciamento de processos, memória, sistemas de arquivos e concorrência, em uma jornada audaciosa aos confins de um dos sistemas mais complexos criados pelo ser humano.</p>
-<p>Aqui, vamos usar o C++23 para desenvolver todos os nossos exemplos, testes e códigos de demonstração e simulação. O C++ é uma linguagem de programação poderosa e versátil, amplamente utilizada no desenvolvimento de <strong>Sistemas Operacionais</strong>, software de alto desempenho e aplicações críticas. Sua sintaxe rica e recursos avançados, como gerenciamento de memória manual, permitem um controle preciso sobre o hardware, tornando-o ideal para explorar os conceitos fundamentais de <strong>Sistemas Operacionais</strong>. A precavida leitora precisará dos conhecimentos básicos de C++. É preferível que esteja ciente das novas técnicas e artefatos implementados na linguagem a partir do C++20 e que seja capaz de criar e rodar programas, tanto no Windows quanto no Ubuntu/Linux. Vamos usar preferencialmente o C++23. Logo, caberá à audaciosa leitora criar e manter seu próprio ambiente de desenvolvimento.</p>
-<p>Não se deixe impressionar com o uso do C++23, pois encontrará textos em Assembly de vez ou outra. Além disso, a leitora precisará de algum conhecimento básico de computação, como saber o que é um MegaByte, um disco rígido ou um <code>_cache_</code>.</p>
-<p>Muito será escrito, muito será testado e a jornada será árdua, longa e para poucos. Mas por enquanto, isso tudo é só pretensão. Ainda estamos na fase de pesquisa, redação e design.</p>
-<p>Muito há por vir. Afinal, de que vale sonhar pequeno?</p>
 
 
 </section>
@@ -970,10 +1046,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./12Bgermem.html" class="pagination-link" aria-label="Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro.html" class="pagination-link" aria-label="Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./13gerfiles.html" class="pagination-link" aria-label="Gestão de Arquivos">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -985,7 +1064,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright © 2025 Frank de Alcantara</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/edit/main/12Zgermem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

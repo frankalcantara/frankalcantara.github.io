@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sistemas Operacionais - 13&nbsp; Gestão de Memória</title>
+<title>Sistemas Operacionais - 16&nbsp; Hierarquia de Memória: Fundamentos e Necessidade</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./13gerfiles.html" rel="next">
+<link href="./12Agermem.html" rel="next">
 <link href="./gerproc6.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,10 +102,10 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles/styles.css">
-<meta property="og:title" content="Sistemas Operacionais - 13&nbsp; Gestão de Memória">
+<meta property="og:title" content="Sistemas Operacionais - 16&nbsp; Hierarquia de Memória: Fundamentos e Necessidade">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Sistemas Operacionais">
-<meta name="twitter:title" content="Sistemas Operacionais - 13&nbsp; Gestão de Memória">
+<meta name="twitter:title" content="Sistemas Operacionais - 16&nbsp; Hierarquia de Memória: Fundamentos e Necessidade">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -119,7 +119,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html">Gestão de Memória</a></li><li class="breadcrumb-item"><a href="./12germem.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -136,7 +136,7 @@ window.Quarto = {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Sistemas Operacionais</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/frankalcantara/linefollower" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/frankalcantara/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -187,6 +187,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pr-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Guia Completo de <em>pull request</em> em Repositório de Terceiros</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./commit-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Arte da Mensagem de <em>commit</em>: Um Guia para Históricos Inteligíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topo-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Topologia do Fluxo de Trabalho em Git: Estratégias para Colaboração em Equipe</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -201,99 +219,128 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Simuladores e Projetos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Atividades Práticas</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Gestão de Memória</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12germem.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Agermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Bgermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Zgermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12germem.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14geres.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18glossa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -312,19 +359,36 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-germen1" id="toc-sec-germen1" class="nav-link active" data-scroll-target="#sec-germen1"><span class="header-section-number">13.1</span> Gerenciamento de Memória: Otimizando o Uso de <code>RAM</code></a>
+  <li><a href="#um-pouco-de-história" id="toc-um-pouco-de-história" class="nav-link active" data-scroll-target="#um-pouco-de-história"><span class="header-section-number">16.1</span> Um Pouco de História</a>
   <ul class="collapse">
-  <li><a href="#memória-virtual" id="toc-memória-virtual" class="nav-link" data-scroll-target="#memória-virtual"><span class="header-section-number">13.1.1</span> Memória Virtual</a></li>
+  <li><a href="#a-era-do-bit-lascado" id="toc-a-era-do-bit-lascado" class="nav-link" data-scroll-target="#a-era-do-bit-lascado"><span class="header-section-number">16.1.1</span> A Era do Bit Lascado</a></li>
   </ul></li>
+  <li><a href="#a-era-da-memória-de-núcleo-magnético-1949-1975" id="toc-a-era-da-memória-de-núcleo-magnético-1949-1975" class="nav-link" data-scroll-target="#a-era-da-memória-de-núcleo-magnético-1949-1975"><span class="header-section-number">16.2</span> A Era da Memória de Núcleo Magnético (1949-1975)</a></li>
+  <li><a href="#a-revolução-dos-semicondutores-dram-e-sram-1970-presente" id="toc-a-revolução-dos-semicondutores-dram-e-sram-1970-presente" class="nav-link" data-scroll-target="#a-revolução-dos-semicondutores-dram-e-sram-1970-presente"><span class="header-section-number">16.3</span> A Revolução dos Semicondutores: DRAM e SRAM (1970-presente)</a>
+  <ul class="collapse">
+  <li><a href="#sram-a-precursora-veloz" id="toc-sram-a-precursora-veloz" class="nav-link" data-scroll-target="#sram-a-precursora-veloz"><span class="header-section-number">16.3.1</span> SRAM: A Precursora Veloz</a></li>
+  <li><a href="#intel-1103-e-o-início-da-era-dram" id="toc-intel-1103-e-o-início-da-era-dram" class="nav-link" data-scroll-target="#intel-1103-e-o-início-da-era-dram"><span class="header-section-number">16.3.2</span> Intel 1103 e o Início da Era DRAM</a></li>
+  </ul></li>
+  <li><a href="#hierarquia" id="toc-hierarquia" class="nav-link" data-scroll-target="#hierarquia"><span class="header-section-number">16.4</span> A Necessidade da Hierarquia de Memória</a></li>
+  <li><a href="#evolução-histórica-e-pressões-tecnológicas" id="toc-evolução-histórica-e-pressões-tecnológicas" class="nav-link" data-scroll-target="#evolução-histórica-e-pressões-tecnológicas"><span class="header-section-number">16.5</span> Evolução Histórica e Pressões Tecnológicas</a></li>
+  <li><a href="#componentes-da-hierarquia-de-memória" id="toc-componentes-da-hierarquia-de-memória" class="nav-link" data-scroll-target="#componentes-da-hierarquia-de-memória"><span class="header-section-number">16.6</span> Componentes da Hierarquia de Memória</a>
+  <ul class="collapse">
+  <li><a href="#registradores-do-processador" id="toc-registradores-do-processador" class="nav-link" data-scroll-target="#registradores-do-processador"><span class="header-section-number">16.6.1</span> Registradores do Processador</a></li>
+  <li><a href="#memória-cache" id="toc-memória-cache" class="nav-link" data-scroll-target="#memória-cache"><span class="header-section-number">16.6.2</span> Memória <em>cache</em></a></li>
+  <li><a href="#memória-principal-ram" id="toc-memória-principal-ram" class="nav-link" data-scroll-target="#memória-principal-ram"><span class="header-section-number">16.6.3</span> Memória Principal (RAM)</a></li>
+  <li><a href="#armazenamento-secundário" id="toc-armazenamento-secundário" class="nav-link" data-scroll-target="#armazenamento-secundário"><span class="header-section-number">16.6.4</span> Armazenamento Secundário</a></li>
+  </ul></li>
+  <li><a href="#métricas-de-desempenho-e-trade-offs" id="toc-métricas-de-desempenho-e-trade-offs" class="nav-link" data-scroll-target="#métricas-de-desempenho-e-trade-offs"><span class="header-section-number">16.7</span> Métricas de Desempenho e Trade-offs</a></li>
+  <li><a href="#memória-virtual" id="toc-memória-virtual" class="nav-link" data-scroll-target="#memória-virtual"><span class="header-section-number">16.8</span> Memória Virtual</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/12germem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/edit/main/12germem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html">Gestão de Memória</a></li><li class="breadcrumb-item"><a href="./12germem.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Gestão de Memória</span></h1>
+<h1 class="title"><span id="sec-hierarquia" class="quarto-section-identifier"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></span></h1>
 </div>
 
 
@@ -341,10 +405,98 @@ window.Quarto = {
 </header>
 
 
-<section id="sec-germen1" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="sec-germen1"><span class="header-section-number">13.1</span> Gerenciamento de Memória: Otimizando o Uso de <code>RAM</code></h2>
-<p>A memória principal, também conhecida como <code>RAM</code> (Random Access Memory), representa um dos recursos mais importantes e voláteis que devem ser gerenciados cuidadosamente em qualquer <strong>Sistema Operacional</strong> moderno. Diferentemente do armazenamento permanente, a <code>RAM</code> perde todo seu conteúdo quando a energia é removida, tornando seu gerenciamento uma tarefa que exige precisão e eficiência constantes.</p>
-<p><em>O controle de alocação de processos em memória envolve manter um registro detalhado e atualizado de quais partes da memória estão em uso por processos ativos e quais permanecem disponíveis</em>. A alocação dinâmica aumenta a complexidade desta tarefa ao exigir que o sistema constantemente atribua e libere espaço conforme processos são criados e terminados, criando um ambiente dinâmico de constante mudança. Além disso, o sistema deve lidar com a fragmentação da memória, que ocorre quando blocos de memória livre são divididos em pedaços pequenos e não contíguos, dificultando a alocação eficiente de novos processos.</p>
+<p>A memória principal na maioria de sistemas computacionais, também conhecida como <code>RAM</code> (<strong>R</strong>andom <strong>A</strong>ccess <strong>M</strong>emory), representa um dos recursos mais importantes e voláteis gerenciados cuidadosamente em qualquer <strong>Sistema Operacional</strong>. Diferentemente do armazenamento permanente, a <code>RAM</code> perde todo seu conteúdo quando a energia é removida, tornando seu gerenciamento uma tarefa que exige precisão e eficiência.</p>
+<p>A atenta leitora pode visualizar esta complexidade se lembrar o quão complexo é manter processos diferentes em memória. <em>O controle de alocação de processos em memória envolve manter um registro detalhado e atualizado de quais partes da memória estão em uso por processos ativos e quais permanecem disponíveis</em>. Como os processos são alocados dinamicamente, o sistema deve ser capaz de rastrear essas alocações em tempo real, garantindo que a memória seja utilizada de forma eficiente e evitando conflitos entre processos.</p>
+<p>Force a imaginação e considere que a alocação dinâmica, de processos e de artefatos em memória pelos próprios processos, aumenta a complexidade desta tarefa ao exigir que o sistema constantemente atribua e libere espaço conforme processos, ou artefatos, são criados e terminados, criando um ambiente dinâmico de constante mudança. Toda esta complexidade cria a possibilidade da criação de fragmentos de memória, que podem levar a uma utilização ineficiente do espaço disponível. Esta fragmentação ocorre quando blocos de memória livre são divididos em pedaços pequenos e não contíguos, dificultando a alocação eficiente de novos processos. Não deve ser simples, nem fácil. Isso tudo começa a década de 1940, com a introdução da memória. Como pode ser visto na <a href="#fig-timeline1" class="quarto-xref">Figure&nbsp;<span>16.1</span></a>.</p>
+<div id="fig-timeline1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-timeline1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src=".\images/timeline_primeiros_computadores.webp" class="img-fluid figure-img"></p>
+<figcaption>Linha do Tempo da Evolução da Memória</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-timeline1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.1
+</figcaption>
+</figure>
+</div>
+<section id="um-pouco-de-história" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="um-pouco-de-história"><span class="header-section-number">16.1</span> Um Pouco de História</h2>
+<p>Talvez por causa do efeito do pós-guerra, temos a tendência de considerar que os primeiros computadores foram o Colossus de 1943 e o ENIAC de 1945. Estes computadores eletrônicos separavam rigidamente programa de dados. O ENIAC (1945) era programado através de painéis de conexão e chaves físicas. Para mudar o programa, técnicos passavam dias reconectando cabos e ajustando cerca de 3.000 chaves de comutação de estados. Os dados ficavam em acumuladores, mas o programa era o próprio hardware configurado (GOLDSTINE; GOLDSTINE, 1946). O Colossus (1943), usado em Bletchley Park para quebrar códigos nazistas, tinha o programa definido por <em>plugboards</em>, que pode ser traduzido para painéis de conexão, enquanto dados vinham de fita de papel perfurado (COPELAND, 2006). Porém, comparados com o Z3, estes dois computadores perdem um pouco do seu brilho.</p>
+<section id="a-era-do-bit-lascado" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="a-era-do-bit-lascado"><span class="header-section-number">16.1.1</span> A Era do Bit Lascado</h3>
+<p>O Z3, completado por Konrad Zuse em maio de 1941, representa um marco fundamental na evolução das tecnologias de memória computacional, antecedendo até mesmo os sistemas eletrônicos posteriores (ROJAS, 1998). Utilizando <strong>relés eletromecânicos</strong> ao invés das válvulas termiônicas do ENIAC ou das linhas de retardo do EDVAC, o Z3 implementava uma memória de 64 palavras de 22 bits cada, totalizando 1.408 bits (aproximadamente 176 bytes), nos quais cada relé representava um bit através de seu estado físico, fechado para ‘1’ e aberto para ‘0’ (ZUSE, 1993). A arquitetura da palavra demonstrava notável sofisticação para a época: <strong>1 bit para sinal, 7 bits para expoente em notação excesso-64, e 14 bits para mantissa</strong>, estabelecendo assim o primeiro sistema de ponto flutuante implementado em hardware, uma inovação que antecipou em décadas a padronização <a href="https://frankalcantara.com/precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna/">IEEE 754</a> (ROJAS, 2000).</p>
+<p>Operando com <em>clock</em> de 5-10 Hz e executando uma adição em aproximadamente 0,8 segundos, a memória do Z3 era classificada como <em>latch memory</em>, não oferecendo acesso aleatório verdadeiro, mas seleção por palavra através de matriz de endereçamento, e mantinha característica volátil, perdendo todo conteúdo ao ser desenergizada. Esta tecnologia representou evolução significativa sobre o Z1 anterior, que utilizava memória puramente mecânica com lâminas metálicas propensas a falhas, estabelecendo conceitos fundamentais como programa armazenado (em fita perfurada), aritmética binária e unidade de memória endereçável separada que influenciariam toda a computação subsequente, apesar da destruição do original em bombardeio aliado em dezembro de 1943. A escolha de relés sobre válvulas, embora resultasse em menor velocidade, oferecia maior confiabilidade e menor consumo energético, demonstrando que diferentes tecnologias de memória podiam coexistir e competir mesmo nos primórdios da computação eletrônica, estabelecendo precedente para a diversidade tecnológica que caracterizaria as próximas oito décadas de evolução.</p>
+<p>O <strong>Projeto do EDVAC 1945</strong> continha uma ideia revolucionária, formalizada no <em>First Draft of a Report on the EDVAC</em> por von Neumann (1945), uma memória unificada contendo instruções (como dados numéricos), dados operacionais e resultados intermediários, todas acessíveis pelo mesmo mecanismo. Isso significava que um programa poderia modificar suas próprias instruções durante a execução, conceito poderoso mas também perigoso (VON NEUMANN, 1945).</p>
+<p>O <strong>Manchester Baby (1948)</strong> foi o primeiro computador de programa armazenado a executar com sucesso (LAVINGTON, 1998). Utilizava memória <a href="https://www.computerhistory.org/revolution/memory-storage/8/308"><em>Williams-Kilburn Tube</em></a>, usando um tubo de raios catódicos para armazenamento, com capacidade de 32 palavras de 32 bits (128 bytes total), sendo volátil e baseada em carga elétrica na tela de fósforo. O primeiro programa executado em 21 de junho de 1948 encontrou o maior fator de <span class="math inline">\(2^18 = 262.144\)</span>, levando 52 minutos e executando 3,5 milhões de instruções (NAPPER, 2000). No Manchester Baby, descobriram que um programa poderia acidentalmente sobrescrever suas próprias instruções. Isso levou ao desenvolvimento das primeiras técnicas de proteção de memória e à distinção entre segmentos de código e dados, conceitos que a esforçada leitora verá que são fundamentais até hoje (LAVINGTON, 1980).</p>
+<p>O <strong>EDSAC (1949)</strong> foi o primeiro computador de programa armazenado praticamente útil (WILKES, 1985). Utilizava <em><a href="https://ieeexplore.ieee.org/document/1698100">Mercury delay lines</a></em>, linhas de retardo de mercúrio, com capacidade de 512 palavras de 18 bits. A peculiaridade era que dados circulavam como pulsos sonoros em tubos de mercúrio de 1,5m. <a href="https://en.wikipedia.org/wiki/David_Wheeler_(computer_scientist)">David Wheeler</a> escreveu a primeira sub-rotina armazenada para o EDSAC, inventando efetivamente o conceito de <em>function call</em> (CAMPBELL-KELLY, 1998).</p>
+<p>O <strong>EDVAC (1951)</strong> representou a implementação completa da arquitetura von Neumann (STERN, 1981). Com <em>Mercury delay lines</em> mais refinadas que o EDSAC, tinha capacidade de 1024 palavras de 44 bits e introduziu aritmética binária, se diferenciando do ENIAC. Apesar de concebido antes, só ficou operacional depois do EDSAC devido a disputas de patentes e problemas técnicos.</p>
+<div id="callout-note">
+<p><strong>A Controvérsia da <em>Arquitetura von Neumann</em></strong></p>
+<p>A atribuição da arquitetura de programa armazenado exclusivamente a <a href="https://en.wikipedia.org/wiki/John_von_Neumann">John von Neumann</a> constitui uma das controvérsias mais significativas da história da computação, centrada no documento <em>First Draft of a Report on the EDVAC</em> de junho de 1945 (GOLDSTINE, 1972). Embora este documento tenha sido assinado apenas por von Neumann, o relatório sintetizava discussões colaborativas da equipe da Moore School of Electrical Engineering da Universidade da Pensilvânia, incluindo <a href="https://en.wikipedia.org/wiki/J._Presper_Eckert">J. Presper Eckert</a> e <a href="https://en.wikipedia.org/wiki/John_Mauchly">John Mauchly</a>, principais projetistas do ENIAC, que já desenvolviam o conceito de programa armazenado para o EDVAC antes da chegada de von Neumann como consultor em 1944 (STERN, 1981). A distribuição prematura do documento por <a href="https://en.wikipedia.org/wiki/Herman_Goldstine">Herman Goldstine</a>, listando apenas von Neumann como autor, não apenas consolidou incorretamente a atribuição histórica, mas teve consequências legais devastadoras: considerada <em>divulgação pública</em>, impediu Eckert e Mauchly de patentear suas inovações no prazo legal de um ano, privando-os dos direitos comerciais sobre suas invenções fundamentais, incluindo a memória de linha de retardo de mercúrio desenvolvida por Eckert (MCCARTNEY, 1999).</p>
+</div>
+<p>O <strong>UNIVAC I (1951)</strong> foi o primeiro computador comercial americano de programa armazenado (LUKOFF, 1979). Com memória principal de <em>Mercury delay lines</em> (1000 palavras de 72 bits) e memória secundária em fita magnética, uma inovação digna de nota. O UNIVAC I foi construído por J. Presper Eckert e John Mauchly. Eles projetaram o computador na empresa que fundaram, a Eckert-Mauchly Computer Corporation e entregaram a primeira unidade ao Departamento do Censo dos EUA em 1951. O UNIVAC I ficou famoso por prever corretamente a vitória de Eisenhower em 1952, contrariando todas as pesquisas.</p>
+</section>
+</section>
+<section id="a-era-da-memória-de-núcleo-magnético-1949-1975" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="a-era-da-memória-de-núcleo-magnético-1949-1975"><span class="header-section-number">16.2</span> A Era da Memória de Núcleo Magnético (1949-1975)</h2>
+<p>A memória de núcleo magnético, desenvolvida entre 1949 e 1953, dominou a computação por mais de duas décadas (FORRESTER, 1951). <a href="https://en.wikipedia.org/wiki/An_Wang">An Wang</a> e Way-Dong Woo desenvolveram o princípio básico em 1949 no Harvard Computation Laboratory. É importante notar que a implementação de Wang e Woo funcionava mais como uma linha de atraso ou registrador de deslocamento (serial), e não como uma memória de acesso aleatório, <code>RAM</code> propriamente dita, enquanto <a href="https://en.wikipedia.org/wiki/Jay_Wright_Forrester">Jay Forrester</a> e sua equipe no MIT criaram a primeira implementação prática para o computador Whirlwind em 1953 (WANG, 1951; FORRESTER, 1951).</p>
+<p>A tecnologia baseava-se em pequenos anéis de ferrite, 1-2mm de diâmetro inicialmente, reduzidos para 0,4mm nos anos 1970 <a href="#fig-magnucleo1" class="quarto-xref">Figure&nbsp;<span>16.2</span></a>, atravessados por fios de cobre. Cada anel armazenava um bit através de sua magnetização (PUGH, 1984). A não-volatilidade era uma característica revolucionária - dados permaneciam intactos mesmo com o computador desligado, permitindo o conceito de “core dump” que persiste na terminologia moderna (BASHE et al., 1986).</p>
+<p>O tempo de acesso evoluiu de 10 microssegundos em 1953 para menos de 1 microssegundo em 1970. O custo caiu dramaticamente de US$ 1 por bit em 1955 para US$ 0,01 por bit em 1970, enquanto a capacidade cresceu de kilobits para megabits (COMPUTER HISTORY MUSEUM, 2006).</p>
+<div id="fig-magnucleo1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-magnucleo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="\images\KL_CoreMemory.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-magnucleo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.2
+</figcaption>
+</figure>
+</div>
+<p>Não deve ser difícil, para a esforçada leitora, acreditar que a redução no custo e o aumento significativo de velocidade tenham sido os fatores que impulsionaram a adoção da tecnologia de memória de núcleos magnéticos. Em 1976, aproximadamente 20 bilhões de núcleos eram produzidos anualmente, com 95% de todos os computadores utilizando esta tecnologia (GARDNER; WONG, 2019). O processo de manufatura era predominantemente manual, empregando principalmente mulheres que passavam fios através dos minúsculos anéis usando microscópios, trabalho que migrou para Ásia nos anos 1960, estabelecendo padrão que persiste na indústria eletrônica (PUGH; JOHNSON; PALMER, 1991).</p>
+<p>Outra curiosidade interessante: memória de núcleo magnético, ou <em>magnetic core memory</em>, quando era necessário estudar o programa em busca de erros ou problemas, os engenheiros faziam a baixa dos núcleos, ou <em>core dump</em>, para análise posterior. E, ainda hoje, a expressão <em>core dump</em> é usada para descrever a captura do estado da memória de um programa em execução.</p>
+</section>
+<section id="a-revolução-dos-semicondutores-dram-e-sram-1970-presente" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="a-revolução-dos-semicondutores-dram-e-sram-1970-presente"><span class="header-section-number">16.3</span> A Revolução dos Semicondutores: DRAM e SRAM (1970-presente)</h2>
+<p>A transição da memória de núcleo magnético para os semicondutores representou uma mudança de paradigma na arquitetura computacional, impulsionada pela necessidade crescente de maior densidade, velocidade superior e custos reduzidos de produção. Enquanto a tecnologia de núcleos magnéticos havia atingido limites físicos práticos em termos de miniaturização e velocidade de acesso, os semicondutores prometiam superar essas barreiras através de processos de fabricação fotolitográficos que permitiam integração em larga escala. Esta revolução não apenas transformaria fundamentalmente como a informação era armazenada e acessada, mas também estabeleceria as bases tecnológicas para a explosão da computação pessoal e dos sistemas embarcados que caracterizariam as décadas seguintes, consolidando a supremacia dos circuitos integrados sobre as tecnologias eletromecânicas predecessoras.</p>
+<p>A verdadeira revolução começa com <a href="https://en.wikipedia.org/wiki/Robert_H._Dennard">Robert Dennard</a> da IBM que patenteou a célula <code>DRAM</code> de um transistor em 1967, estabelecendo o princípio fundamental que ainda governa a <code>DRAM</code> moderna: armazenamento de carga em capacitores minúsculos com refresh periódico a cada 64 milissegundos (DENNARD, 1968). Mas, antes que a memória ficasse dinâmica ela foi estática.</p>
+<section id="sram-a-precursora-veloz" class="level3" data-number="16.3.1">
+<h3 data-number="16.3.1" class="anchored" data-anchor-id="sram-a-precursora-veloz"><span class="header-section-number">16.3.1</span> SRAM: A Precursora Veloz</h3>
+<p>Antes que a <code>DRAM</code> pudesse iniciar seu reinado, a <strong>Memória de Acesso Aleatório Estática (SRAM)</strong> surgiu como a primeira forma viável de memória de semicondutor, estabelecendo um nicho de alto desempenho. A invenção da <code>SRAM</code> é creditada a <a href="https://www.computerhistory.org/siliconengine/semiconductor-rams-serve-high-speed-storage-needs/">Robert Norman</a> na Fairchild Semiconductor em 1963 (RIORDAN; HODDESON, 1997). Diferente da <code>DRAM</code>, que armazena bits como carga em capacitores, a <code>SRAM</code> utiliza um arranjo de seis transistores, conhecido como <strong>célula de flip-flop</strong>, para cada bit. Este design, embora mais complexo e ocupando mais espaço no silício, oferece duas vantagens significativas: velocidade de acesso muito superior e a não necessidade de ciclos de <em>refresh</em> para manter os dados, daí o termo “estática” (HODGES, 1972).</p>
+<p>O primeiro produto comercial da recém-fundada Intel, em 1969, não foi um microprocessador nem uma <code>DRAM</code>, mas sim o chip <code>SRAM</code> <strong>Intel 3101</strong>, um componente bipolar de 64 bits (LUM et al., 1969). Embora sua capacidade fosse ínfima para os padrões atuais, sua velocidade era notável, com tempo de acesso de aproximadamente 60 nanossegundos, superando em mais de uma ordem de magnitude a memória de núcleo magnético mais rápida disponível (BOYSEN, 2011). No entanto, seu alto custo de produção, maior consumo de energia e menor densidade de bits em comparação com o que a <code>DRAM</code> prometia, limitaram seu uso como memória principal em larga escala. A <code>SRAM</code> encontrou seu lugar em aplicações críticas de velocidade, como memórias <em>cache</em> e registradores de alta performance, um papel que, em grande parte, ela mantém até hoje.</p>
+<p>Apesar do ganho em velocidade, As primeiras SRAMs eram aproximadamente 10 vezes mais caras que a memória de núcleo magnético. No final da década de 1960, enquanto um bit em memória de núcleo magnético custava cerca de US$ 0,01, o mesmo bit em uma <code>SRAM</code> de alto desempenho podia custar perto de US$ 1,00 no seu lançamento, com o preço caindo para cerca de US$ 0,10 nos anos seguintes. A precavida leitora deve guardar esta informação: a <code>SRAM</code> é rápida, mas cara. Este pode ser o motivo da SRAM não ter substituído a memória de núcleo magnético.</p>
+<p>A <em>Static RAM</em>, <code>SRAM</code>, baseada em flip-flops de 6 transistores, atualmente oferece acesso em menos de 1 nanosegundo mas com densidade muito menor que <code>DRAM</code> (WESTE; HARRIS, 2015). Utilizada principalmente em caches de processadores, a <code>SRAM</code> representa o comprometimento fundamental entre velocidade e capacidade que caracteriza a hierarquia de memória moderna (JACOB; NG; WANG, 2008). Como veremos na seção <span class="citation" data-cites="hierarquia">(<a href="references.html#ref-hierarquia" role="doc-biblioref"><strong>hierarquia?</strong></a>)</span>.</p>
+<p>A <code>SRAM</code> não foi relegada a uma prateleira empoeirada da história. Em vez disso, está viva e ativa nos registradores e caches de processadores modernos. Este nicho, mantém a tecnologia viva e, ao mesmo tempo, permite que as <code>DRAMs</code> dominem a memória principal, na qual a densidade e o custo por bit são mais críticos que a velocidade absoluta.</p>
+</section>
+<section id="intel-1103-e-o-início-da-era-dram" class="level3" data-number="16.3.2">
+<h3 data-number="16.3.2" class="anchored" data-anchor-id="intel-1103-e-o-início-da-era-dram"><span class="header-section-number">16.3.2</span> Intel 1103 e o Início da Era DRAM</h3>
+<p>A <strong>Intel 1103</strong>, lançada em outubro de 1970, foi o primeiro circuito integrado <code>DRAM</code> comercialmente bem-sucedido, marcando o início do fim para a memória de núcleo magnético (FAGGIN; HOFF; MAZOR, 1996). Com capacidade de 1.024 bits e preço competitivo de US$ 0,01 por bit, aproximadamente o custo das memórias de núcleo magnético. Esta memória tornou-se o circuito integrado semicondutor mais vendido do mundo em 1972 (COMPUTER HISTORY MUSEUM, 2018).</p>
+<p>Apelidada de “Core Killer”, a assassina de núcleos, a 1103 foi adotada por fabricantes de <em>mainframes</em> como Honeywell, DEC, em seus PDP-11, e HP, em sua série 9800. A Intel 1103, utilizava uma célula de três transistores inventada por <a href="https://intelalumni.org/wp-content/uploads/Regitz-Intel-Oral-HistoryInterview-1999-DE.pdf">William Regitz</a> na Honeywell. Essa célula era mais simples que as células de núcleo magnético, mas ainda assim complexa se comparada às <code>DRAMs</code> de um transistor que surgiriam depois. Graças a evolução das ideias de Dennard.</p>
+<p>A progressão foi exponencial: 4KB (1973), 16KB (1976), 64KB (1980), 256KB (1983), 1MB (1986), culminando com a primeira <code>DRAM</code> de 1GB da Samsung em 1996 (SAMSUNG ELECTRONICS, 1996). Cada geração representou não apenas aumento de capacidade, mas inovações fundamentais em arquitetura.</p>
+<p>A atenta leitora deve entender que a <code>DRAM</code> reina, mas seu reinado não é, nem foi tranquilo. Ao longo da história, e ainda hoje, a pesquisa não para e novas tecnologias estão sempre surgindo para desafiar seu domínio.</p>
+<p><strong>Bubble Memory</strong>: desenvolvida por <a href="https://en.wikipedia.org/wiki/Andrew_H._Bobeck">Andrew Bobeck</a> nos Bell Labs em 1967, a bubble memory prometia combinar a não-volatilidade do núcleo magnético com a densidade dos semicondutores (BOBECK; DELLA TORRE, 1975). Baseada em domínios magnéticos microscópicos sobre camadas finas de um composto de granada, <em>garnet</em> em inglês, denominadas <em>filme de garnet</em>, alcançou produção comercial limitada nos anos 1970-1980, mas foi superada pelo rápido avanço dos discos rígidos e memória Flash (CHEN; YEACK-SCRANTON, 1990).</p>
+<p><strong>CCD Memory e Twistor Memory</strong>: A <em>Charge-Coupled Device</em> (CCD) memory, desenvolvida nos Bell Labs, oferecia densidade superior à <code>DRAM</code> inicial mas com complexidade de controle proibitiva (AMELIO; TOMPSETT; SMITH, 1970). A <em>Twistor memory</em> da Bell Labs, usando fitas magnéticas entrelaçadas, nunca superou a fase experimental apesar de promissoras características de não-volatilidade (BOBECK, 1967).</p>
+<p><strong>Ferroelectric RAM (FeRAM)</strong>: Utilizando materiais ferroelétricos para armazenar dados, a FeRAM oferece tempos de acesso rápidos e não-volatilidade, mas enfrenta desafios de escalabilidade e custo que limitam sua adoção em larga escala (SCOTT, 2007).</p>
+<p><strong>Memórias de Estado Sólido</strong>: As memórias de estado sólido, como a Flash, revolucionaram o armazenamento ao oferecer alta densidade e não-volatilidade, mas com limitações em termos de ciclos de gravação e latência (KIM; KIM; KIM, 2012).</p>
+<p>Finalmente, a família <em><strong>D</strong>ouble <strong>D</strong>ata <strong>R</strong>ate</em>, <strong>DDR</strong>, <code>DRAM</code> representa a padronização e evolução contínua da tecnologia <code>DRAM</code>: sua inovação fundamental reside na capacidade de transferir dados duas vezes por ciclo de <em>clock</em> (double data rate), uma na sua borda de subida, quando o sinal vai de baixo para alto, e outra na borda de descida, quando o sinal vai de alto para baixo. Isso a diferencia de sua predecessora. Que agora é chamada de <strong>SDR</strong>, <strong>S</strong>ingle <strong>D</strong>ata <strong>R</strong>ate, <code>SDRAM</code>, que realizava apenas uma transferência por ciclo, tradicionalmente na borda de subida do sinal de <em>clock</em>.</p>
+<p>Para viabilizar essa dupla taxa de transferência sem alterar a frequência do núcleo da memória, a arquitetura <strong>DDR</strong> introduziu um <em>buffer</em> de pré-busca de 2 bits. A cada ciclo, o barramento de memória interno acessa e carrega dois bits de dados adjacentes da matriz de células de memória para este <em>buffer</em>. Em seguida, o barramento externo, sincronizado por este mesmo <em>clock</em>, envia o primeiro bit na borda de subida e o segundo bit na borda de descida. Na prática, essa técnica efetivamente dobra a largura de banda máxima da memória sem a necessidade de duplicar a frequência do barramento, uma solução que ofereceu um ganho de desempenho significativo com maior eficiência energética (PATTERSON; HENNESSY, 2017). As gerações subsequentes, como DDR2 e DDR3, expandiram este conceito utilizando buffers de pré-busca maiores (4 e 8, respectivamente), permitindo taxas de transferência ainda mais altas em relação à frequência do <em>clock</em> interno do chip de memória. Em resumo, temos:</p>
+<ul>
+<li><strong>DDR (2000)</strong>: 200-400 MT/s, 2.5V (JEDEC, 2000);</li>
+<li><strong>DDR2 (2003)</strong>: 400-800 MT/s, 1.8V, prefetch 4-bit (JEDEC, 2003);</li>
+<li><strong>DDR3 (2007)</strong>: 800-1600 MT/s, 1.5V, prefetch 8-bit (JEDEC, 2007);</li>
+<li><strong>DDR4 (2014)</strong>: 1600-3200 MT/s, 1.2V, bank groups (JEDEC, 2014), nova tecnologia;</li>
+<li><strong>DDR5 (2020)</strong>: 3200-6400 MT/s, 1.1V, on-die ECC (JEDEC, 2020), nova tecnologia.</li>
+</ul>
+<p>Cada geração introduziu inovações significativas: DDR2 dobrou o buffer de prefetch, DDR3 implementou calibração automática, um recurso que garante a integridade do sinal em frequências mais altas, ajustando dinamicamente a impedância dos drivers de saída e compensando desvios de tempo no barramento de memória; DDR4 adicionou verificação CRC (Cyclic Redundancy Check), mecanismo que detecta erros de transmissão de dados em trânsito entre o controlador e os chips de DRAM antes que sejam escritos, aumentando a confiabilidade em altas velocidades; e DDR5 incorporou correção de erros on-die (On-Die ECC), onde cada chip de memória individualmente verifica e corrige erros de bits internos, uma necessidade crescente para manter a estabilidade das células à medida que a densidade de armazenamento aumenta e os processos de fabricação encolhem (JACOB; WANG; NG, 2021).</p>
+</section>
+</section>
+<section id="hierarquia" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="hierarquia"><span class="header-section-number">16.4</span> A Necessidade da Hierarquia de Memória</h2>
+<p>A criação de uma hierarquia de memória não foi uma escolha arbitrária dos projetistas de sistemas computacionais, mas sim uma resposta necessária a três limitações fundamentais e inter-relacionadas que persistem desde os primórdios da computação: <strong>velocidade</strong>, <strong>capacidade</strong> e <strong>custo</strong> (PATTERSON; HENNESSY, 2014). Esta trindade de restrições cria um paradoxo tecnológico conhecido como <em>memory wall</em>, descrito originalmente por Wulf e McKee (1995), onde a disparidade entre a velocidade de processamento da <code>CPU</code> e o tempo de acesso à memória continua a crescer exponencialmente.</p>
+<p>O problema central reside no fato de que <em>nenhuma tecnologia de memória única consegue simultaneamente fornecer alta velocidade de acesso, grande capacidade de armazenamento e baixo custo por bit</em>. As memórias mais rápidas, construídas com transistores próximos ao núcleo do processador, são exponencialmente mais caras por unidade de armazenamento. Por exemplo, a <strong>SRAM</strong> (Static Random Access Memory) utilizada em caches L1 pode custar até 1000 vezes mais por megabyte que a <strong>DRAM</strong> convencional, enquanto oferece tempos de acesso na ordem de 0,5 a 2 nanossegundos comparados aos 50-100 nanossegundos da <strong>DRAM</strong> (JACOB; NG; WANG, 2008).</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -355,24 +507,77 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Hierarquia de Memória</strong> A hierarquia de memória é um conceito que representa a organização dos sistemas de armazenamento em um computador, organizados por velocidade, capacidade e custo. No topo desta hierarquia estão as unidades de armazenamento mais rápidas e caras, registradores da <code>CPU</code> e cache, enquanto na base estão os dispositivos de armazenamento mais lentos, mas de maior capacidade, discos rígidos e armazenamento óptico. Este conceito hierárquico existe por motivos econômicos. Porém, serve como base para a criação de rotinas para o uso eficiente de memória. Dois pontos desta hierarquia são importantes para esta introdução aos Sistemas Operacionais:</p>
-<p>A <strong>memória cache</strong> serve como um buffer de alta velocidade entre a <code>CPU</code> e a memória principal, tipicamente implementada usando SRAM, em inglês Static <code>RAM</code>. Processadores modernos incluem múltiplos níveis de cache: cache L1, mais próximo aos núcleos da <code>CPU</code>, ~32KB-64KB, cache L2, ~256KB-1MB, e frequentemente cache L3, ~8MB-32MB, compartilhado entre núcleos. O cache opera no princípio da localidade temporal. Ou seja, considera que dados acessados recentemente provavelmente serão acessados novamente e localidade espacial, dados próximos provavelmente serão acessados em breve. Quando a <code>CPU</code> solicita dados, primeiro verifica sua existência no cache; um cache hit, o dado está no cache, fornece dados em 1-3 ciclos de clock, enquanto um cache miss, o dado não está no cache, requer acessar níveis de memória mais lentos.</p>
-<p>A <strong>memória principal (<code>RAM</code>)</strong> consiste em um conjunto de chips DRAM volátil, em inglês Dynamic <code>RAM</code>, que armazena programas em execução e seus dados. Embora significativamente mais lenta que o cache, com latência típica de 100-300 ciclos de clock, a <code>RAM</code> fornece capacidade muito maior, alguma coisa entre 8GB e 64GB em sistemas modernos, a um custo razoável. O <strong>Sistema Operacional</strong> gerencia a alocação de <code>RAM</code>, mapeamento de memória virtual e o movimento de dados entre níveis de armazenamento. A <code>RAM</code> serve como o espaço de trabalho primário para processos ativos, com o <strong>Sistema Operacional</strong>tratando page faults, erros que ocorrem quando dados solicitados não estão presentes na memória física.</p>
+<p><strong>O Princípio da Localidade</strong></p>
+<p>A hierarquia de memória funciona eficientemente devido ao <em>princípio da localidade</em>, descoberto empiricamente por Denning (1968) e fundamental para o design de sistemas modernos. Este princípio manifesta-se em duas formas complementares:</p>
+<p><strong>Localidade Temporal</strong>: Quando um endereço de memória é acessado, existe alta probabilidade de ser acessado novamente em um futuro próximo. Loops em programas exemplificam este comportamento, onde instruções e variáveis são repetidamente acessadas.</p>
+<p><strong>Localidade Espacial</strong>: Quando um endereço de memória é acessado, endereços próximos provavelmente serão acessados em breve. Arrays e estruturas de dados sequenciais demonstram este padrão, onde elementos adjacentes são processados consecutivamente.</p>
+<p>Estudos empíricos demonstram que programas típicos exibem razão 90/10: aproximadamente 90% do tempo de execução é gasto em apenas 10% do código (HENNESSY; PATTERSON, 2019). Esta característica permite que pequenas memórias rápidas capturem a maioria dos acessos, tornando a hierarquia economicamente viável.</p>
 </div>
 </div>
-<p>A <strong>proteção de memória</strong> garante que processos não acessem memória de outros processos, prevenindo interferências maliciosas ou acidentais que possam comprometer a estabilidade do sistema. <em>O gerenciamento de memória virtual complementa essas responsabilidades ao criar a ilusão de o processo tem mais memória disponível que a memória fisicamente disponível</em>, permitindo que múltiplos programas executem simultaneamente mesmo em sistemas com <code>RAM</code> limitada. À esta memória virtual damos o nome de <strong>espaço de endereçamento</strong>. Para implementar essas responsabilidades, os <strong>Sistemas Operacionais</strong> empregam técnicas como o <strong>particionamento fixo</strong> que divide a memória em partições de tamanho fixo predeterminado, oferecendo previsibilidade. Esta técnica relativamente simples corre o risco de ser ineficiente quando os tamanhos dos processos não correspondem aos tamanhos das partições fixamente definidas. Uma técnica mais complexa, o <strong>particionamento dinâmico</strong>, oferece maior flexibilidade ao criar partições conforme necessário. Neste caso, quando um novo processo solicita memória, o sistema cria uma partição exatamente do tamanho necessário, maximizando a utilização da memória disponível e eliminando o desperdício interno das partições fixas.</p>
-<p>Uma técnica conhecida como paginação revoluciona o gerenciamento de memória ao dividir tanto a memória física quanto o espaço de endereçamento dos processos em páginas de tamanho fixo. Esta técnica permite que processos sejam carregados de forma não-contígua na memória física, resolvendo problemas de fragmentação externa. Nesta técnica o cálculo do endereço físico segue a fórmula:</p>
-<p><span class="math display">\[\text{Endereço Físico} = \text{Número da Página} \times \text{Tamanho da Página} + \text{Offset}\]</span></p>
-<p>A segmentação oferece uma alternativa ao dividir a memória em segmentos de tamanho variável que correspondem mais naturalmente à estrutura lógica dos programas, com diferentes segmentos contendo código, dados, pilha ou heap.</p>
-<p><img src=".\assets/images/memory_management_figure1.webp" class="img-fluid" alt="Diagrama mostrando particionamento fixo e dinâmico e memória virtual e o particionamento todos os diagramas em blocos"> <em>Figura 9: Diagrama ilustrativo de paginação e segmentação na memória, mostrando como processos são divididos em páginas e segmentos, com endereços físicos correspondentes.</em>{: class=<code>legend</code>}</p>
-<section id="memória-virtual" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="memória-virtual"><span class="header-section-number">13.1.1</span> Memória Virtual</h3>
+</section>
+<section id="evolução-histórica-e-pressões-tecnológicas" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="evolução-histórica-e-pressões-tecnológicas"><span class="header-section-number">16.5</span> Evolução Histórica e Pressões Tecnológicas</h2>
+<p>A necessidade de uma hierarquia estruturada tornou-se evidente durante a década de 1960, quando a <em>Lei de Moore</em> começou a ditar o ritmo de evolução dos processadores. Gordon Moore observou em 1965 que o número de transistores em um circuito integrado dobrava aproximadamente a cada dois anos, permitindo processadores cada vez mais rápidos. Contudo, a velocidade de acesso à memória <strong>DRAM</strong> melhorava apenas 7% ao ano, criando uma divergência exponencial conhecida como <em>processor-memory performance gap</em> (HENNESSY; PATTERSON, 2019).</p>
+<p>Esta divergência pode ser quantificada pela seguinte relação temporal:</p>
+<p><span class="math display">\[T_{efetivo} = H \times T_{_cache_} + (1-H) \times T_{memoria}\]</span></p>
+<p>Onde <span class="math inline">\(H\)</span> representa a taxa de acerto (<em>hit rate</em>) no <em>cache</em>, <span class="math inline">\(T_{_cache_}\)</span> o tempo de acesso ao <em>cache</em>, e <span class="math inline">\(T_{memoria}\)</span> o tempo de acesso à memória principal. <em>Sem uma hierarquia eficiente, onde <span class="math inline">\(H\)</span> aproxima-se de 1, o desempenho do sistema seria dominado pelo termo <span class="math inline">\((1-H) \times T_{memoria}\)</span></em>, resultando em processadores desperdiçando a maioria de seus ciclos esperando dados.</p>
+</section>
+<section id="componentes-da-hierarquia-de-memória" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="componentes-da-hierarquia-de-memória"><span class="header-section-number">16.6</span> Componentes da Hierarquia de Memória</h2>
+<p>A hierarquia moderna de memória organiza-se em níveis distintos, cada um otimizado para equilibrar velocidade, capacidade e custo. A estrutura típica, do nível mais próximo ao processador para o mais distante, compreende:</p>
+<section id="registradores-do-processador" class="level3" data-number="16.6.1">
+<h3 data-number="16.6.1" class="anchored" data-anchor-id="registradores-do-processador"><span class="header-section-number">16.6.1</span> Registradores do Processador</h3>
+<p>No topo da hierarquia residem os <strong>registradores</strong>, elementos de armazenamento integrados diretamente no núcleo do processador. Construídos com latches e flip-flops usando tecnologia <strong>CMOS</strong> (Complementary Metal-Oxide-Semiconductor), os registradores fornecem acesso em menos de um ciclo de <em>clock</em>, tipicamente 0,25 a 0,5 nanossegundos em processadores modernos operando a 4 GHz (STALLINGS, 2018).</p>
+<p>Processadores contemporâneos da arquitetura x86-64 incluem tipicamente 16 registradores de propósito geral de 64 bits, além de registradores especializados para ponto flutuante, vetorização <strong>SIMD</strong> (Single Instruction, Multiple Data) e controle de estado. A limitação severa no número de registradores, geralmente entre 32 e 192 dependendo da arquitetura, decorre do custo exponencial de implementar portas de leitura e escrita múltiplas necessárias para acesso paralelo (SHEN; LIPASTI, 2013).</p>
+</section>
+<section id="memória-cache" class="level3" data-number="16.6.2">
+<h3 data-number="16.6.2" class="anchored" data-anchor-id="memória-cache"><span class="header-section-number">16.6.2</span> Memória <em>cache</em></h3>
+<p>A <strong>memória <em>cache</em></strong> constitui o segundo nível da hierarquia, subdividida em múltiplos níveis para otimizar diferentes padrões de acesso. Implementada predominantemente com <strong>SRAM</strong>, a <em>cache</em> oferece tempos de acesso significativamente menores que a <strong>DRAM</strong> devido à sua estrutura de seis transistores por célula, que mantém o estado sem necessidade de refresh periódico.</p>
+<p><strong><em>cache</em> L1</strong> representa o nível mais próximo ao núcleo do processador, tipicamente dividido em <em>cache</em> de instruções (I-<em>cache</em>) e <em>cache</em> de dados (D-<em>cache</em>) para permitir acesso simultâneo. Com capacidades entre 32KB e 64KB por núcleo, o L1 oferece latência de 2-4 ciclos de <em>clock</em>, aproximadamente 0,5 a 1 nanossegundo. A separação entre instruções e dados, conhecida como <em>arquitetura Harvard modificada</em>, elimina conflitos estruturais no pipeline do processador (PATTERSON; HENNESSY, 2014).</p>
+<p><strong><em>cache</em> L2</strong> fornece capacidade intermediária, tipicamente 256KB a 1MB por núcleo, com latência de 10-20 ciclos. Unificado para instruções e dados, o L2 emprega políticas de substituição mais sofisticadas como <strong>LRU</strong> (Least Recently Used) ou aproximações pseudo-LRU para maximizar a taxa de acerto. Processadores modernos implementam L2 inclusivo, onde todos os dados em L1 também existem em L2, ou exclusivo, maximizando a capacidade efetiva total de <em>cache</em>.</p>
+<p><strong><em>cache</em> L3</strong>, quando presente, opera como <em>cache</em> compartilhado entre múltiplos núcleos, com capacidades de 8MB a 32MB e latências de 30-50 ciclos. O compartilhamento permite que núcleos acessem dados modificados por outros núcleos sem recorrer à memória principal, crucial para sincronização em sistemas multicore. Protocolos de coerência como <strong>MESI</strong> (Modified, Exclusive, Shared, Invalid) ou <strong>MOESI</strong> mantêm consistência entre caches de diferentes núcleos (CULLER; SINGH; GUPTA, 1999).</p>
+</section>
+<section id="memória-principal-ram" class="level3" data-number="16.6.3">
+<h3 data-number="16.6.3" class="anchored" data-anchor-id="memória-principal-ram"><span class="header-section-number">16.6.3</span> Memória Principal (RAM)</h3>
+<p>A <strong>memória principal</strong>, implementada com tecnologia <strong>DRAM</strong> (Dynamic Random Access Memory), constitui o repositório primário para programas e dados ativos. Cada célula <strong>DRAM</strong> consiste de um único transistor e um capacitor, permitindo densidade muito maior que <strong>SRAM</strong> ao custo de requerer refresh periódico a cada 64 milissegundos para manter os dados.</p>
+<p>Tecnologias <strong>DRAM</strong> modernas incluem:</p>
+<p><strong>DDR4 SDRAM</strong> (Double Data Rate 4 Synchronous Dynamic RAM) opera com frequências de 2133 a 3200 MHz, transferindo dados em ambas as bordas do <em>clock</em>. Com largura de banda teórica de até 25,6 GB/s por canal, a DDR4 introduziu bank groups para melhorar paralelismo e reduzir consumo através de tensão operacional de 1,2V (JACOB; NG; WANG, 2008).</p>
+<p><strong>DDR5 SDRAM</strong>, a geração mais recente, dobra a largura de banda para até 51,2 GB/s por canal, operando a frequências de 4800 a 8400 MHz. Inovações incluem on-die ECC (Error Correcting Code) para confiabilidade aumentada e arquitetura de canal duplo por módulo <strong>DIMM</strong> (Dual In-line Memory Module).</p>
+<p>A latência de acesso à <strong>DRAM</strong> permanece relativamente constante em termos absolutos, aproximadamente 50-100 nanossegundos, mas aumenta drasticamente quando medida em ciclos de <em>clock</em> do processador devido ao aumento das frequências de operação. Esta latência inclui múltiplos componentes: <strong>RAS</strong> (Row Access Strobe) latency para ativar uma linha, <strong>CAS</strong> (Column Access Strobe) latency para selecionar a coluna, e tempo de transferência dos dados.</p>
+</section>
+<section id="armazenamento-secundário" class="level3" data-number="16.6.4">
+<h3 data-number="16.6.4" class="anchored" data-anchor-id="armazenamento-secundário"><span class="header-section-number">16.6.4</span> Armazenamento Secundário</h3>
+<p>O <strong>armazenamento secundário</strong> forma a base da hierarquia, fornecendo persistência não-volátil com capacidades na ordem de terabytes. Duas tecnologias dominam este nível:</p>
+<p><strong>Solid State Drives (SSD)</strong> utilizam memória flash <strong>NAND</strong> para armazenamento persistente sem partes móveis. Com latências de acesso aleatório de 25-100 microssegundos e velocidades de transferência sequencial excedendo 7 GB/s em interfaces <strong>NVMe</strong> (Non-Volatile Memory Express) sobre <strong>PCIe</strong> 4.0, os SSDs reduziram dramaticamente a penalidade de acessar armazenamento secundário (MIN; KANG; EREZ, 2017).</p>
+<p><strong>Hard Disk Drives (HDD)</strong> continuam relevantes para armazenamento de alta capacidade e baixo custo, oferecendo até 20TB por unidade. Entretanto, a natureza mecânica impõe latências de 5-10 milissegundos para acesso aleatório, incluindo tempo de seek e latência rotacional. Velocidades de transferência sequencial alcançam 250 MB/s em discos de 7200 RPM com tecnologia <strong>SMR</strong> (Shingled Magnetic Recording).</p>
+</section>
+</section>
+<section id="métricas-de-desempenho-e-trade-offs" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="métricas-de-desempenho-e-trade-offs"><span class="header-section-number">16.7</span> Métricas de Desempenho e Trade-offs</h2>
+<p>A eficácia da hierarquia de memória é quantificada através de métricas específicas que capturam a interação entre níveis:</p>
+<p><strong>Taxa de Acerto (Hit Rate)</strong> mede a fração de acessos satisfeitos em um nível específico:</p>
+<p><span class="math display">\[H_i = \frac{\text{Acessos satisfeitos no nível } i}{\text{Total de acessos ao nível } i}\]</span></p>
+<p><strong>Tempo Médio de Acesso à Memória (AMAT)</strong> fornece uma métrica composta considerando múltiplos níveis:</p>
+<p><span class="math display">\[AMAT = T_{L1} + (1-H_{L1}) \times [T_{L2} + (1-H_{L2}) \times T_{L3} + ...]\]</span></p>
+<p><strong>Largura de Banda Efetiva</strong> considera a taxa de transferência agregada através da hierarquia, crítica para aplicações com alto throughput de dados como processamento de vídeo ou computação científica.</p>
+<p>A proteção de memória garante que processos não acessem memória de outros processos, prevenindo interferências maliciosas ou acidentais que possam comprometer a estabilidade do sistema. <em>O gerenciamento de memória virtual complementa essas responsabilidades ao criar a ilusão de que o processo tem mais memória disponível que a memória fisicamente disponível</em>, permitindo que múltiplos programas executem simultaneamente mesmo em sistemas com <code>RAM</code> limitada. À esta memória virtual damos o nome de <strong>espaço de endereçamento</strong>.</p>
+</section>
+<section id="memória-virtual" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="memória-virtual"><span class="header-section-number">16.8</span> Memória Virtual</h2>
 <p>O conceito de memória virtual representa uma das inovações mais impactantes no gerenciamento de memória. Esta técnica permite, como vimos antes, que programas maiores que a memória física sejam executados, criando transparentemente a ilusão de abundância de memória por meio de duas estratégias principais. O primeiro é o <strong>swapping</strong>, que envolve mover processos inteiros entre a memória física e o disco rígido quando necessário. Embora eficaz, o <strong>swapping</strong> pode introduzir latências significativas durante as transferências, especialmente se os processos forem grandes ou se houver muitos processos ativos simultaneamente.</p>
 <p>O segundo é a <strong>paginação sob demanda</strong>, que refina o conceito de <strong>swapping</strong> ao carregar apenas as páginas necessárias de um processo na memória física quando elas são realmente requisitadas. Isso minimiza tanto o uso da memória física quanto o tempo de carregamento inicial dos programas, permitindo que sistemas modernos executem dezenas de processos simultaneamente mesmo com quantidades modestas de <code>RAM</code> física.</p>
-<p><img src=".\assets/images/memory_management_figure2.webp" class="img-fluid"> <em>Figura 10: Diagrama ilustrativo de paginação e segmentação na memória, mostrando como processos são divididos em páginas e segmentos, com endereços físicos correspondentes.</em>{: class=<code>legend</code>}</p>
+<div id="fig-memo2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-memo2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src=".\images/memory_management_figure2.webp" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-memo2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16.3: Diagrama mostrando a paginação sob demanda e uma comparação entre segmentação e paginação.
+</figcaption>
+</figure>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -932,12 +1137,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./gerproc6.html" class="pagination-link" aria-label="Referências">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Referências</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Referências</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./13gerfiles.html" class="pagination-link" aria-label="Gestão de Arquivos">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./12Agermem.html" class="pagination-link" aria-label="A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -949,7 +1154,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright © 2025 Frank de Alcantara</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linefollower/edit/main/12germem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linefollower/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/edit/main/12germem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

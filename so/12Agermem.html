@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Sistemas Operacionais - 17&nbsp; A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./12Bgermem.html" rel="next">
+<link href="./12germem.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/styles.css">
+<meta property="og:title" content="Sistemas Operacionais - 17&nbsp; A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Sistemas Operacionais">
+<meta name="twitter:title" content="Sistemas Operacionais - 17&nbsp; A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html">Gestão de Memória</a></li><li class="breadcrumb-item"><a href="./12Agermem.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Sistemas Operacionais</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Apresentação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introdução</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Desvendando o Invisível: Uma Introdução aos Sistemas Operacionais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sistemas Operacionais: Equilibrando Recursos e Simplicidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Exercícios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introdução: Referências</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pr-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Guia Completo de <em>pull request</em> em Repositório de Terceiros</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./commit-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Arte da Mensagem de <em>commit</em>: Um Guia para Históricos Inteligíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topo-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Topologia do Fluxo de Trabalho em Git: Estratégias para Colaboração em Equipe</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Gestão de Processos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Atividades Práticas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Gestão de Memória</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12germem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Agermem.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Bgermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Zgermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14geres.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./18glossa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-tirania-da-memória-física" id="toc-a-tirania-da-memória-física" class="nav-link active" data-scroll-target="#a-tirania-da-memória-física"><span class="header-section-number">17.1</span> A Tirania da Memória Física</a></li>
+  <li><a href="#a-grande-abstração-endereços-virtuais-vs.-físicos" id="toc-a-grande-abstração-endereços-virtuais-vs.-físicos" class="nav-link" data-scroll-target="#a-grande-abstração-endereços-virtuais-vs.-físicos"><span class="header-section-number">17.2</span> A Grande Abstração: Endereços Virtuais vs.&nbsp;Físicos</a></li>
+  <li><a href="#os-pilares-da-memória-virtual" id="toc-os-pilares-da-memória-virtual" class="nav-link" data-scroll-target="#os-pilares-da-memória-virtual"><span class="header-section-number">17.3</span> Os Pilares da Memória Virtual</a></li>
+  <li><a href="#a-arquitetura-de-suporte-a-mmu-e-as-tabelas-de-páginas" id="toc-a-arquitetura-de-suporte-a-mmu-e-as-tabelas-de-páginas" class="nav-link" data-scroll-target="#a-arquitetura-de-suporte-a-mmu-e-as-tabelas-de-páginas"><span class="header-section-number">17.4</span> A Arquitetura de Suporte: A <strong>MMU</strong> e as Tabelas de Páginas</a>
+  <ul class="collapse">
+  <li><a href="#o-tradutor-de-hardware-a-unidade-de-gerenciamento-de-memória-mmu" id="toc-o-tradutor-de-hardware-a-unidade-de-gerenciamento-de-memória-mmu" class="nav-link" data-scroll-target="#o-tradutor-de-hardware-a-unidade-de-gerenciamento-de-memória-mmu"><span class="header-section-number">17.4.1</span> O Tradutor de Hardware: A Unidade de Gerenciamento de Memória ( <strong>MMU</strong> )</a></li>
+  <li><a href="#paginação-dividir-para-conquistar" id="toc-paginação-dividir-para-conquistar" class="nav-link" data-scroll-target="#paginação-dividir-para-conquistar"><span class="header-section-number">17.4.2</span> Paginação: Dividir para Conquistar</a></li>
+  <li><a href="#a-estrutura-de-dados-central-a-tabela-de-páginas-page-table" id="toc-a-estrutura-de-dados-central-a-tabela-de-páginas-page-table" class="nav-link" data-scroll-target="#a-estrutura-de-dados-central-a-tabela-de-páginas-page-table"><span class="header-section-number">17.4.3</span> A Estrutura de Dados Central: A Tabela de Páginas (Page Table)</a></li>
+  <li><a href="#anatomia-de-um-registro-da-tabela-de-páginas-pte" id="toc-anatomia-de-um-registro-da-tabela-de-páginas-pte" class="nav-link" data-scroll-target="#anatomia-de-um-registro-da-tabela-de-páginas-pte"><span class="header-section-number">17.4.4</span> Anatomia de um Registro da Tabela de Páginas (PTE)</a></li>
+  </ul></li>
+  <li><a href="#o-fluxo-de-tradução-de-endereços-em-detalhes" id="toc-o-fluxo-de-tradução-de-endereços-em-detalhes" class="nav-link" data-scroll-target="#o-fluxo-de-tradução-de-endereços-em-detalhes"><span class="header-section-number">17.5</span> O Fluxo de Tradução de Endereços em Detalhes</a>
+  <ul class="collapse">
+  <li><a href="#a-necessidade-de-velocidade-o-translation-lookaside-buffer-tlb" id="toc-a-necessidade-de-velocidade-o-translation-lookaside-buffer-tlb" class="nav-link" data-scroll-target="#a-necessidade-de-velocidade-o-translation-lookaside-buffer-tlb"><span class="header-section-number">17.5.1</span> A Necessidade de Velocidade: O Translation Lookaside Buffer (TLB)</a></li>
+  <li><a href="#cenário-1-acerto-no-tlb-tlb-hit---o-caminho-rápido" id="toc-cenário-1-acerto-no-tlb-tlb-hit---o-caminho-rápido" class="nav-link" data-scroll-target="#cenário-1-acerto-no-tlb-tlb-hit---o-caminho-rápido"><span class="header-section-number">17.5.2</span> Cenário 1: Acerto no <strong>TLB</strong> (<em>TLB Hit</em>) - O Caminho Rápido</a></li>
+  <li><a href="#cenário-2-erro-no-tlb-acerto-na-tabela-de-páginas-tlb-miss-page-hit" id="toc-cenário-2-erro-no-tlb-acerto-na-tabela-de-páginas-tlb-miss-page-hit" class="nav-link" data-scroll-target="#cenário-2-erro-no-tlb-acerto-na-tabela-de-páginas-tlb-miss-page-hit"><span class="header-section-number">17.5.3</span> Cenário 2: Erro no TLB, Acerto na Tabela de Páginas <em>(TLB Miss, Page Hit)</em></a></li>
+  <li><a href="#cenário-3-falta-de-página-page-fault" id="toc-cenário-3-falta-de-página-page-fault" class="nav-link" data-scroll-target="#cenário-3-falta-de-página-page-fault"><span class="header-section-number">17.5.4</span> Cenário 3: Falta de Página (<em>Page Fault</em>)</a></li>
+  </ul></li>
+  <li><a href="#o-tratamento-de-falhas-de-página-uma-coreografia-entre-hardware-e-software" id="toc-o-tratamento-de-falhas-de-página-uma-coreografia-entre-hardware-e-software" class="nav-link" data-scroll-target="#o-tratamento-de-falhas-de-página-uma-coreografia-entre-hardware-e-software"><span class="header-section-number">17.6</span> O Tratamento de Falhas de Página: Uma Coreografia entre Hardware e Software</a>
+  <ul class="collapse">
+  <li><a href="#o-gatilho-a-interrupção-de-hardware" id="toc-o-gatilho-a-interrupção-de-hardware" class="nav-link" data-scroll-target="#o-gatilho-a-interrupção-de-hardware"><span class="header-section-number">17.6.1</span> O Gatilho: A Interrupção de Hardware</a></li>
+  <li><a href="#a-resposta-do-sistema-operacional-o-handler-de-falhas-de-página" id="toc-a-resposta-do-sistema-operacional-o-handler-de-falhas-de-página" class="nav-link" data-scroll-target="#a-resposta-do-sistema-operacional-o-handler-de-falhas-de-página"><span class="header-section-number">17.6.2</span> A Resposta do Sistema Operacional: O Handler de Falhas de Página</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/edit/main/12Agermem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12germem.html">Gestão de Memória</a></li><li class="breadcrumb-item"><a href="./12Agermem.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>O gerenciamento de memória é uma das funções mais críticas de um Sistema Operacional moderno, garantindo que múltiplos processos possam coexistir e executar de forma eficiente e segura. No cerne deste gerenciamento está o conceito de memória virtual, uma abstração elegante que resolve uma série de problemas históricos e fundamentais da computação. Para compreender como a memória virtual é implementada nos sistemas modernos, precisamos entender por que ela é indispensável.</p>
+<section id="a-tirania-da-memória-física" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="a-tirania-da-memória-física"><span class="header-section-number">17.1</span> A Tirania da Memória Física</h2>
+<p>Nos primórdios da computação, os programas interagiam diretamente com a memória física, as diversas formas de memória volátil que discutimos antes no capítulo <a href="12germem.html" class="quarto-xref"><span>Chapter 16</span></a>. Este modelo simples, impunha severas limitações.</p>
+<p>Um programa, com todo o seu código e dados, precisava ser carregado integralmente na memória para poder ser executado. Se a memória física não fosse suficiente para conter o programa, ele simplesmente não poderia ser executado. Quando chegamos aos ambientes multitarefa, a situação se mostrou ainda mais complexa. Múltiplos programas competiam pelo recurso finito da memória volátil, e o Sistema Operacional era forçado a alocar blocos contíguos de memória para cada um dos processos em execução. Essa necessidade de alocação continua criava problemas de fragmentação, pequenos blocos de memória livre ficavam espalhados, inutilizáveis para processos maiores. A fragmentação ocorria devido a alocações e liberações dinâmicas de memória, levando a um cenário onde, apesar de haver memória total suficiente, não havia blocos contíguos grandes o bastante para satisfazer as solicitações dos processos.</p>
+<p>Outro problema significante surgia da ausência de alguma forma de limitação de acesso. Como todos os processos estavam na mesma memória física não existia uma barreira entre os eles. Isso significava que um programa mal-comportado ou malicioso poderia facilmente ler ou escrever na memória de outro programa, ou até mesmo do próprio Sistema Operacional, levando a falhas catastróficas e exploração de vulnerabilidades de segurança.</p>
+<p>Finalmente, o programador era sobrecarregado com a tarefa de gerenciar explicitamente a alocação e a liberação de memória, uma fonte notória de erros complexos, como vazamentos de memória e referências inválidas.</p>
+<p>Os sistemas eram frágeis, ineficientes e complexos de programar.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Embora pouco versátil, o uso da memória física direta ainda é encontrado em sistemas embarcados e em situações nas quais o desempenho é crítico e a complexidade da memória virtual não é justificada. Nestes casos, o programador deve lidar diretamente com as limitações e desafios da memória física, incluindo a necessidade de garantir que o código e os dados caibam na memória disponível e que não haja conflitos, ou violações, entre processos.</p>
+</div>
+</div>
+</section>
+<section id="a-grande-abstração-endereços-virtuais-vs.-físicos" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="a-grande-abstração-endereços-virtuais-vs.-físicos"><span class="header-section-number">17.2</span> A Grande Abstração: Endereços Virtuais vs.&nbsp;Físicos</h2>
+<p>A memória virtual surgiu como a solução para a tirania da memória física com uma ideia relativamente simples, mas poderosa.</p>
+<p>A memória virtual foi concebida e implementada pioneiramente por <a href="https://en.wikipedia.org/wiki/Tom_Kilburn">Tom Kilburn</a> e sua equipe na Universidade de Manchester entre 1957 e 1962. O trabalho, originalmente chamado de <em>one-level storage</em> (armazenamento de um nível), foi implementado no computador <strong>Atlas</strong>, e introduziu inovações como a tradução automática de endereços por meio de 32 <strong>P</strong>age <strong>A</strong>ddress <strong>R</strong>egisters, <strong>PAR</strong>s, e um dos primeiros algoritmos de aprendizado para substituição de páginas em memória conforme a necessidade. A primeira descrição pública completa da tecnologia foi feita por John Fotheringham em <a href="https://scispace.com/pdf/dynamic-storage-allocation-in-the-atlas-computer-including-4vi6p02ztk.pdf">um artigo acadêmico de 1961</a>, documento que se tornou a base para futuros desenvolvimentos na área.</p>
+<p>Após a inovação de Manchester, a tecnologia foi desenvolvida de forma independente, e comercializada por outros pioneiros. <a href="https://en.wikipedia.org/wiki/Robert_S._Barton">Robert S. Barton</a>, da Burroughs Corporation, lançou o <strong>B5000</strong> em 1964, o primeiro sistema comercial a utilizar memória virtual, embora com uma abordagem baseada em segmentação. Pouco depois, o projeto <strong>Multics do MIT</strong>, liderado por <a href="https://en.wikipedia.org/wiki/Fernando_J._Corbat%C3%B3">Fernando J. Corbató</a>, expandiu significativamente o conceito ao desenvolver o primeiro sistema que combinava segmentação e paginação, além de introduzir os <em><strong>T</strong>ranslation <strong>L</strong>ook-aside <a href="https://en.wikipedia.org/wiki/Fernando_J._Corbat%C3%B3">B</a>uffers</em>, <strong>TLB</strong>s.</p>
+<p>Essa colaboração internacional entre a academia e a indústria consolidou a memória virtual como um pilar dos sistemas operacionais modernos. Tanto na origem histórica quanto hoje a ideia central é desacoplar a visão que o programa tem da memória da realidade física do hardware. Uma boa metáfora para a esforçada leitora ter em mente para entender o conceito é a de um endereço comercial virtual: uma empresa pode usar um endereço de prestígio para correspondência, o endereço virtual, enquanto suas operações físicas reais ocorrem em um local completamente diferente e menos organizado, o endereço físico.</p>
+<p>Em um sistema com memória virtual, cada processo opera dentro do seu próprio <strong>espaço de endereçamento virtual</strong>. Para o processo, este espaço de endereçamento é um vasto, linear e contíguo bloco de memória, começando no endereço <span class="math inline">\(0\)</span> e estendendo-se até o limite máximo permitido pela arquitetura do processador (Ex.:, <span class="math inline">\(2^{32}\)</span> bytes para sistemas de <span class="math inline">\(32 \text{bits}\)</span> ou <span class="math inline">\(2^{64}\)</span> para sistemas de <span class="math inline">\(64 \text{bits}\)</span>). O processo pode ler, escrever e alocar memória dentro deste espaço privado como se fosse o único processo no sistema. Neste ponto a atenta leitora deve observar que as máquinas reais permitem um range de endereçamento muito menor, tipicamente <span class="math inline">\(2^{48} \approx 256 \text{terabytes}\)</span>, para as máquinas de <span class="math inline">\(64 \text{bits}\)</span> devido a limitações físicas e de custo na implementação de memória.</p>
+<p>O processo vê um enorme espaço de endereçamento, todo o espaço de endereçamento possível na arquitetura em que ele está rodando. Contudo, os endereços usados pelo processo são <strong>endereços virtuais</strong>, ou lógicos. Estes endereços virtuais não correspondem diretamente a uma localização na memória. Neste modelo, a memória física real é um recurso compartilhado, gerenciado exclusivamente pelo Sistema Operacional. Os endereços que correspondem às localizações físicas reais na memória são chamados de <strong>endereços físicos</strong>.</p>
+<p>A mágica acontece na tradução: um componente de hardware, a Unidade de Gerenciamento de Memória, do inglês <em><strong>M</strong>emory <strong>M</strong>anagement <strong>U</strong>nity</em>, <strong>MMU</strong>, em colaboração com o Sistema Operacional, traduz cada endereço virtual gerado pelo programa em um endereço físico correspondente em tempo real. Isso significa que o código de um programa, que no espaço virtual pode estar na localização <span class="math inline">\(50_{10}\)</span>, pode estar fisicamente alocado em múltiplos locais diferentes para processos distintos que o executam. Conceito que pode ser visto na <a href="#fig-virtual1" class="quarto-xref">Figure&nbsp;<span>17.1</span></a>. Além disso, blocos de memória que são contíguos no espaço virtual podem estar espalhados de forma não contígua pela memória física sem que esta discontinuidade possa ser percebida pelo processo.</p>
+<div id="fig-virtual1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-virtual1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/virtual1.webp" class="img-fluid figure-img"></p>
+<figcaption>Tradução de Endereços Virtuais para Físicos</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-virtual1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.1
+</figcaption>
+</figure>
+</div>
+<p>A atenta leitora deve lembrar que neste livro, chamaremos de memória física a memória volátil (<code>RAM</code>), eventualmente chamada de memória principal, atendendo um termo do livro do Tanenbaum. Também importamos o termo memória secundária (disco rígido, <code>SSD</code>) para representar um recurso separado e mais lento. Deste ponto em diante, quando falamos de memória física, ou memória principal, estamos nos referindo exclusivamente à memória volátil e a chamaremos de <code>RAM</code>.</p>
+</section>
+<section id="os-pilares-da-memória-virtual" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="os-pilares-da-memória-virtual"><span class="header-section-number">17.3</span> Os Pilares da Memória Virtual</h2>
+<p>A abstração capaz de criar um espaço de endereçamento privado e linear para cada um dos processos em execução é a base para várias capacidades importantes dos sistemas operacionais modernos. Não se trata apenas de <em>aumentar a RAM</em>, mas de fornecer uma estrutura de gerenciamento fundamental. A persistente leitora deve considerar que existem 4 razões principais pelas quais a memória virtual é indispensável:</p>
+<ol type="1">
+<li><p><strong>Execução de Programas Maiores que a <code>RAM</code></strong>: como o programa opera em um espaço virtual, nem todo o seu código e dados precisam estar na memória física simultaneamente. Isso quer dizer que o programa pode ter acesso a todo o espaço de endereçamento teórico de uma determinada arquitetura sem que exista toda essa memória física disponível. Usando as abstrações da memória virtual, o Sistema Operacional pode manter na <code>RAM</code> apenas as partes do programa que estão sendo ativamente usadas, que chamaremos de <em>working set</em>, enquanto o restante permanece em um espaço de armazenamento secundário, como um disco rígido ou <code>SSD</code>, conhecido como área de troca ou <em>swap space</em>. Quando o programa tenta acessar uma parte que não está na <code>RAM</code>, o Sistema Operacional a carrega do disco sob demanda. Isso permite que programas muito maiores que a memória física disponível sejam executados de forma transparente.</p></li>
+<li><p><strong>Isolamento e Proteção de Processos</strong>: como cada processo possui seu próprio espaço de endereçamento virtual, ele é completamente isolado dos outros. Um processo não pode, por design, gerar um endereço que se traduza para a memória física alocada a outro processo ou ao <code>kernel</code>. A <strong>MMU</strong> e o Sistema Operacional impõem essas barreiras no nível do hardware. Se um processo tentar acessar um endereço fora de seu espaço virtual legal, o hardware gerará uma falha de proteção, e o Sistema Operacional encerrará o processo, a famosa mensagem <em>Segmentation Fault</em>. Este isolamento é o pilar da estabilidade e segurança dos sistemas multitarefa.</p></li>
+<li><p><strong>Gerenciamento de Memória Simplificado</strong>: a memória virtual libera os programadores da complexa tarefa de gerenciar a alocação de memória física. Eles podem escrever código assumindo um espaço de endereçamento contíguo limitado apenas pela arquitetura, sem se preocupar com a fragmentação da memória física ou com a localização real de seus dados em relação a outros processos. Funções como <code>malloc</code> em C ou <code>new</code> em C++ permitirão a alocação de memória dentro deste espaço virtual, e o Sistema Operacional cuidará dos detalhes necessários para encontrar um local físico para ela.</p></li>
+<li><p><strong>Compartilhamento Eficiente de Memória</strong>: a memória virtual facilita o compartilhamento de código e dados. Por exemplo, bibliotecas de sistema, como <code>libc</code> no Linux ou <code>DLL</code>s no Windows são usadas por quase todos os programas. Para estas bibliotecas, em vez de carregar uma cópia separada da biblioteca na memória física para cada processo, o Sistema Operacional pode carregar uma única cópia física e mapeá-la para o espaço de endereçamento virtual de todos os processos que a utilizam. Cada processo <em>vê</em> a biblioteca em seu próprio espaço virtual, mas todos apontam para a mesma memória física, resultando em uma economia significativa de <code>RAM</code>.</p></li>
+</ol>
+<p>Em suma, a memória virtual não é uma técnica para criar memória do nada, mas sim uma abstração de gerenciamento. A capacidade de usar o disco como uma extensão da <code>RAM</code> é o <em>mecanismo</em> que permite a essa abstração funcionar sob as demandas de memória e performance, mas as verdadeiras vitórias são o isolamento, a proteção, a simplificação da programação e o compartilhamento eficiente, que são os fundamentos da computação multitarefa moderna.</p>
+</section>
+<section id="a-arquitetura-de-suporte-a-mmu-e-as-tabelas-de-páginas" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="a-arquitetura-de-suporte-a-mmu-e-as-tabelas-de-páginas"><span class="header-section-number">17.4</span> A Arquitetura de Suporte: A <strong>MMU</strong> e as Tabelas de Páginas</h2>
+<p>Como a atenta leitora deve lembrar, a implementação da abstração da memória virtual não é puramente software. Esta abstração depende da colaboração íntima entre o hardware do processador e o Sistema Operacional. O hardware fornece os mecanismos para tradução rápida de endereços e imposição de proteção, enquanto o software gerencia as políticas e as estruturas de dados que guiam esse hardware. Tudo começa com a <strong>Unidade de Gerenciamento de Memória ( </strong>MMU** )**.</p>
+<section id="o-tradutor-de-hardware-a-unidade-de-gerenciamento-de-memória-mmu" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="o-tradutor-de-hardware-a-unidade-de-gerenciamento-de-memória-mmu"><span class="header-section-number">17.4.1</span> O Tradutor de Hardware: A Unidade de Gerenciamento de Memória ( <strong>MMU</strong> )</h3>
+<p>A peça central do hardware é a <strong>Unidade de Gerenciamento de Memória ( </strong>MMU** )<strong>. A </strong>MMU** é um componente, geralmente integrado ao chip da <code>CPU</code>, posicionado entre o núcleo do processador e o sistema de memória. Sua função primária é traduzir, em tempo real, cada endereço virtual gerado pela <code>CPU</code> em um endereço físico correspondente antes que o acesso à memória seja de fato realizado. A <code>CPU</code> opera inteiramente no domínio dos endereços virtuais; ela nunca vê os endereços físicos reais. Cada vez que uma instrução tenta ler ou escrever na memória, o endereço que ela gera é interceptado pela <strong>MMU</strong>, que realiza a tradução. Sem a <strong>MMU</strong>, a tradução de endereços teria que ser feita em software, o que seria ordens de magnitude mais lento e tornaria a memória virtual impraticável para uso geral.</p>
+</section>
+<section id="paginação-dividir-para-conquistar" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="paginação-dividir-para-conquistar"><span class="header-section-number">17.4.2</span> Paginação: Dividir para Conquistar</h3>
+<p>Para gerenciar a tradução de forma eficiente, os sistemas modernos utilizam uma técnica chamada <strong>paginação</strong>. Aqui a técnica consiste em dividir tanto o espaço de endereçamento virtual quanto a memória física em blocos de tamanho fixo:</p>
+<ul>
+<li>Um bloco no espaço de endereçamento virtual é chamado de <strong>página</strong> (<em>page</em>);</li>
+<li>Um bloco na memória física é chamado de <strong>quadro</strong> (<em>frame</em>).</li>
+</ul>
+<p>Páginas e quadros têm sempre o mesmo tamanho, tipicamente <span class="math inline">\(4 \text{KB}\)</span>. Com a paginação, a tarefa de tradução de endereço é simplificada: em vez de traduzir cada byte individualmente, a <strong>MMU</strong> precisa apenas descobrir em qual quadro físico uma determinada página virtual está localizada. Para que isso seja possível, um endereço virtual é interpretado pela <strong>MMU</strong> como sendo composto por duas partes:</p>
+<ol type="1">
+<li><strong>Número da Página Virtual (VPN - Virtual Page Number)</strong>: os bits mais significativos do endereço, que identificam qual página virtual está sendo acessada;</li>
+<li><strong>Deslocamento (Offset)</strong>: os bits menos significativos do endereço, que indicam a posição do byte dentro dessa página.</li>
+</ol>
+<p>Por exemplo, em um sistema com páginas de <span class="math inline">\(4 \text{KB}\)</span> (<span class="math inline">\(2^{12}\)</span> bytes), os <span class="math inline">\(12\)</span> bits menos significativos de um endereço virtual formam o <em>offset</em>, e os bits restantes formam o <em>Virtual Page Number</em>, ou número da página virtual. O processo de tradução consiste em mapear o número da página virtual para um Número de Quadro Físico, do inglês <em><strong>P</strong>hysical <strong>F</strong>rame <strong>N</strong>umber</em>, <strong>PFN</strong>. O <em>offset</em> permanece inalterado, pois a posição relativa de um byte dentro de sua página é a mesma que sua posição relativa dentro de seu quadro. O endereço físico é então construído combinando o <strong>PFN</strong>, os bits mais significativos, com o <em>offset</em> original, os bits menos significativos.</p>
+<p>Para consolidar o entendimento, a esforçada leitora deve considerar um exemplo concreto de tradução em um sistema <code>x86</code> com páginas de <span class="math inline">\(4 \text{KB}\)</span>. Suponha que um programa acesse o endereço virtual <span class="math inline">\(0x87654321_{16}\)</span>.</p>
+<p><strong>Decomposição do endereço</strong>:</p>
+<ul>
+<li>Endereço virtual: <span class="math inline">\(0x87654321_{16}\)</span> = <span class="math inline">\(10000111011001010100001100100001_2\)</span>;</li>
+<li>VPN (bits 31-12): <span class="math inline">\(100001110110010101000_2\)</span> = <span class="math inline">\(0x87654_{16}\)</span> = <span class="math inline">\(554580_{10}\)</span>;</li>
+<li>Offset (bits 11-0): <span class="math inline">\(001100100001_2\)</span> = <span class="math inline">\(0x321_{16}\)</span> = <span class="math inline">\(801_{10}\)</span>.</li>
+</ul>
+<p><strong>Processo de tradução pela MMU</strong>:</p>
+<ol type="1">
+<li>A <strong>MMU</strong> extrai o <strong>VPN</strong> = <span class="math inline">\(554580_{10}\)</span></li>
+<li>Consulta a tabela de páginas na entrada <span class="math inline">\(554580_{10}\)</span></li>
+<li>Encontra <strong>PFN</strong> = <span class="math inline">\(1234_{10}\)</span> (exemplo) na <strong>PTE</strong> correspondente</li>
+<li>Constrói o endereço físico: <span class="math inline">\((1234 × 4096) + 801 = 5054465_{10} = 0x4D2321_{16}\)</span></li>
+</ol>
+<p><strong>Verificação</strong>: O <em>offset</em> permanece inalterado (<span class="math inline">\(0x321_{16}\)</span>), confirmando que a posição relativa dentro da página é preservada. A página virtual <span class="math inline">\(554580_{10}\)</span> foi mapeada para o quadro físico <span class="math inline">\(1234_{10}\)</span>, e o byte específico está na posição <span class="math inline">\(801_{10}\)</span> dentro desse quadro.</p>
+<p>Este processo está ilustrado na <a href="#fig-virtual2" class="quarto-xref">Figure&nbsp;<span>17.2</span></a>.</p>
+<div id="fig-virtual2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-virtual2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/virtual2.webp" class="img-fluid figure-img"></p>
+<figcaption>Tradução de Endereços Virtuais para Físicos</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-virtual2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.2
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="a-estrutura-de-dados-central-a-tabela-de-páginas-page-table" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="a-estrutura-de-dados-central-a-tabela-de-páginas-page-table"><span class="header-section-number">17.4.3</span> A Estrutura de Dados Central: A Tabela de Páginas (Page Table)</h3>
+<p>A questão fundamental é: como a <strong>MMU</strong> sabe qual número de quadro físico corresponde a um determinado número de página virtual? A resposta está na <strong>tabela de páginas</strong> (<em>page table</em>). A tabela de páginas é uma estrutura de dados, mantida pelo Sistema Operacional, que armazena o mapeamento entre as páginas virtuais de um processo e os quadros físicos na <code>RAM</code>.</p>
+<p>A tabela de páginas está armazenada na Memória <code>RAM</code> no <em>Kernel Space</em>. Esta estrutura de dados é criada e gerenciada pelo <code>kernel</code> do Sistema Operacional e é considerada parte dos dados internos do <code>kernel</code>. Por razões de segurança, o espaço de memória do usuário, <em>user space</em>, não pode acessá-la ou modificá-la diretamente. Qualquer alteração, como alocar mais memória para um processo, deve ser feita através de chamadas de sistema, <em>system calls</em> que solicitam ao <code>kernel</code> que execute a operação.</p>
+<p>Cada processo em execução tem sua própria tabela de páginas. A tabela de páginas é, essencialmente, um <em>array</em> no qual o índice é o Número da Página Virtual, <strong>VPN</strong>. Cada entrada nesse <em>array</em>, chamada de <strong>Entrada da Tabela de Páginas (PTE - Page Table Entry)</strong>, contém o Número do Quadro Físico correspondente e um conjunto de bits de controle.</p>
+<p>Para que a <strong>MMU</strong> possa usar essa tabela, a <code>CPU</code> possui um registrador especial, por exemplo, o registrador <code>CR3</code> na arquitetura x86-64, que armazena o endereço físico da base da tabela de páginas do processo atualmente em execução. Quando o Sistema Operacional realiza uma troca de contexto, passando a execução de um processo para outro, uma de suas tarefas é atualizar este registrador para que ele aponte para a tabela de páginas do novo processo. Dessa forma, a <strong>MMU</strong> sempre sabe onde encontrar o mapa de memória correto para o processo ativo.</p>
+</section>
+<section id="anatomia-de-um-registro-da-tabela-de-páginas-pte" class="level3" data-number="17.4.4">
+<h3 data-number="17.4.4" class="anchored" data-anchor-id="anatomia-de-um-registro-da-tabela-de-páginas-pte"><span class="header-section-number">17.4.4</span> Anatomia de um Registro da Tabela de Páginas (PTE)</h3>
+<p>Um registro na tabela de páginas é muito mais do que apenas um ponteiro para um quadro físico. O registro na tabela de páginas é um canal de comunicação rico em informações entre o Sistema Operacional e a <strong>MMU</strong>. Os bits de controle dentro de um registro na tabela de páginas permitem uma gestão fina e dinâmica da memória que pode ser vista na <a href="#fig-pte1" class="quarto-xref">Figure&nbsp;<span>17.3</span></a>.</p>
+<div id="fig-pte1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pte1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/pte.webp" class="img-fluid figure-img"></p>
+<figcaption>Estrutura de um Registro na Tabela de Páginas (PTE)</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-pte1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.3
+</figcaption>
+</figure>
+</div>
+<p>Embora os detalhes exatos variem entre as arquiteturas, os bits mais comuns incluem:</p>
+<ul>
+<li><p><strong>Número do Quadro Físico (Frame Number)</strong>: o Número de Quadro Físico, ou <strong>PFN</strong>, é o número que indica onde a página está localizada na memória física. Quando o bit PS está em <span class="math inline">\(0\)</span>, o campo de endereço da tabela de páginas representa o endereço físico da tabela de páginas que gerencia os quatro megabytes naquele ponto. É fundamental que este endereço esteja alinhado em 4 KiB, pois os últimos 12 bits do valor de 32 bits são sobrescritos pelos bits de acesso. De forma similar, quando PS está em <span class="math inline">\(1\)</span>, o endereço deve estar alinhado em 4 MiB.</p></li>
+<li><p><strong>Bit de Presença/Validade (Present/Valid Bit - P)</strong>: este é talvez o bit mais importante. Se ele estiver definido como <span class="math inline">\(1\)</span>, a página está atualmente na memória física, e o número de quadro físico que está no registro na tabela de páginas é válido. Se estiver definido como <span class="math inline">\(0\)</span>, a página não está na <code>RAM</code>. Neste caso, ela pode estar em uma memória secundária ou ainda não ter sido alocada. Uma tentativa de acesso a uma página com o bit de presença em <span class="math inline">\(0\)</span> faz com que a <strong>MMU</strong> gere uma interrupção especial chamada <strong>falta de página</strong> transferindo o controle para o Sistema Operacional, em inglês esta interrupção especial é chamada de <em>page fault</em>. Quando P não está definido, o processador ignora o resto da entrada e todos os 31 bits restantes podem ser usados para informações extras, como registrar onde a página foi parar no espaço de swap.</p></li>
+<li><p><strong>Bits de Proteção (R/W e U/S)</strong>: controlam as permissões de acesso à página. O bit <strong>R/W</strong> (Read/Write) define se a página é leitura/escrita (quando definido como <span class="math inline">\(1\)</span>) ou somente leitura (quando <span class="math inline">\(0\)</span>). O bit WP em CR0 determina se isso se aplica apenas ao espaço de usuário, sempre dando ao kernel acesso de escrita (o padrão), ou a ambos. O bit <strong>U/S</strong> (User/Supervisor) controla o acesso à página baseado no nível de privilégio: se definido como <span class="math inline">\(1\)</span>, a página pode ser acessada por todos; se <span class="math inline">\(0\)</span>, apenas o supervisor pode acessá-la. Para uma entrada de diretório de páginas, o bit de usuário controla o acesso a todas as páginas referenciadas por aquela entrada. Se um programa tentar realizar uma operação não permitida, a <strong>MMU</strong> gerará uma falha de proteção, que também é tratada pelo Sistema Operacional.</p></li>
+<li><p><strong>Bit de Modificação (Dirty - D)</strong>: este bit é definido como <span class="math inline">\(1\)</span> pelo hardware, a própria <strong>MMU</strong>, sempre que ocorre uma operação de escrita na página. O Sistema Operacional utiliza este bit como uma otimização: quando precisa remover uma página da memória para dar lugar a outra, ele verifica o bit de modificação. Se o bit for <span class="math inline">\(0\)</span>, a página não foi alterada desde que foi carregada do disco, e o Sistema Operacional pode simplesmente descartá-la. Se o bit for <span class="math inline">\(1\)</span>, a página está <em>suja</em>, o Sistema Operacional deve primeiro salvá-la de volta no disco para preservar as alterações.</p></li>
+<li><p><strong>Bit de Acesso (Accessed - A)</strong>: este bit é definido como <span class="math inline">\(1\)</span> pelo hardware durante a tradução de endereço virtual quando a página é lida ou escrita. O Sistema Operacional periodicamente zera este bit e o utiliza para implementar algoritmos de substituição de página. Páginas que foram acessadas recentemente, com o bit de acesso em <span class="math inline">\(1\)</span>, são consideradas parte do <em>working set</em> do programa e têm menos probabilidade de serem escolhidas para substituição. Note que este bit não será limpo pela CPU, então essa responsabilidade recai sobre o Sistema Operacional.</p></li>
+<li><p><strong>Bit de Tamanho de Página (Page Size - PS)</strong>: armazena o tamanho da página para aquela entrada específica. Se o bit estiver definido, então a entrada do diretório de páginas mapeia para uma página de 4 MiB de tamanho. Caso contrário, mapeia para uma tabela de páginas de 4 KiB. Páginas de 4 MiB requerem que o PSE esteja habilitado. Com páginas de 4 MiB, os endereços físicos acima de 4 GiB só podem ser mapeados usando entradas de diretório de páginas de 4 MiB.</p></li>
+<li><p><strong>Bit Global (Global - G)</strong>: instrui o processador a não invalidar a entrada TLB correspondente à página quando uma instrução MOV para CR3 é executada. O bit 7 (PGE) em CR4 deve estar definido para habilitar páginas globais.</p></li>
+<li><p><strong>Bits de <em>cache</em></strong>:</p>
+<ul>
+<li><strong>PCD</strong> (Page-level <em>cache</em> Disable): se definido, a página não será armazenada em <em>cache</em>. Caso contrário, será.</li>
+<li><strong>PWT</strong> (Page-level Write-Through): controla as capacidades de <em>Write-Through</em> da página. Se o bit estiver definido, o <em>cache</em> <em>write-through</em> está habilitado. Se não, então <em>write-back</em> está habilitado.</li>
+<li><strong>PAT</strong> (Page Attribute Table): se PAT for suportado, então PAT junto com PCD e PWT indicarão o tipo de <em>cache</em> de memória. Caso contrário, é reservado e deve ser definido como <span class="math inline">\(0\)</span>.</li>
+</ul></li>
+<li><p><strong>Bits Disponíveis para o Sistema Operacional</strong>: os bits 9 a 11 (se PS=<span class="math inline">\(0\)</span>, também os bits 6 e 8) não são usados pelo processador e estão livres para o Sistema Operacional armazenar suas próprias informações de contabilidade.</p></li>
+</ul>
+<p>A Tabela <span class="citation" data-cites="TLB-bitsresumo">(<a href="references.html#ref-TLB-bitsresumo" role="doc-biblioref"><strong>TLB-bitsresumo?</strong></a>)</span> resume os bits mais comuns encontrados em uma entrada da tabela de páginas, destacando seu propósito, quem os define e quem os lê.</p>
+<table class="table">
+<caption>Tabela Resumo dos Bits Comuns em uma Entrada da Tabela de Páginas (<strong>PTE</strong>). {#TLB-bitsresumo}</caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Nome do Bit</th>
+<th style="text-align: left;">Propósito</th>
+<th style="text-align: left;">Quem Define (Típico)</th>
+<th style="text-align: left;">Quem Lê (Típico)</th>
+<th style="text-align: left;">Implicações</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Presença/Validade (P)</strong></td>
+<td style="text-align: left;">Indica se a página está na memória física (<code>RAM</code>).</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Se <span class="math inline">\(0\)</span>, a <strong>MMU</strong> gera um <em>page fault</em>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Número do Quadro</strong></td>
+<td style="text-align: left;">Endereço do quadro físico onde a página reside.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Usado para construir o endereço físico se o bit de presença for <span class="math inline">\(1\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Proteção (R/W)</strong></td>
+<td style="text-align: left;">Define permissão de leitura/escrita.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Uma violação de permissão gera uma falha de proteção.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Usuário/Supervisor (U/S)</strong></td>
+<td style="text-align: left;">Controla acesso baseado em privilégio.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Se <span class="math inline">\(0\)</span>, apenas modo supervisor pode acessar.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Modificação/Suja (D)</strong></td>
+<td style="text-align: left;">Indica se a página foi modificada desde que foi carregada.</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;">Se <span class="math inline">\(1\)</span>, o Sistema Operacional deve salvar a página no disco antes de substituí-la.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Acesso/Referenciada (A)</strong></td>
+<td style="text-align: left;">Indica se a página foi acessada (lida ou escrita) recentemente.</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;">Usado pelo Sistema Operacional para implementar algoritmos de substituição de página.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tamanho de Página (PS)</strong></td>
+<td style="text-align: left;">Define se é página de 4 KiB ou 4 MiB.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Se <span class="math inline">\(1\)</span>, mapeia diretamente para página de 4 MiB sem tabela de páginas.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Global (G)</strong></td>
+<td style="text-align: left;">Previne invalidação de TLB em mudança de contexto.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Requer bit PGE em CR4 habilitado.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong><em>cache</em> Desabilitado (PCD)</strong></td>
+<td style="text-align: left;">Controla se a página pode ser armazenada em <em>cache</em>.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Se <span class="math inline">\(1\)</span>, página não será colocada em <em>cache</em>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Write-Through (PWT)</strong></td>
+<td style="text-align: left;">Define política de escrita do <em>cache</em>.</td>
+<td style="text-align: left;">Sistema Operacional</td>
+<td style="text-align: left;"><strong>MMU</strong></td>
+<td style="text-align: left;">Se <span class="math inline">\(1\)</span>, usa <em>write-through</em>; se <span class="math inline">\(0\)</span>, usa <em>write-back</em>.</td>
+</tr>
+</tbody>
+</table>
+<p>Como a atenta leitora deve ter percebido, a tabela de páginas não é uma estrutura estática, é um contrato dinâmico. O hardware informa o software sobre como a memória está sendo usada, definindo os bits de acesso e modificação, e o software instrui o hardware sobre como a memória deve ser gerenciada, definindo os bits de presença, proteção e políticas de <em>cache</em>. Ao alterar os bits de acesso ou modificação de <span class="math inline">\(1\)</span> para <span class="math inline">\(0\)</span> enquanto uma entrada está marcada como presente, é recomendado invalidar a página associada. Caso contrário, o processador pode não definir esses bits em leituras/escritas subsequentes devido ao <em>cache</em> de TLB. Essa comunicação contínua é a essência do gerenciamento de memória virtual.</p>
+</section>
+</section>
+<section id="o-fluxo-de-tradução-de-endereços-em-detalhes" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="o-fluxo-de-tradução-de-endereços-em-detalhes"><span class="header-section-number">17.5</span> O Fluxo de Tradução de Endereços em Detalhes</h2>
+<p>Com a <strong>MMU</strong> e as tabelas de páginas como base, podemos agora traçar o caminho completo de um acesso à memória, desde a geração de um endereço virtual pela <code>CPU</code> até a obtenção dos dados. Este processo tem diferentes caminhos, com implicações de desempenho drasticamente diferentes.</p>
+<section id="a-necessidade-de-velocidade-o-translation-lookaside-buffer-tlb" class="level3" data-number="17.5.1">
+<h3 data-number="17.5.1" class="anchored" data-anchor-id="a-necessidade-de-velocidade-o-translation-lookaside-buffer-tlb"><span class="header-section-number">17.5.1</span> A Necessidade de Velocidade: O Translation Lookaside Buffer (TLB)</h3>
+<p>Uma análise inicial do processo de tradução revela um grande problema de desempenho. A tabela de páginas de cada processo reside na memória principal (<code>RAM</code>). Isso significa que, para cada acesso à memória solicitado por um programa, por exemplo, para buscar uma instrução ou um dado, a <strong>MMU</strong> precisará primeiro realizar um ou mais acessos à <code>RAM</code> para consultar a tabela de páginas e encontrar o número do quadro de página física (<strong>PFN</strong>) correto. Isso penaliza o tempo de acesso o tempo de acesso à memória de uma forma inaceitável.</p>
+<p>Para resolver este gargalo, as <code>CPU</code>s modernas incluem um <em>cache</em> de hardware pequeno e extremamente rápido, dedicado a armazenar traduções de endereço recentes. Este <em>cache</em> é chamado de <strong>T</strong>ranslation <strong>L</strong>ookaside <strong>B</strong>uffer, <strong>TLB</strong>[^na1]. O <strong>TLB</strong> é uma memória associativa que armazena pares de <strong>(VPN, PFN)</strong> para as páginas acessadas mais recentemente. Ele explora o princípio da localidade de referência, o que significa que os programas tendem a acessar um conjunto relativamente pequeno de páginas com frequência.</p>
+<p>O <strong>princípio da localidade de referência</strong> considera que se um programa acessa um endereço em uma página, é muito provável que ele acesse outros endereços na mesma página, o que chamamos de localidade espacial, ou acesse a mesma página novamente em breve, o que chamamos de localidade temporal. Ao manter as traduções para essas páginas <em>quentes</em> no <em>Translation Lookaside Buffer</em>, <strong>TLB</strong>, a <strong>MMU</strong> pode evitar a dispendiosa consulta à tabela de páginas na maioria das vezes. Não perca de vista, a tabela de páginas está na <code>RAM</code>, o <strong>TLB</strong> está no chip da <code>CPU</code>, e é muito, muito mais rápido.</p>
+<p>O fluxo de tradução de endereço, portanto, sempre começa com uma consulta ao <strong>TLB</strong> como pode ser visto na <a href="#fig-tlb1" class="quarto-xref">Figure&nbsp;<span>17.4</span></a>.</p>
+<div id="fig-tlb1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tlb1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tlb1.webp" class="img-fluid figure-img"></p>
+<figcaption>Fluxo de Tradução de Endereços com TLB</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-tlb1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.4
+</figcaption>
+</figure>
+</div>
+<p>Para que a esforçada leitora compreenda completamente o processo, vamos detalhar os três cenários possíveis que podem ocorrer durante a tradução de um endereço virtual:</p>
+</section>
+<section id="cenário-1-acerto-no-tlb-tlb-hit---o-caminho-rápido" class="level3" data-number="17.5.2">
+<h3 data-number="17.5.2" class="anchored" data-anchor-id="cenário-1-acerto-no-tlb-tlb-hit---o-caminho-rápido"><span class="header-section-number">17.5.2</span> Cenário 1: Acerto no <strong>TLB</strong> (<em>TLB Hit</em>) - O Caminho Rápido</h3>
+<p>Este é o cenário ideal e, em um sistema bem comportado, o mais comum.</p>
+<ol type="1">
+<li>A <code>CPU</code> gera um endereço virtual para uma operação de leitura ou escrita;</li>
+<li>A <strong>MMU</strong> recebe o endereço virtual e extrai o número da página virtual (<strong>VPN</strong>);</li>
+<li>A <strong>MMU</strong> apresenta o <strong>VPN</strong> ao <strong>TLB</strong>. O <strong>TLB</strong> realiza uma busca paralela (associativa) em todos os seus registros simultaneamente;</li>
+<li>O <strong>TLB</strong> encontra um registro correspondente ao <strong>VPN</strong>. Isso é um <strong>acerto no </strong>TLB** (<em>TLB hit</em>)**;</li>
+<li>O <strong>TLB</strong> retorna instantaneamente o número do quadro físico (<strong>PFN</strong>) associado, juntamente com os bits de proteção;</li>
+<li>A <strong>MMU</strong> verifica se a operação solicitada, leitura/escrita, é permitida pelos bits de proteção. Se for, a <strong>MMU</strong> constrói o endereço físico final combinando o <strong>PFN</strong> do <strong>TLB</strong> com o <em>offset</em> do endereço virtual original;</li>
+<li>O acesso à memória física prossegue. O dado é lido ou escrito na <code>RAM</code> conforme solicitado pela instrução original.</li>
+</ol>
+<p>Todo este processo é extremamente rápido, geralmente levando apenas um ou dois ciclos de <em>clock</em> da <code>CPU</code>. O custo da tradução de endereço é praticamente zero.</p>
+</section>
+<section id="cenário-2-erro-no-tlb-acerto-na-tabela-de-páginas-tlb-miss-page-hit" class="level3" data-number="17.5.3">
+<h3 data-number="17.5.3" class="anchored" data-anchor-id="cenário-2-erro-no-tlb-acerto-na-tabela-de-páginas-tlb-miss-page-hit"><span class="header-section-number">17.5.3</span> Cenário 2: Erro no TLB, Acerto na Tabela de Páginas <em>(TLB Miss, Page Hit)</em></h3>
+<p>Este cenário ocorre quando o programa acessa uma página cuja tradução não está atualmente no <strong>TLB</strong>.</p>
+<ol type="1">
+<li>Os passos <span class="math inline">\(1\)</span> a <span class="math inline">\(3\)</span> são idênticos ao cenário anterior, mas o <strong>TLB</strong> não encontra um registro correspondente ao <strong>VPN</strong>. Isso é um <strong>erro no TLB (<em>TLB miss</em>)</strong>;</li>
+<li>Agora, a <strong>MMU</strong> deve recorrer ao plano B: consultar a tabela de páginas na memória principal. Em muitas arquiteturas, como x86, o hardware inicia um processo chamado <strong><em>page walk</em></strong>, caminhada na página;</li>
+<li>O hardware usa o endereço base da tabela de páginas, do registrador de controle <strong>CR3</strong>, e o <strong>VPN</strong> para calcular o endereço do registro na tabela de páginas, <strong>PTE</strong>, correta na <code>RAM</code>;</li>
+<li>A <strong>MMU</strong> realiza um acesso à memória <code>RAM</code> para ler a <strong>PTE</strong>, lento, muito lento;</li>
+<li>A <strong>MMU</strong> inspeciona a <strong>PTE</strong>. Neste cenário, o bit de presença da <strong>PTE</strong> está definido como <span class="math inline">\(1\)</span>, indicando que a página está na memória. Isso é um <strong>acerto na tabela de páginas (<em>page hit</em>)</strong>;</li>
+<li>A <strong>MMU</strong> extrai o número do frame físico, <strong>PFN</strong>, e os bits de proteção da <strong>PTE</strong>;</li>
+<li>A tradução recém-descoberta, <strong>VPN</strong> → <strong>PFN</strong>, é carregada no <strong>TLB</strong>. Se o <strong>TLB</strong> estiver cheio, um registro existente é substituído, geralmente usando uma política como <strong>L</strong>east <strong>R</strong>ecently <strong>U</strong>sed, <strong>LRU</strong>.</li>
+<li>A instrução original que causou o <strong>TLB</strong> miss é reiniciada. Desta vez, a tradução estará no <strong>TLB</strong>, resultando em um <strong>TLB</strong> hit (Cenário 1).</li>
+</ol>
+<p>Este processo é significativamente mais lento que um <strong>TLB</strong> hit, podendo levar de <span class="math inline">\(10\)</span> a <span class="math inline">\(100\)</span> ciclos de <em>clock</em>, pois envolve um acesso à memória principal, que é muito mais lenta que o <strong>TLB</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O algoritmo <strong>L</strong>east <strong>R</strong>ecently <strong>U</strong>sed, <strong>LRU</strong>, é um dos algoritmos de substituição de <em>cache</em> mais comuns, utilizado para decidir qual entrada remover do <strong>TLB</strong> quando ele está cheio e uma nova tradução de endereço precisa ser armazenada.</p>
+<p>O <strong>LRU</strong> funciona com uma regra simples: o registro de tradução (<strong>VPN</strong> → <strong>PFN</strong>) que foi acessado há mais tempo, o <em>menos recentemente usado</em>, é o escolhido para ser substituído pela nova entrada. O hardware precisa manter um registro, mesmo que aproximado, da ordem de acesso às entradas do <strong>TLB</strong>. Este algoritmo é interessante porque se baseia no <strong>princípio da localidade temporal</strong>, uma heurística fundamental em ciência da computação. A ideia é que as páginas de memória acessadas recentemente têm uma alta probabilidade de serem acessadas novamente em um futuro próximo.</p>
+<p>Ao descartar a entrada que está <em>inativa</em> por mais tempo, o algoritmo <strong>LRU</strong> tenta manter no <strong>TLB</strong> as traduções que são mais relevantes para a execução atual do programa. Isso maximiza a chance de futuros acessos à memória resultarem em um <em>TLB hit</em>, evitando o custo de um <em>page walk</em> completo.</p>
+</div>
+</div>
+</section>
+<section id="cenário-3-falta-de-página-page-fault" class="level3" data-number="17.5.4">
+<h3 data-number="17.5.4" class="anchored" data-anchor-id="cenário-3-falta-de-página-page-fault"><span class="header-section-number">17.5.4</span> Cenário 3: Falta de Página (<em>Page Fault</em>)</h3>
+<p>Este é o cenário mais lento e complexo, ocorre quando a página necessária não está nem mesmo na memória física. Ele começa como um <em>TLB miss</em>, que vimos no Cenário 2, mas quando a <strong>MMU</strong> consulta a <strong>PTE</strong> na memória, ela encontra o bit de presença definido como <span class="math inline">\(0\)</span>. Neste ponto, o hardware não pode prosseguir. Ele para a execução da instrução atual e gera uma interrupção de hardware, transferindo o controle para o Sistema Operacional. Este evento é a <strong>falta de página (<em>page fault</em>)</strong>, e seu tratamento detalhado é o tópico da próxima seção.</p>
+<p>A viabilidade de todo o esquema de memória virtual depende criticamente da eficácia do TLB. A performance de um sistema é diretamente proporcional à sua taxa de acertos no TLB. Um <em>TLB thrashing</em>, onde o conjunto de trabalho de traduções de um processo é maior que o TLB, causa constantes <strong>TLB</strong> misses, degradando severamente o desempenho. A <a href="#fig-virtual3" class="quarto-xref">Figure&nbsp;<span>17.5</span></a> ilustra o fluxograma da tradução de endereços.</p>
+<div id="fig-virtual3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-virtual3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/virtual3.webp" class="img-fluid figure-img"></p>
+<figcaption>Fluxograma de Tradução de Endereços com TLB</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-virtual3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.5
+</figcaption>
+</figure>
+</div>
+<p>A tabela <span class="citation" data-cites="TLB-virtual1">(<a href="references.html#ref-TLB-virtual1" role="doc-biblioref"><strong>TLB-virtual1?</strong></a>)</span> resume os três cenários, destacando as ações do hardware, o envolvimento do Sistema Operacional e o custo relativo de desempenho:</p>
+<table class="table">
+<caption>Tabela Resumo dos Cenários de Tradução de Endereços. {#TLB-virtual1}</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Cenário</th>
+<th style="text-align: left;">Ações do Hardware</th>
+<th style="text-align: left;">Envolvimento do Sistema Operacional</th>
+<th style="text-align: left;">Custo Relativo de Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>TLB Hit</strong></td>
+<td style="text-align: left;">Consulta ao TLB, tradução imediata.</td>
+<td style="text-align: left;">Nenhum.</td>
+<td style="text-align: left;">≈ 1-2 ciclos de <em>clock</em> (muito rápido).</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TLB Miss / Page Hit</strong></td>
+<td style="text-align: left;">Consulta ao <strong>TLB</strong> falha, realiza <em>page walk</em> na <code>RAM</code>, lê <strong>PTE</strong>, atualiza <strong>TLB</strong>.</td>
+<td style="text-align: left;">Nenhum.</td>
+<td style="text-align: left;">≈ 10-100 ciclos de <em>clock</em> (lento).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Page Fault</strong></td>
+<td style="text-align: left;">Consulta ao <strong>TLB</strong> falha, lê <strong>PTE</strong>, encontra bit de presença igual a <span class="math inline">\(0\)</span>, gera trap para o Sistema Operacional.</td>
+<td style="text-align: left;">Total. O Sistema Operacional assume o controle para tratar a falha.</td>
+<td style="text-align: left;">Milhões de ciclos de <em>clock</em> (extremamente lento).</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="o-tratamento-de-falhas-de-página-uma-coreografia-entre-hardware-e-software" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="o-tratamento-de-falhas-de-página-uma-coreografia-entre-hardware-e-software"><span class="header-section-number">17.6</span> O Tratamento de Falhas de Página: Uma Coreografia entre Hardware e Software</h2>
+<p>Uma falta de página, <em>page fault</em>, não é um erro no sentido convencional. Pelo contrário, é um evento normal e necessário para o funcionamento da memória virtual, especificamente para a implementação da <strong>paginação por demanda</strong>, em inglês <em>demand paging</em>. Esta é uma estratégia de otimização na qual as páginas de um programa são carregadas do disco para a memória apenas quando são efetivamente acessadas pela primeira vez, em vez de todas de uma vez quando o programa inicia. A falta de página é o mecanismo que sinaliza ao Sistema Operacional: <em>a página que o programa precisa não está na memória; por favor, carregue-a</em>. O tratamento de uma <em>page fault</em> é uma sequência de passos cuidadosamente orquestrada entre o hardware e o software do Sistema Operacional.</p>
+<section id="o-gatilho-a-interrupção-de-hardware" class="level3" data-number="17.6.1">
+<h3 data-number="17.6.1" class="anchored" data-anchor-id="o-gatilho-a-interrupção-de-hardware"><span class="header-section-number">17.6.1</span> O Gatilho: A Interrupção de Hardware</h3>
+<p>O processo começa quando a <code>CPU</code> tenta executar uma instrução que acessa um endereço virtual. Conforme descrito na seção anterior, a <strong>MMU</strong> tenta traduzir este endereço. Após um <strong>TLB</strong> miss, a <strong>MMU</strong> consulta a tabela de páginas na memória e encontra a <strong>PTE</strong> correspondente, mas descobre que o bit de presença está definido como <span class="math inline">\(0\)</span>. Neste momento, o hardware não pode completar a instrução. Ele realiza as seguintes ações:</p>
+<ol type="1">
+<li>Interrompe a execução da instrução atual;</li>
+<li>Salva o estado da <code>CPU</code>, incluindo o contador de programa, que aponta para a instrução que falhou, e os valores dos registradores, em uma área segura;</li>
+<li>Gera uma exceção de hardware, uma <em>trap</em>, e transfere o controle para um rotina específica dentro do <code>kernel</code> do Sistema Operacional: o <strong>manipulador de faltas de página</strong>, <em>page fault handler</em>.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Resumo: Faults, Traps e Interrupções no x86-64</strong></p>
+<p>Três eventos distintos pausam a execução normal de um programa para dar controle ao Sistema Operacional, com propósitos e comportamentos diferentes.</p>
+<ol type="1">
+<li><p><strong>Fault (ex.: Page Fault - Vetor 14)</strong>: é uma <strong>exceção para tratar um erro corrigível</strong>. Ocorre quando uma instrução não pode ser completada.</p>
+<ul>
+<li><strong>Gatilho</strong>: acesso a uma página de memória não presente na <code>RAM</code> ou com permissão inadequada;</li>
+<li><strong>Quando Ocorre</strong>: <strong>antes</strong> da conclusão da instrução problemática;</li>
+<li><strong>Ação do Sistema Operacional</strong>: corrige o problema, ex.: carrega a página do disco para a <code>RAM</code>;</li>
+<li><strong>Retorno</strong>: a execução volta para a <strong>mesma instrução</strong>, que agora pode ser executada com sucesso;</li>
+<li><strong>Propósito</strong>: mecanismo fundamental para a gestão de memória virtual.</li>
+</ul></li>
+<li><p><strong>Trap (ex.: <em>System Call</em>)</strong>: é uma <strong>exceção intencional</strong> para solicitar um serviço ao Sistema Operacional.</p>
+<ul>
+<li><strong>Gatilho</strong>: execução de uma instrução específica, como <code>SYSCALL</code>, para chamadas de sistema, ou <code>INT 3</code>, para breakpoints de depuração ou debug;</li>
+<li><strong>Quando Ocorre</strong>: <strong>depois</strong> da conclusão da instrução que a causou;</li>
+<li><strong>Ação do Sistema Operacional</strong>: executa o serviço privilegiado solicitado, ex.: abrir um arquivo, alocar memória;</li>
+<li><strong>Retorno</strong>: a execução continua na <strong>próxima instrução</strong> após a que gerou a <em>trap</em>;</li>
+<li><strong>Propósito</strong>: é a <em>ponte segura</em> entre o código do usuário e o <code>kernel</code> do Sistema Operacional.</li>
+</ul></li>
+<li><p><strong>Interrupção de Hardware (ex.: NMI - Vetor 2)</strong>: é um <strong>sinal assíncrono</strong> gerado por um dispositivo de hardware.</p>
+<ul>
+<li><strong>Gatilho</strong>: evento externo ao processador, ex.: erro de paridade na <code>RAM</code>, falha de barramento, timer.</li>
+<li><strong>Quando Ocorre</strong>: a qualquer momento, de forma independente do código em execução.</li>
+<li><strong>Ação do Sistema Operacional</strong>: salva o contexto atual, trata o evento de hardware e depois retoma a tarefa que foi interrompida.</li>
+<li><strong>NMI (<em>Non-Maskable Interrupt</em>)</strong>: é um tipo especial de interrupção para erros de hardware críticos que não pode ser ignorada.</li>
+</ul></li>
+</ol>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 42%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Retorno da Execução</th>
+<th style="text-align: left;">Natureza</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Fault</strong></td>
+<td style="text-align: left;">Reexecuta a <strong>mesma</strong> instrução</td>
+<td style="text-align: left;">Erro corrigível</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Trap</strong></td>
+<td style="text-align: left;">Executa a <strong>próxima</strong> instrução</td>
+<td style="text-align: left;">Requisição intencional de serviço</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>NMI</strong></td>
+<td style="text-align: left;">Retoma a instrução <strong>interrompida</strong></td>
+<td style="text-align: left;">Evento assíncrono de hardware</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="a-resposta-do-sistema-operacional-o-handler-de-falhas-de-página" class="level3" data-number="17.6.2">
+<h3 data-number="17.6.2" class="anchored" data-anchor-id="a-resposta-do-sistema-operacional-o-handler-de-falhas-de-página"><span class="header-section-number">17.6.2</span> A Resposta do Sistema Operacional: O Handler de Falhas de Página</h3>
+<p>Uma vez que o controle é transferido para o <code>kernel</code>, o Sistema Operacional assume o comando e executa uma sequência complexa de operações para resolver a falta de página 20:</p>
+<ol type="1">
+<li><p><strong>Preservação do Contexto e Verificação</strong>: o Sistema Operacional começa salvando o contexto completo do processo que causou a falha e verifica que a interrupção foi, de fato, uma falta de página;</p></li>
+<li><p><strong>Validação do Acesso</strong>: o Sistema Operacional examina o endereço virtual que causou a falha. Ele precisa determinar se o acesso era legal. Ele consulta suas próprias estruturas de dados para verificar se o endereço pertence a uma região válida do espaço de endereçamento do processo, ex.: código, dados, pilha. Se o endereço for inválido, fora dos limites permitidos, o acesso não foi legítimo. Neste caso, o Sistema Operacional não prossegue com o carregamento da página. Em vez disso, ele encerra o processo, tipicamente enviando um sinal de falha de segmentação ou <em>segmentation fault</em> em inglês. (<code>SIGSEGV</code> no Unix/Linux ou <code>STATUS_ACCESS_VIOLATION</code>).</p></li>
+<li><p><strong>Localização da Página no Disco</strong>: se o acesso for válido, significa que a página existe, mas está no armazenamento secundário. O Sistema Operacional consulta uma tabela interna, que pode ser parte do mapa de memória do processo, para encontrar a localização exata da página no disco. A página pode estar na área de troca, <em>swap space</em>, se já esteve na memória e foi removida, ou pode estar no próprio arquivo executável do programa se esta for a primeira vez que é acessada.</p></li>
+<li><p><strong>Alocação de um Quadro Físico</strong>: O Sistema Operacional precisa de um quadro livre na memória física para carregar a página.</p>
+<ul>
+<li><strong>Caso A: há um quadro livre.</strong> o Sistema Operacional simplesmente o aloca para este fim.</li>
+<li><strong>Caso B: não há quadros livres.</strong> esta é a situação mais comum em um sistema sob carga. O Sistema Operacional deve selecionar um quadro para ser reutilizado. Para isso, ele executa um <strong>algoritmo de substituição de página</strong>. Algoritmos comuns incluem <strong>L</strong>east <strong>R</strong>ecently <strong>U</strong>sed, <strong>LRU</strong>, ou aproximações como o algoritmo do relógio, que usam o bit de acesso da <strong>PTE</strong> para decidir qual página é a melhor candidata a ser removida.</li>
+</ul></li>
+<li><p><strong>Tratamento da Página <em>Vítima</em> (se aplicável)</strong>: se um quadro ocupado foi selecionado como <em>vítima</em> (no Caso B), o Sistema Operacional deve invalidar a <strong>PTE</strong> do processo proprietário dessa página. Além disso, ele verifica o bit de modificação, <em>dirty bit</em>, da página vítima. Se o bit estiver definido como <span class="math inline">\(1\)</span>, significa que a página foi alterada e suas modificações devem ser salvas. O Sistema Operacional agenda uma operação de escrita para copiar a página vítima de volta para sua localização no disco, <em>swap out</em>. Se o bit de modificação for <span class="math inline">\(0\)</span>, a cópia no disco já está atualizada, e o quadro pode ser reutilizado imediatamente.</p></li>
+<li><p><strong>Operação de E/S (Page-In)</strong>: o Sistema Operacional agenda uma operação de leitura do disco para carregar a página necessária, localizada no Passo 3, para o quadro físico agora disponível, alocado no Passo 4. Esta operação de E/S de disco é, de longe, o passo mais demorado em todo o processo, levando milhões de ciclos de <em>clock</em>.</p></li>
+<li><p><strong>Escalonamento de Processos</strong>: como a leitura do disco é muito lenta, seria um desperdício imenso deixar a <code>CPU</code> ociosa. O Sistema Operacional, portanto, coloca o processo que causou a falha de página em um estado de <em>bloqueado</em> ou <em>suspenso</em>. Em seguida, o escalonador da <code>CPU</code> seleciona outro processo da fila de <em>prontos</em> para executar, garantindo que a <code>CPU</code> permaneça produtiva.</p></li>
+<li><p><strong>Conclusão da E/S e Atualização</strong>: quando o controlador de disco termina de carregar a página na memória, ele gera outra interrupção para notificar o Sistema Operacional. O manipulador desta interrupção realiza as seguintes tarefas:</p>
+<ul>
+<li>Atualiza a tabela de páginas do processo original. A <strong>PTE</strong> para a página recém-carregada é modificada: o bit de presença é definido como <span class="math inline">\(1\)</span>, e o campo do número do quadro é preenchido com o endereço do quadro onde a página foi carregada.</li>
+<li>Move o processo do estado <em>bloqueado</em> de volta para a fila de <em>prontos</em>. Agora ele está apto a competir pela <code>CPU</code> novamente.</li>
+</ul></li>
+<li><p><strong>Retomada da Execução</strong>: eventualmente, o escalonador selecionará o processo original para ser executado novamente. O Sistema Operacional restaura seu contexto salvo. Crucialmente, a execução não recomeça do início, mas sim da <em>mesma instrução</em> que causou a falha de página. Desta vez, quando a instrução for executada, a <strong>MMU</strong> encontrará uma <strong>PTE</strong> válida, após um <strong>TLB</strong> miss inicial, a tradução de endereço será bem-sucedida, e o programa continuará sua execução como se nada tivesse acontecido.</p></li>
+</ol>
+<p>Este processo complexo ilustra como o mecanismo de falta de página transforma um problema de acesso a hardware, um endereço não mapeado, em um evento de E/S de disco gerenciado por software. Esta transformação é a essência da paginação por demanda, permitindo que o Sistema Operacional carregue dados de forma <em>preguiçosa</em>, em inglês dizemos <em>lazy loading</em>, melhorando drasticamente os tempos de inicialização de programas e a utilização geral da memória. A <a href="#fig-virtual5" class="quarto-xref">Figure&nbsp;<span>17.6</span></a> ilustra o fluxo de tratamento de uma falta de página.</p>
+<div id="fig-virtual5" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-virtual5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/virtual5.webp" class="img-fluid figure-img"></p>
+<figcaption>Fluxograma de Tratamento de Falha de Página</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-virtual5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.6
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As operações de entrada/saída representam o gargalo dominante no tratamento de faltas de página, com custos que variam drasticamente dependendo do meio de armazenamento e das características do sistema:</p>
+<p><strong>Latências por Meio de Armazenamento</strong>:</p>
+<ul>
+<li><strong>HDD tradicional (7200 RPM)</strong>: <span class="math inline">\(8\)</span> a <span class="math inline">\(15ms\)</span> por operação aleatória;</li>
+<li><strong>SSD SATA</strong>: <span class="math inline">\(&lt; 0.1ms\)</span> por operação aleatória;</li>
+<li><strong>NVMe SSD</strong>: <span class="math inline">\(&lt; 0.1ms\)</span> por operação aleatória;</li>
+<li><strong>Optane/SCM</strong>: <span class="math inline">\(&lt; 0.1ms\)</span> por operação.</li>
+</ul>
+<p><strong>Decomposição do Tempo de Page Fault</strong>:</p>
+<ol type="1">
+<li><strong>Detecção e trap (hardware)</strong>: <span class="math inline">\(~10\)</span> a <span class="math inline">\(50\)</span> nanossegundos (0.% do total);</li>
+<li><strong>Handler do SO (software)</strong>: <span class="math inline">\(~1\)</span> a <span class="math inline">\(10\)</span> microssegundos (0.% do total);</li>
+<li><strong>Operação de I/O de disco</strong>: <span class="math inline">\(20\)</span> microssegundos a <span class="math inline">\(15\)</span> milissegundos (99%+ do total);</li>
+<li><strong>Atualização de estruturas</strong>: <span class="math inline">\(~100\)</span> a <span class="math inline">\(500\)</span> nanossegundos (0.% do total).</li>
+</ol>
+<p><strong>Custos Relativos por Contexto</strong>:</p>
+<ul>
+<li><strong>Página limpa (clean)</strong>: apenas <em>swap-in</em> necessário, <span class="math inline">\(1\)</span> operação de I/O;</li>
+<li><strong>Página suja (dirty)</strong>: <em>swap-out</em> + <em>swap-in</em> necessários, <span class="math inline">\(2\)</span> operações de I/O;</li>
+<li><strong>Sem quadros livres</strong>: Potencial cascata de substituições em sistemas sob alta demanda.</li>
+</ul>
+<p><strong>Estratégias de Otimização</strong>: o Sistema Operacional emprega diversas técnicas para amortizar esses custos: <em>clustering</em> de operações de I/O, lendo múltiplas páginas contíguas, <em>write-behind</em> assíncrono para páginas sujas, e <em>prefetching</em> preditivo baseado em padrões de acesso. Em sistemas modernos com <strong>SSD</strong>s, a diferença entre <em>swap-out</em> e descarte simples diminui significativamente, alterando as heurísticas tradicionais de substituição de página.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12germem.html" class="pagination-link" aria-label="Hierarquia de Memória: Fundamentos e Necessidade">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./12Bgermem.html" class="pagination-link" aria-label="Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/edit/main/12Agermem.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

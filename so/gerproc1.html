@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Sistemas Operacionais - 8&nbsp; Criando Processos de Forma Programática</title>
+<title>Sistemas Operacionais - 10&nbsp; Criando Processos de Forma Programática</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,10 +107,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles/styles.css">
-<meta property="og:title" content="Sistemas Operacionais - 8&nbsp; Criando Processos de Forma Programática">
+<meta property="og:title" content="Sistemas Operacionais - 10&nbsp; Criando Processos de Forma Programática">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Sistemas Operacionais">
-<meta name="twitter:title" content="Sistemas Operacionais - 8&nbsp; Criando Processos de Forma Programática">
+<meta name="twitter:title" content="Sistemas Operacionais - 10&nbsp; Criando Processos de Forma Programática">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -198,6 +198,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Guia Completo de <em>pull request</em> em Repositório de Terceiros</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./commit-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">A Arte da Mensagem de <em>commit</em>: Um Guia para Históricos Inteligíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./topo-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">A Topologia do Fluxo de Trabalho em Git: Estratégias para Colaboração em Equipe</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -212,97 +224,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Controle de Processos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agendamento de Tarefas e Escalonamento</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Atividades Práticas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Atividades Práticas</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./gerproc6.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Referências</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Gestão de Memória - 12germem.qmd</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Gestão de Memória</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12germem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Hierarquia de Memória: Fundamentos e Necessidade</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Agermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">A Arquitetura da Ilusão: Um Mergulho Profundo no Gerenciamento de Memória Virtual</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Bgermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Algoritmos de Substituição de Páginas: A Arte de Escolher a Vítima</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12Zgermem.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Gestão de Memória - Referências</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13gerfiles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gestão de Arquivos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14geres.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gestão de Entrada/Saída</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15gerredes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Gestão de Conectividade e Comunicação</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16gerseg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Segurança</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2arqui.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Arquiteturas de Sistemas Operacionais: Estruturando a Complexidade</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3heterox.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Tendências Avançadas em Sistemas Operacionais</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./18glossa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Glossário - Sistemas Operacionais: Fundamentos e Evolução</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19exerc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Exercícios Resolvidos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -321,18 +364,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#filosofias-de-design-duas-visões" id="toc-filosofias-de-design-duas-visões" class="nav-link active" data-scroll-target="#filosofias-de-design-duas-visões"><span class="header-section-number">8.0.1</span> Filosofias de Design: Duas Visões</a></li>
-  <li><a href="#o-modelo-linux-a-composição-de-fork-e-exec" id="toc-o-modelo-linux-a-composição-de-fork-e-exec" class="nav-link" data-scroll-target="#o-modelo-linux-a-composição-de-fork-e-exec"><span class="header-section-number">8.0.2</span> O Modelo Linux: A Composição de <code>fork()</code> e <code>exec()</code></a></li>
-  <li><a href="#o-modelo-windows-a-configuração-com-createprocess" id="toc-o-modelo-windows-a-configuração-com-createprocess" class="nav-link" data-scroll-target="#o-modelo-windows-a-configuração-com-createprocess"><span class="header-section-number">8.0.3</span> O Modelo Windows: A Configuração com CreateProcess</a></li>
+  <li><a href="#filosofias-de-design-duas-visões" id="toc-filosofias-de-design-duas-visões" class="nav-link active" data-scroll-target="#filosofias-de-design-duas-visões"><span class="header-section-number">10.0.1</span> Filosofias de Design: Duas Visões</a></li>
+  <li><a href="#o-modelo-linux-a-composição-de-fork-e-exec" id="toc-o-modelo-linux-a-composição-de-fork-e-exec" class="nav-link" data-scroll-target="#o-modelo-linux-a-composição-de-fork-e-exec"><span class="header-section-number">10.0.2</span> O Modelo Linux: A Composição de <code>fork()</code> e <code>exec()</code></a></li>
+  <li><a href="#o-modelo-windows-a-configuração-com-createprocess" id="toc-o-modelo-windows-a-configuração-com-createprocess" class="nav-link" data-scroll-target="#o-modelo-windows-a-configuração-com-createprocess"><span class="header-section-number">10.0.3</span> O Modelo Windows: A Configuração com CreateProcess</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/edit/main/gerproc1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./gerproc.html">Gestão de Processos</a></li><li class="breadcrumb-item"><a href="./gerproc1.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Criando Processos de Forma Programática</span></h1>
 </div>
 
 
@@ -349,13 +392,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Até a esforçada leitora estudou a anatomia de um processo, seu ciclo de vida, e viu como podemos listar os processos existentes em um <strong>Sistema Operacional</strong>. Vimos que um clique duplo em um ícone ou a execução de um comando em um terminal são ações de alto nível que resultam na criação de um novo processo. Mas como o <strong>Sistema Operacional</strong> realmente executa essa mágica? Como ele pode criar processos? A resposta, como a perspicaz leitora já deve suspeitar, reside em um conjunto de chamadas de sistema, as interfaces programáticas que o <code>Kernel</code> oferece aos programas de usuário. Nesta seção, vamos explorar como criar processos de forma programática, tanto no <strong>Linux</strong> quanto no Windows, e entender as diferenças fundamentais entre esses dois mundos.</p>
+<p>Até a esforçada leitora estudou a anatomia de um processo, seu ciclo de vida, e viu como podemos listar os processos existentes em um <strong>Sistema Operacional</strong> . Vimos que um clique duplo em um ícone ou a execução de um comando em um terminal são ações de alto nível que resultam na criação de um novo processo. Mas como o <strong>Sistema Operacional</strong> realmente executa essa mágica? Como ele pode criar processos? A resposta, como a perspicaz leitora já deve suspeitar, reside em um conjunto de chamadas de sistema, as interfaces programáticas que o <code>Kernel</code> oferece aos programas de usuário. Nesta seção, vamos explorar como criar processos de forma programática, tanto no <strong>Linux</strong> quanto no Windows, e entender as diferenças fundamentais entre esses dois mundos.</p>
 <p>Criar um processo de forma programática é uma das tarefas mais fundamentais em programação de sistemas. É o que permite que um servidor web inicie processos de trabalho para lidar com requisições, que um compilador chame o <code>linker</code>, que um <code>shell</code> execute os comandos que você digita. No entanto, os conceitos e as filosofias por trás dessa criação diferem drasticamente entre os mundos <strong>Linux</strong> e Windows, refletindo seus legados e suas prioridades de design.</p>
-<section id="filosofias-de-design-duas-visões" class="level3" data-number="8.0.1">
-<h3 data-number="8.0.1" class="anchored" data-anchor-id="filosofias-de-design-duas-visões"><span class="header-section-number">8.0.1</span> Filosofias de Design: Duas Visões</h3>
+<section id="filosofias-de-design-duas-visões" class="level3" data-number="10.0.1">
+<h3 data-number="10.0.1" class="anchored" data-anchor-id="filosofias-de-design-duas-visões"><span class="header-section-number">10.0.1</span> Filosofias de Design: Duas Visões</h3>
 <p>A diferença entre os modelos de criação de processos do <strong>Linux</strong> e <strong>Windows</strong> transcende aspectos meramente técnicos, refletindo filosofias fundamentalmente distintas de design de <strong>Sistemas Operacionais</strong>. Estas filosofias, forjadas por contextos históricos e objetivos diferentes, moldam não apenas como processos são criados, mas como desenvolvedores pensam sobre abstrações de sistema.</p>
-<section id="a-herança-unix-simplicidade-ortogonalidade-e-composição" class="level4" data-number="8.0.1.1">
-<h4 data-number="8.0.1.1" class="anchored" data-anchor-id="a-herança-unix-simplicidade-ortogonalidade-e-composição"><span class="header-section-number">8.0.1.1</span> A Herança UNIX: Simplicidade, Ortogonalidade e Composição</h4>
+<section id="a-herança-unix-simplicidade-ortogonalidade-e-composição" class="level4" data-number="10.0.1.1">
+<h4 data-number="10.0.1.1" class="anchored" data-anchor-id="a-herança-unix-simplicidade-ortogonalidade-e-composição"><span class="header-section-number">10.0.1.1</span> A Herança UNIX: Simplicidade, Ortogonalidade e Composição</h4>
 <p>O modelo <strong>fork()/exec()</strong> do <strong>Linux</strong> herda diretamente a filosofia <strong>UNIX</strong>, articulada na década de 1970 por <a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a>, <a href="https://en.wikipedia.org/wiki/Dennis_Ritchie">Dennis Ritchie</a> e seus colegas nos Bell Labs. O modelo <code>fork()/exec()</code> emergiu em um contexto de recursos limitados, PDP-11 com 64KB de memória, mas com necessidades de multitarefa. A separação conceitual permitiu que fosse atingido um grau significativo, para época, de eficiência de memória, graças ao <strong>CoW</strong> que minimiza uso de memória. Também existiram ganhos de flexibilidade nos processos de <code>E/S</code> e, finalmente, uma simplicidade de implementação que favoreceu a manutenção e evolução do <code>kernel</code>.</p>
 <p>A filosofia que suporta o modelo <code>fork()/exec()</code> pode ser resumida em três princípios fundamentais:</p>
 <ol type="1">
@@ -364,8 +407,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Princípio da Composição</strong>: ferramentas simples devem poder ser combinadas para criar funcionalidades complexas. O modelo <code>fork()/exec()</code> permite composições sofisticadas como pipelines, onde múltiplos processos são criados e conectados através de pipes.</p></li>
 </ol>
 </section>
-<section id="a-visão-windows-configuração-completude-e-determinismo" class="level4" data-number="8.0.1.2">
-<h4 data-number="8.0.1.2" class="anchored" data-anchor-id="a-visão-windows-configuração-completude-e-determinismo"><span class="header-section-number">8.0.1.2</span> A Visão Windows: Configuração, Completude e Determinismo</h4>
+<section id="a-visão-windows-configuração-completude-e-determinismo" class="level4" data-number="10.0.1.2">
+<h4 data-number="10.0.1.2" class="anchored" data-anchor-id="a-visão-windows-configuração-completude-e-determinismo"><span class="header-section-number">10.0.1.2</span> A Visão Windows: Configuração, Completude e Determinismo</h4>
 <p>O modelo <code>CreateProcess</code> do <strong>Windows</strong> reflete uma filosofia diferente, moldada pelas necessidades de um <strong>Sistema Operacional</strong> comercial projetado para facilidade de uso e robustez. A atenta leitora não pode esquecer que o <strong>Windows</strong> NT foi projetado para ser comercialmente robusto e atrativo. O modelo <code>CreateProcess</code> também pode ser resumido em três princípios:</p>
 <ol type="1">
 <li><p><strong>Princípio da Configuração Determinística</strong>: O estado inicial de um processo deve ser completamente especificável no momento da criação. <code>CreateProcess</code> permite que o processo pai defina precisamente como o filho deve iniciar, incluindo visibilidade de janela, prioridade, ambiente, e redirecionamentos de <code>E/S</code>.</p></li>
@@ -373,8 +416,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Princípio da Completude</strong>: <code>APIs</code>devem fornecer controle completo sobre os recursos que gerenciam. <code>CreateProcess</code> oferece controle granular sobre quase todos os aspectos da criação de processo através de suas estruturas de parâmetros.</p></li>
 </ol>
 </section>
-<section id="implicações-práticas-das-filosofias" class="level4" data-number="8.0.1.3">
-<h4 data-number="8.0.1.3" class="anchored" data-anchor-id="implicações-práticas-das-filosofias"><span class="header-section-number">8.0.1.3</span> Implicações Práticas das Filosofias</h4>
+<section id="implicações-práticas-das-filosofias" class="level4" data-number="10.0.1.3">
+<h4 data-number="10.0.1.3" class="anchored" data-anchor-id="implicações-práticas-das-filosofias"><span class="header-section-number">10.0.1.3</span> Implicações Práticas das Filosofias</h4>
 <p>A diferença filosófica se manifesta claramente na implementação de <code>shell</code>s de comando. Enquanto <strong>Shells UNIX/Linux</strong> podem implementar pipelines e redirecionamento de forma natural:</p>
 <pre class="pseudocode"><code>// Pseudocódigo para "cmd1 | cmd2 &gt; output.txt"
 pipe(fd);
@@ -422,17 +465,17 @@ while (true) {
     // Processa requisição em thread pool
 }</code></pre>
 </section>
-<section id="síntese-e-filosofias-de-design-convergência-e-divergência" class="level4" data-number="8.0.1.4">
-<h4 data-number="8.0.1.4" class="anchored" data-anchor-id="síntese-e-filosofias-de-design-convergência-e-divergência"><span class="header-section-number">8.0.1.4</span> Síntese e Filosofias de Design: Convergência e Divergência</h4>
+<section id="síntese-e-filosofias-de-design-convergência-e-divergência" class="level4" data-number="10.0.1.4">
+<h4 data-number="10.0.1.4" class="anchored" data-anchor-id="síntese-e-filosofias-de-design-convergência-e-divergência"><span class="header-section-number">10.0.1.4</span> Síntese e Filosofias de Design: Convergência e Divergência</h4>
 <p>Ao longo desta seção, a arguta leitora pode ter tido a impressão de que os mundos <strong>Linux</strong> e <strong>Windows</strong> são universos paralelos, destinados a nunca se encontrar. Contudo, o cenário da computação moderna é mais fluido, e nos últimos anos temos observado uma fascinante convergência em certas áreas. As tecnologias de contêineres no <strong>Linux</strong>, por exemplo, embora baseadas em primitivas do <code>Kernel</code> como <code>namespaces</code> e <code>cgroups</code>, são frequentemente gerenciadas por ferramentas com uma abordagem mais voltada a facilidade de configuração e adaptação, como os manifestos declarativos. Do outro lado do espectro, o <strong>W</strong>indows <strong>S</strong>ubsystem for <strong>L</strong>inux, <strong>WSL</strong>, representa um passo monumental da Microsoft em direção à interoperabilidade, integrando um ambiente <strong>UNIX</strong> quase completo dentro do <strong>Windows</strong>. Até mesmo no coração do <strong>Linux</strong>, a ascensão do <code>systemd</code> como gerenciador de serviços e inicialização introduziu um modelo de gerenciamento mais centralizado e determinístico, afastando-se da simplicidade dos scripts <code>shell</code> tradicionais do <a href="https://en.wikipedia.org/wiki/UNIX_System_V">System V</a>.</p>
 <p>Apesar dessa aproximação, seria um engano declarar o fim das diferenças. As divergências fundamentais persistem, pois estão enraizadas em filosofias de design profundamente distintas. A começar pela filosofia de tratamento de erros: o <strong>Linux</strong>, herdeiro da tradição <strong>UNIX</strong>, geralmente favorece o <code>fail-fast</code>, no qual um componente falha de forma rápida e visível. O <strong>Windows</strong>, por outro lado, muitas vezes se esforça para conseguir uma <code>degradação graciosa</code>, tentando manter a aplicação ou o sistema em funcionamento, mesmo que em um estado limitado. A modularidade é outro ponto de contraste: o ecossistema <strong>Linux</strong> preza por processos pequenos e especializados, enquanto aplicações <strong>Windows</strong> tendem a ser mais monolíticas, utilizando <code>threads</code> para concorrência interna. Por fim, a abordagem de configuração permanece um divisor de águas: o <strong>Linux</strong> confia em arquivos de texto simples e legíveis por humanos, enquanto o <strong>Windows</strong> centraliza a configuração em bancos de dados como o <strong>Registry</strong> e a expõe através de <strong>API</strong>s complexas.</p>
 <p>Essas divergências são a manifestação de duas visões de mundo distintas. A essência do modelo <strong>UNIX</strong> reside em seus três pilares: <strong>ortogonalidade</strong>, <strong>simplicidade</strong> e <strong>composição</strong>. As primitivas, como <code>fork()</code>, <code>exec()</code> e <code>pipes</code>, são simples e independentes umas das outras. Essa simplicidade facilita o raciocínio sobre o comportamento do sistema. E é a capacidade de compor essas ferramentas ortogonais que gera uma funcionalidade emergente e poderosa, permitindo usos que seus criadores originais talvez nem tivessem previsto.</p>
 <p>Em contrapartida, o modelo do <strong>Windows</strong> é construído sobre os pilares do <strong>determinismo</strong>, da <strong>configuração rica</strong> e da <strong>atomicidade</strong>. A <code>atomicidade</code> de chamadas como <code>CreateProcess</code> garante que a criação de um processo seja uma operação de tudo ou nada, o que simplifica o tratamento de erros e aumenta a previsibilidade. Esse é o <strong>determinismo</strong> do sistema. A <strong>API</strong> oferece uma <strong>configuração rica</strong> e explícita, que, embora complexa, reduz a quantidade de código repetitivo <code>boilerplate</code>, que o desenvolvedor precisa escrever para configurar o ambiente de um novo processo. A escolha entre os dois modelos, portanto, não é uma questão de superioridade, mas sim um reflexo de qual conjunto de compromissos, flexibilidade composicional ou robustez configuracional, é mais valorizado.</p>
-<p>A <a href="#tbl-linux-windows-summary" class="quarto-xref">Table&nbsp;<span>8.1</span></a> resume as principais diferenças entre os dois modelos.</p>
+<p>A <a href="#tbl-linux-windows-summary" class="quarto-xref">Table&nbsp;<span>10.1</span></a> resume as principais diferenças entre os dois modelos.</p>
 <div id="tbl-linux-windows-summary" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-linux-windows-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;8.1: Filosofias de criação de processos entre Linux e Windows
+Table&nbsp;10.1: Filosofias de criação de processos entre Linux e Windows
 </figcaption>
 <div aria-describedby="tbl-linux-windows-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -507,8 +550,8 @@ Table&nbsp;8.1: Filosofias de criação de processos entre Linux e Windows
 <p>Ambas as abordagens são válidas e refletem os contextos históricos, técnicos e comerciais em que evoluíram. A compreensão profunda dessas filosofias permite que desenvolvedores não apenas utilizem as APIs, mas pensem de forma nativa sobre problemas em cada plataforma, aproveitando as forças inerentes de cada modelo para criar software mais elegante e eficiente.</p>
 </section>
 </section>
-<section id="o-modelo-linux-a-composição-de-fork-e-exec" class="level3" data-number="8.0.2">
-<h3 data-number="8.0.2" class="anchored" data-anchor-id="o-modelo-linux-a-composição-de-fork-e-exec"><span class="header-section-number">8.0.2</span> O Modelo Linux: A Composição de <code>fork()</code> e <code>exec()</code></h3>
+<section id="o-modelo-linux-a-composição-de-fork-e-exec" class="level3" data-number="10.0.2">
+<h3 data-number="10.0.2" class="anchored" data-anchor-id="o-modelo-linux-a-composição-de-fork-e-exec"><span class="header-section-number">10.0.2</span> O Modelo Linux: A Composição de <code>fork()</code> e <code>exec()</code></h3>
 <p>O universo <strong>UNIX</strong>, e por herança <strong>Linux</strong>, adota um modelo elegante para a criação de processos, baseado na composição de duas ações ortogonais: clonar e substituir. Este paradigma é realizado através de duas famílias de chamadas de sistema: <code>fork()</code> e <code>exec()</code>.</p>
 <ol type="1">
 <li><p><strong><code>fork()</code>: A Clonagem do Processo</strong>: a chamada de sistema <code>fork()</code> é o único método para criar um novo processo no Linux. Esta chamada cria um processo filho que será uma cópia quase exata do processo pai que a invocou. O filho herda o espaço de endereçamento do pai (código, dados, pilha), descritores de arquivos abertos, e outras informações de contexto. Para tornar esta operação eficiente, os sistemas modernos implementam <code>fork()</code> usando a técnica <strong>C</strong>opy-<strong>o</strong>n-<strong>W</strong>rite, <strong>COW</strong>, o inglês para copiar ao escrever. Com <strong>COW</strong>, o espaço de endereçamento não é fisicamente duplicado. Em vez disso, pai e filho compartilham as mesmas páginas de memória, que são marcadas como somente leitura. Uma cópia física da página só é criada quando um dos processos tenta escrever nela, tornando a chamada <code>fork()</code> extremamente rápida.</p>
@@ -524,11 +567,11 @@ Table&nbsp;8.1: Filosofias de criação de processos entre Linux e Windows
 </ol>
 <p>A separação entre <code>fork()</code> e <code>exec()</code> é a base da flexibilidade do <code>shell</code> <strong>UNIX</strong>. Essa separação cria uma janela de oportunidade na qual o processo filho, antes de se transformar no novo programa com <code>exec()</code>, pode manipular seu próprio ambiente, como redirecionar a entrada e saída padrão (<code>stdin</code>, <code>stdout</code>) para implementar <code>pipes</code> e redirecionamentos de arquivo.</p>
 <p>Para garantir a sincronia, o processo pai geralmente usa chamadas como <code>wait()</code> ou <code>waitpid()</code> para aguardar a terminação do filho. Isso não só permite a sincronização, mas também é o mecanismo pelo qual o pai recupera o status de saída do filho, evitando que este se torne um processo zumbi.</p>
-<p>Vai ficar mais claro se a esforçada leitora tentar um exemplo em C++23. O <a href="#lst-cpplinux-create" class="quarto-xref">Listing&nbsp;<span>8.1</span></a> demonstra o ciclo completo <code>fork-exec-wait</code>.</p>
+<p>Vai ficar mais claro se a esforçada leitora tentar um exemplo em C++23. O <a href="#lst-cpplinux-create" class="quarto-xref">Listing&nbsp;<span>10.1</span></a> demonstra o ciclo completo <code>fork-exec-wait</code>.</p>
 <div id="lst-cpplinux-create" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-cpplinux-create-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.1
+Listing&nbsp;10.1
 </figcaption>
 <div aria-describedby="lst-cpplinux-create-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-cpplinux-create"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="lst-cpplinux-create-1"><a href="#lst-cpplinux-create-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
@@ -624,12 +667,12 @@ Listing&nbsp;8.1
 </div>
 </figure>
 </div>
-<p>O código em <a href="#lst-cpplinux-create" class="quarto-xref">Listing&nbsp;<span>8.1</span></a> encapsula o ciclo de vida da criação de processos no Linux. A chamada fork() divide o fluxo de execução em dois. O processo filho, identificado por <strong>PID</strong> == 0, prepara um std::vector de ponteiros para char para os argumentos do comando ls e chama execvp(). Esta função procura pelo executável ls no PATH do sistema e, se encontrar, sobrepõe o processo filho com ele. O processo pai, por sua vez, entra no bloco else, onde usa waitpid(pid, &amp;status, 0) para se suspender até que o processo filho (cujo <strong>PID</strong> ele conhece) termine. Uma vez que o filho termina, o pai acorda e usa as macros WIFEXITED e WEXITSTATUS para inspecionar a variável status e determinar se o filho concluiu com sucesso.</p>
-<section id="hierarquia-de-processos-e-controle-de-ambiente-no-linux" class="level4" data-number="8.0.2.1">
-<h4 data-number="8.0.2.1" class="anchored" data-anchor-id="hierarquia-de-processos-e-controle-de-ambiente-no-linux"><span class="header-section-number">8.0.2.1</span> Hierarquia de Processos e Controle de Ambiente no Linux</h4>
+<p>O código em <a href="#lst-cpplinux-create" class="quarto-xref">Listing&nbsp;<span>10.1</span></a> encapsula o ciclo de vida da criação de processos no Linux. A chamada fork() divide o fluxo de execução em dois. O processo filho, identificado por <strong>PID</strong> == 0, prepara um std::vector de ponteiros para char para os argumentos do comando ls e chama execvp(). Esta função procura pelo executável ls no PATH do sistema e, se encontrar, sobrepõe o processo filho com ele. O processo pai, por sua vez, entra no bloco else, onde usa waitpid(pid, &amp;status, 0) para se suspender até que o processo filho (cujo <strong>PID</strong> ele conhece) termine. Uma vez que o filho termina, o pai acorda e usa as macros WIFEXITED e WEXITSTATUS para inspecionar a variável status e determinar se o filho concluiu com sucesso.</p>
+<section id="hierarquia-de-processos-e-controle-de-ambiente-no-linux" class="level4" data-number="10.0.2.1">
+<h4 data-number="10.0.2.1" class="anchored" data-anchor-id="hierarquia-de-processos-e-controle-de-ambiente-no-linux"><span class="header-section-number">10.0.2.1</span> Hierarquia de Processos e Controle de Ambiente no Linux</h4>
 <p>O modelo de processos do <strong>Linux</strong> oferece mecanismos sofisticados para organização hierárquica e controle de ambiente que vão além da simples relação pai-filho. Dois conceitos fundamentais emergem: <strong>Process Groups</strong> e <strong>Sessions</strong>, que formam a base do controle de tarefas (<code>job control</code>) implementado pelos shells modernos.</p>
-<section id="process-groups-agrupamento-lógico-de-processos" class="level5" data-number="8.0.2.1.1">
-<h5 data-number="8.0.2.1.1" class="anchored" data-anchor-id="process-groups-agrupamento-lógico-de-processos"><span class="header-section-number">8.0.2.1.1</span> Process Groups: Agrupamento Lógico de Processos</h5>
+<section id="process-groups-agrupamento-lógico-de-processos" class="level5" data-number="10.0.2.1.1">
+<h5 data-number="10.0.2.1.1" class="anchored" data-anchor-id="process-groups-agrupamento-lógico-de-processos"><span class="header-section-number">10.0.2.1.1</span> Process Groups: Agrupamento Lógico de Processos</h5>
 <p>Um <strong>Process Group</strong> é uma coleção de processos relacionados que podem ser tratados como uma unidade para propósitos de sinalização. Todo processo pertence exatamente a um group, identificado por um <strong>Process Group ID (PGID)</strong>. O processo cujo <strong>PID</strong> é igual ao <strong>PGID</strong> é denominado <strong>process group leader</strong>.</p>
 <p>Process groups são fundamentais para implementar pipelines de comandos. Quando um shell executa <code>ls | grep txt | sort</code>, os três processos são colocados no mesmo process group, permitindo que sinais como <code>SIGINT</code> (Ctrl+C) sejam enviados para todos simultaneamente.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -659,18 +702,18 @@ Note
 <li><code>getpgrp()</code>: retorna o <strong>PGID</strong> do processo atual</li>
 </ul>
 </section>
-<section id="sessions-isolamento-e-controle-de-terminal" class="level5" data-number="8.0.2.1.2">
-<h5 data-number="8.0.2.1.2" class="anchored" data-anchor-id="sessions-isolamento-e-controle-de-terminal"><span class="header-section-number">8.0.2.1.2</span> Sessions: Isolamento e Controle de Terminal</h5>
+<section id="sessions-isolamento-e-controle-de-terminal" class="level5" data-number="10.0.2.1.2">
+<h5 data-number="10.0.2.1.2" class="anchored" data-anchor-id="sessions-isolamento-e-controle-de-terminal"><span class="header-section-number">10.0.2.1.2</span> Sessions: Isolamento e Controle de Terminal</h5>
 <p>Uma <strong>Session</strong> é uma coleção de process groups, tipicamente associada a um terminal de controle. Sessions proporcionam isolamento entre diferentes contextos de execução. O processo que cria uma nova session torna-se o <strong>session leader</strong>.</p>
 <p>A função <code>setsid()</code> cria uma nova session, remove o processo de seu terminal de controle atual, e o torna session leader. Esta operação é fundamental na criação de daemons, processos que executam em background sem associação a terminal.</p>
 </section>
-<section id="exemplo-prático-implementando-job-control" class="level5" data-number="8.0.2.1.3">
-<h5 data-number="8.0.2.1.3" class="anchored" data-anchor-id="exemplo-prático-implementando-job-control"><span class="header-section-number">8.0.2.1.3</span> Exemplo Prático: Implementando Job Control</h5>
-<p>O <a href="#lst-linux-job-control" class="quarto-xref">Listing&nbsp;<span>8.2</span></a> demonstra uma implementação simplificada de job control, mostrando como <em>process groups</em> e sessions podem ser utilizados para gerenciar tarefas em background e foreground.</p>
+<section id="exemplo-prático-implementando-job-control" class="level5" data-number="10.0.2.1.3">
+<h5 data-number="10.0.2.1.3" class="anchored" data-anchor-id="exemplo-prático-implementando-job-control"><span class="header-section-number">10.0.2.1.3</span> Exemplo Prático: Implementando Job Control</h5>
+<p>O <a href="#lst-linux-job-control" class="quarto-xref">Listing&nbsp;<span>10.2</span></a> demonstra uma implementação simplificada de job control, mostrando como <em>process groups</em> e sessions podem ser utilizados para gerenciar tarefas em background e foreground.</p>
 <div id="lst-linux-job-control" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-linux-job-control-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.2
+Listing&nbsp;10.2
 </figcaption>
 <div aria-describedby="lst-linux-job-control-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-linux-job-control"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="lst-linux-job-control-1"><a href="#lst-linux-job-control-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
@@ -947,14 +990,14 @@ Listing&nbsp;8.2
 </div>
 </section>
 </section>
-<section id="variáveis-de-ambiente-herança-e-customização" class="level4" data-number="8.0.2.2">
-<h4 data-number="8.0.2.2" class="anchored" data-anchor-id="variáveis-de-ambiente-herança-e-customização"><span class="header-section-number">8.0.2.2</span> Variáveis de Ambiente: Herança e Customização</h4>
+<section id="variáveis-de-ambiente-herança-e-customização" class="level4" data-number="10.0.2.2">
+<h4 data-number="10.0.2.2" class="anchored" data-anchor-id="variáveis-de-ambiente-herança-e-customização"><span class="header-section-number">10.0.2.2</span> Variáveis de Ambiente: Herança e Customização</h4>
 <p>Todo processo no <strong>Linux</strong> herda uma cópia das variáveis de ambiente de seu processo pai. O ambiente é representado como um array de strings no formato <code>"NOME=valor"</code>, terminado por um ponteiro <code>NULL</code>.</p>
-<p>Para controle preciso sobre o ambiente de um processo filho, a família <code>exec</code> oferece <code>execve()</code>, que aceita um array de ambiente customizado. O <a href="#lst-linux-environment" class="quarto-xref">Listing&nbsp;<span>8.3</span></a> demonstra manipulação avançada de variáveis de ambiente.</p>
+<p>Para controle preciso sobre o ambiente de um processo filho, a família <code>exec</code> oferece <code>execve()</code>, que aceita um array de ambiente customizado. O <a href="#lst-linux-environment" class="quarto-xref">Listing&nbsp;<span>10.3</span></a> demonstra manipulação avançada de variáveis de ambiente.</p>
 <div id="lst-linux-environment" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-linux-environment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.3
+Listing&nbsp;10.3
 </figcaption>
 <div aria-describedby="lst-linux-environment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-linux-environment"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="lst-linux-environment-1"><a href="#lst-linux-environment-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
@@ -1195,8 +1238,8 @@ Listing&nbsp;8.3
 </div>
 </section>
 </section>
-<section id="o-modelo-windows-a-configuração-com-createprocess" class="level3" data-number="8.0.3">
-<h3 data-number="8.0.3" class="anchored" data-anchor-id="o-modelo-windows-a-configuração-com-createprocess"><span class="header-section-number">8.0.3</span> O Modelo Windows: A Configuração com CreateProcess</h3>
+<section id="o-modelo-windows-a-configuração-com-createprocess" class="level3" data-number="10.0.3">
+<h3 data-number="10.0.3" class="anchored" data-anchor-id="o-modelo-windows-a-configuração-com-createprocess"><span class="header-section-number">10.0.3</span> O Modelo Windows: A Configuração com CreateProcess</h3>
 <p>O <strong>Windows</strong> adota uma abordagem fundamentalmente diferente. Em vez de um modelo composicional, ele oferece uma API monolítica e altamente configurável: <code>CreateProcess</code>. Este método é responsável por criar um novo processo e carregar a imagem do programa inicial em uma única operação atômica. Não há um estado intermediário onde o processo filho executa o código do pai.</p>
 <p>Este é um modelo configuracional: o processo pai especifica o estado inicial completo do novo processo através de um conjunto abrangente de parâmetros. A chamada à função <code>CreateProcessW</code>, a versão Unicode, que é a preferida, aceita dez parâmetros, mas os mais importantes são:</p>
 <ul>
@@ -1211,7 +1254,7 @@ Listing&nbsp;8.3
 <div id="lst-cppwindows-create" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-cppwindows-create-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.4
+Listing&nbsp;10.4
 </figcaption>
 <div aria-describedby="lst-cppwindows-create-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-cppwindows-create"><pre class="sourceCode c++ code-with-copy"><code class="sourceCode cpp"><span id="lst-cppwindows-create-1"><a href="#lst-cppwindows-create-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -1313,18 +1356,18 @@ Listing&nbsp;8.4
 </div>
 </figure>
 </div>
-<p>O código em <a href="#lst-cppwindows-create" class="quarto-xref">Listing&nbsp;<span>8.4</span></a> ilustra a abordagem do Windows. Primeiro, as estruturas <code>STARTUPINFOW</code> e <code>PROCESS_INFORMATION</code> são inicializadas com zeros usando <code>ZeroMemory</code>. A chamada a <code>CreateProcessW</code> é então feita, passando um ponteiro para a string da linha de comando. Se a chamada for bem-sucedida, a estrutura <code>pi</code> será preenchida com os handles e <strong>ID</strong>s do novo processo. O pai então chama <code>WaitForSingleObject</code> no <code>handle</code> do processo (<code>pi.hProcess</code>), bloqueando sua própria execução até que o usuário feche a janela do Bloco de Notas. Finalmente, e de forma indispensável, <code>CloseHandle</code> é chamado em <code>pi.hProcess</code> e <code>pi.hThread</code> para liberar os recursos associados a eles no <code>Kernel</code>.</p>
-<section id="controle-de-ambiente-de-processos-no-windows" class="level4" data-number="8.0.3.1">
-<h4 data-number="8.0.3.1" class="anchored" data-anchor-id="controle-de-ambiente-de-processos-no-windows"><span class="header-section-number">8.0.3.1</span> Controle de Ambiente de Processos no Windows</h4>
+<p>O código em <a href="#lst-cppwindows-create" class="quarto-xref">Listing&nbsp;<span>10.4</span></a> ilustra a abordagem do Windows. Primeiro, as estruturas <code>STARTUPINFOW</code> e <code>PROCESS_INFORMATION</code> são inicializadas com zeros usando <code>ZeroMemory</code>. A chamada a <code>CreateProcessW</code> é então feita, passando um ponteiro para a string da linha de comando. Se a chamada for bem-sucedida, a estrutura <code>pi</code> será preenchida com os handles e <strong>ID</strong>s do novo processo. O pai então chama <code>WaitForSingleObject</code> no <code>handle</code> do processo (<code>pi.hProcess</code>), bloqueando sua própria execução até que o usuário feche a janela do Bloco de Notas. Finalmente, e de forma indispensável, <code>CloseHandle</code> é chamado em <code>pi.hProcess</code> e <code>pi.hThread</code> para liberar os recursos associados a eles no <code>Kernel</code>.</p>
+<section id="controle-de-ambiente-de-processos-no-windows" class="level4" data-number="10.0.3.1">
+<h4 data-number="10.0.3.1" class="anchored" data-anchor-id="controle-de-ambiente-de-processos-no-windows"><span class="header-section-number">10.0.3.1</span> Controle de Ambiente de Processos no Windows</h4>
 <p>No Windows, a manipulação de variáveis de ambiente segue uma abordagem diferente, mas igualmente poderosa. O sistema oferece controle granular sobre o ambiente através dos parâmetros de <code>CreateProcess</code>, permitindo herança seletiva ou definição completa de um ambiente customizado.</p>
-<section id="herança-e-customização-de-ambiente" class="level5" data-number="8.0.3.1.1">
-<h5 data-number="8.0.3.1.1" class="anchored" data-anchor-id="herança-e-customização-de-ambiente"><span class="header-section-number">8.0.3.1.1</span> Herança e Customização de Ambiente</h5>
+<section id="herança-e-customização-de-ambiente" class="level5" data-number="10.0.3.1.1">
+<h5 data-number="10.0.3.1.1" class="anchored" data-anchor-id="herança-e-customização-de-ambiente"><span class="header-section-number">10.0.3.1.1</span> Herança e Customização de Ambiente</h5>
 <p>Por padrão, no Windows, processos filhos herdam todas as variáveis de ambiente do processo pai. Para controle preciso, <code>CreateProcess</code> aceita o parâmetro <code>lpEnvironment</code>, que pode conter um bloco de ambiente completamente novo. Este bloco deve ser formatado como uma sequência de strings terminadas em nulo, cada uma no formato <code>"NOME=valor"</code>, com o bloco inteiro terminado por um nulo adicional.</p>
-<p>O <a href="#lst-windows-environment" class="quarto-xref">Listing&nbsp;<span>8.5</span></a> demonstra as técnicas de manipulação de ambiente no Windows.</p>
+<p>O <a href="#lst-windows-environment" class="quarto-xref">Listing&nbsp;<span>10.5</span></a> demonstra as técnicas de manipulação de ambiente no Windows.</p>
 <div id="lst-windows-environment" class="listing quarto-float">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst quarto-uncaptioned" id="lst-windows-environment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;8.5
+Listing&nbsp;10.5
 </figcaption>
 <div aria-describedby="lst-windows-environment-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-windows-environment"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="lst-windows-environment-1"><a href="#lst-windows-environment-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
@@ -2172,12 +2215,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./gerproc.html" class="pagination-link" aria-label="Gerenciamento de Processos: Introdução">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Gerenciamento de Processos: Introdução</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./gerproc2.html" class="pagination-link" aria-label="Processos de Sistema: Linux vs. Windows">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Processos de Sistema: Linux vs.&nbsp;Windows</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
