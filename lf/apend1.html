@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 21&nbsp; Apêndice 1: A Relação de Myhill-Nerode</title>
+<title>Linguagens Formais e Autômatos - 22&nbsp; Apêndice 1: A Relação de Myhill-Nerode</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./sol-exercicios.html" rel="next">
-<link href="./fase3.html" rel="prev">
+<link href="./fase4.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./apend1.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./apend1.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -274,7 +274,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do LLVM com C++</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -312,18 +312,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -338,37 +344,37 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#definição-formal-da-relação" id="toc-definição-formal-da-relação" class="nav-link active" data-scroll-target="#definição-formal-da-relação"><span class="header-section-number">21.1</span> Definição Formal da Relação</a>
+  <li><a href="#definição-formal-da-relação" id="toc-definição-formal-da-relação" class="nav-link active" data-scroll-target="#definição-formal-da-relação"><span class="header-section-number">22.1</span> Definição Formal da Relação</a>
   <ul class="collapse">
-  <li><a href="#intuição-por-trás-da-definição" id="toc-intuição-por-trás-da-definição" class="nav-link" data-scroll-target="#intuição-por-trás-da-definição"><span class="header-section-number">21.1.1</span> Intuição por Trás da Definição</a></li>
+  <li><a href="#intuição-por-trás-da-definição" id="toc-intuição-por-trás-da-definição" class="nav-link" data-scroll-target="#intuição-por-trás-da-definição"><span class="header-section-number">22.1.1</span> Intuição por Trás da Definição</a></li>
   </ul></li>
-  <li><a href="#classes-de-equivalência" id="toc-classes-de-equivalência" class="nav-link" data-scroll-target="#classes-de-equivalência"><span class="header-section-number">21.2</span> Classes de Equivalência</a>
+  <li><a href="#classes-de-equivalência" id="toc-classes-de-equivalência" class="nav-link" data-scroll-target="#classes-de-equivalência"><span class="header-section-number">22.2</span> Classes de Equivalência</a>
   <ul class="collapse">
-  <li><a href="#exemplo-fundamental" id="toc-exemplo-fundamental" class="nav-link" data-scroll-target="#exemplo-fundamental"><span class="header-section-number">21.2.1</span> Exemplo Fundamental</a></li>
+  <li><a href="#exemplo-fundamental" id="toc-exemplo-fundamental" class="nav-link" data-scroll-target="#exemplo-fundamental"><span class="header-section-number">22.2.1</span> Exemplo Fundamental</a></li>
   </ul></li>
-  <li><a href="#o-teorema-de-myhill-nerode" id="toc-o-teorema-de-myhill-nerode" class="nav-link" data-scroll-target="#o-teorema-de-myhill-nerode"><span class="header-section-number">21.3</span> O Teorema de Myhill-Nerode</a>
+  <li><a href="#o-teorema-de-myhill-nerode" id="toc-o-teorema-de-myhill-nerode" class="nav-link" data-scroll-target="#o-teorema-de-myhill-nerode"><span class="header-section-number">22.3</span> O Teorema de Myhill-Nerode</a>
   <ul class="collapse">
-  <li><a href="#demonstração-esboço" id="toc-demonstração-esboço" class="nav-link" data-scroll-target="#demonstração-esboço"><span class="header-section-number">21.3.1</span> Demonstração (Esboço)</a></li>
+  <li><a href="#demonstração-esboço" id="toc-demonstração-esboço" class="nav-link" data-scroll-target="#demonstração-esboço"><span class="header-section-number">22.3.1</span> Demonstração (Esboço)</a></li>
   </ul></li>
-  <li><a href="#aplicações-práticas" id="toc-aplicações-práticas" class="nav-link" data-scroll-target="#aplicações-práticas"><span class="header-section-number">21.4</span> Aplicações Práticas</a>
+  <li><a href="#aplicações-práticas" id="toc-aplicações-práticas" class="nav-link" data-scroll-target="#aplicações-práticas"><span class="header-section-number">22.4</span> Aplicações Práticas</a>
   <ul class="collapse">
-  <li><a href="#determinação-de-regularidade" id="toc-determinação-de-regularidade" class="nav-link" data-scroll-target="#determinação-de-regularidade"><span class="header-section-number">21.4.1</span> 1. Determinação de Regularidade</a></li>
-  <li><a href="#minimização-de-autômatos" id="toc-minimização-de-autômatos" class="nav-link" data-scroll-target="#minimização-de-autômatos"><span class="header-section-number">21.4.2</span> 2. Minimização de Autômatos</a></li>
-  <li><a href="#algoritmo-de-construção-do-autômato-mínimo" id="toc-algoritmo-de-construção-do-autômato-mínimo" class="nav-link" data-scroll-target="#algoritmo-de-construção-do-autômato-mínimo"><span class="header-section-number">21.4.3</span> 3. Algoritmo de Construção do Autômato Mínimo</a></li>
+  <li><a href="#determinação-de-regularidade" id="toc-determinação-de-regularidade" class="nav-link" data-scroll-target="#determinação-de-regularidade"><span class="header-section-number">22.4.1</span> 1. Determinação de Regularidade</a></li>
+  <li><a href="#minimização-de-autômatos" id="toc-minimização-de-autômatos" class="nav-link" data-scroll-target="#minimização-de-autômatos"><span class="header-section-number">22.4.2</span> 2. Minimização de Autômatos</a></li>
+  <li><a href="#algoritmo-de-construção-do-autômato-mínimo" id="toc-algoritmo-de-construção-do-autômato-mínimo" class="nav-link" data-scroll-target="#algoritmo-de-construção-do-autômato-mínimo"><span class="header-section-number">22.4.3</span> 3. Algoritmo de Construção do Autômato Mínimo</a></li>
   </ul></li>
-  <li><a href="#exemplo-detalhado-construção-passo-a-passo" id="toc-exemplo-detalhado-construção-passo-a-passo" class="nav-link" data-scroll-target="#exemplo-detalhado-construção-passo-a-passo"><span class="header-section-number">21.5</span> Exemplo Detalhado: Construção Passo a Passo</a></li>
-  <li><a href="#propriedades-importantes" id="toc-propriedades-importantes" class="nav-link" data-scroll-target="#propriedades-importantes"><span class="header-section-number">21.6</span> Propriedades Importantes</a>
+  <li><a href="#exemplo-detalhado-construção-passo-a-passo" id="toc-exemplo-detalhado-construção-passo-a-passo" class="nav-link" data-scroll-target="#exemplo-detalhado-construção-passo-a-passo"><span class="header-section-number">22.5</span> Exemplo Detalhado: Construção Passo a Passo</a></li>
+  <li><a href="#propriedades-importantes" id="toc-propriedades-importantes" class="nav-link" data-scroll-target="#propriedades-importantes"><span class="header-section-number">22.6</span> Propriedades Importantes</a>
   <ul class="collapse">
-  <li><a href="#refinamento-de-relações" id="toc-refinamento-de-relações" class="nav-link" data-scroll-target="#refinamento-de-relações"><span class="header-section-number">21.6.1</span> 1. Refinamento de Relações</a></li>
-  <li><a href="#invariância-por-operações" id="toc-invariância-por-operações" class="nav-link" data-scroll-target="#invariância-por-operações"><span class="header-section-number">21.6.2</span> 2. Invariância por Operações</a></li>
-  <li><a href="#conexão-com-congruências" id="toc-conexão-com-congruências" class="nav-link" data-scroll-target="#conexão-com-congruências"><span class="header-section-number">21.6.3</span> 3. Conexão com Congruências</a></li>
+  <li><a href="#refinamento-de-relações" id="toc-refinamento-de-relações" class="nav-link" data-scroll-target="#refinamento-de-relações"><span class="header-section-number">22.6.1</span> 1. Refinamento de Relações</a></li>
+  <li><a href="#invariância-por-operações" id="toc-invariância-por-operações" class="nav-link" data-scroll-target="#invariância-por-operações"><span class="header-section-number">22.6.2</span> 2. Invariância por Operações</a></li>
+  <li><a href="#conexão-com-congruências" id="toc-conexão-com-congruências" class="nav-link" data-scroll-target="#conexão-com-congruências"><span class="header-section-number">22.6.3</span> 3. Conexão com Congruências</a></li>
   </ul></li>
-  <li><a href="#limitações-e-extensões" id="toc-limitações-e-extensões" class="nav-link" data-scroll-target="#limitações-e-extensões"><span class="header-section-number">21.7</span> Limitações e Extensões</a>
+  <li><a href="#limitações-e-extensões" id="toc-limitações-e-extensões" class="nav-link" data-scroll-target="#limitações-e-extensões"><span class="header-section-number">22.7</span> Limitações e Extensões</a>
   <ul class="collapse">
-  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">21.7.1</span> Limitações</a></li>
-  <li><a href="#extensões-modernas" id="toc-extensões-modernas" class="nav-link" data-scroll-target="#extensões-modernas"><span class="header-section-number">21.7.2</span> Extensões Modernas</a></li>
+  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">22.7.1</span> Limitações</a></li>
+  <li><a href="#extensões-modernas" id="toc-extensões-modernas" class="nav-link" data-scroll-target="#extensões-modernas"><span class="header-section-number">22.7.2</span> Extensões Modernas</a></li>
   </ul></li>
-  <li><a href="#conclusão-a-elegância-da-teoria" id="toc-conclusão-a-elegância-da-teoria" class="nav-link" data-scroll-target="#conclusão-a-elegância-da-teoria"><span class="header-section-number">21.8</span> Conclusão: A Elegância da Teoria</a></li>
+  <li><a href="#conclusão-a-elegância-da-teoria" id="toc-conclusão-a-elegância-da-teoria" class="nav-link" data-scroll-target="#conclusão-a-elegância-da-teoria"><span class="header-section-number">22.8</span> Conclusão: A Elegância da Teoria</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/apend1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -381,7 +387,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-myhill-nerode" class="quarto-section-identifier"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></h1>
+<h1 class="title"><span id="sec-myhill-nerode" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></h1>
 </div>
 
 
@@ -400,24 +406,24 @@ window.Quarto = {
 
 <p>A <strong>relação de Myhill-Nerode</strong>, nomeada em homenagem aos matemáticos <a href="https://en.wikipedia.org/wiki/John_Myhill">John Myhill</a> e <a href="https://en.wikipedia.org/wiki/Anil_Nerode">Anil Nerode</a>, representa um dos conceitos mais elegantes e fundamentais da teoria de linguagens formais. Esta relação estabelece uma conexão profunda entre propriedades estruturais de linguagens e a existência de autômatos finitos para reconhecê-las.</p>
 <p>A beleza desta teoria reside em sua capacidade de transformar questões sobre linguagens infinitas em problemas finitos e tratáveis. Por meio de uma relação de equivalência aparentemente simples, podemos determinar não apenas se uma linguagem é regular, mas também qual é o menor autômato capaz de reconhecê-la.</p>
-<section id="definição-formal-da-relação" class="level2" data-number="21.1">
-<h2 data-number="21.1" class="anchored" data-anchor-id="definição-formal-da-relação"><span class="header-section-number">21.1</span> Definição Formal da Relação</h2>
+<section id="definição-formal-da-relação" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="definição-formal-da-relação"><span class="header-section-number">22.1</span> Definição Formal da Relação</h2>
 <p>Seja <span class="math inline">\(L\)</span> uma linguagem sobre um alfabeto <span class="math inline">\(\Sigma\)</span>. A <strong>relação de Myhill-Nerode</strong> para <span class="math inline">\(L\)</span> é uma relação de equivalência <span class="math inline">\(\sim_L\)</span> definida sobre <span class="math inline">\(\Sigma^*\)</span> (o conjunto de todas as strings possíveis sobre <span class="math inline">\(\Sigma\)</span>).</p>
 <p><strong>Definição</strong>: Para duas strings <span class="math inline">\(x, y \in \Sigma^*\)</span>, dizemos que <span class="math inline">\(x \sim_L y\)</span> (lê-se “<span class="math inline">\(x\)</span> é equivalente a <span class="math inline">\(y\)</span> módulo <span class="math inline">\(L\)</span>”) se, e somente se:</p>
 <p><span class="math display">\[\forall z \in \Sigma^*: (xz \in L \iff yz \in L)\]</span></p>
 <p>Em outras palavras, duas strings são equivalentes segundo Myhill-Nerode se, ao concatenarmos qualquer string <span class="math inline">\(z\)</span> a cada uma delas, ambas as strings resultantes têm o mesmo comportamento em relação à linguagem <span class="math inline">\(L\)</span>: ou ambas pertencem a <span class="math inline">\(L\)</span>, ou ambas não pertencem.</p>
-<section id="intuição-por-trás-da-definição" class="level3" data-number="21.1.1">
-<h3 data-number="21.1.1" class="anchored" data-anchor-id="intuição-por-trás-da-definição"><span class="header-section-number">21.1.1</span> Intuição por Trás da Definição</h3>
+<section id="intuição-por-trás-da-definição" class="level3" data-number="22.1.1">
+<h3 data-number="22.1.1" class="anchored" data-anchor-id="intuição-por-trás-da-definição"><span class="header-section-number">22.1.1</span> Intuição por Trás da Definição</h3>
 <p>A intuição fundamental é que strings equivalentes são <strong>indistinguíveis</strong> do ponto de vista de <span class="math inline">\(L\)</span>. Se um autômato finito está processando uma entrada e chega a um estado após ler <span class="math inline">\(x\)</span>, ele deveria estar no mesmo estado após ler <span class="math inline">\(y\)</span> (se <span class="math inline">\(x \sim_L y\)</span>), porque qualquer continuação da entrada (<span class="math inline">\(z\)</span>) levará ao mesmo resultado.</p>
 </section>
 </section>
-<section id="classes-de-equivalência" class="level2" data-number="21.2">
-<h2 data-number="21.2" class="anchored" data-anchor-id="classes-de-equivalência"><span class="header-section-number">21.2</span> Classes de Equivalência</h2>
+<section id="classes-de-equivalência" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="classes-de-equivalência"><span class="header-section-number">22.2</span> Classes de Equivalência</h2>
 <p>A relação <span class="math inline">\(\sim_L\)</span> particiona <span class="math inline">\(\Sigma^*\)</span> em <strong>classes de equivalência</strong>. Cada classe agrupa todas as strings que são mutuamente equivalentes segundo a relação.</p>
 <p><strong>Notação</strong>: A classe de equivalência de uma string <span class="math inline">\(x\)</span> é denotada por <span class="math inline">\([x]_L\)</span> ou simplesmente <span class="math inline">\([x]\)</span> quando <span class="math inline">\(L\)</span> está claro no contexto:</p>
 <p><span class="math display">\[[x]_L = \{y \in \Sigma^* \mid x \sim_L y\}\]</span></p>
-<section id="exemplo-fundamental" class="level3" data-number="21.2.1">
-<h3 data-number="21.2.1" class="anchored" data-anchor-id="exemplo-fundamental"><span class="header-section-number">21.2.1</span> Exemplo Fundamental</h3>
+<section id="exemplo-fundamental" class="level3" data-number="22.2.1">
+<h3 data-number="22.2.1" class="anchored" data-anchor-id="exemplo-fundamental"><span class="header-section-number">22.2.1</span> Exemplo Fundamental</h3>
 <p>Considere a linguagem <span class="math inline">\(L = \{w \in \{0,1\}^* \mid w \text{ termina em } 01\}\)</span>.</p>
 <p><strong>Análise das classes</strong>:</p>
 <ol type="1">
@@ -438,12 +444,12 @@ window.Quarto = {
 <p>Após análise cuidadosa, esta linguagem possui exatamente <strong>3 classes de equivalência</strong>.</p>
 </section>
 </section>
-<section id="o-teorema-de-myhill-nerode" class="level2" data-number="21.3">
-<h2 data-number="21.3" class="anchored" data-anchor-id="o-teorema-de-myhill-nerode"><span class="header-section-number">21.3</span> O Teorema de Myhill-Nerode</h2>
+<section id="o-teorema-de-myhill-nerode" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="o-teorema-de-myhill-nerode"><span class="header-section-number">22.3</span> O Teorema de Myhill-Nerode</h2>
 <p>O teorema principal estabelece a conexão fundamental entre regularidade e finitude das classes de equivalência.</p>
 <p><strong>Teorema (Myhill-Nerode)</strong>: Uma linguagem <span class="math inline">\(L\)</span> é regular se, e somente se, a relação <span class="math inline">\(\sim_L\)</span> possui um número finito de classes de equivalência.</p>
-<section id="demonstração-esboço" class="level3" data-number="21.3.1">
-<h3 data-number="21.3.1" class="anchored" data-anchor-id="demonstração-esboço"><span class="header-section-number">21.3.1</span> Demonstração (Esboço)</h3>
+<section id="demonstração-esboço" class="level3" data-number="22.3.1">
+<h3 data-number="22.3.1" class="anchored" data-anchor-id="demonstração-esboço"><span class="header-section-number">22.3.1</span> Demonstração (Esboço)</h3>
 <p><strong>(<span class="math inline">\(\Rightarrow\)</span>) Se <span class="math inline">\(L\)</span> é regular, então <span class="math inline">\(\sim_L\)</span> tem finitas classes</strong>:</p>
 <p>Se <span class="math inline">\(L\)</span> é regular, existe um autômato finito determinístico (AFD) <span class="math inline">\(M\)</span> com <span class="math inline">\(n\)</span> estados que reconhece <span class="math inline">\(L\)</span>. Definimos uma função <span class="math inline">\(f: \Sigma^* \to Q\)</span> (onde <span class="math inline">\(Q\)</span> é o conjunto de estados) que mapeia cada string para o estado em que <span class="math inline">\(M\)</span> para após processá-la.</p>
 <p>Se <span class="math inline">\(f(x) = f(y)\)</span>, então para qualquer <span class="math inline">\(z\)</span>, o autômato, partindo do mesmo estado, chegará ao mesmo estado final ao processar <span class="math inline">\(z\)</span>. Logo, <span class="math inline">\(xz \in L \iff yz \in L\)</span>, provando que <span class="math inline">\(x \sim_L y\)</span>.</p>
@@ -460,10 +466,10 @@ window.Quarto = {
 <p>Este autômato reconhece exatamente <span class="math inline">\(L\)</span>.</p>
 </section>
 </section>
-<section id="aplicações-práticas" class="level2" data-number="21.4">
-<h2 data-number="21.4" class="anchored" data-anchor-id="aplicações-práticas"><span class="header-section-number">21.4</span> Aplicações Práticas</h2>
-<section id="determinação-de-regularidade" class="level3" data-number="21.4.1">
-<h3 data-number="21.4.1" class="anchored" data-anchor-id="determinação-de-regularidade"><span class="header-section-number">21.4.1</span> 1. Determinação de Regularidade</h3>
+<section id="aplicações-práticas" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="aplicações-práticas"><span class="header-section-number">22.4</span> Aplicações Práticas</h2>
+<section id="determinação-de-regularidade" class="level3" data-number="22.4.1">
+<h3 data-number="22.4.1" class="anchored" data-anchor-id="determinação-de-regularidade"><span class="header-section-number">22.4.1</span> 1. Determinação de Regularidade</h3>
 <p>A relação de Myhill-Nerode fornece um método sistemático para provar que uma linguagem não é regular:</p>
 <p><strong>Exemplo</strong>: <span class="math inline">\(L = \{a^nb^n \mid n \geq 0\}\)</span></p>
 <p>Para cada <span class="math inline">\(i \neq j\)</span>, as strings <span class="math inline">\(a^i\)</span> e <span class="math inline">\(a^j\)</span> estão em classes diferentes, de forma que:</p>
@@ -472,21 +478,21 @@ window.Quarto = {
 </ul>
 <p>Como há infinitas strings <span class="math inline">\(a^i\)</span> duas-a-duas não equivalentes, <span class="math inline">\(L\)</span> não é regular.</p>
 </section>
-<section id="minimização-de-autômatos" class="level3" data-number="21.4.2">
-<h3 data-number="21.4.2" class="anchored" data-anchor-id="minimização-de-autômatos"><span class="header-section-number">21.4.2</span> 2. Minimização de Autômatos</h3>
+<section id="minimização-de-autômatos" class="level3" data-number="22.4.2">
+<h3 data-number="22.4.2" class="anchored" data-anchor-id="minimização-de-autômatos"><span class="header-section-number">22.4.2</span> 2. Minimização de Autômatos</h3>
 <p>O teorema de Myhill-Nerode também caracteriza o <strong>autômato mínimo</strong> para uma linguagem regular:</p>
 <p><strong>Teorema</strong>: Se <span class="math inline">\(L\)</span> é uma linguagem regular com <span class="math inline">\(k\)</span> classes de equivalência segundo Myhill-Nerode, então: 1. Todo AFD que reconhece <span class="math inline">\(L\)</span> tem pelo menos <span class="math inline">\(k\)</span> estados 2. Existe um único AFD (a menos de isomorfismo) com exatamente <span class="math inline">\(k\)</span> estados que reconhece <span class="math inline">\(L\)</span></p>
 <p>Este AFD é chamado de <strong>autômato canônico</strong> ou <strong>autômato mínimo</strong> para <span class="math inline">\(L\)</span>.</p>
 </section>
-<section id="algoritmo-de-construção-do-autômato-mínimo" class="level3" data-number="21.4.3">
-<h3 data-number="21.4.3" class="anchored" data-anchor-id="algoritmo-de-construção-do-autômato-mínimo"><span class="header-section-number">21.4.3</span> 3. Algoritmo de Construção do Autômato Mínimo</h3>
+<section id="algoritmo-de-construção-do-autômato-mínimo" class="level3" data-number="22.4.3">
+<h3 data-number="22.4.3" class="anchored" data-anchor-id="algoritmo-de-construção-do-autômato-mínimo"><span class="header-section-number">22.4.3</span> 3. Algoritmo de Construção do Autômato Mínimo</h3>
 <p><strong>Entrada</strong>: Uma linguagem regular <span class="math inline">\(L\)</span><br>
 <strong>Saída</strong>: O autômato mínimo para <span class="math inline">\(L\)</span></p>
 <p><strong>Passos</strong>: 1. <strong>Identificar representantes</strong>: Encontre strings representativas de cada classe de equivalência 2. <strong>Construir estados</strong>: Cada classe torna-se um estado 3. <strong>Definir transições</strong>: Para cada classe <span class="math inline">\([x]\)</span> e símbolo <span class="math inline">\(a\)</span>, determine <span class="math inline">\([xa]\)</span> 4. <strong>Marcar estados finais</strong>: Classes contendo strings de <span class="math inline">\(L\)</span></p>
 </section>
 </section>
-<section id="exemplo-detalhado-construção-passo-a-passo" class="level2" data-number="21.5">
-<h2 data-number="21.5" class="anchored" data-anchor-id="exemplo-detalhado-construção-passo-a-passo"><span class="header-section-number">21.5</span> Exemplo Detalhado: Construção Passo a Passo</h2>
+<section id="exemplo-detalhado-construção-passo-a-passo" class="level2" data-number="22.5">
+<h2 data-number="22.5" class="anchored" data-anchor-id="exemplo-detalhado-construção-passo-a-passo"><span class="header-section-number">22.5</span> Exemplo Detalhado: Construção Passo a Passo</h2>
 <p><strong>Linguagem</strong>: <span class="math inline">\(L = \{w \in \{a,b\}^* \mid |w|_a \text{ é par}\}\)</span> (número par de <span class="math inline">\(a\)</span>’s)</p>
 <p><strong>Passo 1 - Identificação das classes</strong>:</p>
 <p>Precisamos rastrear apenas a paridade do número de <span class="math inline">\(a\)</span>’s lidos:</p>
@@ -509,14 +515,14 @@ C_1 --a--&gt; C_0
 C_1 --b--&gt; C_1</code></pre>
 <p><strong>Resultado</strong>: Autômato mínimo com 2 estados.</p>
 </section>
-<section id="propriedades-importantes" class="level2" data-number="21.6">
-<h2 data-number="21.6" class="anchored" data-anchor-id="propriedades-importantes"><span class="header-section-number">21.6</span> Propriedades Importantes</h2>
-<section id="refinamento-de-relações" class="level3" data-number="21.6.1">
-<h3 data-number="21.6.1" class="anchored" data-anchor-id="refinamento-de-relações"><span class="header-section-number">21.6.1</span> 1. Refinamento de Relações</h3>
+<section id="propriedades-importantes" class="level2" data-number="22.6">
+<h2 data-number="22.6" class="anchored" data-anchor-id="propriedades-importantes"><span class="header-section-number">22.6</span> Propriedades Importantes</h2>
+<section id="refinamento-de-relações" class="level3" data-number="22.6.1">
+<h3 data-number="22.6.1" class="anchored" data-anchor-id="refinamento-de-relações"><span class="header-section-number">22.6.1</span> 1. Refinamento de Relações</h3>
 <p>Se <span class="math inline">\(\approx\)</span> é qualquer relação de equivalência sobre <span class="math inline">\(\Sigma^*\)</span> que <strong>respeita</strong> <span class="math inline">\(L\)</span> (isto é, se <span class="math inline">\(x \approx y\)</span> então <span class="math inline">\(\forall z: xz \in L \iff yz \in L\)</span>), então <span class="math inline">\(\sim_L\)</span> é um <strong>refinamento</strong> de <span class="math inline">\(\approx\)</span>. Em outras palavras, Myhill-Nerode é a relação mais fina possível que mantém as propriedades da linguagem.</p>
 </section>
-<section id="invariância-por-operações" class="level3" data-number="21.6.2">
-<h3 data-number="21.6.2" class="anchored" data-anchor-id="invariância-por-operações"><span class="header-section-number">21.6.2</span> 2. Invariância por Operações</h3>
+<section id="invariância-por-operações" class="level3" data-number="22.6.2">
+<h3 data-number="22.6.2" class="anchored" data-anchor-id="invariância-por-operações"><span class="header-section-number">22.6.2</span> 2. Invariância por Operações</h3>
 <p>A relação de Myhill-Nerode se comporta bem com operações regulares:</p>
 <ul>
 <li><strong>União</strong>: <span class="math inline">\(\sim_{L_1 \cup L_2}\)</span> tem no máximo <span class="math inline">\(|\sim_{L_1}| \times |\sim_{L_2}|\)</span> classes</li>
@@ -524,23 +530,23 @@ C_1 --b--&gt; C_1</code></pre>
 <li><strong>Fechamento de Kleene</strong>: Preserve a finitude das classes</li>
 </ul>
 </section>
-<section id="conexão-com-congruências" class="level3" data-number="21.6.3">
-<h3 data-number="21.6.3" class="anchored" data-anchor-id="conexão-com-congruências"><span class="header-section-number">21.6.3</span> 3. Conexão com Congruências</h3>
+<section id="conexão-com-congruências" class="level3" data-number="22.6.3">
+<h3 data-number="22.6.3" class="anchored" data-anchor-id="conexão-com-congruências"><span class="header-section-number">22.6.3</span> 3. Conexão com Congruências</h3>
 <p>A relação <span class="math inline">\(\sim_L\)</span> é não apenas uma equivalência, mas também uma <strong>congruência</strong> à direita: se <span class="math inline">\(x \sim_L y\)</span>, então <span class="math inline">\(xz \sim_L yz\)</span> para qualquer <span class="math inline">\(z \in \Sigma^*\)</span>.</p>
 </section>
 </section>
-<section id="limitações-e-extensões" class="level2" data-number="21.7">
-<h2 data-number="21.7" class="anchored" data-anchor-id="limitações-e-extensões"><span class="header-section-number">21.7</span> Limitações e Extensões</h2>
-<section id="limitações" class="level3" data-number="21.7.1">
-<h3 data-number="21.7.1" class="anchored" data-anchor-id="limitações"><span class="header-section-number">21.7.1</span> Limitações</h3>
+<section id="limitações-e-extensões" class="level2" data-number="22.7">
+<h2 data-number="22.7" class="anchored" data-anchor-id="limitações-e-extensões"><span class="header-section-number">22.7</span> Limitações e Extensões</h2>
+<section id="limitações" class="level3" data-number="22.7.1">
+<h3 data-number="22.7.1" class="anchored" data-anchor-id="limitações"><span class="header-section-number">22.7.1</span> Limitações</h3>
 <ol type="1">
 <li><strong>Computabilidade</strong>: Para linguagens arbitrárias, determinar as classes pode ser indecidível</li>
 <li><strong>Complexidade</strong>: Mesmo para linguagens regulares, o número de classes pode ser exponencial no tamanho da descrição</li>
 <li><strong>Aplicabilidade</strong>: Limitado a linguagens regulares por definição</li>
 </ol>
 </section>
-<section id="extensões-modernas" class="level3" data-number="21.7.2">
-<h3 data-number="21.7.2" class="anchored" data-anchor-id="extensões-modernas"><span class="header-section-number">21.7.2</span> Extensões Modernas</h3>
+<section id="extensões-modernas" class="level3" data-number="22.7.2">
+<h3 data-number="22.7.2" class="anchored" data-anchor-id="extensões-modernas"><span class="header-section-number">22.7.2</span> Extensões Modernas</h3>
 <ol type="1">
 <li><strong>Relações de Nerode Generalizadas</strong>: Para linguagens livres de contexto</li>
 <li><strong>Myhill-Nerode Probabilístico</strong>: Para autômatos probabilísticos<br>
@@ -549,8 +555,8 @@ C_1 --b--&gt; C_1</code></pre>
 </ol>
 </section>
 </section>
-<section id="conclusão-a-elegância-da-teoria" class="level2" data-number="21.8">
-<h2 data-number="21.8" class="anchored" data-anchor-id="conclusão-a-elegância-da-teoria"><span class="header-section-number">21.8</span> Conclusão: A Elegância da Teoria</h2>
+<section id="conclusão-a-elegância-da-teoria" class="level2" data-number="22.8">
+<h2 data-number="22.8" class="anchored" data-anchor-id="conclusão-a-elegância-da-teoria"><span class="header-section-number">22.8</span> Conclusão: A Elegância da Teoria</h2>
 <p>A relação de Myhill-Nerode exemplifica a beleza da matemática teórica aplicada à ciência da computação. Com uma definição simples e elegante, ela resolve problemas fundamentais:</p>
 <ul>
 <li><strong>Caracteriza completamente</strong> as linguagens regulares</li>
@@ -975,13 +981,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./fase3.html" class="pagination-link" aria-label="Fase 3 - Analisador Semântico">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span>
+      <a href="./fase4.html" class="pagination-link" aria-label="Fase 4 - Geração de Código Intermediário e Assembly">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./sol-exercicios.html" class="pagination-link" aria-label="Solução dos Exercícios">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

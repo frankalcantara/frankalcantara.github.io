@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 21&nbsp; Fase 4 - Geração de Código Intermediário e Assembly</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./apend1.html" rel="next">
+<link href="./fase3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase1.html">Projetos da Disciplina - 2025-2</a></li><li class="breadcrumb-item"><a href="./fase4.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Geração de Código Intermediário</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo"><span class="header-section-number">21.1</span> 1. Objetivo</a></li>
+  <li><a href="#descrição-do-trabalho" id="toc-descrição-do-trabalho" class="nav-link" data-scroll-target="#descrição-do-trabalho"><span class="header-section-number">21.2</span> 2. Descrição do Trabalho</a>
+  <ul class="collapse">
+  <li><a href="#características-da-linguagem" id="toc-características-da-linguagem" class="nav-link" data-scroll-target="#características-da-linguagem"><span class="header-section-number">21.2.1</span> 2.1. Características da Linguagem</a></li>
+  </ul></li>
+  <li><a href="#three-address-code-tac" id="toc-three-address-code-tac" class="nav-link" data-scroll-target="#three-address-code-tac"><span class="header-section-number">21.3</span> 3. <em>Three Address Code</em> (TAC)</a>
+  <ul class="collapse">
+  <li><a href="#formato-do-tac" id="toc-formato-do-tac" class="nav-link" data-scroll-target="#formato-do-tac"><span class="header-section-number">21.3.1</span> 3.1. Formato do TAC</a></li>
+  <li><a href="#variáveis-temporárias" id="toc-variáveis-temporárias" class="nav-link" data-scroll-target="#variáveis-temporárias"><span class="header-section-number">21.3.2</span> 3.2. Variáveis Temporárias</a></li>
+  <li><a href="#rótulos" id="toc-rótulos" class="nav-link" data-scroll-target="#rótulos"><span class="header-section-number">21.3.3</span> 3.3. Rótulos</a></li>
+  </ul></li>
+  <li><a href="#otimizações" id="toc-otimizações" class="nav-link" data-scroll-target="#otimizações"><span class="header-section-number">21.4</span> 4. Otimizações</a>
+  <ul class="collapse">
+  <li><a href="#constant-folding" id="toc-constant-folding" class="nav-link" data-scroll-target="#constant-folding"><span class="header-section-number">21.4.1</span> 4.1. <em>Constant Folding</em></a></li>
+  <li><a href="#constant-propagation" id="toc-constant-propagation" class="nav-link" data-scroll-target="#constant-propagation"><span class="header-section-number">21.4.2</span> 4.2. <em>Constant Propagation</em></a></li>
+  <li><a href="#dead-code-elimination" id="toc-dead-code-elimination" class="nav-link" data-scroll-target="#dead-code-elimination"><span class="header-section-number">21.4.3</span> 4.3. <em>Dead Code Elimination</em></a></li>
+  <li><a href="#eliminação-de-saltos-redundantes" id="toc-eliminação-de-saltos-redundantes" class="nav-link" data-scroll-target="#eliminação-de-saltos-redundantes"><span class="header-section-number">21.4.4</span> 4.4. Eliminação de Saltos Redundantes</a></li>
+  <li><a href="#documentação-das-otimizações" id="toc-documentação-das-otimizações" class="nav-link" data-scroll-target="#documentação-das-otimizações"><span class="header-section-number">21.4.5</span> 4.5. Documentação das Otimizações</a></li>
+  </ul></li>
+  <li><a href="#geração-de-código-assembly-avr" id="toc-geração-de-código-assembly-avr" class="nav-link" data-scroll-target="#geração-de-código-assembly-avr"><span class="header-section-number">21.5</span> 5. Geração de Código Assembly AVR</a>
+  <ul class="collapse">
+  <li><a href="#características-do-assembly-avr" id="toc-características-do-assembly-avr" class="nav-link" data-scroll-target="#características-do-assembly-avr"><span class="header-section-number">21.5.1</span> 5.1. Características do Assembly AVR</a></li>
+  <li><a href="#convenções-de-uso-dos-registradores" id="toc-convenções-de-uso-dos-registradores" class="nav-link" data-scroll-target="#convenções-de-uso-dos-registradores"><span class="header-section-number">21.5.2</span> 5.2. Convenções de Uso dos Registradores</a></li>
+  <li><a href="#mapeamento-tac-para-assembly" id="toc-mapeamento-tac-para-assembly" class="nav-link" data-scroll-target="#mapeamento-tac-para-assembly"><span class="header-section-number">21.5.3</span> 5.3. Mapeamento TAC para Assembly</a></li>
+  <li><a href="#suporte-a-operações-de-ponto-flutuante" id="toc-suporte-a-operações-de-ponto-flutuante" class="nav-link" data-scroll-target="#suporte-a-operações-de-ponto-flutuante"><span class="header-section-number">21.5.4</span> 5.5. Suporte a Operações de Ponto Flutuante</a></li>
+  </ul></li>
+  <li><a href="#arquivos-de-teste" id="toc-arquivos-de-teste" class="nav-link" data-scroll-target="#arquivos-de-teste"><span class="header-section-number">21.6</span> 6. Arquivos de Teste</a>
+  <ul class="collapse">
+  <li><a href="#teste-1-cálculo-de-fatorial" id="toc-teste-1-cálculo-de-fatorial" class="nav-link" data-scroll-target="#teste-1-cálculo-de-fatorial"><span class="header-section-number">21.6.1</span> 6.1. Teste 1: Cálculo de Fatorial</a></li>
+  <li><a href="#teste-2-sequência-de-fibonacci" id="toc-teste-2-sequência-de-fibonacci" class="nav-link" data-scroll-target="#teste-2-sequência-de-fibonacci"><span class="header-section-number">21.6.2</span> 6.2. Teste 2: Sequência de Fibonacci</a></li>
+  </ul></li>
+  <li><a href="#teste-3-série-de-taylor-para-o-cosseno" id="toc-teste-3-série-de-taylor-para-o-cosseno" class="nav-link" data-scroll-target="#teste-3-série-de-taylor-para-o-cosseno"><span class="header-section-number">21.7</span> 6.3. Teste 3: Série de Taylor para o Cosseno</a>
+  <ul class="collapse">
+  <li><a href="#formato-dos-arquivos-de-teste" id="toc-formato-dos-arquivos-de-teste" class="nav-link" data-scroll-target="#formato-dos-arquivos-de-teste"><span class="header-section-number">21.7.1</span> 6.4. Formato dos Arquivos de Teste</a></li>
+  <li><a href="#validação-no-arduino" id="toc-validação-no-arduino" class="nav-link" data-scroll-target="#validação-no-arduino"><span class="header-section-number">21.7.2</span> 6.5. Validação no Arduino</a></li>
+  </ul></li>
+  <li><a href="#hospedagem-no-github" id="toc-hospedagem-no-github" class="nav-link" data-scroll-target="#hospedagem-no-github"><span class="header-section-number">21.8</span> 7. Hospedagem no GitHub</a></li>
+  <li><a href="#requisitos-do-código" id="toc-requisitos-do-código" class="nav-link" data-scroll-target="#requisitos-do-código"><span class="header-section-number">21.9</span> 8. Requisitos do Código</a></li>
+  <li><a href="#divisão-de-tarefas-para-a-fase-4" id="toc-divisão-de-tarefas-para-a-fase-4" class="nav-link" data-scroll-target="#divisão-de-tarefas-para-a-fase-4"><span class="header-section-number">21.10</span> 9. Divisão de Tarefas para a Fase 4</a>
+  <ul class="collapse">
+  <li><a href="#aluno-1-função-gerartac-e-geração-de-código-intermediário" id="toc-aluno-1-função-gerartac-e-geração-de-código-intermediário" class="nav-link" data-scroll-target="#aluno-1-função-gerartac-e-geração-de-código-intermediário"><span class="header-section-number">21.10.1</span> 9.1. Aluno 1: Função <code>gerarTAC</code> e Geração de Código Intermediário</a></li>
+  <li><a href="#aluno-2-função-otimizartac-e-otimização-de-código" id="toc-aluno-2-função-otimizartac-e-otimização-de-código" class="nav-link" data-scroll-target="#aluno-2-função-otimizartac-e-otimização-de-código"><span class="header-section-number">21.10.2</span> 9.2. Aluno 2: Função <code>otimizarTAC</code> e Otimização de Código</a></li>
+  <li><a href="#aluno-3-função-gerarassembly-e-geração-de-código-assembly-avr" id="toc-aluno-3-função-gerarassembly-e-geração-de-código-assembly-avr" class="nav-link" data-scroll-target="#aluno-3-função-gerarassembly-e-geração-de-código-assembly-avr"><span class="header-section-number">21.10.3</span> 9.3. Aluno 3: Função <code>gerarAssembly</code> e Geração de Código Assembly AVR</a></li>
+  <li><a href="#aluno-4-função-main-integração-testes-e-validação-no-arduino" id="toc-aluno-4-função-main-integração-testes-e-validação-no-arduino" class="nav-link" data-scroll-target="#aluno-4-função-main-integração-testes-e-validação-no-arduino"><span class="header-section-number">21.10.4</span> 9.4. Aluno 4: Função <code>main</code>, Integração, Testes e Validação no Arduino</a></li>
+  </ul></li>
+  <li><a href="#considerações-para-integração" id="toc-considerações-para-integração" class="nav-link" data-scroll-target="#considerações-para-integração"><span class="header-section-number">21.11</span> 10. Considerações para Integração</a></li>
+  <li><a href="#avaliação" id="toc-avaliação" class="nav-link" data-scroll-target="#avaliação"><span class="header-section-number">21.12</span> 11. Avaliação</a>
+  <ul class="collapse">
+  <li><a href="#funcionalidades-do-compilador-70" id="toc-funcionalidades-do-compilador-70" class="nav-link" data-scroll-target="#funcionalidades-do-compilador-70"><span class="header-section-number">21.12.1</span> 11.1. Funcionalidades do Compilador (70%)</a></li>
+  <li><a href="#organização-e-legibilidade-do-código-15" id="toc-organização-e-legibilidade-do-código-15" class="nav-link" data-scroll-target="#organização-e-legibilidade-do-código-15"><span class="header-section-number">21.12.2</span> 11.2. Organização e Legibilidade do Código (15%)</a></li>
+  <li><a href="#robustez-e-validação-15" id="toc-robustez-e-validação-15" class="nav-link" data-scroll-target="#robustez-e-validação-15"><span class="header-section-number">21.12.3</span> 11.3. Robustez e Validação (15%)</a></li>
+  </ul></li>
+  <li><a href="#prova-de-autoria" id="toc-prova-de-autoria" class="nav-link" data-scroll-target="#prova-de-autoria"><span class="header-section-number">21.13</span> 12. Prova de Autoria</a></li>
+  <li><a href="#entrega" id="toc-entrega" class="nav-link" data-scroll-target="#entrega"><span class="header-section-number">21.14</span> 13. Entrega</a>
+  <ul class="collapse">
+  <li><a href="#código-fonte" id="toc-código-fonte" class="nav-link" data-scroll-target="#código-fonte"><span class="header-section-number">21.14.1</span> 13.1. Código-fonte</a></li>
+  <li><a href="#arquivos-de-teste-1" id="toc-arquivos-de-teste-1" class="nav-link" data-scroll-target="#arquivos-de-teste-1"><span class="header-section-number">21.14.2</span> 13.2. Arquivos de Teste</a></li>
+  <li><a href="#arquivos-gerados" id="toc-arquivos-gerados" class="nav-link" data-scroll-target="#arquivos-gerados"><span class="header-section-number">21.14.3</span> 13.3. Arquivos Gerados</a></li>
+  <li><a href="#documentação" id="toc-documentação" class="nav-link" data-scroll-target="#documentação"><span class="header-section-number">21.14.4</span> 13.4. Documentação</a></li>
+  <li><a href="#relatório-de-otimizações" id="toc-relatório-de-otimizações" class="nav-link" data-scroll-target="#relatório-de-otimizações"><span class="header-section-number">21.14.5</span> 13.5. Relatório de Otimizações</a></li>
+  <li><a href="#formato-de-execução" id="toc-formato-de-execução" class="nav-link" data-scroll-target="#formato-de-execução"><span class="header-section-number">21.14.6</span> 13.6. Formato de Execução</a></li>
+  </ul></li>
+  <li><a href="#recursos-adicionais" id="toc-recursos-adicionais" class="nav-link" data-scroll-target="#recursos-adicionais"><span class="header-section-number">21.15</span> 14. Recursos Adicionais</a>
+  <ul class="collapse">
+  <li><a href="#ferramentas-necessárias" id="toc-ferramentas-necessárias" class="nav-link" data-scroll-target="#ferramentas-necessárias"><span class="header-section-number">21.15.1</span> 14.1. Ferramentas Necessárias</a></li>
+  <li><a href="#referências-úteis" id="toc-referências-úteis" class="nav-link" data-scroll-target="#referências-úteis"><span class="header-section-number">21.15.2</span> 14.2. Referências Úteis</a></li>
+  <li><a href="#dicas-de-implementação" id="toc-dicas-de-implementação" class="nav-link" data-scroll-target="#dicas-de-implementação"><span class="header-section-number">21.15.3</span> 14.3. Dicas de Implementação</a></li>
+  </ul></li>
+  <li><a href="#critérios-de-sucesso" id="toc-critérios-de-sucesso" class="nav-link" data-scroll-target="#critérios-de-sucesso"><span class="header-section-number">21.16</span> 15. Critérios de Sucesso</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/fase4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase1.html">Projetos da Disciplina - 2025-2</a></li><li class="breadcrumb-item"><a href="./fase4.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Este trabalho pode ser realizado em grupos de até <strong>4</strong> alunos. Grupos com mais de 4 membros terão o trabalho anulado. Leia todo este documento antes de começar e siga o seguinte código de ética: você pode discutir as questões com colegas, professores e amigos, consultar livros da disciplina, bibliotecas virtuais ou físicas, e a Internet em geral, em qualquer idioma. Com ou sem o uso de ferramentas de Inteligência Artificial. Contudo, o trabalho é seu e deve ser realizado por você. Plágio resultará na anulação do trabalho.</p>
+<p>Os trabalhos entregues serão avaliados por uma ferramenta de Inteligência Artificial, que verificará a originalidade do texto e a autoria do código e o cumprimento de todas as regras de entrega e desenvolvimento. Para isso, o trabalho deve ser entregue em um repositório público no GitHub. O resultado desta avaliação automatizada será a nota base do trabalho, que poderá ser alterada em resultado da prova de autoria (ver seção 10).</p>
+<p>Este é um projeto “Melhorado com o uso de Ferramentas de Inteligência Artificial”. O uso de ferramentas de Inteligência Artificial não é apenas permitido, mas incentivado para tarefas específicas. No entanto, seu uso é governado por um princípio fundamental: <strong>Você é o arquiteto e o engenheiro; a Inteligência Artificial é sua assistente. Você mantém total responsabilidade pelo código que envia</strong>. Você poderá usar as ferramentas de Inteligência Artificial para:</p>
+<ul>
+<li>Gerar código repetitivo (<em>boilerplate</em>) e arquivos de configuração;</li>
+<li>Explicar conceitos complexos e documentação;</li>
+<li>Depurar mensagens de erro e sugerir correções;</li>
+<li>Escrever testes unitários e documentação;</li>
+<li>Otimizar e refatorar código existente;</li>
+<li>Fazer <em>brainstorming</em> de ideias de projetos e arquitetura.</li>
+</ul>
+<p>Não é permitido:</p>
+<ul>
+<li><strong>Envio às Cegas</strong>: enviar código gerado por uma Inteligência Artificial sem revisão, compreensão ou modificação é uma violação da integridade acadêmica. Você deve ser capaz de explicar qualquer código do seu projeto, linha por linha. E provocará a anulação do trabalho. Explicar o código não é ler o que está escrito, mas sim entender sua lógica e funcionamento e explicar por que ele foi escrito daquela forma;</li>
+<li><strong>Contornar o Aprendizado</strong>: usar Inteligência Artificial para completar os objetivos centrais de aprendizado por você é proibido, por exemplo, pedir a uma Inteligência Artificial para construir um componente inteiro do projeto que você tem a tarefa de aprender.</li>
+<li><strong>Violação de Licenças</strong>: é proibido enviar código que viole as políticas de honestidade acadêmica da universidade, a licença dos dados de treinamento, ou qualquer outra restrição legal.</li>
+</ul>
+<section id="objetivo" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="objetivo"><span class="header-section-number">21.1</span> 1. Objetivo</h2>
+<p>Pesquisar e praticar os conceitos de geração de código intermediário, otimização e geração de código Assembly desenvolvendo um programa em <strong>Python</strong>, <strong>C</strong>, ou <strong>C++</strong>. O objetivo é complementar o material de aula, aprimorando sua formação acadêmica e profissional por meio da construção de um gerador de código intermediário (<em>Three Address Code</em> - TAC), um otimizador de código e um gerador de código Assembly AVR para a arquitetura do Arduino Uno, utilizando como entrada a árvore sintática abstrata atribuída gerada na Fase 3.</p>
+</section>
+<section id="descrição-do-trabalho" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="descrição-do-trabalho"><span class="header-section-number">21.2</span> 2. Descrição do Trabalho</h2>
+<p>O objetivo é desenvolver um programa capaz de:</p>
+<ol type="1">
+<li>Ler um arquivo de texto contendo o código-fonte de um programa escrito na linguagem especificada nas fases anteriores (uma expressão ou declaração por linha). Este arquivo deve estar em formato texto simples (.txt) usando apenas caracteres ASCII;</li>
+<li>Utilizar a árvore sintática abstrata atribuída gerada pelo analisador semântico da Fase 3 como entrada;</li>
+<li>Implementar um gerador de código intermediário em formato <em>Three Address Code</em> (TAC);</li>
+<li>Implementar um otimizador de código para o TAC gerado, aplicando técnicas de otimização local;</li>
+<li>Implementar um gerador de código Assembly AVR compatível com o Arduino Uno (ATmega328P);</li>
+<li>Compilar e executar o código Assembly no Arduino Uno, validando o funcionamento correto do compilador completo;</li>
+<li>Detectar e reportar erros em todas as fases (léxica, sintática, semântica e de geração de código) de forma clara e informativa.</li>
+</ol>
+<p><strong>Observação MUITO IMPORTANTE:</strong> Esta é a fase final do projeto. Todos os quatro analisadores/geradores serão utilizados em conjunto. O arquivo de teste passará sequencialmente pelo analisador léxico (Fase 1), analisador sintático (Fase 2), analisador semântico (Fase 3) e finalmente pela geração de código (Fase 4). Portanto, é fundamental que o grupo utilize os mesmos formatos e estruturas definidos nas fases anteriores. Qualquer divergência resultará em erros de integração e perda de pontos na avaliação.</p>
+<section id="características-da-linguagem" class="level3" data-number="21.2.1">
+<h3 data-number="21.2.1" class="anchored" data-anchor-id="características-da-linguagem"><span class="header-section-number">21.2.1</span> 2.1. Características da Linguagem</h3>
+<p>As declarações continuam sendo escritas em notação polonesa reversa (RPN), no formato <code>(A B op)</code>, conforme especificado nas fases anteriores. A linguagem suporta:</p>
+<p><strong>Operadores Aritméticos</strong>: - <strong>Adição</strong>: <code>+</code> - <strong>Subtração</strong>: <code>-</code> - <strong>Multiplicação</strong>: <code>*</code> - <strong>Divisão Real</strong>: <code>|</code> - <strong>Divisão Inteira</strong>: <code>/</code> - <strong>Resto da Divisão Inteira</strong>: <code>%</code> - <strong>Potenciação</strong>: <code>^</code></p>
+<p><strong>Operadores Relacionais</strong> (retornam tipo booleano): - <code>&gt;</code> : maior que - <code>&lt;</code> : menor que - <code>&gt;=</code> : maior ou igual - <code>&lt;=</code> : menor ou igual - <code>==</code> : igual - <code>!=</code> : diferente</p>
+<p><strong>Comandos Especiais</strong>: - <code>(N RES)</code>: Retorna o resultado da expressão N linhas anteriores - <code>(V MEM)</code>: Armazena o valor em uma memória - <code>(MEM)</code>: Retorna o valor armazenado em memória</p>
+<p><strong>Estruturas de Controle</strong>: - Tomada de decisão (definida na Fase 2) - Laços de repetição (definida na Fase 2)</p>
+<p><strong>Precisão Numérica</strong>: Para esta fase, consideramos exclusivamente a arquitetura do Arduino Uno R3 (ATmega328P, 8 bits), utilizando meia precisão (16 bits, IEEE 754) para números de ponto flutuante.</p>
+</section>
+</section>
+<section id="three-address-code-tac" class="level2" data-number="21.3">
+<h2 data-number="21.3" class="anchored" data-anchor-id="three-address-code-tac"><span class="header-section-number">21.3</span> 3. <em>Three Address Code</em> (TAC)</h2>
+<p>O <em>Three Address Code</em> é uma representação intermediária de código na qual cada instrução possui <strong>no máximo três operandos</strong>. Esta representação facilita tanto a análise quanto a otimização do código, servindo como ponte entre a árvore sintática abstrata e o código Assembly final.</p>
+<section id="formato-do-tac" class="level3" data-number="21.3.1">
+<h3 data-number="21.3.1" class="anchored" data-anchor-id="formato-do-tac"><span class="header-section-number">21.3.1</span> 3.1. Formato do TAC</h3>
+<p>Cada instrução TAC deve seguir um dos seguintes formatos:</p>
+<ul>
+<li><strong>Atribuição Simples</strong>: <code>t1 = a</code></li>
+<li><strong>Operação Binária</strong>: <code>t1 = a op b</code> (onde <code>op</code> pode ser <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>|</code>, <code>%</code>, <code>^</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>)</li>
+<li><strong>Operação Unária</strong>: <code>t1 = op a</code> (onde <code>op</code> pode ser <code>-</code> para negação)</li>
+<li><strong>Cópia</strong>: <code>a = b</code></li>
+<li><strong>Salto Incondicional</strong>: <code>goto L1</code></li>
+<li><strong>Salto Condicional</strong>: <code>if a goto L1</code> ou <code>ifFalse a goto L1</code></li>
+<li><strong>Rótulo</strong>: <code>L1:</code></li>
+<li><strong>Chamada de Função</strong>: <code>t1 = call funcao, n</code> (onde <code>n</code> é o número de parâmetros)</li>
+<li><strong>Retorno</strong>: <code>return a</code></li>
+<li><strong>Acesso à Memória</strong>: <code>t1 = MEM[a]</code> e <code>MEM[a] = t1</code></li>
+</ul>
+</section>
+<section id="variáveis-temporárias" class="level3" data-number="21.3.2">
+<h3 data-number="21.3.2" class="anchored" data-anchor-id="variáveis-temporárias"><span class="header-section-number">21.3.2</span> 3.2. Variáveis Temporárias</h3>
+<p>O gerador de TAC deve criar variáveis temporárias para armazenar resultados intermediários. As variáveis temporárias devem seguir a convenção de nomenclatura <code>t0</code>, <code>t1</code>, <code>t2</code>, etc.</p>
+</section>
+<section id="rótulos" class="level3" data-number="21.3.3">
+<h3 data-number="21.3.3" class="anchored" data-anchor-id="rótulos"><span class="header-section-number">21.3.3</span> 3.3. Rótulos</h3>
+<p>Rótulos são usados para identificar pontos de salto no código. Devem seguir a convenção <code>L0</code>, <code>L1</code>, <code>L2</code>, etc.</p>
+</section>
+</section>
+<section id="otimizações" class="level2" data-number="21.4">
+<h2 data-number="21.4" class="anchored" data-anchor-id="otimizações"><span class="header-section-number">21.4</span> 4. Otimizações</h2>
+<p>O otimizador de código deve implementar as seguintes técnicas de otimização local:</p>
+<section id="constant-folding" class="level3" data-number="21.4.1">
+<h3 data-number="21.4.1" class="anchored" data-anchor-id="constant-folding"><span class="header-section-number">21.4.1</span> 4.1. <em>Constant Folding</em></h3>
+<p>Avaliar expressões constantes em tempo de compilação. Por exemplo:</p>
+<ul>
+<li><code>t1 = 2 + 3</code> → <code>t1 = 5</code></li>
+<li><code>t2 = 4 * 5</code> → <code>t2 = 20</code></li>
+</ul>
+</section>
+<section id="constant-propagation" class="level3" data-number="21.4.2">
+<h3 data-number="21.4.2" class="anchored" data-anchor-id="constant-propagation"><span class="header-section-number">21.4.2</span> 4.2. <em>Constant Propagation</em></h3>
+<p>Propagar valores constantes através do código. Por exemplo:</p>
+<pre class="shell"><code>t1 = 5
+t2 = t1 + 3</code></pre>
+<p>Após otimização:</p>
+<pre class="shell"><code>t1 = 5
+t2 = 8</code></pre>
+</section>
+<section id="dead-code-elimination" class="level3" data-number="21.4.3">
+<h3 data-number="21.4.3" class="anchored" data-anchor-id="dead-code-elimination"><span class="header-section-number">21.4.3</span> 4.3. <em>Dead Code Elimination</em></h3>
+<p>Remover código que não afeta o resultado do programa. Por exemplo:</p>
+<pre class="shell"><code>t1 = 5
+t2 = 3
+t3 = t1 + 2</code></pre>
+<p>Se <code>t2</code> nunca é usado, pode ser eliminado:</p>
+<pre class="shell"><code>t1 = 5
+t3 = t1 + 2</code></pre>
+</section>
+<section id="eliminação-de-saltos-redundantes" class="level3" data-number="21.4.4">
+<h3 data-number="21.4.4" class="anchored" data-anchor-id="eliminação-de-saltos-redundantes"><span class="header-section-number">21.4.4</span> 4.4. Eliminação de Saltos Redundantes</h3>
+<p>Remover saltos para a próxima instrução ou para rótulos não utilizados.</p>
+</section>
+<section id="documentação-das-otimizações" class="level3" data-number="21.4.5">
+<h3 data-number="21.4.5" class="anchored" data-anchor-id="documentação-das-otimizações"><span class="header-section-number">21.4.5</span> 4.5. Documentação das Otimizações</h3>
+<p>O grupo deve documentar todas as otimizações implementadas, incluindo:</p>
+<ul>
+<li>Descrição da técnica</li>
+<li>Exemplos de código antes e depois da otimização</li>
+<li>Impacto esperado no desempenho ou tamanho do código</li>
+</ul>
+</section>
+</section>
+<section id="geração-de-código-assembly-avr" class="level2" data-number="21.5">
+<h2 data-number="21.5" class="anchored" data-anchor-id="geração-de-código-assembly-avr"><span class="header-section-number">21.5</span> 5. Geração de Código Assembly AVR</h2>
+<p>O gerador de código Assembly deve produzir código compatível com a arquitetura AVR do Arduino Uno (ATmega328P).</p>
+<section id="características-do-assembly-avr" class="level3" data-number="21.5.1">
+<h3 data-number="21.5.1" class="anchored" data-anchor-id="características-do-assembly-avr"><span class="header-section-number">21.5.1</span> 5.1. Características do Assembly AVR</h3>
+<ul>
+<li>Arquitetura de 8 bits</li>
+<li>32 registradores de uso geral (R0-R31)</li>
+<li>Instruções de dois operandos</li>
+<li>Memória de programa separada da memória de dados (arquitetura Harvard)</li>
+</ul>
+</section>
+<section id="convenções-de-uso-dos-registradores" class="level3" data-number="21.5.2">
+<h3 data-number="21.5.2" class="anchored" data-anchor-id="convenções-de-uso-dos-registradores"><span class="header-section-number">21.5.2</span> 5.2. Convenções de Uso dos Registradores</h3>
+<p>O grupo deve definir e documentar convenções para uso dos registradores:</p>
+<ul>
+<li>Registradores para variáveis temporárias</li>
+<li>Registradores para parâmetros de função</li>
+<li>Registradores para valores de retorno</li>
+<li>Registradores reservados para o sistema</li>
+</ul>
+<p><strong>Sugestão de Convenção</strong>:</p>
+<ul>
+<li>R16-R23: Variáveis temporárias</li>
+<li>R24-R25: Parâmetros e valores de retorno</li>
+<li>R26-R27 (X): Ponteiro de endereço</li>
+<li>R28-R29 (Y): Frame pointer</li>
+<li>R30-R31 (Z): Ponteiro de pilha</li>
+</ul>
+</section>
+<section id="mapeamento-tac-para-assembly" class="level3" data-number="21.5.3">
+<h3 data-number="21.5.3" class="anchored" data-anchor-id="mapeamento-tac-para-assembly"><span class="header-section-number">21.5.3</span> 5.3. Mapeamento TAC para Assembly</h3>
+<p>O gerador deve implementar o mapeamento de cada instrução TAC para uma ou mais instruções Assembly AVR. Exemplos:</p>
+<p><strong>TAC</strong>: <code>t1 = a + b</code></p>
+<p><strong>Assembly</strong>:</p>
+<pre class="assembly"><code>ld r16, a
+ld r17, b
+add r16, r17
+st t1, r16</code></pre>
+<p><strong>TAC</strong>: <code>goto L1</code></p>
+<p><strong>Assembly</strong>:</p>
+<pre class="assembly"><code>rjmp L1</code></pre>
+<p><strong>TAC</strong>: <code>if a goto L1</code></p>
+<p><strong>Assembly</strong>:</p>
+<pre class="assembly"><code>ld r16, a
+cpi r16, 0
+brne L1</code></pre>
+</section>
+<section id="suporte-a-operações-de-ponto-flutuante" class="level3" data-number="21.5.4">
+<h3 data-number="21.5.4" class="anchored" data-anchor-id="suporte-a-operações-de-ponto-flutuante"><span class="header-section-number">21.5.4</span> 5.5. Suporte a Operações de Ponto Flutuante</h3>
+<p>Para operações com números reais em meia precisão (16 bits), o gerador deve:</p>
+<ul>
+<li>Utilizar bibliotecas de ponto flutuante para AVR (se disponíveis), ou</li>
+<li>Implementar rotinas básicas de aritmética de ponto flutuante, ou</li>
+<li>Converter operações de ponto flutuante para operações com inteiros escalados</li>
+</ul>
+</section>
+</section>
+<section id="arquivos-de-teste" class="level2" data-number="21.6">
+<h2 data-number="21.6" class="anchored" data-anchor-id="arquivos-de-teste"><span class="header-section-number">21.6</span> 6. Arquivos de Teste</h2>
+<p>Diferentemente das fases anteriores, esta fase requer <strong>3 arquivos de teste</strong> específicos:</p>
+<section id="teste-1-cálculo-de-fatorial" class="level3" data-number="21.6.1">
+<h3 data-number="21.6.1" class="anchored" data-anchor-id="teste-1-cálculo-de-fatorial"><span class="header-section-number">21.6.1</span> 6.1. Teste 1: Cálculo de Fatorial</h3>
+<p>O primeiro arquivo de teste, <code>fatorial.txt</code>, deve implementar o cálculo do fatorial de números de 1 até 8. O programa deve:</p>
+<ul>
+<li>Calcular <code>n!</code> para <code>n</code> de 1 a 8</li>
+<li>Armazenar ou exibir os resultados</li>
+<li>Utilizar pelo menos uma estrutura de laço</li>
+<li>Demonstrar o uso de variáveis (memórias)</li>
+</ul>
+</section>
+<section id="teste-2-sequência-de-fibonacci" class="level3" data-number="21.6.2">
+<h3 data-number="21.6.2" class="anchored" data-anchor-id="teste-2-sequência-de-fibonacci"><span class="header-section-number">21.6.2</span> 6.2. Teste 2: Sequência de Fibonacci</h3>
+<p>O segundo arquivo de testes, <code>fibonacci.txt</code>, deve calcular a sequência de Fibonacci até a 24ª posição. O programa deve:</p>
+<ul>
+<li>Calcular os 24 primeiros números da sequência de Fibonacci</li>
+<li>Armazenar ou exibir os resultados</li>
+<li>Utilizar pelo menos uma estrutura de laço</li>
+<li>Demonstrar o uso de variáveis (memórias)</li>
+<li>Opcionalmente, utilizar uma estrutura de decisão</li>
+</ul>
+</section>
+</section>
+<section id="teste-3-série-de-taylor-para-o-cosseno" class="level2" data-number="21.7">
+<h2 data-number="21.7" class="anchored" data-anchor-id="teste-3-série-de-taylor-para-o-cosseno"><span class="header-section-number">21.7</span> 6.3. Teste 3: Série de Taylor para o Cosseno</h2>
+<p>O terceiro arquivo de teste, <code>taylor.txt</code>, deve implementar o cálculo da <strong>Série de Taylor para <span class="math inline">\(\mathbf{\cos(X)}\)</span></strong> em torno de <span class="math inline">\(x_0 = 0\)</span>, limitada aos <strong>quatro primeiros termos</strong> não nulos. O programa deve demonstrar o uso e a precisão da aritmética de ponto flutuante de 16 bits.</p>
+<p>A fórmula truncada a ser utilizada é: <span class="math display">\[
+\cos(X) \approx 1 - \frac{X^2}{2!} + \frac{X^4}{4!} - \frac{X^6}{6!}
+\]</span></p>
+<p>O código-fonte deve:</p>
+<ol type="1">
+<li><strong>Calcular</strong> a aproximação de <span class="math inline">\(\cos(X)\)</span> para um valor em radianos.</li>
+<li><strong>Utilizar</strong> estritamente a notação RPN e o operador de <strong>Divisão Real (<code>|</code>)</strong> para os denominadores (fatoriais: <span class="math inline">\(2.0\)</span>, <span class="math inline">\(24.0\)</span>, <span class="math inline">\(720.0\)</span>).</li>
+<li><strong>Armazenar</strong> o valor de <span class="math inline">\(X\)</span> e o resultado final em memórias (<code>MEM</code>) com nomes distintos (ex.: <code>X_VAL</code>, <code>FINAL_COS</code>).</li>
+<li><strong>Enfatizar</strong> o uso de números literais em <strong>ponto flutuante</strong> (ex.: <code>1.0</code>, <code>0.5</code>, <code>2.0</code>, etc.) para todas as operações aritméticas.</li>
+<li><strong>Testar</strong> a manipulação da precisão de <strong>16 bits (meia precisão)</strong>, conforme a arquitetura alvo, e a geração de código Assembly correspondente.</li>
+</ol>
+<p><strong>Observação:</strong> O resultado esperado para <span class="math inline">\(\cos(0.5)\)</span> é <span class="math inline">\(\approx 0.87758\)</span>. O grupo deve documentar o valor obtido na saída do compilador e no Arduino, considerando a perda de precisão inerente ao formato de 16 bits.</p>
+<section id="formato-dos-arquivos-de-teste" class="level3" data-number="21.7.1">
+<h3 data-number="21.7.1" class="anchored" data-anchor-id="formato-dos-arquivos-de-teste"><span class="header-section-number">21.7.1</span> 6.4. Formato dos Arquivos de Teste</h3>
+<ul>
+<li>Cada arquivo deve conter código válido na linguagem especificada nas fases anteriores</li>
+<li>Os arquivos devem estar no mesmo diretório do código-fonte</li>
+<li>Os arquivos devem ser processados via argumento de linha de comando (ex.: <code>./compilador fatorial.txt</code>)</li>
+</ul>
+</section>
+<section id="validação-no-arduino" class="level3" data-number="21.7.2">
+<h3 data-number="21.7.2" class="anchored" data-anchor-id="validação-no-arduino"><span class="header-section-number">21.7.2</span> 6.5. Validação no Arduino</h3>
+<p>Todos os programas de teste devem ser:</p>
+<ol type="1">
+<li>Compilados em Assembly AVR pelo compilador desenvolvido</li>
+<li>Montados e linkados usando ferramentas AVR</li>
+<li>Carregados no Arduino Uno</li>
+<li>Executados com sucesso, produzindo os resultados corretos</li>
+</ol>
+<p>Os resultados podem ser exibidos através de:</p>
+<ul>
+<li>LEDs (representando valores em binário)</li>
+<li>Display LCD</li>
+<li>Comunicação serial (mais recomendado para facilitar validação)</li>
+</ul>
+</section>
+</section>
+<section id="hospedagem-no-github" class="level2" data-number="21.8">
+<h2 data-number="21.8" class="anchored" data-anchor-id="hospedagem-no-github"><span class="header-section-number">21.8</span> 7. Hospedagem no GitHub</h2>
+<p>O projeto deve ser hospedado no mesmo repositório público no GitHub utilizado nas fases anteriores.</p>
+<p>O repositório deve conter:</p>
+<ul>
+<li>Código-fonte completo do compilador (todas as 4 fases integradas)</li>
+<li>Todos os arquivos de teste (fatorial, Fibonacci e Série de Taylor)</li>
+<li>Código Assembly gerado para todos os testes (antes e depois das otimizações)</li>
+<li>Arquivos <code>.hex</code> prontos para upload no Arduino</li>
+<li>Documentação completa (README.md)</li>
+<li>Arquivos markdown com a representação do TAC (antes e depois das otimizações) e o código Assembly gerado</li>
+</ul>
+<p>O repositório deve ser organizado com <em>commits</em> claros. As contribuições de cada aluno devem estar registradas na forma de <em>pull requests</em>. O trabalho deve ser público para permitir a avaliação automática.</p>
+</section>
+<section id="requisitos-do-código" class="level2" data-number="21.9">
+<h2 data-number="21.9" class="anchored" data-anchor-id="requisitos-do-código"><span class="header-section-number">21.9</span> 8. Requisitos do Código</h2>
+<p>As primeiras linhas do código devem conter:</p>
+<ul>
+<li>Nomes dos integrantes do grupo, em ordem alfabética, seguidos do usuário deste aluno no GitHub</li>
+<li>Nome do grupo no ambiente virtual de aprendizagem (Canvas)</li>
+</ul>
+<p>O programa deve receber o nome do arquivo de teste como argumento na linha de comando e rodar todos os analisadores/geradores sequencialmente, gerando todos os arquivos intermediários e finais.</p>
+<p>O código deve ser escrito em <strong>Python</strong>, <strong>C</strong>, ou <strong>C++</strong>, mantendo a mesma linguagem utilizada nas fases anteriores.</p>
+</section>
+<section id="divisão-de-tarefas-para-a-fase-4" class="level2" data-number="21.10">
+<h2 data-number="21.10" class="anchored" data-anchor-id="divisão-de-tarefas-para-a-fase-4"><span class="header-section-number">21.10</span> 9. Divisão de Tarefas para a Fase 4</h2>
+<p>Para resolver o problema de geração de código da Fase 4, o trabalho será dividido entre até quatro alunos. Cada aluno será responsável por uma parte específica do sistema, com interfaces claras para facilitar a integração.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Nota</strong>: As tarefas podem ser divididas da forma que cada grupo achar mais conveniente, desde que as funções e interfaces sejam respeitadas e todos os requisitos sejam cumpridos.</p>
+</div>
+</div>
+<section id="aluno-1-função-gerartac-e-geração-de-código-intermediário" class="level3" data-number="21.10.1">
+<h3 data-number="21.10.1" class="anchored" data-anchor-id="aluno-1-função-gerartac-e-geração-de-código-intermediário"><span class="header-section-number">21.10.1</span> 9.1. Aluno 1: Função <code>gerarTAC</code> e Geração de Código Intermediário</h3>
+<p><strong>Responsabilidades</strong>:</p>
+<ul>
+<li>Implementar <code>gerarTAC(arvoreAtribuida)</code> para gerar o código intermediário em formato TAC a partir da árvore sintática abstrata atribuída</li>
+<li>Criar estruturas de dados para representar instruções TAC</li>
+<li>Implementar o algoritmo de geração de código para expressões aritméticas</li>
+<li>Implementar a geração de código para comandos especiais (<code>RES</code>, <code>MEM</code>)</li>
+<li>Gerenciar a criação de variáveis temporárias e rótulos</li>
+<li>Documentar o formato do TAC gerado</li>
+</ul>
+<p><strong>Tarefas Específicas</strong>:</p>
+<ul>
+<li>Percorrer a árvore sintática abstrata atribuída em pós-ordem</li>
+<li>Gerar instruções TAC para cada nó da árvore</li>
+<li>Implementar alocação de variáveis temporárias (t0, t1, t2, …)</li>
+<li>Implementar geração de rótulos (L0, L1, L2, …)</li>
+<li>Criar funções auxiliares para diferentes tipos de nós (operações binárias, unárias, literais, etc.)</li>
+<li>Testar com expressões simples e aninhadas</li>
+<li>Salvar o TAC gerado em arquivo texto</li>
+</ul>
+<p><strong>Interface</strong>:</p>
+<ul>
+<li>Entrada: Árvore sintática abstrata atribuída (da Fase 3)</li>
+<li>Saída: Lista de instruções TAC e arquivo texto contendo o TAC</li>
+<li>Fornece lista de instruções TAC para a função <code>otimizarTAC()</code></li>
+</ul>
+</section>
+<section id="aluno-2-função-otimizartac-e-otimização-de-código" class="level3" data-number="21.10.2">
+<h3 data-number="21.10.2" class="anchored" data-anchor-id="aluno-2-função-otimizartac-e-otimização-de-código"><span class="header-section-number">21.10.2</span> 9.2. Aluno 2: Função <code>otimizarTAC</code> e Otimização de Código</h3>
+<p><strong>Responsabilidades</strong>:</p>
+<ul>
+<li>Implementar <code>otimizarTAC(tac)</code> para aplicar otimizações no código TAC</li>
+<li>Implementar <em>constant folding</em> (avaliação de expressões constantes)</li>
+<li>Implementar <em>constant propagation</em> (propagação de constantes)</li>
+<li>Implementar <em>dead code elimination</em> (eliminação de código morto)</li>
+<li>Implementar eliminação de saltos redundantes</li>
+<li>Documentar cada técnica de otimização implementada com exemplos</li>
+</ul>
+<p><strong>Tarefas Específicas</strong>:</p>
+<ul>
+<li>Analisar o TAC para identificar oportunidades de otimização</li>
+<li>Implementar cada técnica de otimização como uma passagem separada sobre o código</li>
+<li>Criar funções auxiliares para análise de uso de variáveis (liveness analysis básico)</li>
+<li>Manter a semântica do programa durante as otimizações</li>
+<li>Testar cada otimização isoladamente</li>
+<li>Gerar relatório comparando TAC antes e depois das otimizações</li>
+<li>Salvar o TAC otimizado em arquivo texto</li>
+</ul>
+<p><strong>Interface</strong>:</p>
+<ul>
+<li>Entrada: Lista de instruções TAC (do Aluno 1)</li>
+<li>Saída: Lista de instruções TAC otimizadas e arquivo texto contendo o TAC otimizado</li>
+<li>Fornece TAC otimizado para a função <code>gerarAssembly()</code></li>
+</ul>
+</section>
+<section id="aluno-3-função-gerarassembly-e-geração-de-código-assembly-avr" class="level3" data-number="21.10.3">
+<h3 data-number="21.10.3" class="anchored" data-anchor-id="aluno-3-função-gerarassembly-e-geração-de-código-assembly-avr"><span class="header-section-number">21.10.3</span> 9.3. Aluno 3: Função <code>gerarAssembly</code> e Geração de Código Assembly AVR</h3>
+<p><strong>Responsabilidades</strong>:</p>
+<ul>
+<li>Implementar <code>gerarAssembly(tacOtimizado)</code> para gerar código Assembly AVR a partir do TAC otimizado</li>
+<li>Definir e documentar convenções de uso dos registradores AVR</li>
+<li>Implementar o mapeamento de cada tipo de instrução TAC para Assembly</li>
+<li>Implementar gestão da pilha e alocação de registradores</li>
+<li>Gerar código de inicialização e finalização do programa</li>
+<li>Criar rotinas auxiliares para operações complexas (multiplicação, divisão, operações de ponto flutuante)</li>
+</ul>
+<p><strong>Tarefas Específicas</strong>:</p>
+<ul>
+<li>Mapear cada instrução TAC para uma ou mais instruções Assembly AVR</li>
+<li>Implementar alocação de registradores (pode ser simples, baseado em heurísticas)</li>
+<li>Gerar código para prólogo e epílogo de funções</li>
+<li>Implementar acesso a memória (variáveis globais)</li>
+<li>Tratar conversões de tipo quando necessário</li>
+<li>Gerar comentários no Assembly indicando a instrução TAC correspondente</li>
+<li>Salvar o código Assembly em arquivo <code>.s</code></li>
+<li>Testar a compilação do Assembly usando <code>avr-gcc</code></li>
+</ul>
+<p><strong>Interface</strong>:</p>
+<ul>
+<li>Entrada: Lista de instruções TAC otimizadas (do Aluno 2)</li>
+<li>Saída: Arquivo de código Assembly AVR (<code>.s</code>) e arquivo <code>.hex</code> para upload</li>
+<li>O Assembly gerado deve compilar sem erros usando a toolchain AVR</li>
+</ul>
+</section>
+<section id="aluno-4-função-main-integração-testes-e-validação-no-arduino" class="level3" data-number="21.10.4">
+<h3 data-number="21.10.4" class="anchored" data-anchor-id="aluno-4-função-main-integração-testes-e-validação-no-arduino"><span class="header-section-number">21.10.4</span> 9.4. Aluno 4: Função <code>main</code>, Integração, Testes e Validação no Arduino</h3>
+<p><strong>Responsabilidades</strong>:</p>
+<ul>
+<li>Implementar a função <code>main()</code> que orquestra a execução de todas as fases do compilador</li>
+<li>Integrar todos os módulos das 4 fases</li>
+<li>Implementar a compilação e upload do código Assembly para o Arduino</li>
+<li>Criar os 2 arquivos de teste (fatorial e Fibonacci)</li>
+<li>Testar o compilador completo com ambos os arquivos de teste</li>
+<li>Validar a execução no Arduino Uno</li>
+<li>Gerar todos os relatórios e documentação final</li>
+</ul>
+<p><strong>Tarefas Específicas</strong>:</p>
+<ul>
+<li>Implementar o <code>main()</code> para chamar sequencialmente:
+<ol type="1">
+<li>Analisador Léxico (Fase 1)</li>
+<li>Analisador Sintático (Fase 2)</li>
+<li>Analisador Semântico (Fase 3)</li>
+<li>Gerador de TAC</li>
+<li>Otimizador de TAC</li>
+<li>Gerador de Assembly</li>
+</ol></li>
+<li>Implementar tratamento de erros em cada fase</li>
+<li>Criar scripts para compilação e upload do Assembly</li>
+<li>Desenvolver os 2 programas de teste (fatorial e Fibonacci)</li>
+<li>Testar o compilador completo end-to-end</li>
+<li>Validar os resultados no Arduino Uno (usando serial, LEDs ou display)</li>
+<li>Gerar relatórios em markdown: TAC, TAC otimizado, Assembly, e resultados da execução</li>
+<li>Atualizar o README com instruções completas</li>
+</ul>
+<p><strong>Interface</strong>:</p>
+<ul>
+<li>Entrada: Nome do arquivo de código-fonte via linha de comando</li>
+<li>Saída: Todos os arquivos intermediários (tokens, árvore sintática, árvore atribuída, TAC, TAC otimizado, Assembly) e relatórios</li>
+<li>Gerencia a execução completa do compilador e validação no hardware</li>
+</ul>
+</section>
+</section>
+<section id="considerações-para-integração" class="level2" data-number="21.11">
+<h2 data-number="21.11" class="anchored" data-anchor-id="considerações-para-integração"><span class="header-section-number">21.11</span> 10. Considerações para Integração</h2>
+<p><strong>Interfaces</strong>: Concordar com os formatos de dados entre todas as fases (estrutura da árvore sintática atribuída, formato das instruções TAC, formato do Assembly).</p>
+<p><strong>Depuração</strong>: Testar cada módulo isoladamente antes da integração final.</p>
+<p><strong>Passos de Integração</strong>:</p>
+<ol type="1">
+<li>Utilizar o sistema integrado das Fases 1, 2 e 3 como base</li>
+<li>Integrar a função <code>gerarTAC()</code> do Aluno 1</li>
+<li>Integrar a função <code>otimizarTAC()</code> do Aluno 2</li>
+<li>Integrar a função <code>gerarAssembly()</code> do Aluno 3</li>
+<li>Atualizar o <code>main()</code> (do Aluno 4) para orquestrar todo o processo</li>
+<li>Realizar testes completos com os 2 arquivos de teste</li>
+<li>Validar a execução no Arduino Uno</li>
+</ol>
+<p><strong>Resolução de Conflitos</strong>: Discutir problemas imediatamente na sala ou de forma remota.</p>
+<p><strong>Depuração Final</strong>: Testar o compilador completo, validando:</p>
+<ul>
+<li>A geração correta do TAC</li>
+<li>As otimizações aplicadas</li>
+<li>O código Assembly gerado</li>
+<li>A execução correta no Arduino Uno</li>
+</ul>
+</section>
+<section id="avaliação" class="level2" data-number="21.12">
+<h2 data-number="21.12" class="anchored" data-anchor-id="avaliação"><span class="header-section-number">21.12</span> 11. Avaliação</h2>
+<p>O trabalho será pré-avaliado de forma automática e novamente durante a prova de autoria, com os seguintes critérios:</p>
+<section id="funcionalidades-do-compilador-70" class="level3" data-number="21.12.1">
+<h3 data-number="21.12.1" class="anchored" data-anchor-id="funcionalidades-do-compilador-70"><span class="header-section-number">21.12.1</span> 11.1. Funcionalidades do Compilador (70%)</h3>
+<ul>
+<li>Implementação correta da geração de TAC: Base da nota</li>
+<li>Falha na geração de TAC para operações aritméticas: <strong>-20%</strong></li>
+<li>Falha na geração de TAC para estruturas de controle: <strong>-20%</strong></li>
+<li>Ausência de pelo menos 1 das 3 técnicas de otimização documentadas e implementadas: <strong>-20%</strong></li>
+<li>Falha na geração de Assembly AVR: <strong>-30%</strong></li>
+<li>Assembly gerado não compila ou não executa corretamente no Arduino: <strong>-80%</strong></li>
+<li>Falha em um dos arquivos de teste: <strong>-15%</strong> por arquivo</li>
+<li>Código Assembly não otimizado ou ineficiente: <strong>-10%</strong></li>
+</ul>
+</section>
+<section id="organização-e-legibilidade-do-código-15" class="level3" data-number="21.12.2">
+<h3 data-number="21.12.2" class="anchored" data-anchor-id="organização-e-legibilidade-do-código-15"><span class="header-section-number">21.12.2</span> 11.2. Organização e Legibilidade do Código (15%)</h3>
+<ul>
+<li>Código claro, adequadamente comentado e bem estruturado. Na dúvida, use ferramentas de IA para melhorar a qualidade dos comentários usando como referência o Google <a href="https://google.github.io/styleguide/cppguide.html#Comments">C++ Style Guide</a> ou o <a href="https://peps.python.org/pep-0008/">PEP 8</a> para Python</li>
+<li>README bem escrito contendo, no mínimo:
+<ul>
+<li>Nome da instituição de ensino, ano, disciplina, professor</li>
+<li>Integrantes do grupo em ordem alfabética</li>
+<li>Instruções para compilar, executar e depurar todas as fases</li>
+<li>Documentação das otimizações implementadas</li>
+<li>Instruções para compilar e carregar o Assembly no Arduino</li>
+<li>Documentação das convenções de registradores</li>
+</ul></li>
+<li>Repositório GitHub organizado com <em>commits</em> claros e <em>pull requests</em></li>
+</ul>
+<p><strong>Atenção</strong>: A participação dos integrantes do grupo é fundamental para o sucesso do projeto. Esta participação será avaliada automaticamente. O desbalanceamento na participação dos integrantes do grupo resultará na redução da nota final do trabalho.</p>
+</section>
+<section id="robustez-e-validação-15" class="level3" data-number="21.12.3">
+<h3 data-number="21.12.3" class="anchored" data-anchor-id="robustez-e-validação-15"><span class="header-section-number">21.12.3</span> 11.3. Robustez e Validação (15%)</h3>
+<ul>
+<li>Tratamento de erros em todas as fases com mensagens claras</li>
+<li>Geração correta de todos os arquivos de saída</li>
+<li>Validação bem-sucedida dos 2 programas de teste no Arduino Uno</li>
+<li>Evidências de teste (fotos/vídeos do Arduino executando os programas, saída serial, etc.)</li>
+<li>Documentação do processo de validação no hardware</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Aviso</strong>: Trabalhos identificados como cópias terão a nota zerada.</p>
+</blockquote>
+</section>
+</section>
+<section id="prova-de-autoria" class="level2" data-number="21.13">
+<h2 data-number="21.13" class="anchored" data-anchor-id="prova-de-autoria"><span class="header-section-number">21.13</span> 12. Prova de Autoria</h2>
+<ul>
+<li>Um aluno do grupo será sorteado usando um aplicativo online disponível em https://frankalcantara.com/sorteio.html</li>
+<li>Depois de explicar o projeto e responder as dúvidas do professor, o aluno sorteado escolherá um número de 1 a 10, que corresponderá a uma pergunta sobre o projeto</li>
+<li>A falha na resposta, ou na explicação do projeto, implicará na redução de <strong>35%</strong> da nota provisória que tenha sido atribuída ao projeto durante a avaliação prévia. Esta redução será aplicada para todo o grupo</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Apesar da sugestão de divisão de tarefas, todos os alunos devem entender o funcionamento completo do projeto, incluindo todas as 4 fases. O aluno sorteado para a prova de autoria deve ser capaz de responder qualquer pergunta sobre qualquer parte do projeto, desde a análise léxica até a execução no Arduino.</p>
+</div>
+</div>
+</section>
+<section id="entrega" class="level2" data-number="21.14">
+<h2 data-number="21.14" class="anchored" data-anchor-id="entrega"><span class="header-section-number">21.14</span> 13. Entrega</h2>
+<p>A entrega será um link para o repositório do GitHub contendo:</p>
+<section id="código-fonte" class="level3" data-number="21.14.1">
+<h3 data-number="21.14.1" class="anchored" data-anchor-id="código-fonte"><span class="header-section-number">21.14.1</span> 13.1. Código-fonte</h3>
+<ul>
+<li>Programa completo em <strong>Python</strong>, <strong>C</strong>, ou <strong>C++</strong> integrando todas as 4 fases</li>
+<li>Todas as funções especificadas implementadas</li>
+<li>Scripts de compilação e upload para Arduino</li>
+</ul>
+</section>
+<section id="arquivos-de-teste-1" class="level3" data-number="21.14.2">
+<h3 data-number="21.14.2" class="anchored" data-anchor-id="arquivos-de-teste-1"><span class="header-section-number">21.14.2</span> 13.2. Arquivos de Teste</h3>
+<ul>
+<li>2 arquivos de teste conforme especificado:
+<ol type="1">
+<li>Cálculo de fatorial (1 a 12)</li>
+<li>Sequência de Fibonacci (até posição 15)</li>
+</ol></li>
+<li>Casos de teste devem demonstrar o funcionamento completo do compilador</li>
+</ul>
+</section>
+<section id="arquivos-gerados" class="level3" data-number="21.14.3">
+<h3 data-number="21.14.3" class="anchored" data-anchor-id="arquivos-gerados"><span class="header-section-number">21.14.3</span> 13.3. Arquivos Gerados</h3>
+<p>O repositório deve conter todos os arquivos gerados na última execução do compilador, antes do envio para avaliação. Para cada arquivo de teste, deve haver:</p>
+<ul>
+<li>Arquivo de tokens (da Fase 1)</li>
+<li>Arquivo com a árvore sintática (da Fase 2)</li>
+<li>Arquivo com a árvore sintática abstrata atribuída (da Fase 3)</li>
+<li>Arquivo com o TAC gerado (antes das otimizações)</li>
+<li>Arquivo com o TAC otimizado</li>
+<li>Arquivo Assembly (<code>.s</code>)</li>
+<li>Arquivo HEX (<code>.hex</code>) pronto para upload</li>
+</ul>
+</section>
+<section id="documentação" class="level3" data-number="21.14.4">
+<h3 data-number="21.14.4" class="anchored" data-anchor-id="documentação"><span class="header-section-number">21.14.4</span> 13.4. Documentação</h3>
+<ul>
+<li><strong>README.md</strong> bem formatado com:
+<ul>
+<li>Informações institucionais</li>
+<li>Instruções de compilação e execução de todas as fases</li>
+<li>Documentação das técnicas de otimização implementadas</li>
+<li>Documentação das convenções de registradores AVR utilizadas</li>
+<li>Instruções para compilar e carregar o código no Arduino</li>
+<li>Exemplos de uso e resultados esperados</li>
+</ul></li>
+</ul>
+</section>
+<section id="relatório-de-otimizações" class="level3" data-number="21.14.5">
+<h3 data-number="21.14.5" class="anchored" data-anchor-id="relatório-de-otimizações"><span class="header-section-number">21.14.5</span> 13.5. Relatório de Otimizações</h3>
+<p>Um arquivo markdown contendo:</p>
+<ul>
+<li>Descrição de cada técnica de otimização implementada</li>
+<li>Exemplos de código TAC antes e depois de cada otimização</li>
+<li>Estatísticas: número de instruções TAC antes e depois, número de temporários eliminados, etc.</li>
+<li>Análise do impacto das otimizações no código Assembly gerado</li>
+</ul>
+</section>
+<section id="formato-de-execução" class="level3" data-number="21.14.6">
+<h3 data-number="21.14.6" class="anchored" data-anchor-id="formato-de-execução"><span class="header-section-number">21.14.6</span> 13.6. Formato de Execução</h3>
+<p>O programa deve ser executado com:</p>
+<pre class="shell"><code>./compilador fatorial.txt</code></pre>
+<p>ou</p>
+<pre class="shell"><code>./compilador fibonacci.txt</code></pre>
+<p>ou ainda</p>
+<pre class="shell"><code>./compilador taylor.txt</code></pre>
+<p>O compilador deve gerar todos os arquivos intermediários e finais, incluindo o arquivo <code>.hex</code> pronto para upload no Arduino.</p>
+</section>
+</section>
+<section id="recursos-adicionais" class="level2" data-number="21.15">
+<h2 data-number="21.15" class="anchored" data-anchor-id="recursos-adicionais"><span class="header-section-number">21.15</span> 14. Recursos Adicionais</h2>
+<section id="ferramentas-necessárias" class="level3" data-number="21.15.1">
+<h3 data-number="21.15.1" class="anchored" data-anchor-id="ferramentas-necessárias"><span class="header-section-number">21.15.1</span> 14.1. Ferramentas Necessárias</h3>
+<ul>
+<li>Compilador para a linguagem escolhida (GCC/G++, Python 3.x)</li>
+<li>Toolchain AVR: <code>avr-gcc</code>, <code>avr-libc</code>, <code>avrdude</code></li>
+<li>Arduino Uno (ou simulador como SimulIDE)</li>
+<li>Monitor serial ou ferramenta de comunicação USB</li>
+</ul>
+</section>
+<section id="referências-úteis" class="level3" data-number="21.15.2">
+<h3 data-number="21.15.2" class="anchored" data-anchor-id="referências-úteis"><span class="header-section-number">21.15.2</span> 14.2. Referências Úteis</h3>
+<ul>
+<li><a href="https://ww1.microchip.com/downloads/en/devicedoc/atmel-0856-avr-instruction-set-manual.pdf">AVR Instruction Set Manual</a></li>
+<li><a href="https://docs.arduino.cc/hardware/uno-rev3/">Arduino Uno Datasheet</a></li>
+<li><a href="https://www.geeksforgeeks.org/three-address-code-compiler/">Compiler Design: Three Address Code</a></li>
+<li><a href="https://www.geeksforgeeks.org/compiler-design-code-optimization/">Code Optimization Techniques</a></li>
+<li>Livro: “Compilers: Principles, Techniques, and Tools” (Dragon Book) - Capítulos 6-8</li>
+</ul>
+</section>
+<section id="dicas-de-implementação" class="level3" data-number="21.15.3">
+<h3 data-number="21.15.3" class="anchored" data-anchor-id="dicas-de-implementação"><span class="header-section-number">21.15.3</span> 14.3. Dicas de Implementação</h3>
+<p><strong>Para Geração de TAC</strong>: - Use uma estrutura de dados simples para representar instruções (classe ou struct) - Mantenha contadores globais para temporários e rótulos - Processe a árvore em pós-ordem para gerar código bottom-up</p>
+<p><strong>Para Otimização</strong>: - Implemente cada otimização como uma passagem separada - Mantenha um mapa de valores conhecidos para constant propagation - Use análise de <em>liveness</em> simples para <em>dead code elimination</em></p>
+<p><strong>Para Geração de Assembly</strong>: - Crie um template de prólogo/epílogo para o programa - Mantenha um mapeamento entre variáveis e registradores - Use a pilha quando ficar sem registradores - Adicione comentários no Assembly para facilitar depuração</p>
+<p><strong>Para Validação no Arduino</strong>: - Use comunicação serial para debug (<code>Serial.begin(9600)</code>, <code>Serial.println()</code>) - Teste primeiro com programas simples - Use o monitor serial do Arduino IDE para ver os resultados</p>
+</section>
+</section>
+<section id="critérios-de-sucesso" class="level2" data-number="21.16">
+<h2 data-number="21.16" class="anchored" data-anchor-id="critérios-de-sucesso"><span class="header-section-number">21.16</span> 15. Critérios de Sucesso</h2>
+<p>O projeto será considerado bem-sucedido se:</p>
+<ol type="1">
+<li>O compilador integrar corretamente todas as 4 fases</li>
+<li>Todos os arquivos de teste (fatorial, Fibonacci e Taylor) compilarem sem erros</li>
+<li>O código Assembly gerado executar corretamente no Arduino Uno</li>
+<li>Os resultados obtidos no Arduino corresponderem aos valores esperados</li>
+<li>Pelo menos 3 técnicas de otimização estiverem implementadas e documentadas</li>
+<li>Toda a documentação estiver completa e clara</li>
+<li>O código estiver bem organizado e comentado</li>
+<li>Todos os integrantes do grupo conseguirem explicar o funcionamento do projeto</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./fase3.html" class="pagination-link" aria-label="Fase 3 - Analisador Semântico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./apend1.html" class="pagination-link" aria-label="Apêndice 1: A Relação de Myhill-Nerode">
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/fase4.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
