@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 800 600"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="MLIRBATTLEField.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview75"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.425"
+     inkscape:cx="416.49123"
+     inkscape:cy="429.82456"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <!-- Título Principal -->
+  <text
+     x="400"
+     y="30"
+     font-family="Arial"
+     font-size="22"
+     font-weight="bold"
+     fill="#4472C4"
+     text-anchor="middle"
+     id="text1">
+    A Batalha dos Aceleradores: O Campo de Batalha MLIR
+  </text>
+  <!-- ===== CAMPO DE BATALHA CENTRAL - MLIR ===== -->
+  <rect
+     x="195.75545"
+     y="350.25204"
+     width="400.06781"
+     height="107.58694"
+     fill="#ed7d31"
+     stroke="#44546a"
+     stroke-width="2.84084"
+     rx="10"
+     id="rect1"
+     ry="10"
+     style="fill:#ff0000" />
+  <text
+     x="395.78949"
+     y="380.35086"
+     font-family="Arial"
+     font-size="18px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text2">CAMPO DE BATALHA: MLIR ECOSYSTEM</text>
+  <text
+     x="395.78949"
+     y="400.35086"
+     font-family="Arial"
+     font-size="12px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text3"
+     style="-inkscape-font-specification:'Arial, Normal';font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Multi-Level Intermediate Representation</text>
+  <text
+     x="395.78949"
+     y="420.35086"
+     font-family="Arial"
+     font-size="12px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text4"
+     style="-inkscape-font-specification:'Arial, Normal';font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">O Novo Padrão Industrial para Compilação</text>
+  <text
+     x="395.78949"
+     y="440.35086"
+     font-family="Arial"
+     font-size="12px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text5"
+     style="-inkscape-font-specification:'Arial, Normal';font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14.66666667px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Dialetos: linalg, gpu, tpu, spv, llvm</text>
+  <!-- ===== TRINCHEIRA NVIDIA ===== -->
+  <rect
+     x="418.26132"
+     y="48.261314"
+     width="266.63525"
+     height="278.03876"
+     fill="#e7e6e6"
+     stroke="#44546a"
+     stroke-width="1.68054"
+     rx="8"
+     id="rect5"
+     ry="7.999999" />
+  <text
+     x="550.17548"
+     y="75.438591"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     fill="#5b9bd5"
+     text-anchor="middle"
+     id="text6">Ecossistema NVIDIA</text>
+  <!-- Fortaleza CUDA -->
+  <rect
+     x="431.57895"
+     y="89.999992"
+     width="240"
+     height="80"
+     fill="#5b9bd5"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="8"
+     id="rect6"
+     ry="8" />
+  <text
+     x="551.57898"
+     y="110.00001"
+     font-family="Arial"
+     font-size="14px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text7">A FORÇA CUDA</text>
+  <text
+     x="551.57898"
+     y="130.00002"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text8">15+ anos de desenvolvimento</text>
+  <text
+     x="551.57898"
+     y="145.00002"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text9">Ecossistema maduro</text>
+  <text
+     x="551.57898"
+     y="160.00002"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text10">Lock-in de software</text>
+  <!-- Armas NVIDIA -->
+  <rect
+     x="431.57895"
+     y="178.00003"
+     width="115"
+     height="60"
+     fill="#5b9bd5"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect10"
+     ry="6" />
+  <text
+     x="489.07895"
+     y="198.00003"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text11">PTX</text>
+  <text
+     x="489.07895"
+     y="213.00003"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text12">Assembly Virtual</text>
+  <rect
+     x="556.57898"
+     y="178.00003"
+     width="115"
+     height="60"
+     fill="#5b9bd5"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect12"
+     ry="6" />
+  <text
+     x="614.07898"
+     y="198.00003"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text13">Tensor Cores</text>
+  <text
+     x="614.07898"
+     y="213.00003"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text14">Hardware AI</text>
+  <rect
+     x="431.57895"
+     y="248.00003"
+     width="115"
+     height="60"
+     fill="#5b9bd5"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect14"
+     ry="6" />
+  <text
+     x="489.07895"
+     y="268.00003"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text15">Nsight Tools</text>
+  <text
+     x="489.07895"
+     y="283.00003"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text16">Profiling</text>
+  <rect
+     x="556.57898"
+     y="248.00003"
+     width="115"
+     height="60"
+     fill="#5b9bd5"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect16"
+     ry="6" />
+  <text
+     x="614.07898"
+     y="268.00003"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text17">DGX Systems</text>
+  <text
+     x="614.07898"
+     y="283.00003"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text18">Supercomputers</text>
+  <!-- ===== TRINCHEIRA GOOGLE ===== -->
+  <rect
+     x="107.38716"
+     y="49.667801"
+     width="264.52408"
+     height="282.24332"
+     fill="#e7e6e6"
+     stroke="#44546a"
+     stroke-width="1.68647"
+     rx="7.999999"
+     id="rect18"
+     ry="7.9999995" />
+  <text
+     x="238.59651"
+     y="76.842117"
+     font-family="Arial"
+     font-size="16px"
+     font-weight="bold"
+     fill="#70ad47"
+     text-anchor="middle"
+     id="text19">Ecossistema Google</text>
+  <!-- Fortaleza TPU -->
+  <rect
+     x="120.00002"
+     y="91.82457"
+     width="240"
+     height="80"
+     fill="#70ad47"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="8"
+     id="rect19"
+     ry="8" />
+  <text
+     x="240.00002"
+     y="111.82455"
+     font-family="Arial"
+     font-size="14px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text20">A FORÇA DA TPU</text>
+  <text
+     x="240.00002"
+     y="131.82455"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text21">ASICs Especializados</text>
+  <text
+     x="240.00002"
+     y="146.82455"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text22">Integração Vertical</text>
+  <text
+     x="240.00002"
+     y="161.82455"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text23">Performance/Watt</text>
+  <!-- Armas Google -->
+  <rect
+     x="120.00002"
+     y="179.82455"
+     width="115"
+     height="60"
+     fill="#70ad47"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect23"
+     ry="6" />
+  <text
+     x="177.50002"
+     y="199.82455"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text24">XLA</text>
+  <text
+     x="177.50002"
+     y="214.82455"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text25">Compilador ML</text>
+  <rect
+     x="245.00002"
+     y="179.82455"
+     width="115"
+     height="60"
+     fill="#70ad47"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect25"
+     ry="6" />
+  <text
+     x="302.5"
+     y="199.82455"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text26">TensorFlow</text>
+  <text
+     x="302.5"
+     y="214.82455"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text27">Framework</text>
+  <rect
+     x="120.00002"
+     y="249.82455"
+     width="115"
+     height="60"
+     fill="#70ad47"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect27"
+     ry="6" />
+  <text
+     x="177.50002"
+     y="269.82455"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text28">OpenXLA</text>
+  <text
+     x="177.50002"
+     y="284.82455"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text29">Padrão Aberto</text>
+  <rect
+     x="245.00002"
+     y="249.82455"
+     width="115"
+     height="60"
+     fill="#70ad47"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect29"
+     ry="6" />
+  <text
+     x="302.5"
+     y="269.82455"
+     font-family="Arial"
+     font-size="11px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text30">Google Cloud</text>
+  <text
+     x="302.5"
+     y="284.82455"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text31">Infraestrutura</text>
+  <!-- ===== LADO AMD ===== -->
+  <rect
+     x="46.431896"
+     y="350.8812"
+     width="140.02373"
+     height="107.58694"
+     fill="#ffc000"
+     stroke="#44546a"
+     stroke-width="1.8939"
+     rx="8"
+     id="rect31"
+     ry="7.9999995"
+     style="fill:#ffdd55" />
+  <text
+     x="116.49123"
+     y="371.05261"
+     font-family="Arial"
+     font-size="12px"
+     font-weight="bold"
+     fill="#000000"
+     text-anchor="middle"
+     id="text32"
+     inkscape:transform-center-x="4.9122807"
+     inkscape:transform-center-y="-4.2105263"
+     style="font-size:16px">AMD</text>
+  <text
+     x="116.49123"
+     y="391.05261"
+     font-family="Arial"
+     font-size="10px"
+     fill="#000000"
+     text-anchor="middle"
+     id="text33"
+     style="-inkscape-font-specification:'Arial, Normal';font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:12px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">ROCm</text>
+  <text
+     x="116.49123"
+     y="410.05261"
+     font-family="Arial"
+     font-size="9px"
+     fill="#000000"
+     text-anchor="middle"
+     id="text34"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Open Source</text>
+  <text
+     x="116.49123"
+     y="427.05261"
+     font-family="Arial"
+     font-size="9px"
+     fill="#000000"
+     text-anchor="middle"
+     id="text35"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">HIP</text>
+  <text
+     x="116.49123"
+     y="444.05261"
+     font-family="Arial"
+     font-size="9px"
+     fill="#000000"
+     text-anchor="middle"
+     id="text36"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">MI300</text>
+  <!-- ===== LADO INTEL ===== -->
+  <rect
+     x="606.52679"
+     y="350.8812"
+     width="140.02373"
+     height="107.58694"
+     fill="#a5a5a5"
+     stroke="#44546a"
+     stroke-width="1.8939"
+     rx="8"
+     id="rect36"
+     ry="7.9999995"
+     style="fill:#e2e3db" />
+  <text
+     x="676.49121"
+     y="371.05261"
+     font-family="Arial"
+     font-size="12px"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text37"
+     style="-inkscape-font-specification:'Arial, Bold';font-family:Arial;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:16px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;fill:#000000">Intel</text>
+  <text
+     x="676.49121"
+     y="391.05261"
+     font-family="Arial"
+     font-size="10px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text38"
+     style="-inkscape-font-specification:'Arial, Normal';font-family:Arial;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:12px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">oneAPI</text>
+  <text
+     x="676.49121"
+     y="410.05261"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text39"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Habana Labs</text>
+  <text
+     x="676.49121"
+     y="427.05261"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text40"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Gaudi</text>
+  <text
+     x="676.49121"
+     y="444.05261"
+     font-family="Arial"
+     font-size="9px"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text41"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000">Ponte Vecchio</text>
+  <!-- ===== STARTUPS DISRUPTIVAS ===== -->
+  <rect
+     x="350"
+     y="482"
+     width="100"
+     height="40"
+     fill="#ff0000"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect41"
+     ry="6"
+     style="fill:#ff6600" />
+  <text
+     x="400"
+     y="497"
+     font-family="Arial"
+     font-size="10"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text42"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Cerebras</text>
+  <text
+     x="400"
+     y="514"
+     font-family="Arial"
+     font-size="8"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text43"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Wafer-Scale</text>
+  <rect
+     x="460"
+     y="482"
+     width="100"
+     height="40"
+     fill="#ff0000"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect43"
+     ry="6"
+     style="fill:#ff6600" />
+  <text
+     x="510"
+     y="497"
+     font-family="Arial"
+     font-size="10"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text44"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Groq</text>
+  <text
+     x="510"
+     y="514"
+     font-family="Arial"
+     font-size="8"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text45"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Determinístico</text>
+  <rect
+     x="240"
+     y="482"
+     width="100"
+     height="40"
+     fill="#ff0000"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect45"
+     ry="6"
+     style="fill:#ff6600" />
+  <text
+     x="290"
+     y="497"
+     font-family="Arial"
+     font-size="10"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text46"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Graphcore</text>
+  <text
+     x="290"
+     y="514"
+     font-family="Arial"
+     font-size="8"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text47"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">IPU</text>
+  <!-- ===== CLOUD PROVIDERS ===== -->
+  <rect
+     x="50"
+     y="482"
+     width="80"
+     height="40"
+     fill="#7030a0"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect47"
+     ry="6" />
+  <text
+     x="90"
+     y="497"
+     font-family="Arial"
+     font-size="9"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text48"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">AWS</text>
+  <text
+     x="90"
+     y="514"
+     font-family="Arial"
+     font-size="7"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text49"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Inferentia</text>
+  <rect
+     x="140"
+     y="482"
+     width="80"
+     height="40"
+     fill="#7030a0"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect49"
+     ry="6" />
+  <text
+     x="180"
+     y="497"
+     font-family="Arial"
+     font-size="9"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text50"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Azure</text>
+  <text
+     x="180"
+     y="514"
+     font-family="Arial"
+     font-size="7"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text51"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Maia</text>
+  <rect
+     x="570"
+     y="482"
+     width="80"
+     height="40"
+     fill="#7030a0"
+     stroke="#44546a"
+     stroke-width="2"
+     rx="6"
+     id="rect51"
+     ry="6" />
+  <text
+     x="610"
+     y="497"
+     font-family="Arial"
+     font-size="9"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text52"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Alibaba</text>
+  <text
+     x="610"
+     y="514"
+     font-family="Arial"
+     font-size="7"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text53"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Hanguang</text>
+  <rect
+     x="655.15594"
+     y="482.06824"
+     width="91.79335"
+     height="39.863529"
+     fill="#7030a0"
+     stroke="#44546a"
+     stroke-width="2.05374"
+     rx="6"
+     id="rect53"
+     ry="6" />
+  <text
+     x="700"
+     y="497"
+     font-family="Arial"
+     font-size="9"
+     font-weight="bold"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text54"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Tenstorrent</text>
+  <text
+     x="700"
+     y="514"
+     font-family="Arial"
+     font-size="7"
+     fill="#ffffff"
+     text-anchor="middle"
+     id="text55"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">Jim Keller</text>
+  <!-- ===== SETAS DE BATALHA ===== -->
+  <!-- Ataques ao Campo MLIR -->
+  <!-- AMD atacando MLIR -->
+  <!-- Intel atacando MLIR -->
+  <!-- Startups atacando -->
+  <!-- Cloud Providers atacando -->
+  <!-- ===== ANOTAÇÕES ESTRATÉGICAS ===== -->
+  <text
+     x="385.9649"
+     y="557.08771"
+     font-family="Arial"
+     font-size="9px"
+     fill="#44546a"
+     text-anchor="middle"
+     id="text66"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.6667px;font-family:Arial;-inkscape-font-specification:'Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;fill:#44546a">Quem dominar a stack de compilação dominará o mercado de aceleradores</text>
+  <!-- Legenda Tática -->
+  <!-- Definição de setas coloridas -->
+  <defs
+     id="defs75">
+    <marker
+       id="arrowhead-blue"
+       markerWidth="10"
+       markerHeight="10"
+       refX="9"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3, 0 6"
+         fill="#5B9BD5"
+         id="polygon70" />
+    </marker>
+    <marker
+       id="arrowhead-green"
+       markerWidth="10"
+       markerHeight="10"
+       refX="9"
+       refY="3"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3, 0 6"
+         fill="#70AD47"
+         id="polygon71" />
+    </marker>
+    <marker
+       id="arrowhead-yellow"
+       markerWidth="8"
+       markerHeight="8"
+       refX="7"
+       refY="2.5"
+       orient="auto">
+      <polygon
+         points="0 0, 8 2.5, 0 5"
+         fill="#FFC000"
+         id="polygon72" />
+    </marker>
+    <marker
+       id="arrowhead-gray"
+       markerWidth="8"
+       markerHeight="8"
+       refX="7"
+       refY="2.5"
+       orient="auto">
+      <polygon
+         points="0 0, 8 2.5, 0 5"
+         fill="#A5A5A5"
+         id="polygon73" />
+    </marker>
+    <marker
+       id="arrowhead-red"
+       markerWidth="8"
+       markerHeight="8"
+       refX="7"
+       refY="2.5"
+       orient="auto">
+      <polygon
+         points="0 0, 8 2.5, 0 5"
+         fill="#FF0000"
+         id="polygon74" />
+    </marker>
+    <marker
+       id="arrowhead-purple"
+       markerWidth="8"
+       markerHeight="8"
+       refX="7"
+       refY="2.5"
+       orient="auto">
+      <polygon
+         points="0 0, 8 2.5, 0 5"
+         fill="#7030A0"
+         id="polygon75" />
+    </marker>
+  </defs>
+</svg>

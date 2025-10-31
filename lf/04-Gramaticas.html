@@ -283,6 +283,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -297,25 +315,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -323,13 +341,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -448,7 +466,7 @@ Tip
 <section id="hierarquia-de-chomsky-história-e-contexto" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="hierarquia-de-chomsky-história-e-contexto"><span class="header-section-number">5.1</span> Hierarquia de Chomsky: História e Contexto</h2>
 <p>A Hierarquia de Chomsky representa um dos marcos mais elegantes da ciência do século XX, estabelecendo pontes entre linguística, matemática e ciência da computação. <strong>Desenvolvida por Noam Chomsky entre 1956 e 1959</strong>, esta classificação não apenas transformou os estudos linguísticos de uma disciplina descritiva em uma ciência formal rigorosa, mas também <strong>forneceu as bases teóricas para a construção de compiladores e o processamento computacional de linguagens</strong>. A hierarquia emergiu de uma convergência única de fatores históricos: a revolução cognitiva dos anos 1950, o desenvolvimento da teoria da computação, e a genialidade de um jovem linguista que soube sintetizar influências matemáticas diversas em uma estrutura unificada que perdura até hoje.</p>
-<p>A história da Hierarquia de Chomsky começa com um encontro transformador que ocorreu em 1947, quando Chomsky, então com 19 anos e considerando abandonar a universidade, conheceu <a href="https://en.wikipedia.org/wiki/Zellig_Harris">Zellig S. Harris</a> na Universidade da Pensilvânia. Harris era um dos fundadores da linguística estrutural americana e tinha estabelecido o primeiro departamento moderno de linguística dos Estados Unidos em 1946. Sob a orientação de Harris, Chomsky também estudou matemática com <a href="https://en.wikipedia.org/wiki/Nathan_Fine">Nathan Fine</a> em Harvard. <strong>Essas influências foram cruciais para moldar sua abordagem aos sistemas formais e metodologia científica</strong>. Sua tese de mestrado de 1951, <em>A Morfofonêmica do Hebraico Moderno</em>, e especialmente seu trabalho em <em>A Estrutura Lógica da Teoria Linguística</em> (LSLT), escrito enquanto era fellow júnior em Harvard (1951-55), começaram a transformar a abordagem estrutural de Harris em algo inteiramente novo.</p>
+<p>A história da Hierarquia de Chomsky começa com um encontro transformador que ocorreu em 1947, quando Chomsky, então com 19 anos e considerando abandonar a universidade, conheceu <a href="https://en.wikipedia.org/wiki/Zellig_Harris">Zellig S. Harris</a> na Universidade da Pensilvânia. Harris era um dos fundadores da linguística estrutural americana e tinha estabelecido o primeiro departamento moderno de linguística dos Estados Unidos em 1946. Sob a orientação de Harris, Chomsky também estudou matemática com <a href="https://en.wikipedia.org/wiki/Nathan_Fine">Nathan Fine</a> em Harvard. <strong>Essas influências foram decisivas para moldar sua abordagem aos sistemas formais e metodologia científica</strong>. Sua tese de mestrado de 1951, <em>A Morfofonêmica do Hebraico Moderno</em>, e especialmente seu trabalho em <em>A Estrutura Lógica da Teoria Linguística</em> (LSLT), escrito enquanto era fellow júnior em Harvard (1951-55), começaram a transformar a abordagem estrutural de Harris em algo inteiramente novo.</p>
 <section id="a-revolução-cognitiva-e-o-ambiente-do-mit" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="a-revolução-cognitiva-e-o-ambiente-do-mit"><span class="header-section-number">5.1.1</span> A revolução cognitiva e o ambiente do MIT</h3>
 <p>Os anos 1950 representavam um período de fermentação intelectual que se tornaria conhecido como a <strong>Revolução Cognitiva</strong>. <a href="https://en.wikipedia.org/wiki/George_Armitage_Miller">George Miller</a>, uma das figuras-chave, datou o início dessa revolução em 11 de setembro de 1956, quando pesquisadores de psicologia experimental, ciência da computação e linguística teórica apresentaram trabalhos sobre temas relacionados à ciência cognitiva em uma reunião do <em>Special Interest Group in Information Theory</em> no MIT.</p>

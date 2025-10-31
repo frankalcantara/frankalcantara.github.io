@@ -317,6 +317,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -331,25 +349,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +375,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -860,7 +878,7 @@ Tip
 </section>
 <section id="interseção-e-complemento" class="level4" data-number="3.3.3.3">
 <h4 data-number="3.3.3.3" class="anchored" data-anchor-id="interseção-e-complemento"><span class="header-section-number">3.3.3.3</span> Interseção e Complemento</h4>
-<p>Além das operações que derivam diretamente da teoria dos conjuntos (união) e das que estendem conceitos de <em>strings</em> (concatenação), duas operações adicionais desempenham papéis fundamentais na teoria de linguagens formais: a <strong>interseção</strong> e o <strong>complemento</strong>. Estas operações, embora não sejam diretamente expressáveis por expressões regulares simples, são cruciais para compreender o poder e as limitações das Linguagens Regulares.</p>
+<p>Além das operações que derivam diretamente da teoria dos conjuntos (união) e das que estendem conceitos de <em>strings</em> (concatenação), duas operações adicionais desempenham papéis fundamentais na teoria de linguagens formais: a <strong>interseção</strong> e o <strong>complemento</strong>. Estas operações, embora não sejam diretamente expressáveis por expressões regulares simples, são indispensáveis para compreender o poder e as limitações das Linguagens Regulares.</p>
 <p><strong>Interseção</strong>: a interseção de duas linguagens <span class="math inline">\(L_1\)</span> e <span class="math inline">\(L_2\)</span> será dada por:</p>
 <p><span class="math display">\[L_1 \cap L_2 = \{w \mid w \in L_1 \text{ e } w \in L_2\}\]</span></p>
 <p>A interseção captura as <em>strings</em> que pertencem simultaneamente a ambas as linguagens. Esta operação é particularmente útil para construir linguagens que devem satisfazer múltiplas condições.</p>
@@ -2350,7 +2368,7 @@ Token: NUMERO | Valor: '42'</code></pre>
 <h2 data-number="3.9" class="anchored" data-anchor-id="exercício-6-classes-de-equivalência"><span class="header-section-number">3.9</span> Exercício 6: Classes de Equivalência</h2>
 <p>Considere a linguagem <span class="math inline">\(L = \{w \in \{0,1\}^* \mid w \text{ contém um número par de } 0\text{'s e um número ímpar de } 1\text{'s}\}\)</span>.</p>
 <ol type="a">
-<li>Determine quantas classes de equivalência existem na relação de Myhill-Nerode para <span class="math inline">\(L\)</span> (ver <a href="apend1.html" class="quarto-xref"><span>Chapter 22</span></a>).</li>
+<li>Determine quantas classes de equivalência existem na relação de Myhill-Nerode para <span class="math inline">\(L\)</span> (ver <a href="apend1.html" class="quarto-xref"><span>Chapter 25</span></a>).</li>
 <li>Construa o autômato finito correspondente.</li>
 </ol>
 <p><strong>Solução Letra a</strong></p>

@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./fase1.html" rel="next">
+<link href="./19-mlir-sintaxe.html" rel="next">
 <link href="./15-llvmIR.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -317,6 +317,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -331,25 +349,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +375,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -1967,6 +1985,17 @@ t4 = t2 &nbsp; &nbsp;# Reuso de t2</code></pre>
 </section>
 <section id="exemplo-em-c23-1" class="level3" data-number="17.5.2">
 <h3 data-number="17.5.2" class="anchored" data-anchor-id="exemplo-em-c23-1"><span class="header-section-number">17.5.2</span> Exemplo em C++23</h3>
+<p>O código a seguir implementa a otimização de Eliminação de Subexpressões Comuns Local (Local CSE) usando a técnica de <em>Value Numbering</em> de acordo com o digrama mostrado na <span class="citation" data-cites="fit-cselgoritmo">(<a href="referencias.html#ref-fit-cselgoritmo" role="doc-biblioref"><strong>fit-cselgoritmo?</strong></a>)</span>.</p>
+<div id="fig-cselgoritmo" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cselgoritmo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><a href="\images\CSEOptimizer.webp">Figura: Diagrama do Algoritmo de Eliminação de Subexpressões Comuns Local (Local CSE) usando Value Numbering</a></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cselgoritmo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17.1
+</figcaption>
+</figure>
+</div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> </span><span class="cv">local_cse.cpp</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Frank Alcantara</span></span>
@@ -3767,10 +3796,10 @@ for i = 0 to n:
 <section id="considerações-de-arquitetura" class="level4" data-number="17.7.6.2">
 <h4 data-number="17.7.6.2" class="anchored" data-anchor-id="considerações-de-arquitetura"><span class="header-section-number">17.7.6.2</span> Considerações de Arquitetura</h4>
 <ul>
-<li><strong>ARM</strong>: Multiplicação pode ser mais lenta, strength reduction mais benéfico</li>
-<li><strong>x86-64</strong>: Multiplicação moderna é rápida, focar em divisão e módulo</li>
-<li><strong>Microcontroladores</strong>: Strength reduction é crucial (sem FPU, multiplicadores lentos)</li>
-<li><strong>GPUs</strong>: Evitar divergência de branches, preferir operações uniformes</li>
+<li><strong>ARM</strong>: multiplicação pode ser mais lenta, <em>strength reduction</em> mais benéfico</li>
+<li><strong>x86-64</strong>: multiplicação moderna é rápida, focar em divisão e módulo</li>
+<li><strong>Microcontroladores</strong>: <em>strength reduction</em> é importante, sem <strong>FPU</strong>, as multiplicações são caras</li>
+<li><strong>GPUs</strong>: evitar divergência de branches, preferir operações uniformes</li>
 </ul>
 </section>
 </section>
@@ -5014,8 +5043,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./19-mlir-sintaxe.html" class="pagination-link" aria-label="**MLIR** 101: Nosso Primeiro Exemplo e Sintaxe Básica">
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

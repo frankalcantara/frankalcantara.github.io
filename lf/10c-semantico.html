@@ -317,6 +317,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -331,25 +349,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +375,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -590,7 +608,7 @@ Note
 \end{align*}\]</span></p>
 <p>Para contextos:</p>
 <p><span class="math display">\[\text{ftv}(\Gamma) = \bigcup_{x : \sigma \in \Gamma} \text{ftv}(\sigma)\]</span></p>
-<p>Este conceito é crucial para a operação de <strong>generalização</strong>.</p>
+<p>Este conceito é importante para a operação de <strong>generalização</strong>.</p>
 </section>
 </section>
 <section id="regras-de-julgamento-de-tipo" class="level2" data-number="13.3">
@@ -611,7 +629,7 @@ Note
 <p>Se <span class="math inline">\(e_1\)</span> é uma função de <span class="math inline">\(\tau_1\)</span> para <span class="math inline">\(\tau_2\)</span> e <span class="math inline">\(e_2\)</span> tem tipo <span class="math inline">\(\tau_1\)</span>, então a aplicação tem tipo <span class="math inline">\(\tau_2\)</span>.</p>
 <p><strong>Regra [Let] - Let Polimórfico</strong>:</p>
 <p><span class="math display">\[\frac{\Gamma \vdash e_1 : \sigma \quad \Gamma, x : \sigma \vdash e_2 : \tau}{\Gamma \vdash \text{let } x = e_1 \text{ in } e_2 : \tau}\]</span></p>
-<p>Esta é a regra crucial que introduz polimorfismo. O tipo de <span class="math inline">\(e_1\)</span> pode ser generalizado antes de ser usado em <span class="math inline">\(e_2\)</span>.</p>
+<p>Esta é a regra que introduz polimorfismo. O tipo de <span class="math inline">\(e_1\)</span> pode ser generalizado antes de ser usado em <span class="math inline">\(e_2\)</span>.</p>
 <p><strong>Regra [Inst] - Instanciação</strong>:</p>
 <p><span class="math display">\[\frac{\Gamma \vdash e : \forall \alpha. \sigma}{\Gamma \vdash e : \sigma[\alpha := \tau]}\]</span></p>
 <p>Um tipo polimórfico pode ser instanciado substituindo variáveis quantificadas por tipos concretos.</p>
@@ -722,7 +740,7 @@ S(\forall \alpha. \sigma) &amp;= \forall \alpha. S(\sigma) \quad (\alpha \notin 
 <li>Unificar <span class="math inline">\(\beta\)</span> com <span class="math inline">\(\gamma\)</span>: <span class="math inline">\(S_2 = [\beta := \gamma]\)</span></li>
 <li>Compor: <span class="math inline">\(S_2 \circ S_1 = [\alpha := \text{int}, \beta := \gamma]\)</span></li>
 </ol>
-<p><strong>Occur Check</strong>: a verificação crucial que previne tipos infinitos:</p>
+<p><strong>Occur Check</strong>: a verificação que previne tipos infinitos:</p>
 <pre><code>unify(α, α → β)  // ERRO: α aparece em α → β</code></pre>
 <p>Sem o occur check, teríamos <span class="math inline">\(\alpha = \alpha \rightarrow \beta\)</span>, um tipo infinito.</p>
 </section>

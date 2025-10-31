@@ -317,6 +317,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -331,25 +349,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +375,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -392,7 +410,7 @@ window.Quarto = {
   <li><a href="#exemplo-completo-tradução-de-função-para-tac" id="toc-exemplo-completo-tradução-de-função-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">15.3.4</span> Exemplo Completo: Tradução de Função para TAC</a></li>
   <li><a href="#exemplo-completo-tradução-de-função-com-laço-while-para-tac" id="toc-exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">15.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</a></li>
   </ul></li>
-  <li><a href="#representações-intermediárias-modernas-o-ecossistema-llvm" id="toc-representações-intermediárias-modernas-o-ecossistema-llvm" class="nav-link" data-scroll-target="#representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema LLVM</a>
+  <li><a href="#representações-intermediárias-modernas-o-ecossistema-llvm" id="toc-representações-intermediárias-modernas-o-ecossistema-llvm" class="nav-link" data-scroll-target="#representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema <strong>LLVM</strong></a>
   <ul class="collapse">
   <li><a href="#llvm-como-infraestrutura" id="toc-llvm-como-infraestrutura" class="nav-link" data-scroll-target="#llvm-como-infraestrutura"><span class="header-section-number">15.4.1</span> <strong>LLVM</strong> como Infraestrutura</a></li>
   <li><a href="#características-da-llvm-ir" id="toc-características-da-llvm-ir" class="nav-link" data-scroll-target="#características-da-llvm-ir"><span class="header-section-number">15.4.2</span> Características da <strong>LLVM IR</strong></a></li>
@@ -525,7 +543,7 @@ window.Quarto = {
 <td>Médio</td>
 <td>Modela explicitamente o fluxo de controle e as computações.</td>
 <td>Estrutura de dados mais complexa.</td>
-<td>Padrão em compiladores otimizadores (GCC, LLVM).</td>
+<td>Padrão em compiladores otimizadores (GCC, <strong>LLVM</strong>).</td>
 </tr>
 </tbody>
 </table>
@@ -1897,8 +1915,8 @@ end_function</code></pre>
 </section>
 </section>
 <section id="representações-intermediárias-modernas-o-ecossistema-llvm" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema LLVM</h2>
-<p>Enquanto o Código de Três Endereços representa os fundamentos clássicos das <strong>RI</strong>s, o cenário moderno é dominado pela infraestrutura LLVM. É crucial que a leitora compreenda o <strong>LLVM</strong> não apenas como um formato de RI, mas como um ecossistema completo que redefiniu a construção de compiladores.</p>
+<h2 data-number="15.4" class="anchored" data-anchor-id="representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema <strong>LLVM</strong></h2>
+<p>Enquanto o Código de Três Endereços representa os fundamentos clássicos das <strong>RI</strong>s, o cenário moderno é dominado pela infraestrutura <strong>LLVM</strong>. É preciso que a leitora compreenda o <strong>LLVM</strong> não apenas como um formato de RI, mas como um ecossistema completo que redefiniu a construção de compiladores.</p>
 <section id="llvm-como-infraestrutura" class="level3" data-number="15.4.1">
 <h3 data-number="15.4.1" class="anchored" data-anchor-id="llvm-como-infraestrutura"><span class="header-section-number">15.4.1</span> <strong>LLVM</strong> como Infraestrutura</h3>
 <p>O <strong>LLVM</strong> é uma coleção de bibliotecas modulares e reutilizáveis escritas em C++ que fornecem todas as fases de um <em>back-end</em> de compilador: otimização, geração de código, montagem, etc.. A <strong>LLVM Intermediate Representation (LLVM IR)</strong> é a linguagem que une todas essas componentes. Qualquer linguagem que possa ser traduzida para <strong>LLVM IR</strong> pode, instantaneamente, se beneficiar de seu otimizador de classe mundial e de seus <em>back-ends</em> que suportam dezenas de arquiteturas de hardware.</p>
@@ -2075,7 +2093,7 @@ L3:
 <li><p><strong>Eliminação de Código Morto</strong>: Se uma variável SSA <code>x₇</code> é definida mas nunca usada, podemos removê-la com segurança. A análise de vivacidade torna-se trivial.</p></li>
 <li><p><strong>Detecção de Invariantes de Laço</strong>: Se uma variável dentro de um laço é definida apenas por uma função-φ que escolhe entre um valor externo e ela mesma, isso indica um possível invariante.</p></li>
 </ul>
-<p>Em resumo, a SSA eleva a representação intermediária a um nível onde a semântica do fluxo de dados está codificada estruturalmente nos nomes das variáveis, eliminando uma camada inteira de análise que seria necessária em representações tradicionais. Esta é a razão pela qual a SSA é a base de praticamente todos os compiladores otimizadores modernos, incluindo GCC, LLVM, e JVMs de alto desempenho.</p>
+<p>Em resumo, a SSA eleva a representação intermediária a um nível onde a semântica do fluxo de dados está codificada estruturalmente nos nomes das variáveis, eliminando uma camada inteira de análise que seria necessária em representações tradicionais. Esta é a razão pela qual a SSA é a base de praticamente todos os compiladores otimizadores modernos, incluindo GCC, <strong>LLVM</strong>, e JVMs de alto desempenho.</p>
 </section>
 </section>
 <section id="exemplo-prático-c-para-llvm-ir" class="level3" data-number="15.4.4">
@@ -2085,7 +2103,7 @@ L3:
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="dt">int</span> result <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> <span class="cf">return</span> result<span class="op">;</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Podemos usar o Clang (o <em>front-end</em> C++ para LLVM) para gerar a <strong>LLVM IR</strong> correspondente. O comando <code>clang++ -S -emit-llvm -O0 exemplo.cpp</code> produzirá um arquivo <code>exemplo.ll</code>. O <code>-O0</code> desabilita as otimizações para que possamos ver o código não otimizado, que é mais próximo da tradução direta. O conteúdo será semelhante a este:</p>
+<p>Podemos usar o Clang (o <em>front-end</em> C++ para <strong>LLVM</strong>) para gerar a <strong>LLVM IR</strong> correspondente. O comando <code>clang++ -S -emit-llvm -O0 exemplo.cpp</code> produzirá um arquivo <code>exemplo.ll</code>. O <code>-O0</code> desabilita as otimizações para que possamos ver o código não otimizado, que é mais próximo da tradução direta. O conteúdo será semelhante a este:</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">;ModuleID = 'exemplo.cpp'</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">target</span> <span class="kw">triple</span> = <span class="st">"x86_64-pc-linux-gnu"</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2136,7 +2154,7 @@ L3:
 </section>
 <section id="conclusão-a-ponte-para-a-otimização-de-código" class="level2" data-number="15.5">
 <h2 data-number="15.5" class="anchored" data-anchor-id="conclusão-a-ponte-para-a-otimização-de-código"><span class="header-section-number">15.5</span> Conclusão: A Ponte para a Otimização de Código</h2>
-<p>Neste capítulo, realizamos a transição crucial da fase de análise para a fase de síntese do compilador. Partimos de uma <strong>ASTA</strong> semanticamente rica e a traduzimos para uma Representação Intermediária — uma linguagem universal projetada não apenas para desacoplar o <em>front-end</em> do <em>back-end</em>, mas, fundamentalmente, para servir de alicerce para a melhoria do código.</p>
+<p>Neste capítulo, realizamos a transição da fase de análise para a fase de síntese do compilador. Partimos de uma <strong>ASTA</strong> semanticamente rica e a traduzimos para uma Representação Intermediária — uma linguagem universal projetada não apenas para desacoplar o <em>front-end</em> do <em>back-end</em>, mas, fundamentalmente, para servir de alicerce para a melhoria do código.</p>
 <p>A geração de CI, seja na forma clássica do Código de Três Endereços ou na moderna <strong>LLVM IR</strong>, não é um fim em si mesma. É a preparação do terreno, a transformação do programa em uma forma estruturada, linear e explícita que é ideal para análise e manipulação algorítmica. A estrutura limpa do CI é a base sobre a qual as fases de otimização de código irão operar para tornar os programas mais rápidos, menores e mais eficientes.</p>
 <p>Com o nosso programa agora representado nesta forma poderosa, estamos prontos para dar o próximo passo. O próximo capítulo, “Otimização de Código”, explorará as diversas técnicas que podem ser aplicadas diretamente sobre o código intermediário que aprendemos a gerar, transformando um programa correto em um programa excelente.</p>
 </section>

@@ -6,11 +6,11 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/01-lexico.html</loc>
-    <lastmod>2025-10-10T23:34:27.747Z</lastmod>
+    <lastmod>2025-10-31T13:33:21.418Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01a-lexico.html</loc>
-    <lastmod>2025-10-10T23:34:27.748Z</lastmod>
+    <lastmod>2025-10-31T13:33:32.181Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/02-lexico.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/04-Gramaticas.html</loc>
-    <lastmod>2025-10-10T23:34:27.820Z</lastmod>
+    <lastmod>2025-10-31T13:33:35.058Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/05-parsersLL1.html</loc>
@@ -38,19 +38,19 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/10-semantico.html</loc>
-    <lastmod>2025-10-03T17:34:33.154Z</lastmod>
+    <lastmod>2025-10-31T13:33:38.071Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10a-semantico.html</loc>
-    <lastmod>2025-09-30T23:36:36.838Z</lastmod>
+    <lastmod>2025-10-31T13:33:42.316Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10b-semantico.html</loc>
-    <lastmod>2025-10-03T11:34:12.600Z</lastmod>
+    <lastmod>2025-10-31T13:33:44.705Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10c-semantico.html</loc>
-    <lastmod>2025-10-03T17:42:55.071Z</lastmod>
+    <lastmod>2025-10-31T13:33:47.780Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/11-tabelaSimbolos.html</loc>
@@ -58,15 +58,27 @@
   </url>
   <url>
     <loc>https://frankalcantara.com/14-GeraInter.html</loc>
-    <lastmod>2025-10-12T13:45:48.901Z</lastmod>
+    <lastmod>2025-10-31T13:33:51.183Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/15-llvmIR.html</loc>
-    <lastmod>2025-10-25T20:59:21.067Z</lastmod>
+    <lastmod>2025-10-31T13:33:53.325Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/16-peepOtimiza.html</loc>
-    <lastmod>2025-10-29T17:18:37.733Z</lastmod>
+    <lastmod>2025-10-31T13:33:56.137Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/19-mlir-sintaxe.html</loc>
+    <lastmod>2025-10-31T18:54:49.235Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/20-mlir-plano.html</loc>
+    <lastmod>2025-10-31T13:34:45.786Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/21-mlir-arch.html</loc>
+    <lastmod>2025-10-31T13:33:14.289Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/fase1.html</loc>

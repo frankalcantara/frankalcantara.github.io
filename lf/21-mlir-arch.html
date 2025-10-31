@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 20&nbsp; MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./fase1.html" rel="next">
+<link href="./20-mlir-plano.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./21-mlir-arch.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Geração de Código Intermediário</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#os-blocos-construtivos-da-ir-multinível" id="toc-os-blocos-construtivos-da-ir-multinível" class="nav-link active" data-scroll-target="#os-blocos-construtivos-da-ir-multinível"><span class="header-section-number">20.0.1</span> Os Blocos Construtivos da IR Multinível</a></li>
+  <li><a href="#o-sistema-de-passes-da-mlir-transformação-e-otimização-em-escala" id="toc-o-sistema-de-passes-da-mlir-transformação-e-otimização-em-escala" class="nav-link" data-scroll-target="#o-sistema-de-passes-da-mlir-transformação-e-otimização-em-escala"><span class="header-section-number">20.1</span> O Sistema de Passes da MLIR: Transformação e Otimização em Escala</a>
+  <ul class="collapse">
+  <li><a href="#conceito-e-propósito-dos-passes" id="toc-conceito-e-propósito-dos-passes" class="nav-link" data-scroll-target="#conceito-e-propósito-dos-passes"><span class="header-section-number">20.1.1</span> Conceito e Propósito dos Passes</a></li>
+  <li><a href="#infraestrutura-e-gestão-de-passes-pass-manager" id="toc-infraestrutura-e-gestão-de-passes-pass-manager" class="nav-link" data-scroll-target="#infraestrutura-e-gestão-de-passes-pass-manager"><span class="header-section-number">20.1.2</span> Infraestrutura e Gestão de Passes (<em>Pass Manager</em>)</a></li>
+  </ul></li>
+  <li><a href="#o-processo-de-abaixamento-lowering-dialeto-para-dialeto" id="toc-o-processo-de-abaixamento-lowering-dialeto-para-dialeto" class="nav-link" data-scroll-target="#o-processo-de-abaixamento-lowering-dialeto-para-dialeto"><span class="header-section-number">20.2</span> O Processo de Abaixamento (<em>Lowering</em>) Dialeto-para-Dialeto</a>
+  <ul class="collapse">
+  <li><a href="#conceito-de-lowering-progressivo-strategic-semantic-decay" id="toc-conceito-de-lowering-progressivo-strategic-semantic-decay" class="nav-link" data-scroll-target="#conceito-de-lowering-progressivo-strategic-semantic-decay"><span class="header-section-number">20.2.1</span> Conceito de <em>Lowering</em> Progressivo (<em>Strategic Semantic Decay</em>)</a></li>
+  <li><a href="#o-framework-de-conversão-de-dialetos-dialect-conversion-framework" id="toc-o-framework-de-conversão-de-dialetos-dialect-conversion-framework" class="nav-link" data-scroll-target="#o-framework-de-conversão-de-dialetos-dialect-conversion-framework"><span class="header-section-number">20.2.2</span> <strong>O Framework de Conversão de Dialetos (Dialect Conversion Framework)</strong></a></li>
+  <li><a href="#modos-de-conversão" id="toc-modos-de-conversão" class="nav-link" data-scroll-target="#modos-de-conversão"><span class="header-section-number">20.2.3</span> Modos de Conversão</a></li>
+  </ul></li>
+  <li><a href="#estudos-de-caso-em-lowering-e-dialetos-específicos" id="toc-estudos-de-caso-em-lowering-e-dialetos-específicos" class="nav-link" data-scroll-target="#estudos-de-caso-em-lowering-e-dialetos-específicos"><span class="header-section-number">20.3</span> Estudos de Caso em <em>Lowering</em> e Dialetos Específicos</a>
+  <ul class="collapse">
+  <li><a href="#otimização-baseada-em-semântica-o-dialeto-linalg" id="toc-otimização-baseada-em-semântica-o-dialeto-linalg" class="nav-link" data-scroll-target="#otimização-baseada-em-semântica-o-dialeto-linalg"><span class="header-section-number">20.3.1</span> Otimização Baseada em Semântica: O Dialeto <em>Linalg</em></a></li>
+  <li><a href="#abaixamento-de-linalg-para-estruturas-de-controle-de-loop" id="toc-abaixamento-de-linalg-para-estruturas-de-controle-de-loop" class="nav-link" data-scroll-target="#abaixamento-de-linalg-para-estruturas-de-controle-de-loop"><span class="header-section-number">20.3.2</span> Abaixamento de <em>Linalg</em> para Estruturas de Controle de Loop</a></li>
+  <li><a href="#lowering-final-para-o-target-llvm-ir" id="toc-lowering-final-para-o-target-llvm-ir" class="nav-link" data-scroll-target="#lowering-final-para-o-target-llvm-ir"><span class="header-section-number">20.3.3</span> <em>Lowering</em> Final para o Target (LLVM IR)</a></li>
+  <li><a href="#aplicações-em-machine-learning-ml" id="toc-aplicações-em-machine-learning-ml" class="nav-link" data-scroll-target="#aplicações-em-machine-learning-ml"><span class="header-section-number">20.3.4</span> Aplicações em Machine Learning (ML)</a></li>
+  <li><a href="#síntese-arquitetônica-e-funcional" id="toc-síntese-arquitetônica-e-funcional" class="nav-link" data-scroll-target="#síntese-arquitetônica-e-funcional"><span class="header-section-number">20.3.5</span> Síntese Arquitetônica e Funcional</a></li>
+  <li><a href="#o-impacto-didático-da-mlir-na-engenharia-de-compiladores" id="toc-o-impacto-didático-da-mlir-na-engenharia-de-compiladores" class="nav-link" data-scroll-target="#o-impacto-didático-da-mlir-na-engenharia-de-compiladores"><span class="header-section-number">20.3.6</span> O Impacto Didático da MLIR na Engenharia de Compiladores</a></li>
+  <li><a href="#direções-futuras" id="toc-direções-futuras" class="nav-link" data-scroll-target="#direções-futuras"><span class="header-section-number">20.3.7</span> Direções Futuras</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/21-mlir-arch.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./21-mlir-arch.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A <strong>MLIR</strong> foi concebida como uma resposta aos desafios arquitetônicos e à crescente fragmentação de software observados na engenharia de compiladores moderna. Por muitos anos, a <strong>LLVM</strong> <strong>I</strong>ntermediate <strong>R</strong>epresentation (<strong>IR</strong>) serviu como um pilar para otimizações de propósito geral, operando em um nível de abstração relativamente baixo, frequentemente caracterizado como <em><strong>C</strong> com vetores</em>. Embora esta abordagem uniforme, de tamanho único (<em>one size fits all</em>), tenha permitido a reutilização da tecnologia de <em>backend</em>, ela revelou-se insuficiente para lidar com as demandas de linguagens de programação contemporâneas como Swift, Rust ou Julia e, para <em>frameworks</em> de <em>Machine Learning</em> (ML).</p>
+<p>A história dos compiladores modernos é marcada por um desafio fundamental conhecido como o problema <span class="math inline">\(N \times M\)</span>. Este problema emerge na necessidade de conectar múltiplas linguagens de programação (<span class="math inline">\(N\)</span> <em>frontends</em>) com múltiplas arquiteturas de hardware (<span class="math inline">\(M\)</span> <em>backends</em>). Em uma abordagem ingênua, cada combinação de linguagem e arquitetura requereria um compilador específico, resultando em <span class="math inline">\(N \times M\)</span> implementações distintas. Este cenário torna-se rapidamente insustentável à medida que o ecossistema de linguagens e arquiteturas se expande motivado pela necessidade de usar a mesma linguagem em diferentes plataformas e pela proliferação de arquiteturas especializadas.</p>
+<p>A solução tradicional para este problema foi a introdução de uma Representação Intermediária (IR) única e unificadora.</p>
+<p>O <strong>LLVM</strong>, por exemplo, implementou a abordagem de representação intermediária unificada com notável sucesso: frontends traduzem código-fonte para <strong>LLVM</strong> IR, e backends traduzem <strong>LLVM</strong> IR para código de máquina específico. Esta arquitetura reduz a complexidade de <span class="math inline">\(N \times M\)</span> para <span class="math inline">\(N + M\)</span>, uma economia substancial que explica o domínio do <strong>LLVM</strong> na infraestrutura de compiladores modernos. Contudo, o <strong>LLVM</strong> foi projetado primariamente para linguagens imperativas tradicionais e arquiteturas de CPU de propósito geral. O cenário contemporâneo de computação apresenta novos desafios que expõem as limitações desta abordagem monolítica. A proliferação de aceleradores especializados (GPUs, TPUs, FPGAs, ASICs para machine learning), frameworks de programação de alto nível para computação científica e machine learning, e a necessidade de múltiplos níveis de otimização revelaram que uma única IR não é suficientemente expressiva para capturar tanto abstrações matemáticas de alto nível quanto detalhes de controle de baixo nível de maneira eficiente.</p>
+<p>O MLIR (Multi-Level Intermediate Representation) emerge como resposta a estas limitações. Sua filosofia de design fundamental é a rejeição da premissa de que uma única IR pode servir adequadamente a todos os propósitos. Em vez disso, o MLIR propõe uma infraestrutura unificada que suporta múltiplos níveis de abstração coexistindo de forma estruturada. Este design é implementado através de três princípios centrais.</p>
+<p>Primeiro, o conceito de dialetos extensíveis. Um dialeto no MLIR é um namespace de operações, tipos e atributos que compartilham uma semântica coerente. Dialetos podem representar abstrações de alto nível (como operações tensoriais do linalg), abstrações de nível intermediário (como loops estruturados do scf), ou mapeamentos diretos para hardware (como o dialeto gpu). A extensibilidade significa que novos dialetos podem ser adicionados sem modificar a infraestrutura core, permitindo que o MLIR se adapte a novos domínios e arquiteturas.</p>
+<p>Segundo, o princípio do rebaixamento progressivo (progressive lowering). Em vez de uma única transformação de alto para baixo nível, o MLIR promove uma cascata de transformações onde cada passo reduz o nível de abstração de forma controlada. Um programa pode começar como operações tensoriais abstratas, ser rebaixado para loops explícitos, depois para controle de fluxo não estruturado, e finalmente para instruções de máquina. Cada nível intermediário preserva oportunidades de otimização específicas daquele nível de abstração.</p>
+<p>Terceiro, a uniformidade da representação. Apesar da diversidade de dialetos, todos compartilham a mesma estrutura fundamental de IR. Uma Operation é sempre composta de operandos (valores SSA), resultados, atributos (metadados em tempo de compilação), e regions (blocos de código aninhados). Esta uniformidade permite que ferramentas genéricas (como o mlir-opt para aplicar passes, ou o mlir-translate para exportar) funcionem independentemente do dialeto específico.</p>
+<p>A consequência destes princípios é uma infraestrutura que escala não apenas através de múltiplas linguagens e arquiteturas, mas através de múltiplos domínios e níveis de abstração. Um compilador para machine learning pode usar dialetos de alto nível para otimizações matemáticas e dialetos de baixo nível para geração de código eficiente, reutilizando passes e análises ao longo de toda a stack. Esta flexibilidade representa uma mudança paradigmática na engenharia de compiladores, adequada às demandas da computação heterogênea contemporânea.</p>
+<p>O principal problema detectado pelos arquitetos da <strong>MLIR</strong> foi a fragmentação de software. Para implementar otimizações em nível de código-fonte que dependiam da preservação da semântica de alto nível—semântica essa que o <strong>LLVM</strong>IR de baixo nível não conseguia reter—engenheiros de compiladores começaram a desenvolver suas próprias IRs customizadas e de alto nível, posicionando-as na frente do <strong>LLVM</strong>. Essa abordagem exigia recursos de engenharia excessivos, resultando na construção de infraestruturas de compiladores que não se generalizavam facilmente para outras linguagens.</p>
+<p>O projeto <strong>MLIR</strong> foi lançado com o objetivo primário de fornecer uma solução mais geral, capaz de permitir aos engenheiros projetar IRs de alto nível que fossem propícias para otimizações em nível de fonte, mas que pudessem ser progressivamente rebaixadas (<em>lowered</em>) para IRs de baixo nível, como o <strong>LLVM</strong>IR, dentro de uma única infraestrutura coesa. As metas fundamentais da <strong>MLIR</strong> incluem: abordar a fragmentação de software, melhorar significativamente a compilação para <em>hardware</em> heterogêneo (como TPUs, FPGAs e GPUs) e reduzir o custo associado à construção de compiladores de domínio específicos. A Figura <span class="quarto-unresolved-ref">?fig-mlir-architecture</span> ilustra a arquitetura geral da <strong>MLIR</strong> e sua posição dentro do ecossistema de compiladores.</p>
+<p>::: {figure-md} fig-mlir-architecture <img src=".\images/pipeline_compilacao_mlir.webp" class="img-fluid" alt="Arquitetura do MLIR"> :::</p>
+<p>A <strong>MLIR</strong> pode ser vista como uma infraestrutura reutilizável e extensível que facilita o design e a implementação de geradores de código, tradutores e otimizadores em diferentes níveis de abstração em diversos domínios de aplicação.</p>
+<section id="os-blocos-construtivos-da-ir-multinível" class="level3" data-number="20.0.1">
+<h3 data-number="20.0.1" class="anchored" data-anchor-id="os-blocos-construtivos-da-ir-multinível"><span class="header-section-number">20.0.1</span> Os Blocos Construtivos da IR Multinível</h3>
+<p>A <strong>MLIR</strong> alcança sua flexibilidade e extensibilidade por meio de uma arquitetura que introduz conceitos poderosos e hierárquicos, diferentemente da estrutura plana do <strong>LLVM</strong>IR.</p>
+<section id="dialetos-o-eixo-da-extensibilidade" class="level4" data-number="20.0.1.1">
+<h4 data-number="20.0.1.1" class="anchored" data-anchor-id="dialetos-o-eixo-da-extensibilidade"><span class="header-section-number">20.0.1.1</span> Dialetos: O Eixo da Extensibilidade</h4>
+<p>O conceito central que define a extensibilidade da <strong>MLIR</strong> é chamado de <strong>Dialeto</strong>. Um Dialeto é essencialmente um conjunto definido de operações, instruções, e tipos que são específicos para um determinado domínio ou nível de abstração. O <strong>MLIR</strong> opera com uma vasta gama de dialetos que representam diferentes etapas no processo de compilação. Exemplos incluem Dialetos de alto nível para integração com <em>frameworks</em> de aprendizado de máquina (como <strong>TensorFlow IR</strong>, <strong>Torch</strong> e <strong>TOSA</strong>), Dialetos de domínio intermediário especializados em otimizações (como <strong>Linalg</strong> para álgebra linear, <strong>Vector</strong> para vetorização e <strong>Affine</strong> para análise poliedral), e Dialetos de baixo nível (como <strong>LLVM</strong>IR), que fornecem um mapeamento <span class="math inline">\(1:1\)</span> para a representação do <em>backend</em> <strong>LLVM</strong>. Esta separação em dialetos permite que a IR represente fluxos de dados complexos, otimizações de <em>High-Performance Computing</em> (HPC) e transformações de código de máquina. Se um novo compilador de baixo nível for necessário, o desenvolvedor pode simplesmente criar um novo dialeto e definir os padrões de <em>lowering</em> a partir de dialetos de alto nível, simplificando a integração de novos <em>targets</em> de <em>hardware</em>.</p>
+</section>
+<section id="operações-o-elemento-central-da-ir" class="level4" data-number="20.0.1.2">
+<h4 data-number="20.0.1.2" class="anchored" data-anchor-id="operações-o-elemento-central-da-ir"><span class="header-section-number">20.0.1.2</span> Operações: O Elemento Central da IR</h4>
+<p>As Operações (Ops) são a unidade central e extensível de abstração e transformação dentro da MLIR. As operações são modeladas usando um pequeno conjunto de conceitos fundamentais que permitem que sejam manipuladas e analisadas genericamente, mesmo que pertençam a dialetos customizados. Toda operação possui um nome, uma lista de operandos SSA (Static Single Assignment), atributos, tipos para valores de resultado, uma localização de código para depuração, e, uma lista de blocos sucessores e uma lista de <strong>Regiões</strong>. Esta abordagem genérica, a <em>Opaque API</em>, permite que a <strong>MLIR</strong> analise, represente e realize o <em>round-trip</em> de qualquer IR, mesmo para operações de dialetos não registrados.</p>
+</section>
+<section id="regiões-blocos-e-ssa-hierárquica" class="level4" data-number="20.0.1.3">
+<h4 data-number="20.0.1.3" class="anchored" data-anchor-id="regiões-blocos-e-ssa-hierárquica"><span class="header-section-number">20.0.1.3</span> Regiões, Blocos e SSA Hierárquica</h4>
+<p>A <strong>MLIR</strong> se diferencia fundamentalmente do <strong>LLVM</strong>IR por introduzir uma estrutura hierárquica. Uma Região é uma lista ordenada de Blocos, e é por meio das Regiões que uma Operação pode conter uma estrutura de IR aninhada, análoga ao corpo de uma função ou a um laço de controle estruturado, como scf.for.</p>
+<p>A arquitetura hierárquica é intrinsecamente ligada à forma como a <strong>MLIR</strong> estende o conceito de SSA. A <strong>MLIR</strong> define um conceito generalizado de “dominância hierárquica” que opera por meio da estrutura da IR, determinando o escopo e a validade de um valor. Um valor definido em uma Região nunca pode ser usado fora dela. Os argumentos do primeiro bloco de uma Região são tratados como os argumentos da Região, e a semântica da operação parente define a fonte desses argumentos.</p>
+<p>Esta decisão arquitetônica de hierarquia, escopo limitado do SSA e o uso de referências explícitas a símbolos, tem uma implicação de engenharia que vai além da mera representação. Ela aborda diretamente deficiências de design que existiam no <strong>LLVM</strong>, onde problemas não óbvios impediam que um compilador <em>multi-threaded</em> trabalhasse em múltiplas funções simultaneamente. Ao limitar estritamente o escopo do SSA aos limites de uma Região, a <strong>MLIR</strong> garante que diferentes funções ou <em>kernels</em> contidas em diferentes Regiões/Operações possam ser processadas de forma independente e paralela. A MLIR, portanto, atua como um sistema de orquestração 2 que gerencia a complexidade da compilação multi-nível e permite que as otimizações ocorram em paralelo, o que é fundamental para mitigar os altos custos de compilação em <em>frameworks</em> complexos. A verdadeira força da <strong>MLIR</strong> reside na sua capacidade de <strong>conectar compiladores existentes</strong> e gerenciar <em>pipelines</em> heterogêneos de forma segura e paralela, atuando como o “arquiteto” que projeta as transformações em vários níveis antes de delegar a fase final ao “operário” <strong>LLVM</strong>IR.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tabela I: Diferenças Arquiteturais Chave entre <strong>MLIR</strong> e <strong>LLVM</strong>IR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Característica</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Nível de Abstração</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Extensibilidade</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Estrutura da IR</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Segurança e Concorrência</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Foco de Otimização</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="o-sistema-de-passes-da-mlir-transformação-e-otimização-em-escala" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="o-sistema-de-passes-da-mlir-transformação-e-otimização-em-escala"><span class="header-section-number">20.1</span> O Sistema de Passes da MLIR: Transformação e Otimização em Escala</h2>
+<section id="conceito-e-propósito-dos-passes" class="level3" data-number="20.1.1">
+<h3 data-number="20.1.1" class="anchored" data-anchor-id="conceito-e-propósito-dos-passes"><span class="header-section-number">20.1.1</span> Conceito e Propósito dos Passes</h3>
+<p>Os Passes (ou passes de compilação) são a infraestrutura básica e modular para a transformação e otimização da Intermediate Representation (IR) dentro do MLIR. Eles representam unidades atômicas de trabalho, que podem ser análises ou transformações que modificam a IR. No MLIR, a unidade principal de abstração e transformação é a Operação. Consequentemente, todos os passes na <strong>MLIR</strong> derivam de OperationPass, e o escopo de atuação de cada pass é denominado a “operação atual”.</p>
+</section>
+<section id="infraestrutura-e-gestão-de-passes-pass-manager" class="level3" data-number="20.1.2">
+<h3 data-number="20.1.2" class="anchored" data-anchor-id="infraestrutura-e-gestão-de-passes-pass-manager"><span class="header-section-number">20.1.2</span> Infraestrutura e Gestão de Passes (<em>Pass Manager</em>)</h3>
+<p>A <strong>MLIR</strong> introduziu uma infraestrutura de gerenciamento de passes que se alinha perfeitamente com sua arquitetura hierárquica. O gerenciador de passes (Pass Manager) é projetado para operar em instâncias de operações em diferentes níveis de aninhamento.</p>
+<section id="o-oppassmanager-e-o-aninhamento-estrutural" class="level4" data-number="20.1.2.1">
+<h4 data-number="20.1.2.1" class="anchored" data-anchor-id="o-oppassmanager-e-o-aninhamento-estrutural"><span class="header-section-number">20.1.2.1</span> O <em>OpPassManager</em> e o Aninhamento Estrutural</h4>
+<p>O OpPassManager é o mecanismo central que permite a configuração e execução de <em>pipelines</em> de passes. A funcionalidade de aninhamento (<em>nesting</em>) é decisiva: um OpPassManager pode aninhar um <em>pipeline</em> de passes para operar em uma operação específica contida em outra. Esse aninhamento corresponde diretamente ao aninhamento estrutural das Regiões na IR.</p>
+<p>Por exemplo, é possível ter um OpPassManager que opera no nível de um module (o topo da hierarquia) e, dentro dele, aninhar um segundo <em>pipeline</em> que opera exclusivamente em operações func contidas nesse módulo, usando o método nest&lt;OpT&gt;. Essa capacidade permite que otimizações sejam aplicadas com precisão cirúrgica, visando apenas o subconjunto da IR onde são relevantes (e.g., passes <em>Linalg</em> aplicados apenas dentro de funções que contêm álgebra linear), sem a necessidade de varrer toda a árvore da IR repetidamente. Isso não apenas otimiza o tempo de compilação, mas também garante que otimizações de domínio específico não interfiram inadvertidamente em código não relacionado.</p>
+</section>
+<section id="regras-de-concorrência-e-garantias-de-segurança" class="level4" data-number="20.1.2.2">
+<h4 data-number="20.1.2.2" class="anchored" data-anchor-id="regras-de-concorrência-e-garantias-de-segurança"><span class="header-section-number">20.1.2.2</span> Regras de Concorrência e Garantias de Segurança</h4>
+<p>A capacidade de processar diferentes partes da IR em paralelo, um requisito crítico para mitigar o alto custo de compilação em sistemas modernos 14, é assegurada por um conjunto de restrições rígidas impostas a todos os Passes. Essas restrições são uma consequência direta do design Hierarchical SSA da <strong>MLIR</strong> e são implementadas para prevenir comportamento problemático em cenários <em>multi-threaded</em>.</p>
+<p>A segurança concorrente da <strong>MLIR</strong> se baseia no princípio de que as modificações de um Pass devem ser estritamente confinadas ao escopo da operação atual e às operações aninhadas sob ela. Por exemplo, um Pass não deve inspecionar o estado de operações que são <em>irmãs</em> da operação atual, nem acessar operações aninhadas sob essas irmãs, porque outras <em>threads</em> podem estar modificando esses dados em paralelo. Da mesma forma, um Pass não pode modificar o estado de operações que não estão aninhadas sob a operação atual; a única exceção permitida para modificar a operação atual é alterando seus atributos (não seus operandos).</p>
+<p>O propósito fundamental dessas regras é transferir a responsabilidade pela segurança concorrente do compilador, que tradicionalmente exigiria mecanismos complexos de bloqueio (<em>locks</em>) explícitos, para o próprio design da IR. Essa estrutura hierárquica garante que, ao distribuir o processamento das Operações (como funções ou <em>kernels</em>) para diferentes <em>threads</em>, o isolamento de estado (garantido pelas regras de não-inspeção/modificação de irmãos) impede a corrupção de dados ou inconsistências. O resultado é um sistema onde o paralelismo no <em>pipeline</em> de compilação é intrínseco e seguro.</p>
+<table class="table">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tabela II: Regras Fundamentais para Passes de Operação <strong>MLIR</strong> (Visando Segurança e Paralelismo)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ação Proibida</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inspecionar estado de operações</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Modificar estado de operações</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Modificar operandos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Manter estado mutável</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Manter estado mutável</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="o-processo-de-abaixamento-lowering-dialeto-para-dialeto" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="o-processo-de-abaixamento-lowering-dialeto-para-dialeto"><span class="header-section-number">20.2</span> O Processo de Abaixamento (<em>Lowering</em>) Dialeto-para-Dialeto</h2>
+<section id="conceito-de-lowering-progressivo-strategic-semantic-decay" class="level3" data-number="20.2.1">
+<h3 data-number="20.2.1" class="anchored" data-anchor-id="conceito-de-lowering-progressivo-strategic-semantic-decay"><span class="header-section-number">20.2.1</span> Conceito de <em>Lowering</em> Progressivo (<em>Strategic Semantic Decay</em>)</h3>
+<p>O processo de Abaixamento (<em>Lowering</em>) na <strong>MLIR</strong> é o mecanismo pelo qual uma representação de alto nível (rica em semântica de domínio) é gradualmente transformada em uma representação de baixo nível (otimizada para o <em>backend</em> de <em>hardware</em>). Em contraste com a conversão monolítica frequentemente vista em infraestruturas mais antigas, a <strong>MLIR</strong> adota um <em>lowering</em> progressivo e multi-estágio, caracterizado como uma decomposição semântica estratégica.</p>
+<p>O <em>Lowering</em> é implementado como um <em>pipeline</em> de conversões dialeto-para-dialeto. Isso significa que uma operação em um Dialeto A (e.g., Toy) é transformada em operações em um Dialeto B (Affine ou SCF), que por sua vez podem ser convertidas para um Dialeto C (LLVM). Essa natureza transitiva e modular permite a reutilização eficiente de otimizações intermediárias e o encapsulamento do conhecimento de domínio em cada estágio.</p>
+</section>
+<section id="o-framework-de-conversão-de-dialetos-dialect-conversion-framework" class="level3" data-number="20.2.2">
+<h3 data-number="20.2.2" class="anchored" data-anchor-id="o-framework-de-conversão-de-dialetos-dialect-conversion-framework"><span class="header-section-number">20.2.2</span> <strong>O Framework de Conversão de Dialetos (Dialect Conversion Framework)</strong></h3>
+<p>Para gerenciar este processo complexo, o <strong>MLIR</strong> fornece um <em>framework</em> de conversão robusto que garante que as transformações sejam controladas e resultem em uma IR legal. O framework de conversão de dialetos é composto por três elementos chave:</p>
+<ol type="1">
+<li><strong>Conversion Target (Alvo de Conversão):</strong> Este componente define o conjunto explícito de Operações e Dialetos que são considerados <strong>legais</strong> na IR após a conversão. Todas as operações de entrada que não estão nessa lista de legalidade (e que não são as operações alvo da conversão) são consideradas <strong>ilegais</strong>. Por exemplo, ao converter para o <strong>LLVM</strong>IR, o ConversionTarget pode ser configurado para aceitar apenas o mlir::LLVMDialect e o mlir::ModuleOp.<br>
+</li>
+<li><strong>Rewrite Patterns (Padrões de Reescrita):</strong> São as regras algorítmicas que definem como uma Operação ilegal deve ser transformada ou substituída por um conjunto de Operações legais, geralmente de um Dialeto de nível inferior. A flexibilidade do <strong>MLIR</strong> reside no fato de que esses padrões podem ser populados dinamicamente para lidar com dialetos comuns. Por exemplo, existem funções utilitárias como populateAffineToStdConversionPatterns e populateArithToLLVMConversionPatterns que preenchem o conjunto de padrões (RewritePatternSet) para realizar o <em>lowering</em> transitivo.<br>
+</li>
+<li><strong>Type Converter (Conversor de Tipos):</strong> Essencial para a fase final do <em>lowering</em>, o <em>Type Converter</em> mapeia tipos de alto nível para representações de baixo nível. Isto é particularmente necessário ao lidar com estruturas de memória complexas, como o tipo MemRef, que precisa ser transformado em uma representação em ponteiros e descritores de memória no Dialeto <strong>LLVM</strong>.</li>
+</ol>
+<p>O Lowering, mediado pelo Dialect Conversion Framework, funciona como um sistema de contratos de interface. Em vez de depender de um único algoritmo para ir do ponto A ao Z, o compilador usa o Conversion Target para definir as expectativas de saída. Se um conjunto de Rewrite Patterns pode satisfazer essa expectativa, a conversão é validada. Isso permite que diferentes fornecedores de <em>hardware</em> ou desenvolvedores de domínios específicos (como o consórcio XLA 20) contribuam com seus próprios Dialetos e Padrões de Lowering, plugando-os de forma modular na cadeia de compilação sem necessidade de conhecimento intrínseco sobre o <em>frontend</em> original.</p>
+</section>
+<section id="modos-de-conversão" class="level3" data-number="20.2.3">
+<h3 data-number="20.2.3" class="anchored" data-anchor-id="modos-de-conversão"><span class="header-section-number">20.2.3</span> Modos de Conversão</h3>
+<p>O framework oferece diferentes modos para controlar a granularidade e o sucesso da conversão, dependendo do estágio do <em>pipeline</em> 19:</p>
+<ul>
+<li><strong><em>Full Conversion</em></strong> <strong>(Conversão Completa):</strong> Exige que todas as operações de entrada sejam legalizadas para o alvo. A conversão só é bem-sucedida se todas as operações forem devidamente legalizadas, garantindo que a IR final contenha apenas operações conhecidas e legais.<br>
+</li>
+<li><strong><em>Partial Conversion</em></strong> <strong>(Conversão Parcial):</strong> Legaliza o máximo de operações possível, mas permite que operações preexistentes não explicitamente marcadas como ilegais permaneçam. Este modo é útil em <em>pipelines</em> onde partes do código podem estar em dialetos mistos ou quando se deseja apenas abaixar uma seção específica da IR.<br>
+</li>
+<li><strong><em>Analysis Conversion</em></strong> <strong>(Conversão de Análise):</strong> Realiza a análise do que seria legalizado se uma conversão parcial fosse aplicada, mas sem executar <em>rewrites</em> ou transformações reais. Útil para planejamento e pré-otimizações.</li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tabela III: Fluxo Hierárquico de Abaixamento (Lowering) em um Pipeline de Compilação Típico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nível de Abstração</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Alto Nível (Gráfico)</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Nível Intermediário (Domínio Específico)</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Nível de Loop/Memória</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Baixo Nível (Target)</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="estudos-de-caso-em-lowering-e-dialetos-específicos" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="estudos-de-caso-em-lowering-e-dialetos-específicos"><span class="header-section-number">20.3</span> Estudos de Caso em <em>Lowering</em> e Dialetos Específicos</h2>
+<section id="otimização-baseada-em-semântica-o-dialeto-linalg" class="level3" data-number="20.3.1">
+<h3 data-number="20.3.1" class="anchored" data-anchor-id="otimização-baseada-em-semântica-o-dialeto-linalg"><span class="header-section-number">20.3.1</span> Otimização Baseada em Semântica: O Dialeto <em>Linalg</em></h3>
+<p>O Dialeto <em>Linalg</em> (Linear Algebra) é um exemplo paradigmático da filosofia da MLIR, que visa reter a semântica de domínio pelo maior tempo possível dentro do <em>pipeline</em> de compilação.</p>
+<section id="preservação-semântica-e-legality-by-construction" class="level4" data-number="20.3.1.1">
+<h4 data-number="20.3.1.1" class="anchored" data-anchor-id="preservação-semântica-e-legality-by-construction"><span class="header-section-number">20.3.1.1</span> <strong>Preservação Semântica e <em>Legality by Construction</em></strong></h4>
+<p>Ao contrário de IRs que decompõem operações complexas cedo demais em laços e aritmética simples, operações Linalg, como linalg.matmul, são projetadas para reter sua identidade mesmo após otimizações como <em>tiling</em> (subdivisão de malha) e fusão. Essa preservação semântica simplifica significativamente a implementação de otimizações.</p>
+<p>A <em>Linalg</em> integra as pré-condições de legalidade nas próprias semânticas da operação, um conceito conhecido como <em>legality by construction</em>. Por exemplo, ao aplicar <em>loop tiling</em> em um linalg.matmul, a legalidade da transformação é garantida pela própria natureza da operação, eliminando a necessidade de análises complexas e caras de dependência de dados que seriam necessárias em dialetos mais genéricos como o Affine. Essa estratégia separa claramente a validade de uma transformação das considerações de sua lucratividade, tornando o compilador mais robusto e previsível.</p>
+</section>
+<section id="as-quatro-formas-linalg" class="level4" data-number="20.3.1.2">
+<h4 data-number="20.3.1.2" class="anchored" data-anchor-id="as-quatro-formas-linalg"><span class="header-section-number">20.3.1.2</span> As Quatro Formas Linalg</h4>
+<p>O dialeto <em>Linalg</em> é estruturado em quatro formas de operação que facilitam a correspondência de padrões (<em>pattern matching</em>) e a preservação de informações:</p>
+<ol type="1">
+<li><strong>Generic (linalg.generic):</strong> Capaz de codificar todas as operações de laços perfeitamente aninhados.<br>
+</li>
+<li><strong>Category (e.g., linalg.contract, linalg.elementwise):</strong> Codifica a semântica de alto nível de um linalg.generic.<br>
+</li>
+<li><strong>Named (e.g., linalg.matmul, linalg.add):</strong> Formas perfeitamente aninhadas que podem ser convertidas em formas <em>category</em> ou <em>generic</em>.<br>
+</li>
+<li><strong>Composite (e.g., linalg.softmax):</strong> Operações não perfeitamente aninhadas que são convertidas em uma lista de operações de outros dialetos.</li>
+</ol>
+<p>A capacidade de converter entre as formas, mantendo a equivalência semântica com o linalg.generic, suporta o conceito de <em>canonical forms</em>, onde o compilador pode transformar a IR para o formato que é mais fácil para a otimização particular a ser aplicada (e.g., named para montagem de DAGs ou generic para padrões complexos).</p>
+</section>
+</section>
+<section id="abaixamento-de-linalg-para-estruturas-de-controle-de-loop" class="level3" data-number="20.3.2">
+<h3 data-number="20.3.2" class="anchored" data-anchor-id="abaixamento-de-linalg-para-estruturas-de-controle-de-loop"><span class="header-section-number">20.3.2</span> Abaixamento de <em>Linalg</em> para Estruturas de Controle de Loop</h3>
+<p>Após as otimizações de domínio de álgebra linear, o <em>Lowering</em> continua, transformando a representação declarativa de <em>Linalg</em> em uma representação imperativa de estruturas de controle.</p>
+<p>O <em>Linalg</em> é tipicamente abaixado para o <strong>Dialeto SCF (Structured Control Flow)</strong> 22 e/ou o <strong>Affine Dialect</strong>. O Dialeto SCF fornece representações para laços estruturados (scf.for) e controle de fluxo condicional, servindo como um intermediário vital na geração de código eficiente.</p>
+<p>Nesta etapa, uma operação <em>Linalg</em> declarativa, que descrevia o que calcular, é decomposta em aninhamentos explícitos de laços scf.for, combinados com operações de acesso à memória (memref.load, memref.store) e operações aritméticas (arith). Essa transição da semântica declarativa de alto nível para as estruturas de controle imperativas marca o ponto onde as otimizações de HPC foram finalizadas e o código está pronto para ser refinado em termos de acesso à memória e índices, antes de ser entregue ao <em>backend</em>.</p>
+</section>
+<section id="lowering-final-para-o-target-llvm-ir" class="level3" data-number="20.3.3">
+<h3 data-number="20.3.3" class="anchored" data-anchor-id="lowering-final-para-o-target-llvm-ir"><span class="header-section-number">20.3.3</span> <em>Lowering</em> Final para o Target (LLVM IR)</h3>
+<p>A fase terminal do <em>pipeline</em> de compilação utiliza o Dialeto <strong>LLVM</strong>IR da <strong>MLIR</strong> para se integrar à infraestrutura <strong>LLVM</strong>madura. O Dialeto <strong>LLVM</strong>IR na <strong>MLIR</strong> possui um mapeamento 1:1 com a <strong>LLVM</strong>IR subjacente 6, garantindo que a <strong>MLIR</strong> possa alavancar o ecossistema <strong>LLVM</strong>para otimizações de baixo nível, como alocação de registradores e agendamento de instruções.</p>
+<p>Nesta fase, padrões de conversão são aplicados para traduzir dialetos intermediários (como arith, cf, func, affine e scf) para o Dialeto <strong>LLVM</strong>. O TypeConverter desempenha um papel fundamental, convertendo tipos de memória complexos (como MemRef) em representações de baixo nível adequadas ao contexto <strong>LLVM</strong>, tipicamente descritores de memória baseados em ponteiros. A <strong>MLIR</strong> também representa intrínsecos do <strong>LLVM</strong>(operações específicas do alvo) por meio de operações que começam com o prefixo “llvm.”.</p>
+</section>
+<section id="aplicações-em-machine-learning-ml" class="level3" data-number="20.3.4">
+<h3 data-number="20.3.4" class="anchored" data-anchor-id="aplicações-em-machine-learning-ml"><span class="header-section-number">20.3.4</span> Aplicações em Machine Learning (ML)</h3>
+<p>O <strong>MLIR</strong> é a espinha dorsal de muitas cadeias de compilação de <em>Machine Learning</em>.</p>
+<ul>
+<li><strong>Dialetos de ML:</strong> Dialetos como TensorFlow IR, XLA HLO, MHLO, StableHLO e TOSA são usados para gerenciar o fluxo de compilação desde o grafo de dados. O XLA (Accelerated Linear Algebra), um compilador para ML, utiliza o poder do <strong>MLIR</strong> para otimizar modelos de <em>frameworks</em> populares como PyTorch e TensorFlow para <em>hardware</em> heterogêneo.<br>
+</li>
+<li><strong>MHLO e StableHLO:</strong> O Dialeto MHLO (TensorFlow HLO) e sua variante mais estável, StableHLO, representam a IR usada pelo compilador XLA e são projetados para suportar otimizações próximas ao nível do <em>hardware</em>. É fundamental notar que Dialetos como tf e mhlo são capazes de suportar tanto o treinamento quanto a inferência, dependendo das operações modeladas.</li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tabela IV: Papel e Fluxo de Otimização dos Principais Dialetos <strong>MLIR</strong> (Aprofundamento)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Dialeto</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>TF / TOSA / Torch</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Linalg</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Affine</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>SCF</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>LLVM IR</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="síntese-arquitetônica-e-funcional" class="level3" data-number="20.3.5">
+<h3 data-number="20.3.5" class="anchored" data-anchor-id="síntese-arquitetônica-e-funcional"><span class="header-section-number">20.3.5</span> Síntese Arquitetônica e Funcional</h3>
+<p>A <strong>MLIR</strong> transcende o papel de uma mera Representação Intermediária. Ela é uma infraestrutura de compilador modular, extensível e fundamentalmente projetada para o paralelismo intrínseco. Sua arquitetura resolve o problema da fragmentação de software, permitindo que os engenheiros representem e otimizem código em múltiplos níveis de abstração usando Dialetos específicos de domínio.</p>
+<p>O poder da <strong>MLIR</strong> reside em sua estrutura hierárquica (Regiões e Operações) e no conceito de SSA Hierárquica. Esta estrutura não é apenas uma conveniência representacional, mas sim a base técnica que permite ao OpPassManager aplicar otimizações de forma segura e paralela, isolando o estado e mitigando os desafios de concorrência observados em sistemas como o <strong>LLVM</strong>.</p>
+<p>O processo de Abaixamento (<em>Lowering</em>) é executado por meio de um <em>Dialect Conversion Framework</em> rigoroso. Este framework não é uma simples tradução, mas sim um contrato estratégico onde os <em>Rewrite Patterns</em> transformam a IR de forma incremental. Essa progressão evita a perda prematura de semântica de alto nível, um princípio validado por dialetos como o Linalg, que preserva informações de domínio (como matmul) até o momento ideal para a aplicação de otimizações de HPC, garantindo a <em>legality by construction</em>. A MLIR, portanto, padroniza o <em>mecanismo</em> de compilação, desassociando-o do <em>conteúdo</em> de compilação, o que é importante para alcançar a portabilidade e otimização para <em>hardware</em> heterogêneo.</p>
+</section>
+<section id="o-impacto-didático-da-mlir-na-engenharia-de-compiladores" class="level3" data-number="20.3.6">
+<h3 data-number="20.3.6" class="anchored" data-anchor-id="o-impacto-didático-da-mlir-na-engenharia-de-compiladores"><span class="header-section-number">20.3.6</span> O Impacto Didático da MLIR na Engenharia de Compiladores</h3>
+<p>A ascensão da <strong>MLIR</strong> recontextualiza o ensino e a prática da engenharia de compiladores. O foco se desloca de IRs monolíticas e otimizações de baixo nível para a gestão de <em>pipelines</em> multi-domínio e a priorização da extensibilidade.</p>
+<p>O modelo <strong>MLIR</strong> enfatiza o design de IRs que preservam a semântica de alto nível—como demonstrado pelo Dialeto Linalg, que permite otimizações confiáveis sem depender de análises complexas de dependência. A introdução da Hierarchical SSA e as regras estritas impostas aos Passes oferecem um estudo de caso ideal sobre como projetar infraestrutura para alta concorrência em sistemas de transformação de programas. Dominar o conteúdo desta aula implica não apenas entender o que são Dialetos e Operações, mas também compreender a interligação profunda entre a estrutura da IR (hierarquia), a segurança dos passes (regras de não-inspeção) e a estratégia de <em>lowering</em> (conversão progressiva dialeto-para-dialeto).</p>
+</section>
+<section id="direções-futuras" class="level3" data-number="20.3.7">
+<h3 data-number="20.3.7" class="anchored" data-anchor-id="direções-futuras"><span class="header-section-number">20.3.7</span> Direções Futuras</h3>
+<p>O futuro da <strong>MLIR</strong> está solidamente ligado à consolidação de padrões abertos, como o Dialeto StableHLO 8, que visa fornecer uma interface estável para o ecossistema de <em>Machine Learning</em>. A adoção contínua da <strong>MLIR</strong> em linguagens de alto desempenho, como o Mojo 14, e a sua integração como o intermediário central em projetos como OpenXLA, demonstram a promessa de compilação rápida, segura e extensível, solidificando o seu papel como o padrão arquitetônico para a próxima geração de infraestruturas de compiladores.</p>
+<section id="referências-até-o-momento-31102025" class="level4" data-number="20.3.7.1">
+<h4 data-number="20.3.7.1" class="anchored" data-anchor-id="referências-até-o-momento-31102025"><span class="header-section-number">20.3.7.1</span> Referências até o Momento 31/10/2025</h4>
+<ol type="1">
+<li>CS 6120: MLIR: A Compiler Infrastructure for the End of Moore’s Law, acessado em outubro 29, 2025, <a href="https://www.cs.cornell.edu/courses/cs6120/2023fa/blog/mlir/">https://www.cs.cornell.edu/courses/cs6120/2023fa/blog/mlir/</a><br>
+</li>
+<li>MLIR: A Compiler Infrastructure for the End of Moore’s Law - arXiv, acessado em outubro 29, 2025, <a href="https://arxiv.org/pdf/2002.%20054">https://arxiv.org/pdf/2002. 054</a><br>
+</li>
+<li>Understanding <strong>LLVM</strong>v/s MLIR: A Comprehensive Comparison Overview | by Prince Jain, acessado em outubro 29, 2025, <a href="https://medium.com/@princejain_77044/understanding-llvm-v-s-mlir-a-comprehensive-comparison-overview-9afc0214adc1">https://medium.com/<span class="citation" data-cites="princejain">(<span><strong>princejain?</strong></span>)</span>_77044/understanding-llvm-v-s-mlir-a-comprehensive-comparison-overview-9afc0214adc1</a><br>
+</li>
+<li>MLIR, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/">https://mlir.llvm.org/</a><br>
+</li>
+<li>Perguntas sobre <strong>MLIR</strong> : r/ProgrammingLanguages - Reddit, acessado em outubro 29, 2025, <a href="https://www.reddit.com/r/ProgrammingLanguages/comments/17z6kqu/questions_about_mlir/?tl=pt-br">https://www.reddit.com/r/ProgrammingLanguages/comments/17z6kqu/questions_about_mlir/?tl=pt-br</a><br>
+</li>
+<li><strong>MLIR</strong> dialects - TensorFlow, acessado em outubro 29, 2025, <a href="https://www.tensorflow.org/mlir/dialects">https://www.tensorflow.org/mlir/dialects</a><br>
+</li>
+<li><strong>MLIR</strong> <em>Linalg</em> Dialect and Patterns - Lei.Chat(), acessado em outubro 29, 2025, <a href="https://www.lei.chat/posts/mlir-linalg-dialect-and-patterns/">https://www.lei.chat/posts/mlir-linalg-dialect-and-patterns/</a><br>
+</li>
+<li>What all <strong>MLIR</strong> dialects can support both Training and Inference using TensorFlow?, acessado em outubro 29, 2025, <a href="https://discuss.ai.google.dev/t/what-all-mlir-dialects-can-support-both-training-and-inference-using-tensorflow/30081">https://discuss.ai.google.dev/t/what-all-mlir-dialects-can-support-both-training-and-inference-using-tensorflow/30081</a><br>
+</li>
+<li><em>Linalg</em> Dialect Rationale: The Case For Compiler-Friendly Custom …, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/Rationale/RationaleLinalgDialect/">https://mlir.llvm.org/docs/Rationale/RationaleLinalgDialect/</a><br>
+</li>
+<li><strong>MLIR</strong> Tutorial: Create your custom Dialect &amp; <em>Lowering</em> to <strong>LLVM</strong>IR — 1 - Medium, acessado em outubro 29, 2025, <a href="https://medium.com/sniper-ai/mlir-tutorial-create-your-custom-dialect-lowering-to-llvm-ir-dialect-system-1-1f125a6a3008">https://medium.com/sniper-ai/mlir-tutorial-create-your-custom-dialect-lowering-to-llvm-ir-dialect-system-1-1f125a6a3008</a><br>
+</li>
+<li>Pass Infrastructure - MLIR, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/PassManagement/">https://mlir.llvm.org/docs/PassManagement/</a><br>
+</li>
+<li>Chapter 2: Emitting Basic <strong>MLIR</strong> - <strong>LLVM</strong>, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/">https://mlir.llvm.org/docs/Tutorials/Toy/Ch-2/</a><br>
+</li>
+<li><strong>MLIR</strong> Language Reference, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/LangRef/">https://mlir.llvm.org/docs/LangRef/</a><br>
+</li>
+<li>Deep Engineering #9: Unpacking <strong>MLIR</strong> and Mojo with Ivo Balbaert - Medium, acessado em outubro 29, 2025, <a href="https://medium.com/deep-engineering/deep-engineering-9-unpacking-mlir-and-mojo-with-ivo-balbaert-4e33ac508a5b">https://medium.com/deep-engineering/deep-engineering-9-unpacking-mlir-and-mojo-with-ivo-balbaert-4e33ac508a5b</a><br>
+</li>
+<li><strong>MLIR</strong> — Multi-Level Intermediate Representation | by Vishali Senthilkumar | Medium, acessado em outubro 29, 2025, <a href="https://medium.com/@vishalijsk/mlir-multi-level-intermediate-representation-8496dd3bfc38">https://medium.com/<span class="citation" data-cites="vishalijsk/mlir-multi-level-intermediate-representation-8496dd3bfc38">(<span><strong>vishalijsk/mlir-multi-level-intermediate-representation-8496dd3bfc38?</strong></span>)</span></a><br>
+</li>
+<li><strong>MLIR</strong> Tutorial: - <strong>LLVM</strong>, acessado em outubro 29, 2025, <a href="https://llvm.org/devmtg/2019-04/slides/Tutorial-AminiVasilacheZinenko-MLIR.pdf">https://llvm.org/devmtg/2019-04/slides/Tutorial-AminiVasilacheZinenko-MLIR.pdf</a><br>
+</li>
+<li>Chapter 6: <em>Lowering</em> to <strong>LLVM</strong>and CodeGeneration - MLIR, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/Tutorials/Toy/Ch-6/">https://mlir.llvm.org/docs/Tutorials/Toy/Ch-6/</a><br>
+</li>
+<li><strong>MLIR</strong> Part 1 - Introduction to <strong>MLIR</strong> - Stephen Diehl, acessado em outubro 29, 2025, <a href="https://www.stephendiehl.com/posts/mlir_introduction/">https://www.stephendiehl.com/posts/mlir_introduction/</a><br>
+</li>
+<li>Dialect Conversion - MLIR, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/DialectConversion/">https://mlir.llvm.org/docs/DialectConversion/</a><br>
+</li>
+<li>XLA - OpenXLA Project, acessado em outubro 29, 2025, <a href="https://openxla.org/xla">https://openxla.org/xla</a><br>
+</li>
+<li>‘linalg’ Dialect - <strong>MLIR</strong> - <strong>LLVM</strong>, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/Dialects/Linalg/">https://mlir.llvm.org/docs/Dialects/Linalg/</a><br>
+</li>
+<li>‘scf’ Dialect - <strong>MLIR</strong> - <strong>LLVM</strong>, acessado em outubro 29, 2025, <a href="https://mlir.llvm.org/docs/Dialects/SCFDialect/">https://mlir.llvm.org/docs/Dialects/SCFDialect/</a><br>
+</li>
+<li><strong>MLIR</strong> (software) - Wikipedia, acessado em outubro 29, 2025, <a href="https://en.wikipedia.org/wiki/MLIR_(software)">https://en.wikipedia.org/wiki/MLIR_(software)</a></li>
+</ol>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./20-mlir-plano.html" class="pagination-link" aria-label="Aula: Princípios e Abstrações do MLIR">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./fase1.html" class="pagination-link" aria-label="Fase 1 - Projeto Prático">
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/21-mlir-arch.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

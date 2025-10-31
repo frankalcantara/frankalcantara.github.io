@@ -317,6 +317,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>MLIR</strong> 101: Nosso Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Aula: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -331,25 +349,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,13 +375,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -589,7 +607,7 @@ Cmd:  Comandos (modificam o estado do programa)</code></pre>
 </section>
 <section id="decisão-3-estado-como-função-matemática" class="level3" data-number="11.1.3">
 <h3 data-number="11.1.3" class="anchored" data-anchor-id="decisão-3-estado-como-função-matemática"><span class="header-section-number">11.1.3</span> Decisão 3: Estado como Função Matemática</h3>
-<p>Uma parte crucial da semântica de qualquer linguagem imperativa é o conceito de <strong>estado</strong>. O estado representa o conteúdo da memória do programa em um dado momento, ou seja, o valor atual de todas as variáveis. Para mantermos nossa coerência, precisamos de uma maneira precisa e matemática para representar esse estado. Neste caso, escolhemos representar o estado como uma função matemática que mapeia variáveis para seus valores atuais:</p>
+<p>Uma parte importante da semântica de qualquer linguagem imperativa é o conceito de <strong>estado</strong>. O estado representa o conteúdo da memória do programa em um dado momento, ou seja, o valor atual de todas as variáveis. Para mantermos nossa coerência, precisamos de uma maneira precisa e matemática para representar esse estado. Neste caso, escolhemos representar o estado como uma função matemática que mapeia variáveis para seus valores atuais:</p>
 <p><span class="math display">\[\sigma : \text{Var} \rightarrow \mathbb{Z}\]</span></p>
 <p>Nesta definição, <span class="math inline">\(\sigma(x)\)</span> retorna o valor atual da variável <span class="math inline">\(x\)</span>.</p>
 <p>Na realidade, variáveis são identificadores, nomes, que atribuímos a endereços de memória. Mas para análise semântica, não precisamos desses detalhes de implementação. O importante é a relação <code>variável → valor</code>. A notação <span class="math inline">\(\sigma[x \mapsto v]\)</span> representa um novo estado que é idêntico a <span class="math inline">\(\sigma\)</span>, exceto que <span class="math inline">\(x\)</span> agora tem valor <span class="math inline">\(v\)</span>. Isso captura formalmente o que acontece em uma atribuição. Podemos definir essa operação de atualização precisamente:</p>
@@ -683,7 +701,7 @@ Cmd:  Comandos (modificam o estado do programa)</code></pre>
 <p>A solução para este impasse é uma das ideias mais elegantes da ciência da computação: definir o significado do comando <code>while</code> como o <strong>menor ponto fixo</strong> de uma função de ordem superior. Em vez de definir o significado diretamente, definimos uma função transformadora, que chamaremos de <span class="math inline">\(F\)</span>. Esta função <span class="math inline">\(F\)</span> recebe como entrada uma função candidata a ser o significado do laço, <span class="math inline">\(f\)</span>, e produz uma nova função que representa uma aproximação melhor desse significado. A definição de <span class="math inline">\(F\)</span> captura a lógica de uma única iteração do laço:</p>
 <p><span class="math display">\[F(f) = \lambda\sigma. \begin{cases} f([\![S]\!]_{cmd}\sigma) &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{true} \\ \sigma &amp; \text{se } [\![b]\!]_{bexp}\sigma = \text{false} \end{cases}\]</span></p>
 <p>Esta fórmula expressa que, para um estado <span class="math inline">\(\sigma\)</span>, se a condição <span class="math inline">\(b\)</span> for falsa, o laço termina e o estado não se altera. Se a condição for verdadeira, o corpo do laço <span class="math inline">\(S\)</span> é executado, produzindo um novo estado, e então aplicamos a função <span class="math inline">\(f\)</span> a este novo estado para continuar a execução. O significado do comando <code>while b do S</code> é, então, a função que não é alterada quando aplicada a <span class="math inline">\(F\)</span>, ou seja, o ponto fixo de <span class="math inline">\(F\)</span>, denotado por <span class="math inline">\(\text{fix}(F)\)</span>.</p>
-<p>A razão pela qual os pontos fixos são a ferramenta correta é que eles nos permitem construir o significado do laço de forma iterativa, começando do nada. Iniciamos com a função <span class="math inline">\(\bot\)</span>, que representa a indefinição total, o “não sei nada”. A primeira aproximação, <span class="math inline">\(F^1(\bot)\)</span>, nos dá o significado de laços que executam no máximo uma vez. A segunda, <span class="math inline">\(F^2(\bot)\)</span>, captura laços que executam no máximo duas vezes, e assim por diante. O limite desta cadeia de aproximações, <span class="math inline">\(\bigcup_{n=0}^{\infty} F^n(\bot)\)</span>, é o menor ponto fixo e representa o significado completo e exato do laço para todos os casos que terminam. Crucialmente, se para um determinado estado inicial o laço nunca termina, o resultado da aplicação desta função limite será <span class="math inline">\(\perp\)</span>, o que captura formalmente a não-terminação.</p>
+<p>A razão pela qual os pontos fixos são a ferramenta correta é que eles nos permitem construir o significado do laço de forma iterativa, começando do nada. Iniciamos com a função <span class="math inline">\(\bot\)</span>, que representa a indefinição total, o “não sei nada”. A primeira aproximação, <span class="math inline">\(F^1(\bot)\)</span>, nos dá o significado de laços que executam no máximo uma vez. A segunda, <span class="math inline">\(F^2(\bot)\)</span>, captura laços que executam no máximo duas vezes, e assim por diante. O limite desta cadeia de aproximações, <span class="math inline">\(\bigcup_{n=0}^{\infty} F^n(\bot)\)</span>, é o menor ponto fixo e representa o significado completo e exato do laço para todos os casos que terminam. Note que: se para um determinado estado inicial o laço nunca termina, o resultado da aplicação desta função limite será <span class="math inline">\(\perp\)</span>, o que captura formalmente a não-terminação.</p>
 <p>Qualquer outra alternativa apresenta limitações. Descrever o laço com uma definição operacional simples como <em>execute o corpo enquanto a condição for verdadeira</em> é informal e não lida com a não-terminação de maneira matemática. Tentar contar o número de iterações nos prenderia a detalhes de implementação, e simplesmente ignorar a não-terminação seria assumir que todos os programas terminam, o que é factualmente incorreto e impediria a análise de uma vasta classe de programas, como servidores e sistemas operacionais, que são projetados para rodar indefinidamente. A abordagem de pontos fixos, portanto, não é apenas uma escolha técnica, mas uma necessidade fundamental para uma semântica precisa e completa.</p>
 </section>
 <section id="decisão-12-separação-entre-sintaxe-e-semântica" class="level3" data-number="11.1.12">
