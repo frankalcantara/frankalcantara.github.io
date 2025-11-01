@@ -15,7 +15,7 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-09-21T02:46:54.190Z
+lastmod: 2025-11-01T19:02:25.363Z
 date: 2024-12-20T20:07:14.934Z
 published: true
 ---
@@ -3420,7 +3420,7 @@ As unidades de ponto flutuante modernas implementam esses algoritmos em hardware
 Para fechar nosso estudo, estes exercícios exploram as implicações práticas da norma IEEE 754, focando nos trade-offs entre precisão, desempenho e robustez do software.
 
 **Exercício 5.1: Riscos do `fast-math`**
-A associatividade matemática $(a+b)+c = a+(b+c)$ nem sempre vale na aritmética de ponto flutuante. Crie um exemplo com números `float` onde a mudança de ordem pelo otimizador (`-ffast-math`) altera o resultado.
+A associatividade matemática $(a+b)+c = a+(b+c)$ nem sempre vale na aritmética de ponto flutuante. Crie um exemplo com números `float` nos quais a mudança de ordem pelo otimizador (`-ffast-math`) altera o resultado.
 
 **Resolução**:
 Considere os seguintes valores:

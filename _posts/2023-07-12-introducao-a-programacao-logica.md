@@ -23,7 +23,7 @@ keywords:
    - Programação Lógica
 draft: true
 toc: true
-lastmod: 2025-07-29T00:43:40.466Z
+lastmod: 2025-11-01T19:02:18.098Z
 beforetoc: A Programação Lógica é artefato de raciocínio capaz de ensinar um detetive computadorizado a resolver os mais intricados mistérios, permitindo que se preocupe apenas com o _o que_ e deixando o _como_ a cargo da máquina. Um paradigma de programação no qual não precisamos atentar para os estados da máquina e podemos nos concentrar no problema que queremos resolver. Esta é a base de alguns dos modelos computacionais que estão mudando o mundo, na revolução da Inteligência Artificial.
 ---
 
@@ -1772,7 +1772,7 @@ $$\exists x (QuadPerfeito(x) \land \exists a \in \mathbb{Q} \ (x = a^2))$$
 
 $$\exists x (\text{PolígonoConvexo}(x) \land \sum_{i=1}^{n} \text{ÂnguloInterno}_i(x) \neq (n-2)\cdot 180^{\circ})$$
 
-> Novamente, observe que este predicado é $falso$. Todos os polígonos convexos têm a soma dos ângulos internos igual a $(n−2)cdot 180$, onde $𝑛$ é o número de lados do polígono.
+> Novamente, observe que este predicado é $falso$. Todos os polígonos convexos têm a soma dos ângulos internos igual a $(n−2)cdot 180$, nos quais $𝑛$ é o número de lados do polígono.
 
 ### Equivalências Interessantes
 
@@ -3328,14 +3328,14 @@ Alguns ambientes da Mansão Hollow podem ser vistos na imagem abaixo:
 - **Pista 3: Anotação na Margem de um Livro na Biblioteca**:
   No livro "Compêndio de Ligas Metálicas Raras" (o mesmo que Clara Evans mencionou ter pego), na página sobre o Bismuto, há uma pequena anotação a lápis, quase imperceptível:
 
-   > "Onde o passado encontra o futuro, a reflexão é a chave. $(\neg P \lor Q)$ é equivalente a ?"
+   > "No ponto em que o passado encontra o futuro, a reflexão é a chave. $(\neg P \lor Q)$ é equivalente a ?"
     A caligrafia parece ser de Sr. Blackwood.
 
 - **Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório**:
   Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.
 
 - **Pista 5: Na Estufa Abandonada (Jardim dos Fundos)**:
-  Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.
+  Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de **FOL**has secas.
 
 ## Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural
 
@@ -3343,7 +3343,7 @@ A verificação formal de programas representa uma das disciplinas mais rigorosa
 
 **A verificação formal baseia-se em fundamentos matemáticos sólidos**, utilizando lógica de primeira ordem como base teórica para especificar propriedades de programas e provar sua correção. Dois paradigmas centrais emergem desta disciplina: a verificação de programas imperativos através da lógica de Hoare, que estabelece contratos formais entre pré-condições e pós-condições, e a indução estrutural, que permite verificar propriedades de programas recursivos operando sobre estruturas de dados definidas indutivamente.
 
-A integração destes métodos com lógica de primeira ordem (FOL) cria um framework poderoso para especificação e verificação que encontra aplicações práticas em ferramentas modernas como Dafny, Coq, e SPARK. Esta abordagem não apenas eleva o padrão de qualidade do software, mas também estabelece uma metodologia científica para o desenvolvimento de sistemas computacionais confiáveis.
+A integração destes métodos com lógica de primeira ordem (**FOL**) cria um framework poderoso para especificação e verificação que encontra aplicações práticas em ferramentas modernas como Dafny, Coq, e SPARK. Esta abordagem não apenas eleva o padrão de qualidade do software, mas também estabelece uma metodologia científica para o desenvolvimento de sistemas computacionais confiáveis.
 
 ### Princípios fundamentais e triplas de Hoare
 
@@ -3497,7 +3497,7 @@ Caso indutivo: lst = h::t
 
 ### Relação com tipos de dados indutivos e coinductivos
 
-A indução estrutural aplica-se naturalmente a tipos de dados indutivos, que são construídos através de construtores finitos. **Tipos indutivos como listas e árvores são definidos através de casos base** (lista vazia, folha) e casos recursivos (cons, nó interno).
+A indução estrutural aplica-se naturalmente a tipos de dados indutivos, que são construídos através de construtores finitos. **Tipos indutivos como listas e árvores são definidos através de casos base** (lista vazia, **FOL**ha) e casos recursivos (cons, nó interno).
 
 Por contraste, tipos coinductivos são definidos através de destrutores/observadores e podem representar estruturas potencialmente infinitas como streams. **A coindução é o dual matemático da indução**, apropriada para provar propriedades sobre estruturas infinitas através de consistência de observações.
 
@@ -3518,11 +3518,11 @@ CoInductive stream (A : Type) : Type :=
 
 ## Integração com Lógica de Primeira Ordem
 
-### Especificação de propriedades de programas com FOL
+### Especificação de propriedades de programas com **FOL**
 
-A lógica de primeira ordem (FOL) fornece a base teórica fundamental para especificação de propriedades de programas. **FOL permite expressar propriedades complexas através de quantificadores** (∀ - para todo, ∃ - existe) e predicados, oferecendo expressividade suficiente para a maioria das especificações práticas.
+A lógica de primeira ordem (**FOL**) fornece a base teórica fundamental para especificação de propriedades de programas. ****FOL** permite expressar propriedades complexas através de quantificadores** (∀ - para todo, ∃ - existe) e predicados, oferecendo expressividade suficiente para a maioria das especificações práticas.
 
-A especificação de contratos de programas utiliza FOL para definir pré-condições, pós-condições e invariantes. Por exemplo, uma função de ordenação pode ter especificação:
+A especificação de contratos de programas utiliza **FOL** para definir pré-condições, pós-condições e invariantes. Por exemplo, uma função de ordenação pode ter especificação:
 
 ```
 ∀array: int[], sorted(array) ↔ 
@@ -3531,7 +3531,7 @@ A especificação de contratos de programas utiliza FOL para definir pré-condi�
 
 **Esta especificação captura precisamente o conceito de array ordenado** usando quantificadores universais sobre índices e uma implicação que define a relação de ordem.
 
-Para estruturas de dados mais complexas, FOL permite especificar invariantes estruturais:
+Para estruturas de dados mais complexas, **FOL** permite especificar invariantes estruturais:
 
 ```
 ∀tree: BinaryTree, balanced(tree) ↔ 
@@ -3540,43 +3540,43 @@ Para estruturas de dados mais complexas, FOL permite especificar invariantes est
 
 ### Relação entre lógica e correção de programas
 
-A relação entre FOL e correção de programas manifesta-se através da interpretação semântica das especificações. **A lógica de Hoare utiliza FOL como metalinguagem** para expressar a semântica de correção parcial e total, sendo que triplas de Hoare são interpretadas como fórmulas FOL.
+A relação entre **FOL** e correção de programas manifesta-se através da interpretação semântica das especificações. **A lógica de Hoare utiliza **FOL** como metalinguagem** para expressar a semântica de correção parcial e total, sendo que triplas de Hoare são interpretadas como fórmulas **FOL**.
 
-A verificação de correção transforma programas anotados em condições de verificação (VCs) expressas em FOL. Estas VCs são então enviadas para provadores automáticos de teoremas (SAT/SMT solvers) que determinam sua validade. **Este processo automatiza significativamente a verificação**, reduzindo o esforço manual necessário para provas de correção.
+A verificação de correção transforma programas anotados em condições de verificação (VCs) expressas em **FOL**. Estas VCs são então enviadas para provadores automáticos de teoremas (SAT/SMT solvers) que determinam sua validade. **Este processo automatiza significativamente a verificação**, reduzindo o esforço manual necessário para provas de correção.
 
 A correção parcial especifica que se a pré-condição é verdadeira e o programa termina, então a pós-condição é verdadeira. A correção total adiciona a garantia de terminação, frequentemente expressa através de variantes que diminuem em relações bem-fundamentadas.
 
 ### Métodos formais em engenharia de software
 
-A integração de FOL com engenharia de software ocorre através de diversos métodos formais. **Model checking** explora exaustivamente o espaço de estados de sistemas finitos, verificando propriedades temporais expressas em lógicas como LTL (Linear Temporal Logic) e CTL (Computation Tree Logic).
+A integração de **FOL** com engenharia de software ocorre através de diversos métodos formais. **Model checking** explora exaustivamente o espaço de estados de sistemas finitos, verificando propriedades temporais expressas em lógicas como LTL (Linear Temporal Logic) e CTL (Computation Tree Logic).
 
-**Theorem proving** oferece verificação interativa ou semi-automática baseada em FOL e lógicas de ordem superior. Ferramentas como Coq, Isabelle/HOL e Lean permitem construção incremental de provas complexas, com verificação automática de correção.
+**Theorem proving** oferece verificação interativa ou semi-automática baseada em **FOL** e lógicas de ordem superior. Ferramentas como Coq, Isabelle/HOL e Lean permitem construção incremental de provas complexas, com verificação automática de correção.
 
-A **abstract interpretation** utiliza FOL para especificar domínios abstratos que aproximam o comportamento de programas, permitindo análise estática eficiente para detecção de erros como buffer overflows, null pointer dereferences, e violações de invariantes.
+A **abstract interpretation** utiliza **FOL** para especificar domínios abstratos que aproximam o comportamento de programas, permitindo análise estática eficiente para detecção de erros como buffer overflows, null pointer dereferences, e violações de invariantes.
 
 ### Ferramentas modernas e aplicações práticas
 
-As ferramentas modernas de verificação formal implementam integração sofisticada entre FOL e verificação de programas. **Dafny utiliza Church's Simple Type Theory**, uma extensão de FOL, para especificação e verificação automática através do provador Z3.
+As ferramentas modernas de verificação formal implementam integração sofisticada entre **FOL** e verificação de programas. **Dafny utiliza Church's Simple Type Theory**, uma extensão de **FOL**, para especificação e verificação automática através do provador Z3.
 
-SPARK, baseado em Ada, expressa contratos como predicados FOL e utiliza múltiplos provadores SMT para verificação automática. **Esta abordagem demonstra aplicabilidade industrial** da verificação formal, com uso em sistemas críticos da aviação e automotivos.
+SPARK, baseado em Ada, expressa contratos como predicados **FOL** e utiliza múltiplos provadores SMT para verificação automática. **Esta abordagem demonstra aplicabilidade industrial** da verificação formal, com uso em sistemas críticos da aviação e automotivos.
 
-Coq/Rocq oferece ambiente de prova interativa onde FOL pode ser codificada dentro do sistema de tipos, permitindo formalização matemática rigorosa e extração automática de programas certificados. **Projetos como CompCert** (compilador C formalmente verificado) demonstram a viabilidade da verificação formal em larga escala.
+**Coq/Rocq** oferece ambiente de prova interativa no qual **FOL** pode ser codificada dentro do sistema de tipos, permitindo formalização matemática rigorosa e extração automática de programas certificados. **Projetos como CompCert** (compilador C formalmente verificado) demonstram a viabilidade da verificação formal em larga escala.
 
 ### Aplicações em sistemas críticos
 
-A verificação formal com FOL encontra aplicações cruciais em sistemas críticos. **Na aviação, padrões como DO-178C/ED-12C** reconhecem métodos formais como meio aceitável para certificação de software aviônico. Projetos como o Airbus A380 utilizaram verificação formal para componentes críticos de controle.
+A verificação formal com **FOL** encontra aplicações cruciais em sistemas críticos. **Na aviação, padrões como DO-178C/ED-12C** reconhecem métodos formais como meio aceitável para certificação de software aviônico. Projetos como o Airbus A380 utilizaram verificação formal para componentes críticos de controle.
 
-**Sistemas automotivos seguem a ISO 26262** para segurança funcional, onde verificação formal contribui para atendimento aos níveis mais altos de integridade de segurança (ASIL D). A verificação de ECUs (Electronic Control Units) utiliza especificações FOL para garantir ausência de erros críticos.
+**Sistemas automotivos seguem a ISO 26262** para segurança funcional, no qual a verificação formal contribui para atendimento aos níveis mais altos de integridade de segurança (ASIL D). A verificação de ECUs (Electronic Control Units) utiliza especificações **FOL** para garantir ausência de erros críticos.
 
-Na segurança cibernética, a verificação formal de protocolos criptográficos utiliza FOL para especificar propriedades de segurança como confidencialidade, integridade e autenticidade. **Projetos como a verificação do microkernel seL4** demonstram correção funcional completa usando Isabelle/HOL.
+Na segurança cibernética, a verificação formal de protocolos criptográficos utiliza **FOL** para especificar propriedades de segurança como confidencialidade, integridade e autenticidade. **Projetos como a verificação do microkernel seL4** demonstram correção funcional completa usando Isabelle/HOL.
 
 ### Desafios e direções futuras
 
-A integração entre FOL e verificação formal enfrenta desafios significativos. **A complexidade computacional** da verificação cresce exponencialmente com o tamanho dos programas, exigindo técnicas de abstração e decomposição para escalabilidade.
+A integração entre **FOL** e verificação formal enfrenta desafios significativos. **A complexidade computacional** da verificação cresce exponencialmente com o tamanho dos programas, exigindo técnicas de abstração e decomposição para escalabilidade.
 
 A **usabilidade** permanece um obstáculo para adoção ampla, requerendo conhecimento matemático especializado e ferramentas com interfaces ainda em evolução. Desenvolvimentos em automação inteligente, incluindo uso de aprendizado de máquina para geração de especificações e invariantes, prometem reduzir esta barreira.
 
-**Tendências emergentes** incluem verificação contínua integrada a pipelines DevOps, synthesis automática de código a partir de especificações FOL, e aplicação a novos domínios como blockchain e sistemas de inteligência artificial.
+**Tendências emergentes** incluem verificação contínua integrada a pipelines DevOps, synthesis automática de código a partir de especificações **FOL**, e aplicação a novos domínios como blockchain e sistemas de inteligência artificial.
 
 ## Formas Normais
 
@@ -3590,11 +3590,11 @@ Existem várias formas normais na Lógica Proposicional, cada uma com suas próp
 
    $$\neg (A \wedge B) \equiv (\neg A \vee \neg B)$$
 
-2. **Forma Normal Conjuntiva (PNC)**: Uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação _E_, $\wedge $, de uma ou mais cláusulas, onde cada cláusula é uma disjunção, operação _OU_, $\vee $, de literais. Em outras palavras, é uma série de cláusulas conectadas por _Es_, onde cada cláusula é composta de variáveis conectadas por _OUs_.
+2. **Forma Normal Conjuntiva (PNC)**: Uma proposição está na Forma Normal Conjuntiva se for uma conjunção, operação _E_, $\wedge $, de uma ou mais cláusulas, nas quais cada cláusula é uma disjunção, operação _OU_, $\vee $, de literais. Em outras palavras, é uma série de cláusulas conectadas por _Es_. Cada cláusula é composta de variáveis conectadas por _OUs_.
 
    $$(A \vee B) \wedge (C \vee D) \equiv (A \wedge C) \vee (A \wedge D) \vee (B \wedge C) \vee (B \wedge D)$$
 
-3. **Forma Normal Disjuntiva (PND)**: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, onde cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por **ORs**, onde cada cláusula é composta de variáveis conectadas por **ANDs**.
+3. **Forma Normal Disjuntiva (PND)**: uma proposição está na Forma Normal Disjuntiva se for uma disjunção de uma ou mais cláusulas, nas quais cada cláusula é uma conjunção de literais. Ou seja, é uma série de cláusulas conectadas por **ORs**. Cada cláusula é composta de variáveis conectadas por **ANDs**.
 
    $$(A \wedge B) \vee (C \wedge D) \equiv (A \vee C) \wedge (A \vee D) \wedge (B \vee C) \wedge (B \vee D)$$
 
@@ -3789,8 +3789,8 @@ Converter uma fórmula para a Forma Normal Conjuntiva, já incluindo os conceito
 4. **Eliminar Dupla Negação**: Substitua qualquer dupla negação $\neg \neg A$ Por $A$.
 5. **Skolemização**: todas as variáveis existenciais será substituída por uma Constante de Skolem, ou uma Função de Skolem das variáveis universais relacionadas.
 
-   - $\exists x Bonito(x)$ será transformado em $Bonito(g1)$ onde $g1$ é uma Constante de Skolem;
-   - $\forall x Pessoa(x) \rightarrow Coração(x) \wedge Feliz(x,y)$ se torna $\forall x Pessoa(x) \rightarrow Coração(H(x))\wedge Feliz(x,H(x))$, onde $H$ é uma função de Skolem.
+   - $\exists x Bonito(x)$ será transformado em $Bonito(g1)$  $g1$ é uma Constante de Skolem;
+   - $\forall x Pessoa(x) \rightarrow Coração(x) \wedge Feliz(x,y)$ se torna $\forall x Pessoa(x) \rightarrow Coração(H(x))\wedge Feliz(x,H(x))$, na qual $H$ é uma função de Skolem.
 
 6. Remova todos os Quantificadores Universais. $\forall x Pessoa(x)$ se torna $Pessoa(x)$.
 
@@ -4330,7 +4330,7 @@ Vamos ilustrar a definição acima com um exemplo concreto.
 
 $$D = \{ a, b, c \}$$
 
-**Onde**: $a$, $b$ e $c$ são objetos distintos no domínio.
+**Na qual**: $a$, $b$ e $c$ são objetos distintos no domínio.
 
 **Símbolos de Constante**: $e$: representa um elemento específico do domínio.
 
@@ -4401,7 +4401,7 @@ Este exemplo simplificado serve como um ponto de partida para entender como mode
 
 ### Aplicações e Importância
 
-A definição de mundos na lógica de primeira ordem tem aplicações fundamentais em diversas áreas, abrangendo desde a matemática pura até as ciências aplicadas e a engenharia, passando pela biologia e economia. Na matemática, essa abordagem suporta a prova de teoremas, onde modelos são utilizados para verificar a consistência de sistemas axiomáticos e construir contraexemplos. A teoria dos modelos, um ramo importante da lógica matemática, se dedica ao estudo das relações entre estruturas matemáticas e as linguagens formais que as descrevem. Além disso, nos fundamentos da matemática, a lógica de primeira ordem desempenha um papel central na formalização de conceitos matemáticos, como exemplificado pela Teoria dos Conjuntos de Zermelo-Fraenkel com o Axioma da Escolha (ZFC).
+A definição de mundos na lógica de primeira ordem tem aplicações fundamentais em diversas áreas, abrangendo desde a matemática pura até as ciências aplicadas e a engenharia, passando pela biologia e economia. Na matemática, essa abordagem suporta a prova de teoremas, na qual, modelos são utilizados para verificar a consistência de sistemas axiomáticos e construir contraexemplos. A teoria dos modelos, um ramo importante da lógica matemática, se dedica ao estudo das relações entre estruturas matemáticas e as linguagens formais que as descrevem. Além disso, nos fundamentos da matemática, a lógica de primeira ordem desempenha um papel central na formalização de conceitos matemáticos, como exemplificado pela Teoria dos Conjuntos de Zermelo-Fraenkel com o Axioma da Escolha (ZFC).
 
 ### A Teoria dos Modelos
 
@@ -4464,7 +4464,7 @@ Em sistemas especialistas de diagnóstico médico, a capacidade de definir e man
 
    $$D = \{p, f, t, d, c, g, a\}$$
 
-   Onde $p$ representa o paciente, $f$ (febre), $t$ (tosse), $d$ (dor de cabeça), $c$ (COVID-19), $g$ (gripe), e $a$ (alergia) são elementos do domínio.
+   Na qual $p$ representa o paciente, $f$ (febre), $t$ (tosse), $d$ (dor de cabeça), $c$ (COVID-19), $g$ (gripe), e $a$ (alergia) são elementos do domínio.
 
    A interpretação $I$ define predicados como:
 
@@ -4472,7 +4472,7 @@ Em sistemas especialistas de diagnóstico médico, a capacidade de definir e man
    - $D(x,z)$: "x tem doença z"
    - $T(x,w)$: "x fez teste w"
 
-   O sistema pode então raciocinar sobre um cenário hipotético onde:
+   O sistema pode então raciocinar sobre um cenário hipotético no qual:
 
    $$S(p,f) \land S(p,t) \land \neg S(p,d)$$
 
@@ -4768,7 +4768,7 @@ O objetivo é determinar uma forma de atribuir um canal de comunicação a cada 
 
 **Solução**: vamos usar lógica de primeira ordem para modelar este problema sem utilizar funções, apenas relações e variáveis.
 
-- um predicado binário $Cor(x, c)$, onde $x$ é um servidor e $c$ é uma cor/canal;
+- um predicado binário $Cor(x, c)$, no qual $x$ é um servidor e $c$ é uma cor/canal;
 - um predicado unário $Servidor(x)$, que significa que $x$ é um servidor;
 - um predicado binário $Conexao(x, y)$, que significa que $x$ está diretamente conectado a $y$.
 
@@ -4839,8 +4839,8 @@ Forneça uma linguagem de Lógica de Primeira Ordem e um conjunto de axiomas que
 
 **Solução**:
 
-- Um predicado binário $edge$, onde $edge(n, m)$ significa que o nó $n$ está conectado ao nó $m$;
-- Um predicado binário $color$, onde $color(n, x)$ significa que o nó $n$ tem a cor $x$;
+- Um predicado binário $edge$, no qual $edge(n, m)$ significa que o nó $n$ está conectado ao nó $m$;
+- Um predicado binário $color$, no qual $color(n, x)$ significa que o nó $n$ tem a cor $x$;
 - As constantes $yellow$, $green$, $red$.
 
 **Axiomas e Regras**:
@@ -4880,7 +4880,7 @@ Forneça uma linguagem de Lógica de Primeira Ordem e um conjunto de axiomas que
 
    $$ \forall n \forall m \forall x \forall y ((color(n, x) \land color(m, y) \land x \neq y) \rightarrow \neg reach_k(n, m, \infty)) $$
 
-   Onde $\infty$ representa um número suficientemente grande para cobrir todo o grafo.
+   Na qual $\infty$ representa um número suficientemente grande para cobrir todo o grafo.
 
 **Consultas possíveis**:
 
@@ -4923,9 +4923,9 @@ _Figura 1 - Um estado do jogo Minesweeper._{: class="legend"}
 
 **Solução**:
 
-1. Um predicado unário $mine$, onde $mine(x)$ significa que a célula $x$ contém uma mina;
-2. Um predicado binário $adj$, onde $adj(x, y)$ significa que a célula $x$ é adjacente à célula $y$;
-3. Um predicado binário $contains$, onde $contains(x, n)$ significa que a célula $x$ contém o número $n$.
+1. Um predicado unário $mine$, no qual, $mine(x)$ significa que a célula $x$ contém uma mina;
+2. Um predicado binário $adj$, no qual, $adj(x, y)$ significa que a célula $x$ é adjacente à célula $y$;
+3. Um predicado binário $contains$, no qual, $contains(x, n)$ significa que a célula $x$ contém o número $n$.
 
 **Regras e Axiomas**:
 
@@ -4965,7 +4965,7 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 
 - **Cidades brasileiras**: representadas como nós de um grafo;
 - **Voos diretos**: representados como arestas que conectam duas cidades diretamente (sem escalas intermediárias);
-- **Tipos de voos**: diferentes categorias de voos, como domésticos (doméstico) e internacionais (internacional), com restrições sobre onde eles podem operar.
+- **Tipos de voos**: diferentes categorias de voos, como domésticos (doméstico) e internacionais (internacional), com restrições sobre  eles podem operar.
 - **Cidades pequenas**: algumas cidades são classificadas como pequenas, e certas restrições se aplicam a essas cidades.
 
 **Solução**:
@@ -5052,7 +5052,7 @@ Imagine que você é responsável pela gestão de voos entre várias cidades bra
 
 ##### Exercício 5 - Jogo de Damas Brasileiro
 
-O jogo de damas brasileiro é jogado em um tabuleiro de 64 casas (pretas e brancas), onde dois jogadores competem com 12 peças cada (denominadas **comuns**). Um jogador tem peças pretas e o outro, peças brancas. O objetivo do jogo é capturar todas as peças do adversário ou impossibilitar os movimentos do adversário.
+O jogo de damas brasileiro é jogado em um tabuleiro de 64 casas (pretas e brancas), no qual dois jogadores competem com 12 peças cada (denominadas **comuns**). Um jogador tem peças pretas e o outro, peças brancas. O objetivo do jogo é capturar todas as peças do adversário ou impossibilitar os movimentos do adversário.
 
 Quando o jogo começa, as peças de cada jogador são posicionadas nas 12 casas pretas mais próximas a eles, sendo que as casas brancas não são utilizadas durante o jogo. As peças se movem apenas diagonalmente, permanecendo nas casas pretas. O jogador com peças pretas sempre faz o primeiro movimento.
 
@@ -5181,10 +5181,10 @@ O jogo começa com algumas casas já preenchidas, e o jogador deve completar as 
 **Solução**:
 
 - O predicado unário $cell(x)$ significa que $x$ é uma célula do tabuleiro;
-- O predicado binário $value(x, v)$ significa que a célula $x$ contém o valor $v$, onde $v$ é um número de $1$ a $9$;
-- O predicado binário $inRow(x, r)$ significa que a célula $x$ está na linha $r$, onde $r$ é um número de $1$ a $9$;
-- O predicado binário $inColumn(x, c)$ significa que a célula $x$ está na coluna $c$, onde $c$ é um número de $1$ a $9$;
-- O predicado binário $inRegion(x, z)$ significa que a célula $x$ está na região $z$, onde $z$ é um número de $1$ a $9$ representando uma das $9$ regiões $3\times 3$.
+- O predicado binário $value(x, v)$ significa que a célula $x$ contém o valor $v$, no qual, $v$ é um número de $1$ a $9$;
+- O predicado binário $inRow(x, r)$ significa que a célula $x$ está na linha $r$, no qual, $r$ é um número de $1$ a $9$;
+- O predicado binário $inColumn(x, c)$ significa que a célula $x$ está na coluna $c$, no qual, $c$ é um número de $1$ a $9$;
+- O predicado binário $inRegion(x, z)$ significa que a célula $x$ está na região $z$, no qual, $z$ é um número de $1$ a $9$ representando uma das $9$ regiões $3\times 3$.
 
 **Regras e Axiomas**:
 
@@ -5531,7 +5531,7 @@ $$
 
 ##### Exercício 9 - Jogo Pedra, Papel e Tesoura
 
-O jogo **Pedra, Papel e Tesoura** é um jogo simples entre dois jogadores, onde cada jogador escolhe uma das três opções: Pedra, Papel ou Tesoura. As regras são:
+O jogo **Pedra, Papel e Tesoura** é um jogo simples entre dois jogadores, no qual, cada jogador escolhe uma das três opções: Pedra, Papel ou Tesoura. As regras são:
 
 **Variáveis Proposicionais**:
 
@@ -5629,7 +5629,7 @@ Para resultados:
 $$P_1 \land T_2 \land V_1 \land \lnot V_2 \land \lnot E \land \\
    \lnot A_1 \land \lnot T_1 \land \lnot P_2 \land \lnot A_2$$
 
-Este mundo representa um jogo onde:
+Este mundo representa um jogo no qual,:
 
 - O Jogador $1$ escolheu Pedra;
 - O Jogador $2$ escolheu Tesoura;
@@ -5724,7 +5724,7 @@ Elabore um mundo para um ginásio de esportes. O modelo deve incluir atletas, mo
 
 A **Cláusula de Horn** foi nomeada em homenagem ao matemático e lógico americano [Alfred Horn](https://en.wikipedia.org/wiki/Alfred_Horn), que a introduziu em [um artigo publicado em 1951](https://www.cambridge.org/core/journals/journal-of-symbolic-logic/article/abs/on-sentences-which-are-true-of-direct-unions-of-algebras1/DF348CB269B06D6702DA3AE4DCF38C39). O contexto histórico e a motivação para a introdução da Cláusula de Horn são profundamente enraizados na solução do Problema da Decidibilidade. Na primeira metade do século XX, a lógica matemática estava focada na questão da decidibilidade: determinar se uma afirmação lógica é verdadeira ou falsa de forma algorítmica.
 
-Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, onde a decidibilidade poderia ser alcançada de forma mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
+Não demorou muito para os matemáticos perceberem que a Lógica de Primeira Ordem é poderosa, mas pode ser ineficientes para resolver os problemas relacionados ao Problema da Decidibilidade. A busca por formas mais eficientes de resolução levou ao estudo de subconjuntos restritos da Lógica de Primeira Ordem, na qual a decidibilidade poderia ser alcançada de forma mais eficiente. Aqui, eficiência significa o menor custo computacional, no menor tempo.
 
 Alfred Horn identificou um desses subconjuntos em seu artigo de 1951, introduzindo o que agora é conhecido como **Cláusula de Horn**. Ele mostrou que esse subconjunto particular tem propriedades interessantes que permitem a resolução em tempo polinomial, tornando-o atraente para aplicações práticas.
 
@@ -5767,7 +5767,7 @@ Existem algumas formas equivalentes de representar Cláusulas de Horn:
 * **Cláusula Nula (ou Vazia)**: Representa uma contradição. Não possui literais. Surge quando uma consulta é refutada.
     * Forma disjuntiva: $\Box$ ou $\bot$
 
-Para entender melhor, imagine que estamos construindo um cenário mental fundamentado na lógica para construir o entendimento de um problema, uma espécie de paisagem mental onde as coisas fazem sentido. Nesse cenário, as Cláusulas de Horn serão os tijolos fundamentais que usaremos para construir estruturas lógicas.
+Para entender melhor, imagine que estamos construindo um cenário mental fundamentado na lógica para construir o entendimento de um problema, uma espécie de paisagem mental na qual as coisas fazem sentido. Nesse cenário, as Cláusulas de Horn serão os tijolos fundamentais que usaremos para construir estruturas lógicas.
 
 **1. Fatos**: os fatos são como pedras fundamentais desse cenário. Eles são afirmações simples e diretas que dizem como as coisas são. Considere, por exemplo: _O céu é azul_, $P$ e _A grama é verde_$Q$. Essas são verdades que não precisam de justificativa. Elas simplesmente são. os Fatos são axiomas.
 
@@ -5848,9 +5848,9 @@ Imagine que estamos construindo um sistema lógico para diagnosticar doenças co
 
 ## Exemplo 3 - Mundo Núcleo Familiar (Lógica de Primeira Ordem)
 
-O exemplo a seguir apresenta um mundo que representa uma família e suas relações, apresentado usando a sintaxe da lógica de primeira ordem (FOL).
+O exemplo a seguir apresenta um mundo que representa uma família e suas relações, apresentado usando a sintaxe da lógica de primeira ordem (**FOL**).
 
-**Fatos**: os fatos são representados como predicados aplicados a constantes em FOL.
+**Fatos**: os fatos são representados como predicados aplicados a constantes em **FOL**.
 
 - $Homem(joão)$;
 - $Homem(pedro)$;
@@ -5960,7 +5960,7 @@ O exemplo a seguir apresenta um mundo que representa uma família e suas relaç�
    Para perguntar se "Existe uma avó X para Ana?", a consulta seria $\exists X (Avo(X, ana) \land Mulher(X))$.
    A forma de meta para refutação seria tentar provar que a base de conhecimento junto com $\forall X (\neg Avo(X, ana) \lor \neg Mulher(X))$ leva a uma contradição.
 
-Em um sistema de prova por refutação, adicionamos a negação da consulta à base de conhecimento e tentamos derivar uma contradição ($\bot$). As representações das metas como negações em FOL estão corretas nesse contexto.
+Em um sistema de prova por refutação, adicionamos a negação da consulta à base de conhecimento e tentamos derivar uma contradição ($\bot$). As representações das metas como negações em **FOL** estão corretas nesse contexto.
 #### Exemplo 4 - Torre de Hanói
 
 A **Torre de Hanói** é um quebra-cabeça matemático que consiste em três postes e um número de discos de diferentes tamanhos que podem deslizar sobre qualquer poste. O quebra-cabeça começa com os discos empilhados em ordem decrescente de tamanho no primeiro poste, o menor disco no topo. O objetivo é mover toda a pilha para o último poste, obedecendo às seguintes regras:
@@ -6235,7 +6235,7 @@ Estas consultas, no contexto da resolução do problema, representam estados seg
 
    $$\neg atravessa\_ida(X, Y, T1) \lor \neg volta(Z, T2) \lor \neg atravessa\_ida(W, V, T3) \lor \neg volta(U, T4) \lor \neg atravessa\_ida(S, R, T5) \lor travessia\_completa(T1+T2+T3+T4+T5)$$
 
-   Onde as variáveis representam as pessoas que atravessam em cada fase da solução.
+   Na qual, as variáveis representam as pessoas que atravessam em cada fase da solução.
 
 **Consulta**:
 
@@ -6266,7 +6266,7 @@ $$\exists x (Porta(x) \wedge \neg Revelada(x) \wedge x \neq PortaEscolhida \righ
 O Prolog é uma linguagem de programação lógica que utiliza Cláusulas de Horn para representar e manipular conhecimento. A sintaxe e a semântica do Prolog são diretamente mapeadas para Cláusulas de Horn:
 
 - **Fatos**: Em Prolog, fatos são representados como cláusulas sem antecedentes. Por exemplo, o fato _John é humano_ pode ser representado como _humano(john)_.
-- **Regras**: As regras em Prolog são representadas como implicações, onde os antecedentes são literais negativos e o consequente é o literal positivo. Por exemplo, a regra _Se X é humano, então X é mortal_ pode ser representada como _mortal(X) :- humano(X)_.
+- **Regras**: As regras em Prolog são representadas como implicações, nas quais os antecedentes são literais negativos e o consequente é o literal positivo. Por exemplo, a regra _Se X é humano, então X é mortal_ pode ser representada como _mortal(X) :- humano(X)_.
 - **Consultas**: As consultas em Prolog são feitas ao sistema para inferir informações com base nos fatos e regras definidos. Por exemplo, a consulta "Quem é mortal?" pode ser representada como _?- mortal(X)_.
 
 O Prolog utiliza um mecanismo de resolução baseado em Cláusulas de Horn para responder a consultas. Ele aplica uma técnica de busca em profundidade para encontrar uma substituição de variáveis que satisfaça a consulta.
@@ -6452,7 +6452,7 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 
 4. **Argumento**: Lista de proposições (premissas) seguidas de uma conclusão.
 
-5. **Associatividade**: Propriedade onde $(a * b) * c = a * (b * c)$ para um operador $*$.
+5. **Associatividade**: Propriedade na qual $(a * b) * c = a * (b * c)$ para um operador $*$.
 
 6. **Átomo**: Proposição indivisível ou predicado aplicado a termos em uma fórmula.
 
@@ -6466,7 +6466,7 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 
 11. **Cláusula de Horn**: Disjunção de literais com no máximo um literal positivo.
 
-12. **Comutatividade**: Propriedade onde $a * b = b * a$ para um operador $*$.
+12. **Comutatividade**: Propriedade  $a * b = b * a$ para um operador $*$.
 
 13. **Conclusão**: Em um argumento, a proposição final que se deriva das premissas.
 
@@ -6486,11 +6486,11 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 
 21. **Disjunção** ($\vee$): Operador lógico "OU".
 
-22. **Distributividade**: Propriedade onde $a * (b + c) = (a * b) + (a * c)$ para operadores $*$ e $+$.
+22. **Distributividade**: Propriedade na qual $a * (b + c) = (a * b) + (a * c)$ para operadores $*$ e $+$.
 
 23. **Domínio do Discurso**: Conjunto de objetos sobre os quais as variáveis quantificadas podem se referir.
 
-24. **Dupla Negação**: Princípio onde $\neg \neg P \equiv P$.
+24. **Dupla Negação**: Princípio no qual $\neg \neg P \equiv P$.
 
 25. **Equivalência Lógica** ($\equiv$): Relação entre duas fórmulas que têm o mesmo valor verdade para todas as interpretações.
 
@@ -6500,15 +6500,15 @@ avo(X,Z) :- (pai(X,Y); padrasto(X,Y)), (pai(Y,Z) ; padrasto(Y,Z)).
 
 28. **Falseabilidade**: Propriedade de uma hipótese que pode ser provada falsa.
 
-29. **Forma Normal Conjuntiva** (FNC): Fórmula que é uma conjunção de cláusulas, onde cada cláusula é uma disjunção de literais.
+29. **Forma Normal Conjuntiva** (FNC): Fórmula que é uma conjunção de cláusulas, na qual cada cláusula é uma disjunção de literais.
 
 30. **Forma Normal Disjuntiva** (FND): Fórmula que é uma disjunção de conjunções de literais.
 
-31. **Forma Normal Negativa** (FNN): Fórmula onde as negações aparecem apenas imediatamente antes das variáveis proposicionais.
+31. **Forma Normal Negativa** (FNN): Fórmula na qual as negações aparecem apenas imediatamente antes das variáveis proposicionais.
 
-32. **Forma Normal Prenex**: Fórmula onde todos os quantificadores estão no início, seguidos por uma matriz sem quantificadores.
+32. **Forma Normal Prenex**: Fórmula na qual todos os quantificadores estão no início, seguidos por uma matriz sem quantificadores.
 
-33. **Forma Normal Skolem**: Forma Normal Prenex onde todos os quantificadores existenciais foram eliminados.
+33. **Forma Normal Skolem**: Forma Normal Prenex na qual todos os quantificadores existenciais foram eliminados.
 
 34. **Fórmula Atômica**: Fórmula que consiste em um predicado aplicado a termos.
 
