@@ -21,18 +21,18 @@ description: "Introdução à Teoria das Categorias e Monads em Haskell: conceit
 date: 2025-11-10T21:51:39.096Z
 preview: As monads têm uma função relevante e indispensável na programação funcional, permitindo a composição de efeitos e a manipulação de contextos de forma elegante e segura. Este texto apresenta uma introdução à teoria das categorias direcionada ao entendimento de monads em Haskell, explorando seus conceitos fundamentais, exemplos práticos e aplicações na programação funcional.
 keywords: |-
-  Algoritmos
-  Exercícios
+  teoria das categorias
+  monads 
+  haskell
+  programação funcional
+  functor
+  applicative
+  kleisli
+  io monad
   cálculo lambda
-  recursão
-  redução beta
-  currying
-  monads
-  categorias
-  Teoria das categorias
 toc: true
 published: true
-lastmod: 2025-11-10T21:51:53.674Z
+lastmod: 2025-11-10T22:02:01.077Z
 draft: 2025-11-10T21:51:40.665Z
 ---
 
@@ -98,7 +98,7 @@ A figura a seguir ilustra a categoria **Hask**:
 
 >**Nota sobre a pureza de Hask**: a atenta leitora deve observar que, na prática, **Hask** não é uma categoria matemática perfeita. Isso se deve à existência de funções parciais, que falham para certas entradas e valores indefinidos (como `undefined` ou `error "..."`), que violam a propriedade de que _morfismos devem ser totais_. Contudo, ela serve como uma aproximação conceitual poderosa.
 
-### 2.2 Outros Exemplos de Categorias
+### Outros Exemplos de Categorias
 
 Embora **Hask** seja o nosso principal objeto de estudo, a Teoria das Categorias ganha vida por meio de exemplos e aplicações, mesmo na álgebra pura.
 
@@ -136,7 +136,7 @@ Para que esta seja uma categoria, as leis devem ser satisfeitas:
 1. **Associatividade**: se existe um morfismo $f: A \to B$ (ou seja, $A \leq B$) e $g: B \to C$ (ou seja, $B \leq C$), a composição $g \circ f$ exige um morfismo $h: A \to C$. Neste cenário, a propriedade da **transitividade** ($A \leq B$ e $B \leq C \implies A \leq C$) garante que este morfismo $h$ existe.
 2. **Identidade**: para todo objeto $A$, deve existir um morfismo $id_A: A \to A$. A propriedade da **reflexividade** ($A \leq A$) garante que este morfismo de identidade sempre existe.
 
-### Exercícios 1
+### Exercício 1
 
 1. **Análise das Leis**: Por que a lei da identidade é definida como $id_B \circ f = f = f \circ id_A$? Explique por que $id_A \circ f$ (por exemplo) não faria sentido em termos de tipos.
 2. **Morfismos**: Na categoria **Hask**, a função `read :: String -> Int` é um morfismo válido? Justifique sua resposta considerando a definição de morfismo em **Hask**. (Dica: o que acontece se `read "oi"` for chamado?)
@@ -259,7 +259,7 @@ Aqui, o `Applicative` executa todas as combinações possíveis de multiplicaç�
 
 Em resumo, o `Applicative` generaliza o `Functor`: enquanto `fmap` aplica uma função pura a um valor em contexto, o `Applicative` permite aplicar **funções em contexto a múltiplos valores em contexto**, promovendo composição estruturada e independente dentro de ambientes computacionais.
 
-### Exercícios 2
+### Exercício 2
 
 1. Em Haskell, defina as assinaturas de tipo e implemente exemplos de uso para as funções `pure`, `just` e `Maybe`.
 
@@ -752,7 +752,7 @@ A Teoria das Categorias não é uma abstração gratuita; ela fornece o vocabul�
 
 Finalmente podemos afirmar que Monads não são mágicas: são um padrão de design formal, baseado em matemática rigorosa, para sequenciar computações dependentes de forma pura, segura e composível.
 
-### Exercícios 3
+### Exercício 3
 
 1. **Monad Laws**: Usando a definição da `Maybe` monad, prove a "Identidade à Esquerda" (`return a >>= f == f a`).
 
@@ -769,3 +769,305 @@ Finalmente podemos afirmar que Monads não são mágicas: são um padrão de des
 ```
 
 (Dica: `guard True = [()]`, `guard False = []`)
+
+## Resposta dos Exercícios
+
+A **leitora curiosa** que chegou até aqui merece ver as soluções detalhadas, com explicações passo a passo, rigor matemático e código funcional. A seguir, apresentamos as respostas completas para todos os exercícios propostos, mantendo o mesmo tom didático e formal do texto principal.
+
+### Exercício 1
+
+#### 1. **Análise das Leis**: Por que a lei da identidade é definida como $id_B \circ f = f = f \circ id_A$? Explique por que $id_A \circ f$ (por exemplo) não faria sentido em termos de tipos.
+
+**Resposta:**
+
+A lei da identidade em uma categoria é definida em duas partes:
+
+- $id_B \circ f = f$
+- $f \circ id_A = f$
+
+Isso garante que o morfismo identidade seja **neutro** em relação à composição, tanto à esquerda quanto à direita.
+
+Considere os tipos em **Hask**:
+
+```haskell
+f     :: a -> b
+id_A  :: a -> a
+id_B  :: b -> b
+```
+
+A composição é definida como:
+
+```haskell
+(.) :: (b -> c) -> (a -> b) -> (a -> c)
+```
+
+Agora, analise:
+
+- $id_B \circ f$:
+
+  ```haskell
+  id_B . f :: (a -> b) -> (b -> b) -> (a -> b)
+  ```
+
+  Tipo correto: `(a -> b)`, igual ao tipo de `f`.
+
+- $f \circ id_A$:
+
+  ```haskell
+  f . id_A :: (a -> a) -> (a -> b) -> (a -> b)
+  ```
+
+  Tipo correto: `(a -> b)`, igual ao tipo de `f`.
+
+**Mas e se tentássemos $id_A \circ f$?**
+
+```haskell
+id_A . f :: (a -> b) -> (a -> a) -> (a -> a)  -- erro!
+```
+
+O operador `(.)` exige que o **tipo de saída do segundo argumento** seja igual ao **tipo de entrada do primeiro**. Aqui:
+
+- `f :: a -> b`
+- `id_A :: a -> a`
+
+A saída de `f` é `b`, mas `id_A` espera `a` → **incompatibilidade de tipos**.
+
+Portanto, $id_A \circ f$ **não é bem-tipado** em **Hask**, e por isso não faz parte da lei da identidade. A lei só inclui composições **válidas**.
+
+#### 2. **Morfismos**: Na categoria **Hask**, a função `read :: String -> Int` é um morfismo válido? Justifique considerando a definição de morfismo em **Hask**.
+
+**Resposta:**
+
+Em **Hask** (a categoria idealizada), os **morfismos** são **funções puras e totais** — ou seja, definidas para **todos** os valores do tipo de entrada, sem exceções ou loops infinitos.
+
+A função:
+
+```haskell
+read :: String -> Int
+```
+
+**não é total**. Por exemplo:
+
+```haskell
+read "oi"   -- lança exceção: Prelude.read: no parse
+read ""     -- exceção
+read "3.14" -- exceção
+```
+
+Essas entradas **válidas** do tipo `String` causam falha em tempo de execução. Portanto, `read` **viola a propriedade de totalidade**.
+
+**Conclusão**: `read` **não é um morfismo válido** na categoria **Hask** ideal.  
+Na prática, usamos `Maybe` ou `Either` para torná-la total:
+
+```haskell
+safeRead :: String -> Maybe Int
+safeRead s = case reads s of
+  [(x, "")] -> Just x
+  _         -> Nothing
+```
+
+Agora sim, `safeRead` é um morfismo em **Hask**.
+
+### Exercício 2
+
+#### 1. Defina as assinaturas de tipo e implemente exemplos de uso para `pure`, `Just` e `Maybe`.
+
+**Resposta:**
+
+```haskell
+-- pure: injeta um valor puro em um contexto Applicative
+pure :: Applicative f => a -> f a
+
+-- Just: construtor de Maybe que representa sucesso
+Just :: a -> Maybe a
+
+-- Maybe: tipo que modela computação que pode falhar
+data Maybe a = Nothing | Just a
+```
+
+Exemplos de uso:
+
+```haskell
+pure 42 :: Maybe Int
+-- Just 42
+
+pure (+) :: Maybe (Int -> Int -> Int)
+-- Just (+)
+
+Just "Haskell" :: Maybe String
+-- Just "Haskell"
+
+pure Just <*> Just 10 :: Maybe (Maybe Int)
+-- Just (Just 10)
+```
+
+#### 2. **Leis do Functor**: Prove que a implementação de `fmap` para `Maybe` obedece às duas leis.
+
+```haskell
+instance Functor Maybe where
+  fmap _ Nothing   = Nothing
+  fmap f (Just x)  = Just (f x)
+```
+
+**Lei 1: Preservação da identidade**  
+
+$$fmap\ id = id$$
+
+- Caso `Nothing`:
+
+  ```haskell
+  fmap id Nothing = Nothing = id Nothing
+  ```
+
+- Caso `Just x`:
+
+  ```haskell
+  fmap id (Just x) = Just (id x) = Just x = id (Just x)
+  ```
+
+Conclusão: **válida**.
+
+**Lei 2: Preservação da composição**  
+
+$$fmap\ (g . f) = fmap\ g . fmap\ f$$
+
+- Caso `Nothing`:
+
+  ```haskell
+  fmap (g . f) Nothing = Nothing
+  (fmap g . fmap f) Nothing = fmap g Nothing = Nothing
+  ```
+
+- Caso `Just x`:
+
+  ```haskell
+  fmap (g . f) (Just x) = Just ((g . f) x) = Just (g (f x))
+  (fmap g . fmap f) (Just x) = fmap g (Just (f x)) = Just (g (f x))
+  ```
+
+Conclusão: **válida**.
+
+#### 3. **Leis do Functor para Listas**: Prove a lei da composição.
+
+```haskell
+fmap (g . f) == fmap g . fmap f
+```
+
+Em listas, `fmap = map`.
+
+Prova por indução estrutural:
+
+- **Caso base**: lista vazia `[]`
+
+  ```haskell
+  map (g . f) [] = []
+  (map g . map f) [] = map g [] = []
+  ```
+
+- **Caso indutivo**: `x:xs`
+
+  ```haskell
+  map (g . f) (x:xs) = (g (f x)) : map (g . f) xs
+  (map g . map f) (x:xs) = map g (f x : map f xs) = g (f x) : map g (map f xs)
+  ```
+
+  Pela hipótese indutiva, `map (g . f) xs = map g (map f xs)` → **igual**.
+
+Conclusão: **válida**.
+
+#### 4. **Uso de Applicative**: Combine três `Maybe String` em um `Maybe String` (concatenando).
+
+```haskell
+val1, val2, val3 :: Maybe String
+val1 = Just "a"
+val2 = Just "b"
+val3 = Just "c"
+```
+
+**Solução:**
+
+```haskell
+concatThree :: Maybe String
+concatThree = pure (++) <*> (pure (++) <*> val1 <*> val2) <*> val3
+-- Ou, mais legível:
+concatThree = pure ((++) . (++)) <*> val1 <*> val2 <*> val3
+-- Resultado: Just "abc"
+```
+
+Alternativa com `liftA3`:
+
+```haskell
+import Control.Applicative (liftA3)
+
+concatThree = liftA3 (\a b c -> a ++ b ++ c) val1 val2 val3
+-- Just "abc"
+```
+
+### Exercício 3
+
+#### 1. **Monad Laws**: Prove a "Identidade à Esquerda" para `Maybe`.
+
+```haskell
+return a >>= f == f a
+```
+
+Definição de `return` e `(>>=)` para `Maybe`:
+
+```haskell
+return x = Just x
+
+Nothing  >>= _ = Nothing
+(Just x) >>= f = f x
+```
+
+- Caso `return a`:
+
+  ```haskell
+  return a >>= f = Just a >>= f = f a
+  ```
+
+Conclusão: **igual a `f a`**.
+
+#### 2. **do-notation**: Reescreva usando `do`.
+
+```haskell
+safeDiv 100 2 >>= (\a -> safeDiv a 5 >>= (\b -> return (b + 1)))
+```
+
+**Resposta:**
+
+```haskell
+result :: Maybe Int
+result = do
+  a <- safeDiv 100 2  -- a = Just 50
+  b <- safeDiv a 5     -- b = Just 10
+  return (b + 1)       -- Just 11
+```
+
+#### 3. **List Monad**: O que a expressão calcula?
+
+```haskell
+do 
+  n <- [1, 2, 3] 
+  guard (odd n)
+  return (n * 10)
+```
+
+**Resposta:**
+
+`guard b` retorna `[()]` se `b == True`, ou `[]` se `b == False`.
+
+Passo a passo:
+
+- `n <- [1,2,3]` → tenta `n = 1`, `n = 2`, `n = 3`
+- `guard (odd n)`:
+  - `n=1`: `odd 1 = True` → `[()]`
+  - `n=2`: `odd 2 = False` → `[]` → elimina este ramo
+  - `n=3`: `odd 3 = True` → `[()]`
+- `return (n * 10)`:
+  - Para `n=1`: `[1 * 10] = [10]`
+  - Para `n=3`: `[3 * 10] = [30]`
+
+**Resultado final**: `[10, 30]`
+
+Ou seja: **os números ímpares da lista original, multiplicados por 10**.
