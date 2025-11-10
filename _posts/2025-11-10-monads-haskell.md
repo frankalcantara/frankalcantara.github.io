@@ -18,7 +18,7 @@ image: assets/images/monads.webp
 featured: false
 rating: 5
 description: "Introdução à Teoria das Categorias e Monads em Haskell: conceitos fundamentais, exemplos práticos e aplicações na programação funcional"
-date: 2025-11-01T15:01:39.506Z
+date: 2025-11-10T21:51:39.096Z
 preview: As monads têm uma função relevante e indispensável na programação funcional, permitindo a composição de efeitos e a manipulação de contextos de forma elegante e segura. Este texto apresenta uma introdução à teoria das categorias direcionada ao entendimento de monads em Haskell, explorando seus conceitos fundamentais, exemplos práticos e aplicações na programação funcional.
 keywords: |-
   Algoritmos
@@ -32,8 +32,8 @@ keywords: |-
   Teoria das categorias
 toc: true
 published: true
-lastmod: 2025-11-10T21:49:41.671Z
-draft: 2025-11-01T15:01:40.919Z
+lastmod: 2025-11-10T21:51:53.674Z
+draft: 2025-11-10T21:51:40.665Z
 ---
 
 A **programação funcional**, especialmente na linguagem **Haskell**, repousa sobre fundamentos matemáticos que, embora abstratos, fornecem uma base precisa para a compreensão de como as máquinas processam informações. Entre estes fundamentos, os conceitos da **Teoria das Categorias** ocupam uma posição central.
