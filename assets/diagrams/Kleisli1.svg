@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="640"
+   height="200"
+   viewBox="0 0 640 200"
+   role="img"
+   aria-label="Diagrama Kleisli composição"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="Kleisli1.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.9622213"
+     inkscape:cx="349.60379"
+     inkscape:cy="134.79621"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <defs
+     id="defs1">
+    <marker
+       id="mk"
+       markerWidth="8"
+       markerHeight="8"
+       refX="8"
+       refY="4"
+       orient="auto">
+      <path
+         d="M0,0 L0,8 L8,4 z"
+         fill="#0d47a1"
+         id="path1" />
+    </marker>
+  </defs>
+  <!-- objetos -->
+  <g
+     font-family="serif"
+     font-size="14"
+     fill="#0d47a1"
+     id="g3">
+    <circle
+       cx="90"
+       cy="100"
+       r="20"
+       fill="#e3f2fd"
+       stroke="#1976d2"
+       id="circle1" />
+    <text
+       x="90"
+       y="104"
+       text-anchor="middle"
+       id="text1">A</text>
+    <circle
+       cx="320"
+       cy="60"
+       r="20"
+       fill="#e3f2fd"
+       stroke="#1976d2"
+       id="circle2" />
+    <text
+       x="320"
+       y="64"
+       text-anchor="middle"
+       id="text2">B</text>
+    <circle
+       cx="550"
+       cy="100"
+       r="20"
+       fill="#e3f2fd"
+       stroke="#1976d2"
+       id="circle3" />
+    <text
+       x="550"
+       y="104"
+       text-anchor="middle"
+       id="text3">C</text>
+  </g>
+  <!-- morfismos Kleisli (A -> T B), (B -> T C) -->
+  <path
+     d="M110 95 C 180 70, 260 60, 300 65"
+     stroke="#6a1b9a"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#mk)"
+     id="path3" />
+  <text
+     x="201.98198"
+     y="63.495495"
+     font-family="serif"
+     font-size="12px"
+     fill="#6a1b9a"
+     text-anchor="middle"
+     id="text4">f : A → T B</text>
+  <path
+     d="M340 65 C 420 70, 480 90, 530 95"
+     stroke="#6a1b9a"
+     stroke-width="2"
+     fill="none"
+     marker-end="url(#mk)"
+     id="path4" />
+  <text
+     x="407.92792"
+     y="60.972973"
+     font-family="serif"
+     font-size="12px"
+     fill="#6a1b9a"
+     text-anchor="middle"
+     id="text5">g : B → T C</text>
+  <!-- composição Kleisli -->
+  <path
+     d="M110 105 C 260 150, 420 150, 530 105"
+     stroke="#d84315"
+     stroke-width="2.2"
+     fill="none"
+     marker-end="url(#mk)"
+     id="path5" />
+  <text
+     x="321.44144"
+     y="156.14415"
+     font-family="serif"
+     font-size="12px"
+     fill="#d84315"
+     text-anchor="middle"
+     id="text6">g ∘_T f = \x -&gt; f x &gt;&gt;= g</text>
+</svg>
