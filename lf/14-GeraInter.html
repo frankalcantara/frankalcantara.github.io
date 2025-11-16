@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 15&nbsp; Geração de Código Intermediário: A Linguagem Universal do Compilador</title>
+<title>Linguagens Formais e Autômatos - 16&nbsp; Geração de Código Intermediário: A Linguagem Universal do Compilador</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./15-llvmIR.html" rel="next">
-<link href="./11-tabelaSimbolos.html" rel="prev">
+<link href="./12-questoes-exercicios.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./14-GeraInter.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./14-GeraInter.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -288,6 +288,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-questoes-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -302,37 +308,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">MLIR: Analisando Passes</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,25 +355,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -375,13 +381,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -396,29 +402,29 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#perspectiva-histórica-a-evolução-das-representações-intermediárias" id="toc-perspectiva-histórica-a-evolução-das-representações-intermediárias" class="nav-link active" data-scroll-target="#perspectiva-histórica-a-evolução-das-representações-intermediárias"><span class="header-section-number">15.1</span> Perspectiva Histórica: A Evolução das Representações Intermediárias</a></li>
-  <li><a href="#fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" id="toc-fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" class="nav-link" data-scroll-target="#fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias"><span class="header-section-number">15.2</span> Fundamentos Teóricos: Propriedades e Tipos de Representações Intermediárias</a>
+  <li><a href="#perspectiva-histórica-a-evolução-das-representações-intermediárias" id="toc-perspectiva-histórica-a-evolução-das-representações-intermediárias" class="nav-link active" data-scroll-target="#perspectiva-histórica-a-evolução-das-representações-intermediárias"><span class="header-section-number">16.1</span> Perspectiva Histórica: A Evolução das Representações Intermediárias</a></li>
+  <li><a href="#fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" id="toc-fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" class="nav-link" data-scroll-target="#fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias"><span class="header-section-number">16.2</span> Fundamentos Teóricos: Propriedades e Tipos de Representações Intermediárias</a>
   <ul class="collapse">
-  <li><a href="#propriedades-de-uma-boa-ri" id="toc-propriedades-de-uma-boa-ri" class="nav-link" data-scroll-target="#propriedades-de-uma-boa-ri"><span class="header-section-number">15.2.1</span> Propriedades de uma Boa RI</a></li>
-  <li><a href="#categorização-dos-tipos-de-ci" id="toc-categorização-dos-tipos-de-ci" class="nav-link" data-scroll-target="#categorização-dos-tipos-de-ci"><span class="header-section-number">15.2.2</span> Categorização dos Tipos de CI</a></li>
+  <li><a href="#propriedades-de-uma-boa-ri" id="toc-propriedades-de-uma-boa-ri" class="nav-link" data-scroll-target="#propriedades-de-uma-boa-ri"><span class="header-section-number">16.2.1</span> Propriedades de uma Boa RI</a></li>
+  <li><a href="#categorização-dos-tipos-de-ci" id="toc-categorização-dos-tipos-de-ci" class="nav-link" data-scroll-target="#categorização-dos-tipos-de-ci"><span class="header-section-number">16.2.2</span> Categorização dos Tipos de CI</a></li>
   </ul></li>
-  <li><a href="#aprofundamento-em-código-de-três-endereços-tac" id="toc-aprofundamento-em-código-de-três-endereços-tac" class="nav-link" data-scroll-target="#aprofundamento-em-código-de-três-endereços-tac"><span class="header-section-number">15.3</span> Aprofundamento em Código de Três Endereços (TAC)</a>
+  <li><a href="#aprofundamento-em-código-de-três-endereços-tac" id="toc-aprofundamento-em-código-de-três-endereços-tac" class="nav-link" data-scroll-target="#aprofundamento-em-código-de-três-endereços-tac"><span class="header-section-number">16.3</span> Aprofundamento em Código de Três Endereços (TAC)</a>
   <ul class="collapse">
-  <li><a href="#definição-formal-e-instruções" id="toc-definição-formal-e-instruções" class="nav-link" data-scroll-target="#definição-formal-e-instruções"><span class="header-section-number">15.3.1</span> Definição Formal e Instruções</a></li>
-  <li><a href="#implementações-do-tac" id="toc-implementações-do-tac" class="nav-link" data-scroll-target="#implementações-do-tac"><span class="header-section-number">15.3.2</span> Implementações do <strong>TAC</strong></a></li>
-  <li><a href="#exemplos-práticos-de-tradução" id="toc-exemplos-práticos-de-tradução" class="nav-link" data-scroll-target="#exemplos-práticos-de-tradução"><span class="header-section-number">15.3.3</span> Exemplos Práticos de Tradução</a></li>
-  <li><a href="#exemplo-completo-tradução-de-função-para-tac" id="toc-exemplo-completo-tradução-de-função-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">15.3.4</span> Exemplo Completo: Tradução de Função para TAC</a></li>
-  <li><a href="#exemplo-completo-tradução-de-função-com-laço-while-para-tac" id="toc-exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">15.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</a></li>
+  <li><a href="#definição-formal-e-instruções" id="toc-definição-formal-e-instruções" class="nav-link" data-scroll-target="#definição-formal-e-instruções"><span class="header-section-number">16.3.1</span> Definição Formal e Instruções</a></li>
+  <li><a href="#implementações-do-tac" id="toc-implementações-do-tac" class="nav-link" data-scroll-target="#implementações-do-tac"><span class="header-section-number">16.3.2</span> Implementações do <strong>TAC</strong></a></li>
+  <li><a href="#exemplos-práticos-de-tradução" id="toc-exemplos-práticos-de-tradução" class="nav-link" data-scroll-target="#exemplos-práticos-de-tradução"><span class="header-section-number">16.3.3</span> Exemplos Práticos de Tradução</a></li>
+  <li><a href="#exemplo-completo-tradução-de-função-para-tac" id="toc-exemplo-completo-tradução-de-função-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">16.3.4</span> Exemplo Completo: Tradução de Função para TAC</a></li>
+  <li><a href="#exemplo-completo-tradução-de-função-com-laço-while-para-tac" id="toc-exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="nav-link" data-scroll-target="#exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">16.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</a></li>
   </ul></li>
-  <li><a href="#representações-intermediárias-modernas-o-ecossistema-llvm" id="toc-representações-intermediárias-modernas-o-ecossistema-llvm" class="nav-link" data-scroll-target="#representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema <strong>LLVM</strong></a>
+  <li><a href="#representações-intermediárias-modernas-o-ecossistema-llvm" id="toc-representações-intermediárias-modernas-o-ecossistema-llvm" class="nav-link" data-scroll-target="#representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">16.4</span> Representações Intermediárias Modernas: O Ecossistema <strong>LLVM</strong></a>
   <ul class="collapse">
-  <li><a href="#llvm-como-infraestrutura" id="toc-llvm-como-infraestrutura" class="nav-link" data-scroll-target="#llvm-como-infraestrutura"><span class="header-section-number">15.4.1</span> <strong>LLVM</strong> como Infraestrutura</a></li>
-  <li><a href="#características-da-llvm-ir" id="toc-características-da-llvm-ir" class="nav-link" data-scroll-target="#características-da-llvm-ir"><span class="header-section-number">15.4.2</span> Características da <strong>LLVM IR</strong></a></li>
-  <li><a href="#forma-de-atribuição-única-estática-ssa" id="toc-forma-de-atribuição-única-estática-ssa" class="nav-link" data-scroll-target="#forma-de-atribuição-única-estática-ssa"><span class="header-section-number">15.4.3</span> Forma de Atribuição Única Estática (SSA)</a></li>
-  <li><a href="#exemplo-prático-c-para-llvm-ir" id="toc-exemplo-prático-c-para-llvm-ir" class="nav-link" data-scroll-target="#exemplo-prático-c-para-llvm-ir"><span class="header-section-number">15.4.4</span> Exemplo Prático: C++ para <strong>LLVM IR</strong></a></li>
+  <li><a href="#llvm-como-infraestrutura" id="toc-llvm-como-infraestrutura" class="nav-link" data-scroll-target="#llvm-como-infraestrutura"><span class="header-section-number">16.4.1</span> <strong>LLVM</strong> como Infraestrutura</a></li>
+  <li><a href="#características-da-llvm-ir" id="toc-características-da-llvm-ir" class="nav-link" data-scroll-target="#características-da-llvm-ir"><span class="header-section-number">16.4.2</span> Características da <strong>LLVM IR</strong></a></li>
+  <li><a href="#forma-de-atribuição-única-estática-ssa" id="toc-forma-de-atribuição-única-estática-ssa" class="nav-link" data-scroll-target="#forma-de-atribuição-única-estática-ssa"><span class="header-section-number">16.4.3</span> Forma de Atribuição Única Estática (SSA)</a></li>
+  <li><a href="#exemplo-prático-c-para-llvm-ir" id="toc-exemplo-prático-c-para-llvm-ir" class="nav-link" data-scroll-target="#exemplo-prático-c-para-llvm-ir"><span class="header-section-number">16.4.4</span> Exemplo Prático: C++ para <strong>LLVM IR</strong></a></li>
   </ul></li>
-  <li><a href="#conclusão-a-ponte-para-a-otimização-de-código" id="toc-conclusão-a-ponte-para-a-otimização-de-código" class="nav-link" data-scroll-target="#conclusão-a-ponte-para-a-otimização-de-código"><span class="header-section-number">15.5</span> Conclusão: A Ponte para a Otimização de Código</a></li>
-  <li><a href="#exercícios-propostos" id="toc-exercícios-propostos" class="nav-link" data-scroll-target="#exercícios-propostos"><span class="header-section-number">15.6</span> Exercícios Propostos</a></li>
+  <li><a href="#conclusão-a-ponte-para-a-otimização-de-código" id="toc-conclusão-a-ponte-para-a-otimização-de-código" class="nav-link" data-scroll-target="#conclusão-a-ponte-para-a-otimização-de-código"><span class="header-section-number">16.5</span> Conclusão: A Ponte para a Otimização de Código</a></li>
+  <li><a href="#exercícios-propostos" id="toc-exercícios-propostos" class="nav-link" data-scroll-target="#exercícios-propostos"><span class="header-section-number">16.6</span> Exercícios Propostos</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/14-GeraInter.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -429,9 +435,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./14-GeraInter.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./14-GeraInter.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></h1>
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></h1>
 </div>
 
 
@@ -452,8 +458,8 @@ window.Quarto = {
 <p>Quando colocamos as mãos em em uma <strong>ASTA</strong> uma questão emerge: com uma representação tão rica e completa como a <strong>ASTA</strong>, por que não a traduzimos diretamente para o código de máquina da arquitetura-alvo? A curiosa leitora vai descobrir que a resposta a esta pergunta revelará um dos pilares da arquitetura de compiladores modernos: o desacoplamento.</p>
 <p>Para começar a entender, considere que gerar código de máquina diretamente da <strong>ASTA</strong> criaria um acoplamento forte entre o <em>front-end</em>, responsável pela análise do código-fonte, e o <em>back-end</em>, responsável pela geração de código para a arquitetura-alvo. Imagine a tarefa de construir compiladores para <span class="math inline">\(M\)</span> linguagens de programação diferentes, visando <span class="math inline">\(N\)</span> arquiteturas de hardware distintas. Uma abordagem direta exigiria a construção de <span class="math inline">\(M \times N\)</span> compiladores completos, um esforço de engenharia monumental e redundante. Além disso, a estrutura hierárquica da <strong>ASTA</strong>, ideal para verificações semânticas, é pouco prática para muitas das otimizações de código mais poderosas, que dependem da análise do fluxo de controle e de dados de forma mais linear.</p>
 <p>A solução para este dilema é a introdução de uma <strong>R</strong>epresentação <strong>I</strong>ntermediária, <strong>RI</strong>, também chamada de Código Intermediário. A <strong>RI</strong> atua como uma “linguagem universal” ou uma <em>lingua franca</em> dentro do compilador. O <em>front-end</em> traduz a <strong>ASTA</strong> para esta <strong>RI</strong> comum, e o <em>back-end</em> traduz a <strong>RI</strong> para o código da arquitetura-alvo. Esta arquitetura transforma este problema, um problema <span class="math inline">\(M \times N\)</span> em um problema <span class="math inline">\(M + N\)</span>: precisamos apenas de <span class="math inline">\(M\)</span> <em>front-ends</em> e <span class="math inline">\(N\)</span> <em>back-ends</em>. Mais importante, uma boa <strong>RI</strong> é projetada para ser um substrato ideal para as fases de otimização. Ela se posiciona em um nível de abstração ideal: mais baixo e linear que a <strong>ASTA</strong>, facilitando análises de fluxo, mas mais alto e abstrato que o código de máquina, permanecendo independente de detalhes de hardware como registradores específicos ou convenções de chamada. Neste capítulo, viajaremos pela natureza, a história e a implementação dessas linguagens universais, que formam a espinha dorsal da compilação moderna.</p>
-<section id="perspectiva-histórica-a-evolução-das-representações-intermediárias" class="level2" data-number="15.1">
-<h2 data-number="15.1" class="anchored" data-anchor-id="perspectiva-histórica-a-evolução-das-representações-intermediárias"><span class="header-section-number">15.1</span> Perspectiva Histórica: A Evolução das Representações Intermediárias</h2>
+<section id="perspectiva-histórica-a-evolução-das-representações-intermediárias" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="perspectiva-histórica-a-evolução-das-representações-intermediárias"><span class="header-section-number">16.1</span> Perspectiva Histórica: A Evolução das Representações Intermediárias</h2>
 <p>A concepção e o uso de representações intermediárias não são uma invenção recente; sua evolução espelha as prioridades cambiantes da engenharia de software ao longo das décadas.</p>
 <p>Nos anos 1970, o cenário de hardware era extremamente fragmentado. Muitas empresas produziam máquinas completamente independentes. A portabilidade de software era um desafio colossal. Foi nesse contexto que <a href="https://en.wikipedia.org/wiki/Niklaus_Wirth">Niklaus Wirth</a>, o criador da linguagem <strong>Pascal</strong>, popularizou uma abordagem revolucionária com seu compilador. Em vez de gerar código nativo para uma máquina específica, o compilador <strong>Pascal</strong> da ETH Zurich produzia um código intermediário simples para uma máquina de pilha virtual, conhecido como <strong>P-code</strong>.</p>
 <p>A influência do <strong>P-code</strong> estendeu-se muito além de sua época. Décadas depois, nos anos 1990, a Sun Microsystems adotou uma arquitetura conceitual similar ao projetar a <strong>Java Virtual Machine (JVM)</strong>. Assim como o <strong>P-code</strong>, o <em>bytecode</em> da <strong>JVM</strong> é um código intermediário para uma máquina de pilha abstrata, permitindo que programas <strong>Java</strong> sejam compilados uma vez e executados em qualquer plataforma que possua uma <strong>JVM</strong>. O famoso slogan “Write Once, Run Anywhere” de <strong>Java</strong> é, em essência, uma reformulação do princípio de portabilidade que Wirth pioneirou com o <strong>P-code</strong>. Esta linhagem conceitual demonstra como soluções elegantes para problemas fundamentais de engenharia transcendem gerações de tecnologia.</p>
@@ -462,11 +468,11 @@ window.Quarto = {
 <p>A partir dos anos 2000, a prioridade da indústria mudou outra vez. O hardware, embora mais padronizado, como as máquinas x86 e ARM, tornou-se imensamente complexo internamente, <em>pipelines</em> profundos, <em>caches</em> multinível, paralelismo em nível de instrução. O desafio principal passou a ser extrair o máximo de performance dessas arquiteturas. É nesse contexto que surge o <strong>LLVM</strong>. Originalmente um projeto de pesquisa na Universidade de Illinois, originalmente chamado de <strong>L</strong>ow <strong>L</strong>evel <strong>V</strong>irtual <strong>M</strong>achine, o <strong>LLVM</strong> foi concebido como uma infraestrutura de compilação, modular e reutilizável.</p>
 <p>O <strong>LLVM</strong> representou uma mudança de paradigma. Sua representação intermediária, a <strong>LLVM IR</strong>, não foi projetada apenas como um formato de passagem de dados, mas como o coração de uma infraestrutura de compilação completa, modular e reutilizável. O <strong>LLVM</strong> fornece um conjunto de bibliotecas, e aplicativos. para a análise, transformação e otimização que operam diretamente sobre a <strong>LLVM IR</strong>. Neste ponto da história, o código intermediário deixou de ser um mero produto do <em>front-end</em> para se tornar uma linguagem de programação por si só, na qual otimizadores de propósito geral são escritos e compartilhados por múltiplos <em>front-ends</em>, tais como <a href="https://clang.llvm.org/">Clang</a> para C/C++ e <a href="https://rust-lang.org/">rustc</a> para Rust) e <em>back-ends</em>. Esta evolução, da portabilidade, P-code, à modularidade, arquivos-objeto e, finalmente, à performance com o <strong>LLVM IR</strong>, demonstra como as <strong>RI</strong>s são artefatos capazes de encapsular e permitir a solução dos desafios de engenharia mais prementes de sua época.</p>
 </section>
-<section id="fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" class="level2" data-number="15.2">
-<h2 data-number="15.2" class="anchored" data-anchor-id="fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias"><span class="header-section-number">15.2</span> Fundamentos Teóricos: Propriedades e Tipos de Representações Intermediárias</h2>
+<section id="fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="fundamentos-teóricos-propriedades-e-tipos-de-representações-intermediárias"><span class="header-section-number">16.2</span> Fundamentos Teóricos: Propriedades e Tipos de Representações Intermediárias</h2>
 <p>Para que uma Representação Intermediária seja eficaz, ela deve possuir um conjunto de propriedades bem definidas. Além disso, as <strong>RI</strong>s podem ser classificadas em diferentes categorias, cada uma com suas próprias forças e fraquezas.</p>
-<section id="propriedades-de-uma-boa-ri" class="level3" data-number="15.2.1">
-<h3 data-number="15.2.1" class="anchored" data-anchor-id="propriedades-de-uma-boa-ri"><span class="header-section-number">15.2.1</span> Propriedades de uma Boa RI</h3>
+<section id="propriedades-de-uma-boa-ri" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="propriedades-de-uma-boa-ri"><span class="header-section-number">16.2.1</span> Propriedades de uma Boa RI</h3>
 <p>Uma <strong>RI</strong> robusta e útil deve exibir as seguintes características:</p>
 <ul>
 <li><strong>Independência do código-fonte</strong>: a <strong>RI</strong> deve ser genérica o suficiente para representar as construções semânticas de diversas linguagens de programação de alto nível, desde C++ e Rust até Python e Swift.</li>
@@ -475,8 +481,8 @@ window.Quarto = {
 <li><strong>Adequação para Otimizações</strong>: esta é, talvez, a propriedade mais crítica em compiladores modernos. A estrutura da <strong>RI</strong> deve facilitar a análise e a transformação do código. Por exemplo, a identificação de operandos e resultados deve ser explícita, e a estrutura de controle do programa deve ser claramente representável.</li>
 </ul>
 </section>
-<section id="categorização-dos-tipos-de-ci" class="level3" data-number="15.2.2">
-<h3 data-number="15.2.2" class="anchored" data-anchor-id="categorização-dos-tipos-de-ci"><span class="header-section-number">15.2.2</span> Categorização dos Tipos de CI</h3>
+<section id="categorização-dos-tipos-de-ci" class="level3" data-number="16.2.2">
+<h3 data-number="16.2.2" class="anchored" data-anchor-id="categorização-dos-tipos-de-ci"><span class="header-section-number">16.2.2</span> Categorização dos Tipos de CI</h3>
 <p>As representações intermediárias são geralmente classificadas em três categorias principais:</p>
 <ol type="1">
 <li><p><strong>Representações em Grafos</strong>: estas <strong>RI</strong>s mantêm a estrutura hierárquica, ou de grafo, do programa. Os exemplos mais comuns são a própria <strong>Árvore de Sintaxe Abstrata (AST)</strong> e os <strong>Grafos Acíclicos Dirigidos (DAGs)</strong>. Um <strong>DAG</strong> é uma otimização da <strong>ASTA</strong> na qual subexpressões comuns são representadas por um único vértice, eliminando a redundância e tornando explícita a reutilização de cálculos. <strong>RI</strong>s gráficas são excelentes para capturar a estrutura do código, mas podem ser complexas de manipular para otimizações que dependem do fluxo de execução.</p></li>
@@ -549,11 +555,11 @@ window.Quarto = {
 </table>
 </section>
 </section>
-<section id="aprofundamento-em-código-de-três-endereços-tac" class="level2" data-number="15.3">
-<h2 data-number="15.3" class="anchored" data-anchor-id="aprofundamento-em-código-de-três-endereços-tac"><span class="header-section-number">15.3</span> Aprofundamento em Código de Três Endereços (TAC)</h2>
+<section id="aprofundamento-em-código-de-três-endereços-tac" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="aprofundamento-em-código-de-três-endereços-tac"><span class="header-section-number">16.3</span> Aprofundamento em Código de Três Endereços (TAC)</h2>
 <p>O Código de Três Endereços é uma das formas mais populares e influentes de representação intermediária linear. Sua simplicidade e estrutura o tornam um excelente candidato para análise e transformação.</p>
-<section id="definição-formal-e-instruções" class="level3" data-number="15.3.1">
-<h3 data-number="15.3.1" class="anchored" data-anchor-id="definição-formal-e-instruções"><span class="header-section-number">15.3.1</span> Definição Formal e Instruções</h3>
+<section id="definição-formal-e-instruções" class="level3" data-number="16.3.1">
+<h3 data-number="16.3.1" class="anchored" data-anchor-id="definição-formal-e-instruções"><span class="header-section-number">16.3.1</span> Definição Formal e Instruções</h3>
 <p>O <strong>TAC</strong> consiste em uma sequência de instruções que se assemelham a uma linguagem <strong>Assembly</strong>. A forma geral de uma instrução é:</p>
 <p><span class="math display">\[resultado := argumento_1 \text{ operador } argumento_2\]</span></p>
 <p>A característica definidora do <strong>TAC</strong> é a restrição de que há <strong>no máximo um operador no lado direito de cada instrução de atribuição</strong>. Isso significa que expressões complexas do código-fonte devem ser decompostas em múltiplas instruções <strong>TAC</strong>, utilizando variáveis temporárias geradas pelo compilador para armazenar resultados intermediários. Por exemplo, a instrução <code>w = (a + b) * c;</code> seria traduzida para:</p>
@@ -595,8 +601,8 @@ w:= t2</code></pre>
 <li><code>*x := y</code> (escrita via ponteiro).</li>
 </ul>
 </section>
-<section id="implementações-do-tac" class="level3" data-number="15.3.2">
-<h3 data-number="15.3.2" class="anchored" data-anchor-id="implementações-do-tac"><span class="header-section-number">15.3.2</span> Implementações do <strong>TAC</strong></h3>
+<section id="implementações-do-tac" class="level3" data-number="16.3.2">
+<h3 data-number="16.3.2" class="anchored" data-anchor-id="implementações-do-tac"><span class="header-section-number">16.3.2</span> Implementações do <strong>TAC</strong></h3>
 <p>Existem três formas clássicas de implementar o <strong>TAC</strong> em uma estrutura de dados:</p>
 <ol type="1">
 <li><p><strong>Quádruplas</strong>: cada instrução é um registro, ou <em>struct</em>, com quatro campos: <code>(operador, arg1, arg2, resultado)</code>. O resultado de cada operação é armazenado explicitamente. Esta é a forma mais fácil de manipular, pois as instruções são autocontidas. Mover uma instrução durante a otimização é trivial, pois não há referências implícitas a ela.</p></li>
@@ -654,11 +660,11 @@ w:= t2</code></pre>
 <p>Para ilustrar concretamente, considere uma instrução <code>t1 := a + b</code>. Uma quádrupla requer quatro campos (operador <code>+</code>, argumentos <code>a</code> e <code>b</code>, resultado <code>t1</code>), tipicamente entre <span class="math inline">\(16\)</span> e <span class="math inline">\(32 bytes\)</span> dependendo da implementação. Uma tripla armazena apenas três campos (operador <code>+</code>, argumentos <code>a</code> e <code>b</code>), resultando em um espaço entre <span class="math inline">\(12\)</span> e <span class="math inline">\(24 bytes\)</span>. A tripla indireta adiciona o custo de um ponteiro, de <span class="math inline">\(4\)</span> a <span class="math inline">\(8 bytes\)</span> no array de indireção, mas esse custo extra é amortizado ao longo de muitas instruções e é amplamente compensado pela eficiência nas operações de reordenamento durante a otimização.</p>
 <p>A escolha entre essas representações envolve uma análise de balanceamento clássica entre espaço e flexibilidade. Compiladores modernos frequentemente optam por quádruplas ou uma variante delas durante as fases de otimização intensiva, na qual a facilidade de manipulação supera a preocupação com memória, especialmente considerando que o código intermediário é, na maior parte das vezes, transitório e existe apenas durante a compilação.</p>
 </section>
-<section id="exemplos-práticos-de-tradução" class="level3" data-number="15.3.3">
-<h3 data-number="15.3.3" class="anchored" data-anchor-id="exemplos-práticos-de-tradução"><span class="header-section-number">15.3.3</span> Exemplos Práticos de Tradução</h3>
+<section id="exemplos-práticos-de-tradução" class="level3" data-number="16.3.3">
+<h3 data-number="16.3.3" class="anchored" data-anchor-id="exemplos-práticos-de-tradução"><span class="header-section-number">16.3.3</span> Exemplos Práticos de Tradução</h3>
 <p>A geração de Código de Três Endereços é formalmente especificada usando Esquemas de Tradução Dirigida por Sintaxe, ou em inglês <strong>S</strong>yntax <strong>D</strong>irected <strong>T</strong>ranslation, <strong>SDT</strong>. Um <strong>SDT</strong> anexa ações semânticas às produções de uma gramática, que geram o código intermediário à medida que a árvore de sintaxe é percorrida.</p>
-<section id="tradução-de-expressões-aritméticas" class="level4" data-number="15.3.3.1">
-<h4 data-number="15.3.3.1" class="anchored" data-anchor-id="tradução-de-expressões-aritméticas"><span class="header-section-number">15.3.3.1</span> Tradução de Expressões Aritméticas</h4>
+<section id="tradução-de-expressões-aritméticas" class="level4" data-number="16.3.3.1">
+<h4 data-number="16.3.3.1" class="anchored" data-anchor-id="tradução-de-expressões-aritméticas"><span class="header-section-number">16.3.3.1</span> Tradução de Expressões Aritméticas</h4>
 <p>Consideremos a produção gramatical para uma adição: <span class="math inline">\(E \rightarrow E_1 + E_2\)</span>. A ação semântica associada gera o código para <span class="math inline">\(E_1\)</span>, depois o código para <span class="math inline">\(E_2\)</span>, e finalmente emite uma nova instrução de adição.</p>
 <p><strong>Produção</strong>: <span class="math inline">\(S \rightarrow \textbf{id}:= E\)</span></p>
 <p><strong>Ação Semântica</strong>: <span class="math display">\[
@@ -678,11 +684,11 @@ w:= t2</code></pre>
 \]</span></p>
 <p>Aqui, <code>E.place</code> é um atributo que armazena o nome do temporário ou variável que contém o valor de <span class="math inline">\(E\)</span>, e <code>E.code</code> armazena a sequência de instruções <strong>TAC</strong> geradas. A função <code>newtemp()</code> cria um novo nome de variável temporária.</p>
 </section>
-<section id="tradução-de-estruturas-de-controle-de-fluxo" class="level4" data-number="15.3.3.2">
-<h4 data-number="15.3.3.2" class="anchored" data-anchor-id="tradução-de-estruturas-de-controle-de-fluxo"><span class="header-section-number">15.3.3.2</span> Tradução de Estruturas de Controle de Fluxo</h4>
+<section id="tradução-de-estruturas-de-controle-de-fluxo" class="level4" data-number="16.3.3.2">
+<h4 data-number="16.3.3.2" class="anchored" data-anchor-id="tradução-de-estruturas-de-controle-de-fluxo"><span class="header-section-number">16.3.3.2</span> Tradução de Estruturas de Controle de Fluxo</h4>
 <p>Para estruturas de controle, a tradução envolve a geração de rótulos (<em>labels</em>) e instruções de salto.</p>
-<section id="tradução-de-if-then-else" class="level5" data-number="15.3.3.2.1">
-<h5 data-number="15.3.3.2.1" class="anchored" data-anchor-id="tradução-de-if-then-else"><span class="header-section-number">15.3.3.2.1</span> Tradução de <code>if-then-else</code>:</h5>
+<section id="tradução-de-if-then-else" class="level5" data-number="16.3.3.2.1">
+<h5 data-number="16.3.3.2.1" class="anchored" data-anchor-id="tradução-de-if-then-else"><span class="header-section-number">16.3.3.2.1</span> Tradução de <code>if-then-else</code>:</h5>
 <p>Para uma instrução <code>if (B) then S1 else S2</code>, precisamos de rótulos para o início do bloco <code>then</code> (<code>B.true</code>), o início do bloco <code>else</code> (<code>B.false</code>) e o final da instrução (<code>S.next</code>).</p>
 <p><strong>Produção</strong>: <span class="math inline">\(S \rightarrow \textbf{if} \, (B) \, S_1 \, \textbf{else} \, S_2\)</span></p>
 <p><strong>Ação Semântica</strong>: <span class="math display">\[
@@ -701,8 +707,8 @@ w:= t2</code></pre>
 \]</span></p>
 <p>O código para a expressão booleana <code>B.code</code> é projetado para saltar para <code>B.true</code> se a condição for verdadeira e para <code>B.false</code> se for falsa.</p>
 </section>
-<section id="tradução-de-while" class="level5" data-number="15.3.3.2.2">
-<h5 data-number="15.3.3.2.2" class="anchored" data-anchor-id="tradução-de-while"><span class="header-section-number">15.3.3.2.2</span> Tradução de <code>while</code>:</h5>
+<section id="tradução-de-while" class="level5" data-number="16.3.3.2.2">
+<h5 data-number="16.3.3.2.2" class="anchored" data-anchor-id="tradução-de-while"><span class="header-section-number">16.3.3.2.2</span> Tradução de <code>while</code>:</h5>
 <p>Para uma instrução <code>while (B) do S1</code>, precisamos de um rótulo para o início do laço (<code>S.begin</code>), um para o corpo do laço (<code>B.true</code>) e um para o ponto de saída (<code>B.false</code> ou <code>S.next</code>).</p>
 <p><strong>Produção</strong>: <span class="math inline">\(S \rightarrow \textbf{while} \, (B) \, \textbf{do} \, S_1\)</span></p>
 <p><strong>Ação Semântica</strong>: <span class="math display">\[
@@ -722,11 +728,11 @@ w:= t2</code></pre>
 </section>
 </section>
 </section>
-<section id="exemplo-completo-tradução-de-função-para-tac" class="level3" data-number="15.3.4">
-<h3 data-number="15.3.4" class="anchored" data-anchor-id="exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">15.3.4</span> Exemplo Completo: Tradução de Função para TAC</h3>
+<section id="exemplo-completo-tradução-de-função-para-tac" class="level3" data-number="16.3.4">
+<h3 data-number="16.3.4" class="anchored" data-anchor-id="exemplo-completo-tradução-de-função-para-tac"><span class="header-section-number">16.3.4</span> Exemplo Completo: Tradução de Função para TAC</h3>
 <p>Para que a esforçada leitora possa solidificar seu entendimento sobre o Código de Três Endereços, vamos traduzir uma função completa de uma linguagem de alto nível para <strong>TAC</strong>, incluindo declaração, parâmetros, corpo e retorno. Este exemplo ilustrará como todas as construções se integram em uma tradução real.</p>
-<section id="função-em-linguagem-de-alto-nível" class="level4" data-number="15.3.4.1">
-<h4 data-number="15.3.4.1" class="anchored" data-anchor-id="função-em-linguagem-de-alto-nível"><span class="header-section-number">15.3.4.1</span> Função em Linguagem de Alto Nível</h4>
+<section id="função-em-linguagem-de-alto-nível" class="level4" data-number="16.3.4.1">
+<h4 data-number="16.3.4.1" class="anchored" data-anchor-id="função-em-linguagem-de-alto-nível"><span class="header-section-number">16.3.4.1</span> Função em Linguagem de Alto Nível</h4>
 <p>Considere a seguinte função em <strong>C</strong> que calcula o máximo entre dois números e retorna o dobro desse valor:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> double_max<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> max<span class="op">;</span></span>
@@ -747,8 +753,8 @@ w:= t2</code></pre>
 <li>Retorno de valor.</li>
 </ul>
 </section>
-<section id="tradução-para-código-de-três-endereços" class="level4" data-number="15.3.4.2">
-<h4 data-number="15.3.4.2" class="anchored" data-anchor-id="tradução-para-código-de-três-endereços"><span class="header-section-number">15.3.4.2</span> Tradução para Código de Três Endereços</h4>
+<section id="tradução-para-código-de-três-endereços" class="level4" data-number="16.3.4.2">
+<h4 data-number="16.3.4.2" class="anchored" data-anchor-id="tradução-para-código-de-três-endereços"><span class="header-section-number">16.3.4.2</span> Tradução para Código de Três Endereços</h4>
 <p>A tradução completa para <strong>TAC</strong> segue abaixo. Utilizamos rótulos para delimitar blocos, o padrão de comentários em linha do <strong>C</strong> e instruções específicas para gerenciar parâmetros e retorno:</p>
 <pre class="shell"><code>// Prólogo da função
 begin_function double_max
@@ -804,8 +810,8 @@ return result
 end_function</code></pre>
 <p>Após o <code>if-then-else</code>, o código calcula o dobro de <code>max</code>. A multiplicação é armazenada em <code>t2</code> e depois copiada para <code>result</code>. A instrução <code>return</code> especifica o valor de retorno da função.</p>
 </section>
-<section id="implementação-em-quádruplas" class="level4" data-number="15.3.4.3">
-<h4 data-number="15.3.4.3" class="anchored" data-anchor-id="implementação-em-quádruplas"><span class="header-section-number">15.3.4.3</span> Implementação em Quádruplas</h4>
+<section id="implementação-em-quádruplas" class="level4" data-number="16.3.4.3">
+<h4 data-number="16.3.4.3" class="anchored" data-anchor-id="implementação-em-quádruplas"><span class="header-section-number">16.3.4.3</span> Implementação em Quádruplas</h4>
 <p>Para tornar a tradução ainda mais concreta, vejamos como estas instruções seriam representadas, na tabela #tbl-implementacoes-tac2, usando a implementação de <strong>quádruplas</strong>:</p>
 <table class="table">
 <caption>Representação em Quádruplas do Código de Três Endereços para <code>double_max</code>.</caption>
@@ -942,13 +948,13 @@ end_function</code></pre>
 </table>
 <p>Esta representação tabular torna explícito como cada campo da quádrupla é preenchido. Note que operações unárias e de controle de fluxo deixam alguns campos vazios, marcados com <code>-</code>.</p>
 </section>
-<section id="implementação-em-triplas" class="level4" data-number="15.3.4.4">
-<h4 data-number="15.3.4.4" class="anchored" data-anchor-id="implementação-em-triplas"><span class="header-section-number">15.3.4.4</span> Implementação em Triplas</h4>
+<section id="implementação-em-triplas" class="level4" data-number="16.3.4.4">
+<h4 data-number="16.3.4.4" class="anchored" data-anchor-id="implementação-em-triplas"><span class="header-section-number">16.3.4.4</span> Implementação em Triplas</h4>
 <p>Na representação por <strong>triplas</strong>, cada instrução é composta por três campos: operador, argumento 1 e argumento 2. O resultado de uma operação é implícito e representado pelo índice da própria tripla. Variáveis temporárias e locais apontam para esses índices. Operações de controle de fluxo (como <code>goto</code> e <code>if</code>) usam índices de rótulos como alvos. A tabela abaixo adapta a tradução anterior para triplas, mantendo a mesma sequência lógica das quádruplas originais:</p>
 <div id="tbl-implementacoes-triplas" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-implementacoes-triplas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;15.1: Representação em Triplas do Código de Três Endereços para <code>double_max</code>. Aqui, <code>max</code> aponta para o índice 7 ou 10 (dependendo do ramo), <code>t1</code> para 3, <code>t2</code> para 13 e <code>result</code> para 14. Os alvos de saltos (como <code>(6)</code> para L2) referenciam os índices das triplas de rótulos. Campos vazios são marcados com <code>-</code>.
+Table&nbsp;16.1: Representação em Triplas do Código de Três Endereços para <code>double_max</code>. Aqui, <code>max</code> aponta para o índice 7 ou 10 (dependendo do ramo), <code>t1</code> para 3, <code>t2</code> para 13 e <code>result</code> para 14. Os alvos de saltos (como <code>(6)</code> para L2) referenciam os índices das triplas de rótulos. Campos vazios são marcados com <code>-</code>.
 </figcaption>
 <div aria-describedby="tbl-implementacoes-triplas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -1070,8 +1076,8 @@ Table&nbsp;15.1: Representação em Triplas do Código de Três Endereços para 
 </div>
 <p>Esta estrutura economiza espaço em comparação às quádruplas, pois o resultado é o índice da tripla, mas requer uma tabela de símbolos para mapear variáveis aos índices apropriados.</p>
 </section>
-<section id="implementação-em-triplas-indiretas" class="level4" data-number="15.3.4.5">
-<h4 data-number="15.3.4.5" class="anchored" data-anchor-id="implementação-em-triplas-indiretas"><span class="header-section-number">15.3.4.5</span> Implementação em Triplas Indiretas</h4>
+<section id="implementação-em-triplas-indiretas" class="level4" data-number="16.3.4.5">
+<h4 data-number="16.3.4.5" class="anchored" data-anchor-id="implementação-em-triplas-indiretas"><span class="header-section-number">16.3.4.5</span> Implementação em Triplas Indiretas</h4>
 <p>As <strong>triplas indiretas</strong> adicionam uma camada de indireção: uma tabela principal de ponteiros (índices) aponta para entradas em uma tabela de triplas reais (onde ficam o operador, arg1 e arg2). Isso facilita otimizações, como a remoção de instruções mortas, ao permitir a substituição de ponteiros sem alterar as triplas subjacentes. A tabela abaixo mostra a estrutura para o mesmo exemplo:</p>
 <p><strong>Tabela de Ponteiros (Índices Indiretos)</strong>:</p>
 <table class="table">
@@ -1156,7 +1162,7 @@ Table&nbsp;15.1: Representação em Triplas do Código de Três Endereços para 
 <div id="tbl-implementacoes-triplas-indiretas" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-implementacoes-triplas-indiretas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;15.2: Representação em Triplas Indiretas do Código de Três Endereços para <code>double_max</code>. A tabela de ponteiros mapeia os índices lógicos para as triplas reais, permitindo flexibilidade em otimizações. As referências (como <code>(3)</code>) apontam para índices na tabela de ponteiros, que por sua vez levam às triplas.
+Table&nbsp;16.2: Representação em Triplas Indiretas do Código de Três Endereços para <code>double_max</code>. A tabela de ponteiros mapeia os índices lógicos para as triplas reais, permitindo flexibilidade em otimizações. As referências (como <code>(3)</code>) apontam para índices na tabela de ponteiros, que por sua vez levam às triplas.
 </figcaption>
 <div aria-describedby="tbl-implementacoes-triplas-indiretas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
@@ -1278,8 +1284,8 @@ Table&nbsp;15.2: Representação em Triplas Indiretas do Código de Três Endere
 </div>
 <p>Essa representação é particularmente útil em compiladores que realizam análises de fluxo de dados, pois modificar um ponteiro pode “desconectar” uma tripla sem afetar outras partes do código.</p>
 </section>
-<section id="variações-e-otimizações" class="level4" data-number="15.3.4.6">
-<h4 data-number="15.3.4.6" class="anchored" data-anchor-id="variações-e-otimizações"><span class="header-section-number">15.3.4.6</span> Variações e Otimizações</h4>
+<section id="variações-e-otimizações" class="level4" data-number="16.3.4.6">
+<h4 data-number="16.3.4.6" class="anchored" data-anchor-id="variações-e-otimizações"><span class="header-section-number">16.3.4.6</span> Variações e Otimizações</h4>
 <p>Vale mencionar que esta tradução é deliberadamente não otimizada, preservando a estrutura do código original. Um otimizador poderia aplicar várias transformações:</p>
 <ol type="1">
 <li><p><strong>Eliminação de Cópia</strong>: a atribuição <code>result := t2</code> é redundante; poderíamos retornar <code>t2</code> diretamente.</p></li>
@@ -1303,8 +1309,8 @@ end_function</code></pre>
 <p>Este exemplo completo demonstra como o <strong>TAC</strong> serve como uma ponte entre a abstração da linguagem de alto nível e a concretude do código de máquina, mantendo uma estrutura simples e regular que facilita tanto a geração quanto a otimização.</p>
 </section>
 </section>
-<section id="exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="level3" data-number="15.3.5">
-<h3 data-number="15.3.5" class="anchored" data-anchor-id="exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">15.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</h3>
+<section id="exemplo-completo-tradução-de-função-com-laço-while-para-tac" class="level3" data-number="16.3.5">
+<h3 data-number="16.3.5" class="anchored" data-anchor-id="exemplo-completo-tradução-de-função-com-laço-while-para-tac"><span class="header-section-number">16.3.5</span> Exemplo Completo: Tradução de Função com Laço While para TAC</h3>
 <p>Para ilustrar a tradução de uma estrutura de controle com laço <strong>while</strong>, vamos criar e resolver um exemplo simples em C. A função calcula a soma dos números de 1 até <code>n</code> (soma triangular), usando um laço <strong>while</strong>. Este exemplo integra:</p>
 <ul>
 <li>Parâmetro de entrada (<code>n</code>).</li>
@@ -1315,8 +1321,8 @@ end_function</code></pre>
 <li>Retorno do resultado.</li>
 </ul>
 <p>Seguiremos o <strong>mesmo padrão do exemplo anterior</strong> (<code>double_max</code>): - Código C original. - Tradução para TAC em formato textual (com rótulos, temporários e saltos). - Análise seção por seção. - Representação em <strong>Quádruplas</strong> (tabela). - Representação em <strong>Triplas</strong> (tabela). - Representação em <strong>Triplas Indiretas</strong> (tabelas). - Uma versão otimizada breve para comparação.</p>
-<section id="função-em-linguagem-de-alto-nível-c" class="level4" data-number="15.3.5.1">
-<h4 data-number="15.3.5.1" class="anchored" data-anchor-id="função-em-linguagem-de-alto-nível-c"><span class="header-section-number">15.3.5.1</span> Função em Linguagem de Alto Nível (C)</h4>
+<section id="função-em-linguagem-de-alto-nível-c" class="level4" data-number="16.3.5.1">
+<h4 data-number="16.3.5.1" class="anchored" data-anchor-id="função-em-linguagem-de-alto-nível-c"><span class="header-section-number">16.3.5.1</span> Função em Linguagem de Alto Nível (C)</h4>
 <div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> sum_up_to<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
@@ -1330,8 +1336,8 @@ end_function</code></pre>
 <li><strong>Destaques</strong>: Parâmetro <code>n</code>, inicializações, condição <code>i &lt;= n</code>, corpo do laço com adição e incremento, retorno.</li>
 </ul>
 </section>
-<section id="tradução-para-código-de-três-endereços-tac" class="level4" data-number="15.3.5.2">
-<h4 data-number="15.3.5.2" class="anchored" data-anchor-id="tradução-para-código-de-três-endereços-tac"><span class="header-section-number">15.3.5.2</span> Tradução para Código de Três Endereços (TAC)</h4>
+<section id="tradução-para-código-de-três-endereços-tac" class="level4" data-number="16.3.5.2">
+<h4 data-number="16.3.5.2" class="anchored" data-anchor-id="tradução-para-código-de-três-endereços-tac"><span class="header-section-number">16.3.5.2</span> Tradução para Código de Três Endereços (TAC)</h4>
 <p>A tradução completa para <strong>TAC</strong> segue abaixo. Utilizamos rótulos para delimitar o início do laço (<code>L2</code>), o corpo (<code>L3</code>) e a saída (<code>L4</code>). O código é gerado via SDT, como nos exemplos anteriores (percorrendo a AST bottom-up).</p>
 <pre class="shell"><code>// Prólogo da função
 begin_function sum_up_to
@@ -1360,8 +1366,8 @@ return sum
 // Epílogo da função
 end_function</code></pre>
 </section>
-<section id="análise-da-tradução-tac" class="level4" data-number="15.3.5.3">
-<h4 data-number="15.3.5.3" class="anchored" data-anchor-id="análise-da-tradução-tac"><span class="header-section-number">15.3.5.3</span> Análise da Tradução TAC</h4>
+<section id="análise-da-tradução-tac" class="level4" data-number="16.3.5.3">
+<h4 data-number="16.3.5.3" class="anchored" data-anchor-id="análise-da-tradução-tac"><span class="header-section-number">16.3.5.3</span> Análise da Tradução TAC</h4>
 <p>Vamos examinar cada seção da tradução, destacando como o SDT gera o código para o <strong>while</strong> (similar ao exemplo de SDT para <code>while (B) do S1</code>):</p>
 <p><strong>1. Prólogo e Parâmetro</strong>:</p>
 <pre class="shell"><code>begin_function sum_up_to
@@ -1408,8 +1414,8 @@ end_function</code></pre>
 </ul>
 <p>Este TAC é <strong>não otimizado</strong>, preservando a estrutura original para clareza. O laço forma um ciclo via saltos: <code>L2</code> → <code>L3</code> → <code>L2</code> (se condição verdadeira).</p>
 </section>
-<section id="implementação-em-quádruplas-1" class="level4" data-number="15.3.5.4">
-<h4 data-number="15.3.5.4" class="anchored" data-anchor-id="implementação-em-quádruplas-1"><span class="header-section-number">15.3.5.4</span> Implementação em Quádruplas</h4>
+<section id="implementação-em-quádruplas-1" class="level4" data-number="16.3.5.4">
+<h4 data-number="16.3.5.4" class="anchored" data-anchor-id="implementação-em-quádruplas-1"><span class="header-section-number">16.3.5.4</span> Implementação em Quádruplas</h4>
 <p>Representação tabular em <strong>quádruplas</strong> (cada linha: <code>(operador, arg1, arg2, resultado)</code>). Campos vazios: <code>-</code>.</p>
 <table class="table">
 <thead>
@@ -1554,8 +1560,8 @@ end_function</code></pre>
 <li><strong>Vantagem</strong>: Resultados explícitos (<code>t1</code>, <code>t2</code>, etc.); fácil reordenar durante otimizações.</li>
 </ul>
 </section>
-<section id="implementação-em-triplas-1" class="level4" data-number="15.3.5.5">
-<h4 data-number="15.3.5.5" class="anchored" data-anchor-id="implementação-em-triplas-1"><span class="header-section-number">15.3.5.5</span> Implementação em Triplas</h4>
+<section id="implementação-em-triplas-1" class="level4" data-number="16.3.5.5">
+<h4 data-number="16.3.5.5" class="anchored" data-anchor-id="implementação-em-triplas-1"><span class="header-section-number">16.3.5.5</span> Implementação em Triplas</h4>
 <p>Em <strong>triplas</strong> (<code>(operador, arg1, arg2)</code>), o resultado é o índice da tripla. Variáveis mapeiam para índices (ex.: <code>sum</code> aponta para 3 ou 11; <code>t1</code> = 6).</p>
 <table class="table">
 <thead>
@@ -1681,8 +1687,8 @@ end_function</code></pre>
 <li><strong>Observação</strong>: Referências como <code>(6)</code> apontam para o índice da tripla que define o valor. Reordenar exige atualizar todos os ponteiros.</li>
 </ul>
 </section>
-<section id="implementação-em-triplas-indiretas-1" class="level4" data-number="15.3.5.6">
-<h4 data-number="15.3.5.6" class="anchored" data-anchor-id="implementação-em-triplas-indiretas-1"><span class="header-section-number">15.3.5.6</span> Implementação em Triplas Indiretas</h4>
+<section id="implementação-em-triplas-indiretas-1" class="level4" data-number="16.3.5.6">
+<h4 data-number="16.3.5.6" class="anchored" data-anchor-id="implementação-em-triplas-indiretas-1"><span class="header-section-number">16.3.5.6</span> Implementação em Triplas Indiretas</h4>
 <p>Adiciona uma <strong>tabela de ponteiros</strong> (índices lógicos → triplas reais) para facilitar otimizações (mover ponteiros sem alterar triplas).</p>
 <p><strong>Tabela de Ponteiros (Índices Indiretos)</strong>:</p>
 <table class="table">
@@ -1892,8 +1898,8 @@ end_function</code></pre>
 <li><strong>Vantagem</strong>: Otimizações como remoção de código morto só reorganizam ponteiros.</li>
 </ul>
 </section>
-<section id="variações-e-otimizações-1" class="level4" data-number="15.3.5.7">
-<h4 data-number="15.3.5.7" class="anchored" data-anchor-id="variações-e-otimizações-1"><span class="header-section-number">15.3.5.7</span> Variações e Otimizações</h4>
+<section id="variações-e-otimizações-1" class="level4" data-number="16.3.5.7">
+<h4 data-number="16.3.5.7" class="anchored" data-anchor-id="variações-e-otimizações-1"><span class="header-section-number">16.3.5.7</span> Variações e Otimizações</h4>
 <p>Esta tradução é deliberadamente não otimizada. Um otimizador poderia aplicar:</p>
 <ol type="1">
 <li><strong>Eliminação de Cópias</strong>: Remover <code>sum := t2</code> e <code>i := t3</code> (usar resultados diretamente).</li>
@@ -1914,18 +1920,18 @@ end_function</code></pre>
 </section>
 </section>
 </section>
-<section id="representações-intermediárias-modernas-o-ecossistema-llvm" class="level2" data-number="15.4">
-<h2 data-number="15.4" class="anchored" data-anchor-id="representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">15.4</span> Representações Intermediárias Modernas: O Ecossistema <strong>LLVM</strong></h2>
+<section id="representações-intermediárias-modernas-o-ecossistema-llvm" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="representações-intermediárias-modernas-o-ecossistema-llvm"><span class="header-section-number">16.4</span> Representações Intermediárias Modernas: O Ecossistema <strong>LLVM</strong></h2>
 <p>Enquanto o Código de Três Endereços representa os fundamentos clássicos das <strong>RI</strong>s, o cenário moderno é dominado pela infraestrutura <strong>LLVM</strong>. É preciso que a leitora compreenda o <strong>LLVM</strong> não apenas como um formato de RI, mas como um ecossistema completo que redefiniu a construção de compiladores.</p>
-<section id="llvm-como-infraestrutura" class="level3" data-number="15.4.1">
-<h3 data-number="15.4.1" class="anchored" data-anchor-id="llvm-como-infraestrutura"><span class="header-section-number">15.4.1</span> <strong>LLVM</strong> como Infraestrutura</h3>
+<section id="llvm-como-infraestrutura" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="llvm-como-infraestrutura"><span class="header-section-number">16.4.1</span> <strong>LLVM</strong> como Infraestrutura</h3>
 <p>O <strong>LLVM</strong> é uma coleção de bibliotecas modulares e reutilizáveis escritas em C++ que fornecem todas as fases de um <em>back-end</em> de compilador: otimização, geração de código, montagem, etc.. A <strong>LLVM Intermediate Representation (LLVM IR)</strong> é a linguagem que une todas essas componentes. Qualquer linguagem que possa ser traduzida para <strong>LLVM IR</strong> pode, instantaneamente, se beneficiar de seu otimizador de classe mundial e de seus <em>back-ends</em> que suportam dezenas de arquiteturas de hardware.</p>
 </section>
-<section id="características-da-llvm-ir" class="level3" data-number="15.4.2">
-<h3 data-number="15.4.2" class="anchored" data-anchor-id="características-da-llvm-ir"><span class="header-section-number">15.4.2</span> Características da <strong>LLVM IR</strong></h3>
+<section id="características-da-llvm-ir" class="level3" data-number="16.4.2">
+<h3 data-number="16.4.2" class="anchored" data-anchor-id="características-da-llvm-ir"><span class="header-section-number">16.4.2</span> Características da <strong>LLVM IR</strong></h3>
 <p>A <strong>LLVM IR</strong> possui várias características que a tornam extremamente poderosa. Cada uma dessas propriedades foi cuidadosamente projetada para atender aos requisitos de um compilador moderno de alto desempenho.</p>
-<section id="representação-textual-legível" class="level4" data-number="15.4.2.1">
-<h4 data-number="15.4.2.1" class="anchored" data-anchor-id="representação-textual-legível"><span class="header-section-number">15.4.2.1</span> Representação Textual Legível</h4>
+<section id="representação-textual-legível" class="level4" data-number="16.4.2.1">
+<h4 data-number="16.4.2.1" class="anchored" data-anchor-id="representação-textual-legível"><span class="header-section-number">16.4.2.1</span> Representação Textual Legível</h4>
 <p>Uma das decisões de design mais impactantes do <strong>LLVM</strong> foi tornar sua representação intermediária legível por humanos. A <strong>LLVM IR</strong> pode ser serializada em três formatos equivalentes:</p>
 <ol type="1">
 <li><p><strong>Formato Textual (<code>.ll</code>)</strong>: Uma representação em ASCII que se assemelha a uma linguagem Assembly de alto nível, com sintaxe clara e tipagem explícita.</p></li>
@@ -1955,11 +1961,11 @@ end_function</code></pre>
 </ul>
 <p>A conversão entre formatos é trivial: <code>llvm-as</code> converte <code>.ll</code> para <code>.bc</code>, e <code>llvm-dis</code> faz o caminho inverso. Esta flexibilidade é um diferencial significativo em relação a sistemas como a JVM, onde o <em>bytecode</em> é primariamente binário e ferramentas de desmontagem são necessárias para inspeção humana.</p>
 </section>
-<section id="sistema-de-tipos-forte-e-verificação-estática" class="level4" data-number="15.4.2.2">
-<h4 data-number="15.4.2.2" class="anchored" data-anchor-id="sistema-de-tipos-forte-e-verificação-estática"><span class="header-section-number">15.4.2.2</span> Sistema de Tipos Forte e Verificação Estática</h4>
+<section id="sistema-de-tipos-forte-e-verificação-estática" class="level4" data-number="16.4.2.2">
+<h4 data-number="16.4.2.2" class="anchored" data-anchor-id="sistema-de-tipos-forte-e-verificação-estática"><span class="header-section-number">16.4.2.2</span> Sistema de Tipos Forte e Verificação Estática</h4>
 <p>Diferentemente de linguagens Assembly tradicionais, onde operações operam sobre registradores não tipados ou fracamente tipados, a <strong>LLVM IR</strong> implementa um sistema de tipos robusto e expressivo. Cada valor na <strong>LLVM IR</strong> possui um tipo explícito, e operações inválidas são rejeitadas estaticamente pelo verificador.</p>
-<section id="tipos-primitivos-e-compostos" class="level5" data-number="15.4.2.2.1">
-<h5 data-number="15.4.2.2.1" class="anchored" data-anchor-id="tipos-primitivos-e-compostos"><span class="header-section-number">15.4.2.2.1</span> Tipos Primitivos e Compostos</h5>
+<section id="tipos-primitivos-e-compostos" class="level5" data-number="16.4.2.2.1">
+<h5 data-number="16.4.2.2.1" class="anchored" data-anchor-id="tipos-primitivos-e-compostos"><span class="header-section-number">16.4.2.2.1</span> Tipos Primitivos e Compostos</h5>
 <p>A <strong>LLVM IR</strong> suporta uma hierarquia rica de tipos:</p>
 <ul>
 <li><strong>Tipos Inteiros</strong>: <code>i1</code> (booleano), <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>, ou qualquer largura arbitrária como <code>i128</code> ou <code>i7</code>.</li>
@@ -1969,8 +1975,8 @@ end_function</code></pre>
 <li><strong>Tipos Vetoriais</strong>: <code>&lt;4 x float&gt;</code> (vetor SIMD de 4 floats), essencial para otimizações de paralelismo de dados.</li>
 </ul>
 </section>
-<section id="verificação-em-tempo-de-compilação" class="level5" data-number="15.4.2.2.2">
-<h5 data-number="15.4.2.2.2" class="anchored" data-anchor-id="verificação-em-tempo-de-compilação"><span class="header-section-number">15.4.2.2.2</span> Verificação em Tempo de Compilação</h5>
+<section id="verificação-em-tempo-de-compilação" class="level5" data-number="16.4.2.2.2">
+<h5 data-number="16.4.2.2.2" class="anchored" data-anchor-id="verificação-em-tempo-de-compilação"><span class="header-section-number">16.4.2.2.2</span> Verificação em Tempo de Compilação</h5>
 <p>O verificador de <strong>LLVM IR</strong> (<code>opt -verify</code>) executa uma série de verificações que garantem a consistência do código:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">; Exemplo VÁLIDO</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">%ptr</span> = <span class="kw">alloca</span> <span class="dt">i32</span></span>
@@ -1985,8 +1991,8 @@ end_function</code></pre>
 store i64 42, i32* %ptr</code></pre>
 <p>Esta verificação previne uma categoria inteira de bugs que, em Assembly tradicional, apenas se manifestariam em tempo de execução como corrupção de memória ou comportamento indefinido.</p>
 </section>
-<section id="benefícios-para-otimização" class="level5" data-number="15.4.2.2.3">
-<h5 data-number="15.4.2.2.3" class="anchored" data-anchor-id="benefícios-para-otimização"><span class="header-section-number">15.4.2.2.3</span> Benefícios para Otimização</h5>
+<section id="benefícios-para-otimização" class="level5" data-number="16.4.2.2.3">
+<h5 data-number="16.4.2.2.3" class="anchored" data-anchor-id="benefícios-para-otimização"><span class="header-section-number">16.4.2.2.3</span> Benefícios para Otimização</h5>
 <p>O sistema de tipos não é apenas uma ferramenta de correção; ele habilita otimizações mais agressivas. Por exemplo:</p>
 <ol type="1">
 <li><p><strong>Análise de Aliasing Baseada em Tipos (TBAA)</strong>: O otimizador pode inferir que um ponteiro <code>i32*</code> e um ponteiro <code>float*</code> nunca apontam para a mesma localização de memória, permitindo reordenamento de acessos.</p></li>
@@ -2035,11 +2041,11 @@ store i64 42, i32* %ptr</code></pre>
 </section>
 </section>
 </section>
-<section id="forma-de-atribuição-única-estática-ssa" class="level3" data-number="15.4.3">
-<h3 data-number="15.4.3" class="anchored" data-anchor-id="forma-de-atribuição-única-estática-ssa"><span class="header-section-number">15.4.3</span> Forma de Atribuição Única Estática (SSA)</h3>
+<section id="forma-de-atribuição-única-estática-ssa" class="level3" data-number="16.4.3">
+<h3 data-number="16.4.3" class="anchored" data-anchor-id="forma-de-atribuição-única-estática-ssa"><span class="header-section-number">16.4.3</span> Forma de Atribuição Única Estática (SSA)</h3>
 <p>A <strong>Forma de Atribuição Única Estática (SSA)</strong> é a característica mais distintiva e poderosa da <strong>LLVM IR</strong>. Para compreender sua essência, vamos primeiro observar como o código tradicional difere do código em forma SSA.</p>
-<section id="transformação-básica-código-não-ssa-para-ssa" class="level4" data-number="15.4.3.1">
-<h4 data-number="15.4.3.1" class="anchored" data-anchor-id="transformação-básica-código-não-ssa-para-ssa"><span class="header-section-number">15.4.3.1</span> Transformação Básica: Código Não-SSA para SSA</h4>
+<section id="transformação-básica-código-não-ssa-para-ssa" class="level4" data-number="16.4.3.1">
+<h4 data-number="16.4.3.1" class="anchored" data-anchor-id="transformação-básica-código-não-ssa-para-ssa"><span class="header-section-number">16.4.3.1</span> Transformação Básica: Código Não-SSA para SSA</h4>
 <p>Considere o seguinte fragmento de código em uma representação intermediária tradicional (não-SSA):</p>
 <pre class="shell"><code>x := 5
 y := x + 3
@@ -2053,8 +2059,8 @@ x₂ := y₁ * 2
 z₁ := x₂ + y₁</code></pre>
 <p>Na forma SSA, cada atribuição cria uma nova versão da variável, identificada por um subscrito único. Agora, a relação entre definições e usos é cristalina: <code>z₁</code> usa inequivocamente <code>x₂</code> e <code>y₁</code>. Não há ambiguidade, não há necessidade de análise complexa de fluxo de dados. O grafo de dependências de dados é explícito nos próprios nomes das variáveis.</p>
 </section>
-<section id="lidando-com-fluxo-de-controle-a-função-φ" class="level4" data-number="15.4.3.2">
-<h4 data-number="15.4.3.2" class="anchored" data-anchor-id="lidando-com-fluxo-de-controle-a-função-φ"><span class="header-section-number">15.4.3.2</span> Lidando com Fluxo de Controle: A Função-Φ</h4>
+<section id="lidando-com-fluxo-de-controle-a-função-φ" class="level4" data-number="16.4.3.2">
+<h4 data-number="16.4.3.2" class="anchored" data-anchor-id="lidando-com-fluxo-de-controle-a-função-φ"><span class="header-section-number">16.4.3.2</span> Lidando com Fluxo de Controle: A Função-Φ</h4>
 <p>A transformação acima funciona perfeitamente para código com fluxo linear. Mas o que acontece quando há desvios condicionais? Considere este exemplo:</p>
 <pre class="shell"><code>// Código original (não-SSA)
 x := 1
@@ -2085,8 +2091,8 @@ L3:
 <p><span class="math display">\[x_i := \phi(x_j \text{ de } B_1, x_k \text{ de } B_2, \ldots, x_m \text{ de } B_n)\]</span></p>
 <p>na qual <span class="math inline">\(B_1, B_2, \ldots, B_n\)</span> são os blocos predecessores do bloco atual no grafo de fluxo de controle.</p>
 </section>
-<section id="por-que-ssa-simplifica-as-otimizações" class="level4" data-number="15.4.3.3">
-<h4 data-number="15.4.3.3" class="anchored" data-anchor-id="por-que-ssa-simplifica-as-otimizações"><span class="header-section-number">15.4.3.3</span> Por Que SSA Simplifica as Otimizações</h4>
+<section id="por-que-ssa-simplifica-as-otimizações" class="level4" data-number="16.4.3.3">
+<h4 data-number="16.4.3.3" class="anchored" data-anchor-id="por-que-ssa-simplifica-as-otimizações"><span class="header-section-number">16.4.3.3</span> Por Que SSA Simplifica as Otimizações</h4>
 <p>A forma SSA transforma problemas complexos de análise de fluxo de dados em simples travessias de grafos de dependência. Por exemplo:</p>
 <ul>
 <li><p><strong>Propagação de Constantes</strong>: Se <code>x₁ := 5</code> e todas as referências usam <code>x₁</code>, sabemos imediatamente que o valor é constante. Não há necessidade de verificar se alguma atribuição posterior poderia modificar <code>x</code>.</p></li>
@@ -2096,8 +2102,8 @@ L3:
 <p>Em resumo, a SSA eleva a representação intermediária a um nível onde a semântica do fluxo de dados está codificada estruturalmente nos nomes das variáveis, eliminando uma camada inteira de análise que seria necessária em representações tradicionais. Esta é a razão pela qual a SSA é a base de praticamente todos os compiladores otimizadores modernos, incluindo GCC, <strong>LLVM</strong>, e JVMs de alto desempenho.</p>
 </section>
 </section>
-<section id="exemplo-prático-c-para-llvm-ir" class="level3" data-number="15.4.4">
-<h3 data-number="15.4.4" class="anchored" data-anchor-id="exemplo-prático-c-para-llvm-ir"><span class="header-section-number">15.4.4</span> Exemplo Prático: C++ para <strong>LLVM IR</strong></h3>
+<section id="exemplo-prático-c-para-llvm-ir" class="level3" data-number="16.4.4">
+<h3 data-number="16.4.4" class="anchored" data-anchor-id="exemplo-prático-c-para-llvm-ir"><span class="header-section-number">16.4.4</span> Exemplo Prático: C++ para <strong>LLVM IR</strong></h3>
 <p>Vamos observar um exemplo simples. Considere a seguinte função em C++:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> add<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> <span class="dt">int</span> result <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
@@ -2152,14 +2158,14 @@ L3:
 <p>Este exemplo, embora simples, ilustra o poder da infraestrutura de otimização do <strong>LLVM</strong>. Mesmo funções triviais se beneficiam significativamente, e em código real com estruturas de controle complexas e múltiplas funções, o impacto acumulativo dessas otimizações pode resultar em melhorias de desempenho de 2x a 10x ou mais.</p>
 </section>
 </section>
-<section id="conclusão-a-ponte-para-a-otimização-de-código" class="level2" data-number="15.5">
-<h2 data-number="15.5" class="anchored" data-anchor-id="conclusão-a-ponte-para-a-otimização-de-código"><span class="header-section-number">15.5</span> Conclusão: A Ponte para a Otimização de Código</h2>
+<section id="conclusão-a-ponte-para-a-otimização-de-código" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="conclusão-a-ponte-para-a-otimização-de-código"><span class="header-section-number">16.5</span> Conclusão: A Ponte para a Otimização de Código</h2>
 <p>Neste capítulo, realizamos a transição da fase de análise para a fase de síntese do compilador. Partimos de uma <strong>ASTA</strong> semanticamente rica e a traduzimos para uma Representação Intermediária — uma linguagem universal projetada não apenas para desacoplar o <em>front-end</em> do <em>back-end</em>, mas, fundamentalmente, para servir de alicerce para a melhoria do código.</p>
 <p>A geração de CI, seja na forma clássica do Código de Três Endereços ou na moderna <strong>LLVM IR</strong>, não é um fim em si mesma. É a preparação do terreno, a transformação do programa em uma forma estruturada, linear e explícita que é ideal para análise e manipulação algorítmica. A estrutura limpa do CI é a base sobre a qual as fases de otimização de código irão operar para tornar os programas mais rápidos, menores e mais eficientes.</p>
 <p>Com o nosso programa agora representado nesta forma poderosa, estamos prontos para dar o próximo passo. O próximo capítulo, “Otimização de Código”, explorará as diversas técnicas que podem ser aplicadas diretamente sobre o código intermediário que aprendemos a gerar, transformando um programa correto em um programa excelente.</p>
 </section>
-<section id="exercícios-propostos" class="level2" data-number="15.6">
-<h2 data-number="15.6" class="anchored" data-anchor-id="exercícios-propostos"><span class="header-section-number">15.6</span> Exercícios Propostos</h2>
+<section id="exercícios-propostos" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="exercícios-propostos"><span class="header-section-number">16.6</span> Exercícios Propostos</h2>
 <ol type="1">
 <li><strong>(Prático)</strong> Dado o seguinte trecho de código, traduza-o para Código de Três Endereços usando a representação de Quádruplas. Mostre explicitamente os rótulos e os saltos gerados.</li>
 </ol>
@@ -2609,13 +2615,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./11-tabelaSimbolos.html" class="pagination-link" aria-label="Tabela de Símbolos em Compiladores Modernos">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span>
+      <a href="./12-questoes-exercicios.html" class="pagination-link" aria-label="Questões e Exercícios - Analisador Semântico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./15-llvmIR.html" class="pagination-link" aria-label="Introdução à Representação Intermediária (IR) do **LLVM** com C++">
-        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

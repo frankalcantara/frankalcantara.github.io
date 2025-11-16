@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 16&nbsp; Introdução à Representação Intermediária (IR) do LLVM com C++</title>
+<title>Linguagens Formais e Autômatos - 17&nbsp; Introdução à Representação Intermediária (IR) do LLVM com C++</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./15-llvmIR.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./15-llvmIR.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -288,6 +288,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-questoes-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -302,37 +308,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title"><strong>MLIR: Uma Análise Exaustiva dos Passes e do Abaixamento Multi-Nível na Engenharia Moderna de Compiladores</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">MLIR: Analisando Passes</span></span></a>
   </div>
 </li>
       </ul>
@@ -349,25 +355,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -375,13 +381,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -396,110 +402,110 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm" id="toc-virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm" class="nav-link active" data-scroll-target="#virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm"><span class="header-section-number">16.1</span> VirtualBOX: Configuração do Ambiente (Ubuntu, VS Code, C++ e LLVM)</a>
+  <li><a href="#virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm" id="toc-virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm" class="nav-link active" data-scroll-target="#virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm"><span class="header-section-number">17.1</span> VirtualBOX: Configuração do Ambiente (Ubuntu, VS Code, C++ e LLVM)</a>
   <ul class="collapse">
-  <li><a href="#pré-requisitos" id="toc-pré-requisitos" class="nav-link" data-scroll-target="#pré-requisitos"><span class="header-section-number">16.1.1</span> Pré-requisitos</a></li>
-  <li><a href="#instalação-do-llvmclang" id="toc-instalação-do-llvmclang" class="nav-link" data-scroll-target="#instalação-do-llvmclang"><span class="header-section-number">16.1.2</span> Instalação do LLVM/Clang</a></li>
-  <li><a href="#instalação-do-vs-code-e-extensões" id="toc-instalação-do-vs-code-e-extensões" class="nav-link" data-scroll-target="#instalação-do-vs-code-e-extensões"><span class="header-section-number">16.1.3</span> Instalação do VS Code e Extensões</a></li>
-  <li><a href="#criar-diretório-de-trabalho" id="toc-criar-diretório-de-trabalho" class="nav-link" data-scroll-target="#criar-diretório-de-trabalho"><span class="header-section-number">16.1.4</span> Criar Diretório de Trabalho</a></li>
+  <li><a href="#pré-requisitos" id="toc-pré-requisitos" class="nav-link" data-scroll-target="#pré-requisitos"><span class="header-section-number">17.1.1</span> Pré-requisitos</a></li>
+  <li><a href="#instalação-do-llvmclang" id="toc-instalação-do-llvmclang" class="nav-link" data-scroll-target="#instalação-do-llvmclang"><span class="header-section-number">17.1.2</span> Instalação do LLVM/Clang</a></li>
+  <li><a href="#instalação-do-vs-code-e-extensões" id="toc-instalação-do-vs-code-e-extensões" class="nav-link" data-scroll-target="#instalação-do-vs-code-e-extensões"><span class="header-section-number">17.1.3</span> Instalação do VS Code e Extensões</a></li>
+  <li><a href="#criar-diretório-de-trabalho" id="toc-criar-diretório-de-trabalho" class="nav-link" data-scroll-target="#criar-diretório-de-trabalho"><span class="header-section-number">17.1.4</span> Criar Diretório de Trabalho</a></li>
   </ul></li>
-  <li><a href="#wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21" id="toc-wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21" class="nav-link" data-scroll-target="#wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21"><span class="header-section-number">16.2</span> WSL: Guia Completo: VS Code + WSL (Ubuntu) com Clang, LLD e LLDB v21</a>
+  <li><a href="#wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21" id="toc-wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21" class="nav-link" data-scroll-target="#wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21"><span class="header-section-number">17.2</span> WSL: Guia Completo: VS Code + WSL (Ubuntu) com Clang, LLD e LLDB v21</a>
   <ul class="collapse">
-  <li><a href="#fase-1-preparação-do-windows-e-vs-code" id="toc-fase-1-preparação-do-windows-e-vs-code" class="nav-link" data-scroll-target="#fase-1-preparação-do-windows-e-vs-code"><span class="header-section-number">16.2.1</span> Fase 1: Preparação do Windows e VS Code</a></li>
-  <li><a href="#fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl" id="toc-fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl" class="nav-link" data-scroll-target="#fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl"><span class="header-section-number">16.2.2</span> Fase 2: Instalação do Toolchain <strong>LLVM</strong> 21 no Ubuntu (WSL)</a></li>
-  <li><a href="#fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl" id="toc-fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl" class="nav-link" data-scroll-target="#fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl"><span class="header-section-number">16.2.3</span> Fase 3: Conectar o VS Code e Instalar Extensões no WSL</a></li>
-  <li><a href="#fase-4-configuração-do-projeto-arquivos-.vscode" id="toc-fase-4-configuração-do-projeto-arquivos-.vscode" class="nav-link" data-scroll-target="#fase-4-configuração-do-projeto-arquivos-.vscode"><span class="header-section-number">16.2.4</span> Fase 4: Configuração do Projeto (Arquivos .vscode)</a></li>
-  <li><a href="#fase-5-teste" id="toc-fase-5-teste" class="nav-link" data-scroll-target="#fase-5-teste"><span class="header-section-number">16.2.5</span> Fase 5: Teste</a></li>
+  <li><a href="#fase-1-preparação-do-windows-e-vs-code" id="toc-fase-1-preparação-do-windows-e-vs-code" class="nav-link" data-scroll-target="#fase-1-preparação-do-windows-e-vs-code"><span class="header-section-number">17.2.1</span> Fase 1: Preparação do Windows e VS Code</a></li>
+  <li><a href="#fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl" id="toc-fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl" class="nav-link" data-scroll-target="#fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl"><span class="header-section-number">17.2.2</span> Fase 2: Instalação do Toolchain <strong>LLVM</strong> 21 no Ubuntu (WSL)</a></li>
+  <li><a href="#fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl" id="toc-fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl" class="nav-link" data-scroll-target="#fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl"><span class="header-section-number">17.2.3</span> Fase 3: Conectar o VS Code e Instalar Extensões no WSL</a></li>
+  <li><a href="#fase-4-configuração-do-projeto-arquivos-.vscode" id="toc-fase-4-configuração-do-projeto-arquivos-.vscode" class="nav-link" data-scroll-target="#fase-4-configuração-do-projeto-arquivos-.vscode"><span class="header-section-number">17.2.4</span> Fase 4: Configuração do Projeto (Arquivos .vscode)</a></li>
+  <li><a href="#fase-5-teste" id="toc-fase-5-teste" class="nav-link" data-scroll-target="#fase-5-teste"><span class="header-section-number">17.2.5</span> Fase 5: Teste</a></li>
   </ul></li>
-  <li><a href="#llvm-infraestrutura-moderna-para-construção-de-compiladores" id="toc-llvm-infraestrutura-moderna-para-construção-de-compiladores" class="nav-link" data-scroll-target="#llvm-infraestrutura-moderna-para-construção-de-compiladores"><span class="header-section-number">16.3</span> LLVM: Infraestrutura Moderna para Construção de Compiladores</a>
+  <li><a href="#llvm-infraestrutura-moderna-para-construção-de-compiladores" id="toc-llvm-infraestrutura-moderna-para-construção-de-compiladores" class="nav-link" data-scroll-target="#llvm-infraestrutura-moderna-para-construção-de-compiladores"><span class="header-section-number">17.3</span> LLVM: Infraestrutura Moderna para Construção de Compiladores</a>
   <ul class="collapse">
-  <li><a href="#o-que-é-llvm-ir" id="toc-o-que-é-llvm-ir" class="nav-link" data-scroll-target="#o-que-é-llvm-ir"><span class="header-section-number">16.3.1</span> O que é <strong>LLVM IR</strong>?</a></li>
-  <li><a href="#fluxo-de-compilação-completo" id="toc-fluxo-de-compilação-completo" class="nav-link" data-scroll-target="#fluxo-de-compilação-completo"><span class="header-section-number">16.3.2</span> Fluxo de Compilação Completo</a></li>
-  <li><a href="#conceitos-fundamentais-do-ssa" id="toc-conceitos-fundamentais-do-ssa" class="nav-link" data-scroll-target="#conceitos-fundamentais-do-ssa"><span class="header-section-number">16.3.3</span> Conceitos Fundamentais do SSA</a></li>
-  <li><a href="#dissecando-a-sintaxe-do-llvm-ir" id="toc-dissecando-a-sintaxe-do-llvm-ir" class="nav-link" data-scroll-target="#dissecando-a-sintaxe-do-llvm-ir"><span class="header-section-number">16.3.4</span> Dissecando a Sintaxe do <strong>LLVM IR</strong></a></li>
+  <li><a href="#o-que-é-llvm-ir" id="toc-o-que-é-llvm-ir" class="nav-link" data-scroll-target="#o-que-é-llvm-ir"><span class="header-section-number">17.3.1</span> O que é <strong>LLVM IR</strong>?</a></li>
+  <li><a href="#fluxo-de-compilação-completo" id="toc-fluxo-de-compilação-completo" class="nav-link" data-scroll-target="#fluxo-de-compilação-completo"><span class="header-section-number">17.3.2</span> Fluxo de Compilação Completo</a></li>
+  <li><a href="#conceitos-fundamentais-do-ssa" id="toc-conceitos-fundamentais-do-ssa" class="nav-link" data-scroll-target="#conceitos-fundamentais-do-ssa"><span class="header-section-number">17.3.3</span> Conceitos Fundamentais do SSA</a></li>
+  <li><a href="#dissecando-a-sintaxe-do-llvm-ir" id="toc-dissecando-a-sintaxe-do-llvm-ir" class="nav-link" data-scroll-target="#dissecando-a-sintaxe-do-llvm-ir"><span class="header-section-number">17.3.4</span> Dissecando a Sintaxe do <strong>LLVM IR</strong></a></li>
   </ul></li>
-  <li><a href="#primeiro-exemplo-geração-e-análise-de-ir" id="toc-primeiro-exemplo-geração-e-análise-de-ir" class="nav-link" data-scroll-target="#primeiro-exemplo-geração-e-análise-de-ir"><span class="header-section-number">16.4</span> Primeiro Exemplo: Geração e Análise de IR</a>
+  <li><a href="#primeiro-exemplo-geração-e-análise-de-ir" id="toc-primeiro-exemplo-geração-e-análise-de-ir" class="nav-link" data-scroll-target="#primeiro-exemplo-geração-e-análise-de-ir"><span class="header-section-number">17.4</span> Primeiro Exemplo: Geração e Análise de IR</a>
   <ul class="collapse">
-  <li><a href="#exemplo-mais-completo-múltiplas-operações" id="toc-exemplo-mais-completo-múltiplas-operações" class="nav-link" data-scroll-target="#exemplo-mais-completo-múltiplas-operações"><span class="header-section-number">16.4.1</span> Exemplo Mais Completo: Múltiplas Operações</a></li>
-  <li><a href="#gerar-o-llvm-ir" id="toc-gerar-o-llvm-ir" class="nav-link" data-scroll-target="#gerar-o-llvm-ir"><span class="header-section-number">16.4.2</span> Gerar o <strong>LLVM IR</strong></a></li>
-  <li><a href="#análise-detalhada-do-ir-gerado" id="toc-análise-detalhada-do-ir-gerado" class="nav-link" data-scroll-target="#análise-detalhada-do-ir-gerado"><span class="header-section-number">16.4.3</span> Análise Detalhada do IR Gerado</a></li>
-  <li><a href="#otimização-do-ir" id="toc-otimização-do-ir" class="nav-link" data-scroll-target="#otimização-do-ir"><span class="header-section-number">16.4.4</span> Otimização do IR</a></li>
-  <li><a href="#gerar-ir-com-diferentes-níveis-de-otimização" id="toc-gerar-ir-com-diferentes-níveis-de-otimização" class="nav-link" data-scroll-target="#gerar-ir-com-diferentes-níveis-de-otimização"><span class="header-section-number">16.4.5</span> Gerar IR com Diferentes Níveis de Otimização</a></li>
-  <li><a href="#entendendo-o-novo-pass-manager-llvm-14" id="toc-entendendo-o-novo-pass-manager-llvm-14" class="nav-link" data-scroll-target="#entendendo-o-novo-pass-manager-llvm-14"><span class="header-section-number">16.4.6</span> Entendendo o Novo Pass Manager (LLVM 14+)</a></li>
+  <li><a href="#exemplo-mais-completo-múltiplas-operações" id="toc-exemplo-mais-completo-múltiplas-operações" class="nav-link" data-scroll-target="#exemplo-mais-completo-múltiplas-operações"><span class="header-section-number">17.4.1</span> Exemplo Mais Completo: Múltiplas Operações</a></li>
+  <li><a href="#gerar-o-llvm-ir" id="toc-gerar-o-llvm-ir" class="nav-link" data-scroll-target="#gerar-o-llvm-ir"><span class="header-section-number">17.4.2</span> Gerar o <strong>LLVM IR</strong></a></li>
+  <li><a href="#análise-detalhada-do-ir-gerado" id="toc-análise-detalhada-do-ir-gerado" class="nav-link" data-scroll-target="#análise-detalhada-do-ir-gerado"><span class="header-section-number">17.4.3</span> Análise Detalhada do IR Gerado</a></li>
+  <li><a href="#otimização-do-ir" id="toc-otimização-do-ir" class="nav-link" data-scroll-target="#otimização-do-ir"><span class="header-section-number">17.4.4</span> Otimização do IR</a></li>
+  <li><a href="#gerar-ir-com-diferentes-níveis-de-otimização" id="toc-gerar-ir-com-diferentes-níveis-de-otimização" class="nav-link" data-scroll-target="#gerar-ir-com-diferentes-níveis-de-otimização"><span class="header-section-number">17.4.5</span> Gerar IR com Diferentes Níveis de Otimização</a></li>
+  <li><a href="#entendendo-o-novo-pass-manager-llvm-14" id="toc-entendendo-o-novo-pass-manager-llvm-14" class="nav-link" data-scroll-target="#entendendo-o-novo-pass-manager-llvm-14"><span class="header-section-number">17.4.6</span> Entendendo o Novo Pass Manager (LLVM 14+)</a></li>
   </ul></li>
-  <li><a href="#exemplo-com-controle-de-fluxo" id="toc-exemplo-com-controle-de-fluxo" class="nav-link" data-scroll-target="#exemplo-com-controle-de-fluxo"><span class="header-section-number">16.5</span> Exemplo com Controle de Fluxo</a>
+  <li><a href="#exemplo-com-controle-de-fluxo" id="toc-exemplo-com-controle-de-fluxo" class="nav-link" data-scroll-target="#exemplo-com-controle-de-fluxo"><span class="header-section-number">17.5</span> Exemplo com Controle de Fluxo</a>
   <ul class="collapse">
-  <li><a href="#código-com-condicionais-garantindo-o-branch" id="toc-código-com-condicionais-garantindo-o-branch" class="nav-link" data-scroll-target="#código-com-condicionais-garantindo-o-branch"><span class="header-section-number">16.5.1</span> Código com Condicionais (Garantindo o Branch)</a></li>
-  <li><a href="#gerar-e-analisar-o-ir" id="toc-gerar-e-analisar-o-ir" class="nav-link" data-scroll-target="#gerar-e-analisar-o-ir"><span class="header-section-number">16.5.2</span> Gerar e Analisar o IR</a></li>
-  <li><a href="#análise-detalhada-do-ir-gerado-1" id="toc-análise-detalhada-do-ir-gerado-1" class="nav-link" data-scroll-target="#análise-detalhada-do-ir-gerado-1"><span class="header-section-number">16.5.3</span> Análise Detalhada do IR Gerado</a></li>
-  <li><a href="#visualizar-o-grafo-de-fluxo-de-controle-cfg" id="toc-visualizar-o-grafo-de-fluxo-de-controle-cfg" class="nav-link" data-scroll-target="#visualizar-o-grafo-de-fluxo-de-controle-cfg"><span class="header-section-number">16.5.4</span> Visualizar o Grafo de Fluxo de Controle (CFG)</a></li>
-  <li><a href="#otimização-do-código-com-controle-de-fluxo" id="toc-otimização-do-código-com-controle-de-fluxo" class="nav-link" data-scroll-target="#otimização-do-código-com-controle-de-fluxo"><span class="header-section-number">16.5.5</span> Otimização do Código com Controle de Fluxo</a></li>
+  <li><a href="#código-com-condicionais-garantindo-o-branch" id="toc-código-com-condicionais-garantindo-o-branch" class="nav-link" data-scroll-target="#código-com-condicionais-garantindo-o-branch"><span class="header-section-number">17.5.1</span> Código com Condicionais (Garantindo o Branch)</a></li>
+  <li><a href="#gerar-e-analisar-o-ir" id="toc-gerar-e-analisar-o-ir" class="nav-link" data-scroll-target="#gerar-e-analisar-o-ir"><span class="header-section-number">17.5.2</span> Gerar e Analisar o IR</a></li>
+  <li><a href="#análise-detalhada-do-ir-gerado-1" id="toc-análise-detalhada-do-ir-gerado-1" class="nav-link" data-scroll-target="#análise-detalhada-do-ir-gerado-1"><span class="header-section-number">17.5.3</span> Análise Detalhada do IR Gerado</a></li>
+  <li><a href="#visualizar-o-grafo-de-fluxo-de-controle-cfg" id="toc-visualizar-o-grafo-de-fluxo-de-controle-cfg" class="nav-link" data-scroll-target="#visualizar-o-grafo-de-fluxo-de-controle-cfg"><span class="header-section-number">17.5.4</span> Visualizar o Grafo de Fluxo de Controle (CFG)</a></li>
+  <li><a href="#otimização-do-código-com-controle-de-fluxo" id="toc-otimização-do-código-com-controle-de-fluxo" class="nav-link" data-scroll-target="#otimização-do-código-com-controle-de-fluxo"><span class="header-section-number">17.5.5</span> Otimização do Código com Controle de Fluxo</a></li>
   </ul></li>
-  <li><a href="#exemplo-com-laços-de-repetição-loops" id="toc-exemplo-com-laços-de-repetição-loops" class="nav-link" data-scroll-target="#exemplo-com-laços-de-repetição-loops"><span class="header-section-number">16.6</span> 5. Exemplo com Laços de Repetição (Loops)</a>
+  <li><a href="#exemplo-com-laços-de-repetição-loops" id="toc-exemplo-com-laços-de-repetição-loops" class="nav-link" data-scroll-target="#exemplo-com-laços-de-repetição-loops"><span class="header-section-number">17.6</span> 5. Exemplo com Laços de Repetição (Loops)</a>
   <ul class="collapse">
-  <li><a href="#código-com-laço-de-repetição" id="toc-código-com-laço-de-repetição" class="nav-link" data-scroll-target="#código-com-laço-de-repetição"><span class="header-section-number">16.6.1</span> 5.1. Código com Laço de Repetição</a></li>
-  <li><a href="#análise-do-ir-não-otimizado" id="toc-análise-do-ir-não-otimizado" class="nav-link" data-scroll-target="#análise-do-ir-não-otimizado"><span class="header-section-number">16.6.2</span> 5.2. Análise do IR Não Otimizado</a></li>
-  <li><a href="#visualizando-o-cfg-do-laço" id="toc-visualizando-o-cfg-do-laço" class="nav-link" data-scroll-target="#visualizando-o-cfg-do-laço"><span class="header-section-number">16.6.3</span> 5.3. Visualizando o CFG do Laço</a></li>
-  <li><a href="#otimização-de-laços-vetorização-e-desdobramento-em-ação" id="toc-otimização-de-laços-vetorização-e-desdobramento-em-ação" class="nav-link" data-scroll-target="#otimização-de-laços-vetorização-e-desdobramento-em-ação"><span class="header-section-number">16.6.4</span> 5.4. Otimização de Laços: Vetorização e Desdobramento em Ação</a></li>
-  <li><a href="#converter-para-bitcode" id="toc-converter-para-bitcode" class="nav-link" data-scroll-target="#converter-para-bitcode"><span class="header-section-number">16.6.5</span> 6.1. Converter para Bitcode</a></li>
-  <li><a href="#converter-bitcode-de-volta-para-texto" id="toc-converter-bitcode-de-volta-para-texto" class="nav-link" data-scroll-target="#converter-bitcode-de-volta-para-texto"><span class="header-section-number">16.6.6</span> 6.2. Converter Bitcode de volta para Texto</a></li>
-  <li><a href="#linkar-múltiplos-arquivos-bitcode" id="toc-linkar-múltiplos-arquivos-bitcode" class="nav-link" data-scroll-target="#linkar-múltiplos-arquivos-bitcode"><span class="header-section-number">16.6.7</span> 6.3. Linkar Múltiplos Arquivos Bitcode</a></li>
+  <li><a href="#código-com-laço-de-repetição" id="toc-código-com-laço-de-repetição" class="nav-link" data-scroll-target="#código-com-laço-de-repetição"><span class="header-section-number">17.6.1</span> 5.1. Código com Laço de Repetição</a></li>
+  <li><a href="#análise-do-ir-não-otimizado" id="toc-análise-do-ir-não-otimizado" class="nav-link" data-scroll-target="#análise-do-ir-não-otimizado"><span class="header-section-number">17.6.2</span> 5.2. Análise do IR Não Otimizado</a></li>
+  <li><a href="#visualizando-o-cfg-do-laço" id="toc-visualizando-o-cfg-do-laço" class="nav-link" data-scroll-target="#visualizando-o-cfg-do-laço"><span class="header-section-number">17.6.3</span> 5.3. Visualizando o CFG do Laço</a></li>
+  <li><a href="#otimização-de-laços-vetorização-e-desdobramento-em-ação" id="toc-otimização-de-laços-vetorização-e-desdobramento-em-ação" class="nav-link" data-scroll-target="#otimização-de-laços-vetorização-e-desdobramento-em-ação"><span class="header-section-number">17.6.4</span> 5.4. Otimização de Laços: Vetorização e Desdobramento em Ação</a></li>
+  <li><a href="#converter-para-bitcode" id="toc-converter-para-bitcode" class="nav-link" data-scroll-target="#converter-para-bitcode"><span class="header-section-number">17.6.5</span> 6.1. Converter para Bitcode</a></li>
+  <li><a href="#converter-bitcode-de-volta-para-texto" id="toc-converter-bitcode-de-volta-para-texto" class="nav-link" data-scroll-target="#converter-bitcode-de-volta-para-texto"><span class="header-section-number">17.6.6</span> 6.2. Converter Bitcode de volta para Texto</a></li>
+  <li><a href="#linkar-múltiplos-arquivos-bitcode" id="toc-linkar-múltiplos-arquivos-bitcode" class="nav-link" data-scroll-target="#linkar-múltiplos-arquivos-bitcode"><span class="header-section-number">17.6.7</span> 6.3. Linkar Múltiplos Arquivos Bitcode</a></li>
   </ul></li>
-  <li><a href="#análise-de-otimizações-comuns" id="toc-análise-de-otimizações-comuns" class="nav-link" data-scroll-target="#análise-de-otimizações-comuns"><span class="header-section-number">16.7</span> 7. Análise de Otimizações Comuns</a>
+  <li><a href="#análise-de-otimizações-comuns" id="toc-análise-de-otimizações-comuns" class="nav-link" data-scroll-target="#análise-de-otimizações-comuns"><span class="header-section-number">17.7</span> 7. Análise de Otimizações Comuns</a>
   <ul class="collapse">
-  <li><a href="#constant-folding" id="toc-constant-folding" class="nav-link" data-scroll-target="#constant-folding"><span class="header-section-number">16.7.1</span> 7.1. Constant Folding</a></li>
-  <li><a href="#dead-code-elimination" id="toc-dead-code-elimination" class="nav-link" data-scroll-target="#dead-code-elimination"><span class="header-section-number">16.7.2</span> 7.2. Dead Code Elimination</a></li>
-  <li><a href="#function-inlining" id="toc-function-inlining" class="nav-link" data-scroll-target="#function-inlining"><span class="header-section-number">16.7.3</span> 7.3. Function Inlining</a></li>
-  <li><a href="#common-subexpression-elimination" id="toc-common-subexpression-elimination" class="nav-link" data-scroll-target="#common-subexpression-elimination"><span class="header-section-number">16.7.4</span> 7.4. Common Subexpression Elimination</a></li>
+  <li><a href="#constant-folding" id="toc-constant-folding" class="nav-link" data-scroll-target="#constant-folding"><span class="header-section-number">17.7.1</span> 7.1. Constant Folding</a></li>
+  <li><a href="#dead-code-elimination" id="toc-dead-code-elimination" class="nav-link" data-scroll-target="#dead-code-elimination"><span class="header-section-number">17.7.2</span> 7.2. Dead Code Elimination</a></li>
+  <li><a href="#function-inlining" id="toc-function-inlining" class="nav-link" data-scroll-target="#function-inlining"><span class="header-section-number">17.7.3</span> 7.3. Function Inlining</a></li>
+  <li><a href="#common-subexpression-elimination" id="toc-common-subexpression-elimination" class="nav-link" data-scroll-target="#common-subexpression-elimination"><span class="header-section-number">17.7.4</span> 7.4. Common Subexpression Elimination</a></li>
   </ul></li>
-  <li><a href="#exercícios-práticos" id="toc-exercícios-práticos" class="nav-link" data-scroll-target="#exercícios-práticos"><span class="header-section-number">16.8</span> 8. Exercícios Práticos</a>
+  <li><a href="#exercícios-práticos" id="toc-exercícios-práticos" class="nav-link" data-scroll-target="#exercícios-práticos"><span class="header-section-number">17.8</span> 8. Exercícios Práticos</a>
   <ul class="collapse">
-  <li><a href="#exercício-1-análise-básica" id="toc-exercício-1-análise-básica" class="nav-link" data-scroll-target="#exercício-1-análise-básica"><span class="header-section-number">16.8.1</span> Exercício 1: Análise Básica</a></li>
-  <li><a href="#exercício-2-testando-passes-individuais" id="toc-exercício-2-testando-passes-individuais" class="nav-link" data-scroll-target="#exercício-2-testando-passes-individuais"><span class="header-section-number">16.8.2</span> Exercício 2: Testando Passes Individuais</a></li>
-  <li><a href="#exercício-3-estruturas-de-dados" id="toc-exercício-3-estruturas-de-dados" class="nav-link" data-scroll-target="#exercício-3-estruturas-de-dados"><span class="header-section-number">16.8.3</span> Exercício 3: Estruturas de Dados</a></li>
-  <li><a href="#exercício-2-estruturas-de-dados" id="toc-exercício-2-estruturas-de-dados" class="nav-link" data-scroll-target="#exercício-2-estruturas-de-dados"><span class="header-section-number">16.8.4</span> Exercício 2: Estruturas de Dados</a></li>
-  <li><a href="#exercício-3-ponteiros-e-referências" id="toc-exercício-3-ponteiros-e-referências" class="nav-link" data-scroll-target="#exercício-3-ponteiros-e-referências"><span class="header-section-number">16.8.5</span> Exercício 3: Ponteiros e Referências</a></li>
-  <li><a href="#exercício-4-otimização-de-loop" id="toc-exercício-4-otimização-de-loop" class="nav-link" data-scroll-target="#exercício-4-otimização-de-loop"><span class="header-section-number">16.8.6</span> Exercício 4: Otimização de Loop</a></li>
+  <li><a href="#exercício-1-análise-básica" id="toc-exercício-1-análise-básica" class="nav-link" data-scroll-target="#exercício-1-análise-básica"><span class="header-section-number">17.8.1</span> Exercício 1: Análise Básica</a></li>
+  <li><a href="#exercício-2-testando-passes-individuais" id="toc-exercício-2-testando-passes-individuais" class="nav-link" data-scroll-target="#exercício-2-testando-passes-individuais"><span class="header-section-number">17.8.2</span> Exercício 2: Testando Passes Individuais</a></li>
+  <li><a href="#exercício-3-estruturas-de-dados" id="toc-exercício-3-estruturas-de-dados" class="nav-link" data-scroll-target="#exercício-3-estruturas-de-dados"><span class="header-section-number">17.8.3</span> Exercício 3: Estruturas de Dados</a></li>
+  <li><a href="#exercício-2-estruturas-de-dados" id="toc-exercício-2-estruturas-de-dados" class="nav-link" data-scroll-target="#exercício-2-estruturas-de-dados"><span class="header-section-number">17.8.4</span> Exercício 2: Estruturas de Dados</a></li>
+  <li><a href="#exercício-3-ponteiros-e-referências" id="toc-exercício-3-ponteiros-e-referências" class="nav-link" data-scroll-target="#exercício-3-ponteiros-e-referências"><span class="header-section-number">17.8.5</span> Exercício 3: Ponteiros e Referências</a></li>
+  <li><a href="#exercício-4-otimização-de-loop" id="toc-exercício-4-otimização-de-loop" class="nav-link" data-scroll-target="#exercício-4-otimização-de-loop"><span class="header-section-number">17.8.6</span> Exercício 4: Otimização de Loop</a></li>
   </ul></li>
-  <li><a href="#comandos-de-referência-rápida" id="toc-comandos-de-referência-rápida" class="nav-link" data-scroll-target="#comandos-de-referência-rápida"><span class="header-section-number">16.9</span> 9. Comandos de Referência Rápida</a>
+  <li><a href="#comandos-de-referência-rápida" id="toc-comandos-de-referência-rápida" class="nav-link" data-scroll-target="#comandos-de-referência-rápida"><span class="header-section-number">17.9</span> 9. Comandos de Referência Rápida</a>
   <ul class="collapse">
-  <li><a href="#geração-de-ir" id="toc-geração-de-ir" class="nav-link" data-scroll-target="#geração-de-ir"><span class="header-section-number">16.9.1</span> Geração de IR</a></li>
-  <li><a href="#conversão" id="toc-conversão" class="nav-link" data-scroll-target="#conversão"><span class="header-section-number">16.9.2</span> Conversão</a></li>
-  <li><a href="#otimização-llvm-14" id="toc-otimização-llvm-14" class="nav-link" data-scroll-target="#otimização-llvm-14"><span class="header-section-number">16.9.3</span> Otimização (LLVM 14+)</a></li>
-  <li><a href="#análise-e-visualização" id="toc-análise-e-visualização" class="nav-link" data-scroll-target="#análise-e-visualização"><span class="header-section-number">16.9.4</span> Análise e Visualização</a></li>
-  <li><a href="#compilação-final" id="toc-compilação-final" class="nav-link" data-scroll-target="#compilação-final"><span class="header-section-number">16.9.5</span> Compilação Final</a></li>
+  <li><a href="#geração-de-ir" id="toc-geração-de-ir" class="nav-link" data-scroll-target="#geração-de-ir"><span class="header-section-number">17.9.1</span> Geração de IR</a></li>
+  <li><a href="#conversão" id="toc-conversão" class="nav-link" data-scroll-target="#conversão"><span class="header-section-number">17.9.2</span> Conversão</a></li>
+  <li><a href="#otimização-llvm-14" id="toc-otimização-llvm-14" class="nav-link" data-scroll-target="#otimização-llvm-14"><span class="header-section-number">17.9.3</span> Otimização (LLVM 14+)</a></li>
+  <li><a href="#análise-e-visualização" id="toc-análise-e-visualização" class="nav-link" data-scroll-target="#análise-e-visualização"><span class="header-section-number">17.9.4</span> Análise e Visualização</a></li>
+  <li><a href="#compilação-final" id="toc-compilação-final" class="nav-link" data-scroll-target="#compilação-final"><span class="header-section-number">17.9.5</span> Compilação Final</a></li>
   </ul></li>
-  <li><a href="#troubleshooting-comum" id="toc-troubleshooting-comum" class="nav-link" data-scroll-target="#troubleshooting-comum"><span class="header-section-number">16.10</span> 10. Troubleshooting Comum</a>
+  <li><a href="#troubleshooting-comum" id="toc-troubleshooting-comum" class="nav-link" data-scroll-target="#troubleshooting-comum"><span class="header-section-number">17.10</span> 10. Troubleshooting Comum</a>
   <ul class="collapse">
-  <li><a href="#problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho" id="toc-problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho" class="nav-link" data-scroll-target="#problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho"><span class="header-section-number">16.10.1</span> Problema: opt não otimiza nada, arquivos têm mesmo tamanho</a></li>
-  <li><a href="#problema-comando-não-encontrado" id="toc-problema-comando-não-encontrado" class="nav-link" data-scroll-target="#problema-comando-não-encontrado"><span class="header-section-number">16.10.2</span> Problema: Comando não encontrado</a></li>
-  <li><a href="#problema-versão-incorreta-sendo-usada" id="toc-problema-versão-incorreta-sendo-usada" class="nav-link" data-scroll-target="#problema-versão-incorreta-sendo-usada"><span class="header-section-number">16.10.3</span> Problema: Versão incorreta sendo usada</a></li>
-  <li><a href="#problema-arquivo-.ll-corrompido-ou-ilegível" id="toc-problema-arquivo-.ll-corrompido-ou-ilegível" class="nav-link" data-scroll-target="#problema-arquivo-.ll-corrompido-ou-ilegível"><span class="header-section-number">16.10.4</span> Problema: Arquivo .ll corrompido ou ilegível</a></li>
-  <li><a href="#problema-otimização-não-funciona-como-esperado" id="toc-problema-otimização-não-funciona-como-esperado" class="nav-link" data-scroll-target="#problema-otimização-não-funciona-como-esperado"><span class="header-section-number">16.10.5</span> Problema: Otimização não funciona como esperado</a></li>
+  <li><a href="#problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho" id="toc-problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho" class="nav-link" data-scroll-target="#problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho"><span class="header-section-number">17.10.1</span> Problema: opt não otimiza nada, arquivos têm mesmo tamanho</a></li>
+  <li><a href="#problema-comando-não-encontrado" id="toc-problema-comando-não-encontrado" class="nav-link" data-scroll-target="#problema-comando-não-encontrado"><span class="header-section-number">17.10.2</span> Problema: Comando não encontrado</a></li>
+  <li><a href="#problema-versão-incorreta-sendo-usada" id="toc-problema-versão-incorreta-sendo-usada" class="nav-link" data-scroll-target="#problema-versão-incorreta-sendo-usada"><span class="header-section-number">17.10.3</span> Problema: Versão incorreta sendo usada</a></li>
+  <li><a href="#problema-arquivo-.ll-corrompido-ou-ilegível" id="toc-problema-arquivo-.ll-corrompido-ou-ilegível" class="nav-link" data-scroll-target="#problema-arquivo-.ll-corrompido-ou-ilegível"><span class="header-section-number">17.10.4</span> Problema: Arquivo .ll corrompido ou ilegível</a></li>
+  <li><a href="#problema-otimização-não-funciona-como-esperado" id="toc-problema-otimização-não-funciona-como-esperado" class="nav-link" data-scroll-target="#problema-otimização-não-funciona-como-esperado"><span class="header-section-number">17.10.5</span> Problema: Otimização não funciona como esperado</a></li>
   </ul></li>
-  <li><a href="#recursos-adicionais" id="toc-recursos-adicionais" class="nav-link" data-scroll-target="#recursos-adicionais"><span class="header-section-number">16.11</span> 11. Recursos Adicionais</a>
+  <li><a href="#recursos-adicionais" id="toc-recursos-adicionais" class="nav-link" data-scroll-target="#recursos-adicionais"><span class="header-section-number">17.11</span> 11. Recursos Adicionais</a>
   <ul class="collapse">
-  <li><a href="#documentação-oficial" id="toc-documentação-oficial" class="nav-link" data-scroll-target="#documentação-oficial"><span class="header-section-number">16.11.1</span> Documentação Oficial</a></li>
-  <li><a href="#ferramentas-úteis" id="toc-ferramentas-úteis" class="nav-link" data-scroll-target="#ferramentas-úteis"><span class="header-section-number">16.11.2</span> Ferramentas Úteis</a></li>
-  <li><a href="#leitura-recomendada" id="toc-leitura-recomendada" class="nav-link" data-scroll-target="#leitura-recomendada"><span class="header-section-number">16.11.3</span> Leitura Recomendada</a></li>
+  <li><a href="#documentação-oficial" id="toc-documentação-oficial" class="nav-link" data-scroll-target="#documentação-oficial"><span class="header-section-number">17.11.1</span> Documentação Oficial</a></li>
+  <li><a href="#ferramentas-úteis" id="toc-ferramentas-úteis" class="nav-link" data-scroll-target="#ferramentas-úteis"><span class="header-section-number">17.11.2</span> Ferramentas Úteis</a></li>
+  <li><a href="#leitura-recomendada" id="toc-leitura-recomendada" class="nav-link" data-scroll-target="#leitura-recomendada"><span class="header-section-number">17.11.3</span> Leitura Recomendada</a></li>
   </ul></li>
-  <li><a href="#apêndice-tipos-de-dados-no-llvm-ir" id="toc-apêndice-tipos-de-dados-no-llvm-ir" class="nav-link" data-scroll-target="#apêndice-tipos-de-dados-no-llvm-ir"><span class="header-section-number">16.12</span> 12. Apêndice: Tipos de Dados no <strong>LLVM IR</strong></a>
+  <li><a href="#apêndice-tipos-de-dados-no-llvm-ir" id="toc-apêndice-tipos-de-dados-no-llvm-ir" class="nav-link" data-scroll-target="#apêndice-tipos-de-dados-no-llvm-ir"><span class="header-section-number">17.12</span> 12. Apêndice: Tipos de Dados no <strong>LLVM IR</strong></a>
   <ul class="collapse">
-  <li><a href="#tipos-primitivos" id="toc-tipos-primitivos" class="nav-link" data-scroll-target="#tipos-primitivos"><span class="header-section-number">16.12.1</span> Tipos Primitivos</a></li>
-  <li><a href="#tipos-derivados" id="toc-tipos-derivados" class="nav-link" data-scroll-target="#tipos-derivados"><span class="header-section-number">16.12.2</span> Tipos Derivados</a></li>
-  <li><a href="#exemplos" id="toc-exemplos" class="nav-link" data-scroll-target="#exemplos"><span class="header-section-number">16.12.3</span> Exemplos</a></li>
+  <li><a href="#tipos-primitivos" id="toc-tipos-primitivos" class="nav-link" data-scroll-target="#tipos-primitivos"><span class="header-section-number">17.12.1</span> Tipos Primitivos</a></li>
+  <li><a href="#tipos-derivados" id="toc-tipos-derivados" class="nav-link" data-scroll-target="#tipos-derivados"><span class="header-section-number">17.12.2</span> Tipos Derivados</a></li>
+  <li><a href="#exemplos" id="toc-exemplos" class="nav-link" data-scroll-target="#exemplos"><span class="header-section-number">17.12.3</span> Exemplos</a></li>
   </ul></li>
-  <li><a href="#apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm" id="toc-apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm" class="nav-link" data-scroll-target="#apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm"><span class="header-section-number">16.13</span> 13. Apêndice: Migrando da Sintaxe Antiga para Nova (Legacy PM → New PM)</a>
+  <li><a href="#apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm" id="toc-apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm" class="nav-link" data-scroll-target="#apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm"><span class="header-section-number">17.13</span> 13. Apêndice: Migrando da Sintaxe Antiga para Nova (Legacy PM → New PM)</a>
   <ul class="collapse">
-  <li><a href="#comandos-básicos-de-otimização" id="toc-comandos-básicos-de-otimização" class="nav-link" data-scroll-target="#comandos-básicos-de-otimização"><span class="header-section-number">16.13.1</span> Comandos Básicos de Otimização</a></li>
-  <li><a href="#passes-individuais" id="toc-passes-individuais" class="nav-link" data-scroll-target="#passes-individuais"><span class="header-section-number">16.13.2</span> Passes Individuais</a></li>
-  <li><a href="#múltiplos-passes-em-sequência" id="toc-múltiplos-passes-em-sequência" class="nav-link" data-scroll-target="#múltiplos-passes-em-sequência"><span class="header-section-number">16.13.3</span> Múltiplos Passes em Sequência</a></li>
-  <li><a href="#debug-e-análise" id="toc-debug-e-análise" class="nav-link" data-scroll-target="#debug-e-análise"><span class="header-section-number">16.13.4</span> Debug e Análise</a></li>
-  <li><a href="#passes-de-análise-print" id="toc-passes-de-análise-print" class="nav-link" data-scroll-target="#passes-de-análise-print"><span class="header-section-number">16.13.5</span> Passes de Análise (Print)</a></li>
-  <li><a href="#forçar-o-legacy-pm-versões-de-transição-llvm-13-15" id="toc-forçar-o-legacy-pm-versões-de-transição-llvm-13-15" class="nav-link" data-scroll-target="#forçar-o-legacy-pm-versões-de-transição-llvm-13-15"><span class="header-section-number">16.13.6</span> Forçar o Legacy PM (Versões de Transição <strong>LLVM</strong> 13-15)</a></li>
-  <li><a href="#dicas-para-conversão" id="toc-dicas-para-conversão" class="nav-link" data-scroll-target="#dicas-para-conversão"><span class="header-section-number">16.13.7</span> Dicas para Conversão</a></li>
-  <li><a href="#como-encontrar-o-nome-correto-de-um-pass" id="toc-como-encontrar-o-nome-correto-de-um-pass" class="nav-link" data-scroll-target="#como-encontrar-o-nome-correto-de-um-pass"><span class="header-section-number">16.13.8</span> Como Encontrar o Nome Correto de um Pass</a></li>
-  <li><a href="#script-de-conversão-rápida" id="toc-script-de-conversão-rápida" class="nav-link" data-scroll-target="#script-de-conversão-rápida"><span class="header-section-number">16.13.9</span> Script de Conversão Rápida</a></li>
+  <li><a href="#comandos-básicos-de-otimização" id="toc-comandos-básicos-de-otimização" class="nav-link" data-scroll-target="#comandos-básicos-de-otimização"><span class="header-section-number">17.13.1</span> Comandos Básicos de Otimização</a></li>
+  <li><a href="#passes-individuais" id="toc-passes-individuais" class="nav-link" data-scroll-target="#passes-individuais"><span class="header-section-number">17.13.2</span> Passes Individuais</a></li>
+  <li><a href="#múltiplos-passes-em-sequência" id="toc-múltiplos-passes-em-sequência" class="nav-link" data-scroll-target="#múltiplos-passes-em-sequência"><span class="header-section-number">17.13.3</span> Múltiplos Passes em Sequência</a></li>
+  <li><a href="#debug-e-análise" id="toc-debug-e-análise" class="nav-link" data-scroll-target="#debug-e-análise"><span class="header-section-number">17.13.4</span> Debug e Análise</a></li>
+  <li><a href="#passes-de-análise-print" id="toc-passes-de-análise-print" class="nav-link" data-scroll-target="#passes-de-análise-print"><span class="header-section-number">17.13.5</span> Passes de Análise (Print)</a></li>
+  <li><a href="#forçar-o-legacy-pm-versões-de-transição-llvm-13-15" id="toc-forçar-o-legacy-pm-versões-de-transição-llvm-13-15" class="nav-link" data-scroll-target="#forçar-o-legacy-pm-versões-de-transição-llvm-13-15"><span class="header-section-number">17.13.6</span> Forçar o Legacy PM (Versões de Transição <strong>LLVM</strong> 13-15)</a></li>
+  <li><a href="#dicas-para-conversão" id="toc-dicas-para-conversão" class="nav-link" data-scroll-target="#dicas-para-conversão"><span class="header-section-number">17.13.7</span> Dicas para Conversão</a></li>
+  <li><a href="#como-encontrar-o-nome-correto-de-um-pass" id="toc-como-encontrar-o-nome-correto-de-um-pass" class="nav-link" data-scroll-target="#como-encontrar-o-nome-correto-de-um-pass"><span class="header-section-number">17.13.8</span> Como Encontrar o Nome Correto de um Pass</a></li>
+  <li><a href="#script-de-conversão-rápida" id="toc-script-de-conversão-rápida" class="nav-link" data-scroll-target="#script-de-conversão-rápida"><span class="header-section-number">17.13.9</span> Script de Conversão Rápida</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/15-llvmIR.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -511,9 +517,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./15-llvmIR.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./15-llvmIR.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></h1>
 </div>
 
 
@@ -532,12 +538,12 @@ window.Quarto = {
 
 <p>Representação Intermediária (IR) do <strong>LLVM</strong> é uma linguagem usada como etapa intermediária na compilação de código fonte para código de máquina. Neste ponto do livro, vamos instalar em uma máquina Ubuntu os componentes necessários para trabalhar com <strong>LLVM IR</strong>, com o objetivo de introduzir os conceitos fundamentais de uma representação intermediária real, de mercado. Além disso, demonstraremos como gerar e analisar o IR a partir de código C++, e exploraremos algumas das principais otimizações que podem ser aplicadas.</p>
 <p>Eu, depois de muitas horas de frustração, ódio e da criação de novas expressões ofensivas de baixo calão em português, acabei criando dois guias, um para máquinas virtuais VirtualBOX e outro para WSL. Ambos os guias têm a pretensão de mostrar como a esforçada leitora poderá criar um ambiente adequado ao entendimento do <strong>LLVM IR</strong>.</p>
-<section id="virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm"><span class="header-section-number">16.1</span> VirtualBOX: Configuração do Ambiente (Ubuntu, VS Code, C++ e LLVM)</h2>
+<section id="virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="virtualbox-configuração-do-ambiente-ubuntu-vs-code-c-e-llvm"><span class="header-section-number">17.1</span> VirtualBOX: Configuração do Ambiente (Ubuntu, VS Code, C++ e LLVM)</h2>
 <p>Nesta seção, vamos ser um pouco mais detalhados, quase um tutorial de instalação, para garantir que a esforçada leitora tenha o ambiente correto para a criação deste conhecimento.</p>
 <p>Os passos a seguir foram testados em uma instalação limpa do Ubuntu 24.04 LTS, limpa, atualizada e rodando em uma máquina virtual VirtualBox.</p>
-<section id="pré-requisitos" class="level3" data-number="16.1.1">
-<h3 data-number="16.1.1" class="anchored" data-anchor-id="pré-requisitos"><span class="header-section-number">16.1.1</span> Pré-requisitos</h3>
+<section id="pré-requisitos" class="level3" data-number="17.1.1">
+<h3 data-number="17.1.1" class="anchored" data-anchor-id="pré-requisitos"><span class="header-section-number">17.1.1</span> Pré-requisitos</h3>
 <p>Antes de começar, certifique-se de ter:</p>
 <ul>
 <li>Ubuntu 24.04 LTS ou superior;</li>
@@ -546,8 +552,8 @@ window.Quarto = {
 <li>Pelo menos 5GB de espaço livre em disco.</li>
 </ul>
 </section>
-<section id="instalação-do-llvmclang" class="level3" data-number="16.1.2">
-<h3 data-number="16.1.2" class="anchored" data-anchor-id="instalação-do-llvmclang"><span class="header-section-number">16.1.2</span> Instalação do LLVM/Clang</h3>
+<section id="instalação-do-llvmclang" class="level3" data-number="17.1.2">
+<h3 data-number="17.1.2" class="anchored" data-anchor-id="instalação-do-llvmclang"><span class="header-section-number">17.1.2</span> Instalação do LLVM/Clang</h3>
 <p>O repositório oficial do <strong>LLVM</strong> fornece as versões mais atualizadas das ferramentas.</p>
 <p><strong>Passo 1: Baixar e preparar o script de instalação</strong>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://apt.llvm.org/llvm.sh</span>
@@ -681,8 +687,8 @@ Note
 </div>
 <p>Se você ver <code>optnone</code>, então o opt vai ignorar suas funções. Para corrigir, recompile com <code>-Xclang -disable-O0-optnone</code>.</p>
 </section>
-<section id="instalação-do-vs-code-e-extensões" class="level3" data-number="16.1.3">
-<h3 data-number="16.1.3" class="anchored" data-anchor-id="instalação-do-vs-code-e-extensões"><span class="header-section-number">16.1.3</span> Instalação do VS Code e Extensões</h3>
+<section id="instalação-do-vs-code-e-extensões" class="level3" data-number="17.1.3">
+<h3 data-number="17.1.3" class="anchored" data-anchor-id="instalação-do-vs-code-e-extensões"><span class="header-section-number">17.1.3</span> Instalação do VS Code e Extensões</h3>
 <p><strong>Passo 1: Instalar o VS Code</strong>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Adicionar repositório da Microsoft</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-qO-</span> https://packages.microsoft.com/keys/microsoft.asc <span class="kw">|</span> <span class="ex">gpg</span> <span class="at">--dearmor</span> <span class="op">&gt;</span> packages.microsoft.gpg</span>
@@ -703,17 +709,17 @@ Note
 <p><strong>Passo 3: Instalar Graphviz (para visualização de CFG)</strong>:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install graphviz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="criar-diretório-de-trabalho" class="level3" data-number="16.1.4">
-<h3 data-number="16.1.4" class="anchored" data-anchor-id="criar-diretório-de-trabalho"><span class="header-section-number">16.1.4</span> Criar Diretório de Trabalho</h3>
+<section id="criar-diretório-de-trabalho" class="level3" data-number="17.1.4">
+<h3 data-number="17.1.4" class="anchored" data-anchor-id="criar-diretório-de-trabalho"><span class="header-section-number">17.1.4</span> Criar Diretório de Trabalho</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/llvm-aula</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/llvm-aula</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21"><span class="header-section-number">16.2</span> WSL: Guia Completo: VS Code + WSL (Ubuntu) com Clang, LLD e LLDB v21</h2>
+<section id="wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="wsl-guia-completo-vs-code-wsl-ubuntu-com-clang-lld-e-lldb-v21"><span class="header-section-number">17.2</span> WSL: Guia Completo: VS Code + WSL (Ubuntu) com Clang, LLD e LLDB v21</h2>
 <p>Usar a máquina virtual, estava se tornando um pesadelo na minha máquina e ainda pior nas máquinas do laboratório. Dado esta realidade avassaladora eu resolvi instalar o Ubuntu 24.04 no WSL e criar o tutorial a seguir. Este tutorial evita os problemas comuns, tais como a incompatibilidade do <code>cppdbg</code> da Microsoft como o LLDB, usando as ferramentas mais robustas para esta combinação.</p>
-<section id="fase-1-preparação-do-windows-e-vs-code" class="level3" data-number="16.2.1">
-<h3 data-number="16.2.1" class="anchored" data-anchor-id="fase-1-preparação-do-windows-e-vs-code"><span class="header-section-number">16.2.1</span> Fase 1: Preparação do Windows e VS Code</h3>
+<section id="fase-1-preparação-do-windows-e-vs-code" class="level3" data-number="17.2.1">
+<h3 data-number="17.2.1" class="anchored" data-anchor-id="fase-1-preparação-do-windows-e-vs-code"><span class="header-section-number">17.2.1</span> Fase 1: Preparação do Windows e VS Code</h3>
 <ol type="1">
 <li><strong>Instale o VS Code no Windows 11:</strong> Baixe e instale o Visual Studio Code no seu Windows.</li>
 <li><strong>Instale a Extensão WSL:</strong>
@@ -725,8 +731,8 @@ Note
 </ul></li>
 </ol>
 </section>
-<section id="fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl" class="level3" data-number="16.2.2">
-<h3 data-number="16.2.2" class="anchored" data-anchor-id="fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl"><span class="header-section-number">16.2.2</span> Fase 2: Instalação do Toolchain <strong>LLVM</strong> 21 no Ubuntu (WSL)</h3>
+<section id="fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl" class="level3" data-number="17.2.2">
+<h3 data-number="17.2.2" class="anchored" data-anchor-id="fase-2-instalação-do-toolchain-llvm-21-no-ubuntu-wsl"><span class="header-section-number">17.2.2</span> Fase 2: Instalação do Toolchain <strong>LLVM</strong> 21 no Ubuntu (WSL)</h3>
 <p>Esta é a etapa mais importante para garantir que todas as ferramentas, compilador, linker, debugger, estejam na mesma versão.</p>
 <ol type="1">
 <li><p><strong>Abra seu terminal WSL (Ubuntu).</strong></p></li>
@@ -755,8 +761,8 @@ Note
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ld.lld</span> <span class="at">--version</span>  <span class="co"># Deve mostrar 21</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 </section>
-<section id="fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl" class="level3" data-number="16.2.3">
-<h3 data-number="16.2.3" class="anchored" data-anchor-id="fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl"><span class="header-section-number">16.2.3</span> Fase 3: Conectar o VS Code e Instalar Extensões no WSL</h3>
+<section id="fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl" class="level3" data-number="17.2.3">
+<h3 data-number="17.2.3" class="anchored" data-anchor-id="fase-3-conectar-o-vs-code-e-instalar-extensões-no-wsl"><span class="header-section-number">17.2.3</span> Fase 3: Conectar o VS Code e Instalar Extensões no WSL</h3>
 <ol type="1">
 <li><strong>Conecte o VS Code ao WSL:</strong>
 <ul>
@@ -776,8 +782,8 @@ Note
 </ul></li>
 </ol>
 </section>
-<section id="fase-4-configuração-do-projeto-arquivos-.vscode" class="level3" data-number="16.2.4">
-<h3 data-number="16.2.4" class="anchored" data-anchor-id="fase-4-configuração-do-projeto-arquivos-.vscode"><span class="header-section-number">16.2.4</span> Fase 4: Configuração do Projeto (Arquivos .vscode)</h3>
+<section id="fase-4-configuração-do-projeto-arquivos-.vscode" class="level3" data-number="17.2.4">
+<h3 data-number="17.2.4" class="anchored" data-anchor-id="fase-4-configuração-do-projeto-arquivos-.vscode"><span class="header-section-number">17.2.4</span> Fase 4: Configuração do Projeto (Arquivos .vscode)</h3>
 <ol type="1">
 <li><strong>Abra sua Pasta de Projeto:</strong>
 <ul>
@@ -870,8 +876,8 @@ Note
 </ul></li>
 </ol>
 </section>
-<section id="fase-5-teste" class="level3" data-number="16.2.5">
-<h3 data-number="16.2.5" class="anchored" data-anchor-id="fase-5-teste"><span class="header-section-number">16.2.5</span> Fase 5: Teste</h3>
+<section id="fase-5-teste" class="level3" data-number="17.2.5">
+<h3 data-number="17.2.5" class="anchored" data-anchor-id="fase-5-teste"><span class="header-section-number">17.2.5</span> Fase 5: Teste</h3>
 <ol type="1">
 <li><p>Crie um arquivo de teste, por exemplo, <code>main.cpp</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
@@ -909,8 +915,8 @@ Note
 </div>
 </section>
 </section>
-<section id="llvm-infraestrutura-moderna-para-construção-de-compiladores" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="llvm-infraestrutura-moderna-para-construção-de-compiladores"><span class="header-section-number">16.3</span> LLVM: Infraestrutura Moderna para Construção de Compiladores</h2>
+<section id="llvm-infraestrutura-moderna-para-construção-de-compiladores" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="llvm-infraestrutura-moderna-para-construção-de-compiladores"><span class="header-section-number">17.3</span> LLVM: Infraestrutura Moderna para Construção de Compiladores</h2>
 <p>O <strong>L</strong>ow <strong>L</strong>evel <strong>V</strong>irtual <strong>M</strong>achine, <strong>LLVM</strong>, é uma infraestrutura de compilação modular, reutilizável e extensível principal pilar de uma revolução em curso no desenvolvimento dos compiladores modernos. Apesar do nome histórico sugerir uma máquina virtual, o <strong>LLVM</strong> evoluiu para se tornar um ecossistema completo de ferramentas, bibliotecas, padrões e aplicativos para construção de compiladores e ferramentas de análise de código.</p>
 <p>Criado originalmente por <a href="https://en.wikipedia.org/wiki/Chris_Lattner">Chris Lattner</a> em 2000 como projeto de pesquisa na Universidade de Illinois em Urbana-Champaign, o <strong>LLVM</strong> foi projetado desde o início com modularidade e reusabilidade em mente. Diferentemente de compiladores monolíticos tradicionais, o <strong>LLVM</strong> separa claramente as responsabilidades em componentes independentes que podem ser combinados e reutilizados de formas diversas.</p>
 <p>A arquitetura do <strong>LLVM</strong> segue o modelo clássico de compilador em três fases, mas com uma separação muito bem definida através de interfaces estáveis:</p>
@@ -924,12 +930,12 @@ Note
 <li><strong>Reutilização</strong>: ferramentas como analisadores estáticos, sanitizers e debuggers podem operar diretamente no <strong>IR</strong>;</li>
 <li><strong>Experimentação</strong>: novos passes de otimização podem ser desenvolvidos e testados sem modificar <em>frontends</em> ou <em>backends</em>.</li>
 </ol>
-<section id="o-que-é-llvm-ir" class="level3" data-number="16.3.1">
-<h3 data-number="16.3.1" class="anchored" data-anchor-id="o-que-é-llvm-ir"><span class="header-section-number">16.3.1</span> O que é <strong>LLVM IR</strong>?</h3>
+<section id="o-que-é-llvm-ir" class="level3" data-number="17.3.1">
+<h3 data-number="17.3.1" class="anchored" data-anchor-id="o-que-é-llvm-ir"><span class="header-section-number">17.3.1</span> O que é <strong>LLVM IR</strong>?</h3>
 <p>A <strong>Representação Intermediária</strong>, do inglês: <strong>I</strong>ntermediate <strong>R</strong>epresentation, <strong>IR</strong>, do <strong>LLVM</strong> é o coração do sistema. Trata-se de uma linguagem de programação, comparável ao Assembly, mas com abstrações suficientes para ser independente de arquitetura. Na verdade, o <strong>IR</strong> serve como ponte entre o código de alto nível e o código de máquina, permitindo otimizações poderosas e portabilidade entre plataformas.</p>
 <p>A escolha de usar uma representação intermediária bem definida estabelece um contrato claro entre <em>frontends</em> e <em>backends</em>, permitindo que evoluam independentemente desde que mantenham compatibilidade com o <strong>IR</strong>.</p>
-<section id="características-fundamentais" class="level4" data-number="16.3.1.1">
-<h4 data-number="16.3.1.1" class="anchored" data-anchor-id="características-fundamentais"><span class="header-section-number">16.3.1.1</span> Características Fundamentais</h4>
+<section id="características-fundamentais" class="level4" data-number="17.3.1.1">
+<h4 data-number="17.3.1.1" class="anchored" data-anchor-id="características-fundamentais"><span class="header-section-number">17.3.1.1</span> Características Fundamentais</h4>
 <p><strong>1. Fortemente Tipada</strong></p>
 <p>Cada valor no <strong>LLVM</strong> IR possui um tipo explícito e verificável. O sistema de tipos inclui:</p>
 <ul>
@@ -973,8 +979,8 @@ Note
 <p><strong>Bitcode (.bc)</strong> - <strong>Propósito</strong>: Armazenamento compacto, distribuição, serialização - <strong>Características</strong>: Formato binário eficiente, compacto - <strong>Uso típico</strong>: Bibliotecas pré-compiladas, link-time optimization (LTO) - <strong>Ferramentas</strong>: <code>llvm-as</code> (textual → bitcode), <code>llvm-dis</code> (bitcode → textual) - <strong>Vantagem</strong>: Tamanho reduzido (30-50% menor que .ll) e parsing mais rápido</p>
 <p><strong>Representação em Memória</strong> - <strong>Propósito</strong>: Manipulação por ferramentas, APIs de transformação - <strong>Características</strong>: Estruturas C++ otimizadas para acesso e modificação - <strong>Uso típico</strong>: Passes de otimização, análises, ferramentas customizadas - <strong>Interface</strong>: API C++ do <strong>LLVM</strong> (classes <code>Module</code>, <code>Function</code>, <code>BasicBlock</code>, <code>Instruction</code>) - <strong>Vantagem</strong>: Acesso direto sem parsing, modificação eficiente</p>
 </section>
-<section id="estrutura-hierárquica-do-ir" class="level4" data-number="16.3.1.2">
-<h4 data-number="16.3.1.2" class="anchored" data-anchor-id="estrutura-hierárquica-do-ir"><span class="header-section-number">16.3.1.2</span> Estrutura Hierárquica do IR</h4>
+<section id="estrutura-hierárquica-do-ir" class="level4" data-number="17.3.1.2">
+<h4 data-number="17.3.1.2" class="anchored" data-anchor-id="estrutura-hierárquica-do-ir"><span class="header-section-number">17.3.1.2</span> Estrutura Hierárquica do IR</h4>
 <p>O IR é organizado em uma hierarquia bem definida:</p>
 <p><code> Module // Unidade de compilação completa └─ GlobalVariable // Variáveis globais └─ Function // Funções do programa └─ Argument // Parâmetros da função └─ BasicBlock // Bloco básico (sequência linear) └─ Instruction // Instruções individuais └─ Operand // Operandos das instruções </code></p>
 <p><strong>Module</strong>: Representa uma unidade de compilação completa (equivalente a um arquivo .c ou .cpp) - Contém todas as funções, variáveis globais e metadados - Unidade de compilação e otimização</p>
@@ -982,8 +988,8 @@ Note
 <p><strong>BasicBlock</strong>: Sequência linear de instruções sem branches no meio - Termina sempre com uma instrução terminadora (<code>ret</code>, <code>br</code>, <code>switch</code>) - Unidade fundamental para análise de fluxo de controle - Corresponde a nós em um Control Flow Graph (CFG)</p>
 <p><strong>Instruction</strong>: Operação individual - Tipos: aritméticas, memória, controle de fluxo, conversões - Cada instrução produz zero ou um valor</p>
 </section>
-<section id="exemplo-completo-função-fibonacci" class="level4" data-number="16.3.1.3">
-<h4 data-number="16.3.1.3" class="anchored" data-anchor-id="exemplo-completo-função-fibonacci"><span class="header-section-number">16.3.1.3</span> Exemplo Completo: Função Fibonacci</h4>
+<section id="exemplo-completo-função-fibonacci" class="level4" data-number="17.3.1.3">
+<h4 data-number="17.3.1.3" class="anchored" data-anchor-id="exemplo-completo-função-fibonacci"><span class="header-section-number">17.3.1.3</span> Exemplo Completo: Função Fibonacci</h4>
 <p>Para ilustrar todos os conceitos apresentados, considere a implementação de Fibonacci em C e sua tradução para <strong>LLVM</strong> IR:</p>
 <p><code> // Código C original int fibonacci(int n) { if (n &lt;= 1) return n; return fibonacci(n - 1) + fibonacci(n - 2); } </code></p>
 <p><code> ; <strong>LLVM</strong> IR equivalente define i32 <span class="citation" data-cites="fibonacci">(<a href="referencias.html#ref-fibonacci" role="doc-biblioref"><strong>fibonacci?</strong></a>)</span>(i32 %n) { entry: ; Verifica caso base: n &lt;= 1 %cmp = icmp sle i32 %n, 1 br i1 %cmp, label %base_case, label %recursive_case</code></p><code>
@@ -993,8 +999,8 @@ Note
 </code><p><code>; Soma os resultados %result = add nsw i32 %fib_n_minus_1, %fib_n_minus_2 ret i32 %result } </code></p>
 <p>Note como o IR captura explicitamente: - Tipos de todos os valores (<code>i32</code>) - Forma SSA (cada resultado tem nome único) - Estrutura de blocos básicos claramente delimitada - Instruções de controle de fluxo explícitas (<code>br</code>, <code>ret</code>) - Flags de otimização (<code>nsw</code> - no signed wrap, indica que overflow é undefined behavior)</p>
 </section>
-<section id="ferramentas-do-ecossistema-llvm" class="level4" data-number="16.3.1.4">
-<h4 data-number="16.3.1.4" class="anchored" data-anchor-id="ferramentas-do-ecossistema-llvm"><span class="header-section-number">16.3.1.4</span> Ferramentas do Ecossistema LLVM</h4>
+<section id="ferramentas-do-ecossistema-llvm" class="level4" data-number="17.3.1.4">
+<h4 data-number="17.3.1.4" class="anchored" data-anchor-id="ferramentas-do-ecossistema-llvm"><span class="header-section-number">17.3.1.4</span> Ferramentas do Ecossistema LLVM</h4>
 <p>O <strong>LLVM</strong> fornece um conjunto rico de ferramentas para trabalhar com IR:</p>
 <ul>
 <li><strong>clang</strong>: Compilador C/C++/Objective-C que gera <strong>LLVM</strong> IR</li>
@@ -1010,8 +1016,8 @@ Note
 <p>Estas ferramentas permitem inspecionar, transformar e executar IR em todas as etapas do processo de compilação, facilitando o desenvolvimento e debugging de compiladores.</p>
 </section>
 </section>
-<section id="fluxo-de-compilação-completo" class="level3" data-number="16.3.2">
-<h3 data-number="16.3.2" class="anchored" data-anchor-id="fluxo-de-compilação-completo"><span class="header-section-number">16.3.2</span> Fluxo de Compilação Completo</h3>
+<section id="fluxo-de-compilação-completo" class="level3" data-number="17.3.2">
+<h3 data-number="17.3.2" class="anchored" data-anchor-id="fluxo-de-compilação-completo"><span class="header-section-number">17.3.2</span> Fluxo de Compilação Completo</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">C++</span> Source Code <span class="er">(</span><span class="ex">.cpp</span><span class="kw">)</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="fu">clang</span>++ <span class="at">-S</span> <span class="at">-emit-llvm</span></span>
@@ -1030,8 +1036,8 @@ Note
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        <span class="ex">v</span></span>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Executable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="conceitos-fundamentais-do-ssa" class="level3" data-number="16.3.3">
-<h3 data-number="16.3.3" class="anchored" data-anchor-id="conceitos-fundamentais-do-ssa"><span class="header-section-number">16.3.3</span> Conceitos Fundamentais do SSA</h3>
+<section id="conceitos-fundamentais-do-ssa" class="level3" data-number="17.3.3">
+<h3 data-number="17.3.3" class="anchored" data-anchor-id="conceitos-fundamentais-do-ssa"><span class="header-section-number">17.3.3</span> Conceitos Fundamentais do SSA</h3>
 <p>No formato SSA:</p>
 <ul>
 <li>cada variável tem apenas uma atribuição;</li>
@@ -1047,34 +1053,34 @@ Note
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">%x2</span> = <span class="fu">%x1</span> + <span class="dv">3</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">%x3</span> = <span class="fu">%x2</span> * <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="dissecando-a-sintaxe-do-llvm-ir" class="level3" data-number="16.3.4">
-<h3 data-number="16.3.4" class="anchored" data-anchor-id="dissecando-a-sintaxe-do-llvm-ir"><span class="header-section-number">16.3.4</span> Dissecando a Sintaxe do <strong>LLVM IR</strong></h3>
+<section id="dissecando-a-sintaxe-do-llvm-ir" class="level3" data-number="17.3.4">
+<h3 data-number="17.3.4" class="anchored" data-anchor-id="dissecando-a-sintaxe-do-llvm-ir"><span class="header-section-number">17.3.4</span> Dissecando a Sintaxe do <strong>LLVM IR</strong></h3>
 <p>Antes de prosseguirmos para a análise detalhada de nossos exemplos, é essencial que a leitora se familiarize com os componentes fundamentais da linguagem de Representação Intermediária do LLVM. À primeira vista, o IR pode parecer uma linguagem Assembly, mas ele possui uma estrutura mais rica, um sistema de tipos forte e semânticas bem definidas que o tornam uma plataforma poderosa para otimização.</p>
 <p>Nesta seção, faremos um tour pelos elementos sintáticos mais comuns que encontraremos em nossos exemplos.</p>
-<section id="comentários" class="level4" data-number="16.3.4.1">
-<h4 data-number="16.3.4.1" class="anchored" data-anchor-id="comentários"><span class="header-section-number">16.3.4.1</span> 1. Comentários</h4>
+<section id="comentários" class="level4" data-number="17.3.4.1">
+<h4 data-number="17.3.4.1" class="anchored" data-anchor-id="comentários"><span class="header-section-number">17.3.4.1</span> 1. Comentários</h4>
 <p>Qualquer texto após um ponto e vírgula (<code>;</code>) é um comentário e é ignorado pelo compilador.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">; Este é um comentário de linha inteira.</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">%a</span> = <span class="kw">add</span> <span class="dt">i32</span> <span class="fu">%b</span>, <span class="dv">5</span> <span class="co">; E este é um comentário no final de uma linha.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="identificadores-globais-e-locais" class="level4" data-number="16.3.4.2">
-<h4 data-number="16.3.4.2" class="anchored" data-anchor-id="identificadores-globais-e-locais"><span class="header-section-number">16.3.4.2</span> 2. Identificadores: Globais (<code>@</code>) e Locais (<code>%</code>)</h4>
+<section id="identificadores-globais-e-locais" class="level4" data-number="17.3.4.2">
+<h4 data-number="17.3.4.2" class="anchored" data-anchor-id="identificadores-globais-e-locais"><span class="header-section-number">17.3.4.2</span> 2. Identificadores: Globais (<code>@</code>) e Locais (<code>%</code>)</h4>
 <p>Existem dois tipos principais de identificadores no <strong>LLVM IR</strong>:</p>
 <ul>
 <li><p><strong>Identificadores Globais (<code>@</code>)</strong>: Referem-se a entidades com endereço fixo na memória, como funções e variáveis globais. Eles são, em essência, ponteiros. <code>llvm     @main = define ...          ; Uma função global chamada main     @variavel_global = global i32 0 ; Uma variável global</code></p></li>
 <li><p><strong>Identificadores Locais (<code>%</code>)</strong>: Representam valores temporários dentro de uma função. No formulário SSA, cada um desses “registradores virtuais” recebe um valor apenas uma vez. Eles podem ser nomeados (ex: <code>%soma</code>) ou numerados sequencialmente (ex: <code>%1</code>, <code>%2</code>, <code>%3</code>). <code>llvm     %a = alloca i32           ; O valor retornado por 'alloca' é %a     %b = load i32, ptr %a     ; O valor lido da memória é %b</code></p></li>
 </ul>
 </section>
-<section id="tipos-de-dados" class="level4" data-number="16.3.4.3">
-<h4 data-number="16.3.4.3" class="anchored" data-anchor-id="tipos-de-dados"><span class="header-section-number">16.3.4.3</span> 3. Tipos de Dados</h4>
+<section id="tipos-de-dados" class="level4" data-number="17.3.4.3">
+<h4 data-number="17.3.4.3" class="anchored" data-anchor-id="tipos-de-dados"><span class="header-section-number">17.3.4.3</span> 3. Tipos de Dados</h4>
 <p>O <strong>LLVM IR</strong> é fortemente tipado. Cada instrução que produz um valor o faz com um tipo bem definido. Os mais comuns que veremos são: - <strong>Inteiros</strong>: <code>iN</code>, onde <code>N</code> é o número de bits. <code>i32</code> é um inteiro de 32 bits, e <code>i1</code> é um booleano (<code>true</code>/<code>false</code>). - <strong>Ponteiros</strong>: <code>ptr</code>. O <strong>LLVM</strong> usa ponteiros sem tipo, mas o tipo do dado apontado é especificado nas instruções que o utilizam (<code>load</code>, <code>store</code>, <code>getelementptr</code>). - <strong>Vetores</strong>: <code>&lt;N x T&gt;</code>, onde <code>N</code> é o número de elementos e <code>T</code> é o tipo. Como vimos na otimização do laço, <code>&lt;4 x i32&gt;</code> é um vetor de 4 inteiros de 32 bits. - <strong>Void</strong>: <code>void</code>, usado para representar o tipo de retorno de funções que não retornam valor.</p>
 </section>
-<section id="a-tríade-da-memória-em-código-não-otimizado" class="level4" data-number="16.3.4.4">
-<h4 data-number="16.3.4.4" class="anchored" data-anchor-id="a-tríade-da-memória-em-código-não-otimizado"><span class="header-section-number">16.3.4.4</span> 4. A Tríade da Memória (em código não otimizado)</h4>
+<section id="a-tríade-da-memória-em-código-não-otimizado" class="level4" data-number="17.3.4.4">
+<h4 data-number="17.3.4.4" class="anchored" data-anchor-id="a-tríade-da-memória-em-código-não-otimizado"><span class="header-section-number">17.3.4.4</span> 4. A Tríade da Memória (em código não otimizado)</h4>
 <p>Em código <code>-O0</code>, que traduz C++ literalmente, três instruções são onipresentes para gerenciar variáveis na pilha: - <code>alloca</code>: Aloca espaço na pilha da função (similar a uma variável local em C). Retorna um ponteiro para o espaço alocado. - <code>store</code>: Escreve um valor em um endereço de memória. Formato: <code>store &lt;tipo&gt; &lt;valor&gt;, ptr &lt;endereço&gt;</code>. - <code>load</code>: Lê um valor de um endereço de memória. Formato: <code>%resultado = load &lt;tipo&gt;, ptr &lt;endereço&gt;</code>. A primeira e mais importante otimização (<code>mem2reg</code>) elimina a vasta maioria dessas instruções, promovendo as variáveis da memória para registradores virtuais (<code>%</code>).</p>
 </section>
-<section id="instruções-comuns" class="level4" data-number="16.3.4.5">
-<h4 data-number="16.3.4.5" class="anchored" data-anchor-id="instruções-comuns"><span class="header-section-number">16.3.4.5</span> 5. Instruções Comuns</h4>
+<section id="instruções-comuns" class="level4" data-number="17.3.4.5">
+<h4 data-number="17.3.4.5" class="anchored" data-anchor-id="instruções-comuns"><span class="header-section-number">17.3.4.5</span> 5. Instruções Comuns</h4>
 <p>As instruções formam o corpo executável das funções. Cada instrução segue o formato <code>%resultado = opcode &lt;operandos&gt;</code>.</p>
 <ul>
 <li><strong>Término de Bloco</strong>: Instruções que encerram um bloco básico e transferem o controle.
@@ -1110,10 +1116,10 @@ Note
 </section>
 </section>
 </section>
-<section id="primeiro-exemplo-geração-e-análise-de-ir" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="primeiro-exemplo-geração-e-análise-de-ir"><span class="header-section-number">16.4</span> Primeiro Exemplo: Geração e Análise de IR</h2>
-<section id="exemplo-mais-completo-múltiplas-operações" class="level3" data-number="16.4.1">
-<h3 data-number="16.4.1" class="anchored" data-anchor-id="exemplo-mais-completo-múltiplas-operações"><span class="header-section-number">16.4.1</span> Exemplo Mais Completo: Múltiplas Operações</h3>
+<section id="primeiro-exemplo-geração-e-análise-de-ir" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="primeiro-exemplo-geração-e-análise-de-ir"><span class="header-section-number">17.4</span> Primeiro Exemplo: Geração e Análise de IR</h2>
+<section id="exemplo-mais-completo-múltiplas-operações" class="level3" data-number="17.4.1">
+<h3 data-number="17.4.1" class="anchored" data-anchor-id="exemplo-mais-completo-múltiplas-operações"><span class="header-section-number">17.4.1</span> Exemplo Mais Completo: Múltiplas Operações</h3>
 <p>Para ver otimizações mais claramente, vamos usar um exemplo mais elaborado.</p>
 <p>Crie o arquivo <code>exemplo01_completo.cpp</code>:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">// exemplo01_completo.cpp</span></span>
@@ -1137,8 +1143,8 @@ Note
 <li>O resultado final pode ser calculado em tempo de compilação, <em>constant folding</em>.</li>
 </ul>
 </section>
-<section id="gerar-o-llvm-ir" class="level3" data-number="16.4.2">
-<h3 data-number="16.4.2" class="anchored" data-anchor-id="gerar-o-llvm-ir"><span class="header-section-number">16.4.2</span> Gerar o <strong>LLVM IR</strong></h3>
+<section id="gerar-o-llvm-ir" class="level3" data-number="17.4.2">
+<h3 data-number="17.4.2" class="anchored" data-anchor-id="gerar-o-llvm-ir"><span class="header-section-number">17.4.2</span> Gerar o <strong>LLVM IR</strong></h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1174,8 +1180,8 @@ Note
 <div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">"optnone"</span> exemplo01_soma.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Se você vir <code>optnone</code> na lista de atributos da função, o <code>opt</code> vai ignorar essa função completamente! E a desapontada leitora terá dois arquivos idênticos antes e depois da otimização.</p>
 </section>
-<section id="análise-detalhada-do-ir-gerado" class="level3" data-number="16.4.3">
-<h3 data-number="16.4.3" class="anchored" data-anchor-id="análise-detalhada-do-ir-gerado"><span class="header-section-number">16.4.3</span> Análise Detalhada do IR Gerado</h3>
+<section id="análise-detalhada-do-ir-gerado" class="level3" data-number="17.4.3">
+<h3 data-number="17.4.3" class="anchored" data-anchor-id="análise-detalhada-do-ir-gerado"><span class="header-section-number">17.4.3</span> Análise Detalhada do IR Gerado</h3>
 <p>Se a curiosa leitora abrir o arquivo <code>exemplo01_completo.ll</code> no VS Code. Você verá algo como:</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">; ModuleID = 'exemplo01_soma.cpp'</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>source_filename = <span class="st">"exemplo01_soma.cpp"</span></span>
@@ -1281,8 +1287,8 @@ Note
 </ul></li>
 </ol>
 </section>
-<section id="otimização-do-ir" class="level3" data-number="16.4.4">
-<h3 data-number="16.4.4" class="anchored" data-anchor-id="otimização-do-ir"><span class="header-section-number">16.4.4</span> Otimização do IR</h3>
+<section id="otimização-do-ir" class="level3" data-number="17.4.4">
+<h3 data-number="17.4.4" class="anchored" data-anchor-id="otimização-do-ir"><span class="header-section-number">17.4.4</span> Otimização do IR</h3>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1346,8 +1352,8 @@ Warning
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> exemplo01_completo_opt.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A leitora deve ver uma redução de aproximadamente 60-70% no número de linhas!</p>
 </section>
-<section id="gerar-ir-com-diferentes-níveis-de-otimização" class="level3" data-number="16.4.5">
-<h3 data-number="16.4.5" class="anchored" data-anchor-id="gerar-ir-com-diferentes-níveis-de-otimização"><span class="header-section-number">16.4.5</span> Gerar IR com Diferentes Níveis de Otimização</h3>
+<section id="gerar-ir-com-diferentes-níveis-de-otimização" class="level3" data-number="17.4.5">
+<h3 data-number="17.4.5" class="anchored" data-anchor-id="gerar-ir-com-diferentes-níveis-de-otimização"><span class="header-section-number">17.4.5</span> Gerar IR com Diferentes Níveis de Otimização</h3>
 <p>Existem duas formas de gerar IR otimizado:</p>
 <p><strong>Método 1: Usar o <code>clang</code> diretamente</strong>:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sem otimização (mas sem optnone!)</span></span>
@@ -1404,8 +1410,8 @@ Warning
 <span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"SEM optnone - linhas antes: </span><span class="va">$(</span><span class="fu">wc</span> <span class="at">-l</span> <span class="op">&lt;</span> sem_optnone.ll<span class="va">)</span><span class="st">, depois: </span><span class="va">$(</span><span class="fu">wc</span> <span class="at">-l</span> <span class="op">&lt;</span> sem_optnone_opt.ll<span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Você verá que o arquivo COM optnone <strong>não será otimizado</strong>!</p>
 </section>
-<section id="entendendo-o-novo-pass-manager-llvm-14" class="level3" data-number="16.4.6">
-<h3 data-number="16.4.6" class="anchored" data-anchor-id="entendendo-o-novo-pass-manager-llvm-14"><span class="header-section-number">16.4.6</span> Entendendo o Novo Pass Manager (LLVM 14+)</h3>
+<section id="entendendo-o-novo-pass-manager-llvm-14" class="level3" data-number="17.4.6">
+<h3 data-number="17.4.6" class="anchored" data-anchor-id="entendendo-o-novo-pass-manager-llvm-14"><span class="header-section-number">17.4.6</span> Entendendo o Novo Pass Manager (LLVM 14+)</h3>
 <p>O <strong>LLVM</strong> mudou para um novo sistema de gerenciamento de passes a partir da versão 14. Aqui estão as principais diferenças:</p>
 <p><strong>Sintaxe Antiga (Legacy Pass Manager - até </strong>LLVM** 13)**:</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-O3</span> <span class="at">-S</span> arquivo.ll <span class="at">-o</span> arquivo_opt.ll</span>
@@ -1426,8 +1432,8 @@ Warning
 <div class="sourceCode" id="cb49"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-enable-new-pm</span><span class="op">=</span>0 <span class="at">-O3</span> <span class="at">-S</span> arquivo.ll <span class="at">-o</span> arquivo_opt.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="exemplo-com-controle-de-fluxo" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="exemplo-com-controle-de-fluxo"><span class="header-section-number">16.5</span> Exemplo com Controle de Fluxo</h2>
+<section id="exemplo-com-controle-de-fluxo" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="exemplo-com-controle-de-fluxo"><span class="header-section-number">17.5</span> Exemplo com Controle de Fluxo</h2>
 <p>Artefatos de controle de fluxo, como <code>if-else</code>, <code>for</code> e <code>while</code>, formam a espinha dorsal da lógica em qualquer linguagem de programação. Na Representação Intermediária do LLVM, essas estruturas de alto nível não existem como instruções únicas. Em vez disso, elas são decompostas em uma combinação de três elementos fundamentais:</p>
 <ol type="1">
 <li><strong>Comparações</strong>: para avaliar as condições;</li>
@@ -1435,8 +1441,8 @@ Warning
 <li><strong>Blocos Básicos com Rótulos (Labels)</strong>: os destinos para esses pulos.</li>
 </ol>
 <p>Nesta seção, vamos explorar como um <code>if-else</code> do C++ é traduzido para o <strong>LLVM IR</strong> e como podemos garantir que sua estrutura de desvio seja preservada para análise.</p>
-<section id="código-com-condicionais-garantindo-o-branch" class="level3" data-number="16.5.1">
-<h3 data-number="16.5.1" class="anchored" data-anchor-id="código-com-condicionais-garantindo-o-branch"><span class="header-section-number">16.5.1</span> Código com Condicionais (Garantindo o Branch)</h3>
+<section id="código-com-condicionais-garantindo-o-branch" class="level3" data-number="17.5.1">
+<h3 data-number="17.5.1" class="anchored" data-anchor-id="código-com-condicionais-garantindo-o-branch"><span class="header-section-number">17.5.1</span> Código com Condicionais (Garantindo o Branch)</h3>
 <p>O <em>frontend</em> do <strong>Clang</strong> é extremamente eficiente em otimizar padrões de código simples. Uma função como <code>if (a &gt; b) return a; else return b;</code> é frequentemente convertida diretamente para uma instrução <code>select</code>, um operador ternário, mesmo com as otimizações desligadas, eliminando completamente os desvios e blocos.</p>
 <p>Para forçar o compilador a gerar a estrutura completa de desvio (<code>branch</code>) que queremos estudar, precisamos introduzir um <strong>efeito colateral</strong>, <em>side effect</em>, dentro dos blocos <code>if</code> e <code>else</code>. Um efeito colateral é uma ação que modifica um estado fora da função, como chamar uma função de I/O (<code>printf</code>) ou, de forma mais simples, modificar uma variável global (ARRRGh!!!). Essa ação não pode ser otimizada para uma instrução <code>select</code>, que lida apenas com a escolha de valores e forçará a criação de uma estrutura de desvio completa na Representação Intermediária do LLVM.</p>
 <p>A criativa leitora deve criar o arquivo <code>exemplo02_condicional_global.cpp</code>:</p>
@@ -1467,8 +1473,8 @@ Warning
 <span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="gerar-e-analisar-o-ir" class="level3" data-number="16.5.2">
-<h3 data-number="16.5.2" class="anchored" data-anchor-id="gerar-e-analisar-o-ir"><span class="header-section-number">16.5.2</span> Gerar e Analisar o IR</h3>
+<section id="gerar-e-analisar-o-ir" class="level3" data-number="17.5.2">
+<h3 data-number="17.5.2" class="anchored" data-anchor-id="gerar-e-analisar-o-ir"><span class="header-section-number">17.5.2</span> Gerar e Analisar o IR</h3>
 <p>Para inspecionar a estrutura de controle de fluxo de forma clara, é fundamental gerar o IR <strong>sem otimizações</strong> e, mais importante ainda, <strong>sem o atributo <code>optnone</code></strong>.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clang</span>++ <span class="at">-S</span> <span class="at">-emit-llvm</span> <span class="at">-O0</span> <span class="at">-Xclang</span> <span class="at">-disable-O0-optnone</span> exemplo02_condicional_global.cpp <span class="at">-o</span> exemplo02_condicional_global.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ao abrir o arquivo <code>exemplo02_condicional_global.ll</code>, a atenta leitora encontrará a seguinte representação para a função <code>max_com_efeito_global</code>:</p>
@@ -1508,8 +1514,8 @@ Warning
 <span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a>&nbsp; <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%14</span></span>
 <span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="análise-detalhada-do-ir-gerado-1" class="level3" data-number="16.5.3">
-<h3 data-number="16.5.3" class="anchored" data-anchor-id="análise-detalhada-do-ir-gerado-1"><span class="header-section-number">16.5.3</span> Análise Detalhada do IR Gerado</h3>
+<section id="análise-detalhada-do-ir-gerado-1" class="level3" data-number="17.5.3">
+<h3 data-number="17.5.3" class="anchored" data-anchor-id="análise-detalhada-do-ir-gerado-1"><span class="header-section-number">17.5.3</span> Análise Detalhada do IR Gerado</h3>
 <p>Diferente de um <code>if</code> em C++, a estrutura de controle no <strong>LLVM IR</strong> é explícita e baseada em saltos. Vamos analisar os novos conceitos que este código revela:</p>
 <ol type="1">
 <li><strong>Variáveis Globais</strong>:
@@ -1553,8 +1559,8 @@ Warning
 </ol>
 <p>Em resumo, a combinação de <code>icmp</code>, <code>br</code> e blocos rotulados é a forma como o <strong>LLVM IR</strong> implementa de maneira explícita e de baixo nível o conceito de alto nível de uma declaração <code>if-else</code>.</p>
 </section>
-<section id="visualizar-o-grafo-de-fluxo-de-controle-cfg" class="level3" data-number="16.5.4">
-<h3 data-number="16.5.4" class="anchored" data-anchor-id="visualizar-o-grafo-de-fluxo-de-controle-cfg"><span class="header-section-number">16.5.4</span> Visualizar o Grafo de Fluxo de Controle (CFG)</h3>
+<section id="visualizar-o-grafo-de-fluxo-de-controle-cfg" class="level3" data-number="17.5.4">
+<h3 data-number="17.5.4" class="anchored" data-anchor-id="visualizar-o-grafo-de-fluxo-de-controle-cfg"><span class="header-section-number">17.5.4</span> Visualizar o Grafo de Fluxo de Controle (CFG)</h3>
 <p>A melhor maneira de entender o fluxo de controle é visualizando-o. O <strong>LLVM</strong> pode gerar uma representação do Grafo de Fluxo de Controle (CFG) no formato DOT, que pode ser convertido em uma imagem.</p>
 <p><strong>Passo 1: Instalar o Graphviz (se ainda não o fez)</strong>:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install graphviz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1574,12 +1580,12 @@ Warning
 </div>
 </div>
 </section>
-<section id="otimização-do-código-com-controle-de-fluxo" class="level3" data-number="16.5.5">
-<h3 data-number="16.5.5" class="anchored" data-anchor-id="otimização-do-código-com-controle-de-fluxo"><span class="header-section-number">16.5.5</span> Otimização do Código com Controle de Fluxo</h3>
+<section id="otimização-do-código-com-controle-de-fluxo" class="level3" data-number="17.5.5">
+<h3 data-number="17.5.5" class="anchored" data-anchor-id="otimização-do-código-com-controle-de-fluxo"><span class="header-section-number">17.5.5</span> Otimização do Código com Controle de Fluxo</h3>
 <p>Já vimos o impacto dramático das otimizações em código puramente aritmético. Mas o que acontece quando aplicamos o mesmo processo a um código que contém desvios e, mais importante, efeitos colaterais? Será que o otimizador consegue eliminar a estrutura <code>if-else</code> mesmo com a escrita na variável global?</p>
 <p>A resposta, como a esforçada leitora verá, é surpreendente e revela a genialidade dos compiladores modernos.</p>
-<section id="gerando-a-versão-otimizada" class="level4" data-number="16.5.5.1">
-<h4 data-number="16.5.5.1" class="anchored" data-anchor-id="gerando-a-versão-otimizada"><span class="header-section-number">16.5.5.1</span> Gerando a Versão Otimizada</h4>
+<section id="gerando-a-versão-otimizada" class="level4" data-number="17.5.5.1">
+<h4 data-number="17.5.5.1" class="anchored" data-anchor-id="gerando-a-versão-otimizada"><span class="header-section-number">17.5.5.1</span> Gerando a Versão Otimizada</h4>
 <p>Vamos usar a ferramenta <code>opt</code> para aplicar o pipeline de otimização de nível 3 (<code>O3</code>) ao nosso arquivo <code>exemplo02_condicional_global.ll</code> não otimizado.</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-passes</span><span class="op">=</span><span class="st">'default&lt;O3&gt;'</span> <span class="at">-S</span> exemplo02_condicional_global.ll <span class="at">-o</span> exemplo02_condicional_global_opt.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Ao abrir o arquivo de saída <code>exemplo02_condicional_global_opt.ll</code>, em vez de apenas uma versão mais limpa do <code>if-else</code>, nos deparamos com algo radicalmente diferente. A estrutura de desvio desapareceu completamente!</p>
@@ -1602,8 +1608,8 @@ Warning
 <span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="co">; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)</span></span>
 <span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a><span class="kw">declare</span> <span class="dt">i32</span> <span class="fu">@llvm.smax.i32</span>(<span class="dt">i32</span>, <span class="dt">i32</span>) #<span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="análise-da-otimização-adeus-ao-branch" class="level4" data-number="16.5.5.2">
-<h4 data-number="16.5.5.2" class="anchored" data-anchor-id="análise-da-otimização-adeus-ao-branch"><span class="header-section-number">16.5.5.2</span> Análise da Otimização: Adeus ao Branch</h4>
+<section id="análise-da-otimização-adeus-ao-branch" class="level4" data-number="17.5.5.2">
+<h4 data-number="17.5.5.2" class="anchored" data-anchor-id="análise-da-otimização-adeus-ao-branch"><span class="header-section-number">17.5.5.2</span> Análise da Otimização: Adeus ao Branch</h4>
 <p>A estrutura de <code>branch</code> e os múltiplos blocos básicos foram eliminados. O otimizador conseguiu converter um código baseado em <strong>fluxo de controle</strong> (com pulos) em um código linear baseado em <strong>fluxo de dados</strong>. Vamos analisar passo a passo como essa mágica aconteceu:</p>
 <ol type="1">
 <li><strong>A Condição</strong>: <code>%3 = icmp sgt i32 %0, %1</code>
@@ -1644,8 +1650,8 @@ Note
 </div>
 </div>
 </section>
-<section id="o-novo-grafo-de-fluxo-de-controle-cfg" class="level4" data-number="16.5.5.3">
-<h4 data-number="16.5.5.3" class="anchored" data-anchor-id="o-novo-grafo-de-fluxo-de-controle-cfg"><span class="header-section-number">16.5.5.3</span> O Novo Grafo de Fluxo de Controle (CFG)</h4>
+<section id="o-novo-grafo-de-fluxo-de-controle-cfg" class="level4" data-number="17.5.5.3">
+<h4 data-number="17.5.5.3" class="anchored" data-anchor-id="o-novo-grafo-de-fluxo-de-controle-cfg"><span class="header-section-number">17.5.5.3</span> O Novo Grafo de Fluxo de Controle (CFG)</h4>
 <p>Se gerarmos o CFG desta versão otimizada, o resultado será drasticamente diferente e revelador.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerar o .dot a partir do arquivo _opt.ll</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-passes</span><span class="op">=</span><span class="st">'dot-cfg'</span> <span class="at">-disable-output</span> exemplo02_condicional_global_opt.ll</span>
@@ -1664,12 +1670,12 @@ Note
 </section>
 </section>
 </section>
-<section id="exemplo-com-laços-de-repetição-loops" class="level2" data-number="16.6">
-<h2 data-number="16.6" class="anchored" data-anchor-id="exemplo-com-laços-de-repetição-loops"><span class="header-section-number">16.6</span> 5. Exemplo com Laços de Repetição (Loops)</h2>
+<section id="exemplo-com-laços-de-repetição-loops" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="exemplo-com-laços-de-repetição-loops"><span class="header-section-number">17.6</span> 5. Exemplo com Laços de Repetição (Loops)</h2>
 <p>Junto com os desvios condicionais, os laços de repetição são pilares da programação imperativa. No <strong>LLVM IR</strong>, um laço não é uma instrução única, mas sim uma estrutura específica no Grafo de Fluxo de Controle (CFG). Ele é formado por um conjunto de blocos básicos que se conectam de tal forma a criar um ciclo, permitindo que o código seja executado múltiplas vezes.</p>
 <p>Nesta seção, vamos dissecar um laço <code>for</code> simples, entender sua representação canônica em IR e testemunhar as poderosas otimizações de laço, como a vetorização, que o <strong>LLVM</strong> pode aplicar.</p>
-<section id="código-com-laço-de-repetição" class="level3" data-number="16.6.1">
-<h3 data-number="16.6.1" class="anchored" data-anchor-id="código-com-laço-de-repetição"><span class="header-section-number">16.6.1</span> 5.1. Código com Laço de Repetição</h3>
+<section id="código-com-laço-de-repetição" class="level3" data-number="17.6.1">
+<h3 data-number="17.6.1" class="anchored" data-anchor-id="código-com-laço-de-repetição"><span class="header-section-number">17.6.1</span> 5.1. Código com Laço de Repetição</h3>
 <p>Vamos usar um exemplo clássico e muito comum: somar os elementos de um array. Este padrão é conhecido como “redução” e é um alvo perfeito para otimizações avançadas.</p>
 <p>Crie o arquivo <code>exemplo03_loop.cpp</code>:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">// exemplo03_loop.cpp</span></span>
@@ -1687,8 +1693,8 @@ Note
 <span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="análise-do-ir-não-otimizado" class="level3" data-number="16.6.2">
-<h3 data-number="16.6.2" class="anchored" data-anchor-id="análise-do-ir-não-otimizado"><span class="header-section-number">16.6.2</span> 5.2. Análise do IR Não Otimizado</h3>
+<section id="análise-do-ir-não-otimizado" class="level3" data-number="17.6.2">
+<h3 data-number="17.6.2" class="anchored" data-anchor-id="análise-do-ir-não-otimizado"><span class="header-section-number">17.6.2</span> 5.2. Análise do IR Não Otimizado</h3>
 <p>Primeiro, geramos o IR sem otimizações para podermos estudar a estrutura fundamental de um laço. O código C++ é traduzido da forma mais literal e detalhada possível, sem nenhuma tentativa de simplificação.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clang</span>++ <span class="at">-S</span> <span class="at">-emit-llvm</span> <span class="at">-O0</span> <span class="at">-Xclang</span> <span class="at">-disable-O0-optnone</span> exemplo03_loop.cpp <span class="at">-o</span> exemplo03_loop.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>O código gerado para a função <code>soma_array</code> é um excelente exemplo de código não otimizado, revelando a anatomia completa de um laço no LLVM:</p>
@@ -1756,8 +1762,8 @@ Note
 <li><p><strong>Metadados do Laço</strong>: A instrução <code>br label %7, !llvm.loop !6</code> no final do <em>Latch</em> possui um anexo <code>!llvm.loop !6</code>. Isso é metadado que o frontend do Clang adiciona para passar informações extras para os passes de otimização. Neste caso, <code>!llvm.loop.mustprogress</code> informa ao otimizador que este é um laço que garante progresso e não um laço infinito, permitindo otimizações mais agressivas posteriormente.</p></li>
 </ol>
 </section>
-<section id="visualizando-o-cfg-do-laço" class="level3" data-number="16.6.3">
-<h3 data-number="16.6.3" class="anchored" data-anchor-id="visualizando-o-cfg-do-laço"><span class="header-section-number">16.6.3</span> 5.3. Visualizando o CFG do Laço</h3>
+<section id="visualizando-o-cfg-do-laço" class="level3" data-number="17.6.3">
+<h3 data-number="17.6.3" class="anchored" data-anchor-id="visualizando-o-cfg-do-laço"><span class="header-section-number">17.6.3</span> 5.3. Visualizando o CFG do Laço</h3>
 <p>Gerar o CFG torna a estrutura do laço imediatamente óbvia e fácil de entender.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-passes</span><span class="op">=</span><span class="st">'dot-cfg'</span> <span class="at">-disable-output</span> exemplo03_loop.ll</span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="ex">dot</span> <span class="at">-Tpng</span> ._Z10soma_arrayPii.dot <span class="at">-o</span> cfg_loop.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1771,8 +1777,8 @@ Note
 </div>
 </div>
 </section>
-<section id="otimização-de-laços-vetorização-e-desdobramento-em-ação" class="level3" data-number="16.6.4">
-<h3 data-number="16.6.4" class="anchored" data-anchor-id="otimização-de-laços-vetorização-e-desdobramento-em-ação"><span class="header-section-number">16.6.4</span> 5.4. Otimização de Laços: Vetorização e Desdobramento em Ação</h3>
+<section id="otimização-de-laços-vetorização-e-desdobramento-em-ação" class="level3" data-number="17.6.4">
+<h3 data-number="17.6.4" class="anchored" data-anchor-id="otimização-de-laços-vetorização-e-desdobramento-em-ação"><span class="header-section-number">17.6.4</span> 5.4. Otimização de Laços: Vetorização e Desdobramento em Ação</h3>
 <p>Agora, vamos aplicar o otimizador e testemunhar a transformação. Laços que realizam operações aritméticas sequenciais, como o nosso, são os alvos preferidos das otimizações mais poderosas do LLVM. O resultado não é apenas uma versão “mais limpa” do laço original, mas uma reestruturação completa da lógica para extrair o máximo de desempenho do hardware.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-passes</span><span class="op">=</span><span class="st">'default&lt;O3&gt;'</span> <span class="at">-S</span> exemplo03_loop.ll <span class="at">-o</span> exemplo03_loop_opt.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>O IR otimizado para a função <code>soma_array</code> é um exemplo denso e impressionante de engenharia de compiladores. Ele revela uma estratégia de múltiplas etapas para processar o array da forma mais rápida possível.</p>
@@ -1833,8 +1839,8 @@ Note
 <span id="cb64-55"><a href="#cb64-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">%.06.lcssa</span> = <span class="kw">phi</span> <span class="dt">i32</span> [ <span class="dv">0</span>, <span class="fu">%2</span> ], [ <span class="fu">%9</span>, <span class="fu">%middle.block</span> ], [ <span class="fu">%12</span>, <span class="fu">%.lr.ph</span> ]</span>
 <span id="cb64-56"><a href="#cb64-56" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ret</span> <span class="dt">i32</span> <span class="fu">%.06.lcssa</span></span>
 <span id="cb64-57"><a href="#cb64-57" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="análise-da-otimização-uma-estratégia-de-múltiplas-etapas" class="level4" data-number="16.6.4.1">
-<h4 data-number="16.6.4.1" class="anchored" data-anchor-id="análise-da-otimização-uma-estratégia-de-múltiplas-etapas"><span class="header-section-number">16.6.4.1</span> Análise da Otimização: Uma Estratégia de Múltiplas Etapas</h4>
+<section id="análise-da-otimização-uma-estratégia-de-múltiplas-etapas" class="level4" data-number="17.6.4.1">
+<h4 data-number="17.6.4.1" class="anchored" data-anchor-id="análise-da-otimização-uma-estratégia-de-múltiplas-etapas"><span class="header-section-number">17.6.4.1</span> Análise da Otimização: Uma Estratégia de Múltiplas Etapas</h4>
 <p>Este IR otimizado é o resultado de uma combinação de técnicas. A estratégia geral do compilador foi: processar o máximo de dados possível com um laço vetorial super-rápido e, em seguida, lidar com os elementos restantes com um pequeno laço escalar.</p>
 <p><strong>Etapa 1: A Análise de Custo-Benefício (O “Preâmbulo”)</strong> Antes de fazer qualquer coisa, o otimizador verifica se a vetorização vale a pena. No bloco <code>.lr.ph.preheader</code>, a instrução <code>%min.iters.check = icmp ult i32 %1, 8</code> checa se o número de elementos é menor que 8. Se for, ele considera que a sobrecarga da vetorização não compensa e pula diretamente para o laço escalar de limpeza (Etapa 4).</p>
 <p><strong>Etapa 2: O Laço Vetorizado e Desdobrado (O “Trabalho Pesado”)</strong> Se o array é grande o suficiente, entramos no bloco <code>vector.body</code>. Aqui, duas otimizações massivas ocorrem simultaneamente: 1. <strong>Auto-Vetorização (SIMD)</strong>: O código usa tipos vetoriais como <code>&lt;4 x i32&gt;</code> para carregar (<code>load</code>) e somar (<code>add</code>) <strong>4 inteiros de uma vez</strong>. 2. <strong>Desdobramento de Laço (Loop Unrolling)</strong>: A leitora atenta notará que existem <strong>dois</strong> acumuladores vetoriais (<code>%vec.phi</code>, <code>%vec.phi10</code>) e <strong>duas</strong> operações de <code>load</code> e <code>add</code> por iteração. Isso significa que o laço foi “desdobrado”: em cada ciclo, ele processa <code>2 x 4 = 8</code> elementos do array. Isso reduz a sobrecarga do laço (menos saltos e comparações por elemento) e aumenta o paralelismo de instruções para o processador.</p>
@@ -1844,8 +1850,8 @@ Note
 <p>O CFG desta versão otimizada será muito mais complexo, mostrando a decisão inicial, o ciclo do laço vetorial, o ciclo do laço de limpeza e os caminhos que conectam todos eles, refletindo visualmente esta sofisticada estratégia de otimização.</p>
 </section>
 </section>
-<section id="converter-para-bitcode" class="level3" data-number="16.6.5">
-<h3 data-number="16.6.5" class="anchored" data-anchor-id="converter-para-bitcode"><span class="header-section-number">16.6.5</span> 6.1. Converter para Bitcode</h3>
+<section id="converter-para-bitcode" class="level3" data-number="17.6.5">
+<h3 data-number="17.6.5" class="anchored" data-anchor-id="converter-para-bitcode"><span class="header-section-number">17.6.5</span> 6.1. Converter para Bitcode</h3>
 <p>O Bitcode é a representação binária do <strong>LLVM IR</strong>, mais compacta e eficiente.</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerar bitcode diretamente</span></span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">clang</span>++ <span class="at">-c</span> <span class="at">-emit-llvm</span> exemplo01_soma.cpp <span class="at">-o</span> exemplo01_soma.bc</span>
@@ -1853,12 +1859,12 @@ Note
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ou converter de .ll para .bc</span></span>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="ex">llvm-as</span> exemplo01_soma.ll <span class="at">-o</span> exemplo01_soma.bc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="converter-bitcode-de-volta-para-texto" class="level3" data-number="16.6.6">
-<h3 data-number="16.6.6" class="anchored" data-anchor-id="converter-bitcode-de-volta-para-texto"><span class="header-section-number">16.6.6</span> 6.2. Converter Bitcode de volta para Texto</h3>
+<section id="converter-bitcode-de-volta-para-texto" class="level3" data-number="17.6.6">
+<h3 data-number="17.6.6" class="anchored" data-anchor-id="converter-bitcode-de-volta-para-texto"><span class="header-section-number">17.6.6</span> 6.2. Converter Bitcode de volta para Texto</h3>
 <div class="sourceCode" id="cb66"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="ex">llvm-dis</span> exemplo01_soma.bc <span class="at">-o</span> exemplo01_soma_reverso.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="linkar-múltiplos-arquivos-bitcode" class="level3" data-number="16.6.7">
-<h3 data-number="16.6.7" class="anchored" data-anchor-id="linkar-múltiplos-arquivos-bitcode"><span class="header-section-number">16.6.7</span> 6.3. Linkar Múltiplos Arquivos Bitcode</h3>
+<section id="linkar-múltiplos-arquivos-bitcode" class="level3" data-number="17.6.7">
+<h3 data-number="17.6.7" class="anchored" data-anchor-id="linkar-múltiplos-arquivos-bitcode"><span class="header-section-number">17.6.7</span> 6.3. Linkar Múltiplos Arquivos Bitcode</h3>
 <p>Crie dois arquivos:</p>
 <p><code>modulo_a.cpp</code>:</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> funcao_a<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
@@ -1878,10 +1884,10 @@ Note
 <hr>
 </section>
 </section>
-<section id="análise-de-otimizações-comuns" class="level2" data-number="16.7">
-<h2 data-number="16.7" class="anchored" data-anchor-id="análise-de-otimizações-comuns"><span class="header-section-number">16.7</span> 7. Análise de Otimizações Comuns</h2>
-<section id="constant-folding" class="level3" data-number="16.7.1">
-<h3 data-number="16.7.1" class="anchored" data-anchor-id="constant-folding"><span class="header-section-number">16.7.1</span> 7.1. Constant Folding</h3>
+<section id="análise-de-otimizações-comuns" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="análise-de-otimizações-comuns"><span class="header-section-number">17.7</span> 7. Análise de Otimizações Comuns</h2>
+<section id="constant-folding" class="level3" data-number="17.7.1">
+<h3 data-number="17.7.1" class="anchored" data-anchor-id="constant-folding"><span class="header-section-number">17.7.1</span> 7.1. Constant Folding</h3>
 <p><strong>Código:</strong></p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> calcular<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">5</span> <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
@@ -1891,8 +1897,8 @@ Note
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ret</span> <span class="dt">i32</span> <span class="dv">11</span></span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="dead-code-elimination" class="level3" data-number="16.7.2">
-<h3 data-number="16.7.2" class="anchored" data-anchor-id="dead-code-elimination"><span class="header-section-number">16.7.2</span> 7.2. Dead Code Elimination</h3>
+<section id="dead-code-elimination" class="level3" data-number="17.7.2">
+<h3 data-number="17.7.2" class="anchored" data-anchor-id="dead-code-elimination"><span class="header-section-number">17.7.2</span> 7.2. Dead Code Elimination</h3>
 <p><strong>Código:</strong></p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> funcao<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
@@ -1901,12 +1907,12 @@ Note
 <span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A variável <code>y</code> será eliminada no IR otimizado.</p>
 </section>
-<section id="function-inlining" class="level3" data-number="16.7.3">
-<h3 data-number="16.7.3" class="anchored" data-anchor-id="function-inlining"><span class="header-section-number">16.7.3</span> 7.3. Function Inlining</h3>
+<section id="function-inlining" class="level3" data-number="17.7.3">
+<h3 data-number="17.7.3" class="anchored" data-anchor-id="function-inlining"><span class="header-section-number">17.7.3</span> 7.3. Function Inlining</h3>
 <p>Pequenas funções são automaticamente incorporadas no ponto de chamada.</p>
 </section>
-<section id="common-subexpression-elimination" class="level3" data-number="16.7.4">
-<h3 data-number="16.7.4" class="anchored" data-anchor-id="common-subexpression-elimination"><span class="header-section-number">16.7.4</span> 7.4. Common Subexpression Elimination</h3>
+<section id="common-subexpression-elimination" class="level3" data-number="17.7.4">
+<h3 data-number="17.7.4" class="anchored" data-anchor-id="common-subexpression-elimination"><span class="header-section-number">17.7.4</span> 7.4. Common Subexpression Elimination</h3>
 <p><strong>Código:</strong></p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> a <span class="op">*</span> b <span class="op">+</span> c<span class="op">;</span></span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> a <span class="op">*</span> b <span class="op">+</span> d<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1914,10 +1920,10 @@ Note
 <hr>
 </section>
 </section>
-<section id="exercícios-práticos" class="level2" data-number="16.8">
-<h2 data-number="16.8" class="anchored" data-anchor-id="exercícios-práticos"><span class="header-section-number">16.8</span> 8. Exercícios Práticos</h2>
-<section id="exercício-1-análise-básica" class="level3" data-number="16.8.1">
-<h3 data-number="16.8.1" class="anchored" data-anchor-id="exercício-1-análise-básica"><span class="header-section-number">16.8.1</span> Exercício 1: Análise Básica</h3>
+<section id="exercícios-práticos" class="level2" data-number="17.8">
+<h2 data-number="17.8" class="anchored" data-anchor-id="exercícios-práticos"><span class="header-section-number">17.8</span> 8. Exercícios Práticos</h2>
+<section id="exercício-1-análise-básica" class="level3" data-number="17.8.1">
+<h3 data-number="17.8.1" class="anchored" data-anchor-id="exercício-1-análise-básica"><span class="header-section-number">17.8.1</span> Exercício 1: Análise Básica</h3>
 <p>Crie uma função que calcula o fatorial iterativo:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> fatorial<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> resultado <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
@@ -1928,8 +1934,8 @@ Note
 <span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Tarefas:</strong> 1. Gere o IR sem otimização (<code>-O0</code>) 2. Identifique os blocos básicos no IR 3. Localize os nós phi (φ-nodes) 4. Otimize com <code>-passes='default&lt;O3&gt;'</code> e compare 5. Conte quantas instruções foram eliminadas</p>
 </section>
-<section id="exercício-2-testando-passes-individuais" class="level3" data-number="16.8.2">
-<h3 data-number="16.8.2" class="anchored" data-anchor-id="exercício-2-testando-passes-individuais"><span class="header-section-number">16.8.2</span> Exercício 2: Testando Passes Individuais</h3>
+<section id="exercício-2-testando-passes-individuais" class="level3" data-number="17.8.2">
+<h3 data-number="17.8.2" class="anchored" data-anchor-id="exercício-2-testando-passes-individuais"><span class="header-section-number">17.8.2</span> Exercício 2: Testando Passes Individuais</h3>
 <p>Use o mesmo código do fatorial e aplique passes individuais em sequência:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gerar IR base</span></span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">clang</span>++ <span class="at">-S</span> <span class="at">-emit-llvm</span> <span class="at">-O0</span> fatorial.cpp <span class="at">-o</span> fatorial.ll</span>
@@ -1947,12 +1953,12 @@ Note
 <span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-passes</span><span class="op">=</span><span class="st">'default&lt;O3&gt;'</span> <span class="at">-S</span> fatorial.ll <span class="at">-o</span> fatorial_O3.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Perguntas:</strong> - Qual pass teve maior impacto na redução de código? - O resultado final é idêntico ao <code>-passes='default&lt;O3&gt;'</code>?</p>
 </section>
-<section id="exercício-3-estruturas-de-dados" class="level3" data-number="16.8.3">
-<h3 data-number="16.8.3" class="anchored" data-anchor-id="exercício-3-estruturas-de-dados"><span class="header-section-number">16.8.3</span> Exercício 3: Estruturas de Dados</h3>
+<section id="exercício-3-estruturas-de-dados" class="level3" data-number="17.8.3">
+<h3 data-number="17.8.3" class="anchored" data-anchor-id="exercício-3-estruturas-de-dados"><span class="header-section-number">17.8.3</span> Exercício 3: Estruturas de Dados</h3>
 <p>Implemente uma struct simples: 1. Gere o IR sem otimização 2. Identifique os blocos básicos 3. Localize os nós phi 4. Otimize com -O3 e compare</p>
 </section>
-<section id="exercício-2-estruturas-de-dados" class="level3" data-number="16.8.4">
-<h3 data-number="16.8.4" class="anchored" data-anchor-id="exercício-2-estruturas-de-dados"><span class="header-section-number">16.8.4</span> Exercício 2: Estruturas de Dados</h3>
+<section id="exercício-2-estruturas-de-dados" class="level3" data-number="17.8.4">
+<h3 data-number="17.8.4" class="anchored" data-anchor-id="exercício-2-estruturas-de-dados"><span class="header-section-number">17.8.4</span> Exercício 2: Estruturas de Dados</h3>
 <p>Implemente uma struct simples:</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Ponto <span class="op">{</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x<span class="op">;</span></span>
@@ -1964,15 +1970,15 @@ Note
 <span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Analise como structs são representadas no IR.</p>
 </section>
-<section id="exercício-3-ponteiros-e-referências" class="level3" data-number="16.8.5">
-<h3 data-number="16.8.5" class="anchored" data-anchor-id="exercício-3-ponteiros-e-referências"><span class="header-section-number">16.8.5</span> Exercício 3: Ponteiros e Referências</h3>
+<section id="exercício-3-ponteiros-e-referências" class="level3" data-number="17.8.5">
+<h3 data-number="17.8.5" class="anchored" data-anchor-id="exercício-3-ponteiros-e-referências"><span class="header-section-number">17.8.5</span> Exercício 3: Ponteiros e Referências</h3>
 <p>Compare o IR gerado para:</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> func_valor<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span> x<span class="op">++;</span> <span class="op">}</span></span>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> func_ref<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> x<span class="op">)</span> <span class="op">{</span> x<span class="op">++;</span> <span class="op">}</span></span>
 <span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> func_ptr<span class="op">(</span><span class="dt">int</span><span class="op">*</span> x<span class="op">)</span> <span class="op">{</span> <span class="op">(*</span>x<span class="op">)++;</span> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="exercício-4-otimização-de-loop" class="level3" data-number="16.8.6">
-<h3 data-number="16.8.6" class="anchored" data-anchor-id="exercício-4-otimização-de-loop"><span class="header-section-number">16.8.6</span> Exercício 4: Otimização de Loop</h3>
+<section id="exercício-4-otimização-de-loop" class="level3" data-number="17.8.6">
+<h3 data-number="17.8.6" class="anchored" data-anchor-id="exercício-4-otimização-de-loop"><span class="header-section-number">17.8.6</span> Exercício 4: Otimização de Loop</h3>
 <p>Implemente e compare:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Versão 1</span></span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> soma_v1<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span> <span class="op">{</span></span>
@@ -1990,10 +1996,10 @@ Note
 <hr>
 </section>
 </section>
-<section id="comandos-de-referência-rápida" class="level2" data-number="16.9">
-<h2 data-number="16.9" class="anchored" data-anchor-id="comandos-de-referência-rápida"><span class="header-section-number">16.9</span> 9. Comandos de Referência Rápida</h2>
-<section id="geração-de-ir" class="level3" data-number="16.9.1">
-<h3 data-number="16.9.1" class="anchored" data-anchor-id="geração-de-ir"><span class="header-section-number">16.9.1</span> Geração de IR</h3>
+<section id="comandos-de-referência-rápida" class="level2" data-number="17.9">
+<h2 data-number="17.9" class="anchored" data-anchor-id="comandos-de-referência-rápida"><span class="header-section-number">17.9</span> 9. Comandos de Referência Rápida</h2>
+<section id="geração-de-ir" class="level3" data-number="17.9.1">
+<h3 data-number="17.9.1" class="anchored" data-anchor-id="geração-de-ir"><span class="header-section-number">17.9.1</span> Geração de IR</h3>
 <table class="table">
 <colgroup>
 <col style="width: 45%">
@@ -2021,8 +2027,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="conversão" class="level3" data-number="16.9.2">
-<h3 data-number="16.9.2" class="anchored" data-anchor-id="conversão"><span class="header-section-number">16.9.2</span> Conversão</h3>
+<section id="conversão" class="level3" data-number="17.9.2">
+<h3 data-number="17.9.2" class="anchored" data-anchor-id="conversão"><span class="header-section-number">17.9.2</span> Conversão</h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -2042,8 +2048,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="otimização-llvm-14" class="level3" data-number="16.9.3">
-<h3 data-number="16.9.3" class="anchored" data-anchor-id="otimização-llvm-14"><span class="header-section-number">16.9.3</span> Otimização (LLVM 14+)</h3>
+<section id="otimização-llvm-14" class="level3" data-number="17.9.3">
+<h3 data-number="17.9.3" class="anchored" data-anchor-id="otimização-llvm-14"><span class="header-section-number">17.9.3</span> Otimização (LLVM 14+)</h3>
 <table class="table">
 <colgroup>
 <col style="width: 45%">
@@ -2083,8 +2089,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="análise-e-visualização" class="level3" data-number="16.9.4">
-<h3 data-number="16.9.4" class="anchored" data-anchor-id="análise-e-visualização"><span class="header-section-number">16.9.4</span> Análise e Visualização</h3>
+<section id="análise-e-visualização" class="level3" data-number="17.9.4">
+<h3 data-number="17.9.4" class="anchored" data-anchor-id="análise-e-visualização"><span class="header-section-number">17.9.4</span> Análise e Visualização</h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -2104,8 +2110,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="compilação-final" class="level3" data-number="16.9.5">
-<h3 data-number="16.9.5" class="anchored" data-anchor-id="compilação-final"><span class="header-section-number">16.9.5</span> Compilação Final</h3>
+<section id="compilação-final" class="level3" data-number="17.9.5">
+<h3 data-number="17.9.5" class="anchored" data-anchor-id="compilação-final"><span class="header-section-number">17.9.5</span> Compilação Final</h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -2131,10 +2137,10 @@ Note
 <hr>
 </section>
 </section>
-<section id="troubleshooting-comum" class="level2" data-number="16.10">
-<h2 data-number="16.10" class="anchored" data-anchor-id="troubleshooting-comum"><span class="header-section-number">16.10</span> 10. Troubleshooting Comum</h2>
-<section id="problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho" class="level3" data-number="16.10.1">
-<h3 data-number="16.10.1" class="anchored" data-anchor-id="problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho"><span class="header-section-number">16.10.1</span> Problema: opt não otimiza nada, arquivos têm mesmo tamanho</h3>
+<section id="troubleshooting-comum" class="level2" data-number="17.10">
+<h2 data-number="17.10" class="anchored" data-anchor-id="troubleshooting-comum"><span class="header-section-number">17.10</span> 10. Troubleshooting Comum</h2>
+<section id="problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho" class="level3" data-number="17.10.1">
+<h3 data-number="17.10.1" class="anchored" data-anchor-id="problema-opt-não-otimiza-nada-arquivos-têm-mesmo-tamanho"><span class="header-section-number">17.10.1</span> Problema: opt não otimiza nada, arquivos têm mesmo tamanho</h3>
 <p><strong>Sintoma:</strong> Você executa <code>opt -passes='default&lt;O3&gt;'</code> mas o arquivo de saída é idêntico ao de entrada.</p>
 <p><strong>Causas Comuns:</strong></p>
 <p><strong>1. Atributo <code>optnone</code> (causa mais comum)</strong></p>
@@ -2272,8 +2278,8 @@ Note
 <div class="sourceCode" id="cb85"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x testar_opt.sh</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./testar_opt.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="problema-comando-não-encontrado" class="level3" data-number="16.10.2">
-<h3 data-number="16.10.2" class="anchored" data-anchor-id="problema-comando-não-encontrado"><span class="header-section-number">16.10.2</span> Problema: Comando não encontrado</h3>
+<section id="problema-comando-não-encontrado" class="level3" data-number="17.10.2">
+<h3 data-number="17.10.2" class="anchored" data-anchor-id="problema-comando-não-encontrado"><span class="header-section-number">17.10.2</span> Problema: Comando não encontrado</h3>
 <p><strong>Solução:</strong></p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verificar se o **LLVM** está instalado</span></span>
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> clang++</span>
@@ -2282,45 +2288,45 @@ Note
 <span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Se não estiver, reinstalar</span></span>
 <span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./llvm.sh 20</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="problema-versão-incorreta-sendo-usada" class="level3" data-number="16.10.3">
-<h3 data-number="16.10.3" class="anchored" data-anchor-id="problema-versão-incorreta-sendo-usada"><span class="header-section-number">16.10.3</span> Problema: Versão incorreta sendo usada</h3>
+<section id="problema-versão-incorreta-sendo-usada" class="level3" data-number="17.10.3">
+<h3 data-number="17.10.3" class="anchored" data-anchor-id="problema-versão-incorreta-sendo-usada"><span class="header-section-number">17.10.3</span> Problema: Versão incorreta sendo usada</h3>
 <p><strong>Solução:</strong></p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Atualizar alternativas</span></span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> update-alternatives <span class="at">--config</span> clang++</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="problema-arquivo-.ll-corrompido-ou-ilegível" class="level3" data-number="16.10.4">
-<h3 data-number="16.10.4" class="anchored" data-anchor-id="problema-arquivo-.ll-corrompido-ou-ilegível"><span class="header-section-number">16.10.4</span> Problema: Arquivo .ll corrompido ou ilegível</h3>
+<section id="problema-arquivo-.ll-corrompido-ou-ilegível" class="level3" data-number="17.10.4">
+<h3 data-number="17.10.4" class="anchored" data-anchor-id="problema-arquivo-.ll-corrompido-ou-ilegível"><span class="header-section-number">17.10.4</span> Problema: Arquivo .ll corrompido ou ilegível</h3>
 <p><strong>Solução:</strong></p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regenerar o arquivo</span></span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> arquivo.ll</span>
 <span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">clang</span>++ <span class="at">-S</span> <span class="at">-emit-llvm</span> arquivo.cpp <span class="at">-o</span> arquivo.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="problema-otimização-não-funciona-como-esperado" class="level3" data-number="16.10.5">
-<h3 data-number="16.10.5" class="anchored" data-anchor-id="problema-otimização-não-funciona-como-esperado"><span class="header-section-number">16.10.5</span> Problema: Otimização não funciona como esperado</h3>
+<section id="problema-otimização-não-funciona-como-esperado" class="level3" data-number="17.10.5">
+<h3 data-number="17.10.5" class="anchored" data-anchor-id="problema-otimização-não-funciona-como-esperado"><span class="header-section-number">17.10.5</span> Problema: Otimização não funciona como esperado</h3>
 <p><strong>Solução:</strong> Use <code>-Rpass=.*</code> para ver quais otimizações foram aplicadas:</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clang</span>++ <span class="at">-O3</span> <span class="at">-Rpass</span><span class="op">=</span>.<span class="pp">*</span> arquivo.cpp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
-<section id="recursos-adicionais" class="level2" data-number="16.11">
-<h2 data-number="16.11" class="anchored" data-anchor-id="recursos-adicionais"><span class="header-section-number">16.11</span> 11. Recursos Adicionais</h2>
-<section id="documentação-oficial" class="level3" data-number="16.11.1">
-<h3 data-number="16.11.1" class="anchored" data-anchor-id="documentação-oficial"><span class="header-section-number">16.11.1</span> Documentação Oficial</h3>
+<section id="recursos-adicionais" class="level2" data-number="17.11">
+<h2 data-number="17.11" class="anchored" data-anchor-id="recursos-adicionais"><span class="header-section-number">17.11</span> 11. Recursos Adicionais</h2>
+<section id="documentação-oficial" class="level3" data-number="17.11.1">
+<h3 data-number="17.11.1" class="anchored" data-anchor-id="documentação-oficial"><span class="header-section-number">17.11.1</span> Documentação Oficial</h3>
 <ul>
 <li><strong>LLVM</strong> Language Reference: https://llvm.org/docs/LangRef.html</li>
 <li><strong>LLVM</strong> Passes: https://llvm.org/docs/Passes.html</li>
 <li>Getting Started: https://llvm.org/docs/GettingStarted.html</li>
 </ul>
 </section>
-<section id="ferramentas-úteis" class="level3" data-number="16.11.2">
-<h3 data-number="16.11.2" class="anchored" data-anchor-id="ferramentas-úteis"><span class="header-section-number">16.11.2</span> Ferramentas Úteis</h3>
+<section id="ferramentas-úteis" class="level3" data-number="17.11.2">
+<h3 data-number="17.11.2" class="anchored" data-anchor-id="ferramentas-úteis"><span class="header-section-number">17.11.2</span> Ferramentas Úteis</h3>
 <ul>
 <li>Compiler Explorer (https://godbolt.org): Visualize IR online</li>
 <li><strong>LLVM</strong> Tutorial: https://llvm.org/docs/tutorial/</li>
 </ul>
 </section>
-<section id="leitura-recomendada" class="level3" data-number="16.11.3">
-<h3 data-number="16.11.3" class="anchored" data-anchor-id="leitura-recomendada"><span class="header-section-number">16.11.3</span> Leitura Recomendada</h3>
+<section id="leitura-recomendada" class="level3" data-number="17.11.3">
+<h3 data-number="17.11.3" class="anchored" data-anchor-id="leitura-recomendada"><span class="header-section-number">17.11.3</span> Leitura Recomendada</h3>
 <ul>
 <li>“Getting Started with <strong>LLVM</strong> Core Libraries” - Bruno Cardoso Lopes</li>
 <li><strong>LLVM</strong> Blog: https://blog.llvm.org/</li>
@@ -2328,10 +2334,10 @@ Note
 <hr>
 </section>
 </section>
-<section id="apêndice-tipos-de-dados-no-llvm-ir" class="level2" data-number="16.12">
-<h2 data-number="16.12" class="anchored" data-anchor-id="apêndice-tipos-de-dados-no-llvm-ir"><span class="header-section-number">16.12</span> 12. Apêndice: Tipos de Dados no <strong>LLVM IR</strong></h2>
-<section id="tipos-primitivos" class="level3" data-number="16.12.1">
-<h3 data-number="16.12.1" class="anchored" data-anchor-id="tipos-primitivos"><span class="header-section-number">16.12.1</span> Tipos Primitivos</h3>
+<section id="apêndice-tipos-de-dados-no-llvm-ir" class="level2" data-number="17.12">
+<h2 data-number="17.12" class="anchored" data-anchor-id="apêndice-tipos-de-dados-no-llvm-ir"><span class="header-section-number">17.12</span> 12. Apêndice: Tipos de Dados no <strong>LLVM IR</strong></h2>
+<section id="tipos-primitivos" class="level3" data-number="17.12.1">
+<h3 data-number="17.12.1" class="anchored" data-anchor-id="tipos-primitivos"><span class="header-section-number">17.12.1</span> Tipos Primitivos</h3>
 <ul>
 <li><code>i1</code>, <code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code>: Inteiros de 1, 8, 16, 32, 64 bits</li>
 <li><code>float</code>: Ponto flutuante 32 bits</li>
@@ -2340,27 +2346,27 @@ Note
 <li><code>void</code>: Sem valor</li>
 </ul>
 </section>
-<section id="tipos-derivados" class="level3" data-number="16.12.2">
-<h3 data-number="16.12.2" class="anchored" data-anchor-id="tipos-derivados"><span class="header-section-number">16.12.2</span> Tipos Derivados</h3>
+<section id="tipos-derivados" class="level3" data-number="17.12.2">
+<h3 data-number="17.12.2" class="anchored" data-anchor-id="tipos-derivados"><span class="header-section-number">17.12.2</span> Tipos Derivados</h3>
 <ul>
 <li><code>[N x tipo]</code>: Array de N elementos</li>
 <li><code>{tipo1, tipo2, ...}</code>: Struct (estrutura)</li>
 <li><code>&lt;N x tipo&gt;</code>: Vetor (para SIMD)</li>
 </ul>
 </section>
-<section id="exemplos" class="level3" data-number="16.12.3">
-<h3 data-number="16.12.3" class="anchored" data-anchor-id="exemplos"><span class="header-section-number">16.12.3</span> Exemplos</h3>
+<section id="exemplos" class="level3" data-number="17.12.3">
+<h3 data-number="17.12.3" class="anchored" data-anchor-id="exemplos"><span class="header-section-number">17.12.3</span> Exemplos</h3>
 <div class="sourceCode" id="cb90"><pre class="sourceCode llvm code-with-copy"><code class="sourceCode llvm"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">%array</span> = <span class="kw">alloca</span> [<span class="dv">10</span> x <span class="dt">i32</span>]              <span class="co">; array de 10 inteiros</span></span>
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">%struct</span> = <span class="kw">alloca</span> {<span class="dt">i32</span>, <span class="dt">float</span>}           <span class="co">; struct com int e float</span></span>
 <span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">%vector</span> = <span class="kw">alloca</span> &lt;<span class="dv">4</span> x <span class="dt">float</span>&gt;            <span class="co">; vetor SIMD de 4 floats</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 </section>
 </section>
-<section id="apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm" class="level2" data-number="16.13">
-<h2 data-number="16.13" class="anchored" data-anchor-id="apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm"><span class="header-section-number">16.13</span> 13. Apêndice: Migrando da Sintaxe Antiga para Nova (Legacy PM → New PM)</h2>
+<section id="apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm" class="level2" data-number="17.13">
+<h2 data-number="17.13" class="anchored" data-anchor-id="apêndice-migrando-da-sintaxe-antiga-para-nova-legacy-pm-new-pm"><span class="header-section-number">17.13</span> 13. Apêndice: Migrando da Sintaxe Antiga para Nova (Legacy PM → New PM)</h2>
 <p>Se você encontrar tutoriais antigos ou código que usa a sintaxe antiga do opt, aqui está um guia de conversão:</p>
-<section id="comandos-básicos-de-otimização" class="level3" data-number="16.13.1">
-<h3 data-number="16.13.1" class="anchored" data-anchor-id="comandos-básicos-de-otimização"><span class="header-section-number">16.13.1</span> Comandos Básicos de Otimização</h3>
+<section id="comandos-básicos-de-otimização" class="level3" data-number="17.13.1">
+<h3 data-number="17.13.1" class="anchored" data-anchor-id="comandos-básicos-de-otimização"><span class="header-section-number">17.13.1</span> Comandos Básicos de Otimização</h3>
 <table class="table">
 <thead>
 <tr class="header">
@@ -2388,8 +2394,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="passes-individuais" class="level3" data-number="16.13.2">
-<h3 data-number="16.13.2" class="anchored" data-anchor-id="passes-individuais"><span class="header-section-number">16.13.2</span> Passes Individuais</h3>
+<section id="passes-individuais" class="level3" data-number="17.13.2">
+<h3 data-number="17.13.2" class="anchored" data-anchor-id="passes-individuais"><span class="header-section-number">17.13.2</span> Passes Individuais</h3>
 <table class="table">
 <colgroup>
 <col style="width: 53%">
@@ -2425,8 +2431,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="múltiplos-passes-em-sequência" class="level3" data-number="16.13.3">
-<h3 data-number="16.13.3" class="anchored" data-anchor-id="múltiplos-passes-em-sequência"><span class="header-section-number">16.13.3</span> Múltiplos Passes em Sequência</h3>
+<section id="múltiplos-passes-em-sequência" class="level3" data-number="17.13.3">
+<h3 data-number="17.13.3" class="anchored" data-anchor-id="múltiplos-passes-em-sequência"><span class="header-section-number">17.13.3</span> Múltiplos Passes em Sequência</h3>
 <table class="table">
 <colgroup>
 <col style="width: 53%">
@@ -2450,8 +2456,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="debug-e-análise" class="level3" data-number="16.13.4">
-<h3 data-number="16.13.4" class="anchored" data-anchor-id="debug-e-análise"><span class="header-section-number">16.13.4</span> Debug e Análise</h3>
+<section id="debug-e-análise" class="level3" data-number="17.13.4">
+<h3 data-number="17.13.4" class="anchored" data-anchor-id="debug-e-análise"><span class="header-section-number">17.13.4</span> Debug e Análise</h3>
 <table class="table">
 <colgroup>
 <col style="width: 53%">
@@ -2483,8 +2489,8 @@ Note
 </tbody>
 </table>
 </section>
-<section id="passes-de-análise-print" class="level3" data-number="16.13.5">
-<h3 data-number="16.13.5" class="anchored" data-anchor-id="passes-de-análise-print"><span class="header-section-number">16.13.5</span> Passes de Análise (Print)</h3>
+<section id="passes-de-análise-print" class="level3" data-number="17.13.5">
+<h3 data-number="17.13.5" class="anchored" data-anchor-id="passes-de-análise-print"><span class="header-section-number">17.13.5</span> Passes de Análise (Print)</h3>
 <table class="table">
 <colgroup>
 <col style="width: 53%">
@@ -2512,14 +2518,14 @@ Note
 </tbody>
 </table>
 </section>
-<section id="forçar-o-legacy-pm-versões-de-transição-llvm-13-15" class="level3" data-number="16.13.6">
-<h3 data-number="16.13.6" class="anchored" data-anchor-id="forçar-o-legacy-pm-versões-de-transição-llvm-13-15"><span class="header-section-number">16.13.6</span> Forçar o Legacy PM (Versões de Transição <strong>LLVM</strong> 13-15)</h3>
+<section id="forçar-o-legacy-pm-versões-de-transição-llvm-13-15" class="level3" data-number="17.13.6">
+<h3 data-number="17.13.6" class="anchored" data-anchor-id="forçar-o-legacy-pm-versões-de-transição-llvm-13-15"><span class="header-section-number">17.13.6</span> Forçar o Legacy PM (Versões de Transição <strong>LLVM</strong> 13-15)</h3>
 <p>Se você realmente precisa usar a sintaxe antiga em versões de transição:</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Forçar legacy PM (não recomendado, pode não estar disponível)</span></span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-enable-new-pm</span><span class="op">=</span>0 <span class="at">-O3</span> arquivo.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="dicas-para-conversão" class="level3" data-number="16.13.7">
-<h3 data-number="16.13.7" class="anchored" data-anchor-id="dicas-para-conversão"><span class="header-section-number">16.13.7</span> Dicas para Conversão</h3>
+<section id="dicas-para-conversão" class="level3" data-number="17.13.7">
+<h3 data-number="17.13.7" class="anchored" data-anchor-id="dicas-para-conversão"><span class="header-section-number">17.13.7</span> Dicas para Conversão</h3>
 <ol type="1">
 <li><strong>Passes separados por vírgula</strong>: Na nova sintaxe, use vírgula <code>,</code> para separar passes</li>
 <li><strong>Aspas são importantes</strong>: Use <code>'</code> para evitar problemas com o shell</li>
@@ -2537,16 +2543,16 @@ Note
 <span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Nova</span></span>
 <span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">-passes</span><span class="op">=</span><span class="st">'inline,function(mem2reg,instcombine,simplifycfg,dce)'</span> arquivo.ll</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="como-encontrar-o-nome-correto-de-um-pass" class="level3" data-number="16.13.8">
-<h3 data-number="16.13.8" class="anchored" data-anchor-id="como-encontrar-o-nome-correto-de-um-pass"><span class="header-section-number">16.13.8</span> Como Encontrar o Nome Correto de um Pass</h3>
+<section id="como-encontrar-o-nome-correto-de-um-pass" class="level3" data-number="17.13.8">
+<h3 data-number="17.13.8" class="anchored" data-anchor-id="como-encontrar-o-nome-correto-de-um-pass"><span class="header-section-number">17.13.8</span> Como Encontrar o Nome Correto de um Pass</h3>
 <div class="sourceCode" id="cb93"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Listar todos os passes disponíveis no novo PM</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">--print-passes</span></span>
 <span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Buscar um pass específico</span></span>
 <span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="ex">opt</span> <span class="at">--print-passes</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-i</span> <span class="st">"nome_do_pass"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="script-de-conversão-rápida" class="level3" data-number="16.13.9">
-<h3 data-number="16.13.9" class="anchored" data-anchor-id="script-de-conversão-rápida"><span class="header-section-number">16.13.9</span> Script de Conversão Rápida</h3>
+<section id="script-de-conversão-rápida" class="level3" data-number="17.13.9">
+<h3 data-number="17.13.9" class="anchored" data-anchor-id="script-de-conversão-rápida"><span class="header-section-number">17.13.9</span> Script de Conversão Rápida</h3>
 <p>Se você tem muitos scripts usando a sintaxe antiga, aqui está um exemplo de como converter:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># converter_opt.sh - Converte comandos opt antigos para novos</span></span>
@@ -2985,12 +2991,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./14-GeraInter.html" class="pagination-link" aria-label="Geração de Código Intermediário: A Linguagem Universal do Compilador">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./16-peepOtimiza.html" class="pagination-link" aria-label="Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

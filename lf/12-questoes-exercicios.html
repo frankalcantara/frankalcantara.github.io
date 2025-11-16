@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linguagens Formais e Autômatos - 15&nbsp; Questões e Exercícios - Analisador Semântico</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./14-GeraInter.html" rel="next">
+<link href="./11-tabelaSimbolos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./12-questoes-exercicios.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-questoes-exercicios.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Geração de Código Intermediário</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">MLIR: Analisando Passes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#enunciados-das-questões" id="toc-enunciados-das-questões" class="nav-link active" data-scroll-target="#enunciados-das-questões"><span class="header-section-number">15.1</span> Enunciados das Questões</a></li>
+  <li><a href="#respostas-das-questões" id="toc-respostas-das-questões" class="nav-link" data-scroll-target="#respostas-das-questões"><span class="header-section-number">15.2</span> Respostas das Questões</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/12-questoes-exercicios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-semantico.html">Analisadores Semânticos</a></li><li class="breadcrumb-item"><a href="./12-questoes-exercicios.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Alguns destes exercícios são inspirados em questões de provas e listas de exercícios da nossa disciplina. Outras, precisam de pesquisa. Notadamente as questões que se referem aos meandros das linguagens de programação modernas (Python, C, C++, Rust, TypeScript).</p>
+<section id="enunciados-das-questões" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="enunciados-das-questões"><span class="header-section-number">15.1</span> Enunciados das Questões</h2>
+<ol type="1">
+<li><p>O que é semântica no contexto das linguagens de programação?</p></li>
+<li><p>Descreva a semântica operacional e dê um exemplo.</p></li>
+<li><p>Explique a semântica axiomática e mencione sua base teórica.</p></li>
+<li><p>O que é semântica denotacional e qual é sua principal vantagem?</p></li>
+<li><p>Qual abordagem semântica é mais usada em compiladores industriais como GCC e LLVM, e por quê?</p></li>
+<li><p>Como a semântica formal influencia o design de sistemas de tipos em linguagens modernas?</p></li>
+<li><p>Descreva a distinção entre expressões e comandos na linguagem IMP.</p></li>
+<li><p>Explique formalmente a semântica de loops usando pontos fixos, apresentando a definição do domínio de estados, da função cujo ponto fixo caracteriza o comando while e do menor ponto fixo que corresponde ao significado do laço.</p></li>
+<li><p>O que é tipagem gradual em Python e como ela funciona?</p></li>
+<li><p>Descreva o sistema de tipos de C e dê um exemplo de regra de coerção aritmética.</p></li>
+<li><p>Explique como funciona a inferência de templates em C++.</p></li>
+<li><p>Descreva o sistema de ownership e lifetimes em Rust.</p></li>
+<li><p>Qual é a diferença entre tipagem nominal e estrutural? Dê exemplos de linguagens.</p></li>
+<li><p>O que é análise semântica e qual é seu papel em um compilador?</p></li>
+<li><p>Descreva a evolução histórica da análise semântica desde o FORTRAN I.</p></li>
+<li><p>Explique o conceito de Gramáticas de Atributos introduzido por Donald Knuth.</p></li>
+<li><p>O que é uma Tabela de Símbolos e qual é sua função principal?</p></li>
+<li><p>Descreva a evolução das Tabelas de Símbolos desde o FORTRAN até as linguagens orientadas a objetos.</p></li>
+<li><p>Explique o modelo de pilha de tabelas para gerenciamento de escopos.</p></li>
+<li><p>Descreva o modelo de tabela única com encadeamento de escopo.</p></li>
+<li><p>Explique a semântica denotacional da atribuição.</p></li>
+<li><p>Calcule o significado de <code>if x &gt; 0 then y := 1 else y := -1</code> sob o estado <span class="math inline">\(\sigma=\{x \mapsto 5, y \mapsto 0\}\)</span>.</p></li>
+<li><p>Expresse formalmente a semântica de um condicional.</p></li>
+<li><p>Explique por que expressões IMP são puras.</p></li>
+<li><p>Explique como a semântica formal fundamenta a propagação de constantes.</p></li>
+<li><p>Verifique a compatibilidade de <code>Circulo</code> com <code>Desenhavel</code> usando <em>protocols</em>.</p></li>
+<li><p>Derive o tipo de <code>z</code> em <code>x + y</code> (considerando C).</p></li>
+<li><p>Deduza o tipo resultante em um template C++ com <code>decltype</code>.</p></li>
+<li><p>Explique as restrições de lifetime aplicadas a uma função <code>maior</code> ou similar.</p></li>
+<li><p>Explique <em>type narrowing</em> em TypeScript.</p></li>
+<li><p>Verifique compatibilidade em atribuições.</p></li>
+<li><p>Resolva nomes em Tabela de Símbolos com escopos aninhados.</p></li>
+<li><p>Mostre a busca de um símbolo sombreado.</p></li>
+<li><p>Explique a composicionalidade denotacional.</p></li>
+<li><p>Derive a denotação de <code>y := x + 1</code>.</p></li>
+<li><p>Aplique pontos fixos a <code>while y &gt; 0 do y := y - 1</code>.</p></li>
+<li><p>Derive o tipo de <code>(float*)&amp;x</code>.</p></li>
+<li><p>Derive o tipo de função genérica com <em>trait bound</em>.</p></li>
+<li><p>Aplique subsumption em union types com <em>hints</em>.</p></li>
+<li><p>Explique a detecção de variável não declarada.</p></li>
+<li><p>O que é um axioma em um sistema de julgamento de tipos? Dê três exemplos de axiomas para tipos primitivos.</p></li>
+<li><p>Explique a estrutura de uma regra de inferência de tipos usando a notação de sequentes <span class="math inline">\(\frac{\text{premissas}}{\text{conclusão}}\)</span>.</p></li>
+<li><p>Derive o tipo da expressão <code>x + 5</code> no contexto <span class="math inline">\(\Gamma = \{x : \text{int}\}\)</span> usando regras de tipagem explícitas.</p></li>
+<li><p>Escreva a regra de julgamento de tipos para o operador de multiplicação entre dois números reais.</p></li>
+<li><p>Qual é a diferença entre uma regra de tipagem com uma premissa versus uma com múltiplas premissas? Dê exemplos.</p></li>
+<li><p>Explique como o contexto de tipagem <span class="math inline">\(\Gamma\)</span> evolui durante a análise de um programa com múltiplas declarações de variáveis.</p></li>
+<li><p>Derive a regra de tipagem para operações de comparação (<code>&gt;</code>, <code>&lt;</code>, <code>==</code>) que retornam valores booleanos.</p></li>
+<li><p>Como você expressaria formalmente a regra de coerção de tipos para operações aritméticas mistas (int + float)?</p></li>
+<li><p>Escreva a regra de julgamento de tipos para a concatenação de strings usando o operador <span class="math inline">\(\oplus\)</span>.</p></li>
+<li><p>Derive o tipo da expressão <code>if (x &gt; 0) then 10 else 3.14</code> explicando por que essa expressão pode ou não ser bem tipada.</p></li>
+<li><p>Escreva a regra de tipagem para operações lógicas AND e OR que operam sobre valores booleanos.</p></li>
+<li><p>Explique como seria a derivação completa do tipo para a expressão <code>(x + y) * z</code> em que <span class="math inline">\(\Gamma = \{x : \text{int}, y : \text{int}, z : \text{float}\}\)</span>.</p></li>
+<li><p>Qual é a diferença entre atributos sintetizados e atributos herdados? Dê exemplos de uso para cada um.</p></li>
+<li><p>O que é uma gramática S-atribuída e qual é sua principal vantagem para implementação em compiladores?</p></li>
+<li><p>Explique o que caracteriza uma gramática L-atribuída e por que ela é considerada o “ponto ideal” para compiladores.</p></li>
+<li><p>O que é um grafo de dependências em gramáticas de atributos e como ele é usado para determinar a ordem de avaliação?</p></li>
+<li><p>Qual é a diferença entre uma SDD (Definição Dirigida por Sintaxe) e um SDT (Esquema de Tradução Dirigida por Sintaxe)?</p></li>
+<li><p>Por que gramáticas circulares são consideradas inúteis na prática? Dê um exemplo de dependência circular.</p></li>
+<li><p>Construa uma gramática de atributos S-atribuída para calcular o valor de expressões aritméticas simples (apenas <code>+</code> e <code>*</code>) e mostre a árvore anotada para <code>2 + 3 * 4</code>.</p></li>
+<li><p>Para a gramática de declarações de variáveis, escreva as regras semânticas que verificam se uma variável foi declarada antes de ser usada, usando tanto atributos sintetizados quanto herdados.</p></li>
+</ol>
+</section>
+<section id="respostas-das-questões" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="respostas-das-questões"><span class="header-section-number">15.2</span> Respostas das Questões</h2>
+<ol type="1">
+<li><p>A semântica é o estudo do significado dos programas, ou seja, o que um programa faz quando é executado. Diferente da sintaxe, que se preocupa com a forma e a estrutura do código, a semântica lida com o comportamento e os efeitos do código.</p></li>
+<li><p>A semântica operacional descreve o significado de um programa em termos de como ele é executado, passo a passo. Ela responde à pergunta <em>como a computação acontece</em>. Por exemplo: para a expressão <code>(2 + 3) × 4</code>, uma semântica operacional definiria regras que a transformariam em <code>5 × 4</code> e, posteriormente, no resultado <code>20</code>.</p></li>
+<li><p>A semântica axiomática adota uma abordagem declarativa, focada em provar propriedades sobre programas. Ela é baseada na lógica de Hoare e usa pré-condições e pós-condições. Uma tripla de Hoare <span class="math inline">\(\{P\} C \{Q\}\)</span> indica que, se <span class="math inline">\(P\)</span> for verdadeira antes da execução de <span class="math inline">\(C\)</span>, então <span class="math inline">\(Q\)</span> será verdadeira após sua conclusão. Exemplo: <span class="math inline">\(\{x &gt; 0\}\)</span> <span class="math inline">\(y = x × 2\)</span> <span class="math inline">\(\{y &gt; 0\}\)</span>.</p></li>
+<li><p>A semântica denotacional define o significado de expressões e comandos mapeando suas construções sintáticas para objetos matemáticos, como funções, domínios e relações. Sua principal vantagem é a composicionalidade: o significado de um programa grande resulta da composição dos significados de suas partes.</p></li>
+<li><p>Compiladores industriais como GCC e LLVM não se apoiam em um único formalismo matemático unificado. Seu comportamento resulta de: (a) especificações das linguagens e da ABI, (b) documentação técnica como a <em>LLVM Language Reference</em>, (c) decisões de engenharia presentes na implementação e (d) grandes suítes de testes.</p>
+<p>Na prática, esses compiladores implementam uma <strong>semântica operacional</strong> através de múltiplos passes de transformação sobre representações intermediárias: GIMPLE no GCC, LLVM IR no LLVM. Cada transformação preserva o significado do programa segundo regras operacionais implícitas, e o comportamento final emerge da composição sequencial desses passes combinada com as especificações formais e informais mencionadas acima.</p></li>
+<li><p>A teoria dos tipos fundamenta diversas garantias de segurança e consistência em linguagens modernas. Sistemas como <em>ownership</em> e <em>borrow checking</em> em Rust, tipos dependentes restritos em Scala, verificações estruturais em TypeScript e segurança de opção em Swift derivam diretamente de pesquisas em semântica formal e teoria de tipos.</p></li>
+<li><p>Em IMP, expressões são puras e produzem valores sem alterar o estado, enquanto comandos produzem efeitos colaterais modificando o estado. Assim:</p>
+<ul>
+<li>expressões: cálculo puro;</li>
+<li>comandos: transformação de estado.</li>
+</ul></li>
+<li><p>A semântica denotacional de <code>while b do S</code> é dada pelo <strong>menor ponto fixo</strong> de um operador sobre funções de estados.</p>
+<p>O domínio de estados é <span class="math inline">\(\Sigma\)</span>. O domínio denotacional de comandos é:</p>
+<p><span class="math display">\[D = \Sigma \to \Sigma_{\bot}\]</span></p>
+<p>em que <span class="math inline">\(\Sigma_{\bot}\)</span> contém um elemento <span class="math inline">\(\bot\)</span> representando não-terminação.</p>
+<p>Definimos:</p>
+<p><span class="math display">\[F : D \to D\]</span></p>
+<p>por:</p>
+<p><span class="math display">\[
+F(f) = \lambda \sigma.\;
+\begin{cases}
+f([\![S]\!]_{cmd}(\sigma)) &amp; \text{se } [\![b]\!]_{bexp}(\sigma)=\text{true} \\
+\sigma &amp; \text{se } [\![b]\!]_{bexp}(\sigma)=\text{false} \\
+\bot &amp; \text{se } [\![b]\!]_{bexp}(\sigma)=\bot
+\end{cases}
+\]</span></p>
+<p>Então o significado do laço é:</p>
+<p><span class="math display">\[
+[\![\text{while } b \text{ do } S]\!]_{cmd}
+=
+\mathrm{fix}(F)
+\]</span></p>
+<p>Esse ponto fixo existe porque <span class="math inline">\((D,\sqsubseteq)\)</span> é um domínio completo e <span class="math inline">\(F\)</span> é contínua. Ele é calculado como:</p>
+<p><span class="math display">\[\mathrm{fix}(F) = \bigsqcup_{n \ge 0} F^{\,n}(\bot_D)\]</span></p>
+<p>com <span class="math inline">\(\bot_D = \lambda\sigma.\;\bot\)</span>.</p></li>
+<li><p>Python é dinamicamente tipado em tempo de execução. A PEP 484 introduziu <em>type hints</em> opcionais que permitem <strong>tipagem gradual</strong>, na qual verificadores estáticos (<code>mypy</code>, <code>pyright</code>, <code>pyre</code>) analisam tipos sem alterar o comportamento do interpretador.</p>
+<p>Blocos básicos:</p>
+<ul>
+<li><em>type hints</em> não afetam execução;</li>
+<li>analisadores estáticos verificam coerência;</li>
+<li>subtipagem nominal para classes;</li>
+<li>subtipagem estrutural apenas para <em>protocols</em> (PEP 544).</li>
+</ul>
+<p>Exemplo didático:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importação do módulo typing para usar Protocol</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Definição de um Protocol: interface estrutural</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Desenhavel(Protocol):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        ...</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Classe Circulo: implementa 'desenhar' concretamente</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Circulo:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Desenhando um círculo: ○"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Função aceita qualquer objeto que atenda à interface estrutural</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renderizar(obj: Desenhavel) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    obj.desenhar()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso: Circulo é compatível estruturalmente com Desenhavel</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># O verificador estático aprova sem necessidade de herança explícita</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>renderizar(Circulo())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>O sistema de tipos de C é estático e nominal. Para aritmética, as conversões seguem regras de hierarquia e promoção. Ao contrário de sistemas antigos que promoviam tudo para <code>double</code>, o C moderno (padrão C99 e posteriores) preserva <code>float</code> se ambos os operandos forem <code>float</code>.</p>
+<p>A hierarquia geral para encontrar o tipo comum (<em>common type</em>) em operações aritméticas usuais segue a ordem:</p>
+<p><span class="math display">\[long double \longleftarrow double \longleftarrow float\]</span></p>
+<p>Se nenhum operando for ponto flutuante, aplicam-se as promoções inteiras (<em>integer promotions</em>) e depois o balanceamento de tamanho/sinal (ex: <code>int</code> para <code>long</code>).</p>
+<p>Regra formal simplificada:</p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash e_1 : T_1 \quad
+\Gamma \vdash e_2 : T_2 \quad
+T_{comum} = \text{usual\_arith\_conv}(T_1, T_2)
+}{
+\Gamma \vdash e_1 \oplus e_2 : T_{comum}
+}
+\]</span></p>
+<p>Exemplo didático:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>      <span class="co">// int</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="bu">f</span><span class="op">;</span> <span class="co">// float</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// x sofre conversão aritmética usual para float na soma.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// O resultado float sofre conversão de inicialização para double.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">double</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Resultado de z: </span><span class="sc">%f\n</span><span class="st">"</span><span class="op">,</span> z<span class="op">);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Nota técnica:</strong> A conversão de <code>float</code> para <code>double</code> em <code>double z = x + y;</code> não é uma promoção aritmética (<em>arithmetic promotion</em>), mas uma conversão de inicialização (<em>initialization conversion</em>). As <em>usual arithmetic conversions</em> aplicam-se apenas aos operandos da adição <code>x + y</code>, produzindo um resultado <code>float</code>. A atribuição/inicialização então realiza uma conversão implícita adicional de <code>float</code> para <code>double</code>.</p></li>
+<li><p>Em C++, templates permitem dedução automática dos parâmetros a partir dos argumentos, e <code>decltype</code> determina tipos de retorno dependentes de expressões.</p>
+<p><strong>Dedução básica:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>T soma<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> r1 <span class="op">=</span> soma<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span>      <span class="co">// T deduzido como int</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> r2 <span class="op">=</span> soma<span class="op">(</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">5.0</span><span class="op">);</span>  <span class="co">// T deduzido como double</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Dedução com tipos heterogêneos usando <code>decltype</code>:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma<span class="op">(</span>T a<span class="op">,</span> U b<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> r <span class="op">=</span> soma<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="fl">2.5</span><span class="op">);</span>  <span class="co">// T=int, U=double, retorno: double</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Dedução com referências e qualificadores:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> processa<span class="op">(</span>T<span class="op">&amp;</span> ref<span class="op">)</span> <span class="op">{</span> <span class="co">/* T deduzido sem referência */</span> <span class="op">}</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> processa_const<span class="op">(</span><span class="at">const</span> T<span class="op">&amp;</span> ref<span class="op">)</span> <span class="op">{</span> <span class="co">/* T deduzido sem const */</span> <span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> <span class="dt">int</span> y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    processa<span class="op">(</span>x<span class="op">);</span>        <span class="co">// T = int, parâmetro: int&amp;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    processa_const<span class="op">(</span>y<span class="op">);</span>  <span class="co">// T = int, parâmetro: const int&amp;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Perfect forwarding com <code>std::forward</code>:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;utility&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> wrapper<span class="op">(</span>T<span class="op">&amp;&amp;</span> arg<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// T&amp;&amp; é universal reference</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// std::forward preserva categoria de valor</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    funcao_destino<span class="op">(</span><span class="bu">std::</span>forward<span class="op">&lt;</span>T<span class="op">&gt;(</span>arg<span class="op">));</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Em C++20, <code>auto</code> como parâmetro de função também utiliza dedução de templates:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma_cpp20<span class="op">(</span><span class="kw">auto</span> a<span class="op">,</span> <span class="kw">auto</span> b<span class="op">)</span> <span class="op">{</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span>  <span class="co">// equivalente a template com dois parâmetros</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>O sistema de tipos de Rust combina inferência limitada, <em>ownership</em>, <em>borrowing</em> e <em>lifetimes</em>. <em>Ownership</em> garante posse única; <em>borrowing</em> introduz empréstimos imutáveis <code>&amp;T</code> e mutáveis <code>&amp;mut T</code>. <em>Lifetimes</em> são regiões que expressam a validade de referências.</p>
+<p>A notação correta em Rust para indicar que o <em>lifetime</em> <code>'a</code> deve viver pelo menos tanto quanto <code>'b</code> (outlives) é:</p>
+<p><span class="math display">\['a: 'b    \]</span></p>
+<p>Exemplo didático:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 'a é um parâmetro de lifetime.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Ele liga a referência de entrada à de saída.</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> primeiro<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    s <span class="co">// Seguro: o compilador sabe que o retorno vive tanto quanto s</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> resultado<span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> texto <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"exemplo"</span>)<span class="op">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// resultado = primeiro(&amp;texto); // ERRO: 'texto' não vive o suficiente</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><strong>Tipagem Nominal:</strong> A compatibilidade é determinada pelo nome explícito do tipo e sua hierarquia de herança declarada (ex: Java, C#). <strong>Tipagem Estrutural:</strong> A compatibilidade é determinada pela estrutura ou forma do tipo (membros e métodos disponíveis), sem necessidade de declaração explícita de vínculo (ex: TypeScript, Go). Em C++, classes usam tipagem nominal, mas <em>templates</em> operam com uma forma de tipagem estrutural (duck typing) em tempo de compilação.</p></li>
+<li><p>A análise semântica verifica a coerência e o significado do programa após a análise sintática, garantindo a bem-formação de tipos, escopos e usos de identificadores antes da geração de código.</p>
+<p><strong>Distinção entre erros sintáticos e semânticos:</strong></p>
+<p><em>Erro sintático</em> — viola regras gramaticais da linguagem:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="op">;</span>  <span class="co">// ERRO SINTÁTICO: expressão ausente após '='</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>Erro semântico</em> — sintaticamente correto, mas semanticamente inválido:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> y <span class="op">=</span> x <span class="op">+</span> z<span class="op">;</span>  <span class="co">// ERRO SEMÂNTICO: 'z' não foi declarado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> b <span class="op">=</span> a <span class="op">+</span> <span class="st">"texto"</span><span class="op">;</span>  <span class="co">// ERRO SEMÂNTICO: incompatibilidade de tipos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Verificações principais da análise semântica:</strong></p>
+<ul>
+<li><strong>Declaração de identificadores:</strong> toda variável/função usada foi declarada?</li>
+<li><strong>Compatibilidade de tipos:</strong> operações respeitam os tipos envolvidos?</li>
+<li><strong>Escopo:</strong> identificador está acessível no ponto de uso?</li>
+<li><strong>Inicialização:</strong> variáveis são usadas antes de receber valores?</li>
+<li><strong>Controle de fluxo:</strong> caminhos de execução retornam valores quando necessário?</li>
+</ul>
+<p>Exemplo de verificação de retorno:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> funcao<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ERRO SEMÂNTICO: caminho sem retorno para função não-void</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>FORTRAN I tinha verificações <em>ad-hoc</em>. ALGOL 60 separou sintaxe e semântica. Floyd introduziu o raciocínio lógico. Knuth criou as gramáticas de atributos. Pascal aplicou uma análise mais completa. C consolidou verificações de tipos estáticos fracos. ML introduziu a inferência de tipos robusta (Hindley-Milner). C++ adicionou templates complexos. Java ampliou verificações híbridas.</p></li>
+<li><p>Gramáticas de Atributos associam regras semânticas às regras sintáticas (produções da gramática), permitindo a propagação sistemática de tipos e informações na árvore sintática (atributos sintetizados sobem, atributos herdados descem).</p></li>
+<li><p>Uma Tabela de Símbolos é uma estrutura de dados que mapeia identificadores, nomes de variáveis, funções, tipos, para suas informações semânticas associadas: tipo, escopo, deslocamento de memória, atributos de visibilidade, etc.</p></li>
+<li><p>FORTRAN usava tabelas lineares simples. ALGOL 60 introduziu a necessidade de hierarquia para escopos aninhados. Nos anos 70, o uso de <em>hash tables</em> tornou-se padrão. C++ e Java demandaram suporte complexo a herança, <em>namespaces</em> e sobrecarga. Nos anos 2000, otimizações como <em>arena allocation</em> e <em>string interning</em> tornaram-se comuns para performance em compiladores.</p></li>
+<li><p>O modelo de pilha de tabelas usa uma tabela de símbolos distinta para cada escopo ativo. Quando se entra em um escopo, uma nova tabela é empilhada (<em>push</em>); ao sair, ela é desempilhada (<em>pop</em>). A busca por um identificador ocorre do topo (escopo mais interno) para a base (global).</p></li>
+<li><p>O modelo de tabela única com encadeamento mantém todos os símbolos em uma única <em>hash table</em>. Símbolos com o mesmo nome (colisões ou sombreamento) são encadeados em uma lista ligada no mesmo <em>slot</em>. A entrada em um escopo adiciona símbolos na frente da lista; a saída do escopo remove os símbolos pertencentes àquele nível.</p></li>
+<li><p>A semântica denotacional de um comando de atribuição <span class="math inline">\(x := a\)</span> é uma função que atualiza o estado, mapeando a variável <span class="math inline">\(x\)</span> para o valor da avaliação da expressão <span class="math inline">\(a\)</span>.</p>
+<p><span class="math display">\[
+[\![x := a]\!]_{cmd} = \lambda \sigma. \sigma[x \mapsto [\![a]\!]_{aexp}\sigma]
+\]</span></p>
+<p>Isso denota um novo estado idêntico a <span class="math inline">\(\sigma\)</span>, exceto no ponto <span class="math inline">\(x\)</span>.</p></li>
+<li><p>Dado o estado <span class="math inline">\(\sigma=\{x \mapsto 5, y \mapsto 0\}\)</span> e o comando:</p>
+<p><span class="math display">\[
+C = \text{if } x &gt; 0 \text{ then } y := 1 \text{ else } y := -1
+\]</span></p>
+<p>Avaliamos o predicado: <span class="math inline">\([\![x &gt; 0]\!]\sigma\)</span> é verdadeiro, pois <span class="math inline">\(5 &gt; 0\)</span>. Selecionamos o primeiro ramo: <span class="math inline">\([\![y := 1]\!]\sigma\)</span>. O resultado é o estado atualizado:</p>
+<p><span class="math display">\[
+\sigma' = \{x \mapsto 5, y \mapsto 1\}
+\]</span></p></li>
+<li><p>Semântica formal do condicional:</p>
+<p><span class="math display">\[
+[\![\text{if } b \text{ then } S_1 \text{ else } S_2]\!]_{cmd} = \lambda \sigma.
+\begin{cases}
+[\![S_1]\!]_{cmd}(\sigma) &amp; \text{se } [\![b]\!]_{bexp}(\sigma) = \text{true} \\
+[\![S_2]\!]_{cmd}(\sigma) &amp; \text{se } [\![b]\!]_{bexp}(\sigma) = \text{false} \\
+\bot &amp; \text{se } [\![b]\!]_{bexp}(\sigma) = \bot
+\end{cases}
+\]</span></p></li>
+<li><p>Expressões na linguagem IMP são consideradas puras porque sua avaliação depende apenas do estado atual <span class="math inline">\(\sigma\)</span> para produzir um valor, sem nunca modificar <span class="math inline">\(\sigma\)</span> (sem efeitos colaterais). Isso permite otimizações como a eliminação de subexpressões comuns.</p></li>
+<li><p>A semântica formal justifica que, se uma expressão <span class="math inline">\(e\)</span> sempre avalia para um valor constante <span class="math inline">\(v\)</span> em todos os estados possíveis naquele ponto do programa (ou se as variáveis de que depende são constantes), então a expressão <span class="math inline">\(e\)</span> é semanticamente equivalente ao valor <span class="math inline">\(v\)</span>. Isso permite ao compilador substituir <span class="math inline">\(e\)</span> por <span class="math inline">\(v\)</span> (propagação de constantes) preservando o comportamento do programa.</p></li>
+<li><p>Utilizando o exemplo de <em>protocols</em> (PEP 544) em Python visto anteriormente, um verificador estático deduz que <code>Circulo</code> é subtipo de <code>Desenhavel</code> através de equivalência estrutural.</p>
+<p><strong>Derivação formal do julgamento de subtipagem:</strong></p>
+<p>Dado o protocolo:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Desenhavel(Protocol):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>: ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>E a classe:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Circulo:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Desenhando um círculo: ○"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A regra de subtipagem estrutural é:</p>
+<p><span class="math display">\[
+\frac{
+\forall m \in \text{métodos}(P).\
+\exists m' \in \text{métodos}(C).\
+\text{assinatura}(m') \le \text{assinatura}(m)
+}{
+C &lt;: P
+}
+\quad \text{(Subtipagem Estrutural)}
+\]</span></p>
+<p>Para nosso caso específico:</p>
+<p><span class="math display">\[
+\frac{
+\text{desenhar} \in \text{métodos}(\texttt{Desenhavel}) \quad
+\text{desenhar} \in \text{métodos}(\texttt{Circulo}) \quad
+(\texttt{self}) \to \texttt{None} \equiv (\texttt{self}) \to \texttt{None}
+}{
+\texttt{Circulo} &lt;: \texttt{Desenhavel}
+}
+\]</span></p>
+<p>O verificador estático (<code>mypy</code>, <code>pyright</code>) constrói esta derivação automaticamente, verificando que <code>Circulo</code> possui todos os membros requeridos por <code>Desenhavel</code> com assinaturas compatíveis, sem necessidade de herança explícita.</p></li>
+<li><p>Em C, dada a expressão <code>x + y</code> com <code>x</code> sendo <code>int</code> e <code>y</code> sendo <code>float</code>, derivamos o tipo usando as <em>usual arithmetic conversions</em>:</p>
+<p><strong>Árvore de derivação:</strong></p>
+<p><span class="math display">\[
+\frac{
+\dfrac{}{\Gamma \vdash x : \texttt{int}}
+\quad
+\dfrac{}{\Gamma \vdash y : \texttt{float}}
+\quad
+\dfrac{
+\texttt{int} &lt;_{\text{arith}} \texttt{float}
+}{
+\text{convert}(\texttt{int}, \texttt{float}) = \texttt{float}
+}
+}{
+\Gamma \vdash x + y : \texttt{float}
+}
+\]</span></p>
+<p><strong>Passo a passo:</strong></p>
+<ol type="1">
+<li><span class="math inline">\(\Gamma \vdash x : \texttt{int}\)</span> (hipótese: <code>x</code> declarado como <code>int</code>)</li>
+<li><span class="math inline">\(\Gamma \vdash y : \texttt{float}\)</span> (hipótese: <code>y</code> declarado como <code>float</code>)</li>
+<li>Aplicação da hierarquia aritmética: <span class="math inline">\(\texttt{int} &lt;_{\text{arith}} \texttt{float}\)</span></li>
+<li>Conversão de <code>x</code> para <code>float</code></li>
+<li>Operação realizada em ponto flutuante</li>
+<li>Tipo resultante: <code>float</code></li>
+</ol>
+<p>Se houver atribuição a <code>double z</code>:</p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash x + y : \texttt{float}
+\quad
+\texttt{float} \le \texttt{double}
+\quad
+z : \texttt{double} \in \Gamma
+}{
+\Gamma \vdash z = x + y : \texttt{double}
+}
+\]</span></p>
+<p>A conversão final de <code>float</code> para <code>double</code> é uma conversão de atribuição, não parte das <em>usual arithmetic conversions</em>.</p></li>
+<li><p>Em C++, para templates com <code>decltype</code>, a derivação de tipos ocorre em duas etapas: dedução de parâmetros e resolução de <code>decltype</code>.</p>
+<p><strong>Exemplo:</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">,</span> <span class="kw">typename</span> U<span class="op">&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma<span class="op">(</span>T a<span class="op">,</span> U b<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span> <span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Caso 1:</strong> <code>soma(3, 5)</code> (ambos <code>int</code>)</p>
+<p><span class="math display">\[
+\frac{
+\dfrac{}{\Gamma \vdash 3 : \texttt{int}} \quad T := \texttt{int}
+\quad
+\dfrac{}{\Gamma \vdash 5 : \texttt{int}} \quad U := \texttt{int}
+\quad
+\dfrac{
+a : \texttt{int} \quad b : \texttt{int}
+}{
+\texttt{decltype}(a + b) \equiv \texttt{int}
+}
+}{
+\Gamma \vdash \texttt{soma}(3, 5) : \texttt{int}
+}
+\]</span></p>
+<p><strong>Caso 2:</strong> <code>soma(1, 2.5)</code> (<code>int</code> e <code>double</code>)</p>
+<p><span class="math display">\[
+\frac{
+\dfrac{}{\Gamma \vdash 1 : \texttt{int}} \quad T := \texttt{int}
+\quad
+\dfrac{}{\Gamma \vdash 2.5 : \texttt{double}} \quad U := \texttt{double}
+\quad
+\dfrac{
+a : \texttt{int} \quad b : \texttt{double} \quad
+\texttt{int} &lt;_{\text{arith}} \texttt{double}
+}{
+\texttt{decltype}(a + b) \equiv \texttt{double}
+}
+}{
+\Gamma \vdash \texttt{soma}(1, 2.5) : \texttt{double}
+}
+\]</span></p>
+<p><strong>Caso 3:</strong> Com referências</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span> <span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> identidade<span class="op">(</span>T<span class="op">&amp;</span> ref<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>ref<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> ref<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> y <span class="op">=</span> identidade<span class="op">(</span>x<span class="op">);</span>  <span class="co">// y: int (cópia)</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span><span class="op">&amp;</span> z <span class="op">=</span> identidade<span class="op">(</span>x<span class="op">);</span> <span class="co">// z: int&amp; (referência)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[
+\frac{
+x : \texttt{int} \in \Gamma
+\quad
+T := \texttt{int}
+\quad
+\texttt{ref} : \texttt{int}\&amp;
+}{
+\texttt{decltype}(\texttt{ref}) \equiv \texttt{int}\&amp;
+}
+\]</span></p>
+<p>Note que <code>decltype</code> preserva a categoria de valor (lvalue/rvalue) e qualificadores (<code>const</code>, <code>&amp;</code>).</p></li>
+<li><p>As restrições de <em>lifetime</em> asseguram que referências não sobrevivam aos dados aos quais se referem. Para uma função como <code>fn maior&lt;'a&gt;(x: &amp;'a i32, y: &amp;'a i32) -&gt; &amp;'a i32</code>, o compilador impõe que o tempo de vida do retorno seja limitado pela intersecção dos tempos de vida dos argumentos.</p>
+<p><strong>Regras de lifetime:</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> maior<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(x<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">i32</span><span class="op">,</span> y<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> y <span class="op">{</span> x <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> y <span class="op">}</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Julgamento de tipo com lifetimes:</strong></p>
+<p><span class="math display">\[
+\frac{
+\Gamma, 'a \vdash x : \&amp;^{'a} \texttt{i32}
+\quad
+\Gamma, 'a \vdash y : \&amp;^{'a} \texttt{i32}
+\quad
+'a : \text{região}
+}{
+\Gamma \vdash \texttt{maior}^{'a} :
+(\&amp;^{'a} \texttt{i32}, \&amp;^{'a} \texttt{i32}) \to \&amp;^{'a} \texttt{i32}
+}
+\]</span></p>
+<p><strong>Restrições impostas:</strong></p>
+<ol type="1">
+<li>O retorno vive exatamente <code>'a</code></li>
+<li>Ambos argumentos devem viver pelo menos <code>'a</code></li>
+<li>O chamador deve garantir que <code>'a</code> seja válido no ponto de uso do retorno</li>
+</ol>
+<p><strong>Exemplo de erro detectado:</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> main() <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> resultado<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> y <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        resultado <span class="op">=</span> maior(<span class="op">&amp;</span>x<span class="op">,</span> <span class="op">&amp;</span>y)<span class="op">;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ERRO: 'x e 'y não vivem além deste bloco</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// println!("{}", resultado); // uso após fim do lifetime</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O verificador do borrow checker deriva:</p>
+<p><span class="math display">\[
+\frac{
+'x : \text{lifetime}(x) \quad
+'y : \text{lifetime}(y) \quad
+'a = \min('x, 'y) \quad
+'a \not\sqsupseteq '\text{resultado}
+}{
+\text{ERRO: lifetime insuficiente}
+}
+\]</span></p>
+<p>onde <span class="math inline">\(\sqsupseteq\)</span> denota a relação <em>outlives</em>.</p></li>
+<li><p><em>Type narrowing</em> em TypeScript ocorre quando o compilador refina o tipo de uma variável dentro de um bloco condicional baseando-se em verificações de tempo de execução (type guards). Exemplo:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processar</span>(val<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">number</span>) {</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="kw">typeof</span> val <span class="op">===</span> <span class="st">"string"</span>) {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Aqui, val é tratado como string (narrowing)</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(val<span class="op">.</span><span class="fu">toUpperCase</span>())<span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>A verificação de compatibilidade em atribuições analisa se o tipo da expressão à direita (<span class="math inline">\(T_{rhs}\)</span>) é um subtipo ou coercível para o tipo da variável à esquerda (<span class="math inline">\(T_{lhs}\)</span>).</p>
+<p><strong>Regra geral:</strong></p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash e : T_{rhs}
+\quad
+T_{rhs} \le T_{lhs}
+\quad
+x : T_{lhs} \in \Gamma
+}{
+\Gamma \vdash x := e : \texttt{void}
+}
+\quad \text{(Atribuição Válida)}
+\]</span></p>
+<p><strong>Exemplo 1 — Subtipagem em orientação a objetos:</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Animal <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Cachorro <span class="kw">extends</span> Animal <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>Animal a<span class="op">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>Cachorro c <span class="op">=</span> <span class="kw">new</span> <span class="fu">Cachorro</span><span class="op">();</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> c<span class="op">;</span>  <span class="co">// OK: Cachorro &lt;: Animal</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Derivação:</p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash c : \texttt{Cachorro}
+\quad
+\texttt{Cachorro} &lt;: \texttt{Animal}
+\quad
+a : \texttt{Animal} \in \Gamma
+}{
+\Gamma \vdash a := c : \texttt{void}
+}
+\]</span></p>
+<p><strong>Exemplo 2 — Coerção aritmética em C:</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> f <span class="op">=</span> <span class="fl">3.14</span><span class="bu">f</span><span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> f<span class="op">;</span>  <span class="co">// OK: conversão implícita float -&gt; int (com perda de precisão)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Derivação:</p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash f : \texttt{float}
+\quad
+\texttt{float} \xrightarrow{\text{coerce}} \texttt{int}
+\quad
+x : \texttt{int} \in \Gamma
+}{
+\Gamma \vdash x := f : \texttt{void}
+}
+\]</span></p>
+<p><strong>Exemplo 3 — Erro de tipo:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> s<span class="op">;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> x<span class="op">;</span>  <span class="co">// ERRO: int não é subtipo de String</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Tentativa de derivação falha:</p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash x : \texttt{int}
+\quad
+\texttt{int} \not\le \texttt{String}
+\quad
+s : \texttt{String} \in \Gamma
+}{
+\text{ERRO: incompatibilidade de tipos}
+}
+\]</span></p></li>
+<li><p>A resolução de nomes em escopos aninhados segue a regra do escopo estático mais próximo: busca-se o identificador na tabela do escopo atual. Se não encontrado, busca-se na tabela do escopo imediatamente envolvente, repetindo até o escopo global.</p></li>
+<li><p>Quando um símbolo é sombreado (<em>shadowing</em>), uma nova declaração com o mesmo nome é feita em um escopo interno. A busca encontra essa nova declaração primeiro (no topo da pilha ou início da lista encadeada) e para, ocultando a variável de mesmo nome do escopo externo.</p></li>
+<li><p>Composicionalidade denotacional significa que o significado de um comando composto depende apenas dos significados de seus subcomandos imediatos e de como eles são combinados. Por exemplo, <span class="math inline">\([\![S_1; S_2]\!]\)</span> é definido pela composição das funções <span class="math inline">\([\![S_2]\!]\)</span> e <span class="math inline">\([\![S_1]\!]\)</span>, sem precisar reanalisar a estrutura interna de <span class="math inline">\(S_1\)</span> ou <span class="math inline">\(S_2\)</span>.</p></li>
+<li><p>Denotação de <code>y := x + 1</code>: Assumindo que <span class="math inline">\([\![x]\!]\sigma = v\)</span>, então <span class="math inline">\([\![x+1]\!]\sigma = v+1\)</span>. O estado resultante é <span class="math inline">\(\sigma[y \mapsto \sigma(x) + 1]\)</span>.</p></li>
+<li><p>Para o laço <code>while y &gt; 0 do y := y - 1</code>: A função funcional <span class="math inline">\(F\)</span> associada irá iterar decrementando <span class="math inline">\(y\)</span>. O ponto fixo é uma função que, para qualquer estado inicial onde <span class="math inline">\(y\)</span> é um inteiro positivo, retorna um estado onde <span class="math inline">\(y=0\)</span> (os outros mapeamentos inalterados). Se <span class="math inline">\(y\)</span> for inicialmente negativo ou zero, retorna o estado inalterado.</p></li>
+<li><p>O <em>cast</em> <code>(float*)&amp;x</code> interpreta os bits do endereço de <code>x</code> como um ponteiro para <code>float</code>. O tipo resultante da expressão é <code>float*</code>.</p>
+<p><strong>Análise de tipos:</strong></p>
+<p><span class="math display">\[
+\frac{
+\Gamma \vdash x : T
+\quad
+\dfrac{
+\Gamma \vdash \&amp;x : T*
+}{
+\Gamma \vdash (\texttt{float}*)\&amp;x : \texttt{float}*
+}
+}{
+\text{cast explícito de } T* \to \texttt{float}*
+}
+\]</span></p>
+<p><strong>Semântica e comportamento indefinido:</strong></p>
+<p>Semanticamente, isso é perigoso e pode violar a regra de <em>strict aliasing</em> (C11 §6.5/7), que proíbe acessar um objeto através de um ponteiro de tipo incompatível, exceto em casos específicos:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="bn">0x42C80000</span><span class="op">;</span>  <span class="co">// representação de um float em bits</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span><span class="op">*</span> fp <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">*)&amp;</span>x<span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// COMPORTAMENTO INDEFINIDO se *fp for lido</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Violação da regra de strict aliasing</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"Valor reinterpretado: </span><span class="sc">%f\n</span><span class="st">"</span><span class="op">,</span> <span class="op">*</span>fp<span class="op">);</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Referência ao padrão C11 (ISO/IEC 9899:2011):</strong></p>
+<p>§6.5 Expressions, parágrafo 7: <em>“An object shall have its stored value accessed only by an lvalue expression that has one of the following types: […]”</em></p>
+<p>Tipos permitidos incluem: tipo compatível, versão qualificada, tipo signed/unsigned correspondente, agregado/união contendo esses tipos, ou <code>char*</code>/<code>unsigned char*</code>. Ponteiro <code>float*</code> usado para acessar <code>int</code> não está na lista, gerando comportamento indefinido.</p>
+<p><strong>Alternativa segura usando <code>memcpy</code>:</strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;string.h&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="bn">0x42C80000</span><span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> f<span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    memcpy<span class="op">(&amp;</span>f<span class="op">,</span> <span class="op">&amp;</span>x<span class="op">,</span> <span class="kw">sizeof</span><span class="op">(</span><span class="dt">float</span><span class="op">));</span>  <span class="co">// cópia de bytes, sem violação</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// f agora contém a reinterpretação segura</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O tipo estático permanece <code>float*</code>, mas o uso adequado requer atenção às regras de aliasing do padrão C.</p></li>
+<li><p>Dada uma função genérica com <em>trait bound</em> (ex: Rust): <code>fn processar&lt;T: Display&gt;(item: T)</code> O tipo da função é uma família de funções para todo <span class="math inline">\(T\)</span> que satisfaz a restrição <code>Display</code>. A análise semântica rejeita chamadas com tipos que não implementam esse <em>trait</em>.</p></li>
+<li><p><em>Subsumption</em> (subsunção) é a regra que permite que um tipo seja usado onde se espera seu supertipo. Em sistemas com <em>hints</em> e <em>union types</em>, se uma função espera <code>int | str</code>, ela aceita <code>int</code> por subsunção, pois <span class="math inline">\(int &lt;: (int \cup str)\)</span>.</p></li>
+<li><p>A detecção de variável não declarada ocorre quando a busca na Tabela de Símbolos falha em todos os escopos abertos (da pilha atual até o global). O compilador então emite um erro semântico, impedindo a geração de código.</p></li>
+<li><p>Um <strong>axioma</strong> em um sistema de julgamento de tipos é uma regra de inferência sem premissas, que estabelece verdades fundamentais sobre os tipos primitivos da linguagem. Axiomas são a base do sistema de tipos, representando fatos que são aceitos sem necessidade de derivação.</p></li>
+</ol>
+<p><strong>Estrutura formal de um axioma:</strong></p>
+<p><span class="math display">\[
+\frac{}{\text{conclusão}}
+\]</span></p>
+<p>A ausência de premissas (numerador vazio) indica que a conclusão é válida por definição.</p>
+<p><strong>Exemplos de axiomas para tipos primitivos:</strong></p>
+<p><strong>Axioma para literais inteiros:</strong></p>
+<p><span class="math display">\[
+\frac{}{O, M, C \vdash n : \text{Int}}
+\]</span></p>
+<p>em que <span class="math inline">\(n \in \mathbb{Z}\)</span> (qualquer número inteiro).</p>
+<p>Exemplo: <code>42 : Int</code>, <code>-7 : Int</code>, <code>0 : Int</code>.</p>
+<p><strong>Axioma para literais reais:</strong></p>
+<p><span class="math display">\[
+\frac{}{O, M, C \vdash r : \text{Real}}
+\]</span></p>
+<p>em que <span class="math inline">\(r \in \mathbb{R}\)</span> (qualquer número real).</p>
+<p>Exemplo: <code>3.14 : Real</code>, <code>-0.5 : Real</code>, <code>2.0 : Real</code>.</p>
+<p><strong>Axioma para literais booleanos:</strong></p>
+<p><span class="math display">\[
+\frac{}{O, M, C \vdash b : \text{Bool}}
+\]</span></p>
+<p>em que <span class="math inline">\(b \in \{\text{true}, \text{false}\}\)</span>.</p>
+<p>Exemplo: <code>true : Bool</code>, <code>false : Bool</code>.</p>
+<p>Esses axiomas formam a fundação sobre a qual todas as outras regras de tipagem são construídas. Eles não requerem verificação ou derivação, pois representam os tipos inerentes aos valores literais da linguagem.</p>
+<ol start="42" type="1">
+<li>Uma <strong>regra de inferência de tipos</strong> usando a notação de sequentes tem a forma:</li>
+</ol>
+<p><span class="math display">\[
+\frac{\text{premissa}_1 \quad \text{premissa}_2 \quad \ldots \quad \text{premissa}_n}{\text{conclusão}} \quad [\text{Nome da Regra}]
+\]</span></p>
+<p><strong>Componentes da estrutura:</strong></p>
+<ol type="1">
+<li><strong>Numerador (premissas):</strong> Conjunto de julgamentos que devem ser verdadeiros para que a regra seja aplicável. Cada premissa é um sequente da forma <span class="math inline">\(\Gamma \vdash e : T\)</span>, que se lê “no contexto <span class="math inline">\(\Gamma\)</span>, a expressão <span class="math inline">\(e\)</span> tem tipo <span class="math inline">\(T\)</span>”.</li>
+<li><strong>Denominador (conclusão):</strong> O julgamento que pode ser derivado quando todas as premissas são satisfeitas.</li>
+<li><strong>Linha horizontal:</strong> Representa a relação de implicação lógica: se todas as premissas acima da linha são verdadeiras, então a conclusão abaixo da linha é válida.</li>
+<li><strong>Nome da regra (opcional):</strong> Identificador para referenciar a regra.</li>
+</ol>
+<p><strong>Exemplo: Regra de Adição de Inteiros</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Int} \quad \Gamma \vdash e_2 : \text{Int}}{\Gamma \vdash e_1 + e_2 : \text{Int}} \quad [\text{T-Add-Int}]
+\]</span></p>
+<p><strong>Leitura da regra:</strong></p>
+<p>“Se, no contexto de tipagem <span class="math inline">\(\Gamma\)</span>, a expressão <span class="math inline">\(e_1\)</span> tem tipo <code>Int</code> E a expressão <span class="math inline">\(e_2\)</span> tem tipo <code>Int</code>, então a expressão <span class="math inline">\(e_1 + e_2\)</span> tem tipo <code>Int</code>.”</p>
+<p><strong>Componentes identificados:</strong></p>
+<ul>
+<li><strong>Premissa 1:</strong> <span class="math inline">\(\Gamma \vdash e_1 : \text{Int}\)</span> — o operando esquerdo é um inteiro.</li>
+<li><strong>Premissa 2:</strong> <span class="math inline">\(\Gamma \vdash e_2 : \text{Int}\)</span> — o operando direito é um inteiro.</li>
+<li><strong>Conclusão:</strong> <span class="math inline">\(\Gamma \vdash e_1 + e_2 : \text{Int}\)</span> — a soma resulta em um inteiro.</li>
+<li><strong>Nome:</strong> [T-Add-Int] — identificador da regra.</li>
+</ul>
+<p><strong>Exemplo: Regra com Múltiplas Premissas (Condicional)</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Bool} \quad \Gamma \vdash e_2 : T \quad \Gamma \vdash e_3 : T}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : T} \quad [\text{T-If}]
+\]</span></p>
+<p>Esta regra exige três premissas: a condição deve ser booleana e ambos os ramos devem ter o mesmo tipo <span class="math inline">\(T\)</span>.</p>
+<ol start="43" type="1">
+<li>Para derivar o tipo de <code>x + 5</code> no contexto <span class="math inline">\(\Gamma = \{x : \text{int}\}\)</span>, usamos uma <strong>árvore de derivação</strong> que aplica as regras de tipagem <em>bottom-up</em>.</li>
+</ol>
+<p><strong>Objetivo:</strong> Provar que <span class="math inline">\(\Gamma \vdash x + 5 : \text{int}\)</span>.</p>
+<p><strong>Passo 1: Identificar a regra principal</strong></p>
+<p>A expressão é uma adição, então usamos a <strong>Regra de Adição de Inteiros:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash x : \text{int} \quad \Gamma \vdash 5 : \text{int}}{\Gamma \vdash x + 5 : \text{int}} \quad [\text{T-Add-Int}]
+\]</span></p>
+<p><strong>Passo 2: Derivar a premissa esquerda</strong> <span class="math inline">\(\Gamma \vdash x : \text{int}\)</span></p>
+<p>Usamos a <strong>Regra da Variável</strong> (ou axioma de consulta ao contexto):</p>
+<p><span class="math display">\[
+\frac{x : \text{int} \in \Gamma}{\Gamma \vdash x : \text{int}} \quad [\text{T-Var}]
+\]</span></p>
+<p>Como <span class="math inline">\(x : \text{int}\)</span> está em <span class="math inline">\(\Gamma\)</span> por definição, esta premissa é satisfeita.</p>
+<p><strong>Passo 3: Derivar a premissa direita</strong> <span class="math inline">\(\Gamma \vdash 5 : \text{int}\)</span></p>
+<p>Usamos o <strong>Axioma para Literais Inteiros:</strong></p>
+<p><span class="math display">\[
+\frac{}{\Gamma \vdash 5 : \text{int}} \quad [\text{T-Int}]
+\]</span></p>
+<p>Esta é uma verdade axiomática: o literal <code>5</code> tem tipo <code>int</code>.</p>
+<p><strong>Árvore de Derivação Completa:</strong></p>
+<p><span class="math display">\[
+\frac{
+  \dfrac{x : \text{int} \in \Gamma}{\Gamma \vdash x : \text{int}} \; [\text{T-Var}]
+  \quad
+  \dfrac{}{\Gamma \vdash 5 : \text{int}} \; [\text{T-Int}]
+}{
+  \Gamma \vdash x + 5 : \text{int}
+} \; [\text{T-Add-Int}]
+\]</span></p>
+<p><strong>Conclusão:</strong> A expressão <code>x + 5</code> é bem tipada no contexto <span class="math inline">\(\Gamma = \{x : \text{int}\}\)</span> e tem tipo <code>int</code>.</p>
+<p><strong>Notação textual alternativa (árvore em ASCII):</strong></p>
+<pre class="text"><code>[T-Var]           [T-Int]
+x:int ∈ Γ          (axioma)
+─────────          ─────────
+Γ ⊢ x:int         Γ ⊢ 5:int
+───────────────────────────── [T-Add-Int]
+     Γ ⊢ x + 5 : int</code></pre>
+<ol start="44" type="1">
+<li>A regra de julgamento de tipos para a multiplicação entre dois números reais é:</li>
+</ol>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Real} \quad \Gamma \vdash e_2 : \text{Real}}{\Gamma \vdash e_1 \times e_2 : \text{Real}} \quad [\text{T-Mult-Real}]
+\]</span></p>
+<p><strong>Leitura da regra:</strong></p>
+<p>“Se, no contexto de tipagem <span class="math inline">\(\Gamma\)</span>, a expressão <span class="math inline">\(e_1\)</span> tem tipo <code>Real</code> E a expressão <span class="math inline">\(e_2\)</span> tem tipo <code>Real</code>, então a expressão <span class="math inline">\(e_1 \times e_2\)</span> (produto de <span class="math inline">\(e_1\)</span> e <span class="math inline">\(e_2\)</span>) tem tipo <code>Real</code>.”</p>
+<p><strong>Análise formal:</strong></p>
+<ul>
+<li><strong>Premissa 1:</strong> <span class="math inline">\(\Gamma \vdash e_1 : \text{Real}\)</span> — O primeiro operando deve ser do tipo <code>Real</code>.</li>
+<li><strong>Premissa 2:</strong> <span class="math inline">\(\Gamma \vdash e_2 : \text{Real}\)</span> — O segundo operando deve ser do tipo <code>Real</code>.</li>
+<li><strong>Conclusão:</strong> <span class="math inline">\(\Gamma \vdash e_1 \times e_2 : \text{Real}\)</span> — O resultado da multiplicação é do tipo <code>Real</code>.</li>
+</ul>
+<p><strong>Exemplo de aplicação:</strong></p>
+<p>Para a expressão <code>3.14 * 2.71</code> no contexto vazio <span class="math inline">\(\Gamma_0 = \{\}\)</span>:</p>
+<p><span class="math display">\[
+\frac{
+  \dfrac{}{\Gamma_0 \vdash 3.14 : \text{Real}} \; [\text{Axioma-Real}]
+  \quad
+  \dfrac{}{\Gamma_0 \vdash 2.71 : \text{Real}} \; [\text{Axioma-Real}]
+}{
+  \Gamma_0 \vdash 3.14 \times 2.71 : \text{Real}
+} \; [\text{T-Mult-Real}]
+\]</span></p>
+<p><strong>Observação importante:</strong></p>
+<p>Esta regra assume tipagem <strong>estrita</strong> — ambos operandos devem ser exatamente do tipo <code>Real</code>. Para linguagens que permitem coerção automática de <code>Int</code> para <code>Real</code>, seria necessária uma regra adicional ou uma premissa de conversão.</p>
+<p><strong>Regra alternativa com coerção implícita:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2 \quad T_1, T_2 \in \{\text{Int}, \text{Real}\}}{\Gamma \vdash e_1 \times e_2 : \text{promote}(T_1, T_2)} \quad [\text{T-Mult-Num}]
+\]</span></p>
+<p>em que <code>promote(Int, Int) = Int</code>, <code>promote(Real, Real) = Real</code>, e <code>promote(Int, Real) = promote(Real, Int) = Real</code>.</p>
+<ol start="45" type="1">
+<li>A diferença fundamental entre regras de tipagem com uma versus múltiplas premissas está na <strong>quantidade de informação necessária</strong> para derivar a conclusão.</li>
+</ol>
+<p><strong>Regras com Uma Premissa:</strong></p>
+<p>Estrutura:</p>
+<p><span class="math display">\[
+\frac{\text{premissa única}}{\text{conclusão}}
+\]</span></p>
+<p>Essas regras representam transformações ou propagações diretas de tipo. Há uma dependência linear: a conclusão depende de apenas um julgamento anterior.</p>
+<p><strong>Exemplos:</strong></p>
+<ol type="1">
+<li><p><strong>Propagação de tipo em expressão entre parênteses:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e : T}{\Gamma \vdash (e) : T} \quad [\text{T-Paren}]
+\]</span></p>
+<p>Leitura: “Se <code>e</code> tem tipo <code>T</code>, então <code>(e)</code> também tem tipo <code>T</code>.”</p></li>
+<li><p><strong>Conversão de tipo (cast):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e : T_1}{\Gamma \vdash (T_2)e : T_2} \quad [\text{T-Cast}]
+\]</span></p>
+<p>Leitura: “Se <code>e</code> tem tipo <code>T_1</code>, então o cast <code>(T_2)e</code> tem tipo <code>T_2</code>.”</p></li>
+<li><p><strong>Regra de subsunção (subtipagem):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e : T_1 \quad T_1 &lt;: T_2}{\Gamma \vdash e : T_2} \quad [\text{T-Sub}]
+\]</span></p>
+<p>(Esta tem duas premissas se contarmos a relação de subtipagem, mas conceitualmente é uma transformação direta).</p></li>
+</ol>
+<p><strong>Regras com Múltiplas Premissas:</strong></p>
+<p>Estrutura:</p>
+<p><span class="math display">\[
+\frac{\text{premissa}_1 \quad \text{premissa}_2 \quad \ldots \quad \text{premissa}_n}{\text{conclusão}}
+\]</span></p>
+<p>Essas regras representam <strong>composição</strong> ou <strong>combinação</strong> de informações. A conclusão só é válida se TODAS as premissas forem satisfeitas simultaneamente.</p>
+<p><strong>Exemplos:</strong></p>
+<ol type="1">
+<li><p><strong>Operação binária (adição):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Int} \quad \Gamma \vdash e_2 : \text{Int}}{\Gamma \vdash e_1 + e_2 : \text{Int}} \quad [\text{T-Add}]
+\]</span></p>
+<p>Leitura: “Se ambos <code>e₁</code> e <code>e₂</code> têm tipo <code>Int</code>, então <code>e₁ + e₂</code> tem tipo <code>Int</code>.”</p></li>
+<li><p><strong>Condicional (if-then-else):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Bool} \quad \Gamma \vdash e_2 : T \quad \Gamma \vdash e_3 : T}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : T} \quad [\text{T-If}]
+\]</span></p>
+<p>Leitura: “Se <code>e₁</code> é booleano E <code>e₂</code> tem tipo <code>T</code> E <code>e₃</code> tem tipo <code>T</code>, então o condicional tem tipo <code>T</code>.”</p></li>
+<li><p><strong>Chamada de função:</strong></p>
+<p><span class="math display">\[
+\frac{M(f) = (T_1, T_2) \rightarrow T_{ret} \quad \Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2}{\Gamma \vdash f(e_1, e_2) : T_{ret}} \quad [\text{T-Call}]
+\]</span></p>
+<p>Leitura: “Se <code>f</code> tem assinatura <span class="math inline">\((T_1, T_2) \rightarrow T_{ret}\)</span> E os argumentos têm os tipos corretos, então a chamada tem tipo <code>T_{ret}</code>.”</p></li>
+<li><p>O <strong>contexto de tipagem</strong> <span class="math inline">\(\Gamma\)</span> é uma estrutura de dados mutável que evolui durante a análise semântica, refletindo o conhecimento acumulado do compilador sobre os identificadores declarados e seus tipos.</p></li>
+</ol>
+<p><strong>Definição formal:</strong></p>
+<p><span class="math display">\[
+\Gamma = \{x_1 : T_1, x_2 : T_2, \ldots, x_n : T_n\}
+\]</span></p>
+<p>Um mapeamento de identificadores para tipos.</p>
+<p><strong>Evolução do contexto:</strong></p>
+<p>Durante a análise de um programa com múltiplas declarações, o contexto é <strong>incrementalmente estendido</strong>. Cada declaração bem-sucedida adiciona uma nova ligação ao contexto.</p>
+<p><strong>Notação de extensão:</strong></p>
+<p><span class="math display">\[
+\Gamma, x : T \quad \text{ou} \quad \Gamma \cup \{x : T\}
+\]</span></p>
+<p>Representa o contexto <span class="math inline">\(\Gamma\)</span> estendido com a ligação <span class="math inline">\(x : T\)</span>.</p>
+<p><strong>Exemplo de Programa:</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> z <span class="op">=</span> y <span class="op">*</span> <span class="fl">2.0</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Evolução passo a passo:</strong></p>
+<p><strong>Estado inicial:</strong></p>
+<p><span class="math display">\[
+\Gamma_0 = \{\} \quad \text{(contexto vazio)}
+\]</span></p>
+<p><strong>Linha 1:</strong> <code>int x = 10;</code></p>
+<p>Regra aplicada:</p>
+<p><span class="math display">\[
+\frac{\Gamma_0 \vdash 10 : \text{int}}{\Gamma_0 \vdash (\text{int } x = 10) : \text{ok}}
+\]</span></p>
+<p><strong>Novo contexto:</strong></p>
+<p><span class="math display">\[
+\Gamma_1 = \Gamma_0 \cup \{x : \text{int}\} = \{x : \text{int}\}
+\]</span></p>
+<p><strong>Linha 2:</strong> <code>int y = x + 5;</code></p>
+<p>Regra aplicada:</p>
+<p><span class="math display">\[
+\frac{\Gamma_1 \vdash x + 5 : \text{int}}{\Gamma_1 \vdash (\text{int } y = x + 5) : \text{ok}}
+\]</span></p>
+<p>A verificação de <code>x + 5</code> usa o contexto <span class="math inline">\(\Gamma_1\)</span> para confirmar que <code>x : int</code>.</p>
+<p><strong>Novo contexto:</strong></p>
+<p><span class="math display">\[
+\Gamma_2 = \Gamma_1 \cup \{y : \text{int}\} = \{x : \text{int}, y : \text{int}\}
+\]</span></p>
+<p><strong>Linha 3:</strong> <code>float z = y * 2.0;</code></p>
+<p>Regra aplicada:</p>
+<p><span class="math display">\[
+\frac{\Gamma_2 \vdash y \times 2.0 : \text{float}}{\Gamma_2 \vdash (\text{float } z = y \times 2.0) : \text{ok}}
+\]</span></p>
+<p>Aqui, <code>y : int</code> é promovido para <code>float</code> na multiplicação com <code>2.0 : float</code>.</p>
+<p><strong>Novo contexto:</strong></p>
+<p><span class="math display">\[
+\Gamma_3 = \Gamma_2 \cup \{z : \text{float}\} = \{x : \text{int}, y : \text{int}, z : \text{float}\}
+\]</span></p>
+<p><strong>Formalização com escopos:</strong></p>
+<p>Em linguagens com blocos:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>       <span class="co">// Γ₁ = {x:int}</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">float</span> x <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span> <span class="co">// Γ₂ = Γ₁ ∪ {x:float} (sobrepõe)</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// x aqui refere-se ao float</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">// x aqui volta a ser int (Γ₁)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Isso é implementado com uma <strong>pilha de contextos</strong>, na qual cada bloco introduz um novo nível.</p>
+<p><strong>Regra formal de declaração com threading:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma_i \vdash e : T \quad x \notin \text{dom}(\Gamma_i) \quad \Gamma_{i+1} = \Gamma_i \cup \{x : T\}}{\Gamma_i \vdash (\text{T } x = e) : \text{ok}, \Gamma_{i+1}}
+\]</span></p>
+<p>Esta regra <strong>produz um novo contexto</strong> <span class="math inline">\(\Gamma_{i+1}\)</span> como resultado da análise da declaração.</p>
+<ol start="47" type="1">
+<li>A regra de julgamento de tipos para <strong>operações de comparação</strong> (<code>&gt;</code>, <code>&lt;</code>, <code>==</code>, <code>!=</code>, <code>&gt;=</code>, <code>&lt;=</code>) segue um padrão comum: os operandos devem ser de tipos comparáveis, e o resultado é sempre um valor booleano.</li>
+</ol>
+<p><strong>Regra geral para comparação numérica:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2 \quad T_1, T_2 \in \text{NumericTypes} \quad \text{comparable}(T_1, T_2)}{\Gamma \vdash e_1 \; \texttt{op}_{\text{cmp}} \; e_2 : \text{Bool}} \quad [\text{T-Compare}]
+\]</span></p>
+<p>em que <span class="math inline">\(\texttt{op}_{\text{cmp}} \in \{&gt;, &lt;, \geq, \leq\}\)</span> e <code>NumericTypes</code> = <span class="math inline">\(\{\text{Int}, \text{Real}, \text{Float}, \text{Double}, \ldots\}\)</span>.</p>
+<p><strong>Regras específicas:</strong></p>
+<p><strong>Comparação de inteiros:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Int} \quad \Gamma \vdash e_2 : \text{Int}}{\Gamma \vdash e_1 &gt; e_2 : \text{Bool}} \quad [\text{T-Greater-Int}]
+\]</span></p>
+<p><strong>Comparação de reais:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Real} \quad \Gamma \vdash e_2 : \text{Real}}{\Gamma \vdash e_1 &lt; e_2 : \text{Bool}} \quad [\text{T-Less-Real}]
+\]</span></p>
+<p><strong>Comparação mista (com coerção implícita):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Int} \quad \Gamma \vdash e_2 : \text{Real}}{\Gamma \vdash e_1 \geq e_2 : \text{Bool}} \quad [\text{T-GreaterEq-Mixed}]
+\]</span></p>
+<p>Aqui, <code>Int</code> é promovido implicitamente para <code>Real</code> antes da comparação.</p>
+<p><strong>Igualdade estrutural (qualquer tipo):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : T \quad \Gamma \vdash e_2 : T \quad T \text{ é comparável}}{\Gamma \vdash e_1 == e_2 : \text{Bool}} \quad [\text{T-Equals}]
+\]</span></p>
+<p>Esta regra exige que ambos operandos tenham o <strong>mesmo tipo</strong> <span class="math inline">\(T\)</span>, e que <span class="math inline">\(T\)</span> suporte comparação de igualdade.</p>
+<p><strong>Desigualdade:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : T \quad \Gamma \vdash e_2 : T \quad T \text{ é comparável}}{\Gamma \vdash e_1 \neq e_2 : \text{Bool}} \quad [\text{T-NotEquals}]
+\]</span></p>
+<p><strong>Exemplo de derivação:</strong></p>
+<p>Para a expressão <code>x &gt; 0</code> em que <span class="math inline">\(\Gamma = \{x : \text{Int}\}\)</span>:</p>
+<p><span class="math display">\[
+\frac{
+  \dfrac{x : \text{Int} \in \Gamma}{\Gamma \vdash x : \text{Int}} \; [\text{T-Var}]
+  \quad
+  \dfrac{}{\Gamma \vdash 0 : \text{Int}} \; [\text{Axioma-Int}]
+}{
+  \Gamma \vdash x &gt; 0 : \text{Bool}
+} \; [\text{T-Greater-Int}]
+\]</span></p>
+<p><strong>Uso em condicionais:</strong> Como comparações produzem <code>Bool</code>, elas podem ser usadas diretamente em estruturas de controle:</p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 &gt; e_2 : \text{Bool} \quad \ldots}{\Gamma \vdash \text{if } (e_1 &gt; e_2) \text{ then } \ldots : T}
+\]</span></p>
+<ol start="48" type="1">
+<li>A <strong>regra de coerção de tipos</strong> para operações aritméticas mistas formaliza como linguagens lidam com operandos de tipos diferentes, promovendo automaticamente o tipo “menor” para o tipo “maior” para permitir a operação.</li>
+</ol>
+<p><strong>Fundamento: Hierarquia de Tipos Numéricos</strong></p>
+<p><span class="math display">\[
+\text{Int} &lt;_{\text{num}} \text{Float} &lt;_{\text{num}} \text{Double}
+\]</span></p>
+<p><strong>Função de Promoção</strong></p>
+<p>Definimos uma função <code>promote</code> que retorna o tipo resultante:</p>
+<p><span class="math display">\[
+\text{promote} : \text{Type} \times \text{Type} \rightarrow \text{Type}
+\]</span></p>
+<p>com as seguintes propriedades: 1. <strong>Reflexividade:</strong> <span class="math inline">\(\text{promote}(T, T) = T\)</span> 2. <strong>Comutatividade:</strong> <span class="math inline">\(\text{promote}(T_1, T_2) = \text{promote}(T_2, T_1)\)</span> 3. <strong>Promoção:</strong> Se <span class="math inline">\(T_1 &lt;_{\text{num}} T_2\)</span>, então <span class="math inline">\(\text{promote}(T_1, T_2) = T_2\)</span></p>
+<p><strong>Regra Formal de Adição com Coerção</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2 \quad T_1, T_2 \in \text{NumericTypes} \quad T = \text{promote}(T_1, T_2)}{\Gamma \vdash e_1 + e_2 : T} \quad [\text{T-Add-Coerce}]
+\]</span></p>
+<p><strong>Leitura:</strong> “Se <span class="math inline">\(e_1\)</span> tem tipo numérico <span class="math inline">\(T_1\)</span> e <span class="math inline">\(e_2\)</span> tem tipo numérico <span class="math inline">\(T_2\)</span>, então a adição <span class="math inline">\(e_1 + e_2\)</span> tem tipo <span class="math inline">\(T\)</span>, em que <span class="math inline">\(T\)</span> é o resultado da promoção de <span class="math inline">\(T_1\)</span> e <span class="math inline">\(T_2\)</span>.”</p>
+<p><strong>Regra Expandida (explicitando a conversão):</strong></p>
+<p>Uma forma mais explícita inclui a conversão de tipo:</p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2 \quad T = \text{promote}(T_1, T_2)}{\Gamma \vdash e_1 + e_2 : T} \quad [\text{T-Add-Promote}]
+\]</span></p>
+<p>com a semântica implícita:</p>
+<p><span class="math display">\[
+[\![e_1 + e_2]\!] = [\![\text{convert}(e_1, T)]\!] +_T [\![\text{convert}(e_2, T)]\!]
+\]</span></p>
+<p>em que <span class="math inline">\(+_T\)</span> é a adição no tipo <span class="math inline">\(T\)</span>.</p>
+<p><strong>Exemplo: Int + Float</strong></p>
+<p>Para <code>x + 3.14</code> em que <span class="math inline">\(\Gamma = \{x : \text{Int}\}\)</span>:</p>
+<p><span class="math display">\[
+\frac{
+  \dfrac{x : \text{Int} \in \Gamma}{\Gamma \vdash x : \text{Int}} \; [\text{T-Var}]
+  \quad
+  \dfrac{}{\Gamma \vdash 3.14 : \text{Float}} \; [\text{Axioma-Float}]
+  \quad
+  \text{promote}(\text{Int}, \text{Float}) = \text{Float}
+}{
+  \Gamma \vdash x + 3.14 : \text{Float}
+} \; [\text{T-Add-Coerce}]
+\]</span></p>
+<ol start="49" type="1">
+<li>A regra de julgamento de tipos para <strong>concatenação de strings</strong> usando o operador <span class="math inline">\(\oplus\)</span> garante que ambos os operandos sejam strings e que o resultado também seja uma string.</li>
+</ol>
+<p><strong>Regra básica:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{String} \quad \Gamma \vdash e_2 : \text{String}}{\Gamma \vdash e_1 \oplus e_2 : \text{String}} \quad [\text{T-Concat}]
+\]</span></p>
+<p><strong>Variantes da regra para diferentes linguagens:</strong></p>
+<p><strong>1. Concatenação com conversão automática (como Python ou JavaScript):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{String} \quad \Gamma \vdash e_2 : T \quad T \in \text{ConvertibleTypes}}{\Gamma \vdash e_1 \oplus e_2 : \text{String}} \quad [\text{T-Concat-Convert}]
+\]</span></p>
+<p>em que <code>ConvertibleTypes</code> = <span class="math inline">\(\{\text{Int}, \text{Float}, \text{Bool}, \text{Char}, \ldots\}\)</span>.</p>
+<p>Exemplo em Python:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">"Age: "</span> <span class="op">+</span> <span class="bu">str</span>(<span class="dv">25</span>)  <span class="co"># OK: 25 convertido para "25"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># "Value: " + 3.14  # Em Python 3, erro (sem conversão implícita em soma direta)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Exemplo prático completo:</strong></p>
+<p>Para o programa:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> greeting <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> name <span class="op">=</span> <span class="st">"Alice"</span><span class="op">;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> message <span class="op">=</span> greeting <span class="op">+</span> <span class="st">", "</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">"!"</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Contexto inicial: <span class="math inline">\(\Gamma_0 = \{\}\)</span>.</p>
+<p>Derivação de <code>greeting + ", " + name + "!"</code>:</p>
+<p><span class="math display">\[
+\frac{
+  \Gamma_2 \vdash \text{greeting} : \text{String}
+  \quad
+  \Gamma_2 \vdash \text{", "} : \text{String}
+}{
+  \Gamma_2 \vdash \text{greeting} \oplus \text{", "} : \text{String}
+} \; [\text{T-Concat}]
+\]</span></p>
+<p><span class="math display">\[
+\frac{
+  \Gamma_2 \vdash (\text{greeting} \oplus \text{", "}) : \text{String}
+  \quad
+  \Gamma_2 \vdash \text{name} : \text{String}
+}{
+  \Gamma_2 \vdash (\text{greeting} \oplus \text{", "}) \oplus \text{name} : \text{String}
+} \; [\text{T-Concat}]
+\]</span></p>
+<ol start="50" type="1">
+<li>Para derivar o tipo da expressão <code>if (x &gt; 0) then 10 else 3.14</code>, precisamos analisar se a expressão é <strong>bem tipada</strong> ou não, dependendo das regras da linguagem.</li>
+</ol>
+<p><strong>Contexto:</strong> <span class="math inline">\(\Gamma = \{x : \text{Int}\}\)</span>.</p>
+<p><strong>Análise passo a passo:</strong></p>
+<ol type="1">
+<li><strong>Condição:</strong> <span class="math inline">\(x &gt; 0\)</span> tem tipo <code>Bool</code>.</li>
+<li><strong>Ramo <code>then</code>:</strong> <code>10</code> tem tipo <code>Int</code>.</li>
+<li><strong>Ramo <code>else</code>:</strong> <code>3.14</code> tem tipo <code>Float</code>.</li>
+</ol>
+<p><strong>Regra do condicional:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Bool} \quad \Gamma \vdash e_2 : T \quad \Gamma \vdash e_3 : T}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : T} \quad [\text{T-If}]
+\]</span></p>
+<p><strong>Conclusão depende da linguagem:</strong></p>
+<p><strong>Caso 1: Linguagem com tipagem estrita (sem coerção) - Haskell, ML</strong> A expressão é <strong>mal tipada</strong>. Erro: “Incompatible types in conditional branches: then-branch has type Int, else-branch has type Float”.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ERRO em Haskell: "Couldn't match type 'Int' with 'Double'"</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>f x <span class="ot">=</span> <span class="kw">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">then</span> <span class="dv">10</span> <span class="kw">else</span> <span class="fl">3.14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Caso 2: Linguagem com coerção implícita - C, Java</strong> A expressão é <strong>bem tipada</strong> com tipo <code>Float</code>, após promover o ramo <code>then</code> de <code>Int</code> para <code>Float</code>.</p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Bool} \quad \Gamma \vdash e_2 : T_2 \quad \Gamma \vdash e_3 : T_3 \quad T = \text{promote}(T_2, T_3)}{\Gamma \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : T} \quad [\text{T-If-Coerce}]
+\]</span></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Em C:</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> result <span class="op">=</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">?</span> <span class="dv">10</span> <span class="op">:</span> <span class="fl">3.14</span><span class="op">;</span> <span class="co">// OK: 10 promovido para 10.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Caso 3: Linguagem com union types - TypeScript</strong> A expressão tem tipo <code>Int | Float</code> (união), ou <code>number</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Em TypeScript:</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(x<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="dv">10</span> <span class="op">:</span> <span class="fl">3.14</span><span class="op">;</span> <span class="co">// OK: tipo é number</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="51" type="1">
+<li>A regra de tipagem para <strong>operações lógicas</strong> AND e OR opera sobre valores booleanos e produz um resultado booleano.</li>
+</ol>
+<p><strong>Regra para AND (conjunção lógica):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Bool} \quad \Gamma \vdash e_2 : \text{Bool}}{\Gamma \vdash e_1 \land e_2 : \text{Bool}} \quad [\text{T-And}]
+\]</span></p>
+<p><strong>Regra para OR (disjunção lógica):</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Bool} \quad \Gamma \vdash e_2 : \text{Bool}}{\Gamma \vdash e_1 \lor e_2 : \text{Bool}} \quad [\text{T-Or}]
+\]</span></p>
+<p><strong>Variantes em linguagens específicas (Avaliação curto-circuito):</strong></p>
+<p>Em C, Java, Python, os operadores <code>&amp;&amp;</code> e <code>||</code> avaliam o segundo operando apenas se necessário.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Em C:</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> f<span class="op">()</span> <span class="op">{</span> printf<span class="op">(</span><span class="st">"f called</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> g<span class="op">()</span> <span class="op">{</span> printf<span class="op">(</span><span class="st">"g called</span><span class="sc">\n</span><span class="st">"</span><span class="op">);</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>g<span class="op">()</span> <span class="op">&amp;&amp;</span> f<span class="op">())</span> <span class="op">{</span> <span class="op">...</span> <span class="op">}</span>  <span class="co">// Imprime apenas "g called", f() não é avaliado</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Bitwise vs.&nbsp;Lógico:</strong></p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash e_1 : \text{Int} \quad \Gamma \vdash e_2 : \text{Int}}{\Gamma \vdash e_1 \; \&amp; \; e_2 : \text{Int}} \quad [\text{T-BitAnd}]
+\]</span></p>
+<ol start="52" type="1">
+<li>Para derivar completamente o tipo da expressão <code>(x + y) * z</code> em que <span class="math inline">\(\Gamma = \{x : \text{Int}, y : \text{Int}, z : \text{Float}\}\)</span>, construiremos a árvore de derivação passo a passo.</li>
+</ol>
+<p><strong>Passo 1: Derivar os tipos das variáveis</strong> * <span class="math inline">\(\Gamma \vdash x : \text{Int}\)</span> * <span class="math inline">\(\Gamma \vdash y : \text{Int}\)</span> * <span class="math inline">\(\Gamma \vdash z : \text{Float}\)</span></p>
+<p><strong>Passo 2: Derivar a subexpressão <code>x + y</code></strong> Aplicamos a regra de adição de inteiros:</p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash x : \text{Int} \quad \Gamma \vdash y : \text{Int}}{\Gamma \vdash x + y : \text{Int}} \quad [\text{T-Add-Int}]
+\]</span></p>
+<p><strong>Passo 3: Derivar a expressão completa <code>(x + y) * z</code></strong> Temos <code>Int</code> à esquerda e <code>Float</code> à direita. Aplicamos a <strong>regra de multiplicação com coerção</strong>:</p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash (x + y) : \text{Int} \quad \Gamma \vdash z : \text{Float} \quad \text{promote}(\text{Int}, \text{Float}) = \text{Float}}{\Gamma \vdash (x + y) \times z : \text{Float}} \quad [\text{T-Mult-Coerce}]
+\]</span></p>
+<p><strong>Árvore de Derivação Completa:</strong></p>
+<p><span class="math display">\[
+\frac{
+  \dfrac{
+    \dfrac{x : \text{Int} \in \Gamma}{\Gamma \vdash x : \text{Int}} [\text{T-Var}]
+    \quad
+    \dfrac{y : \text{Int} \in \Gamma}{\Gamma \vdash y : \text{Int}} [\text{T-Var}]
+  }{
+    \Gamma \vdash x + y : \text{Int}
+  } [\text{T-Add-Int}]
+  \quad
+  \dfrac{z : \text{Float} \in \Gamma}{\Gamma \vdash z : \text{Float}} [\text{T-Var}]
+  \quad
+  \text{promote}(\text{Int}, \text{Float}) = \text{Float}
+}{
+  \Gamma \vdash (x + y) \times z : \text{Float}
+} [\text{T-Mult-Coerce}]
+\]</span></p>
+<ol start="53" type="1">
+<li>Existem dois tipos principais de atributos em gramáticas de atributos: <strong>sintetizados</strong> e <strong>herdados</strong>.</li>
+</ol>
+<p><strong>Atributos Sintetizados</strong></p>
+<p><strong>Definição:</strong> Um atributo é sintetizado quando seu valor em um vértice é calculado <strong>a partir dos atributos dos seus filhos</strong> na árvore sintática. <strong>Direção do fluxo:</strong> <strong>Bottom-up</strong> (de baixo para cima). <strong>Exemplo:</strong> Cálculo de valor de expressão aritmética.</p>
+<p><strong>Regra:</strong> <span class="math inline">\(E \rightarrow E_1 + T \quad \{ E.val = E_1.val + T.val \}\)</span></p>
+<pre class="text"><code>      E.val=8
+     /    |    \
+   E.val=3  +  T.val=5
+    |             |
+  T.val=3       num(5)
+    |
+  num(3)</code></pre>
+<p><strong>Atributos Herdados</strong></p>
+<p><strong>Definição:</strong> Um atributo é herdado quando seu valor em um vértice é calculado <strong>a partir dos atributos do seu pai ou irmãos</strong> na árvore sintática. <strong>Direção do fluxo:</strong> <strong>Top-down</strong> (de cima para baixo). <strong>Exemplo:</strong> Propagação de tipo em declarações.</p>
+<p><strong>Regra:</strong> <span class="math inline">\(Decl \rightarrow Type \; VarList \quad \{ VarList.dtype = Type.type \}\)</span></p>
+<pre class="text"><code>         Decl
+        /    \
+    Type    VarList.dtype="int"
+   (int)    /      |    \
+          id(x)    ,    VarList₁.dtype="int"</code></pre>
+<p>O atributo <code>dtype</code> flui do vértice <code>Type</code> para todos os identificadores em <code>VarList</code>.</p>
+<ol start="54" type="1">
+<li>Uma <strong>gramática S-atribuída</strong> é uma classe especial de gramática de atributos que utiliza <strong>exclusivamente atributos sintetizados</strong>.</li>
+</ol>
+<p><strong>Formalmente:</strong> <span class="math display">\[
+\forall \text{ produção } A \rightarrow \alpha : \; \text{attr}(A) \subseteq \text{Sintetizados} \land \text{attr}(\alpha) \subseteq \text{Sintetizados}
+\]</span></p>
+<p><strong>Principal Vantagem:</strong> Elas são <strong>perfeitamente compatíveis</strong> com analisadores sintáticos <em>bottom-up</em> (LR, SLR, LALR), permitindo a avaliação de atributos durante o parsing sem necessidade de múltiplas travessias da árvore.</p>
+<p><strong>Exemplo com YACC/Bison:</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode yacc code-with-copy"><code class="sourceCode yacc"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>expr : expr '+' term { $$= $1 + $3; }  <span class="co">/*$$ é sintetizado a partir de $1 e $3 */</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>     | term          { $$ = $1; }</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>     ;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Além disso, a avaliação pode ser feita em <strong>tempo linear</strong> <span class="math inline">\(O(n)\)</span>.</p>
+<ol start="55" type="1">
+<li>Uma <strong>gramática L-atribuída</strong> permite tanto atributos <strong>sintetizados</strong> quanto <strong>herdados</strong>, mas com a restrição de que atributos herdados devem depender apenas de informações à sua esquerda (pai ou irmãos à esquerda).</li>
+</ol>
+<p><strong>Definição Formal:</strong> Para <span class="math inline">\(A \rightarrow X_1 X_2 \ldots X_n\)</span>, o atributo herdado de <span class="math inline">\(X_j\)</span> pode depender apenas de: 1. Atributos herdados de <span class="math inline">\(A\)</span>. 2. Atributos de <span class="math inline">\(X_1, \ldots, X_{j-1}\)</span>.</p>
+<p><strong>Por que é o “ponto ideal”:</strong> 1. <strong>Expressividade:</strong> Cobre quase todas as necessidades de linguagens reais (verificação de tipos, escopos). 2. <strong>Eficiência:</strong> Avaliação em <strong>tempo linear</strong> <span class="math inline">\(O(n)\)</span> com uma <strong>única travessia</strong> em profundidade (esquerda para a direita). 3. <strong>Compatibilidade:</strong> Integra-se naturalmente com parsers <em>top-down</em> (LL, descida recursiva).</p>
+<p><strong>Exemplo em C++ (Parser Descida Recursiva):</strong></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Decl <span class="op">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> parse<span class="op">(</span>Environment env<span class="op">)</span> <span class="op">{</span>  <span class="co">// env é herdado</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>        Type tipo <span class="op">=</span> parseType<span class="op">();</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>        parseVarList<span class="op">(</span>tipo<span class="op">.</span>type<span class="op">);</span>    <span class="co">// Passa tipo herdado para VarList</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="56" type="1">
+<li>O <strong>grafo de dependências</strong> é um grafo direcionado em que os vértices são pares <span class="math inline">\((nó, atributo)\)</span> e as arestas representam a dependência de dados entre eles.</li>
+</ol>
+<p><strong>Definição:</strong> Existe uma aresta <span class="math inline">\((n_1, a_1) \rightarrow (n_2, a_2)\)</span> se o cálculo de <span class="math inline">\(a_2\)</span> em <span class="math inline">\(n_2\)</span> usa o valor de <span class="math inline">\(a_1\)</span> em <span class="math inline">\(n_1\)</span>.</p>
+<p><strong>Uso para determinar ordem de avaliação:</strong> O grafo é usado para realizar uma <strong>ordenação topológica</strong>. Se o grafo for acíclico (DAG), qualquer ordenação topológica fornece uma ordem válida para calcular os atributos.</p>
+<p><strong>Algoritmo de Ordenação Topológica (Resumo):</strong></p>
+<pre class="text"><code>Lista L = []
+S = {nós sem dependências de entrada}
+Enquanto S não vazio:
+    remover n de S
+    adicionar n em L
+    para cada m com aresta n-&gt;m:
+        remover aresta
+        se m não tem mais entradas, adicionar m em S</code></pre>
+<p>Se o grafo tiver ciclos, a gramática é circular e não pode ser avaliada.</p>
+<ol start="57" type="1">
+<li></li>
+</ol>
+<p><strong>SDD (Definição Dirigida por Sintaxe):</strong> * <strong>Natureza:</strong> Especificação <strong>declarativa</strong> de alto nível. * <strong>Regras:</strong> Define <strong>relações matemáticas</strong> ou equações entre atributos. * <strong>Foco:</strong> O <em>que</em> deve ser calculado. * <strong>Exemplo:</strong> <span class="math inline">\(E \rightarrow E_1 + T \quad | \quad E.val = E_1.val + T.val\)</span></p>
+<p><strong>SDT (Esquema de Tradução Dirigida por Sintaxe):</strong> * <strong>Natureza:</strong> Implementação <strong>procedimental</strong> e imperativa. * <strong>Regras:</strong> Ações de código embutidas nas produções. * <strong>Foco:</strong> <em>Como</em> e <em>quando</em> executar (depende da ordem do parser). * <strong>Exemplo:</strong> <span class="math inline">\(E \rightarrow E_1 + T \quad \{ \text{print("+");} \}\)</span></p>
+<p>SDDs são traduzidas para SDTs para implementação em compiladores.</p>
+<ol start="58" type="1">
+<li>Gramáticas <strong>circulares</strong> são inúteis porque definem <strong>dependências recursivas infinitas</strong> (ciclos no grafo de dependências), tornando impossível a avaliação dos atributos.</li>
+</ol>
+<p><strong>Exemplo de dependência circular:</strong></p>
+<pre class="text"><code>A → B
+  A.x = B.y + 1   (A depende de B)
+  B.y = A.x + 1   (B depende de A)</code></pre>
+<p><strong>Grafo:</strong> <span class="math inline">\((A, x) \leftrightarrow (B, y)\)</span>.</p>
+<p>Isso cria um <em>deadlock</em> na avaliação: para calcular A precisa-se de B, e para B precisa-se de A. O problema de verificar se uma gramática arbitrária é circular é indecidível, por isso compiladores usam classes restritas (S-atribuídas ou L-atribuídas) que são garantidamente não-circulares.</p>
+<ol start="59" type="1">
+<li></li>
+</ol>
+<p><strong>Gramática S-atribuída para Expressões:</strong></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Produção</th>
+<th style="text-align: left;">Regras Semânticas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(E \rightarrow E_1 + T\)</span></td>
+<td style="text-align: left;"><code>E.val = E₁.val + T.val</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(E \rightarrow T\)</span></td>
+<td style="text-align: left;"><code>E.val = T.val</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(T \rightarrow T_1 \ast F\)</span></td>
+<td style="text-align: left;"><code>T.val = T₁.val * F.val</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(T \rightarrow F\)</span></td>
+<td style="text-align: left;"><code>T.val = F.val</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(F \rightarrow (E)\)</span></td>
+<td style="text-align: left;"><code>F.val = E.val</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(F \rightarrow \textbf{num}\)</span></td>
+<td style="text-align: left;"><code>F.val = num.lexval</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Árvore Anotada para <code>2 + 3 * 4</code>:</strong></p>
+<pre class="text"><code>                  E₀ (val=14)
+                 /  |  \
+        E₁ (val=2)  +   T₃ (val=12)
+          |            /   |   \
+        T₁ (val=2)   T₂ (val=3) * F₃ (val=4)
+          |            |            |
+        F₁ (val=2)   F₂ (val=3)    num (4)
+          |            |
+        num (2)      num (3)</code></pre>
+<p><strong>Ordem de Avaliação (Pós-ordem):</strong> 1. <code>num(2)</code> → 2. <code>F₁</code> → 3. <code>T₁</code> → 4. <code>E₁</code> (val=2) 5. <code>num(3)</code> → 6. <code>F₂</code> → 7. <code>T₂</code> (val=3) 8. <code>num(4)</code> → 9. <code>F₃</code> (val=4) 10. <code>T₃</code> = <span class="math inline">\(3 \times 4\)</span> = 12 11. <code>E₀</code> = <span class="math inline">\(2 + 12\)</span> = 14</p>
+<p><strong>Implementação (Pseudocódigo Python):</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> avaliar(no):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> no.tipo <span class="op">==</span> <span class="st">"num"</span>:</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> no.lexval</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> no.tipo <span class="op">==</span> <span class="st">"soma"</span>: <span class="co"># E -&gt; E + T</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> avaliar(no.esq) <span class="op">+</span> avaliar(no.<span class="bu">dir</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> no.tipo <span class="op">==</span> <span class="st">"mult"</span>: <span class="co"># T -&gt; T * F</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> avaliar(no.esq) <span class="op">*</span> avaliar(no.<span class="bu">dir</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... outros casos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="60" type="1">
+<li>Para verificar declaração antes de uso, usamos atributos herdados para propagar o ambiente (<code>env</code>) de cima para baixo e atributos sintetizados (<code>type</code>) para retornar informações.</li>
+</ol>
+<p><strong>Regras Semânticas:</strong></p>
+<p><strong>1. <code>Decl → Type id ;</code></strong> * Verifica se <code>id</code> já existe no ambiente herdado <code>Decl.env</code>. * Sintetiza um novo ambiente adicionando <code>id</code>.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regra Lógica</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">id</span>.nome <span class="kw">in</span> Decl.env:</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    ERRO(<span class="st">"Variável já declarada"</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    Decl.env_out <span class="op">=</span> Decl.env <span class="op">+</span> {<span class="bu">id</span>.nome : Type.<span class="bu">type</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>2. <code>Stmt → id = Expr ;</code></strong> * Herda o ambiente <code>Stmt.env</code>. * Verifica se <code>id</code> existe no ambiente.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regra Lógica</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">id</span>.nome <span class="kw">not</span> <span class="kw">in</span> Stmt.env:</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    ERRO(<span class="st">"Variável não declarada"</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>tipo_esperado <span class="op">=</span> Stmt.env[<span class="bu">id</span>.nome]</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> Expr.<span class="bu">type</span> <span class="op">!=</span> tipo_esperado:</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    WARNING(<span class="st">"Tipos incompatíveis"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>3. Propagação em Lista de Comandos:</strong></p>
+<pre class="text"><code>Stmts → Stmt Stmts₁
+  Stmt.env = Stmts.env        (herda do pai)
+  Stmts₁.env = Stmts.env      (propaga para o próximo)</code></pre>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./11-tabelaSimbolos.html" class="pagination-link" aria-label="Tabela de Símbolos em Compiladores Modernos">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./14-GeraInter.html" class="pagination-link" aria-label="Geração de Código Intermediário: A Linguagem Universal do Compilador">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/12-questoes-exercicios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

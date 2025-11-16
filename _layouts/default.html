@@ -230,7 +230,13 @@
 		<script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
 		{% endif %}
 		<script src="{{ site.baseurl }}/assets/js/ie10-viewport-bug-workaround.js"></script>
-
+		<script type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+			mermaid.initialize({
+				startOnLoad: true,
+				theme: 'neutral'  /* opcional: 'dark' ou 'forest' etc */
+			});
+		</script>
 		<script>
 			// Population Message Script
 			async function updatePopulationMessage() {
