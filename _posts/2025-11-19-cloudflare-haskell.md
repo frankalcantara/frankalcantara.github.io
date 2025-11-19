@@ -21,7 +21,7 @@ description: análise técnica do incidente do Cloudflare em novembro de 2025, e
 date: 2025-11-14T00:58:10.955Z
 preview: |
     O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-19T16:08:17.134Z
+lastmod: 2025-11-19T17:35:10.354Z
 published: true
 draft: 2025-11-19T16:07:35.437Z
 image: assets/images/cloudflare2.webp
@@ -191,7 +191,7 @@ $$
 
 O compilador obriga o desenvolvedor a "desembrulhar" o resultado. Não é possível acessar os dados do `FeatureSet` sem antes verificar se ele é um `Right` (sucesso) ou `Left` (falha).
 
-> Não faz nem uma semana que meus alunos entregaram um trabalho usando exatamente esse padrão. Atenção: momento aha! se aproximando.
+> Não faz nem uma semana que meus alunos entregaram um trabalho usando exatamente esse padrão. No dia do blackout, a última turma estava em sala fazendo prova de autoria. Atenção: momento aha! se aproximando.
 
 ### Exemplo de Consumo Seguro
 
