@@ -3,25 +3,25 @@ layout: post
 title: A Falha do Cloudflare e o Haskell
 author: Frank
 categories:
-    - artigo
-    - opinião
+  - artigo
+  - opinião
 tags: |
-    - haskell
-    - cloudflare
-    - teoria-de-tipos
-    - rust
-    - engenharia-de-software
-    - programação-funcional
-    - post-mortem
-    - análise-técnica
-    - sql
-    - sistemas-distribuídos
+  - haskell
+  - cloudflare
+  - teoria-de-tipos
+  - rust
+  - engenharia-de-software
+  - programação-funcional
+  - post-mortem
+  - análise-técnica
+  - sql
+  - sistemas-distribuídos
 rating: 6
 description: análise técnica do incidente do Cloudflare em novembro de 2025, explorando como a Teoria de Tipos em Haskell poderia ter prevenido a falha.
 date: 2025-11-14T00:58:10.955Z
 preview: |
-    O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-19T17:35:10.354Z
+  O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
+lastmod: 2025-11-19T19:28:35.139Z
 published: true
 draft: 2025-11-19T16:07:35.437Z
 image: assets/images/cloudflare2.webp
@@ -57,7 +57,7 @@ $$
 S_{normal} = \{ x \mid x \in \text{Columns}(D) \}
 $$
 
-Neste cenário, a cardinalidade de $|S_{normal}|$ era de aproximadamente 60 itens (features). Valor, também recuperado do post-mortem oficial.
+Neste cenário, a cardinalidade de $\vertS_{normal}\vert$ era de aproximadamente 60 itens (features). Valor, também recuperado do post-mortem oficial.
 
 No entanto, a elevação de privilégios expandiu o escopo de visibilidade da consulta para incluir também o banco de dados subjacente $R_0$, uma camada física ou *shard* do `default`(pura simplificação didática). Como $R_0$ é isomórfico a $D$, a consulta passou a retornar a união dos conjuntos sem a devida filtragem de unicidade:
 
@@ -65,7 +65,7 @@ $$
 S_{erro} = S_{normal} \cup \{ y \mid y \in \text{Columns}(R_0) \}
 $$
 
-Isso resultou em uma duplicação cartesiana efetiva, na qual $|S_{erro}| \approx 120$. O sistema, que não foi projetado prevendo essa alteração de escopo, não possuía cláusulas de `DISTINCT` ou filtros de *schema* para tratar essa redundância.
+Isso resultou em uma duplicação cartesiana efetiva, na qual $\vertS_{erro}\vert \approx 120$. O sistema, que não foi projetado prevendo essa alteração de escopo, não possuía cláusulas de `DISTINCT` ou filtros de *schema* para tratar essa redundância.
 
 Se a amável leitora se perdeu, pode ser necessário revisar conceitos básicos de álgebra relacional, especialmente operações de união e projeção. Talvez seja a hora de deixar um pouco de lado o SQL e tentar entender o que esta linguagem realmente representa em termos matemáticos.
 
@@ -108,7 +108,7 @@ Novamente podemos ver essa situação com a boa e velha matemática de conjuntos
 Como o sistema de geração do arquivo consultava os nós de forma balanceada, provavelmente usando um algoritmo parecido com o *Round-Robin*, a saúde do sistema global $H(t)$ tornou-se uma variável estocástica dependente de qual nó servia a consulta naquele instante $t$:
 
 $$
-P(\text{Falha}) = \frac{|N_{novos}|}{|N_{total}|}
+P(\text{Falha}) = \frac{\vertN_{novos}\vert}{\vertN_{total}\vert}
 $$
 
 Isso gerou o fenômeno de **oscilação** (*flapping*): o sistema da Cloudflare ficou oscilando entre operação normal e colapso total a cada ciclo de geração, levando os engenheiros a suspeitarem incorretamente de um ataque DDoS. E nessa suspeita está a origem do boato que circulou nas redes sociais. Levando vários órgãos de imprensa a embarcar no bote furado e afundar junto com o boato. Novamente, outra vez, de novo. A imprensa não aprende.
@@ -125,7 +125,7 @@ Para dificultar a análise, a página de status do Cloudflare, hospedada em infr
 
 Essa correlação espúria desviou o foco da equipe de engenharia da causa raiz, lógica interna para mitigação de ataques. E fez com que eles corressem atrás do próprio rabo por horas.
 
-A estabilidade do erro só foi alcançada quando a propagação das permissões foi concluída para $100\%$ dos nós ($|N_{novos}| = |N_{total}|$), momento em que o sistema falhou permanentemente, permitindo o isolamento da variável causal e a subsequente correção. Ficou bonito isso: variável causal. Gostei.
+A estabilidade do erro só foi alcançada quando a propagação das permissões foi concluída para $100\%$ dos nós ($\vertN_{novos}\vert = \vertN_{total}\vert$), momento em que o sistema falhou permanentemente, permitindo o isolamento da variável causal e a subsequente correção. Ficou bonito isso: variável causal. Gostei.
 
 ## Repita Comigo: "Parse, don't Validate"
 
@@ -220,7 +220,7 @@ processDatabaseResult rawRows = do
 
 ### 6. Análise Formal do Impacto
 
-Se analisarmos sob a ótica da Teoria das Categorias, transformamos uma função parcial, que não é definida para todo $x$, pois falha para $|x| > 200$, em uma função total, definida para todo $x$, mapeando para um codomínio `Either`.
+Se analisarmos sob a ótica da Teoria das Categorias, transformamos uma função parcial, que não é definida para todo $x$, pois falha para $\vertx\vert > 200$, em uma função total, definida para todo $x$, mapeando para um codomínio `Either`.
 
 Seja $D$ o conjunto de todos os vetores possíveis de strings retornados pelo SQL.
 Seja $V \subset D$ o subconjunto de vetores válidos onde o comprimento $\le 200$.

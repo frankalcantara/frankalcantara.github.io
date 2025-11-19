@@ -15,8 +15,8 @@ description: A Nvidia fez uma proposta pela criação de um novo padrão de dist
 date: 2025-11-14T00:58:10.955Z
 preview: |
     texto técnico expandido  
-    arquiteturas de distribuição de energia em data centers de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
-lastmod: 2025-11-16T18:04:34.389Z
+    arquiteturas de distribuição de energia em *data centers* de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
+lastmod: 2025-11-19T19:26:27.922Z
 published: false
 draft: 2025-11-14T01:11:49.434Z
 ---
@@ -27,59 +27,60 @@ Espera-se que o mercado de servidores de IA comece em **US$ 124,8 bilhões em 20
 
 A [Goldman Sachs Research](https://www.wired.com/story/data-center-ai-boom-us-economy-jobs/) projeta que a demanda global de energia dos *data centers* saltará $165\%$ até 2030, de $55 \text{ GW}$ em 2023 para $145 \text{ GW}$, com picos intermediários de $92 \text{2 GW}$ em 2027. A IA, que hoje responde por $14\%$ desse consumo, alcançará $27\%$ em 2027 e $36\%$ em 2030 — podendo devorar mais de 40% dos 96 GW críticos previstos para 2026. Nos EUA, a fatia dos *data centers* na demanda elétrica nacional mais que dobrará, de $4\%$ para acima de $8\%$.
 
-Esse crescimento não é apenas estatístico: é o maior gargalo físico do ecossistema de IA. Cerca de $60\%$ da nova demanda exigirá geração adicional, demandando US$ 720 bilhões em investimentos em transmissão até 2030. A matriz energética será híbrida: 30% ciclo combinado a gás, 30% picos a gás, $27,5\%$ solar e $12,5\%$ eólica, um equilíbrio entre urgência e transição.
+Esse crescimento não é apenas estatístico: é o maior gargalo físico do ecossistema de IA. Cerca de $60\%$ da nova demanda exigirá geração adicional, demandando $\text{US\$ } 720$ bilhões em investimentos em transmissão até 2030. A matriz energética será híbrida: $30\%$ ciclo combinado a gás, $30\%$ picos a gás, $27,5\%$ solar e $12,5\%$ eólica, um equilíbrio entre urgência e transição.
 
-Neste mercado a Nvidia se destaca.
+Neste mercado a Nvidia é um catalisador exotérmico, se isso existisse.
 
-Além do [Cuda](https://developer.nvidia.com/cuda-toolkit), a barreira quase intransponível construída nos últimos, por assim dizer, 20 anos, a empresa se destaca pela a busca constante de performance, eficiência e escalabilidade e, principalmente pela colocação perfeita no mercado. Em uma jornada de crescimento constante em mercados que incluem jogos, criptomoedas, aprendizado de máquina e agora para IA generativa. Cada passo foi dado com precisão cirúrgica, antecipando tendências e necessidades. Sua última cartada: a fábrica de IA
+Além do [Cuda](https://developer.nvidia.com/cuda-toolkit), a barreira quase intransponível construída nos últimos, por assim dizer, 20 anos, a empresa se destaca pela a busca constante de performance, eficiência e escalabilidade e, principalmente pela colocação perfeita no mercado. Em uma jornada de desafios constantes em mercados que incluem jogos, criptomoedas, aprendizado de máquina e agora IA generativa. Cada passo foi dado com precisão, corrigindo erros de produtos e antecipando tendências e necessidades. Sua última proposta: a fábrica de IA.
 
 O conceito de fábrica de IA, *AI Factory* proposto pela NVIDIA refere-se a uma infraestrutura de computação especializada projetada para criar valor a partir de dados, gerenciando todo o ciclo de vida de sistemas de inteligência artificial, desde a ingestão de dados até o treinamento, ajuste fino e inferência de IA em alto volume.
 
-O conceito de marketing é que esta infraestrutura irá transformar data centers em fábricas que produzem inteligência como produto principal. Transformando a inteligência em uma espécie de *commodity*, medida por meio de *throughput* de *tokens*, impulsionando decisões, automação e novas soluções de IA. Permitindo a criação de produtos que nossa vâ filosofia ainda não consegue imaginar.
+O conceito de marketing é que esta infraestrutura irá transformar *data centers* em fábricas que produzem inteligência como produto principal. Transformando a inteligência em uma espécie de *commodity*, medida por meio de *throughput* de *tokens*, impulsionando decisões, automação e novas soluções de IA. Permitindo a criação de produtos que nossa vâ filosofia ainda não consegue imaginar.
 
 ### Componentes Principais
 
-- **Pipelines de Dados**: Fundamentais para construir modelos de linguagem grandes (LLMs) inteligentes, seguros e escaláveis, convertendo dados brutos e não estruturados em tokens estruturados de alta qualidade, garantindo limpeza e consistência.
+- **Pipelines de Dados**: fundamentais para construir os modelos de linguagem atuais, os LLMs, inteligentes e escaláveis, convertendo dados brutos e não estruturados em *tokens* estruturados de alta qualidade, garantindo limpeza e consistência.
 
-- **Infraestrutura de Inferência de IA**: Suporta respostas de baixa latência e custo eficiente em ambientes de nuvem, híbridos ou on-premise, permitindo previsões em tempo real e decisões, com processos iterativos que otimizam throughput, latência e eficiência.
+- **Infraestrutura de Inferência de IA**: suporta respostas de baixa latência e custo eficiente em ambientes de nuvem, híbridos ou on-premise, permitindo previsões em tempo real e decisões, com processos iterativos que otimizam throughput, latência e eficiência.
 
-- **Gêmeos Digitais (Digital Twins)**: Permitem o design, simulação e otimização de instalações de fábricas de IA em ambientes virtuais, usando dados 3D agregados para colaboração em tempo real, testes de cenários e validação de redundâncias.
+> Ambientes on-premise, frequentemente chamados de local ou infraestrutura própria em português como falado no Brasil, referem-se a quando uma empresa mantém seus servidores, hardware e software instalados fisicamente dentro do seu próprio prédio ou data center privado, em vez de usar servidores remotos de terceiros.
 
-- **Infraestrutura Full-Stack**: Inclui hardware de alto desempenho como GPUs, CPUs, redes, armazenamento e sistemas de resfriamento avançados; o software é modular, escalável e baseado em APIs, com designs validados para atualizações contínuas.
+- **Gêmeos Digitais (Digital Twins)**: permitem o design, simulação e otimização de instalações de fábricas de IA em ambientes virtuais, usando dados 3D agregados para colaboração em tempo real, testes de cenários e validação de redundâncias.
 
-- **Ferramentas de Automação**: Reduzem esforços manuais, mantendo consistência em todo o ciclo de IA, desde ajustes de hiperparâmetros até fluxos de implantação.
+- **Infraestrutura Full-Stack**: inclui hardware de alto desempenho como GPUs, CPUs, redes, armazenamento e sistemas de resfriamento avançados; o software é modular, escalável e baseado em APIs, com designs validados para atualizações contínuas.
+
+- **Ferramentas de Automação**: reduzem esforços manuais, mantendo consistência em todo o ciclo de IA, desde ajustes de hiperparâmetros até fluxos de implantação.
 
 Esta estrutura de fábrica de IA oferece vários benefícios:
 
 - Transforma dados brutos em inteligência acionável para decisões empresariais e geração de receita.
 - Otimiza o ciclo completo de IA, aumentando o desempenho por Watt com computação acelerada.
-- Facilita a escalabilidade de IA soberana e empresarial, em um ecossistema seguro e adaptável.
-- Exemplos incluem aplicações no setor público (IA soberana para liderança global), automotivo (robótica e veículos autônomos), saúde (descoberta de drogas e medicina personalizada), telecomunicações (otimização de redes) e serviços financeiros (detecção de fraudes e trading algorítmico).
+- Facilita a escalabilidade de IA nos setores públicos e empresariais, em um ecossistema seguro e adaptável.
 
 Hoje a bússola da oportunidade aponta para o [GB200 NVL72](https://www.nvidia.com/en-us/data-center/gb200-nvl72/). Um sistema em forma e tamanho de rack que integra 72 GPUs [Blackwell](https://www.nvidia.com/en-us/data-center/technologies/blackwell-architecture/) e 36 CPUs [Grace](https://www.nvidia.com/en-us/data-center/grace-cpu/), em um único sistema de refrigeração líquida.
 
 Usando 208 bilhões de transistores, este monstro possui **1.440 petaflops de desempenho com precisão FP4**. Com velocidade de inferência $30\times$ mais rápida e a eficiência energética $25\times$ melhorada em comparação com a geração anterior do [H100](https://www.nvidia.com/en-us/data-center/h100/) não foram apenas melhorias de desempenho, mas uma reescrita dos limites físicos. Uma besta faminta por energia, capaz de consumir até $6 \text{ MW}$ em um único rack.
 
-As empresas produtoras de hardware, lideradas pela Nvidia, parecem acreditar que a próxima década será definida não apenas pelo número de parâmetros em modelos de IA, mas pela capacidade de alimentar esses modelos com energia suficiente para treiná-los e operá-los eficientemente.
+Sistemas como este estão levando as empresas produtoras de hardware, lideradas pela Nvidia, a acreditar que a próxima década será definida não apenas pelo número de parâmetros em modelos de IA, mas pela capacidade de alimentar esses modelos com energia suficiente para treiná-los e operá-los eficientemente.
 
-A vantagem competitiva se concentrará em FLOPS/Watt e resfriamento eficiente. A Nvidia alega que o Blackwell melhora a eficiência energética em 25 vezes; a [SuperMicro](https://www.supermicro.com/en/solutions/liquid-cooling) domina resfriamento líquido. Se tudo se confirmar, o mercado se dividirá: *data centers AI-Ready*, com energia massiva e circuitos refrigerados, prosperarão; instalações legadas, presas ao ar-condicionado, tornar-se-ão relíquias.
+Segundo este cenário, a vantagem competitiva se concentrará em FLOPS/Watt e resfriamento eficiente. A Nvidia alega que o Blackwell melhora a eficiência energética em 25 vezes; a [SuperMicro](https://www.supermicro.com/en/solutions/liquid-cooling) domina resfriamento líquido. Se tudo se confirmar, o mercado se dividirá: *data centers AI-Ready*, com energia massiva e circuitos refrigerados, prosperarão; instalações legadas, presas ao ar-condicionado, tornar-se-ão relíquias.
 
-**Em resumo, o futuro da IA não depende apenas de parâmetros, mas de joules. Quem dominar a termodinâmica da computação liderará a próxima década**.
+**Em resumo, parece que o futuro da IA não dependerá apenas da quantidade de parâmetros do modelo, ou da complexidade dos algoritmos, mas da quantidade de Watts envolvida. Quem dominar a termodinâmica da computação liderará a próxima década**.
 
-Todo cuidado é pouco quando tentamos prever o futuro. A [McKinsey](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/investing-in-the-rising-data-center-economy) estima que serão necessários US$ 5,2 trilhões em investimentos de capital (CAPEX) até 2030 para atender à demanda de computação dos modelos de IA. Por outro lado, o comitê de investimento global do Morgan Stanley alertou que o atual boom de CAPEX em IA e o mercado de ações que ele sustenta podem estar mais perto do fim estrondoso do que as pessoas de bom senso gostaria.
+Todo cuidado é pouco quando tentamos prever o futuro. A [McKinsey](https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/investing-in-the-rising-data-center-economy) estima que serão necessários $\text{US\$ } 5,2 \text{trilhões}$ em investimentos de capital (CAPEX) até 2030 para atender à demanda de computação dos modelos de IA. Por outro lado, o comitê de investimento global do [Morgan Stanley](https://www.morganstanley.com/insights/articles/ai-spending-bull-market-2025) alertou que o atual boom de CAPEX em IA e o mercado de ações que ele sustenta podem estar mais perto do fim estrondoso do que as pessoas de bom senso gostaria.
 
 ## Entra em Cena a Fábrica de IA e a Arquitetura Kyber
 
 Em 2025, a Nvidia propôs uma nova arquitetura de distribuição de energia para *data centers* de IA, denominada [Kyber](https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/). 
 
-A arquitetura Kyber, no contexto da fábrica de IA proposta pela NVIDIA, refere-se à próxima geração de plataforma de servidores em rack projetada para infraestrutura de IA em grande escala. Ela é o sucessor da arquitetura Oberon e foi projetada para maximizar a densidade de GPUs por rack, expandir o tamanho das redes e otimizar o desempenho em ambientes de computação acelerada, permitindo a construção de "fábricas de IA" eficientes e escaláveis em escala de gigawatts. Os objetivos não são modestos e incluem:
+A arquitetura Kyber, no contexto da fábrica de IA proposta pela NVIDIA, refere-se à próxima geração de plataforma de servidores em rack projetada para infraestrutura de IA em grande escala. Ela é o sucessor da arquitetura [Oberon](https://www.tomshardware.com/pc-components/gpus/ps5-apu-powered-mining-gpu-hits-ebay-for-dollar500-a-ps5-chip-with-two-less-cpu-cores-and-half-the-memory-that-consumes-around-90w) e foi projetada para maximizar a densidade de GPUs por rack, expandir o tamanho das redes e otimizar o desempenho em ambientes de computação acelerada, permitindo a construção de "fábricas de IA" eficientes e escaláveis em escala de gigawatts. Os objetivos não são modestos e incluem:
 
 - **Formato de Alta Densidade**: adota um design em estilo *blade*, lâmina, diferentemente de formatos tradicionais, o que permite integrar um número maior de GPUs em um único rack. Por exemplo, ela suporta configurações como **576 GPUs Rubin Ultra em um rack, alimentadas por uma arquitetura de 800 VDC** para maior eficiência energética e desempenho por Watt.
-- **Integração com Infraestrutura de IA**: Faz parte do ecossistema MGX (Modular GPU eXtensible) da NVIDIA, que inclui designs abertos e padronizados para racks e bandejas de computação. Isso facilita a construção de data centers otimizados para cargas de trabalho de IA, como treinamento de modelos grandes e inferência em tempo real, com suporte a redes de alta velocidade e resfriamento líquido.
+- **Integração com Infraestrutura de IA**: Faz parte do ecossistema MGX (Modular GPU eXtensible) da NVIDIA, que inclui designs abertos e padronizados para racks e bandejas de computação. Isso facilita a construção de *data centers* otimizados para cargas de trabalho de IA, como treinamento de modelos grandes e inferência em tempo real, com suporte a redes de alta velocidade e resfriamento líquido.
 - **Eficiência e Escalabilidade**: Projetada para suportar clusters de GPUs de alta densidade, desbloqueando maior desempenho por GPU e permitindo mais unidades por fábrica de IA. Ela incorpora inovações como alimentação de 800 VDC, que reduz perdas de energia e melhora a sustentabilidade em instalações de grande porte.
-- **Aplicação em Fábricas de IA**: No conceito de fábrica de IA da NVIDIA, a Kyber atua como base para transformar data centers em "gigafábricas" de inteligência, onde dados são processados em escala massiva para gerar valor. Ela suporta o ciclo completo de IA, desde a preparação de dados até a inferência, em ambientes que demandam alto throughput e baixa latência, como em setores de saúde, automotivo e finanças.
+- **Aplicação em Fábricas de IA**: No conceito de fábrica de IA da NVIDIA, a Kyber atua como base para transformar *data centers* em "gigafábricas" de inteligência, onde dados são processados em escala massiva para gerar valor. Ela suporta o ciclo completo de IA, desde a preparação de dados até a inferência, em ambientes que demandam alto throughput e baixa latência, como em setores de saúde, automotivo e finanças.
 
-Essa arquitetura foi anunciada em eventos como o OCP Global Summit 2025 e o GTC 2025, representando uma evolução para data centers mais eficientes e adaptados à era da IA generativa e agente. Ela enfatiza a integração full-stack, desde o hardware (GPUs, redes e armazenamento) até o software, alinhando-se à visão de Jensen Huang de data centers como produtores de inteligência em escala industrial.
+Essa arquitetura foi anunciada em eventos como o OCP Global Summit 2025 e o GTC 2025, representando uma evolução para *data centers* mais eficientes e adaptados à era da IA generativa e agente. Ela enfatiza a integração full-stack, desde o hardware (GPUs, redes e armazenamento) até o software, alinhando-se à visão de Jensen Huang de *data centers* como produtores de inteligência em escala industrial.
 
 que utiliza barramentos de $800 \text{ Vdc}$ em vez dos tradicionais $48$ – $54 \text{ Vdc}$. Esta mudança não é trivial; ela reflete a necessidade de lidar com cargas cada vez maiores e os desafios associados à eficiência energética e à dissipação térmica.
 
@@ -98,7 +99,12 @@ Cada estágio de conversão tem uma eficiência associada. Chamaremos de $\eta_i
 
 $$\eta_{\text{total}} \= \prod_{i=1}^{n} \eta_i 
 
-### 3.1 PSU (480 Vac → 54 Vdc) Supor eficiência de 96 por cento: $$\eta_{\text{PSU}} \= 0.96 $$\#\#\#\# 3.2 Conversão Primária (54 V → 12 V) Eficiência típica de 97 por cento: $$  
+### 3.1 PSU (480 Vac → 54 Vdc) Supor eficiência de 96 por cento: 
+
+$$\eta_{\text{PSU}} \= 0.96 $$
+
+#### Conversão Primária (54 V → 12 V) Eficiência 
+típica de 97 por cento: $$  
 \eta_{\text{prim}} \= 0.97  
 
 ### 3.3 Conversão Secundária (12 V → 5 V)  
