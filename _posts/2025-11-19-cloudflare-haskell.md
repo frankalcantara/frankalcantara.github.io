@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Falha do Cloudflare e o Haskell
-author: "Frank "
+author: Frank
 categories:
     - artigo
     - opinião
@@ -32,7 +32,7 @@ description: análise técnica do incidente do Cloudflare em novembro de 2025, e
 date: 2025-11-14T00:58:10.955Z
 preview: |
     O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-19T16:03:41.368Z
+lastmod: 2025-11-19T16:04:58.412Z
 published: true
 draft: 2025-11-14T01:11:49.434Z
 image: assets/images/cloudflare2.webp
