@@ -5,7 +5,7 @@ author: Frank
 categories:
     - artigo
     - opinião
-tags:
+tags: |
     - haskell
     - cloudflare
     - teoria-de-tipos
@@ -17,24 +17,13 @@ tags:
     - sql
     - sistemas-distribuídos
 rating: 6
-keywords:
-    - haskell
-    - cloudflare
-    - teoria de tipos
-    - rust
-    - engenharia de software
-    - programação funcional
-    - post-mortem
-    - análise técnica
-    - sql
-    - sistemas distribuídos
 description: análise técnica do incidente do Cloudflare em novembro de 2025, explorando como a Teoria de Tipos em Haskell poderia ter prevenido a falha.
 date: 2025-11-14T00:58:10.955Z
 preview: |
     O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-19T16:04:58.412Z
+lastmod: 2025-11-19T16:08:17.134Z
 published: true
-draft: 2025-11-14T01:11:49.434Z
+draft: 2025-11-19T16:07:35.437Z
 image: assets/images/cloudflare2.webp
 ---
 
