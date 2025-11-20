@@ -17,3 +17,7 @@ id_frank*
 *.log
 
 .vscode/settings.json
+
+# Claude Code settings
+.claude/settings.local.json
+**/settings.local.json
