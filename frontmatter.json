@@ -107,5 +107,6 @@
       "path": "[[workspace]]/_posts"
     }
   ],
-  "frontMatter.content.snippets": {}
+  "frontMatter.content.snippets": {},
+  "frontMatter.media.defaultSorting": "LastModifiedAsc"
 }

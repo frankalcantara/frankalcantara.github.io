@@ -21,7 +21,7 @@ description: análise técnica do incidente do Cloudflare em novembro de 2025, e
 date: 2025-11-14T00:58:10.955Z
 preview: |
   O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-19T21:32:56.992Z
+lastmod: 2025-11-19T22:54:39.798Z
 published: true
 draft: 2025-11-19T16:07:35.437Z
 image: assets/images/cloudflare2.webp
@@ -57,7 +57,7 @@ $$
 S_{normal} = \{ x \mid x \in \text{Columns}(D) \}
 $$
 
-Neste cenário, a cardinalidade de $\vertS_{normal}\vert$ era de aproximadamente 60 itens (features). Valor, também recuperado do post-mortem oficial.
+Neste cenário, a cardinalidade de $\vert S_{normal}\vert$ era de aproximadamente 60 itens (features). Valor, também recuperado do post-mortem oficial.
 
 No entanto, a elevação de privilégios expandiu o escopo de visibilidade da consulta para incluir também o banco de dados subjacente $R_0$, uma camada física ou *shard* do `default`(pura simplificação didática). Como $R_0$ é isomórfico a $D$, a consulta passou a retornar a união dos conjuntos sem a devida filtragem de unicidade:
 
@@ -125,7 +125,7 @@ Para dificultar a análise, a página de status do Cloudflare, hospedada em infr
 
 Essa correlação espúria desviou o foco da equipe de engenharia da causa raiz, lógica interna para mitigação de ataques. E fez com que eles corressem atrás do próprio rabo por horas.
 
-A estabilidade do erro só foi alcançada quando a propagação das permissões foi concluída para $100\%$ dos nós ($\vert N_{novos}\vert = \vert N_{total}\vert$), momento em que o sistema falhou permanentemente, permitindo o isolamento da variável causal e a subsequente correção. Ficou bonito isso: variável causal. Gostei.
+A estabilidade do erro só foi alcançada quando a propagação das permissões foi concluída para $100\%$ dos nós ($\vert N_{novos}c = \vert N_{total}\vert$), momento em que o sistema falhou permanentemente, permitindo o isolamento da variável causal e a subsequente correção. Ficou bonito isso: variável causal. Gostei.
 
 ## Repita Comigo: "Parse, don't Validate"
 
@@ -229,9 +229,7 @@ A abordagem da equipe da Cloudflare assumiu implicitamente que o SQL sempre reto
 
 A abordagem com Tipos Dependentes, ou *Smart Constructors em Haskell*, define a função de processamento $P$ apenas sobre o tipo refinado $T_V$, onde $T_V$ é isomórfico a $V$.
 
-$$
-P: T_V \rightarrow \text{SystemState}
-$$
+$$P: T_V \rightarrow \text{SystemState}$$
 
 Como o dado vindo do banco ($y$) não pôde ser convertido para $T_V$, o construtor retornou `Left`, a função $P$ nunca foi invocada com dados corrompidos. O sistema de tipos serviu como um "firewall lógico", impedindo que o erro de dados (SQL) se transmutasse em um erro de infraestrutura (Crash).
 
