@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="600"
+   height="700"
+   viewBox="0 0 600 700"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="datacenter_48v.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1042857"
+     inkscape:cx="300.19405"
+     inkscape:cy="350"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg11" />
+  <style
+     id="style1">
+    .box { fill: #f0f4f8; stroke: #2c3e50; stroke-width: 2; rx: 10; ry: 10; }
+    .text { font-family: 'Segoe UI', sans-serif; font-size: 14px; fill: #333; text-anchor: middle; dominant-baseline: middle; }
+    .arrow { stroke: #2c3e50; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .label { font-family: 'Segoe UI', sans-serif; font-size: 12px; fill: #666; background-color: white; }
+  </style>
+  <defs
+     id="defs1">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,7 0,0 10,3.5 "
+         fill="#2c3e50"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="arrowhead-dc"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7 "
+         fill="#d35400"
+         id="polygon1-9" />
+    </marker>
+  </defs>
+  <!-- Lado AC/Facility -->
+  <text
+     x="145"
+     y="30"
+     font-family="'Segoe UI', sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#2c3e50"
+     id="text1">Infraestrutura AC (Facility)</text>
+  <rect
+     x="20"
+     y="50"
+     width="250"
+     height="50"
+     class="box"
+     id="rect1" />
+  <text
+     x="145"
+     y="75"
+     class="text"
+     id="text2">Rede Elétrica (11–33 kV AC)</text>
+  <rect
+     x="20"
+     y="130"
+     width="250"
+     height="50"
+     class="box"
+     id="rect2" />
+  <text
+     x="145"
+     y="155"
+     class="text"
+     id="text3">Transformadores Step-down</text>
+  <rect
+     x="20"
+     y="210"
+     width="250"
+     height="50"
+     class="box"
+     id="rect3" />
+  <text
+     x="145"
+     y="235"
+     class="text"
+     id="text4">480 VAC Trifásico</text>
+  <rect
+     x="20"
+     y="290"
+     width="250"
+     height="50"
+     class="box"
+     style="stroke:#e67e22"
+     id="rect4" />
+  <text
+     x="145"
+     y="315"
+     class="text"
+     id="text5">Retificadores AC/DC</text>
+  <!-- Setas lado AC -->
+  <path
+     d="M 145 100 v 30"
+     class="arrow"
+     id="path1" />
+  <path
+     d="M 145 180 v 30"
+     class="arrow"
+     id="path2" />
+  <path
+     d="M 145 260 v 30"
+     class="arrow"
+     id="path3" />
+  <!-- Lado DC -->
+  <text
+     x="433"
+     y="30"
+     font-family="'Segoe UI', sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#d35400"
+     id="text1-dc">Distribuição e Conversão DC</text>
+  <rect
+     x="308"
+     y="50"
+     width="250"
+     height="50"
+     class="box"
+     id="rect1-dc"
+     style="fill:#fff8e1;stroke:#d35400;stroke-width:2" />
+  <text
+     x="433"
+     y="75"
+     class="text"
+     id="text2-dc">Barramento DC 48–54 V</text>
+  <rect
+     x="308"
+     y="130"
+     width="250"
+     height="50"
+     class="box"
+     id="rect2-dc"
+     style="fill:#fff8e1;stroke:#d35400;stroke-width:2" />
+  <text
+     x="433"
+     y="148"
+     class="text"
+     id="text3-dc">Baterias de Backup</text>
+  <text
+     x="433"
+     y="165"
+     class="text"
+     style="font-size:11px;fill:#555555"
+     id="text3-dc-sub">(Li-ion 48 V)</text>
+  <rect
+     x="308"
+     y="210"
+     width="250"
+     height="50"
+     class="box"
+     id="rect3-dc"
+     style="fill:#fff8e1;stroke:#d35400;stroke-width:2" />
+  <text
+     x="433"
+     y="235"
+     class="text"
+     id="text4-dc">Distribuição para Racks</text>
+  <rect
+     x="308"
+     y="290"
+     width="250"
+     height="50"
+     class="box"
+     id="rect4-dc"
+     style="fill:#fff8e1;stroke:#d35400;stroke-width:2" />
+  <text
+     x="433"
+     y="308"
+     class="text"
+     id="text5-dc">Conversores Buck DC-DC</text>
+  <text
+     x="433"
+     y="325"
+     class="text"
+     style="font-size:11px;fill:#555555"
+     id="text5-dc-sub">(48 V → 12 V)</text>
+  <rect
+     x="308"
+     y="370"
+     width="250"
+     height="50"
+     class="box"
+     id="rect5-dc"
+     style="fill:#fff8e1;stroke:#d35400;stroke-width:2" />
+  <text
+     x="433"
+     y="395"
+     class="text"
+     id="text6-dc">Alimentação das Placas</text>
+  <rect
+     x="308"
+     y="450"
+     width="250"
+     height="50"
+     class="box"
+     id="rect6-dc"
+     style="fill:#fff8e1;stroke:#d35400;stroke-width:2" />
+  <text
+     x="433"
+     y="468"
+     class="text"
+     id="text7-dc">POLs (Point of Load)</text>
+  <text
+     x="433"
+     y="485"
+     class="text"
+     style="font-size:11px;fill:#555555"
+     id="text7-dc-sub">(12 V → 0.8–1 V)</text>
+  <rect
+     x="308"
+     y="530"
+     width="250"
+     height="50"
+     class="box"
+     style="fill:#d35400;stroke:#2c3e50;stroke-width:2"
+     id="rect7-dc" />
+  <text
+     x="433"
+     y="555"
+     class="text"
+     style="font-weight:bold;fill:#ffffff"
+     id="text8-dc">Core Voltage (GPUs e CPUs)</text>
+  <!-- Setas lado DC -->
+  <path
+     d="M 433 100 v 30"
+     class="arrow"
+     id="path4"
+     style="stroke:#d35400;marker-end:url(#arrowhead-dc)" />
+  <path
+     d="M 433 180 v 30"
+     class="arrow"
+     id="path5"
+     style="stroke:#d35400;marker-end:url(#arrowhead-dc)" />
+  <path
+     d="M 433 260 v 30"
+     class="arrow"
+     id="path6"
+     style="stroke:#d35400;marker-end:url(#arrowhead-dc)" />
+  <path
+     d="M 433 340 v 30"
+     class="arrow"
+     id="path7"
+     style="stroke:#d35400;marker-end:url(#arrowhead-dc)" />
+  <path
+     d="M 433 420 v 30"
+     class="arrow"
+     id="path8"
+     style="stroke:#d35400;marker-end:url(#arrowhead-dc)" />
+  <path
+     d="M 433 500 v 30"
+     class="arrow"
+     id="path9"
+     style="stroke:#d35400;marker-end:url(#arrowhead-dc)" />
+  <!-- Conexão entre AC e DC -->
+  <!-- Labels de eficiência -->
+  <text
+     x="186.76585"
+     y="353.90686"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#d35400"
+     font-weight="bold"
+     id="efficiency-label">~94% eficiência</text>
+</svg>
