@@ -90,6 +90,36 @@
           "title": "lastmod",
           "name": "lastmod",
           "type": "datetime"
+        },
+        {
+          "title": "schema",
+          "name": "schema",
+          "type": "fields",
+          "fields": [
+            {
+              "title": "type",
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "title": "name",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "title": "description",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "title": "steps",
+              "name": "steps",
+              "type": "block",
+              "fieldGroup": [
+                "steps_group"
+              ]
+            }
+          ]
         }
       ]
     }
@@ -108,5 +138,22 @@
     }
   ],
   "frontMatter.content.snippets": {},
-  "frontMatter.media.defaultSorting": "LastModifiedAsc"
+  "frontMatter.media.defaultSorting": "LastModifiedAsc",
+  "frontMatter.taxonomy.fieldGroups": [
+    {
+      "id": "steps_group",
+      "fields": [
+        {
+          "title": "name",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        }
+      ]
+    }
+  ]
 }

@@ -1,0 +1,49 @@
+<svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="400" height="600" fill="#f0f0f0"/>
+
+  <!-- Title -->
+  <text x="200" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">
+    Progressive Attention Training
+  </text>
+  <text x="200" y="75" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#555">
+    Train your focus like a muscle
+  </text>
+
+  <!-- Week 1 -->
+  <rect x="50" y="100" width="300" height="80" rx="10" fill="#4A90E2"/>
+  <text x="60" y="120" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Week 1</text>
+  <circle cx="80" cy="150" r="10" fill="#FFD700"/>
+  <text x="100" y="155" font-family="Arial, sans-serif" font-size="14" fill="white">Focus: 15 min</text>
+  <circle cx="220" cy="150" r="10" fill="#FFD700"/>
+  <text x="240" y="155" font-family="Arial, sans-serif" font-size="14" fill="white">Pause: 5 min</text>
+
+  <!-- Week 2 -->
+  <rect x="50" y="200" width="300" height="80" rx="10" fill="#5AA8E2"/>
+  <text x="60" y="220" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Week 2</text>
+  <circle cx="80" cy="250" r="10" fill="#FFD700"/>
+  <text x="100" y="255" font-family="Arial, sans-serif" font-size="14" fill="white">Focus: 25 min</text>
+  <circle cx="220" cy="250" r="10" fill="#FFD700"/>
+  <text x="240" y="255" font-family="Arial, sans-serif" font-size="14" fill="white">Pause: 5 min</text>
+
+  <!-- Week 3 -->
+  <rect x="50" y="300" width="300" height="80" rx="10" fill="#6ABFE2"/>
+  <text x="60" y="320" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Week 3</text>
+  <circle cx="80" cy="350" r="10" fill="#FFD700"/>
+  <text x="100" y="355" font-family="Arial, sans-serif" font-size="14" fill="white">Focus: 45 min</text>
+  <circle cx="220" cy="350" r="10" fill="#FFD700"/>
+  <text x="240" y="355" font-family="Arial, sans-serif" font-size="14" fill="white">Pause: 10 min</text>
+
+  <!-- Week 4+ -->
+  <rect x="50" y="400" width="300" height="80" rx="10" fill="#7AD7E2"/>
+  <text x="60" y="420" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">Week 4+</text>
+  <circle cx="80" cy="450" r="10" fill="#FFD700"/>
+  <text x="100" y="455" font-family="Arial, sans-serif" font-size="14" fill="white">Focus: 90 min</text>
+  <circle cx="220" cy="450" r="10" fill="#FFD700"/>
+  <text x="240" y="455" font-family="Arial, sans-serif" font-size="14" fill="white">Pause: 15–20 min</text>
+
+  <!-- Footer Note -->
+  <text x="200" y="550" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#555">
+    4-week protocol to build deep focus for engineers
+  </text>
+</svg>

@@ -53,6 +53,26 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+	
+	{% if page.schema %}
+	<script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "{{ page.schema.type }}",
+	  "name": "{{ page.schema.name }}",
+	  "description": "{{ page.schema.description }}",
+	  "step": [
+	    {% for step in page.schema.steps %}
+	    {
+	      "@type": "HowToStep",
+	      "name": "{{ step.name }}",
+	      "text": "{{ step.description }}"
+	    }{% unless forloop.last %},{% endunless %}
+	    {% endfor %}
+	  ]
+	}
+	</script>
+	{% endif %}
 	</head>
 	{% if jekyll.environment == 'production' %} {% endif %} {% capture layout %}{% if page.layout %}layout-{{
 	page.layout

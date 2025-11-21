@@ -16,7 +16,7 @@ description: |
 date: 2025-11-21T20:25:09.539Z
 preview: |
     Neste artigo, exploramos a mudança de paradigma proposta pela Nvidia com a arquitetura Kyber. O Problema:** As limitações térmicas e de perda da distribuição legada de 54 V. A migração para 800 VDC e refrigeração líquida. Uma redução drástica no TCO e a viabilização de racks com densidade de 600 kW.
-lastmod: 2025-11-21T20:51:30.870Z
+lastmod: 2025-11-21T21:44:58.444Z
 published: true
 draft: 2025-11-21T20:25:14.492Z
 image: assets/images/datacenter-800v.webp
@@ -29,6 +29,42 @@ keywords:
     - GPUs Blackwell e Rubin Ultra
     - Nvidia AI Factory
     - TCO em Data Centers
+schema:
+    type: TechArticle
+    name: Nvidia e a Fábrica de IA 800 VDC, Kyber e Data Centers em 2025
+    description: Análise técnica e econômica da transição para a arquitetura de energia 800 VDC da Nvidia em data centers de IA, destacando a plataforma Kyber, eficiência energética e redução de TCO.
+    author:
+        type: Person
+        name: Frank Silva
+    datePublished: 2025-11-21
+    publisher:
+        type: Organization
+        name: Seu Blog ou Plataforma
+    keywords:
+        - Arquitetura Kyber
+        - Data Centers de Alta Densidade
+        - Distribuição de Energia 800 VDC
+        - Eficiência Energética em IA
+        - GPUs Blackwell e Rubin Ultra
+        - Nvidia AI Factory
+        - TCO em Data Centers
+    mainEntity:
+        type: Technology
+        name: Nvidia Kyber Architecture
+        description: Plataforma de servidores em rack da Nvidia para data centers de IA, utilizando 800 VDC, refrigeração líquida e GPUs Rubin Ultra para alta densidade e eficiência.
+        applicationCategory: Data Center Infrastructure
+        featureList:
+            - 800 VDC Power Distribution
+            - Liquid Cooling
+            - High-Density GPU Configurations
+            - Reduced TCO
+    about:
+        - type: Concept
+          name: AI Factory
+          description: Infraestrutura de data centers otimizada para processar grandes volumes de dados de IA, transformando-os em inteligência por meio de pipelines de dados, inferência e gêmeos digitais.
+        - type: Concept
+          name: Total Cost of Ownership (TCO)
+          description: Custo total de propriedade em data centers, incluindo custos de energia, refrigeração, manutenção e infraestrutura, reduzido pela arquitetura 800 VDC da Nvidia.
 ---
 
 A rápida evolução das tecnologias de treinamento e aceleração para assistentes de inteligência artificial (IA) transformou os **data centers** em sistemas cujo comportamento energético lembra mais instalações industriais de alta densidade do que as salas de servidores que povoam nosso imaginário.
