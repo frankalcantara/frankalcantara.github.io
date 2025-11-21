@@ -3,43 +3,43 @@ layout: post
 title: Como Melhorar a Concentração Profunda em 2025
 author: Frank
 categories:
-    - artigo
-    - opinião
+  - artigo
+  - opinião
 tags:
-    - Física
-    - inteligência artificial
-    - opinião
-    - Engenharia
+  - Física
+  - inteligência artificial
+  - opinião
+  - Engenharia
 rating: 6
 description: Descubra um protocolo baseado em neurociência para engenheiros e estudantes superarem a distração digital e aprimorarem a concentração profunda em 2025.
-date: 2025-11-14T00:58:10.955Z
+date: 2025-11-21T22:06:18.991Z
 preview: |
-    Protocolo prático para engenheiros e estudantes recuperarem o foco profundo, combatendo distrações digitais com técnicas baseadas em neurociência.
-lastmod: 2025-11-21T21:52:48.393Z
+  Protocolo prático para engenheiros e estudantes recuperarem o foco profundo, combatendo distrações digitais com técnicas baseadas em neurociência.
+lastmod: 2025-11-21T22:06:31.626Z
 published: true
-draft: 2025-11-14T01:11:49.434Z
+draft: 2025-11-21T22:06:20.798Z
 keywords:
-    - concentração profunda
-    - deep work 2025
-    - distração digital
-    - neurociência aplicada
-    - produtividade para engenheiros
-    - foco em engenharia
+  - concentração profunda
+  - deep work 2025
+  - distração digital
+  - neurociência aplicada
+  - produtividade para engenheiros
+  - foco em engenharia
 schema:
-    type: HowTo
-    name: Protocolo para Concentração Profunda em Engenharia
-    description: Um guia passo a passo para engenheiros e estudantes restaurarem o foco profundo com técnicas de neurociência.
-    steps:
-        - name: Diagnóstico de Fragmentação
-          description: Meça sua capacidade de foco com um teste de leitura técnica.
-        - name: Aumentar a Impedância de Distração
-          description: Torne o acesso a distrações digitais mais difícil.
-        - name: Leitura Ativa com Escrita Manual
-          description: Use caneta e papel para processar textos técnicos.
-        - name: Sobrecarga Progressiva de Atenção
-          description: Treine a atenção com blocos de foco crescentes.
-        - name: Ancoragem Visual
-          description: Use fixação visual para ativar o estado de alerta.
+  type: HowTo
+  name: Protocolo para Concentração Profunda em Engenharia
+  description: Um guia passo a passo para engenheiros e estudantes restaurarem o foco profundo com técnicas de neurociência.
+  steps:
+    - name: Diagnóstico de Fragmentação
+      description: Meça sua capacidade de foco com um teste de leitura técnica.
+    - name: Aumentar a Impedância de Distração
+      description: Torne o acesso a distrações digitais mais difícil.
+    - name: Leitura Ativa com Escrita Manual
+      description: Use caneta e papel para processar textos técnicos.
+    - name: Sobrecarga Progressiva de Atenção
+      description: Treine a atenção com blocos de foco crescentes.
+    - name: Ancoragem Visual
+      description: Use fixação visual para ativar o estado de alerta.
 image: assets/images/limpar_mente.webp
 ---
   
