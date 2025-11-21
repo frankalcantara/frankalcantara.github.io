@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Nvidia e a Fábrica de IA
+title: Nvidia e a Fábrica de IA 800 VDC, Kyber e Data Centers em 2025
 author: Frank
 categories:
     - artigo
@@ -12,13 +12,23 @@ tags:
     - Engenharia
 rating: 6
 description: A Nvidia fez uma proposta pela criação de um novo padrão de distribuição de energia para *data center*s. Este texto analisa essa proposta
-date: 2025-11-14T00:58:10.955Z
+date: 2025-11-21T20:25:09.539Z
 preview: |
     texto técnico expandido  
     arquiteturas de distribuição de energia em **data centers** de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
-lastmod: 2025-11-21T20:15:50.966Z
-published: false
-draft: 2025-11-14T01:11:49.434Z
+lastmod: 2025-11-21T20:28:44.914Z
+published: true
+draft: 2025-11-21T20:25:14.492Z
+image: /assets/images/datacenter-800v.webp
+keywords:
+    - Arquitetura Kyber
+    - Data Centers de Alta Densidade
+    - Distribuição de Energia 800 VDC
+    - "Distribuição de Energia 800 VDC "
+    - Eficiência Energética em IA (PUE)
+    - GPUs Blackwell e Rubin Ultra
+    - Nvidia AI Factory
+    - TCO em Data Centers
 ---
 
 A rápida evolução das tecnologias de treinamento e aceleração para assistentes de inteligência artificial (IA) transformou os **data centers** em sistemas cujo comportamento energético lembra mais instalações industriais de alta densidade do que as salas de servidores que povoam nosso imaginário.
