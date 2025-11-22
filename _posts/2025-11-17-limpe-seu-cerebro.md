@@ -15,7 +15,7 @@ description: Descubra um protocolo baseado em neurociência para engenheiros e e
 date: 2025-11-21T22:06:18.991Z
 preview: |
   Protocolo prático para engenheiros e estudantes recuperarem o foco profundo, combatendo distrações digitais com técnicas baseadas em neurociência.
-lastmod: 2025-11-22T05:04:30.299Z
+lastmod: 2025-11-22T19:48:16.511Z
 published: true
 draft: 2025-11-21T22:06:20.798Z
 keywords:
@@ -164,6 +164,7 @@ Treine a atenção como se treina um músculo. Não comece com 4 horas seguidas.
 **Meta**: blocos de 90 minutos, um ciclo ultradiano completo, duração mínima real para resolver problemas complexos de engenharia.
 
 ![Infográfico da tabela acima](/assets/images/atencao_treino.webp)
+Figura: Progresso semanal de blocos de foco e pausas. Criada por Claude Code em 22 de novembro de 2025. Licença: CC BY-SA 4.0
 
 _Talvez o mais difícil deste protocolo. Requer disciplina e paciência. Mas é o passo crítico para restaurar a capacidade de foco profundo_. 
 
@@ -199,6 +200,9 @@ Antes de sessões difíceis, depuração longa, prova, projeto. Antes de qualque
 2. **Respire calmamente**. Use a técnica dos Marines dos EUA: inspire contando até 4, segure contando até 4, expire contando até 4, segure contando até 4. Repita no mínimo 4 vezes.
 
 Isto desencadeia um efeito neurofisiológico brutalmente eficiente: ativa o sistema **locus coeruleus–norepinefrina (LC-NE)** — o botão de alerta calmo do cérebro.  
+
+![Um mariner respirando calmamente](/assets/images/respirando.webp)
+Figura: Técnica de respiração dos Marines dos EUA (4-4-4-4). Criada por Gemini Pro em 22 de novembro de 2025. Licença: CC BY-SA 4.0
 
 Em vez do modo ansiedade, que faz seus olhos ficarem saltando para todos os lados procurando ameaça ou distração, você entra no modo caçador: visão túnel, atenção afiada, coração batendo devagar e forte, zero vontade de checar o celular.  
 
