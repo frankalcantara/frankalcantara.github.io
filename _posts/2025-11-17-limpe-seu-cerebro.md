@@ -15,7 +15,7 @@ description: Descubra um protocolo baseado em neurociência para engenheiros e e
 date: 2025-11-21T22:06:18.991Z
 preview: |
   Protocolo prático para engenheiros e estudantes recuperarem o foco profundo, combatendo distrações digitais com técnicas baseadas em neurociência.
-lastmod: 2025-11-22T02:42:27.307Z
+lastmod: 2025-11-22T05:04:30.299Z
 published: true
 draft: 2025-11-21T22:06:20.798Z
 keywords:
