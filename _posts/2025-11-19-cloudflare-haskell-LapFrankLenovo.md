@@ -21,10 +21,48 @@ description: análise técnica do incidente do Cloudflare em novembro de 2025, e
 date: 2025-11-14T00:58:10.955Z
 preview: |
   O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-19T22:54:39.798Z
+lastmod: 2025-11-21T21:45:55.661Z
 published: true
 draft: 2025-11-19T16:07:35.437Z
 image: assets/images/cloudflare2.webp
+schema:
+  type: TechArticle
+  name: A Falha do Cloudflare e o Haskell
+  description: Análise técnica do incidente do Cloudflare em novembro de 2025, explorando como a Teoria de Tipos em Haskell poderia ter prevenido a falha através de modelagem robusta de dados.
+  author:
+    type: Person
+    name: Frank Alcantara
+  datePublished: 2025-11-14
+  publisher:
+    type: Organization
+    name: Seu Blog ou Plataforma
+  keywords:
+    - Haskell
+    - Cloudflare
+    - Teoria de Tipos
+    - Rust
+    - Programação Funcional
+    - Post-Mortem
+    - Sistemas Distribuídos
+    - SQL
+    - Engenharia de Software
+  mainEntity:
+    type: Event
+    name: Cloudflare Outage November 2025
+    description: Incidente global do Cloudflare em 18-19 de novembro de 2025, causado por uma falha em permissões de banco de dados que duplicou dados, levando a erros 500 em escala.
+    startDate: 2025-11-18
+    endDate: 2025-11-19
+  about:
+    - type: Concept
+      name: Teoria de Tipos
+      description: Abordagem matemática para garantir a correção de programas, usada em Haskell para prevenir erros como os do incidente do Cloudflare através de tipos dependentes e smart constructors.
+    - type: Concept
+      name: Programação Funcional
+      description: Paradigma de programação que enfatiza funções puras e imutabilidade, exemplificado por Haskell, para construir sistemas robustos e previsíveis.
+    - type: SoftwareApplication
+      name: Haskell
+      description: Linguagem de programação funcional que utiliza um sistema de tipos forte para garantir segurança e correção, proposta como solução para evitar falhas como a do Cloudflare.
+      applicationCategory: Programming Language
 ---
 
 O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O evento, que durou alguma coisa entre 3 e 6 horas, ilustra como uma _alteração inocente em permissões de banco de dados pode desencadear uma reação em cadeia catastrófica quando acoplada a otimizações de memória estática em sistemas de alta performance_.
