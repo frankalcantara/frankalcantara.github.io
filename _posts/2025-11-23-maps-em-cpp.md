@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Maps Cache-Friendly em C++23 Localidade e Indexação Múltipla
-author: frank
+author: Frank
 categories:
     - artigo
     - Matemática
@@ -18,7 +18,7 @@ rating: 6
 description: Um estudo da classe Maps destacando as melhorias implementadas na últimas versões do C++
 date: 2025-11-23T14:39:47.039Z
 preview: map é uma classe importante para otimização de algoritmos. Este artigo estuda o uso de Maps destacando seus métodos mais modernos.
-lastmod: 2025-11-23T20:11:39.943Z
+lastmod: 2025-11-23T23:04:28.542Z
 keywords:
     - algoritmos
     - CLang
