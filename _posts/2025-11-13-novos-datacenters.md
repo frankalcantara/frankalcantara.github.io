@@ -16,8 +16,8 @@ date: 2025-11-14T00:58:10.955Z
 preview: |
   texto técnico expandido  
   arquiteturas de distribuição de energia em **data center*s* de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
-lastmod: 2025-11-23T21:31:43.468Z
-published: true
+lastmod: 2025-11-23T21:33:16.277Z
+published: false
 draft: 2025-11-14T01:11:49.434Z
 slug: nvidia-fabrica-de-ia
 schema:
