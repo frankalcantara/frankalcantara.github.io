@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="600"
+   height="850"
+   viewBox="0 0 600 850"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="kyber_800vdc_architecture.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview45"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.2861025"
+     inkscape:cx="167.56052"
+     inkscape:cy="556.33204"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg11" />
+  <style
+     id="style1">
+    .box { fill: #f0f4f8; stroke: #2c3e50; stroke-width: 2; rx: 10; ry: 10; }
+    .box-vdc { fill: #e8f5e9; stroke: #1b5e20; stroke-width: 2; rx: 10; ry: 10; }
+    .text { font-family: 'Segoe UI', sans-serif; font-size: 14px; fill: #333; text-anchor: middle; dominant-baseline: middle; }
+    .subtext { font-family: 'Segoe UI', sans-serif; font-size: 11px; fill: #555; text-anchor: middle; dominant-baseline: middle; }
+    .arrow { stroke: #2c3e50; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    .arrow-vdc { stroke: #1b5e20; stroke-width: 3; fill: none; marker-end: url(#arrowhead-vdc); }
+    .arrow-dc { stroke: #d35400; stroke-width: 2; fill: none; marker-end: url(#arrowhead-dc); }
+    .label { font-family: 'Segoe UI', sans-serif; font-size: 12px; fill: #666; }
+  </style>
+  <defs
+     id="defs1">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,7 0,0 10,3.5"
+         fill="#2c3e50"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="arrowhead-vdc"
+       markerWidth="12"
+       markerHeight="8"
+       refX="12"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0,8 0,0 12,4"
+         fill="#1b5e20"
+         id="polygon2" />
+    </marker>
+    <marker
+       id="arrowhead-dc"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7"
+         fill="#d35400"
+         id="polygon3" />
+    </marker>
+    <marker
+       id="arrowhead-9"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7 "
+         fill="#2c3e50"
+         id="polygon1-4" />
+    </marker>
+    <marker
+       id="arrowhead-4"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7 "
+         fill="#2c3e50"
+         id="polygon1-5" />
+    </marker>
+    <marker
+       id="arrowhead-1"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7 "
+         fill="#2c3e50"
+         id="polygon1-1" />
+    </marker>
+    <marker
+       id="arrowhead-6"
+       markerWidth="10"
+       markerHeight="7"
+       refX="10"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,0 10,3.5 0,7 "
+         fill="#2c3e50"
+         id="polygon1-14" />
+    </marker>
+  </defs>
+  <!-- Título Esquerdo -->
+  <text
+     x="145"
+     y="30"
+     font-family="'Segoe UI', sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#1b5e20"
+     id="text3">Infraestrutura 800 VDC</text>
+  <!-- Rede Elétrica -->
+  <rect
+     x="20"
+     y="55"
+     width="250"
+     height="50"
+     class="box"
+     id="rect3" />
+  <text
+     x="145"
+     y="80"
+     class="text"
+     id="text4">Rede Elétrica (13.8 kV AC)</text>
+  <!-- Retificadores -->
+  <rect
+     x="20"
+     y="135"
+     width="250"
+     height="50"
+     class="box-vdc"
+     id="rect4" />
+  <path
+     d="m 145.20116,184.39845 v 30"
+     class="arrow"
+     id="path14-8"
+     style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-9)" />
+  <path
+     d="m 145.20116,265 v 30"
+     class="arrow"
+     id="path14-1"
+     style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-4)" />
+  <path
+     d="m 145.20116,341 v 32.7214"
+     class="arrow"
+     id="path14-2"
+     style="fill:none;stroke:#2c3e50;stroke-width:2.08874;marker-end:url(#arrowhead-1)" />
+  <text
+     x="145"
+     y="153"
+     class="text"
+     id="text5">Retificadores Industriais</text>
+  <text
+     x="145"
+     y="170"
+     class="subtext"
+     id="text6">(AC → 800 VDC Centralizado)</text>
+  <!-- Distribuição 800V -->
+  <rect
+     x="20"
+     y="215"
+     width="250"
+     height="50"
+     class="box-vdc"
+     id="rect6" />
+  <text
+     x="145"
+     y="233"
+     class="text"
+     id="text7">Distribuição 800 VDC</text>
+  <text
+     x="145"
+     y="250"
+     class="subtext"
+     id="text8">(Busways - Sala de Energia)</text>
+  <!-- Proteção Sobrecorrente -->
+  <rect
+     x="20"
+     y="295"
+     width="250"
+     height="50"
+     class="box-vdc"
+     id="rect8" />
+  <text
+     x="145"
+     y="313"
+     class="text"
+     id="text9">Proteção contra Sobrecorrente</text>
+  <text
+     x="145"
+     y="330"
+     class="subtext"
+     id="text10">(Fusíveis/Disjuntores/SSDs)</text>
+  <!-- Distribuição Row-Level -->
+  <rect
+     x="20"
+     y="375"
+     width="250"
+     height="50"
+     class="box-vdc"
+     id="rect10" />
+  <text
+     x="145"
+     y="393"
+     class="text"
+     id="text11">Distribuição Row-Level</text>
+  <text
+     x="145"
+     y="410"
+     class="subtext"
+     id="text12">(Busways 800V - 2 condutores)</text>
+  <!-- Proteção Rack -->
+  <rect
+     x="20"
+     y="455"
+     width="250"
+     height="50"
+     class="box-vdc"
+     id="rect12" />
+  <text
+     x="145"
+     y="473"
+     class="text"
+     id="text13">Proteção Nível de Rack</text>
+  <text
+     x="145"
+     y="490"
+     class="subtext"
+     id="text14">(Overcurrent Protection)</text>
+  <!-- Setas lado esquerdo -->
+  <path
+     d="m 145.20116,105 v 30"
+     class="arrow"
+     id="path14" />
+  <!-- Título Direito -->
+  <text
+     x="433"
+     y="30"
+     font-family="'Segoe UI', sans-serif"
+     font-size="18px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#d35400"
+     id="text18">IT Rack - Conversão DC</text>
+  <!-- Entrada 800V -->
+  <rect
+     x="308"
+     y="55"
+     width="250"
+     height="50"
+     style="fill:#fff8e1; stroke:#d35400; stroke-width:2; rx:10; ry:10;"
+     id="rect18" />
+  <text
+     x="433"
+     y="73"
+     class="text"
+     id="text19">Entrada IT Rack</text>
+  <text
+     x="433"
+     y="90"
+     class="subtext"
+     id="text20">(800 VDC - 2 condutores)</text>
+  <!-- Conversão DC/DC Principal -->
+  <rect
+     x="308"
+     y="135"
+     width="250"
+     height="50"
+     style="fill:#fff8e1; stroke:#d35400; stroke-width:2; rx:10; ry:10;"
+     id="rect20" />
+  <text
+     x="433"
+     y="153"
+     class="text"
+     id="text21">Conversão DC/DC Principal</text>
+  <text
+     x="433"
+     y="170"
+     class="subtext"
+     id="text22">(800 V → 54 V / 12 V)</text>
+  <!-- Distribuição Interna -->
+  <rect
+     x="308"
+     y="215"
+     width="250"
+     height="50"
+     style="fill:#fff8e1; stroke:#d35400; stroke-width:2; rx:10; ry:10;"
+     id="rect22" />
+  <text
+     x="433"
+     y="233"
+     class="text"
+     id="text23">Distribuição Interna Rack</text>
+  <text
+     x="433"
+     y="250"
+     class="subtext"
+     id="text24">(Barramento DC 54V/12V)</text>
+  <!-- Conversão para Core Voltage -->
+  <rect
+     x="308"
+     y="295"
+     width="250"
+     height="50"
+     style="fill:#fff8e1; stroke:#d35400; stroke-width:2; rx:10; ry:10;"
+     id="rect24" />
+  <text
+     x="433"
+     y="313"
+     class="text"
+     id="text25">Conversão para Core Voltage</text>
+  <text
+     x="433"
+     y="330"
+     class="subtext"
+     id="text26">(12 V → 0.8–1.2 V)</text>
+  <!-- GPUs Kyber -->
+  <rect
+     x="308"
+     y="375"
+     width="250"
+     height="70"
+     style="fill:#d35400; stroke:#2c3e50; stroke-width:2; rx:10; ry:10;"
+     id="rect26" />
+  <text
+     x="433"
+     y="400"
+     style="font-family: 'Segoe UI', sans-serif; font-size: 16px; font-weight: bold; fill: #ffffff; text-anchor: middle; dominant-baseline: middle;"
+     id="text27">NVIDIA Kyber Rack</text>
+  <text
+     x="433"
+     y="420"
+     style="font-family: 'Segoe UI', sans-serif; font-size: 12px; fill: #ffffff; text-anchor: middle; dominant-baseline: middle;"
+     id="text28">576 Rubin Ultra GPUs</text>
+  <text
+     x="433"
+     y="435"
+     style="font-family: 'Segoe UI', sans-serif; font-size: 11px; fill: #ffe0b2; text-anchor: middle; dominant-baseline: middle;"
+     id="text29">(1 MW+ por rack)</text>
+  <!-- Setas lado direito -->
+  <path
+     d="M 433,105 v 30"
+     class="arrow-dc"
+     id="path29" />
+  <path
+     d="M 433,185 v 30"
+     class="arrow-dc"
+     id="path30" />
+  <path
+     d="M 433,265 v 30"
+     class="arrow-dc"
+     id="path31" />
+  <path
+     d="M 433,345 v 30"
+     class="arrow-dc"
+     id="path32" />
+  <!-- Seta horizontal conectando os lados -->
+  <!-- Annotations de Benefícios -->
+  <rect
+     x="50"
+     y="545"
+     width="500"
+     height="270"
+     style="fill:#fafafa; stroke:#1b5e20; stroke-width:2; stroke-dasharray:5,5; rx:15; ry:15;"
+     id="rect33" />
+  <text
+     x="300"
+     y="570"
+     font-family="'Segoe UI', sans-serif"
+     font-size="16px"
+     font-weight="bold"
+     text-anchor="middle"
+     fill="#1b5e20"
+     id="text33">Benefícios da Arquitetura 800 VDC</text>
+  <text
+     x="70"
+     y="600"
+     font-family="'Segoe UI', sans-serif"
+     font-size="13px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text34">Eficiência Energética:</text>
+  <text
+     x="70"
+     y="618"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text35">• Até 5% de melhoria na eficiência end-to-end</text>
+  <text
+     x="70"
+     y="633"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text36">• Redução de conversões AC/DC intermediárias</text>
+  <text
+     x="70"
+     y="658"
+     font-family="'Segoe UI', sans-serif"
+     font-size="13px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text37">Redução de Material:</text>
+  <text
+     x="70"
+     y="676"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text38">• 45% menos cobre nos condutores</text>
+  <text
+     x="70"
+     y="691"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text39">• 85% mais potência no mesmo condutor</text>
+  <text
+     x="70"
+     y="716"
+     font-family="'Segoe UI', sans-serif"
+     font-size="13px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text40">Escalabilidade:</text>
+  <text
+     x="70"
+     y="734"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text41">• Suporta racks de 100 kW até +1 MW</text>
+  <text
+     x="70"
+     y="749"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text42">• Mesma infraestrutura para diferentes cargas</text>
+  <text
+     x="70"
+     y="774"
+     font-family="'Segoe UI', sans-serif"
+     font-size="13px"
+     font-weight="bold"
+     fill="#2c3e50"
+     id="text43">Confiabilidade:</text>
+  <text
+     x="70"
+     y="792"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text44">• Até 70% menos falhas de PSU</text>
+  <text
+     x="70"
+     y="807"
+     font-family="'Segoe UI', sans-serif"
+     font-size="11px"
+     fill="#555"
+     id="text45">• Redução de TCO em até 30%</text>
+  <path
+     d="m 144.81239,424.55509 v 30"
+     class="arrow"
+     id="path14-3"
+     style="fill:none;stroke:#2c3e50;stroke-width:2;marker-end:url(#arrowhead-6)" />
+</svg>
