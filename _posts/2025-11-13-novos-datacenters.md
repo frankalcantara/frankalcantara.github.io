@@ -16,7 +16,7 @@ date: 2025-11-14T00:58:10.955Z
 preview: |
   texto técnico expandido  
   arquiteturas de distribuição de energia em **data centers** de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
-lastmod: 2025-11-25T13:44:45.065Z
+lastmod: 2025-11-25T18:07:10.068Z
 published: true
 draft: 2025-11-14T01:11:49.434Z
 slug: nvidia-fabrica-de-ia
@@ -151,7 +151,7 @@ image: assets/images/tecnvida.webp
 
 A rápida evolução das tecnologias de treinamento e aceleração para assistentes de inteligência artificial (IA) transformou os **data centers** em sistemas cujo comportamento energético lembra mais instalações industriais de alta densidade do que as salas de servidores que povoam nosso imaginário.
 
-Espera-se que o mercado de servidores de IA comece em **US 124,8 bilhões em 2024 e salte para US 204,7 bilhões em 2025. Até 2030, prevê-se que seja de US 837 bilhões, com algumas estimativas excedendo US 1,56 trilhão**. Esse número entre $34\%$ e $39\%$ não é apenas uma estatística; representa uma mudança de paradigma em como a humanidade começou a ver a inteligência como um recurso computacional. A Nvidia lidera este mercado com alguma coisa entre $80\%$ e $94\%$ de participação, e sua influência é tamanha que suas decisões moldam o futuro da infraestrutura de sistemas de Inteligência Artificial.
+Espera-se que o mercado de servidores de IA **salte para US 204,7 bilhões em 2025. Até 2030, prevê-se que seja de US 837 bilhões, com algumas estimativas excedendo US 1,56 trilhão**. Esse número entre $34\%$ e $39\%$ não é apenas uma estatística; representa uma mudança de paradigma em como a humanidade começou a ver a inteligência como um recurso computacional. A Nvidia lidera este mercado com alguma coisa entre $80\%$ e $94\%$ de participação, e sua influência é tamanha que suas decisões moldam o futuro da infraestrutura de sistemas de Inteligência Artificial.
 
 A [Goldman Sachs Research](https://www.wired.com/story/data-center-ai-boom-us-economy-jobs/) projeta que a demanda global de energia dos **data centers** saltará $165\%$ até 2030, de $55 \text{ GW}$ em 2023 para $145 \text{ GW}$, com picos intermediários de $92 \text{2 GW}$ em 2027. A IA, que hoje responde por $14\%$ desse consumo, alcançará $27\%$ em 2027 e $36\%$ em 2030 — podendo devorar mais de 40% dos 96 GW críticos previstos para 2026. Nos EUA, a fatia dos **data centers** na demanda elétrica nacional mais que dobrará, de $4\%$ para acima de $8\%$.
 

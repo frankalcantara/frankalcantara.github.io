@@ -18,7 +18,7 @@ rating: 6
 description: Um estudo da classe Maps destacando as melhorias implementadas na últimas versões do C++
 date: 2025-11-23T14:39:47.039Z
 preview: map é uma classe importante para otimização de algoritmos. Este artigo estuda o uso de Maps destacando seus métodos mais modernos.
-lastmod: 2025-11-24T21:51:13.843Z
+lastmod: 2025-11-25T18:51:07.528Z
 keywords:
     - algoritmos
     - CLang
@@ -189,9 +189,9 @@ Começando com a introdução dos **Tensor Cores** no [Volta](https://www.nvidia
 >>2. **Penalidade por Divergência**: threads não relacionados competem por recursos e a divergência de fluxo quebra o modelo de execução em *lockstep*.
 >>3.  **Sincronização**: historicamente, a sincronização era restrita a barreiras dentro do mesmo bloco (`__syncthreads()`). A partir de arquiteturas como Kepler e Volta, surgiram primitivas mais ricas, como os `Cooperative Groups`, `__syncwarp()`, permitindo maior controle.  Ainda assim, a sincronização global (entre blocos) ou com o host, **CPU** permanece muito mais restritiva que em ambientes **SMT**, devido à inviabilidade de colocar milhares de threads em espera passiva gerenciada por um sistema operacional.
 
-### 1.1 TensorCore
+### 1.1 Tensor Core
 
-De uma perspectiva de hardware, olhando desde as instruções **FMA** mais antigas para o vetorizado DP4A, depois para a primeira geração TensorCore no Volta (SM70), e subsequentemente Ampere/Hopper/Blackwell, todos eles têm aumentado a escala da multiplicação de matrizes, melhorado a razão compute-to-memory access e suportado formatos de dados de precisão mais baixa.
+De uma perspectiva de hardware, olhando desde as instruções **FMA** mais antigas para o vetorizado DP4A, depois para a primeira geração Tensor Core no Volta (SM70), e subsequentemente Ampere/Hopper/Blackwell, todos eles têm aumentado a escala da multiplicação de matrizes, melhorado a razão compute-to-memory access e suportado formatos de dados de precisão mais baixa.
 
 ![](/assets/images/tradu2.webp)
 **Figura 2**: Layouts de fragmentos de registradores para instruções **MMA** em diferentes Compute Capabilities. Observe a mudança drástica na organização thread-dado (T#) e o aumento da granularidade do tile, passando do modelo síncrono de 8x8x4 do Volta (SM70) para o modelo de Warpgroup 64x16x16 do Hopper (SM90). Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
@@ -246,41 +246,77 @@ Olhando as mudanças na precisão numérica, como mostrado abaixo, acompanhadas 
 
 Espera-se que a geração [Rubin](https://nvidianews.nvidia.com/news/nvidia-unveils-rubin-cpx-a-new-class-of-gpu-designed-for-massive-context-inference) dobre a escala dos Tensor Cores, estimada em $256 \times N \times 256 \text{ bits}$. Por outro lado, eu acho que veremos uma expansão adicional da **MMA** de 2-**CTA** (**C**ooperative **T**hread **A**rray) do Blackwell para uma instrução **MMA** conjunta de 4-CTA no Rubin. No entanto, haverão demandas adicionais para agendamento dentro do **CGA**, **C**ooperative **G**roup **A**rray).
 
-Outro problema trazido pelo aumento na potência de computação é a mudança no caminho de suprimento de dados. Os TensorCores iniciais (Volta) começaram a reutilizar registradores do CUDA Core. Então, à medida que a escala dos TensorCores do Ampere se expandiu, considerando a pressão de registradores, o cp.async foi usado para contornar o L1 e reduzir o uso de RMEM. O Hopper então introduziu o TMA (Tensor Memory Accelerator), permitindo que os operandos fossem colocados diretamente no SMEM, e introduziu CGA e DSMEM (Distributed Shared Memory). No entanto, nesta fase, os resultados do Acumulador ainda estavam no RMEM para facilitar operações subsequentes de Epilogue, mas isso ainda requeria um mecanismo de barreira waitgroup. Finalmente, o Blackwell introduz o TMEM, essencialmente separando o TensorCore e o CUDA Core, enquanto também reutiliza o mecanismo MBarrier introduzido pelas operações assíncronas do TMA. Como mostrado na figura abaixo:
+Outro problema trazido pelo aumento na capacidade computacional é a alteração do caminho de suprimento de dados. Os Tensor Cores iniciais, na plataforma Volta, começaram com a reutilização dos registradores do CUDA Core. À medida que a escala dos Tensor Cores da arquitetura Ampere se expandiu, a alimentação eficiente de dados tornou-se crítica. Para mitigar a pressão de registradores, o cp.async foi introduzido para mover dados diretamente da memória global para a memória compartilhada. Isso permite contornar o arquivo de registradores (evitando o uso de registros temporários para cópia) e reduzir a poluição do cache L1, liberando recursos para computação matemática intensa.
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992524238469906432)
+> **Tensor Cores:** Unidades de processamento especializadas em GPUs NVIDIA, projetadas para acelerar operações de multiplicação e acumulação de matrizes (MMA), essenciais para tarefas de aprendizado de máquina e IA. Elas permitem computação de alta performance utilizando precisão mista, como FP16, BF16 e INT8.
+>
+> **Pressão de registradores (Register Pressure):** Condição na programação de GPUs onde a demanda por registradores (memória ultra-rápida privada por thread) excede a disponibilidade física. Quando isso ocorre, o compilador é forçado a realizar o "derramamento" (register spilling) dos dados para a memória local (LMEM), que é significativamente mais lenta, reduzindo o desempenho do kernel.
+>
+> **cp.async:** Instrução de cópia assíncrona introduzida na arquitetura Ampere (CUDA 11+). Ela permite transferir dados da memória global diretamente para a memória compartilhada **sem passar pelo arquivo de registradores**. Além de ocultar a latência de memória permitindo computação paralela, sua principal vantagem arquitetural é aliviar a pressão de registradores, liberando-os para cálculos matemáticos.
+>
+> **L1 (Cache L1):** Cache de nível 1, memória rápida próxima aos núcleos de execução. No contexto do cp.async, a instrução faz os dados contornarem o L1, bypass, para evitar a "poluição de cache". Ou seja, impedir que novos dados de streaming expulsem dados reutilizáveis que já estão no cache, depositando-os diretamente na memória compartilhada.
 
-Todo o processo levou cerca de 10 anos, do Volta começando com o que parecia um componente add-on do TensorCore, ao Blackwell introduzindo o TMEM que não depende de RMEM, alcançando basicamente uma separação totalmente assíncrona. Cada passo tem sido bem estável. (Referências: , )
+A evolução continuou com a arquitetura Hopper, que introduziu o **T**ensor **M**emory **A**ccelerator,  **TMA**, permitindo que operandos fossem carregados diretamente na memória compartilhada, **SMEM**, além de implementar a **CGA** e a **DSMEM**. No entanto, nesta fase, os resultados dos acumuladores ainda residiam no arquivo de registradores para facilitar as operações subsequentes de Epílogo, o que exigia o uso de barreiras de espera, wait barriers, para sincronização. Finalmente, a arquitetura Blackwell introduz o **TMEM**, desacoplando efetivamente o Tensor Core do CUDA Core, enquanto reaproveita o mecanismo de **MBarrier** estabelecido pelas operações assíncronas do **TMA**. Como pode ser visto na tabela abaixo:
 
-1.2 Processamento Assíncrono O outro aspecto é o processamento assíncrono. Quando a geração Volta introduziu um PC (Program Counter) independente para cada Thread, na verdade marcou o início da execução assíncrona.
+| Arch      | Matrix A    | Matrix B | Matrix D |
+| :---      | :---:       | :---:    | :---:    |
+| Volta     | RF          | RF       | RF       |
+| Ampere    | RF          | RF       | RF       |
+| Hopper    | RF / SMEM   | SMEM     | RF       |
+| Blackwell | TMEM / SMEM | SMEM     | TMEM     |
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992524819297124352)
+
+> **TMA (Tensor Memory Accelerator):** Motor de cópia assíncrona introduzido na arquitetura Hopper (H100). Ele gerencia a transferência de dados entre a memória global e a memória compartilhada (SMEM) de forma independente, liberando as threads para outras tarefas e lidando automaticamente com cálculos de endereço.
+>
+> **CGA (Cluster Group Architecture):** Refere-se à organização em *Thread Block Clusters*. Permite que múltiplos blocos de threads (CTAs) sejam agrupados em um "Cluster" para cooperar na execução, compartilhando dados de forma rápida e sincronizada através da hierarquia de memória.
+>
+> **DSMEM (Distributed Shared Memory):** Recurso que permite que a memória compartilhada (SMEM) de um bloco seja acessada diretamente por outros blocos dentro do mesmo Cluster. Isso elimina a necessidade de passar pela memória global para trocar dados entre blocos vizinhos.
+>
+> **TMEM (Tensor Memory):** Na arquitetura Blackwell, refere-se a uma área de memória dedicada ou um modo de operação que separa o armazenamento de dados dos Tensor Cores do caminho de dados tradicional dos CUDA Cores, reduzindo a contenção de registradores e permitindo pipelines mais eficientes.
+>
+> **MBarrier:** Mecanismo de barreira assíncrona em hardware. Diferente das barreiras tradicionais (`__syncthreads()`) que pausam a execução, o MBarrier permite que as threads verifiquem se uma operação de memória (como a iniciada pelo TMA) foi concluída sem bloquear totalmente o processamento, essencial para sobrepor cópia e cálculo.
+
+Essa evolução transcorreu ao longo de aproximadamente sete anos, partindo da arquitetura Volta, na qual os Tensor Cores operavam fortemente acoplados ao fluxo de registradores, quase como um add-on, até chegar ao Blackwell. Com a introdução da **TMEM**, o Blackwell eliminou a dependência do arquivo de registradores, RF, para os acumuladores, concretizando uma separação assíncrona entre as unidades de execução. Cada etapa dessa jornada exigiu tanto inovações profundas de hardware quanto avanços significativos nas abstrações de software.
+
+### 1.2 Processamento Assíncrono
+
+O outro aspecto é o processamento assíncrono. Quando a geração Volta introduziu um PC, Program Counter, independente para cada Thread, na verdade marcou o início da execução assíncrona.
+
+![](/assets/images/tradu4.webp)
+**Figura 4**: Evolução do modelo de execução assíncrona na arquitetura NVIDIA, desde a introdução do PC independente por thread no Volta até o mecanismo MBarrier no Hopper e Blackwell. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
 
 A partir desse ponto, os threads podiam esperar por mensagens para realizar processamento assíncrono, abrindo uma janela para programação assíncrona em relação às arquiteturas alinhadas por PC tradicionais.
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992524941108064256)
+![](/assets/images/tradu5.webp)
+**Figura 5**: Representação do processamento assíncrono na arquitetura NVIDIA, destacando a evolução desde o Volta até o Ampere com a introdução do cp.async. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
 
-A parte boa é que a Nvidia forneceu a abstração Cooperative Group no software. No entanto, os TensorCores ainda requeriam execução síncrona em todo o Warp. Então, começando com a introdução do cp.async no Ampere, o caminho de suprimento de dados de todo o programa efetivamente se tornou assíncrono, que é o conceito de "Async Thread" mencionado pela Nvidia.
+A parte boa é que a Nvidia forneceu a abstração Cooperative Group no software. No entanto, os Tensor Cores ainda requeriam execução síncrona em todo o Warp. Então, começando com a introdução do cp.async no Ampere, o caminho de suprimento de dados de todo o programa efetivamente se tornou assíncrono, que é o conceito de **Async Thread** mencionado pela Nvidia.
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992525030966927360)
+![](/assets/images/tradu6.webp)
+**Figura 6**: Ilustração do modelo de execução assíncrona com cp.async na arquitetura Ampere da NVIDIA. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
 
-O Hopper foi um passo adiante ao introduzir o MBarrier. Pipelines assíncronos de software e Warp Specialization construídos em torno do MBarrier se tornaram populares. Ele introduziu o Async Proxy, distinguindo diferentes caminhos de acesso à memória através de General Proxy e Async Proxy. Para operações Async Proxy, geralmente há uma barreira de memória; o LD/ST (Load/Store) do General Proxy pode esperar por essa barreira para completar, permitindo que operações assíncronas do TMA sejam combinadas com o acesso à memória LD/ST **SIMT** original, garantindo requisitos de ordenação de memória.
+O Hopper foi um passo adiante ao introduzir o MBarrier. Pipelines assíncronos de software e Warp Specialization construídos em torno do MBarrier se tornaram populares. Ele introduziu o Async Proxy, distinguindo diferentes caminhos de acesso à memória através de General Proxy e Async Proxy. Para operações Async Proxy, geralmente há uma barreira de memória; o LD/ST (Load/Store) do General Proxy pode esperar por essa barreira para completar, permitindo que operações assíncronas do **TMA** sejam combinadas com o acesso à memória LD/ST **SIMT** original, garantindo requisitos de ordenação de memória.
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992525119626051584)
+![](/assets/images/tradu7.webp)
+**Figura 7**: Representação do modelo de execução assíncrona com MBarrier na arquitetura Hopper da NVIDIA. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
 
 Claro, o Hopper tinha imperfeições. O WGMMA era uma solução temporária, ocupando uma grande quantidade de RMEM enquanto também requeria espera síncrona. Portanto, quando o Hopper foi lançado, foi explicitamente dito que o WGMMA do SM_90a não seria compatível com versões anteriores. Isso teve uma grande desvantagem.
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992525174865096704)
+![](/assets/images/tradu8.webp)
+**Figura 8**: Limitações do WGMMA na arquitetura Hopper da NVIDIA, destacando a necessidade de espera síncrona e o consumo elevado de RMEM. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
+No Blackwell, o Tensor Core também se tornou uma operação totalmente assíncrona, reutilizando a construção MBarrier. Assim, emitir **TMA** e instruções pode ser feito no nível de Thread. No entanto, a alocação e cópia de memória para o TMEM ainda requerem manuseio no nível Warp. Por outro lado, o mecanismo ClusterLaunchControl foi introduzido, fornecendo alguma capacidade de agendamento dinâmico.
 
-No Blackwell, o TensorCore também se tornou uma operação totalmente assíncrona, reutilizando a construção MBarrier. Assim, emitir TMA e instruções pode ser feito no nível de Thread. No entanto, a alocação e cópia de memória para o TMEM ainda requerem manuseio no nível Warp. Por outro lado, o mecanismo ClusterLaunchControl foi introduzido, fornecendo alguma capacidade de agendamento dinâmico.
-
-[](/Jukanlosreve/article/1992531045485531164/media/1992525267232038912)
+![](/assets/images/tradu9.webp)
+**Figura 9**: Modelo de execução assíncrona com TMEM e MBarrier na arquitetura Blackwell da NVIDIA. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
 
 Podemos então construir padrões de processamento Warp Specialization mais complexos.
 
-[](/Jukanlosreve/article/1992531045485531164/media/1992525374375575553)
+![](/assets/images/tradu10.webp)
+**Figura 10**: Exemplos de padrões de processamento com Warp Specialization na arquitetura Blackwell da NVIDIA. Esta imagem está na [postagem original](https://mp.weixin.qq.com/s?__biz=MzUxNzQ5MTExNw==&mid=2247496740&idx=1&sn=c9403138fa59d126fe6cfda19d9b2f76&scene=21&poc_token=HE7LImmjpRK9PkW11_nsMI8ejGiPH0tZf6WKWLO6).
 
-1.3 Layout CuTe Isso também é uma abstração de software fantástica, especialmente em como esconde a complexidade do Swizzle no Hopper e no Blackwell. Além disso, de uma perspectiva algébrica, resolve cálculos complexos de fronteiras de Tile/Partition, tornando o código mais intuitivo—embora para aqueles que não são formados em álgebra, aprender o CuTe ainda apresenta uma curva de aprendizado íngreme. Eu comecei a discutir a álgebra de Layout CuTe no artigo abaixo: (Referência: )
+### 1.3 Layout CuTe 
+
+Isso também é uma abstração de software fantástica, especialmente em como esconde a complexidade do Swizzle no Hopper e no Blackwell. Além disso, de uma perspectiva algébrica, resolve cálculos complexos de fronteiras de Tile/Partition, tornando o código mais intuitivo—embora para aqueles que não são formados em álgebra, aprender o CuTe ainda apresenta uma curva de aprendizado íngreme. Eu comecei a discutir a álgebra de Layout CuTe no artigo abaixo: (Referência: )
 
 No entanto, você precisa notar que na arquitetura dual die do Blackwell, ou mesmo na arquitetura 4-die do Rubin Ultra, e potencialmente em arquiteturas 3D-DRAM futuras, essa álgebra simplifica muitos problemas demais. Eu elaborarei o porquê nos capítulos posteriores. Claro, eu atualizarei este conteúdo ainda mais quando tiver tempo nos próximos meses.
 
@@ -288,7 +324,7 @@ No entanto, você precisa notar que na arquitetura dual die do Blackwell, ou mes
 
 Tendo dito algumas coisas boas, este capítulo discutirá algumas deficiências, principalmente para dissipar o misticismo.
 
-2.1 O Problema SFU do B200 Enquanto escalava freneticamente a performance do TensorCore, uma grande quantidade de TMEM foi adicionada. Ao mesmo tempo, o DSMEM formado por algumas redes de interconexão GPC também ocupou muita área do die. O cancelamento do L2 Partitioning também consumiu área do die. Consequentemente, o número de SMs em um único die foi reduzido para 80. Infelizmente, a performance do SFU (Special Function Unit) pareado com o CUDA Core não foi aprimorada. Isso levou a operações GEMM parecendo muito mais fortes, mas gargalos aparecendo ao calcular Softmax na Attention.
+2.1 O Problema SFU do B200 Enquanto escalava freneticamente a performance do Tensor Core, uma grande quantidade de TMEM foi adicionada. Ao mesmo tempo, o DSMEM formado por algumas redes de interconexão GPC também ocupou muita área do die. O cancelamento do L2 Partitioning também consumiu área do die. Consequentemente, o número de SMs em um único die foi reduzido para 80. Infelizmente, a performance do SFU (Special Function Unit) pareado com o CUDA Core não foi aprimorada. Isso levou a operações GEMM parecendo muito mais fortes, mas gargalos aparecendo ao calcular Softmax na Attention.
 
 [](/Jukanlosreve/article/1992531045485531164/media/1992525953730502657)
 
@@ -296,11 +332,11 @@ Claro, alguns podem dizer, "Sem problema, só use Linear Attention." De fato, mu
 
 Minha visão pessoal se alinha com a do DeepSeek: Linear Attn não resolve bem o gargalo de acesso à memória. A computação em si é fácil de escalar, mas o acesso à memória é difícil. Portanto, escolher Sparse Attn é o caminho correto. Outro aspecto é um artigo que eu li há algum tempo discutindo SDPA da perspectiva de Optimal Transport. Ou seja, o processo de cálculo forward do mecanismo de atenção—o processo de gerar pesos de atenção via a função Softmax—é completamente equivalente à solução exata de um problema de One-Sided Entropic Optimal Transport (EOT). Portanto, o Softmax é inevitável. (Referência: )
 
-Baseado nessa perspectiva, minha visão é que as capacidades SFU devem combinar com a potência de computação do TensorCore. Felizmente, o B300 resolveu esse problema, ao custo de cortar a potência de computação para outras operações de alta precisão. Em relação a essa questão, eu sempre senti que B200 e GB200 não são plataformas que valem a pena investir pesadamente.
+Baseado nessa perspectiva, minha visão é que as capacidades SFU devem combinar com a potência de computação do Tensor Core. Felizmente, o B300 resolveu esse problema, ao custo de cortar a potência de computação para outras operações de alta precisão. Em relação a essa questão, eu sempre senti que B200 e GB200 não são plataformas que valem a pena investir pesadamente.
 
 2.2 Estrutura de Instruções Complexa do Blackwell
 
-Na verdade, começando pelo Hopper, a programação assíncrona se tornou muito complexa, e a introdução do TMEM pelo Blackwell adicionou ainda mais complexidade. Por exemplo, todo o conjunto de instruções TensorCore tcgen05 tem tanto instruções síncronas quanto assíncronas.
+Na verdade, começando pelo Hopper, a programação assíncrona se tornou muito complexa, e a introdução do TMEM pelo Blackwell adicionou ainda mais complexidade. Por exemplo, todo o conjunto de instruções Tensor Core tcgen05 tem tanto instruções síncronas quanto assíncronas.
 
 [](/Jukanlosreve/article/1992531045485531164/media/1992526777386962944)
 
@@ -308,7 +344,7 @@ Por outro lado, a granularidade de emissão de instruções difere—algumas sã
 
 [](/Jukanlosreve/article/1992531045485531164/media/1992526910954622976)
 
-É fácil cometer erros se a sincronização não for bem tratada. No entanto, a Nvidia introduziu muitas abstrações de Pipeline aqui, evitando bastantes erros. Combinado com o mecanismo de alocação de gerenciamento de memória do TMEM, usar alloc/dealloc reduz a complexidade de gerenciar o TMEM sob paralelismo multi-thread. De um ponto de vista de complexidade de gerenciamento, como mostrado na figura abaixo, Sch warp/TMA Warp e TC Warp podem todos alcançar processamento single-thread. Apenas o Epilogue Warp requer as coisas originais do **SIMT**. Uma vez entendido, não parece tão complexo, mas sempre tem que se manter em mente ao programar... Felizmente, tendo passado um longo tempo trabalhando em várias tarefas de programação assíncrona, lidar com isso não é tão difícil.
+É fácil cometer erros se a sincronização não for bem tratada. No entanto, a Nvidia introduziu muitas abstrações de Pipeline aqui, evitando bastantes erros. Combinado com o mecanismo de alocação de gerenciamento de memória do TMEM, usar alloc/dealloc reduz a complexidade de gerenciar o TMEM sob paralelismo multi-thread. De um ponto de vista de complexidade de gerenciamento, como mostrado na figura abaixo, Sch warp/**TMA** Warp e TC Warp podem todos alcançar processamento single-thread. Apenas o Epilogue Warp requer as coisas originais do **SIMT**. Uma vez entendido, não parece tão complexo, mas sempre tem que se manter em mente ao programar... Felizmente, tendo passado um longo tempo trabalhando em várias tarefas de programação assíncrona, lidar com isso não é tão difícil.
 
 [](/Jukanlosreve/article/1992531045485531164/media/1992527018207166464)
 
