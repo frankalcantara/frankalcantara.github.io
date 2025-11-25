@@ -14,11 +14,11 @@ tags:
     - orientação a objetos
     - programação
 image: assets/images/atencao1.webp
-rating: 6
+rating: 5
 description: Um estudo da classe Maps destacando as melhorias implementadas na últimas versões do C++
 date: 2025-11-23T14:39:47.039Z
 preview: map é uma classe importante para otimização de algoritmos. Este artigo estuda o uso de Maps destacando seus métodos mais modernos.
-lastmod: 2025-11-23T23:04:28.542Z
+lastmod: 2025-11-25T21:17:21.101Z
 keywords:
     - algoritmos
     - CLang

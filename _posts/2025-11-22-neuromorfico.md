@@ -3,25 +3,25 @@ layout: post
 title: Prevendo o Futuro, ou o que você deveria estudar hoje
 author: Frank
 categories:
-  - artigo
-  - opinião
+    - artigo
+    - opinião
 tags: |
-  - haskell
-  - cloudflare
-  - teoria-de-tipos
-  - rust
-  - engenharia-de-software
-  - programação-funcional
-  - post-mortem
-  - análise-técnica
-  - sql
-  - sistemas-distribuídos
-rating: 6
+    - haskell
+    - cloudflare
+    - teoria-de-tipos
+    - rust
+    - engenharia-de-software
+    - programação-funcional
+    - post-mortem
+    - análise-técnica
+    - sql
+    - sistemas-distribuídos
+rating: 5
 description: análise técnica do incidente do Cloudflare em novembro de 2025, explorando como a Teoria de Tipos em Haskell poderia ter prevenido a falha.
 date: 2025-11-14T00:58:10.955Z
 preview: |
-  O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
-lastmod: 2025-11-22T23:41:05.853Z
+    O incidente ocorrido entre os dias 18 e 19 de novembro representa uma das piores falhas na infraestrutura do Cloudflare desde 2019. O quê e porquê? Leia a análise técnica completa.
+lastmod: 2025-11-25T21:17:21.118Z
 published: false
 draft: 2025-11-19T16:07:35.437Z
 image: assets/images/cloudflare2.webp

@@ -3,149 +3,149 @@ layout: post
 title: A Nvidia e a Fábrica de IA
 author: Frank
 categories:
-  - artigo
-  - opinião
+    - artigo
+    - opinião
 tags:
-  - Física
-  - inteligência artificial
-  - opinião
-  - Engenharia
-rating: 6
+    - Física
+    - inteligência artificial
+    - opinião
+    - Engenharia
+rating: 5
 description: A Nvidia fez uma proposta pela criação de um novo padrão de distribuição de energia para  **data center**s. Este texto analisa essa proposta
 date: 2025-11-14T00:58:10.955Z
 preview: |
-  texto técnico expandido  
-  arquiteturas de distribuição de energia em **data centers** de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
-lastmod: 2025-11-25T18:07:10.068Z
+    texto técnico expandido  
+    arquiteturas de distribuição de energia em **data centers** de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
+lastmod: 2025-11-25T21:17:21.087Z
 published: true
 draft: 2025-11-14T01:11:49.434Z
 slug: nvidia-fabrica-de-ia
 schema:
-  type: TechArticle
-  name: A Nvidia e a Fábrica de IA – Arquiteturas de Energia para Data Centers
-  headline: A Nvidia e a Fábrica de IA
-  alternativeHeadline: Transição 54 VDC → 800 VDC em data centers de IA - análise elétrica, térmica e econômica da arquitetura Kyber
-  description: Análise técnica aprofundada da proposta da Nvidia para uma nova arquitetura de distribuição de energia em data centers de IA. Examina a transição de 54 Vdc para 800 Vdc (arquitetura Kyber), incluindo modelagem elétrica completa, análise térmica de perdas, comparação de TCO, impactos econômicos e formalização do conceito de fábrica de IA como infraestrutura industrial de produção de inteligência.
-  author:
-    type: Person
-    name: Frank Alcantara
-    jobTitle: Professor de Ciência da Computação
-  datePublished: 2025-11-14
-  dateModified: 2025-11-23
-  publisher:
-    type: Organization
-    name: frankalcantara.com
-  keywords:
-    - data center
-    - arquitetura de energia
-    - 800 VDC
-    - Nvidia Kyber
-    - fábrica de IA
-    - AI factory
-    - GB200 NVL72
-    - Blackwell
-    - eficiência energética
-    - dissipação térmica
-    - TCO
-    - infraestrutura de IA
-    - conversão de potência
-    - perdas resistivas
-    - refrigeração líquida
-    - SiC
-    - GaN
-  articleSection: Engenharia e Infraestrutura de IA
-  wordCount: 4850
-  inLanguage: pt-BR
-  educationalLevel: Avançado
-  proficiencyLevel: Profissional e Acadêmico
-  articleBody: Análise técnica da transição de arquiteturas de energia em data centers de IA, da tradicional 54 Vdc para a proposta Kyber de 800 Vdc da Nvidia, incluindo modelagem matemática completa, análise de perdas elétricas e térmicas, comparação econômica de TCO e formalização do conceito de fábrica de IA
-  teaches:
-    - Fundamentos de distribuição de energia em data centers modernos
-    - Modelagem matemática de perdas elétricas em conversões DC-DC
-    - Análise térmica de dissipação em racks de alta densidade
-    - Cálculo de TCO em infraestruturas de IA
-    - Arquitetura Kyber e suas vantagens sobre sistemas tradicionais
-    - Impacto de tensões elevadas em eficiência e densidade computacional
-    - Conceito e componentes de fábrica de IA
-  about:
-    - type: Thing
-      name: Arquiteturas de Energia para Data Centers
-      description: Transição de sistemas 54 Vdc para 800 Vdc em instalações de IA
-    - type: Thing
-      name: Nvidia Kyber
-      description: Nova arquitetura de distribuição de energia de alta tensão para racks de IA
-    - type: Thing
-      name: Fábrica de IA
-      description: Conceito de infraestrutura que transforma dados em inteligência como produto industrial
-    - type: Thing
-      name: Eficiência Energética
-      description: Análise de perdas, conversões e dissipação térmica em sistemas de alta potência
-    - type: Thing
-      name: TCO de Data Centers
-      description: Custo total de propriedade considerando cobre, **PSUs**, refrigeração e manutenção
-  mentions:
-    - type: Corporation
-      name: Nvidia
-      description: Líder de mercado em GPUs para IA com 80-94% de participação
-    - type: Product
-      name: GB200 NVL72
-      description: Sistema com 72 GPUs Blackwell e 36 **CPUs** Grace, consumo até 6 MW por rack
-    - type: Product
-      name: Blackwell
-      description: Arquitetura de GPU com 208 bilhões de transistores e 1440 petaflops FP4
-    - type: Product
-      name: Grace CPU
-      description: Processador ARM da Nvidia para sistemas de IA
-    - type: Technology
-      name: Arquitetura Kyber
-      description: Sistema de distribuição 800 Vdc para racks de alta densidade
-    - type: Organization
-      name: Goldman Sachs Research
-      description: Projeção de demanda global de data centers de 55 GW para 145 GW até 2030
-    - type: Organization
-      name: McKinsey
-      description: Estimativa de US$ 5,2 trilhões necessários em CAPEX até 2030
-  citation:
-    - type: WebPage
-      name: Nvidia 800V HVDC Architecture
-      url: https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/
-    - type: WebPage
-      name: Goldman Sachs Research on Data Centers
-      url: https://www.wired.com/story/data-center-ai-boom-us-economy-jobs/
-    - type: Organization
-      name: McKinsey Data Center Economy
-      url: https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/investing-in-the-rising-data-center-economy
-  isPartOf:
-    type: Series
-    name: Infraestrutura e Economia da IA
-  genre:
-    - Technical Analysis
-    - Electrical Engineering
-    - Computer Science
-    - Opinion
-  hasPart:
-    - type: WebPageElement
-      name: O Fluxo de Energia
-      description: Modelagem matemática completa do fluxo de energia desde média tensão até o package da GPU
-    - type: WebPageElement
-      name: Análise Térmica de Perdas
-      description: Decomposição e quantificação de dissipação térmica em sistemas 54 Vdc e 800 Vdc
-    - type: WebPageElement
-      name: Comparação de TCO
-      description: Análise econômica detalhada comparando custo total de propriedade entre arquiteturas
-    - type: WebPageElement
-      name: Formalização Acadêmica
-      description: Apresentação dos conceitos em formato de artigo científico com metodologia e resultados
-  mainEntity:
-    type: Technology
-    name: Transição 54 VDC para 800 VDC em Data Centers
-    description: Mudança paradigmática em arquiteturas de energia para suportar cargas de IA de próxima geração
-  license: https://creativecommons.org/licenses/by-sa/4.0/
-  isAccessibleForFree: true
-  discussionUrl: https://frankalcantara.com/nvidia-fabrica-de-ia/#comments
-  commentCount: 0
-  timeRequired: PT25M
-  thumbnailUrl: https://frankalcantara.com/assets/images/nvidia-ai-factory.webp
+    type: TechArticle
+    name: A Nvidia e a Fábrica de IA – Arquiteturas de Energia para Data Centers
+    headline: A Nvidia e a Fábrica de IA
+    alternativeHeadline: Transição 54 VDC → 800 VDC em data centers de IA - análise elétrica, térmica e econômica da arquitetura Kyber
+    description: Análise técnica aprofundada da proposta da Nvidia para uma nova arquitetura de distribuição de energia em data centers de IA. Examina a transição de 54 Vdc para 800 Vdc (arquitetura Kyber), incluindo modelagem elétrica completa, análise térmica de perdas, comparação de TCO, impactos econômicos e formalização do conceito de fábrica de IA como infraestrutura industrial de produção de inteligência.
+    author:
+        type: Person
+        name: Frank Alcantara
+        jobTitle: Professor de Ciência da Computação
+    datePublished: 2025-11-14
+    dateModified: 2025-11-23
+    publisher:
+        type: Organization
+        name: frankalcantara.com
+    keywords:
+        - data center
+        - arquitetura de energia
+        - 800 VDC
+        - Nvidia Kyber
+        - fábrica de IA
+        - AI factory
+        - GB200 NVL72
+        - Blackwell
+        - eficiência energética
+        - dissipação térmica
+        - TCO
+        - infraestrutura de IA
+        - conversão de potência
+        - perdas resistivas
+        - refrigeração líquida
+        - SiC
+        - GaN
+    articleSection: Engenharia e Infraestrutura de IA
+    wordCount: 4850
+    inLanguage: pt-BR
+    educationalLevel: Avançado
+    proficiencyLevel: Profissional e Acadêmico
+    articleBody: Análise técnica da transição de arquiteturas de energia em data centers de IA, da tradicional 54 Vdc para a proposta Kyber de 800 Vdc da Nvidia, incluindo modelagem matemática completa, análise de perdas elétricas e térmicas, comparação econômica de TCO e formalização do conceito de fábrica de IA
+    teaches:
+        - Fundamentos de distribuição de energia em data centers modernos
+        - Modelagem matemática de perdas elétricas em conversões DC-DC
+        - Análise térmica de dissipação em racks de alta densidade
+        - Cálculo de TCO em infraestruturas de IA
+        - Arquitetura Kyber e suas vantagens sobre sistemas tradicionais
+        - Impacto de tensões elevadas em eficiência e densidade computacional
+        - Conceito e componentes de fábrica de IA
+    about:
+        - type: Thing
+          name: Arquiteturas de Energia para Data Centers
+          description: Transição de sistemas 54 Vdc para 800 Vdc em instalações de IA
+        - type: Thing
+          name: Nvidia Kyber
+          description: Nova arquitetura de distribuição de energia de alta tensão para racks de IA
+        - type: Thing
+          name: Fábrica de IA
+          description: Conceito de infraestrutura que transforma dados em inteligência como produto industrial
+        - type: Thing
+          name: Eficiência Energética
+          description: Análise de perdas, conversões e dissipação térmica em sistemas de alta potência
+        - type: Thing
+          name: TCO de Data Centers
+          description: Custo total de propriedade considerando cobre, **PSUs**, refrigeração e manutenção
+    mentions:
+        - type: Corporation
+          name: Nvidia
+          description: Líder de mercado em GPUs para IA com 80-94% de participação
+        - type: Product
+          name: GB200 NVL72
+          description: Sistema com 72 GPUs Blackwell e 36 **CPUs** Grace, consumo até 6 MW por rack
+        - type: Product
+          name: Blackwell
+          description: Arquitetura de GPU com 208 bilhões de transistores e 1440 petaflops FP4
+        - type: Product
+          name: Grace CPU
+          description: Processador ARM da Nvidia para sistemas de IA
+        - type: Technology
+          name: Arquitetura Kyber
+          description: Sistema de distribuição 800 Vdc para racks de alta densidade
+        - type: Organization
+          name: Goldman Sachs Research
+          description: Projeção de demanda global de data centers de 55 GW para 145 GW até 2030
+        - type: Organization
+          name: McKinsey
+          description: Estimativa de US$ 5,2 trilhões necessários em CAPEX até 2030
+    citation:
+        - type: WebPage
+          name: Nvidia 800V HVDC Architecture
+          url: https://developer.nvidia.com/blog/nvidia-800-v-hvdc-architecture-will-power-the-next-generation-of-ai-factories/
+        - type: WebPage
+          name: Goldman Sachs Research on Data Centers
+          url: https://www.wired.com/story/data-center-ai-boom-us-economy-jobs/
+        - type: Organization
+          name: McKinsey Data Center Economy
+          url: https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/investing-in-the-rising-data-center-economy
+    isPartOf:
+        type: Series
+        name: Infraestrutura e Economia da IA
+    genre:
+        - Technical Analysis
+        - Electrical Engineering
+        - Computer Science
+        - Opinion
+    hasPart:
+        - type: WebPageElement
+          name: O Fluxo de Energia
+          description: Modelagem matemática completa do fluxo de energia desde média tensão até o package da GPU
+        - type: WebPageElement
+          name: Análise Térmica de Perdas
+          description: Decomposição e quantificação de dissipação térmica em sistemas 54 Vdc e 800 Vdc
+        - type: WebPageElement
+          name: Comparação de TCO
+          description: Análise econômica detalhada comparando custo total de propriedade entre arquiteturas
+        - type: WebPageElement
+          name: Formalização Acadêmica
+          description: Apresentação dos conceitos em formato de artigo científico com metodologia e resultados
+    mainEntity:
+        type: Technology
+        name: Transição 54 VDC para 800 VDC em Data Centers
+        description: Mudança paradigmática em arquiteturas de energia para suportar cargas de IA de próxima geração
+    license: https://creativecommons.org/licenses/by-sa/4.0/
+    isAccessibleForFree: true
+    discussionUrl: https://frankalcantara.com/nvidia-fabrica-de-ia/#comments
+    commentCount: 0
+    timeRequired: PT25M
+    thumbnailUrl: https://frankalcantara.com/assets/images/nvidia-ai-factory.webp
 image: assets/images/tecnvida.webp
 ---
 
