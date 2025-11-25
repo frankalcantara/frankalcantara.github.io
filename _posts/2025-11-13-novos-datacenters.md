@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Nvidia e a Fábrica de IA
-author: "Frank "
+author: Frank
 categories:
   - artigo
   - opinião
@@ -16,7 +16,7 @@ date: 2025-11-14T00:58:10.955Z
 preview: |
   texto técnico expandido  
   arquiteturas de distribuição de energia em **data centers** de ia: análise elétrica, térmica, econômica e formalização acadêmica da transição 54 vdc → 800 vdc
-lastmod: 2025-11-23T23:01:08.274Z
+lastmod: 2025-11-25T13:44:45.065Z
 published: true
 draft: 2025-11-14T01:11:49.434Z
 slug: nvidia-fabrica-de-ia
