@@ -3,68 +3,68 @@ layout: post
 title: Como Melhorar a Concentração Profunda em 2025
 author: Frank
 categories:
-    - artigo
-    - opinião
+  - artigo
+  - opinião
 tags:
-    - Física
-    - inteligência artificial
-    - opinião
-    - Engenharia
+  - Física
+  - inteligência artificial
+  - opinião
+  - Engenharia
 rating: 5
 description: Descubra um protocolo baseado em neurociência para engenheiros e estudantes superarem a distração digital e aprimorarem a concentração profunda em 2025.
 date: 2025-11-21T22:06:18.991Z
 preview: |
-    Protocolo prático para engenheiros e estudantes recuperarem o foco profundo, combatendo distrações digitais com técnicas baseadas em neurociência.
-lastmod: 2025-11-25T21:17:21.138Z
+  Protocolo prático para engenheiros e estudantes recuperarem o foco profundo, combatendo distrações digitais com técnicas baseadas em neurociência.
+lastmod: 2025-11-26T21:38:38.331Z
 published: true
 draft: 2025-11-21T22:06:20.798Z
 keywords:
-    - concentração profunda
-    - deep work 2025
-    - distração digital
-    - neurociência aplicada
-    - produtividade para engenheiros
-    - foco em engenharia
+  - concentração profunda
+  - deep work 2025
+  - distração digital
+  - neurociência aplicada
+  - produtividade para engenheiros
+  - foco em engenharia
 image: assets/images/limpar_mente.webp
 schema:
-    type: HowTo
-    name: Protocolo de Reflash Cerebral – Recupere o Foco Profundo em 4-6 Semanas
-    description: Guia técnico completo, baseado em neurociência de 2025, para engenheiros, programadores e estudantes eliminarem a fragmentação atencional causada por feeds infinitos e recuperarem concentração de elite capaz de competir com a IA.
-    author:
-        type: Person
-        name: Frank Alcantara
-    datePublished: 2025-11-21
-    publisher:
-        type: Organization
-        name: frankalcantara.com
-    keywords:
-        - concentração profunda
-        - deep work
-        - neurociência
-        - produtividade
-        - engenharia
-        - programação
-        - foco
-        - dopamina
-        - ultradiano
-        - box breathing
-    step:
-        - name: Diagnóstico Rápido de Fragmentação Atencional
-          description: Imprima 3 páginas de datasheet técnico e cronometre quanto tempo aguenta ler com compreensão real antes do impulso irresistível de interromper.
-        - name: Fase 1 – Aumentar a Impedância de Distração
-          description: Tornar o acesso a celular e redes sociais fisicamente caro (mínimo 20 segundos de esforço real).
-        - name: Fase 2 – Leitura Ativa com Escrita Manual Obrigatória
-          description: Ler todo conteúdo técnico em papel, caneta na mão, escrevendo à mão resumos, diagramas e derivações.
-        - name: Fase 3 – Sobrecarga Progressiva de Atenção (Ciclo Ultradiano)
-          description: Treinar blocos de foco crescendo semanalmente até 90–120 minutos, respeitando o ritmo biológico natural do cérebro.
-        - name: Fase 4 – Ancoragem Visual + Box Breathing (40 segundos)
-          description: Fixação do olhar + respiração 4-4-4-4 para ativar locus coeruleus-norepinefrina e entrar em estado de fluxo.
-        - name: Manutenção Permanente
-          description: Proteger o tédio, priorizar sono de qualidade e resistir aos impulsos residuais de dopamina rápida.
-    totalTime: P4W
-    estimatedCost:
-        currency: BRL
-        value: "0"
+  type: HowTo
+  name: Protocolo de Reflash Cerebral – Recupere o Foco Profundo em 4-6 Semanas
+  description: Guia técnico completo, baseado em neurociência de 2025, para engenheiros, programadores e estudantes eliminarem a fragmentação atencional causada por feeds infinitos e recuperarem concentração de elite capaz de competir com a IA.
+  author:
+    type: Person
+    name: Frank Alcantara
+  datePublished: 2025-11-21
+  publisher:
+    type: Organization
+    name: frankalcantara.com
+  keywords:
+    - concentração profunda
+    - deep work
+    - neurociência
+    - produtividade
+    - engenharia
+    - programação
+    - foco
+    - dopamina
+    - ultradiano
+    - box breathing
+  step:
+    - name: Diagnóstico Rápido de Fragmentação Atencional
+      description: Imprima 3 páginas de datasheet técnico e cronometre quanto tempo aguenta ler com compreensão real antes do impulso irresistível de interromper.
+    - name: Fase 1 – Aumentar a Impedância de Distração
+      description: Tornar o acesso a celular e redes sociais fisicamente caro (mínimo 20 segundos de esforço real).
+    - name: Fase 2 – Leitura Ativa com Escrita Manual Obrigatória
+      description: Ler todo conteúdo técnico em papel, caneta na mão, escrevendo à mão resumos, diagramas e derivações.
+    - name: Fase 3 – Sobrecarga Progressiva de Atenção (Ciclo Ultradiano)
+      description: Treinar blocos de foco crescendo semanalmente até 90–120 minutos, respeitando o ritmo biológico natural do cérebro.
+    - name: Fase 4 – Ancoragem Visual + Box Breathing (40 segundos)
+      description: Fixação do olhar + respiração 4-4-4-4 para ativar locus coeruleus-norepinefrina e entrar em estado de fluxo.
+    - name: Manutenção Permanente
+      description: Proteger o tédio, priorizar sono de qualidade e resistir aos impulsos residuais de dopamina rápida.
+  totalTime: P4W
+  estimatedCost:
+    currency: BRL
+    value: "0"
 ---
   
 Me incomoda que os alunos de hoje achem as aulas profundas e técnicas tão difíceis de acompanhar. Acredito que o problema não está na complexidade do conteúdo, mas na forma como nossos cérebros estão sendo treinados para lidar com as informações. E não apenas em ciclos iniciais de educação ruins. Deve haver um componente devido a um efeito colateral da era digital: a fragmentação da atenção. Esta fragmentação que afeta diretamente nossa capacidade de concentração e aprendizado.
@@ -227,6 +227,8 @@ A neuroplasticidade joga a seu favor: reduza o ruído de entrada, aumente progre
 Em um período de 3 a 6 semanas de adesão rigorosa, a maioria das pessoas recupera, e muitas vezes supera, o nível anterior de desempenho cognitivo.
 
 _Cuidado: tem uma armadilha neste texto. Você pensou em comprar um timer antes de começar. Correto? Isto é seu cérebro tentando sabotar a falta de dopamina que ele irá sentir. Ignore este impulso. Use um relógio analógico qualquer, de pulso, de cabeceira, qualquer coisa que não seja digital e que não precise ser comprada. Comece hoje._
+
+![](/assets/images/dentes.webp)
 
 ### Referências 
 
