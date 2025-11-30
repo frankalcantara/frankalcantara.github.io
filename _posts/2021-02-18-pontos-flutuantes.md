@@ -15,9 +15,43 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-11-01T19:02:25.363Z
+lastmod: 2025-11-29T21:37:05.955Z
 date: 2024-12-20T20:07:14.934Z
 published: true
+schema:
+    "@context": https://schema.org
+    "@type": Article
+    headline: "{{ page.title }}"
+    description: "{{ page.description | default: page.preview }}"
+    author:
+        "@type": Person
+        name: Frank Alcantara
+        url: https://frankalcantara.com/about
+    publisher:
+        "@type": Organization
+        name: frankalcantara.com
+        logo:
+            "@type": ImageObject
+            url: https://frankalcantara.com/assets/images/logo.png
+    datePublished: "{{ page.date | date: '%Y-%m-%d' }}"
+    dateModified: "{{ page.lastmod | default: page.date | date: '%Y-%m-%d' }}"
+    mainEntityOfPage:
+        "@type": WebPage
+        "@id": "{{ site.url }}{{ page.url | remove: 'index.html' }}"
+    image:
+        "@type": ImageObject
+        url: "{{ site.url }}{{ page.image | default: '/assets/images/default-article.jpg' }}"
+    wordCount: "{{ content | number_of_words }}"
+    inLanguage: pt-BR
+    license: https://creativecommons.org/licenses/by-sa/4.0/
+    keywords:
+        "{ page.keywords | join: ', ' }": null
+    isPartOf:
+        "@type":
+            - Blog
+            - CreativeWork
+        name: frankalcantara.com
+        url: https://frankalcantara.com
 ---
 
 A memória é escassa, limitada, insuficiente e inteira. O arredondamento de números reais é inevitável, levantando um dilema sobre a extensão da informação a ser armazenada e os métodos de armazenamento. A eficiência computacional é primordial na solução dos problemas concretos que enfrentamos todos os dias. A utilização de normas para a representação de números reais na forma de ponto flutuante surgiu como uma resposta. Este artigo desvelará sua funcionalidade e os desafios que esta representação impõe.
@@ -192,6 +226,57 @@ Por acaso a amável leitora lembra que eu falei da relação de um para um entre
 A norma [IEEE754](http://en.wikipedia.org/wiki/IEEE_754-2008) não é a única forma de armazenar números reais, talvez não seja sequer a melhor forma, mas é de longe a mais utilizada. Com esta norma embaixo do braço, saberemos como representar uma _faixa significativa_ de números reais podendo determinar exatamente a precisão máxima possível para cada valor representado, mesmo em binário e, principalmente, conheceremos todos os problemas inerentes a esta representação. E existem problemas. Afinal, números decimais reais e infinitos serão mapeados em um universo binário, inteiro e finito. O que poderia dar errado?
 
 Quase esqueci! A expressão _faixa significativa_ que usei acima é para destacar que a norma [IEEE754](http://en.wikipedia.org/wiki/IEEE_754-2008) não permite a representação de todo e qualquer número real. Temos um número infinito de valores na base $10$ representados em um número finito de valores na base $2$.
+
+## A Operação Fused Multiply-Add (FMA) – Obrigatória no IEEE 754-2008 e Revolucionária em 2025
+
+A revisão de 2008 do padrão IEEE 754 **tornou o fused multiply-add (FMA)** uma operação **obrigatória** para qualquer implementação que queira declarar conformidade total com o padrão nos formatos binários básicos (binary32 e binary64) e decimais.
+
+A especificação é clara (seção 5.4.1 do documento oficial):
+
+> “A supporting implementation shall provide the fusedMultiplyAdd operation for all supported basic formats.”
+
+Ou seja: se o seu hardware ou processador ou biblioteca diz “conforme IEEE 754-2008”, **ele tem a obrigação** de implementar `fma(a, b, c)` como uma operação atômica com **um único arredondamento final**.
+
+### Por que o comitê tornou o **FMA** obrigatório?
+
+Porque, sem ele, a expressão matemática mais comum em computação numérica — `a × b + c` — sofre **dois arredondamentos**:
+
+$$RN(RN(a \times b) + c)$$
+
+Com FMA:
+
+$$RN(a \times b + c)$$
+
+Resultado:
+
+- Erro máximo cai de ~1 ulp para 0.5 ulp
+- O resultado é **exatamente** o valor corretamente arredondado do valor matemático real
+- Em algoritmos com acúmulo longo (dot products, GEMM, séries, EDOs), a diferença de precisão é frequentemente passa de “pequena” para “o cálculo inteiro converge ou não”
+
+William Kahan (o “pai” do IEEE 754) lutou anos por isso. Ele sabia que sem **FMA** o padrão era bom, mas com **FMA** ele se tornava **matematicamente robusto**.
+
+### Impacto em performance (que ninguém esperava em 2008)
+
+Em 2008 ninguém imaginava que, apenas 5–6 anos depois, o **FMA** dobraria o pico teórico de FLOPs das CPUs:
+
+- Haswell (2013) → primeiras portas FMA3 de 256-bit → 32 FLOPs/ciclo em vez de 16
+- Skylake-X/Zen 1 (2017) → AVX-512 → 64 FLOPs/ciclo
+- 2025 (Arrow Lake, Zen 5, Granite Rapids, Turin, M4 Ultra, Graviton4) → AMX/SME tiles → centenas ou milhares de FMAs por ciclo em bf16/fp8/int8
+
+Hoje, em 2025, quem não usa **FMA** (explícita ou contratada) está literalmente desperdiçando **metade do silício** que pagou.
+
+### Em 2025 o **FMA** é onipresente
+
+- Todos os compiladores modernos (GCC ≥ 12, Clang ≥ 15, MSVC, Intel oneAPI) ativam `-ffp-contract=fast` por padrão em `-O3` com `-march=native`
+- Todas as BLAS ([OpenBLAS](https://github.com/OpenMathLib/OpenBLAS), [MKL](https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html), [blis](https://github.com/flame/blis), Accelerate, [oneDNN](https://github.com/uxlfoundation/oneDNN)) são construídas em cima de FMA
+- Torch-Inductor, Triton, XLA, IREE → fundem tudo em `vector.fma` ou instruções matriciais automaticamente
+- Até Python/NumPy/JAX usa **FMA** sem você perceber
+
+O **FMA** não foi um “extra” que o comitê adicionou por capricho em 2008.  
+Foi a correção de um defeito fundamental da aritmética de ponto flutuante que existia desde os anos 60.  
+Torná-lo obrigatório foi uma das decisões mais importantes da história da computação numérica.
+
+Em 2025, se o seu código numérico não está usando **FMA** (seja via `std::fma`, `mul_add`, `-ffp-contract=fast` ou bibliotecas modernas), você está rodando com meia CPU desligada.
 
 ## E os binários entram na dança
 
