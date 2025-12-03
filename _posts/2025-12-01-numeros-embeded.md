@@ -20,12 +20,12 @@ tags:
   - dsp
   - C++
   - performance
-image: /assets/images/embed1.webp
+image: assets/images/embed1.webp
 rating: 5
 description: Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.
 date: 2025-12-02T10:00:00.000Z
 preview: Em 2025, IEEE-754 half-precision já é considerado obsoleto em sistemas embarcados restritos. As verdadeiras opções vencedoras são ponto fixo eterno, bfloat16, Posits e block floating-point.
-lastmod: 2025-12-03T20:01:10.746Z
+lastmod: 2025-12-03T20:02:19.209Z
 keywords:
   - ieee-754
   - half-precision
