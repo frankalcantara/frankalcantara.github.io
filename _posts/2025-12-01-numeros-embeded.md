@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Representação Numérica em Hardware Constrito
-author: Grok
+author: Frank
 categories:
   - artigo
   - Matemática
@@ -25,7 +25,7 @@ rating: 5
 description: Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.
 date: 2025-12-02T10:00:00.000Z
 preview: Em 2025, IEEE-754 half-precision já é considerado obsoleto em sistemas embarcados restritos. As verdadeiras opções vencedoras são ponto fixo eterno, bfloat16, Posits e block floating-point.
-lastmod: 2025-12-03T20:02:19.209Z
+lastmod: 2025-12-03T20:12:41.799Z
 keywords:
   - ieee-754
   - half-precision
