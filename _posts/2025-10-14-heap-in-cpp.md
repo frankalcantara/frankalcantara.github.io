@@ -22,8 +22,46 @@ keywords: |-
     computação competitiva
 toc: true
 published: true
-lastmod: 2025-10-15T21:36:13.724Z
+lastmod: 2025-12-03T20:13:28.920Z
 draft: 2025-10-14T11:22:19.148Z
+schema: |
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{{ page.url }}"
+      },
+      "headline": "Formatos de Representação Numérica em Hardware Constrito",
+      "alternativeHeadline": "IEEE-754 Half, Fixed-Point, bfloat16 e Posits em 2025",
+      "description": "Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.",
+      "keywords": "ieee-754, half-precision, bfloat16, posit, ponto-fixo, Q8.8, embedded, 8-bit, microcontroladores, avr, dsp",
+      "articleSection": "artigo, Matemática, embedded",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/numeric_formats_2025.webp' | absolute_url }}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Frank Alcantara",
+        "url": "{{ site.url }}/sobre"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title | default: 'Frank Alcantara' }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ site.logo | absolute_url | default: '/assets/images/logo.png' }}"
+        }
+      },
+      "datePublished": "2025-12-02T10:00:00.000Z",
+      "dateModified": "2025-12-03T19:29:29.787Z",
+      "inLanguage": "pt-BR",
+      "wordCount": {{ content | number_of_words }},
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
 ---
 
 > Precisa de revisão, esta é uma versão preliminar a partir de um texto antigo em C++ 20. Esta versão foi verificada com o auxílio do Gemini 2.4, Claude 4.5 e Grok 4.1 em 10 de outubro de 2025.

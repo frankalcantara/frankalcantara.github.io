@@ -3,84 +3,84 @@ layout: post
 title: Representação Numérica em Hardware Constrito
 author: Frank
 categories:
-  - artigo
-  - Matemática
-  - disciplina
-  - embedded
+    - artigo
+    - Matemática
+    - disciplina
+    - embedded
 tags:
-  - ponto-flutuante
-  - ponto-fixo
-  - bfloat16
-  - posit
-  - ieee-754
-  - microcontroladores
-  - 8-bits
-  - avr
-  - embedded
-  - dsp
-  - C++
-  - performance
+    - ponto-flutuante
+    - ponto-fixo
+    - bfloat16
+    - posit
+    - ieee-754
+    - microcontroladores
+    - 8-bits
+    - avr
+    - embedded
+    - dsp
+    - C++
+    - performance
 image: assets/images/embed1.webp
 rating: 5
 description: Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.
 date: 2025-12-02T10:00:00.000Z
 preview: Em 2025, IEEE-754 half-precision já é considerado obsoleto em sistemas embarcados restritos. As verdadeiras opções vencedoras são ponto fixo eterno, bfloat16, Posits e block floating-point.
-lastmod: 2025-12-03T20:12:41.799Z
+lastmod: 2025-12-03T20:13:40.504Z
 keywords:
-  - ieee-754
-  - half-precision
-  - bfloat16
-  - posit
-  - ponto-fixo
-  - Q8.8
-  - Q7.8
-  - embedded
-  - 8-bit
-  - microcontroladores
-  - avr
-  - cortex-m0
-  - dsp
-  - rede-neural-embarcada
+    - ieee-754
+    - half-precision
+    - bfloat16
+    - posit
+    - ponto-fixo
+    - Q8.8
+    - Q7.8
+    - embedded
+    - 8-bit
+    - microcontroladores
+    - avr
+    - cortex-m0
+    - dsp
+    - rede-neural-embarcada
 published: true
 draft: false
 schema: |
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ site.url }}{{ page.url }}"
-    },
-    "headline": "Formatos de Representação Numérica em Hardware Constrito",
-    "alternativeHeadline": "IEEE-754 Half, Fixed-Point, bfloat16 e Posits em 2025",
-    "description": "Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.",
-    "keywords": "ieee-754, half-precision, bfloat16, posit, ponto-fixo, Q8.8, embedded, 8-bit, microcontroladores, avr, dsp",
-    "articleSection": "artigo, Matemática, embedded",
-    "image": {
-      "@type": "ImageObject",
-      "url": "{{ '/assets/images/numeric_formats_2025.webp' | absolute_url }}",
-      "width": 1200,
-      "height": 630
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Frank Alcantara",
-      "url": "{{ site.url }}/sobre"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "{{ site.title | default: 'Frank Alcantara' }}",
-      "logo": {
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{{ page.url }}"
+      },
+      "headline": "Formatos de Representação Numérica em Hardware Constrito",
+      "alternativeHeadline": "IEEE-754 Half, Fixed-Point, bfloat16 e Posits em 2025",
+      "description": "Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.",
+      "keywords": "ieee-754, half-precision, bfloat16, posit, ponto-fixo, Q8.8, embedded, 8-bit, microcontroladores, avr, dsp",
+      "articleSection": "artigo, Matemática, embedded",
+      "image": {
         "@type": "ImageObject",
-        "url": "{{ site.logo | absolute_url | default: '/assets/images/logo.png' }}"
-      }
-    },
-    "datePublished": "2025-12-02T10:00:00.000Z",
-    "dateModified": "2025-12-03T19:29:29.787Z",
-    "inLanguage": "pt-BR",
-    "wordCount": {{ content | number_of_words }},
-    "license": "https://creativecommons.org/licenses/by-sa/4.0/"
-  }
+        "url": "{{ '/assets/images/numeric_formats_2025.webp' | absolute_url }}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Frank Alcantara",
+        "url": "{{ site.url }}/sobre"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title | default: 'Frank Alcantara' }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ site.logo | absolute_url | default: '/assets/images/logo.png' }}"
+        }
+      },
+      "datePublished": "2025-12-02T10:00:00.000Z",
+      "dateModified": "2025-12-03T19:29:29.787Z",
+      "inLanguage": "pt-BR",
+      "wordCount": {{ content | number_of_words }},
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
 slug: representacao-numerica-em-hardware-constrito
 ---
 
