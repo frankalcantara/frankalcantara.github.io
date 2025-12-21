@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Análise da Tecnologia das GPUs NVIDIA
-author: Frank Alcantara
+author: Frank
 categories:
     - artigo
     - GPU
@@ -26,7 +26,7 @@ tags:
 image: assets/images/tecnvida.webp
 description: Análise da evolução das arquiteturas NVIDIA desde Volta até Blackwell, com foco nos Tensor Cores, TMA/TMEM, CuTE DSL e previsões para a geração Rubin.
 date: 2025-11-23T14:39:47-03:00
-lastmod: 2025-12-21T21:05:24.801Z
+lastmod: 2025-12-21T21:08:19.748Z
 published: true
 draft: 2025-12-21T08:50:21.237Z
 keywords:
