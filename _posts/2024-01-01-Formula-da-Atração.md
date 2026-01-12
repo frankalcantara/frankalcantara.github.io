@@ -3,24 +3,107 @@ layout: post
 title: "A Fórmula da Atração: a Matemática do Eletromagnetismo"
 author: Frank
 categories:
-    - Matemática
-    - Eletromagnetismo
+   - Matemática
+   - Eletromagnetismo
 tags:
-    - Matemática
-    - Física
-    - Eletromagnetismo
+   - Matemática
+   - Física
+   - Eletromagnetismo
 image: assets/images/eletromag1.webp
 description: Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia.
-preview: a matemática que suporta o entendimento dos fenômenos que explicam nosso universo.
+preview: Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia.
 slug: formula-da-atracao-matematica-eletromagnetismo
 keywords:
-    - cálculo vetorial
-    - Eletromagnetismo
-    - Matemática
-    - poesia
-    - álgebra vetorial
+   - Eletromagnetismo
+   - Fórmula da Atração
+   - Lei de Coulomb
+   - Campos Elétricos
+   - Campos Magnéticos
+   - Equações de Maxwell
+   - Álgebra Vetorial
+   - Cálculo Vetorial
+   - Produto Escalar
+   - Produto Vetorial
+   - Gradiente
+   - Divergência
+   - Rotacional
+   - Vetores Unitários
+   - Sistemas de Coordenadas
+   - Potencial Elétrico
+   - Permissividade
+   - Permeabilidade
+   - Fluxo
+   - Regra da Mão Direita
+   - Campos Vetoriais
+   - Exercícios Resolvidos
+   - Aplicações em Engenharia
+   - Maxwell e História
+   - Operadores Diferenciais
+   - Introdução ao Eletromagnetismo
 rating: 5
-lastmod: 2025-05-06T11:04:17.770Z
+lastmod: 2026-01-12T18:00:22.329Z
+published: true
+draft: 2026-01-12T15:24:57.008Z
+beforetoc: Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas em um artigo acadêmico destinado a estudantes de ciência e engenharia.
+schema: |
+   {
+     "@context": "https://schema.org",
+     "@type": "ScholarlyArticle",
+     "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "{{ site.url }}{{ page.url }}"
+     },
+     "headline": "A Fórmula da Atração: a Matemática do Eletromagnetismo",
+     "name": "A Fórmula da Atração: a Matemática do Eletromagnetismo",
+     "alternativeHeadline": "Introdução à álgebra vetorial e cálculo vetorial aplicados ao eletromagnetismo",
+     "description": "Entenda como a matemática fundamenta o eletromagnetismo e suas aplicações práticas; introdução a álgebra vetorial, cálculo vetorial e equações de Maxwell.",
+     "author": {
+       "@type": "Person",
+       "name": "Frank"
+     },
+     "datePublished": "2024-01-01",
+     "dateModified": "2026-01-12T15:24:58.220Z",
+     "image": "{{ site.url }}/assets/images/eletromag1.webp",
+     "publisher": {
+       "@type": "Organization",
+       "name": "{{ site.title }}",
+       "logo": {
+         "@type": "ImageObject",
+         "url": "{{ site.url }}/assets/images/logo.png"
+       }
+     },
+     "url": "{{ site.url }}{{ page.url }}",
+     "keywords": [
+       "Eletromagnetismo",
+       "Fórmula da Atração",
+       "Lei de Coulomb",
+       "Campos Elétricos",
+       "Campos Magnéticos",
+       "Equações de Maxwell",
+       "Álgebra Vetorial",
+       "Cálculo Vetorial",
+       "Produto Escalar",
+       "Produto Vetorial",
+       "Gradiente",
+       "Divergência",
+       "Rotacional",
+       "Vetores Unitários",
+       "Sistemas de Coordenadas",
+       "Potencial Elétrico",
+       "Permissividade",
+       "Permeabilidade",
+       "Fluxo",
+       "Regra da Mão Direita",
+       "Campos Vetoriais",
+       "Exercícios Resolvidos",
+       "Aplicações em Engenharia",
+       "História da Física",
+       "Operadores Diferenciais",
+       "Introdução ao Eletromagnetismo"
+     ],
+     "isAccessibleForFree": true,
+     "inLanguage": "pt-BR"
+   }
 ---
 
 O Eletromagnetismo é a lei, o ordenamento que embala o universo. Como uma divindade antiga que rege a existência e os movimentos de tudo que existe. Duas forças, elétrica e magnética, em uma dança interminável, moldam de um grão de poeira a um oceano de estrelas, até o mesmo dispositivo que você usa para decifrar essas palavras deve sua existência e funcionamento ao Eletromagnetismo.
