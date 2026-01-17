@@ -3,39 +3,37 @@ layout: post
 title: Robótica para Iniciantes - Do Microcontrolador ao Controle de Motores
 author: Frank
 categories:
-    - disciplina
-    - Engenharia
-    - Robótica
+   - disciplina
+   - Engenharia
+   - Robótica
 tags:
-    - robótica
-    - eletrônica
-    - microcontroladores
-    - STM32
-    - motores elétricos
-    - baterias
-    - inteligência artificial
+   - robótica
+   - eletrônica
+   - microcontroladores
+   - STM32
+   - motores elétricos
+   - baterias
+   - inteligência artificial
 featured: false
 rating: 5
 description: Guia completo de robótica, cobrindo microcontroladores, gestão de energia e controle de motores para quem deseja aprender do zero com foco em projetos práticos.
-date: 2025-11-14T00:58:10.955Z
+date: 2026-01-17T18:48:01.923Z
 preview: |
-    A robótica é a maior, e talvez última oportunidade para o Brasil entrar no mundo da tecnologia de ponta. Nós perdemos a revolução do hardware, do software, da internet, da computação móvel, da inteligência artificial mas a robótica ainda está em seus primórdios. Este é o momento de agir.
-lastmod: 2026-01-17T18:45:53.378Z
+   A robótica é a maior, e talvez última oportunidade para o Brasil entrar no mundo da tecnologia de ponta. Nós perdemos a revolução do hardware, do software, da internet, da computação móvel, da inteligência artificial mas a robótica ainda está em seus primórdios. Este é o momento de agir.
+lastmod: 2026-01-17T18:49:34.390Z
 published: true
-draft: 2025-11-14T01:11:49.434Z
+draft: 2026-01-17T18:48:04.606Z
 slug: iniciando-robotica
 image: assets/images/tecnvida.webp
-keywords: |-
-    robótica para iniciantes
-    guia de robótica
-    microcontroladores
-    STM32
-    motores elétricos
-    controle de motores
-    gestão de energia
-    baterias lipo
-    eletrônica de potência
-    aprendizado de robótica
+keywords:
+   - Aprendizado de robótica
+   - baterias lipo
+   - Controle de motores
+   - guia de robótica
+   - microcontroladores
+   - Motores Elétricos
+   - robótica para iniciantes
+   - STM32
 ---
 
 Eu escrevi dois posts no Linkedin sobre o que é necessário estudar para iniciar em robótica. Um com 10.000 visualizações e outro com pouco mais de 12.000 visualizações. Sem dúvida nenhuma, o tema interessa muita gente. Então decidi juntar tudo em um único post, expandir os tópicos e criar uma espécie de currículo para quem quer aprender robótica do zero.
