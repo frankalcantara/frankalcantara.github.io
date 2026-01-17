@@ -20,7 +20,7 @@ description: Guia completo de robótica, cobrindo microcontroladores, gestão de
 date: 2026-01-17T18:48:01.923Z
 preview: |
    A robótica é a maior, e talvez última oportunidade para o Brasil entrar no mundo da tecnologia de ponta. Nós perdemos a revolução do hardware, do software, da internet, da computação móvel, da inteligência artificial mas a robótica ainda está em seus primórdios. Este é o momento de agir.
-lastmod: 2026-01-17T18:49:34.390Z
+lastmod: 2026-01-17T21:26:43.773Z
 published: true
 draft: 2026-01-17T18:48:04.606Z
 slug: iniciando-robotica
@@ -55,6 +55,32 @@ Espero que seja útil.
 >Não use kits de desenvolvimento prontos. Principalmente não use o Raspiberry Pi ou outros kits que tenham sido desenvolvidos para o uso de sistemas operacionais. Compre uma placa simples (ex: STM32F407VET6, tiva) e monte seu próprio circuito de programação com um **ST-Link V2** ou **J-Link**. Aprenda a usar o [**OpenOCD**](https://openocd.org/) para programar e depurar seu microcontrolador via **SWD** (**S**erial **W**ire **D**ebug). Isso é essencial para entender como o hardware funciona.
 
 * **Software**: programação em **C++**, manipulação de registros, configuração de Timers para contagem de tempo exata e tratamento de Interrupções. Seus primeiros códigos devem ser escritos sem o uso de bibliotecas de alto nível (HAL ou SDKs). Não use o Arduino IDE para este módulo. Nem nada parecido. Aprenda a manipular os registradores, memória e portas diretamente. Não use nenhum laço para fazer a CPU "esperar". Use interrupções e timers. Se a sua CPU parar para esperar, qualquer coisa, seu código estará errado. Esta limitação forçará a criação de código eficiente e o uso de máquinas de estados finitos.
+
+___
+> O uso indiscriminado de variáveis globais em sistemas embarcados cria "efeitos colaterais" imprevisíveis, dificulta a realização de testes unitários e aumenta o risco de condições de corrida (*race conditions*) em sistemas baseados em interrupções.
+> 
+> Para eliminar as globais, utilizaremos as seguintes técnicas:
+>
+>**A. Encapsulamento em Classes (Singleton ou Static Wrappers)**: em vez de uma variável solta para o status da bateria, criamos uma classe `PowerMonitor`. Os dados tornam-se membros privados, acessíveis apenas por métodos específicos.
+>
+>**B. Injeção de Dependência**: em vez de um módulo de motor olhar para uma variável global de sensores, **passamos uma referência do sensor para o motor no momento da inicialização**.
+>
+>**C. O Desafio das Interrupções (ISRs)**: as interrupções em microcontroladores ARM são funções C que não aceitam argumentos. Para evitar globais aqui, utilizamos o padrão **Bridge**:
+>
+>1. Criamos um ponteiro estático dentro da classe que aponta para a instância ativa (`instancePtr`).  
+>
+>2. A ISR chama esse ponteiro para executar o método da classe. Ponteiro seguro!
+>
+>Para o seu código esteja mais próximo dos códigos que encontramos em projetos reais, siga estas regras:
+>
+>1. **Local Static**: se uma variável só é usada dentro de uma função, mas precisa manter seu valor entre chamadas, declare-a como `static` dentro da função.  
+>
+>2. **Const-Correctness**: se um dado não deve ser alterado, use `const` em todos os lugares possíveis.  
+>
+>3. **Ponteiros Opacos**: esconda a implementação do hardware dentro de arquivos `.cpp`, expondo apenas o necessário no `.hpp`.
+>
+___
+
 * **Aplicação de IA**: utilizar modelos de linguagem para explicar registradores específicos de *datasheets* extensos e gerar códigos base de inicialização de periféricos. Não confie nos pinos sugeridos automaticamente por ferramentas de IA. Existe um problema documentado de alucinação de pinos em alguns modelos. Seu objetivo é encontrar um ambiente (VSCode/PlatformIO/Assistente de IA) que se transforme na sua ferramenta fazendo seu aprendizado mais rápido.
 
 ### Projetos para o Módulo 1
@@ -117,7 +143,7 @@ Os sistemas abaixo foram pensados para serem desenvolvidos de forma puramente **
 
 * **Aplicação de IA**: consulte as ferramentas de IA para modelagem de filtros digitais e cálculo de eficiência de conversores chaveados. **Não esqueça que modelos de IA podem alucinar sobre a capacidade de dissipação térmica de componentes e limites de corrente de trilhas de PCB**. Esta alucinação, eu ainda não vi, mas nas comunidades do **X.com**, esta semana, teve muito burburinho sobre isso. Para não cair em um erro de alucinação, valide as sugestões de componentes com cálculos de potência:
 
-$$P_{total} \= I_{rms}^{2} \times R_{dson} + P_{switching}$$
+$$P_{total} = I_{rms}^{2} \times R_{dson} + P_{switching}$$
 
 Utilize a IA para traduzir requisitos de autonomia (ex: "operar por 2 horas com pico de 10A") em especificações de capacidade de bateria e taxa de descarga (C-rate), mas sempre peça para o assistente explicar o que está fazendo, pegue uma calculadora e verifique os resultados com as leis da física.
 
@@ -169,7 +195,7 @@ Estes projetos devem ser executados seguindo as diretrizes de "tolerância zero"
 
 **Aplicação de IA**: Use a IA para projetar um filtro digital de primeira ordem (passa-baixa) para limpar os dados coletados e implemente-o no código para comparar com o sinal bruto. Neste ponto, lembre-se, o objetivo é entender o impacto do design físico na qualidade do sinal. Ainda assim, você deve validar os resultados com cálculos manuais de frequência de corte:
 
-$$f_c \= \frac{1}{2 \pi R C}$$
+$$f_c = \frac{1}{2 \pi R C}$$
 
 ### **V. Estimador de Autonomia Dinâmica (Time-to-Empty)**
 
