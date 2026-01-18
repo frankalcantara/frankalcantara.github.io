@@ -326,7 +326,7 @@ span.post-read-more a:hover {
 
 .article-post {
   font-family: Merriweather;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   line-height: 1.84;
   color: rgba(0, 0, 0, 0.8);
 }
@@ -335,20 +335,22 @@ blockquote {
      border-left-width: 4px;
     border-left-color: #f5c7ff;
     border-left-style: solid;
-    padding: 0 20px;
+    padding: 10px;
     font-style: italic;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.605);
     text-align: justify !important;
 background-color: #fbf8f8;
   }
 
 blockquote p {
   text-align: justify !important;
+    margin: 10px !important;
+    line-height: 20px;
 }
 
 .article-post p,
 .article-post blockquote {
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 .8rem 0;
 }
 
 .featured-image {
@@ -698,6 +700,47 @@ h6 {
     "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Escala tipográfica reduzida (~20% menor) para melhorar legibilidade geral */
+h1,
+.h1 {
+  font-size: 2rem;
+}
+
+h2,
+.h2 {
+  font-size: 1.6rem;
+}
+
+h3,
+.h3 {
+  font-size: 1.3rem;
+}
+
+h4,
+.h4 {
+  font-size: 1.1rem;
+}
+
+h5,
+.h5 {
+  font-size: 0.95rem;
+}
+
+h6,
+.h6 {
+  font-size: 0.85rem;
+}
+
+body,
+html {
+  font-size: 0.9rem;
+}
+
+p,
+li {
+  font-size: 0.9rem;
+}
+
 .article-post .h1,
 .article-post .h2,
 .article-post .h3,
@@ -724,7 +767,7 @@ h6 {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .layout-page .article-post p {
