@@ -20,7 +20,7 @@ description: Guia completo de robótica, cobrindo microcontroladores, gestão de
 date: 2026-01-17T18:48:01.923Z
 preview: |
    A robótica é a maior, e talvez última oportunidade para o Brasil entrar no mundo da tecnologia de ponta. Nós perdemos a revolução do hardware, do software, da internet, da computação móvel, da inteligência artificial mas a robótica ainda está em seus primórdios. Este é o momento de agir.
-lastmod: 2026-01-18T11:10:09.900Z
+lastmod: 2026-01-18T16:38:11.407Z
 published: true
 draft: 2026-01-17T18:48:04.606Z
 slug: iniciando-robotica
@@ -72,7 +72,7 @@ Todo o material é pensado para ser desenvolvido em **bare-metal** (sem bibliote
 
 Espero que seja útil.
 
-## Módulo 1: O Núcleo de Processamento (Cérebro)
+## **Módulo 1: O Núcleo de Processamento (Cérebro)**
 
 **Objetivo**: compreender a unidade central de processamento e a execução de tarefas em tempo real.
 
