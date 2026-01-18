@@ -20,7 +20,7 @@ description: Guia completo de robótica, cobrindo microcontroladores, gestão de
 date: 2026-01-17T18:48:01.923Z
 preview: |
    A robótica é a maior, e talvez última oportunidade para o Brasil entrar no mundo da tecnologia de ponta. Nós perdemos a revolução do hardware, do software, da internet, da computação móvel, da inteligência artificial mas a robótica ainda está em seus primórdios. Este é o momento de agir.
-lastmod: 2026-01-17T21:26:43.773Z
+lastmod: 2026-01-18T11:10:09.900Z
 published: true
 draft: 2026-01-17T18:48:04.606Z
 slug: iniciando-robotica
@@ -34,13 +34,39 @@ keywords:
    - Motores Elétricos
    - robótica para iniciantes
    - STM32
+schema:
+   type: Article
+   name: Robótica para Iniciantes - Do Microcontrolador ao Controle de Motores
+   description: Guia completo de robótica, cobrindo microcontroladores, gestão de energia e controle de motores para quem deseja aprender do zero com foco em projetos práticos.
+   steps:
+      - name: "Modulo "
+        description: Introdução ao ambiente de desenvolvimento e a cpu
+        fieldGroup: steps_group
+      - name: Módulo 2
+        description: Gestão de Energia e integradade de sinais
+        fieldGroup: steps_group
+      - name: "Módulo "
+        description: transformar sinais elétricos em força mecânica precisa e controlada, dominando a física dos motores e a eletrônica de potência.
+        fieldGroup: steps_group
+      - name: Projeto Integrador
+        description: Um projeto complexo com os conteúdos abordados nos módulos 1, 2 e 3
+        fieldGroup: steps_group
+      - name: Módulo 4
+        description: o sistema de percepção ambiental e garantir que múltiplos módulos conversem através de barramentos industriais robustos.
+        fieldGroup: steps_group
+      - name: Módulo 5
+        description: consolidar o hardware em placas profissionais e garantir que a eletrônica sobreviva ao mundo físico (vibração, calor e impacto).
+        fieldGroup: steps_group
+      - name: Projeto Integrador Final
+        description: Crie um robô autônomo
+        fieldGroup: steps_group
 ---
 
 Eu escrevi dois posts no Linkedin sobre o que é necessário estudar para iniciar em robótica. Um com 10.000 visualizações e outro com pouco mais de 12.000 visualizações. Sem dúvida nenhuma, o tema interessa muita gente. Então decidi juntar tudo em um único post, expandir os tópicos e criar uma espécie de currículo para quem quer aprender robótica do zero.
 
-O texto a seguir serve de guia para você aprender sozinho, mas também serve de base para um curso *in company*, como base para uma pós-graduação e até mesmo para um curso de graduação.
+O texto a seguir serve de guia para você aprender sozinho, mas também serve de base para um curso *in company*, uma pós-graduação e até mesmo para um curso de graduação. Só depende da sua iniciativa.
 
-Optei por usar o STM32F407VET6 por causa do IP Arm Cortex-M4F com FPU single-precision, que é poderoso o suficiente para fazer controle de motores em FOC (Field-Oriented Control) em tempo real. Além disso, o chip tem uma variedade rica de periféricos que permitem explorar todos os conceitos necessários para robótica. Mas, há uma razão egoística: eu estou desenvolvendo um Hat para Raspberry Pi que usa este chip como co-processador de tempo real para processamento de audio totalmente aberto, [aqui](https://github.com/frankalcantara/RoboTZero/tree/main/AuralFocus). Então, eu preciso dominar o hardware e software deste microcontrolador, tudo que eu estudo tem aplicação direta no meu projeto.
+Optei por usar o STM32F407VET6 por causa do IP Arm Cortex-M4F com FPU *single-precision*, que é poderoso o suficiente para fazer controle de motores em FOC (*Field-Oriented Control*) em tempo real. Além disso, o chip tem uma variedade rica de periféricos que permitem explorar todos os conceitos necessários para robótica. Mas, há uma razão egoística: eu estou desenvolvendo um Hat para Raspberry Pi que usa este chip como co-processador de tempo real para processamento de audio totalmente aberto, [aqui](https://github.com/frankalcantara/RoboTZero/tree/main/AuralFocus). Então, eu preciso dominar o hardware e software deste microcontrolador, tudo que eu estudo tem aplicação direta no meu projeto.
 
 Todo o material é pensado para ser desenvolvido em **bare-metal** (sem bibliotecas de alto nível), utilizando apenas registradores, timers e interrupções. Isso é essencial para entender como o hardware funciona. O objetivo é fugir do mundo maker e chegar ao nível profissional. Esta também é razão de eu não seguir a imensa maioria da internet no Brasil e ficar no trio arduino/raspberry pi/esp32. Esses kits são ótimos para prototipagem rápida, mas não ensinam o que é necessário para trabalhar com robótica do mundo real.
 
@@ -255,7 +281,7 @@ Sempre peça para o assistente detalhar a lógica de controle vetorial, mas impl
 
 **Conceito**: entendimento do defasamento de 120 graus e a importância do *Dead-time* para evitar o curto-circuito da ponte.
 
-## Projeto Integrador Final dos Módulos 1, 2 e 3: Driver BLDC com Field-Oriented Control (FOC) *sensorless* em Malha Fechada
+## Projeto Integrador dos Módulos 1, 2 e 3: Driver BLDC com Field-Oriented Control (FOC) *sensorless* em Malha Fechada
 
 O **F**ield-**O**riented **C**ontrol, **FOC**, é o que separa robôs de brinquedo de sistemas profissionais (drones de alta performance, braços robóticos industriais, veículos elétricos). Implementá-lo em **bare-metal** em um chip como o [STM32F407VET6](https://www.st.com/resource/en/datasheet/dm00037051.pdf) é totalmente viável e interessante.
 

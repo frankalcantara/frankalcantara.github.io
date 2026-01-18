@@ -328,16 +328,18 @@ span.post-read-more a:hover {
 }
 
 blockquote {
-  border-right-width: 4px;
-  border-right-color: #f5c7ff;
-  border-right-style: solid;
-  padding: 0 20px;
-  font-style: italic;
-  color: rgba(0, 0, 0, 0.5);
-}
+     border-left-width: 4px;
+    border-left-color: #f5c7ff;
+    border-left-style: solid;
+    padding: 0 20px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: justify !important;
+background-color: #eaeaea;
+  }
 
 blockquote p {
-  text-align: right !important;
+  text-align: justify !important;
 }
 
 .article-post p,
