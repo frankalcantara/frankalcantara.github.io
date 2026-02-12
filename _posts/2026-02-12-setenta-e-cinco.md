@@ -25,7 +25,7 @@ rating: 5
 description: A matemática e a física por trás da escolha dos 50 Ohms como impedância característica padrão em cabos coaxiais.
 date: 2026-02-12T10:00:00.000Z
 preview: Por que os cabos coaxiais usam 50 Ohms ou 75 Ohms? A resposta está em um elegante equilíbrio entre eletrodinâmica clássica, otimização matemática e os limites físicos dos materiais.
-lastmod: 2026-02-12T14:35:26.597Z
+lastmod: 2026-02-12T16:16:43.511Z
 keywords:
     - impedância-característica
     - cabo-coaxial
