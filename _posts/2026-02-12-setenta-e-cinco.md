@@ -104,6 +104,7 @@ Ao contrário da resistência de um fio comum, a impedância característica ($Z
 $$Z_0 = \frac{1}{2\pi} \sqrt{\frac{\mu}{\epsilon}} \ln\left(\frac{b}{a}\right)$$
 
 Na qual:
+
 - $\mu$ é a permeabilidade magnética do isolante.$\epsilon$ é a permissividade elétrica do isolante.
 - $b/a$ representa a razão entre os raios externo e interno.
 
