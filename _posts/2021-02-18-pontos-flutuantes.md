@@ -15,43 +15,47 @@ preview: um estudo novo sobre uma das normas mais importantes e menos conhecidas
 featured: false
 rating: 3.5
 slug: precisao-realidade-os-desafios-da-norma-ieee-754-na-computacao-moderna
-lastmod: 2025-11-29T21:37:05.955Z
+lastmod: 2026-02-18T14:03:21.924Z
 date: 2024-12-20T20:07:14.934Z
 published: true
-schema:
-    "@context": https://schema.org
-    "@type": Article
-    headline: "{{ page.title }}"
-    description: "{{ page.description | default: page.preview }}"
-    author:
-        "@type": Person
-        name: Frank Alcantara
-        url: https://frankalcantara.com/about
-    publisher:
-        "@type": Organization
-        name: frankalcantara.com
-        logo:
-            "@type": ImageObject
-            url: https://frankalcantara.com/assets/images/logo.png
-    datePublished: "{{ page.date | date: '%Y-%m-%d' }}"
-    dateModified: "{{ page.lastmod | default: page.date | date: '%Y-%m-%d' }}"
-    mainEntityOfPage:
-        "@type": WebPage
-        "@id": "{{ site.url }}{{ page.url | remove: 'index.html' }}"
-    image:
-        "@type": ImageObject
-        url: "{{ site.url }}{{ page.image | default: '/assets/images/default-article.jpg' }}"
-    wordCount: "{{ content | number_of_words }}"
-    inLanguage: pt-BR
-    license: https://creativecommons.org/licenses/by-sa/4.0/
-    keywords:
-        "{ page.keywords | join: ', ' }": null
-    isPartOf:
-        "@type":
-            - Blog
-            - CreativeWork
-        name: frankalcantara.com
-        url: https://frankalcantara.com
+schema: |
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{{ page.url }}"
+      },
+      "headline": "Formatos de Representação Numérica em Hardware Constrito",
+      "alternativeHeadline": "IEEE-754 Half, Fixed-Point, bfloat16 e Posits em 2025",
+      "description": "Análise dos formatos numéricos para uso em microcontroladores de 8 e 16 bits.",
+      "keywords": "ieee-754, half-precision, bfloat16, posit, ponto-fixo, Q8.8, embedded, 8-bit, microcontroladores, avr, dsp",
+      "articleSection": "artigo, Matemática, embedded",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ '/assets/images/numeric_formats_2025.webp' | absolute_url }}",
+        "width": 1200,
+        "height": 630
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Frank Alcantara",
+        "url": "{{ site.url }}/sobre"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title | default: 'Frank Alcantara' }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ site.logo | absolute_url | default: '/assets/images/logo.png' }}"
+        }
+      },
+      "datePublished": "2025-12-02T10:00:00.000Z",
+      "dateModified": "2025-12-03T19:29:29.787Z",
+      "inLanguage": "pt-BR",
+      "wordCount": {{ content | number_of_words }},
+      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
 ---
 
 A memória é escassa, limitada, insuficiente e inteira. O arredondamento de números reais é inevitável, levantando um dilema sobre a extensão da informação a ser armazenada e os métodos de armazenamento. A eficiência computacional é primordial na solução dos problemas concretos que enfrentamos todos os dias. A utilização de normas para a representação de números reais na forma de ponto flutuante surgiu como uma resposta. Este artigo desvelará sua funcionalidade e os desafios que esta representação impõe.
