@@ -2,114 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://frankalcantara.com/index.html</loc>
-    <lastmod>2025-10-01T21:52:57.052Z</lastmod>
+    <lastmod>2025-10-01T21:52:57.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01-lexico.html</loc>
-    <lastmod>2025-10-31T13:33:21.418Z</lastmod>
+    <lastmod>2025-10-31T13:33:21.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/01a-lexico.html</loc>
-    <lastmod>2025-10-31T13:33:32.181Z</lastmod>
+    <lastmod>2025-10-31T13:33:32.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/02-lexico.html</loc>
-    <lastmod>2025-10-10T23:34:27.816Z</lastmod>
+    <lastmod>2025-10-10T23:34:27.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/04-Gramaticas.html</loc>
-    <lastmod>2025-10-31T13:33:35.058Z</lastmod>
+    <lastmod>2025-10-31T13:33:35.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/05-parsersLL1.html</loc>
-    <lastmod>2025-10-13T11:37:39.564Z</lastmod>
+    <lastmod>2025-10-13T11:37:39.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/06-first-follow.html</loc>
-    <lastmod>2025-09-20T17:38:42.110Z</lastmod>
+    <lastmod>2025-09-20T17:38:42.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/07-parserLR1.html</loc>
-    <lastmod>2025-10-10T23:34:27.821Z</lastmod>
+    <lastmod>2025-10-10T23:34:27.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/08-parserSLR1.html</loc>
-    <lastmod>2025-09-24T00:04:38.268Z</lastmod>
+    <lastmod>2025-09-24T00:04:38.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10-semantico.html</loc>
-    <lastmod>2025-10-31T13:33:38.071Z</lastmod>
+    <lastmod>2025-10-31T13:33:38.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10a-semantico.html</loc>
-    <lastmod>2025-10-31T13:33:42.316Z</lastmod>
+    <lastmod>2025-10-31T13:33:42.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10b-semantico.html</loc>
-    <lastmod>2025-11-15T21:53:05.879Z</lastmod>
+    <lastmod>2025-11-15T21:53:05.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/10c-semantico.html</loc>
-    <lastmod>2025-11-15T21:50:05.619Z</lastmod>
+    <lastmod>2025-11-15T21:50:05.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/11-tabelaSimbolos.html</loc>
-    <lastmod>2025-10-29T14:35:48.392Z</lastmod>
+    <lastmod>2025-10-29T14:35:48.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/12-questoes-exercicios.html</loc>
-    <lastmod>2025-11-16T00:02:05.863Z</lastmod>
+    <lastmod>2025-11-16T00:02:05.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/14-GeraInter.html</loc>
-    <lastmod>2025-10-31T13:33:51.183Z</lastmod>
+    <lastmod>2025-10-31T13:33:51.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/15-llvmIR.html</loc>
-    <lastmod>2025-10-31T13:33:53.325Z</lastmod>
+    <lastmod>2025-10-31T13:33:53.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/16-peepOtimiza.html</loc>
-    <lastmod>2025-10-31T13:33:56.137Z</lastmod>
+    <lastmod>2025-10-31T13:33:56.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/19-mlir-sintaxe.html</loc>
-    <lastmod>2025-10-31T19:18:36.893Z</lastmod>
+    <lastmod>2025-10-31T19:18:36.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/20-mlir-plano.html</loc>
-    <lastmod>2025-11-15T21:50:05.670Z</lastmod>
+    <lastmod>2025-11-15T21:50:05.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/21-mlir-arch.html</loc>
-    <lastmod>2025-11-16T13:59:33.953Z</lastmod>
+    <lastmod>2025-11-16T13:59:33.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/fase1.html</loc>
-    <lastmod>2025-09-27T22:52:56.607Z</lastmod>
+    <lastmod>2025-09-27T22:52:56.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/fase2.html</loc>
-    <lastmod>2025-10-08T19:38:50.167Z</lastmod>
+    <lastmod>2025-10-08T19:38:50.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/fase3.html</loc>
-    <lastmod>2025-10-10T23:34:27.835Z</lastmod>
+    <lastmod>2025-10-10T23:34:27.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/fase4.html</loc>
-    <lastmod>2025-10-29T13:24:19.630Z</lastmod>
+    <lastmod>2025-12-02T23:10:28.840Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/fase12026-1.html</loc>
+    <lastmod>2026-03-04T21:38:31.143Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/fase22026-1.html</loc>
+    <lastmod>2026-03-04T21:38:29.129Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/fase32026-1.html</loc>
+    <lastmod>2026-03-04T21:38:26.910Z</lastmod>
+  </url>
+  <url>
+    <loc>https://frankalcantara.com/fase42026-1.html</loc>
+    <lastmod>2026-03-04T21:38:24.457Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/apend1.html</loc>
-    <lastmod>2025-09-20T18:01:12.351Z</lastmod>
+    <lastmod>2025-09-20T18:01:12.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/sol-exercicios.html</loc>
-    <lastmod>2025-10-29T14:34:10.761Z</lastmod>
+    <lastmod>2025-10-29T14:34:10.000Z</lastmod>
   </url>
   <url>
     <loc>https://frankalcantara.com/referencias.html</loc>
-    <lastmod>2025-08-23T20:02:40.377Z</lastmod>
+    <lastmod>2025-08-23T20:02:40.000Z</lastmod>
   </url>
 </urlset>

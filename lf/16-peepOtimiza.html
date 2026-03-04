@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Linguagens Formais e Autômatos - 18&nbsp; Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</title>
+<title>18&nbsp; Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário – Linguagens Formais e Autômatos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,15 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./19-mlir-sintaxe.html" rel="next">
 <link href="./15-llvmIR.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -103,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -117,7 +120,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -136,19 +139,19 @@ window.Quarto = {
 <link rel="stylesheet" href="styles/custom.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-GeraInter.html">Geração de Código Intermediário</a></li><li class="breadcrumb-item"><a href="./16-peepOtimiza.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -181,9 +184,9 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Analisadores Léxicos</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -210,9 +213,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Analisadores Sintáticos</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -251,9 +254,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Analisadores Semânticos</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -298,9 +301,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Geração de Código Intermediário</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -345,9 +348,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
- <span class="menu-text">Projetos da Disciplina - 2025-2</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projetos de Engenharia da Computação - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -378,16 +381,86 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projetos de Engenharia da Computação - 2026-1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase12026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase22026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase42026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projetos de Ciência da Computação - 2026-1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase12026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase22026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase42026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -498,7 +571,7 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -545,7 +618,7 @@ goto L2           # Branch incondicional</code></pre>
 <section id="representação-de-instruções" class="level4" data-number="18.1.2.1">
 <h4 data-number="18.1.2.1" class="anchored" data-anchor-id="representação-de-instruções"><span class="header-section-number">18.1.2.1</span> Representação de Instruções</h4>
 <p>Considere o exemplo a seguir, que define uma classe simples para representar instruções TAC:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Instruction:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Instruction:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, op, dest<span class="op">=</span><span class="va">None</span>, arg1<span class="op">=</span><span class="va">None</span>, arg2<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.op <span class="op">=</span> op        <span class="co"># Operador ('+', '-', '*', '/', 'ASSIGN', etc.)</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.dest <span class="op">=</span> dest    <span class="co"># Variável destino</span></span>
@@ -576,13 +649,13 @@ goto L2           # Branch incondicional</code></pre>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.op <span class="op">==</span> other.op <span class="kw">and</span> <span class="op">\</span></span>
 <span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>               <span class="va">self</span>.dest <span class="op">==</span> other.dest <span class="kw">and</span> <span class="op">\</span></span>
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>               <span class="va">self</span>.arg1 <span class="op">==</span> other.arg1 <span class="kw">and</span> <span class="op">\</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>               <span class="va">self</span>.arg2 <span class="op">==</span> other.arg2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>               <span class="va">self</span>.arg2 <span class="op">==</span> other.arg2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tabela-de-definições" class="level4" data-number="18.1.2.2">
 <h4 data-number="18.1.2.2" class="anchored" data-anchor-id="tabela-de-definições"><span class="header-section-number">18.1.2.2</span> Tabela de Definições</h4>
 <p>Para rastrear em que ponto do código variáveis são definidas, podemos utilizar uma estrutura que mapeie cada variável à instrução que a define:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>definitions <span class="op">=</span> {}  <span class="co"># variável -&gt; instrução que a define</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>uses <span class="op">=</span> {}         <span class="co"># variável -&gt; conjunto de instruções que a usam</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>definitions <span class="op">=</span> {}  <span class="co"># variável -&gt; instrução que a define</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>uses <span class="op">=</span> {}         <span class="co"># variável -&gt; conjunto de instruções que a usam</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 </section>
@@ -593,7 +666,7 @@ goto L2           # Branch incondicional</code></pre>
 <h3 data-number="18.2.1" class="anchored" data-anchor-id="algoritmo-com-exemplo-em-python"><span class="header-section-number">18.2.1</span> Algoritmo Com Exemplo em Python</h3>
 <p>O algoritmo opera em duas fases: marcação (<em>mark</em>) e remoção (<em>sweep</em>), inspirado em algoritmos de coleta de lixo.</p>
 <p><strong>Fase 1: Construção das Cadeias de Uso-Definição (<em>Use-Def Chains</em>)</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_use_def_chains(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_use_def_chains(instructions):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Constrói cadeias de uso-definição para todas as variáveis.</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -633,9 +706,9 @@ goto L2           # Branch incondicional</code></pre>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> instr.arg2 <span class="kw">not</span> <span class="kw">in</span> uses: uses[instr.arg2] <span class="op">=</span> <span class="bu">set</span>()</span>
 <span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>                uses[instr.arg2].add(instr)</span>
 <span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> definitions, uses</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> definitions, uses</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Fase 2: Marcação de Código Vivo</strong></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mark_live_code(instructions, definitions, uses):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mark_live_code(instructions, definitions, uses):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Marca instruções que são essenciais (live).</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -679,14 +752,14 @@ goto L2           # Branch incondicional</code></pre>
 <span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Verifica se instrução tem efeito colateral ou é crítica."""</span></span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># STORE é essencial (efeito colateral na memória)</span></span>
 <span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr.op <span class="kw">in</span> [<span class="st">'RETURN'</span>, <span class="st">'CALL'</span>, <span class="st">'PRINT'</span>, <span class="st">'GOTO'</span>, </span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'IF_GT'</span>, <span class="st">'IF_LT'</span>, <span class="st">'IF_EQ'</span>, <span class="st">'STORE'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'IF_GT'</span>, <span class="st">'IF_LT'</span>, <span class="st">'IF_EQ'</span>, <span class="st">'STORE'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Fase 3: Remoção</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_dead_code(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_dead_code(instructions):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Remove instruções mortas."""</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    definitions, uses <span class="op">=</span> build_use_def_chains(instructions)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    live <span class="op">=</span> mark_live_code(instructions, definitions, uses)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [instr <span class="cf">for</span> instr <span class="kw">in</span> instructions <span class="cf">if</span> instr <span class="kw">in</span> live]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [instr <span class="cf">for</span> instr <span class="kw">in</span> instructions <span class="cf">if</span> instr <span class="kw">in</span> live]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="exemplo-de-aplicação" class="level4" data-number="18.2.1.1">
 <h4 data-number="18.2.1.1" class="anchored" data-anchor-id="exemplo-de-aplicação"><span class="header-section-number">18.2.1.1</span> Exemplo de Aplicação</h4>
 <p><strong>Antes</strong>:</p>
@@ -725,7 +798,7 @@ Note
 </section>
 <section id="exemplo-completo-em-c23" class="level3" data-number="18.2.2">
 <h3 data-number="18.2.2" class="anchored" data-anchor-id="exemplo-completo-em-c23"><span class="header-section-number">18.2.2</span> Exemplo Completo em C++23</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> </span><span class="cv">dead_code_eliminator.cpp</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Frank Alcantara </span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@date</span><span class="co"> 2025-10</span></span>
@@ -1160,7 +1233,7 @@ Note
 <span id="cb10-433"><a href="#cb10-433" aria-hidden="true" tabindex="-1"></a>    print_statistics<span class="op">(</span>stats<span class="op">);</span></span>
 <span id="cb10-434"><a href="#cb10-434" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb10-435"><a href="#cb10-435" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-436"><a href="#cb10-436" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-436"><a href="#cb10-436" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="movimentação-de-código-invariante-de-laço-loop-invariant-code-motion---licm" class="level2" data-number="18.3">
@@ -1184,14 +1257,14 @@ Note
 <section id="algoritmo-simplificado-modelo-peephole-para-licm" class="level3" data-number="18.3.2">
 <h3 data-number="18.3.2" class="anchored" data-anchor-id="algoritmo-simplificado-modelo-peephole-para-licm"><span class="header-section-number">18.3.2</span> Algoritmo Simplificado (Modelo <em>Peephole</em> para LICM)</h3>
 <p>Em um contexto de otimização local, a implementação foca na identificação sintática de <em>loops</em> e na verificação das regras de independência:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>variaveis_modificadas_no_laco <span class="op">=</span> {}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>variaveis_modificadas_no_laco <span class="op">=</span> {}</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>Para cada instrução I no corpo do laço:</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    Se (I não tem efeitos colaterais) E (I não usa variavel_de_controle) E (I não usa variaveis_modificadas_no_laco):</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        Mover I para antes do laço.</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    Senão:</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        Manter I no corpo.</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        Adicionar I.destino à variaveis_modificadas_no_laco.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        Adicionar I.destino à variaveis_modificadas_no_laco.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-de-aplicação-e-benefício" class="level3" data-number="18.3.3">
 <h3 data-number="18.3.3" class="anchored" data-anchor-id="exemplo-de-aplicação-e-benefício"><span class="header-section-number">18.3.3</span> Exemplo de Aplicação e Benefício</h3>
@@ -1213,7 +1286,7 @@ for i in range(N):
 </section>
 <section id="exemplo-em-c23" class="level3" data-number="18.3.4">
 <h3 data-number="18.3.4" class="anchored" data-anchor-id="exemplo-em-c23"><span class="header-section-number">18.3.4</span> Exemplo em C++23</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> </span><span class="cv">loop_invariant_code_motion.cpp</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Frank Alcantara</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@date</span><span class="co"> 2025-10-10</span></span>
@@ -1762,7 +1835,7 @@ for i in range(N):
 <span id="cb14-547"><a href="#cb14-547" aria-hidden="true" tabindex="-1"></a>    run_test<span class="op">(</span><span class="st">"Loops Sequenciais e Finalização Implícita"</span><span class="op">,</span> test4<span class="op">);</span></span>
 <span id="cb14-548"><a href="#cb14-548" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb14-549"><a href="#cb14-549" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb14-550"><a href="#cb14-550" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-550"><a href="#cb14-550" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="propagação-de-constantes-constant-propagation" class="level2" data-number="18.4">
@@ -1770,7 +1843,7 @@ for i in range(N):
 <p>A propagação de constantes substitui usos de variáveis por seus valores constantes conhecidos, permitindo avaliação em tempo de compilação (constant folding).</p>
 <section id="algoritmo" class="level3" data-number="18.4.1">
 <h3 data-number="18.4.1" class="anchored" data-anchor-id="algoritmo"><span class="header-section-number">18.4.1</span> Algoritmo</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_constant(value):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_constant(value):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Verifica se valor é constante numérica."""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">isinstance</span>(value, (<span class="bu">int</span>, <span class="bu">float</span>))</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1836,7 +1909,7 @@ for i in range(N):
 <span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Instruções sem destino (GOTO, IF, STORE)</span></span>
 <span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>            result.append(Instruction(instr.op, instr.dest, arg1, arg2))</span>
 <span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-completo" class="level3" data-number="18.4.2">
 <h3 data-number="18.4.2" class="anchored" data-anchor-id="exemplo-completo"><span class="header-section-number">18.4.2</span> Exemplo Completo</h3>
@@ -1846,7 +1919,7 @@ y = x + 5
 z = y * 2
 w = z + x</code></pre>
 <p><strong>Trace da Execução</strong>:</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Instrução</th>
@@ -1886,7 +1959,7 @@ w = 40</code></pre>
 <section id="propagação-condicional" class="level3" data-number="18.4.3">
 <h3 data-number="18.4.3" class="anchored" data-anchor-id="propagação-condicional"><span class="header-section-number">18.4.3</span> Propagação Condicional</h3>
 <p>Em programas com controle de fluxo, a propagação de constantes torna-se mais complexa, exigindo análise de fluxo de dados (<em>dataflow analysis</em>) e um algoritmo de ponto fixo sobre o Grafo de Fluxo de Controle (CFG).</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> conditional_constant_propagation(cfg):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> conditional_constant_propagation(cfg):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Propagação de constantes sensível ao fluxo de controle (conceitual).</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Usa algoritmo de ponto fixo sobre o grafo de fluxo de controle.</span></span>
@@ -1933,7 +2006,7 @@ w = 40</code></pre>
 <span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Conflito ou valor não disponível</span></span>
 <span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>                merged.pop(var)</span>
 <span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merged</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merged</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="eliminação-de-subexpressões-comuns-common-subexpression-elimination---cse" class="level2" data-number="18.5">
@@ -1947,7 +2020,7 @@ w = 40</code></pre>
 <section id="algoritmo-local-value-numbering-local" class="level3" data-number="18.5.1">
 <h3 data-number="18.5.1" class="anchored" data-anchor-id="algoritmo-local-value-numbering-local"><span class="header-section-number">18.5.1</span> Algoritmo Local (Value Numbering Local)</h3>
 <p>O algoritmo Local CSE, ideal para otimizações <em>peephole</em>, implementa uma forma de <em>Value Numbering</em> local, rastreando o resultado de cada expressão única encontrada.</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
 <col style="width: 50%">
@@ -1992,7 +2065,7 @@ t4 = t2 &nbsp; &nbsp;# Reuso de t2</code></pre>
 <section id="exemplo-em-c23-1" class="level3" data-number="18.5.2">
 <h3 data-number="18.5.2" class="anchored" data-anchor-id="exemplo-em-c23-1"><span class="header-section-number">18.5.2</span> Exemplo em C++23</h3>
 <p>O código a seguir implementa a otimização de Eliminação de Subexpressões Comuns Local (Local CSE) usando a técnica de <em>Value Numbering</em> de acordo com o digrama mostrado na <span class="citation" data-cites="fit-cselgoritmo">(<a href="referencias.html#ref-fit-cselgoritmo" role="doc-biblioref"><strong>fit-cselgoritmo?</strong></a>)</span>.</p>
-<div id="fig-cselgoritmo" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-cselgoritmo" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cselgoritmo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <p><a href="\images\CSEOptimizer.webp">Figura: Diagrama do Algoritmo de Eliminação de Subexpressões Comuns Local (Local CSE) usando Value Numbering</a></p>
@@ -2002,7 +2075,7 @@ Figure&nbsp;18.1
 </figcaption>
 </figure>
 </div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> </span><span class="cv">local_cse.cpp</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Frank Alcantara</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@date</span><span class="co"> 2025-10</span></span>
@@ -2493,7 +2566,7 @@ Figure&nbsp;18.1
 <span id="cb21-489"><a href="#cb21-489" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>println<span class="op">(</span><span class="st">"</span><span class="sc">{}</span><span class="st">"</span><span class="op">,</span> <span class="bu">std::</span>string<span class="op">(</span><span class="dv">70</span><span class="op">,</span> <span class="ch">'='</span><span class="op">));</span></span>
 <span id="cb21-490"><a href="#cb21-490" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb21-491"><a href="#cb21-491" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="simplificação-algébrica-algebraic-simplification" class="level2" data-number="18.6">
@@ -2501,7 +2574,7 @@ Figure&nbsp;18.1
 <p>Aplica identidades matemáticas para simplificar expressões, eliminando operações redundantes.</p>
 <section id="identidades-implementadas" class="level3" data-number="18.6.1">
 <h3 data-number="18.6.1" class="anchored" data-anchor-id="identidades-implementadas"><span class="header-section-number">18.6.1</span> Identidades Implementadas</h3>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Padrão</th>
@@ -2550,7 +2623,7 @@ Figure&nbsp;18.1
 </section>
 <section id="algoritmo-1" class="level3" data-number="18.6.2">
 <h3 data-number="18.6.2" class="anchored" data-anchor-id="algoritmo-1"><span class="header-section-number">18.6.2</span> Algoritmo</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> algebraic_simplification(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> algebraic_simplification(instructions):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Aplica identidades algébricas para simplificar expressões.</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -2605,7 +2678,7 @@ Figure&nbsp;18.1
 <span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arg1 <span class="op">==</span> arg2 <span class="kw">and</span> arg1 <span class="op">!=</span> <span class="dv">0</span>: <span class="co"># Adiciona verificação simples</span></span>
 <span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Instruction(<span class="st">'ASSIGN'</span>, instr.dest, <span class="dv">1</span>)</span>
 <span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-com-múltiplas-identidades" class="level3" data-number="18.6.3">
 <h3 data-number="18.6.3" class="anchored" data-anchor-id="exemplo-com-múltiplas-identidades"><span class="header-section-number">18.6.3</span> Exemplo com Múltiplas Identidades</h3>
@@ -2654,7 +2727,7 @@ Warning
 <section id="hierarquia-de-custos" class="level3" data-number="18.7.1">
 <h3 data-number="18.7.1" class="anchored" data-anchor-id="hierarquia-de-custos"><span class="header-section-number">18.7.1</span> Hierarquia de Custos</h3>
 <p>Em arquiteturas típicas, as operações têm custos relativos:</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Operação</th>
@@ -2693,7 +2766,7 @@ Warning
 </section>
 <section id="algoritmo-2" class="level3" data-number="18.7.2">
 <h3 data-number="18.7.2" class="anchored" data-anchor-id="algoritmo-2"><span class="header-section-number">18.7.2</span> Algoritmo</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> strength_reduction(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> strength_reduction(instructions):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Substitui operações custosas por equivalentes mais eficientes.</span></span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -2748,7 +2821,7 @@ Warning
 <span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> instr.op <span class="op">==</span> <span class="st">'**'</span> <span class="kw">and</span> arg2 <span class="op">==</span> <span class="dv">2</span>:</span>
 <span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> Instruction(<span class="st">'*'</span>, instr.dest, arg1, arg1)</span>
 <span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="análise-de-economia" class="level3" data-number="18.7.3">
 <h3 data-number="18.7.3" class="anchored" data-anchor-id="análise-de-economia"><span class="header-section-number">18.7.3</span> Análise de Economia</h3>
@@ -2763,7 +2836,7 @@ t1 = x &lt;&lt; 3     # ~1 ciclo</code></pre>
 <section id="strength-reduction-em-loops" class="level3" data-number="18.7.4">
 <h3 data-number="18.7.4" class="anchored" data-anchor-id="strength-reduction-em-loops"><span class="header-section-number">18.7.4</span> Strength Reduction em Loops</h3>
 <p>A aplicação mais impactante de strength reduction ocorre em loops:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> loop_strength_reduction(loop):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> loop_strength_reduction(loop):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Reduz força de multiplicações em loops através de </span></span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">    variáveis de indução. (Conceitual)</span></span>
@@ -2775,7 +2848,7 @@ t1 = x &lt;&lt; 3     # ~1 ciclo</code></pre>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> var <span class="kw">in</span> induction_vars:</span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> has_multiplication_by_constant(var, loop):</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>            strength_reduce_induction(var, loop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>            strength_reduce_induction(var, loop)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exemplo</strong>:</p>
 <pre class="shell"><code># Original
 for i = 0 to n:
@@ -2794,7 +2867,7 @@ for i = 0 to n:
 <p>A técnica decompõe multiplicações em sequências de shifts e adições/subtrações.</p>
 <section id="tabela-de-conversões-para-multiplicação" class="level5" data-number="18.7.5.1.1">
 <h5 data-number="18.7.5.1.1" class="anchored" data-anchor-id="tabela-de-conversões-para-multiplicação"><span class="header-section-number">18.7.5.1.1</span> Tabela de Conversões para Multiplicação</h5>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 23%">
 <col style="width: 33%">
@@ -2965,7 +3038,7 @@ for i = 0 to n:
 </section>
 <section id="algoritmo-para-gerar-sequência-ótima" class="level5" data-number="18.7.5.1.2">
 <h5 data-number="18.7.5.1.2" class="anchored" data-anchor-id="algoritmo-para-gerar-sequência-ótima"><span class="header-section-number">18.7.5.1.2</span> Algoritmo para Gerar Sequência Ótima</h5>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multiply_by_constant(n):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> multiply_by_constant(n):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Gera sequência ótima de shifts e adds para multiplicar por n.</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Usa algoritmo de adição-subtração de cadeia (addition chain).</span></span>
@@ -3006,7 +3079,7 @@ for i = 0 to n:
 <span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplos</span></span>
 <span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x * 7  = </span><span class="sc">{</span>multiply_by_constant(<span class="dv">7</span>)<span class="sc">}</span><span class="ss">"</span>)   <span class="co"># (x &lt;&lt; 3) - x</span></span>
 <span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x * 9  = </span><span class="sc">{</span>multiply_by_constant(<span class="dv">9</span>)<span class="sc">}</span><span class="ss">"</span>)   <span class="co"># (x &lt;&lt; 3) + x</span></span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x * 15 = </span><span class="sc">{</span>multiply_by_constant(<span class="dv">15</span>)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># (x &lt;&lt; 4) - x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x * 15 = </span><span class="sc">{</span>multiply_by_constant(<span class="dv">15</span>)<span class="sc">}</span><span class="ss">"</span>)  <span class="co"># (x &lt;&lt; 4) - x</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="divisão-por-constantes-magic-numbers" class="level4" data-number="18.7.5.2">
@@ -3020,7 +3093,7 @@ for i = 0 to n:
 </section>
 <section id="tabela-de-números-mágicos-32-bit" class="level5" data-number="18.7.5.2.2">
 <h5 data-number="18.7.5.2.2" class="anchored" data-anchor-id="tabela-de-números-mágicos-32-bit"><span class="header-section-number">18.7.5.2.2</span> Tabela de Números Mágicos (32-bit)</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Divisor</th>
@@ -3107,7 +3180,7 @@ for i = 0 to n:
 </section>
 <section id="algoritmo-para-calcular-número-mágico" class="level5" data-number="18.7.5.2.3">
 <h5 data-number="18.7.5.2.3" class="anchored" data-anchor-id="algoritmo-para-calcular-número-mágico"><span class="header-section-number">18.7.5.2.3</span> Algoritmo para Calcular Número Mágico</h5>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_magic_number(divisor, bits<span class="op">=</span><span class="dv">32</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_magic_number(divisor, bits<span class="op">=</span><span class="dv">32</span>):</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Calcula número mágico para divisão por constante.</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Baseado no algoritmo de Granlund-Montgomery.</span></span>
@@ -3157,14 +3230,14 @@ for i = 0 to n:
 <span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Teste</span></span>
 <span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> d <span class="kw">in</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">10</span>]:</span>
 <span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>    m, s <span class="op">=</span> compute_magic_number(d)</span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Divisão por </span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">: magic=0x</span><span class="sc">{</span>m<span class="sc">:X}</span><span class="ss">, shift=</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Divisão por </span><span class="sc">{</span>d<span class="sc">}</span><span class="ss">: magic=0x</span><span class="sc">{</span>m<span class="sc">:X}</span><span class="ss">, shift=</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="operações-modulares" class="level4" data-number="18.7.5.3">
 <h4 data-number="18.7.5.3" class="anchored" data-anchor-id="operações-modulares"><span class="header-section-number">18.7.5.3</span> Operações Modulares</h4>
 <section id="tabela-para-módulo-com-potências-de-2" class="level5" data-number="18.7.5.3.1">
 <h5 data-number="18.7.5.3.1" class="anchored" data-anchor-id="tabela-para-módulo-com-potências-de-2"><span class="header-section-number">18.7.5.3.1</span> Tabela para Módulo com Potências de 2</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Original</th>
@@ -3213,7 +3286,7 @@ for i = 0 to n:
 </section>
 <section id="módulo-por-constantes-especiais" class="level5" data-number="18.7.5.3.2">
 <h5 data-number="18.7.5.3.2" class="anchored" data-anchor-id="módulo-por-constantes-especiais"><span class="header-section-number">18.7.5.3.2</span> Módulo por Constantes Especiais</h5>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> modulo_strength_reduction(x, divisor):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> modulo_strength_reduction(x, divisor):</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Otimiza operação de módulo."""</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Potência de 2</span></span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> divisor <span class="op">&amp;</span> (divisor <span class="op">-</span> <span class="dv">1</span>) <span class="op">==</span> <span class="dv">0</span>:</span>
@@ -3230,14 +3303,14 @@ for i = 0 to n:
 <span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"modulo_5_special(x)"</span></span>
 <span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Caso geral: usar divisão otimizada + multiplicação</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"x - (x / </span><span class="sc">{</span>divisor<span class="sc">}</span><span class="ss">) * </span><span class="sc">{</span>divisor<span class="sc">}</span><span class="ss">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"x - (x / </span><span class="sc">{</span>divisor<span class="sc">}</span><span class="ss">) * </span><span class="sc">{</span>divisor<span class="sc">}</span><span class="ss">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="exponenciação" class="level4" data-number="18.7.5.4">
 <h4 data-number="18.7.5.4" class="anchored" data-anchor-id="exponenciação"><span class="header-section-number">18.7.5.4</span> Exponenciação</h4>
 <section id="tabela-para-exponenciação-por-constantes-pequenas" class="level5" data-number="18.7.5.4.1">
 <h5 data-number="18.7.5.4.1" class="anchored" data-anchor-id="tabela-para-exponenciação-por-constantes-pequenas"><span class="header-section-number">18.7.5.4.1</span> Tabela para Exponenciação por Constantes Pequenas</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Original</th>
@@ -3291,7 +3364,7 @@ for i = 0 to n:
 </section>
 <section id="exponenciação-rápida-square-and-multiply" class="level5" data-number="18.7.5.4.2">
 <h5 data-number="18.7.5.4.2" class="anchored" data-anchor-id="exponenciação-rápida-square-and-multiply"><span class="header-section-number">18.7.5.4.2</span> Exponenciação Rápida (Square-and-Multiply)</h5>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> power_strength_reduction(base, exponent):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> power_strength_reduction(base, exponent):</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Gera código otimizado para exponenciação.</span></span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Usa algoritmo de exponenciação binária.</span></span>
@@ -3317,14 +3390,14 @@ for i = 0 to n:
 <span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplos</span></span>
 <span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x^5 = </span><span class="sc">{</span>power_strength_reduction(<span class="st">'x'</span>, <span class="dv">5</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x^10 = </span><span class="sc">{</span>power_strength_reduction(<span class="st">'x'</span>, <span class="dv">10</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x^10 = </span><span class="sc">{</span>power_strength_reduction(<span class="st">'x'</span>, <span class="dv">10</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="operações-em-loops-variáveis-de-indução" class="level4" data-number="18.7.5.5">
 <h4 data-number="18.7.5.5" class="anchored" data-anchor-id="operações-em-loops-variáveis-de-indução"><span class="header-section-number">18.7.5.5</span> Operações em Loops (Variáveis de Indução)</h4>
 <section id="transformações-clássicas" class="level5" data-number="18.7.5.5.1">
 <h5 data-number="18.7.5.5.1" class="anchored" data-anchor-id="transformações-clássicas"><span class="header-section-number">18.7.5.5.1</span> Transformações Clássicas</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Padrão Original</th>
@@ -3353,7 +3426,7 @@ for i = 0 to n:
 </section>
 <section id="exemplo-multiplicação-em-loop" class="level5" data-number="18.7.5.5.2">
 <h5 data-number="18.7.5.5.2" class="anchored" data-anchor-id="exemplo-multiplicação-em-loop"><span class="header-section-number">18.7.5.5.2</span> Exemplo: Multiplicação em Loop</h5>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (multiplicação por iteração)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (multiplicação por iteração)</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> i <span class="op">*</span> <span class="dv">5</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span>
@@ -3362,11 +3435,11 @@ for i = 0 to n:
 <span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(result)</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    result <span class="op">+=</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    result <span class="op">+=</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-quadrados-em-loop" class="level5" data-number="18.7.5.5.3">
 <h5 data-number="18.7.5.5.3" class="anchored" data-anchor-id="exemplo-quadrados-em-loop"><span class="header-section-number">18.7.5.5.3</span> Exemplo: Quadrados em Loop</h5>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (multiplicação por iteração)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original (multiplicação por iteração)</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    square <span class="op">=</span> i <span class="op">*</span> i</span>
 <span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(square)</span>
@@ -3377,14 +3450,14 @@ for i = 0 to n:
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(square)</span>
 <span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    square <span class="op">+=</span> odd</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    odd <span class="op">+=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    odd <span class="op">+=</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="funções-trigonométricas-em-ângulos-especiais" class="level4" data-number="18.7.5.6">
 <h4 data-number="18.7.5.6" class="anchored" data-anchor-id="funções-trigonométricas-em-ângulos-especiais"><span class="header-section-number">18.7.5.6</span> Funções Trigonométricas em Ângulos Especiais</h4>
 <section id="tabela-de-valores-exatos" class="level5" data-number="18.7.5.6.1">
 <h5 data-number="18.7.5.6.1" class="anchored" data-anchor-id="tabela-de-valores-exatos"><span class="header-section-number">18.7.5.6.1</span> Tabela de Valores Exatos</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Função</th>
@@ -3446,7 +3519,7 @@ for i = 0 to n:
 <h4 data-number="18.7.5.7" class="anchored" data-anchor-id="operações-de-ponto-flutuante"><span class="header-section-number">18.7.5.7</span> Operações de Ponto Flutuante</h4>
 <section id="divisão-por-constantes-float" class="level5" data-number="18.7.5.7.1">
 <h5 data-number="18.7.5.7.1" class="anchored" data-anchor-id="divisão-por-constantes-float"><span class="header-section-number">18.7.5.7.1</span> Divisão por Constantes Float</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Original</th>
@@ -3479,7 +3552,7 @@ for i = 0 to n:
 <h4 data-number="18.7.5.8" class="anchored" data-anchor-id="operações-bit-a-bit"><span class="header-section-number">18.7.5.8</span> Operações Bit a Bit</h4>
 <section id="tabela-de-truques-com-bits" class="level5" data-number="18.7.5.8.1">
 <h5 data-number="18.7.5.8.1" class="anchored" data-anchor-id="tabela-de-truques-com-bits"><span class="header-section-number">18.7.5.8.1</span> Tabela de Truques com Bits</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Operação</th>
@@ -3531,7 +3604,7 @@ for i = 0 to n:
 <h4 data-number="18.7.5.9" class="anchored" data-anchor-id="seleção-de-técnica-por-arquitetura"><span class="header-section-number">18.7.5.9</span> Seleção de Técnica por Arquitetura</h4>
 <section id="custos-relativos-ciclos-típicos-em-x86-64" class="level5" data-number="18.7.5.9.1">
 <h5 data-number="18.7.5.9.1" class="anchored" data-anchor-id="custos-relativos-ciclos-típicos-em-x86-64"><span class="header-section-number">18.7.5.9.1</span> Custos Relativos (ciclos típicos em x86-64)</h5>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Operação</th>
@@ -3582,7 +3655,7 @@ for i = 0 to n:
 </section>
 <section id="heurística-de-decisão" class="level5" data-number="18.7.5.9.2">
 <h5 data-number="18.7.5.9.2" class="anchored" data-anchor-id="heurística-de-decisão"><span class="header-section-number">18.7.5.9.2</span> Heurística de Decisão</h5>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> should_apply_strength_reduction(operation, operand, target_arch<span class="op">=</span><span class="st">"x86-64"</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> should_apply_strength_reduction(operation, operand, target_arch<span class="op">=</span><span class="st">"x86-64"</span>):</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Decide se vale a pena aplicar strength reduction.</span></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -3627,14 +3700,14 @@ for i = 0 to n:
 <span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">bin</span>(n).count(<span class="st">'1'</span>)</span>
 <span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_power_of_2(n):</span>
-<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> (n <span class="op">&amp;</span> (n <span class="op">-</span> <span class="dv">1</span>)) <span class="op">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> (n <span class="op">&amp;</span> (n <span class="op">-</span> <span class="dv">1</span>)) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="implementação-prática-em-compilador" class="level4" data-number="18.7.5.10">
 <h4 data-number="18.7.5.10" class="anchored" data-anchor-id="implementação-prática-em-compilador"><span class="header-section-number">18.7.5.10</span> Implementação Prática em Compilador</h4>
 <section id="framework-de-strength-reduction" class="level5" data-number="18.7.5.10.1">
 <h5 data-number="18.7.5.10.1" class="anchored" data-anchor-id="framework-de-strength-reduction"><span class="header-section-number">18.7.5.10.1</span> Framework de Strength Reduction</h5>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StrengthReducer:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StrengthReducer:</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Framework para aplicar strength reduction."""</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, target_arch<span class="op">=</span><span class="st">'generic'</span>):</span>
@@ -3784,7 +3857,7 @@ for i = 0 to n:
 <span id="cb38-148"><a href="#cb38-148" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-149"><a href="#cb38-149" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso</span></span>
 <span id="cb38-150"><a href="#cb38-150" aria-hidden="true" tabindex="-1"></a>reducer <span class="op">=</span> StrengthReducer()</span>
-<span id="cb38-151"><a href="#cb38-151" aria-hidden="true" tabindex="-1"></a>optimized <span class="op">=</span> reducer.optimize(Instruction(<span class="st">'*'</span>, <span class="st">'t1'</span>, <span class="st">'x'</span>, <span class="dv">7</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-151"><a href="#cb38-151" aria-hidden="true" tabindex="-1"></a>optimized <span class="op">=</span> reducer.optimize(Instruction(<span class="st">'*'</span>, <span class="st">'t1'</span>, <span class="st">'x'</span>, <span class="dv">7</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 </section>
@@ -3815,7 +3888,7 @@ for i = 0 to n:
 <p>Substitui usos de variáveis copiadas pela variável original, eliminando cópias intermediárias desnecessárias.</p>
 <section id="algoritmo-3" class="level3" data-number="18.8.1">
 <h3 data-number="18.8.1" class="anchored" data-anchor-id="algoritmo-3"><span class="header-section-number">18.8.1</span> Algoritmo</h3>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> copy_propagation(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> copy_propagation(instructions):</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Propaga cópias (em um bloco básico).</span></span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -3849,7 +3922,7 @@ for i = 0 to n:
 <span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>        result.append(new_instr)</span>
 <span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="interação-com-outras-otimizações" class="level3" data-number="18.8.2">
 <h3 data-number="18.8.2" class="anchored" data-anchor-id="interação-com-outras-otimizações"><span class="header-section-number">18.8.2</span> Interação com Outras Otimizações</h3>
@@ -3880,7 +3953,7 @@ z = a * 2</code></pre>
 <section id="algoritmo-local" class="level3" data-number="18.9.1">
 <h3 data-number="18.9.1" class="anchored" data-anchor-id="algoritmo-local"><span class="header-section-number">18.9.1</span> Algoritmo Local</h3>
 <p>Este algoritmo usa uma forma de <em>value numbering</em> local.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> invalidate_expressions(available, modified_var):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> invalidate_expressions(available, modified_var):</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Remove expressões que dependem de variável modificada."""</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {expr: var <span class="cf">for</span> expr, var <span class="kw">in</span> available.items()</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> modified_var <span class="kw">not</span> <span class="kw">in</span> [expr[<span class="dv">1</span>], expr[<span class="dv">2</span>]]}</span>
@@ -3928,12 +4001,12 @@ z = a * 2</code></pre>
 <span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a>            <span class="co"># 5. Não é expressão aritmética (ASSIGN, GOTO, etc.)</span></span>
 <span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a>            result.append(instr)</span>
 <span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="cse-global" class="level3" data-number="18.9.2">
 <h3 data-number="18.9.2" class="anchored" data-anchor-id="cse-global"><span class="header-section-number">18.9.2</span> CSE Global</h3>
 <p>Para CSE entre blocos básicos, precisamos de análise de disponibilidade (available expressions):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> global_cse(cfg):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> global_cse(cfg):</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">    CSE global usando análise de disponibilidade (conceitual).</span></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -3973,7 +4046,7 @@ z = a * 2</code></pre>
 <span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>            available_in[block] <span class="op">=</span> new_in</span>
 <span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Passo 3: Transformar código usando informação de disponibilidade</span></span>
-<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> transform_with_cse(cfg, available_in, available_out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> transform_with_cse(cfg, available_in, available_out)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-detalhado" class="level3" data-number="18.9.3">
 <h3 data-number="18.9.3" class="anchored" data-anchor-id="exemplo-detalhado"><span class="header-section-number">18.9.3</span> Exemplo Detalhado</h3>
@@ -4003,7 +4076,7 @@ t4 = t1 + t2</code></pre>
 </section>
 <section id="algoritmo-4" class="level3" data-number="18.10.2">
 <h3 data-number="18.10.2" class="anchored" data-anchor-id="algoritmo-4"><span class="header-section-number">18.10.2</span> Algoritmo</h3>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_label_map(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_label_map(instructions):</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Constrói mapa de labels para suas posições (índices).</span></span>
 <span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -4110,7 +4183,7 @@ t4 = t1 + t2</code></pre>
 <span id="cb45-105"><a href="#cb45-105" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb45-106"><a href="#cb45-106" aria-hidden="true" tabindex="-1"></a>            result.append(instr)</span>
 <span id="cb45-107"><a href="#cb45-107" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb45-108"><a href="#cb45-108" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-108"><a href="#cb45-108" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-complexo" class="level3" data-number="18.10.3">
 <h3 data-number="18.10.3" class="anchored" data-anchor-id="exemplo-complexo"><span class="header-section-number">18.10.3</span> Exemplo Complexo</h3>
@@ -4136,7 +4209,7 @@ L4: z = y + 1</code></pre>
 <section id="branch-prediction-e-otimização" class="level3" data-number="18.10.4">
 <h3 data-number="18.10.4" class="anchored" data-anchor-id="branch-prediction-e-otimização"><span class="header-section-number">18.10.4</span> Branch Prediction e Otimização</h3>
 <p>Compiladores modernos consideram predição de branches:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> optimize_for_branch_prediction(cfg):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> optimize_for_branch_prediction(cfg):</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Reorganiza código para melhorar predição de branches (Conceitual).</span></span>
 <span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -4152,7 +4225,7 @@ L4: z = y + 1</code></pre>
 <span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>            <span class="co"># provável como fall-through</span></span>
 <span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> unlikely <span class="kw">is</span> block.next_sequential_block:</span>
 <span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>                invert_branch_condition(block)</span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>                swap_successors(block)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>                swap_successors(block)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="eliminação-de-loadstore-redundantes" class="level2" data-number="18.11">
@@ -4168,7 +4241,7 @@ L4: z = y + 1</code></pre>
 </section>
 <section id="algoritmo-5" class="level3" data-number="18.11.2">
 <h3 data-number="18.11.2" class="anchored" data-anchor-id="algoritmo-5"><span class="header-section-number">18.11.2</span> Algoritmo</h3>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_redundant_memory_ops(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_redundant_memory_ops(instructions):</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Elimina loads e stores redundantes (em um bloco básico).</span></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -4227,7 +4300,7 @@ L4: z = y + 1</code></pre>
 <span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">if</span> reg <span class="op">!=</span> instr.dest}</span>
 <span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>            result.append(instr)</span>
 <span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-com-store-load" class="level3" data-number="18.11.3">
 <h3 data-number="18.11.3" class="anchored" data-anchor-id="exemplo-com-store-load"><span class="header-section-number">18.11.3</span> Exemplo com Store-Load</h3>
@@ -4249,7 +4322,7 @@ t3 = t2 + 5</code></pre>
 <p>Remove código que nunca pode ser executado porque não há caminho de controle que leve até ele.</p>
 <section id="algoritmo-baseado-em-alcançabilidade" class="level3" data-number="18.12.1">
 <h3 data-number="18.12.1" class="anchored" data-anchor-id="algoritmo-baseado-em-alcançabilidade"><span class="header-section-number">18.12.1</span> Algoritmo Baseado em Alcançabilidade</h3>
-<div class="sourceCode" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_unreachable_code(cfg):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_unreachable_code(cfg):</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Remove código inalcançável usando busca em grafos.</span></span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -4284,12 +4357,12 @@ t3 = t2 + 5</code></pre>
 <span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>        block.successors <span class="op">=</span> [s <span class="cf">for</span> s <span class="kw">in</span> block.successors <span class="cf">if</span> s <span class="kw">in</span> reachable]</span>
 <span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a>        block.predecessors <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> block.predecessors <span class="cf">if</span> p <span class="kw">in</span> reachable]</span>
 <span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cfg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cfg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="eliminação-de-código-após-return" class="level3" data-number="18.12.2">
 <h3 data-number="18.12.2" class="anchored" data-anchor-id="eliminação-de-código-após-return"><span class="header-section-number">18.12.2</span> Eliminação de Código Após Return</h3>
 <p>Caso especial comum: código após return incondicional.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_code_after_return(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> eliminate_code_after_return(instructions):</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Remove instruções após return ou goto incondicional.</span></span>
 <span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">    (Em um bloco básico linear)</span></span>
@@ -4310,12 +4383,12 @@ t3 = t2 + 5</code></pre>
 <span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> instr.op <span class="kw">in</span> [<span class="st">'RETURN'</span>, <span class="st">'GOTO'</span>]:</span>
 <span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>                in_dead_code <span class="op">=</span> <span class="va">True</span></span>
 <span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="análise-de-condições-constantes" class="level3" data-number="18.12.3">
 <h3 data-number="18.12.3" class="anchored" data-anchor-id="análise-de-condições-constantes"><span class="header-section-number">18.12.3</span> Análise de Condições Constantes</h3>
 <p>Branches com condições constantes revelam código inalcançável:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_condition(instr):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_condition(instr):</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Tenta avaliar condição em tempo de compilação.</span></span>
 <span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
@@ -4362,7 +4435,7 @@ t3 = t2 + 5</code></pre>
 <span id="cb54-45"><a href="#cb54-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb54-46"><a href="#cb54-46" aria-hidden="true" tabindex="-1"></a>            result.append(instr)</span>
 <span id="cb54-47"><a href="#cb54-47" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-48"><a href="#cb54-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="exemplo-completo-1" class="level3" data-number="18.12.4">
 <h3 data-number="18.12.4" class="anchored" data-anchor-id="exemplo-completo-1"><span class="header-section-number">18.12.4</span> Exemplo Completo</h3>
@@ -4390,7 +4463,7 @@ L4: result = b + d</code></pre>
 <p>As otimizações <em>peephole</em> devem ser aplicadas em ordem estratégica, pois uma pode habilitar outra.</p>
 <section id="pipeline-de-otimização" class="level3" data-number="18.13.1">
 <h3 data-number="18.13.1" class="anchored" data-anchor-id="pipeline-de-otimização"><span class="header-section-number">18.13.1</span> Pipeline de Otimização</h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> optimize_code(instructions, max_iterations<span class="op">=</span><span class="dv">10</span>):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> optimize_code(instructions, max_iterations<span class="op">=</span><span class="dv">10</span>):</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Aplica otimizações _peephole_ iterativamente até convergência.</span></span>
 <span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">    (Assumindo que 'instructions' é um único bloco básico)</span></span>
@@ -4436,11 +4509,11 @@ L4: result = b + d</code></pre>
 <span id="cb57-44"><a href="#cb57-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (Requer análise de liveness global para ser 100% correto)</span></span>
 <span id="cb57-45"><a href="#cb57-45" aria-hidden="true" tabindex="-1"></a>    code <span class="op">=</span> eliminate_dead_code(code) </span>
 <span id="cb57-46"><a href="#cb57-46" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb57-47"><a href="#cb57-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb57-47"><a href="#cb57-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> code</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="métricas-de-otimização" class="level3" data-number="18.13.2">
 <h3 data-number="18.13.2" class="anchored" data-anchor-id="métricas-de-otimização"><span class="header-section-number">18.13.2</span> Métricas de Otimização</h3>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_expensive_ops(instructions):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_expensive_ops(instructions):</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Conta operações custosas (multiplicação, divisão, etc.)."""</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    expensive <span class="op">=</span> [<span class="st">'*'</span>, <span class="st">'/'</span>, <span class="st">'**'</span>, <span class="st">'LOAD'</span>, <span class="st">'STORE'</span>]</span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> instr <span class="kw">in</span> instructions <span class="cf">if</span> instr.op <span class="kw">in</span> expensive)</span>
@@ -4472,7 +4545,7 @@ L4: result = b + d</code></pre>
 <span id="cb58-30"><a href="#cb58-30" aria-hidden="true" tabindex="-1"></a>            count_expensive_ops(original) <span class="op">-</span> count_expensive_ops(optimized),</span>
 <span id="cb58-31"><a href="#cb58-31" aria-hidden="true" tabindex="-1"></a>        <span class="st">'temporary_vars_eliminated'</span>:</span>
 <span id="cb58-32"><a href="#cb58-32" aria-hidden="true" tabindex="-1"></a>            count_temporaries(original) <span class="op">-</span> count_temporaries(optimized)</span>
-<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb58-33"><a href="#cb58-33" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="considerações-de-implementação" class="level2" data-number="18.14">
@@ -4480,7 +4553,7 @@ L4: result = b + d</code></pre>
 <section id="representação-eficiente" class="level3" data-number="18.14.1">
 <h3 data-number="18.14.1" class="anchored" data-anchor-id="representação-eficiente"><span class="header-section-number">18.14.1</span> Representação Eficiente</h3>
 <p>Para compiladores de produção, usar estruturas de dados mais sofisticadas:</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BasicBlock:</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BasicBlock:</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Bloco básico otimizado com caching de análises."""</span></span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, instructions):</span>
 <span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.instructions <span class="op">=</span> instructions</span>
@@ -4498,12 +4571,12 @@ L4: result = b + d</code></pre>
 <span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> invalidate_caches(<span class="va">self</span>):</span>
 <span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Invalida caches após modificação."""</span></span>
 <span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._use_def_cache <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._dominators_cache <span class="op">=</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._dominators_cache <span class="op">=</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="tratamento-de-tipos" class="level3" data-number="18.14.2">
 <h3 data-number="18.14.2" class="anchored" data-anchor-id="tratamento-de-tipos"><span class="header-section-number">18.14.2</span> Tratamento de Tipos</h3>
 <p>Otimizações devem preservar semântica de tipos:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> type_safe_optimization(instr):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> type_safe_optimization(instr):</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Verifica se otimização preserva semântica de tipos.</span></span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
@@ -4512,7 +4585,7 @@ L4: result = b + d</code></pre>
 <span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> get_type(instr.arg1) <span class="op">==</span> <span class="st">'int'</span> <span class="kw">and</span> get_type(instr.dest) <span class="op">==</span> <span class="st">'int'</span>:</span>
 <span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> reduce_strength(instr)</span>
 <span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> instr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="exercícios" class="level2" data-number="18.15">
@@ -4634,43 +4707,58 @@ RETURN result</code></pre>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -4678,184 +4766,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -4863,185 +4951,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./15-llvmIR.html" class="pagination-link" aria-label="Introdução à Representação Intermediária (IR) do **LLVM** com C++">
@@ -5061,7 +5125,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>   
     <div class="nav-footer-center">
-<p>Copyright © 2025 Frank de Alcantara</p>
+<p>Copyright © 2025,2026 Frank de Alcantara</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/16-peepOtimiza.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;

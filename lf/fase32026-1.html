@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Frank Coelho de Alcantara">
-<meta name="dcterms.date" content="2025-07-29">
 
-<title>Linguagens Formais e Autômatos</title>
+<title>28&nbsp; Fase 3 - Analisador Semântico – Linguagens Formais e Autômatos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-lexico.html" rel="next">
+<link href="./fase42026-1.html" rel="next">
+<link href="./fase22026-1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -114,7 +113,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase12026-1.html">Projetos de Engenharia da Computação - 2026-1</a></li><li class="breadcrumb-item"><a href="./fase32026-1.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -144,7 +143,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
   </div>
 </li>
@@ -370,7 +369,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
+  <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
@@ -437,13 +436,7 @@ window.Quarto = {
 </li>
     </ul>
     </div>
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Sumário</h2>
-   
-  <ul>
-  <li><a href="#disciplina-de-linguagens-formais" id="toc-disciplina-de-linguagens-formais" class="nav-link active" data-scroll-target="#disciplina-de-linguagens-formais"><span class="header-section-number">1</span> Disciplina de Linguagens Formais</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -452,29 +445,16 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./fase12026-1.html">Projetos de Engenharia da Computação - 2026-1</a></li><li class="breadcrumb-item"><a href="./fase32026-1.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Linguagens Formais e Autômatos</h1>
-<p class="subtitle lead">Fundamentos Teóricos e Aplicações Práticas</p>
+<h1 class="title"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Frank Coelho de Alcantara </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 29, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -484,37 +464,9 @@ window.Quarto = {
 </header>
 
 
-<section id="disciplina-de-linguagens-formais" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Disciplina de Linguagens Formais</h1>
-<p>Este é o material de suporte para a disciplina de Linguagens Formais, que abrange conceitos fundamentais de teoria da computação, autômatos, gramáticas e linguagens formais.</p>
-<p>Além deste texto o aluno deve consultar os livros e artigos recomendados no plano de ensino da disciplina listados a seguir:</p>
-<p><strong>Bibliografia Básica</strong>:</p>
-<ol type="1">
-<li>AHO, A. V. et al.&nbsp;<strong>Compiladores: princípios, técnicas e ferramentas</strong>. 2º. ed.&nbsp;Boston, MA, USA: Pearson Education Inc., 2007.</li>
-<li>SANTOS, Pedro Reis; LANGLOIS, Thibault. <strong>Compiladores da Teoria à Prática</strong>. Rio de Janeiro: Ltc, 2018.</li>
-<li>LOUDEN, Kenneth C.. <strong>Compiladores: princípios e práticas</strong>. São Paulo: Cenage Learning, 2004.</li>
-<li>JOSÉ NETO, João. <strong>Introdução à compilação</strong>. 2. ed.&nbsp;Rio de Janeiro: Elsevier, 2016.</li>
-<li>HOPCROFT, J.E.; MOTWANI, R.; ULLMAN, J.D. Introdução à teoria de autômatos, linguagens e computação. Ed. Campus, 2002.</li>
-<li>LOUDEN, K. C.; <strong>Compiladores Princípios e práticas</strong>. Editora Thompson, 2004.</li>
-</ol>
-<p><strong>Bibliografia Complementar</strong>:</p>
-<ol type="1">
-<li>LEWIS, R. L., PAPADIMITRIOU C. H.; <strong>Elementos de Teoria da Computação</strong>, 2a Edição. Editora Bookman, 2000.</li>
-<li>KOZEN, D. C.; <strong>Automata and Computability</strong>. Editora Springer, 1997.</li>
-<li>DIVERIO, T. A.; <strong>Teoria da Computação</strong>, 2a Edição. Editora Sagra Luzzatto, 2004.</li>
-<li>NETO, J. J.; <strong>Introdução à Compilação</strong>. Editora LTC, 1987.</li>
-<li>SETZER, V. W.; <strong>A construção de um compilador</strong>, 2a Edição. Editora Campus, 1985.</li>
-<li>SETHI, R.; <strong>Programming Languages Concepts &amp; Constructs</strong>, 2a Edição. Editora Addison Wesley, 1997.</li>
-<li>PRICE, A. M., TOSCANI S. S.; <strong>Implementação de Linguagens de Programação: Compiladores</strong>, 3a Edição. Editora Bookman, 2008.</li>
-</ol>
-<p><strong>Bibliografia de Apoio</strong>:</p>
-<ol type="1">
-<li>DIJKSTRA, E. W. <strong>A Case against the GO TO Statement</strong>. Commun. ACM , v. 3, n.&nbsp;1, p.&nbsp;147-148, Mar.&nbsp;1968.</li>
-<li>ALCANTARA, FRANK COELHO DE. <strong>Compiladores e Interpretadores</strong>. 1. ed.&nbsp;Curitiba: IESDE BRASIL S.A., 2022. v. 1. 170p</li>
-</ol>
+<p>Em Breve!</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -919,10 +871,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./fase22026-1.html" class="pagination-link" aria-label="Fase 2 - Analisador Sintático $LL(1)$">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-lexico.html" class="pagination-link" aria-label="Analisadores Léxicos">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./fase42026-1.html" class="pagination-link" aria-label="Fase 4 - Geração de Código Intermediário e Assembly">
+        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -934,7 +889,7 @@ window.Quarto = {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright © 2025,2026 Frank de Alcantara</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/fase32026-1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
