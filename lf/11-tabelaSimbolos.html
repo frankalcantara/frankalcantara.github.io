@@ -670,9 +670,14 @@ Figure&nbsp;14.3
 <p>Ao comparar as duas estruturas aparentemente viáveis que vimos até o momento, <em>hash tables</em> e árvores de pesquisa binária, é essencial que a atenta leitora analise as contrapartidas relacionadas ao uso de memória e ao desempenho do hardware, como a localidade de cache. Em termos de <strong>sobrecarga de memória</strong>, <em>memory overhead</em>, as <em>hash tables</em> exigem a pré-alocação de um vetor de tamanho fixo. Se o número de símbolos for muito inferior a esse tamanho, resultando em um baixo fator de carga, uma quantidade significativa de memória pode ser desperdiçada. Além disso, a estratégia de encadeamento para resolução de colisões adiciona a sobrecarga de um ponteiro para cada entrada na tabela. Em contrapartida, as <strong>BST</strong>s autobalanceadas tipicamente possuem uma sobrecarga por elemento maior, pois cada vértice precisa armazenar, no mínimo, dois ponteiros para os filhos e, frequentemente, informações adicionais para o balanceamento, como a cor em árvores Vermelho-Preto. No entanto, sua alocação de memória é dinâmica, vértice a vértice, o que evita o desperdício de um grande bloco de memória pré-alocado e não utilizado.</p>
 <p>A <strong>localidade de cache</strong> é outro diferenciador de desempenho importante. As <em>hash tables</em> que utilizam endereçamento aberto, especialmente com sondagem linear, podem exibir uma excelente localidade de cache. Isso ocorre porque as sondagens para resolver colisões são sequenciais na memória, aumentando a probabilidade de que os dados necessários já estejam na mesma linha de cache. Por outro lado, estruturas baseadas em ponteiros, como <em>hash tables</em> com encadeamento e todas as BSTs, frequentemente sofrem de má localidade de cache. Percorrer uma lista ligada ou os ramos de uma árvore envolve seguir ponteiros que podem apontar para endereços de memória distantes e dispersos. Esse processo, conhecido como <em>pointer chasing</em>, leva a uma maior taxa de falhas de cache, <em>cache misses</em>, o que pode impactar negativamente o desempenho.</p>
 <p>Do ponto de vista funcional, existem diferenças claras. As <strong>BST</strong>s suportam naturalmente o <strong>percurso ordenado</strong> dos símbolos; por exemplo, um percurso <em>in-order</em> percorre os vértices em ordem alfabética, o que é útil para gerar listagens ordenadas em saídas de depuração ou para implementar certas características de linguagem. Essa não é uma operação natural ou eficiente para <em>hash tables</em>. Da mesma forma, as <strong>BST</strong>s se destacam em <strong>consultas de intervalo e proximidade</strong>, como encontrar a chave mais próxima de um valor ou todas as chaves dentro de um determinado intervalo, funcionalidades que não são suportadas de forma eficiente por <em>hash tables</em>.</p>
-<p>Finalmente, a <strong>complexidade de implementação</strong> é um fator prático a ser considerado. Embora implementações de bibliotecas padrão para ambas as estruturas estejam prontamente disponíveis, construir uma <em>hash table</em> personalizada e de alta qualidade — o que envolve projetar uma boa função de dispersão e uma estratégia de redimensionamento eficiente — pode ser uma tarefa complexa. No entanto, as BSTs autobalanceadas são notoriamente mais difíceis de implementar corretamente do zero, devido à complexidade dos algoritmos de rotação e manutenção das propriedades de balanceamento. A Tabela <span class="quarto-unresolved-ref">?tbl-comp1</span> resume as principais características comparativas dessas estruturas de dados.</p>
+<p>Finalmente, a <strong>complexidade de implementação</strong> é um fator prático a ser considerado. Embora implementações de bibliotecas padrão para ambas as estruturas estejam prontamente disponíveis, construir uma <em>hash table</em> personalizada e de alta qualidade — o que envolve projetar uma boa função de dispersão e uma estratégia de redimensionamento eficiente — pode ser uma tarefa complexa. No entanto, as BSTs autobalanceadas são notoriamente mais difíceis de implementar corretamente do zero, devido à complexidade dos algoritmos de rotação e manutenção das propriedades de balanceamento. A Tabela <a href="#tbl-comp1" class="quarto-xref">Table&nbsp;<span>14.1</span></a> resume as principais características comparativas dessas estruturas de dados.</p>
+<div id="tbl-comp1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;14.1: Tabela 1: Comparação das principais estruturas de dados para implementação de uma <strong>Tabelas de Símbolos</strong>.
+</figcaption>
+<div aria-describedby="tbl-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabela 1: Comparação das principais estruturas de dados para <strong>Tabelas de Símbolos</strong>.{#tbl-comp1}</caption>
 <colgroup>
 <col style="width: 20%">
 <col style="width: 20%">
@@ -748,6 +753,9 @@ Figure&nbsp;14.3
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 </section>
 <section id="implementação-avançada-o-desafio-dos-escopos-lexicais" class="level2" data-number="14.5">
@@ -1155,9 +1163,14 @@ FUNÇÃO lookup(nome):
 <section id="representações-de-escopo-hierárquicas-e-baseadas-em-árvores" class="level3" data-number="14.5.5">
 <h3 data-number="14.5.5" class="anchored" data-anchor-id="representações-de-escopo-hierárquicas-e-baseadas-em-árvores"><span class="header-section-number">14.5.5</span> Representações de Escopo Hierárquicas e Baseadas em Árvores</h3>
 <p>Nesta abordagem, a estrutura aninhada dos escopos de um programa é representada explicitamente como uma árvore, frequentemente chamada de “árvore de escopos”. O escopo global atua como o vértice raiz da árvore, e os blocos de código aninhados (funções, classes, laços, etc.) são representados como vértices filhos. Cada vértice nesta árvore contém sua própria <strong>Tabela de Símbolos</strong> local, que pode ser uma <em>hash table</em>, uma árvore de pesquisa binária ou outra estrutura de dados.</p>
-<p>As operações de busca refletem a estrutura da árvore. A pesquisa por um identificador começa na <strong>Tabela de Símbolos</strong> do vértice correspondente ao escopo atual, que pode ser um vértice folha ou um vértice interno. Se o símbolo não for encontrado localmente, a busca continua na <strong>Tabela de Símbolos</strong> do vértice pai, depois no avô, e assim por diante, subindo pela árvore até a raiz (o escopo global). Esse percurso ascendente do vértice atual até a raiz espelha funcionalmente a busca descendente no modelo de pilha de tabelas, mas o faz dentro de uma estrutura de dados explícita e persistente, que pode ser mais flexível para certas análises do compilador. A Tabela <span class="quarto-unresolved-ref">?tbl-comp2</span> resume as principais características comparativas dessas estratégias de gestão de escopos.</p>
+<p>As operações de busca refletem a estrutura da árvore. A pesquisa por um identificador começa na <strong>Tabela de Símbolos</strong> do vértice correspondente ao escopo atual, que pode ser um vértice folha ou um vértice interno. Se o símbolo não for encontrado localmente, a busca continua na <strong>Tabela de Símbolos</strong> do vértice pai, depois no avô, e assim por diante, subindo pela árvore até a raiz (o escopo global). Esse percurso ascendente do vértice atual até a raiz espelha funcionalmente a busca descendente no modelo de pilha de tabelas, mas o faz dentro de uma estrutura de dados explícita e persistente, que pode ser mais flexível para certas análises do compilador. A Tabela <a href="#tbl-comp2" class="quarto-xref">Table&nbsp;<span>14.2</span></a> resume as principais características comparativas dessas estratégias de gestão de escopos.</p>
+<div id="tbl-comp2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;14.2: Tabela 2: Comparação das principais estratégias para gestão de escopos em <strong>Tabelas de Símbolos</strong>.
+</figcaption>
+<div aria-describedby="tbl-comp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Tabela 2: Comparação das principais estratégias para gestão de escopos em <strong>Tabelas de Símbolos</strong>.{#tbl-comp2}</caption>
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -1203,6 +1216,9 @@ FUNÇÃO lookup(nome):
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 
 
 </section>
