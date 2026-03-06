@@ -714,9 +714,9 @@ Figure&nbsp;4.1: Diagrama de transições de um Autômato Finito Determinístico
 </tbody>
 </table>
 <p><strong>2.</strong> Para o diagrama de transições abaixo, que reconhece <em>strings</em> em a,b com um número par de ’a’s e um número par de ’b’s, forneça a especificação formal completa (a 5-tupla).</p>
-<p><strong>3.</strong> Converta a especificação formal do Exemplo 2 da seção “Exemplos Práticos” (reconhecimento da senha <em>abre</em>) em uma tabela de transições completa, incluindo o estado de erro e todas as transições para ele. Considere o alfabeto =a,b,r,e,x, onde ‘x’ representa qualquer outro caractere.</p>
+<p><strong>3.</strong> Converta a especificação formal do Exemplo 2 da seção “Exemplos Práticos” (reconhecimento da senha <em>abre</em>) em uma tabela de transições completa, incluindo o estado de erro e todas as transições para ele. Considere o alfabeto <span class="math inline">\(\Sigma=\{a,b,r,e,x\}\)</span>, onde ‘x’ representa qualquer outro caractere.</p>
 <p><strong>4.</strong> Qual representação (tabular, gráfica ou formal) você considera mais útil para depurar o comportamento de um autômato? E para implementá-lo em um programa? Justifique.</p>
-<p><strong>5.</strong> Considere a tabela de transições da questão 3.1. Modifique-a para que o autômato passe a aceitar <em>strings</em> que terminam com “010” em vez de “01”.</p>
+<p><strong>5.</strong> Considere a tabela de transições da questão 3.1. Modifique-a para que o autômato passe a aceitar <em>strings</em> que terminam com <code>010</code> em vez de <code>01</code>.</p>
 </section>
 </section>
 <section id="computação-e-aceitação-de-strings" class="level2" data-number="4.3">
@@ -1068,7 +1068,7 @@ Table&nbsp;4.4: Tabela de transições para reconhecimento de operadores relacio
 </section>
 <section id="exercicios-5" class="level3" data-number="4.4.4">
 <h3 data-number="4.4.4" class="anchored" data-anchor-id="exercicios-5"><span class="header-section-number">4.4.4</span> Exercícios 5</h3>
-<p><strong>1.</strong> Projete o diagrama de transições de um Autômato Finito Determinístico sobre <span class="math inline">\(\Sigma=\{a,b\}\)</span> que aceite todas e somente as <em>strings</em> que contêm a substring <code>aba</code>.</p>
+<p><strong>1.</strong> Projete o diagrama de transições de um Autômato Finito Determinístico sobre <span class="math inline">\(\Sigma=\{a,b\}\)</span> que aceite todas, e somente as, <em>strings</em> que contêm a substring <code>aba</code>.</p>
 <p><strong>2.</strong> Projete o diagrama de transições de um Autômato Finito Determinístico sobre <span class="math inline">\(\Sigma=\{0,1\}\)</span> que aceite <em>strings</em> que representam números binários cujo valor é múltiplo de <span class="math inline">\(3\)</span>. (Dica: Mantenha o resto da divisão por <span class="math inline">\(3\)</span> como estado. <span class="math inline">\(v(w0)=2 \cdot v(w)\)</span> e <span class="math inline">\(v(w1)=2 \cdot v(w)+1\)</span>).</p>
 <p><strong>3.</strong> Projete a tabela de transições de um Autômato Finito Determinístico que reconhece comentários de uma linha em uma linguagem de programação hipotética. Um comentário começa com <code>//</code> e vai até o final da linha (não nos preocuparemos com o final da linha). O alfabeto é <span class="math inline">\(\Sigma=\{/,c\}\)</span>, onde ‘c’ representa qualquer outro caractere.</p>
 <p><strong>4.</strong> Desenhe o diagrama de um Autômato Finito Determinístico que aceite <em>strings</em> em <span class="math inline">\(\Sigma=\{a,b\}\)</span> que tenham comprimento ímpar e terminem com ‘a’.</p>
