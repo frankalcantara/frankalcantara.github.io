@@ -1,146 +1,477 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sorteio</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                min-height: 100vh;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-            h1 {
-                color: #333;
-                text-align: center;
-            }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(ellipse at center, #16213e 0%, #0f0f1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 20px;
+        }
 
-            .buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                margin-bottom: 20px;
-            }
+        /* ── Title ── */
+        h1 {
+            color: #ffd700;
+            font-size: clamp(1.6rem, 5vw, 2.6rem);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 0 16px #ffd700, 0 0 40px #ff8c00;
+            margin-bottom: 28px;
+        }
 
-            .action-buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                margin-bottom: 20px;
-            }
+        /* ── Cabinet ── */
+        .machine {
+            background: linear-gradient(160deg, #2a2a45, #1a1a2e);
+            border: 3px solid #ffd700;
+            border-radius: 22px;
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            box-shadow: 0 0 40px rgba(255,215,0,.35), inset 0 0 24px rgba(0,0,0,.5);
+            min-width: 300px;
+            max-width: 420px;
+            width: 100%;
+        }
 
-            button {
-                padding: 15px 20px;
-                font-size: 18px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
+        /* ── Decorative lights ── */
+        .lights {
+            display: flex;
+            gap: 10px;
+        }
 
-            button:hover:not(:disabled) {
-                background-color: #0056b3;
-            }
+        .light {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #333;
+            transition: box-shadow .1s;
+        }
 
-            button:disabled {
-                background-color: #6c757d;
-                cursor: not-allowed;
-            }
+        /* Colours when lit */
+        .light.r { background: #ff4444; }
+        .light.y { background: #ffd700; }
+        .light.g { background: #44ff88; }
+        .light.b { background: #44aaff; }
 
-            .clear-btn {
-                background-color: #dc3545;
-            }
+        .lights.flashing .light { animation: blink .35s ease-in-out infinite alternate; }
+        .lights.flashing .light:nth-child(2n) { animation-delay: .175s; }
 
-            .clear-btn:hover:not(:disabled) {
-                background-color: #c82333;
-            }
+        @keyframes blink {
+            from { opacity: .15; filter: brightness(.4); }
+            to   { opacity: 1;   filter: brightness(1.8); box-shadow: 0 0 10px currentColor; }
+        }
 
-            .read-btn {
-                background-color: #28a745;
-                display: none;
-                /* Escondido inicialmente */
-            }
+        /* ── Reel window ── */
+        .reel-window {
+            background: #000;
+            border: 4px solid #ffd700;
+            border-radius: 14px;
+            width: clamp(160px, 50vw, 210px);
+            height: clamp(130px, 40vw, 170px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 24px rgba(255,215,0,.5),
+                inset 0 0 30px rgba(0,0,0,.8);
+        }
 
-            .read-btn:hover:not(:disabled) {
-                background-color: #218838;
-            }
+        /* Horizontal scan lines */
+        .reel-window::before,
+        .reel-window::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            background: rgba(255,215,0,.18);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .reel-window::before { top: 28%; }
+        .reel-window::after  { bottom: 28%; }
 
-            #resultado {
-                font-size: 24px;
-                font-weight: bold;
-                color: #28a745;
-                text-align: center;
-                min-height: 30px;
-            }
+        #reelDisplay {
+            font-size: clamp(5.5rem, 18vw, 8rem);
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            color: #ffd700;
+            text-shadow: 0 0 16px #ffd700, 0 0 36px #ff8c00;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+            user-select: none;
+            -webkit-user-select: none;
+        }
 
-            @media (min-width: 600px) {
-                .buttons {
-                    flex-direction: row;
-                }
+        /* Spinning state: rapid blur flicker */
+        #reelDisplay.spinning {
+            animation: reel-blur .12s linear infinite;
+        }
 
-                .action-buttons {
-                    flex-direction: row;
-                }
+        @keyframes reel-blur {
+            0%   { filter: blur(3px); transform: scaleY(1.1); }
+            50%  { filter: blur(0);   transform: scaleY(.92); }
+            100% { filter: blur(3px); transform: scaleY(1.1); }
+        }
 
-                button {
-                    min-width: 120px;
-                }
-            }
-        </style>
-    </head>
+        /* Slow-down state */
+        #reelDisplay.slowing {
+            animation: reel-blur .35s linear infinite;
+        }
 
-    <body>
-        <h1>Sorteio</h1>
-        <div class="buttons">
-            <button id="btn4" onclick="sortear(4)">1 de 4</button>
-            <button id="btn3" onclick="sortear(3)">1 de 3</button>
-            <button id="btn2" onclick="sortear(2)">1 de 2</button>
+        /* Winner state */
+        #reelDisplay.winner {
+            animation: prize-pop .55s cubic-bezier(.36,.07,.19,.97) forwards;
+            color: #ff6600;
+            text-shadow: 0 0 24px #ff6600, 0 0 60px #ff2200;
+        }
+
+        @keyframes prize-pop {
+            0%   { transform: scale(1)    rotate(0deg); }
+            20%  { transform: scale(1.45) rotate(-6deg); }
+            40%  { transform: scale(1.55) rotate(5deg); }
+            60%  { transform: scale(1.4)  rotate(-3deg); }
+            80%  { transform: scale(1.3)  rotate(1deg); }
+            100% { transform: scale(1.25) rotate(0deg); }
+        }
+
+        /* ── Status label ── */
+        #status {
+            color: #aaa;
+            font-size: .9rem;
+            min-height: 1.2em;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* ── Draw buttons ── */
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-sortear {
+            padding: 13px 22px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform .15s, box-shadow .15s;
+            min-width: 80px;
+        }
+
+        #btn4 { background: linear-gradient(145deg,#a855f7,#7c3aed); color:#fff; box-shadow: 0 4px 16px rgba(168,85,247,.5); }
+        #btn3 { background: linear-gradient(145deg,#f97316,#ea580c); color:#fff; box-shadow: 0 4px 16px rgba(249,115,22,.5); }
+        #btn2 { background: linear-gradient(145deg,#22c55e,#16a34a); color:#fff; box-shadow: 0 4px 16px rgba(34,197,94,.5); }
+
+        .btn-sortear:hover:not(:disabled) { transform: translateY(-3px) scale(1.05); }
+        .btn-sortear:active:not(:disabled) { transform: translateY(0) scale(.98); }
+        .btn-sortear:disabled {
+            background: linear-gradient(145deg,#444,#333);
+            color: #777;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* ── Action buttons ── */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .clear-btn, .read-btn {
+            padding: 10px 20px;
+            font-size: .88rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform .15s, box-shadow .15s;
+        }
+
+        .clear-btn { background: linear-gradient(145deg,#dc3545,#a71d2a); color:#fff; }
+        .clear-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(220,53,69,.5); }
+
+        .read-btn { background: linear-gradient(145deg,#0ea5e9,#0284c7); color:#fff; display:none; }
+        .read-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(14,165,233,.5); }
+
+        /* ── Flash overlay ── */
+        #flashOverlay {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 90;
+        }
+        #flashOverlay.flash { animation: screen-flash .45s ease-out forwards; }
+
+        @keyframes screen-flash {
+            0%   { opacity: .55; }
+            100% { opacity: 0; }
+        }
+
+        /* ── Confetti canvas ── */
+        #confettiCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 95;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="confettiCanvas"></canvas>
+    <div id="flashOverlay"></div>
+
+    <h1>🎰 Sorteio</h1>
+
+    <div class="machine">
+
+        <div class="lights" id="lights">
+            <div class="light r"></div>
+            <div class="light y"></div>
+            <div class="light g"></div>
+            <div class="light b"></div>
+            <div class="light r"></div>
+            <div class="light y"></div>
+            <div class="light g"></div>
+            <div class="light b"></div>
         </div>
+
+        <div class="reel-window">
+            <div id="reelDisplay">?</div>
+        </div>
+
+        <div id="status">Escolha o tipo de sorteio</div>
+
+        <div class="buttons">
+            <button class="btn-sortear" id="btn4" onclick="sortear(4)">1 de 4</button>
+            <button class="btn-sortear" id="btn3" onclick="sortear(3)">1 de 3</button>
+            <button class="btn-sortear" id="btn2" onclick="sortear(2)">1 de 2</button>
+        </div>
+
         <div class="action-buttons">
             <button class="clear-btn" onclick="limpar()">Limpar</button>
             <button class="read-btn" id="btnLer" onclick="lerResultado()">Eu li o resultado</button>
         </div>
-        <div id="resultado"></div>
 
-        <script>
-            function sortear(max) {
-                const numero = Math.floor(Math.random() * max) + 1;
-                document.getElementById('resultado').textContent = `Número sorteado: ${numero}`;
+    </div>
 
-                // Desabilita os botões de sorteio
-                document.getElementById('btn4').disabled = true;
-                document.getElementById('btn3').disabled = true;
-                document.getElementById('btn2').disabled = true;
+    <script>
+        // ── Audio context (lazy, respects browser autoplay policy) ─────────────
+        let _audioCtx = null;
+        function audioCtx() {
+            if (!_audioCtx) {
+                try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (_) {}
+            }
+            if (_audioCtx && _audioCtx.state === 'suspended') _audioCtx.resume();
+            return _audioCtx;
+        }
 
-                // Mostra o botão de ler
-                document.getElementById('btnLer').style.display = 'block';
+        function beep(freq, type, vol, when, dur) {
+            const ctx = audioCtx();
+            if (!ctx) return;
+            const osc  = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = type;
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(vol, when);
+            gain.gain.exponentialRampToValueAtTime(0.001, when + dur);
+            osc.start(when);
+            osc.stop(when + dur);
+        }
+
+        function playTick(progress) {
+            const ctx = audioCtx();
+            if (!ctx) return;
+            beep(280 + progress * 900, 'square', 0.12, ctx.currentTime, 0.04);
+        }
+
+        function playWin() {
+            const ctx = audioCtx();
+            if (!ctx) return;
+            const melody = [
+                { f: 523, t: 0.00 }, { f: 659, t: 0.12 },
+                { f: 784, t: 0.24 }, { f: 880, t: 0.36 },
+                { f:1047, t: 0.48 }
+            ];
+            const now = ctx.currentTime;
+            melody.forEach(({ f, t }) => beep(f, 'square', 0.18, now + t, 0.22));
+        }
+
+        // ── Confetti ────────────────────────────────────────────────────────────
+        let confettiRaf = null;
+
+        function launchConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx2d  = canvas.getContext('2d');
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = Array.from({ length: 150 }, () => ({
+                x:  canvas.width * Math.random(),
+                y:  -20 - Math.random() * 80,
+                w:  7 + Math.random() * 9,
+                h:  4 + Math.random() * 5,
+                color: `hsl(${Math.random()*360},90%,60%)`,
+                vx: (Math.random() - .5) * 4,
+                vy: 2.5 + Math.random() * 5,
+                spin: (Math.random() - .5) * .25,
+                angle: Math.random() * Math.PI * 2,
+                g: 0.08 + Math.random() * 0.06
+            }));
+
+            function draw() {
+                ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+                pieces.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += p.g;
+                    p.angle += p.spin;
+                    if (p.y < canvas.height + 30) alive = true;
+                    ctx2d.save();
+                    ctx2d.translate(p.x, p.y);
+                    ctx2d.rotate(p.angle);
+                    ctx2d.fillStyle = p.color;
+                    ctx2d.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                    ctx2d.restore();
+                });
+                confettiRaf = alive ? requestAnimationFrame(draw) : null;
+                if (!alive) ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            cancelAnimationFrame(confettiRaf);
+            draw();
+        }
+
+        // ── Flash screen ────────────────────────────────────────────────────────
+        function flashScreen() {
+            const el = document.getElementById('flashOverlay');
+            el.classList.remove('flash');
+            void el.offsetWidth;          // force reflow to restart animation
+            el.classList.add('flash');
+        }
+
+        // ── Button helpers ──────────────────────────────────────────────────────
+        function setButtons(disabled) {
+            ['btn4', 'btn3', 'btn2'].forEach(id => {
+                document.getElementById(id).disabled = disabled;
+            });
+        }
+
+        // ── Main spin function ──────────────────────────────────────────────────
+        let spinTimer = null;
+
+        function sortear(max) {
+            if (spinTimer) return;          // guard against double-click
+            const finalNum = Math.floor(Math.random() * max) + 1;
+            const display  = document.getElementById('reelDisplay');
+            const status   = document.getElementById('status');
+            const lights   = document.getElementById('lights');
+
+            setButtons(true);
+            document.getElementById('btnLer').style.display = 'none';
+            status.textContent = 'Sorteando…';
+            lights.classList.add('flashing');
+
+            // Reset classes
+            display.className = 'spinning';
+
+            let step = 0;
+            const totalSteps = 32;
+
+            function tick() {
+                if (step < totalSteps) {
+                    display.textContent = Math.floor(Math.random() * max) + 1;
+                    playTick(step / totalSteps);
+
+                    // Quadratic ease-out: starts at ~55 ms, ends at ~620 ms
+                    const progress = step / totalSteps;
+                    const delay = 55 + progress * progress * 580;
+
+                    // Switch animation class as it slows
+                    if (progress > 0.7 && display.className === 'spinning') {
+                        display.className = 'slowing';
+                    }
+
+                    step++;
+                    spinTimer = setTimeout(tick, delay);
+                } else {
+                    // Reveal
+                    spinTimer = null;
+                    display.className = '';
+                    display.textContent = finalNum;
+
+                    setTimeout(() => {
+                        display.className = 'winner';
+                        lights.classList.remove('flashing');
+                        playWin();
+                        flashScreen();
+                        launchConfetti();
+                        status.textContent = `Número sorteado: ${finalNum}`;
+                        document.getElementById('btnLer').style.display = 'block';
+                    }, 60);
+                }
             }
 
-            function lerResultado() {
-                // Reabilita os botões de sorteio
-                document.getElementById('btn4').disabled = false;
-                document.getElementById('btn3').disabled = false;
-                document.getElementById('btn2').disabled = false;
+            tick();
+        }
 
-                // Esconde o botão de ler
-                document.getElementById('btnLer').style.display = 'none';
-            }
+        // ── Lerresultado / Limpar ───────────────────────────────────────────────
+        function lerResultado() {
+            setButtons(false);
+            document.getElementById('btnLer').style.display = 'none';
+        }
 
-            function limpar() {
-                document.getElementById('resultado').textContent = '';
-                lerResultado(); // Reabilita os botões e esconde o botão de ler
-            }
-        </script>
-    </body>
+        function limpar() {
+            if (spinTimer) { clearTimeout(spinTimer); spinTimer = null; }
+            cancelAnimationFrame(confettiRaf);
+
+            const canvas = document.getElementById('confettiCanvas');
+            canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+
+            const display = document.getElementById('reelDisplay');
+            display.className = '';
+            display.textContent = '?';
+            display.style.color = '';
+            display.style.textShadow = '';
+
+            document.getElementById('lights').classList.remove('flashing');
+            document.getElementById('status').textContent = 'Escolha o tipo de sorteio';
+            document.getElementById('btnLer').style.display = 'none';
+            setButtons(false);
+        }
+    </script>
+</body>
 
 </html>
