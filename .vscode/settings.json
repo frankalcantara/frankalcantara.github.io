@@ -406,5 +406,6 @@
 		"weibull"
 	],
 	"[markdown]": {
-	}
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }
