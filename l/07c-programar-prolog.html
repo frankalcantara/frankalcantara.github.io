@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à Programação Lógica - 12&nbsp; Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</title>
+<title>12&nbsp; Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais – Introdução à Programação Lógica</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,8 +21,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,15 +67,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./08-verificacao-formal-de-programas.html" rel="next">
 <link href="./07b-inferencia-prolog.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -107,19 +110,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles/custom.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./07c-programar-prolog.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Programação em Prolog: Recursão, Controle de Fluxo e Predicados Essenciais</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -152,9 +155,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Fundamentos da Lógica</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -193,9 +196,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Aplicações Avançadas</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -252,9 +255,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Solução dos Exercícios</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -320,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -358,11 +361,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="12.1.1" class="anchored" data-anchor-id="estudo-de-caso-processamento-de-listas-com-member2"><span class="header-section-number">12.1.1</span> Estudo de Caso: Processamento de Listas com <code>member/2</code></h3>
 <p>A estrutura de dados mais comum em Prolog, a lista, é ela própria definida recursivamente. Uma lista é ou a lista vazia, o caso base, ou uma estrutura composta por uma cabeça (<code>head</code>), o primeiro elemento, e uma cauda (<code>tail</code>), o restante da lista, representada como o caso recursivo. Esta definição inerentemente recursiva torna os predicados recursivos a ferramenta natural e elegante para o processamento de listas.</p>
 <p>O predicado <code>member/2</code>, que verifica se um elemento pertence a uma lista, é um exemplo desta sinergia.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Base: X é membro de uma lista se for a cabeça dessa lista.  </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Base: X é membro de uma lista se for a cabeça dessa lista.  </span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">X</span><span class="fu">|</span><span class="dt">_</span>])<span class="kw">.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Recursivo: X é membro de uma lista se for membro da sua cauda.  </span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">_</span><span class="fu">|</span><span class="dt">T</span>]) <span class="kw">:-</span> member(<span class="dt">X</span><span class="kw">,</span> <span class="dt">T</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>member(<span class="dt">X</span><span class="kw">,</span> [<span class="dt">_</span><span class="fu">|</span><span class="dt">T</span>]) <span class="kw">:-</span> member(<span class="dt">X</span><span class="kw">,</span> <span class="dt">T</span>)<span class="kw">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A forma como a estrutura da lista é utilizada na unificação espelha perfeitamente a lógica de um predicado recursivo. A unificação desconstrói a lista, permitindo que a cabeça <code>H</code> seja processada, enquanto a chamada recursiva opera sobre uma sub-lista progressivamente menor, <code>T</code>. Este mapeamento direto entre a estrutura de dados e a estrutura do algoritmo é um princípio de design que confere ao Prolog sua expressividade para computação simbólica. Para ilustrar, a curiosa leitora pode considerar a consulta <code>?- member(b, [a, b, c]).</code>:</p>
 <ol type="1">
 <li>Prolog tenta unificar <code>member(b, [a, b, c])</code> com o caso base, <code>member(X, [X|_])</code>. A unificação falha porque <code>b</code> não é igual a <code>a</code>;</li>
@@ -377,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="estudo-de-caso-transversalidade-de-grafos-com-ancestor2" class="level3" data-number="12.1.2">
 <h3 data-number="12.1.2" class="anchored" data-anchor-id="estudo-de-caso-transversalidade-de-grafos-com-ancestor2"><span class="header-section-number">12.1.2</span> <strong>Estudo de Caso: Transversalidade de Grafos com ancestor/2</strong></h3>
 <p>A recursão em Prolog não se limita a estruturas de dados explícitas como listas; ela é igualmente poderosa para explorar relações transitivas dentro de uma base de conhecimento, que pode ser vista como um grafo direcionado. O predicado <code>caminho/2</code> é um exemplo clássico que demonstra esta capacidade.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aresta(a<span class="kw">,</span> b)<span class="kw">.</span>  </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aresta(a<span class="kw">,</span> b)<span class="kw">.</span>  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>aresta(b<span class="kw">,</span> c)<span class="kw">.</span>  </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>aresta(c<span class="kw">,</span> d)<span class="kw">.</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -385,14 +388,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>caminho(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> aresta(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Recursivo: Existe um caminho de X para Y se houver uma aresta de X para Z e um caminho de Z para Y.  </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>caminho(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> aresta(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> caminho(<span class="dt">Z</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>caminho(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span>) <span class="kw">:-</span> aresta(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Z</span>)<span class="kw">,</span> caminho(<span class="dt">Z</span><span class="kw">,</span> <span class="dt">Y</span>)<span class="kw">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A recursão aqui define os passos de uma busca em profundidade, em inglês <em><strong>d</strong>epth-<strong>f</strong>irst <strong>s</strong>earch</em>, <strong>dfs</strong>. O caso base representa a descoberta de uma solução direta, enquanto o caso recursivo define como aprofundar a busca. O mecanismo de <em>backtracking</em> do Prolog gerencia automaticamente a exploração de caminhos alternativos. Quando um caminho falha, o Prolog retorna ao último ponto de escolha, frequentemente dentro de uma regra recursiva, e tenta a próxima alternativa. Assim, a recursão em Prolog não é apenas uma estrutura de controle, mas a própria maneira como o programador define a lógica de um algoritmo de busca, delegando ao mecanismo de inferência do do Prolog a complexa tarefa de gerenciar o estado da busca. Uma análise da consulta <code>?- caminho(a, c).</code> irá revelar este processo:</p>
 <p>A tentativa de usar o caso base <code>caminho(X, Y) :- aresta(X, Y).</code> falha, pois <code>aresta(a, c).</code> não é um fato. O Prolog tenta o caso recursivo. O primeiro sub-objetivo, <code>aresta(a, Z)</code>, tem sucesso e unifica <code>Z</code> com <code>b</code>. O segundo sub-objetivo torna-se uma chamada recursiva: <code>caminho(b, c)</code>. Para este novo objetivo, Prolog novamente tenta o caso base. A consulta <code>aresta(b, c)</code> tem sucesso, pois é um fato na base de conhecimento. Como a chamada recursiva teve sucesso, o objetivo original <code>caminho(a, c)</code> também tem sucesso.</p>
 </section>
 <section id="recursão-o-predicado-factorial2" class="level3" data-number="12.1.3">
 <h3 data-number="12.1.3" class="anchored" data-anchor-id="recursão-o-predicado-factorial2"><span class="header-section-number">12.1.3</span> Recursão: O Predicado <code>factorial/2</code></h3>
 <p>Além de verificar a veracidade de relações, a recursão é o principal mecanismo para realizar cálculos. O predicado <code>factorial/2</code>, o exemplo mais tradicional possível, ilustra como um problema pode ser decomposto recursivamente e a solução construída durante o retorno das chamadas.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Base: O fatorial de 0 é 1  </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Base: O fatorial de 0 é 1  </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>factorial(<span class="dv">0</span><span class="kw">,</span> <span class="dv">1</span>)<span class="kw">.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Caso Recursivo: O fatorial de N é F.  </span></span>
@@ -400,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">N</span> <span class="dt">&gt;</span> <span class="dv">0</span><span class="kw">,</span>  </span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">N1</span> <span class="dt">is</span> <span class="dt">N</span> <span class="dt">-</span> <span class="dv">1</span><span class="kw">,</span>  </span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    factorial(<span class="dt">N1</span><span class="kw">,</span> <span class="dt">F1</span>)<span class="kw">,</span>  </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">F</span> <span class="dt">is</span> <span class="dt">N</span> <span class="dt">*</span> <span class="dt">F1</span><span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">F</span> <span class="dt">is</span> <span class="dt">N</span> <span class="dt">*</span> <span class="dt">F1</span><span class="kw">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Ao executar <code>?- factorial(3, X).</code>, o mecanismo de inferência do Prolog constrói uma pilha de chamadas:</p>
 <ol type="1">
 <li><code>factorial(3, F)</code> chama <code>factorial(2, F1)</code>.<br>
@@ -442,11 +445,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Red Cuts</strong>: alteram o significado lógico do programa. Sua remoção levaria a soluções diferentes, muitas vezes incorretas. Os <em>red cuts</em> são usados para implementar construções de controle, como condicionais, mas forçam uma leitura operacional do código, o que pode torná-lo mais difícil de entender e mais propenso a erros.</li>
 </ol>
 <p>O predicado <code>max/3</code> é um excelente exemplo para ilustrar um <em>red cut</em> usado para implementar uma lógica <em>se-então-senão</em>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Se X =&lt; Y, então o máximo é Y. Não considere a outra cláusula.  </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Se X =&lt; Y, então o máximo é Y. Não considere a outra cláusula.  </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">Z</span>) <span class="kw">:-</span> <span class="dt">X</span> <span class="dt">=&lt;</span> <span class="dt">Y</span><span class="kw">,</span> <span class="kw">!,</span> <span class="dt">Z</span> <span class="kw">=</span> <span class="dt">Y</span><span class="kw">.</span>  </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Senão (se a primeira cláusula falhou antes do cut), o máximo é X.  </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>max(<span class="dt">X</span><span class="kw">,</span> <span class="dt">Y</span><span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Neste caso, o <em>cut</em> é essencial para a correção. Considere a consulta <code>?- max(2, 5, 2).</code>, onde estamos perguntando se <code>2</code> é o máximo entre <code>2</code> e <code>5</code>:</p>
 <ol type="1">
 <li>A primeira cláusula <code>max(X, Y, Z) :- X =&lt; Y, !, Z = Y.</code> é selecionada, com <code>X = 2</code>, <code>Y = 5</code>, e <code>Z = 2</code>, já instanciado pela consulta;</li>
@@ -464,8 +467,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="12.2.2" class="anchored" data-anchor-id="negação-por-falha-raciocinando-em-um-mundo-fechado"><span class="header-section-number">12.2.2</span> Negação por Falha (<code>\+</code>): Raciocinando em um Mundo Fechado</h3>
 <p>O Prolog opera sob a <strong>suposição de mundo fechado</strong> <em>Closed World Assumption</em>: qualquer coisa que não possa ser provada como verdadeira a partir da base de conhecimento atual é considerada falsa. A negação por falha é a implementação direta desta suposição. O predicado <code>\+ Goal</code> (ou <code>not Goal</code>) não significa <em>logicamente falso</em>, mas sim <em>não provável</em>.</p>
 <p>A negação por falha é implementada usando uma técnica conhecida como a combinação <em>cut-fail</em>. O predicado <code>fail/0</code> é um objetivo que sempre falha, forçando o <em>backtracking</em>. A definição de <code>\+ (Goal)</code> é efetivamente:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span>(<span class="dt">Goal</span>) <span class="kw">:-</span> <span class="kw">call</span>(<span class="dt">Goal</span>)<span class="kw">,</span> <span class="kw">!,</span> <span class="kw">fail.</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span>(<span class="dt">_</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span>(<span class="dt">Goal</span>) <span class="kw">:-</span> <span class="kw">call</span>(<span class="dt">Goal</span>)<span class="kw">,</span> <span class="kw">!,</span> <span class="kw">fail.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">\+</span>(<span class="dt">_</span>)<span class="kw">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Quando <code>\+(Goal)</code> é chamado:</p>
 <ol type="1">
 <li>Prolog tenta executar <code>Goal</code>;</li>
@@ -476,11 +479,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="armadilhas-procedurais-negação-lógica-vs.-operacional" class="level4" data-number="12.2.2.1">
 <h4 data-number="12.2.2.1" class="anchored" data-anchor-id="armadilhas-procedurais-negação-lógica-vs.-operacional"><span class="header-section-number">12.2.2.1</span> Armadilhas Procedurais: Negação Lógica vs.&nbsp;Operacional</h4>
 <p>É importante que a esforçada leitora entenda que a negação por falha não é a negação lógica. Seu comportamento é procedural e altamente sensível à instanciação das variáveis no momento da chamada. Considere o exemplo de um predicado que descreve as preferências de Alice por hambúrgueres, onde ela gosta de todos, exceto do abacaxi_burger:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão Correta</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode prolog code-with-copy"><code class="sourceCode prolog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão Correta</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gosta(alice<span class="kw">,</span> <span class="dt">X</span>) <span class="kw">:-</span> burger(<span class="dt">X</span>)<span class="kw">,</span> <span class="kw">\+</span> abacaxi_burger(<span class="dt">X</span>)<span class="kw">.</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">% Versão Incorreta</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>gosta(alice<span class="kw">,</span> <span class="dt">X</span>) <span class="kw">:-</span> <span class="kw">\+</span> abacaxi_burger(<span class="dt">X</span>)<span class="kw">,</span> burger(<span class="dt">X</span>)<span class="kw">.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>gosta(alice<span class="kw">,</span> <span class="dt">X</span>) <span class="kw">:-</span> <span class="kw">\+</span> abacaxi_burger(<span class="dt">X</span>)<span class="kw">,</span> burger(<span class="dt">X</span>)<span class="kw">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Na versão correta, a consulta ?- gosta(alice, X). primeiro encontra um hamburger, instanciando <code>X</code>. Em seguida, a negação verifica se <em>esse <code>X</code> específico</em> não é um abacaxi_burger.</p>
 <p>Na versão incorreta, o primeiro objetivo é <code>\+ abacaxi_burger(X)</code>. Como <code>X</code> não está instanciado, a consulta pergunta: <em>É impossível provar que existe algum abacaxi_burger?</em>. Como existe um na base de conhecimento, <code>abacaxi_burger(X)</code> tem sucesso, o que faz com que <code>\+ abacaxi_burger(X)</code> falhe, e a consulta inteira falha prematuramente, sem nunca encontrar nenhum hambúrguer que Alice aprecie.</p>
 <p>Isso leva a uma regra de ouro na programação em Prolog: <strong>sempre garanta que as variáveis em um objetivo negado estejam suficientemente instanciadas antes que a negação seja chamada.</strong></p>
@@ -506,13 +509,13 @@ Note
 <section id="predicados-de-entrada-e-saída-io" class="level3" data-number="12.3.1">
 <h3 data-number="12.3.1" class="anchored" data-anchor-id="predicados-de-entrada-e-saída-io"><span class="header-section-number">12.3.1</span> <strong>Predicados de Entrada e Saída (I/O)</strong></h3>
 <p>No mundo real, ilógico e interativo, a interação entre o programa, usuários e arquivos é fundamental. O SWI-Prolog possui um sistema de Entrada/Saída baseado em fluxos contínuos, <em>streams</em>, nos quais predicados simples como <code>write/1</code> operam no fluxo de saída padrão. A tabela <a href="#tbl-predicados-io" class="quarto-xref">Table&nbsp;<span>12.1</span></a> resume os predicados de entrada e saída mais comuns.</p>
-<div id="tbl-predicados-io" class="quarto-float anchored">
+<div id="tbl-predicados-io" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predicados-io-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;12.1: Tabela com os predicados de I/O mais comuns no SWI-Prolog.
 </figcaption>
 <div aria-describedby="tbl-predicados-io-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -555,7 +558,7 @@ Table&nbsp;12.1: Tabela com os predicados de I/O mais comuns no SWI-Prolog.
 <section id="predicados-aritméticos" class="level3" data-number="12.3.2">
 <h3 data-number="12.3.2" class="anchored" data-anchor-id="predicados-aritméticos"><span class="header-section-number">12.3.2</span> Predicados Aritméticos</h3>
 <p>A aritmética em Prolog é realizada por meio de avaliação explícita, diferenciando-se da unificação. Uma expressão como <code>3 + 4</code> é apenas um termo, <code>+(3, 4)</code>, até ser avaliada. O predicado <code>is/2</code> é usado para avaliar expressões aritméticas, e os operadores de comparação numérica avaliam ambos os lados. A tabela <span class="quarto-unresolved-ref">?tbl-predicados-aritmeticos</span> resume os principais predicados e operadores aritméticos.</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -605,13 +608,13 @@ Table&nbsp;12.1: Tabela com os predicados de I/O mais comuns no SWI-Prolog.
 <section id="predicados-de-agregação-de-soluções" class="level3" data-number="12.3.3">
 <h3 data-number="12.3.3" class="anchored" data-anchor-id="predicados-de-agregação-de-soluções"><span class="header-section-number">12.3.3</span> <strong>Predicados de Agregação de Soluções</strong></h3>
 <p>O Prolog pode encontrar todas as soluções para uma consulta por meio do <em>backtracking</em>. Os predicados de “todas as soluções” aproveitam essa capacidade para coletar os resultados em uma única lista. A tabela <a href="#tbl-predicados-agregacao" class="quarto-xref">Table&nbsp;<span>12.2</span></a> resume os três predicados principais para este propósito: <code>findall/3</code>, <code>bagof/3</code> e <code>setof/3</code>.</p>
-<div id="tbl-predicados-agregacao" class="quarto-float anchored">
+<div id="tbl-predicados-agregacao" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predicados-agregacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;12.2: Tabela comparativa dos predicados de agregação de soluções no SWI-Prolog.
 </figcaption>
 <div aria-describedby="tbl-predicados-agregacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -699,13 +702,13 @@ Note
 <section id="predicados-de-ordenação-de-listas" class="level3" data-number="12.3.4">
 <h3 data-number="12.3.4" class="anchored" data-anchor-id="predicados-de-ordenação-de-listas"><span class="header-section-number">12.3.4</span> <strong>Predicados de Ordenação de Listas</strong></h3>
 <p>A ordenação é uma operação comum, e o Prolog fornece vários predicados para essa finalidade, com a principal diferença sendo o tratamento de elementos duplicados. Novamente, uma tabela comparativa <a href="#tbl-predicados-ordenacao" class="quarto-xref">Table&nbsp;<span>12.3</span></a> resume os dois predicados mais usados: <code>sort/2</code> e <code>msort/2</code>.</p>
-<div id="tbl-predicados-ordenacao" class="quarto-float anchored">
+<div id="tbl-predicados-ordenacao" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predicados-ordenacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;12.3: Tabela comparativa dos predicados de ordenação de listas no SWI-Prolog.
 </figcaption>
 <div aria-describedby="tbl-predicados-ordenacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -746,43 +749,58 @@ Table&nbsp;12.3: Tabela comparativa dos predicados de ordenação de listas no S
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -790,184 +808,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -975,185 +993,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./07b-inferencia-prolog.html" class="pagination-link" aria-label="Desvendando o Processo de Inferência do Prolog">

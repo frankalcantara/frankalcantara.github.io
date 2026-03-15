@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à Programação Lógica - 14&nbsp; Desafios, Problemas e Mistérios</title>
+<title>14&nbsp; Desafios, Problemas e Mistérios – Introdução à Programação Lógica</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,15 +32,17 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <link href="./01-Sol-Proposicional.html" rel="next">
 <link href="./08-verificacao-formal-de-programas.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-70a47bd5681a7291082a5b9f83d58762.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -83,7 +85,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -102,19 +104,19 @@ window.Quarto = {
 <link rel="stylesheet" href="styles/custom.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-formas-normais-e-skolemizacao.html">Aplicações Avançadas</a></li><li class="breadcrumb-item"><a href="./09-desafios-logicos-enigmas-e-misterios.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Desafios, Problemas e Mistérios</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -147,9 +149,9 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Fundamentos da Lógica</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -188,9 +190,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Aplicações Avançadas</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -247,9 +249,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Solução dos Exercícios</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -295,8 +297,8 @@ window.Quarto = {
   <li><a href="#o-mentiroso-e-o-verdadeiro" id="toc-o-mentiroso-e-o-verdadeiro" class="nav-link active" data-scroll-target="#o-mentiroso-e-o-verdadeiro"><span class="header-section-number">14.1</span> O Mentiroso e o Verdadeiro</a>
   <ul class="collapse">
   <li><a href="#solução-intuitiva" id="toc-solução-intuitiva" class="nav-link" data-scroll-target="#solução-intuitiva"><span class="header-section-number">14.1.1</span> Solução Intuitiva</a></li>
-  <li><a href="#solução-usando-lógica-proposicional" id="toc-solução-usando-lógica-proposicional" class="nav-link" data-scroll-target="#solução-usando-lógica-proposicional"><span class="header-section-number">14.1.2</span> Solução usando Lógica Proposicional</a></li>
-  <li><a href="#solução-usando-lógica-de-primeira-ordem" id="toc-solução-usando-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#solução-usando-lógica-de-primeira-ordem"><span class="header-section-number">14.1.3</span> Solução usando Lógica de Primeira Ordem</a></li>
+  <li><a href="#solução-em-lógica-proposicional" id="toc-solução-em-lógica-proposicional" class="nav-link" data-scroll-target="#solução-em-lógica-proposicional"><span class="header-section-number">14.1.2</span> Solução em Lógica Proposicional</a></li>
+  <li><a href="#solução-em-lógica-de-primeira-ordem" id="toc-solução-em-lógica-de-primeira-ordem" class="nav-link" data-scroll-target="#solução-em-lógica-de-primeira-ordem"><span class="header-section-number">14.1.3</span> Solução em Lógica de Primeira Ordem</a></li>
   </ul></li>
   <li><a href="#as-três-lâmpadas" id="toc-as-três-lâmpadas" class="nav-link" data-scroll-target="#as-três-lâmpadas"><span class="header-section-number">14.2</span> As Três Lâmpadas</a>
   <ul class="collapse">
@@ -318,22 +320,13 @@ window.Quarto = {
   <li><a href="#solução-intuitiva-4" id="toc-solução-intuitiva-4" class="nav-link" data-scroll-target="#solução-intuitiva-4"><span class="header-section-number">14.5.1</span> Solução Intuitiva</a></li>
   <li><a href="#formalização-usando-lógica-de-primeira-ordem-e-probabilidades" id="toc-formalização-usando-lógica-de-primeira-ordem-e-probabilidades" class="nav-link" data-scroll-target="#formalização-usando-lógica-de-primeira-ordem-e-probabilidades"><span class="header-section-number">14.5.2</span> Formalização usando Lógica de Primeira Ordem e Probabilidades</a></li>
   </ul></li>
-  <li><a href="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" id="toc-o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="nav-link" data-scroll-target="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">14.6</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</a>
-  <ul class="collapse">
-  <li><a href="#o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" id="toc-o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" class="nav-link" data-scroll-target="#o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood"><span class="header-section-number">14.6.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></a></li>
-  </ul></li>
-  <li><a href="#solução-do-mistério-da-mansão-hollow-1935" id="toc-solução-do-mistério-da-mansão-hollow-1935" class="nav-link" data-scroll-target="#solução-do-mistério-da-mansão-hollow-1935"><span class="header-section-number">14.7</span> Solução do Mistério da Mansão Hollow (1935)</a>
-  <ul class="collapse">
-  <li><a href="#análise-intuitiva" id="toc-análise-intuitiva" class="nav-link" data-scroll-target="#análise-intuitiva"><span class="header-section-number">14.7.1</span> Análise Intuitiva</a></li>
-  <li><a href="#solução-formal-com-lógica-versão-detalhada" id="toc-solução-formal-com-lógica-versão-detalhada" class="nav-link" data-scroll-target="#solução-formal-com-lógica-versão-detalhada"><span class="header-section-number">14.7.2</span> Solução Formal com Lógica (Versão Detalhada)</a></li>
-  <li><a href="#teoria-final" id="toc-teoria-final" class="nav-link" data-scroll-target="#teoria-final"><span class="header-section-number">14.7.3</span> Teoria Final</a></li>
-  </ul></li>
+  <li><a href="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" id="toc-o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="nav-link" data-scroll-target="#o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">14.6</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/logica/edit/main/09-desafios-logicos-enigmas-e-misterios.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/logica/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -367,104 +360,251 @@ window.Quarto = {
 <h3 data-number="14.1.1" class="anchored" data-anchor-id="solução-intuitiva"><span class="header-section-number">14.1.1</span> Solução Intuitiva</h3>
 <p><span class="math inline">\(B\)</span> deve ser o mentiroso e <span class="math inline">\(A\)</span> deve ser o verdadeiro.</p>
 <p><strong>Raciocínio</strong>: Se <span class="math inline">\(A\)</span> fosse o verdadeiro, ele responderia <em>Sim</em> à pergunta. Se <span class="math inline">\(A\)</span> fosse o mentiroso, ele mentiria e também responderia <em>Sim</em>. Logo, <span class="math inline">\(A\)</span> sempre responde <em>Sim</em> à pergunta <em>Você é o verdadeiro?</em>.</p>
-<p>Como <span class="math inline">\(B\)</span> diz que <em><span class="math inline">\(A\)</span> disse que ele é o mentiroso</em>, e sabemos que <span class="math inline">\(A\)</span> respondeu <em>Sim</em> (não <em>Sou mentiroso</em>), então <span class="math inline">\(B\)</span> está mentindo. Portanto, <span class="math inline">\(B\)</span> é o mentiroso e <span class="math inline">\(A\)</span> é o verdadeiro.</p>
+<p>Como <span class="math inline">\(B\)</span> diz que <span class="math inline">\(A\)</span> disse que ele é o mentiroso, e sabemos que <span class="math inline">\(A\)</span> respondeu <em>Sim</em> (não <em>Sou mentiroso</em>), então <span class="math inline">\(B\)</span> está mentindo. Portanto, <span class="math inline">\(B\)</span> é o mentiroso e <span class="math inline">\(A\)</span> é o verdadeiro.</p>
 </section>
-<section id="solução-usando-lógica-proposicional" class="level3" data-number="14.1.2">
-<h3 data-number="14.1.2" class="anchored" data-anchor-id="solução-usando-lógica-proposicional"><span class="header-section-number">14.1.2</span> Solução usando Lógica Proposicional</h3>
-<section id="definições" class="level4" data-number="14.1.2.1">
-<h4 data-number="14.1.2.1" class="anchored" data-anchor-id="definições"><span class="header-section-number">14.1.2.1</span> Definições:</h4>
+<section id="solução-em-lógica-proposicional" class="level3" data-number="14.1.2">
+<h3 data-number="14.1.2" class="anchored" data-anchor-id="solução-em-lógica-proposicional"><span class="header-section-number">14.1.2</span> Solução em Lógica Proposicional</h3>
+<section id="objetivo" class="level4" data-number="14.1.2.1">
+<h4 data-number="14.1.2.1" class="anchored" data-anchor-id="objetivo"><span class="header-section-number">14.1.2.1</span> Objetivo</h4>
+<p>Formalizar corretamente o problema e demonstrar que:</p>
+<p><span class="math display">\[V_A \land M_B\]</span></p>
+<p>isto é, <span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso.</p>
+</section>
+<section id="linguagem-proposicional" class="level4" data-number="14.1.2.2">
+<h4 data-number="14.1.2.2" class="anchored" data-anchor-id="linguagem-proposicional"><span class="header-section-number">14.1.2.2</span> Linguagem Proposicional</h4>
+<p>Sejam as proposições atômicas:</p>
 <ul>
 <li><span class="math inline">\(V_A\)</span>: <span class="math inline">\(A\)</span> é o verdadeiro;</li>
-<li><span class="math inline">\(M_A\)</span>: <span class="math inline">\(A\)</span> é o mentiroso;<br>
-</li>
 <li><span class="math inline">\(V_B\)</span>: <span class="math inline">\(B\)</span> é o verdadeiro;</li>
-<li><span class="math inline">\(M_B\)</span>: <span class="math inline">\(B\)</span> é o mentiroso;</li>
-<li><span class="math inline">\(R_A\)</span>: <span class="math inline">\(A\)</span> respondeu <em>Sim</em> à pergunta <em>Você é o verdadeiro?</em>.</li>
+<li><span class="math inline">\(S\)</span>: <span class="math inline">\(A\)</span> respondeu <em>sim</em> à pergunta <em>você é o verdadeiro?</em>;</li>
+<li><span class="math inline">\(C\)</span>: a afirmação de <span class="math inline">\(B\)</span> sobre a resposta de <span class="math inline">\(A\)</span> é correta.</li>
 </ul>
-</section>
-<section id="axiomas" class="level4" data-number="14.1.2.2">
-<h4 data-number="14.1.2.2" class="anchored" data-anchor-id="axiomas"><span class="header-section-number">14.1.2.2</span> Axiomas</h4>
+<p>a fala de <span class="math inline">\(B\)</span> é: <em>A disse que ele é o mentiroso</em>. como a pergunta feita a <span class="math inline">\(A\)</span> foi polar, isso equivale a relatar que <span class="math inline">\(A\)</span> respondeu <em>não</em>. portanto, <span class="math inline">\(C\)</span> significa:</p>
+<ul>
+<li><span class="math inline">\(C\)</span>: é correto dizer que <span class="math inline">\(A\)</span> respondeu <em>não</em>.</li>
+</ul>
+<p>Como só há duas respostas possíveis, <em>sim</em> e <em>não</em>, segue que:</p>
+<p><span class="math display">\[C \leftrightarrow \neg S\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pergunta polar é um termo da linguística e da lógica da linguagem para designar uma pergunta cuja resposta esperada é apenas um valor binário, tipicamente sim ou não. Ou seja, uma pergunta polar não pede uma descrição, uma explicação ou uma identificação livre; ela pede apenas a confirmação ou a negação de uma proposição.</p>
 <ol type="1">
-<li><span class="math inline">\(V_A \lor M_A\)</span> (A é verdadeiro ou mentiroso);</li>
-<li><span class="math inline">\(\neg(V_A \land M_A)\)</span> (A não é ambos);</li>
-<li><span class="math inline">\(V_B \lor M_B\)</span> (B é verdadeiro ou mentiroso);</li>
-<li><span class="math inline">\(\neg(V_B \land M_B)\)</span> (B não é ambos);</li>
-<li><span class="math inline">\(V_A \leftrightarrow \neg V_B\)</span> (Exatamente um é verdadeiro);</li>
-<li><span class="math inline">\(V_A \to R_A\)</span> (Se A é verdadeiro, ele responde <em>Sim</em>);</li>
-<li><span class="math inline">\(M_A \to R_A\)</span> (Se A é mentiroso, ele também responde <em>Sim</em>, pois mente);</li>
-<li><span class="math inline">\(V_B \to \text{B reporta corretamente}\)</span> (Se B é verdadeiro, ele relata a verdade);</li>
-<li><span class="math inline">\(M_B \to \text{B reporta falsamente}\)</span> (Se B é mentiroso, ele mente).</li>
+<li>o que isso significa no problema do mentiroso e do verdadeiro? A pergunta feita a <span class="math inline">\(A\)</span> foi: <em>Você é o verdadeiro?</em> essa pergunta tem a forma: *“É verdade que* <span class="math inline">\(𝐴\)</span> é o verdadeiro?” Portanto, as respostas diretas possíveis são apenas sim ou não. Isso é exatamente o que caracteriza uma pergunta polar.</li>
 </ol>
+</div>
+</div>
 </section>
-<section id="fato-observado" class="level4" data-number="14.1.2.3">
-<h4 data-number="14.1.2.3" class="anchored" data-anchor-id="fato-observado"><span class="header-section-number">14.1.2.3</span> Fato Observado</h4>
-<p><span class="math inline">\(B\)</span> diz: <em>A disse que ele é o mentiroso</em> (ou seja, <span class="math inline">\(B\)</span> afirma que <span class="math inline">\(A\)</span> disse <em>Não</em>).</p>
-</section>
-<section id="prova" class="level4" data-number="14.1.2.4">
-<h4 data-number="14.1.2.4" class="anchored" data-anchor-id="prova"><span class="header-section-number">14.1.2.4</span> Prova</h4>
+<section id="axiomas" class="level4" data-number="14.1.2.3">
+<h4 data-number="14.1.2.3" class="anchored" data-anchor-id="axiomas"><span class="header-section-number">14.1.2.3</span> Axiomas</h4>
 <ol type="1">
-<li>Por (6) e (7): <span class="math inline">\(R_A\)</span> é sempre verdadeiro (<span class="math inline">\(A\)</span> sempre responde <em>Sim</em>);</li>
-<li><span class="math inline">\(B\)</span> afirma que <span class="math inline">\(\neg R_A\)</span> (<span class="math inline">\(B\)</span> diz que <span class="math inline">\(A\)</span> responde <em>Não</em>/<em>Sou mentiroso</em>);</li>
-<li>Como <span class="math inline">\(R_A\)</span> é verdadeiro e <span class="math inline">\(B\)</span> afirma <span class="math inline">\(\neg R_A\)</span>, então <span class="math inline">\(B\)</span> está mentindo;</li>
-<li>Portanto, <span class="math inline">\(M_B\)</span> (<span class="math inline">\(B\)</span> é o mentiroso);</li>
-<li>Por (5) e (4): <span class="math inline">\(V_A\)</span> (<span class="math inline">\(A\)</span> é o verdadeiro).</li>
+<li>Exatamente um entre <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> é verdadeiro:</li>
 </ol>
+<p><span class="math display">\[V_A \leftrightarrow \neg V_B\]</span></p>
+<ol start="2" type="1">
+<li>Se <span class="math inline">\(A\)</span> é verdadeiro, então responde <em>sim</em> à pergunta <em>você é o verdadeiro?</em>:</li>
+</ol>
+<p><span class="math display">\[V_A \to S\]</span></p>
+<ol start="3" type="1">
+<li>Se <span class="math inline">\(A\)</span> é mentiroso, então também responde <em>sim</em>, pois a proposição <em>A é verdadeiro</em> é falsa, e ele mente:</li>
+</ol>
+<p><span class="math display">\[\neg V_A \to S\]</span></p>
+<ol start="4" type="1">
+<li>Se <span class="math inline">\(B\)</span> é verdadeiro, então o que ele afirma sobre a resposta de <span class="math inline">\(A\)</span> é correto:</li>
+</ol>
+<p><span class="math display">\[V_B \to C\]</span></p>
+<ol start="5" type="1">
+<li>Se <span class="math inline">\(B\)</span> é mentiroso, então o que ele afirma sobre a resposta de <span class="math inline">\(A\)</span> é incorreto:</li>
+</ol>
+<p><span class="math display">\[\neg V_B \to \neg C\]</span></p>
+<ol start="6" type="1">
+<li>Definição semântica do conteúdo relatado por <span class="math inline">\(B\)</span>:</li>
+</ol>
+<p><span class="math display">\[C \leftrightarrow \neg S\]</span></p>
+</section>
+<section id="demonstração" class="level4" data-number="14.1.2.4">
+<h4 data-number="14.1.2.4" class="anchored" data-anchor-id="demonstração"><span class="header-section-number">14.1.2.4</span> Demonstração</h4>
+<p>Dos axiomas (2) e (3), por casos sobre <span class="math inline">\(V_A\)</span>, obtemos:</p>
+<p><span class="math display">\[S\]</span></p>
+<p>pois:</p>
+<ul>
+<li>se <span class="math inline">\(V_A\)</span>, então por (2), <span class="math inline">\(S\)</span>;</li>
+<li>se <span class="math inline">\(\neg V_A\)</span>, então por (3), <span class="math inline">\(S\)</span>.</li>
+</ul>
+<p>Logo, em qualquer caso:</p>
+<p><span class="math display">\[S\]</span></p>
+<p>Pelo axioma (6):</p>
+<p><span class="math display">\[C \leftrightarrow \neg S\]</span></p>
+<p>Como <span class="math inline">\(S\)</span> é verdadeiro, segue que <span class="math inline">\(\neg S\)</span> é falso. portanto:</p>
+<p><span class="math display">\[\neg C\]</span></p>
+<p>Agora suponha, para redução ao absurdo, que <span class="math inline">\(V_B\)</span>. Então, por (4):</p>
+<p><span class="math display">\[C\]</span></p>
+<p>Mas já provamos:</p>
+<p><span class="math display">\[\neg C\]</span></p>
+<p>Encontramos uma contradição. logo:</p>
+<p><span class="math display">\[\neg V_B\]</span></p>
+<p>Usando o axioma (1):</p>
+<p><span class="math display">\[V_A \leftrightarrow \neg V_B\]</span></p>
+<p>E como <span class="math inline">\(\neg V_B\)</span>, concluímos:</p>
+<p><span class="math display">\[V_A\]</span></p>
+<p>Como exatamente um dos dois é verdadeiro, resulta também que <span class="math inline">\(B\)</span> é o mentiroso.</p>
 </section>
 <section id="conclusão" class="level4" data-number="14.1.2.5">
-<h4 data-number="14.1.2.5" class="anchored" data-anchor-id="conclusão"><span class="header-section-number">14.1.2.5</span> Conclusão:</h4>
+<h4 data-number="14.1.2.5" class="anchored" data-anchor-id="conclusão"><span class="header-section-number">14.1.2.5</span> Conclusão</h4>
+<p><span class="math display">\[V_A \land \neg V_B\]</span></p>
+<p>Ou, de modo equivalente,</p>
 <p><span class="math display">\[V_A \land M_B\]</span></p>
-<p><span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso.</p>
+<p>Portanto, <span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso. O que coincide com a solução intuitiva.</p>
 </section>
 </section>
-<section id="solução-usando-lógica-de-primeira-ordem" class="level3" data-number="14.1.3">
-<h3 data-number="14.1.3" class="anchored" data-anchor-id="solução-usando-lógica-de-primeira-ordem"><span class="header-section-number">14.1.3</span> Solução usando Lógica de Primeira Ordem</h3>
-<section id="definições-1" class="level4" data-number="14.1.3.1">
-<h4 data-number="14.1.3.1" class="anchored" data-anchor-id="definições-1"><span class="header-section-number">14.1.3.1</span> Definições</h4>
+<section id="solução-em-lógica-de-primeira-ordem" class="level3" data-number="14.1.3">
+<h3 data-number="14.1.3" class="anchored" data-anchor-id="solução-em-lógica-de-primeira-ordem"><span class="header-section-number">14.1.3</span> Solução em Lógica de Primeira Ordem</h3>
+<p>Vamos construir uma formalização correta em lógica de primeira ordem, evitando usar fórmulas como argumentos de predicados.</p>
+<section id="linguagem-de-primeira-ordem" class="level4" data-number="14.1.3.1">
+<h4 data-number="14.1.3.1" class="anchored" data-anchor-id="linguagem-de-primeira-ordem"><span class="header-section-number">14.1.3.1</span> Linguagem de Primeira Ordem</h4>
+<section id="constantes-individuais" class="level5" data-number="14.1.3.1.1">
+<h5 data-number="14.1.3.1.1" class="anchored" data-anchor-id="constantes-individuais"><span class="header-section-number">14.1.3.1.1</span> Constantes Individuais</h5>
 <ul>
-<li><span class="math inline">\(V(x)\)</span>: <span class="math inline">\(x\)</span> é o verdadeiro;</li>
-<li><span class="math inline">\(M(x)\)</span>: <span class="math inline">\(x\)</span> é o mentiroso;</li>
-<li><span class="math inline">\(R(x, p)\)</span>: <span class="math inline">\(x\)</span> responde <span class="math inline">\(p\)</span> à pergunta;</li>
-<li><span class="math inline">\(D(x, p)\)</span>: <span class="math inline">\(x\)</span> diz que <span class="math inline">\(p\)</span>.</li>
+<li><span class="math inline">\(A\)</span>: o habitante <span class="math inline">\(A\)</span>;</li>
+<li><span class="math inline">\(B\)</span>: o habitante <span class="math inline">\(B\)</span>;</li>
+<li><span class="math inline">\(\mathsf{sim}\)</span> - constante para resposta <em>sim</em>;</li>
+<li><span class="math inline">\(\mathsf{nao}\)</span> - constante para resposta <em>não</em>.</li>
 </ul>
+</section>
+<section id="predicados" class="level5" data-number="14.1.3.1.2">
+<h5 data-number="14.1.3.1.2" class="anchored" data-anchor-id="predicados"><span class="header-section-number">14.1.3.1.2</span> Predicados</h5>
+<ul>
+<li><span class="math inline">\(V(x)\)</span>: <span class="math inline">\(x\)</span> é verdadeiro;</li>
+<li><span class="math inline">\(M(x)\)</span>: <span class="math inline">\(x\)</span> é mentiroso;</li>
+<li><span class="math inline">\(\mathsf{Resp}(x,r)\)</span>: <span class="math inline">\(x\)</span> respondeu <span class="math inline">\(r\)</span>;</li>
+<li><span class="math inline">\(\mathsf{RelataNao}(x,y)\)</span>: <span class="math inline">\(x\)</span> afirma que <span class="math inline">\(y\)</span> respondeu <em>não</em>.</li>
+</ul>
+</section>
 </section>
 <section id="axiomas-1" class="level4" data-number="14.1.3.2">
 <h4 data-number="14.1.3.2" class="anchored" data-anchor-id="axiomas-1"><span class="header-section-number">14.1.3.2</span> Axiomas</h4>
 <ol type="1">
-<li><span class="math inline">\(\forall x (V(x) \lor M(x))\)</span> (Todo indivíduo é verdadeiro ou mentiroso);</li>
-<li><span class="math inline">\(\forall x \neg(V(x) \land M(x))\)</span> (Ninguém é ambos);</li>
-<li><span class="math inline">\((V(A) \land M(B)) \lor (M(A) \land V(B))\)</span> (Exatamente um de cada tipo);</li>
-<li><span class="math inline">\(V(A) \to R(A, \text{_Sim_})\)</span> (Se A é verdadeiro, responde <em>Sim</em>);</li>
-<li><span class="math inline">\(M(A) \to R(A, \text{_Sim_})\)</span> (Se A é mentiroso, também responde <em>Sim</em>);</li>
-<li><span class="math inline">\(\forall x \forall p (V(x) \to (D(x, p) \leftrightarrow p))\)</span> (Verdadeiros dizem a verdade);</li>
-<li><span class="math inline">\(\forall x \forall p (M(x) \to (D(x, p) \leftrightarrow \neg p))\)</span> (Mentirosos mentem).</li>
+<li>exatamente um entre <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> é verdadeiro e o outro é mentiroso:</li>
 </ol>
-</section>
-<section id="fato-observado-1" class="level4" data-number="14.1.3.3">
-<h4 data-number="14.1.3.3" class="anchored" data-anchor-id="fato-observado-1"><span class="header-section-number">14.1.3.3</span> Fato Observado</h4>
-<p><span class="math display">\[D(B, R(A, \text{_Não_}))\]</span></p>
-<p><span class="math inline">\(B\)</span> afirma que <span class="math inline">\(A\)</span> respondeu <em>Não</em> (disse ser mentiroso)</p>
-</section>
-<section id="prova-1" class="level4" data-number="14.1.3.4">
-<h4 data-number="14.1.3.4" class="anchored" data-anchor-id="prova-1"><span class="header-section-number">14.1.3.4</span> Prova</h4>
-<ol type="1">
-<li><p>Por axiomas (4) e (5): <span class="math inline">\(R(A, \text{_Sim_})\)</span> é necessariamente verdadeiro;</p></li>
-<li><p>Fato observado: <span class="math inline">\(D(B, R(A, \text{_Não_}))\)</span>;</p></li>
-<li><p>Como <span class="math inline">\(R(A, \text{_Sim_})\)</span> é verdadeiro, então <span class="math inline">\(R(A, \text{_Não_})\)</span> é falso;</p></li>
-<li><p>B afirma algo falso: <span class="math inline">\(D(B, \text{falso})\)</span>;</p></li>
-<li><p>Por axioma (6): Se <span class="math inline">\(V(B)\)</span>, então <span class="math inline">\(D(B, p) \leftrightarrow p\)</span>;</p>
-<ul>
-<li>Isso implicaria <span class="math inline">\(D(B, \text{falso}) \leftrightarrow \text{falso}\)</span>;</li>
-<li>Logo, <span class="math inline">\(\neg D(B, \text{falso})\)</span>;</li>
-<li>Contradição com (4).</li>
-</ul></li>
-<li><p>Portanto, <span class="math inline">\(\neg V(B)\)</span>, logo <span class="math inline">\(M(B)\)</span> por axioma (1);</p></li>
-<li><p>Por axioma (3) e <span class="math inline">\(M(B)\)</span>: temos <span class="math inline">\(V(A)\)</span>;</p></li>
+<p><span class="math display">\[
+(V(A) \land M(B)) \lor (M(A) \land V(B))
+\]</span></p>
+<ol start="2" type="1">
+<li>ninguém é simultaneamente verdadeiro e mentiroso:</li>
 </ol>
+<p><span class="math display">\[
+\forall x \, \neg (V(x) \land M(x))
+\]</span></p>
+<ol start="3" type="1">
+<li>se <span class="math inline">\(A\)</span> é verdadeiro, então responde <em>sim</em> à pergunta <em>você é o verdadeiro?</em>:</li>
+</ol>
+<p><span class="math display">\[
+V(A) \to \mathsf{Resp}(A,\mathsf{sim})
+\]</span></p>
+<ol start="4" type="1">
+<li>se <span class="math inline">\(A\)</span> é mentiroso, então também responde <em>sim</em>:</li>
+</ol>
+<p><span class="math display">\[
+M(A) \to \mathsf{Resp}(A,\mathsf{sim})
+\]</span></p>
+<ol start="5" type="1">
+<li>respostas <em>sim</em> e <em>não</em> são distintas:</li>
+</ol>
+<p><span class="math display">\[
+\mathsf{sim} \neq \mathsf{nao}
+\]</span></p>
+<ol start="6" type="1">
+<li>cada pergunta recebe uma única resposta:</li>
+</ol>
+<p><span class="math display">\[
+\forall r \forall s \, \bigl((\mathsf{Resp}(A,r) \land \mathsf{Resp}(A,s)) \to r = s\bigr)
+\]</span></p>
+<ol start="7" type="1">
+<li>se <span class="math inline">\(B\)</span> é verdadeiro e relata que <span class="math inline">\(A\)</span> respondeu <em>não</em>, então de fato <span class="math inline">\(A\)</span> respondeu <em>não</em>:</li>
+</ol>
+<p><span class="math display">\[
+(V(B) \land \mathsf{RelataNao}(B,A)) \to \mathsf{Resp}(A,\mathsf{nao})
+\]</span></p>
+<ol start="8" type="1">
+<li>o fato observado é:</li>
+</ol>
+<p><span class="math display">\[
+\mathsf{RelataNao}(B,A)
+\]</span></p>
 </section>
-<section id="conclusão-1" class="level4" data-number="14.1.3.5">
-<h4 data-number="14.1.3.5" class="anchored" data-anchor-id="conclusão-1"><span class="header-section-number">14.1.3.5</span> Conclusão</h4>
-<p><span class="math display">\[V(A) \land M(B)\]</span></p>
-<p><span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso.</p>
+<section id="demonstração-1" class="level4" data-number="14.1.3.3">
+<h4 data-number="14.1.3.3" class="anchored" data-anchor-id="demonstração-1"><span class="header-section-number">14.1.3.3</span> Demonstração</h4>
+<p>agora suponha, para redução ao absurdo, que:</p>
+<p><span class="math display">\[
+V(B)
+\]</span></p>
+<p>do axioma (1), há dois casos possíveis:</p>
+<section id="caso-1" class="level5" data-number="14.1.3.3.1">
+<h5 data-number="14.1.3.3.1" class="anchored" data-anchor-id="caso-1"><span class="header-section-number">14.1.3.3.1</span> Caso 1</h5>
+<p><span class="math display">\[
+V(A) \land M(B)
+\]</span></p>
+<p>então, por (3):</p>
+<p><span class="math display">\[
+\mathsf{Resp}(A,\mathsf{sim})
+\]</span></p>
+</section>
+<section id="caso-2" class="level5" data-number="14.1.3.3.2">
+<h5 data-number="14.1.3.3.2" class="anchored" data-anchor-id="caso-2"><span class="header-section-number">14.1.3.3.2</span> Caso 2</h5>
+<p><span class="math display">\[
+M(A) \land V(B)
+\]</span></p>
+<p>então, por (4):</p>
+<p><span class="math display">\[
+\mathsf{Resp}(A,\mathsf{sim})
+\]</span></p>
+<p>logo, em qualquer caso, concluímos:</p>
+<p><span class="math display">\[
+\mathsf{Resp}(A,\mathsf{sim})
+\]</span></p>
+<p>como o fato observado é:</p>
+<p><span class="math display">\[
+\mathsf{RelataNao}(B,A)
+\]</span></p>
+<p>pelo axioma (7), segue que:</p>
+<p><span class="math display">\[
+\mathsf{Resp}(A,\mathsf{nao})
+\]</span></p>
+<p>mas já provamos:</p>
+<p><span class="math display">\[
+\mathsf{Resp}(A,\mathsf{sim})
+\]</span></p>
+<p>então, pelo axioma de unicidade da resposta (6), obtemos:</p>
+<p><span class="math display">\[
+\mathsf{sim} = \mathsf{nao}
+\]</span></p>
+<p>o que contradiz o axioma (5):</p>
+<p><span class="math display">\[
+\mathsf{sim} \neq \mathsf{nao}
+\]</span></p>
+<p>portanto, a suposição <span class="math inline">\(V(B)\)</span> é falsa:</p>
+<p><span class="math display">\[
+\neg V(B)
+\]</span></p>
+<p>do axioma (1), como exatamente um entre <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> é verdadeiro, segue:</p>
+<p><span class="math display">\[
+V(A) \land M(B)
+\]</span></p>
+</section>
+</section>
+<section id="conclusão-1" class="level4" data-number="14.1.3.4">
+<h4 data-number="14.1.3.4" class="anchored" data-anchor-id="conclusão-1"><span class="header-section-number">14.1.3.4</span> Conclusão</h4>
+<p><span class="math display">\[
+V(A) \land M(B)
+\]</span></p>
+<p>portanto, <span class="math inline">\(A\)</span> é o verdadeiro e <span class="math inline">\(B\)</span> é o mentiroso.</p>
 </section>
 </section>
 </section>
@@ -652,7 +792,7 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 </section>
 <section id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos" class="level2" data-number="14.6">
 <h2 data-number="14.6" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-um-desafio-para-detetives-lógicos"><span class="header-section-number">14.6</span> O Mistério da Mansão Hollow – Um Desafio para Detetives Lógicos</h2>
-<p>::: <img src=".\images/mansaohollow.webp" class="img-fluid"> :::</p>
+<div class="![](/images/mansaohollow.webp)">
 <p><strong>Objetivo</strong>: aplicar os princípios da <strong>Lógica Proposicional</strong> e de predicados para analisar um conjunto complexo de informações, identificar contradições, realizar deduções formais e solucionar um enigma.</p>
 <p><strong>Descrição</strong>: a esforçada leitora foi convidada a investigar um intrigante mistério ocorrido na antiga Mansão Hollow. O renomado inventor, Sir Arthur Blackwood, desapareceu em circunstâncias suspeitas, deixando para trás uma série de pistas, depoimentos de funcionários e familiares, e alguns bilhetes enigmáticos. A polícia local está confusa com a quantidade de informações, algumas aparentemente contraditórias. Você deve montar uma equipe de detetives e superar o famoso detetive Hercule Poirot. Para isso deverá:</p>
 <ol type="1">
@@ -663,7 +803,7 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 </ol>
 <p>A seguir a descrição do caso, o mapa da mansão e os depoimentos dos envolvidos.</p>
 <section id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood" class="level3" data-number="14.6.1">
-<h3 data-number="14.6.1" class="anchored" data-anchor-id="o-mistério-da-mansão-hollow-o-desaparecimento-de-sir-arthur-blackwood"><span class="header-section-number">14.6.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></h3>
+<h3 data-number="14.6.1" class="anchored"><span class="header-section-number">14.6.1</span> <strong>O Mistério da Mansão Hollow: O Desaparecimento de Sir Arthur Blackwood</strong></h3>
 <p><strong>Data do Incidente</strong>: segunda-feira, 18 de Maio de 1935. <strong>Local</strong>: Mansão Hollow, uma propriedade rural isolada. <strong>Vítima (Desaparecido)</strong>: Sir Arthur Blackwood, renomado inventor, 58 anos.</p>
 <p><strong>1. Descrições dos Personagens</strong>:</p>
 <ul>
@@ -675,7 +815,7 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 <li><p><strong>Sra. Beatrice Croft (62 anos)</strong>: Esposa de Reggie, a cozinheira da mansão. Conhece todos os cantos da casa e os hábitos de seus ocupantes. É prática e não se deixa levar por fantasias.</p></li>
 </ul>
 <p>Nossos personagens podem ser vistos na imagem abaixo:</p>
-<p>::: <img src=".\images/personagens.webp" class="img-fluid"> :::</p>
+<div class="![](/images/personagens.webp)">
 <p><strong>2. Mapa da Mansão Hollow (Descrição Textual)</strong>: A Mansão Hollow é uma construção vitoriana de dois andares, com um vasto terreno.</p>
 <ul>
 <li><p><strong>Térreo</strong>:</p>
@@ -703,7 +843,7 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 </ul></li>
 </ul>
 <p>Alguns ambientes da Mansão Hollow podem ser vistos na imagem abaixo:</p>
-<p>::: <img src=".\images/ambientes.webp" class="img-fluid"> :::</p>
+<div class="![](/images/ambientes.webp)">
 <p><strong>3. Linha do Tempo (Segunda-feira, 18 de Maio de 1935)</strong></p>
 <ul>
 <li><p><strong>08:00</strong>: Café da manhã servido na sala de jantar. Sra. Blackwood preside. Sr.&nbsp;Blackwood não comparece, o que, segundo Sra. Blackwood, era comum quando ele estava imerso em trabalho.</p></li>
@@ -773,8 +913,6 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 <li><p><strong>Pista 4: Marca Estranha no Batente da Janela Aberta do Laboratório</strong>: Do lado de fora do batente da janela do laboratório, há uma leve marca de fuligem ou graxa escura, como se algo metálico e sujo tivesse sido apoiado ali brevemente.</p></li>
 <li><p><strong>Pista 5: Na Estufa Abandonada (Jardim dos Fundos)</strong>: Dentro da estufa, sobre uma bancada empoeirada, alguém desenhou com o dedo na poeira um símbolo: um triângulo equilátero com um pequeno círculo no centro. Ao lado do desenho, um único fósforo queimado. Não há outras pegadas recentes visíveis devido ao solo irregular e coberto de folhas secas.</p></li>
 </ul>
-</section>
-</section>
 <section id="solução-do-mistério-da-mansão-hollow-1935" class="level2" data-number="14.7">
 <h2 data-number="14.7" class="anchored" data-anchor-id="solução-do-mistério-da-mansão-hollow-1935"><span class="header-section-number">14.7</span> Solução do Mistério da Mansão Hollow (1935)</h2>
 <section id="análise-intuitiva" class="level3" data-number="14.7.1">
@@ -815,7 +953,7 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 <li><em>Sigma</em> pode ser código para protocolo de evacuação;</li>
 <li>Mensagem: <em>Se ameaçado, negue tudo por meio do desaparecimento</em>.</li>
 </ul>
-<p><strong>Pista 3</strong>: <em><span class="math inline">\((\neg P \lor Q)\)</span> é equivalente a?</em></p>
+<p><strong>Pista 3</strong>: <span class="math inline">\((\neg P \lor Q)\)</span> é equivalente a?</p>
 <ul>
 <li>Equivalente a <span class="math inline">\((P \to Q)\)</span> (implicação material);</li>
 <li>Localização no livro que Clara pegou não é coincidência;</li>
@@ -831,8 +969,8 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 </section>
 <section id="solução-formal-com-lógica-versão-detalhada" class="level3" data-number="14.7.2">
 <h3 data-number="14.7.2" class="anchored" data-anchor-id="solução-formal-com-lógica-versão-detalhada"><span class="header-section-number">14.7.2</span> Solução Formal com Lógica (Versão Detalhada)</h3>
-<section id="definições-2" class="level4" data-number="14.7.2.1">
-<h4 data-number="14.7.2.1" class="anchored" data-anchor-id="definições-2"><span class="header-section-number">14.7.2.1</span> Definições</h4>
+<section id="definições" class="level4" data-number="14.7.2.1">
+<h4 data-number="14.7.2.1" class="anchored" data-anchor-id="definições"><span class="header-section-number">14.7.2.1</span> Definições</h4>
 <p><strong>Constantes</strong>:</p>
 <ul>
 <li><span class="math inline">\(a\)</span>: Sir Arthur Blackwood;</li>
@@ -923,50 +1061,70 @@ t_6 &amp;: \text{Viagem}(F, G, t_6) \to \text{Margem}(F, t_7) = \text{Margem}(G,
 <li>Mas chegou tarde demais;</li>
 <li>Tornou-se o suspeito perfeito.</li>
 </ul>
-
-
 </section>
+</section>
+</div>
+</div>
+</section>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -974,184 +1132,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1159,185 +1317,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./08-verificacao-formal-de-programas.html" class="pagination-link" aria-label="Verificação Formal de Programas: Lógica de Hoare e Indução Estrutural">
