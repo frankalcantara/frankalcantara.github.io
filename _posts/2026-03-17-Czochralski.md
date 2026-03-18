@@ -1,4 +1,4 @@
-
+---
 layout: post
 title: O Processo Czochralski, como se puxa um cristal quase perfeito
 author: Frank
@@ -80,7 +80,7 @@ schema: |
   }
 slug: processo-czochralski-silicio-monocristalino-semicondutores
 toc: true
-
+---
 
 ## Uma descoberta acidental, mas não um acidente histórico
 
