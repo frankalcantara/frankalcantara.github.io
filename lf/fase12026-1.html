@@ -521,6 +521,19 @@ Warning
 <li>Garantir que o resultado do programa, ou as interações necessárias, sejam realizadas por meio das interfaces disponíveis no Cpulator-ARMv7 DEC1-SOC(v16.1) (display, leds, botões, chaves, etc.).</li>
 <li>Hospedar o código, arquivos de teste e documentação em um repositório público no <strong>GitHub</strong>.</li>
 </ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Você está criando um compilador, esta é apenas a primeira fase. A regra mais importante de todas é: nenhum cálculo escrito na linguagem que você está criando pode ser realizado no seu programa em Python, C ou C++. O código Assembly gerado deve ser funcional e compatível com a arquitetura ARMv7 DEC1-SOC(v16.1) para que o resultado do programa seja obtido pelo cálculo realizado no Cpulator-ARMv7 DEC1-SOC(v16.1). <strong>Se você encontrar qualquer função cujo nome lembre uma operação, ou função que você deva executar em Python, C ou C++ para realizar um cálculo, ou uma operação, ou um comando especial, você deve parar e repensar a implementação.</strong>. Talvez para testes, talvez seja um indicativo de funções que terão que ser criadas para construir o Assembly. O código Python, C ou C++ deve apenas ler o arquivo de teste, fazer a análise léxica, e gerar o código Assembly. O código Assembly é que deve realizar os cálculos e as operações.</p>
+</div>
+</div>
 <section id="características-especiais-da-linguagem" class="level3" data-number="26.2.1">
 <h3 data-number="26.2.1" class="anchored" data-anchor-id="características-especiais-da-linguagem"><span class="header-section-number">26.2.1</span> Características Especiais da Linguagem</h3>
 <p>As expressões devem ser escritas em notação RPN, no formato <code>(A B op)</code>, no qual <code>A</code> e <code>B</code> são <strong>números reais de 64 bits</strong>, e <code>op</code> é um operador aritmético entre os listados neste documento. O programa deve suportar apenas as operações aritméticas básicas listadas neste documento e os comandos especiais para manipulação de memória também listados neste documento. Além disso, o programa deve ser capaz de lidar com expressões aninhadas sem limites de aninhamento.</p>
