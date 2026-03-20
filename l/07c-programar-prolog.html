@@ -557,7 +557,13 @@ Table&nbsp;12.1: Tabela com os predicados de I/O mais comuns no SWI-Prolog.
 </section>
 <section id="predicados-aritméticos" class="level3" data-number="12.3.2">
 <h3 data-number="12.3.2" class="anchored" data-anchor-id="predicados-aritméticos"><span class="header-section-number">12.3.2</span> Predicados Aritméticos</h3>
-<p>A aritmética em Prolog é realizada por meio de avaliação explícita, diferenciando-se da unificação. Uma expressão como <code>3 + 4</code> é apenas um termo, <code>+(3, 4)</code>, até ser avaliada. O predicado <code>is/2</code> é usado para avaliar expressões aritméticas, e os operadores de comparação numérica avaliam ambos os lados. A tabela <span class="quarto-unresolved-ref">?tbl-predicados-aritmeticos</span> resume os principais predicados e operadores aritméticos.</p>
+<p>A aritmética em Prolog é realizada por meio de avaliação explícita, diferenciando-se da unificação. Uma expressão como <code>3 + 4</code> é apenas um termo, <code>+(3, 4)</code>, até ser avaliada. O predicado <code>is/2</code> é usado para avaliar expressões aritméticas, e os operadores de comparação numérica avaliam ambos os lados. A tabela <a href="#tbl-predicados-aritmeticos" class="quarto-xref">Table&nbsp;<span>12.2</span></a> resume os principais predicados e operadores aritméticos.</p>
+<div id="tbl-predicados-aritmeticos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predicados-aritmeticos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;12.2: Tabela com os principais predicados e operadores aritméticos do SWI-Prolog.
+</figcaption>
+<div aria-describedby="tbl-predicados-aritmeticos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -604,14 +610,17 @@ Table&nbsp;12.1: Tabela com os predicados de I/O mais comuns no SWI-Prolog.
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="predicados-de-agregação-de-soluções" class="level3" data-number="12.3.3">
 <h3 data-number="12.3.3" class="anchored" data-anchor-id="predicados-de-agregação-de-soluções"><span class="header-section-number">12.3.3</span> <strong>Predicados de Agregação de Soluções</strong></h3>
-<p>O Prolog pode encontrar todas as soluções para uma consulta por meio do <em>backtracking</em>. Os predicados de “todas as soluções” aproveitam essa capacidade para coletar os resultados em uma única lista. A tabela <a href="#tbl-predicados-agregacao" class="quarto-xref">Table&nbsp;<span>12.2</span></a> resume os três predicados principais para este propósito: <code>findall/3</code>, <code>bagof/3</code> e <code>setof/3</code>.</p>
+<p>O Prolog pode encontrar todas as soluções para uma consulta por meio do <em>backtracking</em>. Os predicados de “todas as soluções” aproveitam essa capacidade para coletar os resultados em uma única lista. A tabela <a href="#tbl-predicados-agregacao" class="quarto-xref">Table&nbsp;<span>12.3</span></a> resume os três predicados principais para este propósito: <code>findall/3</code>, <code>bagof/3</code> e <code>setof/3</code>.</p>
 <div id="tbl-predicados-agregacao" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predicados-agregacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;12.2: Tabela comparativa dos predicados de agregação de soluções no SWI-Prolog.
+Table&nbsp;12.3: Tabela comparativa dos predicados de agregação de soluções no SWI-Prolog.
 </figcaption>
 <div aria-describedby="tbl-predicados-agregacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -701,11 +710,11 @@ Note
 </section>
 <section id="predicados-de-ordenação-de-listas" class="level3" data-number="12.3.4">
 <h3 data-number="12.3.4" class="anchored" data-anchor-id="predicados-de-ordenação-de-listas"><span class="header-section-number">12.3.4</span> <strong>Predicados de Ordenação de Listas</strong></h3>
-<p>A ordenação é uma operação comum, e o Prolog fornece vários predicados para essa finalidade, com a principal diferença sendo o tratamento de elementos duplicados. Novamente, uma tabela comparativa <a href="#tbl-predicados-ordenacao" class="quarto-xref">Table&nbsp;<span>12.3</span></a> resume os dois predicados mais usados: <code>sort/2</code> e <code>msort/2</code>.</p>
+<p>A ordenação é uma operação comum, e o Prolog fornece vários predicados para essa finalidade, com a principal diferença sendo o tratamento de elementos duplicados. Novamente, uma tabela comparativa <a href="#tbl-predicados-ordenacao" class="quarto-xref">Table&nbsp;<span>12.4</span></a> resume os dois predicados mais usados: <code>sort/2</code> e <code>msort/2</code>.</p>
 <div id="tbl-predicados-ordenacao" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-predicados-ordenacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;12.3: Tabela comparativa dos predicados de ordenação de listas no SWI-Prolog.
+Table&nbsp;12.4: Tabela comparativa dos predicados de ordenação de listas no SWI-Prolog.
 </figcaption>
 <div aria-describedby="tbl-predicados-ordenacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">

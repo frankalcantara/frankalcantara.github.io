@@ -817,7 +817,7 @@ P \wedge (Q \vee (P \wedge R)) &amp;\equiv (P \wedge Q) \vee (P \wedge (P \wedge
 P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)) &amp;&amp; \text{(7)} \\
 &amp;\equiv (\neg P \vee Q) \wedge (\neg P \vee (R \vee P)) &amp;&amp; \text{(4)} \\
 &amp;\equiv (\neg P \vee Q) \wedge (R \vee \neg P \vee P) &amp;&amp; \text{(2)} \\
-&amp;\equiv (\neg P \vee Q) \wedge $TRUE$ &amp;&amp; \text{(11)} \\
+&amp;\equiv (\neg P \vee Q) \wedge \text{TRUE} &amp;&amp; \text{(11)} \\
 &amp;\equiv \neg P \vee Q &amp;&amp; \text{(14)}
 \end{align*}
 \]</span></p>
@@ -846,8 +846,8 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 (P \rightarrow Q) \vee (R \rightarrow S) \vee (E \rightarrow P) &amp;\equiv (\neg P \vee Q) \vee (\neg R \vee S) \vee (\neg E \vee P) &amp;&amp; \text{Definição de Implicação} \\
 &amp;\equiv \neg P \vee Q \vee \neg R \vee S \vee \neg E \vee P &amp;&amp; \text{Associatividade da Disjunção} \\
 &amp;\equiv (\neg P \vee P) \vee Q \vee \neg R \vee S \vee \neg E &amp;&amp; \text{Comutatividade da Disjunção} \\
-&amp;\equiv$TRUE$\vee Q \vee \neg R \vee S \vee \neg E &amp;&amp; \text{Lei do Terceiro Excluído} \\
-&amp;\equiv$TRUE$&amp;&amp; \text{Lei da Dominação da Disjunção}
+&amp;\equiv\text{TRUE}\vee Q \vee \neg R \vee S \vee \neg E &amp;&amp; \text{Lei do Terceiro Excluído} \\
+&amp;\equiv\text{TRUE}&amp;&amp; \text{Lei da Dominação da Disjunção}
 \end{align*}
 \]</span></p>
 <p>A expressão se simplifica para<span class="math inline">\(TRUE\)</span>pela lei da dominação, que estabelece que <span class="math inline">\(TRUE \vee X \equiv TRUE\)</span> para qualquer proposição <span class="math inline">\(X\)</span>.</p>
@@ -1122,17 +1122,17 @@ P \rightarrow (Q \wedge (R \vee P)) &amp;\equiv \neg P \vee (Q \wedge (R \vee P)
 <li>Linha 5: <span class="math inline">\((R \wedge S) = TRUE\)</span>, <span class="math inline">\((\neg E \wedge P) = TRUE\)</span></li>
 </ul>
 <p>Esses casos mostram que a fórmula é <strong>satisfatível</strong>, pois há valorações em que ela é verdadeira.</p></li>
-<li><p><strong>Casos em que a fórmula é FALSE</strong>: Na última linha ($P = <span class="math inline">\(FALSE\)</span>, Q = <span class="math inline">\(TRUE\)</span>, R = <span class="math inline">\(FALSE\)</span>, S = <span class="math inline">\(TRUE\)</span>, E = <span class="math inline">\(TRUE\)</span>$):</p>
+<li><p><strong>Casos em que a fórmula é FALSE</strong>: Na última linha (<span class="math inline">\(P = \text{FALSE}, Q = \text{TRUE}, R = \text{FALSE}, S = \text{TRUE}, E = \text{TRUE}\)</span>):</p>
 <ul>
-<li>$(P Q) = <span class="math inline">\(FALSE\)</span> <span class="math inline">\(TRUE\)</span> = <span class="math inline">\(FALSE\)</span>$</li>
-<li>$(R S) = <span class="math inline">\(FALSE\)</span> <span class="math inline">\(TRUE\)</span> = <span class="math inline">\(TRUE\)</span> <span class="math inline">\(FALSE\)</span> = <span class="math inline">\(FALSE\)</span>$</li>
-<li>$(R S) = <span class="math inline">\(FALSE\)</span> <span class="math inline">\(TRUE\)</span> = <span class="math inline">\(FALSE\)</span>$</li>
-<li>$(E P) = <span class="math inline">\(TRUE\)</span> <span class="math inline">\(FALSE\)</span> = <span class="math inline">\(FALSE\)</span> <span class="math inline">\(FALSE\)</span> = <span class="math inline">\(FALSE\)</span>$</li>
-<li>Resultado: <span class="math display">\[FALSE$ \vee $FALSE$ \vee $FALSE$ \vee $FALSE$ = $FALSE\]</span></li>
+<li><span class="math inline">\((P \wedge Q) = \text{FALSE} \wedge \text{TRUE} = \text{FALSE}\)</span></li>
+<li><span class="math inline">\((\neg R \wedge \neg S) = \neg \text{FALSE} \wedge \neg \text{TRUE} = \text{TRUE} \wedge \text{FALSE} = \text{FALSE}\)</span></li>
+<li><span class="math inline">\((R \wedge S) = \text{FALSE} \wedge \text{TRUE} = \text{FALSE}\)</span></li>
+<li><span class="math inline">\((\neg E \wedge P) = \neg \text{TRUE} \wedge \text{FALSE} = \text{FALSE} \wedge \text{FALSE} = \text{FALSE}\)</span></li>
+<li>Resultado: <span class="math inline">\(\text{FALSE} \vee \text{FALSE} \vee \text{FALSE} \vee \text{FALSE} = \text{FALSE}\)</span></li>
 </ul>
 <p>Esse caso mostra que a fórmula é <strong>falsificável</strong>, pois há uma valoração em que ela é falsa.</p></li>
 </ul>
-<p><strong>Conclusão</strong>: A fórmula <span class="math inline">\((P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P))\)</span> simplifica para <span class="math inline">\((P \wedge Q) \vee (\neg R \wedge \neg S) \vee (R \wedge S) \vee (\neg E \wedge P)\)</span>. Ela é <strong>satisfatível</strong>, pois há valorações em que é verdadeira, mas também é <strong>falsificável</strong>, pois existe pelo menos uma valoração ($P = <span class="math inline">\(FALSE\)</span>, Q = <span class="math inline">\(TRUE\)</span>, R = <span class="math inline">\(FALSE\)</span>, S = <span class="math inline">\(TRUE\)</span>, E = <span class="math inline">\(TRUE\)</span>$) em que é falsa. Portanto, a fórmula <strong>não é uma tautologia</strong>. A tabela-verdade parcial apresentada é suficiente para confirmar essas propriedades, evitando a necessidade de uma tabela completa com 32 linhas.</p>
+<p><strong>Conclusão</strong>: A fórmula <span class="math inline">\((P \wedge Q) \vee ((\neg R \leftrightarrow S) \rightarrow (\neg E \wedge P))\)</span> simplifica para <span class="math inline">\((P \wedge Q) \vee (\neg R \wedge \neg S) \vee (R \wedge S) \vee (\neg E \wedge P)\)</span>. Ela é <strong>satisfatível</strong>, pois há valorações em que é verdadeira, mas também é <strong>falsificável</strong>, pois existe pelo menos uma valoração (<span class="math inline">\(P = \text{FALSE}, Q = \text{TRUE}, R = \text{FALSE}, S = \text{TRUE}, E = \text{TRUE}\)</span>) em que é falsa. Portanto, a fórmula <strong>não é uma tautologia</strong>. A tabela-verdade parcial apresentada é suficiente para confirmar essas propriedades, evitando a necessidade de uma tabela completa com 32 linhas.</p>
 <p><strong>Exemplo 10</strong>: Simplificação e Análise da Fórmula <span class="math inline">\(\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))\)</span></p>
 <p>Vamos simplificar a fórmula <span class="math inline">\(\neg(P \wedge (Q \vee R)) \leftrightarrow (\neg(S \rightarrow E) \vee \neg(P \rightarrow Q))\)</span> passo a passo e analisar suas propriedades lógicas.</p>
 <p>Simplifiquemos ambos os lados da equivalência separadamente:</p>
@@ -2041,13 +2041,13 @@ Table&nbsp;4.4: Resumo dos métodos de inferência.
 \hline
 P &amp; Q &amp; P \land Q \\
 \hline
-$FALSE$ &amp; $FALSE$ &amp; $FALSE$ \\
+\text{FALSE} &amp; \text{FALSE} &amp; \text{FALSE} \\
 \hline
-$FALSE$ &amp; $TRUE$ &amp; $FALSE$ \\
+\text{FALSE} &amp; \text{TRUE} &amp; \text{FALSE} \\
 \hline
-$TRUE$ &amp; $FALSE$ &amp; $FALSE$ \\
+\text{TRUE} &amp; \text{FALSE} &amp; \text{FALSE} \\
 \hline
-$TRUE$ &amp; $TRUE$ &amp; $TRUE$ \\
+\text{TRUE} &amp; \text{TRUE} &amp; \text{TRUE} \\
 \hline
 \end{array}\]</span></p>
 <ul>

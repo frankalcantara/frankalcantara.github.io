@@ -435,7 +435,7 @@ window.Quarto = {
 </ol>
 <p><span class="math display">\[\neg [\forall x (Programa(x) \to \exists y (Bug(y) \wedge Tem(x,y)))]\]</span></p>
 <p><span class="math display">\[\equiv \exists x \neg [Programa(x) \to \exists y (Bug(y) \wedge Tem(x,y))]\]</span></p>
-<p><span class="math display">\[\equiv \exists x [\Programa(x) \wedge \neg \exists y (Bug(y) \wedge Tem(x,y))]\]</span></p>
+<p><span class="math display">\[\equiv \exists x [Programa(x) \wedge \neg \exists y (Bug(y) \wedge Tem(x,y))]\]</span></p>
 <p><span class="math display">\[\equiv \exists x [Programa(x) \wedge \forall y \neg (Bug(y) \wedge Tem(x,y))]\]</span></p>
 <p><span class="math display">\[\equiv \exists x [Programa(x) \wedge \forall y (Bug(y) \to \neg Tem(x,y))]\]</span></p>
 <p><strong>Tradução</strong>: “Existe um programa de computador que não tem nenhum bug”</p>
