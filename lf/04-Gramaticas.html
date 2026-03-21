@@ -607,9 +607,14 @@ Tip
 S \rightarrow aSb \vert \epsilon
 \]</span></p>
 <p>Nesta gramática o símbolo <span class="math inline">\(\epsilon\)</span> representa a <em>string</em> vazia. A regra recursiva <span class="math inline">\(S \rightarrow aSb\)</span> encapsula perfeitamente a capacidade de aninhamento que define as Linguagens Livres de Contexto. Outros exemplos práticos que exigem o poder das Linguagens Livres de Contexto incluem a linguagem dos palíndromos (ex.: <em>radar</em>) e a linguagem de estruturas XML arbitrariamente aninhadas não é expressável por linguagens regulares no sentido formal clássico.</p>
-<p>A atenta leitora deve observar que essa progressão não é apenas um exercício teórico. A necessidade prática de analisar a sintaxe de linguagens de programação, que são repletas de construções aninhadas como laços, condicionais e chamadas de função, é a força motriz que torna as linguagens regulares insuficientes e as Linguagens Livres de Contexto absolutamente essenciais para a ciência da computação. A Tabela <span class="quarto-unresolved-ref">?tbl-resumo1</span> condensa as diferenças entre linguagens regulares e Linguagens Livres de Contexto.</p>
+<p>A atenta leitora deve observar que essa progressão não é apenas um exercício teórico. A necessidade prática de analisar a sintaxe de linguagens de programação, que são repletas de construções aninhadas como laços, condicionais e chamadas de função, é a força motriz que torna as linguagens regulares insuficientes e as Linguagens Livres de Contexto absolutamente essenciais para a ciência da computação. A Tabela <a href="#tbl-resumo1" class="quarto-xref">Table&nbsp;<span>5.1</span></a> condensa as diferenças entre linguagens regulares e Linguagens Livres de Contexto.</p>
+<div id="tbl-resumo1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-resumo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Resumo das características e diferenças das linguagens regulares e livres de contexto.
+</figcaption>
+<div aria-describedby="tbl-resumo1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Resumo das características e diferenças das linguagens regulares e livres de contexto.{#tbl-resumo1}</caption>
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -655,6 +660,9 @@ S \rightarrow aSb \vert \epsilon
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 </section>
 <section id="sec-anatomia-gramaticas-livres-de-contexto" class="level2" data-number="5.2">
@@ -878,11 +886,11 @@ dígito = "0" | "1" | ... | "9";</code></pre>
 </section>
 <section id="comparação-com-gramáticas-livres-de-contexto" class="level3" data-number="5.3.4">
 <h3 data-number="5.3.4" class="anchored" data-anchor-id="comparação-com-gramáticas-livres-de-contexto"><span class="header-section-number">5.3.4</span> Comparação com Gramáticas Livres de Contexto</h3>
-<p>A <span class="math inline">\(BNF\)</span> é essencialmente uma notação alternativa para Gramáticas Livres de Contexto. A correspondência é direta, como pode ser visto na <a href="#tbl-compara2" class="quarto-xref">Table&nbsp;<span>5.1</span></a>:</p>
+<p>A <span class="math inline">\(BNF\)</span> é essencialmente uma notação alternativa para Gramáticas Livres de Contexto. A correspondência é direta, como pode ser visto na <a href="#tbl-compara2" class="quarto-xref">Table&nbsp;<span>5.2</span></a>:</p>
 <div id="tbl-compara2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;5.1: Correspondência entre elementos de Gramáticas Livres de Contexto e notação <span class="math inline">\(BNF\)</span>.
+Table&nbsp;5.2: Correspondência entre elementos de Gramáticas Livres de Contexto e notação <span class="math inline">\(BNF\)</span>.
 </figcaption>
 <div aria-describedby="tbl-compara2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
