@@ -698,7 +698,7 @@ Tip
 <h4 data-number="6.4.1.1" class="anchored" data-anchor-id="regras-de-criação-do-conjunto-nullable"><span class="header-section-number">6.4.1.1</span> Regras de Criação do Conjunto NULLABLE</h4>
 <p>Para construir o conjunto de todos os símbolos não-terminais <em>NULLABLE</em> de uma gramática, aplicamos as seguintes regras de forma iterativa até que o conjunto não mude mais:</p>
 <ol type="1">
-<li><strong>Regra Base (Nulidade Direta)</strong>: Se existe uma produção da forma <span class="math inline">\(A \rightarrow ε\)</span>, então <span class="math inline">\(A\)</span> é adicionado ao conjunto <em>NULLABLE</em>.</li>
+<li><strong>Regra Base (Nulidade Direta)</strong>: Se existe uma produção da forma <span class="math inline">\(A \rightarrow \epsilon\)</span>, então <span class="math inline">\(A\)</span> é adicionado ao conjunto <em>NULLABLE</em>.</li>
 <li><strong>Regra de Indução (Nulidade Indireta)</strong>: Se existe uma produção da forma <span class="math inline">\(A \rightarrow Y₁Y₂...Yₙ\)</span>, e <strong>todos</strong> os símbolos <span class="math inline">\(Y₁\)</span>, <span class="math inline">\(Y₂\)</span>, …, <span class="math inline">\(Yₙ\)</span> já foram identificados como <em>NULLABLE</em>, então <span class="math inline">\(A\)</span> também é adicionado ao conjunto.</li>
 </ol>
 </section>
@@ -708,9 +708,9 @@ Tip
 <p><span class="math display">\[
 \begin{array}{c}
 S \rightarrow A B C \\
-&amp;A \rightarrow a | ε \\
+&amp;A \rightarrow a | \epsilon \\
 &amp;B \rightarrow C D \\
-&amp;C \rightarrow c | ε \\
+&amp;C \rightarrow c | \epsilon \\
 &amp;D \rightarrow A
 \end{array}
 \]</span></p>
