@@ -22,7 +22,7 @@ rating: 5
 description: Como o processo Czochralski transforma silício policristalino em monocristais de alta pureza que sustentam toda a indústria de semicondutores. Da descoberta acidental de Jan Czochralski em 1916 às limitações físicas, químicas e geométricas que a engenharia aprendeu a administrar.
 date: 2026-03-17T10:00:00.000Z
 preview: Em 1916, Jan Czochralski mergulhou a pena no lugar errado e descobriu o princípio que hoje governa a fabricação de bilhões de transistores. Neste artigo, entendemos como o processo Czochralski converte silício policristalino em monocristais de alta pureza — e por que produzir um cristal "quase perfeito" é uma luta contínua contra a termodinâmica, a química e a geometria.
-lastmod: 2026-03-29T21:14:53.529Z
+lastmod: 2026-03-30T17:50:43.534Z
 keywords:
   - processo-Czochralski
   - silício-monocristalino
