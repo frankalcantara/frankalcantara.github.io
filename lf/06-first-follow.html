@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Conjuntos FIRST e FOLLOW – Linguagens Formais e Autômatos</title>
+<title>7&nbsp; Os Conjuntos FIRST e FOLLOW e a Tabela de Parser LL(1) – Linguagens Formais e Autômatos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./06-first-follow.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./06-first-follow.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Os Conjuntos FIRST e FOLLOW e a Tabela de Parser LL(1)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -235,7 +235,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Os Conjuntos FIRST e FOLLOW e a Tabela de Parser LL(1)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -479,12 +479,31 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#regras-de-criação-do-conjunto-first" id="toc-regras-de-criação-do-conjunto-first" class="nav-link" data-scroll-target="#regras-de-criação-do-conjunto-first"><span class="header-section-number">7.1.1</span> Regras de Criação do Conjunto FIRST</a></li>
   <li><a href="#exemplo-1-criação-de-conjuntos-first" id="toc-exemplo-1-criação-de-conjuntos-first" class="nav-link" data-scroll-target="#exemplo-1-criação-de-conjuntos-first"><span class="header-section-number">7.1.2</span> Exemplo 1: Criação de Conjuntos FIRST</a></li>
-  <li><a href="#algoritmo-para-calcular-o-conjunto-first" id="toc-algoritmo-para-calcular-o-conjunto-first" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">7.1.3</span> Algoritmo para calcular o conjunto FIRST</a></li>
+  <li><a href="#exemplo-2-parte-a-criação-de-conjuntos-first" id="toc-exemplo-2-parte-a-criação-de-conjuntos-first" class="nav-link" data-scroll-target="#exemplo-2-parte-a-criação-de-conjuntos-first"><span class="header-section-number">7.1.3</span> Exemplo 2 (Parte A): Criação de Conjuntos FIRST</a></li>
+  <li><a href="#algoritmo-para-calcular-o-conjunto-first" id="toc-algoritmo-para-calcular-o-conjunto-first" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">7.1.4</span> Algoritmo para calcular o conjunto FIRST</a></li>
   </ul></li>
   <li><a href="#o-conjunto-follow" id="toc-o-conjunto-follow" class="nav-link" data-scroll-target="#o-conjunto-follow"><span class="header-section-number">7.2</span> O Conjunto FOLLOW</a>
   <ul class="collapse">
   <li><a href="#exemplo-1-criação-de-conjuntos-follow" id="toc-exemplo-1-criação-de-conjuntos-follow" class="nav-link" data-scroll-target="#exemplo-1-criação-de-conjuntos-follow"><span class="header-section-number">7.2.1</span> Exemplo 1: Criação de Conjuntos FOLLOW</a></li>
-  <li><a href="#algoritmo-para-calcular-o-conjunto-follow" id="toc-algoritmo-para-calcular-o-conjunto-follow" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">7.2.2</span> Algoritmo para calcular o conjunto FOLLOW</a></li>
+  <li><a href="#exemplo-2-parte-b-criação-de-conjuntos-follow" id="toc-exemplo-2-parte-b-criação-de-conjuntos-follow" class="nav-link" data-scroll-target="#exemplo-2-parte-b-criação-de-conjuntos-follow"><span class="header-section-number">7.2.2</span> Exemplo 2 (Parte B): Criação de Conjuntos FOLLOW</a></li>
+  <li><a href="#algoritmo-para-calcular-o-conjunto-follow" id="toc-algoritmo-para-calcular-o-conjunto-follow" class="nav-link" data-scroll-target="#algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">7.2.3</span> Algoritmo para calcular o conjunto FOLLOW</a></li>
+  <li><a href="#exemplo-3-criação-de-conjuntos-first-e-follow-completos" id="toc-exemplo-3-criação-de-conjuntos-first-e-follow-completos" class="nav-link" data-scroll-target="#exemplo-3-criação-de-conjuntos-first-e-follow-completos"><span class="header-section-number">7.2.4</span> Exemplo 3: Criação de Conjuntos FIRST e FOLLOW completos</a></li>
+  </ul></li>
+  <li><a href="#a-tabela-de-derivação-ll1" id="toc-a-tabela-de-derivação-ll1" class="nav-link" data-scroll-target="#a-tabela-de-derivação-ll1"><span class="header-section-number">7.3</span> A Tabela de Derivação LL(1)</a>
+  <ul class="collapse">
+  <li><a href="#regras-de-criação-da-tabela" id="toc-regras-de-criação-da-tabela" class="nav-link" data-scroll-target="#regras-de-criação-da-tabela"><span class="header-section-number">7.3.1</span> Regras de Criação da Tabela</a></li>
+  <li><a href="#construindo-a-tabela-exercício-1" id="toc-construindo-a-tabela-exercício-1" class="nav-link" data-scroll-target="#construindo-a-tabela-exercício-1"><span class="header-section-number">7.3.2</span> Construindo a Tabela: Exercício 1</a></li>
+  <li><a href="#construindo-a-tabela-exercício-2" id="toc-construindo-a-tabela-exercício-2" class="nav-link" data-scroll-target="#construindo-a-tabela-exercício-2"><span class="header-section-number">7.3.3</span> Construindo a Tabela: Exercício 2</a></li>
+  <li><a href="#exemplo-prático-1-declaração-de-variáveis" id="toc-exemplo-prático-1-declaração-de-variáveis" class="nav-link" data-scroll-target="#exemplo-prático-1-declaração-de-variáveis"><span class="header-section-number">7.3.4</span> Exemplo Prático 1: Declaração de Variáveis</a></li>
+  <li><a href="#exemplo-prático-2-expressões-booleanas" id="toc-exemplo-prático-2-expressões-booleanas" class="nav-link" data-scroll-target="#exemplo-prático-2-expressões-booleanas"><span class="header-section-number">7.3.5</span> Exemplo Prático 2: Expressões Booleanas</a></li>
+  </ul></li>
+  <li><a href="#exercícios-sobre-os-conjuntos-first-follow-e-a-tabela-de-parser-ll1" id="toc-exercícios-sobre-os-conjuntos-first-follow-e-a-tabela-de-parser-ll1" class="nav-link" data-scroll-target="#exercícios-sobre-os-conjuntos-first-follow-e-a-tabela-de-parser-ll1"><span class="header-section-number">7.4</span> Exercícios sobre os Conjuntos FIRST, FOLLOW e a Tabela de Parser LL(1)</a>
+  <ul class="collapse">
+  <li><a href="#exercício-1-lista-opcional-de-parâmetros" id="toc-exercício-1-lista-opcional-de-parâmetros" class="nav-link" data-scroll-target="#exercício-1-lista-opcional-de-parâmetros"><span class="header-section-number">7.4.1</span> Exercício 1: Lista opcional de parâmetros</a></li>
+  <li><a href="#exercício-2-comandos-condicionais-com-parte-opcional" id="toc-exercício-2-comandos-condicionais-com-parte-opcional" class="nav-link" data-scroll-target="#exercício-2-comandos-condicionais-com-parte-opcional"><span class="header-section-number">7.4.2</span> Exercício 2: Comandos condicionais com parte opcional</a></li>
+  <li><a href="#exercício-3-sequência-de-fatores-multiplicativos" id="toc-exercício-3-sequência-de-fatores-multiplicativos" class="nav-link" data-scroll-target="#exercício-3-sequência-de-fatores-multiplicativos"><span class="header-section-number">7.4.3</span> Exercício 3: Sequência de fatores multiplicativos</a></li>
+  <li><a href="#exercício-4-bloco-com-lista-de-comandos" id="toc-exercício-4-bloco-com-lista-de-comandos" class="nav-link" data-scroll-target="#exercício-4-bloco-com-lista-de-comandos"><span class="header-section-number">7.4.4</span> Exercício 4: Bloco com lista de comandos</a></li>
+  <li><a href="#exercício-5-gramática-com-conflito-de-escolha" id="toc-exercício-5-gramática-com-conflito-de-escolha" class="nav-link" data-scroll-target="#exercício-5-gramática-com-conflito-de-escolha"><span class="header-section-number">7.4.5</span> Exercício 5: Gramática com conflito de escolha</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/06-first-follow.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -496,9 +515,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./06-first-follow.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./06-first-follow.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Os Conjuntos FIRST e FOLLOW e a Tabela de Parser LL(1)</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-first-follow" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Conjuntos FIRST e FOLLOW</span></span></h1>
+<h1 class="title"><span id="sec-first-follow" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Os Conjuntos FIRST e FOLLOW e a Tabela de Parser LL(1)</span></span></h1>
 </div>
 
 
@@ -517,14 +536,14 @@ window.Quarto = {
 
 <p>Não dá nem para começar a pensar em criar um <em>parser</em> <span class="math inline">\(LL(1)\)</span> se não entender os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>. <a href="https://frankalcantara.com/parsers-ll(1)/">Também não dá para entender estes conjuntos se não souber o que é um <em>parser</em> <span class="math inline">\(LL(1)\)</span></a> Imagine que você está aprendendo um novo idioma. Para formar frases corretas, você precisará entender quais palavras podem vir antes ou depois de outras. Ou corre o risco de falar como o Yoda. Se quiser evitar ser confundido com um velho alienígena, precisa aprender, no mínimo, a ordem das palavras, muito antes de entender a classe gramatical destas mesmas palavras. Como uma criança aprendendo a falar.</p>
 <p>Eu forcei um pouco a barra na metáfora, mas na análise sintática de linguagens livres de contexto, os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> desempenham um papel importante que quase valida minha metáfora. Estes conjuntos ajudam a decifrar a gramática da linguagem de forma determinística determinando as regras de produção que serão aplicadas aos símbolos da <em>string</em> de entrada para garantir que ele faça parte da linguagem.</p>
-<p>O conjunto <span class="math inline">\(FIRST\)</span> de um símbolo não-terminal será composto dos símbolos terminais que podem aparecer como <strong>primeiro símbolo</strong> de qualquer sequência de símbolos que seja derivada desse não-terminal. Em outras palavras, o conjunto <span class="math inline">\(FIRST\)</span> indica quais terminais podem iniciar uma declaração válida (frase) dentro da estrutura gramática definida por um não-terminal. Por exemplo, considere uma gramática para definir expressões aritméticas. O não-terminal <em>EXPR</em> pode derivar diversas sequências de símbolos, como <em>2 + 3</em>, <em>(4 </em> 5)<em>, </em>x - y<em>. O conjunto <span class="math inline">\(FIRST\)</span> do não-terminal </em>EXPR* seria, neste caso específico, <span class="math inline">\({número, '+', '-', '('}\)</span>, porque esses são os símbolos que podem iniciar qualquer expressão aritmética válida nesta gramática até onde podemos saber com as informações passadas neste parágrafo. Uma gramática para todas as expressões aritméticas possíveis teria um conjunto <span class="math inline">\(FIRST\)</span> maior.</p>
-<p>O conjunto <span class="math inline">\(FOLLOW\)</span>, por sua vez, determina o conjunto de símbolos terminais que podem aparecer <strong>imediatamente após</strong> um não-terminal em alguma derivação da gramática. Ou colocando de outra forma, o conjunto <span class="math inline">\(FOLLOW\)</span> indica quais terminais podem seguir (<em>follow</em>) um não-terminal em uma declaração válida da linguagem.</p>
+<p>O conjunto <span class="math inline">\(FIRST\)</span> de um símbolo não-terminal será composto dos símbolos terminais que podem aparecer como <strong>primeiro símbolo</strong> de qualquer sequência de símbolos que seja derivada desse não-terminal. Em outras palavras, o conjunto <span class="math inline">\(FIRST\)</span> indica quais terminais podem iniciar uma declaração válida (frase) dentro da estrutura gramática definida por um não-terminal. Por exemplo, considere uma gramática para definir expressões aritméticas. O não-terminal <em>EXPR</em> pode derivar diversas sequências de símbolos, como <em>2 + 3</em>, <em>(4 </em> 5)<em>, </em>x - y<em>. O conjunto <span class="math inline">\(FIRST\)</span> do não-terminal </em>EXPR* seria, neste caso específico, <span class="math inline">\(\{num, '-', '('\}\)</span>, porque esses são os símbolos que podem iniciar qualquer expressão aritmética válida nesta gramática até onde podemos saber com as informações passadas neste parágrafo. Uma gramática para todas as expressões aritméticas possíveis teria um conjunto <span class="math inline">\(FIRST\)</span> maior.</p>
+<p>O conjunto <span class="math inline">\(FOLLOW\)</span>, por sua vez, determina o conjunto de símbolos terminais que podem aparecer <strong>imediatamente após</strong> um não-terminal em alguma forma sentencial derivável a partir do símbolo inicial. Ou colocando de outra forma, o conjunto <span class="math inline">\(FOLLOW\)</span> indica quais terminais podem seguir (<em>follow</em>) um não-terminal em uma declaração válida da linguagem.</p>
 <p>Diferentemente do <span class="math inline">\(FIRST\)</span>, que se concentra no início de uma derivação, o <span class="math inline">\(FOLLOW\)</span> analisa a situação em que um não-terminal aparece, considerando as produções diretas do não-terminal e também as produções de outros não terminais que, por ventura, contenham o não-terminal em análise. Por exemplo, considere uma gramática que define declarações de variáveis. O não-terminal <em>DECLARACAO_VAR</em> pode ser seguido por diferentes símbolos, dependendo do contexto. Em uma linguagem como o <span class="math inline">\(C\)</span>, uma declaração de variável pode terminar com um ponto e vírgula, ser seguida por um operador de atribuição e uma expressão, ou até mesmo ser parte de uma estrutura maior. Neste cenário, o conjunto <span class="math inline">\(FOLLOW\)</span> do não-terminal <em>DECLARACAO_VAR</em> incluiria, portanto, o ponto e vírgula ‘;’, o sinal de igual ‘=’, e todos os outros símbolos que podem iniciar uma expressão ou um comando que a linguagem permita ocorrer na mesma linha da declaração da variável.</p>
 <p>Os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> serão utilizados para construir a Tabela de Derivação <span class="math inline">\(LL(1)\)</span>. A forma tecnicamente mais correta seria dizer que estes conjuntos formam a Tabela De Análise <span class="math inline">\(LL(1)\)</span>. Entretanto, pobre de mim, prefiro chamar de Tabela de Derivação.</p>
-<p>As Tabelas de Derivação são tabelas que guiam o processo de análise sintática descendente preditiva no <em>parser</em> <span class="math inline">\(LL(1)\)</span> deterministicamente. Cada célula dessas tabelas corresponde a relação que existe em um par não-terminal, terminal. De forma que o valor da célula apontada por este par indica qual regra de produção deve ser aplicada quando o analisador encontrar este par específico durante a análise preditiva <span class="math inline">\(LL(1)\)</span>.</p>
+<p>As Tabelas de Derivação são tabelas que guiam o processo de análise sintática descendente preditiva no <em>parser</em> <span class="math inline">\(LL(1)\)</span> deterministicamente. Cada célula dessas tabelas à entrada da tabela indexada por um par <span class="math inline">\((A, a)\)</span>, onde <span class="math inline">\(A\)</span> é não-terminal e <span class="math inline">\(a\)</span> é terminal ou <span class="math inline">\(\$\)</span>. De forma que o valor da célula apontada por este par indica qual regra de produção deve ser aplicada quando o analisador encontrar este par específico durante a análise preditiva <span class="math inline">\(LL(1)\)</span>.</p>
 <section id="o-conjunto-first" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="o-conjunto-first"><span class="header-section-number">7.1</span> O Conjunto FIRST</h2>
-<p>O conjunto <span class="math inline">\(FIRST\)</span> de um símbolo não-terminal é o conjunto de todos os terminais que podem aparecer no início de qualquer <em>string</em> derivada desse símbolo, incluindo o símbolo vazio (<span class="math inline">\(\varepsilon\)</span>) se o não-terminal puder derivar a <em>string</em> vazia. Para os símbolos terminais, o elemento do conjunto <span class="math inline">\(FIRST\)</span> será o próprio símbolo terminal.</p>
+<p>O conjunto <span class="math inline">\(FIRST\)</span> de um símbolo não-terminal é o conjunto de todos os terminais que podem aparecer no início de qualquer <em>string</em> derivada desse símbolo, incluindo o símbolo vazio (<span class="math inline">\(\varepsilon\)</span>) se o não-terminal puder derivar a <em>string</em> vazia. Para os símbolos terminais, o elemento do conjunto <span class="math inline">\(FIRST\)</span> conterá o próprio símbolo terminal.</p>
 <section id="regras-de-criação-do-conjunto-first" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="regras-de-criação-do-conjunto-first"><span class="header-section-number">7.1.1</span> Regras de Criação do Conjunto FIRST</h3>
 <p>Para definir o conjunto <span class="math inline">\(FIRST(X)\)</span> para todos os símbolos não-terminais <span class="math inline">\(X\)</span> de uma gramática que esteja definida por um conjunto de regras de produção, podemos seguir os seguintes passos:</p>
@@ -533,12 +552,12 @@ window.Quarto = {
 <li><p><strong>Para um símbolo não-terminal <span class="math inline">\(X\)</span></strong>: olhe para cada regra de produção <span class="math inline">\(X \rightarrow \alpha\)</span> e siga as seguintes regras:</p>
 <ul>
 <li>Se <span class="math inline">\(\alpha\)</span> é um terminal, adicione <span class="math inline">\(\alpha\)</span> ao conjunto <span class="math inline">\(FIRST(X)\)</span>.</li>
-<li>Se <span class="math inline">\(\alpha\)</span> começa com um símbolo não-terminal <span class="math inline">\(Y\)</span>, adicione <span class="math inline">\(FIRST(Y)\)</span> ao <span class="math inline">\(FIRST(X)\)</span>, exceto pelo símbolo de vazio <span class="math inline">\((\varepsilon\)</span>) se ele estiver presente.</li>
+<li>Se <span class="math inline">\(\alpha\)</span> começa com um símbolo não-terminal <span class="math inline">\(Y\)</span>, adicione <span class="math inline">\(FIRST(Y)\)</span> ao <span class="math inline">\(FIRST(X)\)</span>, exceto pelo símbolo vazio <span class="math inline">\((\varepsilon\)</span>) se ele estiver presente.</li>
 <li>Se <span class="math inline">\(\alpha\)</span> consiste apenas em não-terminais e todos eles podem derivar em vazio (diretamente ou indiretamente), adicione <span class="math inline">\(\varepsilon\)</span> ao conjunto <span class="math inline">\(FIRST(X)\)</span>.</li>
 </ul></li>
 </ol>
 <p><strong>O símbolo vazio <span class="math inline">\(\varepsilon\)</span> pertence ao conjunto FIRST(X) se, e somente se, <span class="math inline">\(X\)</span> pode derivar a string vazia (diretamente ou indiretamente).</strong></p>
-<p>Repita esses passos até que os conjuntos <span class="math inline">\(FIRST\)</span> de todos os símbolos não-terminais não possam ser alterado.</p>
+<p>Repita esses passos até que os conjuntos <span class="math inline">\(FIRST\)</span> de todos os símbolos não-terminais não possam ser alterados.</p>
 </section>
 <section id="exemplo-1-criação-de-conjuntos-first" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="exemplo-1-criação-de-conjuntos-first"><span class="header-section-number">7.1.2</span> Exemplo 1: Criação de Conjuntos FIRST</h3>
@@ -562,26 +581,69 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td>S</td>
-<td>{a, b}</td>
-<td>S pode ser derivado em “aB” ou “bA”</td>
+<td><span class="math inline">\(\{a, b\}\)</span></td>
+<td>S produz <span class="math inline">\(aB\)</span> ou <span class="math inline">\(bA\)</span></td>
 </tr>
 <tr class="even">
 <td>A</td>
-<td>{c, d}</td>
-<td>A pode ser derivado em “c” ou “d”</td>
+<td><span class="math inline">\(\{c, d\}\)</span></td>
+<td>A produz <span class="math inline">\(c\)</span> ou <span class="math inline">\(d\)</span></td>
 </tr>
 <tr class="odd">
 <td>B</td>
-<td>{e, f}</td>
-<td>B pode ser derivado em “e” ou “f”</td>
+<td><span class="math inline">\(\{e, f\}\)</span></td>
+<td>B produz <span class="math inline">\(e\)</span> ou <span class="math inline">\(f\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>Logo: <span class="math inline">\(FIRST =\{(S,\{a, b\}),(A,\{c, d\}),(B,\{e, f\})\}\)</span>, um conjunto de tuplas.</p>
+<p>Logo, teremos: <span class="math display">\[FIRST(S)=\{a,b\},FIRST(A)=\{c,d\},FIRST(B)=\{e,f\}\]</span></p>
 <p>Agora que entendemos o algoritmo, podemos tentar criar um pseudocódigo para encontrar os elementos do conjunto <span class="math inline">\(First\)</span>.</p>
 </section>
-<section id="algoritmo-para-calcular-o-conjunto-first" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">7.1.3</span> Algoritmo para calcular o conjunto FIRST</h3>
+<section id="exemplo-2-parte-a-criação-de-conjuntos-first" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="exemplo-2-parte-a-criação-de-conjuntos-first"><span class="header-section-number">7.1.3</span> Exemplo 2 (Parte A): Criação de Conjuntos FIRST</h3>
+<p>Considere a gramática definida pelas seguintes regras de produção:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow A B c \\
+2. &amp; A \rightarrow a \vert \varepsilon \\
+3. &amp; B \rightarrow b \vert \varepsilon \\
+\end{array}
+\]</span></p>
+<p>Aplicando as regras de formação, temos os seguintes conjuntos <span class="math inline">\(FIRST\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">FIRST</th>
+<th style="text-align: left;">Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ a, \varepsilon \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(A\)</span> produz o terminal <code>a</code> ou <span class="math inline">\(\varepsilon\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(B\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ b, \varepsilon \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(B\)</span> produz o terminal <code>b</code> ou <span class="math inline">\(\varepsilon\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ a, b, c \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(S\)</span> inicia com <span class="math inline">\(A\)</span>. Como <span class="math inline">\(A\)</span> pode derivar <span class="math inline">\(\varepsilon\)</span>, incluímos <span class="math inline">\(FIRST(B)\)</span> (exceto <span class="math inline">\(\varepsilon\)</span>). Como <span class="math inline">\(B\)</span> também pode derivar <span class="math inline">\(\varepsilon\)</span>, incluímos o próximo símbolo, que é o terminal <code>c</code>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="algoritmo-para-calcular-o-conjunto-first" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-first"><span class="header-section-number">7.1.4</span> Algoritmo para calcular o conjunto FIRST</h3>
 <pre class="pseudo"><code>## Algoritmo para calcular o conjunto FIRST para símbolos não-terminais
 
 # Entrada: Um conjunto de regras de produção P
@@ -684,8 +746,8 @@ função calcular_FIRST(gramática):
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>producoes <span class="op">=</span> [</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S -&gt; a B"</span>,</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S -&gt; b A"</span>,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S -&gt; aB"</span>,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">"S -&gt; bA"</span>,</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A -&gt; c"</span>,</span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">"A -&gt; d"</span>,</span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">"B -&gt; e"</span>,</span>
@@ -699,10 +761,10 @@ função calcular_FIRST(gramática):
 </section>
 <section id="o-conjunto-follow" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="o-conjunto-follow"><span class="header-section-number">7.2</span> O Conjunto FOLLOW</h2>
-<p>O conjunto <span class="math inline">\(FOLLOW\)</span> de um símbolo não-terminal é o conjunto de terminais que podem aparecer imediatamente à direita (após, <em>follow</em>) desse não-terminal em alguma forma sentencial derivada, <strong>ou o símbolo de fim de entrada (<span class="math inline">\(\$\)</span>) se o não-terminal puder aparecer no final de uma forma sentencial</strong>.</p>
+<p>O conjunto <span class="math inline">\(FOLLOW\)</span> de um símbolo não-terminal é o conjunto de terminais que podem aparecer imediatamente à direita (após, <em>follow</em>) desse não-terminal em alguma forma sentencial derivada, <strong>ou o símbolo marcador de fim de entrada (<span class="math inline">\(\$\)</span>) se o não-terminal puder aparecer no final de uma forma sentencial</strong>.</p>
 <p>Para definir o conjunto <span class="math inline">\(FOLLOW(A)\)</span> para cada não-terminal <span class="math inline">\(A\)</span>, siga estes passos:</p>
 <ol type="1">
-<li><p>Coloque o símbolo de fim de entrada <span class="math inline">\((\$)\)</span> no <span class="math inline">\(FOLLOW\)</span> do símbolo inicial da gramática. Ao colocar o símbolo de fim de entrada ($) no <span class="math inline">\(FOLLOW\)</span> do símbolo inicial da gramática, garantimos que o analisador sintático reconheça a última derivação da gramática como válida. Isso significa que o analisador estará preparado para encontrar o símbolo (<span class="math inline">\(\$\)</span>) ao final da string de entrada, indicando que a análise foi concluída com sucesso. Em outras palavras, o símbolo (<span class="math inline">\(\$\)</span>) no <span class="math inline">\(FOLLOW\)</span> do símbolo inicial representa a expectativa de que a string de entrada seja completamente processada e que não existam símbolos após a última derivada.</p></li>
+<li><p>Coloque o símbolo marcador de fim de entrada <span class="math inline">\((\$)\)</span> no <span class="math inline">\(FOLLOW\)</span> do símbolo inicial da gramática. O símbolo <span class="math inline">\(\$\)</span> pertence a <span class="math inline">\(FOLLOW(S)\)</span> porque, ao final de uma derivação bem-sucedida a partir do símbolo inicial <span class="math inline">\(S\)</span>, não resta nenhum símbolo terminal além do fim da entrada. Isso significa que o analisador estará preparado para encontrar o símbolo (<span class="math inline">\(\$\)</span>) ao final da string de entrada, indicando que a análise foi concluída com sucesso. Em outras palavras, o símbolo (<span class="math inline">\(\$\)</span>) no <span class="math inline">\(FOLLOW\)</span> do símbolo inicial representa a expectativa de que a string de entrada seja completamente processada e que não existam símbolos após a última derivada.</p></li>
 <li><p>Para cada produção da forma <span class="math inline">\(A \rightarrow \alpha B \beta\)</span>, onde <span class="math inline">\(B\)</span> é um não-terminal:</p></li>
 </ol>
 <ul>
@@ -731,7 +793,7 @@ função calcular_FIRST(gramática):
 <ol type="1">
 <li><span class="math inline">\(FOLLOW(S) = \{\$\}\)</span>
 <ul>
-<li><span class="math inline">\(S\)</span> é o símbolo inicial, então adicionamos o marcador de fim de entrada (<span class="math inline">\(\$\)</span>) ao seu conjunto FOLLOW.</li>
+<li><span class="math inline">\(S\)</span> é o símbolo inicial, então adicionamos o símbolo marcador de fim de entrada (<span class="math inline">\(\$\)</span>) ao seu conjunto FOLLOW.</li>
 </ul></li>
 <li><span class="math inline">\(FOLLOW(A) = \{\$\}\)</span>
 <ul>
@@ -779,10 +841,53 @@ função calcular_FIRST(gramática):
 </tbody>
 </table>
 </section>
-<section id="algoritmo-para-calcular-o-conjunto-follow" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">7.2.2</span> Algoritmo para calcular o conjunto FOLLOW</h3>
+<section id="exemplo-2-parte-b-criação-de-conjuntos-follow" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="exemplo-2-parte-b-criação-de-conjuntos-follow"><span class="header-section-number">7.2.2</span> Exemplo 2 (Parte B): Criação de Conjuntos FOLLOW</h3>
+<p>Continuando com a gramática usada no Exemplo 2 do <span class="math inline">\(FIRST\)</span> (Parte A):</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow A B c \\
+2. &amp; A \rightarrow a \vert \varepsilon \\
+3. &amp; B \rightarrow b \vert \varepsilon \\
+\end{array}
+\]</span></p>
+<p>Aplicando as regras para a criação do conjunto <span class="math inline">\(FOLLOW\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">FOLLOW</th>
+<th style="text-align: left;">Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$ \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(S\)</span> é o símbolo inicial, logo recebe o marcador de fim de entrada <code>$</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ b, c \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(A\)</span> é seguido por <span class="math inline">\(B\)</span>. Adicionamos <span class="math inline">\(FIRST(B)\)</span> (sem <span class="math inline">\(\varepsilon\)</span>) ao <span class="math inline">\(FOLLOW(A)\)</span>, o que nos dá <code>b</code>. Como <span class="math inline">\(B\)</span> pode derivar <span class="math inline">\(\varepsilon\)</span>, também adicionamos o <span class="math inline">\(FIRST\)</span> do que vem após <span class="math inline">\(B\)</span>, que é o terminal <code>c</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(B\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ c \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(B\)</span> é seguido diretamente pelo terminal <code>c</code> na produção de <span class="math inline">\(S\)</span>. Portanto, o terminal <code>c</code> é adicionado ao <span class="math inline">\(FOLLOW(B)\)</span>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="algoritmo-para-calcular-o-conjunto-follow" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="algoritmo-para-calcular-o-conjunto-follow"><span class="header-section-number">7.2.3</span> Algoritmo para calcular o conjunto FOLLOW</h3>
 <p>Assim como fizemos com o <span class="math inline">\(FIRST\)</span> podemos criar um algoritmo para criar o conjunto <span class="math inline">\(FOLLOW\)</span>:</p>
-<pre class="shell"><code># Algoritmo para calcular o conjunto FOLLOW para símbolos não-terminais
+<pre class="pseudo"><code># Algoritmo para calcular o conjunto FOLLOW para símbolos não-terminais
 # Entrada: Um conjunto de regras de produção P e o símbolo inicial S
 # Saída: Um dicionário FOLLOW, onde FOLLOW[X] é o conjunto FOLLOW do símbolo não-terminal X
 
@@ -986,8 +1091,8 @@ função calcular_first_da_sequencia(sequencia, FIRST, nao_terminais):
 <span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
 <span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Definindo a gramática</span></span>
 <span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>    producoes <span class="op">=</span> [</span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>        <span class="st">"S -&gt; a B"</span>,</span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>        <span class="st">"S -&gt; b A"</span>,</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>        <span class="st">"S -&gt; aB"</span>,</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>        <span class="st">"S -&gt; bA"</span>,</span>
 <span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A -&gt; c"</span>,</span>
 <span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A -&gt; d"</span>,</span>
 <span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>        <span class="st">"B -&gt; e"</span>,</span>
@@ -1006,8 +1111,538 @@ função calcular_first_da_sequencia(sequencia, FIRST, nao_terminais):
 <span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>    FOLLOW <span class="op">=</span> calcular_FOLLOW(producoes, simbolo_inicial)</span>
 <span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> nao_terminal <span class="kw">in</span> <span class="bu">sorted</span>(FOLLOW.keys()):</span>
 <span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"  FOLLOW(</span><span class="sc">{</span>nao_terminal<span class="sc">}</span><span class="ss">) = </span><span class="ch">{{</span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(<span class="bu">sorted</span>(FOLLOW[nao_terminal]))<span class="sc">}</span><span class="ch">}}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exemplo-3-criação-de-conjuntos-first-e-follow-completos" class="level3" data-number="7.2.4">
+<h3 data-number="7.2.4" class="anchored" data-anchor-id="exemplo-3-criação-de-conjuntos-first-e-follow-completos"><span class="header-section-number">7.2.4</span> Exemplo 3: Criação de Conjuntos FIRST e FOLLOW completos</h3>
+<p>Considere a gramática a seguir:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow X Y Z \\
+2. &amp; X \rightarrow x X \vert \varepsilon \\
+3. &amp; Y \rightarrow y \vert \varepsilon \\
+4. &amp; Z \rightarrow z \\
+\end{array}
+\]</span></p>
+<p>Primeiro, determinamos os conjuntos <span class="math inline">\(FIRST\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">FIRST</th>
+<th style="text-align: left;">Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ x, \varepsilon \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span> produz o terminal <code>x</code> ou deriva <span class="math inline">\(\varepsilon\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Y\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ y, \varepsilon \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(Y\)</span> produz o terminal <code>y</code> ou deriva <span class="math inline">\(\varepsilon\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Z\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ z \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(Z\)</span> produz apenas o terminal <code>z</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ x, y, z \}\)</span></td>
+<td style="text-align: left;">O conjunto <span class="math inline">\(FIRST(S)\)</span> recebe os elementos de <span class="math inline">\(FIRST(X)\)</span> sem <span class="math inline">\(\varepsilon\)</span>. Como <span class="math inline">\(X\)</span> deriva <span class="math inline">\(\varepsilon\)</span>, recebe os elementos de <span class="math inline">\(FIRST(Y)\)</span> sem <span class="math inline">\(\varepsilon\)</span>. Como <span class="math inline">\(Y\)</span> também deriva <span class="math inline">\(\varepsilon\)</span>, recebe os elementos de <span class="math inline">\(FIRST(Z)\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<p>Em seguida, determinamos os conjuntos <span class="math inline">\(FOLLOW\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Símbolo</th>
+<th style="text-align: left;">FOLLOW</th>
+<th style="text-align: left;">Explicação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$ \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(S\)</span> é o símbolo inicial, recebendo o marcador <code>$</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ y, z \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(X\)</span> é seguido por <span class="math inline">\(Y\)</span>. Adicionamos <span class="math inline">\(FIRST(Y)\)</span> sem <span class="math inline">\(\varepsilon\)</span>, resultando em <code>y</code>. Como <span class="math inline">\(Y\)</span> deriva <span class="math inline">\(\varepsilon\)</span>, adicionamos também <span class="math inline">\(FIRST(Z)\)</span>, resultando em <code>z</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Y\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ z \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(Y\)</span> é seguido por <span class="math inline">\(Z\)</span>. Adicionamos os elementos de <span class="math inline">\(FIRST(Z)\)</span> ao <span class="math inline">\(FOLLOW(Y)\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Z\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$ \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(Z\)</span> é o último símbolo na produção de <span class="math inline">\(S\)</span>. Portanto, <span class="math inline">\(FOLLOW(Z)\)</span> recebe os elementos de <span class="math inline">\(FOLLOW(S)\)</span>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="a-tabela-de-derivação-ll1" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="a-tabela-de-derivação-ll1"><span class="header-section-number">7.3</span> A Tabela de Derivação LL(1)</h2>
+<p>Com os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span> calculados, o próximo passo para construir um <em>parser</em> <span class="math inline">\(LL(1)\)</span> é a criação da Tabela de Derivação. Esta tabela é uma matriz bidimensional na qual as linhas representam os símbolos não-terminais da gramática e as colunas representam os símbolos terminais, incluindo o marcador de fim de entrada <code>$</code>.</p>
+<p>A intersecção de uma linha <span class="math inline">\(A\)</span> e uma coluna <span class="math inline">\(a\)</span> define a célula <span class="math inline">\(M[A, a]\)</span>. O conteúdo desta célula indicará ao <em>parser</em> exatamente qual regra de produção utilizar quando o analisador estiver avaliando o não-terminal <span class="math inline">\(A\)</span> e o próximo símbolo de entrada (<em>lookahead</em>) for o terminal <span class="math inline">\(a\)</span>. Se uma célula permanecer vazia ao final do processo, isso significa que a combinação de não-terminal e terminal representa um erro de sintaxe na <em>string</em> de entrada.</p>
+<section id="regras-de-criação-da-tabela" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="regras-de-criação-da-tabela"><span class="header-section-number">7.3.1</span> Regras de Criação da Tabela</h3>
+<p>O processo de preenchimento da Tabela de Derivação <span class="math inline">\(M\)</span> segue um algoritmo determinístico baseado em três regras aplicadas a cada regra de produção <span class="math inline">\(A \rightarrow \alpha\)</span> da gramática:</p>
+<ol type="1">
+<li><strong>Uso do FIRST</strong>: Para cada símbolo terminal <span class="math inline">\(a\)</span> que pertença ao conjunto <span class="math inline">\(FIRST(\alpha)\)</span>, adicione a produção <span class="math inline">\(A \rightarrow \alpha\)</span> à célula <span class="math inline">\(M[A, a]\)</span>.</li>
+<li><strong>Uso do FOLLOW</strong>: Se a string vazia <span class="math inline">\(\varepsilon\)</span> pertencer ao conjunto <span class="math inline">\(FIRST(\alpha)\)</span>, então, para cada terminal <span class="math inline">\(b\)</span> no conjunto <span class="math inline">\(FOLLOW(A)\)</span>, adicione a produção <span class="math inline">\(A \rightarrow \alpha\)</span> à célula <span class="math inline">\(M[A, b]\)</span>.</li>
+<li><strong>Uso do Fim de Entrada</strong>: Se <span class="math inline">\(\varepsilon\)</span> pertencer ao conjunto <span class="math inline">\(FIRST(\alpha)\)</span> e o símbolo <code>$</code> pertencer ao conjunto <span class="math inline">\(FOLLOW(A)\)</span>, adicione a produção <span class="math inline">\(A \rightarrow \alpha\)</span> à célula <span class="math inline">\(M[A, \$]\)</span>.</li>
+</ol>
+<p>Uma gramática é classificada como <span class="math inline">\(LL(1)\)</span> se, e somente se, após aplicar todas estas regras, nenhuma célula da tabela <span class="math inline">\(M\)</span> contiver mais de uma regra de produção. múltiplas entradas em uma célula indicam que a gramática, naquela forma, não é LL(1); isso pode decorrer de ambiguidade, recursão à esquerda, falta de fatoração à esquerda ou outras causas.</p>
+</section>
+<section id="construindo-a-tabela-exercício-1" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="construindo-a-tabela-exercício-1"><span class="header-section-number">7.3.2</span> Construindo a Tabela: Exercício 1</h3>
+<p>Vamos aplicar estas regras ao nosso primeiro exercício, cuja gramática e conjuntos são:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow A B c \\
+2. &amp; A \rightarrow a \vert \varepsilon \\
+3. &amp; B \rightarrow b \vert \varepsilon \\
+\end{array}
+\]</span></p>
+<p><strong>Conjuntos Calculados:</strong> * <span class="math inline">\(FIRST(S) = \{a, b, c\}\)</span>, <span class="math inline">\(FOLLOW(S) = \{\$\}\)</span> * <span class="math inline">\(FIRST(A) = \{a, \varepsilon\}\)</span>, <span class="math inline">\(FOLLOW(A) = \{b, c\}\)</span> * <span class="math inline">\(FIRST(B) = \{b, \varepsilon\}\)</span>, <span class="math inline">\(FOLLOW(B) = \{c\}\)</span></p>
+<p><strong>Aplicação das Regras:</strong></p>
+<ul>
+<li><strong>Para <span class="math inline">\(S \rightarrow A B c\)</span>:</strong> O <span class="math inline">\(FIRST(A B c)\)</span> inclui <code>a</code>, <code>b</code> e <code>c</code>. Logo, adicionamos <span class="math inline">\(S \rightarrow A B c\)</span> em <span class="math inline">\(M[S, a]\)</span>, <span class="math inline">\(M[S, b]\)</span> e <span class="math inline">\(M[S, c]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(A \rightarrow a\)</span>:</strong> O <span class="math inline">\(FIRST(a)\)</span> é <code>a</code>. Adicionamos <span class="math inline">\(A \rightarrow a\)</span> em <span class="math inline">\(M[A, a]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(A \rightarrow \varepsilon\)</span>:</strong> O <span class="math inline">\(FIRST(\varepsilon)\)</span> é <span class="math inline">\(\varepsilon\)</span>. Avaliamos o <span class="math inline">\(FOLLOW(A)\)</span>, que é <span class="math inline">\(\{b, c\}\)</span>. Adicionamos <span class="math inline">\(A \rightarrow \varepsilon\)</span> em <span class="math inline">\(M[A, b]\)</span> e <span class="math inline">\(M[A, c]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(B \rightarrow b\)</span>:</strong> O <span class="math inline">\(FIRST(b)\)</span> é <code>b</code>. Adicionamos <span class="math inline">\(B \rightarrow b\)</span> em <span class="math inline">\(M[B, b]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(B \rightarrow \varepsilon\)</span>:</strong> O <span class="math inline">\(FIRST(\varepsilon)\)</span> é <span class="math inline">\(\varepsilon\)</span>. Avaliamos o <span class="math inline">\(FOLLOW(B)\)</span>, que é <span class="math inline">\(\{c\}\)</span>. Adicionamos <span class="math inline">\(B \rightarrow \varepsilon\)</span> em <span class="math inline">\(M[B, c]\)</span>.</li>
+</ul>
+<p>A tabela resultante terá o seguinte formato:</p>
+<div class="line-block">Símbolo | <code>a</code> | <code>b</code> | <code>c</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—| | <strong><span class="math inline">\(S\)</span></strong> | <span class="math inline">\(S \rightarrow A B c\)</span> | <span class="math inline">\(S \rightarrow A B c\)</span> | <span class="math inline">\(S \rightarrow A B c\)</span> | | | <strong><span class="math inline">\(A\)</span></strong> | <span class="math inline">\(A \rightarrow a\)</span> | <span class="math inline">\(A \rightarrow \varepsilon\)</span> | <span class="math inline">\(A \rightarrow \varepsilon\)</span> | | | <strong><span class="math inline">\(B\)</span></strong> | | <span class="math inline">\(B \rightarrow b\)</span> | <span class="math inline">\(B \rightarrow \varepsilon\)</span> | |</p>
+</section>
+<section id="construindo-a-tabela-exercício-2" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="construindo-a-tabela-exercício-2"><span class="header-section-number">7.3.3</span> Construindo a Tabela: Exercício 2</h3>
+<p>Nosso segundo exercício apresentou uma gramática com propagação encadeada:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow X Y Z \\
+2. &amp; X \rightarrow x X \vert \varepsilon \\
+3. &amp; Y \rightarrow y \vert \varepsilon \\
+4. &amp; Z \rightarrow z \\
+\end{array}
+\]</span></p>
+<p><strong>Conjuntos Calculados:</strong> * <span class="math inline">\(FIRST(S) = \{x, y, z\}\)</span>, <span class="math inline">\(FOLLOW(S) = \{\$\}\)</span> * <span class="math inline">\(FIRST(X) = \{x, \varepsilon\}\)</span>, <span class="math inline">\(FOLLOW(X) = \{y, z\}\)</span> * <span class="math inline">\(FIRST(Y) = \{y, \varepsilon\}\)</span>, <span class="math inline">\(FOLLOW(Y) = \{z\}\)</span> * <span class="math inline">\(FIRST(Z) = \{z\}\)</span>, <span class="math inline">\(FOLLOW(Z) = \{\$\}\)</span></p>
+<p><strong>Aplicação das Regras:</strong></p>
+<ul>
+<li><strong>Para <span class="math inline">\(S \rightarrow X Y Z\)</span>:</strong> O <span class="math inline">\(FIRST(X Y Z)\)</span> é <span class="math inline">\(\{x, y, z\}\)</span>. Adicionamos a regra em <span class="math inline">\(M[S, x]\)</span>, <span class="math inline">\(M[S, y]\)</span> e <span class="math inline">\(M[S, z]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(X \rightarrow x X\)</span>:</strong> O <span class="math inline">\(FIRST(x X)\)</span> é <code>x</code>. Adicionamos a regra em <span class="math inline">\(M[X, x]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(X \rightarrow \varepsilon\)</span>:</strong> Olhamos o <span class="math inline">\(FOLLOW(X)\)</span>, que é <span class="math inline">\(\{y, z\}\)</span>. Adicionamos a regra em <span class="math inline">\(M[X, y]\)</span> e <span class="math inline">\(M[X, z]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(Y \rightarrow y\)</span>:</strong> O <span class="math inline">\(FIRST(y)\)</span> é <code>y</code>. Adicionamos a regra em <span class="math inline">\(M[Y, y]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(Y \rightarrow \varepsilon\)</span>:</strong> Olhamos o <span class="math inline">\(FOLLOW(Y)\)</span>, que é <span class="math inline">\(\{z\}\)</span>. Adicionamos a regra em <span class="math inline">\(M[Y, z]\)</span>.</li>
+<li><strong>Para <span class="math inline">\(Z \rightarrow z\)</span>:</strong> O <span class="math inline">\(FIRST(z)\)</span> é <code>z</code>. Adicionamos a regra em <span class="math inline">\(M[Z, z]\)</span>.</li>
+</ul>
+<p>A tabela correspondente será:</p>
+<div class="line-block">Símbolo | <code>x</code> | <code>y</code> | <code>z</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—| | <strong><span class="math inline">\(S\)</span></strong> | <span class="math inline">\(S \rightarrow X Y Z\)</span> | <span class="math inline">\(S \rightarrow X Y Z\)</span> | <span class="math inline">\(S \rightarrow X Y Z\)</span> | | | <strong><span class="math inline">\(X\)</span></strong> | <span class="math inline">\(X \rightarrow x X\)</span> | <span class="math inline">\(X \rightarrow \varepsilon\)</span> | <span class="math inline">\(X \rightarrow \varepsilon\)</span> | | | <strong><span class="math inline">\(Y\)</span></strong> | | <span class="math inline">\(Y \rightarrow y\)</span> | <span class="math inline">\(Y \rightarrow \varepsilon\)</span> | | | <strong><span class="math inline">\(Z\)</span></strong> | | | <span class="math inline">\(Z \rightarrow z\)</span> | |</p>
+</section>
+<section id="exemplo-prático-1-declaração-de-variáveis" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="exemplo-prático-1-declaração-de-variáveis"><span class="header-section-number">7.3.4</span> Exemplo Prático 1: Declaração de Variáveis</h3>
+<p>Vamos aplicar o conhecimento em um cenário mais próximo das linguagens de programação, construindo um analisador para declarações de variáveis do tipo <code>int a, b;</code> ou <code>float c;</code>. Usaremos os terminais <code>int</code>, <code>float</code>, <code>id</code>, <code>,</code> e <code>;</code>.</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; D \rightarrow T \ id \ L \\
+2. &amp; T \rightarrow int \vert float \\
+3. &amp; L \rightarrow , \ id \ L \vert ; \\
+\end{array}
+\]</span></p>
+<p><strong>Conjuntos FIRST e FOLLOW:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Símbolo</th>
+<th style="text-align: left;">FIRST</th>
+<th style="text-align: left;">FOLLOW</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(D\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ int, float \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$ \}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ int, float \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ id \}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(L\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ ,, ; \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$ \}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preenchimento da Tabela:</strong></p>
+<ul>
+<li><span class="math inline">\(D \rightarrow T \ id \ L\)</span> usa <span class="math inline">\(FIRST(T) = \{int, float\}\)</span>. Vai para <span class="math inline">\(M[D, int]\)</span> e <span class="math inline">\(M[D, float]\)</span>.</li>
+<li><span class="math inline">\(T \rightarrow int\)</span> usa <span class="math inline">\(FIRST(int) = \{int\}\)</span>. Vai para <span class="math inline">\(M[T, int]\)</span>.</li>
+<li><span class="math inline">\(T \rightarrow float\)</span> usa <span class="math inline">\(FIRST(float) = \{float\}\)</span>. Vai para <span class="math inline">\(M[T, float]\)</span>.</li>
+<li><span class="math inline">\(L \rightarrow , \ id \ L\)</span> usa <span class="math inline">\(FIRST(,) = \{,\}\)</span>. Vai para <span class="math inline">\(M[L, ,]\)</span>.</li>
+<li><span class="math inline">\(L \rightarrow ;\)</span> usa <span class="math inline">\(FIRST(;) = \{;\}\)</span>. Vai para <span class="math inline">\(M[L, ;]\)</span>.</li>
+</ul>
+<p>A tabela final:</p>
+<div class="line-block">Símbolo | <code>int</code> | <code>float</code> | <code>id</code> | <code>,</code> | <code>;</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—|:—|:—| | <strong><span class="math inline">\(D\)</span></strong> | <span class="math inline">\(D \rightarrow T \ id \ L\)</span> | <span class="math inline">\(D \rightarrow T \ id \ L\)</span> | | | | | | <strong><span class="math inline">\(T\)</span></strong> | <span class="math inline">\(T \rightarrow int\)</span> | <span class="math inline">\(T \rightarrow float\)</span> | | | | | | <strong><span class="math inline">\(L\)</span></strong> | | | | <span class="math inline">\(L \rightarrow , \ id \ L\)</span> | <span class="math inline">\(L \rightarrow ;\)</span> | |</p>
+</section>
+<section id="exemplo-prático-2-expressões-booleanas" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="exemplo-prático-2-expressões-booleanas"><span class="header-section-number">7.3.5</span> Exemplo Prático 2: Expressões Booleanas</h3>
+<p>Para analisar expressões booleanas garantindo o comportamento <span class="math inline">\(LL(1)\)</span> (sem recursão à esquerda), podemos definir lógicas compostas por <code>and</code>, <code>or</code>, valores literais (<code>true</code>, <code>false</code>) e parênteses.</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; B \rightarrow F \ B' \\
+2. &amp; B' \rightarrow or \ F \ B' \vert \varepsilon \\
+3. &amp; F \rightarrow T \ F' \\
+4. &amp; F' \rightarrow and \ T \ F' \vert \varepsilon \\
+5. &amp; T \rightarrow true \vert false \vert ( B ) \\
+\end{array}
+\]</span></p>
+<p><strong>Conjuntos FIRST e FOLLOW:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Símbolo</th>
+<th style="text-align: left;">FIRST</th>
+<th style="text-align: left;">FOLLOW</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(B\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ true, false, ( \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$, ) \}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(B'\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ or, \varepsilon \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ \$, ) \}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(F\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ true, false, ( \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ or, \$, ) \}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(F'\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ and, \varepsilon \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ or, \$, ) \}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ true, false, ( \}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\{ and, or, \$, ) \}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preenchimento da Tabela:</strong></p>
+<p>Aplicando as três regras rigorosamente com os conjuntos acima, montamos a tabela de análise. As regras que derivam <span class="math inline">\(\varepsilon\)</span> (<span class="math inline">\(B' \rightarrow \varepsilon\)</span> e <span class="math inline">\(F' \rightarrow \varepsilon\)</span>) preenchem as colunas delimitadas por seus respectivos conjuntos <span class="math inline">\(FOLLOW\)</span>.</p>
+<div class="line-block">Símbolo | <code>true</code> | <code>false</code> | <code>(</code> | <code>)</code> | <code>and</code> | <code>or</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—|:—|:—|:—| | <strong><span class="math inline">\(B\)</span></strong> | <span class="math inline">\(B \rightarrow F B'\)</span> | <span class="math inline">\(B \rightarrow F B'\)</span> | <span class="math inline">\(B \rightarrow F B'\)</span> | | | | | | <strong><span class="math inline">\(B'\)</span></strong>| | | | <span class="math inline">\(B' \rightarrow \varepsilon\)</span> | | <span class="math inline">\(B' \rightarrow or F B'\)</span> | <span class="math inline">\(B' \rightarrow \varepsilon\)</span> | | <strong><span class="math inline">\(F\)</span></strong> | <span class="math inline">\(F \rightarrow T F'\)</span> | <span class="math inline">\(F \rightarrow T F'\)</span> | <span class="math inline">\(F \rightarrow T F'\)</span> | | | | | | <strong><span class="math inline">\(F'\)</span></strong>| | | | <span class="math inline">\(F' \rightarrow \varepsilon\)</span> | <span class="math inline">\(F' \rightarrow and T F'\)</span>| <span class="math inline">\(F' \rightarrow \varepsilon\)</span> | <span class="math inline">\(F' \rightarrow \varepsilon\)</span> | | <strong><span class="math inline">\(T\)</span></strong> | <span class="math inline">\(T \rightarrow true\)</span> | <span class="math inline">\(T \rightarrow false\)</span>| <span class="math inline">\(T \rightarrow ( B )\)</span> | | | | |</p>
+<p>Observe que a tabela não possui conflitos, provando que a gramática proposta para expressões booleanas pertence à classe <span class="math inline">\(LL(1)\)</span>.</p>
+</section>
+</section>
+<section id="exercícios-sobre-os-conjuntos-first-follow-e-a-tabela-de-parser-ll1" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="exercícios-sobre-os-conjuntos-first-follow-e-a-tabela-de-parser-ll1"><span class="header-section-number">7.4</span> Exercícios sobre os Conjuntos FIRST, FOLLOW e a Tabela de Parser LL(1)</h2>
+<section id="exercício-1-lista-opcional-de-parâmetros" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="exercício-1-lista-opcional-de-parâmetros"><span class="header-section-number">7.4.1</span> Exercício 1: Lista opcional de parâmetros</h3>
+<p>Considere a gramática:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; P \rightarrow ( \ L \ ) \\
+2. &amp; L \rightarrow id \ R \vert \varepsilon \\
+3. &amp; R \rightarrow , \ id \ R \vert \varepsilon \\
+\end{array}
+\]</span></p>
+<p>Determine:</p>
+<ol type="1">
+<li>os conjuntos <span class="math inline">\(FIRST\)</span> de todos os não-terminais;</li>
+<li>os conjuntos <span class="math inline">\(FOLLOW\)</span> de todos os não-terminais;</li>
+<li>a Tabela de Análise <span class="math inline">\(LL(1)\)</span>;</li>
+<li>se a gramática é ou não <span class="math inline">\(LL(1)\)</span>.</li>
+</ol>
+<section id="solução" class="level4" data-number="7.4.1.1">
+<h4 data-number="7.4.1.1" class="anchored" data-anchor-id="solução"><span class="header-section-number">7.4.1.1</span> Solução</h4>
+<p><strong>Conjuntos FIRST</strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(P) = \{ ( \}\)</span></li>
+<li><span class="math inline">\(FIRST(L) = \{ id, \varepsilon \}\)</span></li>
+<li><span class="math inline">\(FIRST(R) = \{ ,, \varepsilon \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(P\)</span> começa obrigatoriamente com o terminal $( $;</li>
+<li><span class="math inline">\(L\)</span> pode começar com <span class="math inline">\(id\)</span> ou derivar <span class="math inline">\(\varepsilon\)</span>;</li>
+<li><span class="math inline">\(R\)</span> pode começar com <span class="math inline">\(,\)</span> ou derivar <span class="math inline">\(\varepsilon\)</span>.</li>
+</ul>
+<p><strong>Conjuntos FOLLOW</strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(P) = \{ \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(L) = \{ ) \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(R) = \{ ) \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(P\)</span> é o símbolo inicial, logo <span class="math inline">\(\$\)</span> pertence a <span class="math inline">\(FOLLOW(P)\)</span>;</li>
+<li>em <span class="math inline">\(P \rightarrow ( \ L \ )\)</span>, o símbolo que segue <span class="math inline">\(L\)</span> é <span class="math inline">\()\)</span>;</li>
+<li>em <span class="math inline">\(L \rightarrow id \ R\)</span>, como <span class="math inline">\(R\)</span> está no final da produção, <span class="math inline">\(FOLLOW(L)\)</span> é propagado para <span class="math inline">\(FOLLOW(R)\)</span>.</li>
+</ul>
+<p><strong>Tabela de Análise <span class="math inline">\(LL(1)\)</span></strong>:</p>
+<div class="line-block">Símbolo | <code>(</code> | <code>id</code> | <code>,</code> | <code>)</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—|:—| | <strong><span class="math inline">\(P\)</span></strong> | <span class="math inline">\(P \rightarrow ( \ L \ )\)</span> | | | | | | <strong><span class="math inline">\(L\)</span></strong> | | <span class="math inline">\(L \rightarrow id \ R\)</span> | | <span class="math inline">\(L \rightarrow \varepsilon\)</span> | | | <strong><span class="math inline">\(R\)</span></strong> | | | <span class="math inline">\(R \rightarrow , \ id \ R\)</span> | <span class="math inline">\(R \rightarrow \varepsilon\)</span> | |</p>
+<p><strong>Conclusão</strong>:</p>
+<p>A gramática é <span class="math inline">\(LL(1)\)</span>, pois nenhuma célula da tabela recebe mais de uma produção.</p>
+<hr>
+</section>
+</section>
+<section id="exercício-2-comandos-condicionais-com-parte-opcional" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="exercício-2-comandos-condicionais-com-parte-opcional"><span class="header-section-number">7.4.2</span> Exercício 2: Comandos condicionais com parte opcional</h3>
+<p>Considere a gramática:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; S \rightarrow if \ ( \ E \ ) \ S \ O \vert id \ = \ id \ ; \\
+2. &amp; O \rightarrow else \ S \vert \varepsilon \\
+3. &amp; E \rightarrow id \\
+\end{array}
+\]</span></p>
+<p>Determine:</p>
+<ol type="1">
+<li>os conjuntos <span class="math inline">\(FIRST\)</span> de todos os não-terminais;</li>
+<li>os conjuntos <span class="math inline">\(FOLLOW\)</span> de todos os não-terminais;</li>
+<li>a Tabela de Análise <span class="math inline">\(LL(1)\)</span>;</li>
+<li>se a gramática é ou não <span class="math inline">\(LL(1)\)</span>.</li>
+</ol>
+<section id="solução-1" class="level4" data-number="7.4.2.1">
+<h4 data-number="7.4.2.1" class="anchored" data-anchor-id="solução-1"><span class="header-section-number">7.4.2.1</span> Solução</h4>
+<p><strong>Conjuntos FIRST</strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(S) = \{ if, id \}\)</span></li>
+<li><span class="math inline">\(FIRST(O) = \{ else, \varepsilon \}\)</span></li>
+<li><span class="math inline">\(FIRST(E) = \{ id \}\)</span></li>
+</ul>
+<p><strong>Conjuntos FOLLOW</strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S) = \{ else, \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(O) = \{ else, \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(E) = \{ ) \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(S\)</span> é o símbolo inicial, então <span class="math inline">\(\$\)</span> pertence a <span class="math inline">\(FOLLOW(S)\)</span>;</li>
+<li>em <span class="math inline">\(S \rightarrow if ( E ) S O\)</span>, o não-terminal <span class="math inline">\(E\)</span> é seguido por <span class="math inline">\()\)</span>, então <span class="math inline">\()\)</span> pertence a <span class="math inline">\(FOLLOW(E)\)</span>;</li>
+<li>na mesma produção, o primeiro <span class="math inline">\(S\)</span> é seguido por <span class="math inline">\(O\)</span>, então adicionamos <span class="math inline">\(FIRST(O) - \{\varepsilon\} = \{else\}\)</span> a <span class="math inline">\(FOLLOW(S)\)</span>;</li>
+<li>como <span class="math inline">\(O \Rightarrow \varepsilon\)</span>, também adicionamos <span class="math inline">\(FOLLOW(S)\)</span> ao <span class="math inline">\(FOLLOW\)</span> desse mesmo <span class="math inline">\(S\)</span>;</li>
+<li><span class="math inline">\(O\)</span> aparece ao final da produção principal de <span class="math inline">\(S\)</span>, então <span class="math inline">\(FOLLOW(S)\)</span> é propagado para <span class="math inline">\(FOLLOW(O)\)</span>.</li>
+</ul>
+<p><strong>Tabela de Análise <span class="math inline">\(LL(1)\)</span></strong>:</p>
+<div class="line-block">Símbolo | <code>if</code> | <code>id</code> | <code>else</code> | <code>)</code> | <code>;</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—|:—|:—| | <strong><span class="math inline">\(S\)</span></strong> | <span class="math inline">\(S \rightarrow if ( E ) S O\)</span> | <span class="math inline">\(S \rightarrow id = id ;\)</span> | | | | | | <strong><span class="math inline">\(O\)</span></strong> | | | <span class="math inline">\(O \rightarrow else \ S\)</span> <br> <span class="math inline">\(O \rightarrow \varepsilon\)</span> | | | <span class="math inline">\(O \rightarrow \varepsilon\)</span> | | <strong><span class="math inline">\(E\)</span></strong> | | <span class="math inline">\(E \rightarrow id\)</span> | | | | |</p>
+<p><strong>Conclusão</strong>:</p>
+<p>A gramática <strong>não é <span class="math inline">\(LL(1)\)</span></strong>. O conflito aparece em:</p>
+<p><span class="math display">\[
+M[O, else]
+\]</span></p>
+<p>porque:</p>
+<ul>
+<li><span class="math inline">\(else \in FIRST(else \ S)\)</span>, então colocamos <span class="math inline">\(O \rightarrow else \ S\)</span> nessa célula;</li>
+<li>como <span class="math inline">\(\varepsilon \in FIRST(O)\)</span> e <span class="math inline">\(else \in FOLLOW(O)\)</span>, também colocamos <span class="math inline">\(O \rightarrow \varepsilon\)</span> na mesma célula.</li>
+</ul>
+<p>Este é o conflito clássico associado ao problema do <em>dangling else</em>.</p>
+<hr>
+</section>
+</section>
+<section id="exercício-3-sequência-de-fatores-multiplicativos" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="exercício-3-sequência-de-fatores-multiplicativos"><span class="header-section-number">7.4.3</span> Exercício 3: Sequência de fatores multiplicativos</h3>
+<p>Considere a gramática:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; M \rightarrow F \ M' \\
+2. &amp; M' \rightarrow * \ F \ M' \vert / \ F \ M' \vert \varepsilon \\
+3. &amp; F \rightarrow id \vert num \vert ( \ M \ ) \\
+\end{array}
+\]</span></p>
+<p>Determine:</p>
+<ol type="1">
+<li>os conjuntos <span class="math inline">\(FIRST\)</span> de todos os não-terminais;</li>
+<li>os conjuntos <span class="math inline">\(FOLLOW\)</span> de todos os não-terminais;</li>
+<li>a Tabela de Análise <span class="math inline">\(LL(1)\)</span>;</li>
+<li>se a gramática é ou não <span class="math inline">\(LL(1)\)</span>.</li>
+</ol>
+<section id="solução-2" class="level4" data-number="7.4.3.1">
+<h4 data-number="7.4.3.1" class="anchored" data-anchor-id="solução-2"><span class="header-section-number">7.4.3.1</span> Solução</h4>
+<p><strong>Conjuntos FIRST</strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(M) = \{ id, num, ( \}\)</span></li>
+<li><span class="math inline">\(FIRST(M') = \{ *, /, \varepsilon \}\)</span></li>
+<li><span class="math inline">\(FIRST(F) = \{ id, num, ( \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(M\)</span> começa por <span class="math inline">\(F\)</span>;</li>
+<li><span class="math inline">\(M'\)</span> pode começar por <span class="math inline">\(*\)</span>, por <span class="math inline">\(/\)</span> ou derivar <span class="math inline">\(\varepsilon\)</span>;</li>
+<li><span class="math inline">\(F\)</span> pode começar por <span class="math inline">\(id\)</span>, <span class="math inline">\(num\)</span> ou $( $.</li>
+</ul>
+<p><strong>Conjuntos FOLLOW</strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(M) = \{ ), \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(M') = \{ ), \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(F) = \{ *, /, ), \$ \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(M\)</span> é o símbolo inicial, então <span class="math inline">\(\$\)</span> pertence a <span class="math inline">\(FOLLOW(M)\)</span>;</li>
+<li>em <span class="math inline">\(F \rightarrow ( \ M \ )\)</span>, o símbolo <span class="math inline">\()\)</span> segue <span class="math inline">\(M\)</span>, então <span class="math inline">\()\)</span> também pertence a <span class="math inline">\(FOLLOW(M)\)</span>;</li>
+<li>em <span class="math inline">\(M \rightarrow F \ M'\)</span>, como <span class="math inline">\(M'\)</span> está no final, <span class="math inline">\(FOLLOW(M)\)</span> é propagado para <span class="math inline">\(FOLLOW(M')\)</span>;</li>
+<li>ainda em <span class="math inline">\(M \rightarrow F \ M'\)</span>, adicionamos <span class="math inline">\(FIRST(M') - \{\varepsilon\} = \{*,/\}\)</span> a <span class="math inline">\(FOLLOW(F)\)</span>;</li>
+<li>como <span class="math inline">\(M'\)</span> pode derivar <span class="math inline">\(\varepsilon\)</span>, também adicionamos <span class="math inline">\(FOLLOW(M)\)</span> a <span class="math inline">\(FOLLOW(F)\)</span>.</li>
+</ul>
+<p><strong>Tabela de Análise <span class="math inline">\(LL(1)\)</span></strong>:</p>
+<div class="line-block">Símbolo | <code>id</code> | <code>num</code> | <code>(</code> | <code>*</code> | <code>/</code> | <code>)</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—|:—|:—|:—| | <strong><span class="math inline">\(M\)</span></strong> | <span class="math inline">\(M \rightarrow F \ M'\)</span> | <span class="math inline">\(M \rightarrow F \ M'\)</span> | <span class="math inline">\(M \rightarrow F \ M'\)</span> | | | | | | <strong><span class="math inline">\(M'\)</span></strong> | | | | <span class="math inline">\(M' \rightarrow * \ F \ M'\)</span> | <span class="math inline">\(M' \rightarrow / \ F \ M'\)</span> | <span class="math inline">\(M' \rightarrow \varepsilon\)</span> | <span class="math inline">\(M' \rightarrow \varepsilon\)</span> | | <strong><span class="math inline">\(F\)</span></strong> | <span class="math inline">\(F \rightarrow id\)</span> | <span class="math inline">\(F \rightarrow num\)</span> | <span class="math inline">\(F \rightarrow ( \ M \ )\)</span> | | | | |</p>
+<p><strong>Conclusão</strong>:</p>
+<p>A gramática é <span class="math inline">\(LL(1)\)</span>, pois a tabela não apresenta conflitos.</p>
+<hr>
+</section>
+</section>
+<section id="exercício-4-bloco-com-lista-de-comandos" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="exercício-4-bloco-com-lista-de-comandos"><span class="header-section-number">7.4.4</span> Exercício 4: Bloco com lista de comandos</h3>
+<p>Considere a gramática:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; B \rightarrow \{ \ C \} \\
+2. &amp; C \rightarrow S \ C \vert \varepsilon \\
+3. &amp; S \rightarrow id \ ; \vert print \ id \ ; \\
+\end{array}
+\]</span></p>
+<p>Determine:</p>
+<ol type="1">
+<li>os conjuntos <span class="math inline">\(FIRST\)</span> de todos os não-terminais;</li>
+<li>os conjuntos <span class="math inline">\(FOLLOW\)</span> de todos os não-terminais;</li>
+<li>a Tabela de Análise <span class="math inline">\(LL(1)\)</span>;</li>
+<li>se a gramática é ou não <span class="math inline">\(LL(1)\)</span>.</li>
+</ol>
+<section id="solução-3" class="level4" data-number="7.4.4.1">
+<h4 data-number="7.4.4.1" class="anchored" data-anchor-id="solução-3"><span class="header-section-number">7.4.4.1</span> Solução</h4>
+<p><strong>Conjuntos FIRST</strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(B) = \{ \{ \}\)</span></li>
+<li><span class="math inline">\(FIRST(C) = \{ id, print, \varepsilon \}\)</span></li>
+<li><span class="math inline">\(FIRST(S) = \{ id, print \}\)</span></li>
+</ul>
+<p><strong>Conjuntos FOLLOW</strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(B) = \{ \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(C) = \{ \} \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(S) = \{ id, print, \} \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(B\)</span> é o símbolo inicial, então <span class="math inline">\(\$\)</span> pertence a <span class="math inline">\(FOLLOW(B)\)</span>;</li>
+<li>em <span class="math inline">\(B \rightarrow \{ \ C \}\)</span>, o não-terminal <span class="math inline">\(C\)</span> é seguido por <span class="math inline">\(\}\)</span>, logo <span class="math inline">\(\} \in FOLLOW(C)\)</span>;</li>
+<li>em <span class="math inline">\(C \rightarrow S \ C\)</span>, o não-terminal <span class="math inline">\(S\)</span> é seguido por <span class="math inline">\(C\)</span>, então adicionamos <span class="math inline">\(FIRST(C) - \{\varepsilon\} = \{id, print\}\)</span> a <span class="math inline">\(FOLLOW(S)\)</span>;</li>
+<li>como <span class="math inline">\(C\)</span> pode derivar <span class="math inline">\(\varepsilon\)</span>, também propagamos <span class="math inline">\(FOLLOW(C)\)</span> para <span class="math inline">\(FOLLOW(S)\)</span>.</li>
+</ul>
+<p><strong>Tabela de Análise <span class="math inline">\(LL(1)\)</span></strong>:</p>
+<div class="line-block">Símbolo | <code>{</code> | <code>id</code> | <code>print</code> | <code>}</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—|:—| | <strong><span class="math inline">\(B\)</span></strong> | <span class="math inline">\(B \rightarrow \{ \ C \}\)</span> | | | | | | <strong><span class="math inline">\(C\)</span></strong> | | <span class="math inline">\(C \rightarrow S \ C\)</span> | <span class="math inline">\(C \rightarrow S \ C\)</span> | <span class="math inline">\(C \rightarrow \varepsilon\)</span> | | | <strong><span class="math inline">\(S\)</span></strong> | | <span class="math inline">\(S \rightarrow id \ ;\)</span> | <span class="math inline">\(S \rightarrow print \ id \ ;\)</span> | | |</p>
+<p><strong>Conclusão</strong>:</p>
+<p>A gramática é <span class="math inline">\(LL(1)\)</span>, pois não há conflitos na tabela.</p>
+<hr>
+</section>
+</section>
+<section id="exercício-5-gramática-com-conflito-de-escolha" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="exercício-5-gramática-com-conflito-de-escolha"><span class="header-section-number">7.4.5</span> Exercício 5: Gramática com conflito de escolha</h3>
+<p>Considere a gramática:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; A \rightarrow a \ B \vert a \ C \\
+2. &amp; B \rightarrow b \\
+3. &amp; C \rightarrow c \\
+\end{array}
+\]</span></p>
+<p>Determine:</p>
+<ol type="1">
+<li>os conjuntos <span class="math inline">\(FIRST\)</span> de todos os não-terminais;</li>
+<li>os conjuntos <span class="math inline">\(FOLLOW\)</span> de todos os não-terminais;</li>
+<li>a Tabela de Análise <span class="math inline">\(LL(1)\)</span>;</li>
+<li>se a gramática é ou não <span class="math inline">\(LL(1)\)</span>;</li>
+<li>em caso negativo, explique exatamente onde surge o conflito.</li>
+</ol>
+<section id="solução-4" class="level4" data-number="7.4.5.1">
+<h4 data-number="7.4.5.1" class="anchored" data-anchor-id="solução-4"><span class="header-section-number">7.4.5.1</span> Solução</h4>
+<p><strong>Conjuntos FIRST</strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(A) = \{ a \}\)</span></li>
+<li><span class="math inline">\(FIRST(B) = \{ b \}\)</span></li>
+<li><span class="math inline">\(FIRST(C) = \{ c \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li>ambas as alternativas de <span class="math inline">\(A\)</span> começam pelo terminal <span class="math inline">\(a\)</span>;</li>
+<li><span class="math inline">\(B\)</span> começa por <span class="math inline">\(b\)</span>;</li>
+<li><span class="math inline">\(C\)</span> começa por <span class="math inline">\(c\)</span>.</li>
+</ul>
+<p><strong>Conjuntos FOLLOW</strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(A) = \{ \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(B) = \{ \$ \}\)</span></li>
+<li><span class="math inline">\(FOLLOW(C) = \{ \$ \}\)</span></li>
+</ul>
+<p>Justificativa:</p>
+<ul>
+<li><span class="math inline">\(A\)</span> é o símbolo inicial, então <span class="math inline">\(\$\)</span> pertence a <span class="math inline">\(FOLLOW(A)\)</span>;</li>
+<li>em <span class="math inline">\(A \rightarrow a \ B\)</span> e <span class="math inline">\(A \rightarrow a \ C\)</span>, os não-terminais <span class="math inline">\(B\)</span> e <span class="math inline">\(C\)</span> aparecem ao final das produções, logo recebem <span class="math inline">\(FOLLOW(A)\)</span>.</li>
+</ul>
+<p><strong>Tabela de Análise <span class="math inline">\(LL(1)\)</span></strong>:</p>
+<div class="line-block">Símbolo | <code>a</code> | <code>b</code> | <code>c</code> | <code>$</code> |</div>
+<p>|:—:|:—|:—|:—|:—| | <strong><span class="math inline">\(A\)</span></strong> | <span class="math inline">\(A \rightarrow a \ B\)</span> <br> <span class="math inline">\(A \rightarrow a \ C\)</span> | | | | | <strong><span class="math inline">\(B\)</span></strong> | | <span class="math inline">\(B \rightarrow b\)</span> | | | | <strong><span class="math inline">\(C\)</span></strong> | | | <span class="math inline">\(C \rightarrow c\)</span> | |</p>
+<p><strong>Conclusão</strong>:</p>
+<p>A gramática <strong>não é <span class="math inline">\(LL(1)\)</span></strong>.</p>
+<p>O conflito ocorre em:</p>
+<p><span class="math display">\[
+M[A, a]
+\]</span></p>
+<p>porque:</p>
+<ul>
+<li><span class="math inline">\(a \in FIRST(a \ B)\)</span>;</li>
+<li><span class="math inline">\(a \in FIRST(a \ C)\)</span>.</li>
+</ul>
+<p>Assim, duas produções distintas competem pela mesma célula da tabela. Este é um caso clássico em que a gramática precisa ser fatorada à esquerda. Uma forma fatorada seria:</p>
+<p><span class="math display">\[
+\begin{array}{cc}
+1. &amp; A \rightarrow a \ X \\
+2. &amp; X \rightarrow B \vert C \\
+3. &amp; B \rightarrow b \\
+4. &amp; C \rightarrow c \\
+\end{array}
+\]</span></p>
 
 
+</section>
 </section>
 </section>
 
