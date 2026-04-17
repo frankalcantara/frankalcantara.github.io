@@ -2550,217 +2550,388 @@ EXPR → EXPR &lt; EXPR | EXPR + EXPR | id | num</code></pre>
 <section id="exercício-c-propagação-de-lookaheads" class="level3" data-number="8.8.3">
 <h3 data-number="8.8.3" class="anchored" data-anchor-id="exercício-c-propagação-de-lookaheads"><span class="header-section-number">8.8.3</span> Exercício C: Propagação de <em>Lookaheads</em></h3>
 <p><strong>Enunciado</strong>: construa um <em>parser</em> <span class="math inline">\(LR(1)\)</span> canônico para a gramática clássica:</p>
-<pre class="bnf"><code>1. S → C C
-2. C → c C
-3. C → d</code></pre>
-<p>Esta gramática, apresentada em <a href="https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000000081/9780321486813">Aho, Lam, Sethi, Ullman (2006)</a>, reconhece a linguagem <span class="math inline">\(\{w_1 w_2 \mid w_i \in c^* d\}\)</span>. Seu interesse didático está no fato de que ela é <span class="math inline">\(LR(1)\)</span> canônica, mas <strong>não</strong> <span class="math inline">\(SLR(1)\)</span>: o refinamento dos <em>lookaheads</em> é essencial para evitar um conflito <em>reduce-reduce</em> que surgiria no <span class="math inline">\(SLR(1)\)</span>. Verifique a <em>string</em> <code>ccdd</code>.</p>
+<pre class="shell"><code>1. S → A a
+2. S → b A c
+3. S → B c
+4. S → b B a
+5. A → d
+6. B → d</code></pre>
+<p>Esta gramática é um exemplo didático genuíno de linguagem que admite <em>parser</em> <span class="math inline">\(LR(1)\)</span> canônico, mas <strong>não</strong> <span class="math inline">\(SLR(1)\)</span>. O ponto central é que as reduções <code>A → d</code> e <code>B → d</code> precisam ser distinguidas pelo contexto: o símbolo <code>d</code> reduz para <code>A</code> em alguns estados e para <code>B</code> em outros, conforme o <em>lookahead</em>. Um <em>parser</em> <span class="math inline">\(SLR(1)\)</span> perde essa distinção, pois usa apenas os conjuntos <span class="math inline">\(FOLLOW\)</span>. Verifique a <em>string</em> <code>bdc</code>.</p>
 <section id="c.1.-gramática-aumentada" class="level4" data-number="8.8.3.1">
 <h4 data-number="8.8.3.1" class="anchored" data-anchor-id="c.1.-gramática-aumentada"><span class="header-section-number">8.8.3.1</span> C.1. Gramática Aumentada</h4>
-<pre class="bnf"><code>0. S' → S
-1. S → C C
-2. C → c C
-3. C → d</code></pre>
-<p>Os terminais são <span class="math inline">\(\{c, d, \$\}\)</span> e os não-terminais são <span class="math inline">\(\{S', S, C\}\)</span>. Note que <span class="math inline">\(FIRST(C) = \{c, d\}\)</span>.</p>
+<pre class="shell"><code>0. S' → S
+1. S → A a
+2. S → b A c
+3. S → B c
+4. S → b B a
+5. A → d
+6. B → d</code></pre>
+<p>Os terminais são <span class="math inline">\(\{a, b, c, d, \$\}\)</span> e os não-terminais são <span class="math inline">\(\{S', S, A, B\}\)</span>.</p>
+<p>Os conjuntos <span class="math inline">\(FIRST\)</span> relevantes são triviais:</p>
+<ul>
+<li><span class="math inline">\(FIRST(a) = \{a\}\)</span></li>
+<li><span class="math inline">\(FIRST(c) = \{c\}\)</span></li>
+<li><span class="math inline">\(FIRST(d) = \{d\}\)</span></li>
+</ul>
+<p>Os conjuntos <span class="math inline">\(FOLLOW\)</span> que interessam à comparação com <span class="math inline">\(SLR(1)\)</span> são:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(A) = \{a, c\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(B) = \{a, c\}\)</span></li>
+</ul>
+<p>É justamente esta coincidência entre <span class="math inline">\(FOLLOW(A)\)</span> e <span class="math inline">\(FOLLOW(B)\)</span> que inviabiliza a análise <span class="math inline">\(SLR(1)\)</span>.</p>
 </section>
 <section id="c.2.-construção-da-coleção-canônica" class="level4" data-number="8.8.3.2">
 <h4 data-number="8.8.3.2" class="anchored" data-anchor-id="c.2.-construção-da-coleção-canônica"><span class="header-section-number">8.8.3.2</span> C.2. Construção da Coleção Canônica</h4>
 <p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([S' \to \bullet S, \$]\)</span>:</p>
-<p>A expansão sucessiva com <code>CLOSURE</code> leva a:</p>
-<ul>
-<li><span class="math inline">\([S' \to \bullet S, \$]\)</span>: expande <code>S</code> com <em>lookahead</em> <code>$</code>.</li>
-<li><span class="math inline">\([S \to \bullet C\, C, \$]\)</span>: <span class="math inline">\(\beta = C\)</span>, <span class="math inline">\(a = \$\)</span>, <span class="math inline">\(FIRST(C\$) = FIRST(C) = \{c, d\}\)</span>.</li>
-<li>Propagação: geramos itens de <code>C</code> com <em>lookaheads</em> <code>c</code> e <code>d</code>.</li>
-</ul>
-<p>Resultado:</p>
+<p>Começamos com:</p>
 <ul>
 <li><span class="math inline">\([S' \to \bullet S, \$]\)</span></li>
-<li><span class="math inline">\([S \to \bullet C\, C, \$]\)</span></li>
-<li><span class="math inline">\([C \to \bullet c\, C, c]\)</span></li>
-<li><span class="math inline">\([C \to \bullet c\, C, d]\)</span></li>
-<li><span class="math inline">\([C \to \bullet d, c]\)</span></li>
-<li><span class="math inline">\([C \to \bullet d, d]\)</span></li>
+</ul>
+<p>Expandindo <code>S</code>, obtemos:</p>
+<ul>
+<li><span class="math inline">\([S \to \bullet A\, a, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet b\, A\, c, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet B\, c, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet b\, B\, a, \$]\)</span></li>
+</ul>
+<p>Agora expandimos os não-terminais que aparecem imediatamente após o ponto:</p>
+<ul>
+<li>em <span class="math inline">\([S \to \bullet A\, a, \$]\)</span>, o <em>lookahead</em> propagado para <code>A</code> é <span class="math inline">\(FIRST(a) = \{a\}\)</span>, produzindo:
+<ul>
+<li><span class="math inline">\([A \to \bullet d, a]\)</span></li>
+</ul></li>
+<li>em <span class="math inline">\([S \to \bullet B\, c, \$]\)</span>, o <em>lookahead</em> propagado para <code>B</code> é <span class="math inline">\(FIRST(c) = \{c\}\)</span>, produzindo:
+<ul>
+<li><span class="math inline">\([B \to \bullet d, c]\)</span></li>
+</ul></li>
+</ul>
+<p>Assim, o conjunto completo é:</p>
+<ul>
+<li><span class="math inline">\([S' \to \bullet S, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet A\, a, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet b\, A\, c, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet B\, c, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet b\, B\, a, \$]\)</span></li>
+<li><span class="math inline">\([A \to \bullet d, a]\)</span></li>
+<li><span class="math inline">\([B \to \bullet d, c]\)</span></li>
 </ul>
 <p><strong><span class="math inline">\(GOTO(I_0, S) = I_1\)</span></strong>:</p>
 <ul>
 <li><span class="math inline">\([S' \to S \bullet, \$]\)</span> (<em>aceitação</em>)</li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_0, C) = I_2\)</span></strong>: o núcleo é <span class="math inline">\([S \to C \bullet C, \$]\)</span>. O <code>CLOSURE</code> expande <code>C</code> com <span class="math inline">\(FIRST(\varepsilon\$) = \{\$\}\)</span>:</p>
+<p><strong><span class="math inline">\(GOTO(I_0, A) = I_2\)</span></strong>:</p>
 <ul>
-<li><span class="math inline">\([S \to C \bullet C, \$]\)</span></li>
-<li><span class="math inline">\([C \to \bullet c\, C, \$]\)</span></li>
-<li><span class="math inline">\([C \to \bullet d, \$]\)</span></li>
+<li><span class="math inline">\([S \to A \bullet a, \$]\)</span></li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_0, c) = I_3\)</span></strong>: núcleo <span class="math inline">\([C \to c \bullet C, c]\)</span> e <span class="math inline">\([C \to c \bullet C, d]\)</span>. O <code>CLOSURE</code> expande <code>C</code> com <em>lookaheads</em> propagados de <code>c</code> e <code>d</code>:</p>
+<p><strong><span class="math inline">\(GOTO(I_0, B) = I_3\)</span></strong>:</p>
 <ul>
-<li><span class="math inline">\([C \to c \bullet C, c]\)</span></li>
-<li><span class="math inline">\([C \to c \bullet C, d]\)</span></li>
-<li><span class="math inline">\([C \to \bullet c\, C, c]\)</span></li>
-<li><span class="math inline">\([C \to \bullet c\, C, d]\)</span></li>
-<li><span class="math inline">\([C \to \bullet d, c]\)</span></li>
-<li><span class="math inline">\([C \to \bullet d, d]\)</span></li>
+<li><span class="math inline">\([S \to B \bullet c, \$]\)</span></li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_0, d) = I_4\)</span></strong>:</p>
+<p><strong><span class="math inline">\(GOTO(I_0, b) = I_4\)</span></strong>:</p>
+<p>Avançamos o ponto em:</p>
 <ul>
-<li><span class="math inline">\([C \to d \bullet, c]\)</span></li>
-<li><span class="math inline">\([C \to d \bullet, d]\)</span></li>
+<li><span class="math inline">\([S \to b \bullet A\, c, \$]\)</span></li>
+<li><span class="math inline">\([S \to b \bullet B\, a, \$]\)</span></li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_2, C) = I_5\)</span></strong>:</p>
+<p>Agora expandimos:</p>
 <ul>
-<li><span class="math inline">\([S \to C\, C \bullet, \$]\)</span> (<em>redução</em>, regra 1)</li>
-</ul>
-<p><strong><span class="math inline">\(GOTO(I_2, c) = I_6\)</span></strong>: núcleo <span class="math inline">\([C \to c \bullet C, \$]\)</span>, que expande <code>C</code> com <em>lookahead</em> <code>$</code>:</p>
+<li>em <span class="math inline">\([S \to b \bullet A\, c, \$]\)</span>, o <em>lookahead</em> para <code>A</code> é <span class="math inline">\(FIRST(c) = \{c\}\)</span>:
 <ul>
-<li><span class="math inline">\([C \to c \bullet C, \$]\)</span></li>
-<li><span class="math inline">\([C \to \bullet c\, C, \$]\)</span></li>
-<li><span class="math inline">\([C \to \bullet d, \$]\)</span></li>
-</ul>
-<p><strong><span class="math inline">\(GOTO(I_2, d) = I_7\)</span></strong>:</p>
+<li><span class="math inline">\([A \to \bullet d, c]\)</span></li>
+</ul></li>
+<li>em <span class="math inline">\([S \to b \bullet B\, a, \$]\)</span>, o <em>lookahead</em> para <code>B</code> é <span class="math inline">\(FIRST(a) = \{a\}\)</span>:
 <ul>
-<li><span class="math inline">\([C \to d \bullet, \$]\)</span> (<em>redução</em>, regra 3)</li>
+<li><span class="math inline">\([B \to \bullet d, a]\)</span></li>
+</ul></li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_3, C) = I_8\)</span></strong>:</p>
+<p>Portanto:</p>
 <ul>
-<li><span class="math inline">\([C \to c\, C \bullet, c]\)</span></li>
-<li><span class="math inline">\([C \to c\, C \bullet, d]\)</span></li>
+<li><span class="math inline">\([S \to b \bullet A\, c, \$]\)</span></li>
+<li><span class="math inline">\([S \to b \bullet B\, a, \$]\)</span></li>
+<li><span class="math inline">\([A \to \bullet d, c]\)</span></li>
+<li><span class="math inline">\([B \to \bullet d, a]\)</span></li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_3, c) = I_3\)</span></strong>: ao avançar o ponto em <span class="math inline">\([C \to \bullet c\, C, c]\)</span> e <span class="math inline">\([C \to \bullet c\, C, d]\)</span> e fechar, recuperamos exatamente <span class="math inline">\(I_3\)</span>. A transição é um laço.</p>
-<p><strong><span class="math inline">\(GOTO(I_3, d) = I_4\)</span></strong>: o conjunto resultante coincide com <span class="math inline">\(I_4\)</span>.</p>
-<p><strong><span class="math inline">\(GOTO(I_6, C) = I_9\)</span></strong>:</p>
+<p><strong><span class="math inline">\(GOTO(I_0, d) = I_5\)</span></strong>:</p>
 <ul>
-<li><span class="math inline">\([C \to c\, C \bullet, \$]\)</span> (<em>redução</em>, regra 2)</li>
+<li><span class="math inline">\([A \to d \bullet, a]\)</span></li>
+<li><span class="math inline">\([B \to d \bullet, c]\)</span></li>
 </ul>
-<p><strong><span class="math inline">\(GOTO(I_6, c) = I_6\)</span></strong>: laço, análogo ao de <span class="math inline">\(I_3\)</span>.</p>
-<p><strong><span class="math inline">\(GOTO(I_6, d) = I_7\)</span></strong>.</p>
-<p>A coleção canônica tem <span class="math inline">\(10\)</span> estados.</p>
-<p><strong>Observação sobre a diferença LR(1) vs SLR(1)</strong>: um <em>parser</em> <span class="math inline">\(SLR(1)\)</span> para esta mesma gramática computaria a tabela de redução usando o conjunto <span class="math inline">\(FOLLOW(C) = \{c, d, \$\}\)</span>, sem distinguir os contextos. Com isso, os estados <span class="math inline">\(I_4\)</span> e <span class="math inline">\(I_7\)</span> (ambos contendo <span class="math inline">\([C \to d \bullet, \cdot]\)</span>) seriam fundidos em um único estado com <em>lookahead</em> efetivo <span class="math inline">\(\{c, d, \$\}\)</span>, e o mesmo aconteceria com <span class="math inline">\(I_8\)</span> e <span class="math inline">\(I_9\)</span>. A análise <span class="math inline">\(LR(1)\)</span> canônica mantém os estados separados, preservando o contexto de cada redução e, neste caso específico, evitando conflitos que poderiam surgir em gramáticas mais complexas.</p>
+<p>Este estado já mostra o refinamento do <span class="math inline">\(LR(1)\)</span>: a redução por <code>A → d</code> só vale quando o próximo símbolo é <code>a</code>, e a redução por <code>B → d</code> só vale quando o próximo símbolo é <code>c</code>.</p>
+<p><strong><span class="math inline">\(GOTO(I_2, a) = I_6\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to A\, a \bullet, \$]\)</span> (<em>redução pela regra 1</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_3, c) = I_7\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to B\, c \bullet, \$]\)</span> (<em>redução pela regra 3</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_4, A) = I_8\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to b\, A \bullet c, \$]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_4, B) = I_9\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to b\, B \bullet a, \$]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_4, d) = I_{10}\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([A \to d \bullet, c]\)</span></li>
+<li><span class="math inline">\([B \to d \bullet, a]\)</span></li>
+</ul>
+<p>Novamente, as reduções estão separadas por <em>lookahead</em>.</p>
+<p><strong><span class="math inline">\(GOTO(I_8, c) = I_{11}\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to b\, A\, c \bullet, \$]\)</span> (<em>redução pela regra 2</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_9, a) = I_{12}\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to b\, B\, a \bullet, \$]\)</span> (<em>redução pela regra 4</em>)</li>
+</ul>
+<p>A coleção canônica tem, portanto, <span class="math inline">\(13\)</span> estados:</p>
+<p><span class="math display">\[
+\{I_0, I_1, I_2, I_3, I_4, I_5, I_6, I_7, I_8, I_9, I_{10}, I_{11}, I_{12}\}.
+\]</span></p>
+<p><strong>Observação sobre a diferença LR(1) vs SLR(1)</strong>: no autômato <span class="math inline">\(LR(1)\)</span> canônico, os estados <span class="math inline">\(I_5\)</span> e <span class="math inline">\(I_{10}\)</span> têm o mesmo núcleo <span class="math inline">\(LR(0)\)</span>:</p>
+<ul>
+<li><span class="math inline">\(A \to d \bullet\)</span></li>
+<li><span class="math inline">\(B \to d \bullet\)</span></li>
+</ul>
+<p>mas com <em>lookaheads</em> diferentes. Em <span class="math inline">\(I_5\)</span>, temos:</p>
+<ul>
+<li><span class="math inline">\([A \to d \bullet, a]\)</span></li>
+<li><span class="math inline">\([B \to d \bullet, c]\)</span></li>
+</ul>
+<p>em <span class="math inline">\(I_{10}\)</span>, temos:</p>
+<ul>
+<li><span class="math inline">\([A \to d \bullet, c]\)</span></li>
+<li><span class="math inline">\([B \to d \bullet, a]\)</span></li>
+</ul>
+<p>O método <span class="math inline">\(SLR(1)\)</span> ignora essa distinção e usa apenas:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(A) = \{a, c\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(B) = \{a, c\}\)</span></li>
+</ul>
+<p>Logo, no estado <span class="math inline">\(LR(0)\)</span> correspondente a <span class="math inline">\(A \to d \bullet\)</span> e <span class="math inline">\(B \to d \bullet\)</span>, o <em>parser</em> tentaria reduzir <strong>pelas duas regras</strong> tanto com <code>a</code> quanto com <code>c</code>, produzindo conflito <em>reduce-reduce</em>. Portanto, esta gramática é <span class="math inline">\(LR(1)\)</span>, mas não <span class="math inline">\(SLR(1)\)</span>.</p>
 </section>
 <section id="c.3.-tabela-actiongoto" class="level4" data-number="8.8.3.3">
 <h4 data-number="8.8.3.3" class="anchored" data-anchor-id="c.3.-tabela-actiongoto"><span class="header-section-number">8.8.3.3</span> C.3. Tabela ACTION/GOTO</h4>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>a</strong></th>
+<th style="text-align: center;"><strong>b</strong></th>
 <th style="text-align: center;"><strong>c</strong></th>
 <th style="text-align: center;"><strong>d</strong></th>
 <th style="text-align: center;"><strong>$</strong></th>
 <th style="text-align: center;"><strong>S</strong></th>
-<th style="text-align: center;"><strong>C</strong></th>
+<th style="text-align: center;"><strong>A</strong></th>
+<th style="text-align: center;"><strong>B</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><strong>0</strong></td>
-<td style="text-align: center;">s3</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>1</strong></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><strong>2</strong></td>
 <td style="text-align: center;">s6</td>
-<td style="text-align: center;">s7</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>3</strong></td>
-<td style="text-align: center;">s3</td>
-<td style="text-align: center;">s4</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">8</td>
+<td style="text-align: center;">s7</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><strong>4</strong></td>
-<td style="text-align: center;">r3</td>
-<td style="text-align: center;">r3</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;">s10</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">9</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r6</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><strong>6</strong></td>
-<td style="text-align: center;">s6</td>
-<td style="text-align: center;">s7</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">9</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>7</strong></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><strong>8</strong></td>
-<td style="text-align: center;">r2</td>
-<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s11</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;">s12</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: center;">r6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">r2</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>12</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
-<p>A tabela não apresenta conflitos. A atenta leitora notará que as reduções pela regra 3 (<code>C → d</code>) aparecem em dois estados distintos (<span class="math inline">\(I_4\)</span> e <span class="math inline">\(I_7\)</span>), cada um com <em>lookaheads</em> disjuntos: o primeiro reduz para <code>c</code> ou <code>d</code> (contexto do primeiro <code>C</code> da produção <code>S → C C</code>), o segundo reduz apenas para <code>$</code> (contexto do segundo <code>C</code>).</p>
+<p>A tabela não apresenta conflitos. O aspecto crucial aparece nos estados <strong>5</strong> e <strong>10</strong>:</p>
+<ul>
+<li>em <strong>5</strong>, sobre <code>a</code> reduzimos por <code>A → d</code>, e sobre <code>c</code> reduzimos por <code>B → d</code>;</li>
+<li>em <strong>10</strong>, ocorre o inverso: sobre <code>a</code> reduzimos por <code>B → d</code>, e sobre <code>c</code> reduzimos por <code>A → d</code>.</li>
+</ul>
+<p>É precisamente esta sensibilidade ao contexto que o <span class="math inline">\(LR(1)\)</span> canônico preserva e que o <span class="math inline">\(SLR(1)\)</span> não consegue preservar.</p>
 </section>
 <section id="c.4.-diagrama-de-transição" class="level4" data-number="8.8.3.4">
 <h4 data-number="8.8.3.4" class="anchored" data-anchor-id="c.4.-diagrama-de-transição"><span class="header-section-number">8.8.3.4</span> C.4. Diagrama de Transição</h4>
-<pre><code>                     ┌──────────┐
-                     │    I₀    │
-                     └──────────┘
-                   c │    │ d    │ S  │ C
-                     ↓    ↓      ↓    ↓
-                  ┌─────┐┌─────┐┌───┐┌─────┐
-         ┌c,loop─▶│ I₃  ││ I₄  ││I₁ ││ I₂  │
-         │        └─────┘└─────┘└───┘└─────┘
-         │         │ d    (r3)   acc  │ c  │ d  │ C
-         │         ↓                  ↓    ↓    ↓
-         │      ┌─────┐             ┌───┐┌───┐┌───┐
-         │      │ I₄  │     ┌c,loop▶│I₆ ││I₇ ││I₅ │
-         │      └─────┘     │       └───┘└───┘└───┘
-         │         (r3)     │        │ d  (r3)  (r1)
-         │                  │        ↓
-         │   │ C            │      ┌───┐
-         │   ↓              │      │I₇ │
-         │ ┌─────┐          │      └───┘
-         └─│ I₈  │          │ C
-           └─────┘          ↓
-            (r2)          ┌───┐
-                          │I₉ │
-                          └───┘
-                           (r2)</code></pre>
+<pre class="shell"><code>                           ┌─────┐
+                           │ I₀  │
+                           └─────┘
+                 ┌──────────┼──────────┬──────────┬──────────┐
+                 │ S        │ A        │ B        │ b        │ d
+                 ↓          ↓          ↓          ↓          ↓
+              ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐    ┌─────┐
+              │ I₁  │    │ I₂  │    │ I₃  │    │ I₄  │    │ I₅  │
+              └─────┘    └─────┘    └─────┘    └─────┘    └─────┘
+               acc          │ a         │ c       │ A,B,d    r5/r6
+                            ↓           ↓         │
+                         ┌─────┐     ┌─────┐      │
+                         │ I₆  │     │ I₇  │      │
+                         └─────┘     └─────┘      │
+                           r1          r3         │
+                                                  │
+                                       ┌──────────┼──────────┐
+                                       │ A        │ B        │ d
+                                       ↓          ↓          ↓
+                                    ┌─────┐    ┌─────┐    ┌──────┐
+                                    │ I₈  │    │ I₉  │    │ I₁₀  │
+                                    └─────┘    └─────┘    └──────┘
+                                      │ c         │ a       r6/r5
+                                      ↓           ↓
+                                   ┌─────┐     ┌─────┐
+                                   │ I₁₁ │     │ I₁₂ │
+                                   └─────┘     └─────┘
+                                     r2          r4</code></pre>
+<p>O diagrama deixa visível a ideia central do exercício: o símbolo <code>d</code> pode completar tanto <code>A</code> quanto <code>B</code>, mas a decisão correta depende do estado em que o <em>parser</em> se encontra e, portanto, do <em>lookahead</em> associado a cada item.</p>
 </section>
-<section id="c.5.-verificação-da-string-ccdd" class="level4" data-number="8.8.3.5">
-<h4 data-number="8.8.3.5" class="anchored" data-anchor-id="c.5.-verificação-da-string-ccdd"><span class="header-section-number">8.8.3.5</span> C.5. Verificação da <em>String</em> <code>ccdd</code></h4>
+<section id="c.5.-verificação-da-string-bdc" class="level4" data-number="8.8.3.5">
+<h4 data-number="8.8.3.5" class="anchored" data-anchor-id="c.5.-verificação-da-string-bdc"><span class="header-section-number">8.8.3.5</span> C.5. Verificação da <em>String</em> <code>bdc</code></h4>
+<p>A derivação esperada é:</p>
+<p><span class="math display">\[
+S \Rightarrow bAc \Rightarrow bdc
+\]</span></p>
+<p>Vamos simular a análise:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 29%">
@@ -2780,66 +2951,53 @@ EXPR → EXPR &lt; EXPR | EXPR + EXPR | id | num</code></pre>
 <tr class="odd">
 <td style="text-align: center;">1</td>
 <td style="text-align: left;"><code>[0]</code></td>
-<td style="text-align: left;"><code>ccdd$</code></td>
-<td style="text-align: left;"><code>ACTION[0,c] = s3</code>. Empilha 3.</td>
+<td style="text-align: left;"><code>bdc$</code></td>
+<td style="text-align: left;"><code>ACTION[0,b] = s4</code>. Empilha 4.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2</td>
-<td style="text-align: left;"><code>[0,3]</code></td>
-<td style="text-align: left;"><code>cdd$</code></td>
-<td style="text-align: left;"><code>ACTION[3,c] = s3</code>. Empilha 3.</td>
+<td style="text-align: left;"><code>[0,4]</code></td>
+<td style="text-align: left;"><code>dc$</code></td>
+<td style="text-align: left;"><code>ACTION[4,d] = s10</code>. Empilha 10.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">3</td>
-<td style="text-align: left;"><code>[0,3,3]</code></td>
-<td style="text-align: left;"><code>dd$</code></td>
-<td style="text-align: left;"><code>ACTION[3,d] = s4</code>. Empilha 4.</td>
+<td style="text-align: left;"><code>[0,4,10]</code></td>
+<td style="text-align: left;"><code>c$</code></td>
+<td style="text-align: left;"><code>ACTION[10,c] = r5</code> (<code>A → d</code>). Desempilha 1. Topo é 4. <code>GOTO[4,A] = 8</code>. Empilha 8.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">4</td>
-<td style="text-align: left;"><code>[0,3,3,4]</code></td>
-<td style="text-align: left;"><code>d$</code></td>
-<td style="text-align: left;"><code>ACTION[4,d] = r3</code> (<code>C → d</code>). Desempilha 1. Topo é 3. <code>GOTO[3,C] = 8</code>. Empilha 8.</td>
+<td style="text-align: left;"><code>[0,4,8]</code></td>
+<td style="text-align: left;"><code>c$</code></td>
+<td style="text-align: left;"><code>ACTION[8,c] = s11</code>. Empilha 11.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">5</td>
-<td style="text-align: left;"><code>[0,3,3,8]</code></td>
-<td style="text-align: left;"><code>d$</code></td>
-<td style="text-align: left;"><code>ACTION[8,d] = r2</code> (<code>C → c C</code>). Desempilha 2. Topo é 3. <code>GOTO[3,C] = 8</code>. Empilha 8.</td>
+<td style="text-align: left;"><code>[0,4,8,11]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[11,$] = r2</code> (<code>S → b A c</code>). Desempilha 3. Topo é 0. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">6</td>
-<td style="text-align: left;"><code>[0,3,8]</code></td>
-<td style="text-align: left;"><code>d$</code></td>
-<td style="text-align: left;"><code>ACTION[8,d] = r2</code> (<code>C → c C</code>). Desempilha 2. Topo é 0. <code>GOTO[0,C] = 2</code>. Empilha 2.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">7</td>
-<td style="text-align: left;"><code>[0,2]</code></td>
-<td style="text-align: left;"><code>d$</code></td>
-<td style="text-align: left;"><code>ACTION[2,d] = s7</code>. Empilha 7.</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">8</td>
-<td style="text-align: left;"><code>[0,2,7]</code></td>
-<td style="text-align: left;"><code>$</code></td>
-<td style="text-align: left;"><code>ACTION[7,$] = r3</code> (<code>C → d</code>). Desempilha 1. Topo é 2. <code>GOTO[2,C] = 5</code>. Empilha 5.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">9</td>
-<td style="text-align: left;"><code>[0,2,5]</code></td>
-<td style="text-align: left;"><code>$</code></td>
-<td style="text-align: left;"><code>ACTION[5,$] = r1</code> (<code>S → C C</code>). Desempilha 2. Topo é 0. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">10</td>
 <td style="text-align: left;"><code>[0,1]</code></td>
 <td style="text-align: left;"><code>$</code></td>
 <td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
 </tr>
 </tbody>
 </table>
-<p>A análise da <em>string</em> <code>ccdd</code> exibe, nos passos 5 e 6, duas reduções consecutivas pela mesma regra (<code>C → c C</code>) que “desfazem” o aninhamento à esquerda. Na transição do passo 6 para o 7, o topo da pilha revela o estado <span class="math inline">\(0\)</span>, indicando que o primeiro <code>C</code> da produção <code>S → C C</code> acabou de ser reconhecido; a partir daí, o <em>parser</em> passa a reconhecer o segundo <code>C</code>, cujas reduções utilizam a variante com <em>lookahead</em> <code>$</code> (estado <span class="math inline">\(I_7\)</span> no lugar de <span class="math inline">\(I_4\)</span>).</p>
+<p>A simulação destaca o ponto didaticamente mais importante: no passo 3, ao encontrar <code>d</code> seguido de <code>c</code>, o <em>parser</em> reduz por <code>A → d</code>, não por <code>B → d</code>. Em outro contexto, com o mesmo símbolo <code>d</code>, a redução correta poderia ser outra. Esta dependência do contexto imediato é exatamente o que os <em>lookaheads</em> do <span class="math inline">\(LR(1)\)</span> canônico capturam.</p>
+<p>Se tentássemos construir a tabela por <span class="math inline">\(SLR(1)\)</span>, o estado que contém os itens reduzidos</p>
+<ul>
+<li><span class="math inline">\(A \to d \bullet\)</span></li>
+<li><span class="math inline">\(B \to d \bullet\)</span></li>
+</ul>
+<p>receberia simultaneamente:</p>
+<ul>
+<li>redução por <code>A → d</code> em <code>a</code> e <code>c</code>, porque <span class="math inline">\(FOLLOW(A) = \{a,c\}\)</span></li>
+<li>redução por <code>B → d</code> em <code>a</code> e <code>c</code>, porque <span class="math inline">\(FOLLOW(B) = \{a,c\}\)</span></li>
+</ul>
+<p>isso gera conflito <em>reduce-reduce</em> tanto na coluna <code>a</code> quanto na coluna <code>c</code>. Logo, a gramática é um exemplo correto da necessidade de propagação refinada de <em>lookaheads</em>.</p>
 
 
 </section>
