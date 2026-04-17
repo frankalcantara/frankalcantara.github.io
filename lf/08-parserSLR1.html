@@ -484,30 +484,39 @@ window.Quarto = {
   <li><a href="#fase-3-construção-das-tabelas-action-e-goto" id="toc-fase-3-construção-das-tabelas-action-e-goto" class="nav-link" data-scroll-target="#fase-3-construção-das-tabelas-action-e-goto"><span class="header-section-number">9.3.3</span> Fase 3: Construção das Tabelas ACTION e GOTO</a></li>
   <li><a href="#pseudocódigo-do-algoritmo-slr1" id="toc-pseudocódigo-do-algoritmo-slr1" class="nav-link" data-scroll-target="#pseudocódigo-do-algoritmo-slr1"><span class="header-section-number">9.3.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(SLR(1)\)</span></a></li>
   </ul></li>
-  <li><a href="#exemplo-guiado-construindo-um-parser-slr1-completo" id="toc-exemplo-guiado-construindo-um-parser-slr1-completo" class="nav-link" data-scroll-target="#exemplo-guiado-construindo-um-parser-slr1-completo"><span class="header-section-number">9.4</span> Exemplo Guiado: Construindo um Parser <span class="math inline">\(SLR(1)\)</span> Completo</a>
+  <li><a href="#exemplo-guiado-construindo-um-parserslr1-completo" id="toc-exemplo-guiado-construindo-um-parserslr1-completo" class="nav-link" data-scroll-target="#exemplo-guiado-construindo-um-parserslr1-completo"><span class="header-section-number">9.4</span> Exemplo Guiado: Construindo um <em>parser</em><span class="math inline">\(SLR(1)\)</span> Completo</a>
   <ul class="collapse">
   <li><a href="#passo-1-gramática-aumentada-e-conjuntos-preliminares" id="toc-passo-1-gramática-aumentada-e-conjuntos-preliminares" class="nav-link" data-scroll-target="#passo-1-gramática-aumentada-e-conjuntos-preliminares"><span class="header-section-number">9.4.1</span> Passo 1: Gramática Aumentada e Conjuntos Preliminares</a></li>
   <li><a href="#passo-2-construção-dos-estados-lr0" id="toc-passo-2-construção-dos-estados-lr0" class="nav-link" data-scroll-target="#passo-2-construção-dos-estados-lr0"><span class="header-section-number">9.4.2</span> Passo 2: Construção dos Estados <span class="math inline">\(LR(0)\)</span></a></li>
   <li><a href="#passo-3-comparação-com-lr1" id="toc-passo-3-comparação-com-lr1" class="nav-link" data-scroll-target="#passo-3-comparação-com-lr1"><span class="header-section-number">9.4.3</span> Passo 3: Comparação com <span class="math inline">\(LR(1)\)</span></a></li>
   <li><a href="#passo-4-construção-da-tabela-actiongoto" id="toc-passo-4-construção-da-tabela-actiongoto" class="nav-link" data-scroll-target="#passo-4-construção-da-tabela-actiongoto"><span class="header-section-number">9.4.4</span> Passo 4: Construção da Tabela ACTION/GOTO</a></li>
   <li><a href="#tabela-final-slr1" id="toc-tabela-final-slr1" class="nav-link" data-scroll-target="#tabela-final-slr1"><span class="header-section-number">9.4.5</span> Tabela Final <span class="math inline">\(SLR(1)\)</span></a></li>
+  <li><a href="#exemplo-de-rastreamento-da-string-n-n" id="toc-exemplo-de-rastreamento-da-string-n-n" class="nav-link" data-scroll-target="#exemplo-de-rastreamento-da-string-n-n"><span class="header-section-number">9.4.6</span> Exemplo de Rastreamento da <em>String</em> <code>n + n</code></a></li>
   </ul></li>
-  <li><a href="#implementação-em-python" id="toc-implementação-em-python" class="nav-link" data-scroll-target="#implementação-em-python"><span class="header-section-number">9.5</span> Implementação em Python</a></li>
-  <li><a href="#um-estudo-de-caso-uma-gramática-lr1-não-slr1" id="toc-um-estudo-de-caso-uma-gramática-lr1-não-slr1" class="nav-link" data-scroll-target="#um-estudo-de-caso-uma-gramática-lr1-não-slr1"><span class="header-section-number">9.6</span> Um Estudo de Caso: Uma Gramática <span class="math inline">\(LR(1)\)</span> Não-<span class="math inline">\(SLR(1)\)</span></a>
+  <li><a href="#conflitos-em-parsers-slr1" id="toc-conflitos-em-parsers-slr1" class="nav-link" data-scroll-target="#conflitos-em-parsers-slr1"><span class="header-section-number">9.5</span> Conflitos em Parsers <span class="math inline">\(SLR(1)\)</span></a></li>
+  <li><a href="#exemplo-de-implementação-em-python" id="toc-exemplo-de-implementação-em-python" class="nav-link" data-scroll-target="#exemplo-de-implementação-em-python"><span class="header-section-number">9.6</span> Exemplo de Implementação em Python</a></li>
+  <li><a href="#sec-slr-nao-LR" id="toc-sec-slr-nao-LR" class="nav-link" data-scroll-target="#sec-slr-nao-LR"><span class="header-section-number">9.7</span> Um Estudo de Caso: Uma Gramática <span class="math inline">\(LR(1)\)</span> Não-<span class="math inline">\(SLR(1)\)</span></a>
   <ul class="collapse">
-  <li><a href="#preparação-gramática-aumentada-e-conjuntos-preliminares" id="toc-preparação-gramática-aumentada-e-conjuntos-preliminares" class="nav-link" data-scroll-target="#preparação-gramática-aumentada-e-conjuntos-preliminares"><span class="header-section-number">9.6.1</span> Preparação: Gramática Aumentada e Conjuntos Preliminares</a></li>
-  <li><a href="#construção-da-tabela-slr1" id="toc-construção-da-tabela-slr1" class="nav-link" data-scroll-target="#construção-da-tabela-slr1"><span class="header-section-number">9.6.2</span> Construção da Tabela <span class="math inline">\(SLR(1)\)</span></a></li>
-  <li><a href="#construção-da-tabela-lr1-canônica" id="toc-construção-da-tabela-lr1-canônica" class="nav-link" data-scroll-target="#construção-da-tabela-lr1-canônica"><span class="header-section-number">9.6.3</span> Construção da Tabela <span class="math inline">\(LR(1)\)</span> Canônica</a></li>
-  <li><a href="#tabela-final-lr1" id="toc-tabela-final-lr1" class="nav-link" data-scroll-target="#tabela-final-lr1"><span class="header-section-number">9.6.4</span> Tabela Final <span class="math inline">\(LR(1)\)</span></a></li>
-  <li><a href="#por-que-o-conflito-ocorre-no-slr1" id="toc-por-que-o-conflito-ocorre-no-slr1" class="nav-link" data-scroll-target="#por-que-o-conflito-ocorre-no-slr1"><span class="header-section-number">9.6.5</span> Por Que o Conflito Ocorre no <span class="math inline">\(SLR(1)\)</span></a></li>
-  <li><a href="#vantagens" id="toc-vantagens" class="nav-link" data-scroll-target="#vantagens"><span class="header-section-number">9.6.6</span> Vantagens</a></li>
-  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">9.6.7</span> Limitações</a></li>
+  <li><a href="#preparação-gramática-aumentada-e-conjuntos-preliminares" id="toc-preparação-gramática-aumentada-e-conjuntos-preliminares" class="nav-link" data-scroll-target="#preparação-gramática-aumentada-e-conjuntos-preliminares"><span class="header-section-number">9.7.1</span> Preparação: Gramática Aumentada e Conjuntos Preliminares</a></li>
+  <li><a href="#construção-da-tabela-slr1" id="toc-construção-da-tabela-slr1" class="nav-link" data-scroll-target="#construção-da-tabela-slr1"><span class="header-section-number">9.7.2</span> Construção da Tabela <span class="math inline">\(SLR(1)\)</span></a></li>
+  <li><a href="#construção-da-tabela-lr1-canônica" id="toc-construção-da-tabela-lr1-canônica" class="nav-link" data-scroll-target="#construção-da-tabela-lr1-canônica"><span class="header-section-number">9.7.3</span> Construção da Tabela <span class="math inline">\(LR(1)\)</span> Canônica</a></li>
+  <li><a href="#tabela-final-lr1" id="toc-tabela-final-lr1" class="nav-link" data-scroll-target="#tabela-final-lr1"><span class="header-section-number">9.7.4</span> Tabela Final <span class="math inline">\(LR(1)\)</span></a></li>
+  <li><a href="#por-que-o-conflito-ocorre-no-slr1" id="toc-por-que-o-conflito-ocorre-no-slr1" class="nav-link" data-scroll-target="#por-que-o-conflito-ocorre-no-slr1"><span class="header-section-number">9.7.5</span> Por Que o Conflito Ocorre no <span class="math inline">\(SLR(1)\)</span></a></li>
   </ul></li>
-  <li><a href="#o-lugar-do-slr1-na-hierarquia" id="toc-o-lugar-do-slr1-na-hierarquia" class="nav-link" data-scroll-target="#o-lugar-do-slr1-na-hierarquia"><span class="header-section-number">9.7</span> O Lugar do <span class="math inline">\(SLR(1)\)</span> na Hierarquia</a></li>
-  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">9.8</span> Exercícios</a>
+  <li><a href="#o-lugar-do-slr1-na-hierarquia" id="toc-o-lugar-do-slr1-na-hierarquia" class="nav-link" data-scroll-target="#o-lugar-do-slr1-na-hierarquia"><span class="header-section-number">9.8</span> O Lugar do <span class="math inline">\(SLR(1)\)</span> na Hierarquia</a></li>
+  <li><a href="#vantagens-e-limitações-do-slr1" id="toc-vantagens-e-limitações-do-slr1" class="nav-link" data-scroll-target="#vantagens-e-limitações-do-slr1"><span class="header-section-number">9.9</span> Vantagens e Limitações do <span class="math inline">\(SLR(1)\)</span></a>
   <ul class="collapse">
-  <li><a href="#exercício-1-gramática-com-conflito-potencial" id="toc-exercício-1-gramática-com-conflito-potencial" class="nav-link" data-scroll-target="#exercício-1-gramática-com-conflito-potencial"><span class="header-section-number">9.8.1</span> Exercício 1: Gramática com Conflito Potencial</a></li>
-  <li><a href="#exercício-2-implementação-de-gramática-de-declarações" id="toc-exercício-2-implementação-de-gramática-de-declarações" class="nav-link" data-scroll-target="#exercício-2-implementação-de-gramática-de-declarações"><span class="header-section-number">9.8.2</span> Exercício 2: Implementação de Gramática de Declarações</a></li>
+  <li><a href="#vantagens" id="toc-vantagens" class="nav-link" data-scroll-target="#vantagens"><span class="header-section-number">9.9.1</span> Vantagens</a></li>
+  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">9.9.2</span> Limitações</a></li>
+  </ul></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">9.10</span> Exercícios</a></li>
+  <li><a href="#sec-exercicios-SLR1" id="toc-sec-exercicios-SLR1" class="nav-link" data-scroll-target="#sec-exercicios-SLR1"><span class="header-section-number">9.11</span> Exercícios Resolvidos</a>
+  <ul class="collapse">
+  <li><a href="#exercício-a-concatenação-de-blocos" id="toc-exercício-a-concatenação-de-blocos" class="nav-link" data-scroll-target="#exercício-a-concatenação-de-blocos"><span class="header-section-number">9.11.1</span> Exercício A: Concatenação de Blocos</a></li>
+  <li><a href="#exercício-b-produção-vazia-e-balanceamento" id="toc-exercício-b-produção-vazia-e-balanceamento" class="nav-link" data-scroll-target="#exercício-b-produção-vazia-e-balanceamento"><span class="header-section-number">9.11.2</span> Exercício B: Produção Vazia e Balanceamento</a></li>
+  <li><a href="#exercício-c-gramática-de-expressões-aritméticas" id="toc-exercício-c-gramática-de-expressões-aritméticas" class="nav-link" data-scroll-target="#exercício-c-gramática-de-expressões-aritméticas"><span class="header-section-number">9.11.3</span> Exercício C: Gramática de Expressões Aritméticas</a></li>
+  <li><a href="#exercício-d-gramática-com-conflito-potencial" id="toc-exercício-d-gramática-com-conflito-potencial" class="nav-link" data-scroll-target="#exercício-d-gramática-com-conflito-potencial"><span class="header-section-number">9.11.4</span> Exercício D: Gramática com Conflito Potencial</a></li>
+  <li><a href="#exercício-e-gramática-de-declarações" id="toc-exercício-e-gramática-de-declarações" class="nav-link" data-scroll-target="#exercício-e-gramática-de-declarações"><span class="header-section-number">9.11.5</span> Exercício E: Gramática de Declarações</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/08-parserSLR1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -538,8 +547,9 @@ window.Quarto = {
 </header>
 
 
+<p>No capítulo anterior, antecipamos a existência de um primo mais simples do <span class="math inline">\(LR(1)\)</span> canônico; este capítulo honra a promessa.</p>
 <p>Se Watson era nosso detetive <span class="math inline">\(LR(1)\)</span>, então o <span class="math inline">\(SLR(1)\)</span> é o inspetor Lestrade, menos sofisticado, às vezes perde pistas sutis, mas muito mais rápido em chegar a uma conclusão e, frequentemente, é tudo que precisamos. O <em>Simple <span class="math inline">\(LR(1)\)</span></em>, ou <span class="math inline">\(SLR(1)\)</span>, representa o primeiro passo histórico em direção aos parsers <span class="math inline">\(LR\)</span> práticos, oferecendo um compromisso elegante entre simplicidade de implementação e poder de reconhecimento.</p>
-<p>O parser <span class="math inline">\(SLR(1)\)</span> nasceu da necessidade prática de simplificar a construção das tabelas <span class="math inline">\(LR(1)\)</span>. Desenvolvido por Frank DeRemer em 1969, apenas quatro anos após o trabalho de Knuth sobre <span class="math inline">\(LR(1)\)</span>, em sua tese de doutorado <em><a href="https://publications.csail.mit.edu/lcs/pubs/pdf/MIT-LCS-TR-065.pdf">Practical Translators for LR(k) Languages</a></em>, o <span class="math inline">\(SLR\)</span> tornou viável a implementação de parsers <em>bottom-up</em> eficientes sem a explosão de estados que caracterizava o <span class="math inline">\(LR(1)\)</span> canônico que vimos no capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
+<p>O <em>parser</em><span class="math inline">\(SLR(1)\)</span> nasceu da necessidade prática de simplificar a construção das tabelas <span class="math inline">\(LR(1)\)</span>. Desenvolvido por <a href="https://www.lastingmemories.com/memorial/frank-deremer?lifestory">Frank DeRemer</a> em 1969, apenas quatro anos após o trabalho de <a href="https://grokipedia.com/page/Donald_Knuth">Knuth</a> sobre <span class="math inline">\(LR(1)\)</span>, em sua tese de doutorado <em><a href="https://publications.csail.mit.edu/lcs/pubs/pdf/MIT-LCS-TR-065.pdf">Practical Translators for LR(k) Languages</a></em>, o <span class="math inline">\(SLR\)</span> tornou viável a implementação de parsers <em>bottom-up</em> eficientes sem a explosão de estados que caracterizava o <span class="math inline">\(LR(1)\)</span> canônico que vimos no capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
 <p>A notação <span class="math inline">\(SLR(1)\)</span> significa:</p>
 <ul>
 <li><strong><span class="math inline">\(S\)</span></strong>: <em>Simple</em> (simples);</li>
@@ -577,7 +587,7 @@ Figure&nbsp;9.1
 </section>
 <section id="o-papel-dos-conjuntos-follow" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="o-papel-dos-conjuntos-follow"><span class="header-section-number">9.2</span> O Papel dos Conjuntos <span class="math inline">\(FOLLOW\)</span></h2>
-<p>Se os itens <span class="math inline">\(LR(0)\)</span> não carregam <em>lookahead</em>, como o parser decide quando reduzir? A resposta para esta questão pode ser encontrada nos conjuntos <span class="math inline">\(FOLLOW\)</span>. Para cada não-terminal <span class="math inline">\(A\)</span> na gramática, <span class="math inline">\(FOLLOW(A)\)</span> contém todos os terminais que podem aparecer imediatamente após <span class="math inline">\(A\)</span> em alguma forma sentencial.</p>
+<p>Se os itens <span class="math inline">\(LR(0)\)</span> não carregam <em>lookahead</em>, como o _parser_decide quando reduzir? A resposta para esta questão pode ser encontrada nos conjuntos <span class="math inline">\(FOLLOW\)</span>. Para cada não-terminal <span class="math inline">\(A\)</span> na gramática, <span class="math inline">\(FOLLOW(A)\)</span> contém todos os terminais que podem aparecer imediatamente após <span class="math inline">\(A\)</span> em alguma forma sentencial.</p>
 <p>Como vimos antes no Capítulo <a href="06-first-follow.html" class="quarto-xref"><span>Chapter 7</span></a>, a construção do conjunto <span class="math inline">\(FOLLOW\)</span> segue regras precisas:</p>
 <ol type="1">
 <li>se <span class="math inline">\(S\)</span> é o símbolo inicial, então <span class="math inline">\(\$ \in FOLLOW(S)\)</span>;</li>
@@ -585,17 +595,18 @@ Figure&nbsp;9.1
 <li>se existe uma produção <span class="math inline">\(A \rightarrow \alpha B\)</span> ou <span class="math inline">\(A \rightarrow \alpha B \beta\)</span> onde <span class="math inline">\(\epsilon \in FIRST(\beta)\)</span>, então <span class="math inline">\(FOLLOW(A) \subseteq FOLLOW(B)\)</span>.</li>
 </ol>
 <p>Esta informação global substitui a propagação local de <em>lookaheads</em> do <span class="math inline">\(LR(1)\)</span>, tornando a construção muito mais eficiente.</p>
+<p>Eis o método característico de Lestrade: em vez de seguir cada pista até sua origem específica, como Watson faria ao rastrear um <em>lookahead</em> item a item, o inspetor consulta uma ficha pronta com todos os terminais que já viu seguirem um determinado não-terminal em qualquer contexto anterior. A decisão de reduzir é tomada com base nesse histórico agregado, e não no caminho concreto que trouxe o <em>parser</em> até o estado atual. A abordagem é menos refinada, mas consideravelmente mais rápida de montar, e, como veremos, suficiente para a maioria dos casos em que a gramática foi bem projetada.</p>
 </section>
 <section id="o-algoritmo-de-construção-slr1" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="o-algoritmo-de-construção-slr1"><span class="header-section-number">9.3</span> O Algoritmo de Construção <span class="math inline">\(SLR(1)\)</span></h2>
-<p>O processo de construção de um parser <span class="math inline">\(SLR(1)\)</span> segue três fases distintas:</p>
+<p>O processo de construção de um <em>parser</em><span class="math inline">\(SLR(1)\)</span> segue três fases distintas:</p>
 <section id="fase-1-preparação-da-gramática" class="level3" data-number="9.3.1">
 <h3 data-number="9.3.1" class="anchored" data-anchor-id="fase-1-preparação-da-gramática"><span class="header-section-number">9.3.1</span> Fase 1: Preparação da Gramática</h3>
 <p>A primeira fase estabelece os fundamentos necessários para a construção do parser. Começamos aumentando a gramática original adicionando uma nova produção <span class="math inline">\(S' \rightarrow S\)</span>, onde <span class="math inline">\(S\)</span> é o símbolo inicial original. Este aumento nos permite detectar a aceitação da entrada de forma inequívoca. Em seguida, calculamos os conjuntos <span class="math inline">\(FIRST\)</span> para todos os símbolos da gramática, que nos informam quais terminais podem aparecer no início de qualquer sequência derivável de um símbolo. Por fim, para o <span class="math inline">\(SLR(1)\)</span>, calculamos os conjuntos <span class="math inline">\(FOLLOW\)</span> para todos os não-terminais, que contêm os terminais que podem aparecer imediatamente após cada não-terminal em qualquer forma sentencial.</p>
 </section>
 <section id="fase-2-construção-da-coleção-canônica-de-itens-lr0" class="level3" data-number="9.3.2">
 <h3 data-number="9.3.2" class="anchored" data-anchor-id="fase-2-construção-da-coleção-canônica-de-itens-lr0"><span class="header-section-number">9.3.2</span> Fase 2: Construção da Coleção Canônica de Itens <span class="math inline">\(LR(0)\)</span></h3>
-<p>Esta fase constrói o autômato finito que reconhece os prefixos viáveis da gramática. Começamos com o estado inicial <span class="math inline">\(I_0\)</span>, que contém o <em>closure</em> do item <span class="math inline">\([S' \rightarrow \bullet S]\)</span>. A função <span class="math inline">\(CLOSURE\)</span> expande um conjunto de itens adicionando todos os itens que podem ser alcançados quando encontramos um não-terminal imediatamente após o ponto. Para cada estado e cada símbolo gramatical, aplicamos a função <span class="math inline">\(GOTO\)</span>, que move o ponto sobre o símbolo e calcula o <em>closure</em> do resultado. Novos estados são adicionados à coleção até que nenhum novo estado seja descoberto. Note que, diferentemente do <span class="math inline">\(LR(1)\)</span>, trabalhamos apenas com itens <span class="math inline">\(LR(0)\)</span> sem <em>lookahead</em> embutido, o que resulta em significativamente menos estados.</p>
+<p>Esta fase constrói o autômato finito que reconhece os prefixos viáveis da gramática. Começamos com o estado inicial <span class="math inline">\(I_0\)</span>, que contém o <em>closure</em> do item <span class="math inline">\([S' \rightarrow \bullet S]\)</span>. A função <span class="math inline">\(CLOSURE\)</span> expande um conjunto de itens adicionando todos os itens que podem ser alcançados quando encontramos um não-terminal imediatamente após o ponto. Para cada estado e cada símbolo gramatical, aplicamos a função <span class="math inline">\(GOTO\)</span>, que move o ponto sobre o símbolo e calcula o <em>closure</em> do resultado. Novos estados são adicionados à coleção até que nenhum novo estado seja descoberto. A atenta leitora deve ter notado que, diferentemente do <span class="math inline">\(LR(1)\)</span>, trabalhamos apenas com itens <span class="math inline">\(LR(0)\)</span> sem <em>lookahead</em> embutido, o que resulta em significativamente menos estados.</p>
 </section>
 <section id="fase-3-construção-das-tabelas-action-e-goto" class="level3" data-number="9.3.3">
 <h3 data-number="9.3.3" class="anchored" data-anchor-id="fase-3-construção-das-tabelas-action-e-goto"><span class="header-section-number">9.3.3</span> Fase 3: Construção das Tabelas ACTION e GOTO</h3>
@@ -634,10 +645,10 @@ Figure&nbsp;9.1
 // Fase 3: Construção das Tabelas ACTION e GOTO
 18. PARA CADA estado i em C:
 19.   PARA CADA item em I_i:
-20.     // Caso 1: Item de _shift_
+20.     // Caso 1: Item de shift
 21.     SE o item tem a forma [A → α•tβ], onde t é TERMINAL:
 22.       J = GOTO(I_i, t)
-23.       ACTION[i, t] = "_shift_ j", onde I_j = J
+23.       ACTION[i, t] = "shift j", onde I_j = J
 24.     FIM SE
     
 25.     // Caso 2: Item de Reduce (aqui está a diferença mais importante!)
@@ -682,11 +693,11 @@ Figure&nbsp;9.1
 58.   RETORNAR CLOSURE(J)</code></pre>
 </section>
 </section>
-<section id="exemplo-guiado-construindo-um-parser-slr1-completo" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="exemplo-guiado-construindo-um-parser-slr1-completo"><span class="header-section-number">9.4</span> Exemplo Guiado: Construindo um Parser <span class="math inline">\(SLR(1)\)</span> Completo</h2>
-<p>Para que a esforçada leitora possa entender o processo de criação de parsers <span class="math inline">\(SLR(1)\)</span>, vamos construir um parser <span class="math inline">\(SLR(1)\)</span> para a mesma gramática usada no Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>; isso vai permitir que a leitora veja as diferenças e semelhanças entre os dois tipos de parser</p>
-<pre class="bnf"><code>E → E + n
-E → n</code></pre>
+<section id="exemplo-guiado-construindo-um-parserslr1-completo" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="exemplo-guiado-construindo-um-parserslr1-completo"><span class="header-section-number">9.4</span> Exemplo Guiado: Construindo um <em>parser</em><span class="math inline">\(SLR(1)\)</span> Completo</h2>
+<p>Para que a esforçada leitora possa entender o processo de criação de parsers <span class="math inline">\(SLR(1)\)</span>, vamos construir um <em>parser</em><span class="math inline">\(SLR(1)\)</span> para a mesma gramática usada no Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>; isso vai permitir que a leitora veja as diferenças e semelhanças entre os dois tipos de parser.</p>
+<pre class="bnf"><code>1. E → E + n
+2. E → n</code></pre>
 <section id="passo-1-gramática-aumentada-e-conjuntos-preliminares" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="passo-1-gramática-aumentada-e-conjuntos-preliminares"><span class="header-section-number">9.4.1</span> Passo 1: Gramática Aumentada e Conjuntos Preliminares</h3>
 <p>Primeiro, aumentamos a gramática:</p>
@@ -760,7 +771,7 @@ Estado $I_4$:
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Parser</th>
+<th style="text-align: left;"><em>parser</em></th>
 <th style="text-align: center;">Estados Totais</th>
 <th style="text-align: center;">Itens em <span class="math inline">\(I_0\)</span></th>
 </tr>
@@ -867,11 +878,73 @@ Estado $I_4$:
 </tr>
 </tbody>
 </table>
-<p>Observação: a tabela resultante é <strong>idêntica</strong> à tabela <span class="math inline">\(LR(1)\)</span> para esta gramática! Isso ocorre porque esta gramática simples é <span class="math inline">\(SLR(1)\)</span>. A diferença aparece quando a gramática tem sutilezas que o <span class="math inline">\(SLR(1)\)</span> não consegue capturar.</p>
+<p>Neste caso, Lestrade e Watson chegaram à mesma conclusão. A gramática é simples o bastante para que a ficha consolidada de <span class="math inline">\(FOLLOW\)</span> baste, sem que a riqueza dos <em>lookaheads</em> locais do <span class="math inline">\(LR(1)\)</span> canônico faça diferença. É precisamente nessa classe de gramáticas que o inspetor brilha: o trabalho é feito com menos esforço e o resultado é indistinguível. A atenta leitora deve reter, no entanto, que a coincidência é contingente à gramática. No estudo de caso da próxima seção, veremos Lestrade hesitar onde Watson decide com clareza.</p>
+</section>
+<section id="exemplo-de-rastreamento-da-string-n-n" class="level3" data-number="9.4.6">
+<h3 data-number="9.4.6" class="anchored" data-anchor-id="exemplo-de-rastreamento-da-string-n-n"><span class="header-section-number">9.4.6</span> Exemplo de Rastreamento da <em>String</em> <code>n + n</code></h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>n + n $</code></td>
+<td style="text-align: left;"><code>ACTION[0,n] = s2</code>. Empilha 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0, 2]</code></td>
+<td style="text-align: left;"><code>+ n $</code></td>
+<td style="text-align: left;"><code>ACTION[2,+] = r2</code> (<code>E → n</code>). Desempilha 1. <code>GOTO[0,E] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0, 1]</code></td>
+<td style="text-align: left;"><code>+ n $</code></td>
+<td style="text-align: left;"><code>ACTION[1,+] = s3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0, 1, 3]</code></td>
+<td style="text-align: left;"><code>n $</code></td>
+<td style="text-align: left;"><code>ACTION[3,n] = s4</code>. Empilha 4.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0, 1, 3, 4]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[4,$] = r1</code> (<code>E → E + n</code>). Desempilha 3. <code>GOTO[0,E] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0, 1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
-<section id="implementação-em-python" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="implementação-em-python"><span class="header-section-number">9.5</span> Implementação em Python</h2>
+<section id="conflitos-em-parsers-slr1" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="conflitos-em-parsers-slr1"><span class="header-section-number">9.5</span> Conflitos em Parsers <span class="math inline">\(SLR(1)\)</span></h2>
+<p>Os parsers <span class="math inline">\(SLR(1)\)</span> podem apresentar os mesmos tipos de conflitos que vimos no <span class="math inline">\(LR(1)\)</span> canônico —shift-reduce e reduce-reduce— mas com uma fonte adicional: a imprecisão do conjunto <span class="math inline">\(FOLLOW\)</span>. Como o <span class="math inline">\(SLR(1)\)</span> usa <span class="math inline">\(FOLLOW(A)\)</span> uniformemente para decidir todas as reduções por <code>A → α</code>, independentemente do estado, pode haver conflitos em gramáticas que o <span class="math inline">\(LR(1)\)</span> canônico trata sem dificuldade. O estudo de caso na Seção <a href="#sec-slr-nao-LR" class="quarto-xref"><span>Section 9.7</span></a> detalha esse fenômeno.</p>
+<p>Quando conflitos surgem, as estratégias de resolução são idênticas às apresentadas no Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>: preferência por shift (para o <em>dangling else</em>), diretivas de precedência e associatividade, ou reformulação da gramática.</p>
+</section>
+<section id="exemplo-de-implementação-em-python" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="exemplo-de-implementação-em-python"><span class="header-section-number">9.6</span> Exemplo de Implementação em Python</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Set, Dict, List, Tuple, Optional</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass, field</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
@@ -1124,7 +1197,7 @@ Estado $I_4$:
 <span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, state <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.states):</span>
 <span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> item <span class="kw">in</span> state:</span>
 <span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> item.after_dot:</span>
-<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>          <span class="co"># Item de _shift_: [A → α•aβ]</span></span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>          <span class="co"># Item de shift: [A → α•aβ]</span></span>
 <span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a>          symbol <span class="op">=</span> item.after_dot[<span class="dv">0</span>]</span>
 <span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> symbol <span class="kw">in</span> <span class="va">self</span>.terminals:</span>
 <span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>            goto_state <span class="op">=</span> <span class="va">self</span>.goto(state, symbol)</span>
@@ -1137,11 +1210,11 @@ Estado $I_4$:
 <span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'reduce'</span>:</span>
 <span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a>                  conflicts.append(</span>
 <span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"Conflito S/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, "</span></span>
-<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"símbolo '</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">': preferindo _shift_"</span></span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>                    <span class="ss">f"símbolo '</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">': preferindo shift"</span></span>
 <span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a>                  )</span>
-<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'_shift_'</span>, j)</span>
+<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'shift'</span>, j)</span>
 <span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a>              <span class="cf">else</span>:</span>
-<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'_shift_'</span>, j)</span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'shift'</span>, j)</span>
 <span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a>          <span class="co"># Item de reduce: [A → α•]</span></span>
 <span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a>          <span class="cf">if</span> (item.lhs <span class="op">==</span> <span class="va">self</span>.start_symbol <span class="kw">and</span> </span>
@@ -1162,10 +1235,10 @@ Estado $I_4$:
 <span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a>                  </span>
 <span id="cb9-289"><a href="#cb9-289" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">if</span> key <span class="kw">in</span> <span class="va">self</span>.action_table:</span>
 <span id="cb9-290"><a href="#cb9-290" aria-hidden="true" tabindex="-1"></a>                    existing <span class="op">=</span> <span class="va">self</span>.action_table[key]</span>
-<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'_shift_'</span>:</span>
+<span id="cb9-291"><a href="#cb9-291" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'shift'</span>:</span>
 <span id="cb9-292"><a href="#cb9-292" aria-hidden="true" tabindex="-1"></a>                      conflicts.append(</span>
 <span id="cb9-293"><a href="#cb9-293" aria-hidden="true" tabindex="-1"></a>                        <span class="ss">f"Conflito S/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, "</span></span>
-<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>                        <span class="ss">f"símbolo '</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">': mantendo _shift_"</span></span>
+<span id="cb9-294"><a href="#cb9-294" aria-hidden="true" tabindex="-1"></a>                        <span class="ss">f"símbolo '</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">': mantendo shift"</span></span>
 <span id="cb9-295"><a href="#cb9-295" aria-hidden="true" tabindex="-1"></a>                      )</span>
 <span id="cb9-296"><a href="#cb9-296" aria-hidden="true" tabindex="-1"></a>                      <span class="cf">continue</span></span>
 <span id="cb9-297"><a href="#cb9-297" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">elif</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'reduce'</span>:</span>
@@ -1227,8 +1300,8 @@ Estado $I_4$:
 <span id="cb9-353"><a href="#cb9-353" aria-hidden="true" tabindex="-1"></a>      stack_str <span class="op">=</span> <span class="bu">str</span>(stack)</span>
 <span id="cb9-354"><a href="#cb9-354" aria-hidden="true" tabindex="-1"></a>      input_str <span class="op">=</span> <span class="st">' '</span>.join(input_tokens[i:])</span>
 <span id="cb9-355"><a href="#cb9-355" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb9-356"><a href="#cb9-356" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> action[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'_shift_'</span>:</span>
-<span id="cb9-357"><a href="#cb9-357" aria-hidden="true" tabindex="-1"></a>        action_str <span class="op">=</span> <span class="ss">f"_shift_ para estado </span><span class="sc">{</span>action[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb9-356"><a href="#cb9-356" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> action[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'shift'</span>:</span>
+<span id="cb9-357"><a href="#cb9-357" aria-hidden="true" tabindex="-1"></a>        action_str <span class="op">=</span> <span class="ss">f"shift para estado </span><span class="sc">{</span>action[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb9-358"><a href="#cb9-358" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>step<span class="sc">:&lt;6}</span><span class="ss"> </span><span class="sc">{</span>stack_str<span class="sc">:&lt;20}</span><span class="ss"> </span><span class="sc">{</span>input_str<span class="sc">:&lt;15}</span><span class="ss"> </span><span class="sc">{</span>action_str<span class="sc">:&lt;30}</span><span class="ss">"</span>)</span>
 <span id="cb9-359"><a href="#cb9-359" aria-hidden="true" tabindex="-1"></a>        stack.append(action[<span class="dv">1</span>])</span>
 <span id="cb9-360"><a href="#cb9-360" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
@@ -1266,7 +1339,7 @@ Estado $I_4$:
 <span id="cb9-392"><a href="#cb9-392" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-393"><a href="#cb9-393" aria-hidden="true" tabindex="-1"></a><span class="co"># Exemplo de uso</span></span>
 <span id="cb9-394"><a href="#cb9-394" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="cb9-395"><a href="#cb9-395" aria-hidden="true" tabindex="-1"></a>  parser <span class="op">=</span> SLR1Parser()</span>
+<span id="cb9-395"><a href="#cb9-395" aria-hidden="true" tabindex="-1"></a>  _parser_<span class="op">=</span> SLR1Parser()</span>
 <span id="cb9-396"><a href="#cb9-396" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-397"><a href="#cb9-397" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define a gramática E → E + n | n</span></span>
 <span id="cb9-398"><a href="#cb9-398" aria-hidden="true" tabindex="-1"></a>  parser.add_production(<span class="st">'E'</span>, [<span class="st">'E'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>])</span>
@@ -1317,18 +1390,18 @@ Estado $I_4$:
 <span id="cb9-443"><a href="#cb9-443" aria-hidden="true" tabindex="-1"></a>  result <span class="op">=</span> parser.parse([<span class="st">'n'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>, <span class="st">'+'</span>, <span class="st">'n'</span>])</span>
 <span id="cb9-444"><a href="#cb9-444" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Resultado: </span><span class="sc">{</span><span class="st">'Aceito'</span> <span class="cf">if</span> result <span class="cf">else</span> <span class="st">'Rejeitado'</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="um-estudo-de-caso-uma-gramática-lr1-não-slr1" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="um-estudo-de-caso-uma-gramática-lr1-não-slr1"><span class="header-section-number">9.6</span> Um Estudo de Caso: Uma Gramática <span class="math inline">\(LR(1)\)</span> Não-<span class="math inline">\(SLR(1)\)</span></h2>
-<p>Para entender as limitações do <span class="math inline">\(SLR(1)\)</span> e a necessidade de métodos mais potentes como o <span class="math inline">\(LR(1)\)</span>, vamos analisar uma gramática que é um exemplo clássico de ser <span class="math inline">\(LR(1)\)</span>, mas não <span class="math inline">\(SLR(1)\)</span>. Ela foi projetada para criar um cenário em que a informação global dos conjuntos <span class="math inline">\(FOLLOW\)</span> é insuficiente, mas a informação local dos <em>lookaheads</em> do <span class="math inline">\(LR(1)\)</span> é precisa o bastante para resolver a ambiguidade.</p>
+<section id="sec-slr-nao-LR" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="sec-slr-nao-LR"><span class="header-section-number">9.7</span> Um Estudo de Caso: Uma Gramática <span class="math inline">\(LR(1)\)</span> Não-<span class="math inline">\(SLR(1)\)</span></h2>
+<p>Para entender as limitações do <span class="math inline">\(SLR(1)\)</span> e a necessidade de métodos mais potentes como o <span class="math inline">\(LR(1)\)</span>, vamos analisar uma gramática que é um exemplo clássico de ser <span class="math inline">\(LR(1)\)</span>, mas não <span class="math inline">\(SLR(1)\)</span>. Ela foi projetada para criar um cenário em que a informação global dos conjuntos <span class="math inline">\(FOLLOW\)</span> é insuficiente, mas a informação local dos <em>lookaheads</em> do <span class="math inline">\(LR(1)\)</span> é precisa o bastante para resolver a ambiguidade. Dito de outro modo: é o tipo de caso em que Lestrade hesita diante do mesmo <code>c</code> em contextos diferentes, porque sua ficha de <span class="math inline">\(FOLLOW\)</span> não registra de onde cada <code>c</code> veio. Watson, que anota o caminho completo percorrido até o estado atual, decide sem vacilar.</p>
 <pre class="bnf"><code>S → a A d
 S → b B d
 S → a B e
 S → b A e
 A → c
 B → c</code></pre>
-<p>Esta gramática descreve uma linguagem simples com quatro sentenças possíveis: <code>acd</code>, <code>bcd</code>, <code>abe</code> e <code>bae</code>. O problema para o parser surge após ler o terminal <code>c</code>, pois, nesse momento, ele não sabe se esse <code>c</code> veio de um não-terminal <code>A</code> ou <code>B</code>. A decisão de qual produção usar para a redução (<code>A → c</code> ou <code>B → c</code>) dependerá do contexto que o <span class="math inline">\(SLR(1)\)</span> não consegue enxergar.</p>
-<section id="preparação-gramática-aumentada-e-conjuntos-preliminares" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1" class="anchored" data-anchor-id="preparação-gramática-aumentada-e-conjuntos-preliminares"><span class="header-section-number">9.6.1</span> Preparação: Gramática Aumentada e Conjuntos Preliminares</h3>
+<p>Esta gramática descreve uma linguagem simples com quatro sentenças possíveis: <code>acd</code>, <code>bcd</code>, <code>ace</code> e <code>bce</code>. O problema para o _parser_surge após ler o terminal <code>c</code>, pois, nesse momento, ele não sabe se esse <code>c</code> veio de um não-terminal <code>A</code> ou <code>B</code>. A decisão de qual produção usar para a redução (<code>A → c</code> ou <code>B → c</code>) dependerá do contexto que o <span class="math inline">\(SLR(1)\)</span> não consegue enxergar.</p>
+<section id="preparação-gramática-aumentada-e-conjuntos-preliminares" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="preparação-gramática-aumentada-e-conjuntos-preliminares"><span class="header-section-number">9.7.1</span> Preparação: Gramática Aumentada e Conjuntos Preliminares</h3>
 <p>Primeiro, aumentamos a gramática e numeramos as produções:</p>
 <pre class="bnf"><code>0. S' → S
 1. S → a A d
@@ -1337,8 +1410,8 @@ B → c</code></pre>
 4. S → b A e
 5. A → c
 6. B → c</code></pre>
-<section id="conjuntos-first" class="level4" data-number="9.6.1.1">
-<h4 data-number="9.6.1.1" class="anchored" data-anchor-id="conjuntos-first"><span class="header-section-number">9.6.1.1</span> Conjuntos <span class="math inline">\(FIRST\)</span></h4>
+<section id="conjuntos-first" class="level4" data-number="9.7.1.1">
+<h4 data-number="9.7.1.1" class="anchored" data-anchor-id="conjuntos-first"><span class="header-section-number">9.7.1.1</span> Conjuntos <span class="math inline">\(FIRST\)</span></h4>
 <p>Os conjuntos <span class="math inline">\(FIRST\)</span> são diretos de calcular:</p>
 <ul>
 <li><span class="math inline">\(FIRST(S) = \{a, b\}\)</span></li>
@@ -1346,8 +1419,8 @@ B → c</code></pre>
 <li><span class="math inline">\(FIRST(B) = \{c\}\)</span></li>
 </ul>
 </section>
-<section id="conjuntos-follow" class="level4" data-number="9.6.1.2">
-<h4 data-number="9.6.1.2" class="anchored" data-anchor-id="conjuntos-follow"><span class="header-section-number">9.6.1.2</span> Conjuntos <span class="math inline">\(FOLLOW\)</span></h4>
+<section id="conjuntos-follow" class="level4" data-number="9.7.1.2">
+<h4 data-number="9.7.1.2" class="anchored" data-anchor-id="conjuntos-follow"><span class="header-section-number">9.7.1.2</span> Conjuntos <span class="math inline">\(FOLLOW\)</span></h4>
 <p>Aqui está o ponto central do problema para o <span class="math inline">\(SLR(1)\)</span>. Vamos calcular os conjuntos <span class="math inline">\(FOLLOW\)</span>:</p>
 <ol type="1">
 <li><span class="math inline">\(S'\)</span> é o símbolo inicial, então <span class="math inline">\(\$ \in FOLLOW(S')\)</span> e, por consequência, <span class="math inline">\(\$ \in FOLLOW(S)\)</span>.</li>
@@ -1365,10 +1438,10 @@ B → c</code></pre>
 <p>Note que <span class="math inline">\(FOLLOW(A)\)</span> e <span class="math inline">\(FOLLOW(B)\)</span> são idênticos. É esta sobreposição que o <span class="math inline">\(SLR(1)\)</span> não conseguirá resolver.</p>
 </section>
 </section>
-<section id="construção-da-tabela-slr1" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2" class="anchored" data-anchor-id="construção-da-tabela-slr1"><span class="header-section-number">9.6.2</span> Construção da Tabela <span class="math inline">\(SLR(1)\)</span></h3>
-<section id="estados-do-autômato-lr0" class="level4" data-number="9.6.2.1">
-<h4 data-number="9.6.2.1" class="anchored" data-anchor-id="estados-do-autômato-lr0"><span class="header-section-number">9.6.2.1</span> Estados do Autômato <span class="math inline">\(LR(0)\)</span></h4>
+<section id="construção-da-tabela-slr1" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="construção-da-tabela-slr1"><span class="header-section-number">9.7.2</span> Construção da Tabela <span class="math inline">\(SLR(1)\)</span></h3>
+<section id="estados-do-autômato-lr0" class="level4" data-number="9.7.2.1">
+<h4 data-number="9.7.2.1" class="anchored" data-anchor-id="estados-do-autômato-lr0"><span class="header-section-number">9.7.2.1</span> Estados do Autômato <span class="math inline">\(LR(0)\)</span></h4>
 <p>Vamos construir os estados mais relevantes para a análise.</p>
 <p><strong>Estado <span class="math inline">\(I_0\)</span></strong> (inicial):</p>
 <pre class="bnf"><code>CLOSURE({[S' → •S]}) =
@@ -1381,8 +1454,8 @@ B → c</code></pre>
 <pre class="bnf"><code>CLOSURE({[S → a•A d], [S → a•B e]}) =
 [S → a•A d]
 [S → a•B e]
-[A → •c] // Adicionado pelo item 1
-[B → •c] // Adicionado pelo item 2</code></pre>
+[A → •c] // Gerado pela expansão de A após [S → a•A d]
+[B → •c] // Gerado pela expansão de B após [S → a•B e]</code></pre>
 <p><strong>Estado <span class="math inline">\(I_2\)</span></strong>: <span class="math inline">\(GOTO(I_0, b)\)</span></p>
 <pre class="bnf"><code>CLOSURE({[S → b•B d], [S → b•A e]}) =
 [S → b•B d]
@@ -1395,8 +1468,8 @@ B → c</code></pre>
 [B → c•]</code></pre>
 <p>Este estado, <span class="math inline">\(I_6\)</span>, é o estado problemático.</p>
 </section>
-<section id="tabela-slr1-com-conflitos" class="level4" data-number="9.6.2.2">
-<h4 data-number="9.6.2.2" class="anchored" data-anchor-id="tabela-slr1-com-conflitos"><span class="header-section-number">9.6.2.2</span> Tabela <span class="math inline">\(SLR(1)\)</span> com Conflitos</h4>
+<section id="tabela-slr1-com-conflitos" class="level4" data-number="9.7.2.2">
+<h4 data-number="9.7.2.2" class="anchored" data-anchor-id="tabela-slr1-com-conflitos"><span class="header-section-number">9.7.2.2</span> Tabela <span class="math inline">\(SLR(1)\)</span> com Conflitos</h4>
 <p>Ao construir a tabela para o estado <span class="math inline">\(I_6\)</span>, encontramos um conflito.</p>
 <ul>
 <li>O item <code>[A → c•]</code> (produção 5) nos diz para reduzir. As ações de redução são inseridas para cada terminal no conjunto <span class="math inline">\(FOLLOW(A)\)</span>. Como <span class="math inline">\(FOLLOW(A) = \{d, e\}\)</span>, teríamos:</li>
@@ -1411,14 +1484,14 @@ B → c</code></pre>
 <li>Na célula <span class="math inline">\(ACTION[6, d]\)</span>, temos um conflito entre <code>reduce 5</code> e <code>reduce 6</code>.</li>
 <li>Na célula <span class="math inline">\(ACTION[6, e]\)</span>, temos um conflito entre <code>reduce 5</code> e <code>reduce 6</code>.</li>
 </ul>
-<p>O parser <span class="math inline">\(SLR(1)\)</span> não sabe se, ao ver um <code>c</code>, deve reduzi-lo para <code>A</code> ou para <code>B</code>. Ele usa a informação global de que tanto <code>A</code> quanto <code>B</code> podem ser seguidos por <code>d</code> ou <code>e</code>, gerando o conflito.</p>
+<p>O <em>parser</em><span class="math inline">\(SLR(1)\)</span> não sabe se, ao ver um <code>c</code>, deve reduzi-lo para <code>A</code> ou para <code>B</code>. Ele usa a informação global de que tanto <code>A</code> quanto <code>B</code> podem ser seguidos por <code>d</code> ou <code>e</code>, gerando o conflito.</p>
 </section>
 </section>
-<section id="construção-da-tabela-lr1-canônica" class="level3" data-number="9.6.3">
-<h3 data-number="9.6.3" class="anchored" data-anchor-id="construção-da-tabela-lr1-canônica"><span class="header-section-number">9.6.3</span> Construção da Tabela <span class="math inline">\(LR(1)\)</span> Canônica</h3>
+<section id="construção-da-tabela-lr1-canônica" class="level3" data-number="9.7.3">
+<h3 data-number="9.7.3" class="anchored" data-anchor-id="construção-da-tabela-lr1-canônica"><span class="header-section-number">9.7.3</span> Construção da Tabela <span class="math inline">\(LR(1)\)</span> Canônica</h3>
 <p>Agora, vamos ver como a propagação de <em>lookaheads</em> específicos do <span class="math inline">\(LR(1)\)</span> resolve esse problema.</p>
-<section id="estados-do-autômato-lr1" class="level4" data-number="9.6.3.1">
-<h4 data-number="9.6.3.1" class="anchored" data-anchor-id="estados-do-autômato-lr1"><span class="header-section-number">9.6.3.1</span> Estados do Autômato <span class="math inline">\(LR(1)\)</span></h4>
+<section id="estados-do-autômato-lr1" class="level4" data-number="9.7.3.1">
+<h4 data-number="9.7.3.1" class="anchored" data-anchor-id="estados-do-autômato-lr1"><span class="header-section-number">9.7.3.1</span> Estados do Autômato <span class="math inline">\(LR(1)\)</span></h4>
 <p><strong>Estado <span class="math inline">\(I_0\)</span></strong> (inicial):</p>
 <pre class="bnf"><code>[S' → •S, $]
 [S → •a A d, $]
@@ -1465,8 +1538,8 @@ B → c</code></pre>
 </ul>
 </section>
 </section>
-<section id="tabela-final-lr1" class="level3" data-number="9.6.4">
-<h3 data-number="9.6.4" class="anchored" data-anchor-id="tabela-final-lr1"><span class="header-section-number">9.6.4</span> Tabela Final <span class="math inline">\(LR(1)\)</span></h3>
+<section id="tabela-final-lr1" class="level3" data-number="9.7.4">
+<h3 data-number="9.7.4" class="anchored" data-anchor-id="tabela-final-lr1"><span class="header-section-number">9.7.4</span> Tabela Final <span class="math inline">\(LR(1)\)</span></h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
@@ -1678,78 +1751,1813 @@ B → c</code></pre>
 </tbody>
 </table>
 </section>
-<section id="por-que-o-conflito-ocorre-no-slr1" class="level3" data-number="9.6.5">
-<h3 data-number="9.6.5" class="anchored" data-anchor-id="por-que-o-conflito-ocorre-no-slr1"><span class="header-section-number">9.6.5</span> Por Que o Conflito Ocorre no <span class="math inline">\(SLR(1)\)</span></h3>
+<section id="por-que-o-conflito-ocorre-no-slr1" class="level3" data-number="9.7.5">
+<h3 data-number="9.7.5" class="anchored" data-anchor-id="por-que-o-conflito-ocorre-no-slr1"><span class="header-section-number">9.7.5</span> Por Que o Conflito Ocorre no <span class="math inline">\(SLR(1)\)</span></h3>
 <ol type="1">
-<li><p><strong>Problema do <span class="math inline">\(SLR(1)\)</span></strong>: O parser chega ao estado <span class="math inline">\(I_6\)</span> (LR(0)) após ler <code>c</code>. Para decidir a redução, ele consulta os conjuntos <span class="math inline">\(FOLLOW(A)\)</span> e <span class="math inline">\(FOLLOW(B)\)</span>. Como ambos contêm <code>{d, e}</code>, ele não consegue decidir entre reduzir para <code>A</code> ou para <code>B</code>.</p></li>
-<li><p><strong>Solução do <span class="math inline">\(LR(1)\)</span></strong>: O parser <span class="math inline">\(LR(1)\)</span> sabe muito mais.</p></li>
+<li><p><strong>Problema do <span class="math inline">\(SLR(1)\)</span></strong>: O _parser_chega ao estado <span class="math inline">\(I_6\)</span> (LR(0)) após ler <code>c</code>. Para decidir a redução, ele consulta os conjuntos <span class="math inline">\(FOLLOW(A)\)</span> e <span class="math inline">\(FOLLOW(B)\)</span>. Como ambos contêm <code>{d, e}</code>, ele não consegue decidir entre reduzir para <code>A</code> ou para <code>B</code>.</p></li>
+<li><p><strong>Solução do <span class="math inline">\(LR(1)\)</span></strong>: O <em>parser</em><span class="math inline">\(LR(1)\)</span> sabe muito mais.</p></li>
 </ol>
 <ul>
-<li>Se ele chegou ao estado <span class="math inline">\(I_6\)</span> (LR(1)), ele sabe que veio da sequência <code>a</code> <code>c</code>. Neste contexto, o <code>c</code> <strong>deve</strong> ser seguido por <code>d</code> para formar <code>A</code> (<code>acd</code>) ou por <code>e</code> para formar <code>B</code> (<code>abe</code>). Os <em>lookaheads</em> <code>d</code> e <code>e</code> são específicos para cada redução e não se sobrepõem.</li>
+<li>Se ele chegou ao estado <span class="math inline">\(I_6\)</span> (LR(1)), ele sabe que veio da sequência <code>a</code> <code>c</code>. Neste contexto, o <code>c</code> <strong>deve</strong> ser seguido por <code>d</code> para formar <code>A</code> (derivando <code>acd</code>) ou por <code>e</code> para formar <code>B</code> ( derivando <code>ace</code>). Os <em>lookaheads</em> <code>d</code> e <code>e</code> são específicos para cada redução e não se sobrepõem.</li>
 <li>Se ele chegou ao estado <span class="math inline">\(I_9\)</span> (LR(1)), ele sabe que veio da sequência <code>b</code> <code>c</code>. O raciocínio é análogo.</li>
 </ul>
-<p>A precisão do <span class="math inline">\(LR(1)\)</span> ao propagar os <em>lookaheads</em> permite que ele divida o que era um único estado conflituoso no <span class="math inline">\(SLR(1)\)</span> em múltiplos estados não conflituosos, cada um representando um contexto de análise distinto.## Vantagens e Limitações do <span class="math inline">\(SLR(1)\)</span></p>
+<p>Em termos da analogia que abre este capítulo: Lestrade consolida suas observações em uma ficha única por não-terminal e a aplica uniformemente em qualquer estado onde a redução seja cabível. Quando dois caminhos distintos da derivação levam ao mesmo item <span class="math inline">\(LR(0)\)</span> mas exigiriam decisões diferentes, o inspetor não tem como separar os casos. Watson, por contraste, mantém uma ficha específica para cada estado: o mesmo item <span class="math inline">\([A \to c \bullet]\)</span> aparece com <em>lookahead</em> <code>d</code> em um estado e com <em>lookahead</em> <code>e</code> em outro, e a decisão de reduzir se faz no contexto correto. É a troca fundamental entre os dois métodos: Lestrade paga com poder de reconhecimento o que economiza em esforço de construção.</p>
 </section>
-<section id="vantagens" class="level3" data-number="9.6.6">
-<h3 data-number="9.6.6" class="anchored" data-anchor-id="vantagens"><span class="header-section-number">9.6.6</span> Vantagens</h3>
+</section>
+<section id="o-lugar-do-slr1-na-hierarquia" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="o-lugar-do-slr1-na-hierarquia"><span class="header-section-number">9.8</span> O Lugar do <span class="math inline">\(SLR(1)\)</span> na Hierarquia</h2>
+<p>A família dos parsers <em>bottom-up</em> pode ser imaginada como uma pequena galeria da Scotland Yard, em que cada detetive representa uma combinação específica de capacidade de reconhecimento e custo de construção. Todos usam o mesmo algoritmo <em>shift-reduce</em>; o que os distingue é a quantidade e a qualidade da informação que consultam antes de decidir uma redução.</p>
+<p>Na ponta mais modesta da galeria está o <strong>constable <span class="math inline">\(LR(0)\)</span></strong>, o policial de ronda que jamais passou por treinamento de investigação. Ele reduz sempre que encontra uma regra completa no topo da pilha, sem sequer olhar para o próximo símbolo da entrada. O método é eficaz apenas em gramáticas triviais, nas quais não há ambiguidade entre reduzir e empilhar em estado algum. Em qualquer gramática minimamente interessante, o constable se paralisa em conflitos <em>shift-reduce</em> logo nos primeiros estados. Seu valor é predominantemente teórico: serve como ponto de partida histórico e conceitual para as demais classes.</p>
+<p>Logo acima está o <strong>inspetor <span class="math inline">\(SLR(1)\)</span> Lestrade</strong>, que conhecemos ao longo deste capítulo. Ele carrega consigo uma ficha única por não-terminal, o conjunto <span class="math inline">\(FOLLOW\)</span>, que consulta antes de cada redução. A ficha é construída uma vez e aplicada uniformemente em qualquer estado em que uma redução seja cabível. Quando a gramática é limpa, o método de Lestrade basta; quando há sobreposição de contextos, como vimos no estudo de caso, a ficha consolidada falha em distinguir situações que exigiriam decisões distintas.</p>
+<p>Na ponta oposta da galeria está o <strong>doutor <span class="math inline">\(LR(1)\)</span> canônico Watson</strong>, apresentado no Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>. Watson mantém, para cada estado, uma ficha específica contendo o <em>lookahead</em> preciso calculado item a item por <span class="math inline">\(FIRST(\beta a)\)</span>. Nenhum contexto é perdido na consolidação, e gramáticas que derrotariam Lestrade são tratadas sem conflito. O preço é o volume de fichas: o número de estados pode crescer para dezenas de milhares em gramáticas realistas, inviabilizando o método em boa parte dos usos industriais.</p>
+<p>Entre Lestrade e Watson há uma figura que merece apresentação própria, pois será o protagonista do próximo capítulo: o <strong>inspetor <span class="math inline">\(LALR(1)\)</span> Gregson</strong>. Gregson ocupa exatamente a mesma mesa que Lestrade na delegacia — ou seja, seu autômato tem o mesmo número de estados do <span class="math inline">\(SLR(1)\)</span> —, mas seu método de trabalho é distinto. Em vez de consultar uma ficha única de <span class="math inline">\(FOLLOW\)</span>, Gregson anota, para cada estado, apenas os <em>lookaheads</em> que efetivamente podem alcançá-lo por alguma derivação viável. Essa anotação é mais fina do que a de Lestrade e menos volumosa do que a de Watson, e resolve exatamente os conflitos espúrios gerados pela superaproximação de <span class="math inline">\(FOLLOW\)</span>. Na maior parte dos casos em que Lestrade falha sem que haja ambiguidade real na linguagem, Gregson tem sucesso, e seu autômato permanece compacto o bastante para ser embutido em <em>arrays</em> estáticos.</p>
+<p>A comparação entre os quatro métodos pode ser sintetizada na tabela a seguir:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Classe</th>
+<th style="text-align: left;">Cálculo do <em>lookahead</em> para reduções</th>
+<th style="text-align: center;">Estados</th>
+<th style="text-align: center;">Poder</th>
+<th style="text-align: left;">Uso prático</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(LR(0)\)</span></td>
+<td style="text-align: left;">Nenhum: reduz sempre que <span class="math inline">\([A \to \alpha \bullet]\)</span> aparece no estado</td>
+<td style="text-align: center;">Base</td>
+<td style="text-align: center;">Fraco</td>
+<td style="text-align: left;">Raro; valor didático e histórico</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(SLR(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(FOLLOW(A)\)</span> global, por símbolo reduzido</td>
+<td style="text-align: center;"><span class="math inline">\(= LR(0)\)</span></td>
+<td style="text-align: center;">Intermediário</td>
+<td style="text-align: left;">Material didático; <em>DSLs</em> simples</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(LALR(1)\)</span></td>
+<td style="text-align: left;"><em>Lookaheads</em> dos estados <span class="math inline">\(LR(1)\)</span> canônicos fundidos por núcleo</td>
+<td style="text-align: center;"><span class="math inline">\(= LR(0)\)</span></td>
+<td style="text-align: center;">Forte</td>
+<td style="text-align: left;">yacc, bison, CUP, GNU Bison</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(LR(1)\)</span> canônico</td>
+<td style="text-align: left;"><em>Lookahead</em> preciso, calculado item a item via <span class="math inline">\(FIRST(\beta a)\)</span></td>
+<td style="text-align: center;">Maior (pode crescer muito)</td>
+<td style="text-align: center;">Máximo</td>
+<td style="text-align: left;">Análise teórica, geradores especializados</td>
+</tr>
+</tbody>
+</table>
+<p>A inclusão entre as classes de gramáticas é estrita:</p>
+<p><span class="math display">\[LR(0) \subsetneq SLR(1) \subsetneq LALR(1) \subsetneq LR(1)\]</span></p>
+<p>Em cada nível, existe pelo menos uma gramática que pertence a ele mas não ao anterior. A gramática clássica <code>S → L = R | R; L → * R | id; R → L</code> é <span class="math inline">\(LALR(1)\)</span> mas não <span class="math inline">\(SLR(1)\)</span>: ela modela atribuições a <em>lvalues</em> não triviais e é o exemplo canônico de por que ferramentas industriais adotam <span class="math inline">\(LALR(1)\)</span> em vez de <span class="math inline">\(SLR(1)\)</span>. Já a gramática do estudo de caso deste capítulo (<code>S → a A d | b B d | a B e | b A e; A → c; B → c</code>) é <span class="math inline">\(LR(1)\)</span> canônica mas não <span class="math inline">\(LALR(1)\)</span>: a fusão de estados por núcleo, característica do método de Gregson, reintroduz o conflito <em>reduce-reduce</em> que Watson evitava. Veremos, no próximo capítulo, precisamente por que essa fusão falha nesse caso específico e em que condições ela preserva o poder de reconhecimento do <span class="math inline">\(LR(1)\)</span> canônico.</p>
+<p>A atenta leitora tem, a essa altura, quase o mapa completo da galeria. Falta conhecer Gregson de perto: entender como seu método de anotar <em>lookaheads</em> por estado recupera parte do poder de Watson mantendo a compacidade de Lestrade, examinar o mecanismo de fusão de estados que dá nome ao método — <em>Look-Ahead LR</em> — e compreender por que, apesar das limitações que herda do tamanho da tabela <span class="math inline">\(SLR(1)\)</span>, ele se tornou o padrão de fato dos geradores de parsers industriais. Esse é o assunto do Capítulo <span class="quarto-unresolved-ref">?sec-parserLALR1</span>.</p>
+</section>
+<section id="vantagens-e-limitações-do-slr1" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="vantagens-e-limitações-do-slr1"><span class="header-section-number">9.9</span> Vantagens e Limitações do <span class="math inline">\(SLR(1)\)</span></h2>
+<p>A presente seção sintetiza as qualidades e os custos do método <span class="math inline">\(SLR(1)\)</span>, ancorando cada ponto em situações concretas observadas na prática.</p>
+<section id="vantagens" class="level3" data-number="9.9.1">
+<h3 data-number="9.9.1" class="anchored" data-anchor-id="vantagens"><span class="header-section-number">9.9.1</span> Vantagens</h3>
 <ol type="1">
-<li><strong>Simplicidade de Implementação</strong>: o algoritmo é direto e eficiente;</li>
-<li><strong>Tabelas Compactas</strong>: significativamente menores que <span class="math inline">\(LR(1)\)</span>;</li>
-<li><strong>Eficiência de Construção</strong>: tempo <span class="math inline">\(O(n^2)\)</span> vs <span class="math inline">\(O(n^3)\)</span> do <span class="math inline">\(LR(1)\)</span>;</li>
-<li><strong>Suficiente para Muitas Linguagens</strong>: funciona bem para gramáticas de linguagens de programação simples.</li>
+<li><p><strong>Simplicidade de implementação</strong>: o algoritmo de construção dispensa a propagação de <em>lookaheads</em> item a item, reduzindo a coleção canônica a itens <span class="math inline">\(LR(0)\)</span> e eliminando a contabilidade associada ao cálculo de <span class="math inline">\(FIRST(\beta a)\)</span> para cada expansão de <code>CLOSURE</code>. Na prática, um <em>parser</em><span class="math inline">\(SLR(1)\)</span> didático cabe em cerca de 300 linhas de Python, enquanto o equivalente <span class="math inline">\(LR(1)\)</span> canônico ocupa aproximadamente o dobro. A construção manual de uma tabela para uma gramática com 10 a 15 produções é viável em um período de aula, algo raramente possível com o <span class="math inline">\(LR(1)\)</span> canônico sobre a mesma gramática, onde o número de estados típicos já desencoraja o traçado em papel.</p></li>
+<li><p><strong>Tabelas compactas</strong>: o número de estados do autômato <span class="math inline">\(SLR(1)\)</span> coincide com o do <span class="math inline">\(LR(0)\)</span>, pois ambos trabalham sobre a mesma coleção de itens sem <em>lookahead</em> embutido. A diferença frente ao <span class="math inline">\(LR(1)\)</span> canônico pode ser de uma ou mais ordens de grandeza em gramáticas realistas. A gramática ANSI C, por exemplo, gera algumas centenas de estados em <span class="math inline">\(SLR(1)\)</span> ou <span class="math inline">\(LALR(1)\)</span>, contra dezenas de milhares no <span class="math inline">\(LR(1)\)</span> canônico para a mesma gramática. Para Pascal, a razão é semelhante. Essa compactação torna viável embutir a tabela como <em>array</em> estático em memória, o que explica por que geradores industriais como <code>yacc</code> e <code>bison</code> adotam <span class="math inline">\(LALR(1)\)</span>, que herda o tamanho do <span class="math inline">\(SLR(1)\)</span>, em vez do <span class="math inline">\(LR(1)\)</span> canônico.</p></li>
+<li><p><strong>Eficiência de construção</strong>: a construção do autômato procede em tempo proporcional ao produto do número de produções pela soma dos comprimentos dos lados direitos, sem o fator adicional associado à enumeração de <em>lookaheads</em> que caracteriza o <span class="math inline">\(LR(1)\)</span> canônico. Ferramentas que regeneram a tabela a cada <em>build</em> percebem a diferença: gramáticas médias são processadas em frações de segundo no <span class="math inline">\(SLR(1)\)</span>, enquanto a versão <span class="math inline">\(LR(1)\)</span> canônica pode levar alguns segundos apenas para a construção da coleção de itens, por causa do volume de estados gerados.</p></li>
+<li><p><strong>Suficiente para muitas linguagens</strong>: gramáticas bem projetadas de linguagens específicas de domínio (<em>DSLs</em>) e de subconjuntos de linguagens de programação caem naturalmente na classe <span class="math inline">\(SLR(1)\)</span>. Exemplos típicos incluem parsers de expressões aritméticas com precedência e associatividade explícitas, linguagens de configuração estruturada (um subconjunto de JSON ou TOML), gramáticas de comandos de interpretadores e linguagens de consulta simples. A gramática do exemplo guiado deste capítulo (<code>E → E + n | n</code>) é paradigmática: a tabela <span class="math inline">\(SLR(1)\)</span> coincide exatamente com a <span class="math inline">\(LR(1)\)</span> canônica, sem perda de poder de reconhecimento.</p></li>
 </ol>
 </section>
-<section id="limitações" class="level3" data-number="9.6.7">
-<h3 data-number="9.6.7" class="anchored" data-anchor-id="limitações"><span class="header-section-number">9.6.7</span> Limitações</h3>
+<section id="limitações" class="level3" data-number="9.9.2">
+<h3 data-number="9.9.2" class="anchored" data-anchor-id="limitações"><span class="header-section-number">9.9.2</span> Limitações</h3>
 <ol type="1">
-<li><strong>Poder de Reconhecimento Limitado</strong>: nem toda gramática <span class="math inline">\(LR(1)\)</span> é <span class="math inline">\(SLR(1)\)</span>;</li>
-<li><strong>Conflitos Espúrios</strong>: o uso de <span class="math inline">\(FOLLOW\)</span> pode gerar conflitos desnecessários;</li>
-<li><strong>Inadequado para Gramáticas Complexas</strong>: linguagens modernas frequentemente excedem suas capacidades.</li>
+<li><p><strong>Poder de reconhecimento limitado</strong>: nem toda gramática <span class="math inline">\(LR(1)\)</span> é <span class="math inline">\(SLR(1)\)</span>, e a diferença não é meramente teórica. A gramática analisada no estudo de caso anterior (<code>S → a A d | b B d | a B e | b A e; A → c; B → c</code>) é o exemplo canônico: o <span class="math inline">\(LR(1)\)</span> a reconhece sem conflitos, mas o <span class="math inline">\(SLR(1)\)</span> apresenta conflito <em>reduce-reduce</em> no estado que contém <span class="math inline">\([A \to c \bullet]\)</span> e <span class="math inline">\([B \to c \bullet]\)</span>. Padrões análogos aparecem em gramáticas com a mesma estrutura léxica aparecendo em contextos sintáticos distintos, como declarações de tipos e expressões em linguagens com sintaxe unificada.</p></li>
+<li><p><strong>Conflitos espúrios</strong>: o uso de <span class="math inline">\(FOLLOW\)</span> pode sinalizar conflitos que não correspondem a ambiguidade real na gramática, apenas à imprecisão da aproximação global. O caso típico ocorre quando dois não-terminais <span class="math inline">\(A\)</span> e <span class="math inline">\(B\)</span> têm <span class="math inline">\(FOLLOW(A) \cap FOLLOW(B) \neq \emptyset\)</span>, ainda que os contextos específicos em que cada um é reduzido sejam disjuntos. A sagaz leitora notará que o <span class="math inline">\(LALR(1)\)</span> foi concebido para resolver exatamente esse tipo de conflito mantendo a compacidade das tabelas <span class="math inline">\(SLR(1)\)</span>: ele computa, para cada estado, o conjunto preciso de <em>lookaheads</em> que podem alcançá-lo, evitando a superaproximação de <span class="math inline">\(FOLLOW\)</span>.</p></li>
+<li><p><strong>Inadequado para gramáticas complexas</strong>: linguagens com construções sintáticas sobrepostas frequentemente excedem a capacidade do <span class="math inline">\(SLR(1)\)</span>. Três classes de problema aparecem com recorrência. A primeira são atribuições com <em>lvalues</em> não triviais, como a gramática <code>S → L = R | R; L → * R | id; R → L</code>, que é <span class="math inline">\(LR(1)\)</span> canônica mas nem mesmo <span class="math inline">\(LALR(1)\)</span>, quanto mais <span class="math inline">\(SLR(1)\)</span>. A segunda são declarações de tipos em linguagens da família C, onde a distinção sintática entre declaração e expressão depende de informação semântica (o clássico <code>A * B;</code>, que pode ser multiplicação ou declaração de ponteiro, exige consulta à tabela de símbolos durante o parsing). A terceira são sintaxes modernas com <em>templates</em> ou genéricos, como <code>Foo&lt;Bar&gt;(x)</code> em C++, que escapam ao poder <span class="math inline">\(LR(1)\)</span> e são resolvidas na prática com <em>lexer hacks</em> ou parsers de propósito específico. Para o contexto didático deste capítulo, a atenta leitora pode reter que o <span class="math inline">\(SLR(1)\)</span> é adequado quando a gramática é limpa e bem fatorada, enquanto o <span class="math inline">\(LALR(1)\)</span> é o sucessor natural quando o <span class="math inline">\(SLR(1)\)</span> falha sem que haja ambiguidade real na linguagem.</p></li>
 </ol>
 </section>
 </section>
-<section id="o-lugar-do-slr1-na-hierarquia" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="o-lugar-do-slr1-na-hierarquia"><span class="header-section-number">9.7</span> O Lugar do <span class="math inline">\(SLR(1)\)</span> na Hierarquia</h2>
-<p>O <span class="math inline">\(SLR(1)\)</span> ocupa uma posição intermediária na hierarquia dos parsers:</p>
-<p><span class="math display">\[LL(1) \subset $SLR(1)$ \subset LALR(1) \subset $LR(1)\]</span>$</p>
-<p>Onde:</p>
+<section id="exercícios" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">9.10</span> Exercícios</h2>
+</section>
+<section id="sec-exercicios-SLR1" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="sec-exercicios-SLR1"><span class="header-section-number">9.11</span> Exercícios Resolvidos</h2>
+<p>Os três exercícios a seguir complementam o material sobre parsers <span class="math inline">\(SLR(1)\)</span> com resoluções completas, passo a passo, em dificuldade crescente. Cada exercício segue o mesmo roteiro do material sobre <span class="math inline">\(LR(1)\)</span>: (i) gramática aumentada; (ii) conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>; (iii) coleção canônica de itens <span class="math inline">\(LR(0)\)</span>; (iv) tabela <code>ACTION/GOTO</code>; (v) diagrama de transição; (vi) rastreamento de uma ou mais <em>strings</em> de entrada. A atenta leitora perceberá que a estrutura é idêntica à dos exercícios do Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>, mas com duas diferenças cruciais: os itens agora são <span class="math inline">\(LR(0)\)</span> (sem <em>lookahead</em> embutido) e as reduções consultam o conjunto <span class="math inline">\(FOLLOW\)</span> global em vez do <em>lookahead</em> item a item.</p>
+<section id="exercício-a-concatenação-de-blocos" class="level3" data-number="9.11.1">
+<h3 data-number="9.11.1" class="anchored" data-anchor-id="exercício-a-concatenação-de-blocos"><span class="header-section-number">9.11.1</span> Exercício A: Concatenação de Blocos</h3>
+<p><strong>Enunciado</strong>: construa um <em>parser</em> <span class="math inline">\(SLR(1)\)</span> para a linguagem <span class="math inline">\(\{a^n b^m \mid n, m \geq 1\}\)</span>, gerada pela gramática:</p>
+<pre class="bnf"><code>1. S → A B
+2. A → a A
+3. A → a
+4. B → b B
+5. B → b</code></pre>
+<p>Verifique a <em>string</em> <code>aabb</code>.</p>
+<section id="a.1.-gramática-aumentada" class="level4" data-number="9.11.1.1">
+<h4 data-number="9.11.1.1" class="anchored" data-anchor-id="a.1.-gramática-aumentada"><span class="header-section-number">9.11.1.1</span> A.1. Gramática Aumentada</h4>
+<pre class="bnf"><code>0. S' → S
+1. S → A B
+2. A → a A
+3. A → a
+4. B → b B
+5. B → b</code></pre>
+<p>Os terminais são <span class="math inline">\(\{a, b, \$\}\)</span> e os não-terminais são <span class="math inline">\(\{S', S, A, B\}\)</span>.</p>
+</section>
+<section id="a.2.-conjuntos-first-e-follow" class="level4" data-number="9.11.1.2">
+<h4 data-number="9.11.1.2" class="anchored" data-anchor-id="a.2.-conjuntos-first-e-follow"><span class="header-section-number">9.11.1.2</span> A.2. Conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></h4>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
 <ul>
-<li><strong><span class="math inline">\(LL(1)\)</span></strong>: parsers preditivos <em>top-down</em>;</li>
-<li><strong><span class="math inline">\(SLR(1)\)</span></strong>: <em>Simple LR</em> com conjuntos <span class="math inline">\(FOLLOW\)</span>;</li>
-<li><strong><span class="math inline">\(LALR(1)\)</span></strong>: <em>Look-Ahead LR</em>, combina estados <span class="math inline">\(LR(1)\)</span> similares;</li>
-<li><strong><span class="math inline">\(LR(1)\)</span></strong>: canônico, máximo poder determinístico.</li>
+<li><span class="math inline">\(FIRST(A) = \{a\}\)</span></li>
+<li><span class="math inline">\(FIRST(B) = \{b\}\)</span></li>
+<li><span class="math inline">\(FIRST(S) = FIRST(A) = \{a\}\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(FOLLOW\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S') = \{\$\}\)</span></li>
+<li>Da produção <code>S' → S</code>: <span class="math inline">\(FOLLOW(S') \subseteq FOLLOW(S)\)</span>, logo <span class="math inline">\(\$ \in FOLLOW(S)\)</span>.</li>
+<li>Da produção <code>S → A B</code>: <span class="math inline">\(FIRST(B) - \{\varepsilon\} \subseteq FOLLOW(A)\)</span>, logo <span class="math inline">\(b \in FOLLOW(A)\)</span>.</li>
+<li>Da produção <code>S → A B</code>: <span class="math inline">\(B\)</span> está no final, logo <span class="math inline">\(FOLLOW(S) \subseteq FOLLOW(B)\)</span>, e <span class="math inline">\(\$ \in FOLLOW(B)\)</span>.</li>
+<li>Das produções <code>A → a A</code> e <code>B → b B</code>: as propagações reflexivas não adicionam nada.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S) = \{\$\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(A) = \{b\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(B) = \{\$\}\)</span></li>
 </ul>
 </section>
-<section id="exercícios" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">9.8</span> Exercícios</h2>
-<section id="exercício-1-gramática-com-conflito-potencial" class="level3" data-number="9.8.1">
-<h3 data-number="9.8.1" class="anchored" data-anchor-id="exercício-1-gramática-com-conflito-potencial"><span class="header-section-number">9.8.1</span> Exercício 1: Gramática com Conflito Potencial</h3>
-<p>Considere a gramática:</p>
+<section id="a.3.-construção-da-coleção-canônica-de-itens-lr0" class="level4" data-number="9.11.1.3">
+<h4 data-number="9.11.1.3" class="anchored" data-anchor-id="a.3.-construção-da-coleção-canônica-de-itens-lr0"><span class="header-section-number">9.11.1.3</span> A.3. Construção da Coleção Canônica de Itens <span class="math inline">\(LR(0)\)</span></h4>
+<p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([S' \to \bullet S]\)</span>. O <code>CLOSURE</code> expande <code>S</code> e, recursivamente, <code>A</code>:</p>
+<ul>
+<li><span class="math inline">\([S' \to \bullet S]\)</span></li>
+<li><span class="math inline">\([S \to \bullet A\, B]\)</span></li>
+<li><span class="math inline">\([A \to \bullet a\, A]\)</span></li>
+<li><span class="math inline">\([A \to \bullet a]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, S) = I_1\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S' \to S \bullet]\)</span> (<em>aceitação</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, A) = I_2\)</span></strong>: o núcleo é <span class="math inline">\([S \to A \bullet B]\)</span>, e o <code>CLOSURE</code> expande <code>B</code>:</p>
+<ul>
+<li><span class="math inline">\([S \to A \bullet B]\)</span></li>
+<li><span class="math inline">\([B \to \bullet b\, B]\)</span></li>
+<li><span class="math inline">\([B \to \bullet b]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, a) = I_3\)</span></strong>: o núcleo é <span class="math inline">\([A \to a \bullet A]\)</span> e <span class="math inline">\([A \to a \bullet]\)</span>, e o <code>CLOSURE</code> reexpande <code>A</code>:</p>
+<ul>
+<li><span class="math inline">\([A \to a \bullet A]\)</span></li>
+<li><span class="math inline">\([A \to a \bullet]\)</span> (<em>redução</em>, regra 3)</li>
+<li><span class="math inline">\([A \to \bullet a\, A]\)</span></li>
+<li><span class="math inline">\([A \to \bullet a]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, B) = I_4\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to A\, B \bullet]\)</span> (<em>redução</em>, regra 1)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, b) = I_5\)</span></strong>: análogo a <span class="math inline">\(I_3\)</span>, para <code>B</code>:</p>
+<ul>
+<li><span class="math inline">\([B \to b \bullet B]\)</span></li>
+<li><span class="math inline">\([B \to b \bullet]\)</span> (<em>redução</em>, regra 5)</li>
+<li><span class="math inline">\([B \to \bullet b\, B]\)</span></li>
+<li><span class="math inline">\([B \to \bullet b]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_3, A) = I_6\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([A \to a\, A \bullet]\)</span> (<em>redução</em>, regra 2)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_3, a) = I_3\)</span></strong>: a transição retorna ao próprio estado, pois os itens gerados já estão em <span class="math inline">\(I_3\)</span>.</p>
+<p><strong><span class="math inline">\(GOTO(I_5, B) = I_7\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([B \to b\, B \bullet]\)</span> (<em>redução</em>, regra 4)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_5, b) = I_5\)</span></strong>: laço, análogo ao de <span class="math inline">\(I_3\)</span>.</p>
+<p>A coleção canônica tem <span class="math inline">\(8\)</span> estados.</p>
+</section>
+<section id="a.4.-tabela-actiongoto" class="level4" data-number="9.11.1.4">
+<h4 data-number="9.11.1.4" class="anchored" data-anchor-id="a.4.-tabela-actiongoto"><span class="header-section-number">9.11.1.4</span> A.4. Tabela ACTION/GOTO</h4>
+<p>As reduções consultam os conjuntos <span class="math inline">\(FOLLOW\)</span>. Para o item <span class="math inline">\([A \to a \bullet]\)</span> em <span class="math inline">\(I_3\)</span>, a redução pela regra 3 é inserida nos <em>lookaheads</em> de <span class="math inline">\(FOLLOW(A) = \{b\}\)</span>. Analogamente para os demais itens de redução.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>a</strong></th>
+<th style="text-align: center;"><strong>b</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>S</strong></th>
+<th style="text-align: center;"><strong>A</strong></th>
+<th style="text-align: center;"><strong>B</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">s3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">s3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>A atenta leitora pode verificar que não há conflitos: em <span class="math inline">\(I_3\)</span>, o <em>shift</em> sobre <code>a</code> e a redução sobre <code>b</code> ocupam células distintas; em <span class="math inline">\(I_5\)</span>, o <em>shift</em> sobre <code>b</code> e a redução sobre <code>$</code> também são disjuntos. A gramática é <span class="math inline">\(SLR(1)\)</span>.</p>
+</section>
+<section id="a.5.-diagrama-de-transição" class="level4" data-number="9.11.1.5">
+<h4 data-number="9.11.1.5" class="anchored" data-anchor-id="a.5.-diagrama-de-transição"><span class="header-section-number">9.11.1.5</span> A.5. Diagrama de Transição</h4>
+<pre><code>                    ┌──────┐  a ↺
+            ┌──a───▶│  I₃  │───┐
+            │       └──────┘   │
+            │         │ A      │
+     ┌──────┐         ↓        │
+     │  I₀  │      ┌──────┐    │
+     └──────┘      │  I₆  │ (r2)
+      │ S │ A      └──────┘
+      ↓   ↓
+   ┌──────┐ ┌──────┐  b ↺
+   │  I₁  │ │  I₂  │──┐
+   └──────┘ └──────┘  │
+   (acc)     │ B     ↓
+             ↓    ┌──────┐
+          ┌──────┐│  I₅  │──b↺
+          │  I₄  │└──────┘
+          └──────┘  │ B
+           (r1)     ↓
+                 ┌──────┐
+                 │  I₇  │
+                 └──────┘
+                  (r4)</code></pre>
+</section>
+<section id="a.6.-verificação-da-string-aabb" class="level4" data-number="9.11.1.6">
+<h4 data-number="9.11.1.6" class="anchored" data-anchor-id="a.6.-verificação-da-string-aabb"><span class="header-section-number">9.11.1.6</span> A.6. Verificação da <em>String</em> <code>aabb</code></h4>
+<p>A derivação esperada é <span class="math inline">\(S \Rightarrow A B \Rightarrow a A B \Rightarrow a a B \Rightarrow a a b B \Rightarrow a a b b\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>aabb$</code></td>
+<td style="text-align: left;"><code>ACTION[0,a] = s3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,3]</code></td>
+<td style="text-align: left;"><code>abb$</code></td>
+<td style="text-align: left;"><code>ACTION[3,a] = s3</code>. Empilha 3.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,3,3]</code></td>
+<td style="text-align: left;"><code>bb$</code></td>
+<td style="text-align: left;"><code>ACTION[3,b] = r3</code> (<code>A → a</code>). Desempilha 1. Topo é 3. <code>GOTO[3,A] = 6</code>. Empilha 6.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,3,6]</code></td>
+<td style="text-align: left;"><code>bb$</code></td>
+<td style="text-align: left;"><code>ACTION[6,b] = r2</code> (<code>A → a A</code>). Desempilha 2. Topo é 0. <code>GOTO[0,A] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>bb$</code></td>
+<td style="text-align: left;"><code>ACTION[2,b] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>b$</code></td>
+<td style="text-align: left;"><code>ACTION[5,b] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0,2,5,5]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[5,$] = r5</code> (<code>B → b</code>). Desempilha 1. Topo é 5. <code>GOTO[5,B] = 7</code>. Empilha 7.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;"><code>[0,2,5,7]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[7,$] = r4</code> (<code>B → b B</code>). Desempilha 2. Topo é 2. <code>GOTO[2,B] = 4</code>. Empilha 4.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;"><code>[0,2,4]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[4,$] = r1</code> (<code>S → A B</code>). Desempilha 2. Topo é 0. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="exercício-b-produção-vazia-e-balanceamento" class="level3" data-number="9.11.2">
+<h3 data-number="9.11.2" class="anchored" data-anchor-id="exercício-b-produção-vazia-e-balanceamento"><span class="header-section-number">9.11.2</span> Exercício B: Produção Vazia e Balanceamento</h3>
+<p><strong>Enunciado</strong>: construa um <em>parser</em> <span class="math inline">\(SLR(1)\)</span> para a linguagem <span class="math inline">\(\{a^n b^n \mid n \geq 0\}\)</span>, incluindo a <em>string</em> vazia, gerada pela gramática:</p>
+<pre class="bnf"><code>1. S → a S b
+2. S → ε</code></pre>
+<p>Verifique as <em>strings</em> <code>aabb</code> e a <em>string</em> vazia. Este exercício ilustra um aspecto próprio do <span class="math inline">\(SLR(1)\)</span>: a presença de uma produção vazia introduz itens de redução no próprio estado inicial, o que sem a informação de <span class="math inline">\(FOLLOW\)</span> seria causa imediata de conflitos.</p>
+<section id="b.1.-gramática-aumentada" class="level4" data-number="9.11.2.1">
+<h4 data-number="9.11.2.1" class="anchored" data-anchor-id="b.1.-gramática-aumentada"><span class="header-section-number">9.11.2.1</span> B.1. Gramática Aumentada</h4>
+<pre class="bnf"><code>0. S' → S
+1. S → a S b
+2. S → ε</code></pre>
+</section>
+<section id="b.2.-conjuntos-first-e-follow" class="level4" data-number="9.11.2.2">
+<h4 data-number="9.11.2.2" class="anchored" data-anchor-id="b.2.-conjuntos-first-e-follow"><span class="header-section-number">9.11.2.2</span> B.2. Conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></h4>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(S) = \{a, \varepsilon\}\)</span> (de <code>S → a S b</code> vem <code>a</code>; de <code>S → ε</code> vem <code>ε</code>)</li>
+</ul>
+<p><strong><span class="math inline">\(FOLLOW\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S') = \{\$\}\)</span></li>
+<li>Da produção <code>S' → S</code>: <span class="math inline">\(\$ \in FOLLOW(S)\)</span>.</li>
+<li>Da produção <code>S → a S b</code>: <span class="math inline">\(FIRST(b) = \{b\} \subseteq FOLLOW(S)\)</span>.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S) = \{\$, b\}\)</span></li>
+</ul>
+</section>
+<section id="b.3.-construção-da-coleção-canônica-de-itens-lr0" class="level4" data-number="9.11.2.3">
+<h4 data-number="9.11.2.3" class="anchored" data-anchor-id="b.3.-construção-da-coleção-canônica-de-itens-lr0"><span class="header-section-number">9.11.2.3</span> B.3. Construção da Coleção Canônica de Itens <span class="math inline">\(LR(0)\)</span></h4>
+<p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([S' \to \bullet S]\)</span>. O <code>CLOSURE</code> expande <code>S</code>, gerando inclusive o item vazio:</p>
+<ul>
+<li><span class="math inline">\([S' \to \bullet S]\)</span></li>
+<li><span class="math inline">\([S \to \bullet a\, S\, b]\)</span></li>
+<li><span class="math inline">\([S \to \bullet]\)</span> (<em>redução imediata</em>, regra 2)</li>
+</ul>
+<p>A sagaz leitora notará que <span class="math inline">\([S \to \bullet]\)</span> já é um item de redução no estado inicial. O <em>parser</em> pode reduzir pela regra 2 assim que a entrada apresentar qualquer símbolo de <span class="math inline">\(FOLLOW(S) = \{\$, b\}\)</span>, sem sequer consumir nenhum terminal.</p>
+<p><strong><span class="math inline">\(GOTO(I_0, S) = I_1\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S' \to S \bullet]\)</span> (<em>aceitação</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, a) = I_2\)</span></strong>: o núcleo é <span class="math inline">\([S \to a \bullet S\, b]\)</span>, e o <code>CLOSURE</code> reexpande <code>S</code>:</p>
+<ul>
+<li><span class="math inline">\([S \to a \bullet S\, b]\)</span></li>
+<li><span class="math inline">\([S \to \bullet a\, S\, b]\)</span></li>
+<li><span class="math inline">\([S \to \bullet]\)</span> (<em>redução</em>, regra 2)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, S) = I_3\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to a\, S \bullet b]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, a) = I_2\)</span></strong>: a transição é um laço. O núcleo avançado <span class="math inline">\([S \to a \bullet S\, b]\)</span> já está em <span class="math inline">\(I_2\)</span>, e o <code>CLOSURE</code> apenas repete os itens.</p>
+<p><strong><span class="math inline">\(GOTO(I_3, b) = I_4\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to a\, S\, b \bullet]\)</span> (<em>redução</em>, regra 1)</li>
+</ul>
+<p>A coleção canônica tem apenas <span class="math inline">\(5\)</span> estados.</p>
+</section>
+<section id="b.4.-tabela-actiongoto" class="level4" data-number="9.11.2.4">
+<h4 data-number="9.11.2.4" class="anchored" data-anchor-id="b.4.-tabela-actiongoto"><span class="header-section-number">9.11.2.4</span> B.4. Tabela ACTION/GOTO</h4>
+<p>O item <span class="math inline">\([S \to \bullet]\)</span> aparece em <span class="math inline">\(I_0\)</span> e em <span class="math inline">\(I_2\)</span>, gerando redução pela regra 2 nos <em>lookaheads</em> <span class="math inline">\(FOLLOW(S) = \{\$, b\}\)</span> em ambos os estados. O item <span class="math inline">\([S \to a\, S\, b \bullet]\)</span> em <span class="math inline">\(I_4\)</span> gera redução pela regra 1 nos mesmos <em>lookaheads</em>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>a</strong></th>
+<th style="text-align: center;"><strong>b</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>S</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">s2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">s2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>A atenta leitora deve verificar que não há conflitos: em <span class="math inline">\(I_0\)</span> e <span class="math inline">\(I_2\)</span>, o <em>shift</em> ocupa a célula de <code>a</code> enquanto as reduções ocupam <code>b</code> e <code>$</code>, que são disjuntos. A gramática é <span class="math inline">\(SLR(1)\)</span>. Observe, contudo, que se a produção vazia fosse <code>S → ε</code> e existisse outra produção cujo <span class="math inline">\(FOLLOW\)</span> incluísse <code>a</code>, haveria conflito <em>shift-reduce</em> imediato em <span class="math inline">\(I_0\)</span>: é um dos pontos em que Lestrade hesita diante de gramáticas menos limpas.</p>
+</section>
+<section id="b.5.-diagrama-de-transição" class="level4" data-number="9.11.2.5">
+<h4 data-number="9.11.2.5" class="anchored" data-anchor-id="b.5.-diagrama-de-transição"><span class="header-section-number">9.11.2.5</span> B.5. Diagrama de Transição</h4>
+<pre><code>          ┌──────┐    a     ┌──────┐    S     ┌──────┐    b     ┌──────┐
+          │  I₀  │────→─────│  I₂  │────→─────│  I₃  │────→─────│  I₄  │
+          └──────┘          └──────┘          └──────┘          └──────┘
+             │ S             │ a ↺                               (r1)
+             ↓               
+          ┌──────┐
+          │  I₁  │
+          └──────┘
+           (acc)</code></pre>
+</section>
+<section id="b.6.-verificação-das-strings" class="level4" data-number="9.11.2.6">
+<h4 data-number="9.11.2.6" class="anchored" data-anchor-id="b.6.-verificação-das-strings"><span class="header-section-number">9.11.2.6</span> B.6. Verificação das <em>Strings</em></h4>
+<p><strong><em>String</em> <code>aabb</code></strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>aabb$</code></td>
+<td style="text-align: left;"><code>ACTION[0,a] = s2</code>. Empilha 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>abb$</code></td>
+<td style="text-align: left;"><code>ACTION[2,a] = s2</code>. Empilha 2.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,2,2]</code></td>
+<td style="text-align: left;"><code>bb$</code></td>
+<td style="text-align: left;"><code>ACTION[2,b] = r2</code> (<code>S → ε</code>). Desempilha 0. Topo é 2. <code>GOTO[2,S] = 3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,2,2,3]</code></td>
+<td style="text-align: left;"><code>bb$</code></td>
+<td style="text-align: left;"><code>ACTION[3,b] = s4</code>. Empilha 4.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,2,2,3,4]</code></td>
+<td style="text-align: left;"><code>b$</code></td>
+<td style="text-align: left;"><code>ACTION[4,b] = r1</code> (<code>S → a S b</code>). Desempilha 3. Topo é 2. <code>GOTO[2,S] = 3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,2,3]</code></td>
+<td style="text-align: left;"><code>b$</code></td>
+<td style="text-align: left;"><code>ACTION[3,b] = s4</code>. Empilha 4.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0,2,3,4]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[4,$] = r1</code>. Desempilha 3. Topo é 0. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>Note, no passo 3, que a redução pela produção vazia (<code>S → ε</code>) desempilha zero estados, de modo que o topo permanece 2 e o <code>GOTO[2,S]</code> é consultado normalmente. Esse é o comportamento padrão do algoritmo quando se encontra um item da forma <span class="math inline">\([A \to \bullet]\)</span>.</p>
+<p><strong><em>String</em> vazia</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[0,$] = r2</code> (<code>S → ε</code>). Desempilha 0. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>A <em>string</em> vazia é aceita em dois passos, sem nenhum <em>shift</em>. O item <span class="math inline">\([S \to \bullet]\)</span> presente em <span class="math inline">\(I_0\)</span> é o responsável por essa aceitação imediata.</p>
+</section>
+</section>
+<section id="exercício-c-gramática-de-expressões-aritméticas" class="level3" data-number="9.11.3">
+<h3 data-number="9.11.3" class="anchored" data-anchor-id="exercício-c-gramática-de-expressões-aritméticas"><span class="header-section-number">9.11.3</span> Exercício C: Gramática de Expressões Aritméticas</h3>
+<p><strong>Enunciado</strong>: construa um <em>parser</em> <span class="math inline">\(SLR(1)\)</span> para a gramática clássica de expressões aritméticas com precedência e parênteses, apresentada em <a href="https://www.pearson.com/en-us/subject-catalog/p/compilers-principles-techniques-and-tools/P200000000081/9780321486813">Aho, Lam, Sethi, Ullman (2006)</a>:</p>
+<pre class="bnf"><code>1. E → E + T
+2. E → T
+3. T → T * F
+4. T → F
+5. F → ( E )
+6. F → id</code></pre>
+<p>Verifique a <em>string</em> <code>id + id * id</code>. Esta gramática é o exemplo paradigmático de gramática <span class="math inline">\(SLR(1)\)</span> em material didático: sua estratificação em três níveis (<span class="math inline">\(E\)</span>, <span class="math inline">\(T\)</span>, <span class="math inline">\(F\)</span>) implementa naturalmente a precedência e a associatividade à esquerda dos operadores, sem exigir diretivas externas.</p>
+<section id="c.1.-gramática-aumentada" class="level4" data-number="9.11.3.1">
+<h4 data-number="9.11.3.1" class="anchored" data-anchor-id="c.1.-gramática-aumentada"><span class="header-section-number">9.11.3.1</span> C.1. Gramática Aumentada</h4>
+<pre class="bnf"><code>0. E' → E
+1. E → E + T
+2. E → T
+3. T → T * F
+4. T → F
+5. F → ( E )
+6. F → id</code></pre>
+<p>Os terminais são <span class="math inline">\(\{+, *, (, ), \text{id}, \$\}\)</span> e os não-terminais são <span class="math inline">\(\{E', E, T, F\}\)</span>.</p>
+</section>
+<section id="c.2.-conjuntos-first-e-follow" class="level4" data-number="9.11.3.2">
+<h4 data-number="9.11.3.2" class="anchored" data-anchor-id="c.2.-conjuntos-first-e-follow"><span class="header-section-number">9.11.3.2</span> C.2. Conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></h4>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(F) = \{(, \text{id}\}\)</span></li>
+<li><span class="math inline">\(FIRST(T) = FIRST(F) = \{(, \text{id}\}\)</span></li>
+<li><span class="math inline">\(FIRST(E) = FIRST(T) = \{(, \text{id}\}\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(FOLLOW\)</span></strong>: o cálculo requer iteração, pois as propagações entre <span class="math inline">\(E\)</span>, <span class="math inline">\(T\)</span> e <span class="math inline">\(F\)</span> são cíclicas.</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(E') = \{\$\}\)</span></li>
+<li>Da produção <code>E' → E</code>: <span class="math inline">\(\$ \in FOLLOW(E)\)</span>.</li>
+<li>Da produção <code>E → E + T</code>: <span class="math inline">\(+ \in FOLLOW(E)\)</span> (pois <code>+</code> segue <span class="math inline">\(E\)</span>); <span class="math inline">\(FOLLOW(E) \subseteq FOLLOW(T)\)</span> (pois <span class="math inline">\(T\)</span> está no final).</li>
+<li>Da produção <code>E → T</code>: <span class="math inline">\(FOLLOW(E) \subseteq FOLLOW(T)\)</span>.</li>
+<li>Da produção <code>T → T * F</code>: <span class="math inline">\(* \in FOLLOW(T)\)</span>; <span class="math inline">\(FOLLOW(T) \subseteq FOLLOW(F)\)</span>.</li>
+<li>Da produção <code>T → F</code>: <span class="math inline">\(FOLLOW(T) \subseteq FOLLOW(F)\)</span>.</li>
+<li>Da produção <code>F → ( E )</code>: <span class="math inline">\() \in FOLLOW(E)\)</span>.</li>
+</ul>
+<p>Após estabilização:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(E) = \{\$, +, )\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(T) = \{\$, +, ), *\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(F) = \{\$, +, ), *\}\)</span></li>
+</ul>
+</section>
+<section id="c.3.-construção-da-coleção-canônica-de-itens-lr0" class="level4" data-number="9.11.3.3">
+<h4 data-number="9.11.3.3" class="anchored" data-anchor-id="c.3.-construção-da-coleção-canônica-de-itens-lr0"><span class="header-section-number">9.11.3.3</span> C.3. Construção da Coleção Canônica de Itens <span class="math inline">\(LR(0)\)</span></h4>
+<p>A coleção tem <span class="math inline">\(12\)</span> estados. Apresento a construção de forma compacta, destacando apenas os núcleos e as expansões relevantes.</p>
+<p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([E' \to \bullet E]\)</span> mais o fechamento completo:</p>
+<ul>
+<li><span class="math inline">\([E' \to \bullet E]\)</span></li>
+<li><span class="math inline">\([E \to \bullet E + T]\)</span></li>
+<li><span class="math inline">\([E \to \bullet T]\)</span></li>
+<li><span class="math inline">\([T \to \bullet T * F]\)</span></li>
+<li><span class="math inline">\([T \to \bullet F]\)</span></li>
+<li><span class="math inline">\([F \to \bullet ( E )]\)</span></li>
+<li><span class="math inline">\([F \to \bullet \text{id}]\)</span></li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_0\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_0, E) = I_1\)</span>: <span class="math inline">\(\{[E' \to E \bullet], [E \to E \bullet + T]\}\)</span>.</li>
+<li><span class="math inline">\(GOTO(I_0, T) = I_2\)</span>: <span class="math inline">\(\{[E \to T \bullet], [T \to T \bullet * F]\}\)</span>.</li>
+<li><span class="math inline">\(GOTO(I_0, F) = I_3\)</span>: <span class="math inline">\(\{[T \to F \bullet]\}\)</span> (<em>redução</em>, regra 4).</li>
+<li><span class="math inline">\(GOTO(I_0, \text{id}) = I_5\)</span>: <span class="math inline">\(\{[F \to \text{id} \bullet]\}\)</span> (<em>redução</em>, regra 6).</li>
+<li><span class="math inline">\(GOTO(I_0, () = I_4\)</span>: núcleo <span class="math inline">\([F \to ( \bullet E )]\)</span>, fechamento similar ao de <span class="math inline">\(I_0\)</span> com os itens de <span class="math inline">\(E\)</span>, <span class="math inline">\(T\)</span> e <span class="math inline">\(F\)</span>.</li>
+</ul>
+<p><strong>Estado <span class="math inline">\(I_4\)</span></strong> — completo após <code>CLOSURE</code>:</p>
+<ul>
+<li><span class="math inline">\([F \to ( \bullet E )]\)</span></li>
+<li><span class="math inline">\([E \to \bullet E + T]\)</span></li>
+<li><span class="math inline">\([E \to \bullet T]\)</span></li>
+<li><span class="math inline">\([T \to \bullet T * F]\)</span></li>
+<li><span class="math inline">\([T \to \bullet F]\)</span></li>
+<li><span class="math inline">\([F \to \bullet ( E )]\)</span></li>
+<li><span class="math inline">\([F \to \bullet \text{id}]\)</span></li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_1\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_1, +) = I_6\)</span>: núcleo <span class="math inline">\([E \to E + \bullet T]\)</span>, fechamento acrescenta itens de <span class="math inline">\(T\)</span> e <span class="math inline">\(F\)</span>.</li>
+</ul>
+<p><strong>Estado <span class="math inline">\(I_6\)</span></strong> — completo:</p>
+<ul>
+<li><span class="math inline">\([E \to E + \bullet T]\)</span></li>
+<li><span class="math inline">\([T \to \bullet T * F]\)</span></li>
+<li><span class="math inline">\([T \to \bullet F]\)</span></li>
+<li><span class="math inline">\([F \to \bullet ( E )]\)</span></li>
+<li><span class="math inline">\([F \to \bullet \text{id}]\)</span></li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_2\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_2, *) = I_7\)</span>: núcleo <span class="math inline">\([T \to T * \bullet F]\)</span>, fechamento acrescenta itens de <span class="math inline">\(F\)</span>.</li>
+</ul>
+<p><strong>Estado <span class="math inline">\(I_7\)</span></strong> — completo:</p>
+<ul>
+<li><span class="math inline">\([T \to T * \bullet F]\)</span></li>
+<li><span class="math inline">\([F \to \bullet ( E )]\)</span></li>
+<li><span class="math inline">\([F \to \bullet \text{id}]\)</span></li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_4\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_4, E) = I_8\)</span>: <span class="math inline">\(\{[F \to ( E \bullet )], [E \to E \bullet + T]\}\)</span>.</li>
+<li><span class="math inline">\(GOTO(I_4, T) = I_2\)</span>, <span class="math inline">\(GOTO(I_4, F) = I_3\)</span>, <span class="math inline">\(GOTO(I_4, () = I_4\)</span>, <span class="math inline">\(GOTO(I_4, \text{id}) = I_5\)</span> (estados reaproveitados).</li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_6\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_6, T) = I_9\)</span>: <span class="math inline">\(\{[E \to E + T \bullet], [T \to T \bullet * F]\}\)</span> (<em>redução</em>, regra 1).</li>
+<li><span class="math inline">\(GOTO(I_6, F) = I_3\)</span>, <span class="math inline">\(GOTO(I_6, () = I_4\)</span>, <span class="math inline">\(GOTO(I_6, \text{id}) = I_5\)</span>.</li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_7\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_7, F) = I_{10}\)</span>: <span class="math inline">\(\{[T \to T * F \bullet]\}\)</span> (<em>redução</em>, regra 3).</li>
+<li><span class="math inline">\(GOTO(I_7, () = I_4\)</span>, <span class="math inline">\(GOTO(I_7, \text{id}) = I_5\)</span>.</li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_8\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_8, )) = I_{11}\)</span>: <span class="math inline">\(\{[F \to ( E ) \bullet]\}\)</span> (<em>redução</em>, regra 5).</li>
+<li><span class="math inline">\(GOTO(I_8, +) = I_6\)</span>.</li>
+</ul>
+<p><strong>Transições a partir de <span class="math inline">\(I_9\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(GOTO(I_9, *) = I_7\)</span>.</li>
+</ul>
+<p>A coleção canônica está completa com <span class="math inline">\(12\)</span> estados (<span class="math inline">\(I_0\)</span> a <span class="math inline">\(I_{11}\)</span>).</p>
+</section>
+<section id="c.4.-tabela-actiongoto" class="level4" data-number="9.11.3.4">
+<h4 data-number="9.11.3.4" class="anchored" data-anchor-id="c.4.-tabela-actiongoto"><span class="header-section-number">9.11.3.4</span> C.4. Tabela ACTION/GOTO</h4>
+<p>As reduções consultam os conjuntos <span class="math inline">\(FOLLOW\)</span>:</p>
+<ul>
+<li><span class="math inline">\([E \to T \bullet]\)</span> em <span class="math inline">\(I_2\)</span> reduz pela regra 2 em <span class="math inline">\(FOLLOW(E) = \{\$, +, )\}\)</span>.</li>
+<li><span class="math inline">\([T \to F \bullet]\)</span> em <span class="math inline">\(I_3\)</span> reduz pela regra 4 em <span class="math inline">\(FOLLOW(T) = \{\$, +, ), *\}\)</span>.</li>
+<li><span class="math inline">\([F \to \text{id} \bullet]\)</span> em <span class="math inline">\(I_5\)</span> reduz pela regra 6 em <span class="math inline">\(FOLLOW(F) = \{\$, +, ), *\}\)</span>.</li>
+<li><span class="math inline">\([E \to E + T \bullet]\)</span> em <span class="math inline">\(I_9\)</span> reduz pela regra 1 em <span class="math inline">\(FOLLOW(E)\)</span>.</li>
+<li><span class="math inline">\([T \to T * F \bullet]\)</span> em <span class="math inline">\(I_{10}\)</span> reduz pela regra 3 em <span class="math inline">\(FOLLOW(T)\)</span>.</li>
+<li><span class="math inline">\([F \to ( E ) \bullet]\)</span> em <span class="math inline">\(I_{11}\)</span> reduz pela regra 5 em <span class="math inline">\(FOLLOW(F)\)</span>.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>+</strong></th>
+<th style="text-align: center;"><strong>*</strong></th>
+<th style="text-align: center;"><strong>(</strong></th>
+<th style="text-align: center;"><strong>)</strong></th>
+<th style="text-align: center;"><strong>id</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>E</strong></th>
+<th style="text-align: center;"><strong>T</strong></th>
+<th style="text-align: center;"><strong>F</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">s6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">s7</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">r6</td>
+<td style="text-align: center;">r6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;">s6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s11</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;">s7</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>10</strong></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>A atenta leitora pode verificar que não há conflitos. O ponto delicado está em <span class="math inline">\(I_2\)</span> e <span class="math inline">\(I_9\)</span>: ambos contêm um item de redução e um item com <code>*</code> após o ponto. Em <span class="math inline">\(I_2\)</span>, o item <span class="math inline">\([E \to T \bullet]\)</span> reduz pela regra 2 nos <em>lookaheads</em> <span class="math inline">\(\{\$, +, )\}\)</span>, e o item <span class="math inline">\([T \to T \bullet * F]\)</span> faz <em>shift</em> sobre <code>*</code>. Como <code>*</code> não está em <span class="math inline">\(FOLLOW(E)\)</span>, a célula <code>ACTION[2, *]</code> recebe apenas <code>s7</code>, sem conflito. Em <span class="math inline">\(I_9\)</span>, o raciocínio é idêntico para a regra 1.</p>
+<p>É exatamente essa disjunção de <span class="math inline">\(FOLLOW(E)\)</span> e o operador <code>*</code> que materializa, na tabela <span class="math inline">\(SLR(1)\)</span>, a precedência maior do produto sobre a soma. Se a gramática fosse escrita sem a estratificação em três níveis (por exemplo, <code>E → E + E | E * E | id</code>), o <span class="math inline">\(FOLLOW\)</span> colapsaria e o conflito <em>shift-reduce</em> apareceria. Essa é uma das razões pelas quais a fatoração <code>E</code>/<code>T</code>/<code>F</code> é tratada como forma canônica em material didático: ela transforma a precedência em informação gramatical que o <span class="math inline">\(SLR(1)\)</span> captura sem diretivas externas.</p>
+</section>
+<section id="c.5.-diagrama-de-transição-resumido" class="level4" data-number="9.11.3.5">
+<h4 data-number="9.11.3.5" class="anchored" data-anchor-id="c.5.-diagrama-de-transição-resumido"><span class="header-section-number">9.11.3.5</span> C.5. Diagrama de Transição (Resumido)</h4>
+<p>Pelo volume de estados, apresento apenas as arestas principais em forma de lista:</p>
+<ul>
+<li><span class="math inline">\(I_0 \xrightarrow{E} I_1 \xrightarrow{+} I_6 \xrightarrow{T} I_9 \xrightarrow{*} I_7 \xrightarrow{F} I_{10}\)</span> (caminho para <code>id + id * id</code>)</li>
+<li><span class="math inline">\(I_0 \xrightarrow{T} I_2 \xrightarrow{*} I_7\)</span> (transição do produto no nível superior)</li>
+<li><span class="math inline">\(I_0 \xrightarrow{F} I_3\)</span>, <span class="math inline">\(I_0 \xrightarrow{\text{id}} I_5\)</span>, <span class="math inline">\(I_0 \xrightarrow{(} I_4\)</span> (alcançar átomos)</li>
+<li><span class="math inline">\(I_4 \xrightarrow{E} I_8 \xrightarrow{)} I_{11}\)</span> (parênteses)</li>
+<li><span class="math inline">\(I_4\)</span> replica as transições de <span class="math inline">\(I_0\)</span> para os não-terminais e <code>id</code>, <code>(</code> (contexto de parênteses aninhados)</li>
+<li><span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_7\)</span> compartilham as transições para <code>id</code>, <code>(</code>, <span class="math inline">\(F\)</span> (contexto pós-operador)</li>
+</ul>
+</section>
+<section id="c.6.-verificação-da-string-id-id-id" class="level4" data-number="9.11.3.6">
+<h4 data-number="9.11.3.6" class="anchored" data-anchor-id="c.6.-verificação-da-string-id-id-id"><span class="header-section-number">9.11.3.6</span> C.6. Verificação da <em>String</em> <code>id + id * id</code></h4>
+<p>A derivação esperada respeita precedência: <span class="math inline">\(E \Rightarrow E + T \Rightarrow E + T * F \Rightarrow T + T * F \Rightarrow F + T * F \Rightarrow \text{id} + T * F \Rightarrow \text{id} + F * F \Rightarrow \text{id} + \text{id} * F \Rightarrow \text{id} + \text{id} * \text{id}\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>id+id*id$</code></td>
+<td style="text-align: left;"><code>ACTION[0,id] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,5]</code></td>
+<td style="text-align: left;"><code>+id*id$</code></td>
+<td style="text-align: left;"><code>ACTION[5,+] = r6</code> (<code>F → id</code>). Desempilha 1. <code>GOTO[0,F] = 3</code>. Empilha 3.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,3]</code></td>
+<td style="text-align: left;"><code>+id*id$</code></td>
+<td style="text-align: left;"><code>ACTION[3,+] = r4</code> (<code>T → F</code>). Desempilha 1. <code>GOTO[0,T] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>+id*id$</code></td>
+<td style="text-align: left;"><code>ACTION[2,+] = r2</code> (<code>E → T</code>). Desempilha 1. <code>GOTO[0,E] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>+id*id$</code></td>
+<td style="text-align: left;"><code>ACTION[1,+] = s6</code>. Empilha 6.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,1,6]</code></td>
+<td style="text-align: left;"><code>id*id$</code></td>
+<td style="text-align: left;"><code>ACTION[6,id] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0,1,6,5]</code></td>
+<td style="text-align: left;"><code>*id$</code></td>
+<td style="text-align: left;"><code>ACTION[5,*] = r6</code> (<code>F → id</code>). Desempilha 1. <code>GOTO[6,F] = 3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;"><code>[0,1,6,3]</code></td>
+<td style="text-align: left;"><code>*id$</code></td>
+<td style="text-align: left;"><code>ACTION[3,*] = r4</code> (<code>T → F</code>). Desempilha 1. <code>GOTO[6,T] = 9</code>. Empilha 9.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;"><code>[0,1,6,9]</code></td>
+<td style="text-align: left;"><code>*id$</code></td>
+<td style="text-align: left;"><code>ACTION[9,*] = s7</code>. Empilha 7.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>[0,1,6,9,7]</code></td>
+<td style="text-align: left;"><code>id$</code></td>
+<td style="text-align: left;"><code>ACTION[7,id] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: left;"><code>[0,1,6,9,7,5]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[5,$] = r6</code> (<code>F → id</code>). Desempilha 1. <code>GOTO[7,F] = 10</code>. Empilha 10.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: left;"><code>[0,1,6,9,7,10]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[10,$] = r3</code> (<code>T → T * F</code>). Desempilha 3. <code>GOTO[6,T] = 9</code>. Empilha 9.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: left;"><code>[0,1,6,9]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[9,$] = r1</code> (<code>E → E + T</code>). Desempilha 3. <code>GOTO[0,E] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>No passo 12, a redução pela regra 3 (<code>T → T * F</code>) ocorre antes da redução pela regra 1 (<code>E → E + T</code>), materializando a precedência maior do produto sobre a soma. No passo 9, o <em>parser</em> escolhe <code>s7</code> em vez de reduzir pela regra 1 em <code>ACTION[9, *]</code>, porque a célula correspondente está preenchida apenas com <em>shift</em> — e isso é verdade precisamente porque <code>*</code> não está em <span class="math inline">\(FOLLOW(E)\)</span>.</p>
+</section>
+</section>
+<section id="exercício-d-gramática-com-conflito-potencial" class="level3" data-number="9.11.4">
+<h3 data-number="9.11.4" class="anchored" data-anchor-id="exercício-d-gramática-com-conflito-potencial"><span class="header-section-number">9.11.4</span> Exercício D: Gramática com Conflito Potencial</h3>
+<p><strong>Enunciado</strong>: considere a gramática abaixo, que apresenta uma produção vazia e um fator de risco didático — o conjunto <span class="math inline">\(FOLLOW(A)\)</span> poderia, em gramáticas próximas, gerar conflito <em>shift-reduce</em> em <span class="math inline">\(I_0\)</span>. Aumente a gramática, calcule <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, construa os estados <span class="math inline">\(LR(0)\)</span> e a tabela <span class="math inline">\(SLR(1)\)</span>, identifique se há conflitos e analise o comportamento do <em>parser</em> sobre a <em>string</em> <code>a</code> (que exercita a produção vazia).</p>
 <pre class="bnf"><code>S → A a | b
 A → c | ε</code></pre>
-<ol type="1">
-<li><strong>Aumente a gramática</strong> e calcule os conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>;</li>
-<li><strong>Construa os estados <span class="math inline">\(LR(0)\)</span></strong> do autômato;</li>
-<li><strong>Construa a tabela <span class="math inline">\(SLR(1)\)</span></strong> e identifique possíveis conflitos;</li>
-<li><strong>Analise</strong> se esta gramática é <span class="math inline">\(SLR(1)\)</span>.</li>
-</ol>
-<p><strong>Dica</strong>: Preste atenção especial ao conjunto <span class="math inline">\(FOLLOW(A)\)</span> e como ele afeta as ações de redução.</p>
+<section id="d.1.-gramática-aumentada" class="level4" data-number="9.11.4.1">
+<h4 data-number="9.11.4.1" class="anchored" data-anchor-id="d.1.-gramática-aumentada"><span class="header-section-number">9.11.4.1</span> D.1. Gramática Aumentada</h4>
+<pre class="bnf"><code>0. S' → S
+1. S → A a
+2. S → b
+3. A → c
+4. A → ε</code></pre>
+<p>Os terminais são <span class="math inline">\(\{a, b, c, \$\}\)</span> e os não-terminais são <span class="math inline">\(\{S', S, A\}\)</span>.</p>
 </section>
-<section id="exercício-2-implementação-de-gramática-de-declarações" class="level3" data-number="9.8.2">
-<h3 data-number="9.8.2" class="anchored" data-anchor-id="exercício-2-implementação-de-gramática-de-declarações"><span class="header-section-number">9.8.2</span> Exercício 2: Implementação de Gramática de Declarações</h3>
-<p>Implemente um parser <span class="math inline">\(SLR(1)\)</span> para:</p>
+<section id="d.2.-conjuntos-first-e-follow" class="level4" data-number="9.11.4.2">
+<h4 data-number="9.11.4.2" class="anchored" data-anchor-id="d.2.-conjuntos-first-e-follow"><span class="header-section-number">9.11.4.2</span> D.2. Conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></h4>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(A) = \{c, \varepsilon\}\)</span> (de <code>A → c</code> vem <code>c</code>; de <code>A → ε</code> vem <code>ε</code>).</li>
+<li><span class="math inline">\(FIRST(S)\)</span>: da produção <code>S → A a</code>, como <span class="math inline">\(\varepsilon \in FIRST(A)\)</span>, temos <span class="math inline">\((FIRST(A) - \{\varepsilon\}) \cup FIRST(a) = \{c\} \cup \{a\} = \{a, c\}\)</span>; da produção <code>S → b</code> vem <code>b</code>. Portanto <span class="math inline">\(FIRST(S) = \{a, b, c\}\)</span>.</li>
+</ul>
+<p><strong><span class="math inline">\(FOLLOW\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S') = \{\$\}\)</span>.</li>
+<li>Da produção <code>S' → S</code>: <span class="math inline">\(\$ \in FOLLOW(S)\)</span>.</li>
+<li>Da produção <code>S → A a</code>: o terminal <code>a</code> segue diretamente <code>A</code>, logo <span class="math inline">\(a \in FOLLOW(A)\)</span>.</li>
+<li>As demais produções (<code>S → b</code>, <code>A → c</code>, <code>A → ε</code>) não adicionam informação ao <span class="math inline">\(FOLLOW\)</span>.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S) = \{\$\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(A) = \{a\}\)</span></li>
+</ul>
+</section>
+<section id="d.3.-construção-da-coleção-canônica-de-itens-lr0" class="level4" data-number="9.11.4.3">
+<h4 data-number="9.11.4.3" class="anchored" data-anchor-id="d.3.-construção-da-coleção-canônica-de-itens-lr0"><span class="header-section-number">9.11.4.3</span> D.3. Construção da Coleção Canônica de Itens <span class="math inline">\(LR(0)\)</span></h4>
+<p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([S' \to \bullet S]\)</span>. O <code>CLOSURE</code> expande <code>S</code> e, recursivamente, <code>A</code>, que possui produção vazia:</p>
+<ul>
+<li><span class="math inline">\([S' \to \bullet S]\)</span></li>
+<li><span class="math inline">\([S \to \bullet A\, a]\)</span></li>
+<li><span class="math inline">\([S \to \bullet b]\)</span></li>
+<li><span class="math inline">\([A \to \bullet c]\)</span></li>
+<li><span class="math inline">\([A \to \bullet]\)</span> (<em>redução</em>, regra 4)</li>
+</ul>
+<p>A sagaz leitora notará que <span class="math inline">\([A \to \bullet]\)</span> já é um item de redução dentro do estado inicial. Ele gerará ações de <em>reduce</em> pela regra 4 em todas as células correspondentes aos terminais de <span class="math inline">\(FOLLOW(A) = \{a\}\)</span>.</p>
+<p><strong><span class="math inline">\(GOTO(I_0, S) = I_1\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S' \to S \bullet]\)</span> (<em>aceitação</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, A) = I_2\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to A \bullet a]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, b) = I_3\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to b \bullet]\)</span> (<em>redução</em>, regra 2)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, c) = I_4\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([A \to c \bullet]\)</span> (<em>redução</em>, regra 3)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, a) = I_5\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to A\, a \bullet]\)</span> (<em>redução</em>, regra 1)</li>
+</ul>
+<p>A coleção canônica tem <span class="math inline">\(6\)</span> estados.</p>
+</section>
+<section id="d.4.-tabela-actiongoto" class="level4" data-number="9.11.4.4">
+<h4 data-number="9.11.4.4" class="anchored" data-anchor-id="d.4.-tabela-actiongoto"><span class="header-section-number">9.11.4.4</span> D.4. Tabela ACTION/GOTO</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>a</strong></th>
+<th style="text-align: center;"><strong>b</strong></th>
+<th style="text-align: center;"><strong>c</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>S</strong></th>
+<th style="text-align: center;"><strong>A</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;">s3</td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>A atenta leitora deve verificar cada célula crítica:</p>
+<ul>
+<li>Em <span class="math inline">\(I_0\)</span>, a célula <span class="math inline">\(\text{ACTION}[0, a]\)</span> recebe <code>r4</code> (redução pela produção vazia <code>A → ε</code>, pois <span class="math inline">\(a \in FOLLOW(A)\)</span>). As demais ações em <span class="math inline">\(I_0\)</span> são <em>shifts</em> sobre <code>b</code> e <code>c</code>, ocupando células distintas. Não há conflito.</li>
+<li>Em <span class="math inline">\(I_2\)</span>, a única ação é <em>shift</em> sobre <code>a</code>. Não há redução concorrente.</li>
+<li>Em <span class="math inline">\(I_4\)</span>, a redução pela regra 3 (<code>A → c</code>) ocorre em <span class="math inline">\(FOLLOW(A) = \{a\}\)</span>, ocupando apenas <span class="math inline">\(\text{ACTION}[4, a]\)</span>. Sem conflito.</li>
+</ul>
+<p>A gramática é <span class="math inline">\(SLR(1)\)</span>. Entretanto, é instrutivo observar por que a dica do enunciado alerta sobre <span class="math inline">\(FOLLOW(A)\)</span>: se a gramática fosse ligeiramente modificada para <code>S → A a | A b</code>, teríamos <span class="math inline">\(FOLLOW(A) = \{a, b\}\)</span>, e a célula <span class="math inline">\(\text{ACTION}[0, b]\)</span> conteria simultaneamente <code>s3</code> (<em>shift</em> sobre <code>b</code> pela produção <code>S → b</code>) — que já não existiria nessa variante — e <code>r4</code> (<em>reduce</em> de <code>A → ε</code>). Em uma variante mais clara, basta trocar <code>S → b</code> por <code>S → A d</code> e introduzir <code>b</code> em <span class="math inline">\(FOLLOW(A)\)</span> para produzir conflito imediato em <span class="math inline">\(I_0\)</span>. A produção vazia é sempre o ponto de atenção: ela transforma o estado inicial em candidato a redução, e a limpeza de <span class="math inline">\(FOLLOW\)</span> passa a ser condição de existência do <em>parser</em> <span class="math inline">\(SLR(1)\)</span>.</p>
+</section>
+<section id="d.5.-diagrama-de-transição" class="level4" data-number="9.11.4.5">
+<h4 data-number="9.11.4.5" class="anchored" data-anchor-id="d.5.-diagrama-de-transição"><span class="header-section-number">9.11.4.5</span> D.5. Diagrama de Transição</h4>
+<pre><code>                ┌──────┐    b     ┌──────┐
+          ┌────▶│  I₀  │────→─────│  I₃  │ (r2)
+          │     └──────┘          └──────┘
+          │      │  │  │
+          │      │  │  └── c ──▶ ┌──────┐
+          │      │  │             │  I₄  │ (r3)
+          │      │  │             └──────┘
+          │      │  │ S
+          │      │  ↓
+          │      │  ┌──────┐
+          │      │  │  I₁  │ (acc)
+          │      │  └──────┘
+          │      │ A
+          │      ↓
+          │   ┌──────┐    a     ┌──────┐
+          │   │  I₂  │────→─────│  I₅  │ (r1)
+          │   └──────┘          └──────┘
+          │
+         (r4 em a dentro de I₀: reduz A → ε sem consumir terminal)</code></pre>
+</section>
+<section id="d.6.-verificação-da-string-a" class="level4" data-number="9.11.4.6">
+<h4 data-number="9.11.4.6" class="anchored" data-anchor-id="d.6.-verificação-da-string-a"><span class="header-section-number">9.11.4.6</span> D.6. Verificação da <em>String</em> <code>a</code></h4>
+<p>Esta <em>string</em> exercita a produção vazia: a derivação esperada é <span class="math inline">\(S \Rightarrow A\, a \Rightarrow \varepsilon\, a \Rightarrow a\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>a$</code></td>
+<td style="text-align: left;"><code>ACTION[0,a] = r4</code> (<code>A → ε</code>). Desempilha 0 estados (produção vazia). Topo permanece 0. <code>GOTO[0,A] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>a$</code></td>
+<td style="text-align: left;"><code>ACTION[2,a] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[5,$] = r1</code> (<code>S → A a</code>). Desempilha 2. Topo é 0. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>No passo 1, a redução pela produção vazia desempilha zero estados e gera um não-terminal <code>A</code> sem que nenhum terminal tenha sido consumido da entrada. O <em>parser</em> consulta <code>GOTO[0, A]</code> e prossegue. É o comportamento idêntico ao visto no Exercício B: a única diferença é que aqui a redução ocorre já no estado inicial, porque a dica do <span class="math inline">\(FOLLOW\)</span> é disparada imediatamente.</p>
+</section>
+<section id="d.7.-verificações-adicionais" class="level4" data-number="9.11.4.7">
+<h4 data-number="9.11.4.7" class="anchored" data-anchor-id="d.7.-verificações-adicionais"><span class="header-section-number">9.11.4.7</span> D.7. Verificações Adicionais</h4>
+<p><strong><em>String</em> <code>ca</code></strong>, derivação <span class="math inline">\(S \Rightarrow A\, a \Rightarrow c\, a\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>ca$</code></td>
+<td style="text-align: left;"><code>ACTION[0,c] = s4</code>. Empilha 4.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,4]</code></td>
+<td style="text-align: left;"><code>a$</code></td>
+<td style="text-align: left;"><code>ACTION[4,a] = r3</code> (<code>A → c</code>). Desempilha 1. <code>GOTO[0,A] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>a$</code></td>
+<td style="text-align: left;"><code>ACTION[2,a] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[5,$] = r1</code>. Desempilha 2. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>String</em> <code>b</code></strong>, derivação <span class="math inline">\(S \Rightarrow b\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>b$</code></td>
+<td style="text-align: left;"><code>ACTION[0,b] = s3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,3]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[3,$] = r2</code> (<code>S → b</code>). Desempilha 1. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>As três <em>strings</em> <code>a</code>, <code>ca</code> e <code>b</code> cobrem os três caminhos derivacionais possíveis da gramática.</p>
+</section>
+</section>
+<section id="exercício-e-gramática-de-declarações" class="level3" data-number="9.11.5">
+<h3 data-number="9.11.5" class="anchored" data-anchor-id="exercício-e-gramática-de-declarações"><span class="header-section-number">9.11.5</span> Exercício E: Gramática de Declarações</h3>
+<p><strong>Enunciado</strong>: considere a gramática que modela declarações de variáveis em uma linguagem simples, com dois tipos primitivos (<code>int</code> e <code>float</code>) e listas de identificadores separadas por vírgulas. Aumente a gramática, calcule <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span>, construa os estados <span class="math inline">\(LR(0)\)</span> e a tabela <span class="math inline">\(SLR(1)\)</span>, e verifique as <em>strings</em> <code>int id ;</code> e <code>float id , id , id ;</code> (onde <code>id</code> é o token genérico para identificadores).</p>
 <pre class="bnf"><code>DECL → TYPE VARS ;
 TYPE → int | float
 VARS → VARS , id | id</code></pre>
-<ol type="1">
-<li><strong>Construa</strong> a coleção canônica de conjuntos de itens <span class="math inline">\(LR(0)\)</span>;</li>
-<li><strong>Calcule</strong> os conjuntos <span class="math inline">\(FOLLOW\)</span> necessários;</li>
-<li><strong>Implemente</strong> o parser usando o código fornecido como base;</li>
-<li><strong>Teste</strong> com as strings: <code>int x ;</code>, <code>float x , y , z ;</code></li>
-</ol>
-<p><strong>Observação</strong>: Esta gramática é perfeitamente <span class="math inline">\(SLR(1)\)</span> e não deve gerar conflitos.</p>
+<section id="e.1.-gramática-aumentada" class="level4" data-number="9.11.5.1">
+<h4 data-number="9.11.5.1" class="anchored" data-anchor-id="e.1.-gramática-aumentada"><span class="header-section-number">9.11.5.1</span> E.1. Gramática Aumentada</h4>
+<pre class="bnf"><code>0. DECL' → DECL
+1. DECL → TYPE VARS ;
+2. TYPE → int
+3. TYPE → float
+4. VARS → VARS , id
+5. VARS → id</code></pre>
+<p>Os terminais são <span class="math inline">\(\{\text{int}, \text{float}, \text{id}, \mathord,, \mathord;, \$\}\)</span> e os não-terminais são <span class="math inline">\(\{DECL', DECL, TYPE, VARS\}\)</span>.</p>
+</section>
+<section id="e.2.-conjuntos-first-e-follow" class="level4" data-number="9.11.5.2">
+<h4 data-number="9.11.5.2" class="anchored" data-anchor-id="e.2.-conjuntos-first-e-follow"><span class="header-section-number">9.11.5.2</span> E.2. Conjuntos <span class="math inline">\(FIRST\)</span> e <span class="math inline">\(FOLLOW\)</span></h4>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(TYPE) = \{\text{int}, \text{float}\}\)</span></li>
+<li><span class="math inline">\(FIRST(VARS) = \{\text{id}\}\)</span></li>
+<li><span class="math inline">\(FIRST(DECL) = FIRST(TYPE) = \{\text{int}, \text{float}\}\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(FOLLOW\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(DECL') = \{\$\}\)</span></li>
+<li>Da produção <code>DECL' → DECL</code>: <span class="math inline">\(\$ \in FOLLOW(DECL)\)</span>.</li>
+<li>Da produção <code>DECL → TYPE VARS ;</code>: <span class="math inline">\(FIRST(VARS) \subseteq FOLLOW(TYPE)\)</span>, logo <span class="math inline">\(\text{id} \in FOLLOW(TYPE)\)</span>. Ainda nessa produção, o terminal <code>;</code> segue diretamente <span class="math inline">\(VARS\)</span>, logo <span class="math inline">\(\mathord; \in FOLLOW(VARS)\)</span>.</li>
+<li>Da produção <code>VARS → VARS , id</code>: o terminal <code>,</code> segue diretamente <span class="math inline">\(VARS\)</span> no lado direito, logo <span class="math inline">\(\mathord, \in FOLLOW(VARS)\)</span>.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(DECL) = \{\$\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(TYPE) = \{\text{id}\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(VARS) = \{\mathord;, \mathord,\}\)</span></li>
+</ul>
+<p>A disjunção entre <span class="math inline">\(FOLLOW(TYPE) = \{\text{id}\}\)</span> e <span class="math inline">\(FOLLOW(VARS) = \{\mathord;, \mathord,\}\)</span> é o que garante que a gramática seja limpa: nenhuma decisão de redução de <span class="math inline">\(TYPE\)</span> concorre com decisão de redução de <span class="math inline">\(VARS\)</span> no mesmo <em>lookahead</em>.</p>
+</section>
+<section id="e.3.-construção-da-coleção-canônica-de-itens-lr0" class="level4" data-number="9.11.5.3">
+<h4 data-number="9.11.5.3" class="anchored" data-anchor-id="e.3.-construção-da-coleção-canônica-de-itens-lr0"><span class="header-section-number">9.11.5.3</span> E.3. Construção da Coleção Canônica de Itens <span class="math inline">\(LR(0)\)</span></h4>
+<p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([DECL' \to \bullet DECL]\)</span>. O <code>CLOSURE</code> expande <span class="math inline">\(DECL\)</span> e, recursivamente, <span class="math inline">\(TYPE\)</span>:</p>
+<ul>
+<li><span class="math inline">\([DECL' \to \bullet DECL]\)</span></li>
+<li><span class="math inline">\([DECL \to \bullet TYPE\, VARS\, \mathord;]\)</span></li>
+<li><span class="math inline">\([TYPE \to \bullet \text{int}]\)</span></li>
+<li><span class="math inline">\([TYPE \to \bullet \text{float}]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, DECL) = I_1\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([DECL' \to DECL \bullet]\)</span> (<em>aceitação</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, TYPE) = I_2\)</span></strong>: núcleo <span class="math inline">\([DECL \to TYPE \bullet VARS\, \mathord;]\)</span>, e o <code>CLOSURE</code> expande <span class="math inline">\(VARS\)</span>:</p>
+<ul>
+<li><span class="math inline">\([DECL \to TYPE \bullet VARS\, \mathord;]\)</span></li>
+<li><span class="math inline">\([VARS \to \bullet VARS \mathord, \text{id}]\)</span></li>
+<li><span class="math inline">\([VARS \to \bullet \text{id}]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, \text{int}) = I_3\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([TYPE \to \text{int} \bullet]\)</span> (<em>redução</em>, regra 2)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, \text{float}) = I_4\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([TYPE \to \text{float} \bullet]\)</span> (<em>redução</em>, regra 3)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, VARS) = I_5\)</span></strong>: dois itens de <span class="math inline">\(I_2\)</span> têm <code>VARS</code> após o ponto:</p>
+<ul>
+<li><span class="math inline">\([DECL \to TYPE\, VARS \bullet \mathord;]\)</span></li>
+<li><span class="math inline">\([VARS \to VARS \bullet \mathord, \text{id}]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, \text{id}) = I_6\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([VARS \to \text{id} \bullet]\)</span> (<em>redução</em>, regra 5)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_5, \mathord;) = I_7\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([DECL \to TYPE\, VARS\, \mathord; \bullet]\)</span> (<em>redução</em>, regra 1)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_5, \mathord,) = I_8\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([VARS \to VARS \mathord, \bullet \text{id}]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_8, \text{id}) = I_9\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([VARS \to VARS \mathord, \text{id} \bullet]\)</span> (<em>redução</em>, regra 4)</li>
+</ul>
+<p>A coleção canônica tem <span class="math inline">\(10\)</span> estados.</p>
+</section>
+<section id="e.4.-tabela-actiongoto" class="level4" data-number="9.11.5.4">
+<h4 data-number="9.11.5.4" class="anchored" data-anchor-id="e.4.-tabela-actiongoto"><span class="header-section-number">9.11.5.4</span> E.4. Tabela ACTION/GOTO</h4>
+<p>As reduções consultam os conjuntos <span class="math inline">\(FOLLOW\)</span>:</p>
+<ul>
+<li><span class="math inline">\([TYPE \to \text{int} \bullet]\)</span> em <span class="math inline">\(I_3\)</span> reduz pela regra 2 em <span class="math inline">\(FOLLOW(TYPE) = \{\text{id}\}\)</span>.</li>
+<li><span class="math inline">\([TYPE \to \text{float} \bullet]\)</span> em <span class="math inline">\(I_4\)</span> reduz pela regra 3 em <span class="math inline">\(FOLLOW(TYPE) = \{\text{id}\}\)</span>.</li>
+<li><span class="math inline">\([VARS \to \text{id} \bullet]\)</span> em <span class="math inline">\(I_6\)</span> reduz pela regra 5 em <span class="math inline">\(FOLLOW(VARS) = \{\mathord;, \mathord,\}\)</span>.</li>
+<li><span class="math inline">\([DECL \to TYPE\, VARS\, \mathord; \bullet]\)</span> em <span class="math inline">\(I_7\)</span> reduz pela regra 1 em <span class="math inline">\(FOLLOW(DECL) = \{\$\}\)</span>.</li>
+<li><span class="math inline">\([VARS \to VARS \mathord, \text{id} \bullet]\)</span> em <span class="math inline">\(I_9\)</span> reduz pela regra 4 em <span class="math inline">\(FOLLOW(VARS) = \{\mathord;, \mathord,\}\)</span>.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>int</strong></th>
+<th style="text-align: center;"><strong>float</strong></th>
+<th style="text-align: center;"><strong>id</strong></th>
+<th style="text-align: center;"><strong>,</strong></th>
+<th style="text-align: center;"><strong>;</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>DECL</strong></th>
+<th style="text-align: center;"><strong>TYPE</strong></th>
+<th style="text-align: center;"><strong>VARS</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">s3</td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s8</td>
+<td style="text-align: center;">s7</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s9</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Não há conflitos. A gramática é <span class="math inline">\(SLR(1)\)</span>.</p>
+<p>O ponto didaticamente interessante está em <span class="math inline">\(I_5\)</span>: esse estado contém dois itens, <span class="math inline">\([DECL \to TYPE\, VARS \bullet \mathord;]\)</span> (aguardando <code>;</code> para <em>shift</em>) e <span class="math inline">\([VARS \to VARS \bullet \mathord, \text{id}]\)</span> (aguardando <code>,</code> para <em>shift</em>). Ambos são itens de <em>shift</em>, mas sobre terminais disjuntos. Se a gramática admitisse, por exemplo, uma produção adicional <code>DECL → TYPE VARS</code> sem <code>;</code> final, teríamos <span class="math inline">\([DECL \to TYPE\, VARS \bullet]\)</span> concorrente com <span class="math inline">\([VARS \to VARS \bullet \mathord, \text{id}]\)</span>, e um conflito <em>shift-reduce</em> em <span class="math inline">\(\text{ACTION}[5, \mathord,]\)</span>, já que <span class="math inline">\(\mathord, \in FOLLOW(DECL)\)</span> nessa variante hipotética. O uso do <code>;</code> como terminador obrigatório é o que mantém a gramática limpa.</p>
+</section>
+<section id="e.5.-diagrama-de-transição" class="level4" data-number="9.11.5.5">
+<h4 data-number="9.11.5.5" class="anchored" data-anchor-id="e.5.-diagrama-de-transição"><span class="header-section-number">9.11.5.5</span> E.5. Diagrama de Transição</h4>
+<pre><code>   ┌──────┐     int     ┌──────┐
+   │  I₀  │────────────▶│  I₃  │ (r2)
+   └──────┘             └──────┘
+    │  │  │     float   ┌──────┐
+    │  │  └────────────▶│  I₄  │ (r3)
+    │  │                └──────┘
+    │  │ DECL
+    │  ↓
+    │ ┌──────┐
+    │ │  I₁  │ (acc)
+    │ └──────┘
+    │ TYPE
+    ↓
+   ┌──────┐     id      ┌──────┐
+   │  I₂  │────────────▶│  I₆  │ (r5)
+   └──────┘             └──────┘
+    │ VARS
+    ↓
+   ┌──────┐     ;       ┌──────┐
+   │  I₅  │────────────▶│  I₇  │ (r1)
+   └──────┘             └──────┘
+    │ ,
+    ↓
+   ┌──────┐     id      ┌──────┐
+   │  I₈  │────────────▶│  I₉  │ (r4)
+   └──────┘             └──────┘</code></pre>
+</section>
+<section id="e.6.-verificação-da-string-int-id" class="level4" data-number="9.11.5.6">
+<h4 data-number="9.11.5.6" class="anchored" data-anchor-id="e.6.-verificação-da-string-int-id"><span class="header-section-number">9.11.5.6</span> E.6. Verificação da <em>String</em> <code>int id ;</code></h4>
+<p>Derivação esperada: <span class="math inline">\(DECL \Rightarrow TYPE\, VARS\, \mathord; \Rightarrow \text{int}\, VARS\, \mathord; \Rightarrow \text{int}\, \text{id}\, \mathord;\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>int id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[0,int] = s3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,3]</code></td>
+<td style="text-align: left;"><code>id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[3,id] = r2</code> (<code>TYPE → int</code>). Desempilha 1. <code>GOTO[0,TYPE] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[2,id] = s6</code>. Empilha 6.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,2,6]</code></td>
+<td style="text-align: left;"><code>; $</code></td>
+<td style="text-align: left;"><code>ACTION[6,;] = r5</code> (<code>VARS → id</code>). Desempilha 1. <code>GOTO[2,VARS] = 5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>; $</code></td>
+<td style="text-align: left;"><code>ACTION[5,;] = s7</code>. Empilha 7.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,2,5,7]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[7,$] = r1</code> (<code>DECL → TYPE VARS ;</code>). Desempilha 3. <code>GOTO[0,DECL] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="e.7.-verificação-da-string-float-id-id-id" class="level4" data-number="9.11.5.7">
+<h4 data-number="9.11.5.7" class="anchored" data-anchor-id="e.7.-verificação-da-string-float-id-id-id"><span class="header-section-number">9.11.5.7</span> E.7. Verificação da <em>String</em> <code>float id , id , id ;</code></h4>
+<p>Esta <em>string</em> exercita a recursão à esquerda em <span class="math inline">\(VARS\)</span>: a derivação é <span class="math inline">\(DECL \Rightarrow TYPE\, VARS\, \mathord; \Rightarrow \text{float}\, VARS\, \mathord; \Rightarrow \text{float}\, VARS \mathord, \text{id}\, \mathord; \Rightarrow \text{float}\, VARS \mathord, \text{id} \mathord, \text{id}\, \mathord; \Rightarrow \text{float}\, \text{id} \mathord, \text{id} \mathord, \text{id}\, \mathord;\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>float id , id , id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[0,float] = s4</code>. Empilha 4.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,4]</code></td>
+<td style="text-align: left;"><code>id , id , id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[4,id] = r3</code> (<code>TYPE → float</code>). <code>GOTO[0,TYPE] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>id , id , id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[2,id] = s6</code>. Empilha 6.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,2,6]</code></td>
+<td style="text-align: left;"><code>, id , id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[6,,] = r5</code> (<code>VARS → id</code>). <code>GOTO[2,VARS] = 5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>, id , id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[5,,] = s8</code>. Empilha 8.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,2,5,8]</code></td>
+<td style="text-align: left;"><code>id , id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[8,id] = s9</code>. Empilha 9.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0,2,5,8,9]</code></td>
+<td style="text-align: left;"><code>, id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[9,,] = r4</code> (<code>VARS → VARS , id</code>). Desempilha 3. Topo é 2. <code>GOTO[2,VARS] = 5</code>. Empilha 5.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>, id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[5,,] = s8</code>. Empilha 8.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;"><code>[0,2,5,8]</code></td>
+<td style="text-align: left;"><code>id ; $</code></td>
+<td style="text-align: left;"><code>ACTION[8,id] = s9</code>. Empilha 9.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>[0,2,5,8,9]</code></td>
+<td style="text-align: left;"><code>; $</code></td>
+<td style="text-align: left;"><code>ACTION[9,;] = r4</code> (<code>VARS → VARS , id</code>). Desempilha 3. <code>GOTO[2,VARS] = 5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: left;"><code>[0,2,5]</code></td>
+<td style="text-align: left;"><code>; $</code></td>
+<td style="text-align: left;"><code>ACTION[5,;] = s7</code>. Empilha 7.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: left;"><code>[0,2,5,7]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[7,$] = r1</code> (<code>DECL → TYPE VARS ;</code>). Desempilha 3. <code>GOTO[0,DECL] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>A atenta leitora deve observar, nos passos 7 e 10, o padrão característico de recursão à esquerda: cada redução pela regra 4 (<code>VARS → VARS , id</code>) desempilha três estados, retorna ao topo 2, e o <code>GOTO[2, VARS] = 5</code> a recoloca em <span class="math inline">\(I_5\)</span>, de onde a análise prossegue empilhando o próximo <code>,</code> ou o <code>;</code> final. Esse ciclo “reduce → GOTO → shift” se repete uma vez por elemento adicional da lista, e é a assinatura de qualquer <em>parser</em> <span class="math inline">\(LR\)</span> tratando recursão à esquerda — comportamento já observado no Exercício B do complemento <span class="math inline">\(LR(1)\)</span>, que usa gramática análoga (<code>L → L , a | a</code>). A coincidência não é acidental: a estrutura de listas separadas por vírgula é um padrão sintático tão comum que forma quase um subgênero de exercícios didáticos sobre parsers <em>bottom-up</em>.</p>
 
 
+</section>
 </section>
 </section>
 
