@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Parsers LALR(1): O Padrão Industrial da Nossa Scotland Yard – Linguagens Formais e Autômatos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-semantico.html" rel="next">
+<link href="./08-parserSLR1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./09-parserLALR1.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Linguagens Formais e Autômatos</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/frankalcantara/linguagens-formais" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Disciplina de Linguagens Formais</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Analisadores Léxicos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analisadores Léxicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01a-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Alfabetos, Linguagens e Strings: Fundamentos Matemáticos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-lexico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Autômatos Finitos Determinísticos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Analisadores Sintáticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-Gramaticas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Gramáticas e Linguagens Livres de Contexto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-parsersLL1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Parsers LL(1): Começando a Análise Sintática</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-first-follow.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Os Conjuntos FIRST e FOLLOW e a Tabela de Parser LL(1)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-parserLALR1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Analisadores Semânticos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-questoes-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Geração de Código Intermediário</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">MLIR: Analisando Passes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projetos de Engenharia da Computação - 2025-2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projetos de Engenharia da Computação - 2026-1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase12026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 1 - Analisador Léxico e Gerador de Assembly para ARMv7</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase22026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase42026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Projetos de Ciência da Computação - 2026-1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase12026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 1 - Analisador Léxico e Gerador de Assembly para ARMv7</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase22026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fase42026-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./apend1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./referencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referências</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sumário</h2>
+   
+  <ul>
+  <li><a href="#o-conceito-fundamental-o-núcleo-de-um-estado" id="toc-o-conceito-fundamental-o-núcleo-de-um-estado" class="nav-link active" data-scroll-target="#o-conceito-fundamental-o-núcleo-de-um-estado"><span class="header-section-number">10.1</span> O Conceito Fundamental: O Núcleo de um Estado</a></li>
+  <li><a href="#o-algoritmo-de-construção-lalr1" id="toc-o-algoritmo-de-construção-lalr1" class="nav-link" data-scroll-target="#o-algoritmo-de-construção-lalr1"><span class="header-section-number">10.2</span> O Algoritmo de Construção <span class="math inline">\(LALR(1)\)</span></a>
+  <ul class="collapse">
+  <li><a href="#fase-1-construção-da-coleção-lr1-canônica" id="toc-fase-1-construção-da-coleção-lr1-canônica" class="nav-link" data-scroll-target="#fase-1-construção-da-coleção-lr1-canônica"><span class="header-section-number">10.2.1</span> Fase 1: Construção da Coleção <span class="math inline">\(LR(1)\)</span> Canônica</a></li>
+  <li><a href="#fase-2-fusão-de-estados-com-mesmo-núcleo" id="toc-fase-2-fusão-de-estados-com-mesmo-núcleo" class="nav-link" data-scroll-target="#fase-2-fusão-de-estados-com-mesmo-núcleo"><span class="header-section-number">10.2.2</span> Fase 2: Fusão de Estados com Mesmo Núcleo</a></li>
+  <li><a href="#fase-3-construção-da-tabela-action-e-goto" id="toc-fase-3-construção-da-tabela-action-e-goto" class="nav-link" data-scroll-target="#fase-3-construção-da-tabela-action-e-goto"><span class="header-section-number">10.2.3</span> Fase 3: Construção da Tabela ACTION e GOTO</a></li>
+  <li><a href="#pseudocódigo-do-algoritmo-lalr1-método-de-fusão" id="toc-pseudocódigo-do-algoritmo-lalr1-método-de-fusão" class="nav-link" data-scroll-target="#pseudocódigo-do-algoritmo-lalr1-método-de-fusão"><span class="header-section-number">10.2.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(LALR(1)\)</span> (Método de Fusão)</a></li>
+  </ul></li>
+  <li><a href="#exemplo-guiado-o-resgate-do-estudo-de-caso" id="toc-exemplo-guiado-o-resgate-do-estudo-de-caso" class="nav-link" data-scroll-target="#exemplo-guiado-o-resgate-do-estudo-de-caso"><span class="header-section-number">10.3</span> Exemplo Guiado: O Resgate do Estudo de Caso</a>
+  <ul class="collapse">
+  <li><a href="#a-tabela-lalr1-resultante" id="toc-a-tabela-lalr1-resultante" class="nav-link" data-scroll-target="#a-tabela-lalr1-resultante"><span class="header-section-number">10.3.1</span> A Tabela <span class="math inline">\(LALR(1)\)</span> Resultante</a></li>
+  </ul></li>
+  <li><a href="#a-anomalia-quando-o-lalr1-falha" id="toc-a-anomalia-quando-o-lalr1-falha" class="nav-link" data-scroll-target="#a-anomalia-quando-o-lalr1-falha"><span class="header-section-number">10.4</span> A Anomalia: Quando o <span class="math inline">\(LALR(1)\)</span> Falha</a></li>
+  <li><a href="#exemplo-de-implementação-em-python" id="toc-exemplo-de-implementação-em-python" class="nav-link" data-scroll-target="#exemplo-de-implementação-em-python"><span class="header-section-number">10.5</span> Exemplo de Implementação em Python</a></li>
+  <li><a href="#vantagens-e-limitações-do-lalr1" id="toc-vantagens-e-limitações-do-lalr1" class="nav-link" data-scroll-target="#vantagens-e-limitações-do-lalr1"><span class="header-section-number">10.6</span> Vantagens e Limitações do <span class="math inline">\(LALR(1)\)</span></a>
+  <ul class="collapse">
+  <li><a href="#vantagens" id="toc-vantagens" class="nav-link" data-scroll-target="#vantagens"><span class="header-section-number">10.6.1</span> Vantagens</a></li>
+  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">10.6.2</span> Limitações</a></li>
+  </ul></li>
+  <li><a href="#sec-exercicios-LALR1" id="toc-sec-exercicios-LALR1" class="nav-link" data-scroll-target="#sec-exercicios-LALR1"><span class="header-section-number">10.7</span> Exercícios Resolvidos</a>
+  <ul class="collapse">
+  <li><a href="#exercício-a-atribuição-de-l-value-e-r-value" id="toc-exercício-a-atribuição-de-l-value-e-r-value" class="nav-link" data-scroll-target="#exercício-a-atribuição-de-l-value-e-r-value"><span class="header-section-number">10.7.1</span> Exercício A: Atribuição de L-value e R-value</a></li>
+  <li><a href="#exercício-b-compressão-de-estados-similares" id="toc-exercício-b-compressão-de-estados-similares" class="nav-link" data-scroll-target="#exercício-b-compressão-de-estados-similares"><span class="header-section-number">10.7.2</span> Exercício B: Compressão de Estados Similares</a></li>
+  <li><a href="#exercício-c-uma-gramática-que-não-é-lalr1" id="toc-exercício-c-uma-gramática-que-não-é-lalr1" class="nav-link" data-scroll-target="#exercício-c-uma-gramática-que-não-é-lalr1"><span class="header-section-number">10.7.3</span> Exercício C: Uma Gramática que Não é <span class="math inline">\(LALR(1)\)</span></a></li>
+  </ul></li>
+  <li><a href="#síntese-comparativa-final" id="toc-síntese-comparativa-final" class="nav-link" data-scroll-target="#síntese-comparativa-final"><span class="header-section-number">10.8</span> Síntese Comparativa Final</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/09-parserLALR1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./09-parserLALR1.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-parserLALR1" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>No capítulo anterior, deixamos a atenta leitora com uma promessa: apresentar o inspetor Gregson, o detetive metafórico que domina a construção de analisadores sintáticos no mundo real. O <em>Look-Ahead LR</em>, ou <span class="math inline">\(LALR(1)\)</span>, é a ponte definitiva entre a precisão teórica e a viabilidade prática.</p>
+<p>Na nossa delegacia da Scotland Yard, o doutor Watson (nosso <em>parser</em> <span class="math inline">\(LR(1)\)</span> canônico) possui uma precisão impecável, anotando cada pista (o <em>lookahead</em>) em fichas separadas para cada contexto possível. O resultado é um arquivo gigantesco, frequentemente inviável para gramáticas de linguagens reais devido ao consumo de memória. O inspetor Lestrade (nosso <em>parser</em> <span class="math inline">\(SLR(1)\)</span>), por sua vez, usa uma ficha única consolidada por não-terminal (o conjunto <span class="math inline">\(FOLLOW\)</span>). Seu arquivo é compacto, cabendo na mesa de trabalho, mas ele falha em separar contextos sobrepostos, hesitando em momentos nos quais Watson resolveria o caso sem pestanejar.</p>
+<p>É aqui que entra o inspetor Gregson (nosso <em>parser</em> <span class="math inline">\(LALR(1)\)</span>). Ele senta exatamente na mesma mesa que Lestrade, no sentido de que o autômato <span class="math inline">\(LALR(1)\)</span> tem exatamente o mesmo número de estados que o autômato <span class="math inline">\(LR(0)\)</span>, e portanto o mesmo número de linhas que a tabela <span class="math inline">\(SLR(1)\)</span>. No entanto, Gregson utiliza o método de trabalho de Watson: ele anota os <em>lookaheads</em> específicos para cada situação. O método de Gregson é a <strong>fusão</strong>: quando ele percebe que duas fichas de Watson descrevem exatamente a mesma situação sintática, diferindo apenas nos <em>lookaheads</em> esperados, ele grampeia as duas fichas juntas. Ele economiza espaço sem perder o detalhamento do contexto local.</p>
+<p>O resultado é um <em>parser</em> com o tamanho exato do <span class="math inline">\(SLR(1)\)</span> e com quase todo o poder de reconhecimento do <span class="math inline">\(LR(1)\)</span> canônico. Por essa razão, o <span class="math inline">\(LALR(1)\)</span> é o algoritmo base de geradores de parsers industriais históricos, como o yacc e o CUP, e continua sendo o modo padrão do bison, embora o bison moderno também suporte IELR e canonical-lr. Desenvolvido por <a href="https://www.lastingmemories.com/memorial/frank-deremer?lifestory">Frank DeRemer</a> em sua tese de doutorado de 1969 — a mesma que introduziu o <span class="math inline">\(SLR(1)\)</span> —, o método <span class="math inline">\(LALR(1)\)</span> foi a resposta à pergunta central da época: como obter quase todo o poder do <span class="math inline">\(LR(1)\)</span> canônico com o tamanho de tabela do <span class="math inline">\(SLR(1)\)</span>? A resposta, como veremos, está na fusão cuidadosa de estados que compartilham o mesmo núcleo.</p>
+<section id="o-conceito-fundamental-o-núcleo-de-um-estado" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="o-conceito-fundamental-o-núcleo-de-um-estado"><span class="header-section-number">10.1</span> O Conceito Fundamental: O Núcleo de um Estado</h2>
+<p>Para entender como Gregson grampeia as fichas de Watson, a sagaz leitora precisa compreender o conceito de <strong>núcleo</strong> (<em>core</em>) de um estado <span class="math inline">\(LR(1)\)</span>.</p>
+<p>Todo estado <span class="math inline">\(LR(1)\)</span> é um conjunto de itens da forma <span class="math inline">\([A \to \alpha \bullet \beta, a]\)</span>. O núcleo de um estado <span class="math inline">\(LR(1)\)</span> é o conjunto de seus itens de kernel, considerados sem os lookaheads. Em <span class="math inline">\(LALR(1)\)</span>, estados com o mesmo núcleo são candidatos à fusão.</p>
+<p>Considere dois estados hipotéticos de um autômato <span class="math inline">\(LR(1)\)</span>.</p>
+<p><strong>Estado <span class="math inline">\(I_4\)</span></strong>:</p>
+<pre class="bnf"><code>[C → d •, c]
+[C → d •, d]</code></pre>
+<p><strong>Estado <span class="math inline">\(I_7\)</span></strong>:</p>
+<pre class="bnf"><code>[C → d •, $]</code></pre>
+<p>Se removermos os <em>lookaheads</em> (<code>c</code>, <code>d</code> e <code>$</code>), ambos os estados terão exatamente o mesmo núcleo: <span class="math inline">\(\{[C \to d \bullet]\}\)</span>.</p>
+<p>A observação fundamental do <span class="math inline">\(LALR(1)\)</span> é a seguinte: se dois estados <span class="math inline">\(LR(1)\)</span> possuem o mesmo núcleo, eles representam o mesmo contexto sintático no nível <span class="math inline">\(LR(0)\)</span>, diferindo apenas nos lookaheads associados a esse contexto. A única diferença é o que o <em>parser</em> espera encontrar no futuro. Portanto, podemos fundi-los em um único estado, unindo seus <em>lookaheads</em>.</p>
+<p>O estado fundido <span class="math inline">\(I_{47}\)</span> seria:</p>
+<pre class="bnf"><code>[C → d •, c]
+[C → d •, d]
+[C → d •, $]</code></pre>
+<p><strong>Nota</strong>: eventualmente poderemos usar uma notação abreviada <code>[C → d •, c/d/$]</code> para indicar que o item <span class="math inline">\([C \to d \bullet]\)</span> tem os <em>lookaheads</em> <code>c</code>, <code>d</code> e <code>$</code>. Neste caso, a astuta leitora precisa lembrar que o item é um único item com múltiplos <em>lookaheads</em>, e não três itens distintos. O núcleo é o mesmo, mas os <em>lookaheads</em> foram unidos.</p>
+<p>Ao fazer isso para todos os estados com o mesmo núcleo, o autômato <span class="math inline">\(LR(1)\)</span> colossal encolhe até atingir o exato número de estados do autômato <span class="math inline">\(LR(0)\)</span> (e do <span class="math inline">\(SLR(1)\)</span>).</p>
+</section>
+<section id="o-algoritmo-de-construção-lalr1" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="o-algoritmo-de-construção-lalr1"><span class="header-section-number">10.2</span> O Algoritmo de Construção <span class="math inline">\(LALR(1)\)</span></h2>
+<p>Existem métodos para construir a tabela <span class="math inline">\(LALR(1)\)</span> diretamente, propagando <em>lookaheads</em> sem nunca gerar a imensa coleção de estados <span class="math inline">\(LR(1)\)</span>. Ferramentas industriais usam essas técnicas avançadas para economizar memória durante a compilação. No entanto, para fins didáticos, o método mais claro é construir o autômato <span class="math inline">\(LR(1)\)</span> canônico e aplicar a fusão de estados a posteriori. O processo segue três fases distintas.</p>
+<section id="fase-1-construção-da-coleção-lr1-canônica" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="fase-1-construção-da-coleção-lr1-canônica"><span class="header-section-number">10.2.1</span> Fase 1: Construção da Coleção <span class="math inline">\(LR(1)\)</span> Canônica</h3>
+<p>O processo começa exatamente como Watson faria. Construímos a gramática aumentada, calculamos os conjuntos <span class="math inline">\(FIRST\)</span> e geramos a coleção canônica completa de conjuntos de itens <span class="math inline">\(LR(1)\)</span>, utilizando as operações <code>CLOSURE</code> e <code>GOTO</code>, conforme detalhado no Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
+</section>
+<section id="fase-2-fusão-de-estados-com-mesmo-núcleo" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="fase-2-fusão-de-estados-com-mesmo-núcleo"><span class="header-section-number">10.2.2</span> Fase 2: Fusão de Estados com Mesmo Núcleo</h3>
+<p>A atenta leitora deve examinar toda a coleção de estados <span class="math inline">\(LR(1)\)</span>. Agrupamos os estados que possuem exatamente o mesmo núcleo. Para cada grupo, criamos um novo estado fundido. Os itens desse novo estado serão os itens do núcleo, e o <em>lookahead</em> de cada item será a união dos <em>lookaheads</em> dos itens correspondentes nos estados originais.</p>
+<p>Após a fusão, as transições <code>GOTO</code> originais precisam ser redirecionadas. Se havia uma transição do estado <span class="math inline">\(I_i\)</span> para o estado <span class="math inline">\(I_j\)</span> consumindo o símbolo <span class="math inline">\(X\)</span>, e <span class="math inline">\(I_j\)</span> foi fundido no novo estado <span class="math inline">\(I_{jk}\)</span>, a nova transição será de <span class="math inline">\(I_i\)</span> (ou do seu estado fundido) para <span class="math inline">\(I_{jk}\)</span> consumindo <span class="math inline">\(X\)</span>.</p>
+</section>
+<section id="fase-3-construção-da-tabela-action-e-goto" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="fase-3-construção-da-tabela-action-e-goto"><span class="header-section-number">10.2.3</span> Fase 3: Construção da Tabela ACTION e GOTO</h3>
+<p>A construção segue as regras do <span class="math inline">\(LR(1)\)</span>, mas aplicada aos novos estados fundidos:</p>
+<ol type="1">
+<li>se existe um item <span class="math inline">\([A \to \alpha \bullet t \beta, a]\)</span> e a transição com <span class="math inline">\(t\)</span> leva ao estado fundido <span class="math inline">\(J\)</span>, definimos <code>ACTION[I, t] = _shift_ J</code>;</li>
+<li>se existe um item de redução <span class="math inline">\([A \to \alpha \bullet, a]\)</span>, definimos <code>ACTION[I, a] = reduce</code> pela produção <span class="math inline">\(A \to \alpha\)</span>;</li>
+<li>se existe o item de aceitação <span class="math inline">\([S' \to S \bullet, \$]\)</span>, definimos <code>ACTION[I, $] = accept</code>.</li>
+</ol>
+</section>
+<section id="pseudocódigo-do-algoritmo-lalr1-método-de-fusão" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="pseudocódigo-do-algoritmo-lalr1-método-de-fusão"><span class="header-section-number">10.2.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(LALR(1)\)</span> (Método de Fusão)</h3>
+<pre class="pseudocode"><code>ALGORITMO CONSTRUIR_PARSER_LALR1_POR_FUSAO(G)
+
+// ENTRADA: Uma gramática G
+// SAÍDA: As tabelas de parsing LALR(1) ACTION e GOTO
+
+// Fase 1: Construção da Coleção Canônica LR(1)
+1. C_LR1 = CONSTRUIR_COLECAO_CANONICA_LR1(G)
+   // C_LR1 contém os estados I₀, I₁, ..., Iₙ do LR(1) canônico
+
+// Fase 2: Identificação de Núcleos e Fusão
+2. Agrupamentos = {}
+3. PARA CADA estado I em C_LR1:
+4.    Núcleo = EXTRAIR_NUCLEO(I)  // Remove os lookaheads
+5.    SE Núcleo não existe em Agrupamentos:
+6.        Agrupamentos[Núcleo] = {I}
+7.    SENÃO:
+8.        Adicionar I a Agrupamentos[Núcleo]
+9.    FIM SE
+10. FIM PARA
+
+11. C_LALR1 = []
+12. Tabela_Mapeamento = {}  // Mapeia índice original para novo índice fundido
+13. i_novo = 0
+
+14. PARA CADA Núcleo EM Agrupamentos:
+15.    Estados_A_Fundir = Agrupamentos[Núcleo]
+16.    Novo_Estado = FUNDIR_ESTADOS(Estados_A_Fundir)
+17.    C_LALR1[i_novo] = Novo_Estado
+18.    PARA CADA I_original EM Estados_A_Fundir:
+19.        Tabela_Mapeamento[INDICE(I_original)] = i_novo
+20.    FIM PARA
+21.    i_novo = i_novo + 1
+22. FIM PARA
+
+// Fase 3: Atualização do GOTO e Criação da Tabela ACTION/GOTO
+23. PARA CADA novo_estado_idx EM C_LALR1:
+24.    Novo_Estado = C_LALR1[novo_estado_idx]
+25.
+26.    // As transições GOTO seguem o mapeamento
+27.    PARA CADA símbolo X:
+28.        I_orig = PEGAR_QUALQUER_ESTADO_ORIGINAL(Novo_Estado)
+29.        Destino_Orig = GOTO_LR1(I_orig, X)
+30.        SE Destino_Orig não for vazio:
+31.            Destino_Novo = Tabela_Mapeamento[INDICE(Destino_Orig)]
+32.            GOTO_LALR[novo_estado_idx, X] = Destino_Novo
+33.        FIM SE
+34.    FIM PARA
+35.
+36.    // Preencher ACTION usando os lookaheads fundidos
+37.    // (Lógica idêntica ao LR(1), aplicando shift, Reduce e Accept)
+38. FIM PARA
+
+// Funções Auxiliares
+
+39. FUNÇÃO EXTRAIR_NUCLEO(I):
+40.   Núcleo = {}
+41.   PARA CADA item [A → α•β, a] em I:
+42.       SE item é de kernel:
+43.           Adicionar [A → α•β] a Núcleo
+44.       FIM SE
+45.   FIM PARA
+46.   RETORNAR Núcleo
+47. FUNÇÃO FUNDIR_ESTADOS(Estados):
+48.    Fundido = {}
+49.    PARA CADA I em Estados:
+50.        PARA CADA item [A → α•β, a] em I:
+51.            Adicionar [A → α•β, a] a Fundido
+52.        FIM PARA
+53.    FIM PARA
+54.    RETORNAR Fundido  // Itens com mesmo núcleo terão lookaheads unidos</code></pre>
+</section>
+</section>
+<section id="exemplo-guiado-o-resgate-do-estudo-de-caso" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="exemplo-guiado-o-resgate-do-estudo-de-caso"><span class="header-section-number">10.3</span> Exemplo Guiado: O Resgate do Estudo de Caso</h2>
+<p>No Exercício C do Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>, analisamos a gramática:</p>
+<pre class="bnf"><code>0. S' → S
+1. S → C C
+2. C → c C
+3. C → d</code></pre>
+<p>Vimos que o autômato <span class="math inline">\(LR(1)\)</span> canônico gerou <span class="math inline">\(10\)</span> estados (<span class="math inline">\(I_0\)</span> a <span class="math inline">\(I_9\)</span>). O <span class="math inline">\(SLR(1)\)</span> falharia miseravelmente nesta gramática, fundindo transições de forma que causariam conflito <em>reduce-reduce</em>. Vamos observar a abordagem de Gregson em ação.</p>
+<p>Relembremos os estados <span class="math inline">\(LR(1)\)</span> gerados no capítulo anterior, observando com atenção seus núcleos:</p>
+<ul>
+<li><span class="math inline">\(I_0\)</span>: núcleo envolvendo <span class="math inline">\(S'\)</span> e expansões iniciais.</li>
+<li><span class="math inline">\(I_1\)</span>: aceitação.</li>
+<li><span class="math inline">\(I_2\)</span>: primeiro <span class="math inline">\(C\)</span> reconhecido, indo para o segundo.</li>
+<li><strong><span class="math inline">\(I_3\)</span></strong>: núcleo <span class="math inline">\(\{[C \to c \bullet C], [C \to \bullet c C], [C \to \bullet d]\}\)</span>. <em>Lookaheads</em>: <span class="math inline">\(\{c, d\}\)</span>.</li>
+<li><strong><span class="math inline">\(I_4\)</span></strong>: núcleo <span class="math inline">\(\{[C \to d \bullet]\}\)</span>. <em>Lookaheads</em>: <span class="math inline">\(\{c, d\}\)</span>.</li>
+<li><span class="math inline">\(I_5\)</span>: fim do segundo <span class="math inline">\(C\)</span>, redução para <span class="math inline">\(S\)</span>.</li>
+<li><strong><span class="math inline">\(I_6\)</span></strong>: núcleo <span class="math inline">\(\{[C \to c \bullet C], [C \to \bullet c C], [C \to \bullet d]\}\)</span>. <em>Lookaheads</em>: <span class="math inline">\(\{\$\}\)</span>.</li>
+<li><strong><span class="math inline">\(I_7\)</span></strong>: núcleo <span class="math inline">\(\{[C \to d \bullet]\}\)</span>. <em>Lookaheads</em>: <span class="math inline">\(\{\$\}\)</span>.</li>
+<li><strong><span class="math inline">\(I_8\)</span></strong>: núcleo <span class="math inline">\(\{[C \to c C \bullet]\}\)</span>. <em>Lookaheads</em>: <span class="math inline">\(\{c, d\}\)</span>.</li>
+<li><strong><span class="math inline">\(I_9\)</span></strong>: núcleo <span class="math inline">\(\{[C \to c C \bullet]\}\)</span>. <em>Lookaheads</em>: <span class="math inline">\(\{\$\}\)</span>.</li>
+</ul>
+<p>A amável leitora pode notar rapidamente as semelhanças:</p>
+<ol type="1">
+<li>Os estados <span class="math inline">\(I_3\)</span> e <span class="math inline">\(I_6\)</span> têm exatamente o mesmo núcleo. Suas transições representam o processamento do terminal <code>c</code>. Gregson os funde no estado <span class="math inline">\(I_{36}\)</span>, unindo os <em>lookaheads</em> <span class="math inline">\(\{c, d\}\)</span> e <span class="math inline">\(\{\$\}\)</span>, resultando em <span class="math inline">\(\{c, d, \$\}\)</span>.</li>
+<li>Os estados <span class="math inline">\(I_4\)</span> e <span class="math inline">\(I_7\)</span> compartilham o núcleo de redução por <code>C → d</code>. Gregson os funde em <span class="math inline">\(I_{47}\)</span> com <em>lookaheads</em> <span class="math inline">\(\{c, d, \$\}\)</span>.</li>
+<li>Os estados <span class="math inline">\(I_8\)</span> e <span class="math inline">\(I_9\)</span> compartilham o núcleo de redução por <code>C → c C</code>. Gregson os funde em <span class="math inline">\(I_{89}\)</span> com <em>lookaheads</em> <span class="math inline">\(\{c, d, \$\}\)</span>.</li>
+</ol>
+<section id="a-tabela-lalr1-resultante" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="a-tabela-lalr1-resultante"><span class="header-section-number">10.3.1</span> A Tabela <span class="math inline">\(LALR(1)\)</span> Resultante</h3>
+<p>Nossos antigos <span class="math inline">\(10\)</span> estados foram reduzidos para <span class="math inline">\(7\)</span> (o exato tamanho que um autômato <span class="math inline">\(LR(0)\)</span> teria). A nova tabela <code>ACTION/GOTO</code> fica assim:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>c</strong></th>
+<th style="text-align: center;"><strong>d</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>S</strong></th>
+<th style="text-align: center;"><strong>C</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">s36</td>
+<td style="text-align: center;">s47</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">s36</td>
+<td style="text-align: center;">s47</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>36</strong></td>
+<td style="text-align: center;">s36</td>
+<td style="text-align: center;">s47</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">89</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>47</strong></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>89</strong></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Nenhum conflito. Gregson obteve uma tabela compacta, mas preservou contexto suficiente para evitar os conflitos que derrubariam o inspetor Lestrade (<span class="math inline">\(SLR(1)\)</span>).</p>
+</section>
+</section>
+<section id="a-anomalia-quando-o-lalr1-falha" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="a-anomalia-quando-o-lalr1-falha"><span class="header-section-number">10.4</span> A Anomalia: Quando o <span class="math inline">\(LALR(1)\)</span> Falha</h2>
+<p>Mencionamos que o <span class="math inline">\(LALR(1)\)</span> tem quase todo o poder do <span class="math inline">\(LR(1)\)</span> canônico. Em que momento ele falha? A falha ocorre especificamente durante a fusão.</p>
+<p>A fusão de estados de mesmo núcleo <strong>nunca</strong> introduzirá um novo conflito <em>shift-reduce</em>. Se um estado fundido apresenta conflito <em>shift-reduce</em>, é garantido que esse conflito já existia no <span class="math inline">\(LR(1)\)</span> canônico (o que indicaria que a gramática não era <span class="math inline">\(LR(1)\)</span> em primeiro lugar). No entanto, a fusão <strong>pode</strong> introduzir um conflito <em>reduce-reduce</em> que não existia no <span class="math inline">\(LR(1)\)</span> original.</p>
+<p>Vamos resgatar o estudo de caso que encerrou o Capítulo <a href="08-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a>, no qual Lestrade falhava, mas Watson triunfava:</p>
+<pre class="bnf"><code>S → a A d
+S → b B d
+S → a B e
+S → b A e
+A → c
+B → c</code></pre>
+<p>No <span class="math inline">\(LR(1)\)</span> canônico, criamos dois estados diferentes após ler <code>c</code>:</p>
+<p><strong><span class="math inline">\(I_6\)</span></strong> (vindo pelo caminho <code>a</code>):</p>
+<ul>
+<li><span class="math inline">\([A \to c \bullet, d]\)</span></li>
+<li><span class="math inline">\([B \to c \bullet, e]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(I_9\)</span></strong> (vindo pelo caminho <code>b</code>):</p>
+<ul>
+<li><span class="math inline">\([B \to c \bullet, d]\)</span></li>
+<li><span class="math inline">\([A \to c \bullet, e]\)</span></li>
+</ul>
+<p>Em <span class="math inline">\(I_6\)</span>, se o próximo terminal for <code>d</code>, reduzimos para <span class="math inline">\(A\)</span>. Se for <code>e</code>, reduzimos para <span class="math inline">\(B\)</span>. Não há conflito. Em <span class="math inline">\(I_9\)</span>, se o próximo terminal for <code>d</code>, reduzimos para <span class="math inline">\(B\)</span>. Se for <code>e</code>, reduzimos para <span class="math inline">\(A\)</span>. Não há conflito. Watson processa esta gramática perfeitamente.</p>
+<p>Agora, entregue as fichas de <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span> para Gregson. Ele perceberá que os núcleos são rigorosamente os mesmos: <span class="math inline">\(\{[A \to c \bullet], [B \to c \bullet]\}\)</span>. Ele grampeará as fichas, fundindo os estados no novo estado <span class="math inline">\(I_{69}\)</span>:</p>
+<ul>
+<li><span class="math inline">\([A \to c \bullet, d/e]\)</span> (união dos <em>lookaheads</em> de <span class="math inline">\(A\)</span> em <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span>);</li>
+<li><span class="math inline">\([B \to c \bullet, d/e]\)</span> (união dos <em>lookaheads</em> de <span class="math inline">\(B\)</span> em <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span>).</li>
+</ul>
+<p>O problema se materializa aqui. No estado <span class="math inline">\(I_{69}\)</span>, se o próximo símbolo for <code>d</code>, o <em>parser</em> deve reduzir para <span class="math inline">\(A\)</span> ou para <span class="math inline">\(B\)</span>? É um conflito <em>reduce-reduce</em> criado artificialmente pelo ato de fundir os <em>lookaheads</em>. A gramática do exemplo é <span class="math inline">\(LR(1)\)</span>, mas <strong>não</strong> é <span class="math inline">\(LALR(1)\)</span>. Podemos definir a relação entre os conjuntos de gramáticas matematicamente:</p>
+<p><span class="math display">\[LALR(1) \subsetneq LR(1)\]</span></p>
+<p>Felizmente, situações simétricas cruzadas como essa são raras em linguagens de programação projetadas para uso em produção. É por isso que a abordagem do <span class="math inline">\(LALR(1)\)</span> atende à maioria esmagadora das necessidades práticas.</p>
+</section>
+<section id="exemplo-de-implementação-em-python" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="exemplo-de-implementação-em-python"><span class="header-section-number">10.5</span> Exemplo de Implementação em Python</h2>
+<p>Para materializar o conceito, vamos adaptar nosso gerador de <em>parsers</em>. A classe <code>LALR1Parser</code> herda a lógica de construção dos estados canônicos, mas aplica a rotina de agrupamento e fusão antes de construir a tabela <code>ACTION/GOTO</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Tuple, Dict, Set</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span>(frozen<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LR1Item:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    lhs: <span class="bu">str</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    before_dot: <span class="bu">tuple</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    after_dot: <span class="bu">tuple</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    lookahead: <span class="bu">str</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> core(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">tuple</span>:</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Retorna uma representação do núcleo (sem o lookahead)"""</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="va">self</span>.lhs, <span class="va">self</span>.before_dot, <span class="va">self</span>.after_dot)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        before <span class="op">=</span> <span class="st">' '</span>.join(<span class="va">self</span>.before_dot) <span class="cf">if</span> <span class="va">self</span>.before_dot <span class="cf">else</span> <span class="st">''</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        after <span class="op">=</span> <span class="st">' '</span>.join(<span class="va">self</span>.after_dot) <span class="cf">if</span> <span class="va">self</span>.after_dot <span class="cf">else</span> <span class="st">''</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f"[</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>lhs<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>before<span class="sc">}</span><span class="ss">•</span><span class="sc">{</span>after<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>lookahead<span class="sc">}</span><span class="ss">]"</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Production:</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    lhs: <span class="bu">str</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    rhs: <span class="bu">tuple</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LALR1Parser:</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.grammar <span class="op">=</span> {}</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.terminals <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.nonterminals <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.start_symbol <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.original_start <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.productions <span class="op">=</span> []</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lr1_states <span class="op">=</span> []</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lalr_states <span class="op">=</span> []</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.state_mapping <span class="op">=</span> {}</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.action_table <span class="op">=</span> {}</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.goto_table <span class="op">=</span> {}</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Métodos base de gramática, FIRST e CLOSURE omitidos por concisão.</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># A implementação é idêntica à apresentada no capítulo de LR(1).</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> extract_core_from_state(<span class="va">self</span>, state: Set[LR1Item]) <span class="op">-&gt;</span> <span class="bu">frozenset</span>:</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Extrai o núcleo de um estado LR(1) como um frozenset </span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">        para usar como chave"""</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>        cores <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> state:</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>            cores.add(item.core())</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">frozenset</span>(cores)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> merge_states(<span class="va">self</span>, states_to_merge: List[Set[LR1Item]]) <span class="op">-&gt;</span> Set[LR1Item]:</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Funde múltiplos estados LR(1) combinando seus lookaheads"""</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>        merged <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>        core_to_lookaheads <span class="op">=</span> {}</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> state <span class="kw">in</span> states_to_merge:</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> state:</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>                c <span class="op">=</span> item.core()</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> core_to_lookaheads:</span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>                    core_to_lookaheads[c] <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>                core_to_lookaheads[c].add(item.lookahead)</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c, lookaheads <span class="kw">in</span> core_to_lookaheads.items():</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> la <span class="kw">in</span> lookaheads:</span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>                merged.add(LR1Item(</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>                    lhs<span class="op">=</span>c[<span class="dv">0</span>], </span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>                    before_dot<span class="op">=</span>c[<span class="dv">1</span>], </span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>                    after_dot<span class="op">=</span>c[<span class="dv">2</span>], </span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>                    lookahead<span class="op">=</span>la</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>                ))</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> merged</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> build_lalr_states(<span class="va">self</span>):</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Constrói estados LALR(1) a partir dos estados LR(1) pré-calculados"""</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>        core_groups <span class="op">=</span> {}</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> idx, state <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.lr1_states):</span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>            c_key <span class="op">=</span> <span class="va">self</span>.extract_core_from_state(state)</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> c_key <span class="kw">not</span> <span class="kw">in</span> core_groups:</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>                core_groups[c_key] <span class="op">=</span> []</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>            core_groups[c_key].append((idx, state))</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>        new_idx <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c_key, group <span class="kw">in</span> core_groups.items():</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>            states_only <span class="op">=</span> [s <span class="cf">for</span> idx, s <span class="kw">in</span> group]</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>            merged_state <span class="op">=</span> <span class="va">self</span>.merge_states(states_only)</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.lalr_states.append(merged_state)</span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> original_idx, _ <span class="kw">in</span> group:</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.state_mapping[original_idx] <span class="op">=</span> new_idx</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>            new_idx <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> build_parsing_table(<span class="va">self</span>):</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>        <span class="co">"""Constrói tabela ACTION e GOTO para o autômato LALR(1)"""</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>        conflicts <span class="op">=</span> []</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, state <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.lalr_states):</span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> item <span class="kw">in</span> state:</span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> item.after_dot:</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>                    symbol <span class="op">=</span> item.after_dot[<span class="dv">0</span>]</span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> symbol <span class="kw">in</span> <span class="va">self</span>.terminals:</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>                        original_idx <span class="op">=</span> <span class="bu">next</span>(</span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>                            k <span class="cf">for</span> k, v <span class="kw">in</span> <span class="va">self</span>.state_mapping.items() <span class="cf">if</span> v <span class="op">==</span> i</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>                        original_state <span class="op">=</span> <span class="va">self</span>.lr1_states[original_idx]</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>                        goto_orig <span class="op">=</span> <span class="va">self</span>.goto(original_state, symbol)</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">if</span> goto_orig <span class="kw">in</span> <span class="va">self</span>.lr1_states:</span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>                            orig_dest_idx <span class="op">=</span> <span class="va">self</span>.lr1_states.index(goto_orig)</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>                            lalr_dest_idx <span class="op">=</span> <span class="va">self</span>.state_mapping[orig_dest_idx]</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>                            key <span class="op">=</span> (i, symbol)</span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">if</span> (key <span class="kw">in</span> <span class="va">self</span>.action_table <span class="kw">and</span> </span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.action_table[key][<span class="dv">0</span>] <span class="op">==</span> <span class="st">'reduce'</span>):</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>                                conflicts.append(</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>                                    <span class="ss">f"Conflito S/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>                                    <span class="ss">f"símbolo </span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>                                )</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>                            <span class="va">self</span>.action_table[key] <span class="op">=</span> (<span class="st">'shift'</span>, lalr_dest_idx)</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> (item.lhs <span class="op">==</span> <span class="va">self</span>.start_symbol <span class="kw">and</span> </span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a>                        item.before_dot <span class="op">==</span> (<span class="va">self</span>.original_start,) <span class="kw">and</span> </span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>                        item.lookahead <span class="op">==</span> <span class="st">'$'</span>):</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a>                        <span class="va">self</span>.action_table[(i, <span class="st">'$'</span>)] <span class="op">=</span> (<span class="st">'accept'</span>, <span class="va">None</span>)</span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">else</span>:</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">for</span> prod_idx, prod <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.productions):</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>                            <span class="cf">if</span> (prod.lhs <span class="op">==</span> item.lhs <span class="kw">and</span> </span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>                                prod.rhs <span class="op">==</span> item.before_dot):</span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>                                key <span class="op">=</span> (i, item.lookahead)</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>                                action <span class="op">=</span> (<span class="st">'reduce'</span>, prod_idx)</span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">if</span> key <span class="kw">in</span> <span class="va">self</span>.action_table:</span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a>                                    existing <span class="op">=</span> <span class="va">self</span>.action_table[key]</span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>                                    <span class="cf">if</span> existing[<span class="dv">0</span>] <span class="op">==</span> <span class="st">'shift'</span>:</span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>                                        conflicts.append(</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>                                            <span class="ss">f"Conflito S/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a>                                        )</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a>                                        <span class="cf">continue</span></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a>                                    <span class="cf">elif</span> existing <span class="op">!=</span> action:</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a>                                        conflicts.append(</span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a>                                            <span class="ss">f"Conflito R/R em estado </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">, "</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>                                            <span class="ss">f"símbolo </span><span class="sc">{</span>item<span class="sc">.</span>lookahead<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>                                        )</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>                                        <span class="cf">continue</span></span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a>                                <span class="va">self</span>.action_table[key] <span class="op">=</span> action</span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">break</span></span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> symbol <span class="kw">in</span> <span class="va">self</span>.nonterminals:</span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>                original_idx <span class="op">=</span> <span class="bu">next</span>(</span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>                    k <span class="cf">for</span> k, v <span class="kw">in</span> <span class="va">self</span>.state_mapping.items() <span class="cf">if</span> v <span class="op">==</span> i</span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a>                original_state <span class="op">=</span> <span class="va">self</span>.lr1_states[original_idx]</span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>                goto_orig <span class="op">=</span> <span class="va">self</span>.goto(original_state, symbol)</span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> goto_orig <span class="kw">in</span> <span class="va">self</span>.lr1_states:</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>                    orig_dest_idx <span class="op">=</span> <span class="va">self</span>.lr1_states.index(goto_orig)</span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>                    lalr_dest_idx <span class="op">=</span> <span class="va">self</span>.state_mapping[orig_dest_idx]</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>                    <span class="va">self</span>.goto_table[(i, symbol)] <span class="op">=</span> lalr_dest_idx</span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> conflicts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="vantagens-e-limitações-do-lalr1" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="vantagens-e-limitações-do-lalr1"><span class="header-section-number">10.6</span> Vantagens e Limitações do <span class="math inline">\(LALR(1)\)</span></h2>
+<p>A presente seção analisa a posição do método <span class="math inline">\(LALR(1)\)</span> no ecossistema de compiladores, ancorando cada ponto em situações concretas observadas na prática.</p>
+<section id="vantagens" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="vantagens"><span class="header-section-number">10.6.1</span> Vantagens</h3>
+<ol type="1">
+<li><p><strong>Tabelas excepcionalmente compactas</strong>: como a atenta leitora pôde deduzir, o número de estados gerados é idêntico ao de um <em>parser</em> <span class="math inline">\(LR(0)\)</span> ou <span class="math inline">\(SLR(1)\)</span>. Em um compilador de C, por exemplo, o <span class="math inline">\(LR(1)\)</span> canônico exigiria dezenas de milhares de estados e consumiria memória considerável. O <span class="math inline">\(LALR(1)\)</span> resolve o mesmo problema com apenas algumas centenas de estados, um volume que pode ser mantido facilmente em matrizes de dados estáticos embutidas no executável.</p></li>
+<li><p><strong>Poder superior ao <span class="math inline">\(SLR(1)\)</span></strong>: ao manter a granularidade dos <em>lookaheads</em> fundidos, a esmagadora maioria dos conflitos espúrios (como os conflitos <em>reduce-reduce</em>) causados pelo uso excessivo do conjunto global <span class="math inline">\(FOLLOW\)</span> desaparece. O exemplo clássico é a gramática de atribuições a <em>lvalues</em> não triviais (<code>S → L = R | R; L → * R | id; R → L</code>), que é <span class="math inline">\(LALR(1)\)</span> mas não <span class="math inline">\(SLR(1)\)</span>, como veremos no Exercício A a seguir.</p></li>
+<li><p><strong>Padrão da indústria</strong>: boa parte da tradição de projeto de gramáticas em ferramentas como <code>yacc</code>, <code>CUP</code> e, por padrão, <code>bison</code>, foi moldada pelo modelo <span class="math inline">\(LALR(1)\)</span>, embora ferramentas modernas também ofereçam variantes mais poderosas. O aprendizado desta técnica possui aplicação prática imediata no desenvolvimento de <em>software</em>. Gramáticas práticas de <strong>C</strong> em <code>bison</code> costumam caber em algumas centenas de estados <span class="math inline">\(LALR(1)\)</span>, dependendo da codificação exata da gramática, viabilizando compiladores inteiros em arquiteturas com restrições severas de memória.</p></li>
+</ol>
+</section>
+<section id="limitações" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="limitações"><span class="header-section-number">10.6.2</span> Limitações</h3>
+<ol type="1">
+<li><p><strong>Mensagens de erro menos precisas</strong>: como os estados fundem múltiplos caminhos derivacionais, determinar o exato motivo sintático de uma falha na entrada pode ser complexo. O <em>parser</em> <span class="math inline">\(LALR(1)\)</span> perde o detalhamento isolado de transições que o <span class="math inline">\(LR(1)\)</span> possui, o que explica por que mensagens de erro de <code>yacc</code>/<code>bison</code> sobre “<em>syntax error, unexpected X</em>” nem sempre indicam com precisão qual regra foi violada.</p></li>
+<li><p><strong>Introdução de conflitos <em>reduce-reduce</em></strong>: como demonstramos na seção sobre anomalias, se a gramática possuir ambiguidades cruzadas dependentes de contextos opostos, a fusão causará colisões. Em geral, se um projeto relata falhas do tipo <em>reduce-reduce conflict</em>, a solução envolve refatorar as regras gramaticais para contornar essa anomalia estrutural, e não mudar o método de parsing.</p></li>
+<li><p><strong>Construção via <span class="math inline">\(LR(1)\)</span> canônico é custosa</strong>: o método didático apresentado neste capítulo constrói primeiro o autômato <span class="math inline">\(LR(1)\)</span> completo e depois funde estados, o que mantém o custo de construção proporcional ao do <span class="math inline">\(LR(1)\)</span> canônico. Ferramentas industriais empregam algoritmos de propagação direta de <em>lookaheads</em> (como o algoritmo de DeRemer e Pennello de 1982) que nunca materializam o autômato <span class="math inline">\(LR(1)\)</span> intermediário, construindo o <span class="math inline">\(LALR(1)\)</span> diretamente a partir do autômato <span class="math inline">\(LR(0)\)</span>.</p></li>
+</ol>
+</section>
+</section>
+<section id="sec-exercicios-LALR1" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="sec-exercicios-LALR1"><span class="header-section-number">10.7</span> Exercícios Resolvidos</h2>
+<p>A seguir, a sagaz leitora encontrará exercícios detalhados que solidificam a teoria do <span class="math inline">\(LALR(1)\)</span>, resolvidos passo a passo com o mesmo roteiro estabelecido nos capítulos anteriores.</p>
+<section id="exercício-a-atribuição-de-l-value-e-r-value" class="level3" data-number="10.7.1">
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="exercício-a-atribuição-de-l-value-e-r-value"><span class="header-section-number">10.7.1</span> Exercício A: Atribuição de L-value e R-value</h3>
+<p><strong>Enunciado</strong>: a gramática abaixo é o exemplo fundamental utilizado para demonstrar por que o <span class="math inline">\(SLR(1)\)</span> é insuficiente para linguagens de programação reais, exigindo a intervenção do <span class="math inline">\(LALR(1)\)</span>. Trata-se da atribuição de valores para variáveis simples e ponteiros desreferenciados, fortemente inspirada na sintaxe de C:</p>
+<pre class="bnf"><code>1. S → L = R
+2. S → R
+3. L → * R
+4. L → id
+5. R → L</code></pre>
+<p>Esta gramática permite expressões perfeitamente válidas como <code>*id = id</code>. Demonstre, passo a passo, por que esta gramática falha no <span class="math inline">\(SLR(1)\)</span> mas pertence à classe <span class="math inline">\(LALR(1)\)</span>.</p>
+<section id="a.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="10.7.1.1">
+<h4 data-number="10.7.1.1" class="anchored" data-anchor-id="a.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">10.7.1.1</span> A.1. Gramática Aumentada e Conjuntos</h4>
+<pre class="bnf"><code>0. S' → S
+1. S → L = R
+2. S → R
+3. L → * R
+4. L → id
+5. R → L</code></pre>
+<p>Terminais: <span class="math inline">\(\{=, *, \text{id}, \$\}\)</span>. Não-terminais: <span class="math inline">\(\{S', S, L, R\}\)</span>.</p>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(L) = \{*, \text{id}\}\)</span></li>
+<li><span class="math inline">\(FIRST(R) = FIRST(L) = \{*, \text{id}\}\)</span></li>
+<li><span class="math inline">\(FIRST(S) = FIRST(L) \cup FIRST(R) = \{*, \text{id}\}\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(FOLLOW\)</span></strong> (essencial para entender a falha do <span class="math inline">\(SLR(1)\)</span>):</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(S') = \{\$\}\)</span>, logo <span class="math inline">\(\$ \in FOLLOW(S)\)</span>.</li>
+<li>Da produção <code>S → L = R</code>: <span class="math inline">\(= \,\in FOLLOW(L)\)</span>.</li>
+<li>Da produção <code>R → L</code>: <span class="math inline">\(FOLLOW(R) \subseteq FOLLOW(L)\)</span>, e reciprocamente <span class="math inline">\(FOLLOW(L) \subseteq FOLLOW(R)\)</span> não se aplica aqui.</li>
+<li>Da produção <code>L → * R</code>: <span class="math inline">\(FOLLOW(L) \subseteq FOLLOW(R)\)</span>.</li>
+<li>Da produção <code>S → R</code>: <span class="math inline">\(FOLLOW(S) \subseteq FOLLOW(R)\)</span>, logo <span class="math inline">\(\$ \in FOLLOW(R)\)</span>.</li>
+</ul>
+<p>Após estabilização:</p>
+<ul>
+<li><span class="math inline">\(FOLLOW(L) = \{=, \$\}\)</span></li>
+<li><span class="math inline">\(FOLLOW(R) = \{=, \$\}\)</span></li>
+</ul>
+<p>A sagaz leitora deve reter este resultado: <span class="math inline">\(= \,\in FOLLOW(R)\)</span>, justamente o terminal que causará problema para Lestrade.</p>
+</section>
+<section id="a.2.-autômato-lr1-e-a-falha-oculta-do-slr1" class="level4" data-number="10.7.1.2">
+<h4 data-number="10.7.1.2" class="anchored" data-anchor-id="a.2.-autômato-lr1-e-a-falha-oculta-do-slr1"><span class="header-section-number">10.7.1.2</span> A.2. Autômato <span class="math inline">\(LR(1)\)</span> e a Falha Oculta do <span class="math inline">\(SLR(1)\)</span></h4>
+<p>A construção do estado <span class="math inline">\(I_0\)</span> inicia com <span class="math inline">\([S' \to \bullet S, \$]\)</span>. Ao expandir <span class="math inline">\([S \to \bullet L = R, \$]\)</span>, o <em>lookahead</em> para as produções de <span class="math inline">\(L\)</span> é calculado a partir de <span class="math inline">\(FIRST(= R\, \$)\)</span>, que resulta em <span class="math inline">\(\{=\}\)</span>. Ao expandir <span class="math inline">\([S \to \bullet R, \$]\)</span>, o <em>lookahead</em> para as produções de <span class="math inline">\(R\)</span> é <span class="math inline">\(\{\$\}\)</span>. E como <span class="math inline">\(R \to \bullet L\)</span>, o <em>lookahead</em> para as produções de <span class="math inline">\(L\)</span> derivadas de <span class="math inline">\(R\)</span> é <span class="math inline">\(\{\$\}\)</span>.</p>
+<p>Portanto, em <span class="math inline">\(I_0\)</span>, temos as produções de <span class="math inline">\(L\)</span> e <span class="math inline">\(R\)</span> com <em>lookaheads</em> estritamente controlados:</p>
+<pre class="bnf"><code>[S' → • S, $]
+[S → • L = R, $]
+[S → • R, $]
+[L → • * R, =/$]
+[L → • id, =/$]
+[R → • L, $]</code></pre>
+<p>Ao consumirmos <code>id</code> e completarmos a transição via <span class="math inline">\(L\)</span>, o <em>parser</em> transitará para um estado <span class="math inline">\(I_2\)</span> com os seguintes itens:</p>
+<pre class="bnf"><code>[S → L • = R, $]
+[R → L •, $]</code></pre>
+<p>Observe atentamente o estado <span class="math inline">\(I_2\)</span>. Se estivéssemos operando com o inspetor Lestrade (<span class="math inline">\(SLR(1)\)</span>), a redução <code>R → L</code> consultaria o conjunto <span class="math inline">\(FOLLOW(R) = \{=, \$\}\)</span>, que contém o terminal <code>=</code>. O <span class="math inline">\(SLR(1)\)</span> tentaria executar <em>reduce</em> diante do símbolo <code>=</code>, enquanto o item de <em>shift</em> <span class="math inline">\([S \to L \bullet = R]\)</span> exigiria empilhar o mesmo símbolo. O resultado seria um conflito <em>shift-reduce</em> intransponível para o <span class="math inline">\(SLR(1)\)</span>.</p>
+<p>No <span class="math inline">\(LALR(1)\)</span> (assim como no <span class="math inline">\(LR(1)\)</span> original), o estado <span class="math inline">\(I_2\)</span> apresenta <em>lookaheads</em> limitados. O item de redução <span class="math inline">\([R \to L \bullet, \$]\)</span> possui especificamente o <em>lookahead</em> <span class="math inline">\(\{\$\}\)</span>, e não o terminal <code>=</code>. Por isso não há conflito: a célula <code>ACTION[2, =]</code> recebe apenas <em>shift</em>, e a célula <code>ACTION[2, $]</code> recebe apenas <em>reduce</em>.</p>
+</section>
+<section id="a.3.-fusão-e-tabela-lalr1" class="level4" data-number="10.7.1.3">
+<h4 data-number="10.7.1.3" class="anchored" data-anchor-id="a.3.-fusão-e-tabela-lalr1"><span class="header-section-number">10.7.1.3</span> A.3. Fusão e Tabela <span class="math inline">\(LALR(1)\)</span></h4>
+<p>A construção completa do autômato <span class="math inline">\(LR(1)\)</span> canônico para esta gramática gera <span class="math inline">\(10\)</span> estados. Após a fusão por núcleo, nenhum par de estados é fundido (os núcleos são todos distintos), de modo que a tabela <span class="math inline">\(LALR(1)\)</span> coincide com a tabela <span class="math inline">\(LR(1)\)</span> canônica para esta gramática. A atenta leitora deve notar que esse é o caso mais benéfico: a gramática é <span class="math inline">\(LR(1)\)</span> canônica, <span class="math inline">\(LALR(1)\)</span> sem fusão que altere poder de reconhecimento, mas <strong>não</strong> é <span class="math inline">\(SLR(1)\)</span>, demonstrando que a distinção entre <span class="math inline">\(SLR(1)\)</span> e <span class="math inline">\(LALR(1)\)</span> não está no tamanho da tabela — que aqui é idêntico — e sim na precisão com que cada método calcula os <em>lookaheads</em> a partir do autômato <span class="math inline">\(LR(0)\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>=</strong></th>
+<th style="text-align: center;"><strong>*</strong></th>
+<th style="text-align: center;"><strong>id</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>S</strong></th>
+<th style="text-align: center;"><strong>L</strong></th>
+<th style="text-align: center;"><strong>R</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">s6</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r4</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s4</td>
+<td style="text-align: center;">s5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r5</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Nenhum conflito. A gramática é reconhecida com sucesso pelo <span class="math inline">\(LALR(1)\)</span>.</p>
+</section>
+<section id="a.4.-verificação-da-string-idid" class="level4" data-number="10.7.1.4">
+<h4 data-number="10.7.1.4" class="anchored" data-anchor-id="a.4.-verificação-da-string-idid"><span class="header-section-number">10.7.1.4</span> A.4. Verificação da <em>String</em> <code>*id=id</code></h4>
+<p>A derivação à direita reversa processada é <span class="math inline">\(S \Rightarrow L = R \Rightarrow L = L \Rightarrow L = \text{id} \Rightarrow *R = \text{id} \Rightarrow *L = \text{id} \Rightarrow *\text{id} = \text{id}\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>*id=id$</code></td>
+<td style="text-align: left;"><code>ACTION[0,*] = s4</code>. Empilha 4.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,4]</code></td>
+<td style="text-align: left;"><code>id=id$</code></td>
+<td style="text-align: left;"><code>ACTION[4,id] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,4,5]</code></td>
+<td style="text-align: left;"><code>=id$</code></td>
+<td style="text-align: left;"><code>ACTION[5,=] = r4</code> (<code>L → id</code>). Desempilha 1. <code>GOTO[4,L] = 8</code>. Empilha 8.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,4,8]</code></td>
+<td style="text-align: left;"><code>=id$</code></td>
+<td style="text-align: left;"><code>ACTION[8,=] = r5</code> (<code>R → L</code>). Desempilha 1. <code>GOTO[4,R] = 7</code>. Empilha 7.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,4,7]</code></td>
+<td style="text-align: left;"><code>=id$</code></td>
+<td style="text-align: left;"><code>ACTION[7,=] = r3</code> (<code>L → * R</code>). Desempilha 2. <code>GOTO[0,L] = 2</code>. Empilha 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>=id$</code></td>
+<td style="text-align: left;"><code>ACTION[2,=] = s6</code>. Empilha 6.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;"><code>[0,2,6]</code></td>
+<td style="text-align: left;"><code>id$</code></td>
+<td style="text-align: left;"><code>ACTION[6,id] = s5</code>. Empilha 5.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: left;"><code>[0,2,6,5]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[5,$] = r4</code> (<code>L → id</code>). Desempilha 1. <code>GOTO[6,L] = 8</code>. Empilha 8.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: left;"><code>[0,2,6,8]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[8,$] = r5</code> (<code>R → L</code>). Desempilha 1. <code>GOTO[6,R] = 9</code>. Empilha 9.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>[0,2,6,9]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[9,$] = r1</code> (<code>S → L = R</code>). Desempilha 3. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>A execução transcorre sem falhas. O detalhe fundamental ocorre no passo 6, no qual o conhecimento específico de que <code>=</code> deve gerar a ação de <em>shift</em> encontra-se isolado em <span class="math inline">\(I_2\)</span>, impedindo uma redução incorreta na qual a sintaxe quebraria. É exatamente esse refinamento de <em>lookahead</em> por estado que distingue Gregson de Lestrade.</p>
+</section>
+</section>
+<section id="exercício-b-compressão-de-estados-similares" class="level3" data-number="10.7.2">
+<h3 data-number="10.7.2" class="anchored" data-anchor-id="exercício-b-compressão-de-estados-similares"><span class="header-section-number">10.7.2</span> Exercício B: Compressão de Estados Similares</h3>
+<p><strong>Enunciado</strong>: demonstre a capacidade do <span class="math inline">\(LALR(1)\)</span> de comprimir estados em uma linguagem na qual os contextos envolventes diferem, mas a estrutura interna é idêntica. Considere a simulação de fechamento de aspas simples e duplas:</p>
+<pre class="bnf"><code>1. S → ' A '
+2. S → " A "
+3. A → a</code></pre>
+<p>Construa o autômato <span class="math inline">\(LR(1)\)</span> canônico, identifique os núcleos comuns, aplique a fusão e gere a tabela <span class="math inline">\(LALR(1)\)</span>. Verifique as <em>strings</em> <code>'a'</code> e <code>"a"</code>.</p>
+<section id="b.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="10.7.2.1">
+<h4 data-number="10.7.2.1" class="anchored" data-anchor-id="b.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">10.7.2.1</span> B.1. Gramática Aumentada e Conjuntos</h4>
+<pre class="bnf"><code>0. S' → S
+1. S → ' A '
+2. S → " A "
+3. A → a</code></pre>
+<p>Terminais: <span class="math inline">\(\{', ", a, \$\}\)</span>. Não-terminais: <span class="math inline">\(\{S', S, A\}\)</span>.</p>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(A) = \{a\}\)</span></li>
+<li><span class="math inline">\(FIRST(S) = \{', "\}\)</span></li>
+</ul>
+</section>
+<section id="b.2.-estados-lr1-canônicos" class="level4" data-number="10.7.2.2">
+<h4 data-number="10.7.2.2" class="anchored" data-anchor-id="b.2.-estados-lr1-canônicos"><span class="header-section-number">10.7.2.2</span> B.2. Estados <span class="math inline">\(LR(1)\)</span> Canônicos</h4>
+<p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([S' \to \bullet S, \$]\)</span>, mais o fechamento:</p>
+<ul>
+<li><span class="math inline">\([S' \to \bullet S, \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet ' A ', \$]\)</span></li>
+<li><span class="math inline">\([S \to \bullet " A ", \$]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, S) = I_1\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S' \to S \bullet, \$]\)</span> (<em>aceitação</em>)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, ') = I_2\)</span></strong>: núcleo <span class="math inline">\([S \to ' \bullet A ', \$]\)</span>, com fechamento de <span class="math inline">\(A\)</span> usando <span class="math inline">\(FIRST(' \$) = \{'\}\)</span>:</p>
+<ul>
+<li><span class="math inline">\([S \to ' \bullet A ', \$]\)</span></li>
+<li><span class="math inline">\([A \to \bullet a, ']\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_0, ") = I_3\)</span></strong>: núcleo <span class="math inline">\([S \to " \bullet A ", \$]\)</span>, com fechamento análogo:</p>
+<ul>
+<li><span class="math inline">\([S \to " \bullet A ", \$]\)</span></li>
+<li><span class="math inline">\([A \to \bullet a, "]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, A) = I_4\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to ' A \bullet ', \$]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_2, a) = I_5\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([A \to a \bullet, ']\)</span> (<em>redução</em>, regra 3)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_3, A) = I_6\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to " A \bullet ", \$]\)</span></li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_3, a) = I_7\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([A \to a \bullet, "]\)</span> (<em>redução</em>, regra 3)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_4, ') = I_8\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to ' A ' \bullet, \$]\)</span> (<em>redução</em>, regra 1)</li>
+</ul>
+<p><strong><span class="math inline">\(GOTO(I_6, ") = I_9\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\([S \to " A " \bullet, \$]\)</span> (<em>redução</em>, regra 2)</li>
+</ul>
+<p>A coleção canônica <span class="math inline">\(LR(1)\)</span> tem <span class="math inline">\(10\)</span> estados.</p>
+</section>
+<section id="b.3.-a-compressão-lalr1" class="level4" data-number="10.7.2.3">
+<h4 data-number="10.7.2.3" class="anchored" data-anchor-id="b.3.-a-compressão-lalr1"><span class="header-section-number">10.7.2.3</span> B.3. A Compressão <span class="math inline">\(LALR(1)\)</span></h4>
+<p>Observemos os núcleos dos estados candidatos à fusão:</p>
+<ul>
+<li>Núcleo de <span class="math inline">\(I_5\)</span>: <span class="math inline">\(\{[A \to a \bullet]\}\)</span></li>
+<li>Núcleo de <span class="math inline">\(I_7\)</span>: <span class="math inline">\(\{[A \to a \bullet]\}\)</span></li>
+</ul>
+<p>Como os núcleos são estritamente iguais, Gregson os funde em um estado singular <span class="math inline">\(I_{57}\)</span> que conterá o item <span class="math inline">\([A \to a \bullet, '/"]\)</span>.</p>
+<p>Os demais estados (<span class="math inline">\(I_0, I_1, I_2, I_3, I_4, I_6, I_8, I_9\)</span>) possuem núcleos todos distintos entre si e não são fundidos. O autômato <span class="math inline">\(LALR(1)\)</span> tem portanto <span class="math inline">\(9\)</span> estados, um a menos que o <span class="math inline">\(LR(1)\)</span> canônico.</p>
+<p>O inspetor Gregson percebe que, para o processamento do não-terminal <span class="math inline">\(A\)</span>, é irrelevante se a estrutura foi aberta com aspas simples ou duplas; a redução da regra opera o lado direito de maneira independente. Essa otimização, pequena neste exemplo didático, escala de forma considerável em linguagens reais: em gramáticas nas quais uma mesma estrutura interna aparece em múltiplos contextos envolventes (expressões dentro de parênteses vs.&nbsp;colchetes vs.&nbsp;chaves, por exemplo), a fusão pode eliminar centenas de estados redundantes sem perda de poder.</p>
+</section>
+<section id="b.4.-tabela-lalr1" class="level4" data-number="10.7.2.4">
+<h4 data-number="10.7.2.4" class="anchored" data-anchor-id="b.4.-tabela-lalr1"><span class="header-section-number">10.7.2.4</span> B.4. Tabela <span class="math inline">\(LALR(1)\)</span></h4>
+<p>Renumeramos os estados após a fusão, mantendo índices contíguos:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Estado</th>
+<th style="text-align: center;"><strong>’</strong></th>
+<th style="text-align: center;"><strong>“</strong></th>
+<th style="text-align: center;"><strong>a</strong></th>
+<th style="text-align: center;"><strong>$</strong></th>
+<th style="text-align: center;"><strong>S</strong></th>
+<th style="text-align: center;"><strong>A</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">s2</td>
+<td style="text-align: center;">s3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">acc</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s57</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s57</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;">s8</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>57</strong></td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;">r3</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>6</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">s9</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>8</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>9</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">r2</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>A atenta leitora deve notar que a célula <code>ACTION[57, ']</code> contém <code>r3</code> e <code>ACTION[57, "]</code> também contém <code>r3</code>. Isso é correto e não gera conflito: ambos os <em>lookaheads</em> <span class="math inline">\('\)</span> e <span class="math inline">\("\)</span> apontam para a mesma redução (regra 3), porque a união dos <em>lookaheads</em> durante a fusão apenas acumula os terminais que podem legitimamente seguir o item, sem mudar a produção reduzida.</p>
+<p>Nenhum conflito. A gramática é <span class="math inline">\(LALR(1)\)</span>, e na verdade é também <span class="math inline">\(LR(1)\)</span> canônica, <span class="math inline">\(SLR(1)\)</span> e até <span class="math inline">\(LR(0)\)</span> — sua simplicidade permite que todos os métodos funcionem.</p>
+</section>
+<section id="b.5.-verificação-das-strings" class="level4" data-number="10.7.2.5">
+<h4 data-number="10.7.2.5" class="anchored" data-anchor-id="b.5.-verificação-das-strings"><span class="header-section-number">10.7.2.5</span> B.5. Verificação das <em>Strings</em></h4>
+<p><strong><em>String</em> <code>'a'</code></strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>'a'$</code></td>
+<td style="text-align: left;"><code>ACTION[0,'] = s2</code>. Empilha 2.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,2]</code></td>
+<td style="text-align: left;"><code>a'$</code></td>
+<td style="text-align: left;"><code>ACTION[2,a] = s57</code>. Empilha 57.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,2,57]</code></td>
+<td style="text-align: left;"><code>'$</code></td>
+<td style="text-align: left;"><code>ACTION[57,'] = r3</code> (<code>A → a</code>). Desempilha 1. <code>GOTO[2,A] = 4</code>. Empilha 4.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,2,4]</code></td>
+<td style="text-align: left;"><code>'$</code></td>
+<td style="text-align: left;"><code>ACTION[4,'] = s8</code>. Empilha 8.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,2,4,8]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[8,$] = r1</code> (<code>S → ' A '</code>). Desempilha 3. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>String</em> <code>"a"</code></strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Passo</th>
+<th style="text-align: left;">Pilha</th>
+<th style="text-align: left;"><em>Buffer</em></th>
+<th style="text-align: left;">Ação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>[0]</code></td>
+<td style="text-align: left;"><code>"a"$</code></td>
+<td style="text-align: left;"><code>ACTION[0,"] = s3</code>. Empilha 3.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>[0,3]</code></td>
+<td style="text-align: left;"><code>a"$</code></td>
+<td style="text-align: left;"><code>ACTION[3,a] = s57</code>. Empilha 57.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>[0,3,57]</code></td>
+<td style="text-align: left;"><code>"$</code></td>
+<td style="text-align: left;"><code>ACTION[57,"] = r3</code> (<code>A → a</code>). Desempilha 1. <code>GOTO[3,A] = 6</code>. Empilha 6.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>[0,3,6]</code></td>
+<td style="text-align: left;"><code>"$</code></td>
+<td style="text-align: left;"><code>ACTION[6,"] = s9</code>. Empilha 9.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>[0,3,6,9]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[9,$] = r2</code> (<code>S → " A "</code>). Desempilha 3. <code>GOTO[0,S] = 1</code>. Empilha 1.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>[0,1]</code></td>
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;"><code>ACTION[1,$] = acc</code>. <strong>Aceito</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>Ambas as <em>strings</em> passam pelo estado fundido <span class="math inline">\(I_{57}\)</span> no passo 2, mas os caminhos divergem em seguida graças ao <code>GOTO</code> contextual: a partir de <span class="math inline">\(I_{57}\)</span>, o <code>GOTO[2, A] = 4</code> leva ao fechamento por <code>'</code>, enquanto <code>GOTO[3, A] = 6</code> leva ao fechamento por <code>"</code>. A fusão de <span class="math inline">\(I_5\)</span> e <span class="math inline">\(I_7\)</span> não destrói a distinção de contexto, apenas reconhece que a redução interna é idêntica.</p>
+</section>
+</section>
+<section id="exercício-c-uma-gramática-que-não-é-lalr1" class="level3" data-number="10.7.3">
+<h3 data-number="10.7.3" class="anchored" data-anchor-id="exercício-c-uma-gramática-que-não-é-lalr1"><span class="header-section-number">10.7.3</span> Exercício C: Uma Gramática que Não é <span class="math inline">\(LALR(1)\)</span></h3>
+<p><strong>Enunciado</strong>: demonstre, passo a passo, por que a gramática do estudo de caso final do Capítulo <a href="08-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a> é <span class="math inline">\(LR(1)\)</span> canônica mas não <span class="math inline">\(LALR(1)\)</span>. Construa os estados relevantes, identifique as fichas que Gregson tentará grampear, e mostre o conflito <em>reduce-reduce</em> que surge após a fusão. Este exercício espelha o exemplo da seção “A Anomalia”, mas com o detalhamento dos passos intermediários que mostram por que a fusão destrói o poder de reconhecimento neste caso específico.</p>
+<pre class="bnf"><code>1. S → a A d
+2. S → b B d
+3. S → a B e
+4. S → b A e
+5. A → c
+6. B → c</code></pre>
+<section id="c.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="10.7.3.1">
+<h4 data-number="10.7.3.1" class="anchored" data-anchor-id="c.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">10.7.3.1</span> C.1. Gramática Aumentada e Conjuntos</h4>
+<pre class="bnf"><code>0. S' → S
+1. S → a A d
+2. S → b B d
+3. S → a B e
+4. S → b A e
+5. A → c
+6. B → c</code></pre>
+<p>Terminais: <span class="math inline">\(\{a, b, c, d, e, \$\}\)</span>. Não-terminais: <span class="math inline">\(\{S', S, A, B\}\)</span>.</p>
+<p><strong><span class="math inline">\(FIRST\)</span></strong>:</p>
+<ul>
+<li><span class="math inline">\(FIRST(A) = FIRST(B) = \{c\}\)</span></li>
+<li><span class="math inline">\(FIRST(S) = \{a, b\}\)</span></li>
+</ul>
+</section>
+<section id="c.2.-estados-lr1-canônicos-relevantes" class="level4" data-number="10.7.3.2">
+<h4 data-number="10.7.3.2" class="anchored" data-anchor-id="c.2.-estados-lr1-canônicos-relevantes"><span class="header-section-number">10.7.3.2</span> C.2. Estados <span class="math inline">\(LR(1)\)</span> Canônicos Relevantes</h4>
+<p>A coleção <span class="math inline">\(LR(1)\)</span> canônica completa tem <span class="math inline">\(14\)</span> estados (foram apresentados na tabela final do Capítulo <a href="08-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a>). Para este exercício, interessam particularmente os estados que contêm as reduções das regras 5 e 6.</p>
+<p><strong>Estado <span class="math inline">\(I_6\)</span></strong> — alcançado por <span class="math inline">\(GOTO(I_1, c)\)</span>, onde <span class="math inline">\(I_1 = GOTO(I_0, a)\)</span>:</p>
+<ul>
+<li><span class="math inline">\([A \to c \bullet, d]\)</span></li>
+<li><span class="math inline">\([B \to c \bullet, e]\)</span></li>
+</ul>
+<p>O núcleo é <span class="math inline">\(\{[A \to c \bullet], [B \to c \bullet]\}\)</span>. Os <em>lookaheads</em> são <code>d</code> (para <span class="math inline">\(A\)</span>) e <code>e</code> (para <span class="math inline">\(B\)</span>).</p>
+<p><strong>Estado <span class="math inline">\(I_9\)</span></strong> — alcançado por <span class="math inline">\(GOTO(I_2, c)\)</span>, onde <span class="math inline">\(I_2 = GOTO(I_0, b)\)</span>:</p>
+<ul>
+<li><span class="math inline">\([B \to c \bullet, d]\)</span></li>
+<li><span class="math inline">\([A \to c \bullet, e]\)</span></li>
+</ul>
+<p>O núcleo é <span class="math inline">\(\{[B \to c \bullet], [A \to c \bullet]\} = \{[A \to c \bullet], [B \to c \bullet]\}\)</span> (conjuntos são desordenados). Os <em>lookaheads</em> estão <strong>invertidos</strong> em relação a <span class="math inline">\(I_6\)</span>: <code>d</code> (para <span class="math inline">\(B\)</span>) e <code>e</code> (para <span class="math inline">\(A\)</span>).</p>
+</section>
+<section id="c.3.-a-fusão-catastrófica" class="level4" data-number="10.7.3.3">
+<h4 data-number="10.7.3.3" class="anchored" data-anchor-id="c.3.-a-fusão-catastrófica"><span class="header-section-number">10.7.3.3</span> C.3. A Fusão Catastrófica</h4>
+<p>Gregson inspeciona os núcleos de <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span> e verifica que são idênticos. Aplicando a fusão, ele obtém o estado <span class="math inline">\(I_{69}\)</span>:</p>
+<ul>
+<li><span class="math inline">\([A \to c \bullet, d/e]\)</span> — união dos <em>lookaheads</em> de <span class="math inline">\(A\)</span>: <span class="math inline">\(\{d\}\)</span> de <span class="math inline">\(I_6\)</span> + <span class="math inline">\(\{e\}\)</span> de <span class="math inline">\(I_9\)</span> = <span class="math inline">\(\{d, e\}\)</span>;</li>
+<li><span class="math inline">\([B \to c \bullet, d/e]\)</span> — união dos <em>lookaheads</em> de <span class="math inline">\(B\)</span>: <span class="math inline">\(\{e\}\)</span> de <span class="math inline">\(I_6\)</span> + <span class="math inline">\(\{d\}\)</span> de <span class="math inline">\(I_9\)</span> = <span class="math inline">\(\{d, e\}\)</span>.</li>
+</ul>
+<p>O problema se materializa. No estado fundido <span class="math inline">\(I_{69}\)</span>:</p>
+<ul>
+<li>Diante do <em>lookahead</em> <code>d</code>, devemos reduzir por <code>A → c</code> (regra 5) ou por <code>B → c</code> (regra 6)?</li>
+<li>Diante do <em>lookahead</em> <code>e</code>, a mesma ambiguidade ocorre.</li>
+</ul>
+<p>A célula <code>ACTION[69, d]</code> teria que conter simultaneamente <code>r5</code> e <code>r6</code>. Idem para <code>ACTION[69, e]</code>. <strong>Conflito <em>reduce-reduce</em></strong> em ambos os terminais.</p>
+</section>
+<section id="c.4.-por-que-o-lr1-não-tem-esse-problema" class="level4" data-number="10.7.3.4">
+<h4 data-number="10.7.3.4" class="anchored" data-anchor-id="c.4.-por-que-o-lr1-não-tem-esse-problema"><span class="header-section-number">10.7.3.4</span> C.4. Por Que o <span class="math inline">\(LR(1)\)</span> Não Tem Esse Problema</h4>
+<p>No <span class="math inline">\(LR(1)\)</span> canônico, a separação entre <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span> preserva a informação sobre qual caminho derivacional levou ao <code>c</code>:</p>
+<ul>
+<li>Se o <em>parser</em> está em <span class="math inline">\(I_6\)</span>, veio pelo caminho <code>a</code> (regras 1 ou 3). O <code>c</code> aqui só pode ser reduzido por <code>A → c</code> se o próximo terminal for <code>d</code> (regra 1), ou por <code>B → c</code> se for <code>e</code> (regra 3). Os <em>lookaheads</em> são disjuntos para cada redução.</li>
+<li>Se o <em>parser</em> está em <span class="math inline">\(I_9\)</span>, veio pelo caminho <code>b</code> (regras 2 ou 4). Simetricamente, <code>c</code> só pode ser reduzido por <code>B → c</code> se o próximo for <code>d</code> (regra 2), ou por <code>A → c</code> se for <code>e</code> (regra 4).</li>
+</ul>
+<p>Watson mantém os dois contextos separados e toma a decisão correta em cada estado. Gregson, ao fundir os estados, perde a informação de contexto e não consegue mais distinguir entre os caminhos <code>a...c</code> e <code>b...c</code>. A fusão realiza a união dos <em>lookaheads</em> item a item, o que neste caso particular cruza as associações originais e contamina ambas as reduções com ambos os <em>lookaheads</em>.</p>
+</section>
+<section id="c.5.-análise-estrutural" class="level4" data-number="10.7.3.5">
+<h4 data-number="10.7.3.5" class="anchored" data-anchor-id="c.5.-análise-estrutural"><span class="header-section-number">10.7.3.5</span> C.5. Análise Estrutural</h4>
+<p>A atenta leitora deve notar que a estrutura da gramática é <strong>simétrica cruzada</strong>: a mesma redução (<code>A → c</code> ou <code>B → c</code>) aparece em contextos onde os <em>lookaheads</em> estão invertidos. Formalmente, a condição que caracteriza gramáticas <span class="math inline">\(LR(1)\)</span> que não são <span class="math inline">\(LALR(1)\)</span> é exatamente esta: existem dois estados <span class="math inline">\(I_i\)</span> e <span class="math inline">\(I_j\)</span> com mesmo núcleo tais que, para algum par de itens de redução <span class="math inline">\([A \to \alpha \bullet, a]\)</span> em <span class="math inline">\(I_i\)</span> e <span class="math inline">\([B \to \beta \bullet, a]\)</span> em <span class="math inline">\(I_j\)</span> (com <span class="math inline">\(a\)</span> em comum entre os dois estados), as produções <span class="math inline">\(A \to \alpha\)</span> e <span class="math inline">\(B \to \beta\)</span> são distintas.</p>
+<p>Em gramáticas de linguagens de programação projetadas para produção, essa configuração é rara porque os projetistas tipicamente evitam redundância sintática desse tipo — a simetria cruzada força o programador a resolver ambiguidade com base em contexto distante, o que é ruim tanto para o <em>parser</em> quanto para a legibilidade humana. Por isso, na prática, o <span class="math inline">\(LALR(1)\)</span> atende à esmagadora maioria das linguagens reais, mesmo que existam gramáticas teóricas nas quais ele falha.</p>
+</section>
+<section id="c.6.-resolução-prática" class="level4" data-number="10.7.3.6">
+<h4 data-number="10.7.3.6" class="anchored" data-anchor-id="c.6.-resolução-prática"><span class="header-section-number">10.7.3.6</span> C.6. Resolução Prática</h4>
+<p>Se um projetista de linguagem se depara com um conflito <em>reduce-reduce</em> introduzido pela fusão <span class="math inline">\(LALR(1)\)</span>, há três caminhos:</p>
+<ol type="1">
+<li><p><strong>Refatorar a gramática</strong> para eliminar a simetria cruzada, unificando os não-terminais responsáveis pela mesma redução, ou introduzindo terminais distintos que desambiguem o contexto. No exemplo acima, se <code>A</code> e <code>B</code> realmente representam a mesma construção sintática, bastaria usar um único não-terminal.</p></li>
+<li><p><strong>Usar <span class="math inline">\(LR(1)\)</span> canônico</strong>, aceitando o custo de memória. Geradores como <code>GLR</code> (<code>bison</code> com flag <code>%glr-parser</code>) ou ferramentas especializadas permitem isso.</p></li>
+<li><p><strong>Usar <em>parser</em> generalizado</strong> (<em>GLR</em>, <em>Earley</em>) quando a ambiguidade é essencial à linguagem, aceitando múltiplas árvores de derivação.</p></li>
+</ol>
+<p>Ferramentas como <code>bison</code> relatam conflitos durante a construção da tabela e, na falta de resolução explícita, aplicam regras padrão; por exemplo, em conflitos <em>shift</em>/<em>reduce</em>, o comportamento clássico é preferir <em>shift</em>, salvo diretivas de precedência. Essas heurísticas podem mascarar erros reais, razão pela qual a atenta leitora deve tratar todo aviso de <em>reduce-reduce conflict</em> em <code>bison</code> como indicação de que a gramática precisa de revisão.</p>
+</section>
+</section>
+</section>
+<section id="síntese-comparativa-final" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="síntese-comparativa-final"><span class="header-section-number">10.8</span> Síntese Comparativa Final</h2>
+<p>Com o <span class="math inline">\(LALR(1)\)</span> concluído, a galeria da Scotland Yard está completa. A tabela a seguir consolida as quatro classes estudadas, agora com dados concretos observados nos exemplos dos capítulos.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica</th>
+<th style="text-align: center;"><span class="math inline">\(LR(0)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(SLR(1)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(LALR(1)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(LR(1)\)</span> canônico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>Lookahead</em> em reduções</td>
+<td style="text-align: center;">Nenhum</td>
+<td style="text-align: center;"><span class="math inline">\(FOLLOW(A)\)</span> global</td>
+<td style="text-align: center;">Fundido por núcleo</td>
+<td style="text-align: center;">Preciso item a item</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Estados (gramática <code>S → C C</code>, <code>C → c C</code>, <code>C → d</code>)</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Estados (gramática C99 <code>bison</code>)</td>
+<td style="text-align: center;">$$350</td>
+<td style="text-align: center;">$$350</td>
+<td style="text-align: center;">$$350</td>
+<td style="text-align: center;">$$50000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Reconhece <code>S → L = R</code>, etc.</td>
+<td style="text-align: center;">Não</td>
+<td style="text-align: center;"><strong>Não</strong></td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+<td style="text-align: center;">Sim</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Reconhece <code>S → a A d</code>, etc.</td>
+<td style="text-align: center;">Não</td>
+<td style="text-align: center;">Não</td>
+<td style="text-align: center;"><strong>Não</strong></td>
+<td style="text-align: center;"><strong>Sim</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Custo de construção</td>
+<td style="text-align: center;">Baixo</td>
+<td style="text-align: center;">Baixo</td>
+<td style="text-align: center;">Moderado (com propagação direta: baixo)</td>
+<td style="text-align: center;">Alto</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Uso prático dominante</td>
+<td style="text-align: center;">Didático</td>
+<td style="text-align: center;">Didático</td>
+<td style="text-align: center;"><strong>Industrial (yacc, bison, CUP)</strong></td>
+<td style="text-align: center;">Teórico</td>
+</tr>
+</tbody>
+</table>
+<p>O <span class="math inline">\(LALR(1)\)</span> é, portanto, o compromisso ótimo para a grande maioria das aplicações práticas: tabelas compactas, poder suficiente para linguagens de programação reais, e algoritmos de construção eficientes disponíveis em ferramentas maduras. Watson permanece como referência teórica, Lestrade como ferramenta didática para exposição do conceito de <em>lookahead</em>, e Gregson como o detetive que efetivamente resolve os casos do mundo real.</p>
+<p>Nos próximos capítulos, passaremos da teoria dos analisadores sintáticos às etapas subsequentes da compilação: análise semântica, geração de código intermediário e otimizações. Os <em>parsers</em> <span class="math inline">\(LALR(1)\)</span> que construímos aqui serão a espinha dorsal sobre a qual essas etapas operam, entregando árvores sintáticas anotadas que alimentarão todo o <em>pipeline</em> de tradução.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/frankalcantara\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-parserSLR1.html" class="pagination-link" aria-label="Parsers $SLR(1)$: A Ponte Entre Simplicidade e Poder">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-semantico.html" class="pagination-link" aria-label="Analisadores Semânticos: a determinação do significado">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright © 2025,2026 Frank de Alcantara</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/09-parserLALR1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
