@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Parsers LALR(1): O Padrão Industrial da Nossa Scotland Yard – Linguagens Formais e Autômatos</title>
+<title>11&nbsp; Parsers LALR(1): O Padrão Industrial da Nossa Scotland Yard – Linguagens Formais e Autômatos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./10-semantico.html" rel="next">
-<link href="./08-parserSLR1.html" rel="prev">
+<link href="./08-parserLR1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -148,7 +148,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./09-parserLALR1.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./09-parserLALR1.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -240,20 +240,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-parserLR1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  <a href="./06-parserShiftReduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Parser <em>Shift-Reduce</em>: A Porta de Entrada para a Análise Sintática <em>bottom-up</em></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-parserSLR1.html" class="sidebar-item-text sidebar-link">
+  <a href="./07-parserSLR1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-parserLR1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./09-parserLALR1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></span></a>
   </div>
 </li>
       </ul>
@@ -270,37 +276,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-semantico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10a-semantico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos da Semântica</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10b-semantico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Julgamento de Tipos em Linguagens Imperativas</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10c-semantico.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">O Sistema de Tipos Hindley-Milner</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-tabelaSimbolos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Tabela de Símbolos em Compiladores Modernos</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-questoes-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Questões e Exercícios - Analisador Semântico</span></span></a>
   </div>
 </li>
       </ul>
@@ -317,37 +323,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-GeraInter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Geração de Código Intermediário: A Linguagem Universal do Compilador</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-llvmIR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Introdução à Representação Intermediária (IR) do <strong>LLVM</strong> com C++</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-peepOtimiza.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Otimizações Peephole: Algoritmos e Técnicas em Código Intermediário</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./19-mlir-sintaxe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">MLIR 101: Primeiro Exemplo e Sintaxe Básica</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./20-mlir-plano.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Plano de Aulas: Princípios e Abstrações do MLIR</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./21-mlir-arch.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">MLIR: Analisando Passes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">MLIR: Analisando Passes</span></span></a>
   </div>
 </li>
       </ul>
@@ -364,25 +370,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 1 - Projeto Prático</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -399,25 +405,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase12026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 1 - Analisador Léxico e Gerador de Assembly para ARMv7</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 1 - Analisador Léxico e Gerador de Assembly para ARMv7</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase22026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase42026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -434,25 +440,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase12026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Fase 1 - Analisador Léxico e Gerador de Assembly para ARMv7</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 1 - Analisador Léxico e Gerador de Assembly para ARMv7</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase22026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 2 - Analisador Sintático <span class="math inline">\(LL(1)\)</span></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase32026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Fase 3 - Analisador Semântico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./fase42026-1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Fase 4 - Geração de Código Intermediário e Assembly</span></span></a>
   </div>
 </li>
       </ul>
@@ -460,13 +466,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./apend1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Apêndice 1: A Relação de Myhill-Nerode</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sol-exercicios.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Solução dos Exercícios</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -481,32 +487,32 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#o-conceito-fundamental-o-núcleo-de-um-estado" id="toc-o-conceito-fundamental-o-núcleo-de-um-estado" class="nav-link active" data-scroll-target="#o-conceito-fundamental-o-núcleo-de-um-estado"><span class="header-section-number">10.1</span> O Conceito Fundamental: O Núcleo de um Estado</a></li>
-  <li><a href="#o-algoritmo-de-construção-lalr1" id="toc-o-algoritmo-de-construção-lalr1" class="nav-link" data-scroll-target="#o-algoritmo-de-construção-lalr1"><span class="header-section-number">10.2</span> O Algoritmo de Construção <span class="math inline">\(LALR(1)\)</span></a>
+  <li><a href="#o-conceito-fundamental-o-núcleo-de-um-estado" id="toc-o-conceito-fundamental-o-núcleo-de-um-estado" class="nav-link active" data-scroll-target="#o-conceito-fundamental-o-núcleo-de-um-estado"><span class="header-section-number">11.1</span> O Conceito Fundamental: O Núcleo de um Estado</a></li>
+  <li><a href="#o-algoritmo-de-construção-lalr1" id="toc-o-algoritmo-de-construção-lalr1" class="nav-link" data-scroll-target="#o-algoritmo-de-construção-lalr1"><span class="header-section-number">11.2</span> O Algoritmo de Construção <span class="math inline">\(LALR(1)\)</span></a>
   <ul class="collapse">
-  <li><a href="#fase-1-construção-da-coleção-lr1-canônica" id="toc-fase-1-construção-da-coleção-lr1-canônica" class="nav-link" data-scroll-target="#fase-1-construção-da-coleção-lr1-canônica"><span class="header-section-number">10.2.1</span> Fase 1: Construção da Coleção <span class="math inline">\(LR(1)\)</span> Canônica</a></li>
-  <li><a href="#fase-2-fusão-de-estados-com-mesmo-núcleo" id="toc-fase-2-fusão-de-estados-com-mesmo-núcleo" class="nav-link" data-scroll-target="#fase-2-fusão-de-estados-com-mesmo-núcleo"><span class="header-section-number">10.2.2</span> Fase 2: Fusão de Estados com Mesmo Núcleo</a></li>
-  <li><a href="#fase-3-construção-da-tabela-action-e-goto" id="toc-fase-3-construção-da-tabela-action-e-goto" class="nav-link" data-scroll-target="#fase-3-construção-da-tabela-action-e-goto"><span class="header-section-number">10.2.3</span> Fase 3: Construção da Tabela ACTION e GOTO</a></li>
-  <li><a href="#pseudocódigo-do-algoritmo-lalr1-método-de-fusão" id="toc-pseudocódigo-do-algoritmo-lalr1-método-de-fusão" class="nav-link" data-scroll-target="#pseudocódigo-do-algoritmo-lalr1-método-de-fusão"><span class="header-section-number">10.2.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(LALR(1)\)</span> (Método de Fusão)</a></li>
+  <li><a href="#fase-1-construção-da-coleção-lr1-canônica" id="toc-fase-1-construção-da-coleção-lr1-canônica" class="nav-link" data-scroll-target="#fase-1-construção-da-coleção-lr1-canônica"><span class="header-section-number">11.2.1</span> Fase 1: Construção da Coleção <span class="math inline">\(LR(1)\)</span> Canônica</a></li>
+  <li><a href="#fase-2-fusão-de-estados-com-mesmo-núcleo" id="toc-fase-2-fusão-de-estados-com-mesmo-núcleo" class="nav-link" data-scroll-target="#fase-2-fusão-de-estados-com-mesmo-núcleo"><span class="header-section-number">11.2.2</span> Fase 2: Fusão de Estados com Mesmo Núcleo</a></li>
+  <li><a href="#fase-3-construção-da-tabela-action-e-goto" id="toc-fase-3-construção-da-tabela-action-e-goto" class="nav-link" data-scroll-target="#fase-3-construção-da-tabela-action-e-goto"><span class="header-section-number">11.2.3</span> Fase 3: Construção da Tabela ACTION e GOTO</a></li>
+  <li><a href="#pseudocódigo-do-algoritmo-lalr1-método-de-fusão" id="toc-pseudocódigo-do-algoritmo-lalr1-método-de-fusão" class="nav-link" data-scroll-target="#pseudocódigo-do-algoritmo-lalr1-método-de-fusão"><span class="header-section-number">11.2.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(LALR(1)\)</span> (Método de Fusão)</a></li>
   </ul></li>
-  <li><a href="#exemplo-guiado-o-resgate-do-estudo-de-caso" id="toc-exemplo-guiado-o-resgate-do-estudo-de-caso" class="nav-link" data-scroll-target="#exemplo-guiado-o-resgate-do-estudo-de-caso"><span class="header-section-number">10.3</span> Exemplo Guiado: O Resgate do Estudo de Caso</a>
+  <li><a href="#exemplo-guiado-o-resgate-do-estudo-de-caso" id="toc-exemplo-guiado-o-resgate-do-estudo-de-caso" class="nav-link" data-scroll-target="#exemplo-guiado-o-resgate-do-estudo-de-caso"><span class="header-section-number">11.3</span> Exemplo Guiado: O Resgate do Estudo de Caso</a>
   <ul class="collapse">
-  <li><a href="#a-tabela-lalr1-resultante" id="toc-a-tabela-lalr1-resultante" class="nav-link" data-scroll-target="#a-tabela-lalr1-resultante"><span class="header-section-number">10.3.1</span> A Tabela <span class="math inline">\(LALR(1)\)</span> Resultante</a></li>
+  <li><a href="#a-tabela-lalr1-resultante" id="toc-a-tabela-lalr1-resultante" class="nav-link" data-scroll-target="#a-tabela-lalr1-resultante"><span class="header-section-number">11.3.1</span> A Tabela <span class="math inline">\(LALR(1)\)</span> Resultante</a></li>
   </ul></li>
-  <li><a href="#a-anomalia-quando-o-lalr1-falha" id="toc-a-anomalia-quando-o-lalr1-falha" class="nav-link" data-scroll-target="#a-anomalia-quando-o-lalr1-falha"><span class="header-section-number">10.4</span> A Anomalia: Quando o <span class="math inline">\(LALR(1)\)</span> Falha</a></li>
-  <li><a href="#exemplo-de-implementação-em-python" id="toc-exemplo-de-implementação-em-python" class="nav-link" data-scroll-target="#exemplo-de-implementação-em-python"><span class="header-section-number">10.5</span> Exemplo de Implementação em Python</a></li>
-  <li><a href="#vantagens-e-limitações-do-lalr1" id="toc-vantagens-e-limitações-do-lalr1" class="nav-link" data-scroll-target="#vantagens-e-limitações-do-lalr1"><span class="header-section-number">10.6</span> Vantagens e Limitações do <span class="math inline">\(LALR(1)\)</span></a>
+  <li><a href="#a-anomalia-quando-o-lalr1-falha" id="toc-a-anomalia-quando-o-lalr1-falha" class="nav-link" data-scroll-target="#a-anomalia-quando-o-lalr1-falha"><span class="header-section-number">11.4</span> A Anomalia: Quando o <span class="math inline">\(LALR(1)\)</span> Falha</a></li>
+  <li><a href="#exemplo-de-implementação-em-python" id="toc-exemplo-de-implementação-em-python" class="nav-link" data-scroll-target="#exemplo-de-implementação-em-python"><span class="header-section-number">11.5</span> Exemplo de Implementação em Python</a></li>
+  <li><a href="#vantagens-e-limitações-do-lalr1" id="toc-vantagens-e-limitações-do-lalr1" class="nav-link" data-scroll-target="#vantagens-e-limitações-do-lalr1"><span class="header-section-number">11.6</span> Vantagens e Limitações do <span class="math inline">\(LALR(1)\)</span></a>
   <ul class="collapse">
-  <li><a href="#vantagens" id="toc-vantagens" class="nav-link" data-scroll-target="#vantagens"><span class="header-section-number">10.6.1</span> Vantagens</a></li>
-  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">10.6.2</span> Limitações</a></li>
+  <li><a href="#vantagens" id="toc-vantagens" class="nav-link" data-scroll-target="#vantagens"><span class="header-section-number">11.6.1</span> Vantagens</a></li>
+  <li><a href="#limitações" id="toc-limitações" class="nav-link" data-scroll-target="#limitações"><span class="header-section-number">11.6.2</span> Limitações</a></li>
   </ul></li>
-  <li><a href="#sec-exercicios-LALR1" id="toc-sec-exercicios-LALR1" class="nav-link" data-scroll-target="#sec-exercicios-LALR1"><span class="header-section-number">10.7</span> Exercícios Resolvidos</a>
+  <li><a href="#sec-exercicios-LALR1" id="toc-sec-exercicios-LALR1" class="nav-link" data-scroll-target="#sec-exercicios-LALR1"><span class="header-section-number">11.7</span> Exercícios Resolvidos</a>
   <ul class="collapse">
-  <li><a href="#exercício-a-atribuição-de-l-value-e-r-value" id="toc-exercício-a-atribuição-de-l-value-e-r-value" class="nav-link" data-scroll-target="#exercício-a-atribuição-de-l-value-e-r-value"><span class="header-section-number">10.7.1</span> Exercício A: Atribuição de L-value e R-value</a></li>
-  <li><a href="#exercício-b-compressão-de-estados-similares" id="toc-exercício-b-compressão-de-estados-similares" class="nav-link" data-scroll-target="#exercício-b-compressão-de-estados-similares"><span class="header-section-number">10.7.2</span> Exercício B: Compressão de Estados Similares</a></li>
-  <li><a href="#exercício-c-uma-gramática-que-não-é-lalr1" id="toc-exercício-c-uma-gramática-que-não-é-lalr1" class="nav-link" data-scroll-target="#exercício-c-uma-gramática-que-não-é-lalr1"><span class="header-section-number">10.7.3</span> Exercício C: Uma Gramática que Não é <span class="math inline">\(LALR(1)\)</span></a></li>
+  <li><a href="#exercício-a-atribuição-de-l-value-e-r-value" id="toc-exercício-a-atribuição-de-l-value-e-r-value" class="nav-link" data-scroll-target="#exercício-a-atribuição-de-l-value-e-r-value"><span class="header-section-number">11.7.1</span> Exercício A: Atribuição de L-value e R-value</a></li>
+  <li><a href="#exercício-b-compressão-de-estados-similares" id="toc-exercício-b-compressão-de-estados-similares" class="nav-link" data-scroll-target="#exercício-b-compressão-de-estados-similares"><span class="header-section-number">11.7.2</span> Exercício B: Compressão de Estados Similares</a></li>
+  <li><a href="#exercício-c-uma-gramática-que-não-é-lalr1" id="toc-exercício-c-uma-gramática-que-não-é-lalr1" class="nav-link" data-scroll-target="#exercício-c-uma-gramática-que-não-é-lalr1"><span class="header-section-number">11.7.3</span> Exercício C: Uma Gramática que Não é <span class="math inline">\(LALR(1)\)</span></a></li>
   </ul></li>
-  <li><a href="#síntese-comparativa-final" id="toc-síntese-comparativa-final" class="nav-link" data-scroll-target="#síntese-comparativa-final"><span class="header-section-number">10.8</span> Síntese Comparativa Final</a></li>
+  <li><a href="#síntese-comparativa-final" id="toc-síntese-comparativa-final" class="nav-link" data-scroll-target="#síntese-comparativa-final"><span class="header-section-number">11.8</span> Síntese Comparativa Final</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/09-parserLALR1.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -517,9 +523,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./09-parserLALR1.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-Gramaticas.html">Analisadores Sintáticos</a></li><li class="breadcrumb-item"><a href="./09-parserLALR1.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-parserLALR1" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></span></h1>
+<h1 class="title"><span id="sec-parserLALR1" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LALR(1)\)</span>: O Padrão Industrial da Nossa Scotland Yard</span></span></h1>
 </div>
 
 
@@ -540,8 +546,8 @@ window.Quarto = {
 <p>Na nossa delegacia da Scotland Yard, o doutor Watson (nosso <em>parser</em> <span class="math inline">\(LR(1)\)</span> canônico) possui uma precisão impecável, anotando cada pista (o <em>lookahead</em>) em fichas separadas para cada contexto possível. O resultado é um arquivo gigantesco, frequentemente inviável para gramáticas de linguagens reais devido ao consumo de memória. O inspetor Lestrade (nosso <em>parser</em> <span class="math inline">\(SLR(1)\)</span>), por sua vez, usa uma ficha única consolidada por não-terminal (o conjunto <span class="math inline">\(FOLLOW\)</span>). Seu arquivo é compacto, cabendo na mesa de trabalho, mas ele falha em separar contextos sobrepostos, hesitando em momentos nos quais Watson resolveria o caso sem pestanejar.</p>
 <p>É aqui que entra o inspetor Gregson (nosso <em>parser</em> <span class="math inline">\(LALR(1)\)</span>). Ele senta exatamente na mesma mesa que Lestrade, no sentido de que o autômato <span class="math inline">\(LALR(1)\)</span> tem exatamente o mesmo número de estados que o autômato <span class="math inline">\(LR(0)\)</span>, e portanto o mesmo número de linhas que a tabela <span class="math inline">\(SLR(1)\)</span>. No entanto, Gregson utiliza o método de trabalho de Watson: ele anota os <em>lookaheads</em> específicos para cada situação. O método de Gregson é a <strong>fusão</strong>: quando ele percebe que duas fichas de Watson descrevem exatamente a mesma situação sintática, diferindo apenas nos <em>lookaheads</em> esperados, ele grampeia as duas fichas juntas. Ele economiza espaço sem perder o detalhamento do contexto local.</p>
 <p>O resultado é um <em>parser</em> com o tamanho exato do <span class="math inline">\(SLR(1)\)</span> e com quase todo o poder de reconhecimento do <span class="math inline">\(LR(1)\)</span> canônico. Por essa razão, o <span class="math inline">\(LALR(1)\)</span> é o algoritmo base de geradores de parsers industriais históricos, como o yacc e o CUP, e continua sendo o modo padrão do bison, embora o bison moderno também suporte IELR e canonical-lr. Desenvolvido por <a href="https://www.lastingmemories.com/memorial/frank-deremer?lifestory">Frank DeRemer</a> em sua tese de doutorado de 1969 — a mesma que introduziu o <span class="math inline">\(SLR(1)\)</span> —, o método <span class="math inline">\(LALR(1)\)</span> foi a resposta à pergunta central da época: como obter quase todo o poder do <span class="math inline">\(LR(1)\)</span> canônico com o tamanho de tabela do <span class="math inline">\(SLR(1)\)</span>? A resposta, como veremos, está na fusão cuidadosa de estados que compartilham o mesmo núcleo.</p>
-<section id="o-conceito-fundamental-o-núcleo-de-um-estado" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="o-conceito-fundamental-o-núcleo-de-um-estado"><span class="header-section-number">10.1</span> O Conceito Fundamental: O Núcleo de um Estado</h2>
+<section id="o-conceito-fundamental-o-núcleo-de-um-estado" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="o-conceito-fundamental-o-núcleo-de-um-estado"><span class="header-section-number">11.1</span> O Conceito Fundamental: O Núcleo de um Estado</h2>
 <p>Para entender como Gregson grampeia as fichas de Watson, a sagaz leitora precisa compreender o conceito de <strong>núcleo</strong> (<em>core</em>) de um estado <span class="math inline">\(LR(1)\)</span>.</p>
 <p>Todo estado <span class="math inline">\(LR(1)\)</span> é um conjunto de itens da forma <span class="math inline">\([A \to \alpha \bullet \beta, a]\)</span>. O núcleo de um estado <span class="math inline">\(LR(1)\)</span> é o conjunto de seus itens de kernel, considerados sem os lookaheads. Em <span class="math inline">\(LALR(1)\)</span>, estados com o mesmo núcleo são candidatos à fusão.</p>
 <p>Considere dois estados hipotéticos de um autômato <span class="math inline">\(LR(1)\)</span>.</p>
@@ -559,20 +565,20 @@ window.Quarto = {
 <p><strong>Nota</strong>: eventualmente poderemos usar uma notação abreviada <code>[C → d •, c/d/$]</code> para indicar que o item <span class="math inline">\([C \to d \bullet]\)</span> tem os <em>lookaheads</em> <code>c</code>, <code>d</code> e <code>$</code>. Neste caso, a astuta leitora precisa lembrar que o item é um único item com múltiplos <em>lookaheads</em>, e não três itens distintos. O núcleo é o mesmo, mas os <em>lookaheads</em> foram unidos.</p>
 <p>Ao fazer isso para todos os estados com o mesmo núcleo, o autômato <span class="math inline">\(LR(1)\)</span> colossal encolhe até atingir o exato número de estados do autômato <span class="math inline">\(LR(0)\)</span> (e do <span class="math inline">\(SLR(1)\)</span>).</p>
 </section>
-<section id="o-algoritmo-de-construção-lalr1" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="o-algoritmo-de-construção-lalr1"><span class="header-section-number">10.2</span> O Algoritmo de Construção <span class="math inline">\(LALR(1)\)</span></h2>
+<section id="o-algoritmo-de-construção-lalr1" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="o-algoritmo-de-construção-lalr1"><span class="header-section-number">11.2</span> O Algoritmo de Construção <span class="math inline">\(LALR(1)\)</span></h2>
 <p>Existem métodos para construir a tabela <span class="math inline">\(LALR(1)\)</span> diretamente, propagando <em>lookaheads</em> sem nunca gerar a imensa coleção de estados <span class="math inline">\(LR(1)\)</span>. Ferramentas industriais usam essas técnicas avançadas para economizar memória durante a compilação. No entanto, para fins didáticos, o método mais claro é construir o autômato <span class="math inline">\(LR(1)\)</span> canônico e aplicar a fusão de estados a posteriori. O processo segue três fases distintas.</p>
-<section id="fase-1-construção-da-coleção-lr1-canônica" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="fase-1-construção-da-coleção-lr1-canônica"><span class="header-section-number">10.2.1</span> Fase 1: Construção da Coleção <span class="math inline">\(LR(1)\)</span> Canônica</h3>
-<p>O processo começa exatamente como Watson faria. Construímos a gramática aumentada, calculamos os conjuntos <span class="math inline">\(FIRST\)</span> e geramos a coleção canônica completa de conjuntos de itens <span class="math inline">\(LR(1)\)</span>, utilizando as operações <code>CLOSURE</code> e <code>GOTO</code>, conforme detalhado no Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
+<section id="fase-1-construção-da-coleção-lr1-canônica" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="fase-1-construção-da-coleção-lr1-canônica"><span class="header-section-number">11.2.1</span> Fase 1: Construção da Coleção <span class="math inline">\(LR(1)\)</span> Canônica</h3>
+<p>O processo começa exatamente como Watson faria. Construímos a gramática aumentada, calculamos os conjuntos <span class="math inline">\(FIRST\)</span> e geramos a coleção canônica completa de conjuntos de itens <span class="math inline">\(LR(1)\)</span>, utilizando as operações <code>CLOSURE</code> e <code>GOTO</code>, conforme detalhado no Capítulo <a href="08-parserLR1.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
 </section>
-<section id="fase-2-fusão-de-estados-com-mesmo-núcleo" class="level3" data-number="10.2.2">
-<h3 data-number="10.2.2" class="anchored" data-anchor-id="fase-2-fusão-de-estados-com-mesmo-núcleo"><span class="header-section-number">10.2.2</span> Fase 2: Fusão de Estados com Mesmo Núcleo</h3>
+<section id="fase-2-fusão-de-estados-com-mesmo-núcleo" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="fase-2-fusão-de-estados-com-mesmo-núcleo"><span class="header-section-number">11.2.2</span> Fase 2: Fusão de Estados com Mesmo Núcleo</h3>
 <p>A atenta leitora deve examinar toda a coleção de estados <span class="math inline">\(LR(1)\)</span>. Agrupamos os estados que possuem exatamente o mesmo núcleo. Para cada grupo, criamos um novo estado fundido. Os itens desse novo estado serão os itens do núcleo, e o <em>lookahead</em> de cada item será a união dos <em>lookaheads</em> dos itens correspondentes nos estados originais.</p>
 <p>Após a fusão, as transições <code>GOTO</code> originais precisam ser redirecionadas. Se havia uma transição do estado <span class="math inline">\(I_i\)</span> para o estado <span class="math inline">\(I_j\)</span> consumindo o símbolo <span class="math inline">\(X\)</span>, e <span class="math inline">\(I_j\)</span> foi fundido no novo estado <span class="math inline">\(I_{jk}\)</span>, a nova transição será de <span class="math inline">\(I_i\)</span> (ou do seu estado fundido) para <span class="math inline">\(I_{jk}\)</span> consumindo <span class="math inline">\(X\)</span>.</p>
 </section>
-<section id="fase-3-construção-da-tabela-action-e-goto" class="level3" data-number="10.2.3">
-<h3 data-number="10.2.3" class="anchored" data-anchor-id="fase-3-construção-da-tabela-action-e-goto"><span class="header-section-number">10.2.3</span> Fase 3: Construção da Tabela ACTION e GOTO</h3>
+<section id="fase-3-construção-da-tabela-action-e-goto" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="fase-3-construção-da-tabela-action-e-goto"><span class="header-section-number">11.2.3</span> Fase 3: Construção da Tabela ACTION e GOTO</h3>
 <p>A construção segue as regras do <span class="math inline">\(LR(1)\)</span>, mas aplicada aos novos estados fundidos:</p>
 <ol type="1">
 <li>se existe um item <span class="math inline">\([A \to \alpha \bullet t \beta, a]\)</span> e a transição com <span class="math inline">\(t\)</span> leva ao estado fundido <span class="math inline">\(J\)</span>, definimos <code>ACTION[I, t] = _shift_ J</code>;</li>
@@ -580,8 +586,8 @@ window.Quarto = {
 <li>se existe o item de aceitação <span class="math inline">\([S' \to S \bullet, \$]\)</span>, definimos <code>ACTION[I, $] = accept</code>.</li>
 </ol>
 </section>
-<section id="pseudocódigo-do-algoritmo-lalr1-método-de-fusão" class="level3" data-number="10.2.4">
-<h3 data-number="10.2.4" class="anchored" data-anchor-id="pseudocódigo-do-algoritmo-lalr1-método-de-fusão"><span class="header-section-number">10.2.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(LALR(1)\)</span> (Método de Fusão)</h3>
+<section id="pseudocódigo-do-algoritmo-lalr1-método-de-fusão" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="pseudocódigo-do-algoritmo-lalr1-método-de-fusão"><span class="header-section-number">11.2.4</span> Pseudocódigo do Algoritmo <span class="math inline">\(LALR(1)\)</span> (Método de Fusão)</h3>
 <pre class="pseudocode"><code>ALGORITMO CONSTRUIR_PARSER_LALR1_POR_FUSAO(G)
 
 // ENTRADA: Uma gramática G
@@ -654,9 +660,9 @@ window.Quarto = {
 54.    RETORNAR Fundido  // Itens com mesmo núcleo terão lookaheads unidos</code></pre>
 </section>
 </section>
-<section id="exemplo-guiado-o-resgate-do-estudo-de-caso" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="exemplo-guiado-o-resgate-do-estudo-de-caso"><span class="header-section-number">10.3</span> Exemplo Guiado: O Resgate do Estudo de Caso</h2>
-<p>No Exercício C do Capítulo <a href="07-parserLR1.html" class="quarto-xref"><span>Chapter 8</span></a>, analisamos a gramática:</p>
+<section id="exemplo-guiado-o-resgate-do-estudo-de-caso" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="exemplo-guiado-o-resgate-do-estudo-de-caso"><span class="header-section-number">11.3</span> Exemplo Guiado: O Resgate do Estudo de Caso</h2>
+<p>No Exercício C do Capítulo <a href="08-parserLR1.html" class="quarto-xref"><span>Chapter 10</span></a>, analisamos a gramática:</p>
 <pre class="bnf"><code>0. S' → S
 1. S → C C
 2. C → c C
@@ -681,8 +687,8 @@ window.Quarto = {
 <li>Os estados <span class="math inline">\(I_4\)</span> e <span class="math inline">\(I_7\)</span> compartilham o núcleo de redução por <code>C → d</code>. Gregson os funde em <span class="math inline">\(I_{47}\)</span> com <em>lookaheads</em> <span class="math inline">\(\{c, d, \$\}\)</span>.</li>
 <li>Os estados <span class="math inline">\(I_8\)</span> e <span class="math inline">\(I_9\)</span> compartilham o núcleo de redução por <code>C → c C</code>. Gregson os funde em <span class="math inline">\(I_{89}\)</span> com <em>lookaheads</em> <span class="math inline">\(\{c, d, \$\}\)</span>.</li>
 </ol>
-<section id="a-tabela-lalr1-resultante" class="level3" data-number="10.3.1">
-<h3 data-number="10.3.1" class="anchored" data-anchor-id="a-tabela-lalr1-resultante"><span class="header-section-number">10.3.1</span> A Tabela <span class="math inline">\(LALR(1)\)</span> Resultante</h3>
+<section id="a-tabela-lalr1-resultante" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="a-tabela-lalr1-resultante"><span class="header-section-number">11.3.1</span> A Tabela <span class="math inline">\(LALR(1)\)</span> Resultante</h3>
 <p>Nossos antigos <span class="math inline">\(10\)</span> estados foram reduzidos para <span class="math inline">\(7\)</span> (o exato tamanho que um autômato <span class="math inline">\(LR(0)\)</span> teria). A nova tabela <code>ACTION/GOTO</code> fica assim:</p>
 <table class="caption-top table">
 <thead>
@@ -757,11 +763,11 @@ window.Quarto = {
 <p>Nenhum conflito. Gregson obteve uma tabela compacta, mas preservou contexto suficiente para evitar os conflitos que derrubariam o inspetor Lestrade (<span class="math inline">\(SLR(1)\)</span>).</p>
 </section>
 </section>
-<section id="a-anomalia-quando-o-lalr1-falha" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="a-anomalia-quando-o-lalr1-falha"><span class="header-section-number">10.4</span> A Anomalia: Quando o <span class="math inline">\(LALR(1)\)</span> Falha</h2>
+<section id="a-anomalia-quando-o-lalr1-falha" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="a-anomalia-quando-o-lalr1-falha"><span class="header-section-number">11.4</span> A Anomalia: Quando o <span class="math inline">\(LALR(1)\)</span> Falha</h2>
 <p>Mencionamos que o <span class="math inline">\(LALR(1)\)</span> tem quase todo o poder do <span class="math inline">\(LR(1)\)</span> canônico. Em que momento ele falha? A falha ocorre especificamente durante a fusão.</p>
 <p>A fusão de estados de mesmo núcleo <strong>nunca</strong> introduzirá um novo conflito <em>shift-reduce</em>. Se um estado fundido apresenta conflito <em>shift-reduce</em>, é garantido que esse conflito já existia no <span class="math inline">\(LR(1)\)</span> canônico (o que indicaria que a gramática não era <span class="math inline">\(LR(1)\)</span> em primeiro lugar). No entanto, a fusão <strong>pode</strong> introduzir um conflito <em>reduce-reduce</em> que não existia no <span class="math inline">\(LR(1)\)</span> original.</p>
-<p>Vamos resgatar o estudo de caso que encerrou o Capítulo <a href="08-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a>, no qual Lestrade falhava, mas Watson triunfava:</p>
+<p>Vamos resgatar o estudo de caso que encerrou o Capítulo <a href="07-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a>, no qual Lestrade falhava, mas Watson triunfava:</p>
 <pre class="bnf"><code>S → a A d
 S → b B d
 S → a B e
@@ -789,8 +795,8 @@ B → c</code></pre>
 <p><span class="math display">\[LALR(1) \subsetneq LR(1)\]</span></p>
 <p>Felizmente, situações simétricas cruzadas como essa são raras em linguagens de programação projetadas para uso em produção. É por isso que a abordagem do <span class="math inline">\(LALR(1)\)</span> atende à maioria esmagadora das necessidades práticas.</p>
 </section>
-<section id="exemplo-de-implementação-em-python" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="exemplo-de-implementação-em-python"><span class="header-section-number">10.5</span> Exemplo de Implementação em Python</h2>
+<section id="exemplo-de-implementação-em-python" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="exemplo-de-implementação-em-python"><span class="header-section-number">11.5</span> Exemplo de Implementação em Python</h2>
 <p>Para materializar o conceito, vamos adaptar nosso gerador de <em>parsers</em>. A classe <code>LALR1Parser</code> herda a lógica de construção dos estados canônicos, mas aplica a rotina de agrupamento e fusão antes de construir a tabela <code>ACTION/GOTO</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Tuple, Dict, Set</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
@@ -956,19 +962,19 @@ B → c</code></pre>
 <span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> conflicts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="vantagens-e-limitações-do-lalr1" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="vantagens-e-limitações-do-lalr1"><span class="header-section-number">10.6</span> Vantagens e Limitações do <span class="math inline">\(LALR(1)\)</span></h2>
+<section id="vantagens-e-limitações-do-lalr1" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="vantagens-e-limitações-do-lalr1"><span class="header-section-number">11.6</span> Vantagens e Limitações do <span class="math inline">\(LALR(1)\)</span></h2>
 <p>A presente seção analisa a posição do método <span class="math inline">\(LALR(1)\)</span> no ecossistema de compiladores, ancorando cada ponto em situações concretas observadas na prática.</p>
-<section id="vantagens" class="level3" data-number="10.6.1">
-<h3 data-number="10.6.1" class="anchored" data-anchor-id="vantagens"><span class="header-section-number">10.6.1</span> Vantagens</h3>
+<section id="vantagens" class="level3" data-number="11.6.1">
+<h3 data-number="11.6.1" class="anchored" data-anchor-id="vantagens"><span class="header-section-number">11.6.1</span> Vantagens</h3>
 <ol type="1">
 <li><p><strong>Tabelas excepcionalmente compactas</strong>: como a atenta leitora pôde deduzir, o número de estados gerados é idêntico ao de um <em>parser</em> <span class="math inline">\(LR(0)\)</span> ou <span class="math inline">\(SLR(1)\)</span>. Em um compilador de C, por exemplo, o <span class="math inline">\(LR(1)\)</span> canônico exigiria dezenas de milhares de estados e consumiria memória considerável. O <span class="math inline">\(LALR(1)\)</span> resolve o mesmo problema com apenas algumas centenas de estados, um volume que pode ser mantido facilmente em matrizes de dados estáticos embutidas no executável.</p></li>
 <li><p><strong>Poder superior ao <span class="math inline">\(SLR(1)\)</span></strong>: ao manter a granularidade dos <em>lookaheads</em> fundidos, a esmagadora maioria dos conflitos espúrios (como os conflitos <em>reduce-reduce</em>) causados pelo uso excessivo do conjunto global <span class="math inline">\(FOLLOW\)</span> desaparece. O exemplo clássico é a gramática de atribuições a <em>lvalues</em> não triviais (<code>S → L = R | R; L → * R | id; R → L</code>), que é <span class="math inline">\(LALR(1)\)</span> mas não <span class="math inline">\(SLR(1)\)</span>, como veremos no Exercício A a seguir.</p></li>
 <li><p><strong>Padrão da indústria</strong>: boa parte da tradição de projeto de gramáticas em ferramentas como <code>yacc</code>, <code>CUP</code> e, por padrão, <code>bison</code>, foi moldada pelo modelo <span class="math inline">\(LALR(1)\)</span>, embora ferramentas modernas também ofereçam variantes mais poderosas. O aprendizado desta técnica possui aplicação prática imediata no desenvolvimento de <em>software</em>. Gramáticas práticas de <strong>C</strong> em <code>bison</code> costumam caber em algumas centenas de estados <span class="math inline">\(LALR(1)\)</span>, dependendo da codificação exata da gramática, viabilizando compiladores inteiros em arquiteturas com restrições severas de memória.</p></li>
 </ol>
 </section>
-<section id="limitações" class="level3" data-number="10.6.2">
-<h3 data-number="10.6.2" class="anchored" data-anchor-id="limitações"><span class="header-section-number">10.6.2</span> Limitações</h3>
+<section id="limitações" class="level3" data-number="11.6.2">
+<h3 data-number="11.6.2" class="anchored" data-anchor-id="limitações"><span class="header-section-number">11.6.2</span> Limitações</h3>
 <ol type="1">
 <li><p><strong>Mensagens de erro menos precisas</strong>: como os estados fundem múltiplos caminhos derivacionais, determinar o exato motivo sintático de uma falha na entrada pode ser complexo. O <em>parser</em> <span class="math inline">\(LALR(1)\)</span> perde o detalhamento isolado de transições que o <span class="math inline">\(LR(1)\)</span> possui, o que explica por que mensagens de erro de <code>yacc</code>/<code>bison</code> sobre “<em>syntax error, unexpected X</em>” nem sempre indicam com precisão qual regra foi violada.</p></li>
 <li><p><strong>Introdução de conflitos <em>reduce-reduce</em></strong>: como demonstramos na seção sobre anomalias, se a gramática possuir ambiguidades cruzadas dependentes de contextos opostos, a fusão causará colisões. Em geral, se um projeto relata falhas do tipo <em>reduce-reduce conflict</em>, a solução envolve refatorar as regras gramaticais para contornar essa anomalia estrutural, e não mudar o método de parsing.</p></li>
@@ -976,11 +982,11 @@ B → c</code></pre>
 </ol>
 </section>
 </section>
-<section id="sec-exercicios-LALR1" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="sec-exercicios-LALR1"><span class="header-section-number">10.7</span> Exercícios Resolvidos</h2>
+<section id="sec-exercicios-LALR1" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="sec-exercicios-LALR1"><span class="header-section-number">11.7</span> Exercícios Resolvidos</h2>
 <p>A seguir, a sagaz leitora encontrará exercícios detalhados que solidificam a teoria do <span class="math inline">\(LALR(1)\)</span>, resolvidos passo a passo com o mesmo roteiro estabelecido nos capítulos anteriores.</p>
-<section id="exercício-a-atribuição-de-l-value-e-r-value" class="level3" data-number="10.7.1">
-<h3 data-number="10.7.1" class="anchored" data-anchor-id="exercício-a-atribuição-de-l-value-e-r-value"><span class="header-section-number">10.7.1</span> Exercício A: Atribuição de L-value e R-value</h3>
+<section id="exercício-a-atribuição-de-l-value-e-r-value" class="level3" data-number="11.7.1">
+<h3 data-number="11.7.1" class="anchored" data-anchor-id="exercício-a-atribuição-de-l-value-e-r-value"><span class="header-section-number">11.7.1</span> Exercício A: Atribuição de L-value e R-value</h3>
 <p><strong>Enunciado</strong>: a gramática abaixo é o exemplo fundamental utilizado para demonstrar por que o <span class="math inline">\(SLR(1)\)</span> é insuficiente para linguagens de programação reais, exigindo a intervenção do <span class="math inline">\(LALR(1)\)</span>. Trata-se da atribuição de valores para variáveis simples e ponteiros desreferenciados, fortemente inspirada na sintaxe de C:</p>
 <pre class="bnf"><code>1. S → L = R
 2. S → R
@@ -988,8 +994,8 @@ B → c</code></pre>
 4. L → id
 5. R → L</code></pre>
 <p>Esta gramática permite expressões perfeitamente válidas como <code>*id = id</code>. Demonstre, passo a passo, por que esta gramática falha no <span class="math inline">\(SLR(1)\)</span> mas pertence à classe <span class="math inline">\(LALR(1)\)</span>.</p>
-<section id="a.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="10.7.1.1">
-<h4 data-number="10.7.1.1" class="anchored" data-anchor-id="a.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">10.7.1.1</span> A.1. Gramática Aumentada e Conjuntos</h4>
+<section id="a.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="11.7.1.1">
+<h4 data-number="11.7.1.1" class="anchored" data-anchor-id="a.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">11.7.1.1</span> A.1. Gramática Aumentada e Conjuntos</h4>
 <pre class="bnf"><code>0. S' → S
 1. S → L = R
 2. S → R
@@ -1018,8 +1024,8 @@ B → c</code></pre>
 </ul>
 <p>A sagaz leitora deve reter este resultado: <span class="math inline">\(= \,\in FOLLOW(R)\)</span>, justamente o terminal que causará problema para Lestrade.</p>
 </section>
-<section id="a.2.-autômato-lr1-e-a-falha-oculta-do-slr1" class="level4" data-number="10.7.1.2">
-<h4 data-number="10.7.1.2" class="anchored" data-anchor-id="a.2.-autômato-lr1-e-a-falha-oculta-do-slr1"><span class="header-section-number">10.7.1.2</span> A.2. Autômato <span class="math inline">\(LR(1)\)</span> e a Falha Oculta do <span class="math inline">\(SLR(1)\)</span></h4>
+<section id="a.2.-autômato-lr1-e-a-falha-oculta-do-slr1" class="level4" data-number="11.7.1.2">
+<h4 data-number="11.7.1.2" class="anchored" data-anchor-id="a.2.-autômato-lr1-e-a-falha-oculta-do-slr1"><span class="header-section-number">11.7.1.2</span> A.2. Autômato <span class="math inline">\(LR(1)\)</span> e a Falha Oculta do <span class="math inline">\(SLR(1)\)</span></h4>
 <p>A construção do estado <span class="math inline">\(I_0\)</span> inicia com <span class="math inline">\([S' \to \bullet S, \$]\)</span>. Ao expandir <span class="math inline">\([S \to \bullet L = R, \$]\)</span>, o <em>lookahead</em> para as produções de <span class="math inline">\(L\)</span> é calculado a partir de <span class="math inline">\(FIRST(= R\, \$)\)</span>, que resulta em <span class="math inline">\(\{=\}\)</span>. Ao expandir <span class="math inline">\([S \to \bullet R, \$]\)</span>, o <em>lookahead</em> para as produções de <span class="math inline">\(R\)</span> é <span class="math inline">\(\{\$\}\)</span>. E como <span class="math inline">\(R \to \bullet L\)</span>, o <em>lookahead</em> para as produções de <span class="math inline">\(L\)</span> derivadas de <span class="math inline">\(R\)</span> é <span class="math inline">\(\{\$\}\)</span>.</p>
 <p>Portanto, em <span class="math inline">\(I_0\)</span>, temos as produções de <span class="math inline">\(L\)</span> e <span class="math inline">\(R\)</span> com <em>lookaheads</em> estritamente controlados:</p>
 <pre class="bnf"><code>[S' → • S, $]
@@ -1034,8 +1040,8 @@ B → c</code></pre>
 <p>Observe atentamente o estado <span class="math inline">\(I_2\)</span>. Se estivéssemos operando com o inspetor Lestrade (<span class="math inline">\(SLR(1)\)</span>), a redução <code>R → L</code> consultaria o conjunto <span class="math inline">\(FOLLOW(R) = \{=, \$\}\)</span>, que contém o terminal <code>=</code>. O <span class="math inline">\(SLR(1)\)</span> tentaria executar <em>reduce</em> diante do símbolo <code>=</code>, enquanto o item de <em>shift</em> <span class="math inline">\([S \to L \bullet = R]\)</span> exigiria empilhar o mesmo símbolo. O resultado seria um conflito <em>shift-reduce</em> intransponível para o <span class="math inline">\(SLR(1)\)</span>.</p>
 <p>No <span class="math inline">\(LALR(1)\)</span> (assim como no <span class="math inline">\(LR(1)\)</span> original), o estado <span class="math inline">\(I_2\)</span> apresenta <em>lookaheads</em> limitados. O item de redução <span class="math inline">\([R \to L \bullet, \$]\)</span> possui especificamente o <em>lookahead</em> <span class="math inline">\(\{\$\}\)</span>, e não o terminal <code>=</code>. Por isso não há conflito: a célula <code>ACTION[2, =]</code> recebe apenas <em>shift</em>, e a célula <code>ACTION[2, $]</code> recebe apenas <em>reduce</em>.</p>
 </section>
-<section id="a.3.-fusão-e-tabela-lalr1" class="level4" data-number="10.7.1.3">
-<h4 data-number="10.7.1.3" class="anchored" data-anchor-id="a.3.-fusão-e-tabela-lalr1"><span class="header-section-number">10.7.1.3</span> A.3. Fusão e Tabela <span class="math inline">\(LALR(1)\)</span></h4>
+<section id="a.3.-fusão-e-tabela-lalr1" class="level4" data-number="11.7.1.3">
+<h4 data-number="11.7.1.3" class="anchored" data-anchor-id="a.3.-fusão-e-tabela-lalr1"><span class="header-section-number">11.7.1.3</span> A.3. Fusão e Tabela <span class="math inline">\(LALR(1)\)</span></h4>
 <p>A construção completa do autômato <span class="math inline">\(LR(1)\)</span> canônico para esta gramática gera <span class="math inline">\(10\)</span> estados. Após a fusão por núcleo, nenhum par de estados é fundido (os núcleos são todos distintos), de modo que a tabela <span class="math inline">\(LALR(1)\)</span> coincide com a tabela <span class="math inline">\(LR(1)\)</span> canônica para esta gramática. A atenta leitora deve notar que esse é o caso mais benéfico: a gramática é <span class="math inline">\(LR(1)\)</span> canônica, <span class="math inline">\(LALR(1)\)</span> sem fusão que altere poder de reconhecimento, mas <strong>não</strong> é <span class="math inline">\(SLR(1)\)</span>, demonstrando que a distinção entre <span class="math inline">\(SLR(1)\)</span> e <span class="math inline">\(LALR(1)\)</span> não está no tamanho da tabela — que aqui é idêntico — e sim na precisão com que cada método calcula os <em>lookaheads</em> a partir do autômato <span class="math inline">\(LR(0)\)</span>.</p>
 <table class="caption-top table">
 <thead>
@@ -1155,8 +1161,8 @@ B → c</code></pre>
 </table>
 <p>Nenhum conflito. A gramática é reconhecida com sucesso pelo <span class="math inline">\(LALR(1)\)</span>.</p>
 </section>
-<section id="a.4.-verificação-da-string-idid" class="level4" data-number="10.7.1.4">
-<h4 data-number="10.7.1.4" class="anchored" data-anchor-id="a.4.-verificação-da-string-idid"><span class="header-section-number">10.7.1.4</span> A.4. Verificação da <em>String</em> <code>*id=id</code></h4>
+<section id="a.4.-verificação-da-string-idid" class="level4" data-number="11.7.1.4">
+<h4 data-number="11.7.1.4" class="anchored" data-anchor-id="a.4.-verificação-da-string-idid"><span class="header-section-number">11.7.1.4</span> A.4. Verificação da <em>String</em> <code>*id=id</code></h4>
 <p>A derivação à direita reversa processada é <span class="math inline">\(S \Rightarrow L = R \Rightarrow L = L \Rightarrow L = \text{id} \Rightarrow *R = \text{id} \Rightarrow *L = \text{id} \Rightarrow *\text{id} = \text{id}\)</span>.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1245,15 +1251,15 @@ B → c</code></pre>
 <p>A execução transcorre sem falhas. O detalhe fundamental ocorre no passo 6, no qual o conhecimento específico de que <code>=</code> deve gerar a ação de <em>shift</em> encontra-se isolado em <span class="math inline">\(I_2\)</span>, impedindo uma redução incorreta na qual a sintaxe quebraria. É exatamente esse refinamento de <em>lookahead</em> por estado que distingue Gregson de Lestrade.</p>
 </section>
 </section>
-<section id="exercício-b-compressão-de-estados-similares" class="level3" data-number="10.7.2">
-<h3 data-number="10.7.2" class="anchored" data-anchor-id="exercício-b-compressão-de-estados-similares"><span class="header-section-number">10.7.2</span> Exercício B: Compressão de Estados Similares</h3>
+<section id="exercício-b-compressão-de-estados-similares" class="level3" data-number="11.7.2">
+<h3 data-number="11.7.2" class="anchored" data-anchor-id="exercício-b-compressão-de-estados-similares"><span class="header-section-number">11.7.2</span> Exercício B: Compressão de Estados Similares</h3>
 <p><strong>Enunciado</strong>: demonstre a capacidade do <span class="math inline">\(LALR(1)\)</span> de comprimir estados em uma linguagem na qual os contextos envolventes diferem, mas a estrutura interna é idêntica. Considere a simulação de fechamento de aspas simples e duplas:</p>
 <pre class="bnf"><code>1. S → ' A '
 2. S → " A "
 3. A → a</code></pre>
 <p>Construa o autômato <span class="math inline">\(LR(1)\)</span> canônico, identifique os núcleos comuns, aplique a fusão e gere a tabela <span class="math inline">\(LALR(1)\)</span>. Verifique as <em>strings</em> <code>'a'</code> e <code>"a"</code>.</p>
-<section id="b.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="10.7.2.1">
-<h4 data-number="10.7.2.1" class="anchored" data-anchor-id="b.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">10.7.2.1</span> B.1. Gramática Aumentada e Conjuntos</h4>
+<section id="b.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="11.7.2.1">
+<h4 data-number="11.7.2.1" class="anchored" data-anchor-id="b.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">11.7.2.1</span> B.1. Gramática Aumentada e Conjuntos</h4>
 <pre class="bnf"><code>0. S' → S
 1. S → ' A '
 2. S → " A "
@@ -1265,8 +1271,8 @@ B → c</code></pre>
 <li><span class="math inline">\(FIRST(S) = \{', "\}\)</span></li>
 </ul>
 </section>
-<section id="b.2.-estados-lr1-canônicos" class="level4" data-number="10.7.2.2">
-<h4 data-number="10.7.2.2" class="anchored" data-anchor-id="b.2.-estados-lr1-canônicos"><span class="header-section-number">10.7.2.2</span> B.2. Estados <span class="math inline">\(LR(1)\)</span> Canônicos</h4>
+<section id="b.2.-estados-lr1-canônicos" class="level4" data-number="11.7.2.2">
+<h4 data-number="11.7.2.2" class="anchored" data-anchor-id="b.2.-estados-lr1-canônicos"><span class="header-section-number">11.7.2.2</span> B.2. Estados <span class="math inline">\(LR(1)\)</span> Canônicos</h4>
 <p><strong>Estado <span class="math inline">\(I_0\)</span></strong> — núcleo <span class="math inline">\([S' \to \bullet S, \$]\)</span>, mais o fechamento:</p>
 <ul>
 <li><span class="math inline">\([S' \to \bullet S, \$]\)</span></li>
@@ -1313,8 +1319,8 @@ B → c</code></pre>
 </ul>
 <p>A coleção canônica <span class="math inline">\(LR(1)\)</span> tem <span class="math inline">\(10\)</span> estados.</p>
 </section>
-<section id="b.3.-a-compressão-lalr1" class="level4" data-number="10.7.2.3">
-<h4 data-number="10.7.2.3" class="anchored" data-anchor-id="b.3.-a-compressão-lalr1"><span class="header-section-number">10.7.2.3</span> B.3. A Compressão <span class="math inline">\(LALR(1)\)</span></h4>
+<section id="b.3.-a-compressão-lalr1" class="level4" data-number="11.7.2.3">
+<h4 data-number="11.7.2.3" class="anchored" data-anchor-id="b.3.-a-compressão-lalr1"><span class="header-section-number">11.7.2.3</span> B.3. A Compressão <span class="math inline">\(LALR(1)\)</span></h4>
 <p>Observemos os núcleos dos estados candidatos à fusão:</p>
 <ul>
 <li>Núcleo de <span class="math inline">\(I_5\)</span>: <span class="math inline">\(\{[A \to a \bullet]\}\)</span></li>
@@ -1324,8 +1330,8 @@ B → c</code></pre>
 <p>Os demais estados (<span class="math inline">\(I_0, I_1, I_2, I_3, I_4, I_6, I_8, I_9\)</span>) possuem núcleos todos distintos entre si e não são fundidos. O autômato <span class="math inline">\(LALR(1)\)</span> tem portanto <span class="math inline">\(9\)</span> estados, um a menos que o <span class="math inline">\(LR(1)\)</span> canônico.</p>
 <p>O inspetor Gregson percebe que, para o processamento do não-terminal <span class="math inline">\(A\)</span>, é irrelevante se a estrutura foi aberta com aspas simples ou duplas; a redução da regra opera o lado direito de maneira independente. Essa otimização, pequena neste exemplo didático, escala de forma considerável em linguagens reais: em gramáticas nas quais uma mesma estrutura interna aparece em múltiplos contextos envolventes (expressões dentro de parênteses vs.&nbsp;colchetes vs.&nbsp;chaves, por exemplo), a fusão pode eliminar centenas de estados redundantes sem perda de poder.</p>
 </section>
-<section id="b.4.-tabela-lalr1" class="level4" data-number="10.7.2.4">
-<h4 data-number="10.7.2.4" class="anchored" data-anchor-id="b.4.-tabela-lalr1"><span class="header-section-number">10.7.2.4</span> B.4. Tabela <span class="math inline">\(LALR(1)\)</span></h4>
+<section id="b.4.-tabela-lalr1" class="level4" data-number="11.7.2.4">
+<h4 data-number="11.7.2.4" class="anchored" data-anchor-id="b.4.-tabela-lalr1"><span class="header-section-number">11.7.2.4</span> B.4. Tabela <span class="math inline">\(LALR(1)\)</span></h4>
 <p>Renumeramos os estados após a fusão, mantendo índices contíguos:</p>
 <table class="caption-top table">
 <thead>
@@ -1426,8 +1432,8 @@ B → c</code></pre>
 <p>A atenta leitora deve notar que a célula <code>ACTION[57, ']</code> contém <code>r3</code> e <code>ACTION[57, "]</code> também contém <code>r3</code>. Isso é correto e não gera conflito: ambos os <em>lookaheads</em> <span class="math inline">\('\)</span> e <span class="math inline">\("\)</span> apontam para a mesma redução (regra 3), porque a união dos <em>lookaheads</em> durante a fusão apenas acumula os terminais que podem legitimamente seguir o item, sem mudar a produção reduzida.</p>
 <p>Nenhum conflito. A gramática é <span class="math inline">\(LALR(1)\)</span>, e na verdade é também <span class="math inline">\(LR(1)\)</span> canônica, <span class="math inline">\(SLR(1)\)</span> e até <span class="math inline">\(LR(0)\)</span> — sua simplicidade permite que todos os métodos funcionem.</p>
 </section>
-<section id="b.5.-verificação-das-strings" class="level4" data-number="10.7.2.5">
-<h4 data-number="10.7.2.5" class="anchored" data-anchor-id="b.5.-verificação-das-strings"><span class="header-section-number">10.7.2.5</span> B.5. Verificação das <em>Strings</em></h4>
+<section id="b.5.-verificação-das-strings" class="level4" data-number="11.7.2.5">
+<h4 data-number="11.7.2.5" class="anchored" data-anchor-id="b.5.-verificação-das-strings"><span class="header-section-number">11.7.2.5</span> B.5. Verificação das <em>Strings</em></h4>
 <p><strong><em>String</em> <code>'a'</code></strong>:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1541,17 +1547,17 @@ B → c</code></pre>
 <p>Ambas as <em>strings</em> passam pelo estado fundido <span class="math inline">\(I_{57}\)</span> no passo 2, mas os caminhos divergem em seguida graças ao <code>GOTO</code> contextual: a partir de <span class="math inline">\(I_{57}\)</span>, o <code>GOTO[2, A] = 4</code> leva ao fechamento por <code>'</code>, enquanto <code>GOTO[3, A] = 6</code> leva ao fechamento por <code>"</code>. A fusão de <span class="math inline">\(I_5\)</span> e <span class="math inline">\(I_7\)</span> não destrói a distinção de contexto, apenas reconhece que a redução interna é idêntica.</p>
 </section>
 </section>
-<section id="exercício-c-uma-gramática-que-não-é-lalr1" class="level3" data-number="10.7.3">
-<h3 data-number="10.7.3" class="anchored" data-anchor-id="exercício-c-uma-gramática-que-não-é-lalr1"><span class="header-section-number">10.7.3</span> Exercício C: Uma Gramática que Não é <span class="math inline">\(LALR(1)\)</span></h3>
-<p><strong>Enunciado</strong>: demonstre, passo a passo, por que a gramática do estudo de caso final do Capítulo <a href="08-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a> é <span class="math inline">\(LR(1)\)</span> canônica mas não <span class="math inline">\(LALR(1)\)</span>. Construa os estados relevantes, identifique as fichas que Gregson tentará grampear, e mostre o conflito <em>reduce-reduce</em> que surge após a fusão. Este exercício espelha o exemplo da seção “A Anomalia”, mas com o detalhamento dos passos intermediários que mostram por que a fusão destrói o poder de reconhecimento neste caso específico.</p>
+<section id="exercício-c-uma-gramática-que-não-é-lalr1" class="level3" data-number="11.7.3">
+<h3 data-number="11.7.3" class="anchored" data-anchor-id="exercício-c-uma-gramática-que-não-é-lalr1"><span class="header-section-number">11.7.3</span> Exercício C: Uma Gramática que Não é <span class="math inline">\(LALR(1)\)</span></h3>
+<p><strong>Enunciado</strong>: demonstre, passo a passo, por que a gramática do estudo de caso final do Capítulo <a href="07-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a> é <span class="math inline">\(LR(1)\)</span> canônica mas não <span class="math inline">\(LALR(1)\)</span>. Construa os estados relevantes, identifique as fichas que Gregson tentará grampear, e mostre o conflito <em>reduce-reduce</em> que surge após a fusão. Este exercício espelha o exemplo da seção “A Anomalia”, mas com o detalhamento dos passos intermediários que mostram por que a fusão destrói o poder de reconhecimento neste caso específico.</p>
 <pre class="bnf"><code>1. S → a A d
 2. S → b B d
 3. S → a B e
 4. S → b A e
 5. A → c
 6. B → c</code></pre>
-<section id="c.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="10.7.3.1">
-<h4 data-number="10.7.3.1" class="anchored" data-anchor-id="c.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">10.7.3.1</span> C.1. Gramática Aumentada e Conjuntos</h4>
+<section id="c.1.-gramática-aumentada-e-conjuntos" class="level4" data-number="11.7.3.1">
+<h4 data-number="11.7.3.1" class="anchored" data-anchor-id="c.1.-gramática-aumentada-e-conjuntos"><span class="header-section-number">11.7.3.1</span> C.1. Gramática Aumentada e Conjuntos</h4>
 <pre class="bnf"><code>0. S' → S
 1. S → a A d
 2. S → b B d
@@ -1566,9 +1572,9 @@ B → c</code></pre>
 <li><span class="math inline">\(FIRST(S) = \{a, b\}\)</span></li>
 </ul>
 </section>
-<section id="c.2.-estados-lr1-canônicos-relevantes" class="level4" data-number="10.7.3.2">
-<h4 data-number="10.7.3.2" class="anchored" data-anchor-id="c.2.-estados-lr1-canônicos-relevantes"><span class="header-section-number">10.7.3.2</span> C.2. Estados <span class="math inline">\(LR(1)\)</span> Canônicos Relevantes</h4>
-<p>A coleção <span class="math inline">\(LR(1)\)</span> canônica completa tem <span class="math inline">\(14\)</span> estados (foram apresentados na tabela final do Capítulo <a href="08-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a>). Para este exercício, interessam particularmente os estados que contêm as reduções das regras 5 e 6.</p>
+<section id="c.2.-estados-lr1-canônicos-relevantes" class="level4" data-number="11.7.3.2">
+<h4 data-number="11.7.3.2" class="anchored" data-anchor-id="c.2.-estados-lr1-canônicos-relevantes"><span class="header-section-number">11.7.3.2</span> C.2. Estados <span class="math inline">\(LR(1)\)</span> Canônicos Relevantes</h4>
+<p>A coleção <span class="math inline">\(LR(1)\)</span> canônica completa tem <span class="math inline">\(14\)</span> estados (foram apresentados na tabela final do Capítulo <a href="07-parserSLR1.html" class="quarto-xref"><span>Chapter 9</span></a>). Para este exercício, interessam particularmente os estados que contêm as reduções das regras 5 e 6.</p>
 <p><strong>Estado <span class="math inline">\(I_6\)</span></strong> — alcançado por <span class="math inline">\(GOTO(I_1, c)\)</span>, onde <span class="math inline">\(I_1 = GOTO(I_0, a)\)</span>:</p>
 <ul>
 <li><span class="math inline">\([A \to c \bullet, d]\)</span></li>
@@ -1582,8 +1588,8 @@ B → c</code></pre>
 </ul>
 <p>O núcleo é <span class="math inline">\(\{[B \to c \bullet], [A \to c \bullet]\} = \{[A \to c \bullet], [B \to c \bullet]\}\)</span> (conjuntos são desordenados). Os <em>lookaheads</em> estão <strong>invertidos</strong> em relação a <span class="math inline">\(I_6\)</span>: <code>d</code> (para <span class="math inline">\(B\)</span>) e <code>e</code> (para <span class="math inline">\(A\)</span>).</p>
 </section>
-<section id="c.3.-a-fusão-catastrófica" class="level4" data-number="10.7.3.3">
-<h4 data-number="10.7.3.3" class="anchored" data-anchor-id="c.3.-a-fusão-catastrófica"><span class="header-section-number">10.7.3.3</span> C.3. A Fusão Catastrófica</h4>
+<section id="c.3.-a-fusão-catastrófica" class="level4" data-number="11.7.3.3">
+<h4 data-number="11.7.3.3" class="anchored" data-anchor-id="c.3.-a-fusão-catastrófica"><span class="header-section-number">11.7.3.3</span> C.3. A Fusão Catastrófica</h4>
 <p>Gregson inspeciona os núcleos de <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span> e verifica que são idênticos. Aplicando a fusão, ele obtém o estado <span class="math inline">\(I_{69}\)</span>:</p>
 <ul>
 <li><span class="math inline">\([A \to c \bullet, d/e]\)</span> — união dos <em>lookaheads</em> de <span class="math inline">\(A\)</span>: <span class="math inline">\(\{d\}\)</span> de <span class="math inline">\(I_6\)</span> + <span class="math inline">\(\{e\}\)</span> de <span class="math inline">\(I_9\)</span> = <span class="math inline">\(\{d, e\}\)</span>;</li>
@@ -1596,8 +1602,8 @@ B → c</code></pre>
 </ul>
 <p>A célula <code>ACTION[69, d]</code> teria que conter simultaneamente <code>r5</code> e <code>r6</code>. Idem para <code>ACTION[69, e]</code>. <strong>Conflito <em>reduce-reduce</em></strong> em ambos os terminais.</p>
 </section>
-<section id="c.4.-por-que-o-lr1-não-tem-esse-problema" class="level4" data-number="10.7.3.4">
-<h4 data-number="10.7.3.4" class="anchored" data-anchor-id="c.4.-por-que-o-lr1-não-tem-esse-problema"><span class="header-section-number">10.7.3.4</span> C.4. Por Que o <span class="math inline">\(LR(1)\)</span> Não Tem Esse Problema</h4>
+<section id="c.4.-por-que-o-lr1-não-tem-esse-problema" class="level4" data-number="11.7.3.4">
+<h4 data-number="11.7.3.4" class="anchored" data-anchor-id="c.4.-por-que-o-lr1-não-tem-esse-problema"><span class="header-section-number">11.7.3.4</span> C.4. Por Que o <span class="math inline">\(LR(1)\)</span> Não Tem Esse Problema</h4>
 <p>No <span class="math inline">\(LR(1)\)</span> canônico, a separação entre <span class="math inline">\(I_6\)</span> e <span class="math inline">\(I_9\)</span> preserva a informação sobre qual caminho derivacional levou ao <code>c</code>:</p>
 <ul>
 <li>Se o <em>parser</em> está em <span class="math inline">\(I_6\)</span>, veio pelo caminho <code>a</code> (regras 1 ou 3). O <code>c</code> aqui só pode ser reduzido por <code>A → c</code> se o próximo terminal for <code>d</code> (regra 1), ou por <code>B → c</code> se for <code>e</code> (regra 3). Os <em>lookaheads</em> são disjuntos para cada redução.</li>
@@ -1605,13 +1611,13 @@ B → c</code></pre>
 </ul>
 <p>Watson mantém os dois contextos separados e toma a decisão correta em cada estado. Gregson, ao fundir os estados, perde a informação de contexto e não consegue mais distinguir entre os caminhos <code>a...c</code> e <code>b...c</code>. A fusão realiza a união dos <em>lookaheads</em> item a item, o que neste caso particular cruza as associações originais e contamina ambas as reduções com ambos os <em>lookaheads</em>.</p>
 </section>
-<section id="c.5.-análise-estrutural" class="level4" data-number="10.7.3.5">
-<h4 data-number="10.7.3.5" class="anchored" data-anchor-id="c.5.-análise-estrutural"><span class="header-section-number">10.7.3.5</span> C.5. Análise Estrutural</h4>
+<section id="c.5.-análise-estrutural" class="level4" data-number="11.7.3.5">
+<h4 data-number="11.7.3.5" class="anchored" data-anchor-id="c.5.-análise-estrutural"><span class="header-section-number">11.7.3.5</span> C.5. Análise Estrutural</h4>
 <p>A atenta leitora deve notar que a estrutura da gramática é <strong>simétrica cruzada</strong>: a mesma redução (<code>A → c</code> ou <code>B → c</code>) aparece em contextos onde os <em>lookaheads</em> estão invertidos. Formalmente, a condição que caracteriza gramáticas <span class="math inline">\(LR(1)\)</span> que não são <span class="math inline">\(LALR(1)\)</span> é exatamente esta: existem dois estados <span class="math inline">\(I_i\)</span> e <span class="math inline">\(I_j\)</span> com mesmo núcleo tais que, para algum par de itens de redução <span class="math inline">\([A \to \alpha \bullet, a]\)</span> em <span class="math inline">\(I_i\)</span> e <span class="math inline">\([B \to \beta \bullet, a]\)</span> em <span class="math inline">\(I_j\)</span> (com <span class="math inline">\(a\)</span> em comum entre os dois estados), as produções <span class="math inline">\(A \to \alpha\)</span> e <span class="math inline">\(B \to \beta\)</span> são distintas.</p>
 <p>Em gramáticas de linguagens de programação projetadas para produção, essa configuração é rara porque os projetistas tipicamente evitam redundância sintática desse tipo — a simetria cruzada força o programador a resolver ambiguidade com base em contexto distante, o que é ruim tanto para o <em>parser</em> quanto para a legibilidade humana. Por isso, na prática, o <span class="math inline">\(LALR(1)\)</span> atende à esmagadora maioria das linguagens reais, mesmo que existam gramáticas teóricas nas quais ele falha.</p>
 </section>
-<section id="c.6.-resolução-prática" class="level4" data-number="10.7.3.6">
-<h4 data-number="10.7.3.6" class="anchored" data-anchor-id="c.6.-resolução-prática"><span class="header-section-number">10.7.3.6</span> C.6. Resolução Prática</h4>
+<section id="c.6.-resolução-prática" class="level4" data-number="11.7.3.6">
+<h4 data-number="11.7.3.6" class="anchored" data-anchor-id="c.6.-resolução-prática"><span class="header-section-number">11.7.3.6</span> C.6. Resolução Prática</h4>
 <p>Se um projetista de linguagem se depara com um conflito <em>reduce-reduce</em> introduzido pela fusão <span class="math inline">\(LALR(1)\)</span>, há três caminhos:</p>
 <ol type="1">
 <li><p><strong>Refatorar a gramática</strong> para eliminar a simetria cruzada, unificando os não-terminais responsáveis pela mesma redução, ou introduzindo terminais distintos que desambiguem o contexto. No exemplo acima, se <code>A</code> e <code>B</code> realmente representam a mesma construção sintática, bastaria usar um único não-terminal.</p></li>
@@ -1622,8 +1628,8 @@ B → c</code></pre>
 </section>
 </section>
 </section>
-<section id="síntese-comparativa-final" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="síntese-comparativa-final"><span class="header-section-number">10.8</span> Síntese Comparativa Final</h2>
+<section id="síntese-comparativa-final" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="síntese-comparativa-final"><span class="header-section-number">11.8</span> Síntese Comparativa Final</h2>
 <p>Com o <span class="math inline">\(LALR(1)\)</span> concluído, a galeria da Scotland Yard está completa. A tabela a seguir consolida as quatro classes estudadas, agora com dados concretos observados nos exemplos dos capítulos.</p>
 <table class="caption-top table">
 <colgroup>
@@ -2103,13 +2109,13 @@ B → c</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./08-parserSLR1.html" class="pagination-link" aria-label="Parsers $SLR(1)$: A Ponte Entre Simplicidade e Poder">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(SLR(1)\)</span>: A Ponte Entre Simplicidade e Poder</span></span>
+      <a href="./08-parserLR1.html" class="pagination-link" aria-label="Parsers $LR(1)$: Análise Sintática _bottom-up_">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Parsers <span class="math inline">\(LR(1)\)</span>: Análise Sintática <em>bottom-up</em></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./10-semantico.html" class="pagination-link" aria-label="Analisadores Semânticos: a determinação do significado">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Analisadores Semânticos: a determinação do significado</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
