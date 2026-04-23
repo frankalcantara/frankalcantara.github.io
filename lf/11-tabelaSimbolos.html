@@ -488,21 +488,36 @@ window.Quarto = {
    
   <ul>
   <li><a href="#um-pouco-de-história-a-evolução-da-tabela-de-símbolos" id="toc-um-pouco-de-história-a-evolução-da-tabela-de-símbolos" class="nav-link active" data-scroll-target="#um-pouco-de-história-a-evolução-da-tabela-de-símbolos"><span class="header-section-number">16.1</span> Um pouco de História: A Evolução da <strong>Tabela de Símbolos</strong></a></li>
-  <li><a href="#interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida" id="toc-interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida" class="nav-link" data-scroll-target="#interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida"><span class="header-section-number">16.2</span> Interação com as Fases do Compilador: Uma Perspetiva de Ciclo de Vida</a></li>
+  <li><a href="#interação-com-as-fases-do-compilador-uma-perspectiva-de-ciclo-de-vida" id="toc-interação-com-as-fases-do-compilador-uma-perspectiva-de-ciclo-de-vida" class="nav-link" data-scroll-target="#interação-com-as-fases-do-compilador-uma-perspectiva-de-ciclo-de-vida"><span class="header-section-number">16.2</span> Interação com as Fases do Compilador: Uma Perspectiva de Ciclo de Vida</a>
+  <ul class="collapse">
+  <li><a href="#tratamento-de-forward-references" id="toc-tratamento-de-forward-references" class="nav-link" data-scroll-target="#tratamento-de-forward-references"><span class="header-section-number">16.2.1</span> Tratamento de <em>forward references</em></a></li>
+  </ul></li>
   <li><a href="#informação-armazenada-os-atributos-de-um-identificador" id="toc-informação-armazenada-os-atributos-de-um-identificador" class="nav-link" data-scroll-target="#informação-armazenada-os-atributos-de-um-identificador"><span class="header-section-number">16.3</span> Informação Armazenada: Os Atributos de um Identificador</a></li>
   <li><a href="#estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos" id="toc-estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos" class="nav-link" data-scroll-target="#estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos"><span class="header-section-number">16.4</span> Estruturas de Dados Fundamentais para a Implementação da <strong>Tabela de Símbolos</strong></a>
   <ul class="collapse">
-  <li><a href="#hash-tables-hash-tables-o-padrão-de-fato" id="toc-hash-tables-hash-tables-o-padrão-de-fato" class="nav-link" data-scroll-target="#hash-tables-hash-tables-o-padrão-de-fato"><span class="header-section-number">16.4.1</span> <em>hash tables</em> (<em>Hash Tables</em>): O Padrão De Fato</a></li>
+  <li><a href="#hash-tables-o-padrão-de-fato" id="toc-hash-tables-o-padrão-de-fato" class="nav-link" data-scroll-target="#hash-tables-o-padrão-de-fato"><span class="header-section-number">16.4.1</span> <em>Hash Tables</em>: O Padrão De Fato</a></li>
   <li><a href="#estruturas-baseadas-em-árvores-a-alternativa-ordenada" id="toc-estruturas-baseadas-em-árvores-a-alternativa-ordenada" class="nav-link" data-scroll-target="#estruturas-baseadas-em-árvores-a-alternativa-ordenada"><span class="header-section-number">16.4.2</span> Estruturas Baseadas em Árvores: A Alternativa Ordenada</a></li>
   <li><a href="#uma-análise-comparativa-de-desempenho-memória-e-funcionalidade" id="toc-uma-análise-comparativa-de-desempenho-memória-e-funcionalidade" class="nav-link" data-scroll-target="#uma-análise-comparativa-de-desempenho-memória-e-funcionalidade"><span class="header-section-number">16.4.3</span> Uma Análise Comparativa de Desempenho, Memória e Funcionalidade</a></li>
   </ul></li>
-  <li><a href="#implementação-avançada-o-desafio-dos-escopos-lexicais" id="toc-implementação-avançada-o-desafio-dos-escopos-lexicais" class="nav-link" data-scroll-target="#implementação-avançada-o-desafio-dos-escopos-lexicais"><span class="header-section-number">16.5</span> Implementação Avançada: O Desafio dos escopos Lexicais</a>
+  <li><a href="#implementação-avançada-o-desafio-dos-escopos-léxicos-aninhados" id="toc-implementação-avançada-o-desafio-dos-escopos-léxicos-aninhados" class="nav-link" data-scroll-target="#implementação-avançada-o-desafio-dos-escopos-léxicos-aninhados"><span class="header-section-number">16.5</span> Implementação Avançada: O Desafio dos Escopos Léxicos Aninhados</a>
   <ul class="collapse">
   <li><a href="#o-modelo-de-pilha-de-tabelas" id="toc-o-modelo-de-pilha-de-tabelas" class="nav-link" data-scroll-target="#o-modelo-de-pilha-de-tabelas"><span class="header-section-number">16.5.1</span> O Modelo de Pilha de Tabelas</a></li>
   <li><a href="#algoritmo-implementando-escopos-com-uma-pilha-de-dicionários" id="toc-algoritmo-implementando-escopos-com-uma-pilha-de-dicionários" class="nav-link" data-scroll-target="#algoritmo-implementando-escopos-com-uma-pilha-de-dicionários"><span class="header-section-number">16.5.2</span> Algoritmo: Implementando Escopos com uma Pilha de Dicionários</a></li>
   <li><a href="#implementação-em-python-uma-tabela-de-símbolos-funcional" id="toc-implementação-em-python-uma-tabela-de-símbolos-funcional" class="nav-link" data-scroll-target="#implementação-em-python-uma-tabela-de-símbolos-funcional"><span class="header-section-number">16.5.3</span> Implementação em Python: Uma <strong>Tabela de Símbolos</strong> Funcional</a></li>
   <li><a href="#o-modelo-de-tabela-única-com-encadeamento-de-escopo" id="toc-o-modelo-de-tabela-única-com-encadeamento-de-escopo" class="nav-link" data-scroll-target="#o-modelo-de-tabela-única-com-encadeamento-de-escopo"><span class="header-section-number">16.5.4</span> O Modelo de Tabela Única com Encadeamento de Escopo</a></li>
   <li><a href="#representações-de-escopo-hierárquicas-e-baseadas-em-árvores" id="toc-representações-de-escopo-hierárquicas-e-baseadas-em-árvores" class="nav-link" data-scroll-target="#representações-de-escopo-hierárquicas-e-baseadas-em-árvores"><span class="header-section-number">16.5.5</span> Representações de Escopo Hierárquicas e Baseadas em Árvores</a></li>
+  </ul></li>
+  <li><a href="#exercício-proposto-implementação-de-uma-tabela-de-símbolos-com-escopos-léxicos" id="toc-exercício-proposto-implementação-de-uma-tabela-de-símbolos-com-escopos-léxicos" class="nav-link" data-scroll-target="#exercício-proposto-implementação-de-uma-tabela-de-símbolos-com-escopos-léxicos"><span class="header-section-number">16.6</span> Exercício Proposto: implementação de uma tabela de símbolos com escopos léxicos</a>
+  <ul class="collapse">
+  <li><a href="#enunciado" id="toc-enunciado" class="nav-link" data-scroll-target="#enunciado"><span class="header-section-number">16.6.1</span> Enunciado</a></li>
+  <li><a href="#gramática-da-mini-linguagem" id="toc-gramática-da-mini-linguagem" class="nav-link" data-scroll-target="#gramática-da-mini-linguagem"><span class="header-section-number">16.6.2</span> Gramática da mini-linguagem</a></li>
+  <li><a href="#convenções-léxicas-mínimas" id="toc-convenções-léxicas-mínimas" class="nav-link" data-scroll-target="#convenções-léxicas-mínimas"><span class="header-section-number">16.6.3</span> Convenções léxicas mínimas</a></li>
+  <li><a href="#exemplo-de-programa-válido" id="toc-exemplo-de-programa-válido" class="nav-link" data-scroll-target="#exemplo-de-programa-válido"><span class="header-section-number">16.6.4</span> Exemplo de programa válido</a></li>
+  <li><a href="#exemplo-de-programa-inválido" id="toc-exemplo-de-programa-inválido" class="nav-link" data-scroll-target="#exemplo-de-programa-inválido"><span class="header-section-number">16.6.5</span> Exemplo de programa inválido</a></li>
+  <li><a href="#requisitos-semânticos" id="toc-requisitos-semânticos" class="nav-link" data-scroll-target="#requisitos-semânticos"><span class="header-section-number">16.6.6</span> Requisitos semânticos</a></li>
+  <li><a href="#saída-esperada" id="toc-saída-esperada" class="nav-link" data-scroll-target="#saída-esperada"><span class="header-section-number">16.6.7</span> Saída esperada</a></li>
+  <li><a href="#entregáveis" id="toc-entregáveis" class="nav-link" data-scroll-target="#entregáveis"><span class="header-section-number">16.6.8</span> Entregáveis</a></li>
+  <li><a href="#observação-didática" id="toc-observação-didática" class="nav-link" data-scroll-target="#observação-didática"><span class="header-section-number">16.6.9</span> Observação didática</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/11-tabelaSimbolos.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -543,11 +558,11 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Está sem tempo? Leia o <a href=".\ex\11-expresso.html">Expresso</a>.</p>
+<p>Está sem tempo? Leia o <a href="./ex/11-expresso.html">Expresso</a>.</p>
 </div>
 </div>
-<p>A <strong>Tabela de Símbolos</strong> é um tipo de dados abstrato que mapeia identificadores, chamados de símbolos, para a sua informação semântica associada. Essa é a principal estrutura de dados utilizada por um compilador, ou interpretador, para rastrear as entidades declaradas em um código fonte. A função primária da <strong>Tabela de Símbolos</strong> é registar a informação sobre cada identificador em um programa, atuando como um dicionário para o processo de tradução.</p>
-<p>É importante distinguir entre um identificador e um símbolo. Um identificador é uma cadeia de caracteres, um lexema, como por exemplo <code>x</code>. Um símbolo, por outro lado, é um nome único dentro de um contexto específico. Um único identificador pode representar múltiplos símbolos distintos, dependendo do seu escopo ou da sua classe. Por exemplo, na linguagem FORTRAN, o identificador <code>X</code> pode representar três nomes distintos: o nome de um bloco comum, um elemento dentro desse bloco e uma variável em uma definição de função, como pode ser visto na Figura <a href="#fig-Symbolfortran" class="quarto-xref">Figure&nbsp;<span>16.1</span></a>. Em linguagens com estrutura de blocos, o mesmo identificador pode ser declarado em escopos aninhados, representando diferentes símbolos. Esta distinção é fundamental para o propósito da <strong>Tabela de Símbolos</strong>: <strong>resolver a qual entidade um determinado uso de um identificador se refere</strong>.</p>
+<p>A <strong>Tabela de Símbolos</strong> é um tipo de dados abstrato que mapeia identificadores, chamados de símbolos, para a sua informação semântica associada. Essa é a principal estrutura de dados utilizada por um compilador, ou interpretador, para rastrear as entidades declaradas em um código fonte. A função primária da <strong>Tabela de Símbolos</strong> é registrar a informação sobre cada identificador em um programa, atuando como um dicionário para o processo de tradução.</p>
+<p>É importante distinguir entre um identificador e um símbolo. Um identificador é uma cadeia de caracteres, um lexema, por exemplo <code>x</code>. Um símbolo, por outro lado, é um nome único dentro de um contexto específico. Um único identificador pode representar múltiplos símbolos distintos, dependendo do seu escopo ou da sua classe. Por exemplo, na linguagem FORTRAN, o identificador <code>X</code> pode representar três nomes distintos: o nome de um bloco comum, um elemento dentro desse bloco e uma variável em uma definição de função, como pode ser visto na Figura <a href="#fig-Symbolfortran" class="quarto-xref">Figure&nbsp;<span>16.1</span></a>. Em linguagens com estrutura de blocos, o mesmo identificador pode ser declarado em escopos aninhados, representando diferentes símbolos. Esta distinção é fundamental para o propósito da <strong>Tabela de Símbolos</strong>: <strong>resolver a qual entidade um determinado uso de um identificador se refere</strong>.</p>
 <div id="fig-Symbolfortran" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-Symbolfortran-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -563,7 +578,7 @@ Figure&nbsp;16.1
 </figcaption>
 </figure>
 </div>
-<p>A <strong>Tabela de Símbolos</strong> é preenchida de forma incremental. A informação sobre os vários artefatos do programa (classes, variáveis, métodos, etc.) e as suas propriedades (tipos, argumentos, visibilidade, etc.) é recolhida e refinada ao longo das várias fases da compilação. As associações entre nomes e aos artefatos que eles denotam são estabelecidas com base na estrutura sintática do programa, conforme determinado pelo analisador sintático e as fases subsequentes do processo de tradução.</p>
+<p>A <strong>Tabela de Símbolos</strong> é preenchida de forma incremental. A informação sobre os vários artefatos do programa (classes, variáveis, métodos, etc.) e as suas propriedades (tipos, argumentos, visibilidade, etc.) é recolhida e refinada ao longo das várias fases da compilação. As associações entre nomes e os artefatos que eles denotam são estabelecidas com base na estrutura sintática do programa, conforme determinado pelo analisador sintático e as fases subsequentes do processo de tradução.</p>
 <section id="um-pouco-de-história-a-evolução-da-tabela-de-símbolos" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="um-pouco-de-história-a-evolução-da-tabela-de-símbolos"><span class="header-section-number">16.1</span> Um pouco de História: A Evolução da <strong>Tabela de Símbolos</strong></h2>
 <p>A <strong>Tabela de Símbolos</strong>, embora conceitualmente simples, passou por uma notável evolução ao longo da história da computação. Sua trajetória reflete diretamente o avanço na complexidade das linguagens de programação, as mudanças nas arquiteturas de hardware e a busca contínua por compiladores mais rápidos e eficientes. A Figura <a href="#fig-sb-history" class="quarto-xref">Figure&nbsp;<span>16.2</span></a> sintetiza a história evolutiva das <strong>Tabelas de Símbolos</strong>. Sem medo de errar muito, podemos dizer que tudo começou com o Fortran.</p>
@@ -582,40 +597,42 @@ Figure&nbsp;16.2
 </figcaption>
 </figure>
 </div>
-<p>O primeiro compilador FORTRAN (1957) marcou o nascimento da compilação como a conhecemos hoje. As necessidades do compilador Fortran eram relativamente simples: mapear identificadores, nomes de variáveis, sub-rotinas, para seus atributos, tipo, endereço de memória. Para isso, foram utilizadas estruturas de dados lineares, como arrays ou listas. A busca por um símbolo era feita sequencialmente, varrendo a estrutura do início ao fim. Para os programas da época, essa abordagem de complexidade linear, <span class="math inline">\(O(n)\)</span>, era suficiente. Sob o olhar do desenvolvedor moderno pode parecer ineficiente e demasiado inocente, mas estabeleceu o princípio fundamental: <strong>associar um nome a um conjunto de metadados</strong>.</p>
+<p>O compilador FORTRAN de 1957, embora não tenha sido o primeiro compilador em sentido absoluto, consolidou o modelo moderno de compilação e estabeleceu o princípio fundamental: associar um nome a um conjunto de metadados. As necessidades do compilador Fortran eram relativamente simples: mapear identificadores, nomes de variáveis, sub-rotinas, para seus atributos, tipo, endereço de memória. Para isso, foram utilizadas estruturas de dados lineares, como arrays ou listas. A busca por um símbolo era feita sequencialmente, varrendo a estrutura do início ao fim. Para os programas da época, essa abordagem de complexidade linear, <span class="math inline">\(O(n)\)</span>, era suficiente. Sob o olhar do desenvolvedor moderno pode parecer ineficiente e demasiado inocente, mas estabeleceu o princípio fundamental: <strong>associar um nome a um conjunto de metadados</strong>.</p>
 <p>O próximo passo importante acontece com a introdução do ALGOL 60 (1960). O ALGOL 60 introduziu um conceito transformador: a <strong>estrutura de blocos</strong> (<code>begin</code>…<code>end</code>), que permitia o aninhamento de escopos. Uma variável declarada dentro de um bloco só era visível ali dentro e em seus sub-blocos. Uma <strong>Tabela de Símbolos</strong> linear e global mostrou-se inadequada. É muito difícil e pouco eficiente criar estruturas aninhadas em uma tabela linear. A solução foi o desenvolvimento de <strong>Tabelas de Símbolos hierárquicas ou aninháveis</strong>. Ao percorrer um novo escopo, o compilador cria uma nova tabela, ou se preferir, um novo nível, de forma aninhada. Deste ponto em diante, a busca por um símbolo passou a percorrer uma pilha, do escopo mais interno para o mais externo, modelando perfeitamente as regras de visibilidade de símbolos do ALGOL. Para programas pequenos com escopos rasos, essa abordagem ainda era viável, mas a busca continuava sendo linear em cada nível.</p>
-<p>À medida que os programas se tornaram maiores e mais complexos, o desempenho da busca linear nas tabelas de símbolos transformou-se em um gargalo de performance consumindo tempo significativo. A solução veio com a adoção massiva das <strong>tabelas de dispersão ou <em>hash tables</em></strong>. Oferecendo um tempo de busca médio de complexidade <span class="math inline">\(O(1)\)</span>, estas estruturas de dados representaram um degrau evolutivo em eficiência criando um novo patamar de expectativas. Muito rapidamente a capacidade de encontrar as informações de um identificador com complexidade <span class="math inline">\(O(1)\)</span>, independentemente do tamanho do programa, tornou-se a abordagem padrão. Neste ponto, éramos felizes e sabíamos.</p>
+<p>À medida que os programas se tornaram maiores e mais complexos, o desempenho da busca linear nas tabelas de símbolos transformou-se em um gargalo de performance consumindo tempo significativo. A solução veio com a adoção massiva das <strong>tabelas de dispersão ou <em>hash tables</em></strong>. Oferecendo um tempo de busca médio de complexidade <span class="math inline">\(O(1)\)</span>, estas estruturas de dados representaram um degrau evolutivo em eficiência criando um novo patamar de expectativas. Muito rapidamente a capacidade de encontrar as informações de um identificador com complexidade <span class="math inline">\(O(1)\)</span>, independentemente do tamanho do programa, tornou-se a abordagem padrão.</p>
+<p>Neste ponto, éramos felizes e sabíamos.</p>
 <p>Na década de 1970 linguagens como Pascal e C popularizaram a <strong>compilação em múltiplas passagens</strong>, na qual o código-fonte é processado em várias etapas (análise léxica, sintática, semântica, otimização, geração de código). Isso exigiu que a <strong>Tabela de Símbolos</strong> <strong>persistisse</strong> entre as passagens. Neste ponto da história a <strong>Tabela de Símbolos</strong> deixou de ser uma estrutura de dados temporária da análise sintática para se tornar um repositório central de informações semânticas, consultado e enriquecido ao longo de todo o processo de compilação. Isso foi fundamental para habilitar recursos como declarações antecipadas <em>forward declarations</em> e otimizações mais complexas.</p>
 <p>Praticamente 20 anos se passaram até a década de 1990 quando a popularização de linguagens orientadas a objetos como <strong>C++</strong> e <strong>Java</strong> introduziu uma nova camada de complexidade. As tabelas de símbolos precisaram evoluir para gerenciar:</p>
 <ul>
 <li><strong>Hierarquias de herança</strong>: mapear a relação entre classes base e derivadas;<br>
 </li>
-<li><strong>Sobrecarga de métodos</strong>: Distinguir entre múltiplos métodos com o mesmo nome, mas assinaturas diferentes;<br>
+<li><strong>Sobrecarga de métodos</strong>: distinguir entre múltiplos métodos com o mesmo nome, mas assinaturas diferentes;<br>
 </li>
-<li><strong>Resolução de métodos virtuais</strong>: lidar com a vinculação dinâmica (late binding) em tempo de execução; As tabelas de símbolos se tornaram mais estruturadas, frequentemente integradas a outras representações, como árvores de classes, para modelar essas relações complexas.</li>
+<li><strong>Resolução de métodos virtuais</strong>: lidar com a vinculação dinâmica (late binding) em tempo de execução;</li>
 </ul>
+<p>As tabelas de símbolos se tornaram mais estruturadas, frequentemente integradas a outras representações, como árvores de classes, para modelar essas relações complexas.</p>
 <p>Na mesma proporção em que o tempo passa, a evolução tecnológica não para. Chegamos aos anos 2000, a era moderna dos compiladores. Esta era é marcada pela explosão na escala dos projetos de software e pela onipresença de processadores multi-core. O foco se voltou para otimizações de baixo nível e gerenciamento de memória, resultando em inovações como:</p>
 <ul>
 <li><strong>Alocação em arena</strong>: em vez de alocar memória para cada símbolo individualmente, grandes blocos de memória, as arenas, são alocados de uma vez. Símbolos são então “esculpidos” nesses blocos com um simples incremento de ponteiro. Isso acelera drasticamente a alocação e permite que toda a memória da compilação seja liberada de uma só vez, eliminando a sobrecarga de desalocações individuais.<br>
 </li>
-<li><strong>Internalização de <em>strings</em>, <em>String Interning</em></strong>: garante que cada string de identificador idêntico exista apenas uma vez na memória. Todas as ocorrências de <code>minhaVariavel</code>, por exemplo, apontam para a mesma instância de string. Isso reduz o consumo de memória e permite comparações de <em>strings</em> ultrarrápidas através da simples comparação de ponteiros com complexidade <span class="math inline">\(O(1)\)</span>.<br>
+<li><strong>Internalização de <em>strings</em></strong>: garante que cada <em>string</em> de identificador exista apenas uma vez na memória. Todas as ocorrências de <code>minhaVariavel</code>, por exemplo, apontam para a mesma instância de string. Isso reduz o consumo de memória e permite comparações de <em>strings</em> ultrarrápidas através da simples comparação de ponteiros com complexidade <span class="math inline">\(O(1)\)</span>.<br>
 </li>
 <li><strong>Design Consciente de Cache, <em>Cache-Conscious Design</em></strong>: os engenheiros de compiladores começaram a projetar estruturas de dados que minimizam falhas de cache, os <em>cache misses</em>. Técnicas como o armazenamento co-localizado de <em>strings</em>, como pode ser visto no <a href="https://llvm.org/">LLVM</a>, em que o nome do símbolo é armazenado junto com seus metadados na mesma alocação de memória, melhoram a localidade de dados e, consequentemente, o desempenho.</li>
 </ul>
 </section>
-<section id="interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="interação-com-as-fases-do-compilador-uma-perspetiva-de-ciclo-de-vida"><span class="header-section-number">16.2</span> Interação com as Fases do Compilador: Uma Perspetiva de Ciclo de Vida</h2>
-<p>A <strong>Tabela de Símbolos</strong> é uma estrutura de dados dinâmica que evolui ao longo do processo de compilação, servindo como <em>interface</em> entre o <em>frontend</em>, módulos de análise, e o <em>backend</em>, módulos de síntese, do processo de tradução. Seja este processo a compilação, a interpretação ou qualquer outro método misto. O estado de completude da <strong>Tabela de Símbolos</strong> reflete o progresso do processo de tradução em questão. Assim, teremos:</p>
+<section id="interação-com-as-fases-do-compilador-uma-perspectiva-de-ciclo-de-vida" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="interação-com-as-fases-do-compilador-uma-perspectiva-de-ciclo-de-vida"><span class="header-section-number">16.2</span> Interação com as Fases do Compilador: Uma Perspectiva de Ciclo de Vida</h2>
+<p>A <strong>Tabela de Símbolos</strong> é uma estrutura de dados dinâmica que evolui ao longo do processo de tradução, servindo como <em>interface</em> entre o <em>frontend</em>, módulos de análise, e o <em>backend</em> e módulos de síntese. Seja este processo a compilação, a interpretação ou qualquer método misto. O estado de completude da <strong>Tabela de Símbolos</strong> reflete o progresso do processo de tradução em questão. Assim, teremos:</p>
 <ol type="1">
-<li><p><strong>Análise Léxica</strong>: esta é a primeira fase do processo de tradução. É a fase que encontra os identificadores. Pode realizar a inserção inicial na <strong>Tabela de Símbolos</strong>, muitas vezes armazenando apenas o lexema. <strong>Palavras-chave, operadores e identificadores predefinidos são tipicamente pré-carregados na tabela durante a inicialização do compilador</strong>.</p></li>
+<li><p><strong>Análise Léxica</strong>: esta é a primeira fase do processo de tradução. É a fase que encontra os identificadores. Pode realizar a inserção inicial na <strong>Tabela de Símbolos</strong>, muitas vezes armazenando apenas o lexema. <strong>Palavras-chave, operadores e identificadores predefinidos são inseridos na Tabela de Símbolos durante a inicialização do compilador</strong>.</p></li>
 <li><p><strong>Análise Sintática e Semântica</strong>: nestas duas fases, a <strong>Tabela de Símbolos</strong> é mais intensamente utilizada e enriquecida. A análise sintática fornece o contexto, por exemplo, uma declaração de variável, para que o analisador semântico adicione atributos detalhados como tipo, escopo e requisitos de memória. A análise semântica depende da <strong>Tabela de Símbolos</strong> para realizar verificações essenciais, como a compatibilidade de tipos, a resolução de escopo e a detecção de variáveis não declaradas ou declaradas múltiplas vezes no mesmo escopo. Historicamente será o analisador semântico o módulo de tradução responsável pelo preenchimento da maior parte da <strong>Tabela de Símbolos</strong>. Apenas durante a análise semântica é possível conhecer informação suficiente para descrever um nome de forma correta e completa.</p></li>
-<li><p><strong>Geração de Código Intermédio e Final</strong>: as fases de <em>backend</em> consomem a informação armazenada na <strong>Tabela de Símbolos</strong> para gerar código de máquina eficiente. Utilizam especificamente os endereços de memória, os deslocamentos, <em>offsets</em>, dentro dos registos de ativação e os tamanhos dos tipos para alocar armazenamento e gerar as diretivas de montagem apropriadas.</p></li>
+<li><p><strong>Geração de Código Intermediário e Final</strong>: as fases de <em>backend</em> consomem a informação armazenada na <strong>Tabela de Símbolos</strong> para gerar código de máquina eficiente. Utilizam especificamente os endereços de memória, os deslocamentos, <em>offsets</em>, dentro dos registros de ativação e os tamanhos dos tipos para alocar armazenamento e gerar as diretivas de montagem apropriadas.</p></li>
 </ol>
 <p>O design da estrutura de dados da <strong>Tabela de Símbolos</strong> deve, portanto, acomodar este preenchimento incremental e os padrões de acesso variados de cada fase. Uma operação de inserção ineficiente retardaria o <em>frontend</em> do compilador (analisadores léxico, sintático e semântico), enquanto uma operação de pesquisa, <em>lookup</em>, lenta constituiria um estrangulamento tanto para o <em>frontend</em> como para o <em>backend</em>.</p>
-<p>A Figura <a href="#fig-compliler-lifecycle" class="quarto-xref">Figure&nbsp;<span>16.3</span></a> mostra a relação típica de uma <strong>Tabela de Símbolos</strong> ao longo das várias fases do processo de tradução.</p>
-<div id="fig-compliler-lifecycle" class="quarto-float quarto-figure quarto-figure-center anchored">
+<p>A Figura <a href="#fig-compiler-lifecycle" class="quarto-xref">Figure&nbsp;<span>16.3</span></a> mostra a relação típica de uma <strong>Tabela de Símbolos</strong> ao longo das várias fases do processo de tradução.</p>
+<div id="fig-compiler-lifecycle" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-compliler-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-compiler-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Compiler_Diagram.webp" class="img-fluid figure-img"></p>
@@ -623,17 +640,22 @@ Figure&nbsp;16.2
 </figure>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-compliler-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-compiler-lifecycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;16.3
 </figcaption>
 </figure>
 </div>
+<section id="tratamento-de-forward-references" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="tratamento-de-forward-references"><span class="header-section-number">16.2.1</span> Tratamento de <em>forward references</em></h3>
+<p>Uma das operações que mais distinguem as <strong>Tabelas de Símbolos</strong> modernas das suas antecessoras é o tratamento de <em>forward references</em>, ou referências antecipadas. Uma <em>forward reference</em> ocorre quando um identificador é utilizado no código antes de a sua declaração ter sido encontrada pelo <em>parser</em>. Nas linguagens mais antigas, estruturadas em torno de compiladores de passagem única, <em>single-pass</em>, esta situação era problemática e a sua resolução era repassada ao programador. O Pascal original de Wirth exigia o uso da palavra-chave <code>forward</code> para anunciar a existência de um procedimento que seria definido mais adiante no código, levando o compilador a inserir na <strong>Tabela de Símbolos</strong> uma entrada parcial contendo apenas a assinatura, completada mais tarde ao se encontrar a definição efetiva. O C adotou estratégia semelhante através dos protótipos de função declarados em arquivos de cabeçalho. A sagaz leitora deve observar que esta dificuldade é particularmente severa no caso de tipos mutuamente recursivos, em que duas estruturas referenciam uma à outra: nenhuma das duas pode ser completamente declarada primeiro, o que exige o uso de declarações incompletas, <em>incomplete types</em>, que criam uma entrada provisória na tabela marcada como “tipo em construção”.</p>
+<p>As linguagens modernas, como Java, C#, Scala ou Rust, eliminaram a necessidade de declarações antecipadas explícitas por parte do programador através da adoção de compiladores de múltiplas passagens. Uma passagem inicial percorre a árvore sintática registrando na <strong>Tabela de Símbolos</strong> todas as declarações de tipos, classes, métodos e variáveis de nível superior antes que qualquer uso seja verificado. As passagens subsequentes realizam a resolução de nomes e a verificação de tipos com a tabela já populada no que diz respeito às declarações de nível superior, o que transforma a <em>forward reference</em> em um padrão interno do compilador e não mais em uma obrigação do programador. Quando uma única passagem é inevitável, a técnica clássica é o <em>backpatching</em>: ao encontrar uma referência a um símbolo ainda não declarado, o compilador insere na <strong>Tabela de Símbolos</strong> uma entrada marcada como não resolvida, <em>unresolved</em>, registrando os pontos do código que dependem dessa referência. Ao encontrar a declaração, o compilador retorna a essas localizações e preenche os endereços ou tipos ausentes, mecanismo que se torna particularmente importante na geração de código intermediário para saltos condicionais, nos quais o destino do salto só é conhecido após o processamento do restante do bloco.</p>
+</section>
 </section>
 <section id="informação-armazenada-os-atributos-de-um-identificador" class="level2" data-number="16.3">
 <h2 data-number="16.3" class="anchored" data-anchor-id="informação-armazenada-os-atributos-de-um-identificador"><span class="header-section-number">16.3</span> Informação Armazenada: Os Atributos de um Identificador</h2>
 <p>Uma entrada na <strong>Tabela de Símbolos</strong> é uma coleção de atributos associados a um símbolo. Os atributos exatos dependem da linguagem, mas tipicamente incluem os seguintes campos:</p>
 <ul>
-<li><strong>Nome</strong>: o lexema ou a representação em cadeia de caracteres do identificador (ex: <code>x</code>, <code>for</code>, <code>1</code>).<br>
+<li><strong>Nome</strong>: o lexema ou a representação em cadeia de caracteres do identificador (ex: <code>x</code>, <code>for</code>, <code>one</code>).<br>
 </li>
 <li><strong>Tipo</strong>: o tipo de dados do símbolo (por exemplo, <code>int</code>, <code>float</code>, <code>struct</code>, ponteiro para função). Esta informação é utilizada para a verificação de tipos.<br>
 </li>
@@ -652,16 +674,16 @@ Figure&nbsp;16.3
 </section>
 <section id="estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos" class="level2" data-number="16.4">
 <h2 data-number="16.4" class="anchored" data-anchor-id="estruturas-de-dados-fundamentais-para-a-implementação-da-tabela-de-símbolos"><span class="header-section-number">16.4</span> Estruturas de Dados Fundamentais para a Implementação da <strong>Tabela de Símbolos</strong></h2>
-<p>Nesta secção a curiosa leitora encontrará um estudo das principais estruturas de dados utilizadas para construção e gestão da <strong>Tabela de Símbolos</strong>, estabelecendo por que certas escolhas são dominantes na prática moderna. Originalmente, as <strong>Tabelas de Símbolos</strong> foram implementadas usando listas ligadas simples ou vetores não ordenados. Estas abordagens são fáceis de entender e implementar, mas não escalam bem com o aumento do número de símbolos.</p>
-<p>As listas ligadas e os vetores não ordenados representam as implementações mais simples para uma <strong>Tabela de Símbolos</strong>. Contudo, sua simplicidade vem atrelada a um alto custo computacional. Ambas as estruturas exigem uma pesquisa linear para localizar um símbolo, o que resulta em uma complexidade de tempo de <span class="math inline">\(O(n)\)</span> no pior caso e no caso médio. Para o grande número de símbolos encontrados em programas modernos, nos quais as operações de busca são extremamente frequentes, essa complexidade as torna ineficientes.</p>
-<p>O uso de vetores ordenados pode representar uma melhoria considerável na complexidade da pesquisa. Manter os símbolos em ordem alfabética, por exemplo, permite a utilização de algoritmos de pesquisa binária, que possuem uma complexidade de tempo típica de <span class="math inline">\(O(\log n)\)</span>. Isso representa um ganho de desempenho substancial para as operações de busca em comparação com a abordagem linear. Contudo, neste caso, o problema é transferido para as operações de inserção e exclusão. Para manter a ordem do vetor, a inserção de um novo símbolo pode exigir o deslocamento de uma grande porção dos elementos existentes para abrir espaço, uma operação com complexidade <span class="math inline">\(O(n)\)</span>. Da mesma forma, a remoção de um símbolo pode necessitar que os elementos subsequentes sejam deslocados para preencher a lacuna. Portanto, embora a pesquisa seja otimizada, as operações de inserção e exclusão tornam-se um gargalo significativo, especialmente em cenários onde a <strong>Tabela de Símbolos</strong> é frequentemente modificada.</p>
-<section id="hash-tables-hash-tables-o-padrão-de-fato" class="level3" data-number="16.4.1">
-<h3 data-number="16.4.1" class="anchored" data-anchor-id="hash-tables-hash-tables-o-padrão-de-fato"><span class="header-section-number">16.4.1</span> <em>hash tables</em> (<em>Hash Tables</em>): O Padrão De Fato</h3>
-<p>A esmagadora preferência por <em>hash tables</em> na implementação de tabelas de símbolos é uma consequência direta da carga de trabalho típica de um processo de tradução. As pesquisas por símbolos são muito mais frequentes do que as suas inserções. Um símbolo é declarado apenas uma vez, o que corresponde a uma única inserção, mas pode ser referenciado centenas ou milhares de vezes, resultando em múltiplas operações de pesquisa. Portanto, otimizar o tempo médio de pesquisa, que possui complexidade <span class="math inline">\(O(1)\)</span> para <em>hash tables</em>, proporciona o maior benefício de desempenho geral. Esta assimetria na frequência das operações torna a pesquisa de caso médio <span class="math inline">\(O(1)\)</span> de uma <em>hash table</em> o fator decisivo para sua escolha, mesmo que seu desempenho no pior caso seja <span class="math inline">\(O(n)\)</span>, o que ainda é linear, e que a estrutura não possua as características de ordenação inerentes a uma árvore de pesquisa binária.</p>
+<p>Nesta seção a curiosa leitora encontrará um estudo das principais estruturas de dados utilizadas para construção e gestão da <strong>Tabela de Símbolos</strong>, estabelecendo por que certas escolhas são dominantes na prática moderna. Originalmente, as <strong>Tabelas de Símbolos</strong> foram implementadas usando listas ligadas simples ou vetores não ordenados. Estas abordagens são fáceis de entender e implementar, mas não escalam bem com o aumento do número de símbolos.</p>
+<p>As listas ligadas e os vetores não ordenados representam, historicamente, as implementações mais simples para uma <strong>Tabela de Símbolos</strong>. Contudo, sua simplicidade vem atrelada a um alto custo computacional. Ambas as estruturas exigem uma pesquisa linear para localizar um símbolo, o que resulta em uma complexidade de tempo de <span class="math inline">\(O(n)\)</span> no pior caso e no caso médio. Para o grande número de símbolos encontrados em programas modernos, nos quais as operações de busca são extremamente frequentes, essa complexidade as torna ineficientes.</p>
+<p>O uso de vetores ordenados pode representar uma melhoria considerável na complexidade da pesquisa. Manter os símbolos em ordem alfabética, por exemplo, permite a utilização de algoritmos de pesquisa binária, que possuem uma complexidade de tempo típica de <span class="math inline">\(O(\log n)\)</span>. Isso representa um ganho de desempenho substancial para as operações de busca em comparação com a abordagem linear. Contudo, neste caso, o problema é transferido para as operações de inserção e exclusão. Para manter a ordem do vetor, a inserção de um novo símbolo pode exigir o deslocamento de uma grande porção dos elementos existentes para abrir espaço, uma operação com, em média, complexidade <span class="math inline">\(O(n)\)</span>. Da mesma forma, a remoção de um símbolo pode necessitar que os elementos subsequentes sejam deslocados para preencher a lacuna. Portanto, embora a pesquisa seja otimizada, as operações de inserção e exclusão tornam-se um gargalo significativo, especialmente em cenários onde a <strong>Tabela de Símbolos</strong> é frequentemente modificada.</p>
+<section id="hash-tables-o-padrão-de-fato" class="level3" data-number="16.4.1">
+<h3 data-number="16.4.1" class="anchored" data-anchor-id="hash-tables-o-padrão-de-fato"><span class="header-section-number">16.4.1</span> <em>Hash Tables</em>: O Padrão De Fato</h3>
+<p>A esmagadora preferência por <em>hash tables</em> na implementação de tabelas de símbolos é uma consequência direta da carga de trabalho típica de um processo de tradução. As pesquisas por símbolos são muito mais frequentes do que as suas inserções. Um símbolo é declarado apenas uma vez, o que corresponde a uma única inserção, mas pode ser referenciado centenas ou milhares de vezes, resultando em múltiplas operações de pesquisa. Portanto, otimizar o tempo médio de pesquisa, complexidade <span class="math inline">\(O(1)\)</span> para <em>hash tables</em>, proporciona o maior benefício de desempenho geral. Esta assimetria na frequência das operações torna a pesquisa de caso médio <span class="math inline">\(O(1)\)</span> de uma <em>hash table</em> o fator decisivo para sua escolha, mesmo que seu desempenho no pior caso seja <span class="math inline">\(O(n)\)</span>, o que ainda é linear, e que a estrutura não possua as características de ordenação inerentes a uma árvore de pesquisa binária. Neste ponto, talvez seja importante destacar que implementações modernas (Java 8+, <em>Robin Hood hashing</em>, <em>cuckoo hashing</em>) garantem pior caso com complexidade <span class="math inline">\(O(\log n)\)</span> ou até <span class="math inline">\(O(1)\)</span> amortizado.</p>
 <p>O conceito central de uma <em>hash table</em> é mapear chaves, neste caso os nomes dos símbolos, para índices em um vetor. Esses índices, chamados de <em>buckets</em> ou <em>slots</em>, são determinados por meio de uma função de dispersão, conhecida como <em>hash function</em>.</p>
 <p>O design da função de dispersão é o aspecto fundamental para o projeto de uma <em>hash table</em> com bom desempenho. O objetivo principal é distribuir os símbolos de maneira uniforme pelos <em>buckets</em> para minimizar a ocorrência de colisões, que podem acontecer quando duas chaves diferentes geram o mesmo índice. Uma função de dispersão, <em>hash</em>, simples poderia envolver a soma dos valores ASCII dos caracteres de uma <em>string</em> e, em seguida, a aplicação do operador módulo com o tamanho da tabela para obter um índice. No entanto, na prática, são utilizadas funções mais sofisticadas para garantir uma distribuição mais homogênea e evitar agrupamentos. Mesmo com uma boa função de dispersão, as colisões são inevitáveis. Por isso, uma estratégia eficaz de resolução de colisões é essencial.</p>
-<p>Existem duas abordagens comuns para lidar com o problema das colisões em <em>hash tables</em> usadas no processo de tradução. A primeira, conhecida como <strong>encadeamento</strong>, <em>chaining</em> ou <em>closed addressing</em>, consiste em fazer com que cada <em>bucket</em> da tabela aponte para uma lista ligada contendo todos os símbolos que foram mapeados para aquele mesmo índice. Esta é uma abordagem comum e robusta. Porém a atenta leitora deve observar que nesta solução, a performance degrada de forma gradual com o aumento do número de elementos em colisão devido a complexidade de busca na lista ligada em cada <em>bucket</em>, uma lista ligada tem complexidade <span class="math inline">\(O(n)\)</span> nos casos médio e pior e <span class="math inline">\(O(1)\)</span> no melhor caso.</p>
-<p>A segunda abordagem é o <strong>endereçamento aberto</strong>, <em>open addressing</em> ou <em>open hashing</em>. Nesta técnica, se um <em>bucket</em> já estiver ocupado, o algoritmo procura o próximo espaço disponível dentro da própria tabela para inserir o novo elemento. Existem métodos diferentes para encontrar o próximo <em>bucket</em> livre, incluindo a <strong>sondagem linear</strong>, que verifica sequencialmente os índices (<code>i + 1</code>, <code>i + 2</code>, …), e a <strong>sondagem quadrática</strong>, que verifica os índices (<code>i + 1²</code>, <code>i + 2²</code>, …), ajudando a mitigar problemas de agrupamento primário que podem ocorrer com a sondagem linear.</p>
+<p>Existem duas abordagens comuns para lidar com o problema das colisões em <em>hash tables</em> usadas no processo de tradução. A primeira, conhecida como <strong>encadeamento</strong>, <em>chaining</em> ou <em>closed addressing</em>, consiste em fazer com que cada <em>bucket</em> da tabela aponte para uma lista ligada contendo todos os símbolos que foram mapeados para aquele mesmo índice. Esta é uma abordagem comum e robusta. Porém a atenta leitora deve observar que nesta solução, a performance degrada de forma gradual com o aumento do número de elementos em colisão devido à complexidade de busca na lista ligada em cada <em>bucket</em>, uma lista ligada tem complexidade <span class="math inline">\(O(n)\)</span> nos casos médio e pior e <span class="math inline">\(O(1)\)</span> no melhor caso.</p>
+<p>A segunda abordagem é o <strong>endereçamento aberto</strong>, <em>open addressing</em> ou <em>open hashing</em>. Nesta técnica, se um <em>bucket</em> já estiver ocupado, o algoritmo procura o próximo espaço disponível dentro da própria tabela para inserir o novo elemento. Existem métodos diferentes para encontrar o próximo <em>bucket</em> livre, incluindo a <strong>sondagem linear</strong>, que verifica sequencialmente os índices (<span class="math inline">\(i + 1\)</span>, <span class="math inline">\(i + 2\)</span>, …), e a <strong>sondagem quadrática</strong>, que verifica os índices (<span class="math inline">\(i + 1^1\)</span>, <span class="math inline">\(i + 2^2\)</span>, …), ajudando a mitigar problemas de agrupamento primário que podem ocorrer com a sondagem linear.</p>
 <p>O <strong>problema de agrupamento primário</strong>, ou <em>primary clustering</em>, é um fenômeno negativo que ocorre especificamente com o método de <strong>sondagem linear</strong> em <em>hash tables</em> que usam endereçamento aberto. Em termos simples, ele pode ser descrito da seguinte forma:</p>
 <ol type="1">
 <li><p><strong>Causa</strong>: na sondagem linear, quando uma colisão ocorre em um índice <code>i</code>, o algoritmo procura o próximo <em>bucket</em> livre verificando sequencialmente os índices <code>i + 1</code>, <code>i + 2</code>, <code>i + 3</code>, e assim por diante.</p></li>
@@ -675,18 +697,18 @@ Figure&nbsp;16.3
 <h3 data-number="16.4.2" class="anchored" data-anchor-id="estruturas-baseadas-em-árvores-a-alternativa-ordenada"><span class="header-section-number">16.4.2</span> Estruturas Baseadas em Árvores: A Alternativa Ordenada</h3>
 <p>As estruturas baseadas em árvores representam a principal alternativa ordenada às <em>hash tables</em> na implementação das <strong>Tabelas de Símbolos</strong>. O conceito central por trás desta abordagem é o uso dos algoritmos de árvores de pesquisa binária, de <em><strong>B</strong>inary <strong>S</strong>earch <strong>T</strong>ree</em>, <strong>BST</strong> autobalanceadas, como as árvores <strong>AVL</strong> ou as árvores <strong>Vermelho-Preto</strong>, <em>Red-Black Trees</em>, que mantêm os símbolos em uma ordem lexicográfica constante. Esta propriedade de ordenação é a sua vantagem mais significativa em relação às <em>hash tables</em>.</p>
 <p>A propriedade chave que define uma <strong>BST</strong> garante que, para qualquer vértice, todas as chaves em sua subárvore esquerda são menores que a chave do próprio vértice, e todas as chaves em sua subárvore direita são maiores. Em uma <strong>BST</strong> simples, inserções sequenciais poderiam levar à degeneração da árvore, fazendo-a se comportar como uma lista ligada com desempenho <span class="math inline">\(O(n)\)</span>. Para evitar isso, os algoritmos de autobalanceamento, como os das árvores <strong>AVL</strong> e <strong>Vermelho-Preto</strong>, realizam rotações para assegurar que a altura da árvore permaneça logarítmica (<span class="math inline">\(O(\log n)\)</span>) em relação ao número de vértices, garantindo assim a eficiência das operações.</p>
-<p>Essa ordenação inerente aos algoritmos das árvores <strong>AVL</strong> e <strong>Vermelho-Preto</strong>, permite a implementação eficiente de funcionalidades com as quais as <em>hash tables</em> têm grande dificuldade. Por exemplo, é possível realizar um percurso ordenado para listar todos os símbolos em ordem alfabética de forma trivial. Além disso, operações como encontrar o símbolo sucessor ou predecessor de um dado símbolo e realizar consultas de intervalo, como encontrar todos os símbolos entre inicio e fim, por exemplo, podem ser executadas de maneira computacionalmente eficiente, capacidades que não são suportadas nativamente por uma <em>hash table</em> padrão.</p>
+<p>Essa ordenação inerente aos algoritmos das árvores <strong>AVL</strong> e <strong>Vermelho-Preto</strong> permite a implementação eficiente de funcionalidades com as quais as <em>hash tables</em> têm grande dificuldade. Por exemplo, é possível realizar um percurso ordenado para listar todos os símbolos em ordem alfabética de forma trivial. Além disso, operações como encontrar o símbolo sucessor ou predecessor de um dado símbolo e realizar consultas de intervalo, como encontrar todos os símbolos entre início e fim, por exemplo, podem ser executadas de maneira computacionalmente eficiente, capacidades que não são suportadas nativamente por uma <em>hash table</em> padrão.</p>
 </section>
 <section id="uma-análise-comparativa-de-desempenho-memória-e-funcionalidade" class="level3" data-number="16.4.3">
 <h3 data-number="16.4.3" class="anchored" data-anchor-id="uma-análise-comparativa-de-desempenho-memória-e-funcionalidade"><span class="header-section-number">16.4.3</span> Uma Análise Comparativa de Desempenho, Memória e Funcionalidade</h3>
-<p>Ao comparar as duas estruturas aparentemente viáveis que vimos até o momento, <em>hash tables</em> e árvores de pesquisa binária, é essencial que a atenta leitora analise as contrapartidas relacionadas ao uso de memória e ao desempenho do hardware, como a localidade de cache. Em termos de <strong>sobrecarga de memória</strong>, <em>memory overhead</em>, as <em>hash tables</em> exigem a pré-alocação de um vetor de tamanho fixo. Se o número de símbolos for muito inferior a esse tamanho, resultando em um baixo fator de carga, uma quantidade significativa de memória pode ser desperdiçada. Além disso, a estratégia de encadeamento para resolução de colisões adiciona a sobrecarga de um ponteiro para cada entrada na tabela. Em contrapartida, as <strong>BST</strong>s autobalanceadas tipicamente possuem uma sobrecarga por elemento maior, pois cada vértice precisa armazenar, no mínimo, dois ponteiros para os filhos e, frequentemente, informações adicionais para o balanceamento, como a cor em árvores Vermelho-Preto. No entanto, sua alocação de memória é dinâmica, vértice a vértice, o que evita o desperdício de um grande bloco de memória pré-alocado e não utilizado.</p>
+<p>Ao comparar as duas estruturas aparentemente viáveis que vimos até o momento, <em>hash tables</em> e árvores de pesquisa binária, é essencial que a atenta leitora analise as contrapartidas relacionadas ao uso de memória e ao desempenho do hardware, como a localidade de cache. Em termos de sobrecarga de memória, <em>memory overhead</em>, as <em>hash tables</em> mantêm um vetor de <em>buckets</em>, em geral sujeito a redimensionamento dinâmico. Se o número de símbolos for muito inferior à capacidade atual da tabela, resultando em um baixo fator de carga, uma quantidade significativa de memória pode ser desperdiçada. Além disso, a estratégia de encadeamento para resolução de colisões adiciona a sobrecarga de um ponteiro para cada entrada na tabela. Em contrapartida, as <strong>BST</strong>s autobalanceadas tipicamente possuem uma sobrecarga por elemento maior, pois cada vértice precisa armazenar, no mínimo, dois ponteiros para os filhos e, frequentemente, informações adicionais para o balanceamento, como a cor em árvores Vermelho-Preto. No entanto, sua alocação de memória é dinâmica, vértice a vértice, o que evita o desperdício de um grande bloco de memória pré-alocado e não utilizado.</p>
 <p>A <strong>localidade de cache</strong> é outro diferenciador de desempenho importante. As <em>hash tables</em> que utilizam endereçamento aberto, especialmente com sondagem linear, podem exibir uma excelente localidade de cache. Isso ocorre porque as sondagens para resolver colisões são sequenciais na memória, aumentando a probabilidade de que os dados necessários já estejam na mesma linha de cache. Por outro lado, estruturas baseadas em ponteiros, como <em>hash tables</em> com encadeamento e todas as BSTs, frequentemente sofrem de má localidade de cache. Percorrer uma lista ligada ou os ramos de uma árvore envolve seguir ponteiros que podem apontar para endereços de memória distantes e dispersos. Esse processo, conhecido como <em>pointer chasing</em>, leva a uma maior taxa de falhas de cache, <em>cache misses</em>, o que pode impactar negativamente o desempenho.</p>
 <p>Do ponto de vista funcional, existem diferenças claras. As <strong>BST</strong>s suportam naturalmente o <strong>percurso ordenado</strong> dos símbolos; por exemplo, um percurso <em>in-order</em> percorre os vértices em ordem alfabética, o que é útil para gerar listagens ordenadas em saídas de depuração ou para implementar certas características de linguagem. Essa não é uma operação natural ou eficiente para <em>hash tables</em>. Da mesma forma, as <strong>BST</strong>s se destacam em <strong>consultas de intervalo e proximidade</strong>, como encontrar a chave mais próxima de um valor ou todas as chaves dentro de um determinado intervalo, funcionalidades que não são suportadas de forma eficiente por <em>hash tables</em>.</p>
 <p>Finalmente, a <strong>complexidade de implementação</strong> é um fator prático a ser considerado. Embora implementações de bibliotecas padrão para ambas as estruturas estejam prontamente disponíveis, construir uma <em>hash table</em> personalizada e de alta qualidade — o que envolve projetar uma boa função de dispersão e uma estratégia de redimensionamento eficiente — pode ser uma tarefa complexa. No entanto, as BSTs autobalanceadas são notoriamente mais difíceis de implementar corretamente do zero, devido à complexidade dos algoritmos de rotação e manutenção das propriedades de balanceamento. A Tabela <a href="#tbl-comp1" class="quarto-xref">Table&nbsp;<span>16.1</span></a> resume as principais características comparativas dessas estruturas de dados.</p>
 <div id="tbl-comp1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;16.1: Tabela 1: Comparação das principais estruturas de dados para implementação de uma <strong>Tabelas de Símbolos</strong>.
+Table&nbsp;16.1: Comparação das principais estruturas de dados para implementação de uma <strong>Tabela de Símbolos</strong>.
 </figcaption>
 <div aria-describedby="tbl-comp1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -711,28 +733,28 @@ Table&nbsp;16.1: Tabela 1: Comparação das principais estruturas de dados para 
 <td style="text-align: left;"><strong>Pesquisa (Média)</strong></td>
 <td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(\log n)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(\log n)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Pesquisa (Pior Caso)</strong></td>
 <td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(\log n)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(\log n)\)</span></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Inserção (Média)</strong></td>
 <td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(\log n)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Inserção (Pior Caso)</strong></td>
 <td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(O(logn)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(\log n)\)</span></td>
 <td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
 </tr>
 <tr class="odd">
@@ -770,9 +792,9 @@ Table&nbsp;16.1: Tabela 1: Comparação das principais estruturas de dados para 
 </div>
 </section>
 </section>
-<section id="implementação-avançada-o-desafio-dos-escopos-lexicais" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="implementação-avançada-o-desafio-dos-escopos-lexicais"><span class="header-section-number">16.5</span> Implementação Avançada: O Desafio dos escopos Lexicais</h2>
-<p>Desde o ALGOL 60, com seus blocos de código, que as linguagens de programação modernas suportam <strong>escopos lexicais aninhados. Isto significa que uma variável declarada dentro de um bloco só é visível dentro desse bloco e em seus sub-blocos</strong>. A gestão eficaz destes escopos aninhados é um desafio fundamental na implementação de uma <strong>Tabela de Símbolos</strong>. A estrutura de dados selecionada para a <strong>Tabela de Símbolos</strong> deve não apenas armazenar os símbolos, mas também refletir a hierarquia dos escopos para garantir que as regras de visibilidade sejam corretamente aplicadas durante o processo de tradução.</p>
+<section id="implementação-avançada-o-desafio-dos-escopos-léxicos-aninhados" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="implementação-avançada-o-desafio-dos-escopos-léxicos-aninhados"><span class="header-section-number">16.5</span> Implementação Avançada: O Desafio dos Escopos Léxicos Aninhados</h2>
+<p>Desde o ALGOL 60, com seus blocos de código, que as linguagens de programação modernas suportam escopos léxicos aninhados. Isto significa que uma variável declarada dentro de um bloco só é visível dentro desse bloco e em seus sub-blocos. A gestão eficaz destes escopos aninhados é um desafio fundamental na implementação de uma <strong>Tabela de Símbolos</strong>. A estrutura de dados selecionada para a <strong>Tabela de Símbolos</strong> deve não apenas armazenar os símbolos, mas também refletir a hierarquia dos escopos para garantir que as regras de visibilidade sejam corretamente aplicadas durante o processo de tradução.</p>
 <section id="o-modelo-de-pilha-de-tabelas" class="level3" data-number="16.5.1">
 <h3 data-number="16.5.1" class="anchored" data-anchor-id="o-modelo-de-pilha-de-tabelas"><span class="header-section-number">16.5.1</span> O Modelo de Pilha de Tabelas</h3>
 <p>Esta abordagem, amplamente utilizada por sua simplicidade e intuição, gerencia escopos mantendo uma pilha de <strong>Tabelas de Símbolos</strong>, que são tipicamente implementadas como <em>hash tables</em>. O mecanismo espelha diretamente a estrutura de escopos aninhados de uma linguagem de programação. Quando um novo escopo é introduzido no código-fonte, como o corpo de uma função, um laço ou um bloco condicional, uma nova <em>hash table</em> vazia é empurrada (<em>pushed</em>) para o topo da pilha, representando o escopo atual. Ao final desse escopo, a tabela correspondente é simplesmente retirada (<em>popped</em>) da pilha e descartada, restaurando o escopo anterior.</p>
@@ -796,8 +818,8 @@ Figure&nbsp;16.4
 <section id="algoritmo-implementando-escopos-com-uma-pilha-de-dicionários" class="level3" data-number="16.5.2">
 <h3 data-number="16.5.2" class="anchored" data-anchor-id="algoritmo-implementando-escopos-com-uma-pilha-de-dicionários"><span class="header-section-number">16.5.2</span> Algoritmo: Implementando Escopos com uma Pilha de Dicionários</h3>
 <p>A lógica para gerenciar uma <strong>Tabela de Símbolos</strong> com escopo pode ser formalizada por meio de um pseudocódigo simples. Assumimos que nossa estrutura é uma pilha de tabelas, na qual cada tabela mapeia nomes a atributos.</p>
-<pre class="pseudocode"><code>// Estrutura de dados global
-pilha_de_escopos = []  // Inicia com uma tabela para o escopo global
+<pre class="text"><code>// Estrutura de dados global
+pilha_de_escopos = []  // Inicia com uma lista para a tabela do escopo global
 
 PROCEDIMENTO enter_scope():
     nova_tabela = criar_tabela_vazia()
@@ -808,19 +830,20 @@ PROCEDIMENTO exit_scope():
         pilha_de_escopos.pop()
     SENÃO
         erro("Não é possível sair do escopo global")
-
+    FIM-SE
 PROCEDIMENTO declare(nome, atributos):
     tabela_atual = pilha_de_escopos.top()
     SE nome JÁ EXISTE em tabela_atual ENTÃO
         erro("Símbolo já declarado neste escopo")
     SENÃO
         inserir(nome, atributos) em tabela_atual
-
+    FIM-SE
 FUNÇÃO lookup(nome):
     PARA cada tabela em pilha_de_escopos (do topo para a base):
         SE nome EXISTE em tabela ENTÃO
             RETORNAR atributos_de(nome) em tabela
     // Se o loop terminar, o nome não foi encontrado
+    FIM-PARA
     RETORNAR nulo  // Ou lançar erro de "símbolo não declarado"</code></pre>
 </section>
 <section id="implementação-em-python-uma-tabela-de-símbolos-funcional" class="level3" data-number="16.5.3">
@@ -842,7 +865,7 @@ FUNÇÃO lookup(nome):
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">    Uma **Tabela de Símbolos** que gerencia escopos aninhados usando uma pilha.</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># A pilha de escopos, onde cada escopo é um dicionário (tabela de _hash_).</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># A pilha de escopos, onde cada escopo é um dicionário (tabela de hash).</span></span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Começa com o escopo global.</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scoped_tables <span class="op">=</span> [{}]</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
@@ -880,8 +903,8 @@ FUNÇÃO lookup(nome):
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NameError</span>(<span class="ss">f"Erro: Símbolo '</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">' não foi declarado."</span>)</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> display(<span class="va">self</span>):</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Exibe o estado atual da **Tabela de Símbolos**. """</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Estado da **Tabela de Símbolos** ==="</span>)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="co">""" Exibe o estado atual da Tabela de Símbolos. """</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">=== Estado da Tabela de Símbolos ==="</span>)</span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, scope <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">list</span>(<span class="bu">enumerate</span>(<span class="va">self</span>.scoped_tables))):</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"--- Escopo Nível </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> ---"</span>)</span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>            pprint.pprint(scope)</span>
@@ -926,12 +949,12 @@ FUNÇÃO lookup(nome):
 <span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    st.exit_scope()</span>
 <span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    st.display()</span>
 <span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    st.lookup(<span class="st">"g"</span>)  <span class="co"># Agora encontra o 'g' global (int)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Uma implementação deste mesmo modelo, em <strong>C++</strong>23 pode ser vista no bloco de código a seguir:</p>
+<p>Uma implementação deste mesmo modelo, em <strong>C++23</strong> pode ser vista no bloco de código a seguir:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@file</span><span class="co"> </span><span class="cv">SymbolTable.h</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@author</span><span class="co"> Frank Alcantara</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@date</span><span class="co"> 26 de Setembro de 2025</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Implementação de uma **Tabela de Símbolos** com escopo em **C++**23.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@brief</span><span class="co"> Implementação de uma **Tabela de Símbolos** com escopo em **C++23**.</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"> * </span><span class="an">@copyright</span><span class="co"> </span><span class="do">Copyright</span><span class="co"> </span><span class="do">(c)</span><span class="co"> </span><span class="do">2025</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"> *</span></span>
@@ -1051,7 +1074,7 @@ FUNÇÃO lookup(nome):
 <span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="co">     *</span></span>
 <span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="co">     * O uso de `std::optional` (**C++**17) é a forma moderna e segura de retornar um</span></span>
 <span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="co">     * valor que pode ou não existir, evitando o uso de ponteiros nulos ou</span></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="co">     * valores mágicos (como uma string vazia).</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="co">     * valores mágicos (como uma _string_ vazia).</span></span>
 <span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="co">     */</span></span>
 <span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>optional<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> lookupSymbol<span class="op">(</span><span class="at">const</span> <span class="bu">std::</span>string<span class="op">&amp;</span> name<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
 <span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Para percorrer a pilha sem destruí-la (pois o método é const),</span></span>
@@ -1165,12 +1188,12 @@ FUNÇÃO lookup(nome):
 <span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>No código <strong>C++</strong>23 acima, a classe <code>SymbolTable</code> encapsula toda a funcionalidade necessária para gerenciar escopos aninhados usando uma pilha de tabelas de símbolos. Cada tabela é implementada como um <code>std::unordered_map</code>, que oferece acesso eficiente aos símbolos por meio de <em>hashing</em>. O uso de <code>std::optional</code> para o método <code>lookupSymbol</code> permite um tratamento elegante dos casos em que um símbolo não é encontrado.</p>
+<p>No código <strong>C++23</strong> acima, a classe <code>SymbolTable</code> encapsula toda a funcionalidade necessária para gerenciar escopos aninhados usando uma pilha de tabelas de símbolos. Cada tabela é implementada como um <code>std::unordered_map</code>, que oferece acesso eficiente aos símbolos por meio de <em>hashing</em>. O uso de <code>std::optional</code> para o método <code>lookupSymbol</code> permite um tratamento elegante dos casos em que um símbolo não é encontrado.</p>
 </section>
 <section id="o-modelo-de-tabela-única-com-encadeamento-de-escopo" class="level3" data-number="16.5.4">
 <h3 data-number="16.5.4" class="anchored" data-anchor-id="o-modelo-de-tabela-única-com-encadeamento-de-escopo"><span class="header-section-number">16.5.4</span> O Modelo de Tabela Única com Encadeamento de Escopo</h3>
 <p>Este modelo adota uma abordagem diferente, utilizando uma única <em>hash table</em> global para armazenar todos os símbolos de todos os escopos. Para gerenciar os diferentes escopos, as entradas para um mesmo identificador são encadeadas em uma lista ligada dentro do <em>bucket</em> correspondente. Geralmente, essa lista é ordenada do escopo mais interno para o mais externo, de modo que a declaração mais recente esteja no início da lista.</p>
-<p>As operações neste modelo são mais complexas. Para <strong>entrar em um escopo</strong>, um marcador especial, que não é um símbolo válido da linguagem, é empurrado para uma pilha de escopos auxiliar, simplesmente para registrar a fronteira do novo escopo. A <strong>inserção</strong> de um símbolo envolve adicionar uma nova entrada ao início da lista ligada no <em>bucket</em> apropriado, ligando-a a quaisquer entradas pré-existentes para esse mesmo nome. A <strong>pesquisa</strong> começa com a função de dispersão, que localiza o início da lista ligada para o identificador. Em seguida, essa lista é percorrida para encontrar a primeira entrada válida que corresponda ao escopo atual ou a um escopo envolvente. A principal desvantagem surge ao <strong>sair de um escopo</strong>. É necessário identificar e remover da <em>hash table</em> todos os símbolos que foram inseridos desde que o último marcador de escopo foi empurrado. Este processo de limpeza é consideravelmente mais complexo e menos eficiente do que a simples operação de <code>pop</code> do modelo de pilha.</p>
+<p>As operações neste modelo são mais complexas. Para <strong>entrar em um escopo</strong>, um marcador especial, que não é um símbolo válido da linguagem, é empurrado para uma pilha de escopos auxiliar, simplesmente para registrar a fronteira do novo escopo. A <strong>inserção de um símbolo</strong> envolve adicionar uma nova entrada ao início da lista ligada no <em>bucket</em> apropriado. Como esse <em>bucket</em> pode conter colisões entre identificadores distintos, a estrutura deve preservar também a comparação explícita das chaves. Entre entradas com o mesmo nome, a mais recente pode ser organizada de modo a representar primeiro o escopo mais interno. A <strong>pesquisa</strong> usa a função de dispersão para localizar o início da lista ligada do identificador e, em seguida, percorre essa lista até encontrar a primeira entrada válida para o escopo atual ou para algum escopo envolvente. A principal desvantagem surge ao <strong>sair de um escopo</strong>. É necessário identificar e remover da <em>hash table</em> todos os símbolos que foram inseridos desde que o último marcador de escopo foi empurrado. Este processo de limpeza é consideravelmente mais complexo e menos eficiente do que a simples operação de <code>pop</code> do modelo de pilha.</p>
 </section>
 <section id="representações-de-escopo-hierárquicas-e-baseadas-em-árvores" class="level3" data-number="16.5.5">
 <h3 data-number="16.5.5" class="anchored" data-anchor-id="representações-de-escopo-hierárquicas-e-baseadas-em-árvores"><span class="header-section-number">16.5.5</span> Representações de Escopo Hierárquicas e Baseadas em Árvores</h3>
@@ -1179,7 +1202,7 @@ FUNÇÃO lookup(nome):
 <div id="tbl-comp2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-comp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;16.2: Tabela 2: Comparação das principais estratégias para gestão de escopos em <strong>Tabelas de Símbolos</strong>.
+Table&nbsp;16.2: Comparação das principais estratégias para gestão de escopos em <strong>Tabelas de Símbolos</strong>.
 </figcaption>
 <div aria-describedby="tbl-comp2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -1204,25 +1227,25 @@ Table&nbsp;16.2: Tabela 2: Comparação das principais estratégias para gestão
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><strong>Pilha de Tabelas</strong></td>
-<td style="text-align: left;">O(1)</td>
-<td style="text-align: left;">O(1)</td>
-<td style="text-align: left;">O(D) (D = profundidade do escopo)</td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(D)\)</span> <span class="math inline">\((D = \text{profundidade do escopo})\)</span></td>
 <td style="text-align: left;">Simples (tabelas inteiras são alocadas/desalocadas)</td>
 <td style="text-align: left;">Baixa a Moderada</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Tabela Única com Encadeamento</strong></td>
-<td style="text-align: left;">O(1)</td>
-<td style="text-align: left;">O(k) (k = símbolos no escopo)</td>
-<td style="text-align: left;">O(L) (L = comprimento da cadeia)</td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(k)\)</span> <span class="math inline">\((k = \text{número de símbolos no escopo})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(L)\)</span> <span class="math inline">\((L = \text{comprimento da cadeia})\)</span></td>
 <td style="text-align: left;">Complexa (requer limpeza seletiva)</td>
 <td style="text-align: left;">Moderada a Alta</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Árvore de escopos Explícita</strong></td>
-<td style="text-align: left;">O(logS) ou O(1) (S = n.º de escopos)</td>
-<td style="text-align: left;">O(1)</td>
-<td style="text-align: left;">O(D)</td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span>, assumindo referência direta ao escopo atual</td>
+<td style="text-align: left;"><span class="math inline">\(O(1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(O(D)\)</span></td>
 <td style="text-align: left;">Moderada (vértices da árvore + tabelas)</td>
 <td style="text-align: left;">Alta</td>
 </tr>
@@ -1231,6 +1254,255 @@ Table&nbsp;16.2: Tabela 2: Comparação das principais estratégias para gestão
 </div>
 </figure>
 </div>
+</section>
+</section>
+<section id="exercício-proposto-implementação-de-uma-tabela-de-símbolos-com-escopos-léxicos" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="exercício-proposto-implementação-de-uma-tabela-de-símbolos-com-escopos-léxicos"><span class="header-section-number">16.6</span> Exercício Proposto: implementação de uma tabela de símbolos com escopos léxicos</h2>
+<p>Neste exercício, você deverá projetar e implementar uma <strong>tabela de símbolos</strong> para uma mini-linguagem imperativa com variáveis globais, funções, parâmetros formais e blocos aninhados. O objetivo é fazer com que a <strong>tabela de símbolos</strong> deixe de ser apenas uma abstração teórica e passe a operar como um componente efetivo do processo de tradução, capaz de registrar declarações, controlar a visibilidade dos nomes e detectar erros semânticos associados ao uso de identificadores.</p>
+<p>A implementação deverá suportar <strong>escopos léxicos aninhados</strong>, permitindo que identificadores declarados em escopos internos ocultem, quando apropriado, identificadores homônimos declarados em escopos externos. Em contrapartida, a implementação deverá também ser capaz de detectar <strong>redeclarações ilegais no mesmo escopo</strong>, bem como o uso de identificadores não declarados. Para as funções, a <strong>tabela de símbolos</strong> deverá armazenar, além do nome e do tipo de retorno, a lista dos parâmetros formais, incluindo os respectivos tipos.</p>
+<section id="enunciado" class="level3" data-number="16.6.1">
+<h3 data-number="16.6.1" class="anchored" data-anchor-id="enunciado"><span class="header-section-number">16.6.1</span> Enunciado</h3>
+<p>Implemente uma <strong>tabela de símbolos</strong> para a gramática apresentada a seguir. A sua implementação deverá oferecer, no mínimo, operações equivalentes a:</p>
+<ol type="1">
+<li><code>beginScope()</code> para iniciar um novo escopo;</li>
+<li><code>endScope()</code> para encerrar o escopo atual;</li>
+<li><code>insert(symbol)</code> para inserir um novo símbolo no escopo corrente;</li>
+<li><code>lookupCurrentScope(name)</code> para verificar se um identificador já foi declarado no escopo local;</li>
+<li><code>lookup(name)</code> para procurar um identificador na cadeia de escopos, do mais interno para o mais externo.</li>
+</ol>
+<p>Os nomes dessas operações podem variar de acordo com a linguagem escolhida, mas a semântica de cada uma delas deverá ser preservada.</p>
+<p>Cada entrada da <strong>tabela de símbolos</strong> deverá armazenar, no mínimo, os seguintes atributos:</p>
+<ul>
+<li>nome do identificador;</li>
+<li>classe do símbolo, por exemplo, variável, parâmetro ou função;</li>
+<li>tipo do símbolo;</li>
+<li>nível de escopo;</li>
+<li>para funções, a lista de parâmetros formais e o tipo de retorno.</li>
+</ul>
+</section>
+<section id="gramática-da-mini-linguagem" class="level3" data-number="16.6.2">
+<h3 data-number="16.6.2" class="anchored" data-anchor-id="gramática-da-mini-linguagem"><span class="header-section-number">16.6.2</span> Gramática da mini-linguagem</h3>
+<p>A gramática a seguir define a linguagem mínima para a qual a <strong>tabela de símbolos</strong> deverá ser construída.</p>
+<pre class="ebnf"><code>program         ::= decl_list EOF
+
+decl_list       ::= decl decl_list
+                  | ε
+
+decl            ::= type id decl_tail
+
+decl_tail       ::= ";"
+                  | "(" param_list_opt ")" block
+
+type            ::= "int"
+                  | "float"
+                  | "bool"
+
+param_list_opt  ::= param_list
+                  | ε
+
+param_list      ::= param param_list_tail
+
+param_list_tail ::= "," param param_list_tail
+                  | ε
+
+param           ::= type id
+
+block           ::= "{" block_item_list "}"
+
+block_item_list ::= block_item block_item_list
+                  | ε
+
+block_item      ::= var_decl
+                  | stmt
+
+var_decl        ::= type id ";"
+
+stmt            ::= id stmt_id_tail
+                  | "return" expr_opt ";"
+                  | "if" "(" expr ")" stmt else_opt
+                  | "while" "(" expr ")" stmt
+                  | block
+                  | ";"
+
+stmt_id_tail    ::= "=" expr ";"
+                  | "(" arg_list_opt ")" ";"
+
+else_opt        ::= "else" stmt
+                  | ε
+
+expr_opt        ::= expr
+                  | ε
+
+arg_list_opt    ::= arg_list
+                  | ε
+
+arg_list        ::= expr arg_list_tail
+
+arg_list_tail   ::= "," expr arg_list_tail
+                  | ε
+
+expr            ::= equality
+
+equality        ::= relational equality_tail
+
+equality_tail   ::= ("==" | "!=") relational equality_tail
+                  | ε
+
+relational      ::= additive relational_tail
+
+relational_tail ::= ("&lt;" | "&lt;=" | "&gt;" | "&gt;=") additive relational_tail
+                  | ε
+
+additive        ::= term additive_tail
+
+additive_tail   ::= ("+" | "-") term additive_tail
+                  | ε
+
+term            ::= factor term_tail
+
+term_tail       ::= ("*" | "/") factor term_tail
+                  | ε
+
+factor          ::= id factor_id_tail
+                  | int_lit
+                  | float_lit
+                  | bool_lit
+                  | "(" expr ")"
+
+factor_id_tail  ::= "(" arg_list_opt ")"
+                  | ε</code></pre>
+</section>
+<section id="convenções-léxicas-mínimas" class="level3" data-number="16.6.3">
+<h3 data-number="16.6.3" class="anchored" data-anchor-id="convenções-léxicas-mínimas"><span class="header-section-number">16.6.3</span> Convenções léxicas mínimas</h3>
+<p>Para este exercício, considere as seguintes convenções léxicas:</p>
+<ul>
+<li><code>id</code>: identificadores iniciados por letra, seguidos de letras, dígitos ou <code>_</code>;</li>
+<li><code>int_lit</code>: literais inteiros;</li>
+<li><code>float_lit</code>: literais em ponto flutuante;</li>
+<li><code>bool_lit</code>: os literais <code>true</code> e <code>false</code>.</li>
+</ul>
+</section>
+<section id="exemplo-de-programa-válido" class="level3" data-number="16.6.4">
+<h3 data-number="16.6.4" class="anchored" data-anchor-id="exemplo-de-programa-válido"><span class="header-section-number">16.6.4</span> Exemplo de programa válido</h3>
+<p>O exemplo a seguir ilustra um programa válido na mini-linguagem e mostra situações em que a <strong>tabela de símbolos</strong> deverá registrar declarações, gerir escopos e resolver corretamente os usos dos identificadores.</p>
+<pre class="text"><code>int x;
+float y;
+
+int soma(int a, int b) {
+    int x;
+    x = a + b;
+
+    {
+        bool y;
+        x = x + 1;
+    }
+
+    return x;
+}
+
+bool teste(bool p) {
+    if (p) {
+        int z;
+        z = 1;
+    } else {
+        int z;
+        z = 0;
+    }
+
+    return p;
+}</code></pre>
+</section>
+<section id="exemplo-de-programa-inválido" class="level3" data-number="16.6.5">
+<h3 data-number="16.6.5" class="anchored" data-anchor-id="exemplo-de-programa-inválido"><span class="header-section-number">16.6.5</span> Exemplo de programa inválido</h3>
+<p>O exemplo a seguir ilustra situações em que a <strong>tabela de símbolos</strong> deverá emitir erros semânticos.</p>
+<pre class="text"><code>int x;
+bool x;
+
+int soma(int a, int a) {
+    y = 3;
+    return a;
+}
+
+int inc(int n) {
+    return n + 1;
+}
+
+int main() {
+    int z;
+    z = inc();
+    z = soma(1, 2, 3);
+    return z;
+}</code></pre>
+<p>Nesse programa, espera-se que a implementação detecte, pelo menos, os seguintes problemas:</p>
+<ul>
+<li>redeclaração de <code>x</code> no escopo global;</li>
+<li>redeclaração do parâmetro <code>a</code> no escopo da função <code>soma</code>;</li>
+<li>uso do identificador <code>y</code> sem declaração visível;</li>
+<li>chamada de <code>inc</code> com número insuficiente de argumentos;</li>
+<li>chamada de <code>soma</code> com número excessivo de argumentos.</li>
+</ul>
+</section>
+<section id="requisitos-semânticos" class="level3" data-number="16.6.6">
+<h3 data-number="16.6.6" class="anchored" data-anchor-id="requisitos-semânticos"><span class="header-section-number">16.6.6</span> Requisitos semânticos</h3>
+<p>A sua implementação deverá respeitar as seguintes regras semânticas:</p>
+<ol type="1">
+<li>um identificador não pode ser declarado duas vezes no mesmo escopo;</li>
+<li>um identificador pode ser declarado em um escopo interno com o mesmo nome de outro identificador declarado em escopo externo, caracterizando <em>shadowing</em>;</li>
+<li>todo uso de identificador em expressões, atribuições ou chamadas de função deve corresponder a uma declaração visível;</li>
+<li>uma chamada de função deve referir-se a um símbolo cuja classe seja função;</li>
+<li>a quantidade de argumentos fornecidos em uma chamada deve coincidir com a quantidade de parâmetros formais;</li>
+<li>os tipos dos argumentos devem ser compatíveis com os tipos dos parâmetros formais;</li>
+<li>a implementação deverá distinguir, no mínimo, entre variáveis, parâmetros e funções.</li>
+</ol>
+</section>
+<section id="saída-esperada" class="level3" data-number="16.6.7">
+<h3 data-number="16.6.7" class="anchored" data-anchor-id="saída-esperada"><span class="header-section-number">16.6.7</span> Saída esperada</h3>
+<p>Ao processar um programa escrito nessa mini-linguagem, a sua implementação deverá ser capaz de produzir:</p>
+<ol type="1">
+<li>a listagem da <strong>tabela de símbolos</strong>, organizada por escopos;</li>
+<li>mensagens de erro para identificadores não declarados;</li>
+<li>mensagens de erro para redeclarações ilegais no mesmo escopo;</li>
+<li>identificação explícita dos casos de <em>shadowing</em>;</li>
+<li>para funções, a assinatura contendo tipo de retorno e tipos dos parâmetros.</li>
+</ol>
+<p>Uma saída possível, para o programa válido, poderia assumir uma forma semelhante à seguinte:</p>
+<pre class="text"><code>Escopo 0:
+  x : variável, int
+  y : variável, float
+  soma : função, int(int, int)
+  teste : função, bool(bool)
+
+Escopo 1 - função soma:
+  a : parâmetro, int
+  b : parâmetro, int
+  x : variável, int
+
+Escopo 2 - bloco interno de soma:
+  y : variável, bool
+
+Escopo 1 - função teste:
+  p : parâmetro, bool
+
+Escopo 2 - bloco do if:
+  z : variável, int
+
+Escopo 2 - bloco do else:
+  z : variável, int</code></pre>
+</section>
+<section id="entregáveis" class="level3" data-number="16.6.8">
+<h3 data-number="16.6.8" class="anchored" data-anchor-id="entregáveis"><span class="header-section-number">16.6.8</span> Entregáveis</h3>
+<p>O aluno deverá entregar:</p>
+<ol type="1">
+<li>o código-fonte da implementação da <strong>tabela de símbolos</strong>;</li>
+<li>uma descrição breve da estrutura de dados escolhida;</li>
+<li>a saída produzida para pelo menos um programa válido;</li>
+<li>a saída produzida para pelo menos um programa inválido;</li>
+<li>a listagem final da <strong>tabela de símbolos</strong> por escopo.</li>
+</ol>
+</section>
+<section id="observação-didática" class="level3" data-number="16.6.9">
+<h3 data-number="16.6.9" class="anchored" data-anchor-id="observação-didática"><span class="header-section-number">16.6.9</span> Observação didática</h3>
+<p>O propósito central deste exercício é mostrar que a <strong>tabela de símbolos</strong> não é apenas um repositório passivo de nomes. Ela é uma estrutura ativa de suporte à análise semântica, responsável por resolver referências, modelar a visibilidade de identificadores e garantir que as regras de escopo da linguagem sejam efetivamente respeitadas.</p>
 
 
 </section>
