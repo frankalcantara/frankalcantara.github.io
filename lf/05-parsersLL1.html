@@ -610,7 +610,7 @@ Tip
 </section>
 <section id="eliminação-da-recursão-à-esquerda" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="eliminação-da-recursão-à-esquerda"><span class="header-section-number">6.2</span> Eliminação da Recursão à Esquerda</h2>
-<p>Felizmente, existem técnicas para eliminar a recursão à esquerda em gramáticas livres de contexto. Uma técnica comum e eficaz envolve a introdução de novos símbolos não terminais e a substituição de regras recursivas por regras equivalentes que não apresentem recursão. Em alguns casos, a substituição direta dos símbolos não terminais recursivos por suas respectivas regras pode ser suficiente para eliminar a recursão à esquerda direta. Outra técnica, a fatoração à esquerda, pode ser utilizada para eliminar ambiguidades na gramática, mas não resolve diretamente o problema da recursão.</p>
+<p>Felizmente, existem técnicas para eliminar a recursão à esquerda em gramáticas livres de contexto. Uma técnica comum e eficaz envolve a introdução de novos símbolos não-terminais e a substituição de regras recursivas por regras equivalentes que não apresentem recursão. Em alguns casos, a substituição direta dos símbolos não-terminais recursivos por suas respectivas regras pode ser suficiente para eliminar a recursão à esquerda direta. Outra técnica, a fatoração à esquerda, pode ser utilizada para eliminar ambiguidades na gramática, mas não resolve diretamente o problema da recursão.</p>
 <p><strong>Exemplo 1</strong>: eliminando a Recursão à Esquerda Direta, considere a regra <span class="math inline">\(A \rightarrow Aa \mid b\)</span>. Esta regra pode ser reescrita como:</p>
 <ol type="1">
 <li><span class="math inline">\(A \rightarrow bA'\)</span></li>
