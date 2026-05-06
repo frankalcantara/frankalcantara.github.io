@@ -105,6 +105,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -494,45 +497,53 @@ window.Quarto = {
   <li><a href="#eixo-2-equivalência-de-tipos" id="toc-eixo-2-equivalência-de-tipos" class="nav-link" data-scroll-target="#eixo-2-equivalência-de-tipos"><span class="header-section-number">14.2.2</span> Eixo 2: Equivalência de Tipos</a></li>
   <li><a href="#eixo-3-inferência" id="toc-eixo-3-inferência" class="nav-link" data-scroll-target="#eixo-3-inferência"><span class="header-section-number">14.2.3</span> Eixo 3: Inferência</a></li>
   </ul></li>
-  <li><a href="#python-do-dinâmico-ao-gradual" id="toc-python-do-dinâmico-ao-gradual" class="nav-link" data-scroll-target="#python-do-dinâmico-ao-gradual"><span class="header-section-number">14.3</span> Python: Do Dinâmico ao Gradual</a>
+  <li><a href="#julgamentos-imperativos-contexto-estado-e-efeitos" id="toc-julgamentos-imperativos-contexto-estado-e-efeitos" class="nav-link" data-scroll-target="#julgamentos-imperativos-contexto-estado-e-efeitos"><span class="header-section-number">14.3</span> Julgamentos Imperativos: Contexto, Estado e Efeitos</a></li>
+  <li><a href="#python-do-dinâmico-ao-gradual" id="toc-python-do-dinâmico-ao-gradual" class="nav-link" data-scroll-target="#python-do-dinâmico-ao-gradual"><span class="header-section-number">14.4</span> Python: Do Dinâmico ao Gradual</a>
   <ul class="collapse">
-  <li><a href="#python-puro-duck-typing" id="toc-python-puro-duck-typing" class="nav-link" data-scroll-target="#python-puro-duck-typing"><span class="header-section-number">14.3.1</span> Python Puro: <em>duck typing</em></a></li>
-  <li><a href="#python-com-type-hints-tipagem-gradual" id="toc-python-com-type-hints-tipagem-gradual" class="nav-link" data-scroll-target="#python-com-type-hints-tipagem-gradual"><span class="header-section-number">14.3.2</span> Python com Type <em>hints</em>: Tipagem Gradual</a></li>
+  <li><a href="#python-puro-duck-typing" id="toc-python-puro-duck-typing" class="nav-link" data-scroll-target="#python-puro-duck-typing"><span class="header-section-number">14.4.1</span> Python Puro: <em>duck typing</em></a></li>
+  <li><a href="#python-com-type-hints-tipagem-gradual" id="toc-python-com-type-hints-tipagem-gradual" class="nav-link" data-scroll-target="#python-com-type-hints-tipagem-gradual"><span class="header-section-number">14.4.2</span> Python com Type <em>hints</em>: Tipagem Gradual</a></li>
   </ul></li>
-  <li><a href="#c-tipagem-nominal-minimalista" id="toc-c-tipagem-nominal-minimalista" class="nav-link" data-scroll-target="#c-tipagem-nominal-minimalista"><span class="header-section-number">14.4</span> C: Tipagem Nominal Minimalista</a>
+  <li><a href="#c-tipagem-nominal-minimalista" id="toc-c-tipagem-nominal-minimalista" class="nav-link" data-scroll-target="#c-tipagem-nominal-minimalista"><span class="header-section-number">14.5</span> C: Tipagem Nominal Minimalista</a>
   <ul class="collapse">
-  <li><a href="#sistema-de-tipos-de-c" id="toc-sistema-de-tipos-de-c" class="nav-link" data-scroll-target="#sistema-de-tipos-de-c"><span class="header-section-number">14.4.1</span> Sistema de Tipos de C</a></li>
-  <li><a href="#a-fraqueza-controlada-casts-e-ponteiros" id="toc-a-fraqueza-controlada-casts-e-ponteiros" class="nav-link" data-scroll-target="#a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">14.4.2</span> A Fraqueza Controlada: Casts e Ponteiros</a></li>
+  <li><a href="#sistema-de-tipos-de-c" id="toc-sistema-de-tipos-de-c" class="nav-link" data-scroll-target="#sistema-de-tipos-de-c"><span class="header-section-number">14.5.1</span> Sistema de Tipos de C</a></li>
+  <li><a href="#a-fraqueza-controlada-casts-e-ponteiros" id="toc-a-fraqueza-controlada-casts-e-ponteiros" class="nav-link" data-scroll-target="#a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">14.5.2</span> A Fraqueza Controlada: Casts e Ponteiros</a></li>
   </ul></li>
-  <li><a href="#c-templates-e-dedução-de-tipos" id="toc-c-templates-e-dedução-de-tipos" class="nav-link" data-scroll-target="#c-templates-e-dedução-de-tipos"><span class="header-section-number">14.5</span> C++: Templates e Dedução de Tipos</a>
+  <li><a href="#c-templates-e-dedução-de-tipos" id="toc-c-templates-e-dedução-de-tipos" class="nav-link" data-scroll-target="#c-templates-e-dedução-de-tipos"><span class="header-section-number">14.6</span> C++: Templates e Dedução de Tipos</a>
   <ul class="collapse">
-  <li><a href="#templates-duck-typing-em-tempo-de-compilação" id="toc-templates-duck-typing-em-tempo-de-compilação" class="nav-link" data-scroll-target="#templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">14.5.1</span> Templates: <em>duck typing</em> em Tempo de Compilação</a></li>
-  <li><a href="#dedução-de-tipos-com-auto" id="toc-dedução-de-tipos-com-auto" class="nav-link" data-scroll-target="#dedução-de-tipos-com-auto"><span class="header-section-number">14.5.2</span> Dedução de Tipos com <code>auto</code></a></li>
-  <li><a href="#concepts-c20-restrições-explícitas" id="toc-concepts-c20-restrições-explícitas" class="nav-link" data-scroll-target="#concepts-c20-restrições-explícitas"><span class="header-section-number">14.5.3</span> Concepts (C++20): Restrições Explícitas</a></li>
-  <li><a href="#exemplo-completo-de-julgamento-em-c" id="toc-exemplo-completo-de-julgamento-em-c" class="nav-link" data-scroll-target="#exemplo-completo-de-julgamento-em-c"><span class="header-section-number">14.5.4</span> Exemplo Completo de Julgamento em C++</a></li>
+  <li><a href="#templates-duck-typing-em-tempo-de-compilação" id="toc-templates-duck-typing-em-tempo-de-compilação" class="nav-link" data-scroll-target="#templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">14.6.1</span> Templates: <em>duck typing</em> em Tempo de Compilação</a></li>
+  <li><a href="#dedução-de-tipos-com-auto" id="toc-dedução-de-tipos-com-auto" class="nav-link" data-scroll-target="#dedução-de-tipos-com-auto"><span class="header-section-number">14.6.2</span> Dedução de Tipos com <code>auto</code></a></li>
+  <li><a href="#concepts-c20-restrições-explícitas" id="toc-concepts-c20-restrições-explícitas" class="nav-link" data-scroll-target="#concepts-c20-restrições-explícitas"><span class="header-section-number">14.6.3</span> Concepts (C++20): Restrições Explícitas</a></li>
+  <li><a href="#exemplo-completo-de-julgamento-em-c" id="toc-exemplo-completo-de-julgamento-em-c" class="nav-link" data-scroll-target="#exemplo-completo-de-julgamento-em-c"><span class="header-section-number">14.6.4</span> Exemplo Completo de Julgamento em C++</a></li>
   </ul></li>
-  <li><a href="#rust-hindley-milner-encontra-sistemas" id="toc-rust-hindley-milner-encontra-sistemas" class="nav-link" data-scroll-target="#rust-hindley-milner-encontra-sistemas"><span class="header-section-number">14.6</span> Rust: Hindley-Milner Encontra Sistemas</a>
+  <li><a href="#rust-hindley-milner-encontra-sistemas" id="toc-rust-hindley-milner-encontra-sistemas" class="nav-link" data-scroll-target="#rust-hindley-milner-encontra-sistemas"><span class="header-section-number">14.7</span> Rust: Hindley-Milner Encontra Sistemas</a>
   <ul class="collapse">
-  <li><a href="#sistema-base-inferência-hindley-milner" id="toc-sistema-base-inferência-hindley-milner" class="nav-link" data-scroll-target="#sistema-base-inferência-hindley-milner"><span class="header-section-number">14.6.1</span> Sistema Base: Inferência Hindley-Milner</a></li>
-  <li><a href="#trait-based-constraints" id="toc-trait-based-constraints" class="nav-link" data-scroll-target="#trait-based-constraints"><span class="header-section-number">14.6.2</span> 1. Trait-Based Constraints</a></li>
-  <li><a href="#ownership-e-lifetimes" id="toc-ownership-e-lifetimes" class="nav-link" data-scroll-target="#ownership-e-lifetimes"><span class="header-section-number">14.6.3</span> 2. Ownership e Lifetimes</a></li>
-  <li><a href="#inferência-bidirecional" id="toc-inferência-bidirecional" class="nav-link" data-scroll-target="#inferência-bidirecional"><span class="header-section-number">14.6.4</span> 3. Inferência Bidirecional</a></li>
-  <li><a href="#sistema-completo-de-rust" id="toc-sistema-completo-de-rust" class="nav-link" data-scroll-target="#sistema-completo-de-rust"><span class="header-section-number">14.6.5</span> Sistema Completo de Rust</a></li>
+  <li><a href="#sistema-base-inferência-hindley-milner" id="toc-sistema-base-inferência-hindley-milner" class="nav-link" data-scroll-target="#sistema-base-inferência-hindley-milner"><span class="header-section-number">14.7.1</span> Sistema Base: Inferência Hindley-Milner</a></li>
+  <li><a href="#restrições-baseadas-em-traits" id="toc-restrições-baseadas-em-traits" class="nav-link" data-scroll-target="#restrições-baseadas-em-traits"><span class="header-section-number">14.7.2</span> Restrições Baseadas em Traits</a></li>
+  <li><a href="#ownership-e-lifetimes" id="toc-ownership-e-lifetimes" class="nav-link" data-scroll-target="#ownership-e-lifetimes"><span class="header-section-number">14.7.3</span> Ownership e Lifetimes</a></li>
+  <li><a href="#inferência-bidirecional" id="toc-inferência-bidirecional" class="nav-link" data-scroll-target="#inferência-bidirecional"><span class="header-section-number">14.7.4</span> Inferência Bidirecional</a></li>
+  <li><a href="#sistema-completo-de-rust" id="toc-sistema-completo-de-rust" class="nav-link" data-scroll-target="#sistema-completo-de-rust"><span class="header-section-number">14.7.5</span> Sistema Completo de Rust</a></li>
   </ul></li>
-  <li><a href="#casos-especiais-typescript-go-e-swift" id="toc-casos-especiais-typescript-go-e-swift" class="nav-link" data-scroll-target="#casos-especiais-typescript-go-e-swift"><span class="header-section-number">14.7</span> Casos Especiais: TypeScript, Go e Swift</a>
+  <li><a href="#casos-especiais-typescript-go-e-swift" id="toc-casos-especiais-typescript-go-e-swift" class="nav-link" data-scroll-target="#casos-especiais-typescript-go-e-swift"><span class="header-section-number">14.8</span> Casos Especiais: TypeScript, Go e Swift</a>
   <ul class="collapse">
-  <li><a href="#typescript-tipagem-estrutural-gradual" id="toc-typescript-tipagem-estrutural-gradual" class="nav-link" data-scroll-target="#typescript-tipagem-estrutural-gradual"><span class="header-section-number">14.7.1</span> TypeScript: Tipagem Estrutural Gradual</a></li>
-  <li><a href="#go-simplicidade-nominal" id="toc-go-simplicidade-nominal" class="nav-link" data-scroll-target="#go-simplicidade-nominal"><span class="header-section-number">14.7.2</span> Go: Simplicidade Nominal</a></li>
-  <li><a href="#swift-sistema-híbrido" id="toc-swift-sistema-híbrido" class="nav-link" data-scroll-target="#swift-sistema-híbrido"><span class="header-section-number">14.7.3</span> Swift: Sistema Híbrido</a></li>
+  <li><a href="#typescript-tipagem-estrutural-gradual" id="toc-typescript-tipagem-estrutural-gradual" class="nav-link" data-scroll-target="#typescript-tipagem-estrutural-gradual"><span class="header-section-number">14.8.1</span> TypeScript: Tipagem Estrutural Gradual</a></li>
+  <li><a href="#go-simplicidade-nominal" id="toc-go-simplicidade-nominal" class="nav-link" data-scroll-target="#go-simplicidade-nominal"><span class="header-section-number">14.8.2</span> Go: Simplicidade Nominal</a></li>
+  <li><a href="#swift-sistema-híbrido" id="toc-swift-sistema-híbrido" class="nav-link" data-scroll-target="#swift-sistema-híbrido"><span class="header-section-number">14.8.3</span> Swift: Sistema Híbrido</a></li>
   </ul></li>
-  <li><a href="#comparação-complexidade-dos-sistemas" id="toc-comparação-complexidade-dos-sistemas" class="nav-link" data-scroll-target="#comparação-complexidade-dos-sistemas"><span class="header-section-number">14.8</span> Comparação: Complexidade dos Sistemas</a></li>
-  <li><a href="#trade-offs-fundamentais" id="toc-trade-offs-fundamentais" class="nav-link" data-scroll-target="#trade-offs-fundamentais"><span class="header-section-number">14.9</span> Trade-offs Fundamentais</a>
+  <li><a href="#comparação-complexidade-dos-sistemas" id="toc-comparação-complexidade-dos-sistemas" class="nav-link" data-scroll-target="#comparação-complexidade-dos-sistemas"><span class="header-section-number">14.9</span> Comparação: Complexidade dos Sistemas</a></li>
+  <li><a href="#trade-offs-fundamentais" id="toc-trade-offs-fundamentais" class="nav-link" data-scroll-target="#trade-offs-fundamentais"><span class="header-section-number">14.10</span> Trade-offs Fundamentais</a>
   <ul class="collapse">
-  <li><a href="#expressividade-vs.-decidibilidade" id="toc-expressividade-vs.-decidibilidade" class="nav-link" data-scroll-target="#expressividade-vs.-decidibilidade"><span class="header-section-number">14.9.1</span> 1. Expressividade vs.&nbsp;Decidibilidade</a></li>
-  <li><a href="#segurança-vs.-performance" id="toc-segurança-vs.-performance" class="nav-link" data-scroll-target="#segurança-vs.-performance"><span class="header-section-number">14.9.2</span> 2. Segurança vs.&nbsp;Performance</a></li>
-  <li><a href="#inferência-vs.-clareza" id="toc-inferência-vs.-clareza" class="nav-link" data-scroll-target="#inferência-vs.-clareza"><span class="header-section-number">14.9.3</span> 3. Inferência vs.&nbsp;Clareza</a></li>
+  <li><a href="#expressividade-vs.-decidibilidade" id="toc-expressividade-vs.-decidibilidade" class="nav-link" data-scroll-target="#expressividade-vs.-decidibilidade"><span class="header-section-number">14.10.1</span> 1. Expressividade vs.&nbsp;Decidibilidade</a></li>
+  <li><a href="#segurança-vs.-performance" id="toc-segurança-vs.-performance" class="nav-link" data-scroll-target="#segurança-vs.-performance"><span class="header-section-number">14.10.2</span> 2. Segurança vs.&nbsp;Performance</a></li>
+  <li><a href="#inferência-vs.-clareza" id="toc-inferência-vs.-clareza" class="nav-link" data-scroll-target="#inferência-vs.-clareza"><span class="header-section-number">14.10.3</span> 3. Inferência vs.&nbsp;Clareza</a></li>
   </ul></li>
-  <li><a href="#conclusão-o-pragmatismo-vence-a-elegância" id="toc-conclusão-o-pragmatismo-vence-a-elegância" class="nav-link" data-scroll-target="#conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">14.10</span> Conclusão: O Pragmatismo Vence a Elegância</a></li>
+  <li><a href="#conclusão-o-pragmatismo-vence-a-elegância" id="toc-conclusão-o-pragmatismo-vence-a-elegância" class="nav-link" data-scroll-target="#conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">14.11</span> Conclusão: O Pragmatismo Vence a Elegância</a></li>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">14.12</span> Exercícios</a>
+  <ul class="collapse">
+  <li><a href="#classificação-de-sistemas-de-tipos" id="toc-classificação-de-sistemas-de-tipos" class="nav-link" data-scroll-target="#classificação-de-sistemas-de-tipos"><span class="header-section-number">14.12.1</span> Classificação de sistemas de tipos</a></li>
+  <li><a href="#julgamentos-em-linguagens-imperativas" id="toc-julgamentos-em-linguagens-imperativas" class="nav-link" data-scroll-target="#julgamentos-em-linguagens-imperativas"><span class="header-section-number">14.12.2</span> Julgamentos em linguagens imperativas</a></li>
+  <li><a href="#subtipagem-coerção-e-equivalência" id="toc-subtipagem-coerção-e-equivalência" class="nav-link" data-scroll-target="#subtipagem-coerção-e-equivalência"><span class="header-section-number">14.12.3</span> Subtipagem, coerção e equivalência</a></li>
+  <li><a href="#inferência-local-e-fluxo-de-controle" id="toc-inferência-local-e-fluxo-de-controle" class="nav-link" data-scroll-target="#inferência-local-e-fluxo-de-controle"><span class="header-section-number">14.12.4</span> Inferência local e fluxo de controle</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10b-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -601,13 +612,129 @@ window.Quarto = {
 <li><strong>Fluxo-sensitiva</strong>: inferência através de branches (TypeScript, Flow)</li>
 <li><strong>Completa</strong>: inferência global (ML, Haskell, parcialmente em Rust)</li>
 </ul>
+<div id="fig-taxonomia-tipos-imperativos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-taxonomia-tipos-imperativos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  Sistemas["Sistemas de tipos imperativos"]
+  Verificacao["Momento da verificação"]
+  Equivalencia["Equivalência de tipos"]
+  Inferencia["Grau de inferência"]
+
+  Sistemas --&gt; Verificacao
+  Sistemas --&gt; Equivalencia
+  Sistemas --&gt; Inferencia
+
+  Verificacao --&gt; Estatico["Estática"]
+  Verificacao --&gt; Gradual["Gradual"]
+  Verificacao --&gt; Dinamico["Dinâmica"]
+
+  Equivalencia --&gt; Nominal["Nominal"]
+  Equivalencia --&gt; Estrutural["Estrutural"]
+  Equivalencia --&gt; Mista["Mista"]
+
+  Inferencia --&gt; Nenhuma["Nenhuma"]
+  Inferencia --&gt; Local["Local"]
+  Inferencia --&gt; Fluxo["Sensível ao fluxo"]
+  Inferencia --&gt; Completa["Completa"]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-taxonomia-tipos-imperativos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.1: Eixos usados para comparar sistemas de tipos imperativos.
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
-<section id="python-do-dinâmico-ao-gradual" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="python-do-dinâmico-ao-gradual"><span class="header-section-number">14.3</span> Python: Do Dinâmico ao Gradual</h2>
+<section id="julgamentos-imperativos-contexto-estado-e-efeitos" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="julgamentos-imperativos-contexto-estado-e-efeitos"><span class="header-section-number">14.3</span> Julgamentos Imperativos: Contexto, Estado e Efeitos</h2>
+<p>Para comparar linguagens imperativas de forma mais rigorosa, precisamos ampliar o julgamento de tipos usado em linguagens funcionais puras. Em uma linguagem funcional simples, um julgamento como <span class="math inline">\(\Gamma \vdash e : \tau\)</span> é suficiente: no contexto <span class="math inline">\(\Gamma\)</span>, a expressão <span class="math inline">\(e\)</span> tem tipo <span class="math inline">\(\tau\)</span>. Em linguagens imperativas, porém, expressões e comandos podem depender do estado, modificar variáveis, acessar memória, lançar exceções ou mover valores.</p>
+<p>Uma forma mais expressiva de julgamento é:</p>
+<p><span class="math display">\[\Gamma ; \Sigma \vdash e : \tau \; ! \; \varepsilon\]</span></p>
+<p>Na qual:</p>
+<ul>
+<li><span class="math inline">\(\Gamma\)</span> é o contexto de nomes e tipos, isto é, a informação estática sobre variáveis, funções e tipos declarados;</li>
+<li><span class="math inline">\(\Sigma\)</span> é o contexto de memória ou armazenamento, usado quando a linguagem possui referências, ponteiros ou regiões;</li>
+<li><span class="math inline">\(\tau\)</span> é o tipo inferido ou verificado para a expressão;</li>
+<li><span class="math inline">\(\varepsilon\)</span> é um conjunto de efeitos aproximados, como leitura, escrita, alocação, chamada de função, lançamento de exceção ou I/O.</li>
+</ul>
+<p>Para comandos, que normalmente não produzem valor útil, podemos usar:</p>
+<p><span class="math display">\[\Gamma ; \Sigma \vdash S : \Gamma' ; \Sigma' \; ! \; \varepsilon\]</span></p>
+<p>Esse julgamento lê-se assim: executar ou aceitar o comando <span class="math inline">\(S\)</span> no contexto <span class="math inline">\(\Gamma ; \Sigma\)</span> produz um novo contexto <span class="math inline">\(\Gamma' ; \Sigma'\)</span> e possui os efeitos <span class="math inline">\(\varepsilon\)</span>. A diferença em relação ao mundo funcional é crucial: um comando pode transformar o contexto do programa.</p>
+<p><strong>Regra de declaração de variável</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma ; \Sigma \vdash e : \tau' \; ! \; \varepsilon
+  \quad
+  \tau' &lt;: \tau
+}{
+  \Gamma ; \Sigma \vdash \text{let } x : \tau = e : \Gamma[x \mapsto \tau] ; \Sigma \; ! \; \varepsilon
+}\]</span></p>
+<p><strong>Regra de atribuição</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma(x) = \text{mut } \tau
+  \quad
+  \Gamma ; \Sigma \vdash e : \tau' \; ! \; \varepsilon
+  \quad
+  \tau' &lt;: \tau
+}{
+  \Gamma ; \Sigma \vdash x := e : \Gamma ; \Sigma \; ! \; (\varepsilon \cup \{\text{write}(x)\})
+}\]</span></p>
+<p><strong>Regra de sequência</strong>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma ; \Sigma \vdash S_1 : \Gamma_1 ; \Sigma_1 \; ! \; \varepsilon_1
+  \quad
+  \Gamma_1 ; \Sigma_1 \vdash S_2 : \Gamma_2 ; \Sigma_2 \; ! \; \varepsilon_2
+}{
+  \Gamma ; \Sigma \vdash S_1 ; S_2 : \Gamma_2 ; \Sigma_2 \; ! \; (\varepsilon_1 \cup \varepsilon_2)
+}\]</span></p>
+<p>Essa notação não pretende capturar todos os detalhes de todas as linguagens reais, mas fornece uma lente comum. <strong>C</strong> relaxa parte das garantias sobre <span class="math inline">\(\Sigma\)</span>; <strong>Rust</strong> torna <span class="math inline">\(\Sigma\)</span> e os efeitos de posse muito mais rígidos; <strong>Python</strong> deixa parte de <span class="math inline">\(\Gamma\)</span> ser descoberta em tempo de execução; <strong>TypeScript</strong> refina <span class="math inline">\(\Gamma\)</span> de maneira sensível ao fluxo de controle.</p>
+<div id="fig-julgamento-imperativo" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-julgamento-imperativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  Entrada["Contexto inicial&lt;br/&gt;Γ ; Σ"]
+  Comando["Comando ou expressão&lt;br/&gt;S ou e"]
+  Julgamento["Julgamento de tipos&lt;br/&gt;Γ ; Σ ⊢ S"]
+  Saida["Contexto resultante&lt;br/&gt;Γ' ; Σ'"]
+  Efeitos["Efeitos aproximados&lt;br/&gt;ε"]
+
+  Entrada --&gt; Julgamento
+  Comando --&gt; Julgamento
+  Julgamento --&gt; Saida
+  Julgamento --&gt; Efeitos
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-julgamento-imperativo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperativas.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="python-do-dinâmico-ao-gradual" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="python-do-dinâmico-ao-gradual"><span class="header-section-number">14.4</span> Python: Do Dinâmico ao Gradual</h2>
 <p><strong>Python</strong> representa uma abordagem radicalmente diferente. Historicamente uma linguagem puramente dinâmica, ela evoluiu para um sistema de <strong>tipagem gradual</strong> com a PEP 484 (2014).</p>
-<section id="python-puro-duck-typing" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="python-puro-duck-typing"><span class="header-section-number">14.3.1</span> Python Puro: <em>duck typing</em></h3>
+<section id="python-puro-duck-typing" class="level3" data-number="14.4.1">
+<h3 data-number="14.4.1" class="anchored" data-anchor-id="python-puro-duck-typing"><span class="header-section-number">14.4.1</span> Python Puro: <em>duck typing</em></h3>
 <p>No Python tradicional, não há julgamento de tipos em tempo de compilação:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a, b):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
@@ -620,8 +747,8 @@ window.Quarto = {
 <p><span class="math display">\[\text{typeof}(e, \sigma) = \tau\]</span></p>
 <p>Onde <span class="math inline">\(\sigma\)</span> é o estado do programa (valores concretos) e <span class="math inline">\(\tau\)</span> é o tipo descoberto em <em>runtime</em>.</p>
 </section>
-<section id="python-com-type-hints-tipagem-gradual" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="python-com-type-hints-tipagem-gradual"><span class="header-section-number">14.3.2</span> Python com Type <em>hints</em>: Tipagem Gradual</h3>
+<section id="python-com-type-hints-tipagem-gradual" class="level3" data-number="14.4.2">
+<h3 data-number="14.4.2" class="anchored" data-anchor-id="python-com-type-hints-tipagem-gradual"><span class="header-section-number">14.4.2</span> Python com Type <em>hints</em>: Tipagem Gradual</h3>
 <p>A PEP 484 introduziu <strong>anotações de tipo opcionais</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
@@ -669,13 +796,24 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: str</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O refinamento de tipos pode ser expresso como uma transformação local do contexto. Se antes do teste sabemos que <code>valor</code> tem tipo <code>int | str</code>, dentro do ramo verdadeiro o contexto é refinado para <code>valor : int</code>, e no ramo falso para <code>valor : str</code>:</p>
+<p><span class="math display">\[\frac{
+  \Gamma \vdash x : T_1 \cup T_2
+  \quad
+  \Gamma[x \mapsto T_1] \vdash e_1 : \tau
+  \quad
+  \Gamma[x \mapsto T_2] \vdash e_2 : \tau
+}{
+  \Gamma \vdash \text{if } \texttt{isinstance}(x,T_1) \text{ then } e_1 \text{ else } e_2 : \tau
+}\]</span></p>
+<p>Essa regra mostra por que a tipagem gradual moderna não é apenas uma anotação superficial. O verificador de tipos acompanha o fluxo de controle e constrói contextos diferentes para cada ramo do programa.</p>
 </section>
 </section>
-<section id="c-tipagem-nominal-minimalista" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="c-tipagem-nominal-minimalista"><span class="header-section-number">14.4</span> C: Tipagem Nominal Minimalista</h2>
+<section id="c-tipagem-nominal-minimalista" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="c-tipagem-nominal-minimalista"><span class="header-section-number">14.5</span> C: Tipagem Nominal Minimalista</h2>
 <p><strong>C</strong> representa o extremo oposto: um sistema de tipos <strong>estático</strong>, <strong>fraco</strong> e <strong>nominal</strong>, projetado para estar o mais próximo possível do hardware.</p>
-<section id="sistema-de-tipos-de-c" class="level3" data-number="14.4.1">
-<h3 data-number="14.4.1" class="anchored" data-anchor-id="sistema-de-tipos-de-c"><span class="header-section-number">14.4.1</span> Sistema de Tipos de C</h3>
+<section id="sistema-de-tipos-de-c" class="level3" data-number="14.5.1">
+<h3 data-number="14.5.1" class="anchored" data-anchor-id="sistema-de-tipos-de-c"><span class="header-section-number">14.5.1</span> Sistema de Tipos de C</h3>
 <p>O sistema de tipos de C é deliberadamente minimalista. As regras de julgamento são simples, mas permissivas:</p>
 <p><strong>Regra de Declaração de Variável</strong>:</p>
 <p><span class="math display">\[\frac{T \in \{\text{int, float, char, ...}\}}{\Gamma \vdash (T \, x;) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : T\}}\]</span></p>
@@ -687,8 +825,8 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>  <span class="co">// x promovido para float, resultado promovido para double</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="a-fraqueza-controlada-casts-e-ponteiros" class="level3" data-number="14.4.2">
-<h3 data-number="14.4.2" class="anchored" data-anchor-id="a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">14.4.2</span> A Fraqueza Controlada: Casts e Ponteiros</h3>
+<section id="a-fraqueza-controlada-casts-e-ponteiros" class="level3" data-number="14.5.2">
+<h3 data-number="14.5.2" class="anchored" data-anchor-id="a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">14.5.2</span> A Fraqueza Controlada: Casts e Ponteiros</h3>
 <p>O que torna C “fracamente tipado” é sua permissividade com <strong>casts</strong> e <strong>aritmética de ponteiros</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span><span class="op">*</span> p <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">*)&amp;</span>x<span class="op">;</span>  <span class="co">// Cast inseguro: reinterpreta bits</span></span>
@@ -723,11 +861,11 @@ window.Quarto = {
 }\]</span></p>
 </section>
 </section>
-<section id="c-templates-e-dedução-de-tipos" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="c-templates-e-dedução-de-tipos"><span class="header-section-number">14.5</span> C++: Templates e Dedução de Tipos</h2>
+<section id="c-templates-e-dedução-de-tipos" class="level2" data-number="14.6">
+<h2 data-number="14.6" class="anchored" data-anchor-id="c-templates-e-dedução-de-tipos"><span class="header-section-number">14.6</span> C++: Templates e Dedução de Tipos</h2>
 <p><strong>C++</strong> estende C com um sistema de tipos significativamente mais rico, mas mantém compatibilidade com a fraqueza controlada de C.</p>
-<section id="templates-duck-typing-em-tempo-de-compilação" class="level3" data-number="14.5.1">
-<h3 data-number="14.5.1" class="anchored" data-anchor-id="templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">14.5.1</span> Templates: <em>duck typing</em> em Tempo de Compilação</h3>
+<section id="templates-duck-typing-em-tempo-de-compilação" class="level3" data-number="14.6.1">
+<h3 data-number="14.6.1" class="anchored" data-anchor-id="templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">14.6.1</span> Templates: <em>duck typing</em> em Tempo de Compilação</h3>
 <p>Templates em C++ são essencialmente <strong><em>duck typing</em> estático</strong>. Um template é instanciado apenas quando usado, e o compilador verifica se todas as operações requeridas existem:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>T max<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span></span>
@@ -745,8 +883,8 @@ window.Quarto = {
 }\]</span></p>
 <p>Esta verificação acontece <strong>por instanciação</strong>: o compilador substitui <code>T</code> por cada tipo concreto usado e então verifica se as operações são válidas.</p>
 </section>
-<section id="dedução-de-tipos-com-auto" class="level3" data-number="14.5.2">
-<h3 data-number="14.5.2" class="anchored" data-anchor-id="dedução-de-tipos-com-auto"><span class="header-section-number">14.5.2</span> Dedução de Tipos com <code>auto</code></h3>
+<section id="dedução-de-tipos-com-auto" class="level3" data-number="14.6.2">
+<h3 data-number="14.6.2" class="anchored" data-anchor-id="dedução-de-tipos-com-auto"><span class="header-section-number">14.6.2</span> Dedução de Tipos com <code>auto</code></h3>
 <p>C++11 introduziu <code>auto</code>, que realiza <strong>inferência de tipo local</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>           <span class="co">// x : int</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>         <span class="co">// y : double</span></span>
@@ -758,8 +896,8 @@ window.Quarto = {
 <p><span class="math display">\[\frac{\Gamma \vdash e : \tau}{\Gamma \vdash (\text{auto } x = e) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : \tau\}}\]</span></p>
 <p>O tipo de <code>x</code> é <strong>exatamente</strong> o tipo de <code>e</code>, sem coerções automáticas.</p>
 </section>
-<section id="concepts-c20-restrições-explícitas" class="level3" data-number="14.5.3">
-<h3 data-number="14.5.3" class="anchored" data-anchor-id="concepts-c20-restrições-explícitas"><span class="header-section-number">14.5.3</span> Concepts (C++20): Restrições Explícitas</h3>
+<section id="concepts-c20-restrições-explícitas" class="level3" data-number="14.6.3">
+<h3 data-number="14.6.3" class="anchored" data-anchor-id="concepts-c20-restrições-explícitas"><span class="header-section-number">14.6.3</span> Concepts (C++20): Restrições Explícitas</h3>
 <p>C++20 introduziu <strong>concepts</strong> para adicionar restrições explícitas a templates:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">concept</span> Numeric <span class="op">=</span> <span class="bu">std::</span>is_arithmetic_v<span class="op">&lt;</span>T<span class="op">&gt;;</span></span>
@@ -780,8 +918,8 @@ window.Quarto = {
 }\]</span></p>
 <p>Onde <span class="math inline">\(T \models C\)</span> significa “T satisfaz as restrições do concept C”.</p>
 </section>
-<section id="exemplo-completo-de-julgamento-em-c" class="level3" data-number="14.5.4">
-<h3 data-number="14.5.4" class="anchored" data-anchor-id="exemplo-completo-de-julgamento-em-c"><span class="header-section-number">14.5.4</span> Exemplo Completo de Julgamento em C++</h3>
+<section id="exemplo-completo-de-julgamento-em-c" class="level3" data-number="14.6.4">
+<h3 data-number="14.6.4" class="anchored" data-anchor-id="exemplo-completo-de-julgamento-em-c"><span class="header-section-number">14.6.4</span> Exemplo Completo de Julgamento em C++</h3>
 <p>Para o código:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma_dobro<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">{</span></span>
@@ -802,11 +940,11 @@ window.Quarto = {
 </ol>
 </section>
 </section>
-<section id="rust-hindley-milner-encontra-sistemas" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="rust-hindley-milner-encontra-sistemas"><span class="header-section-number">14.6</span> Rust: Hindley-Milner Encontra Sistemas</h2>
+<section id="rust-hindley-milner-encontra-sistemas" class="level2" data-number="14.7">
+<h2 data-number="14.7" class="anchored" data-anchor-id="rust-hindley-milner-encontra-sistemas"><span class="header-section-number">14.7</span> Rust: Hindley-Milner Encontra Sistemas</h2>
 <p><strong>Rust</strong> é a linguagem imperativa moderna que mais se aproxima da elegância dos sistemas de tipos funcionais, mas com extensões úteis para programação de sistemas.</p>
-<section id="sistema-base-inferência-hindley-milner" class="level3" data-number="14.6.1">
-<h3 data-number="14.6.1" class="anchored" data-anchor-id="sistema-base-inferência-hindley-milner"><span class="header-section-number">14.6.1</span> Sistema Base: Inferência Hindley-Milner</h3>
+<section id="sistema-base-inferência-hindley-milner" class="level3" data-number="14.7.1">
+<h3 data-number="14.7.1" class="anchored" data-anchor-id="sistema-base-inferência-hindley-milner"><span class="header-section-number">14.7.1</span> Sistema Base: Inferência Hindley-Milner</h3>
 <p>O sistema de tipos de Rust é baseado em Hindley-Milner, permitindo inferência quase completa:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">+</span> b</span>
@@ -816,8 +954,8 @@ window.Quarto = {
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> y <span class="op">=</span> soma(x<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span> <span class="co">// Tipo inferido: i32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Contudo, Rust adiciona três extensões fundamentais:</p>
 </section>
-<section id="trait-based-constraints" class="level3" data-number="14.6.2">
-<h3 data-number="14.6.2" class="anchored" data-anchor-id="trait-based-constraints"><span class="header-section-number">14.6.2</span> 1. Trait-Based Constraints</h3>
+<section id="restrições-baseadas-em-traits" class="level3" data-number="14.7.2">
+<h3 data-number="14.7.2" class="anchored" data-anchor-id="restrições-baseadas-em-traits"><span class="header-section-number">14.7.2</span> Restrições Baseadas em Traits</h3>
 <p>Traits em Rust são similares a type classes em Haskell, mas com semântica de sistemas:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">trait</span> Adicionavel <span class="op">{</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> adicionar(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> outro<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Self</span>) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
@@ -831,11 +969,11 @@ window.Quarto = {
   \Gamma \vdash T : \text{trait } C \quad
   \Gamma, x : T \vdash e : \tau
 }{
-  \Gamma \vdash \text{fn}(x : T \text{ where } T : C) \rightarrow \tau : (T \rightarrow \tau)
+  \Gamma \vdash \text{fn}(x : T \text{ com } T : C) \rightarrow \tau : (T \rightarrow \tau)
 }\]</span></p>
 </section>
-<section id="ownership-e-lifetimes" class="level3" data-number="14.6.3">
-<h3 data-number="14.6.3" class="anchored" data-anchor-id="ownership-e-lifetimes"><span class="header-section-number">14.6.3</span> 2. Ownership e Lifetimes</h3>
+<section id="ownership-e-lifetimes" class="level3" data-number="14.7.3">
+<h3 data-number="14.7.3" class="anchored" data-anchor-id="ownership-e-lifetimes"><span class="header-section-number">14.7.3</span> Ownership e Lifetimes</h3>
 <p>A característica mais distintiva de Rust é seu sistema de <strong>ownership</strong> e <strong>lifetimes</strong>, que são parte integrante do sistema de tipos:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> primeiro<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span>split_whitespace()<span class="op">.</span>next()<span class="op">.</span>unwrap_or(<span class="st">""</span>)</span>
@@ -849,6 +987,64 @@ window.Quarto = {
   \Gamma; \Delta \vdash e : \tau_{/'a}
 }\]</span></p>
 <p>Onde <span class="math inline">\(\Delta\)</span> é o contexto de lifetimes e <span class="math inline">\(\tau_{/'a}\)</span> é o tipo <span class="math inline">\(\tau\)</span> anotado com lifetime <span class="math inline">\('a\)</span>.</p>
+<p>Também podemos escrever regras simplificadas para posse e empréstimo. Seja <span class="math inline">\(\Omega\)</span> o contexto de posse, registrando quais variáveis ainda possuem seus valores e quais estão emprestadas. Um movimento consome a posse do valor original:</p>
+<p><span class="math display">\[\frac{
+  \Gamma ; \Omega \vdash x : \text{own}(T)
+}{
+  \Gamma ; \Omega \vdash \text{move}(x) : T
+  \quad
+  \Omega' = \Omega[x \mapsto \text{moved}]
+}\]</span></p>
+<p>Um empréstimo compartilhado não consome a posse, mas registra que há uma referência imutável ativa:</p>
+<p><span class="math display">\[\frac{
+  \Gamma ; \Omega \vdash x : \text{own}(T)
+}{
+  \Gamma ; \Omega \vdash \&amp;x : \&amp;'a T
+  \quad
+  \Omega' = \Omega[x \mapsto \text{shared}('a)]
+}\]</span></p>
+<p>Já um empréstimo mutável exige exclusividade:</p>
+<p><span class="math display">\[\frac{
+  \Gamma ; \Omega \vdash x : \text{own}(T)
+  \quad
+  x \notin \text{borrowed}(\Omega)
+}{
+  \Gamma ; \Omega \vdash \&amp;mut\,x : \&amp;'a mut\,T
+  \quad
+  \Omega' = \Omega[x \mapsto \text{unique}('a)]
+}\]</span></p>
+<p>Essas regras são esquemáticas, mas capturam a intuição central do <em>borrow checker</em>: múltiplas leituras compartilhadas são aceitáveis, mas uma escrita mutável exige acesso exclusivo. A segurança de memória em Rust nasce exatamente dessa disciplina de tipos aplicada ao uso de referências.</p>
+<div id="fig-borrow-checker" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-borrow-checker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram-v2
+  [*] --&gt; Livre
+  Livre --&gt; Movido: move(x)
+  Livre --&gt; Compartilhado: &amp;x
+  Livre --&gt; Mutavel: &amp;mut x
+  Compartilhado --&gt; Compartilhado: novos &amp;x
+  Compartilhado --&gt; Livre: fim dos empréstimos
+  Mutavel --&gt; Livre: fim do empréstimo
+  Mutavel --&gt; Rejeitado: &amp;x ou &amp;mut x simultâneo
+  Compartilhado --&gt; Rejeitado: &amp;mut x simultâneo
+  Movido --&gt; Rejeitado: uso de x
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-borrow-checker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow checker</em> de Rust.
+</figcaption>
+</figure>
+</div>
 <p><strong>Exemplo de julgamento com lifetimes</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> maior<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s1<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> s2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s1<span class="op">.</span>len() <span class="op">&gt;</span> s2<span class="op">.</span>len() <span class="op">{</span> s1 <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> s2 <span class="op">}</span></span>
@@ -867,8 +1063,8 @@ window.Quarto = {
   \text{ERRO: } 'b \not\sqsupseteq 'a \text{ (lifetime esperado)}
 }\]</span></p>
 </section>
-<section id="inferência-bidirecional" class="level3" data-number="14.6.4">
-<h3 data-number="14.6.4" class="anchored" data-anchor-id="inferência-bidirecional"><span class="header-section-number">14.6.4</span> 3. Inferência Bidirecional</h3>
+<section id="inferência-bidirecional" class="level3" data-number="14.7.4">
+<h3 data-number="14.7.4" class="anchored" data-anchor-id="inferência-bidirecional"><span class="header-section-number">14.7.4</span> Inferência Bidirecional</h3>
 <p>Rust usa <strong>inferência bidirecional</strong> para combinar anotações explícitas com dedução:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> v<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> <span class="co">// Vec&lt;i32&gt; inferido</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> soma <span class="op">=</span> v<span class="op">.</span>iter()<span class="op">.</span>sum()<span class="op">;</span>      <span class="co">// Tipo de retorno inferido do contexto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -884,8 +1080,8 @@ window.Quarto = {
   \Gamma \vdash e \Leftarrow \tau_2
 }\]</span></p>
 </section>
-<section id="sistema-completo-de-rust" class="level3" data-number="14.6.5">
-<h3 data-number="14.6.5" class="anchored" data-anchor-id="sistema-completo-de-rust"><span class="header-section-number">14.6.5</span> Sistema Completo de Rust</h3>
+<section id="sistema-completo-de-rust" class="level3" data-number="14.7.5">
+<h3 data-number="14.7.5" class="anchored" data-anchor-id="sistema-completo-de-rust"><span class="header-section-number">14.7.5</span> Sistema Completo de Rust</h3>
 <p>O sistema de tipos de Rust pode ser formalizado como uma tupla:</p>
 <p><span class="math display">\[\text{RustTypes} = (\text{HM}, \text{Traits}, \text{Ownership}, \text{Lifetimes})\]</span></p>
 <p><strong>Exemplo de derivação completa</strong>:</p>
@@ -912,10 +1108,10 @@ window.Quarto = {
 }\]</span></p>
 </section>
 </section>
-<section id="casos-especiais-typescript-go-e-swift" class="level2" data-number="14.7">
-<h2 data-number="14.7" class="anchored" data-anchor-id="casos-especiais-typescript-go-e-swift"><span class="header-section-number">14.7</span> Casos Especiais: TypeScript, Go e Swift</h2>
-<section id="typescript-tipagem-estrutural-gradual" class="level3" data-number="14.7.1">
-<h3 data-number="14.7.1" class="anchored" data-anchor-id="typescript-tipagem-estrutural-gradual"><span class="header-section-number">14.7.1</span> TypeScript: Tipagem Estrutural Gradual</h3>
+<section id="casos-especiais-typescript-go-e-swift" class="level2" data-number="14.8">
+<h2 data-number="14.8" class="anchored" data-anchor-id="casos-especiais-typescript-go-e-swift"><span class="header-section-number">14.8</span> Casos Especiais: TypeScript, Go e Swift</h2>
+<section id="typescript-tipagem-estrutural-gradual" class="level3" data-number="14.8.1">
+<h3 data-number="14.8.1" class="anchored" data-anchor-id="typescript-tipagem-estrutural-gradual"><span class="header-section-number">14.8.1</span> TypeScript: Tipagem Estrutural Gradual</h3>
 <p><strong>TypeScript</strong> combina tipagem estrutural com inferência flow-sensitive:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processar</span>(valor<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">typeof</span> valor <span class="op">===</span> <span class="st">"string"</span>) {</span>
@@ -935,8 +1131,8 @@ window.Quarto = {
   \Gamma \vdash (\text{if typeof}(e) \text{ then } b_1 \text{ else } b_2) : \tau
 }\]</span></p>
 </section>
-<section id="go-simplicidade-nominal" class="level3" data-number="14.7.2">
-<h3 data-number="14.7.2" class="anchored" data-anchor-id="go-simplicidade-nominal"><span class="header-section-number">14.7.2</span> Go: Simplicidade Nominal</h3>
+<section id="go-simplicidade-nominal" class="level3" data-number="14.8.2">
+<h3 data-number="14.8.2" class="anchored" data-anchor-id="go-simplicidade-nominal"><span class="header-section-number">14.8.2</span> Go: Simplicidade Nominal</h3>
 <p><strong>Go</strong> usa um sistema simples e nominal, mas com interfaces estruturais:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Desenhavel <span class="kw">interface</span> <span class="op">{</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    Desenhar<span class="op">()</span> <span class="dt">string</span></span>
@@ -956,16 +1152,16 @@ window.Quarto = {
   T &lt;: I
 }\]</span></p>
 </section>
-<section id="swift-sistema-híbrido" class="level3" data-number="14.7.3">
-<h3 data-number="14.7.3" class="anchored" data-anchor-id="swift-sistema-híbrido"><span class="header-section-number">14.7.3</span> Swift: Sistema Híbrido</h3>
+<section id="swift-sistema-híbrido" class="level3" data-number="14.8.3">
+<h3 data-number="14.8.3" class="anchored" data-anchor-id="swift-sistema-híbrido"><span class="header-section-number">14.8.3</span> Swift: Sistema Híbrido</h3>
 <p><strong>Swift</strong> combina inferência local forte com type classes (protocols) e tipos opcionais:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="fu">processar</span><span class="op">&lt;</span><span class="dt">T</span><span class="op">:</span> <span class="dt">Numeric</span><span class="op">&gt;(</span><span class="va">valor</span><span class="op">:</span> <span class="dt">T</span><span class="op">?)</span> -&gt; <span class="fu">T</span> <span class="op">{</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> valor <span class="op">??</span> <span class="dv">0</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="comparação-complexidade-dos-sistemas" class="level2" data-number="14.8">
-<h2 data-number="14.8" class="anchored" data-anchor-id="comparação-complexidade-dos-sistemas"><span class="header-section-number">14.8</span> Comparação: Complexidade dos Sistemas</h2>
+<section id="comparação-complexidade-dos-sistemas" class="level2" data-number="14.9">
+<h2 data-number="14.9" class="anchored" data-anchor-id="comparação-complexidade-dos-sistemas"><span class="header-section-number">14.9</span> Comparação: Complexidade dos Sistemas</h2>
 <p>A tabela a seguir resume as características dos sistemas de tipos discutidos:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1037,27 +1233,27 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="trade-offs-fundamentais" class="level2" data-number="14.9">
-<h2 data-number="14.9" class="anchored" data-anchor-id="trade-offs-fundamentais"><span class="header-section-number">14.9</span> Trade-offs Fundamentais</h2>
+<section id="trade-offs-fundamentais" class="level2" data-number="14.10">
+<h2 data-number="14.10" class="anchored" data-anchor-id="trade-offs-fundamentais"><span class="header-section-number">14.10</span> Trade-offs Fundamentais</h2>
 <p>A evolução dos sistemas de tipos em linguagens imperativas revela três trade-offs fundamentais:</p>
-<section id="expressividade-vs.-decidibilidade" class="level3" data-number="14.9.1">
-<h3 data-number="14.9.1" class="anchored" data-anchor-id="expressividade-vs.-decidibilidade"><span class="header-section-number">14.9.1</span> 1. Expressividade vs.&nbsp;Decidibilidade</h3>
+<section id="expressividade-vs.-decidibilidade" class="level3" data-number="14.10.1">
+<h3 data-number="14.10.1" class="anchored" data-anchor-id="expressividade-vs.-decidibilidade"><span class="header-section-number">14.10.1</span> 1. Expressividade vs.&nbsp;Decidibilidade</h3>
 <ul>
 <li><strong>C</strong>: Sistema simples e sempre decidível, mas expressividade limitada</li>
 <li><strong>C++</strong>: Templates Turing-completos, decidibilidade sacrificada</li>
 <li><strong>Rust</strong>: Máxima expressividade mantendo decidibilidade (com restrições)</li>
 </ul>
 </section>
-<section id="segurança-vs.-performance" class="level3" data-number="14.9.2">
-<h3 data-number="14.9.2" class="anchored" data-anchor-id="segurança-vs.-performance"><span class="header-section-number">14.9.2</span> 2. Segurança vs.&nbsp;Performance</h3>
+<section id="segurança-vs.-performance" class="level3" data-number="14.10.2">
+<h3 data-number="14.10.2" class="anchored" data-anchor-id="segurança-vs.-performance"><span class="header-section-number">14.10.2</span> 2. Segurança vs.&nbsp;Performance</h3>
 <ul>
 <li><strong>C</strong>: Segurança mínima, performance máxima</li>
 <li><strong>Java/C#</strong>: Segurança com verificações <em>runtime</em> quando necessário</li>
 <li><strong>Rust</strong>: Segurança sem custo em <em>runtime</em> (zero-cost abstractions)</li>
 </ul>
 </section>
-<section id="inferência-vs.-clareza" class="level3" data-number="14.9.3">
-<h3 data-number="14.9.3" class="anchored" data-anchor-id="inferência-vs.-clareza"><span class="header-section-number">14.9.3</span> 3. Inferência vs.&nbsp;Clareza</h3>
+<section id="inferência-vs.-clareza" class="level3" data-number="14.10.3">
+<h3 data-number="14.10.3" class="anchored" data-anchor-id="inferência-vs.-clareza"><span class="header-section-number">14.10.3</span> 3. Inferência vs.&nbsp;Clareza</h3>
 <ul>
 <li><strong>ML/Haskell</strong>: Inferência máxima, pode ser confuso</li>
 <li><strong>C/Go</strong>: Tipos explícitos, sempre claro mas verboso</li>
@@ -1065,8 +1261,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="conclusão-o-pragmatismo-vence-a-elegância" class="level2" data-number="14.10">
-<h2 data-number="14.10" class="anchored" data-anchor-id="conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">14.10</span> Conclusão: O Pragmatismo Vence a Elegância</h2>
+<section id="conclusão-o-pragmatismo-vence-a-elegância" class="level2" data-number="14.11">
+<h2 data-number="14.11" class="anchored" data-anchor-id="conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">14.11</span> Conclusão: O Pragmatismo Vence a Elegância</h2>
 <p>A comparação entre o <strong>Algoritmo W</strong> e os sistemas de tipos imperativos revela uma verdade fundamental sobre design de linguagens: <strong>não existe solução universal</strong>. O Algoritmo W é uma maravilha matemática para linguagens funcionais puras, mas as necessidades do mundo imperativo exigem abordagens diferentes.</p>
 <p>As linguagens imperativas modernas convergem para um modelo híbrido:</p>
 <ol type="1">
@@ -1076,8 +1272,58 @@ window.Quarto = {
 <li><strong>Sistemas de restrições</strong> (traits, concepts, protocols) para polimorfismo</li>
 </ol>
 <p>O futuro provavelmente verá mais convergência: linguagens funcionais adotando características imperativas (efeitos, mutabilidade controlada) e linguagens imperativas adotando ideias funcionais (inferência, imutabilidade por padrão, pattern matching). O sistema de tipos de <strong>Rust</strong> pode representar um vislumbre desse futuro: a ponte entre a elegância teórica e as necessidades práticas da programação de sistemas.</p>
+</section>
+<section id="exercícios" class="level2" data-number="14.12">
+<h2 data-number="14.12" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">14.12</span> Exercícios</h2>
+<p>Os exercícios a seguir exploram a classificação de sistemas de tipos, a escrita de regras de julgamento e a comparação entre linguagens imperativas reais.</p>
+<section id="classificação-de-sistemas-de-tipos" class="level3" data-number="14.12.1">
+<h3 data-number="14.12.1" class="anchored" data-anchor-id="classificação-de-sistemas-de-tipos"><span class="header-section-number">14.12.1</span> Classificação de sistemas de tipos</h3>
+<ol type="1">
+<li><p>Classifique <strong>C</strong>, <strong>Java</strong>, <strong>TypeScript</strong>, <strong>Go</strong> e <strong>Rust</strong> nos três eixos apresentados neste capítulo: momento da verificação, equivalência de tipos e inferência.</p></li>
+<li><p>Explique por que <strong>Python com type hints</strong> é gradual, e não simplesmente estaticamente tipado.</p></li>
+<li><p>Em que sentido <strong>Rust</strong> se aproxima de Hindley-Milner e em que sentido se afasta dele?</p></li>
+</ol>
+</section>
+<section id="julgamentos-em-linguagens-imperativas" class="level3" data-number="14.12.2">
+<h3 data-number="14.12.2" class="anchored" data-anchor-id="julgamentos-em-linguagens-imperativas"><span class="header-section-number">14.12.2</span> Julgamentos em linguagens imperativas</h3>
+<ol start="4" type="1">
+<li><p>Usando o julgamento:</p>
+<p><span class="math display">\[\Gamma ; \Sigma \vdash S : \Gamma' ; \Sigma' \; ! \; \varepsilon\]</span></p>
+<p>escreva a derivação para o comando:</p>
+<pre class="text"><code>int x = 3;
+x = x + 1;</code></pre>
+<p>explicando quais efeitos aparecem em <span class="math inline">\(\varepsilon\)</span>.</p></li>
+<li><p>Escreva uma regra de tipagem para uma declaração de constante imutável:</p>
+<pre class="text"><code>const x : T = e</code></pre>
+<p>Em seguida, explique por que uma atribuição posterior <code>x := e2</code> deve ser rejeitada.</p></li>
+<li><p>Considere uma linguagem com exceções. Estenda informalmente o conjunto de efeitos <span class="math inline">\(\varepsilon\)</span> para representar uma expressão que pode lançar uma exceção.</p></li>
+</ol>
+</section>
+<section id="subtipagem-coerção-e-equivalência" class="level3" data-number="14.12.3">
+<h3 data-number="14.12.3" class="anchored" data-anchor-id="subtipagem-coerção-e-equivalência"><span class="header-section-number">14.12.3</span> Subtipagem, coerção e equivalência</h3>
+<ol start="7" type="1">
+<li><p>Dê um exemplo de dois tipos que seriam compatíveis em um sistema estrutural, mas incompatíveis em um sistema nominal.</p></li>
+<li><p>Escreva uma regra de coerção numérica para permitir que uma expressão de tipo <code>int</code> seja usada onde se espera <code>float</code>.</p></li>
+<li><p>Explique por que casts em <strong>C</strong> funcionam como uma espécie de “escape hatch” do sistema de tipos.</p></li>
+</ol>
+</section>
+<section id="inferência-local-e-fluxo-de-controle" class="level3" data-number="14.12.4">
+<h3 data-number="14.12.4" class="anchored" data-anchor-id="inferência-local-e-fluxo-de-controle"><span class="header-section-number">14.12.4</span> Inferência local e fluxo de controle</h3>
+<ol start="10" type="1">
+<li><p>Usando a regra de refinamento de tipos, mostre como o tipo de <code>valor</code> muda nos dois ramos do programa:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(valor: <span class="bu">int</span> <span class="op">|</span> <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(valor, <span class="bu">int</span>):</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Escreva uma regra simplificada para <code>auto</code> em <strong>C++</strong>, assumindo que o tipo da expressão de inicialização já foi inferido.</p></li>
+<li><p>Para o seguinte trecho de <strong>Rust</strong>, explique por que o segundo empréstimo mutável deve ser rejeitado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

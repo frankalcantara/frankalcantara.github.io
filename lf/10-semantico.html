@@ -487,70 +487,68 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#perspectiva-histórica-a-evolução-da-análise-semântica" id="toc-perspectiva-histórica-a-evolução-da-análise-semântica" class="nav-link active" data-scroll-target="#perspectiva-histórica-a-evolução-da-análise-semântica"><span class="header-section-number">12.1</span> Perspectiva Histórica: A Evolução da Análise Semântica</a></li>
-  <li><a href="#da-necessidade-à-solução-por-que-gramáticas-de-atributos" id="toc-da-necessidade-à-solução-por-que-gramáticas-de-atributos" class="nav-link" data-scroll-target="#da-necessidade-à-solução-por-que-gramáticas-de-atributos"><span class="header-section-number">12.2</span> Da Necessidade à Solução: Por Que Gramáticas de Atributos?</a></li>
-  <li><a href="#a-análise-semântica-no-contexto-do-compilador" id="toc-a-análise-semântica-no-contexto-do-compilador" class="nav-link" data-scroll-target="#a-análise-semântica-no-contexto-do-compilador"><span class="header-section-number">12.3</span> A Análise Semântica no Contexto do Compilador</a></li>
-  <li><a href="#semântica-estática-vs.-dinâmica-o-limite-da-compilação" id="toc-semântica-estática-vs.-dinâmica-o-limite-da-compilação" class="nav-link" data-scroll-target="#semântica-estática-vs.-dinâmica-o-limite-da-compilação"><span class="header-section-number">12.4</span> Semântica Estática vs.&nbsp;Dinâmica: O Limite da Compilação</a>
+  <li><a href="#motivação-e-contexto" id="toc-motivação-e-contexto" class="nav-link active" data-scroll-target="#motivação-e-contexto"><span class="header-section-number">12.1</span> Motivação e Contexto</a>
   <ul class="collapse">
-  <li><a href="#indecidibilidade-e-trade-offs" id="toc-indecidibilidade-e-trade-offs" class="nav-link" data-scroll-target="#indecidibilidade-e-trade-offs"><span class="header-section-number">12.4.1</span> Indecidibilidade e <em>Trade-offs</em></a></li>
+  <li><a href="#perspectiva-histórica" id="toc-perspectiva-histórica" class="nav-link" data-scroll-target="#perspectiva-histórica"><span class="header-section-number">12.1.1</span> Perspectiva histórica</a></li>
+  <li><a href="#o-papel-da-análise-semântica-no-compilador" id="toc-o-papel-da-análise-semântica-no-compilador" class="nav-link" data-scroll-target="#o-papel-da-análise-semântica-no-compilador"><span class="header-section-number">12.1.2</span> O papel da análise semântica no compilador</a></li>
+  <li><a href="#semântica-estática-e-semântica-dinâmica" id="toc-semântica-estática-e-semântica-dinâmica" class="nav-link" data-scroll-target="#semântica-estática-e-semântica-dinâmica"><span class="header-section-number">12.1.3</span> Semântica estática e semântica dinâmica</a></li>
+  <li><a href="#limites-da-análise-estática" id="toc-limites-da-análise-estática" class="nav-link" data-scroll-target="#limites-da-análise-estática"><span class="header-section-number">12.1.4</span> Limites da análise estática</a></li>
   </ul></li>
-  <li><a href="#gramáticas-de-atributos-formalizando-a-análise-semântica" id="toc-gramáticas-de-atributos-formalizando-a-análise-semântica" class="nav-link" data-scroll-target="#gramáticas-de-atributos-formalizando-a-análise-semântica"><span class="header-section-number">12.5</span> Gramáticas de Atributos: Formalizando a Análise Semântica</a>
+  <li><a href="#gramáticas-de-atributos" id="toc-gramáticas-de-atributos" class="nav-link" data-scroll-target="#gramáticas-de-atributos"><span class="header-section-number">12.2</span> Gramáticas de Atributos</a>
   <ul class="collapse">
-  <li><a href="#da-intuição-ao-formalismo-atributos-e-regras-semânticas" id="toc-da-intuição-ao-formalismo-atributos-e-regras-semânticas" class="nav-link" data-scroll-target="#da-intuição-ao-formalismo-atributos-e-regras-semânticas"><span class="header-section-number">12.5.1</span> Da Intuição ao Formalismo: Atributos e Regras Semânticas</a></li>
-  <li><a href="#atributos-sintetizados-e-herdados-o-fluxo-de-informação" id="toc-atributos-sintetizados-e-herdados-o-fluxo-de-informação" class="nav-link" data-scroll-target="#atributos-sintetizados-e-herdados-o-fluxo-de-informação"><span class="header-section-number">12.5.2</span> Atributos Sintetizados e Herdados: O Fluxo de Informação</a></li>
-  <li><a href="#definição-formal-e-exemplos-práticos" id="toc-definição-formal-e-exemplos-práticos" class="nav-link" data-scroll-target="#definição-formal-e-exemplos-práticos"><span class="header-section-number">12.5.3</span> Definição Formal E Exemplos Práticos</a></li>
-  <li><a href="#avaliação-de-atributos-grafos-de-dependência-e-ordenação-topológica" id="toc-avaliação-de-atributos-grafos-de-dependência-e-ordenação-topológica" class="nav-link" data-scroll-target="#avaliação-de-atributos-grafos-de-dependência-e-ordenação-topológica"><span class="header-section-number">12.5.4</span> Avaliação de Atributos: Grafos de Dependência e Ordenação Topológica</a></li>
-  <li><a href="#classes-de-gramáticas-de-atributos-e-o-impacto-na-eficiência" id="toc-classes-de-gramáticas-de-atributos-e-o-impacto-na-eficiência" class="nav-link" data-scroll-target="#classes-de-gramáticas-de-atributos-e-o-impacto-na-eficiência"><span class="header-section-number">12.5.5</span> Classes de Gramáticas de Atributos e o Impacto na Eficiência</a></li>
-  <li><a href="#definição-formal-e-exemplo-prático" id="toc-definição-formal-e-exemplo-prático" class="nav-link" data-scroll-target="#definição-formal-e-exemplo-prático"><span class="header-section-number">12.5.6</span> Definição Formal e Exemplo Prático</a></li>
-  <li><a href="#esquemas-de-tradução-dirigida-por-sintaxe-sdt" id="toc-esquemas-de-tradução-dirigida-por-sintaxe-sdt" class="nav-link" data-scroll-target="#esquemas-de-tradução-dirigida-por-sintaxe-sdt"><span class="header-section-number">12.5.7</span> Esquemas de Tradução Dirigida por Sintaxe (SDT)</a></li>
+  <li><a href="#por-que-gramáticas-de-atributos" id="toc-por-que-gramáticas-de-atributos" class="nav-link" data-scroll-target="#por-que-gramáticas-de-atributos"><span class="header-section-number">12.2.1</span> Por que gramáticas de atributos?</a></li>
+  <li><a href="#atributos-e-regras-semânticas" id="toc-atributos-e-regras-semânticas" class="nav-link" data-scroll-target="#atributos-e-regras-semânticas"><span class="header-section-number">12.2.2</span> Atributos e regras semânticas</a></li>
+  <li><a href="#atributos-sintetizados-e-herdados" id="toc-atributos-sintetizados-e-herdados" class="nav-link" data-scroll-target="#atributos-sintetizados-e-herdados"><span class="header-section-number">12.2.3</span> Atributos sintetizados e herdados</a></li>
+  <li><a href="#exemplos-de-gramáticas-de-atributos" id="toc-exemplos-de-gramáticas-de-atributos" class="nav-link" data-scroll-target="#exemplos-de-gramáticas-de-atributos"><span class="header-section-number">12.2.4</span> Exemplos de gramáticas de atributos</a></li>
+  <li><a href="#avaliação-de-atributos" id="toc-avaliação-de-atributos" class="nav-link" data-scroll-target="#avaliação-de-atributos"><span class="header-section-number">12.2.5</span> Avaliação de atributos</a></li>
+  <li><a href="#classes-de-gramáticas-de-atributos" id="toc-classes-de-gramáticas-de-atributos" class="nav-link" data-scroll-target="#classes-de-gramáticas-de-atributos"><span class="header-section-number">12.2.6</span> Classes de gramáticas de atributos</a></li>
+  <li><a href="#definições-dirigidas-por-sintaxe" id="toc-definições-dirigidas-por-sintaxe" class="nav-link" data-scroll-target="#definições-dirigidas-por-sintaxe"><span class="header-section-number">12.2.7</span> Definições dirigidas por sintaxe</a></li>
+  <li><a href="#esquemas-de-tradução-dirigida-por-sintaxe" id="toc-esquemas-de-tradução-dirigida-por-sintaxe" class="nav-link" data-scroll-target="#esquemas-de-tradução-dirigida-por-sintaxe"><span class="header-section-number">12.2.8</span> Esquemas de tradução dirigida por sintaxe</a></li>
   </ul></li>
-  <li><a href="#catálogo-de-verificações-semânticas-comuns" id="toc-catálogo-de-verificações-semânticas-comuns" class="nav-link" data-scroll-target="#catálogo-de-verificações-semânticas-comuns"><span class="header-section-number">12.6</span> Catálogo de Verificações Semânticas Comuns</a>
+  <li><a href="#verificações-semânticas-em-compiladores" id="toc-verificações-semânticas-em-compiladores" class="nav-link" data-scroll-target="#verificações-semânticas-em-compiladores"><span class="header-section-number">12.3</span> Verificações Semânticas em Compiladores</a>
   <ul class="collapse">
-  <li><a href="#verificações-relacionadas-a-nomes-e-escopos" id="toc-verificações-relacionadas-a-nomes-e-escopos" class="nav-link" data-scroll-target="#verificações-relacionadas-a-nomes-e-escopos"><span class="header-section-number">12.6.1</span> Verificações Relacionadas a Nomes e Escopos</a></li>
-  <li><a href="#verificações-de-tipo" id="toc-verificações-de-tipo" class="nav-link" data-scroll-target="#verificações-de-tipo"><span class="header-section-number">12.6.2</span> Verificações de Tipo</a></li>
-  <li><a href="#verificações-relacionadas-a-sub-rotinas-funçõesmétodos" id="toc-verificações-relacionadas-a-sub-rotinas-funçõesmétodos" class="nav-link" data-scroll-target="#verificações-relacionadas-a-sub-rotinas-funçõesmétodos"><span class="header-section-number">12.6.3</span> Verificações Relacionadas a Sub-rotinas (Funções/Métodos)</a></li>
-  <li><a href="#verificações-de-controle-de-fluxo" id="toc-verificações-de-controle-de-fluxo" class="nav-link" data-scroll-target="#verificações-de-controle-de-fluxo"><span class="header-section-number">12.6.4</span> Verificações de Controle de Fluxo</a></li>
+  <li><a href="#nomes-escopos-e-declarações" id="toc-nomes-escopos-e-declarações" class="nav-link" data-scroll-target="#nomes-escopos-e-declarações"><span class="header-section-number">12.3.1</span> Nomes, escopos e declarações</a></li>
+  <li><a href="#verificação-de-tipos" id="toc-verificação-de-tipos" class="nav-link" data-scroll-target="#verificação-de-tipos"><span class="header-section-number">12.3.2</span> Verificação de tipos</a></li>
+  <li><a href="#funções-métodos-e-sub-rotinas" id="toc-funções-métodos-e-sub-rotinas" class="nav-link" data-scroll-target="#funções-métodos-e-sub-rotinas"><span class="header-section-number">12.3.3</span> Funções, métodos e sub-rotinas</a></li>
+  <li><a href="#controle-de-fluxo" id="toc-controle-de-fluxo" class="nav-link" data-scroll-target="#controle-de-fluxo"><span class="header-section-number">12.3.4</span> Controle de fluxo</a></li>
   </ul></li>
-  <li><a href="#o-produto-final-a-árvore-de-sintaxe-abstrata-atribuída" id="toc-o-produto-final-a-árvore-de-sintaxe-abstrata-atribuída" class="nav-link" data-scroll-target="#o-produto-final-a-árvore-de-sintaxe-abstrata-atribuída"><span class="header-section-number">12.7</span> O Produto Final: A Árvore de Sintaxe Abstrata <em>Atribuída</em></a></li>
-  <li><a href="#verificação-de-tipos-type-checking" id="toc-verificação-de-tipos-type-checking" class="nav-link" data-scroll-target="#verificação-de-tipos-type-checking"><span class="header-section-number">12.8</span> Verificação de Tipos, <em>Type Checking</em></a>
+  <li><a href="#sistemas-de-tipos-e-julgamentos" id="toc-sistemas-de-tipos-e-julgamentos" class="nav-link" data-scroll-target="#sistemas-de-tipos-e-julgamentos"><span class="header-section-number">12.4</span> Sistemas de Tipos e Julgamentos</a>
   <ul class="collapse">
-  <li><a href="#a-importância-dos-tipos-prevenindo-o-absurdo-computacional" id="toc-a-importância-dos-tipos-prevenindo-o-absurdo-computacional" class="nav-link" data-scroll-target="#a-importância-dos-tipos-prevenindo-o-absurdo-computacional"><span class="header-section-number">12.8.1</span> A Importância dos Tipos: Prevenindo o “Absurdo” Computacional</a></li>
-  <li><a href="#equivalência-de-tipos-quando-t1-é-igual-a-t2" id="toc-equivalência-de-tipos-quando-t1-é-igual-a-t2" class="nav-link" data-scroll-target="#equivalência-de-tipos-quando-t1-é-igual-a-t2"><span class="header-section-number">12.8.2</span> Equivalência de Tipos: Quando T1 é igual a T2?</a></li>
-  <li><a href="#compatibilidade-de-tipos-coerção-e-conversão-casting" id="toc-compatibilidade-de-tipos-coerção-e-conversão-casting" class="nav-link" data-scroll-target="#compatibilidade-de-tipos-coerção-e-conversão-casting"><span class="header-section-number">12.8.3</span> Compatibilidade de Tipos: Coerção e Conversão (Casting)</a></li>
-  <li><a href="#lidando-com-polimorfismo-muitas-formas" id="toc-lidando-com-polimorfismo-muitas-formas" class="nav-link" data-scroll-target="#lidando-com-polimorfismo-muitas-formas"><span class="header-section-number">12.8.4</span> Lidando com Polimorfismo: “Muitas Formas”</a></li>
-  <li><a href="#a-base-formal-dos-sistemas-de-tipos" id="toc-a-base-formal-dos-sistemas-de-tipos" class="nav-link" data-scroll-target="#a-base-formal-dos-sistemas-de-tipos"><span class="header-section-number">12.8.5</span> A Base Formal dos Sistemas de Tipos</a></li>
-  <li><a href="#construindo-uma-árvore-de-derivação-um-exemplo-prático" id="toc-construindo-uma-árvore-de-derivação-um-exemplo-prático" class="nav-link" data-scroll-target="#construindo-uma-árvore-de-derivação-um-exemplo-prático"><span class="header-section-number">12.8.6</span> Construindo uma Árvore de Derivação: Um Exemplo Prático</a></li>
-  <li><a href="#exemplo-adicional-verificação-de-tipos-em-c" id="toc-exemplo-adicional-verificação-de-tipos-em-c" class="nav-link" data-scroll-target="#exemplo-adicional-verificação-de-tipos-em-c"><span class="header-section-number">12.8.7</span> Exemplo Adicional: Verificação de Tipos em <strong>C++</strong></a></li>
+  <li><a href="#tipagem-estática-dinâmica-forte-e-fraca" id="toc-tipagem-estática-dinâmica-forte-e-fraca" class="nav-link" data-scroll-target="#tipagem-estática-dinâmica-forte-e-fraca"><span class="header-section-number">12.4.1</span> Tipagem estática, dinâmica, forte e fraca</a></li>
+  <li><a href="#equivalência-e-compatibilidade-de-tipos" id="toc-equivalência-e-compatibilidade-de-tipos" class="nav-link" data-scroll-target="#equivalência-e-compatibilidade-de-tipos"><span class="header-section-number">12.4.2</span> Equivalência e compatibilidade de tipos</a></li>
+  <li><a href="#polimorfismo" id="toc-polimorfismo" class="nav-link" data-scroll-target="#polimorfismo"><span class="header-section-number">12.4.3</span> Polimorfismo</a></li>
+  <li><a href="#julgamentos-de-tipo-e-regras-de-inferência" id="toc-julgamentos-de-tipo-e-regras-de-inferência" class="nav-link" data-scroll-target="#julgamentos-de-tipo-e-regras-de-inferência"><span class="header-section-number">12.4.4</span> Julgamentos de tipo e regras de inferência</a></li>
+  <li><a href="#exemplos-resolvidos-de-derivação" id="toc-exemplos-resolvidos-de-derivação" class="nav-link" data-scroll-target="#exemplos-resolvidos-de-derivação"><span class="header-section-number">12.4.5</span> Exemplos resolvidos de derivação</a></li>
+  <li><a href="#exemplos-resolvidos-de-cálculo-de-sequentes" id="toc-exemplos-resolvidos-de-cálculo-de-sequentes" class="nav-link" data-scroll-target="#exemplos-resolvidos-de-cálculo-de-sequentes"><span class="header-section-number">12.4.6</span> Exemplos resolvidos de cálculo de sequentes</a></li>
+  <li><a href="#inferência-de-tipos-e-o-algoritmo-w" id="toc-inferência-de-tipos-e-o-algoritmo-w" class="nav-link" data-scroll-target="#inferência-de-tipos-e-o-algoritmo-w"><span class="header-section-number">12.4.7</span> Inferência de tipos e o Algoritmo W</a></li>
+  <li><a href="#complexidade-da-verificação-e-inferência-de-tipos" id="toc-complexidade-da-verificação-e-inferência-de-tipos" class="nav-link" data-scroll-target="#complexidade-da-verificação-e-inferência-de-tipos"><span class="header-section-number">12.4.8</span> Complexidade da verificação e inferência de tipos</a></li>
   </ul></li>
-  <li><a href="#exercícios-da-seção" id="toc-exercícios-da-seção" class="nav-link" data-scroll-target="#exercícios-da-seção"><span class="header-section-number">12.9</span> Exercícios da Seção</a>
+  <li><a href="#a-ast-atribuída-como-produto-da-análise" id="toc-a-ast-atribuída-como-produto-da-análise" class="nav-link" data-scroll-target="#a-ast-atribuída-como-produto-da-análise"><span class="header-section-number">12.5</span> A AST Atribuída como Produto da Análise</a>
   <ul class="collapse">
-  <li><a href="#questão-1-considerando-que-estamos-trabalhando-em-uma-liguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros" id="toc-questão-1-considerando-que-estamos-trabalhando-em-uma-liguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros" class="nav-link" data-scroll-target="#questão-1-considerando-que-estamos-trabalhando-em-uma-liguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros"><span class="header-section-number">12.9.1</span> Questão 1: Considerando que estamos trabalhando em uma liguagem de programação na qual o contexto pode ser formado de objetos <span class="math inline">\(O\)</span>, métodos <span class="math inline">\(M\)</span> e classes <span class="math inline">\(C\)</span>. Qual a regra de dedução para o julgamento de tipo para a adição de inteiros?</a></li>
-  <li><a href="#questão-2-no-mesmo-ambiente-da-questão-um.-como-seria-o-julgamento-de-tipo-para-instruções-if" id="toc-questão-2-no-mesmo-ambiente-da-questão-um.-como-seria-o-julgamento-de-tipo-para-instruções-if" class="nav-link" data-scroll-target="#questão-2-no-mesmo-ambiente-da-questão-um.-como-seria-o-julgamento-de-tipo-para-instruções-if"><span class="header-section-number">12.9.2</span> Questão 2: No mesmo ambiente da questão um. Como seria o julgamento de tipo para instruções <code>IF</code>?</a></li>
-  <li><a href="#questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela" id="toc-questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela" class="nav-link" data-scroll-target="#questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela"><span class="header-section-number">12.9.3</span> Questão 3: O que a seguinte regra significa? Como lemos ela?</a></li>
-  <li><a href="#questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regra-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função." id="toc-questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regra-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função." class="nav-link" data-scroll-target="#questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regra-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função."><span class="header-section-number">12.9.4</span> Questão 4: Considere uma linguagem de programação que suporta variáveis, funções e expressões aritméticas com tipos inteiro, real e <em>string</em>. Crie um sistema de tipos com Cálculo de Sequentes e escreva as regra de tipagem para a declaração de variáveis, operações aritméticas, <em>strings</em> e para a chamada de função.</a></li>
-  <li><a href="#complexidade-da-verificação-e-inferência-de-tipos" id="toc-complexidade-da-verificação-e-inferência-de-tipos" class="nav-link" data-scroll-target="#complexidade-da-verificação-e-inferência-de-tipos"><span class="header-section-number">12.9.5</span> Complexidade da Verificação e Inferência de Tipos</a></li>
+  <li><a href="#decoração-da-ast" id="toc-decoração-da-ast" class="nav-link" data-scroll-target="#decoração-da-ast"><span class="header-section-number">12.5.1</span> Decoração da AST</a></li>
+  <li><a href="#relação-com-a-tabela-de-símbolos" id="toc-relação-com-a-tabela-de-símbolos" class="nav-link" data-scroll-target="#relação-com-a-tabela-de-símbolos"><span class="header-section-number">12.5.2</span> Relação com a tabela de símbolos</a></li>
+  <li><a href="#preparação-para-a-geração-de-código-intermediário" id="toc-preparação-para-a-geração-de-código-intermediário" class="nav-link" data-scroll-target="#preparação-para-a-geração-de-código-intermediário"><span class="header-section-number">12.5.3</span> Preparação para a geração de código intermediário</a></li>
   </ul></li>
-  <li><a href="#implementação-prática-da-teoria-à-prática" id="toc-implementação-prática-da-teoria-à-prática" class="nav-link" data-scroll-target="#implementação-prática-da-teoria-à-prática"><span class="header-section-number">12.10</span> Implementação Prática: Da Teoria à Prática</a>
+  <li><a href="#implementação-prática-langarit" id="toc-implementação-prática-langarit" class="nav-link" data-scroll-target="#implementação-prática-langarit"><span class="header-section-number">12.6</span> Implementação Prática: Langarit</a>
   <ul class="collapse">
-  <li><a href="#definição-da-mini-linguagem-langarit" id="toc-definição-da-mini-linguagem-langarit" class="nav-link" data-scroll-target="#definição-da-mini-linguagem-langarit"><span class="header-section-number">12.10.1</span> Definição da Mini-Linguagem: Langarit</a></li>
-  <li><a href="#gramática-livre-de-contexto-para-langarit" id="toc-gramática-livre-de-contexto-para-langarit" class="nav-link" data-scroll-target="#gramática-livre-de-contexto-para-langarit"><span class="header-section-number">12.10.2</span> Gramática Livre de Contexto para Langarit</a></li>
-  <li><a href="#gramática-de-atributos-para-langarit" id="toc-gramática-de-atributos-para-langarit" class="nav-link" data-scroll-target="#gramática-de-atributos-para-langarit"><span class="header-section-number">12.10.3</span> Gramática de Atributos para Langarit</a></li>
-  <li><a href="#implementação-empython" id="toc-implementação-empython" class="nav-link" data-scroll-target="#implementação-empython"><span class="header-section-number">12.10.4</span> Implementação em<strong>Python</strong></a></li>
-  <li><a href="#exemplo-de-uso-completo" id="toc-exemplo-de-uso-completo" class="nav-link" data-scroll-target="#exemplo-de-uso-completo"><span class="header-section-number">12.10.5</span> Exemplo de Uso Completo</a></li>
-  <li><a href="#saída-esperada" id="toc-saída-esperada" class="nav-link" data-scroll-target="#saída-esperada"><span class="header-section-number">12.10.6</span> Saída Esperada</a></li>
-  <li><a href="#exercícios-propostos" id="toc-exercícios-propostos" class="nav-link" data-scroll-target="#exercícios-propostos"><span class="header-section-number">12.10.7</span> Exercícios Propostos</a></li>
+  <li><a href="#definição-da-linguagem" id="toc-definição-da-linguagem" class="nav-link" data-scroll-target="#definição-da-linguagem"><span class="header-section-number">12.6.1</span> Definição da linguagem</a></li>
+  <li><a href="#gramática-livre-de-contexto" id="toc-gramática-livre-de-contexto" class="nav-link" data-scroll-target="#gramática-livre-de-contexto"><span class="header-section-number">12.6.2</span> Gramática livre de contexto</a></li>
+  <li><a href="#gramática-de-atributos" id="toc-gramática-de-atributos" class="nav-link" data-scroll-target="#gramática-de-atributos"><span class="header-section-number">12.6.3</span> Gramática de atributos</a></li>
+  <li><a href="#implementação-em-python" id="toc-implementação-em-python" class="nav-link" data-scroll-target="#implementação-em-python"><span class="header-section-number">12.6.4</span> Implementação em Python</a></li>
+  <li><a href="#execução-e-saída-esperada" id="toc-execução-e-saída-esperada" class="nav-link" data-scroll-target="#execução-e-saída-esperada"><span class="header-section-number">12.6.5</span> Execução e saída esperada</a></li>
+  <li><a href="#extensões-propostas" id="toc-extensões-propostas" class="nav-link" data-scroll-target="#extensões-propostas"><span class="header-section-number">12.6.6</span> Extensões propostas</a></li>
   </ul></li>
-  <li><a href="#a-ponte-para-a-geração-de-código-intermediário" id="toc-a-ponte-para-a-geração-de-código-intermediário" class="nav-link" data-scroll-target="#a-ponte-para-a-geração-de-código-intermediário"><span class="header-section-number">12.11</span> A Ponte para a Geração de Código Intermediário</a>
+  <li><a href="#ponte-para-a-geração-de-código-intermediário" id="toc-ponte-para-a-geração-de-código-intermediário" class="nav-link" data-scroll-target="#ponte-para-a-geração-de-código-intermediário"><span class="header-section-number">12.7</span> Ponte para a Geração de Código Intermediário</a>
   <ul class="collapse">
-  <li><a href="#da-análise-à-síntese-o-papel-da-ast-atribuída" id="toc-da-análise-à-síntese-o-papel-da-ast-atribuída" class="nav-link" data-scroll-target="#da-análise-à-síntese-o-papel-da-ast-atribuída"><span class="header-section-number">12.11.1</span> Da Análise à Síntese: O Papel da <strong>AST</strong> Atribuída</a></li>
-  <li><a href="#código-de-três-endereços-tac-uma-representação-linear" id="toc-código-de-três-endereços-tac-uma-representação-linear" class="nav-link" data-scroll-target="#código-de-três-endereços-tac-uma-representação-linear"><span class="header-section-number">12.11.2</span> Código de Três Endereços (TAC): Uma Representação Linear</a></li>
-  <li><a href="#exemplo-de-tradução-gerando-tac-a-partir-da-ast-atribuída" id="toc-exemplo-de-tradução-gerando-tac-a-partir-da-ast-atribuída" class="nav-link" data-scroll-target="#exemplo-de-tradução-gerando-tac-a-partir-da-ast-atribuída"><span class="header-section-number">12.11.3</span> Exemplo de Tradução: Gerando TAC a partir da <strong>AST</strong> Atribuída</a></li>
+  <li><a href="#da-ast-atribuída-para-uma-representação-intermediária" id="toc-da-ast-atribuída-para-uma-representação-intermediária" class="nav-link" data-scroll-target="#da-ast-atribuída-para-uma-representação-intermediária"><span class="header-section-number">12.7.1</span> Da AST atribuída para uma representação intermediária</a></li>
+  <li><a href="#código-de-três-endereços" id="toc-código-de-três-endereços" class="nav-link" data-scroll-target="#código-de-três-endereços"><span class="header-section-number">12.7.2</span> Código de três endereços</a></li>
+  <li><a href="#exemplo-de-tradução" id="toc-exemplo-de-tradução" class="nav-link" data-scroll-target="#exemplo-de-tradução"><span class="header-section-number">12.7.3</span> Exemplo de tradução</a></li>
   </ul></li>
-  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">12.12</span> Exercícios</a>
+  <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">12.8</span> Exercícios</a>
   <ul class="collapse">
-  <li><a href="#exercício-1-semântica-básica" id="toc-exercício-1-semântica-básica" class="nav-link" data-scroll-target="#exercício-1-semântica-básica"><span class="header-section-number">12.12.1</span> Exercício 1: Semântica Básica</a></li>
-  <li><a href="#exercício-2-análise-de-tipos" id="toc-exercício-2-análise-de-tipos" class="nav-link" data-scroll-target="#exercício-2-análise-de-tipos"><span class="header-section-number">12.12.2</span> Exercício 2: Análise de Tipos</a></li>
-  <li><a href="#exercício-3-otimização" id="toc-exercício-3-otimização" class="nav-link" data-scroll-target="#exercício-3-otimização"><span class="header-section-number">12.12.3</span> Exercício 3: Otimização</a></li>
+  <li><a href="#análise-semântica-básica" id="toc-análise-semântica-básica" class="nav-link" data-scroll-target="#análise-semântica-básica"><span class="header-section-number">12.8.1</span> Análise semântica básica</a></li>
+  <li><a href="#julgamentos-de-tipo" id="toc-julgamentos-de-tipo" class="nav-link" data-scroll-target="#julgamentos-de-tipo"><span class="header-section-number">12.8.2</span> Julgamentos de tipo</a></li>
+  <li><a href="#otimização-e-geração-intermediária" id="toc-otimização-e-geração-intermediária" class="nav-link" data-scroll-target="#otimização-e-geração-intermediária"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -591,10 +589,10 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Está sem tempo? Leia o <a href=".\ex\10-expresso.html">Expresso</a>.</p>
+<p>Está sem tempo? Leia o <a href="./ex/10-expresso.html">Expresso</a>.</p>
 </div>
 </div>
-<p>Após as fases de análise léxica e sintática, um compilador já será capaz de reconhecer corretamente a estrutura de um programa. Ele pode afirmar, com certeza, que uma sequência de <em>tokens</em> como <code>int x = y + z;</code> conforma-se à gramática de uma declaração de variável seguida de uma atribuição e é formado por um conjunto de <em>tokens</em> válido na linguagem. Contudo, a análise sintática é agvérticestica ao significado. Ela não sabe o que <code>int</code>, <code>x</code>, <code>y</code> ou <code>z</code> significam. Foram <code>y</code> e <code>z</code> declarados anteriormente? Seus tipos são compatíveis com o operador <code>+</code>? O resultado pode ser armazenado em uma variável do tipo <code>int</code>? Responder a essas perguntas é a tarefa da análise semântica.</p>
+<p>Após as fases de análise léxica e sintática, um compilador já será capaz de reconhecer corretamente a estrutura de um programa. Ele pode afirmar, com certeza, que uma sequência de <em>tokens</em> como <code>int x = y + z;</code> conforma-se à gramática de uma declaração de variável seguida de uma atribuição e é formada por um conjunto de <em>tokens</em> válido na linguagem. Contudo, a análise sintática é agnóstica ao significado. Ela não sabe o que <code>int</code>, <code>x</code>, <code>y</code> ou <code>z</code> significam. Foram <code>y</code> e <code>z</code> declarados anteriormente? Seus tipos são compatíveis com o operador <code>+</code>? O resultado pode ser armazenado em uma variável do tipo <code>int</code>? Responder a essas perguntas é a tarefa da análise semântica.</p>
 <p>A análise sintática garante que um programa tem a forma correta, mas não garante que ele faz qualquer sentido. A atenta leitora talvez já tenha se deparado com a famosa frase do linguista <a href="https://en.wikipedia.org/wiki/Noam_Chomsky">Noam Chomsky</a>: <em>Colorless green ideas sleep furiously</em>, Ideias verdes incolores dormem furiosamente. Esta frase é, de longe, a forma mais simples de entender o valor da análise semântica. A frase é gramaticalmente sintaticamente impecável em inglês, um adjetivo precede outro adjetivo que precede um substantivo, seguido por um verbo e um advérbio. Ainda assim, semanticamente, <em>Colorless green ideas sleep furiously</em> é um disparate agressivo.</p>
 <p>Em linguagens de programação, este tipo de disparate pode acontecer com mais frequência do que a sociedade deveria poder aguentar. Por exemplo, uma gramática livre de contexto poderia perfeitamente aceitar a construção <code>x = "olá" * 5;</code>. Estruturalmente, temos um identificador, um operador de atribuição e uma expressão. No entanto, para a maioria das linguagens, multiplicar uma <em>string</em> por um número, exceto em casos específicos como em <strong>Python</strong>, é uma operação sem significado. Um comportamento contra-intuitivo mesmo que a linguagem permita. Cabe a análise semântica detectar e rejeitar tais absurdos. Exceto quando a linguagem permitir, claro.</p>
 <p>A análise semântica é a fase do compilador que preenche essa lacuna, verificando se as construções sintaticamente válidas formam um conjunto de instruções coerente e com significado, de acordo com as regras da linguagem. Mesmo que as regras sejam contra-intuitivas como algumas do <strong>Python</strong> e outras do <strong>JavaScript</strong>.</p>
@@ -608,22 +606,22 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Contra-intuições Semânticas Em</strong>Python****</p>
-<pre class="**python**"><code># Multiplicação de string por booleano
-resultado = "texto" * True # Retorna "texto"
-resultado = "texto" * False # Retorna ""
-
-# Soma de booleanos com números
-valor = True + True + False # Retorna 2
-valor = 50 + True # Retorna 51
-
-# Lista multiplicada por número negativo
-lista = [1, 2, 3] * -1 # Retorna []
-
-# Uso de and/or para retornar valores não booleanos
-resultado = 0 or "default" # Retorna "default"
-resultado = 5 and "texto" # Retorna "texto"</code></pre>
-<p><strong>Contra-intuições Semânticas Em </strong>Java<strong>Script</strong></p>
+<p><strong>Contra-intuições Semânticas Em Python</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiplicação de string por booleano</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="st">"texto"</span> <span class="op">*</span> <span class="va">True</span> <span class="co"># Retorna "texto"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="st">"texto"</span> <span class="op">*</span> <span class="va">False</span> <span class="co"># Retorna ""</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Soma de booleanos com números</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>valor <span class="op">=</span> <span class="va">True</span> <span class="op">+</span> <span class="va">True</span> <span class="op">+</span> <span class="va">False</span> <span class="co"># Retorna 2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>valor <span class="op">=</span> <span class="dv">50</span> <span class="op">+</span> <span class="va">True</span> <span class="co"># Retorna 51</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Lista multiplicada por número negativo</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>lista <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>] <span class="op">*</span> <span class="op">-</span><span class="dv">1</span> <span class="co"># Retorna []</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Uso de and/or para retornar valores não booleanos</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="dv">0</span> <span class="kw">or</span> <span class="st">"default"</span> <span class="co"># Retorna "default"</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="dv">5</span> <span class="kw">and</span> <span class="st">"texto"</span> <span class="co"># Retorna "texto"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Contra-intuições Semânticas Em JavaScript</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode javascript code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// NaN não é igual a si mesmo</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="kw">NaN</span> <span class="op">===</span> <span class="kw">NaN</span><span class="op">;</span> <span class="co">// Retorna false</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -650,8 +648,10 @@ resultado = 5 and "texto" # Retorna "texto"</code></pre>
 </div>
 </div>
 <p>A análise semântica é a ponte que conecta a estrutura à semântica, garantindo que o programa não seja apenas bem-formado, mas também que tenha sentido.</p>
-<section id="perspectiva-histórica-a-evolução-da-análise-semântica" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="perspectiva-histórica-a-evolução-da-análise-semântica"><span class="header-section-number">12.1</span> Perspectiva Histórica: A Evolução da Análise Semântica</h2>
+<section id="motivação-e-contexto" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="motivação-e-contexto"><span class="header-section-number">12.1</span> Motivação e Contexto</h2>
+<section id="perspectiva-histórica" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="perspectiva-histórica"><span class="header-section-number">12.1.1</span> Perspectiva histórica</h3>
 <p>A <strong>análise semântica</strong>, o centro nervoso do compilador para significado e a coerência, não nasceu pronta. Sua história é uma jornada que acompanha a própria evolução das linguagens de programação, partindo de verificações simples e dispersas para se tornar uma estrutura formal e sofisticada. A incansável leitora poderá traçar essa trajetória desde os primórdios da computação até os complexos sistemas de tipos que usamos hoje. A Figura <a href="#fig-timeline-semantics" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> ilustra essa evolução.</p>
 <div id="fig-timeline-semantics" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -673,33 +673,8 @@ Figure&nbsp;12.1
 <p>Com fundamentos sólidos estabelecidos, a fase seguinte foi de sistematização e popularização. O livro <em>Principles of Compiler Design</em> de <strong>Aho e Ullman (1977)</strong>, o famoso <strong>Livro do Dragão</strong>, estabeleceu a estrutura canônica dos compiladores, consolidando a análise semântica como uma fase bem definida. Paralelamente, a linguagem <strong>C</strong>, desenvolvida por <strong>Dennis Ritchie (1972)</strong> e padronizada neste período, demonstrava que um sistema de tipos simples mas rigoroso poderia ser extremamente eficaz, influenciando profundamente o design de compiladores com sua abordagem pragmática de verificação de tipos em tempo de compilação. Foi nesse período que uma das ideias mais poderosas da teoria das linguagens surgiu: a <strong>inferência de tipos</strong>. O <strong>algoritmo W</strong>, desenvolvido por <strong>Robin Milner (1978)</strong> para a linguagem ML, permitiu que o compilador deduzisse os tipos das variáveis automaticamente, sem a necessidade de anotações explícitas, combinando segurança e flexibilidade de uma forma inédita, um contraste marcante com a filosofia da linguagem <strong>C</strong>, que exigia declarações explícitas mas oferecia controle direto sobre a representação em memória. Ao mesmo tempo, linguagens como <strong>Ada (1983)</strong> exploravam o outro extremo, implementando sistemas de tipos extremamente ricos e complexos, projetados para a construção de software robusto e de missão crítica, enquanto o <strong>C</strong> mantinha sua posição como a escolha para programação de sistemas, nos quais a previsibilidade e o controle fino da memória e performance eram mais valorizados que a expressividade do sistema de tipos.</p>
 <p>A partir de meados da década de 1980, a complexidade das linguagens explodiu, trazendo consigo desafios semânticos sem precedentes. O <strong>C++ (1985)</strong>, com a introdução de <strong>templates</strong> e <strong>sobrecarga</strong> de funções e operadores, exigiu que os analisadores semânticos resolvessem nomes e tipos em contextos muito mais elaborados. O <strong>Java (1995)</strong> popularizou um modelo híbrido, realizando verificações de tipo rigorosas tanto em tempo de compilação quanto em tempo de execução através da <strong>JVM</strong>. Paralelamente, a tradição funcional, representada pelo <strong>Haskell (1990)</strong>, continuou a empurrar as fronteiras da teoria, introduzindo conceitos como <strong>type classes</strong> e polimorfismo paramétrico avançado, que hoje influenciam o design de muitas linguagens modernas.</p>
 </section>
-<section id="da-necessidade-à-solução-por-que-gramáticas-de-atributos" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="da-necessidade-à-solução-por-que-gramáticas-de-atributos"><span class="header-section-number">12.2</span> Da Necessidade à Solução: Por Que Gramáticas de Atributos?</h2>
-<p>A evolução histórica da análise semântica que acabamos de traçar revela um padrão: à medida que as linguagens de programação se tornavam mais expressivas, as verificações semânticas necessárias cresciam em número e complexidade. Contudo, um problema fundamental permanecia sem solução satisfatória: <strong>como especificar formalmente essas verificações?</strong></p>
-<p>As gramáticas livres de contexto (<strong>GLC</strong>), poderosas para descrever a sintaxe, revelavam-se insuficientes para capturar regras semânticas. Considere a regra <em>toda variável deve ser declarada antes de seu uso</em>. Uma <strong>GLC</strong> pode garantir que <code>x = y + z;</code> seja uma atribuição sintaticamente válida, mas não pode verificar se <code>y</code> e <code>z</code> foram previamente declarados. Este tipo de restrição é <strong>sensível ao contexto</strong> e depende de informações que estão fora da estrutura local da produção.</p>
-<p>Durante os anos 1960, a análise semântica nos compiladores era implementada como código <em>ad-hoc</em> espalhado pelo parser. Cada compilador tinha sua própria abordagem, muitas vezes não documentada e difícil de manter. Não havia uma especificação formal da semântica, apenas a implementação. Isso criava problemas sérios:</p>
-<ol type="1">
-<li><strong>Não-portabilidade</strong>: reaproveitar código entre compiladores era praticamente impossível;</li>
-<li><strong>Verificação impossível</strong>: sem especificação formal, não havia como provar que a implementação estava correta;</li>
-<li><strong>Manutenção custosa</strong>: modificar ou estender as regras semânticas exigia alterações profundas no código do compilador;</li>
-<li><strong>Falta de clareza</strong>: a semântica da linguagem estava implícita no código, não explícita em documentação.</li>
-</ol>
-<p>A comunidade de compiladores necessitava de um formalismo que:</p>
-<ul>
-<li>Estendesse naturalmente as <strong>GLC</strong>s, mantendo sua elegância matemática;</li>
-<li>Permitisse especificar como informação contextual flui pela árvore sintática;</li>
-<li>Fosse implementável de forma sistemática e automática;</li>
-<li>Servisse tanto como especificação quanto como base para implementação.</li>
-</ul>
-<p>A resposta veio em 1968, quando <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> introduziu as <strong>Gramáticas de Atributos</strong>. Sua ideia central era engenhosamente simples: se as produções da gramática descrevem a estrutura do programa, por que não anotar essas mesmas produções com regras que descrevem o significado? Em vez de criar um formalismo completamente novo, Knuth estendeu as <strong>GLC</strong>s adicionando duas características:</p>
-<ol type="1">
-<li><strong>Atributos</strong>: propriedades associadas aos símbolos gramaticais, como o tipo de uma expressão;</li>
-<li><strong>Regras Semânticas</strong>: equações que definem como calcular atributos a partir de outros atributos.</li>
-</ol>
-<p>Esta abordagem unificava sintaxe e semântica sob um único formalismo matemático. A análise semântica deixava de ser código disperso para se tornar um conjunto de equações anexadas à gramática, verificável, modular e automaticamente implementável. Era a ponte que faltava entre a teoria formal das linguagens e a prática da construção de compiladores.</p>
-</section>
-<section id="a-análise-semântica-no-contexto-do-compilador" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="a-análise-semântica-no-contexto-do-compilador"><span class="header-section-number">12.3</span> A Análise Semântica no Contexto do Compilador</h2>
+<section id="o-papel-da-análise-semântica-no-compilador" class="level3" data-number="12.1.2">
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="o-papel-da-análise-semântica-no-compilador"><span class="header-section-number">12.1.2</span> O papel da análise semântica no compilador</h3>
 <p>Considerando a estrutura de compilação canônica, como definida por <a href="https://en.wikipedia.org/wiki/Alfred_Aho">Aho</a> (1977), e histórica que estamos adotando ao longo de todo este livro, a análise semântica será a terceira fase do <em>front-end</em> de um compilador, posicionando-se logo após a análise sintática. Como pode ser visto na Figura <a href="#fig-compilador1" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>. A principal informação de entrada do analisador semântico será a Árvore de Sintática Abstrata, termo importado do inglês <strong>A</strong>bstract <strong>S</strong>yntactic <strong>T</strong>ree, <strong>AST</strong>, a representação hierárquica da estrutura do programa que foi gerada pelo analisador sintático.</p>
 <div id="fig-compilador1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -721,8 +696,8 @@ Figure&nbsp;12.2
 <p><strong>Compiladores de uma passagem</strong>: intercalam a análise léxica, sintática, semântica e até a geração de código em uma única travessia do código-fonte. São extremamente rápidos, mas impõem restrições à linguagem, como a exigência de que todas as entidades sejam declaradas antes de serem usadas.</p>
 <p><strong>Compiladores de múltiplas passagens</strong>: utilizam a <strong>AST</strong> como uma representação intermediária entre as fases. A primeira passagem constrói a <strong>AST</strong>, e passagens subsequentes a percorrem para realizar a análise semântica, otimizações e, finalmente, a geração de código. Essa abordagem é mais modular, flexível e adequada para linguagens complexas como <strong>C++</strong> ou <strong>Java</strong>, que permitem declarações em qualquer ordem. A <strong>AST</strong>, nesse contexto, não é apenas uma estrutura de dados, mas uma estrutura de dados que desacopla a sintaxe do significado.</p>
 </section>
-<section id="semântica-estática-vs.-dinâmica-o-limite-da-compilação" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="semântica-estática-vs.-dinâmica-o-limite-da-compilação"><span class="header-section-number">12.4</span> Semântica Estática vs.&nbsp;Dinâmica: O Limite da Compilação</h2>
+<section id="semântica-estática-e-semântica-dinâmica" class="level3" data-number="12.1.3">
+<h3 data-number="12.1.3" class="anchored" data-anchor-id="semântica-estática-e-semântica-dinâmica"><span class="header-section-number">12.1.3</span> Semântica estática e semântica dinâmica</h3>
 <p>As regras semânticas de uma linguagem se dividem em duas categorias, que definem o que pode e o que não pode ser verificado antes da execução do programa. Estas categorias são:</p>
 <p><strong>Semântica Estática</strong>: compreende todas as regras de significado que podem ser verificadas em <strong>tempo de compilação</strong>. Essas regras são chamadas de estáticas porque a verificação ocorre através da análise do código-fonte, sem necessidade de execução. A análise semântica concentra-se primariamente em impor essas regras estáticas, que podem ser categorizadas em:</p>
 <p><strong>1. Verificações de Escopo e Declarações</strong>:</p>
@@ -802,7 +777,7 @@ Figure&nbsp;12.2
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> processar(obj):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> obj.metodo() <span class="co"># Erro se obj não possui metodo()</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="st">"texto"</span> <span class="op">/</span> <span class="dv">2</span> <span class="co"># TypeError em**Python**</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="st">"texto"</span> <span class="op">/</span> <span class="dv">2</span> <span class="co"># TypeError em Python</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Object</span> obj <span class="op">=</span> <span class="st">"String"</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Integer</span> num <span class="op">=</span> <span class="op">(</span><span class="bu">Integer</span><span class="op">)</span> obj<span class="op">;</span> <span class="co">// ClassCastException em tempo de execução</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>4. Erros de Recursos e Limites do Sistema</strong>:</p>
@@ -840,8 +815,9 @@ Figure&nbsp;12.2
 <li><strong>Starvation</strong>: thread nunca obtém acesso a recurso necessário;</li>
 <li><strong>Atomicidade violada</strong>: operação que deveria ser atômica é interrompida.</li>
 </ul>
-<section id="indecidibilidade-e-trade-offs" class="level3" data-number="12.4.1">
-<h3 data-number="12.4.1" class="anchored" data-anchor-id="indecidibilidade-e-trade-offs"><span class="header-section-number">12.4.1</span> Indecidibilidade e <em>Trade-offs</em></h3>
+</section>
+<section id="limites-da-análise-estática" class="level3" data-number="12.1.4">
+<h3 data-number="12.1.4" class="anchored" data-anchor-id="limites-da-análise-estática"><span class="header-section-number">12.1.4</span> Limites da análise estática</h3>
 <p>A leitora perspicaz notará que muitos desses problemas são <strong>indecidíveis</strong> estaticamente. O <strong>Problema da Parada</strong> de Turing prova que não existe algoritmo geral que possa determinar se um programa arbitrário terminará ou entrará em loop infinito. Consequentemente:</p>
 <ul>
 <li>Não é possível determinar estaticamente se um divisor será zero sem executar o código;</li>
@@ -872,11 +848,36 @@ Figure&nbsp;12.2
 <p>A análise semântica dinâmica representa, portanto, a última linha de defesa do programa contra comportamento incorreto. Enquanto a semântica estática previne erros que podem ser provados impossíveis, a semântica dinâmica detecta erros que só se manifestam sob condições específicas de execução, transformando falhas catastróficas em exceções controláveis.</p>
 </section>
 </section>
-<section id="gramáticas-de-atributos-formalizando-a-análise-semântica" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="gramáticas-de-atributos-formalizando-a-análise-semântica"><span class="header-section-number">12.5</span> Gramáticas de Atributos: Formalizando a Análise Semântica</h2>
+<section id="gramáticas-de-atributos" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="gramáticas-de-atributos"><span class="header-section-number">12.2</span> Gramáticas de Atributos</h2>
 <p>Vimos que as gramáticas livres de contexto (GLC) são excelentes para descrever a estrutura sintática de uma linguagem, mas insuficientes para capturar regras contextuais, como a verificação de tipos. Para formalizar a análise semântica de maneira sistemática e rigorosa, precisamos de uma ferramenta mais poderosa. Aqui voltamos a ideia de <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a>.</p>
-<section id="da-intuição-ao-formalismo-atributos-e-regras-semânticas" class="level3" data-number="12.5.1">
-<h3 data-number="12.5.1" class="anchored" data-anchor-id="da-intuição-ao-formalismo-atributos-e-regras-semânticas"><span class="header-section-number">12.5.1</span> Da Intuição ao Formalismo: Atributos e Regras Semânticas</h3>
+<section id="por-que-gramáticas-de-atributos" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="por-que-gramáticas-de-atributos"><span class="header-section-number">12.2.1</span> Por que gramáticas de atributos?</h3>
+<p>A evolução histórica da análise semântica que acabamos de traçar revela um padrão: à medida que as linguagens de programação se tornavam mais expressivas, as verificações semânticas necessárias cresciam em número e complexidade. Contudo, um problema fundamental permanecia sem solução satisfatória: <strong>como especificar formalmente essas verificações?</strong></p>
+<p>As gramáticas livres de contexto (<strong>GLC</strong>), poderosas para descrever a sintaxe, revelavam-se insuficientes para capturar regras semânticas. Considere a regra <em>toda variável deve ser declarada antes de seu uso</em>. Uma <strong>GLC</strong> pode garantir que <code>x = y + z;</code> seja uma atribuição sintaticamente válida, mas não pode verificar se <code>y</code> e <code>z</code> foram previamente declarados. Este tipo de restrição é <strong>sensível ao contexto</strong> e depende de informações que estão fora da estrutura local da produção.</p>
+<p>Durante os anos 1960, a análise semântica nos compiladores era implementada como código <em>ad-hoc</em> espalhado pelo parser. Cada compilador tinha sua própria abordagem, muitas vezes não documentada e difícil de manter. Não havia uma especificação formal da semântica, apenas a implementação. Isso criava problemas sérios:</p>
+<ol type="1">
+<li><strong>Não-portabilidade</strong>: reaproveitar código entre compiladores era praticamente impossível;</li>
+<li><strong>Verificação impossível</strong>: sem especificação formal, não havia como provar que a implementação estava correta;</li>
+<li><strong>Manutenção custosa</strong>: modificar ou estender as regras semânticas exigia alterações profundas no código do compilador;</li>
+<li><strong>Falta de clareza</strong>: a semântica da linguagem estava implícita no código, não explícita em documentação.</li>
+</ol>
+<p>A comunidade de compiladores necessitava de um formalismo que:</p>
+<ul>
+<li>Estendesse naturalmente as <strong>GLC</strong>s, mantendo sua elegância matemática;</li>
+<li>Permitisse especificar como informação contextual flui pela árvore sintática;</li>
+<li>Fosse implementável de forma sistemática e automática;</li>
+<li>Servisse tanto como especificação quanto como base para implementação.</li>
+</ul>
+<p>A resposta veio em 1968, quando <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> introduziu as <strong>Gramáticas de Atributos</strong>. Sua ideia central era engenhosamente simples: se as produções da gramática descrevem a estrutura do programa, por que não anotar essas mesmas produções com regras que descrevem o significado? Em vez de criar um formalismo completamente novo, Knuth estendeu as <strong>GLC</strong>s adicionando duas características:</p>
+<ol type="1">
+<li><strong>Atributos</strong>: propriedades associadas aos símbolos gramaticais, como o tipo de uma expressão;</li>
+<li><strong>Regras Semânticas</strong>: equações que definem como calcular atributos a partir de outros atributos.</li>
+</ol>
+<p>Esta abordagem unificava sintaxe e semântica sob um único formalismo matemático. A análise semântica deixava de ser código disperso para se tornar um conjunto de equações anexadas à gramática, verificável, modular e automaticamente implementável. Era a ponte que faltava entre a teoria formal das linguagens e a prática da construção de compiladores.</p>
+</section>
+<section id="atributos-e-regras-semânticas" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="atributos-e-regras-semânticas"><span class="header-section-number">12.2.2</span> Atributos e regras semânticas</h3>
 <p>Uma Gramática de Atributos é, em sua essência, uma Gramática Livre de Contexto na qual cada símbolo gramatical, terminal ou não-terminal, é anotado com um conjunto de <strong>atributos</strong>, e cada produção da gramática é acompanhada por um conjunto de <strong>regras semânticas</strong> que especificam como calcular os valores desses atributos.</p>
 <ul>
 <li><strong>Atributos</strong>: São propriedades associadas aos vértices da árvore sintática. Eles podem carregar informações como o tipo de uma expressão, o valor de uma constante, uma <em>string</em> de código gerado, ou um ponteiro para a <strong>Tabela de Símbolos</strong>.</li>
@@ -884,8 +885,8 @@ Figure&nbsp;12.2
 </ul>
 <p>Esse formalismo transforma a análise semântica em um processo de avaliação de atributos sobre a árvore sintática, um processo conhecido como “decoração” da árvore.</p>
 </section>
-<section id="atributos-sintetizados-e-herdados-o-fluxo-de-informação" class="level3" data-number="12.5.2">
-<h3 data-number="12.5.2" class="anchored" data-anchor-id="atributos-sintetizados-e-herdados-o-fluxo-de-informação"><span class="header-section-number">12.5.2</span> Atributos Sintetizados e Herdados: O Fluxo de Informação</h3>
+<section id="atributos-sintetizados-e-herdados" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="atributos-sintetizados-e-herdados"><span class="header-section-number">12.2.3</span> Atributos sintetizados e herdados</h3>
 <p>Os atributos são classificados com base na direção em que a informação flui pela árvore sintática. Como pode ser visto na Figura <a href="#fig-sint-herdados" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>.</p>
 <div id="fig-sint-herdados" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -914,9 +915,9 @@ Figure&nbsp;12.3
 </ul>
 <p>O poder das gramáticas de atributos reside na interação entre esses dois tipos de fluxo, permitindo que informações contextuais, herdadas, influenciem cálculos locais que, por sua vez, são agregados e passados para cima, os atributos sintetizados.</p>
 </section>
-<section id="definição-formal-e-exemplos-práticos" class="level3" data-number="12.5.3">
-<h3 data-number="12.5.3" class="anchored" data-anchor-id="definição-formal-e-exemplos-práticos"><span class="header-section-number">12.5.3</span> Definição Formal E Exemplos Práticos</h3>
-<p>Para transformar a análise semântica em um processo sistemático e guiado pela sintaxe, utilizamos o formalismo das Gramáticas de Atributos. Formalmente, uma Gramática de Atributos (AG) é uma tupla <span class="math inline">\(AG = \{G, A, R\}\)</span>, na qual cada componente tem um papel bem definido:</p>
+<section id="exemplos-de-gramáticas-de-atributos" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="exemplos-de-gramáticas-de-atributos"><span class="header-section-number">12.2.4</span> Exemplos de gramáticas de atributos</h3>
+<p>Para transformar a análise semântica em um processo sistemático e guiado pela sintaxe, utilizamos o formalismo das Gramáticas de Atributos. Formalmente, uma Gramática de Atributos (<span class="math inline">\(AG\)</span>) é uma tupla <span class="math inline">\(AG = \{G, A, R\}\)</span>, na qual cada componente tem um papel bem definido:</p>
 <ul>
 <li><p><strong><span class="math inline">\(G\)</span>: A Gramática Livre de Contexto (GLC)</strong>: a fundação sintática, definida por <span class="math inline">\(G = \{N, T, P, S\}\)</span>, na qual:</p>
 <ul>
@@ -941,8 +942,8 @@ Figure&nbsp;12.3
 <li>Os atributos sintetizados de <span class="math inline">\(X_0\)</span> a partir dos atributos de <span class="math inline">\(X_1, \dots, X_n\)</span>.</li>
 <li>Os atributos herdados de <span class="math inline">\(X_1, \dots, X_n\)</span> a partir dos atributos de <span class="math inline">\(X_0\)</span> ou de outros símbolos <span class="math inline">\(X_j\)</span> na mesma produção.</li>
 </ol>
-<section id="exemplo-1-declaração-de-variáveis" class="level4" data-number="12.5.3.1">
-<h4 data-number="12.5.3.1" class="anchored" data-anchor-id="exemplo-1-declaração-de-variáveis"><span class="header-section-number">12.5.3.1</span> Exemplo 1: Declaração de Variáveis</h4>
+<section id="exemplo-1-declaração-de-variáveis" class="level4" data-number="12.2.4.1">
+<h4 data-number="12.2.4.1" class="anchored" data-anchor-id="exemplo-1-declaração-de-variáveis"><span class="header-section-number">12.2.4.1</span> Exemplo 1: Declaração de Variáveis</h4>
 <p>Vamos definir uma Gramática de Atributos para processar declarações simples como <code>float x, y;</code>, na qual o tipo deve ser distribuído para cada variável na lista.</p>
 <p><strong>1. Gramática (<span class="math inline">\(G\)</span>)</strong>: começamos com a seguinte gramática livre de contexto:</p>
 <p><span class="math display">\[
@@ -1071,8 +1072,8 @@ Figure&nbsp;12.5
 </figure>
 </div>
 </section>
-<section id="exemplo-2-estrutura-de-tomada-de-decisão-if-then-else" class="level4" data-number="12.5.3.2">
-<h4 data-number="12.5.3.2" class="anchored" data-anchor-id="exemplo-2-estrutura-de-tomada-de-decisão-if-then-else"><span class="header-section-number">12.5.3.2</span> Exemplo 2: Estrutura de Tomada de Decisão (if-then-else)</h4>
+<section id="exemplo-2-estrutura-de-tomada-de-decisão-if-then-else" class="level4" data-number="12.2.4.2">
+<h4 data-number="12.2.4.2" class="anchored" data-anchor-id="exemplo-2-estrutura-de-tomada-de-decisão-if-then-else"><span class="header-section-number">12.2.4.2</span> Exemplo 2: Estrutura de Tomada de Decisão (if-then-else)</h4>
 <p>Vamos construir uma Gramática de Atributos para processar estruturas condicionais como <code>if (x &gt; 0) then y = 1 else y = -1</code>.</p>
 <p><strong>1. Gramática Base (<span class="math inline">\(G\)</span>)</strong>:</p>
 <p><span class="math display">\[
@@ -1195,8 +1196,8 @@ Figure&nbsp;12.6
 </ul>
 <p>A árvore sintática deve ser anotada com estes valores, o que permitirá que a estrutura condicional seja processada corretamente com os destinos apropriados para cada um dos caminho de execução.</p>
 </section>
-<section id="exemplo-3-laço-de-repetição-while" class="level4" data-number="12.5.3.3">
-<h4 data-number="12.5.3.3" class="anchored" data-anchor-id="exemplo-3-laço-de-repetição-while"><span class="header-section-number">12.5.3.3</span> Exemplo 3: Laço de Repetição (while)</h4>
+<section id="exemplo-3-laço-de-repetição-while" class="level4" data-number="12.2.4.3">
+<h4 data-number="12.2.4.3" class="anchored" data-anchor-id="exemplo-3-laço-de-repetição-while"><span class="header-section-number">12.2.4.3</span> Exemplo 3: Laço de Repetição (while)</h4>
 <p>Finalmente, vamos construir uma Gramática de Atributos para laços como <code>while (x &gt; 0) do x = x - 1</code>, em que o fluxo de controle deve retornar ao início após cada iteração.</p>
 <p><strong>1. Gramática Base (<span class="math inline">\(G\)</span>)</strong>:</p>
 <p><span class="math display">\[
@@ -1329,8 +1330,8 @@ Figure&nbsp;12.7
 <p>Esta diferença nas regras semânticas é o que implementa comportamentos completamente distintos: execução condicional única versus repetição em ciclo. A árvore sintática anotada com estes atributos captura perfeitamente a semântica do laço de repetição.</p>
 </section>
 </section>
-<section id="avaliação-de-atributos-grafos-de-dependência-e-ordenação-topológica" class="level3" data-number="12.5.4">
-<h3 data-number="12.5.4" class="anchored" data-anchor-id="avaliação-de-atributos-grafos-de-dependência-e-ordenação-topológica"><span class="header-section-number">12.5.4</span> Avaliação de Atributos: Grafos de Dependência e Ordenação Topológica</h3>
+<section id="avaliação-de-atributos" class="level3" data-number="12.2.5">
+<h3 data-number="12.2.5" class="anchored" data-anchor-id="avaliação-de-atributos"><span class="header-section-number">12.2.5</span> Avaliação de atributos</h3>
 <p>As regras semânticas de uma gramática de atributos formam um sistema de equações. Contudo, para resolver esse sistema, precisamos estabelecer uma ordem de avaliação, pois o cálculo de um atributo frequentemente depende do valor de outro. O <strong>Grafo de Dependências</strong> é a ferramenta formal que nos permite visualizar e determinar essa ordem.</p>
 <p>Para uma determinada árvore sintática, o grafo de dependências é um grafo direcionado <span class="math inline">\(D = (V, E)\)</span> que torna explícitas as interdependências entre os atributos:</p>
 <ul>
@@ -1355,8 +1356,8 @@ Figure&nbsp;12.8: Exemplo de árvore sintática e seu grafo de dependências cor
 <p>Uma gramática de atributos é considerada <strong>não-circular</strong> se, para qualquer árvore sintática que ela possa gerar, seu grafo de dependências for <strong>acíclico</strong> (não contiver ciclos).</p>
 <p>O problema de encontrar a sequência correta de avaliação é resolvido pela <strong>ordenação topológica</strong> do grafo. O algoritmo geral consiste em construir o grafo, verificar se há ciclos e, em caso negativo, percorrê-lo em uma ordem topológica para calcular cada atributo.</p>
 </section>
-<section id="classes-de-gramáticas-de-atributos-e-o-impacto-na-eficiência" class="level3" data-number="12.5.5">
-<h3 data-number="12.5.5" class="anchored" data-anchor-id="classes-de-gramáticas-de-atributos-e-o-impacto-na-eficiência"><span class="header-section-number">12.5.5</span> Classes de Gramáticas de Atributos e o Impacto na Eficiência</h3>
+<section id="classes-de-gramáticas-de-atributos" class="level3" data-number="12.2.6">
+<h3 data-number="12.2.6" class="anchored" data-anchor-id="classes-de-gramáticas-de-atributos"><span class="header-section-number">12.2.6</span> Classes de gramáticas de atributos</h3>
 <p>Embora a definição de uma gramática de atributos seja muito flexível, essa flexibilidade tem um custo. Regras semânticas irrestritas podem levar a dependências complexas, difíceis de avaliar ou, no pior caso, a dependências circulares que tornam a avaliação impossível. Para gerenciar essa complexidade, as gramáticas de atributos são classificadas em uma hierarquia baseada nas restrições impostas sobre o fluxo de informação. Em uma estrutura aninhada que pode ser vista na Figura <a href="#fig-classes-gramaticas" class="quarto-xref">Figure&nbsp;<span>12.9</span></a>, cada classe é um subconjunto estrito da anterior, com propriedades específicas que impactam diretamente a implementação do compilador.</p>
 <div id="fig-classes-gramaticas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1374,8 +1375,8 @@ Figure&nbsp;12.9
 </figure>
 </div>
 <p>Essa classificação é de suma importância para o design de linguagens e compiladores, pois representa um balanço direto entre o poder expressivo das regras semânticas e a eficiência do algoritmo de avaliação.</p>
-<section id="gramáticas-s-atribuídas" class="level4" data-number="12.5.5.1">
-<h4 data-number="12.5.5.1" class="anchored" data-anchor-id="gramáticas-s-atribuídas"><span class="header-section-number">12.5.5.1</span> Gramáticas S-Atribuídas</h4>
+<section id="gramáticas-s-atribuídas" class="level4" data-number="12.2.6.1">
+<h4 data-number="12.2.6.1" class="anchored" data-anchor-id="gramáticas-s-atribuídas"><span class="header-section-number">12.2.6.1</span> Gramáticas S-Atribuídas</h4>
 <p>A classe mais simples e restrita. Uma gramática é <strong>S-atribuída</strong> se ela utiliza <strong>apenas</strong> atributos sintetizados.</p>
 <ul>
 <li><strong>Característica</strong>: A informação flui estritamente de baixo para cima (bottom-up) na árvore sintática.</li>
@@ -1383,8 +1384,8 @@ Figure&nbsp;12.9
 <li><strong>Complexidade</strong>: Avaliação em tempo linear, <span class="math inline">\(O(n)\)</span>.</li>
 </ul>
 </section>
-<section id="gramáticas-l-atribuídas" class="level4" data-number="12.5.5.2">
-<h4 data-number="12.5.5.2" class="anchored" data-anchor-id="gramáticas-l-atribuídas"><span class="header-section-number">12.5.5.2</span> Gramáticas L-Atribuídas</h4>
+<section id="gramáticas-l-atribuídas" class="level4" data-number="12.2.6.2">
+<h4 data-number="12.2.6.2" class="anchored" data-anchor-id="gramáticas-l-atribuídas"><span class="header-section-number">12.2.6.2</span> Gramáticas L-Atribuídas</h4>
 <p>Esta é a classe mais importante para a maioria das linguagens de programação modernas. Uma gramática é <strong>L-atribuída</strong> se, para cada produção <span class="math inline">\(A \rightarrow X_1 X_2 \dots X_n\)</span>, os atributos herdados de um símbolo <span class="math inline">\(X_j\)</span> no lado direito dependem apenas:</p>
 <ol type="1">
 <li>Dos atributos herdados de <span class="math inline">\(A\)</span> (o pai).</li>
@@ -1396,8 +1397,8 @@ Figure&nbsp;12.9
 <li><strong>Complexidade</strong>: Avaliação em tempo linear, <span class="math inline">\(O(n)\)</span>.</li>
 </ul>
 </section>
-<section id="gramáticas-não-circulares" class="level4" data-number="12.5.5.3">
-<h4 data-number="12.5.5.3" class="anchored" data-anchor-id="gramáticas-não-circulares"><span class="header-section-number">12.5.5.3</span> Gramáticas Não-Circulares</h4>
+<section id="gramáticas-não-circulares" class="level4" data-number="12.2.6.3">
+<h4 data-number="12.2.6.3" class="anchored" data-anchor-id="gramáticas-não-circulares"><span class="header-section-number">12.2.6.3</span> Gramáticas Não-Circulares</h4>
 <p>Esta é a classe mais geral de gramáticas de atributos que ainda é utilizável.</p>
 <ul>
 <li><strong>Característica</strong>: A única restrição é que o grafo de dependências não pode ter ciclos para nenhuma árvore sintática possível. No entanto, as dependências podem ser complexas, com atributos dependendo de irmãos à sua direita, por exemplo.</li>
@@ -1405,11 +1406,11 @@ Figure&nbsp;12.9
 <li><strong>Complexidade</strong>: A avaliação é mais cara, geralmente quadrática (<span class="math inline">\(O(n^2)\)</span>) ou pior, dependendo da estrutura do grafo. Linguagens com funcionalidades semânticas muito complexas, como templates em <strong>C++</strong>, podem exigir essa flexibilidade.</li>
 </ul>
 </section>
-<section id="gramáticas-circulares" class="level4" data-number="12.5.5.4">
-<h4 data-number="12.5.5.4" class="anchored" data-anchor-id="gramáticas-circulares"><span class="header-section-number">12.5.5.4</span> Gramáticas Circulares</h4>
+<section id="gramáticas-circulares" class="level4" data-number="12.2.6.4">
+<h4 data-number="12.2.6.4" class="anchored" data-anchor-id="gramáticas-circulares"><span class="header-section-number">12.2.6.4</span> Gramáticas Circulares</h4>
 <ul>
 <li><strong>Característica</strong>: Existe pelo menos uma árvore sintática que gera um grafo de dependências com um ciclo. Isso representa uma definição semântica recursiva sem caso base (ex: <code>a = b + 1</code> e <code>b = a * 2</code>).</li>
-<li><strong>Implicação no Compilador</strong>: São semanticamente malformadas e inúteis na prática, pois a avaliação de atributos é impossível. Pior ainda, o problema de determinar se uma gramática de atributos geral é circular ou não é <strong>indecidível</strong>.</li>
+<li><strong>Implicação no Compilador</strong>: São semanticamente malformadas e inúteis na prática, pois a avaliação de atributos é impossível. Pior ainda, o problema de determinar se uma gramática de atributos geral é circular ou não é <strong>computacionalmente caro e dependente da classe de gramática</strong>.</li>
 </ul>
 <p>A tabela a seguir resume estas classes, suas características e o impacto na complexidade da análise semântica.</p>
 <table class="caption-top table">
@@ -1431,39 +1432,39 @@ Figure&nbsp;12.9
 <tr class="odd">
 <td style="text-align: left;"><strong>S-atribuída</strong></td>
 <td style="text-align: left;">Apenas atributos sintetizados</td>
-<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><strong><span class="math inline">\(O(n)\)</span></strong></td>
 <td style="text-align: left;">Calculadoras, expressões</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>L-atribuída</strong></td>
 <td style="text-align: left;">Restrições em atributos herdados</td>
-<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><strong><span class="math inline">\(O(n)\)</span></strong></td>
 <td style="text-align: left;">Maioria das linguagens (<strong>C</strong>, <strong>Java</strong>)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Absolutamente não-circular</strong></td>
 <td style="text-align: left;">Ordem fixa para todas as árvores</td>
-<td style="text-align: left;"><span class="math inline">\(O(n)\)</span></td>
+<td style="text-align: left;"><strong><span class="math inline">\(O(n)\)</span></strong></td>
 <td style="text-align: left;">Subclasse de L-atribuídas</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><strong>Não-circular</strong></td>
 <td style="text-align: left;">Ordem depende da árvore</td>
-<td style="text-align: left;"><span class="math inline">\(O(n^2)\)</span></td>
+<td style="text-align: left;"><strong><span class="math inline">\(O(n^2)\)</span></strong></td>
 <td style="text-align: left;"><strong>Ada</strong>, <strong>C++</strong> (templates)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><strong>Circular</strong></td>
 <td style="text-align: left;">Possui ciclos</td>
-<td style="text-align: left;">Indecidível</td>
+<td style="text-align: left;"><strong>Indecidível</strong></td>
 <td style="text-align: left;">Não utilizável</td>
 </tr>
 </tbody>
 </table>
 </section>
 </section>
-<section id="definição-formal-e-exemplo-prático" class="level3" data-number="12.5.6">
-<h3 data-number="12.5.6" class="anchored" data-anchor-id="definição-formal-e-exemplo-prático"><span class="header-section-number">12.5.6</span> Definição Formal e Exemplo Prático</h3>
+<section id="definições-dirigidas-por-sintaxe" class="level3" data-number="12.2.7">
+<h3 data-number="12.2.7" class="anchored" data-anchor-id="definições-dirigidas-por-sintaxe"><span class="header-section-number">12.2.7</span> Definições dirigidas por sintaxe</h3>
 <p>Uma <strong>Definição Dirigida por Sintaxe (SDD)</strong> é a especificação formal de uma gramática de atributos. É uma generalização que associa regras semânticas a cada produção de uma <strong>GLC</strong>. Uma <strong>SDD</strong> especifica <em>o que</em> deve ser calculado, mas não <em>como</em> ou <em>em que ordem</em>. A ordem de avaliação é determinada pelas dependências entre os atributos.</p>
 <p>Com base nos tipos de atributos que utilizam, as <strong>SDD</strong>s podem ser classificadas em categorias importantes que impactam diretamente a implementação do compilador:</p>
 <p><strong>Gramáticas S-Atribuídas</strong>: São <strong>SDD</strong>s que utilizam <strong>apenas</strong> atributos sintetizados. A avaliação desses atributos pode ser feita de forma natural durante uma travessia em pós-ordem da árvore sintática. Isso as torna perfeitamente compatíveis com analisadores sintáticos <em>bottom-up</em> (como os <span class="math inline">\(LR\)</span>), nos quais as ações semânticas podem ser executadas no momento em que uma produção é reduzida.</p>
@@ -1474,8 +1475,8 @@ Figure&nbsp;12.9
 </ol>
 <p>Essa restrição garante que os atributos possam ser avaliados em uma única travessia em profundidade e da esquerda para a direita da árvore sintática. Isso as torna ideais para implementação em conjunto com analisadores sintáticos <em>top-down</em> (como os <span class="math inline">\(LL\)</span> e os de descida recursiva).</p>
 </section>
-<section id="esquemas-de-tradução-dirigida-por-sintaxe-sdt" class="level3" data-number="12.5.7">
-<h3 data-number="12.5.7" class="anchored" data-anchor-id="esquemas-de-tradução-dirigida-por-sintaxe-sdt"><span class="header-section-number">12.5.7</span> Esquemas de Tradução Dirigida por Sintaxe (SDT)</h3>
+<section id="esquemas-de-tradução-dirigida-por-sintaxe" class="level3" data-number="12.2.8">
+<h3 data-number="12.2.8" class="anchored" data-anchor-id="esquemas-de-tradução-dirigida-por-sintaxe"><span class="header-section-number">12.2.8</span> Esquemas de tradução dirigida por sintaxe</h3>
 <p>Enquanto uma <strong>SDD</strong> é uma especificação, um <strong>Esquema de Tradução Dirigida por Sintaxe (SDT)</strong> é uma implementação concreta. Um SDT é uma <strong>GLC</strong>na qual as <strong>ações semânticas</strong> (fragmentos de código) são embutidas diretamente no lado direito das produções. Essas ações são executadas no momento em que o analisador sintático reconhece aquela parte da produção.</p>
 <p><strong>Exemplo de SDT para uma calculadora simples</strong>:</p>
 <table class="caption-top table">
@@ -1516,11 +1517,11 @@ Figure&nbsp;12.9
 <p>O formalismo das gramáticas de atributos e dos SDTs transforma a análise semântica, que poderia ser uma tarefa <em>ad-hoc</em> e propensa a erros, em um processo sistemático e declarativo. Ele nos permite raciocinar sobre o fluxo de informações contextuais de maneira estruturada, guiada diretamente pela sintaxe da linguagem, personificando o princípio da composicionalidade: o significado do todo é derivado do significado de suas partes.</p>
 </section>
 </section>
-<section id="catálogo-de-verificações-semânticas-comuns" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="catálogo-de-verificações-semânticas-comuns"><span class="header-section-number">12.6</span> Catálogo de Verificações Semânticas Comuns</h2>
+<section id="verificações-semânticas-em-compiladores" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="verificações-semânticas-em-compiladores"><span class="header-section-number">12.3</span> Verificações Semânticas em Compiladores</h2>
 <p>A análise semântica é a última linha de defesa do <em>front-end</em> contra programas incorretos. Ela é responsável por capturar uma ampla gama de erros que são sintaticamente invisíveis, mas semanticamente inválidos. Esta seção cataloga as verificações mais comuns realizadas por um analisador semântico, com exemplos práticos de código que falhariam em cada verificação.</p>
-<section id="verificações-relacionadas-a-nomes-e-escopos" class="level3" data-number="12.6.1">
-<h3 data-number="12.6.1" class="anchored" data-anchor-id="verificações-relacionadas-a-nomes-e-escopos"><span class="header-section-number">12.6.1</span> Verificações Relacionadas a Nomes e Escopos</h3>
+<section id="nomes-escopos-e-declarações" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="nomes-escopos-e-declarações"><span class="header-section-number">12.3.1</span> Nomes, escopos e declarações</h3>
 <p>Estas verificações garantem que os identificadores sejam usados de acordo com as regras de escopo da linguagem. A <strong>Tabela de Símbolos</strong> é a ferramenta central para realizar essas checagens.</p>
 <p><strong>Uso de Identificador Não Declarado</strong>: Talvez o erro semântico mais fundamental. O compilador deve garantir que todo identificador (variável, função, etc.) tenha sido declarado antes de ser utilizado.</p>
 <p><strong>Exemplo de Erro</strong>:</p>
@@ -1536,8 +1537,8 @@ Figure&nbsp;12.9
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">String</span> x <span class="op">=</span> <span class="st">"hello"</span><span class="op">;</span> <span class="co">// ERRO: 'x' já está definido neste escopo.</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="verificações-de-tipo" class="level3" data-number="12.6.2">
-<h3 data-number="12.6.2" class="anchored" data-anchor-id="verificações-de-tipo"><span class="header-section-number">12.6.2</span> Verificações de Tipo</h3>
+<section id="verificação-de-tipos" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="verificação-de-tipos"><span class="header-section-number">12.3.2</span> Verificação de tipos</h3>
 <p>O coração da análise semântica, a verificação de tipos garante que os dados sejam usados de maneira consistente com suas definições.</p>
 <p><strong>Incompatibilidade em Atribuições</strong>: O tipo da expressão do lado direito de uma atribuição deve ser compatível (ou poder ser coagido) com o tipo da variável do lado esquerdo.</p>
 <p><strong>Exemplo de Erro</strong>:</p>
@@ -1547,14 +1548,14 @@ Figure&nbsp;12.9
 <p><strong>Exemplo de Erro</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> <span class="st">"Total: "</span> <span class="op">-</span> <span class="dv">10</span> <span class="co"># ERRO: Operador '-' não suportado entre 'str' e 'int'.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Tipo Incorreto em Estruturas de Controle</strong>: A expressão de controle em estruturas como <code>if</code>, <code>while</code> e <code>for</code> deve resultar em um tipo booleano (ou um tipo que possa ser coagido para booleano).</p>
-<p><strong>Exemplo de Erro (em uma linguagem como</strong> <strong>Java)</strong>:</p>
+<p><strong>Exemplo de Erro (em uma linguagem como Java)</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> contador <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>contador<span class="op">)</span> <span class="op">{</span> <span class="co">// ERRO: 'contador' é int, mas um booleano é esperado.</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">//...</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="verificações-relacionadas-a-sub-rotinas-funçõesmétodos" class="level3" data-number="12.6.3">
-<h3 data-number="12.6.3" class="anchored" data-anchor-id="verificações-relacionadas-a-sub-rotinas-funçõesmétodos"><span class="header-section-number">12.6.3</span> Verificações Relacionadas a Sub-rotinas (Funções/Métodos)</h3>
+<section id="funções-métodos-e-sub-rotinas" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="funções-métodos-e-sub-rotinas"><span class="header-section-number">12.3.3</span> Funções, métodos e sub-rotinas</h3>
 <p>Essas verificações garantem que as funções sejam chamadas corretamente, respeitando suas assinaturas.</p>
 <p><strong>Número Incorreto de Argumentos em Chamada</strong>: A chamada de uma função deve fornecer exatamente o número de argumentos que sua declaração exige.</p>
 <p><strong>Exemplo de Erro</strong>:</p>
@@ -1582,8 +1583,8 @@ Figure&nbsp;12.9
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="st">"jovem"</span><span class="op">;</span> <span class="co">// ERRO: Tipo de retorno incompatível.</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="verificações-de-controle-de-fluxo" class="level3" data-number="12.6.4">
-<h3 data-number="12.6.4" class="anchored" data-anchor-id="verificações-de-controle-de-fluxo"><span class="header-section-number">12.6.4</span> Verificações de Controle de Fluxo</h3>
+<section id="controle-de-fluxo" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="controle-de-fluxo"><span class="header-section-number">12.3.4</span> Controle de fluxo</h3>
 <p>Essas regras garantem que as construções de controle de fluxo sejam usadas em contextos apropriados.</p>
 <p><strong>break ou continue Fora de um Laço</strong>: As palavras-chave <code>break</code> e <code>continue</code> só são permitidas dentro do corpo de estruturas de repetição (como <code>while</code>, <code>for</code>, <code>do-while</code>).</p>
 <p><strong>Exemplo de Erro</strong>:</p>
@@ -1600,35 +1601,13 @@ Figure&nbsp;12.9
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="o-produto-final-a-árvore-de-sintaxe-abstrata-atribuída" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="o-produto-final-a-árvore-de-sintaxe-abstrata-atribuída"><span class="header-section-number">12.7</span> O Produto Final: A Árvore de Sintaxe Abstrata <em>Atribuída</em></h2>
-<p>O resultado de uma análise semântica bem-sucedida, em uma passagem ou em múltiplas passagens, não será percebido por um valor <em>booleano</em> indicando sucesso ou falha. O produto tangível desta fase será uma <strong>Árvore de Sintaxe Abstrata “Atribuída”</strong>, ou em alguns livros árvore sintática abstrata anotada, ou ainda árvore sintática abstrata decorada.</p>
-<p>O processo de decorar a árvore consiste em percorrer seus vértices e enriquecê-los com informações semânticas que foram inferidas durante a análise. Este é um processo de atribuição de informação aos vértices da árvore sintática. Por exemplo:</p>
-<ul>
-<li>um vértice que representa o uso de uma variável pode ser decorado com um ponteiro para a entrada correspondente na <strong>Tabela de Símbolos</strong>;</li>
-<li>um vértice de expressão (como <code>+</code> ou <code>*</code>) pode ser decorado com o tipo resultante da operação (ex.: <code>int</code> ou <code>float</code>);</li>
-<li>um vértice de declaração de tipo pode ser decorado com informações sobre o layout de memória daquele tipo.</li>
-</ul>
-<p>Essa <strong>AST</strong> atribuída é uma estrutura de dados rica. Ela contém não apenas a estrutura sintática do programa, mas também todo o entendimento contextual que o compilador adquiriu durante o processo de compilação. Ela serve como a única fonte de verdade para as fases subsequentes do processo de compilação, como a geração de código intermediário e a otimização. Nesse sentido, a análise semântica não apenas detecta e elimina erros, mas enriquece a representação do programa com informações que o fortalecem e o preparam para a transformação final em código executável.</p>
-<p>A <strong>AST</strong> é a principal e mais importante estrutura de dados usada como entrada pelo analisador semântico. Mas, não é a única.</p>
-<p>Para que um compilador possa realizar verificações semânticas, como garantir que uma variável foi declarada antes de ser usada ou que o tipo de uma expressão é válido, ele precisa de um mecanismo para registrar e recuperar informações sobre os identificadores encontrados no código-fonte. Essa “memória” do compilador é a <strong>Tabela de Símbolos</strong>. Os processos de análise léxica e sintática precisaram consultar esta tabela para identificar palavras reservadas e tipos básicos, mas é o analisador semântico que fará o uso mais intensivo e complexo desta estrutura.</p>
-<p>A <strong>Tabela de Símbolos</strong> é uma estrutura de dados fundamental que associa cada identificador, ou símbolo, a um conjunto de informações, os atributos que citamos antes, que pertencem ao símbolo. Esta tabela funciona como um dicionário em que as chaves são os nomes dos símbolos e os valores são os metadados coletados sobre eles.</p>
-<p>Praticamente todas as fases do compilador interagem com a <strong>Tabela de Símbolos</strong>:</p>
-<ol type="1">
-<li><strong>Análise Léxica</strong>: ao encontrar um identificador, o analisador léxico pode inseri-lo na <strong>Tabela de Símbolos</strong> se ele ainda não estiver presente. Ou para classificar um determinado lexema como uma palavra reservada, o analisador léxico consulta a tabela;</li>
-<li><strong>Análise Sintática/Semântica</strong>: o analisador semântico consulta a <strong>Tabela de Símbolos</strong> constantemente para verificar declarações, tipos e escopos. Ele também a preenche com informações obtidas das declarações.</li>
-<li><strong>Geração de Código e Otimização</strong>: as fases do <em>back-end</em> usam a tabela para obter informações como o tipo de uma variável e seu endereço de memória para gerar o código de máquina apropriado.</li>
-</ol>
-<p>A <strong>Tabela de Símbolos</strong> está detalhada na seção <a href="11-tabelaSimbolos.html" class="quarto-xref"><span>Chapter 16</span></a></p>
-</section>
-<section id="verificação-de-tipos-type-checking" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="verificação-de-tipos-type-checking"><span class="header-section-number">12.8</span> Verificação de Tipos, <em>Type Checking</em></h2>
+<section id="sistemas-de-tipos-e-julgamentos" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="sistemas-de-tipos-e-julgamentos"><span class="header-section-number">12.4</span> Sistemas de Tipos e Julgamentos</h2>
 <p>A verificação de tipos é, sem dúvida, a tarefa central da análise semântica. Ela consiste em percorrer a <strong>AST</strong> e aplicar um conjunto de regras para garantir que os tipos de dados sejam usados de maneira consistente e segura. Um <strong>tipo</strong> pode ser formalmente definido como um conjunto de valores e um conjunto de operações permitidas sobre esses valores. A verificação de tipos assegura que um programa não tente realizar operações absurdas, como somar uma <em>string</em> a um objeto de arquivo ou calcular a raiz quadrada de um booleano.</p>
-<section id="a-importância-dos-tipos-prevenindo-o-absurdo-computacional" class="level3" data-number="12.8.1">
-<h3 data-number="12.8.1" class="anchored" data-anchor-id="a-importância-dos-tipos-prevenindo-o-absurdo-computacional"><span class="header-section-number">12.8.1</span> A Importância dos Tipos: Prevenindo o “Absurdo” Computacional</h3>
+<section id="tipagem-estática-dinâmica-forte-e-fraca" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="tipagem-estática-dinâmica-forte-e-fraca"><span class="header-section-number">12.4.1</span> Tipagem estática, dinâmica, forte e fraca</h3>
 <p>Os sistemas de tipos impõem uma disciplina que traz enormes benefícios, principalmente a detecção de uma vasta classe de erros antes mesmo da execução do programa. Essa verificação pode ocorrer em momentos distintos, o que nos leva a uma das mais importantes classificações de linguagens de programação.</p>
-<section id="tipagem-estática-vs.-dinâmica" class="level4" data-number="12.8.1.1">
-<h4 data-number="12.8.1.1" class="anchored" data-anchor-id="tipagem-estática-vs.-dinâmica"><span class="header-section-number">12.8.1.1</span> Tipagem Estática vs.&nbsp;Dinâmica</h4>
+<p><strong>Tipagem estática vs.&nbsp;dinâmica</strong></p>
 <p><strong>Tipagem Estática</strong>: A verificação de tipos é realizada em <strong>tempo de compilação</strong>. O compilador analisa o código-fonte, infere ou lê as anotações de tipo e valida todas as operações. Se um erro de tipo é encontrado, a compilação falha. Linguagens como <strong>Java</strong>, <strong>C++</strong>, <strong>C#</strong>, <strong>Rust</strong> e <strong>Haskell</strong> são estaticamente tipadas.</p>
 <p><strong>Vantagens</strong>:</p>
 <ol type="1">
@@ -1648,11 +1627,9 @@ Figure&nbsp;12.9
 <li><strong>Erros em Tempo de Execução</strong>: Erros de tipo só são descobertos quando o código é efetivamente executado, o que pode ocorrer tardiamente no ciclo de vida do software.</li>
 <li><strong><em>overhead</em> de Performance</strong>: A necessidade de verificar tipos em tempo de execução e de armazenar informações de tipo com cada valor impõe uma penalidade de desempenho.</li>
 </ol>
-</section>
-<section id="tipagem-forte-vs.-fraca" class="level4" data-number="12.8.1.2">
-<h4 data-number="12.8.1.2" class="anchored" data-anchor-id="tipagem-forte-vs.-fraca"><span class="header-section-number">12.8.1.2</span> Tipagem Forte vs.&nbsp;Fraca</h4>
+<p><strong>Tipagem forte vs.&nbsp;fraca</strong></p>
 <p>Essa distinção, muitas vezes confundida com estática vs.&nbsp;dinâmica, refere-se ao rigor com que a linguagem impõe suas regras de tipo.</p>
-<p><strong>Tipagem Forte</strong>: Uma linguagem fortemente tipada não permite que operações sejam realizadas entre tipos incompatíveis, prevenindo comportamento indefinido. Ela pode permitir conversões implícitas (coerção), mas apenas de maneiras bem-definidas e seguras. Por exemplo, em<strong>Python</strong> (fortemente tipado), <code>3 + "olá"</code> resulta em um <code>TypeError</code> em tempo de execução, pois a operação não está definida.</p>
+<p><strong>Tipagem Forte</strong>: Uma linguagem fortemente tipada não permite que operações sejam realizadas entre tipos incompatíveis, prevenindo comportamento indefinido. Ela pode permitir conversões implícitas (coerção), mas apenas de maneiras bem-definidas e seguras. Por exemplo, em <strong>Python</strong> (fortemente tipado), <code>3 + "olá"</code> resulta em um <code>TypeError</code> em tempo de execução, pois a operação não está definida.</p>
 <p><strong>Tipagem Fraca</strong>: Uma linguagem fracamente tipada possui regras de tipo mais permissivas e pode tentar realizar operações mesmo entre tipos incompatíveis, muitas vezes tratando os dados como sequências de bits. Em C (fracamente tipado), é possível usar um *<em>cast</em> para tratar um ponteiro para um inteiro como um ponteiro para uma estrutura, contornando o sistema de tipos e abrindo a porta para erros difíceis de depurar e vulnerabilidades de segurança.</p>
 <p>É importante que a atenta leitora perceba que essas duas classificações são ortogonais. Temos:</p>
 <ul>
@@ -1663,9 +1640,8 @@ Figure&nbsp;12.9
 </ul>
 <p>A escolha de um sistema de tipos reflete uma filosofia de design da linguagem, um balanço entre segurança, flexibilidade, performance e expressividade.</p>
 </section>
-</section>
-<section id="equivalência-de-tipos-quando-t1-é-igual-a-t2" class="level3" data-number="12.8.2">
-<h3 data-number="12.8.2" class="anchored" data-anchor-id="equivalência-de-tipos-quando-t1-é-igual-a-t2"><span class="header-section-number">12.8.2</span> Equivalência de Tipos: Quando T1 é igual a T2?</h3>
+<section id="equivalência-e-compatibilidade-de-tipos" class="level3" data-number="12.4.2">
+<h3 data-number="12.4.2" class="anchored" data-anchor-id="equivalência-e-compatibilidade-de-tipos"><span class="header-section-number">12.4.2</span> Equivalência e compatibilidade de tipos</h3>
 <p>Para verificar se uma operação é válida, o compilador precisa primeiro determinar se os tipos envolvidos são equivalentes. Existem duas abordagens principais para isso:</p>
 <p><strong>Equivalência por Nome (Nominal)</strong>: dois tipos são considerados equivalentes se, e somente se, eles têm o mesmo nome. Cada declaração de um novo tipo (ex.: com <code>typedef</code> em C, <code>type</code> em Pascal, ou <code>class</code> em <strong>Java</strong>) cria um tipo único e distinto dos outros, mesmo que suas estruturas subjacentes sejam idênticas. Essa é a abordagem mais comum em linguagens modernas como <strong>Java</strong>, <strong>C#</strong> e <strong>C++</strong>. Esta abordagem é mais segura e reflete melhor a intenção do programador.</p>
 <p><strong>Exemplo</strong>:</p>
@@ -1705,9 +1681,7 @@ Figure&nbsp;12.9
 <p>Apesar de <code>Ponto</code> e <code>Vetor</code> serem estruturalmente idênticas, ambas possuem dois campos <code>int</code> chamados <code>x</code> e <code>y</code>, o compilador <strong>Java</strong> as considera como tendo tipos completamente incompatíveis. A tentativa de atribuir um objeto <code>Vetor</code> a uma variável do tipo <code>Ponto</code> (<code>p = v;</code>) falha com um erro claro, como: <code>error: incompatible types: Vetor cannot be converted to Ponto</code>. Isso ocorre porque, para o <strong>Java</strong>, o que importa é o nome do tipo. <code>Ponto</code> é um nome, <code>Vetor</code> é outro. Em <strong>Java</strong> a equivalência é nominal.</p>
 <p><strong>Equivalência Estrutural</strong>: dois tipos são equivalentes se eles têm a mesma estrutura interna. Os nomes dos tipos são ignorados; o compilador expande as definições de tipo e compara suas formas recursivamente. Essa abordagem é mais flexível, mas pode levar a equivalências acidentais entre tipos que são conceitualmente diferentes. É usada em linguagens como <strong>Go</strong> e <strong>TypeScript</strong>.</p>
 <p><strong>Exemplo</strong>: no exemplo acima, sob equivalência estrutural, <code>Ponto</code> e <code>Vetor</code> seriam considerados o mesmo tipo, pois ambos são estruturas com dois campos inteiros chamados <code>x</code> e <code>y</code>. A atribuição <code>v = p;</code> seria válida.</p>
-</section>
-<section id="compatibilidade-de-tipos-coerção-e-conversão-casting" class="level3" data-number="12.8.3">
-<h3 data-number="12.8.3" class="anchored" data-anchor-id="compatibilidade-de-tipos-coerção-e-conversão-casting"><span class="header-section-number">12.8.3</span> Compatibilidade de Tipos: Coerção e Conversão (Casting)</h3>
+<p><strong>Compatibilidade de tipos: coerção e conversão (casting)</strong></p>
 <p>Mesmo que dois tipos não sejam equivalentes, eles podem ser <strong>compatíveis</strong>. A compatibilidade permite que um valor de um tipo seja usado em um contexto que espera outro.</p>
 <p><strong>Conversão (Casting)</strong>: é uma mudança de tipo explícita, solicitada pelo programador. O <em>cast</em> informa ao compilador: “Eu sei o que estou fazendo; trate este valor como se fosse deste outro tipo”. O compilador insere o código necessário para realizar a conversão.</p>
 <p>Exemplo em <strong>C</strong>:</p>
@@ -1719,8 +1693,8 @@ Figure&nbsp;12.9
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> d <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O compilador automaticamente promove o literal inteiro <code>5</code> para o valor de ponto flutuante <code>5.0</code> antes da atribuição. A coerção aumenta a conveniência, mas pode mascarar erros graves se as regras não forem bem compreendidas.</p>
 </section>
-<section id="lidando-com-polimorfismo-muitas-formas" class="level3" data-number="12.8.4">
-<h3 data-number="12.8.4" class="anchored" data-anchor-id="lidando-com-polimorfismo-muitas-formas"><span class="header-section-number">12.8.4</span> Lidando com Polimorfismo: “Muitas Formas”</h3>
+<section id="polimorfismo" class="level3" data-number="12.4.3">
+<h3 data-number="12.4.3" class="anchored" data-anchor-id="polimorfismo"><span class="header-section-number">12.4.3</span> Polimorfismo</h3>
 <p>Polimorfismo, da expressão em grego para muitas formas, é a capacidade de uma única interface, como uma função ou um operador, ser usada com diferentes tipos de dados. Existem três tipos principais de polimorfismo que um sistema de tipos deve gerenciar:</p>
 <ol type="1">
 <li><p><strong>Polimorfismo Ad-hoc (Sobrecarga)</strong>: ocorre quando múltiplas funções ou métodos compartilham o mesmo nome, mas têm assinaturas (tipos e/ou número de parâmetros) diferentes. O compilador (ou o sistema de tempo de execução) seleciona a implementação correta com base nos tipos dos argumentos fornecidos na chamada. O exemplo clássico é o operador <code>+</code>, que realiza adição para números e concatenação para <em>strings</em>.</p></li>
@@ -1728,8 +1702,8 @@ Figure&nbsp;12.9
 <li><p><strong>Polimorfismo de Subtipo (Herança)</strong>: é a base da programação orientada a objetos. Permite que um objeto de uma classe derivada (subtipo) seja usado em qualquer contexto que espere um objeto da classe base. Por exemplo, uma função que espera um objeto do tipo <code>Animal</code> pode receber, sem problemas, um objeto do tipo <code>Cachorro</code>, assumindo que <code>Cachorro</code> herda de <code>Animal</code>.</p></li>
 </ol>
 </section>
-<section id="a-base-formal-dos-sistemas-de-tipos" class="level3" data-number="12.8.5">
-<h3 data-number="12.8.5" class="anchored" data-anchor-id="a-base-formal-dos-sistemas-de-tipos"><span class="header-section-number">12.8.5</span> A Base Formal dos Sistemas de Tipos</h3>
+<section id="julgamentos-de-tipo-e-regras-de-inferência" class="level3" data-number="12.4.4">
+<h3 data-number="12.4.4" class="anchored" data-anchor-id="julgamentos-de-tipo-e-regras-de-inferência"><span class="header-section-number">12.4.4</span> Julgamentos de tipo e regras de inferência</h3>
 <p>Até agora, discutimos a verificação de tipos de forma intuitiva. No entanto, para que um compilador possa executar essa tarefa de maneira automática e correta, nossa intuição precisa ser traduzida para um sistema matemático rigoroso. A teoria dos tipos nos fornece exatamente esse formalismo, permitindo não apenas especificar as regras de tipo de uma linguagem, mas também provar que um programa é seguro com relação a tipos, conceito chamado de <em>type-safe</em>, antes de sua execução.</p>
 <p>O pilar deste sistema é uma afirmação conhecida como <strong>julgamento de tipo</strong>, em inglês: <em>typing judgment</em>, representada pela seguinte notação:</p>
 <p><span class="math display">\[\Gamma \vdash e : \tau\]</span></p>
@@ -1751,8 +1725,8 @@ Figure&nbsp;12.9
 <p><span class="math display">\[\frac{\Gamma \vdash e_1 : \tau_1 \rightarrow \tau_2 \quad \Gamma \vdash e_2 : \tau_1}{\Gamma \vdash e_1 \, e_2 : \tau_2}\]</span></p>
 <p><strong>Leitura</strong>: para verificar a chamada de função <span class="math inline">\(e_1 \, e_2\)</span>, precisamos provar duas coisas em nosso contexto <span class="math inline">\(\Gamma\)</span>: primeiro, que <span class="math inline">\(e_1\)</span> é de fato uma função do tipo <span class="math inline">\(\tau_1 \rightarrow \tau_2\)</span>, e segundo, que o argumento <span class="math inline">\(e_2\)</span> que estamos passando para ela tem o tipo <span class="math inline">\(\tau_1\)</span>. Se ambas as premissas forem verdadeiras, podemos concluir que a expressão inteira da chamada de função resulta em um valor do tipo <span class="math inline">\(\tau_2\)</span>.</p>
 </section>
-<section id="construindo-uma-árvore-de-derivação-um-exemplo-prático" class="level3" data-number="12.8.6">
-<h3 data-number="12.8.6" class="anchored" data-anchor-id="construindo-uma-árvore-de-derivação-um-exemplo-prático"><span class="header-section-number">12.8.6</span> Construindo uma Árvore de Derivação: Um Exemplo Prático</h3>
+<section id="exemplos-resolvidos-de-derivação" class="level3" data-number="12.4.5">
+<h3 data-number="12.4.5" class="anchored" data-anchor-id="exemplos-resolvidos-de-derivação"><span class="header-section-number">12.4.5</span> Exemplos resolvidos de derivação</h3>
 <p>Para tornar essas regras abstratas mais concretas, vamos construir uma <strong>árvore de derivação de tipos</strong> passo a passo. Nosso objetivo será provar formalmente que a expressão <code>(λx:int. x + 1) 5</code> tem o tipo <code>int</code>, partindo de um contexto vazio <code>Γ = {}</code>.</p>
 <p>Uma árvore de derivação é uma representação visual de como as regras de inferência se encaixam. A expressão final que queremos provar fica na raiz (embaixo), e as premissas formam os galhos que crescem para cima, terminando em axiomas (regras que não têm premissas).</p>
 <p>Antes de começar, precisamos de mais duas regras simples para lidar com literais e operadores:</p>
@@ -1782,10 +1756,9 @@ Figure&nbsp;12.9
 </ul></li>
 </ol>
 <p>Como conseguimos provar todas as premissas até chegar a axiomas, a derivação inteira é válida!</p>
-<section id="a-árvore-de-derivação-completa" class="level4" data-number="12.8.6.1">
-<h4 data-number="12.8.6.1" class="anchored" data-anchor-id="a-árvore-de-derivação-completa"><span class="header-section-number">12.8.6.1</span> A Árvore de Derivação Completa</h4>
+<p><strong>A árvore de derivação completa</strong></p>
 <p>Visualmente, a prova completa se parece com esta árvore, na qual lemos de cima (axiomas) para baixo (conclusão):</p>
-<pre class="shell"><code>
+<pre class="text"><code>
 Regra da Variável         Regra da Constante
 -----------------        ------------------
 {x:int} ⊢ x : int         {x:int} ⊢ 1 : int
@@ -1796,16 +1769,12 @@ Regra da Variável         Regra da Constante
 -------------------------------------------------------------------------------------------------- Regra da Aplicação
                {} ⊢ (λx:int. x + 1) 5 : int
 </code></pre>
-</section>
-</section>
-<section id="exemplo-adicional-verificação-de-tipos-em-c" class="level3" data-number="12.8.7">
-<h3 data-number="12.8.7" class="anchored" data-anchor-id="exemplo-adicional-verificação-de-tipos-em-c"><span class="header-section-number">12.8.7</span> Exemplo Adicional: Verificação de Tipos em <strong>C++</strong></h3>
+<p><strong>Exemplo adicional: verificação de tipos em C++</strong></p>
 <p>Para demonstrar como o mesmo formalismo se aplica a linguagens imperativas, vamos analisar um trecho de código <strong>C++</strong> muito comum. O objetivo não é mais encontrar o tipo de uma expressão única, mas sim provar que uma sequência de comandos é <strong>bem-tipada</strong>, passo a passo, atualizando o contexto de tipagem (<code>Γ</code>) a cada declaração. Considere o código:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Vamos começar com um contexto vazio, <code>Γ₀ = {}</code>.</p>
-<section id="análise-da-linha-1-int-x-10" class="level4" data-number="12.8.7.1">
-<h4 data-number="12.8.7.1" class="anchored" data-anchor-id="análise-da-linha-1-int-x-10"><span class="header-section-number">12.8.7.1</span> Análise da Linha 1: <code>int x = 10;</code></h4>
+<p><strong>Análise da linha 1: <code>int x = 10;</code></strong></p>
 <p>Para validar uma declaração com inicialização, precisamos de uma regra específica.</p>
 <p><strong>Regra da Declaração (Simplificada)</strong>: Uma declaração <code>T v = e;</code> é bem-tipada se a expressão <code>e</code> tiver o tipo <code>T</code>. O efeito de uma declaração bem-tipada é adicionar a nova variável <code>v</code> com seu tipo <code>T</code> ao contexto para as linhas seguintes. <span class="math display">\[\frac{\Gamma \vdash e : T}{\Gamma \vdash (\texttt{T v = e;}) : \textbf{ok}}\]</span></p>
 <p>Na qual, <strong>ok</strong> significa que a declaração é semanticamente válida/bem-tipada.</p>
@@ -1816,9 +1785,7 @@ Regra da Variável         Regra da Constante
 <li><strong>Prova da Premissa:</strong> Usando a <strong>Regra da Constante</strong>, sabemos que o literal <code>10</code> tem o tipo <code>int</code>. A premissa é verdadeira.</li>
 </ol>
 <p>Como a premissa é válida, a declaração <code>int x = 10;</code> é bem-tipada. O efeito colateral desta análise é a criação de um novo contexto para a próxima linha: <code>Γ₁ = Γ₀ ∪ {x:int}</code>.</p>
-</section>
-<section id="análise-da-linha-2-int-y-x-5" class="level4" data-number="12.8.7.2">
-<h4 data-number="12.8.7.2" class="anchored" data-anchor-id="análise-da-linha-2-int-y-x-5"><span class="header-section-number">12.8.7.2</span> Análise da Linha 2: <code>int y = x + 5;</code></h4>
+<p><strong>Análise da linha 2: <code>int y = x + 5;</code></strong></p>
 <p>Agora, analisamos a segunda linha no <strong>novo contexto</strong> <code>Γ₁ = {x:int}</code>.</p>
 <ol type="1">
 <li><p><strong>Objetivo:</strong> Provar que <code>Γ₁ ⊢ (int y = x + 5;) : ok</code>.</p></li>
@@ -1836,7 +1803,7 @@ Regra da Variável         Regra da Constante
 </ol>
 <p>Como todas as premissas foram satisfeitas, a expressão <code>x + 5</code> de fato tem o tipo <code>int</code>. Consequentemente, a declaração <code>int y = x + 5;</code> é bem-tipada.</p>
 <p>A árvore de derivação para a segunda linha seria:</p>
-<pre class="shell"><code>Regra da Variável    Regra da Constante
+<pre class="text"><code>Regra da Variável    Regra da Constante
 -------------------  ------------------
 Γ₁ ⊢ x : int       Γ₁ ⊢ 5 : int
 ------------------------------------------- Regra do Operador (+)
@@ -1845,25 +1812,23 @@ Regra da Variável         Regra da Constante
      Γ₁ ⊢ (int y = x + 5;) : ok</code></pre>
 <p>Este exemplo mostra como o sistema de julgamento de tipos funciona como um mecanismo formal que não só valida expressões, mas também modela a forma como o contexto (o conhecimento do compilador sobre as variáveis declaradas) evolui ao longo da análise de um programa imperativo.</p>
 </section>
-</section>
-</section>
-<section id="exercícios-da-seção" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="exercícios-da-seção"><span class="header-section-number">12.9</span> Exercícios da Seção</h2>
-<section id="questão-1-considerando-que-estamos-trabalhando-em-uma-liguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros" class="level3" data-number="12.9.1">
-<h3 data-number="12.9.1" class="anchored" data-anchor-id="questão-1-considerando-que-estamos-trabalhando-em-uma-liguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros"><span class="header-section-number">12.9.1</span> Questão 1: Considerando que estamos trabalhando em uma liguagem de programação na qual o contexto pode ser formado de objetos <span class="math inline">\(O\)</span>, métodos <span class="math inline">\(M\)</span> e classes <span class="math inline">\(C\)</span>. Qual a regra de dedução para o julgamento de tipo para a adição de inteiros?</h3>
+<section id="exemplos-resolvidos-de-cálculo-de-sequentes" class="level3" data-number="12.4.6">
+<h3 data-number="12.4.6" class="anchored" data-anchor-id="exemplos-resolvidos-de-cálculo-de-sequentes"><span class="header-section-number">12.4.6</span> Exemplos resolvidos de cálculo de sequentes</h3>
+<section id="questão-1-considerando-que-estamos-trabalhando-em-uma-linguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros" class="level4" data-number="12.4.6.1">
+<h4 data-number="12.4.6.1" class="anchored" data-anchor-id="questão-1-considerando-que-estamos-trabalhando-em-uma-linguagem-de-programação-na-qual-o-contexto-pode-ser-formado-de-objetos-o-métodos-m-e-classes-c.-qual-a-regra-de-dedução-para-o-julgamento-de-tipo-para-a-adição-de-inteiros"><span class="header-section-number">12.4.6.1</span> Questão 1: Considerando que estamos trabalhando em uma linguagem de programação na qual o contexto pode ser formado de objetos <span class="math inline">\(O\)</span>, métodos <span class="math inline">\(M\)</span> e classes <span class="math inline">\(C\)</span>. Qual a regra de dedução para o julgamento de tipo para a adição de inteiros?</h4>
 <p>O julgamento de tipo para adição de inteiros pode ser expresso como:</p>
 <p><span class="math display">\[\frac{O,M,C \vdash e_1 : \text{Int} \quad O,M,C \vdash e_2 : \text{Int}}{O,M,C \vdash e_1 + e_2 : \text{Int}}\]</span></p>
 <p>Leitura da regra: Se no ambiente de objetos <span class="math inline">\(O\)</span>, métodos <span class="math inline">\(M\)</span> e classes <span class="math inline">\(C\)</span>, a expressão <span class="math inline">\(e_1\)</span> tem tipo <code>Int</code> e a expressão <span class="math inline">\(e_2\)</span> tem tipo <code>Int</code>, então a expressão <span class="math inline">\(e_1 + e_2\)</span> tem tipo <code>Int</code>.</p>
 <p>Em outras palavras, para que uma operação de adição seja bem tipada, ambos os operandos devem ter tipo inteiro, e o resultado também será um inteiro.</p>
 </section>
-<section id="questão-2-no-mesmo-ambiente-da-questão-um.-como-seria-o-julgamento-de-tipo-para-instruções-if" class="level3" data-number="12.9.2">
-<h3 data-number="12.9.2" class="anchored" data-anchor-id="questão-2-no-mesmo-ambiente-da-questão-um.-como-seria-o-julgamento-de-tipo-para-instruções-if"><span class="header-section-number">12.9.2</span> Questão 2: No mesmo ambiente da questão um. Como seria o julgamento de tipo para instruções <code>IF</code>?</h3>
+<section id="questão-2-no-mesmo-ambiente-da-questão-1.-como-seria-o-julgamento-de-tipo-para-instruções-if" class="level4" data-number="12.4.6.2">
+<h4 data-number="12.4.6.2" class="anchored" data-anchor-id="questão-2-no-mesmo-ambiente-da-questão-1.-como-seria-o-julgamento-de-tipo-para-instruções-if"><span class="header-section-number">12.4.6.2</span> Questão 2: No mesmo ambiente da questão 1. Como seria o julgamento de tipo para instruções <code>IF</code>?</h4>
 <p>O julgamento de tipo para instruções condicionais (IF) pode ser expresso como:</p>
 <p><span class="math display">\[\frac{O,M,C \vdash e_1 : \text{Bool} \quad O,M,C \vdash e_2 : T_2 \quad O,M,C \vdash e_3 : T_3 \quad T_2 \sqcup T_3 = T}{O,M,C \vdash \text{if } e_1 \text{ then } e_2 \text{ else } e_3 : T}\]</span></p>
 <p>Leitura da regra: Se a condição <span class="math inline">\(e_1\)</span> tem tipo <code>Bool</code>, o ramo then <span class="math inline">\(e_2\)</span> tem tipo <span class="math inline">\(T_2\)</span>, o ramo else <span class="math inline">\(e_3\)</span> tem tipo <span class="math inline">\(T_3\)</span>, e o menor limite superior (join) de <span class="math inline">\(T_2\)</span> e <span class="math inline">\(T_3\)</span> é <span class="math inline">\(T\)</span>, então toda a expressão if tem tipo <span class="math inline">\(T\)</span>.</p>
 </section>
-<section id="questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela" class="level3" data-number="12.9.3">
-<h3 data-number="12.9.3" class="anchored" data-anchor-id="questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela"><span class="header-section-number">12.9.3</span> Questão 3: O que a seguinte regra significa? Como lemos ela?</h3>
+<section id="questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela" class="level4" data-number="12.4.6.3">
+<h4 data-number="12.4.6.3" class="anchored" data-anchor-id="questão-3-o-que-a-seguinte-regra-significa-como-lemos-ela"><span class="header-section-number">12.4.6.3</span> Questão 3: O que a seguinte regra significa? Como lemos ela?</h4>
 <p>A regra apresentada é:</p>
 <p><span class="math display">\[\frac{O,M,C \vdash e_1 : T_1 \quad O,M,C \vdash e_2 : T_2 \quad \vdots \quad O,M,C \vdash e_n : T_n}{O,M,C \vdash \{ e_1; e_2; \ldots e_n; \} : T_n} \quad \text{[Sequence]}\]</span></p>
 <p><strong>Significado da regra</strong>: Esta é a regra de tipagem para sequências de expressões. Ela especifica que uma sequência de expressões tem o tipo da última expressão na sequência.</p>
@@ -1875,77 +1840,52 @@ Regra da Variável         Regra da Constante
 </ul>
 <p>Então a sequência inteira <code>{ e₁; e₂; ... eₙ; }</code> tem tipo <span class="math inline">\(T_n\)</span> (o tipo da última expressão).</p>
 <p><strong>Intuição</strong>: Em muitas linguagens, uma sequência de comandos é executada em ordem, e o valor retornado é o valor da última expressão. Por exemplo:</p>
-<pre class="shell"><code>{
+<pre class="text"><code>{
   x &lt;- 5;
   y &lt;- 10;
   x + y
 }</code></pre>
 <p>Esta sequência tem tipo <code>Int</code> porque a última expressão <code>x + y</code> tem tipo <code>Int</code>, independentemente dos tipos das expressões anteriores.</p>
 </section>
-<section id="questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regra-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função." class="level3" data-number="12.9.4">
-<h3 data-number="12.9.4" class="anchored" data-anchor-id="questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regra-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função."><span class="header-section-number">12.9.4</span> Questão 4: Considere uma linguagem de programação que suporta variáveis, funções e expressões aritméticas com tipos inteiro, real e <em>string</em>. Crie um sistema de tipos com Cálculo de Sequentes e escreva as regra de tipagem para a declaração de variáveis, operações aritméticas, <em>strings</em> e para a chamada de função.</h3>
-<section id="regras-de-tipagem-para-declaração-de-variável-e-chamada-de-função" class="level4" data-number="12.9.4.1">
-<h4 data-number="12.9.4.1" class="anchored" data-anchor-id="regras-de-tipagem-para-declaração-de-variável-e-chamada-de-função"><span class="header-section-number">12.9.4.1</span> Regras de Tipagem para Declaração de Variável e Chamada de Função</h4>
-<section id="axiomas-da-linguagem" class="level5" data-number="12.9.4.1.1">
-<h5 data-number="12.9.4.1.1" class="anchored" data-anchor-id="axiomas-da-linguagem"><span class="header-section-number">12.9.4.1.1</span> 1. Axiomas da Linguagem</h5>
-<p>Axiomas são regras de tipagem sem premissas - definem os tipos dos valores primitivos da linguagem.</p>
-<section id="axioma-para-literais-inteiros" class="level6" data-number="12.9.4.1.1.1">
-<h6 data-number="12.9.4.1.1.1" class="anchored" data-anchor-id="axioma-para-literais-inteiros"><span class="header-section-number">12.9.4.1.1.1</span> Axioma para literais inteiros:</h6>
+<section id="questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regras-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função." class="level4" data-number="12.4.6.4">
+<h4 data-number="12.4.6.4" class="anchored" data-anchor-id="questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regras-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função."><span class="header-section-number">12.4.6.4</span> Questão 4: Considere uma linguagem de programação que suporta variáveis, funções e expressões aritméticas com tipos inteiro, real e <em>string</em>. Crie um sistema de tipos com Cálculo de Sequentes e escreva as regras de tipagem para a declaração de variáveis, operações aritméticas, <em>strings</em> e para a chamada de função.</h4>
+<ol type="1">
+<li><strong>Regras de Tipagem para Declaração de Variável e Chamada de Função</strong></li>
+</ol>
+<p><strong>Axiomas da Linguagem</strong>: axiomas são regras de tipagem sem premissas - definem os tipos dos valores primitivos da linguagem.</p>
+<p><strong>Axioma para literais inteiros</strong>:</p>
 <p><span class="math display">\[\frac{}{O, M, C \vdash n : \text{Int}}\]</span></p>
-<p>onde <span class="math inline">\(n \in \mathbb{Z}\)</span> (qualquer número inteiro)</p>
+<p>no qual <span class="math inline">\(n \in \mathbb{Z}\)</span> (qualquer número inteiro)</p>
 <p><strong>Exemplo</strong>: <code>42 : Int</code>, <code>-7 : Int</code>, <code>0 : Int</code></p>
-</section>
-<section id="axioma-para-literais-reais" class="level6" data-number="12.9.4.1.1.2">
-<h6 data-number="12.9.4.1.1.2" class="anchored" data-anchor-id="axioma-para-literais-reais"><span class="header-section-number">12.9.4.1.1.2</span> Axioma para literais reais:</h6>
+<p><strong>Axioma para literais reais</strong>:</p>
 <p><span class="math display">\[\frac{}{O, M, C \vdash r : \text{Real}}\]</span></p>
-<p>onde <span class="math inline">\(r \in \mathbb{R}\)</span> (qualquer número real)</p>
+<p>no qual <span class="math inline">\(r \in \mathbb{R}\)</span> (qualquer número real)</p>
 <p><strong>Exemplo</strong>: <code>3.14 : Real</code>, <code>-0.5 : Real</code>, <code>2.0 : Real</code></p>
-</section>
-<section id="axioma-para-literais-de-string" class="level6" data-number="12.9.4.1.1.3">
-<h6 data-number="12.9.4.1.1.3" class="anchored" data-anchor-id="axioma-para-literais-de-string"><span class="header-section-number">12.9.4.1.1.3</span> Axioma para literais de string:</h6>
+<p><strong>Axioma para literais de <em>string</em></strong>:</p>
 <p><span class="math display">\[\frac{}{O, M, C \vdash s : \text{String}}\]</span></p>
-<p>onde <span class="math inline">\(s\)</span> é uma sequência de caracteres entre aspas</p>
+<p>no qual <span class="math inline">\(s\)</span> é uma sequência de caracteres entre aspas</p>
 <p><strong>Exemplo</strong>: <code>"hello" : String</code>, <code>"" : String</code>, <code>"123" : String</code></p>
-</section>
-</section>
-<section id="axioma-para-variáveis-no-ambiente" class="level5" data-number="12.9.4.1.2">
-<h5 data-number="12.9.4.1.2" class="anchored" data-anchor-id="axioma-para-variáveis-no-ambiente"><span class="header-section-number">12.9.4.1.2</span> Axioma para variáveis no ambiente:</h5>
+<p><strong>Axioma para variáveis no ambiente</strong>:</p>
 <p><span class="math display">\[\frac{C(x) = T}{O, M, C \vdash x : T}\]</span></p>
 <p>Se a variável <span class="math inline">\(x\)</span> está no ambiente <span class="math inline">\(C\)</span> com tipo <span class="math inline">\(T\)</span>, então <span class="math inline">\(x\)</span> tem tipo <span class="math inline">\(T\)</span>.</p>
-</section>
-</section>
-<section id="regras-de-tipagem-para-operações-aritméticas" class="level4" data-number="12.9.4.2">
-<h4 data-number="12.9.4.2" class="anchored" data-anchor-id="regras-de-tipagem-para-operações-aritméticas"><span class="header-section-number">12.9.4.2</span> 2. Regras de Tipagem para Operações Aritméticas</h4>
-<section id="adição-de-inteiros" class="level5" data-number="12.9.4.2.1">
-<h5 data-number="12.9.4.2.1" class="anchored" data-anchor-id="adição-de-inteiros"><span class="header-section-number">12.9.4.2.1</span> Adição de inteiros:</h5>
+<p><strong>2. Regras de Tipagem para Operações Aritméticas</strong></p>
+<p><strong>Adição de inteiros</strong>:</p>
 <p><span class="math display">\[\frac{O, M, C \vdash e_1 : \text{Int} \quad O, M, C \vdash e_2 : \text{Int}}{O, M, C \vdash e_1 + e_2 : \text{Int}}\]</span></p>
-</section>
-<section id="adição-de-reais" class="level5" data-number="12.9.4.2.2">
-<h5 data-number="12.9.4.2.2" class="anchored" data-anchor-id="adição-de-reais"><span class="header-section-number">12.9.4.2.2</span> Adição de reais:</h5>
+<p><strong>Adição de reais</strong>:</p>
 <p><span class="math display">\[\frac{O, M, C \vdash e_1 : \text{Real} \quad O, M, C \vdash e_2 : \text{Real}}{O, M, C \vdash e_1 + e_2 : \text{Real}}\]</span></p>
-</section>
-<section id="adição-mista-coerção-de-int-para-real" class="level5" data-number="12.9.4.2.3">
-<h5 data-number="12.9.4.2.3" class="anchored" data-anchor-id="adição-mista-coerção-de-int-para-real"><span class="header-section-number">12.9.4.2.3</span> Adição mista (coerção de Int para Real):</h5>
+<p><strong>Adição mista (coerção de Int para Real)</strong>:</p>
 <p><span class="math display">\[\frac{O, M, C \vdash e_1 : \text{Int} \quad O, M, C \vdash e_2 : \text{Real}}{O, M, C \vdash e_1 + e_2 : \text{Real}}\]</span></p>
 <p><span class="math display">\[\frac{O, M, C \vdash e_1 : \text{Real} \quad O, M, C \vdash e_2 : \text{Int}}{O, M, C \vdash e_1 + e_2 : \text{Real}}\]</span></p>
 <p><strong>Nota</strong>: As mesmas regras aplicam-se para subtração, multiplicação e divisão.</p>
-</section>
-<section id="concatenação-de-strings" class="level5" data-number="12.9.4.2.4">
-<h5 data-number="12.9.4.2.4" class="anchored" data-anchor-id="concatenação-de-strings"><span class="header-section-number">12.9.4.2.4</span> Concatenação de strings:</h5>
+<p><strong>Concatenação de strings</strong>:</p>
 <p><span class="math display">\[\frac{O, M, C \vdash e_1 : \text{String} \quad O, M, C \vdash e_2 : \text{String}}{O, M, C \vdash e_1 \oplus e_2 : \text{String}}\]</span></p>
-<p>onde <span class="math inline">\(\oplus\)</span> representa o operador de concatenação.</p>
-</section>
-</section>
-<section id="regra-de-tipagem-para-declaração-de-variável" class="level4" data-number="12.9.4.3">
-<h4 data-number="12.9.4.3" class="anchored" data-anchor-id="regra-de-tipagem-para-declaração-de-variável"><span class="header-section-number">12.9.4.3</span> 3. Regra de Tipagem para Declaração de Variável</h4>
+<p>na qual <span class="math inline">\(\oplus\)</span> representa o operador de concatenação.</p>
+<p><strong>3. Regra de Tipagem para Declaração de Variável</strong></p>
 <p>A declaração de uma variável envolve associar um nome a um tipo e, opcionalmente, a uma expressão de inicialização.</p>
-<section id="forma-geral-da-declaração" class="level5" data-number="12.9.4.3.1">
-<h5 data-number="12.9.4.3.1" class="anchored" data-anchor-id="forma-geral-da-declaração"><span class="header-section-number">12.9.4.3.1</span> Forma geral da declaração:</h5>
+<p><strong>Forma geral da declaração</strong>:</p>
 <p><code>x : T &lt;- e</code></p>
-<p>onde <code>x</code> é o nome da variável, <code>T</code> é o tipo declarado e <code>e</code> é a expressão de inicialização.</p>
-</section>
-<section id="regra-de-tipagem" class="level5" data-number="12.9.4.3.2">
-<h5 data-number="12.9.4.3.2" class="anchored" data-anchor-id="regra-de-tipagem"><span class="header-section-number">12.9.4.3.2</span> Regra de tipagem:</h5>
+<p>na qual <code>x</code> é o nome da variável, <code>T</code> é o tipo declarado e <code>e</code> é a expressão de inicialização.</p>
+<p><strong>Regra de tipagem</strong>:</p>
 <p><span class="math display">\[\frac{O, M, C \vdash e : T' \quad T' \leq T \quad O, M, C[x \mapsto T] \vdash e_{corpo} : T_{corpo}}{O, M, C \vdash (x : T \leftarrow e; e_{corpo}) : T_{corpo}}\]</span></p>
 <p><strong>Leitura da regra</strong>:</p>
 <ul>
@@ -1957,23 +1897,17 @@ Regra da Variável         Regra da Constante
 <p><strong>Variante simplificada</strong> (apenas declaração sem corpo subsequente):</p>
 <p><span class="math display">\[\frac{O, M, C \vdash e : T' \quad T' \leq T}{O, M, C \vdash (x : T \leftarrow e) : T}\]</span></p>
 <p><strong>Exemplo</strong>:</p>
-<pre class="shell"><code>x : Int &lt;- 5 + 3</code></pre>
+<pre class="text"><code>x : Int &lt;- 5 + 3</code></pre>
 <p>Neste caso, <code>5 + 3</code> tem tipo <code>Int</code>, que é compatível com o tipo declarado <code>Int</code>.</p>
 <p><strong>Outro exemplo com coerção</strong>:</p>
-<pre class="shell"><code>y : Real &lt;- 10</code></pre>
+<pre class="text"><code>y : Real &lt;- 10</code></pre>
 <p>Aqui, <code>10</code> tem tipo <code>Int</code>, mas <code>Int</code> <span class="math inline">\(\leq\)</span> <code>Real</code>, então a declaração é válida.</p>
-</section>
-</section>
-<section id="regra-de-tipagem-para-chamada-de-função" class="level4" data-number="12.9.4.4">
-<h4 data-number="12.9.4.4" class="anchored" data-anchor-id="regra-de-tipagem-para-chamada-de-função"><span class="header-section-number">12.9.4.4</span> 4. Regra de Tipagem para Chamada de Função</h4>
+<p><strong>4. Regra de Tipagem para Chamada de Função</strong></p>
 <p>A chamada de uma função envolve verificar que os argumentos passados são compatíveis com os parâmetros esperados.</p>
-<section id="forma-geral-da-chamada" class="level5" data-number="12.9.4.4.1">
-<h5 data-number="12.9.4.4.1" class="anchored" data-anchor-id="forma-geral-da-chamada"><span class="header-section-number">12.9.4.4.1</span> Forma geral da chamada:</h5>
+<p><strong>Forma geral da chamada</strong>:</p>
 <p><code>f(e₁, e₂, ..., eₙ)</code></p>
-<p>onde <code>f</code> é o nome da função e <span class="math inline">\(e_1, e_2, \ldots, e_n\)</span> são os argumentos.</p>
-</section>
-<section id="regra-de-tipagem-1" class="level5" data-number="12.9.4.4.2">
-<h5 data-number="12.9.4.4.2" class="anchored" data-anchor-id="regra-de-tipagem-1"><span class="header-section-number">12.9.4.4.2</span> Regra de tipagem:</h5>
+<p>na qual <code>f</code> é o nome da função e <span class="math inline">\(e_1, e_2, \ldots, e_n\)</span> são os argumentos.</p>
+<p><strong>Regra de tipagem</strong>:</p>
 <p><span class="math display">\[\frac{M(f) = (T_1, T_2, \ldots, T_n) \rightarrow T_{ret} \quad O, M, C \vdash e_1 : T_1' \quad T_1' \leq T_1 \quad \ldots \quad O, M, C \vdash e_n : T_n' \quad T_n' \leq T_n}{O, M, C \vdash f(e_1, e_2, \ldots, e_n) : T_{ret}}\]</span></p>
 <p><strong>Leitura da regra</strong>:</p>
 <ul>
@@ -1983,20 +1917,17 @@ Regra da Variável         Regra da Constante
 <li>Se todas as premissas são satisfeitas, a chamada tem tipo <span class="math inline">\(T_{ret}\)</span> (tipo de retorno da função).</li>
 </ul>
 <p><strong>Exemplo 1</strong>: suponha que temos a função:</p>
-<pre class="shell"><code>def soma(a : Int, b : Int) : Int { a + b }</code></pre>
+<pre class="text"><code>def soma(a : Int, b : Int) : Int { a + b }</code></pre>
 <p>Para a chamada <code>soma(5, 10)</code>: - Verificamos que <code>5</code> tem tipo <code>Int</code> e <code>Int</code> <span class="math inline">\(\leq\)</span> <code>Int</code> - Verificamos que <code>10</code> tem tipo <code>Int</code> e <code>Int</code> <span class="math inline">\(\leq\)</span> <code>Int</code> - Portanto, <code>soma(5, 10)</code> tem tipo <code>Int</code></p>
 <p><strong>Exemplo 2 (com coerção)</strong>: suponha a função:</p>
-<pre class="shell"><code>def media(a : Real, b : Real) : Real { (a + b) / 2.0 }</code></pre>
+<pre class="text"><code>def media(a : Real, b : Real) : Real { (a + b) / 2.0 }</code></pre>
 <p>Para a chamada <code>media(5, 3.5)</code>:</p>
 <ul>
 <li>Verificamos que <code>5</code> tem tipo <code>Int</code> e <code>Int</code> <span class="math inline">\(\leq\)</span> <code>Real</code>;</li>
 <li>Verificamos que <code>3.5</code> tem tipo <code>Real</code> e <code>Real</code> <span class="math inline">\(\leq\)</span> <code>Real</code>;</li>
 <li>Portanto, <code>media(5, 3.5)</code> tem tipo <code>Real</code>.</li>
 </ul>
-</section>
-</section>
-<section id="hierarquia-de-tipos" class="level4" data-number="12.9.4.5">
-<h4 data-number="12.9.4.5" class="anchored" data-anchor-id="hierarquia-de-tipos"><span class="header-section-number">12.9.4.5</span> 4. Hierarquia de Tipos</h4>
+<p><strong>4. Hierarquia de Tipos</strong></p>
 <p>Para que a relação de subtipagem <span class="math inline">\(\leq\)</span> funcione, definimos:</p>
 <p><span class="math display">\[\text{Int} \leq \text{Real}\]</span></p>
 <p>Isso permite que inteiros sejam usados onde reais são esperados (coerção implícita).</p>
@@ -2006,8 +1937,9 @@ Regra da Variável         Regra da Constante
 <li>Se <span class="math inline">\(T_1 \leq T_2\)</span> e <span class="math inline">\(T_2 \leq T_3\)</span>, então <span class="math inline">\(T_1 \leq T_3\)</span>.</li>
 </ul>
 </section>
-<section id="o-motor-da-inferência-algoritmo-de-hindley-milner" class="level4" data-number="12.9.4.6">
-<h4 data-number="12.9.4.6" class="anchored" data-anchor-id="o-motor-da-inferência-algoritmo-de-hindley-milner"><span class="header-section-number">12.9.4.6</span> O Motor da Inferência: Algoritmo de Hindley-Milner</h4>
+</section>
+<section id="inferência-de-tipos-e-o-algoritmo-w" class="level3" data-number="12.4.7">
+<h3 data-number="12.4.7" class="anchored" data-anchor-id="inferência-de-tipos-e-o-algoritmo-w"><span class="header-section-number">12.4.7</span> Inferência de tipos e o Algoritmo W</h3>
 <p>As regras acima são ótimas para verificar tipos que já estão anotados. Mas, o que acontece em linguagens como <strong>ML</strong> ou <strong>Haskell</strong>, nas quais podemos escrever declarações como <code>let f x = x + 1</code> e o compilador descobre sozinho que <code>f</code> tem o tipo <code>int -&gt; int</code>? Isso é <strong>inferência de tipos</strong>, e o motor por trás dessa arte é, em grande parte, movido pelo <strong>algoritmo W</strong>, desenvolvido por <a href="https://en.wikipedia.org/wiki/Robin_Milner">Robin Milner</a>.</p>
 <p>O <strong>algoritmo W</strong> automatiza o processo de encontrar os tipos, mesmo quando eles não são declarados. Sua ideia central é usar <strong>variáveis de tipo</strong>, símbolos como <span class="math inline">\(\alpha, \beta, \gamma\)</span> que funcionam como <em>placeholders</em> para tipos desconhecidos e um processo chamado <strong>unificação</strong>. Unificação é, em essência, um algoritmo para resolver equações entre tipos.</p>
 <p>Quando o <strong>algoritmo W</strong> analisa uma expressão, ele gera um conjunto de equações de tipo. Por exemplo, para <code>f x = x + 1</code>, ele diria:</p>
@@ -2022,7 +1954,7 @@ Regra da Variável         Regra da Constante
 <li>Resolvendo a equação do passo 4, substituímos <span class="math inline">\(\alpha\)</span> por <code>int</code>, e o algoritmo conclui que o tipo de <code>f</code> é <span class="math inline">\(\text{int} \rightarrow \text{int}\)</span>.</li>
 </ol>
 <p>O pseudocódigo do algoritmo formaliza exatamente esse processo de geração e resolução de restrições de tipo:</p>
-<pre class="pseudocódigo"><code>algoritmo W(Γ, e):
+<pre class="pseudocode"><code>algoritmo W(Γ, e):
   caso e de:
     // Variável: simplesmente a procuramos no ambiente.
     x → 
@@ -2050,22 +1982,52 @@ Regra da Variável         Regra da Constante
       // substituições (soluções) encontradas.
       retornar (S₃(α), S₃ ∘ S₂ ∘ S₁)</code></pre>
 <p>No pseudocódigo, as variáveis <span class="math inline">\(S\)</span> representam as <strong>substituições</strong>, as soluções parciais para as equações de tipo, que são compostas ao longo do processo.</p>
-<p>O <strong>Algoritmo W</strong> é poderoso e tem histórico de uso em linguagens funcionais descendentes do <strong>ML</strong>. O sistema de tipos do <strong>Haskell</strong> evoluiu para incluir extensões mais avançadas, como classes de tipos, a sua base para a inferência de tipos ainda é o <strong>Algoritmo W</strong>. Isso permite que o compilador do <strong>Haskell</strong>, o <strong>G</strong>lasgow <strong>H</strong>askell <strong>C</strong>ompiler, <strong>GHC</strong>, infira os tipos da maioria das funções e expressões de forma automática. Fora do domínio das linguagens funcionais, o <strong>Algoritmo W</strong> também influenciou sistemas de tipos em linguagens como <strong>TypeScript</strong>, que trazem a inferência de tipos para o mundo da programação orientada a objetos e funcional. Finalmente, precisamos destacar a linguagem <strong>Rust</strong>, conhecida por seu foco em segurança de memória e concorrência, que possui um sistema de inferência de tipos. Embora seja baseado no sistema <strong>Hindley-Milner</strong>, ele é significativamente estendido para lidar com o sistema de <em>lifetimes</em> e <em>traits</em> característicos da linguagem. Portanto, a curiosa leitora não pode dizer que o <strong>Rust</strong> utiliza uma implementação pura do <strong>Algoritmo W</strong>, mas sim um sistema que evoluiu a partir de suas fundações.</p>
+<p>O <strong>Algoritmo W</strong> é poderoso e tem histórico de uso em linguagens funcionais descendentes do <strong>ML</strong>. O sistema de tipos do <strong>Haskell</strong> evoluiu para incluir extensões mais avançadas, como classes de tipos, mas sua base para a inferência de tipos ainda é o <strong>Algoritmo W</strong>. Isso permite que o <strong>G</strong>lasgow <strong>H</strong>askell <strong>C</strong>ompiler, <strong>GHC</strong>, infira os tipos da maioria das funções e expressões de forma automática. Fora do domínio das linguagens funcionais, o <strong>Algoritmo W</strong> também influenciou sistemas de tipos em linguagens como <strong>TypeScript</strong>, que trazem a inferência de tipos para o mundo da programação orientada a objetos e funcional. Finalmente, precisamos destacar a linguagem <strong>Rust</strong>, conhecida por seu foco em segurança de memória e concorrência, que possui um sistema de inferência de tipos. Embora seja baseado no sistema <strong>Hindley-Milner</strong>, ele é significativamente estendido para lidar com o sistema de <em>lifetimes</em> e <em>traits</em> característicos da linguagem. Portanto, a curiosa leitora não pode dizer que o <strong>Rust</strong> utiliza uma implementação pura do <strong>Algoritmo W</strong>, mas sim um sistema que evoluiu a partir de suas fundações.</p>
 <p>Finalmente, na <a href="10c-semantico.html" class="quarto-xref"><span>Chapter 15</span></a> discutimos o sistema de tipos <strong>Hindley-Milner</strong> e o <strong>Algoritmo W</strong> em mais detalhes.</p>
 </section>
-</section>
-<section id="complexidade-da-verificação-e-inferência-de-tipos" class="level3" data-number="12.9.5">
-<h3 data-number="12.9.5" class="anchored" data-anchor-id="complexidade-da-verificação-e-inferência-de-tipos"><span class="header-section-number">12.9.5</span> Complexidade da Verificação e Inferência de Tipos</h3>
+<section id="complexidade-da-verificação-e-inferência-de-tipos" class="level3" data-number="12.4.8">
+<h3 data-number="12.4.8" class="anchored" data-anchor-id="complexidade-da-verificação-e-inferência-de-tipos"><span class="header-section-number">12.4.8</span> Complexidade da verificação e inferência de tipos</h3>
 <p>A complexidade para garantir a segurança de tipos varia drasticamente com o poder do sistema de tipos:</p>
 <ul>
 <li><strong>Tipagem Monomórfica Simples</strong>: em linguagens como <strong>Pascal</strong> ou <strong>C</strong>, a verificação de tipos é muito eficiente. Ela pode ser feita em tempo linear, <span class="math inline">\(O(n)\)</span>, correspondendo a uma única travessia na <strong>AST</strong>.</li>
-<li><strong>Inferência de Hindley-Milner</strong>: o <strong>algoritmo W</strong>, apesar de sua expressividade, ainda é considerado eficiente. Em teoria, seu pior caso é exponencial, mas com otimizações na estrutura de dados de unificação, ele se comporta de forma quase linear na prática. Porém, a atenta leitora deve observar que a observação empírica não muda a complexidade exponencial deste algoritmo, <span class="math inline">\(O(n^3)\)</span>.</li>
+<li><strong>Inferência de Hindley-Milner</strong>: o <strong>algoritmo W</strong>, apesar de sua expressividade, ainda é considerado eficiente. Em teoria, seu pior caso é exponencial, mas com otimizações na estrutura de dados de unificação, ele se comporta de forma quase linear na prática. Porém, a atenta leitora deve observar que a observação empírica não muda a complexidade exponencial deste algoritmo, <span class="math inline">\(O(2^n)\)</span>.</li>
 <li><strong>Sistemas Mais Complexos</strong>: à medida que adicionamos funcionalidades ao sistema de tipos, a complexidade pode explodir. A inferência de tipos na presença de <strong>subtipos</strong> (comuns em programação orientada a objetos) torna o problema <strong>PSPACE-completo</strong>, como provado por <a href="https://www.cis.upenn.edu/~bcpierce/">Benjamin Pierce</a>. Se adicionarmos características ainda mais poderosas, como as <strong>type classes</strong> do <strong>Haskell</strong> em sua forma mais geral, o problema da inferência de tipos se torna <strong>indecidível</strong> — ou seja, não existe um algoritmo que possa resolver todos os casos. Isso demonstra um dos balanços mais fundamentais no design de linguagens: a troca entre o poder de expressividade do sistema de tipos e a capacidade do compilador de verificá-lo e inferi-lo de forma automática e eficiente.</li>
 </ul>
 </section>
 </section>
-<section id="implementação-prática-da-teoria-à-prática" class="level2" data-number="12.10">
-<h2 data-number="12.10" class="anchored" data-anchor-id="implementação-prática-da-teoria-à-prática"><span class="header-section-number">12.10</span> Implementação Prática: Da Teoria à Prática</h2>
+<section id="a-ast-atribuída-como-produto-da-análise" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="a-ast-atribuída-como-produto-da-análise"><span class="header-section-number">12.5</span> A AST Atribuída como Produto da Análise</h2>
+<section id="decoração-da-ast" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="decoração-da-ast"><span class="header-section-number">12.5.1</span> Decoração da AST</h3>
+<p>O resultado de uma análise semântica bem-sucedida, em uma passagem ou em múltiplas passagens, não será percebido por um valor <em>booleano</em> indicando sucesso ou falha. O produto tangível desta fase será uma <strong>Árvore de Sintaxe Abstrata “Atribuída”</strong>, ou em alguns livros árvore sintática abstrata anotada, ou ainda árvore sintática abstrata decorada.</p>
+<p>O processo de decorar a árvore consiste em percorrer seus vértices e enriquecê-los com informações semânticas que foram inferidas durante a análise. Este é um processo de atribuição de informação aos vértices da árvore sintática. Por exemplo:</p>
+<ul>
+<li>um vértice que representa o uso de uma variável pode ser decorado com um ponteiro para a entrada correspondente na <strong>Tabela de Símbolos</strong>;</li>
+<li>um vértice de expressão (como <code>+</code> ou <code>*</code>) pode ser decorado com o tipo resultante da operação (ex.: <code>int</code> ou <code>float</code>);</li>
+<li>um vértice de declaração de tipo pode ser decorado com informações sobre o layout de memória daquele tipo.</li>
+</ul>
+<p>Essa <strong>AST</strong> atribuída é uma estrutura de dados rica. Ela contém não apenas a estrutura sintática do programa, mas também todo o entendimento contextual que o compilador adquiriu durante o processo de compilação. Ela serve como a única fonte de verdade para as fases subsequentes do processo de compilação, como a geração de código intermediário e a otimização. Nesse sentido, a análise semântica não apenas detecta e elimina erros, mas enriquece a representação do programa com informações que o fortalecem e o preparam para a transformação final em código executável.</p>
+</section>
+<section id="relação-com-a-tabela-de-símbolos" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="relação-com-a-tabela-de-símbolos"><span class="header-section-number">12.5.2</span> Relação com a tabela de símbolos</h3>
+<p>A <strong>AST</strong> é a principal e mais importante estrutura de dados usada como entrada pelo analisador semântico. Mas, não é a única.</p>
+<p>Para que um compilador possa realizar verificações semânticas, como garantir que uma variável foi declarada antes de ser usada ou que o tipo de uma expressão é válido, ele precisa de um mecanismo para registrar e recuperar informações sobre os identificadores encontrados no código-fonte. Essa “memória” do compilador é a <strong>Tabela de Símbolos</strong>. Os processos de análise léxica e sintática precisaram consultar esta tabela para identificar palavras reservadas e tipos básicos, mas é o analisador semântico que fará o uso mais intensivo e complexo desta estrutura.</p>
+<p>A <strong>Tabela de Símbolos</strong> é uma estrutura de dados fundamental que associa cada identificador, ou símbolo, a um conjunto de informações, os atributos que citamos antes, que pertencem ao símbolo. Esta tabela funciona como um dicionário em que as chaves são os nomes dos símbolos e os valores são os metadados coletados sobre eles.</p>
+<p>Praticamente todas as fases do compilador interagem com a <strong>Tabela de Símbolos</strong>:</p>
+<ol type="1">
+<li><strong>Análise Léxica</strong>: ao encontrar um identificador, o analisador léxico pode inseri-lo na <strong>Tabela de Símbolos</strong> se ele ainda não estiver presente. Ou para classificar um determinado lexema como uma palavra reservada, o analisador léxico consulta a tabela;</li>
+<li><strong>Análise Sintática/Semântica</strong>: o analisador semântico consulta a <strong>Tabela de Símbolos</strong> constantemente para verificar declarações, tipos e escopos. Ele também a preenche com informações obtidas das declarações.</li>
+<li><strong>Geração de Código e Otimização</strong>: as fases do <em>back-end</em> usam a tabela para obter informações como o tipo de uma variável e seu endereço de memória para gerar o código de máquina apropriado.</li>
+</ol>
+<p>A <strong>Tabela de Símbolos</strong> está detalhada na seção <a href="11-tabelaSimbolos.html" class="quarto-xref"><span>Chapter 16</span></a></p>
+</section>
+<section id="preparação-para-a-geração-de-código-intermediário" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="preparação-para-a-geração-de-código-intermediário"><span class="header-section-number">12.5.3</span> Preparação para a geração de código intermediário</h3>
+<p>A <strong>AST</strong> atribuída encerra a fase de análise com uma representação sintática, contextual e tipada do programa. Por isso, ela é a entrada natural para a próxima etapa: a tradução para uma representação intermediária, tema retomado na seção sobre geração de código intermediário.</p>
+</section>
+</section>
+<section id="implementação-prática-langarit" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="implementação-prática-langarit"><span class="header-section-number">12.6</span> Implementação Prática: Langarit</h2>
 <p>Até este ponto, discutimos os fundamentos teóricos da análise semântica e das gramáticas de atributos. Um diagrama em blocos da estrutura do analisador semântico pode ser visto na Figura <a href="#fig-analisSemantico1" class="quarto-xref">Figure&nbsp;<span>12.10</span></a>.</p>
 <div id="fig-analisSemantico1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -2088,8 +2050,8 @@ Figure&nbsp;12.10
 <li>Mensagens de erro com informações de localização;</li>
 <li>Suporte a estruturas de dados compostas (<code>arrays</code>, <code>structs</code>).</li>
 </ul>
-<section id="definição-da-mini-linguagem-langarit" class="level3" data-number="12.10.1">
-<h3 data-number="12.10.1" class="anchored" data-anchor-id="definição-da-mini-linguagem-langarit"><span class="header-section-number">12.10.1</span> Definição da Mini-Linguagem: Langarit</h3>
+<section id="definição-da-linguagem" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="definição-da-linguagem"><span class="header-section-number">12.6.1</span> Definição da linguagem</h3>
 <p>Iniciaremos definindo uma linguagem simples, mas suficientemente rica para demonstrar os principais conceitos da análise semântica. Nossa linguagem, <strong>Langarit</strong>, suportará:</p>
 <ul>
 <li>Declarações de variáveis com tipos <code>int</code> e <code>float</code>;</li>
@@ -2111,8 +2073,8 @@ Figure&nbsp;12.10
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y<span class="op">;</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">/</span> <span class="dv">0</span><span class="op">;</span>    # ERRO<span class="op">:</span> divisão por zero <span class="op">(</span>semântica dinâmica<span class="op">,</span> mas detectável em literais<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="gramática-livre-de-contexto-para-langarit" class="level3" data-number="12.10.2">
-<h3 data-number="12.10.2" class="anchored" data-anchor-id="gramática-livre-de-contexto-para-langarit"><span class="header-section-number">12.10.2</span> Gramática Livre de Contexto para Langarit</h3>
+<section id="gramática-livre-de-contexto" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="gramática-livre-de-contexto"><span class="header-section-number">12.6.2</span> Gramática livre de contexto</h3>
 <p>Nossa linguagem precisa de uma sintaxe de Langarit, vamos criar uma gramática livre de contexto para Langarit. Lembre-se, esta gramática descreve apenas a forma dos programas válidos, sem considerar o significado.</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -2131,7 +2093,7 @@ Figure&nbsp;12.10
 <div id="fig-langarit1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-langarit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ast-langarit1.webp" class="img-fluid figure-img">
+<img src="images/ast-lagarit1.webp" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-langarit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;12.11
@@ -2139,8 +2101,8 @@ Figure&nbsp;12.11
 </figure>
 </div>
 </section>
-<section id="gramática-de-atributos-para-langarit" class="level3" data-number="12.10.3">
-<h3 data-number="12.10.3" class="anchored" data-anchor-id="gramática-de-atributos-para-langarit"><span class="header-section-number">12.10.3</span> Gramática de Atributos para Langarit</h3>
+<section id="gramática-de-atributos" class="level3" data-number="12.6.3">
+<h3 data-number="12.6.3" class="anchored" data-anchor-id="gramática-de-atributos"><span class="header-section-number">12.6.3</span> Gramática de atributos</h3>
 <p>Uma vez que temos uma gramática livre de contexto, estenderemos a gramática sintática com atributos e regras semânticas. Neste momento, nossos objetivos são:</p>
 <ol type="1">
 <li><strong>Verificar declarações</strong>: toda variável usada foi previamente declarada;</li>
@@ -2300,12 +2262,12 @@ Figure&nbsp;12.11
 <li><code>promover_tipo("float", "int")</code> retorna <code>"float"</code></li>
 </ul>
 </section>
-<section id="implementação-empython" class="level3" data-number="12.10.4">
-<h3 data-number="12.10.4" class="anchored" data-anchor-id="implementação-empython"><span class="header-section-number">12.10.4</span> Implementação em<strong>Python</strong></h3>
-<p>Implementaremos o analisador semântico como um percurso da <strong>AST</strong> gerada por um <em>parser</em>. Por simplicidade, assumiremos que já temos a <strong>AST</strong> construída. Contudo, antes de escrever o analisador, precisamos de uma forma de representar a <strong>Árvore Sintática Abstrata</strong> em<strong>Python</strong>. Usaremos <code>dataclasses</code> para criar uma hierarquia de classes simples e legível, em que cada classe corresponde a um conceito da nossa gramática, um programa, uma declaração, uma expressão binária, etc..</p>
-<section id="estrutura-dos-vértices-da-ast" class="level4" data-number="12.10.4.1">
-<h4 data-number="12.10.4.1" class="anchored" data-anchor-id="estrutura-dos-vértices-da-ast"><span class="header-section-number">12.10.4.1</span> Estrutura dos vértices da AST</h4>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<section id="implementação-em-python" class="level3" data-number="12.6.4">
+<h3 data-number="12.6.4" class="anchored" data-anchor-id="implementação-em-python"><span class="header-section-number">12.6.4</span> Implementação em Python</h3>
+<p>Implementaremos o analisador semântico como um percurso da <strong>AST</strong> gerada por um <em>parser</em>. Por simplicidade, assumiremos que já temos a <strong>AST</strong> construída. Contudo, antes de escrever o analisador, precisamos de uma forma de representar a <strong>Árvore Sintática Abstrata</strong> em <strong>Python</strong>. Usaremos <code>dataclasses</code> para criar uma hierarquia de classes simples e legível, em que cada classe corresponde a um conceito da nossa gramática, um programa, uma declaração, uma expressão binária, etc..</p>
+<section id="estrutura-da-ast" class="level4" data-number="12.6.4.1">
+<h4 data-number="12.6.4.1" class="anchored" data-anchor-id="estrutura-da-ast"><span class="header-section-number">12.6.4.1</span> Estrutura da AST</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass, field</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Optional, List, Union</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
@@ -2334,7 +2296,7 @@ Figure&nbsp;12.11
 <span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
 <span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Expressao(NoAST):</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>  tipo_inferido: Optional[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span> <span class="co"># Preenchido pelo analisador semântico</span></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>  tipo_inferido: Optional[<span class="bu">str</span>] <span class="op">=</span> field(default<span class="op">=</span><span class="va">None</span>, init<span class="op">=</span><span class="va">False</span>) <span class="co"># Preenchido pelo analisador semântico</span></span>
 <span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
 <span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ExpressaoBinaria(Expressao):</span>
@@ -2349,15 +2311,19 @@ Figure&nbsp;12.11
 <span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
 <span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LiteralInt(Expressao):</span>
 <span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>  valor: <span class="bu">int</span></span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>  tipo_inferido: <span class="bu">str</span> <span class="op">=</span> <span class="st">"int"</span></span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LiteralFloat(Expressao):</span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>  valor: <span class="bu">float</span></span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>  tipo_inferido: <span class="bu">str</span> <span class="op">=</span> <span class="st">"float"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> __post_init__(<span class="va">self</span>):</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.tipo_inferido <span class="op">=</span> <span class="st">"int"</span></span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a><span class="at">@dataclass</span></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LiteralFloat(Expressao):</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>  valor: <span class="bu">float</span></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> __post_init__(<span class="va">self</span>):</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>.tipo_inferido <span class="op">=</span> <span class="st">"float"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="tabela-de-símbolos" class="level4" data-number="12.10.4.2">
-<h4 data-number="12.10.4.2" class="anchored" data-anchor-id="tabela-de-símbolos"><span class="header-section-number">12.10.4.2</span> <strong>Tabela de Símbolos</strong></h4>
+<section id="tabela-de-símbolos" class="level4" data-number="12.6.4.2">
+<h4 data-number="12.6.4.2" class="anchored" data-anchor-id="tabela-de-símbolos"><span class="header-section-number">12.6.4.2</span> Tabela de símbolos</h4>
 <p>A <strong>Tabela de Símbolos</strong> (<a href="11-tabelaSimbolos.html" class="quarto-xref"><span>Chapter 16</span></a>) é a estrutura de dados que servirá como a memória do nosso analisador. É ela que armazena o contexto necessário para as verificações semânticas, associando o nome de cada variável ao seu tipo (<code>int</code> ou <code>float</code>). Nossa implementação usará uma pilha de dicionários para gerenciar escopos, embora neste exemplo inicial utilizemos apenas o escopo global.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TabelaSimbolos:</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""</span></span>
@@ -2396,8 +2362,8 @@ Figure&nbsp;12.11
 <span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>.escopos) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
 <span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.escopos.pop()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="analisador-semântico" class="level4" data-number="12.10.4.3">
-<h4 data-number="12.10.4.3" class="anchored" data-anchor-id="analisador-semântico"><span class="header-section-number">12.10.4.3</span> Analisador Semântico</h4>
+<section id="analisador-semântico" class="level4" data-number="12.6.4.3">
+<h4 data-number="12.6.4.3" class="anchored" data-anchor-id="analisador-semântico"><span class="header-section-number">12.6.4.3</span> Analisador Semântico</h4>
 <p>O coração da nossa implementação é a classe <code>AnalisadorSemantico</code>. Ela percorrerá a <strong>AST</strong> aplicando as regras que definimos. A estrutura do código seguirá o padrão de projeto <code>Visitor</code>, no qual criamos um método específico, <code>_analisar_...</code>, para cada tipo de vértice da árvore. Neste caso, usamos uma abordagem em duas passagens para simplificar a implementação:</p>
 <p>Primeiro, percorreremos todas as <code>declaracoes</code> para popular a <strong>Tabela de Símbolos</strong>. Depois, em uma segunda passagem, analisaremos os <code>comandos</code>, usando a tabela já preenchida para realizar as verificações de tipo e uso.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AnalisadorSemantico:</span>
@@ -2525,8 +2491,8 @@ Figure&nbsp;12.11
 <span id="cb35-123"><a href="#cb35-123" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f" </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">. </span><span class="sc">{</span>erro<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="exemplo-de-uso-completo" class="level3" data-number="12.10.5">
-<h3 data-number="12.10.5" class="anchored" data-anchor-id="exemplo-de-uso-completo"><span class="header-section-number">12.10.5</span> Exemplo de Uso Completo</h3>
+<section id="execução-e-saída-esperada" class="level3" data-number="12.6.5">
+<h3 data-number="12.6.5" class="anchored" data-anchor-id="execução-e-saída-esperada"><span class="header-section-number">12.6.5</span> Execução e saída esperada</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exemplo_programa_valido():</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">"""Programa correto: todas as variáveis declaradas, tipos compatíveis"""</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  programa <span class="op">=</span> Programa(</span>
@@ -2682,10 +2648,8 @@ Figure&nbsp;12.11
 <span id="cb36-153"><a href="#cb36-153" aria-hidden="true" tabindex="-1"></a>  exemplo_incompatibilidade_tipo()</span>
 <span id="cb36-154"><a href="#cb36-154" aria-hidden="true" tabindex="-1"></a>  exemplo_divisao_por_zero()</span>
 <span id="cb36-155"><a href="#cb36-155" aria-hidden="true" tabindex="-1"></a>  exemplo_promocao_tipo()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="saída-esperada" class="level3" data-number="12.10.6">
-<h3 data-number="12.10.6" class="anchored" data-anchor-id="saída-esperada"><span class="header-section-number">12.10.6</span> Saída Esperada</h3>
-<pre class="shell"><code>=== Programa Válido ===
+<p><strong>Saída esperada</strong></p>
+<pre class="text"><code>=== Programa Válido ===
 Nenhum erro semântico encontrado.
 Análise: SUCESSO
 
@@ -2709,8 +2673,8 @@ Nenhum erro semântico encontrado.
 Análise: SUCESSO
 Tipo inferido da expressão: float</code></pre>
 </section>
-<section id="exercícios-propostos" class="level3" data-number="12.10.7">
-<h3 data-number="12.10.7" class="anchored" data-anchor-id="exercícios-propostos"><span class="header-section-number">12.10.7</span> Exercícios Propostos</h3>
+<section id="extensões-propostas" class="level3" data-number="12.6.6">
+<h3 data-number="12.6.6" class="anchored" data-anchor-id="extensões-propostas"><span class="header-section-number">12.6.6</span> Extensões propostas</h3>
 <p>A implementação acima fornece uma base sólida, mas pode ser estendida de várias maneiras instrutivas:</p>
 <p><strong>1. Adicionar Operadores Relacionais</strong>: estenda a gramática e o analisador para suportar operadores de comparação (<code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>). Esses operadores devem:</p>
 <ul>
@@ -2749,11 +2713,11 @@ Tipo inferido da expressão: float</code></pre>
 </ul>
 </section>
 </section>
-<section id="a-ponte-para-a-geração-de-código-intermediário" class="level2" data-number="12.11">
-<h2 data-number="12.11" class="anchored" data-anchor-id="a-ponte-para-a-geração-de-código-intermediário"><span class="header-section-number">12.11</span> A Ponte para a Geração de Código Intermediário</h2>
+<section id="ponte-para-a-geração-de-código-intermediário" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="ponte-para-a-geração-de-código-intermediário"><span class="header-section-number">12.7</span> Ponte para a Geração de Código Intermediário</h2>
 <p>A análise semântica marca o fim da fase de análise do compilador. Neste ponto, o programa-fonte foi validado como sintática e semanticamente correto. A <strong>AST</strong>, agora ricamente Atribuída com informações de tipo e escopo, está pronta para ser entregue à fase de <em>síntese</em>, cujo primeiro passo é a <strong>geração de código intermediário (CI)</strong>.</p>
-<section id="da-análise-à-síntese-o-papel-da-ast-atribuída" class="level3" data-number="12.11.1">
-<h3 data-number="12.11.1" class="anchored" data-anchor-id="da-análise-à-síntese-o-papel-da-ast-atribuída"><span class="header-section-number">12.11.1</span> Da Análise à Síntese: O Papel da <strong>AST</strong> Atribuída</h3>
+<section id="da-ast-atribuída-para-uma-representação-intermediária" class="level3" data-number="12.7.1">
+<h3 data-number="12.7.1" class="anchored" data-anchor-id="da-ast-atribuída-para-uma-representação-intermediária"><span class="header-section-number">12.7.1</span> Da AST atribuída para uma representação intermediária</h3>
 <p>A transição da análise para a síntese é um momento crítico no processo de compilação. O compilador deixa de <em>entender</em> o código-fonte e começa a <em>construir</em> o programa-alvo. Gerar código de máquina diretamente a partir da <strong>AST</strong> é possível, mas apresenta duas grandes desvantagens:</p>
 <ol type="1">
 <li><strong>Complexidade</strong>: A estrutura hierárquica e de alto nível da <strong>AST</strong> está muito distante da natureza linear e de baixo nível do código de máquina. A tradução direta seria complexa e propensa a erros.</li>
@@ -2761,8 +2725,8 @@ Tipo inferido da expressão: float</code></pre>
 </ol>
 <p>A solução é usar uma <strong>Representação Intermediária (RI)</strong> ou <strong>Código Intermediário (CI)</strong>. O CI é uma linguagem abstrata, mais simples que a linguagem-fonte, mas mais rica que a linguagem de máquina. Ele atua como uma ponte, permitindo que o <em>front-end</em> traduza a <strong>AST</strong> Atribuída para essa linguagem universal, e que o <em>back-end</em> traduza o CI para o código de máquina específico da arquitetura-alvo. Essa abordagem promove a modularidade e a portabilidade.</p>
 </section>
-<section id="código-de-três-endereços-tac-uma-representação-linear" class="level3" data-number="12.11.2">
-<h3 data-number="12.11.2" class="anchored" data-anchor-id="código-de-três-endereços-tac-uma-representação-linear"><span class="header-section-number">12.11.2</span> Código de Três Endereços (TAC): Uma Representação Linear</h3>
+<section id="código-de-três-endereços" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2" class="anchored" data-anchor-id="código-de-três-endereços"><span class="header-section-number">12.7.2</span> Código de três endereços</h3>
 <p>Uma das formas mais populares de código intermediário é o <strong>Código de Três Endereços (TAC)</strong>. Sua principal característica é que cada instrução possui, no máximo, um operador e três endereços (dois para operandos e um para o resultado). Um “endereço” pode ser um nome de variável, uma constante ou uma variável temporária gerada pelo compilador.</p>
 <p>O formato geral é: <code>resultado = operando1 op operando2</code>.</p>
 <p>O TAC transforma a estrutura hierárquica da <strong>AST</strong> em uma sequência linear de instruções simples, muito semelhante a uma linguagem de montagem abstrata. Algumas instruções típicas do TAC incluem:</p>
@@ -2776,14 +2740,14 @@ Tipo inferido da expressão: float</code></pre>
 <li><strong>Acesso a Array</strong>: <code>x = y[i]</code>, <code>x[i] = y</code>.</li>
 </ul>
 </section>
-<section id="exemplo-de-tradução-gerando-tac-a-partir-da-ast-atribuída" class="level3" data-number="12.11.3">
-<h3 data-number="12.11.3" class="anchored" data-anchor-id="exemplo-de-tradução-gerando-tac-a-partir-da-ast-atribuída"><span class="header-section-number">12.11.3</span> Exemplo de Tradução: Gerando TAC a partir da <strong>AST</strong> Atribuída</h3>
+<section id="exemplo-de-tradução" class="level3" data-number="12.7.3">
+<h3 data-number="12.7.3" class="anchored" data-anchor-id="exemplo-de-tradução"><span class="header-section-number">12.7.3</span> Exemplo de tradução</h3>
 <p>O processo de geração de TAC é tipicamente implementado como uma travessia recursiva da <strong>AST</strong> Atribuída, geralmente em pós-ordem. Para cada vértice da árvore, o compilador gera uma sequência de instruções TAC.</p>
 <p>Vamos considerar a tradução da instrução <code>w = (a + b) * c;</code>, assumindo que todas as variáveis são do tipo <code>float</code>.</p>
 <ol type="1">
 <li><strong>AST Atribuída (Simplificada)</strong>: A análise semântica já validou os tipos e decorou a árvore. O vértice da atribuição, o <code>+</code> e o <code>*</code> estão todos anotados com o tipo <code>float</code>.</li>
 </ol>
-<pre class="shell"><code>    =
+<pre class="text"><code>    =
   / \
 id(w) * [type: float]
     /  \
@@ -2802,7 +2766,7 @@ id(a) id(b)</code></pre>
 </ul></li>
 <li><p><strong>Código de Três Endereços Resultante</strong>: A sequência linear de instruções TAC para a expressão original é:</p></li>
 </ol>
-<pre class="shell"><code>t1 = a + b
+<pre class="text"><code>t1 = a + b
 t2 = t1 * c
 w = t2</code></pre>
 <p>Que pode ser vista na Figura <a href="#fig-tac1" class="quarto-xref">Figure&nbsp;<span>12.12</span></a>.</p>
@@ -2819,12 +2783,12 @@ Figure&nbsp;12.12
 <p>A informação da <strong>AST</strong> Atribuída é fundamental aqui. O atributo de tipo em cada vértice de operador (<code>+</code>, <code>*</code>) informa ao gerador de código qual instrução específica emitir (ex.: <code>ADD_FLOAT</code> vs.&nbsp;<code>ADD_INT</code>). As referências dos vértices de identificador (<code>a</code>, <code>b</code>, <code>c</code>, <code>w</code>) à <strong>Tabela de Símbolos</strong> fornecem os endereços de memória que serão usados no código final. A <strong>AST</strong> Atribuída, portanto, não é apenas uma representação validada, mas um projeto detalhado a partir do qual a fase de síntese pode construir o programa executável.</p>
 </section>
 </section>
-<section id="exercícios" class="level2" data-number="12.12">
-<h2 data-number="12.12" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">12.12</span> Exercícios</h2>
-<section id="exercício-1-semântica-básica" class="level3" data-number="12.12.1">
-<h3 data-number="12.12.1" class="anchored" data-anchor-id="exercício-1-semântica-básica"><span class="header-section-number">12.12.1</span> Exercício 1: Semântica Básica</h3>
+<section id="exercícios" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">12.8</span> Exercícios</h2>
+<section id="análise-semântica-básica" class="level3" data-number="12.8.1">
+<h3 data-number="12.8.1" class="anchored" data-anchor-id="análise-semântica-básica"><span class="header-section-number">12.8.1</span> Análise semântica básica</h3>
 <p>Dado o programa:</p>
-<pre class="shell"><code>x := 3;
+<pre class="text"><code>x := 3;
 y := x * 2;
 x := x + y;</code></pre>
 <p>Trace a execução usando semântica denotacional, mostrando o estado após cada comando.</p>
@@ -2836,8 +2800,8 @@ x := x + y;</code></pre>
 <li><span class="math inline">\(\sigma_3 = [\![x := x + y]\!]\sigma_2 = \{x \mapsto 9, y \mapsto 6\}\)</span>.</li>
 </ul>
 </section>
-<section id="exercício-2-análise-de-tipos" class="level3" data-number="12.12.2">
-<h3 data-number="12.12.2" class="anchored" data-anchor-id="exercício-2-análise-de-tipos"><span class="header-section-number">12.12.2</span> Exercício 2: Análise de Tipos</h3>
+<section id="julgamentos-de-tipo" class="level3" data-number="12.8.2">
+<h3 data-number="12.8.2" class="anchored" data-anchor-id="julgamentos-de-tipo"><span class="header-section-number">12.8.2</span> Julgamentos de tipo</h3>
 <p>Verifique se o seguinte programa está bem tipado:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> b <span class="op">=</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span></span>
@@ -2854,10 +2818,10 @@ x := x + y;</code></pre>
 </ol>
 <p>Programa bem tipado!</p>
 </section>
-<section id="exercício-3-otimização" class="level3" data-number="12.12.3">
-<h3 data-number="12.12.3" class="anchored" data-anchor-id="exercício-3-otimização"><span class="header-section-number">12.12.3</span> Exercício 3: Otimização</h3>
+<section id="otimização-e-geração-intermediária" class="level3" data-number="12.8.3">
+<h3 data-number="12.8.3" class="anchored" data-anchor-id="otimização-e-geração-intermediária"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária</h3>
 <p>Identifique otimizações possíveis para:</p>
-<pre class="shell"><code>x := 10;
+<pre class="text"><code>x := 10;
 y := x + 0;
 z := y * 1;
 w := z - z;</code></pre>
@@ -2868,12 +2832,12 @@ w := z - z;</code></pre>
 <li><span class="math inline">\(w := z - z\)</span> pode ser simplificado para <span class="math inline">\(w := 0\)</span>.</li>
 </ul>
 <p>Código otimizado:</p>
-<pre class="shell"><code>x := 10;
+<pre class="text"><code>x := 10;
 y := x;
 z := y;
 w := 0;</code></pre>
 <p>Ou ainda mais otimizado:</p>
-<pre class="shell"><code>x := 10;
+<pre class="text"><code>x := 10;
 y := 10;
 z := 10;
 w := 0;</code></pre>
