@@ -542,6 +542,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Está sem tempo? Leia o <a href="./ex/09-expresso.html">Expresso</a>.</p>
+</div>
+</div>
 <p>No capítulo anterior, deixamos a atenta leitora com uma promessa: apresentar o inspetor Gregson, o detetive metafórico que domina a construção de analisadores sintáticos no mundo real. O <em>Look-Ahead LR</em>, ou <span class="math inline">\(LALR(1)\)</span>, é a ponte definitiva entre a precisão teórica e a viabilidade prática.</p>
 <p>Na nossa delegacia da Scotland Yard, o doutor Watson (nosso <em>parser</em> <span class="math inline">\(LR(1)\)</span> canônico) possui uma precisão impecável, anotando cada pista (o <em>lookahead</em>) em fichas separadas para cada contexto possível. O resultado é um arquivo gigantesco, frequentemente inviável para gramáticas de linguagens reais devido ao consumo de memória. O inspetor Lestrade (nosso <em>parser</em> <span class="math inline">\(SLR(1)\)</span>), por sua vez, usa uma ficha única consolidada por não-terminal (o conjunto <span class="math inline">\(FOLLOW\)</span>). Seu arquivo é compacto, cabendo na mesa de trabalho, mas ele falha em separar contextos sobrepostos, hesitando em momentos nos quais Watson resolveria o caso sem pestanejar.</p>
 <p>É aqui que entra o inspetor Gregson (nosso <em>parser</em> <span class="math inline">\(LALR(1)\)</span>). Ele senta exatamente na mesma mesa que Lestrade, no sentido de que o autômato <span class="math inline">\(LALR(1)\)</span> tem exatamente o mesmo número de estados que o autômato <span class="math inline">\(LR(0)\)</span>, e portanto o mesmo número de linhas que a tabela <span class="math inline">\(SLR(1)\)</span>. No entanto, Gregson utiliza o método de trabalho de Watson: ele anota os <em>lookaheads</em> específicos para cada situação. O método de Gregson é a <strong>fusão</strong>: quando ele percebe que duas fichas de Watson descrevem exatamente a mesma situação sintática, diferindo apenas nos <em>lookaheads</em> esperados, ele grampeia as duas fichas juntas. Ele economiza espaço sem perder o detalhamento do contexto local.</p>

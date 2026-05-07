@@ -528,6 +528,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Está sem tempo? Leia o <a href="./ex/06-parserShiftReduce-expresso.html">Expresso</a>.</p>
+</div>
+</div>
 <p><strong>Antes de Watson, Lestrade e Gregson, precisamos falar do policial que realmente patrulha as ruas.</strong> O <em>parser shirt-reduce</em> não é uma classe formal como <span class="math inline">\(SLR(1)\)</span>, <span class="math inline">\(LALR(1)\)</span> ou <span class="math inline">\(LR(1)\)</span> canônico. Ele é o mecanismo operacional que todos eles usam. É o agente que fica na linha de frente, olhando a entrada símbolo por símbolo, decidindo a cada instante se deve avançar, reduzir, aceitar ou declarar erro. Se os capítulos seguintes apresentarão detetives cada vez mais sofisticados, este capítulo apresenta o trabalho bruto: a mecânica da análise sintática ascendente.</p>
 <p>A ideia central de um <em>parser shirt-reduce</em> é simples de enunciar e profunda em suas consequências. Em vez de começar pelo símbolo inicial da gramática e tentar prever como a entrada poderá ser gerada, como fazem os métodos <em>top-down</em>, a análise <em>bottom-up</em> começa com os símbolos concretos da entrada e tenta reconstruir, passo a passo, a derivação que produziu aquela sentença. O processo lê a entrada da esquerda para a direita, empilha símbolos já reconhecidos e procura, no topo dessa pilha, cadeias que coincidam com o lado direito de alguma produção. Quando encontra uma dessas cadeias, substitui-a pelo não-terminal correspondente. Esse ato de substituição é a essência da operação de <em>reduce</em>.</p>
 <p>Em termos históricos, o <em>shift-reduce parsing</em> é a formulação operacional da análise sintática ascendente determinística. A teoria completa dos parsers <span class="math inline">\(LR\)</span> foi sistematizada por <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> em 1965, no trabalho seminal <em><a href="https://www.sciencedirect.com/science/article/pii/S0019995865904262">On the Translation of Languages from Left to Right</a></em>. No entanto, antes de a leitora lidar com itens, autômatos, <code>CLOSURE</code>, <code>GOTO</code> e propagação de <em>lookaheads</em>, é didaticamente mais produtivo compreender o mecanismo elementar que essas estruturas controlam. Esse mecanismo é o algoritmo <em>shift-reduce</em>.</p>

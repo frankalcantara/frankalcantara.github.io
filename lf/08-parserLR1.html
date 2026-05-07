@@ -548,6 +548,19 @@ window.Quarto = {
 </header>
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Está sem tempo? Leia o <a href="./ex/08-expresso.html">Expresso</a>.</p>
+</div>
+</div>
 <p><strong>Watson, o jogo está começando!</strong> Se no texto sobre parsers <span class="math inline">\(LL(1)\)</span> invoquei Sherlock Holmes, agora preciso do Dr.&nbsp;Watson para me ajudar com uma abordagem completamente diferente. Enquanto Holmes (nosso <em>parser</em> <span class="math inline">\(LL(1)\)</span>) deduz do geral para o específico (<em>top-down</em>), Watson (nosso <em>parser</em> <span class="math inline">\(LR(1)\)</span>) observa os detalhes e constrói a solução de baixo para cima (<em>bottom-up</em>). É uma mudança fundamental de perspectiva: em vez de prever o que virá, vamos coletar evidências e montar o quebra-cabeça peça por peça.</p>
 <p>Parsers <span class="math inline">\(LR(1)\)</span> representam uma classe de analisadores sintáticos que utilizam a abordagem <em>bottom-up</em>, lendo a entrada da esquerda para a direita e construindo uma derivação mais à direita em ordem reversa. Introduzidos por <a href="https://en.wikipedia.org/wiki/Donald_Knuth">Donald Knuth</a> em 1965 no trabalho seminal <em><a href="https://www.sciencedirect.com/science/article/pii/S0019995865904262">On the Translation of Languages from Left to Right</a></em>, esses parsers revolucionaram a análise sintática por sua capacidade de reconhecer uma classe muito mais ampla de gramáticas do que os parsers <span class="math inline">\(LL(1)\)</span>.</p>
 <p>A notação <span class="math inline">\(LR(k)\)</span> tem significado preciso:</p>
