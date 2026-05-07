@@ -551,8 +551,8 @@ window.Quarto = {
   <li><a href="#unificação" id="toc-unificação" class="nav-link" data-scroll-target="#unificação"><span class="header-section-number">15.14.2</span> Unificação</a></li>
   <li><a href="#execução-do-algoritmo-w" id="toc-execução-do-algoritmo-w" class="nav-link" data-scroll-target="#execução-do-algoritmo-w"><span class="header-section-number">15.14.3</span> Execução do Algoritmo W</a></li>
   <li><a href="#limitações-de-hindley-milner" id="toc-limitações-de-hindley-milner" class="nav-link" data-scroll-target="#limitações-de-hindley-milner"><span class="header-section-number">15.14.4</span> Limitações de Hindley-Milner</a></li>
+  <li><a href="#esquemas-substituições-e-generalização-avançada" id="toc-esquemas-substituições-e-generalização-avançada" class="nav-link" data-scroll-target="#esquemas-substituições-e-generalização-avançada"><span class="header-section-number">15.14.5</span> Esquemas, substituições e generalização avançada</a></li>
   </ul></li>
-  <li><a href="#conclusão-o-legado-de-hindley-milner" id="toc-conclusão-o-legado-de-hindley-milner" class="nav-link" data-scroll-target="#conclusão-o-legado-de-hindley-milner"><span class="header-section-number">15.15</span> Conclusão: O Legado de Hindley-Milner</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10c-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
@@ -698,7 +698,7 @@ Note
 
   Expr --&gt; Regras
   Expr --&gt; W
-  W --&gt; Unificacao
+  **W** --&gt; Unificacao
   Unificacao --&gt; Subst
   Subst --&gt; Tipo
   Regras --&gt; Tipo
@@ -710,7 +710,7 @@ Note
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pipeline-hm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.1: Relação entre o sistema Hindley-Milner, o Algoritmo W e o tipo principal.
+Figure&nbsp;15.1: Relação entre o sistema Hindley-Milner, o Algoritmo <strong>W</strong> e o tipo principal.
 </figcaption>
 </figure>
 </div>
@@ -936,7 +936,7 @@ Figure&nbsp;15.2: Fluxo decisório simplificado do algoritmo de unificação.
 <p>O <strong>Algoritmo W</strong> (de Robin Milner, 1978) é o algoritmo clássico de inferência de tipos para HM. Ele é <strong>sintaxe-dirigido</strong>: processa a estrutura da expressão recursivamente.</p>
 <section id="estrutura-do-algoritmo" class="level3" data-number="15.5.1">
 <h3 data-number="15.5.1" class="anchored" data-anchor-id="estrutura-do-algoritmo"><span class="header-section-number">15.5.1</span> Estrutura do Algoritmo</h3>
-<p>O algoritmo W tem a assinatura:</p>
+<p>O algoritmo <strong>W</strong> tem a assinatura:</p>
 <p><span class="math display">\[\mathcal{W} : \text{Context} \times \text{Expr} \rightarrow \text{Substitution} \times \text{Type}\]</span></p>
 <p>Retorna uma substituição acumulada e o tipo inferido.</p>
 <div id="fig-algoritmo-w-fluxo" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1026,7 +1026,7 @@ função instanciar(∀α₁...αₙ. τ):
 </section>
 <section id="traço-de-execução-exemplo-completo" class="level3" data-number="15.5.3">
 <h3 data-number="15.5.3" class="anchored" data-anchor-id="traço-de-execução-exemplo-completo"><span class="header-section-number">15.5.3</span> Traço de Execução: Exemplo Completo</h3>
-<p>Vamos executar W para <code>let id = λx. x in id 5</code>:</p>
+<p>Vamos executar <strong>W</strong> para <code>let id = λx. x in id 5</code>:</p>
 <p><strong>Passo 1</strong>: Processar <code>let id = λx. x in id 5</code></p>
 <p><strong>Passo 2</strong>: Avaliar <code>λx. x</code>: - Criar variável fresca: <span class="math inline">\(\alpha_1\)</span> - Avaliar corpo <code>x</code> no contexto <span class="math inline">\(\{x : \alpha_1\}\)</span> - Resultado: <span class="math inline">\((\emptyset, \alpha_1)\)</span> - Retornar: <span class="math inline">\((\emptyset, \alpha_1 \rightarrow \alpha_1)\)</span></p>
 <p><strong>Passo 3</strong>: Generalizar: - <span class="math inline">\(\text{ftv}(\alpha_1 \rightarrow \alpha_1) = \{\alpha_1\}\)</span> - <span class="math inline">\(\text{ftv}(\emptyset) = \emptyset\)</span> - Generalizar: <span class="math inline">\(\sigma = \forall \alpha_1. \alpha_1 \rightarrow \alpha_1\)</span></p>
@@ -1045,23 +1045,23 @@ função instanciar(∀α₁...αₙ. τ):
 </section>
 <section id="propriedades-formais-do-sistema-hm" class="level2" data-number="15.6">
 <h2 data-number="15.6" class="anchored" data-anchor-id="propriedades-formais-do-sistema-hm"><span class="header-section-number">15.6</span> Propriedades Formais do Sistema HM</h2>
-<p>As propriedades do Algoritmo W são consequências de propriedades mais profundas do próprio sistema <strong>Hindley-Milner</strong>. O ponto central é que HM não apenas verifica tipos: ele caracteriza, quando possível, o tipo mais geral de uma expressão. Isso torna o sistema especialmente útil em compiladores, pois o programador não precisa fornecer anotações redundantes, e o compilador ainda pode preservar garantias fortes de segurança.</p>
+<p>As propriedades do Algoritmo <strong>W</strong> são consequências de propriedades mais profundas do próprio sistema <strong>Hindley-Milner</strong>. O ponto central é que HM não apenas verifica tipos: ele caracteriza, quando possível, o tipo mais geral de uma expressão. Isso torna o sistema especialmente útil em compiladores, pois o programador não precisa fornecer anotações redundantes, e o compilador ainda pode preservar garantias fortes de segurança.</p>
 <section id="correção" class="level3" data-number="15.6.1">
 <h3 data-number="15.6.1" class="anchored" data-anchor-id="correção"><span class="header-section-number">15.6.1</span> Correção</h3>
-<p>A propriedade de <strong>correção</strong> afirma que o algoritmo nunca inventa um tipo inválido. Se o Algoritmo W retorna um tipo para uma expressão, então esse tipo pode ser derivado pelas regras de julgamento do sistema:</p>
+<p>A propriedade de <strong>correção</strong> afirma que o algoritmo nunca inventa um tipo inválido. Se o Algoritmo <strong>W</strong> retorna um tipo para uma expressão, então esse tipo pode ser derivado pelas regras de julgamento do sistema:</p>
 <p><span class="math display">\[\mathcal{W}(\Gamma, e) = (S, \tau) \implies S(\Gamma) \vdash e : \tau\]</span></p>
-<p>Em palavras: se W infere <span class="math inline">\(\tau\)</span> para <span class="math inline">\(e\)</span>, depois de aplicar a substituição <span class="math inline">\(S\)</span> ao contexto, existe uma derivação formal provando que <span class="math inline">\(e\)</span> tem tipo <span class="math inline">\(\tau\)</span>. Essa propriedade conecta a implementação algorítmica à especificação matemática do sistema.</p>
-<p>Uma consequência prática é que um compilador baseado em W não aceita programas que violem as regras do sistema HM. Se uma expressão como <code>5 true</code> tenta aplicar um inteiro como função, a unificação exigiria algo como:</p>
+<p>Em palavras: se <strong>W</strong> infere <span class="math inline">\(\tau\)</span> para <span class="math inline">\(e\)</span>, depois de aplicar a substituição <span class="math inline">\(S\)</span> ao contexto, existe uma derivação formal provando que <span class="math inline">\(e\)</span> tem tipo <span class="math inline">\(\tau\)</span>. Essa propriedade conecta a implementação algorítmica à especificação matemática do sistema.</p>
+<p>Uma consequência prática é que um compilador baseado em <strong>W</strong> não aceita programas que violem as regras do sistema HM. Se uma expressão como <code>5 true</code> tenta aplicar um inteiro como função, a unificação exigiria algo como:</p>
 <p><span class="math display">\[\text{int} = \text{bool} \rightarrow \alpha\]</span></p>
 <p>Essa equação não possui unificador, logo o algoritmo rejeita a expressão.</p>
 </section>
 <section id="completude" class="level3" data-number="15.6.2">
 <h3 data-number="15.6.2" class="anchored" data-anchor-id="completude"><span class="header-section-number">15.6.2</span> Completude</h3>
-<p>A propriedade de <strong>completude</strong> afirma a direção inversa: se uma expressão é tipável pelas regras de HM, então o Algoritmo W encontra um tipo para ela:</p>
+<p>A propriedade de <strong>completude</strong> afirma a direção inversa: se uma expressão é tipável pelas regras de HM, então o Algoritmo <strong>W</strong> encontra um tipo para ela:</p>
 <p><span class="math display">\[\Gamma \vdash e : \tau \implies \exists S,\tau'.\ \mathcal{W}(\Gamma,e) = (S,\tau') \text{ e } \tau' \preceq \tau\]</span></p>
 <p>A relação <span class="math inline">\(\tau' \preceq \tau\)</span> indica que <span class="math inline">\(\tau\)</span> é uma instância de <span class="math inline">\(\tau'\)</span>, isto é, <span class="math inline">\(\tau'\)</span> é mais geral. Por exemplo:</p>
 <p><span class="math display">\[\alpha \rightarrow \alpha \preceq \text{int} \rightarrow \text{int}\]</span></p>
-<p>porque podemos obter <span class="math inline">\(\text{int} \rightarrow \text{int}\)</span> substituindo <span class="math inline">\(\alpha\)</span> por <code>int</code>. Assim, W não apenas encontra <em>um</em> tipo: ele encontra um tipo suficientemente geral para representar todos os usos monomórficos possíveis.</p>
+<p>porque podemos obter <span class="math inline">\(\text{int} \rightarrow \text{int}\)</span> substituindo <span class="math inline">\(\alpha\)</span> por <code>int</code>. Assim, <strong>W</strong> não apenas encontra <em>um</em> tipo: ele encontra um tipo suficientemente geral para representar todos os usos monomórficos possíveis.</p>
 </section>
 <section id="existência-de-tipos-principais" class="level3" data-number="15.6.3">
 <h3 data-number="15.6.3" class="anchored" data-anchor-id="existência-de-tipos-principais"><span class="header-section-number">15.6.3</span> Existência de Tipos Principais</h3>
@@ -1087,7 +1087,7 @@ função instanciar(∀α₁...αₙ. τ):
 <h2 data-number="15.7" class="anchored" data-anchor-id="complexidade-computacional"><span class="header-section-number">15.7</span> Complexidade Computacional</h2>
 <section id="análise-do-algoritmo-w" class="level3" data-number="15.7.1">
 <h3 data-number="15.7.1" class="anchored" data-anchor-id="análise-do-algoritmo-w"><span class="header-section-number">15.7.1</span> Análise do Algoritmo W</h3>
-<p>A complexidade do Algoritmo W é surpreendentemente alta:</p>
+<p>A complexidade do Algoritmo <strong>W</strong> é surpreendentemente alta:</p>
 <p><strong>Pior caso</strong>: <span class="math inline">\(O(2^n)\)</span> exponencial, onde <span class="math inline">\(n\)</span> é o tamanho da expressão.</p>
 <p><strong>Exemplo patológico</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode ocaml code-with-copy"><code class="sourceCode ocaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> f1 = λx. (x, x) <span class="kw">in</span></span>
@@ -1105,7 +1105,7 @@ função instanciar(∀α₁...αₙ. τ):
 </section>
 <section id="prática-vs.-teoria" class="level3" data-number="15.7.2">
 <h3 data-number="15.7.2" class="anchored" data-anchor-id="prática-vs.-teoria"><span class="header-section-number">15.7.2</span> Prática vs.&nbsp;Teoria</h3>
-<p>Na prática, o Algoritmo W se comporta <strong>quase linearmente</strong> porque:</p>
+<p>Na prática, o Algoritmo <strong>W</strong> se comporta <strong>quase linearmente</strong> porque:</p>
 <ol type="1">
 <li>Programas reais raramente exibem o pior caso</li>
 <li>Otimizações modernas (como compartilhamento de estrutura)</li>
@@ -1117,7 +1117,7 @@ função instanciar(∀α₁...αₙ. τ):
 </section>
 <section id="algoritmo-m-uma-alternativa" class="level2" data-number="15.8">
 <h2 data-number="15.8" class="anchored" data-anchor-id="algoritmo-m-uma-alternativa"><span class="header-section-number">15.8</span> Algoritmo M: Uma Alternativa</h2>
-<p>O <strong>Algoritmo M</strong> (de Clement, 1987) é uma reformulação do Algoritmo W que separa as fases:</p>
+<p>O <strong>Algoritmo M</strong> (de Clement, 1987) é uma reformulação do Algoritmo <strong>W</strong> que separa as fases:</p>
 <ol type="1">
 <li><strong>Geração de restrições</strong>: produz um conjunto de equações de tipo</li>
 <li><strong>Resolução</strong>: resolve as equações via unificação</li>
@@ -1525,73 +1525,363 @@ função solve(C):
 <p>Os exercícios a seguir foram pensados para fazer a leitora executar manualmente as operações centrais de <strong>Hindley-Milner</strong>: cálculo de variáveis livres, generalização, instanciação, unificação e aplicação do Algoritmo W.</p>
 <section id="variáveis-livres-e-generalização" class="level3" data-number="15.14.1">
 <h3 data-number="15.14.1" class="anchored" data-anchor-id="variáveis-livres-e-generalização"><span class="header-section-number">15.14.1</span> Variáveis livres e generalização</h3>
-<ol type="1">
-<li><p>Calcule <span class="math inline">\(\text{ftv}(\tau)\)</span> para cada tipo:</p>
+<section id="exercício-1-variáveis-livres-em-tipos" class="level4" data-number="15.14.1.1">
+<h4 data-number="15.14.1.1" class="anchored" data-anchor-id="exercício-1-variáveis-livres-em-tipos"><span class="header-section-number">15.14.1.1</span> Exercício 1: Variáveis livres em tipos</h4>
+<p>Calcule <span class="math inline">\(\text{ftv}(\tau)\)</span> para cada tipo:</p>
 <ul>
 <li><span class="math inline">\(\alpha \rightarrow \beta\)</span></li>
 <li><span class="math inline">\((\alpha \rightarrow \text{int}) \rightarrow \alpha\)</span></li>
 <li><span class="math inline">\(\forall \alpha.\ \alpha \rightarrow \beta\)</span></li>
-</ul></li>
-<li><p>Considere o contexto:</p>
-<p><span class="math display">\[\Gamma = \{x : \alpha,\ y : \forall \beta.\ \beta \rightarrow \beta\}\]</span></p>
-<p>Calcule <span class="math inline">\(\text{ftv}(\Gamma)\)</span>.</p></li>
-<li><p>Seja <span class="math inline">\(\tau = \alpha \rightarrow \gamma\)</span> e <span class="math inline">\(\Gamma = \{x : \alpha\}\)</span>. Qual é o resultado de <span class="math inline">\(\text{generalizar}(\Gamma,\tau)\)</span>? Explique por que <span class="math inline">\(\alpha\)</span> não deve ser quantificada.</p></li>
-</ol>
+</ul>
+<p><strong>Solução:</strong></p>
+<p>A função <span class="math inline">\(\text{ftv}\)</span> devolve o conjunto de variáveis de tipo livres, isto é, não vinculadas por um quantificador <span class="math inline">\(\forall\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\text{ftv}(\alpha \rightarrow \beta) = \{\alpha, \beta\}\)</span>. Ambas aparecem no tipo e nenhuma está sob um <span class="math inline">\(\forall\)</span>.</li>
+<li><span class="math inline">\(\text{ftv}((\alpha \rightarrow \text{int}) \rightarrow \alpha) = \{\alpha\}\)</span>. A variável aparece duas vezes (à esquerda e à direita), mas o conjunto não tem repetição. <code>int</code> é uma constante, não uma variável.</li>
+<li><span class="math inline">\(\text{ftv}(\forall \alpha.\ \alpha \rightarrow \beta) = \{\beta\}\)</span>. A variável <span class="math inline">\(\alpha\)</span> está vinculada pelo <span class="math inline">\(\forall\)</span> e portanto não é livre. <span class="math inline">\(\beta\)</span> está livre.</li>
+</ul>
+</section>
+<section id="exercício-2-variáveis-livres-em-contexto" class="level4" data-number="15.14.1.2">
+<h4 data-number="15.14.1.2" class="anchored" data-anchor-id="exercício-2-variáveis-livres-em-contexto"><span class="header-section-number">15.14.1.2</span> Exercício 2: Variáveis livres em contexto</h4>
+<p>Para o contexto <span class="math inline">\(\Gamma = \{x : \alpha,\ y : \forall \beta.\ \beta \rightarrow \beta\}\)</span>, calcule <span class="math inline">\(\text{ftv}(\Gamma)\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p><span class="math inline">\(\text{ftv}(\Gamma)\)</span> é a união das variáveis livres de cada esquema de tipo no contexto.</p>
+<ul>
+<li><span class="math inline">\(\text{ftv}(\alpha) = \{\alpha\}\)</span> (variável solta, livre);</li>
+<li><span class="math inline">\(\text{ftv}(\forall \beta.\ \beta \rightarrow \beta) = \emptyset\)</span> (a única variável está vinculada).</li>
+</ul>
+<p>Portanto, <span class="math inline">\(\text{ftv}(\Gamma) = \{\alpha\}\)</span>.</p>
+<p>A distinção entre variáveis livres em <span class="math inline">\(\Gamma\)</span> e em <span class="math inline">\(\tau\)</span> é o que permite a generalização: só podemos generalizar uma variável que apareça em <span class="math inline">\(\tau\)</span> mas <strong>não</strong> em <span class="math inline">\(\text{ftv}(\Gamma)\)</span>, sob pena de fixar incorretamente uma variável que pertence ao contexto externo.</p>
+</section>
+<section id="exercício-3-generalização-cuidadosa" class="level4" data-number="15.14.1.3">
+<h4 data-number="15.14.1.3" class="anchored" data-anchor-id="exercício-3-generalização-cuidadosa"><span class="header-section-number">15.14.1.3</span> Exercício 3: Generalização cuidadosa</h4>
+<p>Seja <span class="math inline">\(\tau = \alpha \rightarrow \gamma\)</span> e <span class="math inline">\(\Gamma = \{x : \alpha\}\)</span>. Qual é <span class="math inline">\(\text{generalizar}(\Gamma, \tau)\)</span>? Por que <span class="math inline">\(\alpha\)</span> não deve ser quantificada?</p>
+<p><strong>Solução:</strong></p>
+<p>A definição é <span class="math inline">\(\text{generalizar}(\Gamma, \tau) = \forall \vec{a}. \tau\)</span>, em que <span class="math inline">\(\vec{a} = \text{ftv}(\tau) \setminus \text{ftv}(\Gamma)\)</span>.</p>
+<p>Calculando:</p>
+<ul>
+<li><span class="math inline">\(\text{ftv}(\tau) = \{\alpha, \gamma\}\)</span>;</li>
+<li><span class="math inline">\(\text{ftv}(\Gamma) = \{\alpha\}\)</span>;</li>
+<li><span class="math inline">\(\vec{a} = \{\alpha, \gamma\} \setminus \{\alpha\} = \{\gamma\}\)</span>.</li>
+</ul>
+<p>Resultado: <span class="math inline">\(\text{generalizar}(\Gamma, \tau) = \forall \gamma.\ \alpha \rightarrow \gamma\)</span>.</p>
+<p>A variável <span class="math inline">\(\alpha\)</span> não pode ser generalizada porque está em <span class="math inline">\(\Gamma\)</span>, ligada à variável <span class="math inline">\(x\)</span>. Se generalizássemos <span class="math inline">\(\alpha\)</span>, criaríamos um esquema <span class="math inline">\(\forall \alpha, \gamma.\ \alpha \rightarrow \gamma\)</span> que sugeriria liberdade que não existe: o uso futuro do esquema poderia instanciar <span class="math inline">\(\alpha\)</span> com qualquer tipo, mas isso quebraria a igualdade necessária com o tipo de <span class="math inline">\(x\)</span> no contexto. A regra de exclusão garante que generalização preserva consistência semântica.</p>
+</section>
 </section>
 <section id="unificação" class="level3" data-number="15.14.2">
 <h3 data-number="15.14.2" class="anchored" data-anchor-id="unificação"><span class="header-section-number">15.14.2</span> Unificação</h3>
-<ol start="4" type="1">
-<li><p>Encontre o unificador mais geral para:</p>
-<p><span class="math display">\[\alpha \rightarrow \beta = \text{int} \rightarrow \gamma\]</span></p></li>
-<li><p>Tente unificar:</p>
-<p><span class="math display">\[\alpha = \alpha \rightarrow \beta\]</span></p>
-<p>Explique por que o <em>occur check</em> deve rejeitar essa equação.</p></li>
-<li><p>Unifique, se possível:</p>
-<p><span class="math display">\[(\alpha \rightarrow \text{bool}) \rightarrow \alpha = (\text{int} \rightarrow \beta) \rightarrow \gamma\]</span></p>
-<p>Mostre as substituições intermediárias.</p></li>
-</ol>
+<section id="exercício-4-unificação-simples" class="level4" data-number="15.14.2.1">
+<h4 data-number="15.14.2.1" class="anchored" data-anchor-id="exercício-4-unificação-simples"><span class="header-section-number">15.14.2.1</span> Exercício 4: Unificação simples</h4>
+<p>Encontre o unificador mais geral para <span class="math inline">\(\alpha \rightarrow \beta = \text{int} \rightarrow \gamma\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Aplicamos unificação estrutural sobre construtores de tipo iguais (ambos os lados são funções <code>→</code>). Isto reduz à unificação dos componentes:</p>
+<ul>
+<li>Domínio: <span class="math inline">\(\alpha = \text{int}\)</span>, gerando <span class="math inline">\(\{\alpha \mapsto \text{int}\}\)</span>;</li>
+<li>Codomínio: <span class="math inline">\(\beta = \gamma\)</span>, gerando <span class="math inline">\(\{\beta \mapsto \gamma\}\)</span> (ou simetricamente <span class="math inline">\(\{\gamma \mapsto \beta\}\)</span>).</li>
+</ul>
+<p>Compondo: <span class="math inline">\(S = \{\alpha \mapsto \text{int}, \beta \mapsto \gamma\}\)</span>. Aplicando <span class="math inline">\(S\)</span> em ambos os lados, ambos viram <span class="math inline">\(\text{int} \rightarrow \gamma\)</span>. O unificador é o mais geral porque qualquer outra solução é instância dele.</p>
+</section>
+<section id="exercício-5-occur-check" class="level4" data-number="15.14.2.2">
+<h4 data-number="15.14.2.2" class="anchored" data-anchor-id="exercício-5-occur-check"><span class="header-section-number">15.14.2.2</span> Exercício 5: Occur check</h4>
+<p>Tente unificar <span class="math inline">\(\alpha = \alpha \rightarrow \beta\)</span>. Por que o occur check rejeita essa equação?</p>
+<p><strong>Solução:</strong></p>
+<p>A unificação gera a tentativa de substituição <span class="math inline">\(\alpha \mapsto \alpha \rightarrow \beta\)</span>. Se essa substituição fosse aceita, qualquer aplicação dela ao próprio <span class="math inline">\(\alpha\)</span> produziria:</p>
+<p><span class="math display">\[\alpha \mapsto (\alpha \rightarrow \beta) \mapsto ((\alpha \rightarrow \beta) \rightarrow \beta) \mapsto \cdots\]</span></p>
+<p>um tipo infinito. No sistema de tipos finito do HM, tipos infinitos não são permitidos. A função <code>occur_check(α, τ)</code> verifica se <span class="math inline">\(\alpha\)</span> aparece em <span class="math inline">\(\tau\)</span> antes de aceitar a substituição <span class="math inline">\(\alpha \mapsto \tau\)</span>. Se ocorrer, a equação é incompatível.</p>
+<p>Na prática, esse erro é o que rejeita expressões como <span class="math inline">\(\lambda x.\ x\,x\)</span> (auto-aplicação): a inferência tentaria unificar o tipo de <span class="math inline">\(x\)</span> (digamos <span class="math inline">\(\alpha\)</span>) com <span class="math inline">\(\alpha \to \beta\)</span> (porque <span class="math inline">\(x\)</span> é tanto função quanto argumento), gerando um occur check.</p>
+</section>
+<section id="exercício-6-unificação-composta" class="level4" data-number="15.14.2.3">
+<h4 data-number="15.14.2.3" class="anchored" data-anchor-id="exercício-6-unificação-composta"><span class="header-section-number">15.14.2.3</span> Exercício 6: Unificação composta</h4>
+<p>Unifique <span class="math inline">\((\alpha \rightarrow \text{bool}) \rightarrow \alpha\)</span> com <span class="math inline">\((\text{int} \rightarrow \beta) \rightarrow \gamma\)</span>, mostrando substituições intermediárias.</p>
+<p><strong>Solução:</strong></p>
+<p>Ambos os lados são funções; reduz a unificar os pares de domínio e codomínio.</p>
+<p><strong>Passo 1</strong>: unificar <span class="math inline">\((\alpha \rightarrow \text{bool}) = (\text{int} \rightarrow \beta)\)</span>. Reduz a:</p>
+<ul>
+<li><span class="math inline">\(\alpha = \text{int}\)</span>: <span class="math inline">\(S_1 = \{\alpha \mapsto \text{int}\}\)</span>;</li>
+<li><span class="math inline">\(\text{bool} = \beta\)</span>: <span class="math inline">\(S_2 = \{\beta \mapsto \text{bool}\}\)</span>.</li>
+</ul>
+<p>Compondo: <span class="math inline">\(S' = S_2 \circ S_1 = \{\alpha \mapsto \text{int}, \beta \mapsto \text{bool}\}\)</span>.</p>
+<p><strong>Passo 2</strong>: unificar codomínios após aplicar <span class="math inline">\(S'\)</span>. Lado esquerdo: <span class="math inline">\(S'(\alpha) = \text{int}\)</span>. Lado direito: <span class="math inline">\(S'(\gamma) = \gamma\)</span>. Equação: <span class="math inline">\(\text{int} = \gamma\)</span>. Substituição: <span class="math inline">\(S_3 = \{\gamma \mapsto \text{int}\}\)</span>.</p>
+<p><strong>Passo 3</strong>: composição final. <span class="math inline">\(S = S_3 \circ S' = \{\alpha \mapsto \text{int}, \beta \mapsto \text{bool}, \gamma \mapsto \text{int}\}\)</span>.</p>
+<p>Verificação: aplicando <span class="math inline">\(S\)</span> a ambos os lados originais, ambos viram <span class="math inline">\((\text{int} \rightarrow \text{bool}) \rightarrow \text{int}\)</span>. Unificação bem-sucedida.</p>
+</section>
 </section>
 <section id="execução-do-algoritmo-w" class="level3" data-number="15.14.3">
 <h3 data-number="15.14.3" class="anchored" data-anchor-id="execução-do-algoritmo-w"><span class="header-section-number">15.14.3</span> Execução do Algoritmo W</h3>
-<ol start="7" type="1">
-<li><p>Execute o Algoritmo W para a expressão:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Mostre o tipo antes e depois da generalização.</p></li>
-<li><p>Execute o Algoritmo W para:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="fu">id</span> <span class="ot">=</span> \x <span class="ot">-&gt;</span> x <span class="kw">in</span> <span class="fu">id</span> <span class="dv">5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Mostre onde ocorre a instanciação do tipo polimórfico de <code>id</code>.</p></li>
-<li><p>Execute o Algoritmo W para:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="fu">const</span> <span class="ot">=</span> \x <span class="ot">-&gt;</span> \y <span class="ot">-&gt;</span> x <span class="kw">in</span> <span class="fu">const</span> <span class="dv">3</span> true</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Determine o tipo final da expressão.</p></li>
+<section id="exercício-7-algoritmo-w-em-identidade" class="level4" data-number="15.14.3.1">
+<h4 data-number="15.14.3.1" class="anchored" data-anchor-id="exercício-7-algoritmo-w-em-identidade"><span class="header-section-number">15.14.3.1</span> Exercício 7: Algoritmo <strong>W</strong> em identidade</h4>
+<p>Execute <strong>W</strong> para <span class="math inline">\(\lambda x.\ x\)</span>. Mostre o tipo antes e depois da generalização.</p>
+<p><strong>Solução:</strong></p>
+<p>Estado inicial: <span class="math inline">\(\Gamma = \emptyset\)</span>, sem substituições.</p>
+<p><strong>Aplicar regra de Abs</strong> (<span class="math inline">\(\lambda x. e\)</span>):</p>
+<ol type="1">
+<li>Cria variável fresca <span class="math inline">\(\alpha\)</span>;</li>
+<li>Adiciona <span class="math inline">\(x : \alpha\)</span> ao contexto temporário: <span class="math inline">\(\Gamma' = \{x : \alpha\}\)</span>;</li>
+<li>Recursa em <span class="math inline">\(e = x\)</span> com <span class="math inline">\(\Gamma'\)</span>:
+<ul>
+<li>Regra de Var: <span class="math inline">\(x : \alpha \in \Gamma'\)</span>, retorna <span class="math inline">\((\emptyset, \alpha)\)</span>;</li>
+</ul></li>
+<li>Retorna <span class="math inline">\((\emptyset, \alpha \to \alpha)\)</span>.</li>
 </ol>
+<p>Tipo inferido (não generalizado): <span class="math inline">\(\alpha \rightarrow \alpha\)</span>.</p>
+<p><strong>Generalização</strong> no contexto vazio: <span class="math inline">\(\text{ftv}(\Gamma) = \emptyset\)</span>, <span class="math inline">\(\text{ftv}(\alpha \to \alpha) = \{\alpha\}\)</span>. Diferença: <span class="math inline">\(\{\alpha\}\)</span>. Generalizamos: <span class="math inline">\(\forall \alpha.\ \alpha \rightarrow \alpha\)</span>.</p>
+<p>Esse é o <strong>tipo principal</strong> da função identidade no sistema HM.</p>
+</section>
+<section id="exercício-8-let-polimórfico-simples" class="level4" data-number="15.14.3.2">
+<h4 data-number="15.14.3.2" class="anchored" data-anchor-id="exercício-8-let-polimórfico-simples"><span class="header-section-number">15.14.3.2</span> Exercício 8: Let polimórfico simples</h4>
+<p>Execute <strong>W</strong> para <code>let id = \x -&gt; x in id 5</code>. Mostre onde ocorre a instanciação.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Inferência de</strong> <span class="math inline">\(\lambda x.\ x\)</span> (lado direito do let): conforme exercício 7, retorna <span class="math inline">\(\alpha \to \alpha\)</span> com substituição vazia.</p>
+<p><strong>Generalização</strong> no contexto <span class="math inline">\(\Gamma = \emptyset\)</span>: <span class="math inline">\(\sigma_{\text{id}} = \forall \alpha.\ \alpha \to \alpha\)</span>. Adicionamos <code>id : ∀α. α → α</code> ao contexto.</p>
+<p><strong>Inferência do corpo do let</strong> (<code>id 5</code>):</p>
+<ol type="1">
+<li>Aplicação: inferir tipo de <code>id</code> e tipo de <code>5</code>.</li>
+<li>Para <code>id</code>: regra Var encontra esquema <code>∀α. α → α</code>. <strong>Instanciamos</strong>: criamos variável fresca <span class="math inline">\(\beta\)</span> e substituímos. Tipo: <span class="math inline">\(\beta \to \beta\)</span>.</li>
+<li>Para <code>5</code>: regra Lit retorna <code>int</code>.</li>
+<li>Cria fresca <span class="math inline">\(\gamma\)</span> para o resultado. Unifica <span class="math inline">\(\beta \to \beta\)</span> com <span class="math inline">\(\text{int} \to \gamma\)</span>:
+<ul>
+<li><span class="math inline">\(\beta = \text{int}\)</span> e <span class="math inline">\(\beta = \gamma\)</span>, então <span class="math inline">\(\gamma = \text{int}\)</span>.</li>
+<li>Substituição: <span class="math inline">\(\{\beta \mapsto \text{int}, \gamma \mapsto \text{int}\}\)</span>.</li>
+</ul></li>
+<li>Aplicada à variável de retorno <span class="math inline">\(\gamma\)</span>: tipo final <code>int</code>.</li>
+</ol>
+<p>Tipo de <code>id 5</code>: <strong>int</strong>. A instanciação ocorreu no passo 2: o esquema <span class="math inline">\(\forall \alpha.\ \alpha \to \alpha\)</span> foi substituído por <span class="math inline">\(\beta \to \beta\)</span>, em que <span class="math inline">\(\beta\)</span> é uma variável fresca não vinculada. Sem essa instanciação fresca, usos múltiplos de <code>id</code> em tipos diferentes seriam impossíveis.</p>
+</section>
+<section id="exercício-9-const-com-dois-argumentos" class="level4" data-number="15.14.3.3">
+<h4 data-number="15.14.3.3" class="anchored" data-anchor-id="exercício-9-const-com-dois-argumentos"><span class="header-section-number">15.14.3.3</span> Exercício 9: Const com dois argumentos</h4>
+<p>Execute <strong>W</strong> para <code>let const = \x -&gt; \y -&gt; x in const 3 true</code>. Determine o tipo final.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Inferência de</strong> <span class="math inline">\(\lambda x. \lambda y. x\)</span>:</p>
+<ol type="1">
+<li>Frescas <span class="math inline">\(\alpha, \beta\)</span> para os parâmetros.</li>
+<li>Contexto temporário <span class="math inline">\(\{x : \alpha, y : \beta\}\)</span>.</li>
+<li>Corpo <code>x</code> tem tipo <span class="math inline">\(\alpha\)</span>.</li>
+<li><span class="math inline">\(\lambda y. x\)</span> tem tipo <span class="math inline">\(\beta \to \alpha\)</span>.</li>
+<li><span class="math inline">\(\lambda x. \lambda y. x\)</span> tem tipo <span class="math inline">\(\alpha \to \beta \to \alpha\)</span>.</li>
+</ol>
+<p>Generalização: <span class="math inline">\(\sigma_{\text{const}} = \forall \alpha, \beta.\ \alpha \to \beta \to \alpha\)</span>.</p>
+<p><strong>Inferência de</strong> <code>const 3 true</code>:</p>
+<ol type="1">
+<li>Instancia <code>const</code> com frescas: <span class="math inline">\(\alpha' \to \beta' \to \alpha'\)</span>.</li>
+<li>Aplicação <code>const 3</code>:
+<ul>
+<li><code>3 : int</code>. Cria fresca <span class="math inline">\(\gamma\)</span> para o resultado parcial.</li>
+<li>Unifica <span class="math inline">\(\alpha' \to \beta' \to \alpha'\)</span> com <span class="math inline">\(\text{int} \to \gamma\)</span>:
+<ul>
+<li><span class="math inline">\(\alpha' = \text{int}\)</span>, <span class="math inline">\(\gamma = \beta' \to \alpha' = \beta' \to \text{int}\)</span>.</li>
+</ul></li>
+<li>Tipo de <code>const 3</code>: <span class="math inline">\(\beta' \to \text{int}\)</span>.</li>
+</ul></li>
+<li>Aplicação <code>(const 3) true</code>:
+<ul>
+<li><code>true : bool</code>. Cria fresca <span class="math inline">\(\delta\)</span>.</li>
+<li>Unifica <span class="math inline">\(\beta' \to \text{int}\)</span> com <span class="math inline">\(\text{bool} \to \delta\)</span>:
+<ul>
+<li><span class="math inline">\(\beta' = \text{bool}\)</span>, <span class="math inline">\(\delta = \text{int}\)</span>.</li>
+</ul></li>
+<li>Tipo final: <strong>int</strong>.</li>
+</ul></li>
+</ol>
+<p>A função <code>const</code> ignora seu segundo argumento. O tipo do resultado da aplicação completa é o tipo do primeiro argumento, neste caso <code>int</code>.</p>
+</section>
 </section>
 <section id="limitações-de-hindley-milner" class="level3" data-number="15.14.4">
 <h3 data-number="15.14.4" class="anchored" data-anchor-id="limitações-de-hindley-milner"><span class="header-section-number">15.14.4</span> Limitações de Hindley-Milner</h3>
-<ol start="10" type="1">
-<li><p>Explique por que HM básico infere o tipo de:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>\x <span class="ot">-&gt;</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>mas não aceita automaticamente polimorfismo de rank 2 sem anotações.</p></li>
-<li><p>Considere uma linguagem com subtipagem. Por que a existência de subtipos torna a inferência de tipos mais difícil do que no HM puro?</p></li>
-<li><p>Explique a diferença entre rejeitar um programa porque ele é realmente mal tipado e rejeitá-lo porque o algoritmo de inferência é incompleto para uma extensão da linguagem.</p></li>
+<section id="exercício-10-por-que-rank-2-sem-anotações-não-funciona" class="level4" data-number="15.14.4.1">
+<h4 data-number="15.14.4.1" class="anchored" data-anchor-id="exercício-10-por-que-rank-2-sem-anotações-não-funciona"><span class="header-section-number">15.14.4.1</span> Exercício 10: Por que rank-2 sem anotações não funciona</h4>
+<p>Explique por que HM básico infere o tipo de <span class="math inline">\(\lambda x.\ x\)</span> mas não aceita automaticamente polimorfismo de rank 2 sem anotações.</p>
+<p><strong>Solução:</strong></p>
+<p>HM permite <span class="math inline">\(\forall\)</span> apenas no nível mais externo dos esquemas de tipo, conhecido como <strong>rank 1</strong>. O tipo <span class="math inline">\(\forall \alpha.\ \alpha \to \alpha\)</span> é rank 1: o <span class="math inline">\(\forall\)</span> envolve toda a expressão.</p>
+<p>Polimorfismo rank 2 exige <span class="math inline">\(\forall\)</span> aninhado, como em <span class="math inline">\((\forall \alpha.\ \alpha \to \alpha) \to \text{int}\)</span>, que é o tipo de uma função que recebe uma função polimórfica e retorna inteiro. Considere:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ot">aplicar_id ::</span> (<span class="kw">forall</span> a<span class="op">.</span> a <span class="ot">-&gt;</span> a) <span class="ot">-&gt;</span> (<span class="dt">Int</span>, <span class="dt">Bool</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>aplicar_id f <span class="ot">=</span> (f <span class="dv">5</span>, f <span class="dt">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>f</code> é usada com dois tipos diferentes (<code>Int</code> e <code>Bool</code>). Em HM puro, parâmetros de função têm tipos monomórficos no corpo, então <code>f</code> teria que ser de algum tipo <span class="math inline">\(\alpha \to \alpha\)</span> específico, e a tentativa de aplicar a <code>5</code> e <code>True</code> falharia na unificação (<span class="math inline">\(\alpha = \text{Int}\)</span> e <span class="math inline">\(\alpha = \text{Bool}\)</span> são contraditórios).</p>
+<p>A inferência desse tipo de uso é indecidível em geral (Wells, 1994 — para System F). Linguagens como Haskell aceitam esses tipos via extensão <code>RankNTypes</code>, mas exigem anotação explícita: a anotação fornece a estrutura quantificadora que o algoritmo não consegue descobrir sozinho.</p>
+</section>
+<section id="exercício-11-subtipagem-dificulta-inferência" class="level4" data-number="15.14.4.2">
+<h4 data-number="15.14.4.2" class="anchored" data-anchor-id="exercício-11-subtipagem-dificulta-inferência"><span class="header-section-number">15.14.4.2</span> Exercício 11: Subtipagem dificulta inferência</h4>
+<p>Por que a presença de subtipos torna a inferência de tipos mais difícil que em HM puro?</p>
+<p><strong>Solução:</strong></p>
+<p>HM puro resolve restrições por <strong>igualdade</strong>: cada equação <span class="math inline">\(\tau_1 = \tau_2\)</span> é resolvida por unificação, que produz uma única substituição mais geral.</p>
+<p>Com subtipos, as restrições mudam de forma. Em vez de igualdades, geramos restrições de forma <span class="math inline">\(\tau_1 &lt;: \tau_2\)</span>. Essas restrições não têm uma única solução; podem ter várias soluções incomparáveis. Exemplo: para a aplicação <code>f x</code> em uma linguagem com subtipagem numérica, o tipo de <code>x</code> deve ser subtipo do tipo de domínio de <code>f</code>, mas múltiplos subtipos podem satisfazer.</p>
+<p>Consequências:</p>
+<ol type="1">
+<li><p><strong>Princípio do tipo principal pode falhar</strong>: pode não existir um tipo único mais geral. Solução: uso de ferramentas como tipos com restrições (constrained types) que carregam a relação de subtipagem como parte da assinatura.</p></li>
+<li><p><strong>Algoritmo precisa de estratégia adicional</strong>: além de unificação, é preciso gerar e simplificar conjuntos de restrições <span class="math inline">\(&lt;:\)</span>, possivelmente com saturação ou normalização.</p></li>
+<li><p><strong>Complexidade aumenta</strong>: para subtipagem em sistemas com tipos de função e dualidade contravariante/covariante, a verificação pode ser PSPACE-hard ou indecidível, dependendo do sistema (Pierce, 1992).</p></li>
 </ol>
 </section>
-</section>
-<section id="conclusão-o-legado-de-hindley-milner" class="level2" data-number="15.15">
-<h2 data-number="15.15" class="anchored" data-anchor-id="conclusão-o-legado-de-hindley-milner"><span class="header-section-number">15.15</span> Conclusão: O Legado de Hindley-Milner</h2>
-<p>O sistema Hindley-Milner representa um dos <strong>pontos ótimos</strong> no espaço de design de sistemas de tipos. Sua combinação única de inferência completa, decidibilidade e polimorfismo paramétrico o torna extremamente útil na prática, enquanto sua elegância matemática o estabelece como um objeto de estudo teórico fundamental.</p>
-<p>Contudo, a atenta leitora deve reconhecer suas limitações. Linguagens modernas frequentemente precisam de recursos além do <strong>HM</strong> básico:</p>
+<section id="exercício-12-mal-tipado-vs-algoritmo-incompleto" class="level4" data-number="15.14.4.3">
+<h4 data-number="15.14.4.3" class="anchored" data-anchor-id="exercício-12-mal-tipado-vs-algoritmo-incompleto"><span class="header-section-number">15.14.4.3</span> Exercício 12: Mal tipado vs algoritmo incompleto</h4>
+<p>Explique a diferença entre rejeitar um programa porque ele é realmente mal tipado e rejeitá-lo porque o algoritmo de inferência é incompleto para uma extensão.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Programa mal tipado</strong>: existe uma incompatibilidade fundamental entre os tipos exigidos pelas operações e os tipos disponíveis. Exemplo: <span class="math inline">\(\lambda x.\ x + \text{true}\)</span>. Não há nenhuma atribuição de tipos que torne essa expressão tipável em uma linguagem com inteiros e booleanos como tipos distintos. Qualquer sistema de tipos correto deve rejeitar.</p>
+<p><strong>Algoritmo incompleto</strong>: o programa é tipável segundo a especificação do sistema de tipos, mas o algoritmo escolhido não consegue encontrar a derivação. Exemplo: o programa de rank-2 do exercício 10. Em System F, o programa tem tipo bem definido <span class="math inline">\((\forall \alpha. \alpha \to \alpha) \to (\text{Int}, \text{Bool})\)</span>. Mas o Algoritmo <strong>W</strong> para HM puro não consegue inferir, pois não considera <span class="math inline">\(\forall\)</span> aninhado.</p>
+<p>A distinção tem consequências práticas:</p>
 <ul>
-<li><strong>Type classes</strong> para polimorfismo <em>ad-hoc</em></li>
-<li><strong>Higher-rank types</strong> para abstrações mais expressivas<br>
-</li>
-<li><strong>GADTs</strong> para tipos dependentes limitados</li>
-<li><strong>Subtyping</strong> para OOP</li>
+<li><strong>Mal tipado</strong>: o programa tem um bug que o programador deve corrigir.</li>
+<li><strong>Algoritmo incompleto</strong>: o programa está correto, mas o programador deve ajudar o compilador com anotações de tipo.</li>
 </ul>
-<p>Estas extensões quebram as garantias de HM, exigindo anotações ou aceitando incompletude. O Algoritmo W, em sua forma pura, já não é suficiente. Implementações modernas (GHC, OCaml, Rust) usam variantes sofisticadas: <strong>bidirectional typing</strong>, <strong>constraint-based inference</strong>, <strong>unificação de ordem superior</strong>.</p>
-<p>Ainda assim, <strong>HM</strong> permanece a fundação. Todo sistema de tipos moderno para linguagens funcionais é, essencialmente, “Hindley-Milner + extensões”. Compreender <strong>HM</strong> profundamente é compreender tanto suas possibilidades quanto suas limitações fundamentais - e porque os compiladores modernos fazem as escolhas que fazem.</p>
-<p>O verdadeiro legado de Hindley-Milner não é ter resolvido todos os problemas de tipos, mas ter mostrado que <strong>inferência automática e <em>soundness</em> podem coexistir</strong> - um resultado que parecia impossível antes de 1969.</p>
+<p>Linguagens reais distinguem os casos com mensagens de erro. GHC, por exemplo, sugere <code>RankNTypes</code> quando detecta padrões característicos de polimorfismo aninhado, comunicando “este código está bem; falta apenas a extensão e a anotação”.</p>
+</section>
+</section>
+<section id="esquemas-substituições-e-generalização-avançada" class="level3" data-number="15.14.5">
+<h3 data-number="15.14.5" class="anchored" data-anchor-id="esquemas-substituições-e-generalização-avançada"><span class="header-section-number">15.14.5</span> Esquemas, substituições e generalização avançada</h3>
+<section id="exercício-13-composição-de-substituições" class="level4" data-number="15.14.5.1">
+<h4 data-number="15.14.5.1" class="anchored" data-anchor-id="exercício-13-composição-de-substituições"><span class="header-section-number">15.14.5.1</span> Exercício 13: Composição de substituições</h4>
+<p>Sejam <span class="math inline">\(S_1 = \{\alpha \mapsto \beta\}\)</span> e <span class="math inline">\(S_2 = \{\beta \mapsto \text{int}\}\)</span>. Calcule <span class="math inline">\(S_2 \circ S_1\)</span> e <span class="math inline">\(S_1 \circ S_2\)</span>, e mostre que diferem.</p>
+<p><strong>Solução:</strong></p>
+<p>A composição <span class="math inline">\((S_2 \circ S_1)(\tau) = S_2(S_1(\tau))\)</span> aplica primeiro <span class="math inline">\(S_1\)</span>, depois <span class="math inline">\(S_2\)</span>.</p>
+<p>Para <span class="math inline">\(S_2 \circ S_1\)</span>: aplicamos <span class="math inline">\(S_2\)</span> a cada lado direito de <span class="math inline">\(S_1\)</span>, e depois unimos com <span class="math inline">\(S_2\)</span>:</p>
+<ul>
+<li><span class="math inline">\(S_1\)</span> leva <span class="math inline">\(\alpha\)</span> a <span class="math inline">\(\beta\)</span>. <span class="math inline">\(S_2(\beta) = \text{int}\)</span>. Logo <span class="math inline">\(\alpha \mapsto \text{int}\)</span>.</li>
+<li>Para <span class="math inline">\(\beta\)</span>, que não está em <span class="math inline">\(S_1\)</span>: <span class="math inline">\(S_2(\beta) = \text{int}\)</span>.</li>
+</ul>
+<p>Resultado: <span class="math inline">\(S_2 \circ S_1 = \{\alpha \mapsto \text{int}, \beta \mapsto \text{int}\}\)</span>.</p>
+<p>Para <span class="math inline">\(S_1 \circ S_2\)</span>: aplicamos <span class="math inline">\(S_1\)</span> a cada lado direito de <span class="math inline">\(S_2\)</span>:</p>
+<ul>
+<li><span class="math inline">\(S_2\)</span> leva <span class="math inline">\(\beta\)</span> a <span class="math inline">\(\text{int}\)</span>. <span class="math inline">\(S_1(\text{int}) = \text{int}\)</span>. Logo <span class="math inline">\(\beta \mapsto \text{int}\)</span>.</li>
+<li>Para <span class="math inline">\(\alpha\)</span>, que não está em <span class="math inline">\(S_2\)</span>: <span class="math inline">\(S_1(\alpha) = \beta\)</span>.</li>
+</ul>
+<p>Resultado: <span class="math inline">\(S_1 \circ S_2 = \{\alpha \mapsto \beta, \beta \mapsto \text{int}\}\)</span>.</p>
+<p>As substituições diferem: na primeira, <span class="math inline">\(\alpha\)</span> vai a <code>int</code>; na segunda, <span class="math inline">\(\alpha\)</span> vai a <span class="math inline">\(\beta\)</span> (e <span class="math inline">\(\beta\)</span> vai a <code>int</code>). Aplicadas a um tipo <span class="math inline">\(\alpha \to \beta\)</span>, ambas produzem <span class="math inline">\(\text{int} \to \text{int}\)</span>, mas como objetos matemáticos são distintos.</p>
+<p>A não-comutatividade implica que a ordem em que substituições são compostas durante o Algoritmo <strong>W</strong> importa. A convenção habitual é compor à esquerda: substituições novas ficam à esquerda em <span class="math inline">\(S_n \circ S_{n-1} \circ \cdots \circ S_1\)</span>.</p>
+</section>
+<section id="exercício-14-identidade-aplicada-à-identidade" class="level4" data-number="15.14.5.2">
+<h4 data-number="15.14.5.2" class="anchored" data-anchor-id="exercício-14-identidade-aplicada-à-identidade"><span class="header-section-number">15.14.5.2</span> Exercício 14: Identidade aplicada à identidade</h4>
+<p>Execute o Algoritmo <strong>W</strong> para a expressão <code>let id = \x -&gt; x in id id</code>.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Lado direito do let</strong>: tipo principal de <span class="math inline">\(\lambda x.\ x\)</span> é <span class="math inline">\(\forall \alpha. \alpha \to \alpha\)</span> (exercício 7).</p>
+<p><strong>Inferência de <code>id id</code></strong> com <span class="math inline">\(\Gamma = \{\text{id} : \forall \alpha. \alpha \to \alpha\}\)</span>:</p>
+<ol type="1">
+<li>Aplicação: tipo de <code>id</code> (função) e <code>id</code> (argumento).</li>
+<li>Primeira ocorrência de <code>id</code> (função): instancia com fresca <span class="math inline">\(\beta\)</span>. Tipo: <span class="math inline">\(\beta \to \beta\)</span>.</li>
+<li>Segunda ocorrência de <code>id</code> (argumento): instancia com fresca <span class="math inline">\(\gamma\)</span> (independente de <span class="math inline">\(\beta\)</span>). Tipo: <span class="math inline">\(\gamma \to \gamma\)</span>.</li>
+<li>Cria fresca <span class="math inline">\(\delta\)</span> para o resultado.</li>
+<li>Unifica <span class="math inline">\(\beta \to \beta\)</span> com <span class="math inline">\((\gamma \to \gamma) \to \delta\)</span>:
+<ul>
+<li><span class="math inline">\(\beta = \gamma \to \gamma\)</span>;</li>
+<li><span class="math inline">\(\beta = \delta\)</span>.</li>
+</ul></li>
+<li>Combinando: <span class="math inline">\(\delta = \gamma \to \gamma\)</span>.</li>
+</ol>
+<p>Tipo de <code>id id</code> antes da generalização: <span class="math inline">\(\gamma \to \gamma\)</span>.</p>
+<p>A generalização final, no contexto vazio onde <span class="math inline">\(\gamma\)</span> é livre, produz <span class="math inline">\(\forall \gamma.\ \gamma \to \gamma\)</span>. O resultado da aplicação é, novamente, a função identidade. A chave do exercício é que, sem a instanciação independente das duas ocorrências de <code>id</code>, <span class="math inline">\(\beta\)</span> e <span class="math inline">\(\gamma\)</span> teriam que ser iguais e o tipo seria menos geral.</p>
+</section>
+<section id="exercício-15-let-com-múltiplos-usos-polimórficos" class="level4" data-number="15.14.5.3">
+<h4 data-number="15.14.5.3" class="anchored" data-anchor-id="exercício-15-let-com-múltiplos-usos-polimórficos"><span class="header-section-number">15.14.5.3</span> Exercício 15: Let com múltiplos usos polimórficos</h4>
+<p>Execute o Algoritmo <strong>W</strong> para <code>let id = \x -&gt; x in (id 5, id true)</code>, assumindo que a linguagem tem tuplas com tipo <span class="math inline">\(\tau_1 \times \tau_2\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Inferência de <code>id</code></strong>: <span class="math inline">\(\sigma_{\text{id}} = \forall \alpha. \alpha \to \alpha\)</span>.</p>
+<p><strong>Inferência da tupla</strong>: a regra para <span class="math inline">\((e_1, e_2)\)</span> é inferir cada componente independentemente e formar o produto.</p>
+<p>Para <code>id 5</code>:</p>
+<ol type="1">
+<li>Instancia <code>id</code> com <span class="math inline">\(\beta_1\)</span>: <span class="math inline">\(\beta_1 \to \beta_1\)</span>.</li>
+<li>Tipo de <code>5</code>: <code>int</code>.</li>
+<li>Unifica <span class="math inline">\(\beta_1 \to \beta_1\)</span> com <span class="math inline">\(\text{int} \to \delta_1\)</span>. Substituição: <span class="math inline">\(\{\beta_1 \mapsto \text{int}, \delta_1 \mapsto \text{int}\}\)</span>.</li>
+<li>Tipo de <code>id 5</code>: <code>int</code>.</li>
+</ol>
+<p>Para <code>id true</code>:</p>
+<ol type="1">
+<li>Instancia <code>id</code> com <span class="math inline">\(\beta_2\)</span> (variável diferente!): <span class="math inline">\(\beta_2 \to \beta_2\)</span>.</li>
+<li>Tipo de <code>true</code>: <code>bool</code>.</li>
+<li>Unifica <span class="math inline">\(\beta_2 \to \beta_2\)</span> com <span class="math inline">\(\text{bool} \to \delta_2\)</span>. Substituição: <span class="math inline">\(\{\beta_2 \mapsto \text{bool}, \delta_2 \mapsto \text{bool}\}\)</span>.</li>
+<li>Tipo de <code>id true</code>: <code>bool</code>.</li>
+</ol>
+<p>Tipo da tupla: <span class="math inline">\(\text{int} \times \text{bool}\)</span>.</p>
+<p>Este exercício ilustra exatamente o ponto crucial do let-polimorfismo: cada uso de <code>id</code> no corpo do let recebe sua própria instanciação fresca. Se <code>id</code> fosse um simples lambda em vez de um let-bind, <span class="math inline">\(\beta_1\)</span> e <span class="math inline">\(\beta_2\)</span> seriam a mesma variável, e a unificação geraria <span class="math inline">\(\text{int} = \text{bool}\)</span>, falhando. O let-polimorfismo é o mecanismo formal que permite uma definição ser usada como múltiplas instâncias monomórficas distintas.</p>
+</section>
+<section id="exercício-16-alpha-equivalência-de-esquemas" class="level4" data-number="15.14.5.4">
+<h4 data-number="15.14.5.4" class="anchored" data-anchor-id="exercício-16-alpha-equivalência-de-esquemas"><span class="header-section-number">15.14.5.4</span> Exercício 16: Alpha-equivalência de esquemas</h4>
+<p>Os esquemas <span class="math inline">\(\forall \alpha.\ \alpha \to \alpha\)</span> e <span class="math inline">\(\forall \beta.\ \beta \to \beta\)</span> representam o mesmo tipo? E <span class="math inline">\(\forall \alpha.\ \alpha \to \beta\)</span> e <span class="math inline">\(\forall \beta.\ \beta \to \beta\)</span>?</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Caso 1</strong>: <span class="math inline">\(\forall \alpha.\ \alpha \to \alpha\)</span> e <span class="math inline">\(\forall \beta.\ \beta \to \beta\)</span>. Sim, são o mesmo tipo. As variáveis <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> são quantificadas localmente, então o nome usado é irrelevante. Renomear <span class="math inline">\(\alpha\)</span> para <span class="math inline">\(\beta\)</span> em todo o esquema produz a outra forma. A relação que iguala dois esquemas a menos de renomeação consistente das variáveis ligadas é chamada <strong>alpha-equivalência</strong>.</p>
+<p><strong>Caso 2</strong>: <span class="math inline">\(\forall \alpha.\ \alpha \to \beta\)</span> e <span class="math inline">\(\forall \beta.\ \beta \to \beta\)</span>. Não são o mesmo. No primeiro, a variável <span class="math inline">\(\beta\)</span> é livre — refere-se a algo no contexto externo. A renomeação <span class="math inline">\(\alpha \to \beta\)</span> no primeiro esquema <em>capturaria</em> a variável <span class="math inline">\(\beta\)</span> que era livre, alterando o significado. A renomeação correta seria, por exemplo, <span class="math inline">\(\alpha \to \gamma\)</span> para evitar captura, gerando <span class="math inline">\(\forall \gamma.\ \gamma \to \beta\)</span>, que ainda não é o segundo esquema.</p>
+<p>A regra é: renomeação só preserva significado quando evita capturar variáveis livres. Implementações reais lidam com isso com cuidado, frequentemente renomeando variáveis ligadas para frescas a cada operação que envolve substituição. Esta é a razão pela qual a função <code>instantiate</code> no algoritmo cria sempre variáveis frescas.</p>
+</section>
+<section id="exercício-17-falha-de-unificação-por-construtores-diferentes" class="level4" data-number="15.14.5.5">
+<h4 data-number="15.14.5.5" class="anchored" data-anchor-id="exercício-17-falha-de-unificação-por-construtores-diferentes"><span class="header-section-number">15.14.5.5</span> Exercício 17: Falha de unificação por construtores diferentes</h4>
+<p>Tente unificar <span class="math inline">\(\text{int} \to \text{bool}\)</span> com <span class="math inline">\(\text{int} \times \text{bool}\)</span>. Por que a unificação falha?</p>
+<p><strong>Solução:</strong></p>
+<p>Os dois lados têm o mesmo conjunto de tipos componentes (<span class="math inline">\(\text{int}\)</span> e <span class="math inline">\(\text{bool}\)</span>), mas usam construtores de tipo diferentes: o primeiro é um tipo função (<span class="math inline">\(\to\)</span>), o segundo é um tipo produto (<span class="math inline">\(\times\)</span>).</p>
+<p>A unificação estrutural exige que os construtores externos sejam iguais antes de descer aos componentes. Como <span class="math inline">\(\to \neq \times\)</span>, a unificação falha imediatamente:</p>
+<pre class="text"><code>unify(int → bool, int × bool)
+  → falha: construtores incompatíveis</code></pre>
+<p>O resultado é um erro de tipo da forma “expected function, found pair” (ou simétrico). Mensagens de erro de inferência de tipos são frequentemente melhoradas adicionando contexto de onde a expectativa veio: “esperava-se uma função porque foi aplicada a um argumento” vs “encontrou-se um par porque a expressão é uma tupla”.</p>
+<p>A regra geral é: unificação só pode unir tipos se o esqueleto sintático superior for idêntico. Tipos como <span class="math inline">\(\text{int} \to \alpha\)</span> e <span class="math inline">\(\beta \to \text{bool}\)</span> se unificam (ambos são funções), mas <span class="math inline">\(\text{int} \to \alpha\)</span> e <span class="math inline">\(\beta \times \alpha\)</span> não.</p>
+</section>
+<section id="exercício-18-recursão-polimórfica-como-limitação" class="level4" data-number="15.14.5.6">
+<h4 data-number="15.14.5.6" class="anchored" data-anchor-id="exercício-18-recursão-polimórfica-como-limitação"><span class="header-section-number">15.14.5.6</span> Exercício 18: Recursão polimórfica como limitação</h4>
+<p>Considere a definição:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> rec f <span class="ot">=</span> \x <span class="ot">-&gt;</span> <span class="kw">if</span> (algum_teste x) <span class="kw">then</span> x <span class="kw">else</span> f (transformar x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Suponha que <code>transformar : T → T'</code> para tipos diferentes (por exemplo, <code>[T] → [[T]]</code>). Por que HM rejeita essa definição?</p>
+<p><strong>Solução:</strong></p>
+<p>HM trata a regra de <code>let rec</code> da seguinte forma: para tipar o corpo recursivo, a função <code>f</code> é assumida no contexto <strong>com tipo monomórfico</strong> (uma variável fresca <span class="math inline">\(\phi\)</span>, não um esquema generalizado). A generalização ocorre apenas após a inferência completa.</p>
+<p>Em recursão polimórfica genuína, <code>f</code> é usada <strong>dentro do seu próprio corpo</strong> com tipos diferentes. Aqui, no corpo:</p>
+<ul>
+<li><code>x : T</code> (parâmetro);</li>
+<li><code>transformar x : T'</code> (com <span class="math inline">\(T \neq T'\)</span>);</li>
+<li><code>f (transformar x) : ?</code> — tem que ter o mesmo tipo que <code>f</code> (recursão), mas o argumento <code>transformar x</code> tem tipo <span class="math inline">\(T'\)</span> enquanto a chamada externa de <code>f</code> foi com <code>x : T</code>.</li>
+</ul>
+<p>A unificação geraria <span class="math inline">\(T = T'\)</span>, contradição com a hipótese.</p>
+<p>Formalmente: HM é equivalente a System F restrito a polimorfismo predicativo de rank 1. Recursão polimórfica corresponde a um uso de <strong>polimorfismo na recursão</strong> que ultrapassa esse fragmento. A consequência é que essas funções são teoricamente bem tipadas em sistemas mais ricos (Coq, Agda, Haskell com <code>RankNTypes</code> e anotação explícita) mas inferíveis automaticamente em HM puro.</p>
+<p>A solução prática em Haskell é fornecer assinatura explícita:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode haskell code-with-copy"><code class="sourceCode haskell"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ot">f ::</span> <span class="kw">forall</span> a<span class="op">.</span> <span class="dt">SomeClass</span> a <span class="ot">=&gt;</span> a <span class="ot">-&gt;</span> a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A presença da assinatura permite ao GHC verificar que cada chamada recursiva está bem tipada com base na assinatura, em vez de inferir a partir do corpo. Henglein (1993) provou que inferência de tipos com recursão polimórfica é equivalente ao problema da igualdade semântica em álgebras finitas, e portanto indecidível em geral.</p>
+</section>
+<section id="exercício-19-princípio-do-tipo-principal" class="level4" data-number="15.14.5.7">
+<h4 data-number="15.14.5.7" class="anchored" data-anchor-id="exercício-19-princípio-do-tipo-principal"><span class="header-section-number">15.14.5.7</span> Exercício 19: Princípio do tipo principal</h4>
+<p>Enuncie o princípio do tipo principal e ilustre com a expressão <span class="math inline">\(\lambda f. \lambda x.\ f\,(f\,x)\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Princípio do tipo principal</strong> (Hindley, 1969): se uma expressão <span class="math inline">\(e\)</span> é tipável em HM, existe um único tipo <span class="math inline">\(\sigma_p\)</span> (a menos de alpha-equivalência) tal que todo tipo <span class="math inline">\(\sigma\)</span> admissível para <span class="math inline">\(e\)</span> é uma instância de <span class="math inline">\(\sigma_p\)</span>. O Algoritmo <strong>W</strong> computa <span class="math inline">\(\sigma_p\)</span>.</p>
+<p><strong>Aplicação a <span class="math inline">\(\lambda f. \lambda x.\ f\,(f\,x)\)</span></strong>:</p>
+<p>Inferência:</p>
+<ol type="1">
+<li>Frescas <span class="math inline">\(\alpha\)</span> (para <span class="math inline">\(f\)</span>) e <span class="math inline">\(\beta\)</span> (para <span class="math inline">\(x\)</span>).</li>
+<li>Inferência de <span class="math inline">\(f\,x\)</span>: precisa <span class="math inline">\(f : \beta \to \gamma\)</span> para algum <span class="math inline">\(\gamma\)</span>. Unifica <span class="math inline">\(\alpha = \beta \to \gamma\)</span>.</li>
+<li>Inferência de <span class="math inline">\(f\,(f\,x)\)</span>: <span class="math inline">\(f\,x : \gamma\)</span>, e <span class="math inline">\(f\)</span> aplicado a algo de tipo <span class="math inline">\(\gamma\)</span> exige <span class="math inline">\(f : \gamma \to \delta\)</span>. Unifica <span class="math inline">\(\alpha = \gamma \to \delta\)</span>, junto com a anterior <span class="math inline">\(\alpha = \beta \to \gamma\)</span>.</li>
+<li>Da segunda unificação: <span class="math inline">\(\beta \to \gamma = \gamma \to \delta\)</span>, então <span class="math inline">\(\beta = \gamma\)</span> e <span class="math inline">\(\gamma = \delta\)</span>. Logo <span class="math inline">\(\beta = \gamma = \delta\)</span>.</li>
+<li>Tipo de <span class="math inline">\(f\)</span>: <span class="math inline">\(\beta \to \beta\)</span>.</li>
+<li>Tipo de <span class="math inline">\(\lambda x.\ f\,(f\,x)\)</span>: <span class="math inline">\(\beta \to \beta\)</span>.</li>
+<li>Tipo de <span class="math inline">\(\lambda f. \lambda x.\ f\,(f\,x)\)</span>: <span class="math inline">\((\beta \to \beta) \to (\beta \to \beta)\)</span>.</li>
+</ol>
+<p>Generalização: <span class="math inline">\(\sigma_p = \forall \beta.\ (\beta \to \beta) \to \beta \to \beta\)</span>.</p>
+<p>Esse é o tipo de “duplicação funcional” (church numeral 2): aplica uma função duas vezes a um argumento. Qualquer tipo concreto utilizável (<code>(Int → Int) → Int → Int</code>, <code>(Bool → Bool) → Bool → Bool</code>, etc.) é instância desse tipo principal.</p>
+<p>O princípio do tipo principal é uma propriedade matemática poderosa: garante que o sistema HM tem inferência completa e sem ambiguidade. Sistemas mais expressivos (System F com inferência) perdem essa propriedade.</p>
+</section>
+<section id="exercício-20-algoritmo-w-versus-algoritmo-m" class="level4" data-number="15.14.5.8">
+<h4 data-number="15.14.5.8" class="anchored" data-anchor-id="exercício-20-algoritmo-w-versus-algoritmo-m"><span class="header-section-number">15.14.5.8</span> Exercício 20: Algoritmo <strong>W</strong> versus Algoritmo M</h4>
+<p>Compare o estilo de inferência do Algoritmo <strong>W</strong> (síntese, bottom-up) com o do Algoritmo <strong>M</strong> ( herança, top-down) usando como exemplo a expressão <code>(\x -&gt; x) 5</code>.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Algoritmo </strong>W** (síntese)**: começa pela folha, sintetizando tipos.</p>
+<ol type="1">
+<li>Inferência de <span class="math inline">\(\lambda x.\ x\)</span> (sem contexto externo): tipo <span class="math inline">\(\alpha \to \alpha\)</span>.</li>
+<li>Inferência de <code>5</code>: tipo <code>int</code>.</li>
+<li>Aplicação: cria fresca <span class="math inline">\(\beta\)</span> para o resultado, unifica <span class="math inline">\(\alpha \to \alpha\)</span> com <span class="math inline">\(\text{int} \to \beta\)</span>. Resultado: <span class="math inline">\(\alpha = \text{int}, \beta = \text{int}\)</span>. Tipo final: <code>int</code>.</li>
+</ol>
+<p><strong>Algoritmo </strong>M** ( herança)**: começa pela raiz, descendo expectativas.</p>
+<ol type="1">
+<li>A expressão completa é uma aplicação. Suponha que se queira tipar com expectativa <span class="math inline">\(\rho\)</span> (digamos, <span class="math inline">\(\rho\)</span> é uma fresca, pois não há anotação externa).</li>
+<li>Aplicação: o tipo da função deve ser <span class="math inline">\(\tau_{\text{arg}} \to \rho\)</span> para algum <span class="math inline">\(\tau_{\text{arg}}\)</span>. Recursa em <span class="math inline">\(\lambda x. x\)</span> com expectativa <span class="math inline">\(\tau_{\text{arg}} \to \rho\)</span>.</li>
+<li>Inferência de <span class="math inline">\(\lambda x.\ x\)</span> com expectativa <span class="math inline">\(\tau_{\text{arg}} \to \rho\)</span>:
+<ul>
+<li>Coloca <span class="math inline">\(x : \tau_{\text{arg}}\)</span> no contexto.</li>
+<li>Recursa em <span class="math inline">\(x\)</span> com expectativa <span class="math inline">\(\rho\)</span>. Regra Var: tipo de <span class="math inline">\(x\)</span> é <span class="math inline">\(\tau_{\text{arg}}\)</span>. Unifica <span class="math inline">\(\tau_{\text{arg}} = \rho\)</span>.</li>
+</ul></li>
+<li>Recursa em <code>5</code> com expectativa <span class="math inline">\(\tau_{\text{arg}}\)</span>. Unifica <span class="math inline">\(\tau_{\text{arg}} = \text{int}\)</span>.</li>
+<li>Junto: <span class="math inline">\(\rho = \tau_{\text{arg}} = \text{int}\)</span>.</li>
+</ol>
+<p>Ambos os algoritmos chegam ao mesmo tipo <code>int</code>. As diferenças práticas são:</p>
+<ul>
+<li><strong>Mensagens de erro</strong>: <strong>M</strong> reporta o erro mais próximo da causa real, porque o teste de unificação acontece na descida. <strong>W</strong> frequentemente reporta erros longe da fonte, porque acumula restrições e só falha ao tentar unificá-las.</li>
+<li><strong>Eficiência</strong>: <strong>M</strong> pode falhar mais cedo, evitando trabalho desnecessário. Porém em padrões comuns, ambos são similares.</li>
+<li><strong>Implementação</strong>: <strong>W</strong> é mais simples de descrever; <strong>M</strong> requer carregar uma expectativa pelo recurso.</li>
+</ul>
+<p><strong>OCaml</strong> e <strong>Haskell</strong> modernos usam variantes que combinam ambos os estilos (inferência <strong>bidirecional</strong>), com modo de herança para subexpressões com tipo esperado e modo de síntese quando o tipo precisa ser inferido. Essa combinação produz mensagens de erro mais úteis do que qualquer um dos algoritmos puros.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

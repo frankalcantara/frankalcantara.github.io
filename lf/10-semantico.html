@@ -547,8 +547,11 @@ window.Quarto = {
   <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">12.8</span> Exercícios</a>
   <ul class="collapse">
   <li><a href="#análise-semântica-básica" id="toc-análise-semântica-básica" class="nav-link" data-scroll-target="#análise-semântica-básica"><span class="header-section-number">12.8.1</span> Análise semântica básica</a></li>
-  <li><a href="#julgamentos-de-tipo" id="toc-julgamentos-de-tipo" class="nav-link" data-scroll-target="#julgamentos-de-tipo"><span class="header-section-number">12.8.2</span> Julgamentos de tipo</a></li>
-  <li><a href="#otimização-e-geração-intermediária-semântica-denotacional---otimização" id="toc-otimização-e-geração-intermediária-semântica-denotacional---otimização" class="nav-link" data-scroll-target="#otimização-e-geração-intermediária-semântica-denotacional---otimização"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária (semântica denotacional - otimização)</a></li>
+  <li><a href="#gramáticas-de-atributos-1" id="toc-gramáticas-de-atributos-1" class="nav-link" data-scroll-target="#gramáticas-de-atributos-1"><span class="header-section-number">12.8.2</span> Gramáticas de atributos</a></li>
+  <li><a href="#tabela-de-símbolos-e-escopos" id="toc-tabela-de-símbolos-e-escopos" class="nav-link" data-scroll-target="#tabela-de-símbolos-e-escopos"><span class="header-section-number">12.8.3</span> Tabela de símbolos e escopos</a></li>
+  <li><a href="#verificação-de-tipos-e-julgamentos" id="toc-verificação-de-tipos-e-julgamentos" class="nav-link" data-scroll-target="#verificação-de-tipos-e-julgamentos"><span class="header-section-number">12.8.4</span> Verificação de tipos e julgamentos</a></li>
+  <li><a href="#polimorfismo-e-regras-de-tipo" id="toc-polimorfismo-e-regras-de-tipo" class="nav-link" data-scroll-target="#polimorfismo-e-regras-de-tipo"><span class="header-section-number">12.8.5</span> Polimorfismo e regras de tipo</a></li>
+  <li><a href="#tradução-para-representação-intermediária" id="toc-tradução-para-representação-intermediária" class="nav-link" data-scroll-target="#tradução-para-representação-intermediária"><span class="header-section-number">12.8.6</span> Tradução para representação intermediária</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -2803,68 +2806,350 @@ Figure&nbsp;12.12
 </section>
 <section id="exercícios" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">12.8</span> Exercícios</h2>
+<p>Os exercícios a seguir foram organizados nos eixos centrais da análise semântica desenvolvidos neste capítulo: gramáticas de atributos, tabela de símbolos, verificação de tipos e tradução para representações intermediárias. Cada um deles foi resolvido para servir de referência durante o estudo.</p>
 <section id="análise-semântica-básica" class="level3" data-number="12.8.1">
 <h3 data-number="12.8.1" class="anchored" data-anchor-id="análise-semântica-básica"><span class="header-section-number">12.8.1</span> Análise semântica básica</h3>
-<p>Dado o programa:</p>
-<pre class="text"><code>x := 3;
-y := x * 2;
-x := x + y;</code></pre>
-<p>Trace a execução usando semântica denotacional, mostrando o estado após cada comando.</p>
-<p><strong>Solução</strong>:</p>
-<ul>
-<li><span class="math inline">\(\sigma_0 = \{\}\)</span> (estado inicial);</li>
-<li><span class="math inline">\(\sigma_1 = [\![x := 3]\!]\sigma_0 = \{x \mapsto 3\}\)</span>;</li>
-<li><span class="math inline">\(\sigma_2 = [\![y := x * 2]\!]\sigma_1 = \{x \mapsto 3, y \mapsto 6\}\)</span>;</li>
-<li><span class="math inline">\(\sigma_3 = [\![x := x + y]\!]\sigma_2 = \{x \mapsto 9, y \mapsto 6\}\)</span>.</li>
-</ul>
-</section>
-<section id="julgamentos-de-tipo" class="level3" data-number="12.8.2">
-<h3 data-number="12.8.2" class="anchored" data-anchor-id="julgamentos-de-tipo"><span class="header-section-number">12.8.2</span> Julgamentos de tipo</h3>
-<p>Verifique se o seguinte programa está bem tipado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> b <span class="op">=</span> <span class="op">(</span>x <span class="op">&gt;</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="cf">if</span> b then x <span class="op">+</span> <span class="dv">1</span> <span class="cf">else</span> x <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Solução</strong>:</p>
-<ol type="1">
-<li><span class="math inline">\(x : \text{int}\)</span>;</li>
-<li><span class="math inline">\(x &gt; 0 : \text{bool}\)</span> (comparação de inteiros);</li>
-<li><span class="math inline">\(b : \text{bool}\)</span>;</li>
-<li><span class="math inline">\(x + 1 : \text{int}\)</span>;</li>
-<li><span class="math inline">\(x - 1 : \text{int}\)</span>;</li>
-<li><span class="math inline">\(\text{if } b \text{ then } \text{int} \text{ else } \text{int} : \text{int}\)</span>;</li>
-<li><span class="math inline">\(y : \text{int}\)</span>.</li>
+<section id="exercício-1-estática-ou-dinâmica" class="level4" data-number="12.8.1.1">
+<h4 data-number="12.8.1.1" class="anchored" data-anchor-id="exercício-1-estática-ou-dinâmica"><span class="header-section-number">12.8.1.1</span> Exercício 1: Estática ou dinâmica?</h4>
+<p>Para cada uma das verificações abaixo, classifique como pertencente à análise <strong>semântica estática</strong>, <strong>semântica dinâmica</strong>, ou <strong>não verificável</strong> em qualquer das duas:</p>
+<ol type="a">
+<li>uma variável é declarada antes de ser usada;</li>
+<li>um índice de array está dentro dos limites do array;</li>
+<li>um ponteiro não é nulo no momento da desreferenciação;</li>
+<li>dois operandos de soma têm tipos compatíveis;</li>
+<li>uma função recursiva sempre termina.</li>
 </ol>
-<p>Programa bem tipado!</p>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>Estática</strong>: a presença de uma declaração no escopo é decidível em tempo de compilação consultando a tabela de símbolos.</p></li>
+<li><p><strong>Dinâmica</strong>: o índice geralmente depende de valores calculados em tempo de execução. Compiladores podem provar a propriedade estaticamente em casos restritos (índice constante), mas o caso geral é dinâmico.</p></li>
+<li><p><strong>Dinâmica</strong>: a nulidade do ponteiro depende do fluxo de execução. Linguagens como Rust elevam parte dessa verificação ao nível estático via tipos como <code>Option&lt;T&gt;</code>, mas em C/C++ a verificação é tipicamente dinâmica.</p></li>
+<li><p><strong>Estática</strong>: tipos de operandos são deriváveis pelas regras de tipagem, sem necessidade de execução.</p></li>
+<li><p><strong>Não verificável</strong> em geral: a terminação de programas é equivalente ao problema da parada e, portanto, indecidível. Compiladores podem provar terminação em fragmentos restritos da linguagem.</p></li>
+</ol>
 </section>
-<section id="otimização-e-geração-intermediária-semântica-denotacional---otimização" class="level3" data-number="12.8.3">
-<h3 data-number="12.8.3" class="anchored" data-anchor-id="otimização-e-geração-intermediária-semântica-denotacional---otimização"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária (semântica denotacional - otimização)</h3>
-<p>Identifique otimizações possíveis para:</p>
-<pre class="text"><code>x := 10;
-y := x + 0;
-z := y * 1;
-w := z - z;</code></pre>
-<p><strong>Solução</strong>: aplicando regras semânticas de identidade:</p>
+<section id="exercício-2-limites-das-gramáticas-livres-de-contexto" class="level4" data-number="12.8.1.2">
+<h4 data-number="12.8.1.2" class="anchored" data-anchor-id="exercício-2-limites-das-gramáticas-livres-de-contexto"><span class="header-section-number">12.8.1.2</span> Exercício 2: Limites das gramáticas livres de contexto</h4>
+<p>Explique por que uma gramática livre de contexto, sozinha, não consegue rejeitar o programa abaixo:</p>
+<pre class="text"><code>{
+  int x;
+  int x;
+}</code></pre>
+<p><strong>Solução:</strong></p>
+<p>Uma gramática livre de contexto descreve apenas a estrutura sintática das produções, sem capacidade de manter um conjunto de identificadores já vistos. Para rejeitar a redeclaração, seria preciso uma regra como “o identificador no segundo <code>int x;</code> não pode coincidir com nenhum identificador previamente declarado no mesmo escopo”, o que envolve quantificação sobre estados de uma tabela de símbolos.</p>
+<p>Esse tipo de restrição é <strong>sensível ao contexto</strong>, e gramáticas dessa classe são computacionalmente caras de processar. A solução prática adotada pelos compiladores é: usar uma gramática livre de contexto para a sintaxe e relegar essa classe de verificação à fase de análise semântica, em que a tabela de símbolos é consultada e atualizada durante o percurso da árvore.</p>
+</section>
+<section id="exercício-3-erros-que-escapam-da-análise-estática" class="level4" data-number="12.8.1.3">
+<h4 data-number="12.8.1.3" class="anchored" data-anchor-id="exercício-3-erros-que-escapam-da-análise-estática"><span class="header-section-number">12.8.1.3</span> Exercício 3: Erros que escapam da análise estática</h4>
+<p>Para cada situação, indique se a análise estática típica de um compilador como <code>gcc</code> ou <code>clang</code> consegue detectá-la, e justifique:</p>
+<ol type="a">
+<li>divisão por zero quando o divisor é constante e igual a zero;</li>
+<li>divisão por zero quando o divisor depende de entrada do usuário;</li>
+<li>acesso a variável não inicializada;</li>
+<li>vazamento de memória (alocação sem <code>free</code>).</li>
+</ol>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>Detectável</strong>: <code>clang</code> e <code>gcc</code> emitem aviso para <code>x / 0</code> quando o <code>0</code> é literal. Isso corresponde a uma análise de constantes triviais.</p></li>
+<li><p><strong>Não detectável</strong> em geral. Requer análise de fluxo de dados acoplada a verificação de range, e mesmo assim só em casos onde o range pode ser provado finito. No caso geral, depende da entrada e portanto é indecidível.</p></li>
+<li><p><strong>Parcialmente detectável</strong>: análise de fluxo de dados (<code>-Wuninitialized</code> em GCC) detecta casos simples, mas falha quando a inicialização depende de fluxo complexo. Ferramentas como Clang Static Analyzer fazem análise mais profunda, ainda assim incompleta.</p></li>
+<li><p><strong>Parcialmente detectável</strong>: ferramentas como Valgrind operam em tempo de execução; análise estática profunda (Coverity, ferramentas de propriedade ou ownership como em Rust) detecta casos comuns. Não há solução estática completa para C/C++.</p></li>
+</ol>
+</section>
+</section>
+<section id="gramáticas-de-atributos-1" class="level3" data-number="12.8.2">
+<h3 data-number="12.8.2" class="anchored" data-anchor-id="gramáticas-de-atributos-1"><span class="header-section-number">12.8.2</span> Gramáticas de atributos</h3>
+<section id="exercício-4-sintetizado-ou-herdado" class="level4" data-number="12.8.2.1">
+<h4 data-number="12.8.2.1" class="anchored" data-anchor-id="exercício-4-sintetizado-ou-herdado"><span class="header-section-number">12.8.2.1</span> Exercício 4: Sintetizado ou herdado?</h4>
+<p>Considere a gramática para declarações de variáveis:</p>
+<pre class="text"><code>Decl  -&gt; Tipo Lista
+Tipo  -&gt; int | float
+Lista -&gt; id , Lista | id</code></pre>
+<p>Suponha que cada <code>id</code> deve receber o tipo declarado em <code>Tipo</code>. Para cada atributo abaixo, classifique como <strong>sintetizado</strong> ou <strong>herdado</strong>:</p>
+<ol type="a">
+<li><code>Tipo.tipo</code> em <code>Tipo -&gt; int</code>;</li>
+<li><code>Lista.tipo_herdado</code> em <code>Decl -&gt; Tipo Lista</code>;</li>
+<li><code>Lista.tipo_herdado</code> em <code>Lista -&gt; id , Lista</code>;</li>
+<li><code>Decl.contagem</code>, total de identificadores declarados.</li>
+</ol>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>Sintetizado</strong>: o atributo <code>tipo</code> flui da folha (<code>int</code>) para o nó <code>Tipo</code>, ou seja, de baixo para cima. É a forma natural de expressar “o tipo é o que a produção do <code>Tipo</code> define”.</p></li>
+<li><p><strong>Herdado</strong>: <code>Lista.tipo_herdado</code> recebe seu valor de <code>Tipo.tipo</code>, que está à esquerda na produção do pai <code>Decl</code>. A informação flui de fora para dentro.</p></li>
+<li><p><strong>Herdado</strong>: o <code>Lista</code> recursivo recebe o <code>tipo_herdado</code> do <code>Lista</code> pai, propagando o tipo para todos os identificadores da cauda da lista.</p></li>
+<li><p><strong>Sintetizado</strong>: a contagem é calculada somando 1 ao valor da contagem da <code>Lista</code> filha, fluindo de baixo para cima até a raiz <code>Decl</code>.</p></li>
+</ol>
+</section>
+<section id="exercício-5-cálculo-de-altura-de-árvore-aritmética" class="level4" data-number="12.8.2.2">
+<h4 data-number="12.8.2.2" class="anchored" data-anchor-id="exercício-5-cálculo-de-altura-de-árvore-aritmética"><span class="header-section-number">12.8.2.2</span> Exercício 5: Cálculo de altura de árvore aritmética</h4>
+<p>Construa uma gramática de atributos que, para a gramática:</p>
+<pre class="text"><code>E -&gt; E + T | T
+T -&gt; T * F | F
+F -&gt; ( E ) | n</code></pre>
+<p>calcule o atributo <code>altura</code> de cada nó da árvore de derivação. A altura de uma folha é <span class="math inline">\(0\)</span>, e a altura de um nó interno é <span class="math inline">\(1 + \max(\text{altura dos filhos})\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Todos os atributos são sintetizados:</p>
+<pre class="text"><code>E   -&gt; E1 + T     { E.altura := 1 + max(E1.altura, T.altura) }
+E   -&gt; T          { E.altura := T.altura }
+T   -&gt; T1 * F     { T.altura := 1 + max(T1.altura, F.altura) }
+T   -&gt; F          { T.altura := F.altura }
+F   -&gt; ( E )      { F.altura := 1 + E.altura }
+F   -&gt; n          { F.altura := 0 }</code></pre>
+<p>Esta é uma gramática <strong>S-atribuída</strong>, pois usa apenas atributos sintetizados. A avaliação ocorre durante uma análise <em>bottom-up</em> simples.</p>
+</section>
+<section id="exercício-6-s-atribuída-l-atribuída-ou-nenhuma" class="level4" data-number="12.8.2.3">
+<h4 data-number="12.8.2.3" class="anchored" data-anchor-id="exercício-6-s-atribuída-l-atribuída-ou-nenhuma"><span class="header-section-number">12.8.2.3</span> Exercício 6: S-atribuída, L-atribuída ou nenhuma?</h4>
+<p>Classifique cada gramática como S-atribuída, L-atribuída (e não S) ou nenhuma das duas. Justifique.</p>
+<ol type="a">
+<li>Produção <code>A -&gt; B C</code> com regras <code>B.x := A.y; C.z := B.w</code>.</li>
+<li>Produção <code>A -&gt; B C</code> com regras <code>A.x := B.y + C.z</code>.</li>
+<li>Produção <code>A -&gt; B C</code> com regras <code>B.x := C.y</code>.</li>
+</ol>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>L-atribuída</strong>. <code>B.x</code> é herdado e depende de <code>A.y</code> (atributo do pai), o que é permitido. <code>C.z</code> é herdado e depende de <code>B.w</code>, atributo de um símbolo à esquerda na produção, também permitido. Não é S-atribuída porque tem atributos herdados.</p></li>
+<li><p><strong>S-atribuída</strong> (e portanto também L-atribuída). Apenas atributos sintetizados são definidos.</p></li>
+<li><p><strong>Nenhuma das duas</strong>. <code>B.x</code> é herdado e depende de <code>C.y</code>, atributo de um símbolo <strong>à direita</strong> de <code>B</code> na produção. Em uma análise da esquerda para a direita, <code>C.y</code> ainda não estará disponível quando precisarmos calcular <code>B.x</code>. Esta é uma dependência circular potencial, ou no mínimo exige uma estratégia de avaliação multipasso.</p></li>
+</ol>
+</section>
+<section id="exercício-7-detectando-circularidade" class="level4" data-number="12.8.2.4">
+<h4 data-number="12.8.2.4" class="anchored" data-anchor-id="exercício-7-detectando-circularidade"><span class="header-section-number">12.8.2.4</span> Exercício 7: Detectando circularidade</h4>
+<p>A gramática abaixo apresenta uma circularidade em alguma de suas regras. Identifique-a:</p>
+<pre class="text"><code>A -&gt; B    { A.x := B.y; B.z := A.x; B.y := B.z + 1 }</code></pre>
+<p><strong>Solução:</strong></p>
+<p>A regra <code>B.y := B.z + 1</code> define <code>B.y</code> em termos de <code>B.z</code>. A regra <code>B.z := A.x</code> define <code>B.z</code> em função de <code>A.x</code>, que por sua vez é definido por <code>A.x := B.y</code>. Encadeando: <code>B.y</code> precisa de <code>B.z</code>, <code>B.z</code> precisa de <code>A.x</code>, <code>A.x</code> precisa de <code>B.y</code>. Há um ciclo de dependências:</p>
+<p><span class="math display">\[B.y \rightarrow B.z \rightarrow A.x \rightarrow B.y\]</span></p>
+<p>Nenhum dos três pode ser calculado sem que os outros já tenham valor. A gramática é <strong>circular</strong> e portanto não pertence a nenhuma das classes avaliáveis em tempo finito sem reescrita.</p>
+</section>
+<section id="exercício-8-de-s-atribuída-para-l-atribuída" class="level4" data-number="12.8.2.5">
+<h4 data-number="12.8.2.5" class="anchored" data-anchor-id="exercício-8-de-s-atribuída-para-l-atribuída"><span class="header-section-number">12.8.2.5</span> Exercício 8: De S-atribuída para L-atribuída</h4>
+<p>A gramática abaixo é S-atribuída. Reescreva-a como L-atribuída sem alterar o significado computacional:</p>
+<pre class="text"><code>Decl -&gt; Lista Tipo    { propagar Tipo.tipo para todos os id em Lista }
+Tipo -&gt; int           { Tipo.tipo := 'int' }</code></pre>
+<p><strong>Solução:</strong></p>
+<p>A dificuldade é que, na ordem da produção <code>Decl -&gt; Lista Tipo</code>, o atributo <code>Tipo.tipo</code> aparece <strong>depois</strong> de <code>Lista</code>. Em uma travessia da esquerda para a direita, ainda não conhecemos o tipo quando processamos os identificadores. A reescrita inverte a ordem dos símbolos:</p>
+<pre class="text"><code>Decl -&gt; Tipo Lista    { Lista.tipo_herdado := Tipo.tipo }
+Tipo -&gt; int           { Tipo.tipo := 'int' }
+Lista -&gt; id , Lista1  { adicionar(id.lexval, Lista.tipo_herdado);
+                        Lista1.tipo_herdado := Lista.tipo_herdado }
+Lista -&gt; id           { adicionar(id.lexval, Lista.tipo_herdado) }</code></pre>
+<p>Agora o atributo herdado <code>tipo_herdado</code> flui de cima para baixo e da esquerda para a direita, satisfazendo a definição L-atribuída.</p>
+</section>
+</section>
+<section id="tabela-de-símbolos-e-escopos" class="level3" data-number="12.8.3">
+<h3 data-number="12.8.3" class="anchored" data-anchor-id="tabela-de-símbolos-e-escopos"><span class="header-section-number">12.8.3</span> Tabela de símbolos e escopos</h3>
+<section id="exercício-9-trace-de-operações-de-escopo" class="level4" data-number="12.8.3.1">
+<h4 data-number="12.8.3.1" class="anchored" data-anchor-id="exercício-9-trace-de-operações-de-escopo"><span class="header-section-number">12.8.3.1</span> Exercício 9: Trace de operações de escopo</h4>
+<p>Considere o programa:</p>
+<pre class="text"><code>{
+  int x;
+  {
+    int y;
+    int x;
+    y := x;
+  }
+  x := 10;
+}</code></pre>
+<p>Liste as operações sobre a tabela de símbolos durante a análise: quando uma entrada é criada, quando um escopo é aberto/fechado, e qual <code>x</code> cada uso resolve.</p>
+<p><strong>Solução:</strong></p>
+<pre class="text"><code>abrir_escopo(0)
+inserir(x_0, int)              # x do escopo 0
+abrir_escopo(1)
+inserir(y_1, int)              # y do escopo 1
+inserir(x_1, int)              # x do escopo 1, sombreia x_0
+buscar(x) -&gt; x_1               # uso em y := x resolve para x_1
+buscar(y) -&gt; y_1               # uso em y := x resolve para y_1
+fechar_escopo(1)               # remove y_1 e x_1
+buscar(x) -&gt; x_0               # uso em x := 10 resolve para x_0
+fechar_escopo(0)</code></pre>
+<p>A regra de resolução é a mais próxima ao uso (escopo mais interno primeiro). O <code>x</code> interno <strong>sombreia</strong> o <code>x</code> externo durante a vigência do escopo 1.</p>
+</section>
+<section id="exercício-10-erro-de-redeclaração" class="level4" data-number="12.8.3.2">
+<h4 data-number="12.8.3.2" class="anchored" data-anchor-id="exercício-10-erro-de-redeclaração"><span class="header-section-number">12.8.3.2</span> Exercício 10: Erro de redeclaração</h4>
+<p>Para o trecho:</p>
+<pre class="text"><code>{
+  int x;
+  float x;
+}</code></pre>
+<p>descreva o que a verificação semântica deve fazer e qual mensagem de erro emitir.</p>
+<p><strong>Solução:</strong></p>
+<p>Ao processar a segunda declaração <code>float x</code>, o analisador semântico:</p>
+<ol type="1">
+<li>avalia o tipo (<code>float</code>);</li>
+<li>tenta inserir <code>x</code> na tabela de símbolos do escopo atual com tipo <code>float</code>;</li>
+<li>encontra <code>x</code> já presente no mesmo escopo, originalmente com tipo <code>int</code>;</li>
+<li>emite erro de redeclaração: <code>erro: identificador 'x' redeclarado no mesmo escopo (declaração anterior em &lt;linha&gt;)</code>.</li>
+</ol>
+<p>Há duas estratégias após o erro: descartar a segunda declaração e prosseguir (recuperação por ignorar) ou substituir a entrada da tabela e seguir adiante usando o novo tipo (recuperação otimista). A primeira é mais comum, pois evita propagar consequências do erro pelo resto da análise.</p>
+</section>
+<section id="exercício-11-resolução-em-escopos-aninhados" class="level4" data-number="12.8.3.3">
+<h4 data-number="12.8.3.3" class="anchored" data-anchor-id="exercício-11-resolução-em-escopos-aninhados"><span class="header-section-number">12.8.3.3</span> Exercício 11: Resolução em escopos aninhados</h4>
+<p>Para o programa abaixo, em qual escopo cada uso de <code>n</code> é resolvido?</p>
+<pre class="text"><code>int n;            // &lt;a&gt;
+fn f() {
+  int n;          // &lt;b&gt;
+  while (n &gt; 0) { // &lt;use 1&gt;
+    int n;        // &lt;c&gt;
+    n := n - 1;   // &lt;use 2 e 3&gt;
+  }
+}</code></pre>
+<p><strong>Solução:</strong></p>
 <ul>
-<li><span class="math inline">\(y := x + 0\)</span> pode ser simplificado para <span class="math inline">\(y := x\)</span>;</li>
-<li><span class="math inline">\(z := y * 1\)</span> pode ser simplificado para <span class="math inline">\(z := y\)</span>;</li>
-<li><span class="math inline">\(w := z - z\)</span> pode ser simplificado para <span class="math inline">\(w := 0\)</span>.</li>
+<li><p><strong>&lt;use 1&gt;</strong> (<code>n &gt; 0</code> na condição do <code>while</code>): o escopo do <code>while</code> ainda não introduziu o <code>n</code> interno. A busca sobe até o escopo da função e resolve para <strong><b></b></strong><b>.</b></p></li><b>
+<li><p><strong>&lt;use 2&gt;</strong> (lado esquerdo de <code>n := n - 1</code>): está dentro do bloco do <code>while</code>, no escopo em que o <code>n</code> de <strong><c></c></strong> está visível. Resolve para <strong><c></c></strong>.</p></li>
+<li><p><strong>&lt;use 3&gt;</strong> (lado direito da mesma atribuição): mesmo escopo, resolve para <strong><c></c></strong>.</p></li>
+</b></ul><b>
+<p>A entrada <code>&lt;a&gt;</code> (global) é sombreada por <code>&lt;b&gt;</code> dentro de <code>f</code>, que por sua vez é sombreada por <code>&lt;c&gt;</code> dentro do laço.</p>
+</b></section><b>
+</b></section><b>
+<section id="verificação-de-tipos-e-julgamentos" class="level3" data-number="12.8.4">
+<h3 data-number="12.8.4" class="anchored" data-anchor-id="verificação-de-tipos-e-julgamentos"><span class="header-section-number">12.8.4</span> Verificação de tipos e julgamentos</h3>
+<section id="exercício-12-derivação-de-tipos" class="level4" data-number="12.8.4.1">
+<h4 data-number="12.8.4.1" class="anchored" data-anchor-id="exercício-12-derivação-de-tipos"><span class="header-section-number">12.8.4.1</span> Exercício 12: Derivação de tipos</h4>
+<p>Construa a árvore de derivação para o julgamento <span class="math inline">\(\Gamma \vdash (x + 3) &gt; 0 : \text{bool}\)</span>, em que <span class="math inline">\(\Gamma = \{x : \text{int}\}\)</span>. Use as regras: constante (<code>Const</code>), variável (<code>Var</code>), operador <code>+</code> (Soma) e operador <code>&gt;</code> (Comparação).</p>
+<p><strong>Solução:</strong></p>
+<p><span class="math display">\[\frac{
+  \dfrac{
+    \dfrac{x : \text{int} \in \Gamma}{\Gamma \vdash x : \text{int}} (\text{Var})
+    \quad
+    \dfrac{}{\Gamma \vdash 3 : \text{int}} (\text{Const})
+  }{
+    \Gamma \vdash x + 3 : \text{int}
+  } (\text{Soma})
+  \quad
+  \dfrac{}{\Gamma \vdash 0 : \text{int}} (\text{Const})
+}{
+  \Gamma \vdash (x + 3) &gt; 0 : \text{bool}
+} (\text{Comparação})\]</span></p>
+<p>A folha mais à direita é axiomática (<code>Const</code>); a outra folha consulta o contexto (<code>Var</code>); o nó intermediário aplica a regra do operador <code>+</code> retornando <code>int</code>; a raiz aplica a regra de comparação, que recebe dois <code>int</code> e produz <code>bool</code>.</p>
+</section>
+<section id="exercício-13-identificando-erros-de-tipo" class="level4" data-number="12.8.4.2">
+<h4 data-number="12.8.4.2" class="anchored" data-anchor-id="exercício-13-identificando-erros-de-tipo"><span class="header-section-number">12.8.4.2</span> Exercício 13: Identificando erros de tipo</h4>
+<p>Para cada expressão abaixo no contexto <span class="math inline">\(\Gamma = \{x : \text{int}, b : \text{bool}, s : \text{string}\}\)</span>, indique se está bem tipada e, em caso de erro, qual regra falha:</p>
+<ol type="a">
+<li><code>x + 1</code></li>
+<li><code>b + 1</code></li>
+<li><code>x &gt; 0 &amp;&amp; b</code></li>
+<li><code>s + s</code></li>
+</ol>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>Bem tipada</strong>: <code>Var</code> produz <code>x : int</code>, <code>Const</code> produz <code>1 : int</code>, <code>Soma</code> aceita dois <code>int</code> e retorna <code>int</code>.</p></li>
+<li><p><strong>Erro</strong>: a regra <code>Soma</code> exige operandos <code>int</code> (ou compatíveis numéricos). O operando esquerdo tem tipo <code>bool</code>, que não satisfaz a premissa.</p></li>
+<li><p><strong>Bem tipada</strong>: <code>x &gt; 0</code> produz <code>bool</code>; <code>b</code> é <code>bool</code>. O operador <code>&amp;&amp;</code> aceita dois <code>bool</code> e retorna <code>bool</code>.</p></li>
+<li><p><strong>Depende da linguagem</strong>: em C, <code>s + s</code> envolve aritmética de ponteiros e gera erro semântico (soma entre dois <code>char*</code> é proibida). Em Java/Python, o operador <code>+</code> está sobrecarregado para <code>string</code> e a expressão é válida, retornando concatenação. A regra que decide o caso é a <strong>regra do operador</strong>, cuja semântica varia conforme o sistema de tipos da linguagem.</p></li>
+</ol>
+</section>
+<section id="exercício-14-coerção-numérica-implícita" class="level4" data-number="12.8.4.3">
+<h4 data-number="12.8.4.3" class="anchored" data-anchor-id="exercício-14-coerção-numérica-implícita"><span class="header-section-number">12.8.4.3</span> Exercício 14: Coerção numérica implícita</h4>
+<p>Em uma linguagem com hierarquia <code>int &lt;: float &lt;: double</code>, derive o tipo de <code>x + y + z</code> no contexto <span class="math inline">\(\{x : \text{int}, y : \text{float}, z : \text{double}\}\)</span>, indicando onde ocorrem coerções.</p>
+<p><strong>Solução:</strong></p>
+<p>Avaliando da esquerda para a direita, com associatividade <code>(x + y) + z</code>:</p>
+<ol type="1">
+<li><p><code>x + y</code>: <span class="math inline">\(\Gamma \vdash x : \text{int}\)</span>, <span class="math inline">\(\Gamma \vdash y : \text{float}\)</span>. Aplica-se a regra de coerção: <code>int</code> é promovido a <code>float</code>. Resultado: <code>float</code>.</p></li>
+<li><p><code>(x + y) + z</code>: <span class="math inline">\(\Gamma \vdash (x + y) : \text{float}\)</span>, <span class="math inline">\(\Gamma \vdash z : \text{double}\)</span>. Promove-se <code>float</code> para <code>double</code>. Resultado: <code>double</code>.</p></li>
+</ol>
+<p>Tipo final: <code>double</code>. As coerções inseridas são: <code>int → float</code> antes da primeira soma e <code>float → double</code> antes da segunda. A AST decorada teria nós explícitos de coerção no caminho de cada operando promovido.</p>
+</section>
+<section id="exercício-15-equivalência-nominal-versus-estrutural" class="level4" data-number="12.8.4.4">
+<h4 data-number="12.8.4.4" class="anchored" data-anchor-id="exercício-15-equivalência-nominal-versus-estrutural"><span class="header-section-number">12.8.4.4</span> Exercício 15: Equivalência nominal versus estrutural</h4>
+<p>Considere as duas declarações:</p>
+<pre class="text"><code>type Ponto = { x: float, y: float };
+type Vetor = { x: float, y: float };</code></pre>
+<p>Em uma linguagem com <strong>equivalência nominal</strong>, um valor de tipo <code>Ponto</code> pode ser passado a uma função que espera <code>Vetor</code>? E em uma linguagem com <strong>equivalência estrutural</strong>?</p>
+<p><strong>Solução:</strong></p>
+<p>Em <strong>equivalência nominal</strong>, dois tipos são iguais somente se compartilham o mesmo nome. <code>Ponto</code> e <code>Vetor</code> são tipos distintos, ainda que tenham a mesma estrutura, e a passagem é rejeitada.</p>
+<p>Em <strong>equivalência estrutural</strong>, dois tipos são iguais se têm a mesma estrutura, ou seja, os mesmos campos com os mesmos tipos. <code>Ponto</code> e <code>Vetor</code> são considerados o mesmo tipo, e a passagem é aceita.</p>
+<p>Linguagens nominalmente tipadas (Java, C++, C#) tipicamente exigem conversão explícita ou herança. Linguagens estruturalmente tipadas (TypeScript, OCaml para tipos de registro) aceitam o uso transparentemente. Cada escolha tem trade-offs: nominal protege a intenção do programador (um <code>Ponto</code> não é um <code>Vetor</code> mesmo que pareça); estrutural maximiza reuso.</p>
+</section>
+</section>
+<section id="polimorfismo-e-regras-de-tipo" class="level3" data-number="12.8.5">
+<h3 data-number="12.8.5" class="anchored" data-anchor-id="polimorfismo-e-regras-de-tipo"><span class="header-section-number">12.8.5</span> Polimorfismo e regras de tipo</h3>
+<section id="exercício-16-identificando-o-tipo-de-polimorfismo" class="level4" data-number="12.8.5.1">
+<h4 data-number="12.8.5.1" class="anchored" data-anchor-id="exercício-16-identificando-o-tipo-de-polimorfismo"><span class="header-section-number">12.8.5.1</span> Exercício 16: Identificando o tipo de polimorfismo</h4>
+<p>Para cada situação, identifique se exemplifica polimorfismo <strong>ad-hoc</strong>, <strong>paramétrico</strong> ou de <strong>subtipo</strong>:</p>
+<ol type="a">
+<li>um operador <code>+</code> que funciona para <code>int</code>, <code>float</code> e <code>string</code>;</li>
+<li>uma função <code>length(lista)</code> que aceita qualquer lista e retorna seu tamanho;</li>
+<li>um método <code>desenhar()</code> definido em <code>Forma</code> e sobrescrito em <code>Circulo</code> e <code>Quadrado</code>;</li>
+<li>uma função <code>swap(a, b)</code> que troca dois valores de qualquer tipo.</li>
+</ol>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>Ad-hoc</strong> (sobrecarga). O comportamento de <code>+</code> é definido caso a caso por tipo concreto, e a implementação difere para cada um.</p></li>
+<li><p><strong>Paramétrico</strong>. A mesma implementação serve para listas de qualquer tipo: o algoritmo de contagem não depende do tipo dos elementos.</p></li>
+<li><p><strong>Subtipo</strong> (inclusão). <code>Circulo</code> e <code>Quadrado</code> são subtipos de <code>Forma</code>, e o despacho dinâmico seleciona a implementação apropriada.</p></li>
+<li><p><strong>Paramétrico</strong>. <code>swap</code> opera de forma idêntica sobre qualquer tipo <code>T</code>, com tipo <span class="math inline">\(\forall T.\ T \times T \to T \times T\)</span> se assumirmos passagem por valor, ou um tipo análogo com referências.</p></li>
+</ol>
+</section>
+</section>
+<section id="tradução-para-representação-intermediária" class="level3" data-number="12.8.6">
+<h3 data-number="12.8.6" class="anchored" data-anchor-id="tradução-para-representação-intermediária"><span class="header-section-number">12.8.6</span> Tradução para representação intermediária</h3>
+<section id="exercício-17-tac-para-expressão-aritmética" class="level4" data-number="12.8.6.1">
+<h4 data-number="12.8.6.1" class="anchored" data-anchor-id="exercício-17-tac-para-expressão-aritmética"><span class="header-section-number">12.8.6.1</span> Exercício 17: TAC para expressão aritmética</h4>
+<p>Gere o código de três endereços (TAC) para a expressão <span class="math inline">\(a \cdot (b + c) - d / 2\)</span>, usando temporários <span class="math inline">\(t_1, t_2, \ldots\)</span> conforme necessário.</p>
+<p><strong>Solução:</strong></p>
+<pre class="text"><code>t1 := b + c
+t2 := a * t1
+t3 := d / 2
+t4 := t2 - t3</code></pre>
+<p>Cada operação binária da expressão original gera exatamente um TAC. A ordem segue a estratégia <em>bottom-up</em> sobre a árvore sintática: subexpressões mais profundas geram TAC primeiro, e seus resultados são consumidos pelos pais. O resultado final está em <code>t4</code>.</p>
+</section>
+<section id="exercício-18-tac-para-if-then-else" class="level4" data-number="12.8.6.2">
+<h4 data-number="12.8.6.2" class="anchored" data-anchor-id="exercício-18-tac-para-if-then-else"><span class="header-section-number">12.8.6.2</span> Exercício 18: TAC para if-then-else</h4>
+<p>Gere TAC para o comando:</p>
+<pre class="text"><code>if x &gt; 0 then y := x else y := -x</code></pre>
+<p>usando rótulos para fluxo de controle.</p>
+<p><strong>Solução:</strong></p>
+<pre class="text"><code>        t1 := x &gt; 0
+        if_false t1 goto L_else
+        y := x
+        goto L_fim
+L_else: t2 := -x
+        y := t2
+L_fim:</code></pre>
+<p>A estratégia gera dois rótulos: <code>L_else</code> para o ramo falso e <code>L_fim</code> como ponto de junção depois do condicional. O salto incondicional <code>goto L_fim</code> no fim do ramo verdadeiro evita que a execução caia no ramo falso. O ramo falso usa um temporário para o resultado de <code>-x</code> antes da atribuição, embora muitos compiladores combinem a operação unária diretamente com a atribuição em backends mais sofisticados.</p>
+</section>
+<section id="exercício-19-tac-para-while" class="level4" data-number="12.8.6.3">
+<h4 data-number="12.8.6.3" class="anchored" data-anchor-id="exercício-19-tac-para-while"><span class="header-section-number">12.8.6.3</span> Exercício 19: TAC para while</h4>
+<p>Gere TAC para o laço:</p>
+<pre class="text"><code>while x &gt; 0 do
+  x := x - 1</code></pre>
+<p><strong>Solução:</strong></p>
+<pre class="text"><code>L_inicio: t1 := x &gt; 0
+          if_false t1 goto L_fim
+          t2 := x - 1
+          x := t2
+          goto L_inicio
+L_fim:</code></pre>
+<p>O rótulo <code>L_inicio</code> marca o ponto de teste e é o destino do salto que retorna após cada iteração. O <code>if_false</code> desvia para <code>L_fim</code> quando a condição se torna falsa. O salto <code>goto L_inicio</code> no final do corpo cria o ciclo. Comparando com a tradução do <code>if</code> do exercício anterior, a diferença essencial é o <code>goto L_inicio</code> (para trás) em vez de <code>goto L_fim</code> (para frente).</p>
+</section>
+<section id="exercício-20-identificando-código-morto-em-tac" class="level4" data-number="12.8.6.4">
+<h4 data-number="12.8.6.4" class="anchored" data-anchor-id="exercício-20-identificando-código-morto-em-tac"><span class="header-section-number">12.8.6.4</span> Exercício 20: Identificando código morto em TAC</h4>
+<p>Aponte instruções mortas (cujo resultado nunca é lido) na sequência:</p>
+<pre class="text"><code>t1 := a + b
+t2 := a * b
+t3 := t1 - 1
+x  := t3
+y  := a + b</code></pre>
+<p><strong>Solução:</strong></p>
+<ul>
+<li><code>t2 := a * b</code> é <strong>morta</strong>: o valor <code>t2</code> não é usado em nenhuma instrução posterior.</li>
+<li><code>y := a + b</code> recalcula <code>a + b</code>, valor já computado em <code>t1</code>. Não é estritamente uma instrução morta (<code>y</code> pode ser usado depois), mas representa <strong>subexpressão comum</strong> que poderia ser eliminada substituindo <code>y := a + b</code> por <code>y := t1</code>.</li>
 </ul>
-<p>Código otimizado:</p>
-<pre class="text"><code>x := 10;
-y := x;
-z := y;
-w := 0;</code></pre>
-<p>Ou ainda mais otimizado:</p>
-<pre class="text"><code>x := 10;
-y := 10;
-z := 10;
-w := 0;</code></pre>
+<p>Após eliminar <code>t2</code> e aplicar eliminação de subexpressão comum:</p>
+<pre class="text"><code>t1 := a + b
+t3 := t1 - 1
+x  := t3
+y  := t1</code></pre>
+<p>A justificativa formal das duas otimizações exige análise de fluxo de dados: variáveis vivas para detectar <code>t2</code> morto, e disponibilidade de expressões para detectar a subexpressão comum. Essas análises são tópicos da otimização de compiladores propriamente dita.</p>
 
 
 </section>
 </section>
+</b></section><b>
 
-</main> <!-- /main -->
+</b></main><b> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -3277,7 +3562,7 @@ w := 0;</code></pre>
       </a>
   </div>
 </nav>
-</div> <!-- /content -->
+</b></div><b> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
@@ -3295,4 +3580,4 @@ w := 0;</code></pre>
 
 
 
-</body></html>
+</b></body></html>

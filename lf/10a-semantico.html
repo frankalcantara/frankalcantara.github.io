@@ -523,9 +523,8 @@ window.Quarto = {
   <li><a href="#exercícios" id="toc-exercícios" class="nav-link" data-scroll-target="#exercícios"><span class="header-section-number">13.5</span> Exercícios</a>
   <ul class="collapse">
   <li><a href="#cálculo-de-denotações" id="toc-cálculo-de-denotações" class="nav-link" data-scroll-target="#cálculo-de-denotações"><span class="header-section-number">13.5.1</span> Cálculo de denotações</a></li>
-  <li><a href="#equivalência-de-programas" id="toc-equivalência-de-programas" class="nav-link" data-scroll-target="#equivalência-de-programas"><span class="header-section-number">13.5.2</span> Equivalência de programas</a></li>
-  <li><a href="#pontos-fixos-e-laços" id="toc-pontos-fixos-e-laços" class="nav-link" data-scroll-target="#pontos-fixos-e-laços"><span class="header-section-number">13.5.3</span> Pontos fixos e laços</a></li>
-  <li><a href="#semântica-e-otimização" id="toc-semântica-e-otimização" class="nav-link" data-scroll-target="#semântica-e-otimização"><span class="header-section-number">13.5.4</span> Semântica e otimização</a></li>
+  <li><a href="#pontos-fixos-e-laços" id="toc-pontos-fixos-e-laços" class="nav-link" data-scroll-target="#pontos-fixos-e-laços"><span class="header-section-number">13.5.2</span> Pontos fixos e laços</a></li>
+  <li><a href="#semântica-e-otimização" id="toc-semântica-e-otimização" class="nav-link" data-scroll-target="#semântica-e-otimização"><span class="header-section-number">13.5.3</span> Semântica e otimização</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10a-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -1070,79 +1069,229 @@ Figure&nbsp;13.8: Aproximações sucessivas do significado denotacional de um la
 </section>
 <section id="exercícios" class="level2" data-number="13.5">
 <h2 data-number="13.5" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">13.5</span> Exercícios</h2>
-<p>Os exercícios a seguir têm o objetivo de fazer a leitora manipular diretamente as definições matemáticas apresentadas neste capítulo. Em todos os casos, assuma a linguagem <strong>Imperativa</strong> e a função de interpretação <span class="math inline">\([\![\cdot]\!]\)</span> definidas anteriormente.</p>
+<p>Os exercícios a seguir têm o objetivo de fazer a esforçada leitora manipular diretamente as definições matemáticas apresentadas neste capítulo. Em todos os casos, assuma a linguagem <strong>Imperativa</strong> e a função de interpretação <span class="math inline">\([\![\cdot]\!]\)</span> definidas anteriormente.</p>
 <section id="cálculo-de-denotações" class="level3" data-number="13.5.1">
 <h3 data-number="13.5.1" class="anchored" data-anchor-id="cálculo-de-denotações"><span class="header-section-number">13.5.1</span> Cálculo de denotações</h3>
+<section id="exercício-1-atribuição-em-estado-inicial" class="level4" data-number="13.5.1.1">
+<h4 data-number="13.5.1.1" class="anchored" data-anchor-id="exercício-1-atribuição-em-estado-inicial"><span class="header-section-number">13.5.1.1</span> Exercício 1: Atribuição em estado inicial</h4>
+<p>Considere o estado inicial <span class="math inline">\(\sigma_0 = \{x \mapsto 2, y \mapsto 5\}\)</span>. Calcule <span class="math inline">\([\![x := x + 1]\!]_{cmd}\sigma_0\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Pela definição da semântica da atribuição:</p>
+<p><span class="math display">\[[\![x := e]\!]_{cmd}\sigma = \sigma[x \mapsto [\![e]\!]_{aexp}\sigma]\]</span></p>
+<p>Aplicando ao caso:</p>
+<p><span class="math display">\[[\![x := x + 1]\!]_{cmd}\sigma_0 = \sigma_0[x \mapsto [\![x + 1]\!]_{aexp}\sigma_0]\]</span></p>
+<p>Avaliando <span class="math inline">\([\![x + 1]\!]_{aexp}\sigma_0 = \sigma_0(x) + 1 = 2 + 1 = 3\)</span>. Portanto, o estado final é <span class="math inline">\(\{x \mapsto 3, y \mapsto 5\}\)</span>.</p>
+</section>
+<section id="exercício-2-sequência-com-estado-intermediário" class="level4" data-number="13.5.1.2">
+<h4 data-number="13.5.1.2" class="anchored" data-anchor-id="exercício-2-sequência-com-estado-intermediário"><span class="header-section-number">13.5.1.2</span> Exercício 2: Sequência com estado intermediário</h4>
+<p>Para <span class="math inline">\(\sigma_0 = \{x \mapsto 2, y \mapsto 5\}\)</span>, calcule <span class="math inline">\([\![x := y + 3 ; y := x \cdot 2]\!]_{cmd}\sigma_0\)</span>, mostrando explicitamente o estado intermediário.</p>
+<p><strong>Solução:</strong></p>
+<p>Pela regra da sequência:</p>
+<p><span class="math display">\[[\![S_1 ; S_2]\!]_{cmd}\sigma = [\![S_2]\!]_{cmd}([\![S_1]\!]_{cmd}\sigma)\]</span></p>
+<p>Primeiro comando: <span class="math inline">\([\![x := y + 3]\!]_{cmd}\sigma_0\)</span>. Avaliando <span class="math inline">\([\![y + 3]\!]_{aexp}\sigma_0 = 5 + 3 = 8\)</span>. Estado intermediário:</p>
+<p><span class="math display">\[\sigma_1 = \sigma_0[x \mapsto 8] = \{x \mapsto 8, y \mapsto 5\}\]</span></p>
+<p>Segundo comando: <span class="math inline">\([\![y := x \cdot 2]\!]_{cmd}\sigma_1\)</span>. Avaliando <span class="math inline">\([\![x \cdot 2]\!]_{aexp}\sigma_1 = 8 \cdot 2 = 16\)</span>. Estado final:</p>
+<p><span class="math display">\[\sigma_2 = \sigma_1[y \mapsto 16] = \{x \mapsto 8, y \mapsto 16\}\]</span></p>
+</section>
+<section id="exercício-3-condicional-por-casos" class="level4" data-number="13.5.1.3">
+<h4 data-number="13.5.1.3" class="anchored" data-anchor-id="exercício-3-condicional-por-casos"><span class="header-section-number">13.5.1.3</span> Exercício 3: Condicional por casos</h4>
+<p>Seja <span class="math inline">\(\sigma_0 = \{x \mapsto 4, y \mapsto 0\}\)</span>. Calcule <span class="math inline">\([\![\text{if } x &gt; 0 \text{ then } y := 1 \text{ else } y := -1]\!]_{cmd}\sigma_0\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Pela semântica do condicional, primeiro avaliamos <span class="math inline">\([\![x &gt; 0]\!]_{bexp}\sigma_0 = (4 &gt; 0) = \text{true}\)</span>. Como a condição é verdadeira, aplicamos o ramo <code>then</code>:</p>
+<p><span class="math display">\[[\![y := 1]\!]_{cmd}\sigma_0 = \sigma_0[y \mapsto 1] = \{x \mapsto 4, y \mapsto 1\}\]</span></p>
+</section>
+<section id="exercício-4-equivalência-s-skip-s" class="level4" data-number="13.5.1.4">
+<h4 data-number="13.5.1.4" class="anchored" data-anchor-id="exercício-4-equivalência-s-skip-s"><span class="header-section-number">13.5.1.4</span> Exercício 4: Equivalência S ; skip ≡ S</h4>
+<p>Prove, usando a definição de equivalência semântica, que <span class="math inline">\(S ; \text{skip}\)</span> é equivalente a <span class="math inline">\(S\)</span> para qualquer comando <span class="math inline">\(S\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>A semântica do <code>skip</code> é a função identidade: <span class="math inline">\([\![\text{skip}]\!]_{cmd}\sigma = \sigma\)</span>.</p>
+<p>Para um <span class="math inline">\(\sigma\)</span> arbitrário:</p>
+<p><span class="math display">\[[\![S ; \text{skip}]\!]_{cmd}\sigma = [\![\text{skip}]\!]_{cmd}([\![S]\!]_{cmd}\sigma) = [\![S]\!]_{cmd}\sigma\]</span></p>
+<p>A última igualdade vale porque a identidade aplicada a qualquer valor retorna o próprio valor (incluindo <span class="math inline">\(\perp\)</span>, se a denotação de <span class="math inline">\(S\)</span> for indefinida). Como a igualdade vale para todo <span class="math inline">\(\sigma\)</span>, os dois programas são semanticamente equivalentes.</p>
+</section>
+<section id="exercício-5-sobrescrita-de-atribuição" class="level4" data-number="13.5.1.5">
+<h4 data-number="13.5.1.5" class="anchored" data-anchor-id="exercício-5-sobrescrita-de-atribuição"><span class="header-section-number">13.5.1.5</span> Exercício 5: Sobrescrita de atribuição</h4>
+<p>Verifique se <span class="math inline">\(x := 1 ; x := 2\)</span> é semanticamente equivalente a <span class="math inline">\(x := 2\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Para um <span class="math inline">\(\sigma\)</span> arbitrário, calculamos:</p>
+<p><span class="math display">\[[\![x := 1 ; x := 2]\!]_{cmd}\sigma = [\![x := 2]\!]_{cmd}(\sigma[x \mapsto 1]) = (\sigma[x \mapsto 1])[x \mapsto 2]\]</span></p>
+<p>Pela propriedade <span class="math inline">\(\sigma[x \mapsto a][x \mapsto b] = \sigma[x \mapsto b]\)</span>, isto se reduz a <span class="math inline">\(\sigma[x \mapsto 2]\)</span>, que é exatamente <span class="math inline">\([\![x := 2]\!]_{cmd}\sigma\)</span>. Os programas são equivalentes.</p>
+<p>A propriedade da sobrescrita usada vale porque <span class="math inline">\(x = x\)</span> é trivialmente verdadeiro, e a definição <span class="math inline">\(\sigma[x \mapsto v](y) = v\)</span> para <span class="math inline">\(y = x\)</span> ignora qualquer atualização anterior na mesma variável.</p>
+</section>
+<section id="exercício-6-equivalência-dependente-do-estado" class="level4" data-number="13.5.1.6">
+<h4 data-number="13.5.1.6" class="anchored" data-anchor-id="exercício-6-equivalência-dependente-do-estado"><span class="header-section-number">13.5.1.6</span> Exercício 6: Equivalência dependente do estado</h4>
+<p>Os programas <span class="math inline">\(x := 1 ; y := x + 2\)</span> e <span class="math inline">\(y := x + 2\)</span> são equivalentes? Explique a dependência do estado inicial.</p>
+<p><strong>Solução:</strong></p>
+<p>Para que sejam equivalentes, deve valer <span class="math inline">\([\![S_1]\!]_{cmd}\sigma = [\![S_2]\!]_{cmd}\sigma\)</span> para todo <span class="math inline">\(\sigma\)</span>.</p>
+<p>Calculando o primeiro programa: <span class="math inline">\([\![x := 1 ; y := x+2]\!]_{cmd}\sigma = \sigma[x \mapsto 1][y \mapsto 3]\)</span>, sempre. O resultado é independente do valor original de <span class="math inline">\(x\)</span>.</p>
+<p>Calculando o segundo: <span class="math inline">\([\![y := x+2]\!]_{cmd}\sigma = \sigma[y \mapsto \sigma(x) + 2]\)</span>, que depende de <span class="math inline">\(\sigma(x)\)</span>.</p>
+<p>Os programas são <strong>equivalentes apenas se</strong> <span class="math inline">\(\sigma(x) = 1\)</span>. Para qualquer outro estado inicial, eles divergem: o primeiro força <span class="math inline">\(x = 1\)</span> e produz <span class="math inline">\(y = 3\)</span>; o segundo deixa <span class="math inline">\(x\)</span> inalterado e calcula <span class="math inline">\(y\)</span> a partir do valor atual.</p>
+</section>
+</section>
+<section id="pontos-fixos-e-laços" class="level3" data-number="13.5.2">
+<h3 data-number="13.5.2" class="anchored" data-anchor-id="pontos-fixos-e-laços"><span class="header-section-number">13.5.2</span> Pontos fixos e laços</h3>
+<section id="exercício-7-aproximações-sucessivas-do-while" class="level4" data-number="13.5.2.1">
+<h4 data-number="13.5.2.1" class="anchored" data-anchor-id="exercício-7-aproximações-sucessivas-do-while"><span class="header-section-number">13.5.2.1</span> Exercício 7: Aproximações sucessivas do while</h4>
+<p>Para o comando <span class="math inline">\(\text{while } x &gt; 0 \text{ do } x := x - 1\)</span> e estado <span class="math inline">\(\sigma_0 = \{x \mapsto 2\}\)</span>, calcule informalmente as três primeiras aproximações relevantes de <span class="math inline">\(F^n(\bot)\)</span> até obter o estado final.</p>
+<p><strong>Solução:</strong></p>
+<p>A função de transformação para o <code>while</code> é:</p>
+<p><span class="math display">\[F(g)(\sigma) = \begin{cases} g([\![x := x-1]\!]_{cmd}\sigma) &amp; \text{se } [\![x &gt; 0]\!]_{bexp}\sigma = \text{true} \\ \sigma &amp; \text{caso contrário} \end{cases}\]</span></p>
+<p>Aplicando a partir de <span class="math inline">\(\sigma_0 = \{x \mapsto 2\}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(F^0(\bot)(\sigma_0) = \bot\)</span> (função inicial é totalmente indefinida);</li>
+<li><span class="math inline">\(F^1(\bot)(\sigma_0)\)</span>: condição true, chama <span class="math inline">\(\bot([\![x:=x-1]\!]\sigma_0) = \bot\)</span>;</li>
+<li><span class="math inline">\(F^2(\bot)(\sigma_0)\)</span>: chama <span class="math inline">\(F^1(\bot)\)</span> no estado <span class="math inline">\(\{x \mapsto 1\}\)</span>, condição true, chama <span class="math inline">\(\bot\)</span>, resultado <span class="math inline">\(\bot\)</span>;</li>
+<li><span class="math inline">\(F^3(\bot)(\sigma_0)\)</span>: chama <span class="math inline">\(F^2(\bot)\)</span> em <span class="math inline">\(\{x \mapsto 1\}\)</span>, que chama <span class="math inline">\(F^1(\bot)\)</span> em <span class="math inline">\(\{x \mapsto 0\}\)</span>. Aqui a condição é false, retorna <span class="math inline">\(\{x \mapsto 0\}\)</span>. Subindo as chamadas, o resultado final é <span class="math inline">\(\{x \mapsto 0\}\)</span>.</li>
+</ul>
+<p>A partir de <span class="math inline">\(F^3\)</span>, o resultado se estabiliza em <span class="math inline">\(\{x \mapsto 0\}\)</span> para <span class="math inline">\(\sigma_0 = \{x \mapsto 2\}\)</span>. O ponto fixo é o supremo da cadeia <span class="math inline">\(\bot \sqsubseteq F(\bot) \sqsubseteq F^2(\bot) \sqsubseteq \ldots\)</span></p>
+</section>
+<section id="exercício-8-divergência-do-while-true" class="level4" data-number="13.5.2.2">
+<h4 data-number="13.5.2.2" class="anchored" data-anchor-id="exercício-8-divergência-do-while-true"><span class="header-section-number">13.5.2.2</span> Exercício 8: Divergência do while true</h4>
+<p>Explique por que o comando <span class="math inline">\(\text{while true do skip}\)</span> tem denotação <span class="math inline">\(\perp\)</span> para qualquer estado inicial.</p>
+<p><strong>Solução:</strong></p>
+<p>Aplicando <span class="math inline">\(F\)</span> a partir de qualquer <span class="math inline">\(\sigma\)</span>:</p>
+<p><span class="math display">\[F(g)(\sigma) = \begin{cases} g([\![\text{skip}]\!]_{cmd}\sigma) = g(\sigma) &amp; \text{se true} \\ \sigma &amp; \text{se false} \end{cases}\]</span></p>
+<p>Como a condição é constante <code>true</code>, o caso false nunca ocorre. A função <span class="math inline">\(F\)</span> se reduz a <span class="math inline">\(F(g)(\sigma) = g(\sigma)\)</span>, ou seja, <span class="math inline">\(F\)</span> é a identidade no espaço de funções.</p>
+<p>A iteração começa em <span class="math inline">\(g_0 = \bot\)</span> (totalmente indefinida) e aplica repetidamente a identidade. Resultado: <span class="math inline">\(F^n(\bot) = \bot\)</span> para todo <span class="math inline">\(n\)</span>. O ponto fixo é a função totalmente indefinida, e portanto <span class="math inline">\([\![\text{while true do skip}]\!]_{cmd}\sigma = \perp\)</span> para todo <span class="math inline">\(\sigma\)</span>. Esta é a forma matemática de dizer “o laço diverge”.</p>
+</section>
+<section id="exercício-9-quando-o-laço-termina" class="level4" data-number="13.5.2.3">
+<h4 data-number="13.5.2.3" class="anchored" data-anchor-id="exercício-9-quando-o-laço-termina"><span class="header-section-number">13.5.2.3</span> Exercício 9: Quando o laço termina?</h4>
+<p>Para <span class="math inline">\(\text{while } x &gt; 0 \text{ do } x := x + 1\)</span>, determine para quais estados iniciais o laço termina e para quais diverge. Expresse a resposta em termos de <span class="math inline">\(\sigma(x)\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Em cada iteração, <span class="math inline">\(x\)</span> é incrementado, então a condição <span class="math inline">\(x &gt; 0\)</span> se mantém ou se torna verdadeira. Análise por casos:</p>
+<ul>
+<li>Se <span class="math inline">\(\sigma(x) &gt; 0\)</span>: a condição é true, <span class="math inline">\(x\)</span> é incrementado para <span class="math inline">\(\sigma(x) + 1 &gt; 0\)</span>, e o laço continua indefinidamente. <strong>Diverge</strong> (<span class="math inline">\(\perp\)</span>).</li>
+<li>Se <span class="math inline">\(\sigma(x) = 0\)</span>: a condição é false na primeira avaliação, e o laço termina sem iterar. Estado final: <span class="math inline">\(\sigma\)</span>.</li>
+<li>Se <span class="math inline">\(\sigma(x) &lt; 0\)</span>: a condição <span class="math inline">\(\sigma(x) &gt; 0\)</span> é false, o laço termina sem iterar. Estado final: <span class="math inline">\(\sigma\)</span>.</li>
+</ul>
+<p>Resumindo:</p>
+<p><span class="math display">\[[\![\text{while } x &gt; 0 \text{ do } x := x+1]\!]_{cmd}\sigma = \begin{cases} \perp &amp; \text{se } \sigma(x) &gt; 0 \\ \sigma &amp; \text{se } \sigma(x) \leq 0 \end{cases}\]</span></p>
+</section>
+</section>
+<section id="semântica-e-otimização" class="level3" data-number="13.5.3">
+<h3 data-number="13.5.3" class="anchored" data-anchor-id="semântica-e-otimização"><span class="header-section-number">13.5.3</span> Semântica e otimização</h3>
+<section id="exercício-10-atribuição-morta" class="level4" data-number="13.5.3.1">
+<h4 data-number="13.5.3.1" class="anchored" data-anchor-id="exercício-10-atribuição-morta"><span class="header-section-number">13.5.3.1</span> Exercício 10: Atribuição morta</h4>
+<p>Identifique a atribuição morta em <span class="math inline">\(x := 10 ; x := 20 ; y := x + 1\)</span> e escreva uma versão otimizada equivalente.</p>
+<p><strong>Solução:</strong></p>
+<p>A atribuição <span class="math inline">\(x := 10\)</span> é morta: o valor <span class="math inline">\(10\)</span> é imediatamente sobrescrito pela atribuição seguinte, sem nenhuma leitura intermediária de <span class="math inline">\(x\)</span>. Versão otimizada: <span class="math inline">\(x := 20 ; y := x + 1\)</span>.</p>
+<p>Prova de equivalência. Para um <span class="math inline">\(\sigma\)</span> qualquer:</p>
+<p><span class="math display">\[[\![x := 10 ; x := 20 ; y := x + 1]\!]_{cmd}\sigma = \sigma[x \mapsto 10][x \mapsto 20][y \mapsto 21] = \sigma[x \mapsto 20][y \mapsto 21]\]</span></p>
+<p>A primeira atualização <span class="math inline">\(\sigma[x \mapsto 10]\)</span> é absorvida pela segunda (sobrescrita). O programa otimizado tem exatamente esta denotação.</p>
+</section>
+<section id="exercício-11-condição-para-sobrescrita-ser-correta" class="level4" data-number="13.5.3.2">
+<h4 data-number="13.5.3.2" class="anchored" data-anchor-id="exercício-11-condição-para-sobrescrita-ser-correta"><span class="header-section-number">13.5.3.2</span> Exercício 11: Condição para sobrescrita ser correta</h4>
+<p>Quando <span class="math inline">\(x := e_1 ; x := e_2\)</span> pode ser substituído por <span class="math inline">\(x := e_2\)</span>? Dê uma condição suficiente sobre <span class="math inline">\(e_2\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>A transformação é correta sempre que a avaliação de <span class="math inline">\(e_2\)</span> no estado intermediário <span class="math inline">\(\sigma[x \mapsto [\![e_1]\!]_{aexp}\sigma]\)</span> produzir o mesmo resultado que sua avaliação em <span class="math inline">\(\sigma\)</span>. Isto é, sempre que <span class="math inline">\(e_2\)</span> não dependa de <span class="math inline">\(x\)</span>.</p>
+<p><strong>Condição suficiente</strong>: <span class="math inline">\(x \notin \text{vars}(e_2)\)</span>. Se <span class="math inline">\(x\)</span> não aparece em <span class="math inline">\(e_2\)</span>, sua avaliação não consulta o valor de <span class="math inline">\(x\)</span> no estado, e portanto:</p>
+<p><span class="math display">\[[\![e_2]\!]_{aexp}(\sigma[x \mapsto v]) = [\![e_2]\!]_{aexp}\sigma\]</span></p>
+<p>para qualquer <span class="math inline">\(v\)</span>. Sob essa condição, <span class="math inline">\([\![x := e_1 ; x := e_2]\!]_{cmd}\sigma\)</span> se reduz a <span class="math inline">\(\sigma[x \mapsto [\![e_2]\!]_{aexp}\sigma]\)</span>, que é exatamente <span class="math inline">\([\![x := e_2]\!]_{cmd}\sigma\)</span>.</p>
+<p>Quando <span class="math inline">\(x\)</span> aparece em <span class="math inline">\(e_2\)</span>, a transformação não é segura: por exemplo, <span class="math inline">\(x := 1 ; x := x + 1\)</span> produz <span class="math inline">\(\sigma[x \mapsto 2]\)</span>, mas <span class="math inline">\(x := x + 1\)</span> produz <span class="math inline">\(\sigma[x \mapsto \sigma(x) + 1]\)</span>, e os dois divergem se <span class="math inline">\(\sigma(x) \neq 1\)</span>.</p>
+</section>
+<section id="exercício-12-if-com-ramos-idênticos" class="level4" data-number="13.5.3.3">
+<h4 data-number="13.5.3.3" class="anchored" data-anchor-id="exercício-12-if-com-ramos-idênticos"><span class="header-section-number">13.5.3.3</span> Exercício 12: If com ramos idênticos</h4>
+<p>A transformação de <span class="math inline">\(\text{if } b \text{ then } S \text{ else } S\)</span> para <span class="math inline">\(S\)</span> é correta na semântica deste capítulo? Discuta o caso em que <span class="math inline">\([\![b]\!]_{bexp}\sigma = \perp\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Para <span class="math inline">\([\![b]\!]_{bexp}\sigma \in \{\text{true}, \text{false}\}\)</span>, ambos os ramos do programa original executam <span class="math inline">\(S\)</span>, dando <span class="math inline">\([\![S]\!]_{cmd}\sigma\)</span>. O programa otimizado também produz <span class="math inline">\([\![S]\!]_{cmd}\sigma\)</span>. Equivalentes nesses casos.</p>
+<p>Para <span class="math inline">\([\![b]\!]_{bexp}\sigma = \perp\)</span> (condição indefinida), a semântica do condicional definida no capítulo retorna <span class="math inline">\(\perp\)</span>. Mas o programa <span class="math inline">\(S\)</span> (sem o teste) pode terminar normalmente com <span class="math inline">\([\![S]\!]_{cmd}\sigma = \sigma' \neq \perp\)</span>. Os dois divergem.</p>
+<p>A transformação <strong>não é correta</strong> nesta semântica estrita. Em uma semântica não-estrita ou em uma linguagem em que expressões booleanas são totais (não podem ser <span class="math inline">\(\perp\)</span>), a transformação seria correta. A escolha entre as duas semânticas é uma decisão de design da linguagem: linguagens totais aceitam a otimização; linguagens parciais (com possível indefinição em booleanos) precisam preservar o teste.</p>
+</section>
+<section id="exercício-13-comutatividade-de-atribuições-independentes" class="level4" data-number="13.5.3.4">
+<h4 data-number="13.5.3.4" class="anchored" data-anchor-id="exercício-13-comutatividade-de-atribuições-independentes"><span class="header-section-number">13.5.3.4</span> Exercício 13: Comutatividade de atribuições independentes</h4>
+<p>Dados dois comandos <span class="math inline">\(x := e_1\)</span> e <span class="math inline">\(y := e_2\)</span>, com <span class="math inline">\(x \neq y\)</span>, <span class="math inline">\(x \notin \text{vars}(e_2)\)</span> e <span class="math inline">\(y \notin \text{vars}(e_1)\)</span>, prove que:</p>
+<p><span class="math display">\[[\![x := e_1 ; y := e_2]\!]_{cmd}\sigma = [\![y := e_2 ; x := e_1]\!]_{cmd}\sigma\]</span></p>
+<p><strong>Solução:</strong></p>
+<p>Calculando o lado esquerdo. Avaliação de <span class="math inline">\(e_1\)</span> em <span class="math inline">\(\sigma\)</span> produz <span class="math inline">\(v_1 = [\![e_1]\!]_{aexp}\sigma\)</span>. Estado intermediário: <span class="math inline">\(\sigma_1 = \sigma[x \mapsto v_1]\)</span>. Como <span class="math inline">\(x \notin \text{vars}(e_2)\)</span>, temos <span class="math inline">\([\![e_2]\!]_{aexp}\sigma_1 = [\![e_2]\!]_{aexp}\sigma = v_2\)</span>. Estado final: <span class="math inline">\(\sigma[x \mapsto v_1][y \mapsto v_2]\)</span>.</p>
+<p>Calculando o lado direito por simetria: <span class="math inline">\(\sigma[y \mapsto v_2][x \mapsto v_1]\)</span>.</p>
+<p>Como <span class="math inline">\(x \neq y\)</span>, as duas atualizações comutam: para qualquer <span class="math inline">\(z\)</span>, ambas as funções resultantes retornam <span class="math inline">\(v_1\)</span> se <span class="math inline">\(z = x\)</span>, <span class="math inline">\(v_2\)</span> se <span class="math inline">\(z = y\)</span>, e <span class="math inline">\(\sigma(z)\)</span> caso contrário. Os dois estados finais são iguais como funções, e portanto os programas são equivalentes.</p>
+<p>Esta propriedade é o fundamento de otimizações de reordenação que paralelizam atribuições independentes.</p>
+</section>
+<section id="exercício-14-composição-com-skip" class="level4" data-number="13.5.3.5">
+<h4 data-number="13.5.3.5" class="anchored" data-anchor-id="exercício-14-composição-com-skip"><span class="header-section-number">13.5.3.5</span> Exercício 14: Composição com skip</h4>
+<p>Mostre que <span class="math inline">\(\text{skip} ; S\)</span> também é equivalente a <span class="math inline">\(S\)</span> (a propriedade simétrica do exercício 4).</p>
+<p><strong>Solução:</strong></p>
+<p><span class="math display">\[[\![\text{skip} ; S]\!]_{cmd}\sigma = [\![S]\!]_{cmd}([\![\text{skip}]\!]_{cmd}\sigma) = [\![S]\!]_{cmd}\sigma\]</span></p>
+<p>A primeira igualdade aplica a regra da sequência. A segunda usa <span class="math inline">\([\![\text{skip}]\!]_{cmd}\sigma = \sigma\)</span>. A equivalência vale para todo <span class="math inline">\(\sigma\)</span>.</p>
+<p>Combinando este resultado com o exercício 4, vemos que <code>skip</code> é elemento neutro à esquerda e à direita da composição. Junto com a associatividade, isso confere ao conjunto de comandos com a operação <code>;</code> a estrutura de um monoide, com <code>skip</code> como identidade.</p>
+</section>
+<section id="exercício-15-pureza-de-expressões-aritméticas" class="level4" data-number="13.5.3.6">
+<h4 data-number="13.5.3.6" class="anchored" data-anchor-id="exercício-15-pureza-de-expressões-aritméticas"><span class="header-section-number">13.5.3.6</span> Exercício 15: Pureza de expressões aritméticas</h4>
+<p>Mostre que para qualquer expressão aritmética <span class="math inline">\(e\)</span> e estado <span class="math inline">\(\sigma\)</span>, vale <span class="math inline">\([\![e]\!]_{aexp}\sigma = [\![e]\!]_{aexp}\sigma\)</span>. Em seguida, explique por que essa identidade trivial tem consequências profundas para otimização.</p>
+<p><strong>Solução:</strong></p>
+<p>A propriedade é trivialmente verdadeira por reflexividade da igualdade. O que importa é o que ela implica: a avaliação de <span class="math inline">\(e\)</span> em <span class="math inline">\(\sigma\)</span> não tem efeitos colaterais que poderiam alterar <span class="math inline">\(\sigma\)</span> entre duas avaliações sucessivas.</p>
+<p>Consequências para otimização:</p>
 <ol type="1">
-<li><p>Considere o estado inicial <span class="math inline">\(\sigma_0 = \{x \mapsto 2, y \mapsto 5\}\)</span>. Calcule o resultado de:</p>
-<pre class="text"><code>x := x + 1</code></pre>
-<p>isto é, determine <span class="math inline">\([\![x := x + 1]\!]_{cmd}\sigma_0\)</span>.</p></li>
-<li><p>Para o mesmo estado inicial, calcule:</p>
-<pre class="text"><code>x := y + 3;
-y := x * 2</code></pre>
-<p>Mostre explicitamente o estado intermediário produzido após o primeiro comando.</p></li>
-<li><p>Seja <span class="math inline">\(\sigma_0 = \{x \mapsto 4, y \mapsto 0\}\)</span>. Calcule:</p>
-<pre class="text"><code>if x &gt; 0 then y := 1 else y := -1</code></pre>
-<p>usando a definição por casos da semântica do condicional.</p></li>
+<li><strong>Eliminação de subexpressão comum</strong>: se <span class="math inline">\(e\)</span> aparece duas vezes em uma expressão maior sem que o estado intermediário mude as variáveis de <span class="math inline">\(e\)</span>, pode-se calcular <span class="math inline">\(e\)</span> uma vez e reutilizar o resultado.</li>
+<li><strong>Movimento de código invariante</strong>: dentro de um laço, se <span class="math inline">\(e\)</span> não depende de variáveis modificadas pelo corpo, pode-se mover sua avaliação para fora do laço.</li>
+<li><strong>Reordenação</strong>: dois cálculos puros independentes podem ser reordenados ou paralelizados sem alterar o resultado.</li>
 </ol>
+<p>Em uma semântica com efeitos (linguagens com ponteiros, I/O ou atribuições embutidas em expressões), nenhuma dessas otimizações seria justificável tão facilmente. A pureza das expressões aritméticas em <strong>Imperativa</strong> é o que torna o raciocínio composicional possível.</p>
 </section>
-<section id="equivalência-de-programas" class="level3" data-number="13.5.2">
-<h3 data-number="13.5.2" class="anchored" data-anchor-id="equivalência-de-programas"><span class="header-section-number">13.5.2</span> Equivalência de programas</h3>
-<ol start="4" type="1">
-<li><p>Prove, usando a definição de equivalência semântica, que:</p>
-<pre class="text"><code>S ; skip</code></pre>
-<p>é equivalente a:</p>
-<pre class="text"><code>S</code></pre>
-<p>para qualquer comando <span class="math inline">\(S\)</span>.</p></li>
-<li><p>Verifique se os dois programas abaixo são semanticamente equivalentes para todo estado inicial:</p>
-<pre class="text"><code>x := 1;
-x := 2</code></pre>
-<p>e</p>
-<pre class="text"><code>x := 2</code></pre>
-<p>Justifique usando a definição de atribuição.</p></li>
-<li><p>Os dois programas abaixo são equivalentes?</p>
-<pre class="text"><code>x := 1;
-y := x + 2</code></pre>
-<p>e</p>
-<pre class="text"><code>y := x + 2</code></pre>
-<p>Explique por que a resposta depende do estado inicial.</p></li>
-</ol>
+<section id="exercício-16-falha-de-equivalência-por-divergência" class="level4" data-number="13.5.3.7">
+<h4 data-number="13.5.3.7" class="anchored" data-anchor-id="exercício-16-falha-de-equivalência-por-divergência"><span class="header-section-number">13.5.3.7</span> Exercício 16: Falha de equivalência por divergência</h4>
+<p>Os programas <span class="math inline">\(\text{while } x &gt; 0 \text{ do skip}\)</span> e <span class="math inline">\(\text{skip}\)</span> são equivalentes?</p>
+<p><strong>Solução:</strong></p>
+<p>Para <span class="math inline">\(\sigma_0 = \{x \mapsto -1\}\)</span>: a condição <span class="math inline">\(-1 &gt; 0\)</span> é false, o laço não itera, resultado <span class="math inline">\(\sigma_0\)</span>. O <code>skip</code> também produz <span class="math inline">\(\sigma_0\)</span>. Iguais nesse estado.</p>
+<p>Para <span class="math inline">\(\sigma_0 = \{x \mapsto 1\}\)</span>: a condição <span class="math inline">\(1 &gt; 0\)</span> é true, o corpo <code>skip</code> não modifica o estado, condição continua true, e o laço diverge: resultado <span class="math inline">\(\perp\)</span>. O <code>skip</code> produz <span class="math inline">\(\sigma_0\)</span>. Diferentes.</p>
+<p>Como a equivalência exige igualdade para <strong>todo</strong> estado inicial, os programas <strong>não são equivalentes</strong>. O exemplo mostra como a presença de divergência em um dos programas, mesmo que apenas para alguns estados, basta para quebrar a equivalência.</p>
 </section>
-<section id="pontos-fixos-e-laços" class="level3" data-number="13.5.3">
-<h3 data-number="13.5.3" class="anchored" data-anchor-id="pontos-fixos-e-laços"><span class="header-section-number">13.5.3</span> Pontos fixos e laços</h3>
-<ol start="7" type="1">
-<li><p>Considere o comando:</p>
-<pre class="text"><code>while x &gt; 0 do x := x - 1</code></pre>
-<p>e o estado <span class="math inline">\(\sigma_0 = \{x \mapsto 2\}\)</span>. Calcule informalmente as três primeiras aproximações relevantes de <span class="math inline">\(F^n(\bot)\)</span> até obter o estado final.</p></li>
-<li><p>Explique por que o comando:</p>
-<pre class="text"><code>while true do skip</code></pre>
-<p>tem denotação <span class="math inline">\(\perp\)</span> para qualquer estado inicial.</p></li>
-<li><p>Para o comando:</p>
-<pre class="text"><code>while x &gt; 0 do x := x + 1</code></pre>
-<p>determine para quais estados iniciais o laço termina e para quais estados iniciais ele diverge. Expresse sua resposta em termos de <span class="math inline">\(\sigma(x)\)</span>.</p></li>
-</ol>
+<section id="exercício-17-composicionalidade-da-soma" class="level4" data-number="13.5.3.8">
+<h4 data-number="13.5.3.8" class="anchored" data-anchor-id="exercício-17-composicionalidade-da-soma"><span class="header-section-number">13.5.3.8</span> Exercício 17: Composicionalidade da soma</h4>
+<p>Para <span class="math inline">\(e_1 = x + 1\)</span>, <span class="math inline">\(e_2 = y - 2\)</span> e <span class="math inline">\(\sigma = \{x \mapsto 4, y \mapsto 3\}\)</span>, calcule <span class="math inline">\([\![e_1 + e_2]\!]_{aexp}\sigma\)</span> aplicando a regra de composicionalidade passo a passo.</p>
+<p><strong>Solução:</strong></p>
+<p>A regra é <span class="math inline">\([\![e_1 + e_2]\!]_{aexp}\sigma = [\![e_1]\!]_{aexp}\sigma + [\![e_2]\!]_{aexp}\sigma\)</span>.</p>
+<p>Calculando <span class="math inline">\([\![e_1]\!]_{aexp}\sigma\)</span>:</p>
+<p><span class="math display">\[[\![x + 1]\!]_{aexp}\sigma = [\![x]\!]_{aexp}\sigma + [\![1]\!]_{aexp}\sigma = \sigma(x) + 1 = 4 + 1 = 5\]</span></p>
+<p>Calculando <span class="math inline">\([\![e_2]\!]_{aexp}\sigma\)</span>:</p>
+<p><span class="math display">\[[\![y - 2]\!]_{aexp}\sigma = [\![y]\!]_{aexp}\sigma - [\![2]\!]_{aexp}\sigma = \sigma(y) - 2 = 3 - 2 = 1\]</span></p>
+<p>Combinando: <span class="math inline">\([\![e_1 + e_2]\!]_{aexp}\sigma = 5 + 1 = 6\)</span>.</p>
+<p>A composicionalidade decompõe o cálculo em subproblemas independentes, cada um resolvido recursivamente. O estado <span class="math inline">\(\sigma\)</span> é compartilhado entre todas as subavaliações.</p>
 </section>
-<section id="semântica-e-otimização" class="level3" data-number="13.5.4">
-<h3 data-number="13.5.4" class="anchored" data-anchor-id="semântica-e-otimização"><span class="header-section-number">13.5.4</span> Semântica e otimização</h3>
-<ol start="10" type="1">
-<li><p>Identifique a atribuição morta no programa abaixo e escreva uma versão otimizada semanticamente equivalente:</p>
-<pre class="text"><code>x := 10;
-x := 20;
-y := x + 1</code></pre></li>
-<li><p>A seguinte transformação é sempre correta?</p>
-<pre class="text"><code>x := e1;
-x := e2</code></pre>
-<p>para:</p>
-<pre class="text"><code>x := e2</code></pre>
-<p>Dê uma condição suficiente sobre <span class="math inline">\(e_2\)</span> para que a transformação seja correta.</p></li>
-<li><p>Considere a otimização:</p>
-<pre class="text"><code>if b then S else S</code></pre>
-<p>para:</p>
-<pre class="text"><code>S</code></pre>
-<p>Essa transformação é correta na semântica definida neste capítulo? Discuta o caso em que <span class="math inline">\([\![b]\!]_{bexp}\sigma = \perp\)</span>.</p></li>
-</ol>
+<section id="exercício-18-estado-parcial-e-variáveis-não-declaradas" class="level4" data-number="13.5.3.9">
+<h4 data-number="13.5.3.9" class="anchored" data-anchor-id="exercício-18-estado-parcial-e-variáveis-não-declaradas"><span class="header-section-number">13.5.3.9</span> Exercício 18: Estado parcial e variáveis não declaradas</h4>
+<p>Suponha que tenhamos um estado <span class="math inline">\(\sigma\)</span> definido apenas para <span class="math inline">\(\{x, y\}\)</span>. Qual é o resultado de <span class="math inline">\([\![z := 1]\!]_{cmd}\sigma\)</span>, considerando o estado como função total ou parcial?</p>
+<p><strong>Solução:</strong></p>
+<p>Se <span class="math inline">\(\sigma\)</span> é uma função <strong>total</strong> <span class="math inline">\(\text{Var} \to \mathbb{Z}_\perp\)</span>, então <span class="math inline">\(\sigma(z)\)</span> está definido (talvez como um valor padrão ou indefinido <span class="math inline">\(\perp\)</span>). A atribuição produz <span class="math inline">\(\sigma[z \mapsto 1]\)</span>, em que o valor anterior de <span class="math inline">\(z\)</span> é descartado.</p>
+<p>Se <span class="math inline">\(\sigma\)</span> é uma função <strong>parcial</strong>, definida só em <span class="math inline">\(\{x, y\}\)</span>, a atribuição <span class="math inline">\(z := 1\)</span> requer estender <span class="math inline">\(\sigma\)</span> para incluir <span class="math inline">\(z\)</span>. O resultado seria a função estendida <span class="math inline">\(\sigma'\)</span> com domínio <span class="math inline">\(\{x, y, z\}\)</span> e <span class="math inline">\(\sigma'(z) = 1\)</span>.</p>
+<p>A escolha entre os dois modelos é parte do design da semântica:</p>
+<ul>
+<li><strong>Estado total</strong>: simplifica a metateoria (fórmulas universais sobre <span class="math inline">\(\sigma\)</span> funcionam) e permite tratar variáveis não declaradas via valor <span class="math inline">\(\perp\)</span>. Adoptado em <span class="math inline">\([\![\cdot]\!]_{cmd}\)</span> deste capítulo.</li>
+<li><strong>Estado parcial</strong>: corresponde mais de perto à intuição de “memória existente apenas para variáveis declaradas”. Mais comum em semânticas de linguagens com escopo léxico explícito.</li>
+</ul>
+<p>Em ambos os modelos, a atribuição <span class="math inline">\(z := 1\)</span> produz um estado em que <span class="math inline">\(z\)</span> vale <span class="math inline">\(1\)</span>. A diferença está no significado pré-atribuição: indefinido global vs.&nbsp;fora do domínio.</p>
+</section>
+<section id="exercício-19-sequência-associativa" class="level4" data-number="13.5.3.10">
+<h4 data-number="13.5.3.10" class="anchored" data-anchor-id="exercício-19-sequência-associativa"><span class="header-section-number">13.5.3.10</span> Exercício 19: Sequência associativa</h4>
+<p>Verifique formalmente que <span class="math inline">\((S_1 ; S_2) ; S_3\)</span> e <span class="math inline">\(S_1 ; (S_2 ; S_3)\)</span> produzem o mesmo resultado para qualquer <span class="math inline">\(\sigma\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Pelo lado esquerdo:</p>
+<p><span class="math display">\[[\![(S_1 ; S_2) ; S_3]\!]_{cmd}\sigma = [\![S_3]\!]_{cmd}([\![S_1 ; S_2]\!]_{cmd}\sigma) = [\![S_3]\!]_{cmd}([\![S_2]\!]_{cmd}([\![S_1]\!]_{cmd}\sigma))\]</span></p>
+<p>Pelo lado direito:</p>
+<p><span class="math display">\[[\![S_1 ; (S_2 ; S_3)]\!]_{cmd}\sigma = [\![S_2 ; S_3]\!]_{cmd}([\![S_1]\!]_{cmd}\sigma) = [\![S_3]\!]_{cmd}([\![S_2]\!]_{cmd}([\![S_1]\!]_{cmd}\sigma))\]</span></p>
+<p>As duas expressões finais são idênticas. Os programas são equivalentes para todo <span class="math inline">\(\sigma\)</span>.</p>
+<p>A propriedade decorre da associatividade da composição funcional matemática, que é verdadeira por definição: <span class="math inline">\((f \circ g) \circ h = f \circ (g \circ h)\)</span>. Esse fato matemático fundamental é o que justifica eliminarmos parênteses de longas sequências <code>S₁; S₂; S₃; ... ; Sₙ</code> sem ambiguidade.</p>
+</section>
+<section id="exercício-20-identificando-otimização-incorreta" class="level4" data-number="13.5.3.11">
+<h4 data-number="13.5.3.11" class="anchored" data-anchor-id="exercício-20-identificando-otimização-incorreta"><span class="header-section-number">13.5.3.11</span> Exercício 20: Identificando otimização incorreta</h4>
+<p>Considere a transformação proposta:</p>
+<p><span class="math display">\[\text{if } b \text{ then } x := 1 \text{ else } x := 2 \quad \rightsquigarrow \quad x := \text{if } b \text{ then } 1 \text{ else } 2\]</span></p>
+<p>Sob a hipótese de que a linguagem suporta condicionais como expressões (não apenas como comandos), a transformação é correta?</p>
+<p><strong>Solução:</strong></p>
+<p>A transformação tenta consolidar duas atribuições em uma, escolhendo o valor pela condição. Vamos verificar caso a caso, assumindo que <span class="math inline">\([\![\text{if } b \text{ then } e_1 \text{ else } e_2]\!]_{aexp}\sigma\)</span> avalia <span class="math inline">\(b\)</span> e retorna <span class="math inline">\([\![e_1]\!]_{aexp}\sigma\)</span> ou <span class="math inline">\([\![e_2]\!]_{aexp}\sigma\)</span> conforme o valor.</p>
+<p>Caso <span class="math inline">\([\![b]\!]_{bexp}\sigma = \text{true}\)</span>:</p>
+<ul>
+<li>Programa original: <span class="math inline">\([\![x := 1]\!]_{cmd}\sigma = \sigma[x \mapsto 1]\)</span>.</li>
+<li>Programa transformado: <span class="math inline">\(\sigma[x \mapsto 1]\)</span>.</li>
+<li>Iguais.</li>
+</ul>
+<p>Caso false: análogo, ambos produzem <span class="math inline">\(\sigma[x \mapsto 2]\)</span>.</p>
+<p>Caso <span class="math inline">\([\![b]\!]_{bexp}\sigma = \perp\)</span>: ambos retornam <span class="math inline">\(\perp\)</span> (o programa original pela definição da semântica do condicional como comando, o transformado pela definição da expressão condicional, que herda a indefinição do operando).</p>
+<p>A transformação <strong>é correta</strong> sob a hipótese de que a expressão condicional tem semântica análoga ao comando condicional. Esta otimização é conhecida como <code>select</code> em arquiteturas modernas e elimina ramos de fluxo de controle por uma operação aritmética/lógica, vantajosa em pipelines com previsão de desvio.</p>
+<p>A correção depende crucialmente de a avaliação de <span class="math inline">\(1\)</span> e <span class="math inline">\(2\)</span> não ter efeitos colaterais — o que é garantido neste capítulo por todas as expressões aritméticas serem puras. Em uma linguagem com expressões impuras, a transformação não seria válida em geral.</p>
 
 
+</section>
 </section>
 </section>
 

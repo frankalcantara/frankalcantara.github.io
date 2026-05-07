@@ -543,6 +543,7 @@ window.Quarto = {
   <li><a href="#julgamentos-em-linguagens-imperativas" id="toc-julgamentos-em-linguagens-imperativas" class="nav-link" data-scroll-target="#julgamentos-em-linguagens-imperativas"><span class="header-section-number">14.12.2</span> Julgamentos em linguagens imperativas</a></li>
   <li><a href="#subtipagem-coerção-e-equivalência" id="toc-subtipagem-coerção-e-equivalência" class="nav-link" data-scroll-target="#subtipagem-coerção-e-equivalência"><span class="header-section-number">14.12.3</span> Subtipagem, coerção e equivalência</a></li>
   <li><a href="#inferência-local-e-fluxo-de-controle" id="toc-inferência-local-e-fluxo-de-controle" class="nav-link" data-scroll-target="#inferência-local-e-fluxo-de-controle"><span class="header-section-number">14.12.4</span> Inferência local e fluxo de controle</a></li>
+  <li><a href="#comparação-entre-linguagens" id="toc-comparação-entre-linguagens" class="nav-link" data-scroll-target="#comparação-entre-linguagens"><span class="header-section-number">14.12.5</span> Comparação entre linguagens</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10b-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -729,6 +730,81 @@ Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperati
 </figcaption>
 </figure>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Estudo de Caso: Julgamento de Tipos em Membros Flexíveis">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Estudo de Caso: Julgamento de Tipos em Membros Flexíveis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Considere o código a seguir em C, que define uma estrutura, <code>struct</code>, com um membro de array flexível:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> data<span class="op">[];</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> Array<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Alocação dinâmica da struct + espaço para 'n' inteiros no array flexível</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    Array <span class="op">*</span>a <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(*</span>a<span class="op">)</span> <span class="op">+</span> n <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span>a<span class="op">-&gt;</span>data<span class="op">[</span><span class="dv">0</span><span class="op">]));</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>a<span class="op">)</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    a<span class="op">-&gt;</span>len <span class="op">=</span> n<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Preenche o array com múltiplos de 10</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        a<span class="op">-&gt;</span>data<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Imprime o valor no índice 3 (deve resultar em 30)</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%d\n</span><span class="st">"</span><span class="op">,</span> a<span class="op">-&gt;</span>data<span class="op">[</span><span class="dv">3</span><span class="op">]);</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Libera a memória alocada</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    free<span class="op">(</span>a<span class="op">);</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esse código utiliza um <strong><em>Flexible Array Member</em></strong>, um desafio interessante para o sistema de tipos. Vamos decompor o julgamento da linha de alocação:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Array <span class="op">*</span>a <span class="op">=</span> malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(*</span>a<span class="op">)</span> <span class="op">+</span> n <span class="op">*</span> <span class="kw">sizeof</span><span class="op">(</span>a<span class="op">-&gt;</span>data<span class="op">[</span><span class="dv">0</span><span class="op">]));</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>1. Contexto (<span class="math inline">\(\Gamma\)</span>) e Efeitos (<span class="math inline">\(\varepsilon\)</span>):</strong> Nesta linha, o contexto <span class="math inline">\(\Gamma\)</span> já contém <span class="math inline">\(n : \text{int}\)</span> e a definição da `<code>struct Array</code>. A execução do <code>malloc</code> possui o efeito <span class="math inline">\(\varepsilon = \{\text{alloc}\}\)</span>, modificando o contexto de memória <span class="math inline">\(\Sigma\)</span> para incluir uma nova região.</p>
+<p><strong>2. Derivação do Tipo de Alocação:</strong> Para que a atribuição seja válida, o sistema de tipos deve verificar a compatibilidade entre o ponteiro <code>a</code> e o retorno de <code>malloc</code>. A regra de promoção e cálculo seria:</p>
+<p><span class="math display">\[
+\frac{\Gamma \vdash \text{sizeof}(*a) : \text{size\_t} \quad \Gamma \vdash n \times \text{sizeof}(a\text{-&gt;data}[0]) : \text{size\_t}}{\Gamma \vdash \text{expressão\_total} : \text{size\_t}}
+\]</span></p>
+<p><strong>3. O Problema da Seta (<span class="math inline">\(\rightarrow\)</span>):</strong> O operador <code>-&gt;</code> é um <em>açúcar sintático</em> para desreferenciamento seguido de acesso. O julgamento para <code>a-&gt;len</code> no código seria:</p>
+<p><span class="math display">\[
+\frac{\Gamma(a) = \text{Array*} \quad \text{Array possui campo } len : \text{int}}{\Gamma ; \Sigma \vdash a \rightarrow len : \text{int} ! \{\text{read}(a)\}}
+\]</span></p>
+<p><strong>4. Semântica do Membro Flexível:</strong> Diferente de um array comum, <code>int data[]</code> não possui tamanho fixo no contexto <span class="math inline">\(\Gamma\)</span> da <code>struct</code>. Sua segurança de tipos depende inteiramente da semântica operacional: o programador é responsável por garantir que o índice <span class="math inline">\(i\)</span> no laço <code>for (int i = 0; i &lt; n; i++)</code> respeita o limite <span class="math inline">\(n\)</span> alocado dinamicamente.</p>
+<p>Apesar desta técnica ser muito usada em sistemas de baixo nível, como o Kernel Linux, em linguagens como <strong>Rust</strong>, esse código seria rejeitado ou exigiria um bloco <code>unsafe</code>, pois o sistema de tipos <span class="math inline">\((\text{Ownership}, \text{Lifetimes})\)</span> exige provas estáticas de que o acesso <code>a-&gt;data[i]</code> não transborda os limites da região <span class="math inline">\(\Sigma\)</span>.</p>
+<p>Embora o <strong><em>Flexible Array Member</em></strong> seja uma técnica poderosa em <strong>C</strong>, ele não faz parte do padrão <strong>C++</strong>. Ainda que alguns compiladores mantenham suporte a ao uso de <strong><em>Flexible Array Member</em></strong>, as técnicas modernas de <strong>C++</strong> priorizam o gerenciamento automático de memória e o conhecimento estático do tamanho dos objetos. Para obter o mesmo efeito de forma moderna e segura, a atenta leitora poderá usar as seguintes alternativas:</p>
+<p><strong>1. std::vector (O Padrão Ouro)</strong> A solução mais comum que gerencia automaticamente a alocação e liberação de memória (RAII).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Array <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> data<span class="op">;</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><strong>Segurança</strong>: Previne vazamentos de memória e oferece verificação de limites.</li>
+<li><strong>Flexibilidade</strong>: O tamanho pode crescer dinamicamente conforme a necessidade.</li>
+</ul>
+<p><strong>2. std::span (C++20)</strong> Ideal para quando você precisa de uma visão segura sobre um bloco contíguo de memória já existente, sem assumir a posse dos dados.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Array <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>span<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> data<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> processar<span class="op">(</span><span class="bu">std::</span>span<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> dados<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>3. std::inplace_vector (C++26)</strong> Para casos onde a <strong>localidade de cache</strong> é vital e você deseja evitar alocações na Heap, mantendo os dados contíguos dentro da própria estrutura, similar ao FAM do <strong>C</strong>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Array <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>inplace_vector<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dv">10</span><span class="op">&gt;</span> data<span class="op">;</span> <span class="co">// Capacidade fixa interna</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Conclusão Semântica</strong>: Enquanto no <strong>C</strong> a segurança depende da disciplina operacional do programador (semântica operacional), no <strong>C++</strong> moderno ela é garantida pelo <strong>Sistema de Tipos</strong> e pelas abstrações da biblioteca padrão.</p>
+</div>
+</div>
 </section>
 <section id="python-do-dinâmico-ao-gradual" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="python-do-dinâmico-ao-gradual"><span class="header-section-number">14.4</span> Python: Do Dinâmico ao Gradual</h2>
@@ -736,49 +812,49 @@ Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperati
 <section id="python-puro-duck-typing" class="level3" data-number="14.4.1">
 <h3 data-number="14.4.1" class="anchored" data-anchor-id="python-puro-duck-typing"><span class="header-section-number">14.4.1</span> Python Puro: <em>duck typing</em></h3>
 <p>No Python tradicional, não há julgamento de tipos em tempo de compilação:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a, b):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="dv">3</span>, <span class="dv">5</span>)        <span class="co"># Funciona: 8</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="st">"oi"</span>, <span class="st">"lá"</span>)  <span class="co"># Funciona: "oilá"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="dv">3</span>, <span class="st">"lá"</span>)     <span class="co"># TypeError em *runtime*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O sistema de tipos é baseado em <strong><em>duck typing</em></strong>: “se anda como pato e faz quack como pato, então é um pato”. O que importa não é o tipo nominal de um objeto, mas sim quais operações ele suporta.</p>
-<p>Formalmente, não há julgamento de tipo estático. O “tipo” de uma expressão só é conhecido em <em>runtime</em>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a, b):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="dv">3</span>, <span class="dv">5</span>)        <span class="co"># Funciona: 8</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="st">"oi"</span>, <span class="st">"lá"</span>)  <span class="co"># Funciona: "oilá"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> soma(<span class="dv">3</span>, <span class="st">"lá"</span>)     <span class="co"># TypeError em *runtime*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O sistema de tipos é baseado em <strong><em>duck typing</em></strong>: <em>se anda como pato e faz quack como pato, então é um pato</em>. O que importa não é o tipo nominal de um objeto, mas sim quais operações ele suporta.</p>
+<p>Formalmente, não há julgamento de tipo estático. O tipo de uma expressão só é conhecido em <em>runtime</em>:</p>
 <p><span class="math display">\[\text{typeof}(e, \sigma) = \tau\]</span></p>
 <p>Onde <span class="math inline">\(\sigma\)</span> é o estado do programa (valores concretos) e <span class="math inline">\(\tau\)</span> é o tipo descoberto em <em>runtime</em>.</p>
 </section>
 <section id="python-com-type-hints-tipagem-gradual" class="level3" data-number="14.4.2">
 <h3 data-number="14.4.2" class="anchored" data-anchor-id="python-com-type-hints-tipagem-gradual"><span class="header-section-number">14.4.2</span> Python com Type <em>hints</em>: Tipagem Gradual</h3>
 <p>A PEP 484 introduziu <strong>anotações de tipo opcionais</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Type checker (mypy) pode detectar erro:</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>resultado: <span class="bu">int</span> <span class="op">=</span> soma(<span class="dv">3</span>, <span class="st">"olá"</span>)  <span class="co"># Type error em análise estática</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> soma(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Type checker (mypy) pode detectar erro:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>resultado: <span class="bu">int</span> <span class="op">=</span> soma(<span class="dv">3</span>, <span class="st">"olá"</span>)  <span class="co"># Type error em análise estática</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O sistema de julgamento de tipos para Python anotado usa <strong>equivalência estrutural</strong> com <strong>subtipagem</strong>:</p>
 <p><strong>Regra de Subtipagem (Subsumption)</strong>:</p>
 <p><span class="math display">\[\frac{\Gamma \vdash e : T_1 \quad T_1 &lt;: T_2}{\Gamma \vdash e : T_2}\]</span></p>
 <p>Se <code>e</code> tem tipo <code>T₁</code> e <code>T₁</code> é subtipo de <code>T₂</code>, então <code>e</code> pode ser usado onde <code>T₂</code> é esperado.</p>
 <p><strong>Exemplo prático</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Desenhavel(Protocol):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>: ...</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Circulo:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"○"</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Quadrado:</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"□"</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renderizar(obj: Desenhavel) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    obj.desenhar()</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Type checker aceita ambos:</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>renderizar(Circulo())   <span class="co"># OK: Circulo é estruturalmente compatível</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>renderizar(Quadrado())  <span class="co"># OK: Quadrado é estruturalmente compatível</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Desenhavel(Protocol):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>: ...</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Circulo:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"○"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Quadrado:</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> desenhar(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"□"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> renderizar(obj: Desenhavel) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    obj.desenhar()</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Type checker aceita ambos:</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>renderizar(Circulo())   <span class="co"># OK: Circulo é estruturalmente compatível</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>renderizar(Quadrado())  <span class="co"># OK: Quadrado é estruturalmente compatível</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O julgamento aqui é:</p>
 <p><span class="math display">\[\frac{\text{Circulo} &lt;: \text{Desenhavel}}{\Gamma \vdash \text{Circulo()} : \text{Desenhavel}}\]</span></p>
 <p><strong>Características únicas do sistema Python</strong>:</p>
@@ -789,13 +865,13 @@ Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperati
 <li><strong>Union types</strong>: <code>int | str</code> permite múltiplos tipos</li>
 <li><strong>Type narrowing</strong>: refinamento de tipos em branches</li>
 </ol>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> processar(valor: <span class="bu">int</span> <span class="op">|</span> <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(valor, <span class="bu">int</span>):</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: int</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: str</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> processar(valor: <span class="bu">int</span> <span class="op">|</span> <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(valor, <span class="bu">int</span>):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: int</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Aqui, type checker sabe que valor: str</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O refinamento de tipos pode ser expresso como uma transformação local do contexto. Se antes do teste sabemos que <code>valor</code> tem tipo <code>int | str</code>, dentro do ramo verdadeiro o contexto é refinado para <code>valor : int</code>, e no ramo falso para <code>valor : str</code>:</p>
 <p><span class="math display">\[\frac{
   \Gamma \vdash x : T_1 \cup T_2
@@ -841,27 +917,27 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 </figure>
 </div>
 <p><strong>Exemplo</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>  <span class="co">// x promovido para float, resultado promovido para double</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>  <span class="co">// x promovido para float, resultado promovido para double</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="a-fraqueza-controlada-casts-e-ponteiros" class="level3" data-number="14.5.2">
 <h3 data-number="14.5.2" class="anchored" data-anchor-id="a-fraqueza-controlada-casts-e-ponteiros"><span class="header-section-number">14.5.2</span> A Fraqueza Controlada: Casts e Ponteiros</h3>
 <p>O que torna C “fracamente tipado” é sua permissividade com <strong>casts</strong> e <strong>aritmética de ponteiros</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span><span class="op">*</span> p <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">*)&amp;</span>x<span class="op">;</span>  <span class="co">// Cast inseguro: reinterpreta bits</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>              <span class="co">// Comportamento indefinido</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span><span class="op">*</span> str <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> offset <span class="op">=</span> str<span class="op">[</span><span class="dv">2</span><span class="op">];</span>    <span class="co">// 'l' interpretado como int</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span><span class="op">*</span> p <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">*)&amp;</span>x<span class="op">;</span>  <span class="co">// Cast inseguro: reinterpreta bits</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>              <span class="co">// Comportamento indefinido</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="dt">char</span><span class="op">*</span> str <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> offset <span class="op">=</span> str<span class="op">[</span><span class="dv">2</span><span class="op">];</span>    <span class="co">// 'l' interpretado como int</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Cast (Conversão Explícita)</strong>:</p>
 <p><span class="math display">\[\frac{\Gamma \vdash e : T_1}{\Gamma \vdash (T_2)e : T_2}\]</span></p>
 <p>Esta regra é <strong>perigosamente permissiva</strong>: ela aceita qualquer cast, transferindo a responsabilidade de correção para o programador. O compilador confia que você sabe o que está fazendo.</p>
 <p><strong>Exemplo de julgamento em C</strong>:</p>
 <p>Para o código:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="op">*</span>p <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span><span class="op">*</span> p <span class="op">=</span> <span class="op">&amp;</span>x<span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y <span class="op">=</span> <span class="op">*</span>p <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A derivação seria:</p>
 <p><span class="math display">\[\frac{
   \frac{}{\Gamma_0 \vdash 10 : \text{int}} \quad \Gamma_1 = \{x : \text{int}\}
@@ -887,13 +963,13 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 <section id="templates-duck-typing-em-tempo-de-compilação" class="level3" data-number="14.6.1">
 <h3 data-number="14.6.1" class="anchored" data-anchor-id="templates-duck-typing-em-tempo-de-compilação"><span class="header-section-number">14.6.1</span> Templates: <em>duck typing</em> em Tempo de Compilação</h3>
 <p>Templates em C++ são essencialmente <strong><em>duck typing</em> estático</strong>. Um template é instanciado apenas quando usado, e o compilador verifica se todas as operações requeridas existem:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>T max<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">&gt;</span> b <span class="op">?</span> a <span class="op">:</span> b<span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> max<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span>        <span class="co">// T deduzido como int</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> y <span class="op">=</span> max<span class="op">(</span><span class="fl">3.1</span><span class="op">,</span> <span class="fl">2.9</span><span class="op">);</span> <span class="co">// T deduzido como double</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>T max<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">&gt;</span> b <span class="op">?</span> a <span class="op">:</span> b<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> max<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span>        <span class="co">// T deduzido como int</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> y <span class="op">=</span> max<span class="op">(</span><span class="fl">3.1</span><span class="op">,</span> <span class="fl">2.9</span><span class="op">);</span> <span class="co">// T deduzido como double</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Instanciação de Template</strong>:</p>
 <p><span class="math display">\[\frac{
   \Gamma \vdash e_1 : T \quad \Gamma \vdash e_2 : T \quad
@@ -906,12 +982,12 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 <section id="dedução-de-tipos-com-auto" class="level3" data-number="14.6.2">
 <h3 data-number="14.6.2" class="anchored" data-anchor-id="dedução-de-tipos-com-auto"><span class="header-section-number">14.6.2</span> Dedução de Tipos com <code>auto</code></h3>
 <p>C++11 introduziu <code>auto</code>, que realiza <strong>inferência de tipo local</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>           <span class="co">// x : int</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>         <span class="co">// y : double</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>        <span class="co">// z : double</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> f <span class="op">=</span> <span class="op">[](</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span>   <span class="co">// f : lambda com tipo deduzido</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span>           <span class="co">// x : int</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>         <span class="co">// y : double</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> z <span class="op">=</span> x <span class="op">+</span> y<span class="op">;</span>        <span class="co">// z : double</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> f <span class="op">=</span> <span class="op">[](</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span>   <span class="co">// f : lambda com tipo deduzido</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Dedução para <code>auto</code></strong>:</p>
 <p><span class="math display">\[\frac{\Gamma \vdash e : \tau}{\Gamma \vdash (\text{auto } x = e) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : \tau\}}\]</span></p>
 <p>O tipo de <code>x</code> é <strong>exatamente</strong> o tipo de <code>e</code>, sem coerções automáticas.</p>
@@ -919,17 +995,17 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 <section id="concepts-c20-restrições-explícitas" class="level3" data-number="14.6.3">
 <h3 data-number="14.6.3" class="anchored" data-anchor-id="concepts-c20-restrições-explícitas"><span class="header-section-number">14.6.3</span> Concepts (C++20): Restrições Explícitas</h3>
 <p>C++20 introduziu <strong>concepts</strong> para adicionar restrições explícitas a templates:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">concept</span> Numeric <span class="op">=</span> <span class="bu">std::</span>is_arithmetic_v<span class="op">&lt;</span>T<span class="op">&gt;;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span>Numeric T<span class="op">&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>T quadrado<span class="op">(</span>T x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> x<span class="op">;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> quadrado<span class="op">(</span><span class="dv">5</span><span class="op">);</span>      <span class="co">// OK</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> quadrado<span class="op">(</span><span class="fl">3.14</span><span class="op">);</span> <span class="co">// OK</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">// std::string c = quadrado("oi"); // ERRO: string não satisfaz Numeric</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">concept</span> Numeric <span class="op">=</span> <span class="bu">std::</span>is_arithmetic_v<span class="op">&lt;</span>T<span class="op">&gt;;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span>Numeric T<span class="op">&gt;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>T quadrado<span class="op">(</span>T x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> x<span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a <span class="op">=</span> quadrado<span class="op">(</span><span class="dv">5</span><span class="op">);</span>      <span class="co">// OK</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="dt">double</span> b <span class="op">=</span> quadrado<span class="op">(</span><span class="fl">3.14</span><span class="op">);</span> <span class="co">// OK</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">// std::string c = quadrado("oi"); // ERRO: string não satisfaz Numeric</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Concept</strong>:</p>
 <p><span class="math display">\[\frac{
   \Gamma \vdash T \models C \quad \Gamma, x : T \vdash e : \tau
@@ -941,12 +1017,12 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 <section id="exemplo-completo-de-julgamento-em-c" class="level3" data-number="14.6.4">
 <h3 data-number="14.6.4" class="anchored" data-anchor-id="exemplo-completo-de-julgamento-em-c"><span class="header-section-number">14.6.4</span> Exemplo Completo de Julgamento em C++</h3>
 <p>Para o código:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma_dobro<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> resultado <span class="op">=</span> soma_dobro<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> soma_dobro<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">-&gt;</span> <span class="kw">decltype</span><span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>a <span class="op">+</span> b<span class="op">)</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> resultado <span class="op">=</span> soma_dobro<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A derivação envolve múltiplas etapas:</p>
 <ol type="1">
 <li><p><strong>Dedução do parâmetro de template</strong>: <span class="math display">\[\frac{\Gamma \vdash 3 : \text{int} \quad \Gamma \vdash 5 : \text{int}}{T = \text{int}}\]</span></p></li>
@@ -966,24 +1042,24 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 <section id="sistema-base-inferência-hindley-milner" class="level3" data-number="14.7.1">
 <h3 data-number="14.7.1" class="anchored" data-anchor-id="sistema-base-inferência-hindley-milner"><span class="header-section-number">14.7.1</span> Sistema Base: Inferência Hindley-Milner</h3>
 <p>O sistema de tipos de Rust é baseado em Hindley-Milner, permitindo inferência quase completa:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">+</span> b</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>           <span class="co">// Tipo inferido: i32</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> y <span class="op">=</span> soma(x<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span> <span class="co">// Tipo inferido: i32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">+</span> b</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>           <span class="co">// Tipo inferido: i32</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> y <span class="op">=</span> soma(x<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span> <span class="co">// Tipo inferido: i32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Contudo, Rust adiciona três extensões fundamentais:</p>
 </section>
 <section id="restrições-baseadas-em-traits" class="level3" data-number="14.7.2">
 <h3 data-number="14.7.2" class="anchored" data-anchor-id="restrições-baseadas-em-traits"><span class="header-section-number">14.7.2</span> Restrições Baseadas em Traits</h3>
 <p>Traits em Rust são similares a type classes em Haskell, mas com semântica de sistemas:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">trait</span> Adicionavel <span class="op">{</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> adicionar(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> outro<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Self</span>) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma_generica<span class="op">&lt;</span>T<span class="op">:</span> Adicionavel<span class="op">&gt;</span>(a<span class="op">:</span> T<span class="op">,</span> b<span class="op">:</span> T) <span class="op">-&gt;</span> T <span class="op">{</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    a<span class="op">.</span>adicionar(<span class="op">&amp;</span>b)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">trait</span> Adicionavel <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span> adicionar(<span class="op">&amp;</span><span class="kw">self</span><span class="op">,</span> outro<span class="op">:</span> <span class="op">&amp;</span><span class="dt">Self</span>) <span class="op">-&gt;</span> <span class="dt">Self</span><span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> soma_generica<span class="op">&lt;</span>T<span class="op">:</span> Adicionavel<span class="op">&gt;</span>(a<span class="op">:</span> T<span class="op">,</span> b<span class="op">:</span> T) <span class="op">-&gt;</span> T <span class="op">{</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    a<span class="op">.</span>adicionar(<span class="op">&amp;</span>b)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Trait Bound</strong>:</p>
 <p><span class="math display">\[\frac{
   \Gamma \vdash T : \text{trait } C \quad
@@ -995,9 +1071,9 @@ Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, 
 <section id="ownership-e-lifetimes" class="level3" data-number="14.7.3">
 <h3 data-number="14.7.3" class="anchored" data-anchor-id="ownership-e-lifetimes"><span class="header-section-number">14.7.3</span> Ownership e Lifetimes</h3>
 <p>A característica mais distintiva de Rust é seu sistema de <strong>ownership</strong> e <strong>lifetimes</strong>, que são parte integrante do sistema de tipos:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> primeiro<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span>split_whitespace()<span class="op">.</span>next()<span class="op">.</span>unwrap_or(<span class="st">""</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> primeiro<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span>split_whitespace()<span class="op">.</span>next()<span class="op">.</span>unwrap_or(<span class="st">""</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Lifetime</strong>:</p>
 <p><span class="math display">\[\frac{
   \Gamma; \Delta \vdash e : \tau \quad
@@ -1066,16 +1142,16 @@ Figure&nbsp;14.5: Estados simplificados de posse e empréstimo no <em>borrow che
 </figure>
 </div>
 <p><strong>Exemplo de julgamento com lifetimes</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> maior<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s1<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> s2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s1<span class="op">.</span>len() <span class="op">&gt;</span> s2<span class="op">.</span>len() <span class="op">{</span> s1 <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> s2 <span class="op">}</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> resultado<span class="op">;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> texto1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"curto"</span>)<span class="op">;</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> texto2 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"mais longo"</span>)<span class="op">;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> maior(<span class="op">&amp;</span>texto1<span class="op">,</span> <span class="op">&amp;</span>texto2)<span class="op">;</span> <span class="co">// ERRO: texto1 não vive o suficiente</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> maior<span class="op">&lt;</span><span class="ot">'a</span><span class="op">&gt;</span>(s1<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span><span class="op">,</span> s2<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span>) <span class="op">-&gt;</span> <span class="op">&amp;</span><span class="ot">'a</span> <span class="dt">str</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s1<span class="op">.</span>len() <span class="op">&gt;</span> s2<span class="op">.</span>len() <span class="op">{</span> s1 <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> s2 <span class="op">}</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> resultado<span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> texto1 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"curto"</span>)<span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> texto2 <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"mais longo"</span>)<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> maior(<span class="op">&amp;</span>texto1<span class="op">,</span> <span class="op">&amp;</span>texto2)<span class="op">;</span> <span class="co">// ERRO: texto1 não vive o suficiente</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A derivação falharia:</p>
 <p><span class="math display">\[\frac{
   \Gamma; \{\text{texto1} : 'b\} \vdash \&amp;\text{texto1} : \&amp;'b \text{str}
@@ -1096,12 +1172,12 @@ Figure&nbsp;14.6: Lifetimes anotados em uma timeline de escopos: a referência a
 <section id="inferência-bidirecional" class="level3" data-number="14.7.4">
 <h3 data-number="14.7.4" class="anchored" data-anchor-id="inferência-bidirecional"><span class="header-section-number">14.7.4</span> Inferência Bidirecional</h3>
 <p>Rust usa <strong>inferência bidirecional</strong> para combinar anotações explícitas com dedução:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> v<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> <span class="co">// Vec&lt;i32&gt; inferido</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> soma <span class="op">=</span> v<span class="op">.</span>iter()<span class="op">.</span>sum()<span class="op">;</span>      <span class="co">// Tipo de retorno inferido do contexto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> v<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span>_<span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> <span class="co">// Vec&lt;i32&gt; inferido</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> soma <span class="op">=</span> v<span class="op">.</span>iter()<span class="op">.</span>sum()<span class="op">;</span>      <span class="co">// Tipo de retorno inferido do contexto</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Inferência Bidirecional</strong>:</p>
 <ul>
 <li><strong>Modo de síntese</strong> (<span class="math inline">\(\Gamma \vdash e \Rightarrow \tau\)</span>): deduz o tipo de <code>e</code></li>
-<li><strong>Modo de checagem</strong> (<span class="math inline">\(\Gamma \vdash e \Leftarrow \tau\)</span>): verifica se <code>e</code> tem tipo <span class="math inline">\(\tau\)</span></li>
+<li><strong>Modo de herança</strong> (<span class="math inline">\(\Gamma \vdash e \Leftarrow \tau\)</span>): verifica se <code>e</code> tem tipo <span class="math inline">\(\tau\)</span></li>
 </ul>
 <p><span class="math display">\[\frac{
   \Gamma \vdash e \Rightarrow \tau_1 \quad
@@ -1125,9 +1201,9 @@ Figure&nbsp;14.7: As quatro camadas do sistema de tipos de Rust: cada nível adi
 </figure>
 </div>
 <p><strong>Exemplo de derivação completa</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> processar<span class="op">&lt;</span><span class="ot">'a</span><span class="op">,</span> T<span class="op">:</span> <span class="bu">Clone</span><span class="op">&gt;</span>(dados<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> [T]) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    dados<span class="op">.</span>iter()<span class="op">.</span>cloned()<span class="op">.</span>collect()</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> processar<span class="op">&lt;</span><span class="ot">'a</span><span class="op">,</span> T<span class="op">:</span> <span class="bu">Clone</span><span class="op">&gt;</span>(dados<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> [T]) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    dados<span class="op">.</span>iter()<span class="op">.</span>cloned()<span class="op">.</span>collect()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A derivação verifica:</p>
 <ol type="1">
 <li><strong>Trait bound</strong>: <code>T : Clone</code></li>
@@ -1153,15 +1229,15 @@ Figure&nbsp;14.7: As quatro camadas do sistema de tipos de Rust: cada nível adi
 <section id="typescript-tipagem-estrutural-gradual" class="level3" data-number="14.8.1">
 <h3 data-number="14.8.1" class="anchored" data-anchor-id="typescript-tipagem-estrutural-gradual"><span class="header-section-number">14.8.1</span> TypeScript: Tipagem Estrutural Gradual</h3>
 <p><strong>TypeScript</strong> combina tipagem estrutural com inferência <em>flow-sensitive</em>(como visto em <a href="#fig-type-narrowing" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processar</span>(valor<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">typeof</span> valor <span class="op">===</span> <span class="st">"string"</span>) {</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: string</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: number</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processar</span>(valor<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">typeof</span> valor <span class="op">===</span> <span class="st">"string"</span>) {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: string</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: number</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Type Narrowing</strong>:</p>
 <p><span class="math display">\[\frac{
   \Gamma \vdash e : T_1 | T_2 \quad
@@ -1174,17 +1250,17 @@ Figure&nbsp;14.7: As quatro camadas do sistema de tipos de Rust: cada nível adi
 <section id="go-simplicidade-nominal" class="level3" data-number="14.8.2">
 <h3 data-number="14.8.2" class="anchored" data-anchor-id="go-simplicidade-nominal"><span class="header-section-number">14.8.2</span> Go: Simplicidade Nominal</h3>
 <p><strong>Go</strong> usa um sistema simples e nominal, mas com interfaces estruturais:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Desenhavel <span class="kw">interface</span> <span class="op">{</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    Desenhar<span class="op">()</span> <span class="dt">string</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Circulo <span class="kw">struct</span><span class="op">{}</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>c Circulo<span class="op">)</span> Desenhar<span class="op">()</span> <span class="dt">string</span> <span class="op">{</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"○"</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Circulo implementa Desenhavel implicitamente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Desenhavel <span class="kw">interface</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    Desenhar<span class="op">()</span> <span class="dt">string</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Circulo <span class="kw">struct</span><span class="op">{}</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>c Circulo<span class="op">)</span> Desenhar<span class="op">()</span> <span class="dt">string</span> <span class="op">{</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"○"</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Circulo implementa Desenhavel implicitamente</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Regra de Interface Implícita</strong>:</p>
 <p><span class="math display">\[\frac{
   \forall m \in \text{methods}(I), \quad T \text{ implementa } m
@@ -1195,9 +1271,9 @@ Figure&nbsp;14.7: As quatro camadas do sistema de tipos de Rust: cada nível adi
 <section id="swift-sistema-híbrido" class="level3" data-number="14.8.3">
 <h3 data-number="14.8.3" class="anchored" data-anchor-id="swift-sistema-híbrido"><span class="header-section-number">14.8.3</span> Swift: Sistema Híbrido</h3>
 <p><strong>Swift</strong> combina inferência local forte com type classes (protocols) e tipos opcionais:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="fu">processar</span><span class="op">&lt;</span><span class="dt">T</span><span class="op">:</span> <span class="dt">Numeric</span><span class="op">&gt;(</span><span class="va">valor</span><span class="op">:</span> <span class="dt">T</span><span class="op">?)</span> -&gt; <span class="fu">T</span> <span class="op">{</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> valor <span class="op">??</span> <span class="dv">0</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode swift code-with-copy"><code class="sourceCode swift"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="fu">processar</span><span class="op">&lt;</span><span class="dt">T</span><span class="op">:</span> <span class="dt">Numeric</span><span class="op">&gt;(</span><span class="va">valor</span><span class="op">:</span> <span class="dt">T</span><span class="op">?)</span> -&gt; <span class="fu">T</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">return</span> valor <span class="op">??</span> <span class="dv">0</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="comparação-complexidade-dos-sistemas" class="level2" data-number="14.9">
@@ -1325,54 +1401,364 @@ Figure&nbsp;14.8: Posicionamento aproximado das linguagens em duas dimensões: m
 </section>
 <section id="exercícios" class="level2" data-number="14.12">
 <h2 data-number="14.12" class="anchored" data-anchor-id="exercícios"><span class="header-section-number">14.12</span> Exercícios</h2>
-<p>Os exercícios a seguir exploram a classificação de sistemas de tipos, a escrita de regras de julgamento e a comparação entre linguagens imperativas reais.</p>
+<p>Os exercícios a seguir exploram a classificação de sistemas de tipos, a escrita de regras de julgamento e a comparação entre linguagens imperativas reais. Use a notação introduzida no capítulo: <span class="math inline">\(\Gamma ; \Sigma \vdash e : \tau \; ! \; \varepsilon\)</span> para julgamentos completos, e a versão simplificada <span class="math inline">\(\Gamma \vdash e : \tau\)</span> quando o estado e os efeitos não forem relevantes.</p>
 <section id="classificação-de-sistemas-de-tipos" class="level3" data-number="14.12.1">
 <h3 data-number="14.12.1" class="anchored" data-anchor-id="classificação-de-sistemas-de-tipos"><span class="header-section-number">14.12.1</span> Classificação de sistemas de tipos</h3>
+<section id="exercício-1-posicionamento-nos-três-eixos" class="level4" data-number="14.12.1.1">
+<h4 data-number="14.12.1.1" class="anchored" data-anchor-id="exercício-1-posicionamento-nos-três-eixos"><span class="header-section-number">14.12.1.1</span> Exercício 1: Posicionamento nos três eixos</h4>
+<p>Classifique <strong>C</strong>, <strong>Java</strong>, <strong>TypeScript</strong>, <strong>Go</strong> e <strong>Rust</strong> nos três eixos apresentados neste capítulo: momento da verificação, equivalência de tipos e inferência.</p>
+<p><strong>Solução:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 28%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Linguagem</th>
+<th>Verificação</th>
+<th>Equivalência</th>
+<th>Inferência</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C</td>
+<td>Estática (fraca, com casts)</td>
+<td>Nominal</td>
+<td>Nenhuma</td>
+</tr>
+<tr class="even">
+<td>Java</td>
+<td>Estática (forte) + runtime checks</td>
+<td>Nominal</td>
+<td>Local (<code>var</code> desde Java 10)</td>
+</tr>
+<tr class="odd">
+<td>TypeScript</td>
+<td>Gradual</td>
+<td>Estrutural</td>
+<td>Sensível ao fluxo</td>
+</tr>
+<tr class="even">
+<td>Go</td>
+<td>Estática (forte)</td>
+<td>Nominal, estrutural para interfaces</td>
+<td>Nenhuma</td>
+</tr>
+<tr class="odd">
+<td>Rust</td>
+<td>Estática (muito forte)</td>
+<td>Nominal</td>
+<td>Quase global (HM-like)</td>
+</tr>
+</tbody>
+</table>
+<p>Observações: a tipagem fraca de C decorre da permissividade dos casts e da aritmética de ponteiros, não do momento da verificação. Java é estática mas usa verificações em runtime para casts descendentes e arrays. Go é único na combinação de equivalência nominal para tipos nomeados e estrutural para interfaces.</p>
+</section>
+<section id="exercício-2-por-que-python-é-gradual" class="level4" data-number="14.12.1.2">
+<h4 data-number="14.12.1.2" class="anchored" data-anchor-id="exercício-2-por-que-python-é-gradual"><span class="header-section-number">14.12.1.2</span> Exercício 2: Por que Python é gradual?</h4>
+<p>Explique por que Python com type hints é gradual, e não simplesmente estaticamente tipado.</p>
+<p><strong>Solução:</strong></p>
+<p>Tipagem gradual difere de tipagem estática em três aspectos centrais:</p>
 <ol type="1">
-<li><p>Classifique <strong>C</strong>, <strong>Java</strong>, <strong>TypeScript</strong>, <strong>Go</strong> e <strong>Rust</strong> nos três eixos apresentados neste capítulo: momento da verificação, equivalência de tipos e inferência.</p></li>
-<li><p>Explique por que <strong>Python com type hints</strong> é gradual, e não simplesmente estaticamente tipado.</p></li>
-<li><p>Em que sentido <strong>Rust</strong> se aproxima de Hindley-Milner e em que sentido se afasta dele?</p></li>
+<li><p><strong>As anotações são opcionais</strong>: código sem anotações continua válido. Em uma linguagem estaticamente tipada, ausência de tipo é erro.</p></li>
+<li><p><strong>As anotações não são executadas em runtime</strong>: o interpretador Python ignora as anotações de tipo durante a execução. Programas anotados com tipos errados rodam normalmente até que a violação cause uma falha em runtime.</p></li>
+<li><p><strong>Existe um tipo de escape (<code>Any</code>)</strong>: o tipo <code>Any</code> é compatível com tudo, e seu uso desabilita a verificação local. Isso permite interoperabilidade entre código tipado e não tipado.</p></li>
 </ol>
+<p>Em uma linguagem estaticamente tipada (Java, Rust), o compilador rejeita o programa se a verificação não passar; em Python anotado, o verificador externo (mypy, pyright) emite avisos, mas o código pode rodar mesmo assim. A gradualidade é a fronteira controlada entre os dois mundos.</p>
+</section>
+<section id="exercício-3-rust-e-hindley-milner" class="level4" data-number="14.12.1.3">
+<h4 data-number="14.12.1.3" class="anchored" data-anchor-id="exercício-3-rust-e-hindley-milner"><span class="header-section-number">14.12.1.3</span> Exercício 3: Rust e Hindley-Milner</h4>
+<p>Em que sentido Rust se aproxima de Hindley-Milner e em que sentido se afasta dele?</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Aproximações com HM</strong>:</p>
+<ul>
+<li>Inferência local de tipos sem anotações em maior parte das atribuições (<code>let x = 5;</code>).</li>
+<li>Polimorfismo paramétrico via parâmetros genéricos <code>&lt;T&gt;</code>.</li>
+<li>Unificação de tipos para resolver variáveis de tipo durante a inferência.</li>
+<li>Princípio de “type principal”: para um termo bem tipado, existe um tipo mais geral que captura todas as instâncias possíveis.</li>
+</ul>
+<p><strong>Afastamentos em relação a HM</strong>:</p>
+<ul>
+<li>Trait bounds: <code>fn f&lt;T: Clone&gt;</code> exige restrições explícitas que HM puro não tem (HM puro é paramétrico, sem ad-hoc).</li>
+<li>Lifetimes: nenhuma noção análoga em HM. Rust adiciona um sistema de regiões temporais entrelaçado com tipos.</li>
+<li>Ownership: HM trata tipos imutáveis e funções puras; Rust precisa rastrear posse, movimento e empréstimo.</li>
+<li>Inferência limitada em assinaturas de função: tipos de parâmetros e retorno devem ser declarados, ao contrário de HM, em que tudo pode ser inferido.</li>
+</ul>
+<p>Resumindo, Rust pega a inferência de tipos de HM e a estende com traits (polimorfismo ad-hoc estruturado), ownership (linearidade) e lifetimes (regiões), pagando o preço de declarações em fronteiras de função.</p>
+</section>
 </section>
 <section id="julgamentos-em-linguagens-imperativas" class="level3" data-number="14.12.2">
 <h3 data-number="14.12.2" class="anchored" data-anchor-id="julgamentos-em-linguagens-imperativas"><span class="header-section-number">14.12.2</span> Julgamentos em linguagens imperativas</h3>
-<ol start="4" type="1">
-<li><p>Usando o julgamento:</p>
-<p><span class="math display">\[\Gamma ; \Sigma \vdash S : \Gamma' ; \Sigma' \; ! \; \varepsilon\]</span></p>
-<p>escreva a derivação para o comando:</p>
+<section id="exercício-4-derivação-de-declaração-e-atribuição" class="level4" data-number="14.12.2.1">
+<h4 data-number="14.12.2.1" class="anchored" data-anchor-id="exercício-4-derivação-de-declaração-e-atribuição"><span class="header-section-number">14.12.2.1</span> Exercício 4: Derivação de declaração e atribuição</h4>
+<p>Usando o julgamento <span class="math inline">\(\Gamma ; \Sigma \vdash S : \Gamma' ; \Sigma' \; ! \; \varepsilon\)</span>, construa a derivação para:</p>
 <pre class="text"><code>int x = 3;
 x = x + 1;</code></pre>
-<p>explicando quais efeitos aparecem em <span class="math inline">\(\varepsilon\)</span>.</p></li>
-<li><p>Escreva uma regra de tipagem para uma declaração de constante imutável:</p>
-<pre class="text"><code>const x : T = e</code></pre>
-<p>Em seguida, explique por que uma atribuição posterior <code>x := e2</code> deve ser rejeitada.</p></li>
-<li><p>Considere uma linguagem com exceções. Estenda informalmente o conjunto de efeitos <span class="math inline">\(\varepsilon\)</span> para representar uma expressão que pode lançar uma exceção.</p></li>
-</ol>
+<p>explicando quais efeitos aparecem em <span class="math inline">\(\varepsilon\)</span>.</p>
+<p><strong>Solução:</strong></p>
+<p>Estado inicial: <span class="math inline">\(\Gamma_0 = \emptyset\)</span>, <span class="math inline">\(\Sigma_0 = \emptyset\)</span>, <span class="math inline">\(\varepsilon_0 = \emptyset\)</span>.</p>
+<p><strong>Primeiro comando</strong> (<code>int x = 3</code>):</p>
+<p><span class="math display">\[\frac{\Gamma_0; \Sigma_0 \vdash 3 : \text{int} \; ! \; \emptyset}{\Gamma_0; \Sigma_0 \vdash (\text{int } x = 3) : \Gamma_1 ; \Sigma_0 \; ! \; \emptyset}\]</span></p>
+<p>com <span class="math inline">\(\Gamma_1 = \{x : \text{mut int}\}\)</span>. Sem efeitos: literais não geram leituras nem escritas observáveis.</p>
+<p><strong>Segundo comando</strong> (<code>x = x + 1</code>):</p>
+<p><span class="math display">\[\frac{\Gamma_1(x) = \text{mut int} \quad \Gamma_1; \Sigma_0 \vdash x + 1 : \text{int} \; ! \; \{\text{read}(x)\}}{\Gamma_1; \Sigma_0 \vdash (x = x+1) : \Gamma_1 ; \Sigma_0 \; ! \; \{\text{read}(x), \text{write}(x)\}}\]</span></p>
+<p>A leitura de <span class="math inline">\(x\)</span> no operando direito gera <code>read(x)</code>; a atribuição final gera <code>write(x)</code>.</p>
+<p><strong>Sequência completa</strong>:</p>
+<p><span class="math display">\[\Gamma_0 ; \Sigma_0 \vdash (\text{int } x = 3 ; x = x+1) : \Gamma_1 ; \Sigma_0 \; ! \; \{\text{read}(x), \text{write}(x)\}\]</span></p>
+<p>Os efeitos finais são a união dos efeitos das partes. A declaração não contribui para <span class="math inline">\(\varepsilon\)</span> neste modelo, mas modifica o contexto <span class="math inline">\(\Gamma\)</span>.</p>
+</section>
+<section id="exercício-5-constante-imutável" class="level4" data-number="14.12.2.2">
+<h4 data-number="14.12.2.2" class="anchored" data-anchor-id="exercício-5-constante-imutável"><span class="header-section-number">14.12.2.2</span> Exercício 5: Constante imutável</h4>
+<p>Escreva uma regra de tipagem para <code>const x : T = e</code> e explique por que <code>x = e2</code> deve ser rejeitada depois.</p>
+<p><strong>Solução:</strong></p>
+<pre class="text"><code>       Γ ; Σ ⊢ e : T' ! ε       T' &lt;: T
+       --------------------------------------
+Γ ; Σ ⊢ const x : T = e : Γ[x ↦ const T] ; Σ ! ε</code></pre>
+<p>A diferença em relação a <code>let mut</code> é que o tipo armazenado em <span class="math inline">\(\Gamma\)</span> é <code>const T</code>, marcando o vínculo como imutável.</p>
+<p>A regra de atribuição posterior consulta <span class="math inline">\(\Gamma(x)\)</span> e exige <code>mut T</code>. Para uma variável marcada como <code>const T</code>, a premissa <span class="math inline">\(\Gamma(x) = \text{mut } T\)</span> falha:</p>
+<p><span class="math display">\[\frac{\Gamma(x) = \text{const } T \quad \cdots}{\Gamma ; \Sigma \vdash x = e_2 : \cdots}\]</span></p>
+<p>Não há regra que case com esse contexto. O verificador rejeita a atribuição. Linguagens reais (<code>const</code> em C++, <code>final</code> em Java, <code>let</code> sem <code>mut</code> em Rust, <code>val</code> em Scala) implementam essa distinção via marcação no contexto, exatamente como a regra acima.</p>
+</section>
+<section id="exercício-6-efeitos-com-exceções" class="level4" data-number="14.12.2.3">
+<h4 data-number="14.12.2.3" class="anchored" data-anchor-id="exercício-6-efeitos-com-exceções"><span class="header-section-number">14.12.2.3</span> Exercício 6: Efeitos com exceções</h4>
+<p>Estenda informalmente o conjunto de efeitos <span class="math inline">\(\varepsilon\)</span> para representar uma expressão que pode lançar uma exceção.</p>
+<p><strong>Solução:</strong></p>
+<p>Adicionamos ao conjunto <span class="math inline">\(\varepsilon\)</span> um novo tipo de efeito: <code>throws(E)</code>, indicando que a expressão pode lançar uma exceção do tipo <code>E</code>. A regra para o operador de divisão, por exemplo, ficaria:</p>
+<p><span class="math display">\[\frac{\Gamma; \Sigma \vdash e_1 : \text{int} \; ! \; \varepsilon_1 \quad \Gamma; \Sigma \vdash e_2 : \text{int} \; ! \; \varepsilon_2}{\Gamma; \Sigma \vdash e_1 / e_2 : \text{int} \; ! \; \varepsilon_1 \cup \varepsilon_2 \cup \{\text{throws}(\text{DivByZero})\}}\]</span></p>
+<p>Para uma sequência <span class="math inline">\(S_1 ; S_2\)</span>, os efeitos da sequência incluem todos os efeitos de exceção possíveis de <span class="math inline">\(S_1\)</span> e <span class="math inline">\(S_2\)</span>. Um bloco <code>try-catch</code> pode reduzir os efeitos: se o <code>catch</code> trata <code>throws(E)</code>, o efeito é removido do conjunto que sai do bloco:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash S : \tau \; ! \; \varepsilon \quad \text{throws}(E) \in \varepsilon \quad \Gamma \vdash H : \tau \; ! \; \varepsilon'}{\Gamma \vdash \text{try } S \text{ catch}(E)\,H : \tau \; ! \; (\varepsilon \setminus \{\text{throws}(E)\}) \cup \varepsilon'}\]</span></p>
+<p>Sistemas reais que rastreiam esse tipo de efeito incluem Java (<code>throws</code> clauses), Koka (effect rows) e parte do design proposto para Scala 3 effects.</p>
+</section>
 </section>
 <section id="subtipagem-coerção-e-equivalência" class="level3" data-number="14.12.3">
 <h3 data-number="14.12.3" class="anchored" data-anchor-id="subtipagem-coerção-e-equivalência"><span class="header-section-number">14.12.3</span> Subtipagem, coerção e equivalência</h3>
-<ol start="7" type="1">
-<li><p>Dê um exemplo de dois tipos que seriam compatíveis em um sistema estrutural, mas incompatíveis em um sistema nominal.</p></li>
-<li><p>Escreva uma regra de coerção numérica para permitir que uma expressão de tipo <code>int</code> seja usada onde se espera <code>float</code>.</p></li>
-<li><p>Explique por que casts em <strong>C</strong> funcionam como uma espécie de “escape hatch” do sistema de tipos.</p></li>
-</ol>
+<section id="exercício-7-compatibilidade-nominal-vs-estrutural" class="level4" data-number="14.12.3.1">
+<h4 data-number="14.12.3.1" class="anchored" data-anchor-id="exercício-7-compatibilidade-nominal-vs-estrutural"><span class="header-section-number">14.12.3.1</span> Exercício 7: Compatibilidade nominal vs estrutural</h4>
+<p>Dê um exemplo de dois tipos compatíveis em sistema estrutural mas incompatíveis em sistema nominal.</p>
+<p><strong>Solução:</strong></p>
+<p>Em uma linguagem estrutural como TypeScript:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Pessoa <span class="op">=</span> { nome<span class="op">:</span> <span class="dt">string</span><span class="op">;</span> idade<span class="op">:</span> <span class="dt">number</span> }<span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Funcionario <span class="op">=</span> { nome<span class="op">:</span> <span class="dt">string</span><span class="op">;</span> idade<span class="op">:</span> <span class="dt">number</span> }<span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> p<span class="op">:</span> Pessoa <span class="op">=</span> { nome<span class="op">:</span> <span class="st">"Ana"</span><span class="op">,</span> idade<span class="op">:</span> <span class="dv">30</span> }<span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> f<span class="op">:</span> Funcionario <span class="op">=</span> p<span class="op">;</span>  <span class="co">// OK: estrutura idêntica</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Em TypeScript, <code>Pessoa</code> e <code>Funcionario</code> são intercambiáveis porque ambos têm os mesmos campos com os mesmos tipos.</p>
+<p>A mesma definição em Java (sistema nominal) seria incompatível:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Pessoa <span class="op">{</span> <span class="bu">String</span> nome<span class="op">;</span> <span class="dt">int</span> idade<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Funcionario <span class="op">{</span> <span class="bu">String</span> nome<span class="op">;</span> <span class="dt">int</span> idade<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Pessoa p <span class="op">=</span> <span class="kw">new</span> <span class="fu">Pessoa</span><span class="op">(</span><span class="kw">...</span><span class="op">);</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>Funcionario f <span class="op">=</span> p<span class="op">;</span>  <span class="co">// ERRO: Pessoa não é Funcionario</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Mesmo com estrutura idêntica, os nomes diferem, então os tipos são distintos. O programador precisaria converter explicitamente, herdar de uma superclasse comum ou implementar uma interface compartilhada.</p>
+<p>A escolha entre nominal e estrutural carrega consequências: nominal protege a intenção semântica do programador (<code>Pessoa</code> representa algo conceitualmente diferente de <code>Funcionario</code>); estrutural maximiza intercambialidade (qualquer coisa que se pareça com pato é pato).</p>
+</section>
+<section id="exercício-8-regra-de-coerção-numérica" class="level4" data-number="14.12.3.2">
+<h4 data-number="14.12.3.2" class="anchored" data-anchor-id="exercício-8-regra-de-coerção-numérica"><span class="header-section-number">14.12.3.2</span> Exercício 8: Regra de coerção numérica</h4>
+<p>Escreva uma regra que permita usar uma expressão <code>int</code> onde se espera <code>float</code>.</p>
+<p><strong>Solução:</strong></p>
+<p>A regra introduz uma coerção implícita quando o tipo da expressão é “menor” que o esperado:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : \text{int}}{\Gamma \vdash e : \text{float}} (\text{Coerce-IntFloat})\]</span></p>
+<p>Esta regra introduz uma forma fraca de subtipagem: <code>int &lt;: float</code>. Em derivações, ela funciona como uma regra de subsumção e pode ser aplicada onde for necessária.</p>
+<p>Operacionalmente, o compilador insere uma conversão (instrução de hardware ou operação de biblioteca) no ponto da coerção. Em uma AST decorada, isso aparece como um nó <code>Coerce(int → float)</code> envolvendo a expressão original.</p>
+<p>A regra pode ser estendida para a hierarquia completa <code>char &lt;: short &lt;: int &lt;: long &lt;: float &lt;: double</code>. A coerção em cada passo é não-destrutiva, mas a transitividade pode acumular perda de precisão (por exemplo, <code>long → float</code> perde dígitos significativos para valores grandes).</p>
+</section>
+<section id="exercício-9-casts-em-c-como-escape-hatch" class="level4" data-number="14.12.3.3">
+<h4 data-number="14.12.3.3" class="anchored" data-anchor-id="exercício-9-casts-em-c-como-escape-hatch"><span class="header-section-number">14.12.3.3</span> Exercício 9: Casts em C como escape hatch</h4>
+<p>Explique por que casts em C funcionam como escape hatch do sistema de tipos.</p>
+<p><strong>Solução:</strong></p>
+<p>A regra de cast em C é:</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : T_1}{\Gamma \vdash (T_2)e : T_2}\]</span></p>
+<p>A regra não tem premissa relacionando <span class="math inline">\(T_1\)</span> e <span class="math inline">\(T_2\)</span>. Qualquer coisa pode ser convertida em qualquer outra coisa, sem que o sistema de tipos ofereça resistência.</p>
+<p>O efeito prático é que o programador pode contornar o sistema de tipos sempre que precisar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">42</span><span class="op">;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span><span class="op">*</span> p <span class="op">=</span> <span class="op">(</span><span class="dt">float</span><span class="op">*)&amp;</span>x<span class="op">;</span>     <span class="co">// tipo aceito; semântica indefinida</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="op">*</span>p <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Essa permissividade é por design: C foi pensado como linguagem de sistemas, em que reinterpretação de bytes (para alocação manual, comunicação com hardware, manipulação de protocolos) é necessária. O custo é que a verificação de tipos em C garante muito menos do que parece: passar um cast significa “o programador prometeu que sabe o que está fazendo”, não “o sistema verificou”.</p>
+<p>Linguagens posteriores (C++, Rust) refinam o conceito introduzindo casts diferenciados:</p>
+<ul>
+<li><code>static_cast</code> (C++): conversões verificadas em compilação;</li>
+<li><code>reinterpret_cast</code> (C++): equivalente ao cast de C, marcado claramente como inseguro;</li>
+<li><code>as</code> (Rust): conversões numéricas seguras; reinterpretação só via blocos <code>unsafe</code>.</li>
+</ul>
+<p>A diferenciação separa coerções legítimas de bypass do sistema, mantendo escape hatches mas tornando-os explícitos.</p>
+</section>
 </section>
 <section id="inferência-local-e-fluxo-de-controle" class="level3" data-number="14.12.4">
 <h3 data-number="14.12.4" class="anchored" data-anchor-id="inferência-local-e-fluxo-de-controle"><span class="header-section-number">14.12.4</span> Inferência local e fluxo de controle</h3>
-<ol start="10" type="1">
-<li><p>Usando a regra de refinamento de tipos, mostre como o tipo de <code>valor</code> muda nos dois ramos do programa:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(valor: <span class="bu">int</span> <span class="op">|</span> <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(valor, <span class="bu">int</span>):</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Escreva uma regra simplificada para <code>auto</code> em <strong>C++</strong>, assumindo que o tipo da expressão de inicialização já foi inferido.</p></li>
-<li><p>Para o seguinte trecho de <strong>Rust</strong>, explique por que o segundo empréstimo mutável deve ser rejeitado:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<section id="exercício-10-refinamento-em-ramos" class="level4" data-number="14.12.4.1">
+<h4 data-number="14.12.4.1" class="anchored" data-anchor-id="exercício-10-refinamento-em-ramos"><span class="header-section-number">14.12.4.1</span> Exercício 10: Refinamento em ramos</h4>
+<p>Para o programa abaixo, mostre como o tipo de <code>valor</code> muda em cada ramo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(valor: <span class="bu">int</span> <span class="op">|</span> <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(valor, <span class="bu">int</span>):</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> valor <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(valor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Solução:</strong></p>
+<p>Antes do <code>if</code>, <span class="math inline">\(\Gamma_0 = \{\text{valor} : \text{int} \cup \text{str}\}\)</span>.</p>
+<p>No ramo verdadeiro do <code>if isinstance(valor, int)</code>, o teste filtra a união ao primeiro componente:</p>
+<p><span class="math display">\[\Gamma_1 = \Gamma_0[\text{valor} \mapsto \text{int}]\]</span></p>
+<p>A expressão <code>valor + 1</code> é então tipada em <span class="math inline">\(\Gamma_1\)</span>: <span class="math inline">\(\text{int} + \text{int} = \text{int}\)</span>. Bem tipada.</p>
+<p>No ramo falso, o teste falhou, então o tipo é o complemento na união:</p>
+<p><span class="math display">\[\Gamma_2 = \Gamma_0[\text{valor} \mapsto \text{str}]\]</span></p>
+<p>A expressão <code>len(valor)</code> é tipada em <span class="math inline">\(\Gamma_2\)</span>: <code>len(str)</code> retorna <code>int</code>. Bem tipada.</p>
+<p>Sem o refinamento, a função teria que tratar <code>valor</code> como <code>int | str</code> em ambos os ramos, e nem <code>valor + 1</code> nem <code>len(valor)</code> seriam aceitos (a soma exige <code>int</code>; <code>len</code> exige tipo com tamanho definido, e a união não satisfaz nenhum dos dois sozinha). O refinamento é o que torna tipos uniões utilizáveis na prática.</p>
+</section>
+<section id="exercício-11-regra-simplificada-para-auto" class="level4" data-number="14.12.4.2">
+<h4 data-number="14.12.4.2" class="anchored" data-anchor-id="exercício-11-regra-simplificada-para-auto"><span class="header-section-number">14.12.4.2</span> Exercício 11: Regra simplificada para auto</h4>
+<p>Escreva uma regra para <code>auto</code> em C++, assumindo que o tipo da expressão de inicialização já foi inferido.</p>
+<p><strong>Solução:</strong></p>
+<p><span class="math display">\[\frac{\Gamma \vdash e : \tau}{\Gamma \vdash (\text{auto } x = e) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : \tau\}}\]</span></p>
+<p>A regra delega toda a complexidade à inferência prévia do tipo de <code>e</code>. Após resolver <span class="math inline">\(\tau\)</span>, o nome <code>x</code> é vinculado a esse tipo no contexto resultante.</p>
+<p>Detalhes ausentes da regra simplificada que importam em C++ real:</p>
+<ul>
+<li><strong>Ajuste de qualificadores</strong>: <code>auto</code> remove <code>const</code> e referências de cima do tipo inferido. Para <code>const int&amp; y = ...; auto z = y;</code>, <span class="math inline">\(z\)</span> tem tipo <code>int</code>, não <code>const int&amp;</code>. Para preservar, usa-se <code>auto&amp;</code> ou <code>decltype(auto)</code>.</li>
+<li><strong>Brace initialization</strong>: <code>auto x = {1, 2, 3}</code> infere <code>std::initializer_list&lt;int&gt;</code>, não <code>int[3]</code>, pegada surpreendente.</li>
+<li><strong>Templates</strong>: <code>auto</code> em parâmetros de função (C++14) introduz polimorfismo paramétrico.</li>
+</ul>
+<p>A regra simplificada captura o essencial; as exceções são parte da especificação real de C++.</p>
+</section>
+<section id="exercício-12-empréstimo-mutável-duplo-em-rust" class="level4" data-number="14.12.4.3">
+<h4 data-number="14.12.4.3" class="anchored" data-anchor-id="exercício-12-empréstimo-mutável-duplo-em-rust"><span class="header-section-number">14.12.4.3</span> Exercício 12: Empréstimo mutável duplo em Rust</h4>
+<p>Para o trecho:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> <span class="kw">mut</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r1 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r2 <span class="op">=</span> <span class="op">&amp;</span><span class="kw">mut</span> x<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>explique por que o segundo empréstimo deve ser rejeitado.</p>
+<p><strong>Solução:</strong></p>
+<p>A regra para empréstimo mutável é:</p>
+<p><span class="math display">\[\frac{\Gamma; \Omega \vdash x : \text{own}(T) \quad x \notin \text{borrowed}(\Omega)}{\Gamma; \Omega \vdash \&amp;\text{mut}\,x : \&amp;'a\,\text{mut}\,T \quad \Omega' = \Omega[x \mapsto \text{unique}('a)]}\]</span></p>
+<p>A premissa <span class="math inline">\(x \notin \text{borrowed}(\Omega)\)</span> é o que rejeita o segundo empréstimo. Após a primeira linha (<code>let r1 = &amp;mut x</code>), o estado de posse passa a ser <span class="math inline">\(\Omega' = \{x : \text{unique}('1)\}\)</span>, indicando que <code>x</code> está mutavelmente emprestado para <code>r1</code> durante a vigência de um lifetime <span class="math inline">\('1\)</span>.</p>
+<p>Quando a segunda linha (<code>let r2 = &amp;mut x</code>) é processada, a premissa <span class="math inline">\(x \notin \text{borrowed}(\Omega')\)</span> falha, pois <code>x</code> está em estado <code>unique</code>. A derivação não fecha. O compilador emite o erro:</p>
+<pre class="text"><code>cannot borrow `x` as mutable more than once at a time</code></pre>
+<p>A justificativa de design é: se duas referências mutáveis pudessem coexistir, escritas concorrentes a <code>x</code> poderiam corromper invariantes. Forçar exclusividade no acesso de escrita elimina a classe inteira de bugs de aliasing mutável, que são a causa fundamental de muitos erros em C/C++ (use-after-free, iterator invalidation, data races). Esta restrição é o coração do borrow checker.</p>
+</section>
+</section>
+<section id="comparação-entre-linguagens" class="level3" data-number="14.12.5">
+<h3 data-number="14.12.5" class="anchored" data-anchor-id="comparação-entre-linguagens"><span class="header-section-number">14.12.5</span> Comparação entre linguagens</h3>
+<section id="exercício-13-templates-como-duck-typing-estático" class="level4" data-number="14.12.5.1">
+<h4 data-number="14.12.5.1" class="anchored" data-anchor-id="exercício-13-templates-como-duck-typing-estático"><span class="header-section-number">14.12.5.1</span> Exercício 13: Templates como duck typing estático</h4>
+<p>Explique por que templates em C++ podem ser caracterizados como duck typing estático.</p>
+<p><strong>Solução:</strong></p>
+<p>Duck typing dinâmico (Python original) opera assim: chama-se um método <code>m()</code> em um objeto, e em runtime verifica-se se o objeto tem esse método. Se tiver, executa; se não tiver, erro.</p>
+<p>Templates em C++ fazem algo análogo, mas em compilação: o template é instanciado para um tipo <code>T</code> concreto, e o compilador verifica se todas as operações usadas no corpo são definidas para <code>T</code>. Se forem, gera código; se não, erro de compilação.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="kw">typename</span> T<span class="op">&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>T max<span class="op">(</span>T a<span class="op">,</span> T b<span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> a <span class="op">&gt;</span> b <span class="op">?</span> a <span class="op">:</span> b<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>max<span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span>              <span class="co">// OK: int suporta operator&gt;</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>max<span class="op">(</span><span class="fl">3.1</span><span class="op">,</span> <span class="fl">2.9</span><span class="op">);</span>          <span class="co">// OK: double suporta operator&gt;</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>max<span class="op">(</span>MeuTipo<span class="op">{},</span> MeuTipo<span class="op">{});</span> <span class="co">// OK só se MeuTipo definir operator&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A diferença com duck typing dinâmico é que, em C++, o erro aparece em compilação, e a verificação é sobre a forma do código gerado, não sobre objetos em memória. Cada instanciação produz um corpo de função distinto, com tipos concretos.</p>
+<p>A consequência problemática é que mensagens de erro de templates são notoriamente longas e difíceis de ler: o compilador reporta erros sobre o código instanciado, não sobre o template original. Concepts em C++20 corrigem parcialmente isso ao permitir restrições explícitas que o compilador pode verificar antes da instanciação, melhorando as mensagens.</p>
+</section>
+<section id="exercício-14-inferência-bidirecional" class="level4" data-number="14.12.5.2">
+<h4 data-number="14.12.5.2" class="anchored" data-anchor-id="exercício-14-inferência-bidirecional"><span class="header-section-number">14.12.5.2</span> Exercício 14: Inferência bidirecional</h4>
+<p>Em qual modo (síntese ou herança) cada uso ocorreria em Rust?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                     <span class="co">// (a)</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> y<span class="op">:</span> <span class="dt">i64</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>                <span class="co">// (b)</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> v<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[]<span class="op">;</span>      <span class="co">// (c)</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> add(a<span class="op">:</span> <span class="dt">i32</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">i32</span>) <span class="op">-&gt;</span> <span class="dt">i32</span> <span class="op">{</span> a <span class="op">+</span> b <span class="op">}</span>  <span class="co">// (d)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Solução:</strong></p>
+<ol type="a">
+<li><p><strong>Síntese</strong>. Sem anotação no <code>let</code>, o compilador deduz o tipo da expressão <code>5</code> (<code>i32</code> por padrão para inteiros). <span class="math inline">\(\Gamma \vdash 5 \Rightarrow i32\)</span>.</p></li>
+<li><p>** herança**. Com a anotação <code>: i64</code>, o compilador verifica se <code>5</code> pode ter o tipo <code>i64</code>. <span class="math inline">\(\Gamma \vdash 5 \Leftarrow i64\)</span>. O literal numérico em Rust é polimórfico até ser fixado por contexto, então a herança fixa o tipo em <code>i64</code>.</p></li>
+<li><p>** herança**. Sem a anotação, <code>vec![]</code> produziria <code>Vec&lt;?&gt;</code> com parâmetro de tipo livre, o que o compilador não consegue resolver. A anotação <code>Vec&lt;i32&gt;</code> força o tipo, e o macro adapta-se.</p></li>
+<li><p>** herança do corpo, síntese da assinatura**. A assinatura <code>(a: i32, b: i32) -&gt; i32</code> é declarada explicitamente. O corpo <code>a + b</code> é verificado contra <code>i32</code>: <span class="math inline">\(\Gamma, a:i32, b:i32 \vdash a + b \Leftarrow i32\)</span>. A função inteira é então sintetizada como tendo tipo <code>(i32, i32) -&gt; i32</code>.</p></li>
 </ol>
+<p>A combinação dos dois modos é o que torna a inferência de Rust prática: assinaturas externas guiam a verificação dos corpos (modo de herança), enquanto expressões locais sintetizam tipos quando o contexto não os impõe.</p>
+</section>
+<section id="exercício-15-interface-implícita-em-go" class="level4" data-number="14.12.5.3">
+<h4 data-number="14.12.5.3" class="anchored" data-anchor-id="exercício-15-interface-implícita-em-go"><span class="header-section-number">14.12.5.3</span> Exercício 15: Interface implícita em Go</h4>
+<p>Considere a interface Go:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Stringer <span class="kw">interface</span> <span class="op">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    String<span class="op">()</span> <span class="dt">string</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>e a struct:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode go code-with-copy"><code class="sourceCode go"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">type</span> Ponto <span class="kw">struct</span><span class="op">{</span> X<span class="op">,</span> Y <span class="dt">int</span> <span class="op">}</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">func</span> <span class="op">(</span>p Ponto<span class="op">)</span> String<span class="op">()</span> <span class="dt">string</span> <span class="op">{</span> <span class="cf">return</span> <span class="st">"..."</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Explique por que <code>Ponto</code> satisfaz <code>Stringer</code> sem declaração explícita.</p>
+<p><strong>Solução:</strong></p>
+<p>Go usa a regra de implementação implícita de interfaces:</p>
+<p><span class="math display">\[\frac{\forall m \in \text{methods}(I), \quad T \text{ implementa } m \text{ com a mesma assinatura}}{T &lt;: I}\]</span></p>
+<p>Para <code>Ponto</code>, o conjunto de métodos é <code>{String() string}</code>. A interface <code>Stringer</code> exige exatamente o mesmo conjunto. A premissa é satisfeita, e a relação <span class="math inline">\(\text{Ponto} &lt;: \text{Stringer}\)</span> é estabelecida automaticamente.</p>
+<p>Comparação com Java/C#: nessas linguagens, seria preciso declarar <code>class Ponto implements Stringer</code> para a relação valer. A vantagem é que o compilador detecta inconsistência logo (a classe é obrigada a implementar todos os métodos). A desvantagem é o acoplamento: para fazer <code>Ponto</code> satisfazer uma nova interface, é preciso modificar a declaração da classe.</p>
+<p>Go inverte: o compilador descobre relações de subtipo quando precisa delas (em uma chamada que espera <code>Stringer</code>, verifica se o tipo passado tem os métodos necessários). Isso permite escrever interfaces após o fato, retroativamente sobre tipos existentes, o que é especialmente útil para tipos vindos de bibliotecas externas. O preço é que o programador não tem garantia local de que um tipo “implementa” uma interface — é só na hora do uso que a verificação ocorre.</p>
+</section>
+<section id="exercício-16-decidibilidade-em-c-vs-rust" class="level4" data-number="14.12.5.4">
+<h4 data-number="14.12.5.4" class="anchored" data-anchor-id="exercício-16-decidibilidade-em-c-vs-rust"><span class="header-section-number">14.12.5.4</span> Exercício 16: Decidibilidade em C++ vs Rust</h4>
+<p>Templates em C++ são Turing-completos, e isso significa que a verificação não é decidível em geral. Por que Rust, com generics aparentemente similares, ainda mantém decidibilidade?</p>
+<p><strong>Solução:</strong></p>
+<p>Templates de C++ permitem recursão estrutural arbitrária sobre tipos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;</span><span class="dt">int</span> N<span class="op">&gt;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Fact <span class="op">{</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> <span class="dt">int</span> value <span class="op">=</span> N <span class="op">*</span> Fact<span class="op">&lt;</span>N<span class="op">-</span><span class="dv">1</span><span class="op">&gt;::</span>value<span class="op">;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="kw">template</span><span class="op">&lt;&gt;</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Fact<span class="op">&lt;</span><span class="dv">0</span><span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">static</span> <span class="at">const</span> <span class="dt">int</span> value <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sem limite de profundidade imposto pela linguagem, é possível codificar máquinas de Turing dentro do sistema de templates, e a metaprogramação se torna indecidível. O compilador impõe um limite de profundidade artificial (geralmente 1024) para garantir terminação prática.</p>
+<p>Generics de Rust são intencionalmente menos expressivos:</p>
+<ol type="1">
+<li><strong>Sem especialização recursiva ilimitada</strong>: traits podem ter implementações genéricas, mas a resolução de traits é limitada por regras de coerência. Em particular, traits órfãs e sobreposição são proibidos.</li>
+<li><strong>Trait bounds são explícitos</strong>: <code>T: Clone + Send</code> é uma conjunção fechada de traits. Não há mecanismo análogo a <code>enable_if</code> que produz controle de fluxo arbitrário no sistema de tipos.</li>
+<li><strong>Sem parâmetros de tipo de tipo arbitrário</strong>: const generics em Rust são limitados a inteiros e booleanos, não permitindo recursão estrutural sobre tipos.</li>
+</ol>
+<p>A tradeoff é que Rust generics são menos poderosos para metaprogramação avançada (alguns idiomas de C++ não traduzem diretamente), mas em compensação a inferência e a verificação são tratáveis e produzem mensagens de erro razoáveis. C++20 concepts foram introduzidos parcialmente em resposta a esse contraste, mas a Turing-completude legada permanece para compatibilidade com código existente.</p>
+</section>
+<section id="exercício-17-relação-entre-traits-e-type-classes" class="level4" data-number="14.12.5.5">
+<h4 data-number="14.12.5.5" class="anchored" data-anchor-id="exercício-17-relação-entre-traits-e-type-classes"><span class="header-section-number">14.12.5.5</span> Exercício 17: Relação entre traits e type classes</h4>
+<p>Traits de Rust e type classes de Haskell têm semelhanças. Liste duas semelhanças e duas diferenças.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Semelhanças</strong>:</p>
+<ol type="1">
+<li><p><strong>Polimorfismo ad-hoc estruturado</strong>: ambos resolvem o problema de “diferentes implementações para diferentes tipos” sem usar herança. Um valor pode ter operações disponíveis baseadas no seu tipo concreto, decididas em tempo de compilação.</p></li>
+<li><p><strong>Restrições em parâmetros polimórficos</strong>: tanto <code>fn f&lt;T: Trait&gt;</code> em Rust quanto <code>f :: Trait t =&gt; t -&gt; ...</code> em Haskell expressam que <span class="math inline">\(T\)</span> deve satisfazer um conjunto de operações, sem fixar o tipo concreto.</p></li>
+</ol>
+<p><strong>Diferenças</strong>:</p>
+<ol type="1">
+<li><p><strong>Despacho</strong>: type classes em Haskell usam <em>dictionary passing</em> implícito em runtime (na implementação padrão GHC). Traits em Rust usam <em>monomorphization</em> — o compilador gera uma cópia da função para cada tipo concreto usado, eliminando o overhead de despacho dinâmico. Rust também oferece <em>trait objects</em> (<code>dyn Trait</code>) para despacho dinâmico opcional.</p></li>
+<li><p><strong>Coerência</strong>: Haskell permite múltiplas instâncias para o mesmo tipo via flags (<code>OverlappingInstances</code>), com regras intricadas para resolver conflitos. Rust impõe a regra do órfão (orphan rule): só se pode implementar um trait para um tipo se o trait ou o tipo é definido no crate atual. Isso simplifica raciocínio sobre instâncias mas restringe alguns padrões idiomáticos de Haskell.</p></li>
+</ol>
+</section>
+<section id="exercício-18-por-que-java-usa-erasure" class="level4" data-number="14.12.5.6">
+<h4 data-number="14.12.5.6" class="anchored" data-anchor-id="exercício-18-por-que-java-usa-erasure"><span class="header-section-number">14.12.5.6</span> Exercício 18: Por que Java usa erasure?</h4>
+<p>Java implementa generics via <em>type erasure</em>: em runtime, <code>List&lt;Integer&gt;</code> e <code>List&lt;String&gt;</code> são indistinguíveis (ambas são apenas <code>List</code>). Indique uma vantagem e uma desvantagem desse design comparado a generics de Rust.</p>
+<p><strong>Solução:</strong></p>
+<p><strong>Vantagem</strong>:</p>
+<p>Compatibilidade com código pré-generics. Java introduziu generics em 2004 (Java 5), mais de uma década depois do lançamento da linguagem. Sem erasure, todo o código existente que usava <code>List</code> (sem parâmetros) seria incompatível com novo código generificado. Erasure permite que <code>List</code> legado continue funcionando como <code>List&lt;Object&gt;</code>. Esta foi uma decisão pragmática para preservar o ecossistema, não um design ideal.</p>
+<p><strong>Desvantagem</strong>:</p>
+<p>Várias operações naturais ficam impossíveis. Não se pode <code>new T[n]</code> (não há informação de tipo em runtime), não se pode testar <code>obj instanceof List&lt;Integer&gt;</code> (apenas <code>instanceof List</code>), e a sobrecarga não pode distinguir métodos por tipo genérico (<code>void m(List&lt;Integer&gt;)</code> e <code>void m(List&lt;String&gt;)</code> colidem após erasure).</p>
+<p>Rust, por usar monomorphization, gera código distinto para cada instanciação concreta (<code>Vec&lt;i32&gt;</code> e <code>Vec&lt;String&gt;</code> são tipos completamente diferentes em runtime). Isso elimina as limitações acima e permite especialização por tipo, ao custo de aumento do binário e tempo de compilação.</p>
+<p>A escolha não é absoluta: C# preserva tipos genéricos em runtime via <em>reified generics</em>, evitando erasure mas adotada na primeira versão da linguagem com generics, sem o lastro de compatibilidade que Java tinha.</p>
+</section>
+<section id="exercício-19-inferência-global-vs-local" class="level4" data-number="14.12.5.7">
+<h4 data-number="14.12.5.7" class="anchored" data-anchor-id="exercício-19-inferência-global-vs-local"><span class="header-section-number">14.12.5.7</span> Exercício 19: Inferência global vs local</h4>
+<p>Por que linguagens imperativas modernas tipicamente preferem inferência local (como Rust e C++) em vez de inferência global (como ML e Haskell)?</p>
+<p><strong>Solução:</strong></p>
+<p>Inferência global tem propriedades teóricas atraentes (princípio do tipo principal, inferência sem anotações), mas custos práticos significativos no contexto imperativo:</p>
+<ol type="1">
+<li><p><strong>Mensagens de erro</strong>: quando algo falha na inferência global, o erro pode aparecer em um lugar muito distante da sua origem real. Em ML/Haskell, é comum o erro ser reportado na função que chama uma função problemática, não na função problemática em si. Inferência local limita o escopo do erro à expressão que o causou.</p></li>
+<li><p><strong>Estabilidade de mudanças</strong>: alterar a implementação de uma função em uma linguagem com inferência global pode mudar o tipo inferido, propagando mudanças por toda a base de código. Com inferência local em assinaturas de função, alterar a implementação não afeta a interface, e o impacto é contido.</p></li>
+<li><p><strong>Documentação e leitura</strong>: assinaturas de função explícitas funcionam como documentação primária do código. Em uma codebase grande, ler <code>fn process(data: &amp;[Record]) -&gt; Result&lt;Summary, Error&gt;</code> é mais informativo que ter que rodar o type checker mentalmente.</p></li>
+<li><p><strong>Compatibilidade com features imperativas</strong>: ownership, lifetimes, efeitos e mutabilidade interagem com tipos de forma que inferência global se torna intratável ou produz tipos que o programador não esperava. Anotações em fronteiras estabelecem contratos claros.</p></li>
+<li><p><strong>Compilação incremental</strong>: inferência local permite verificação por unidade (função), facilitando builds incrementais. Inferência global pode exigir reinferência de transitivamente todas as dependências quando algo muda.</p></li>
+</ol>
+<p>A escolha é uma negociação: ML/Haskell pagam o preço dessas dificuldades em troca de menos verbosidade. Linguagens imperativas modernas decidiram que o custo é alto demais para programação de sistemas, em que clareza de interface e mensagens de erro previsíveis dominam.</p>
+</section>
+<section id="exercício-20-sumário-das-três-decisões" class="level4" data-number="14.12.5.8">
+<h4 data-number="14.12.5.8" class="anchored" data-anchor-id="exercício-20-sumário-das-três-decisões"><span class="header-section-number">14.12.5.8</span> Exercício 20: Sumário das três decisões</h4>
+<p>Escolha uma linguagem que você não conhece em profundidade entre as discutidas (C, C++, Rust, Python, TypeScript, Go) e descreva como ela responde às três tensões fundamentais: expressividade vs.&nbsp;decidibilidade, segurança vs.&nbsp;performance, inferência vs.&nbsp;clareza.</p>
+<p><strong>Solução (exemplo: TypeScript):</strong></p>
+<p><strong>Expressividade vs.&nbsp;decidibilidade</strong>: TypeScript prioriza expressividade. Tem tipos condicionais, mapeados, <em>template literal types</em>, recursão sobre tipos. O custo é que verificação é, em alguns casos, indecidível ou de complexidade elevada — TypeScript compila com tempo limite e desabilita análise avançada quando excede. Em troca, modela com fidelidade muitos padrões de JavaScript dinâmico.</p>
+<p><strong>Segurança vs.&nbsp;performance</strong>: TypeScript prioriza compatibilidade com JavaScript dinâmico, então segurança é parcial. O tipo <code>any</code> desabilita verificação localmente. Verificação não roda em runtime — é apenas estática. Isso significa zero overhead de execução, mas também zero garantias além do que o verificador estático detectou. Bibliotecas mal tipadas podem fazer o sistema mentir.</p>
+<p><strong>Inferência vs.&nbsp;clareza</strong>: TypeScript usa inferência local agressiva mas valoriza clareza quando há interface pública. APIs expostas tipicamente declaram tipos explícitos (assinaturas em <code>.d.ts</code>), enquanto código interno pode usar inferência. A flow-sensitive narrowing dá poder à inferência sem sacrificar legibilidade, pois o tipo refinado é localmente óbvio em cada ramo.</p>
+<p>A posição de TypeScript no espaço de design é “segurança gradual sobre uma linguagem dinâmica”: prioriza adoção e produtividade mais que garantias formais, mas compensa com expressividade rara entre linguagens estaticamente tipadas. É uma resposta diferente das três tensões em comparação com Rust (segurança máxima) ou C (performance máxima), e o equilíbrio escolhido é o que explica seu sucesso em substituir JavaScript em codebases grandes.</p>
 
 
+</section>
 </section>
 </section>
 
