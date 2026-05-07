@@ -490,7 +490,7 @@ window.Quarto = {
     <h2 id="toc-title">Sumário</h2>
    
   <ul>
-  <li><a href="#do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" id="toc-do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" class="nav-link active" data-scroll-target="#do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta"><span class="header-section-number">14.1</span> Do Elegante ao Pragmático: Por Que o Algoritmo W Não Basta</a></li>
+  <li><a href="#do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" id="toc-do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" class="nav-link active" data-scroll-target="#do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta"><span class="header-section-number">14.1</span> Do Elegante ao Pragmático: Por Que o <strong>Algoritmo W</strong> Não Basta</a></li>
   <li><a href="#taxonomia-dos-sistemas-de-tipos-imperativos" id="toc-taxonomia-dos-sistemas-de-tipos-imperativos" class="nav-link" data-scroll-target="#taxonomia-dos-sistemas-de-tipos-imperativos"><span class="header-section-number">14.2</span> Taxonomia dos Sistemas de Tipos Imperativos</a>
   <ul class="collapse">
   <li><a href="#eixo-1-momento-da-verificação" id="toc-eixo-1-momento-da-verificação" class="nav-link" data-scroll-target="#eixo-1-momento-da-verificação"><span class="header-section-number">14.2.1</span> Eixo 1: Momento da Verificação</a></li>
@@ -574,7 +574,7 @@ window.Quarto = {
 
 
 <section id="do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta"><span class="header-section-number">14.1</span> Do Elegante ao Pragmático: Por Que o Algoritmo W Não Basta</h2>
+<h2 data-number="14.1" class="anchored" data-anchor-id="do-elegante-ao-pragmático-por-que-o-algoritmo-w-não-basta"><span class="header-section-number">14.1</span> Do Elegante ao Pragmático: Por Que o <strong>Algoritmo W</strong> Não Basta</h2>
 <p>A transição do mundo funcional para o imperativo revela um choque fundamental de filosofias de design. O <strong>Algoritmo W</strong>, com sua elegância matemática e capacidade de inferência completa, foi projetado para linguagens funcionais puras onde o estado é imutável e as funções são valores de primeira classe. Contudo, as linguagens imperativas introduzem características que tornam a inferência completa de tipos não apenas difícil, mas frequentemente <strong>indesejável</strong>:</p>
 <p><strong>Mutabilidade</strong>: em linguagens funcionais, uma vez que <code>x</code> recebe um tipo, ele permanece inalterado. Em linguagens imperativas, <code>x</code> pode ser reatribuído múltiplas vezes, e seu tipo pode precisar ser conhecido explicitamente para cada ponto do programa.</p>
 <p><strong>Efeitos colaterais</strong>: funções imperativas não são puras. Elas podem modificar estado global, realizar I/O, lançar exceções. O tipo de uma função deve capturar não apenas sua assinatura, mas potencialmente seus efeitos.</p>
@@ -807,6 +807,16 @@ Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperati
   \Gamma \vdash \text{if } \texttt{isinstance}(x,T_1) \text{ then } e_1 \text{ else } e_2 : \tau
 }\]</span></p>
 <p>Essa regra mostra por que a tipagem gradual moderna não é apenas uma anotação superficial. O verificador de tipos acompanha o fluxo de controle e constrói contextos diferentes para cada ramo do programa.</p>
+<div id="fig-type-narrowing" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-type-narrowing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/refinamento-tipos.webp" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-type-narrowing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.3: Refinamento sensível ao fluxo: o contexto Γ se especializa diferentemente em cada ramo conforme o teste de tipo realizado.
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="c-tipagem-nominal-minimalista" class="level2" data-number="14.5">
@@ -819,7 +829,17 @@ Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperati
 <p><span class="math display">\[\frac{T \in \{\text{int, float, char, ...}\}}{\Gamma \vdash (T \, x;) : \text{ok}, \quad \Gamma' = \Gamma \cup \{x : T\}}\]</span></p>
 <p><strong>Regra de Coerção Aritmética</strong>:</p>
 <p><span class="math display">\[\frac{\Gamma \vdash e_1 : T_1 \quad \Gamma \vdash e_2 : T_2 \quad T_1, T_2 \in \text{NumericTypes}}{\Gamma \vdash e_1 + e_2 : \text{promote}(T_1, T_2)}\]</span></p>
-<p>Onde <code>promote</code> segue a hierarquia: <code>char</code> &lt; <code>short</code> &lt; <code>int</code> &lt; <code>long</code> &lt; <code>float</code> &lt; <code>double</code></p>
+<p>Onde <code>promote</code> segue a hierarquia: <code>char &lt; short &lt; int &lt; long &lt; float &lt; double</code> como pode ser visto na <a href="#fig-promocao-c" class="quarto-xref">Figure&nbsp;<span>14.4</span></a>.</p>
+<div id="fig-promocao-c" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-promocao-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/promocao-numerica-c.webp" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-promocao-c-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.4: Cadeia de promoção numérica em C: a função promote(T₁, T₂) escolhe sempre o tipo mais alto na hierarquia, com exemplo de aplicação em uma soma mista int + float.
+</figcaption>
+</figure>
+</div>
 <p><strong>Exemplo</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> y <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span></span>
@@ -1041,7 +1061,7 @@ Figure&nbsp;14.2: Forma geral de um julgamento de tipos para linguagens imperati
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-borrow-checker-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow checker</em> de Rust.
+Figure&nbsp;14.5: Estados simplificados de posse e empréstimo no <em>borrow checker</em> de Rust.
 </figcaption>
 </figure>
 </div>
@@ -1062,6 +1082,16 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 }{
   \text{ERRO: } 'b \not\sqsupseteq 'a \text{ (lifetime esperado)}
 }\]</span></p>
+<div id="fig-lifetimes-rust" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lifetimes-rust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/lifetimes-rust.webp" class="img-fluid figure-img" style="width:95.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lifetimes-rust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.6: Lifetimes anotados em uma timeline de escopos: a referência a texto1 não vive o suficiente para satisfazer o lifetime exigido pela atribuição a resultado.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="inferência-bidirecional" class="level3" data-number="14.7.4">
 <h3 data-number="14.7.4" class="anchored" data-anchor-id="inferência-bidirecional"><span class="header-section-number">14.7.4</span> Inferência Bidirecional</h3>
@@ -1084,6 +1114,16 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 <h3 data-number="14.7.5" class="anchored" data-anchor-id="sistema-completo-de-rust"><span class="header-section-number">14.7.5</span> Sistema Completo de Rust</h3>
 <p>O sistema de tipos de Rust pode ser formalizado como uma tupla:</p>
 <p><span class="math display">\[\text{RustTypes} = (\text{HM}, \text{Traits}, \text{Ownership}, \text{Lifetimes})\]</span></p>
+<div id="fig-camadas-rust" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-camadas-rust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/camadas-rust.webp" class="img-fluid figure-img" style="width:85.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-camadas-rust-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.7: As quatro camadas do sistema de tipos de Rust: cada nível adiciona expressividade e disciplina sobre o anterior.
+</figcaption>
+</figure>
+</div>
 <p><strong>Exemplo de derivação completa</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fn</span> processar<span class="op">&lt;</span><span class="ot">'a</span><span class="op">,</span> T<span class="op">:</span> <span class="bu">Clone</span><span class="op">&gt;</span>(dados<span class="op">:</span> <span class="op">&amp;</span><span class="ot">'a</span> [T]) <span class="op">-&gt;</span> <span class="dt">Vec</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    dados<span class="op">.</span>iter()<span class="op">.</span>cloned()<span class="op">.</span>collect()</span>
@@ -1112,7 +1152,7 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 <h2 data-number="14.8" class="anchored" data-anchor-id="casos-especiais-typescript-go-e-swift"><span class="header-section-number">14.8</span> Casos Especiais: TypeScript, Go e Swift</h2>
 <section id="typescript-tipagem-estrutural-gradual" class="level3" data-number="14.8.1">
 <h3 data-number="14.8.1" class="anchored" data-anchor-id="typescript-tipagem-estrutural-gradual"><span class="header-section-number">14.8.1</span> TypeScript: Tipagem Estrutural Gradual</h3>
-<p><strong>TypeScript</strong> combina tipagem estrutural com inferência flow-sensitive:</p>
+<p><strong>TypeScript</strong> combina tipagem estrutural com inferência <em>flow-sensitive</em>(como visto em <a href="#fig-type-narrowing" class="quarto-xref">Figure&nbsp;<span>14.3</span></a>):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode typescript code-with-copy"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">processar</span>(valor<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">typeof</span> valor <span class="op">===</span> <span class="st">"string"</span>) {</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Aqui, TypeScript sabe que valor: string</span></span>
@@ -1185,7 +1225,7 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 <td style="text-align: left;"><strong>Python</strong></td>
 <td style="text-align: left;">Gradual</td>
 <td style="text-align: left;">Estrutural</td>
-<td style="text-align: left;">Nenhuma (puro) / Flow-sensitive (<em>hints</em>)</td>
+<td style="text-align: left;">Nenhuma (puro) / <em>flow-sensitive</em> (<em>hints</em>)</td>
 <td style="text-align: left;">O(n) (<em>hints</em>)</td>
 </tr>
 <tr class="even">
@@ -1213,7 +1253,7 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 <td style="text-align: left;"><strong>TypeScript</strong></td>
 <td style="text-align: left;">Gradual</td>
 <td style="text-align: left;">Estrutural</td>
-<td style="text-align: left;">Flow-sensitive</td>
+<td style="text-align: left;"><em>flow-sensitive</em></td>
 <td style="text-align: left;">O(n²)</td>
 </tr>
 <tr class="even">
@@ -1232,6 +1272,16 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 </tr>
 </tbody>
 </table>
+<div id="fig-mapa-sistemas-tipos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mapa-sistemas-tipos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/mapa-sistemas-tipos.webp" class="img-fluid figure-img" style="width:90.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mapa-sistemas-tipos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.8: Posicionamento aproximado das linguagens em duas dimensões: momento da verificação e força do sistema de tipos.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="trade-offs-fundamentais" class="level2" data-number="14.10">
 <h2 data-number="14.10" class="anchored" data-anchor-id="trade-offs-fundamentais"><span class="header-section-number">14.10</span> Trade-offs Fundamentais</h2>
@@ -1263,7 +1313,7 @@ Figure&nbsp;14.3: Estados simplificados de posse e empréstimo no <em>borrow che
 </section>
 <section id="conclusão-o-pragmatismo-vence-a-elegância" class="level2" data-number="14.11">
 <h2 data-number="14.11" class="anchored" data-anchor-id="conclusão-o-pragmatismo-vence-a-elegância"><span class="header-section-number">14.11</span> Conclusão: O Pragmatismo Vence a Elegância</h2>
-<p>A comparação entre o <strong>Algoritmo W</strong> e os sistemas de tipos imperativos revela uma verdade fundamental sobre design de linguagens: <strong>não existe solução universal</strong>. O Algoritmo W é uma maravilha matemática para linguagens funcionais puras, mas as necessidades do mundo imperativo exigem abordagens diferentes.</p>
+<p>A comparação entre o <strong>Algoritmo W</strong> e os sistemas de tipos imperativos revela uma verdade fundamental sobre design de linguagens: <strong>não existe solução universal</strong>. O <strong>Algoritmo W</strong> é uma maravilha matemática para linguagens funcionais puras, mas as necessidades do mundo imperativo exigem abordagens diferentes.</p>
 <p>As linguagens imperativas modernas convergem para um modelo híbrido:</p>
 <ol type="1">
 <li><strong>Verificação estática rigorosa</strong> onde possível</li>

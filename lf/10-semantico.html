@@ -548,7 +548,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#análise-semântica-básica" id="toc-análise-semântica-básica" class="nav-link" data-scroll-target="#análise-semântica-básica"><span class="header-section-number">12.8.1</span> Análise semântica básica</a></li>
   <li><a href="#julgamentos-de-tipo" id="toc-julgamentos-de-tipo" class="nav-link" data-scroll-target="#julgamentos-de-tipo"><span class="header-section-number">12.8.2</span> Julgamentos de tipo</a></li>
-  <li><a href="#otimização-e-geração-intermediária" id="toc-otimização-e-geração-intermediária" class="nav-link" data-scroll-target="#otimização-e-geração-intermediária"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária</a></li>
+  <li><a href="#otimização-e-geração-intermediária-semântica-denotacional---otimização" id="toc-otimização-e-geração-intermediária-semântica-denotacional---otimização" class="nav-link" data-scroll-target="#otimização-e-geração-intermediária-semântica-denotacional---otimização"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária (semântica denotacional - otimização)</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/frankalcantara/linguagens-formais/edit/main/10-semantico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/frankalcantara/linguagens-formais/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -652,7 +652,7 @@ Note
 <h2 data-number="12.1" class="anchored" data-anchor-id="motivação-e-contexto"><span class="header-section-number">12.1</span> Motivação e Contexto</h2>
 <section id="perspectiva-histórica" class="level3" data-number="12.1.1">
 <h3 data-number="12.1.1" class="anchored" data-anchor-id="perspectiva-histórica"><span class="header-section-number">12.1.1</span> Perspectiva histórica</h3>
-<p>A <strong>análise semântica</strong>, o centro nervoso do compilador para significado e a coerência, não nasceu pronta. Sua história é uma jornada que acompanha a própria evolução das linguagens de programação, partindo de verificações simples e dispersas para se tornar uma estrutura formal e sofisticada. A incansável leitora poderá traçar essa trajetória desde os primórdios da computação até os complexos sistemas de tipos que usamos hoje. A Figura <a href="#fig-timeline-semantics" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> ilustra essa evolução.</p>
+<p>A <strong>análise semântica</strong>, o centro nervoso do compilador para significado e a coerência, não nasceu pronta. Sua história é uma jornada que acompanha a própria evolução das linguagens de programação, partindo de verificações simples e dispersas para se tornar uma estrutura formal e sofisticada. A incansável leitora poderá traçar essa trajetória desde os primórdios da computação até os complexos sistemas de tipos que usamos hoje. A <a href="#fig-timeline-semantics" class="quarto-xref">Figure&nbsp;<span>12.1</span></a> ilustra essa evolução.</p>
 <div id="fig-timeline-semantics" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-timeline-semantics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -675,7 +675,7 @@ Figure&nbsp;12.1
 </section>
 <section id="o-papel-da-análise-semântica-no-compilador" class="level3" data-number="12.1.2">
 <h3 data-number="12.1.2" class="anchored" data-anchor-id="o-papel-da-análise-semântica-no-compilador"><span class="header-section-number">12.1.2</span> O papel da análise semântica no compilador</h3>
-<p>Considerando a estrutura de compilação canônica, como definida por <a href="https://en.wikipedia.org/wiki/Alfred_Aho">Aho</a> (1977), e histórica que estamos adotando ao longo de todo este livro, a análise semântica será a terceira fase do <em>front-end</em> de um compilador, posicionando-se logo após a análise sintática. Como pode ser visto na Figura <a href="#fig-compilador1" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>. A principal informação de entrada do analisador semântico será a Árvore de Sintática Abstrata, termo importado do inglês <strong>A</strong>bstract <strong>S</strong>yntactic <strong>T</strong>ree, <strong>AST</strong>, a representação hierárquica da estrutura do programa que foi gerada pelo analisador sintático.</p>
+<p>Considerando a estrutura de compilação canônica, como definida por <a href="https://en.wikipedia.org/wiki/Alfred_Aho">Aho</a> (1977), e histórica que estamos adotando ao longo de todo este livro, a análise semântica será a terceira fase do <em>front-end</em> de um compilador, posicionando-se logo após a análise sintática. Como pode ser visto na <a href="#fig-compilador1" class="quarto-xref">Figure&nbsp;<span>12.2</span></a>. A principal informação de entrada do analisador semântico será a Árvore de Sintática Abstrata, termo importado do inglês <strong>A</strong>bstract <strong>S</strong>yntactic <strong>T</strong>ree, <strong>AST</strong>, a representação hierárquica da estrutura do programa que foi gerada pelo analisador sintático.</p>
 <div id="fig-compilador1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-compilador1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -711,8 +711,26 @@ Figure&nbsp;12.2
 <li>Os tipos dos operandos de uma expressão devem ser compatíveis com o operador;</li>
 <li>O tipo da expressão atribuída deve ser compatível com o tipo da variável receptora;</li>
 <li>Expressões condicionais (<code>if</code>, <code>while</code>) devem resultar em valores booleanos;</li>
-<li>Operações de indexação de arrays devem usar índices inteiros.</li>
+<li>Operações de indexação de <em>arrays</em> devem usar índices inteiros.</li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Exceções Históricas e Práticas: _arrays_ Indexados por Números Reais">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Exceções Históricas e Práticas: <em>arrays</em> Indexados por Números Reais
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A regra geral dita que <em>arrays</em> utilizam índices inteiros, mas algumas linguagens de programação subvertem isso permitindo números reais. Isso ocorre em implementações de <em>arrays</em> como <strong>arrays associativos</strong> (estruturas de chave-valor ou tabelas <em>hash</em>), e não como blocos contínuos de memória.</p>
+<p><strong>Como a memória física de um computador é inerentemente discreta e acessada por endereços inteiros, não existe a possibilidade no nível do hardware de acessar o índice um e meio de uma sequência contígua.</strong> No entanto, abstrações de software criaram comportamentos para lidar com isso:</p>
+<p><strong>1. <em>arrays</em> Associativos Nativos (Estruturas Esparsas)</strong> Algumas linguagens não fazem distinção arquitetônica entre <em>arrays</em> tradicionais e dicionários. Nelas, o índice pode ser virtualmente qualquer tipo de dado. * <strong>MUMPS (M) (1966):</strong> <em>arrays</em> são estruturas esparsas armazenadas em árvores B. É comum criar um índice numérico fracionário para inserir um novo nó entre dois índices já existentes. Um comando como ´SET paciente(1.5) = “resultado”´ é nativo. * <strong>AWK (1977):</strong> Todos os <em>arrays</em> são associativos. Ao atribuir um valor como ´meu_array[3.14] = 42´, o interpretador converte o número para uma string e o utiliza como chave. * <strong>Lua (1993):</strong> A única estrutura complexa é a tabela (<em>table</em>), que aceita ponto flutuante. A atribuição ´vetor[2.5] = “meio”´ é válida e armazenada na porção hash da estrutura.</p>
+<p><strong>2. <em>arrays</em> Implementados como Objetos</strong> * <strong>JavaScript:</strong> <em>arrays</em> são um tipo especial de objeto. Executar ´vetor[1.5] = “teste”´ não gera um erro de sintaxe. A linguagem simplesmente adiciona uma nova propriedade chamada ´“1.5”´ ao objeto do array, sem alterar o tamanho sequencial do vetor (a propriedade ´length´ permanece intacta).</p>
+<p><strong>3. Coerção e Truncamento de Tipo</strong> * <strong>PHP:</strong> Se houver a tentativa de usar um número real como chave, como em ´$vetor[2.9] = “dado”;´, a linguagem truncará a parte decimal de forma silenciosa e converterá o índice para inteiro. O valor será salvo no índice ´2´.</p>
+<p><strong>O Conceito na Computação Científica</strong> Em disciplinas numéricas e linguagens voltadas para matemática (como <strong>MATLAB</strong>, <strong>R</strong> ou o ecossistema <strong>SciPy</strong> no <strong>Python</strong>), existe o conceito prático de acessar um índice fracionário utilizando funções de <strong>interpolação</strong>. O programador fornece o vetor contínuo e solicita o valor no índice ´1.5´, e a linguagem calcula o resultado com base nos valores que existem no índice ´1´ e no índice ´2´, gerando uma estimativa matemática em vez de um acesso direto à memória.</p>
+</div>
+</div>
 <p><strong>3. Verificações de Sub-rotinas</strong>:</p>
 <ul>
 <li>Funções devem ser chamadas com o número correto de argumentos;</li>
@@ -887,7 +905,7 @@ Figure&nbsp;12.2
 </section>
 <section id="atributos-sintetizados-e-herdados" class="level3" data-number="12.2.3">
 <h3 data-number="12.2.3" class="anchored" data-anchor-id="atributos-sintetizados-e-herdados"><span class="header-section-number">12.2.3</span> Atributos sintetizados e herdados</h3>
-<p>Os atributos são classificados com base na direção em que a informação flui pela árvore sintática. Como pode ser visto na Figura <a href="#fig-sint-herdados" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>.</p>
+<p>Os atributos são classificados com base na direção em que a informação flui pela árvore sintática. Como pode ser visto na <a href="#fig-sint-herdados" class="quarto-xref">Figure&nbsp;<span>12.3</span></a>.</p>
 <div id="fig-sint-herdados" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sint-herdados-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -953,7 +971,7 @@ Figure&nbsp;12.3
 \text{ListaIDs} &amp; \rightarrow \text{ListaIDs}_1, \textbf{id} \mid \textbf{id}
 \end{align*}
 \]</span></p>
-<p><strong>2. Análise do Fluxo de Informação</strong>: para transformar esta gramática em uma Gramática de Atributos, precisamos primeiro identificar como a informação flui pela árvore sintática que pode ser vista na Figura <a href="#fig-decl-tree" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>:</p>
+<p><strong>2. Análise do Fluxo de Informação</strong>: para transformar esta gramática em uma Gramática de Atributos, precisamos primeiro identificar como a informação flui pela árvore sintática que pode ser vista na <a href="#fig-decl-tree" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>:</p>
 <div id="fig-decl-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-decl-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -969,7 +987,7 @@ Figure&nbsp;12.4
 </figcaption>
 </figure>
 </div>
-<p>Na <strong>AST</strong> da Figura <a href="#fig-decl-tree" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>, podemos observar dois fluxos principais de informação:</p>
+<p>Na <strong>AST</strong> da <a href="#fig-decl-tree" class="quarto-xref">Figure&nbsp;<span>12.4</span></a>, podemos observar dois fluxos principais de informação:</p>
 <ul>
 <li><p><strong>Informação que sobe (sintetizada)</strong>: o tipo declarado (<code>int</code> ou <code>float</code>) é reconhecido nas folhas da árvore (<em>tokens</em> <code>int</code> ou <code>float</code>) e precisa ser propagado para cima até o símbolo <code>Tipo</code>.</p></li>
 <li><p><strong>Informação que desce (herdada)</strong>: uma vez que o tipo foi determinado, ele precisa ser distribuído para todos os identificadores na <code>ListaIDs</code>. Como a lista pode ter múltiplos elementos separados por vírgulas, o tipo deve “fluir para baixo” através da recursão da lista.</p></li>
@@ -1049,7 +1067,7 @@ Figure&nbsp;12.4
 </tr>
 </tbody>
 </table>
-<p><strong>6. Exemplo de Avaliação</strong>: para a declaração <code>float x, y;</code>, a árvore sintática anotada seria construída conforme ilustrado na Figura <a href="#fig-exemplo-atributos" class="quarto-xref">Figure&nbsp;<span>12.5</span></a>, na qual, temos:</p>
+<p><strong>6. Exemplo de Avaliação</strong>: para a declaração <code>float x, y;</code>, a árvore sintática anotada seria construída conforme ilustrado na <a href="#fig-exemplo-atributos" class="quarto-xref">Figure&nbsp;<span>12.5</span></a>, na qual, temos:</p>
 <ol type="1">
 <li>O atributo <code>Tipo.tipo</code> é sintetizado com valor <code>'real'</code>;</li>
 <li>Este valor é passado como <code>ListaIDs.tipo_herdado</code>;</li>
@@ -1208,7 +1226,7 @@ Figure&nbsp;12.6
 \text{Comando} &amp; \rightarrow \textbf{id} \, \text{=} \, \text{Expr}
 \end{align*}
 \]</span></p>
-<p><strong>2. Análise do Fluxo de Informação</strong>: para laços de repetição, a análise do fluxo de informação é garante que o controle retorne ao início do laço após cada iteração. A árvore sintática para um comando <code>while</code> pode ser vista na Figura <a href="#fig-while-tree" class="quarto-xref">Figure&nbsp;<span>12.7</span></a>:</p>
+<p><strong>2. Análise do Fluxo de Informação</strong>: para laços de repetição, a análise do fluxo de informação é garante que o controle retorne ao início do laço após cada iteração. A árvore sintática para um comando <code>while</code> pode ser vista na <a href="#fig-while-tree" class="quarto-xref">Figure&nbsp;<span>12.7</span></a>:</p>
 <div id="fig-while-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-while-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1358,7 +1376,7 @@ Figure&nbsp;12.8: Exemplo de árvore sintática e seu grafo de dependências cor
 </section>
 <section id="classes-de-gramáticas-de-atributos" class="level3" data-number="12.2.6">
 <h3 data-number="12.2.6" class="anchored" data-anchor-id="classes-de-gramáticas-de-atributos"><span class="header-section-number">12.2.6</span> Classes de gramáticas de atributos</h3>
-<p>Embora a definição de uma gramática de atributos seja muito flexível, essa flexibilidade tem um custo. Regras semânticas irrestritas podem levar a dependências complexas, difíceis de avaliar ou, no pior caso, a dependências circulares que tornam a avaliação impossível. Para gerenciar essa complexidade, as gramáticas de atributos são classificadas em uma hierarquia baseada nas restrições impostas sobre o fluxo de informação. Em uma estrutura aninhada que pode ser vista na Figura <a href="#fig-classes-gramaticas" class="quarto-xref">Figure&nbsp;<span>12.9</span></a>, cada classe é um subconjunto estrito da anterior, com propriedades específicas que impactam diretamente a implementação do compilador.</p>
+<p>Embora a definição de uma gramática de atributos seja muito flexível, essa flexibilidade tem um custo. Regras semânticas irrestritas podem levar a dependências complexas, difíceis de avaliar ou, no pior caso, a dependências circulares que tornam a avaliação impossível. Para gerenciar essa complexidade, as gramáticas de atributos são classificadas em uma hierarquia baseada nas restrições impostas sobre o fluxo de informação. Em uma estrutura aninhada que pode ser vista na <a href="#fig-classes-gramaticas" class="quarto-xref">Figure&nbsp;<span>12.9</span></a>, cada classe é um subconjunto estrito da anterior, com propriedades específicas que impactam diretamente a implementação do compilador.</p>
 <div id="fig-classes-gramaticas" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-classes-gramaticas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1730,8 +1748,10 @@ Figure&nbsp;12.9
 <p>Para tornar essas regras abstratas mais concretas, vamos construir uma <strong>árvore de derivação de tipos</strong> passo a passo. Nosso objetivo será provar formalmente que a expressão <code>(λx:int. x + 1) 5</code> tem o tipo <code>int</code>, partindo de um contexto vazio <code>Γ = {}</code>.</p>
 <p>Uma árvore de derivação é uma representação visual de como as regras de inferência se encaixam. A expressão final que queremos provar fica na raiz (embaixo), e as premissas formam os galhos que crescem para cima, terminando em axiomas (regras que não têm premissas).</p>
 <p>Antes de começar, precisamos de mais duas regras simples para lidar com literais e operadores:</p>
-<p><strong>Regra da Constante (ou Literal)</strong>: Um literal já carrega seu próprio tipo. <span class="math display">\[\frac{c \text{ é um literal de tipo } \tau}{\Gamma \vdash c : \tau}\]</span></p>
-<p><strong>Regra do Operador (exemplo para <code>+</code>)</strong>: Se somarmos dois inteiros, o resultado é um inteiro. <span class="math display">\[\frac{\Gamma \vdash e_1 : \text{int} \quad \Gamma \vdash e_2 : \text{int}}{\Gamma \vdash e_1 + e_2 : \text{int}}\]</span></p>
+<p><strong>Regra da Constante (ou Literal)</strong>: Um literal já carrega seu próprio tipo.</p>
+<p><span class="math display">\[\frac{c \text{ é um literal de tipo } \tau}{\Gamma \vdash c : \tau}\]</span></p>
+<p><strong>Regra do Operador (exemplo para <code>+</code>)</strong>: Se somarmos dois inteiros, o resultado é um inteiro.</p>
+<p><span class="math display">\[\frac{\Gamma \vdash e_1 : \text{int} \quad \Gamma \vdash e_2 : \text{int}}{\Gamma \vdash e_1 + e_2 : \text{int}}\]</span></p>
 <p>Agora, vamos provar que <code>{} ⊢ (λx:int. x + 1) 5 : int</code>. Construímos a prova de baixo para cima, aplicando a regra que corresponde à estrutura da expressão em cada passo.</p>
 <ol type="1">
 <li><p><strong>O Objetivo Final:</strong> A expressão <code>(λx:int. x + 1) 5</code> é uma <em>aplicação de função</em>. Portanto, a última regra a ser usada é a <strong>Regra da Aplicação</strong>. Para que a conclusão seja <code>... : int</code>, a regra nos diz que a função deve ter o tipo <code>τ₁ → int</code> e o argumento deve ter o tipo <code>τ₁</code>. Nossa hipótese é que <code>τ₁</code> seja <code>int</code>. Então, precisamos provar duas premissas:</p>
@@ -1849,9 +1869,7 @@ Regra da Variável         Regra da Constante
 </section>
 <section id="questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regras-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função." class="level4" data-number="12.4.6.4">
 <h4 data-number="12.4.6.4" class="anchored" data-anchor-id="questão-4-considere-uma-linguagem-de-programação-que-suporta-variáveis-funções-e-expressões-aritméticas-com-tipos-inteiro-real-e-string.-crie-um-sistema-de-tipos-com-cálculo-de-sequentes-e-escreva-as-regras-de-tipagem-para-a-declaração-de-variáveis-operações-aritméticas-strings-e-para-a-chamada-de-função."><span class="header-section-number">12.4.6.4</span> Questão 4: Considere uma linguagem de programação que suporta variáveis, funções e expressões aritméticas com tipos inteiro, real e <em>string</em>. Crie um sistema de tipos com Cálculo de Sequentes e escreva as regras de tipagem para a declaração de variáveis, operações aritméticas, <em>strings</em> e para a chamada de função.</h4>
-<ol type="1">
-<li><strong>Regras de Tipagem para Declaração de Variável e Chamada de Função</strong></li>
-</ol>
+<p><strong>1. Regras de Tipagem para Declaração de Variável e Chamada de Função</strong></p>
 <p><strong>Axiomas da Linguagem</strong>: axiomas são regras de tipagem sem premissas - definem os tipos dos valores primitivos da linguagem.</p>
 <p><strong>Axioma para literais inteiros</strong>:</p>
 <p><span class="math display">\[\frac{}{O, M, C \vdash n : \text{Int}}\]</span></p>
@@ -1927,7 +1945,7 @@ Regra da Variável         Regra da Constante
 <li>Verificamos que <code>3.5</code> tem tipo <code>Real</code> e <code>Real</code> <span class="math inline">\(\leq\)</span> <code>Real</code>;</li>
 <li>Portanto, <code>media(5, 3.5)</code> tem tipo <code>Real</code>.</li>
 </ul>
-<p><strong>4. Hierarquia de Tipos</strong></p>
+<p><strong>5. Hierarquia de Tipos</strong></p>
 <p>Para que a relação de subtipagem <span class="math inline">\(\leq\)</span> funcione, definimos:</p>
 <p><span class="math display">\[\text{Int} \leq \text{Real}\]</span></p>
 <p>Isso permite que inteiros sejam usados onde reais são esperados (coerção implícita).</p>
@@ -2028,7 +2046,7 @@ Regra da Variável         Regra da Constante
 </section>
 <section id="implementação-prática-langarit" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="implementação-prática-langarit"><span class="header-section-number">12.6</span> Implementação Prática: Langarit</h2>
-<p>Até este ponto, discutimos os fundamentos teóricos da análise semântica e das gramáticas de atributos. Um diagrama em blocos da estrutura do analisador semântico pode ser visto na Figura <a href="#fig-analisSemantico1" class="quarto-xref">Figure&nbsp;<span>12.10</span></a>.</p>
+<p>Até este ponto, discutimos os fundamentos teóricos da análise semântica e das gramáticas de atributos. Um diagrama em blocos da estrutura do analisador semântico pode ser visto na <a href="#fig-analisSemantico1" class="quarto-xref">Figure&nbsp;<span>12.10</span></a>.</p>
 <div id="fig-analisSemantico1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-analisSemantico1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2041,7 +2059,7 @@ Figure&nbsp;12.10
 </div>
 <p>Agora, a persistente leitora deverá aplicar esses conceitos construindo um analisador semântico completo para uma mini-linguagem de expressões aritméticas. Se acompanhar detalhada e cuidadosamente este exercício demonstrará como a teoria se traduz em código executável, consolidando o entendimento através da prática. Porém, esta é uma implementação simplificada, destinada a ilustrar os conceitos principais. Sendo assim, existem alguns pontos importantes que a leitora deve observar:</p>
 <p><strong>Separação de Responsabilidades</strong>: o analisador semântico é completamente independente do parser. Ele recebe uma <strong>AST</strong> como entrada e a anota com informações semânticas. Esta modularidade é essencial em compiladores reais. Uma opção a favor da didática.</p>
-<p><strong>Recuperação de Erros</strong>: o analisador que criaremos não irá interromper a execução no primeiro erro; ele continuará analisando e acumulará todos os erros encontrados. Isso fornece o objetivo é fornecer informações mais completas ao programador.</p>
+<p><strong>Recuperação de Erros</strong>: o analisador que criaremos não irá interromper a execução no primeiro erro; ele continuará analisando e acumulará todos os erros encontrados. O objetivo é fornecer informações mais completas ao programador.</p>
 <p><strong>Decoração da AST</strong>: os vértices da <strong>AST</strong> serão anotados com tipos inferidos (<code>tipo_inferido</code>). Esta <strong>AST</strong> decorada poderia ser passada para a fase de geração de código intermediário, que usaria essas informações para gerar instruções apropriadas.</p>
 <p><strong>Limitações</strong>: por simplicidade, nossa implementação não cobre aspectos importantes como:</p>
 <ul>
@@ -2067,11 +2085,11 @@ Figure&nbsp;12.10
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> y <span class="op">*</span> <span class="fl">2.0</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Exemplos de programas com erros semânticos</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>     # ERRO<span class="op">:</span> x não foi declarado</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode c code-with-copy"><code class="sourceCode c"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span>     <span class="co">// ERRO: x não foi declarado</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> x<span class="op">;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>    # ERRO<span class="op">:</span> tentativa de atribuir <span class="dt">float</span> a <span class="dt">int</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">3.14</span><span class="op">;</span>    <span class="co">// ERRO: tentativa de atribuir float a int</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> y<span class="op">;</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">/</span> <span class="dv">0</span><span class="op">;</span>    # ERRO<span class="op">:</span> divisão por zero <span class="op">(</span>semântica dinâmica<span class="op">,</span> mas detectável em literais<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> x <span class="op">/</span> <span class="dv">0</span><span class="op">;</span>    <span class="co">// ERRO: divisão por zero (semântica dinâmica, mas detectável em literais)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="gramática-livre-de-contexto" class="level3" data-number="12.6.2">
 <h3 data-number="12.6.2" class="anchored" data-anchor-id="gramática-livre-de-contexto"><span class="header-section-number">12.6.2</span> Gramática livre de contexto</h3>
@@ -2089,7 +2107,7 @@ Figure&nbsp;12.10
 \text{Factor} &amp; \rightarrow \textbf{(} \; \text{Expr} \; \textbf{)} \mid \textbf{id} \mid \textbf{num\_int} \mid \textbf{num\_float}
 \end{align*}
 \]</span></p>
-<p>Observe como a estrutura desta gramática, cuja hierarquia pode ser vista na Figura <a href="#fig-langarit1" class="quarto-xref">Figure&nbsp;<span>12.11</span></a>, já impõe regras de precedência e associatividade. Ao separar Expr (adição/subtração), Term (multiplicação/divisão) e Factor (literais, variáveis), garantimos que as operações em Term sejam avaliadas antes das de Expr. A recursão à esquerda nas regras (Expr -&gt; Expr + Term) define a associatividade da esquerda para a direita para os operadores.</p>
+<p>Observe como a estrutura desta gramática, cuja hierarquia pode ser vista na <a href="#fig-langarit1" class="quarto-xref">Figure&nbsp;<span>12.11</span></a>, já impõe regras de precedência e associatividade. Ao separar Expr (adição/subtração), Term (multiplicação/divisão) e Factor (literais, variáveis), garantimos que as operações em Term sejam avaliadas antes das de Expr. A recursão à esquerda nas regras (Expr -&gt; Expr + Term) define a associatividade da esquerda para a direita para os operadores.</p>
 <div id="fig-langarit1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-langarit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2769,7 +2787,7 @@ id(a) id(b)</code></pre>
 <pre class="text"><code>t1 = a + b
 t2 = t1 * c
 w = t2</code></pre>
-<p>Que pode ser vista na Figura <a href="#fig-tac1" class="quarto-xref">Figure&nbsp;<span>12.12</span></a>.</p>
+<p>Que pode ser vista na <a href="#fig-tac1" class="quarto-xref">Figure&nbsp;<span>12.12</span></a>.</p>
 <div id="fig-tac1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-tac1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -2818,8 +2836,8 @@ x := x + y;</code></pre>
 </ol>
 <p>Programa bem tipado!</p>
 </section>
-<section id="otimização-e-geração-intermediária" class="level3" data-number="12.8.3">
-<h3 data-number="12.8.3" class="anchored" data-anchor-id="otimização-e-geração-intermediária"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária</h3>
+<section id="otimização-e-geração-intermediária-semântica-denotacional---otimização" class="level3" data-number="12.8.3">
+<h3 data-number="12.8.3" class="anchored" data-anchor-id="otimização-e-geração-intermediária-semântica-denotacional---otimização"><span class="header-section-number">12.8.3</span> Otimização e geração intermediária (semântica denotacional - otimização)</h3>
 <p>Identifique otimizações possíveis para:</p>
 <pre class="text"><code>x := 10;
 y := x + 0;
